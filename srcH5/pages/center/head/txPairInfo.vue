@@ -6,12 +6,13 @@
         </div>
 
         <div class="info">
-            <div class="symbol-wrapper" @click="_showDetail('token')">
-                <span>{{ ftokenDetail ? ftokenDetail.symbol : '' }}</span>
-                <span class="ttoken">
+            <div class="symbol-wrapper">
+                <span @click="_showDetail('token')">{{ ftokenDetail ? ftokenDetail.symbol : '' }}</span>
+                <span @click="_showDetail('token')" class="ttoken">
                     /{{ ttokenDetail ? ttokenDetail.symbol : '' }}
                 </span>
-                <img class="mining" src="~h5Assets/imgs/mining.png"/>
+                <img @click="_showDetail('token')" class="mining" src="~h5Assets/imgs/mining.png"/>
+                <img @click="switchTxPair" class="mining" src="~h5Assets/imgs/down.svg"/>
             </div>
             <div class="gate" @click="_showDetail('operator')">
                 <img class="gate-img" :src="operatorIcon" />
@@ -25,6 +26,7 @@
 
 <script>
 import operatorIcon from 'h5Assets/imgs/operator_default.svg';
+import { bridge } from 'h5Utils/bridge';
 import { getTokenIcon } from 'utils/tokenParser';
 
 export default {
@@ -42,7 +44,7 @@ export default {
             if (!this.activeTxPair) {
                 return false;
             }
-            return this.$store.state.favoriteTxPair.favoriteList.indexOf(this.activeTxPair.symbol);
+            return this.$store.state.favoriteTxPair.favoriteList.indexOf(this.activeTxPair.symbol) > -1;
         },
         isMining() {
             return this.$store.getters.activeTxPairIsMining;
@@ -90,6 +92,14 @@ export default {
             this.$store.dispatch(action, this.activeTxPair.symbol).catch(err => {
                 this.$toast(this.$t('hint.operateFail'));
                 console.warn(err);
+            });
+        },
+        switchTxPair() {
+            bridge['pri.switchPair']().then(({ symbol }) => {
+                this.$toast(symbol);
+            }).catch(err => {
+                console.warn(err);
+                this.$toast(this.$t('hint.operateFail'));
             });
         }
     }
