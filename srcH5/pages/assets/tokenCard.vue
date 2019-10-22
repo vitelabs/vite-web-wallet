@@ -107,15 +107,14 @@ export default {
                 this.tokenDetail = data;
                 if (data.links) {
                     for (const key in data.links) {
-                        this.tokenDetail[`${ key }Link`] = data.links[key] && data.links[key].length
-                            ? data.links[key][0] : '';
+                        this.tokenDetail[`${ key }Link`] = data.links[key] || [];
                     }
                 }
                 this.tokenDetail.ttype = this.tokenDetail.gateway
                     ? this.$t('tokenCard.tokenInfo.labels.crossType')
                     : this.$t('tokenCard.tokenInfo.labels.originType');
                 this.tokenDetail.explorerLink = this.tokenDetail.explorerLink
-                    || (this.tokenDetail.gateway ? null : getExplorerLink(this.$i18n.locale));
+                    || (this.tokenDetail.gateway ? null : [getExplorerLink(this.$i18n.locale)]);
                 this.tokenDetail.showTotalSupply = bigNumber.toBasic(this.tokenDetail.totalSupply, this.tokenDetail.tokenDecimals);
             }).catch(err => {
                 console.warn(err);
