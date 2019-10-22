@@ -95,8 +95,9 @@ export default {
             });
         },
         switchTxPair() {
-            bridge['pri.switchPair']().then(({ symbol }) => {
-                this.$toast(symbol);
+            bridge['pri.switchPair']().then(data => {
+                console.log('pri.switchPair', data);
+                this.$toast(data.symbol);
             }).catch(err => {
                 console.warn(err);
                 this.$toast(this.$t('hint.operateFail'));
