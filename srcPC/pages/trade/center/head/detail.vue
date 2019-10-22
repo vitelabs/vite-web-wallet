@@ -25,8 +25,8 @@
                 <div class="label">{{$t("tokenCard.tokenInfo.labels.overview")}}:</div>
                 {{ getOverview(tokenDetail.overview) }}
                 <span class="click-able view-more"
-                      v-if="tokenDetail.overview && tokenDetail.overviewLink"
-                      @click="openUrl(tokenDetail.overviewLink)">
+                      v-if="tokenDetail.overview && tokenDetail.overviewLink && tokenDetail.overviewLink.length"
+                      @click="openUrl(tokenDetail.overviewLink[0])">
                     {{ $t("tokenCard.tokenInfo.labels.viewmore") }}</span>
             </div>
             <div class="content__item">
@@ -42,22 +42,43 @@
             </div>
             <div class="content__item">
                 <div class="label">{{$t("tokenCard.tokenInfo.labels.website")}}:</div>
-                <div class="click-able" @click="openUrl(tokenDetail.websiteLink)">{{ tokenDetail.websiteLink || '--' }}</div>
+                <div v-if="!tokenDetail.websiteLink || !tokenDetail.websiteLink.length">--</div>
+                <div v-else>
+                    <span class="click-able" @click="openUrl(link)"
+                          v-for="(link, i) in tokenDetail.websiteLink" :key="i">
+                        {{ link || '--' }}
+                    </span>
+                </div>
             </div>
             <div class="content__item">
                 <div class="label">{{$t("tokenCard.tokenInfo.labels.whitePaper")}}:</div>
-                <div class="click-able" @click="openUrl(tokenDetail.whitepaperLink)">
-                    {{ tokenDetail.whitepaperLink || '--' }}</div>
+                <div v-if="!tokenDetail.whitepaperLink || !tokenDetail.whitepaperLink.length">--</div>
+                <div v-else>
+                    <span class="click-able" @click="openUrl(link)"
+                          v-for="(link, i) in tokenDetail.whitepaperLink" :key="i">
+                        {{ link || '--' }}
+                    </span>
+                </div>
             </div>
             <div class="content__item">
                 <div class="label">{{$t("tokenCard.tokenInfo.labels.explorer")}}:</div>
-                <div class="click-able" @click="openUrl(tokenDetail.explorerLink)">
-                    {{ tokenDetail.explorerLink || '--' }}</div>
+                <div v-if="!tokenDetail.explorerLink || !tokenDetail.explorerLink.length">--</div>
+                <div v-else>
+                    <span class="click-able" @click="openUrl(link)"
+                          v-for="(link, i) in tokenDetail.explorerLink" :key="i">
+                        {{ link || '--' }}
+                    </span>
+                </div>
             </div>
             <div class="content__item">
                 <div class="label">{{$t("tokenCard.tokenInfo.labels.github")}}:</div>
-                <div class="click-able" @click="openUrl(tokenDetail.githubLink)">
-                    {{ tokenDetail.githubLink || '--' }}</div>
+                <div v-if="!tokenDetail.githubLink || !tokenDetail.githubLink.length">--</div>
+                <div v-else>
+                    <span class="click-able" @click="openUrl(link)"
+                          v-for="(link, i) in tokenDetail.githubLink" :key="i">
+                        {{ link || '--' }}
+                    </span>
+                </div>
             </div>
             <div class="content__item">
                 <div class="label">{{$t("tokenCard.tokenInfo.labels.media")}}:</div>
@@ -124,8 +145,7 @@ export default {
             const tokenDetail = this.ftokenDetail;
             if (this.ftokenDetail.links) {
                 for (const key in this.ftokenDetail.links) {
-                    tokenDetail[`${ key }Link`] = this.ftokenDetail.links[key] && this.ftokenDetail.links[key].length
-                        ? this.ftokenDetail.links[key][0] : '';
+                    tokenDetail[`${ key }Link`] = this.ftokenDetail.links[key] || [];
                 }
             }
             tokenDetail.ttype = typeof tokenDetail.gateway === 'undefined'
@@ -133,7 +153,7 @@ export default {
                     ? this.$t('tokenCard.tokenInfo.labels.crossType')
                     : this.$t('tokenCard.tokenInfo.labels.originType');
             tokenDetail.explorerLink = tokenDetail.explorerLink
-                || (tokenDetail.gateway ? null : getExplorerLink(this.$i18n.locale));
+                || (tokenDetail.gateway ? null : [getExplorerLink(this.$i18n.locale)]);
             tokenDetail.showTotalSupply = BigNumber.toBasic(tokenDetail.totalSupply, tokenDetail.tokenDecimals);
 
             return tokenDetail;
@@ -199,6 +219,10 @@ export default {
 
 <style lang="scss" scoped>
 @import "~components/confirm/moreTabConfirm.scss";
+
+.click-able {
+    margin-right: 10px;
+}
 
 .content__item {
     word-break: break-word;
