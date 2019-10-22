@@ -88,7 +88,7 @@ export default {
             this.showDetail && this.showDetail(tab);
         },
         toggleFavorite() {
-            const action = this.isFavorite ? 'exSetFavorite' : 'exDeletetFavorite';
+            const action = this.isFavorite ? 'exDeletetFavorite' : 'exSetFavorite';
             this.$store.dispatch(action, this.activeTxPair.symbol).catch(err => {
                 this.$toast(this.$t('hint.operateFail'));
                 console.warn(err);
