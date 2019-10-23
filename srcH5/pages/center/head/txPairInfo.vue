@@ -94,7 +94,7 @@ export default {
         toggleFavorite() {
             const action = this.isFavorite ? 'exDeletetFavorite' : 'exSetFavorite';
             this.$store.dispatch(action, this.activeTxPair.symbol).catch(err => {
-                this.$toast(this.$t('hint.operateFail'));
+                this.$toast(this.$t('hint.operateFail'), err);
                 console.warn(err);
             });
         },
@@ -104,7 +104,7 @@ export default {
                 this.$store.dispatch('dexFetchActiveTxPair');
             }).catch(err => {
                 console.warn(err);
-                this.$toast(this.$t('hint.operateFail'));
+                this.$toast(this.$t('hint.operateFail'), err);
             });
         }
     }
