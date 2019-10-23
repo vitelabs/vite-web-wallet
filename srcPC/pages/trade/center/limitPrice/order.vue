@@ -94,7 +94,7 @@ import viteConfirm from 'components/confirm/index.js';
 import { initPwd } from 'pcComponents/password/index.js';
 import sendTx from 'pcUtils/sendTx';
 import BigNumber from 'utils/bigNumber';
-import { verifyAmount, checkAmountFormat } from 'pcUtils/validations';
+import { isNumber, verifyAmount } from 'pcUtils/validations';
 import { execWithValid } from 'pcUtils/execWithValid';
 import statistics from 'utils/statistics';
 
@@ -436,14 +436,14 @@ export default {
         // price = amount / quantity / (1+fee)
         getPrice(quantity, amount) {
             const isRightQuantity = quantity
-                                    && checkAmountFormat(quantity) === 0
+                                    && isNumber(quantity)
                                     && !BigNumber.isEqual(quantity, 0);
             if (!isRightQuantity) {
                 return '';
             }
 
             const isRightAmount = amount
-                                    && checkAmountFormat(amount) === 0
+                                    && isNumber(amount)
                                     && !BigNumber.isEqual(amount, 0);
             if (!isRightAmount) {
                 return '';
@@ -469,15 +469,15 @@ export default {
         },
         // amount = quantity * price * (1+fee)
         getAmount(price, quantity) {
-            const isRightPrice = price
-                                && checkAmountFormat(price) === 0
+            const isRightPrice = !!price
+                                && isNumber(price)
                                 && !BigNumber.isEqual(price, 0);
             if (!isRightPrice) {
                 return '';
             }
 
             const isRightQuantity = quantity
-                                    && checkAmountFormat(quantity) === 0
+                                    && isNumber(quantity)
                                     && !BigNumber.isEqual(quantity, 0);
             if (!isRightQuantity) {
                 return '';
@@ -493,14 +493,14 @@ export default {
         // quantity = amount/price/（1+fee)
         getQuantity(price, amount) {
             const isRightPrice = price
-                                && checkAmountFormat(price) === 0
+                                && isNumber(price)
                                 && !BigNumber.isEqual(price, 0);
             if (!isRightPrice) {
                 return '';
             }
 
             const isRightAmount = amount
-                                    && checkAmountFormat(amount) === 0
+                                    && isNumber(amount)
                                     && !BigNumber.isEqual(amount, 0);
             if (!isRightAmount) {
                 return '';

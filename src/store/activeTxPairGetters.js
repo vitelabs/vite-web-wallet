@@ -117,7 +117,10 @@ const getters = {
             'GRIN-000_ETH-000': 0.92,
             'GRIN-000_VITE': 0.92,
             'BTC-000_USDT-000': 0.95,
-            'ETH-000_USDT-000': 0.95
+            'ETH-000_USDT-000': 0.95,
+            'VITE_BTC-000': 0.85,
+            'VITE_ETH-000': 0.85,
+            'VITE_USDT-000': 0.85
         };
 
         const symbol = activeTxPair.symbol;
