@@ -12,7 +12,7 @@
                     /{{ ttokenDetail ? ttokenDetail.symbol : '' }}
                 </span>
                 <img class="mining" src="~h5Assets/imgs/mining.png"/>
-                <img @click="switchTxPair" class="mining" src="~h5Assets/imgs/down.svg"/>
+                <img v-if="isSupportSwitch" @click="switchTxPair" class="mining" src="~h5Assets/imgs/down.svg"/>
             </div>
             <div class="gate" @click="_showDetail('operator')">
                 <img class="gate-img" :src="operatorIcon" />
@@ -81,6 +81,10 @@ export default {
                 return this.operatorInfo.icon || '';
             }
             return operatorIcon;
+        },
+        isSupportSwitch() {
+            const bridgeUnsupportList = this.$store.getters.bridgeUnsupportList;
+            return bridgeUnsupportList.indexOf('pri.switchPair') === -1;
         }
     },
     methods: {

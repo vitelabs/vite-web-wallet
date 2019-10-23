@@ -15,9 +15,13 @@
             <span>{{ $t('tokenCard.heads.availableExAmount') }}</span>
             <span>{{ avaliableExBalance || 0 }}</span>
         </div>
-        <div class="op_group">
+        <div v-if="isSupportTransfer" class="op_group">
             <div class="op __pointer" @click="transfer">{{ $t('mobileAssets.transfer') }}</div>
             <div class="op __pointer" @click="trade">{{ $t('mobileAssets.trade') }}</div>
+        </div>
+        <div v-else class="op_group">
+            <div class="op __pointer" @click="exCharge">{{ $t("tokenCard.actionType.EXCHARGE") }}</div>
+            <div class="op __pointer" @click="exWithdraw">{{ $t("tokenCard.actionType.EXWITHDRAW") }}</div>
         </div>
 
         <trade-view ref="tradeView" :symbol="tokenDetail ? tokenDetail.symbol : ''"></trade-view>
@@ -25,8 +29,7 @@
 </template>
 
 <script>
-// , exWithdrawDialog, exChargeDialog
-import { tokenInfoDialog } from './dialog';
+import { exWithdrawDialog, exChargeDialog, tokenInfoDialog } from './dialog';
 import tradeView from './trade';
 import { tokenDetail } from 'services/trade';
 import bigNumber from 'utils/bigNumber';
@@ -58,6 +61,10 @@ export default {
         return { tokenDetail: {} };
     },
     computed: {
+        isSupportTransfer() {
+            const bridgeUnsupportList = this.$store.getters.bridgeUnsupportList;
+            return bridgeUnsupportList.indexOf('pri.transferAsset') === -1;
+        },
         currencySymbol() {
             return this.$store.getters.currencySymbol;
         },
@@ -100,6 +107,18 @@ export default {
         },
         trade() {
             this.$refs.tradeView.isShow = true;
+        },
+        exCharge() {
+            statistics.event(`H5${ this.$route.name }`, 'exchange-deposit', this.address || '');
+            exChargeDialog({ token: this.token }).catch(e => {
+                console.error(e);
+            });
+        },
+        exWithdraw() {
+            statistics.event(`H5${ this.$route.name }`, 'exchange-withdraw', this.address || '');
+            exWithdrawDialog({ token: this.token }).catch(e => {
+                console.error(e);
+            });
         },
 
         fetchTokenDetail() {
