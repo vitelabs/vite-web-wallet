@@ -23,9 +23,7 @@
             </div>
         </div>
 
-        <logout-view v-if="!isLogin"></logout-view>
-
-        <div v-if="isLogin" class="ex-center-login">
+        <div class="ex-center-login">
             <order orderType="buy"></order>
             <div class="order-border"></div>
             <order orderType="sell" class="order-wrapper"></order>
@@ -34,19 +32,14 @@
 </template>
 
 <script>
-import logoutView from './logout';
 import order from './order.vue';
-import { StatusMap } from 'wallet';
 import BigNumber from 'utils/bigNumber';
 import Vip from './vip.vue';
 
 export default {
-    components: { logoutView, order, Vip },
+    components: { order, Vip },
     data() {
         return { isShowHelp: false };
-    },
-    beforeMount() {
-        window.fffffffff = this;
     },
     computed: {
         baseFee() {
@@ -95,12 +88,6 @@ export default {
         },
         markerInfo() {
             return this.$store.state.exchangeFee.marketInfo;
-        },
-        isLogin() {
-            return this.$store.state.wallet.status === StatusMap.UNLOCK;
-        },
-        address() {
-            return this.$store.getters.activeAddr;
         }
     },
     methods: {
