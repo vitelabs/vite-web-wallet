@@ -13,6 +13,12 @@ class numChecker {
         this.i18n = i18n;
     }
 
+    isNumber(amount) {
+        const isInt = new RegExp('^(\\d+)$').test(amount);
+        const isPoint = new RegExp('^\\d+[.]\\d+$').test(amount);
+        return isInt || isPoint;
+    }
+
     checkAmountFormat(amount = '', decimals = 8, integerBits?) {
         const limit = decimals > MaxDecimals ? MaxDecimals : decimals;
         const decimalNum = +decimals ? new RegExp(`^\\d+[.]\\d{1,${ limit }}$`) : null;
