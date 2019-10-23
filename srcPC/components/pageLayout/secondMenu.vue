@@ -17,13 +17,7 @@
             <div class="tab __pointer" @click="goHelp">{{ $t("help") }}</div>
             <div v-show="!isHaveUsers" @click="login"
                  class="tab __pointer"> {{ $t("login") }}</div>
-            <div v-show="!isLogin && isHaveUsers" @click="_unlock" class="tab __pointer">
-                {{ $t("unlockAcc") }}
-                <div v-show="isShowUnlockBubble" class="unlock-bubble">
-                    {{ $t('hint.unreceived') }}
-                    <div class="bubble-btn" @click.stop="iKnow">{{ $t('btn.known') }}</div>
-                </div>
-            </div>
+            <div v-show="!isLogin && isHaveUsers" @click="_unlock" class="tab __pointer">{{ $t("unlockAcc") }}</div>
             <div v-show="!isLogin && isHaveUsers" class="tab __pointer"
                  @click="changeAcc">{{ $t('changeAcc') }}</div>
 
@@ -57,10 +51,7 @@ export default {
         }
     },
     data() {
-        return {
-            selectInvite: this.showInvite ? 'invite' : 'receiveInvite',
-            isKnowUnrecieved: false
-        };
+        return { selectInvite: this.showInvite ? 'invite' : 'receiveInvite' };
     },
     computed: {
         moreOptList() {
@@ -94,32 +85,12 @@ export default {
         },
         isHaveUsers() {
             return !!this.$store.state.wallet.currHDAcc;
-        },
-        isShowUnlockBubble() {
-            return this.isHaveUnreceived && this.$route.name === 'assets' && !this.isKnowUnrecieved;
-        },
-        balanceInfo() {
-            return this.$store.getters.balanceInfo;
-        },
-        isHaveUnreceived() {
-            if (!this.balanceInfo) {
-                return false;
-            }
-            for (const tokenId in this.balanceInfo) {
-                if (this.balanceInfo[tokenId].onroadNum && +this.balanceInfo[tokenId].onroadNum > 0) {
-                    return true;
-                }
-            }
-            return false;
         }
     },
     methods: {
         operateAction(action) {
             action === 'operator' && this.goOperator();
             action === 'proxy' && this.goProxy();
-        },
-        iKnow() {
-            this.isKnowUnrecieved = true;
         },
         inviteDialog(v) {
             this.selectInvite = this.showInvite ? 'invite' : 'receiveInvite';
