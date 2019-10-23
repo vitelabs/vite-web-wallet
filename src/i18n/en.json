@@ -151,7 +151,8 @@
         "bigger0": "Value must be greater than 0",
         "operateSuccess": "Operation Successful",
         "operateFail": "Operation Failed",
-        "unreceived": "Unlock you wallet before use"
+        "unreceived": "请登录后接收在途金额",
+        "unreceivedNum": "请登录后接收在途金额，当前共有{number}笔待接收交易"
     },
     "beforeUse": {
         "title": "Read Before Use",
