@@ -2,6 +2,7 @@ import Vue from 'vue';
 import vuex from 'vuex';
 
 import env from './env';
+import bridge from './bridge';
 import account from './account';
 
 import market from './market';
@@ -47,8 +48,10 @@ for (const moduleName in exchange) {
 }
 store.registerModule('env', env);
 store.registerModule('account', account);
+store.registerModule('bridge', bridge);
 
 store.commit('exSetDepthListLimit', 20);
+store.dispatch('setBridgeVersion');
 store.dispatch('fetchDefaultTokenList');
 store.dispatch('startLoopExchangeRate');
 store.dispatch('getMiningSettingInfo');
