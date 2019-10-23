@@ -67,15 +67,27 @@
             </div>
         </div>
 
-        <div class="order-btn __pointer" :class="{
+        <div v-if="isLogin" class="order-btn __pointer" :class="{
             'red': orderType === 'sell',
             'green': orderType === 'buy',
             'gray': isLoading || amountErr || priceErr || quantityErr || activeTxPairIsClose
         }" @click="_clickBtn">{{ $t(`trade.${orderType}.title`, { token: ftokenShow }) }}</div>
+        <div v-else class="order-btn __pointer"  :class="{
+            'red': orderType === 'sell',
+            'green': orderType === 'buy'
+        }">
+            <span v-if="isHaveUsers">
+                <span @click="unlock">{{ $t("unlockAcc") }}</span> / <span @click="login">{{ $t("changeAcc") }}</span>
+            </span>
+            <span v-else>
+                <span @click="login">{{ $t("login") }}</span> / <span @click="login">{{ $t("register") }}</span>
+            </span>
+        </div>
     </div>
 </template>
 
 <script>
+import { StatusMap } from 'wallet';
 import slider from 'components/slider';
 import viteInput from 'components/viteInput';
 import viteConfirm from 'components/confirm/index.js';
@@ -140,49 +152,18 @@ export default {
         },
         activeTx: function () {
             this.price = BigNumber.normalFormatNum(this.activeTx.price, this.ttokenDigit);
-
-            if (!this.activeTx.num) {
-                this.priceChanged();
-                return;
-            }
+            this.priceChanged();
 
             if (
-                !(this.orderType === 'buy' && this.activeTx.side === 1)
-                && !(this.orderType === 'sell' && this.activeTx.side === 0)
+                (
+                    !(this.orderType === 'buy' && this.activeTx.side === 1)
+                    && !(this.orderType === 'sell' && this.activeTx.side === 0)
+                ) || !this.activeTx.num
             ) {
-                this.priceChanged();
                 return;
             }
 
-            const quantity = BigNumber.normalFormatNum(this.activeTx.num, this.ftokenDigit);
-
-            if (
-                this.orderType === 'sell'
-                && BigNumber.compared(this.balance || 0, quantity) < 0
-            ) {
-                if (+this.balance === 0) {
-                    this.priceChanged();
-                    return;
-                }
-                this.quantity = BigNumber.normalFormatNum(this.balance, this.ftokenDigit);
-                this.quantityChanged();
-                return;
-            }
-
-            if (this.orderType === 'buy') {
-                const amount = this.getAmount(this.price, quantity);
-                if (BigNumber.compared(this.balance || 0, amount) < 0) {
-                    if (+this.balance === 0) {
-                        return;
-                    }
-                    this.amount = BigNumber.normalFormatNum(this.balance || '',
-                        this.ttokenDigit);
-                    this.quantity = this.getQuantity(this.price, this.amount);
-                    return;
-                }
-            }
-
-            this.quantity = BigNumber.normalFormatNum(quantity, this.ftokenDigit);
+            this.quantity = BigNumber.normalFormatNum(this.activeTx.num, this.ftokenDigit);
             this.quantityChanged();
         },
         ttokenDigit: function () {
@@ -200,6 +181,12 @@ export default {
         }
     },
     computed: {
+        isLogin() {
+            return this.$store.state.wallet.status === StatusMap.UNLOCK;
+        },
+        isHaveUsers() {
+            return !!this.$store.state.wallet.currHDAcc;
+        },
         isOperatorTxPairLoading() {
             return this.$store.state.exchangeTokens.isLoading;
         },
@@ -362,12 +349,22 @@ export default {
         }
     },
     methods: {
+        unlock() {
+            statistics.event(this.$route.name, 'limitPrice-unlockAccount', this.address || '');
+            const valid = execWithValid(function () {});
+            valid();
+        },
+        login() {
+            statistics.event(this.$route.name, 'limitPrice-login', this.address || '');
+            this.$router.push({ name: 'startLogin' });
+        },
         hideTips(type) {
             this.focusInput === type && (this.focusInput = '');
         },
         showTips(type) {
             this.focusInput = type;
         },
+
         percentChanged(percent) {
             percent = percent / 100;
 
@@ -390,12 +387,6 @@ export default {
             !BigNumber.isEqual(amount, this.amount) && (this.amount = amount);
         },
         amountChanged() {
-            this.validAll();
-
-            if (this.amountErr) {
-                return;
-            }
-
             const price = this.price;
             let quantity = this.quantity;
             const amount = this.amount;
@@ -410,12 +401,6 @@ export default {
                 && (this.quantity = quantity);
         },
         priceChanged() {
-            this.validAll();
-
-            if (this.priceErr) {
-                return;
-            }
-
             const price = this.price;
             const quantity = this.quantity;
             let amount = this.amount;
@@ -424,12 +409,6 @@ export default {
             !BigNumber.isEqual(amount, this.amount) && (this.amount = amount);
         },
         quantityChanged() {
-            this.validAll();
-
-            if (this.quantityErr) {
-                return;
-            }
-
             const price = this.price;
             const quantity = this.quantity;
             let amount = this.amount;
