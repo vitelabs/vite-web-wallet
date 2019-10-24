@@ -28,7 +28,7 @@
 import loading from 'components/loading';
 import noData from 'h5Components/noData';
 import confirm from 'h5Components/confirm/confirm.vue';
-import { getMarketsByTradeToken } from 'services/trade';
+import { getMarketsByTradeToken, getMarketsByQuoteToken } from 'services/trade';
 import bigNumber from 'utils/bigNumber';
 
 export default {
@@ -78,9 +78,19 @@ export default {
         },
         getTxPairs() {
             this.isLoading = true;
-            getMarketsByTradeToken({ tradeTokenSymbol: this.symbol }).then(data => {
+
+            Promise.all([
+                getMarketsByTradeToken({ tradeTokenSymbol: this.symbol }),
+                getMarketsByQuoteToken({ quoteTokenSymbol: this.symbol })
+            ]).then(data => {
                 this.isLoading = false;
-                this.txPairList = data || [];
+                if (!data || !data.length) {
+                    this.txPairList = [];
+                    return;
+                }
+                data.forEach(_d => {
+                    this.txPairList = (this.txPairList || []).concat(_d || []);
+                });
             }).catch(err => {
                 this.isLoading = false;
                 console.warn(err);
