@@ -102,7 +102,7 @@ export default {
             statistics.event(`H5${ this.$route.name }`, 'transfer', this.address || '');
             bridge['pri.transferAsset']({ tokenId: this.token.tokenId }).catch(err => {
                 console.warn(err);
-                this.$toast(this.$t('hint.operateFail'));
+                this.$toast(this.$t('hint.operateFail'), err);
             });
         },
         trade() {
