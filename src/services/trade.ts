@@ -309,3 +309,11 @@ export function getMarketsByTradeToken({ tradeTokenSymbol }) {
         params: { tradeTokenSymbol }
     });
 }
+
+export function getMarketsByQuoteToken({ quoteTokenSymbol }) {
+    return ViteXAPI({
+        method: 'GET',
+        path: 'ticker/24hr',
+        params: { quoteTokenSymbol }
+    });
+}
