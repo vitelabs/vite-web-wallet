@@ -7,6 +7,7 @@
 
         <div class="info">
             <div class="symbol-wrapper">
+                <img class="cmc-img" v-show="isCMC" src="~assets/imgs/cmc.svg"/>
                 <span @click="_showDetail('token')">{{ ftokenDetail ? ftokenDetail.symbol : '' }}</span>
                 <span @click="_showDetail('token')" class="ttoken">
                     /{{ ttokenDetail ? ttokenDetail.symbol : '' }}
@@ -37,6 +38,9 @@ export default {
         }
     },
     computed: {
+        isCMC() {
+            return this.$store.getters.activeTxPairIsCMC;
+        },
         canFavorite() {
             return this.activeTxPair && this.$store.state.favoriteTxPair.canFavorite;
         },
@@ -123,7 +127,7 @@ export default {
     width: 44px;
     height: 44px;
     display: inline-block;
-    margin-right: 10px;
+    margin-right: 8px;
     img {
         display: inline-block;
         width: 100%;
@@ -153,6 +157,11 @@ export default {
         @include font-bold();
         color: rgba(36,39,43,1);
         margin-bottom: 11px;
+        .cmc-img {
+            width: 20px;
+            height: 20px;
+            margin-bottom: 2px;
+        }
         .ttoken {
             font-size: 12px;
             color: rgba(62,74,89,0.3);
