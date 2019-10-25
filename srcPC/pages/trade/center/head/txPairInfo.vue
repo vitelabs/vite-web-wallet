@@ -6,6 +6,7 @@
         </div>
 
         <div class="t-item">
+            <img class="cmc-img" v-show="isCMC" src="~assets/imgs/cmc.svg"/>
             <span class="symbol" @click="_showDetail('token')">
                 {{ ftokenDetail ? ftokenDetail.symbol : '' }}
             </span> /
@@ -37,6 +38,9 @@ export default {
         }
     },
     computed: {
+        isCMC() {
+            return this.$store.getters.activeTxPairIsCMC;
+        },
         isMining() {
             return this.$store.getters.activeTxPairIsMining;
         },
@@ -147,6 +151,11 @@ export default {
     color: rgba(29, 32, 36, 1);
     line-height: 14px;
     margin-left: 36px;
+    .cmc-img {
+        width: 20px;
+        height: 20px;
+        margin-bottom: -5px;
+    }
 
     .symbol {
         position: relative;
