@@ -105,6 +105,7 @@ export default {
         switchTxPair() {
             bridge['pri.switchPair']().then(data => {
                 this.$store.commit('switchTradePair', data);
+                this.$store.commit('initFavorite');
                 this.$store.dispatch('dexFetchActiveTxPair');
             }).catch(err => {
                 console.warn(err);
