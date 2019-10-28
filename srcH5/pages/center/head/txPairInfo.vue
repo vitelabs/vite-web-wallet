@@ -96,7 +96,7 @@ export default {
             this.showDetail && this.showDetail(tab);
         },
         toggleFavorite() {
-            const action = this.isFavorite ? 'exDeletetFavorite' : 'exSetFavorite';
+            const action = this.isFavorite ? 'exDeleteFavorite' : 'exSetFavorite';
             this.$store.dispatch(action, this.activeTxPair.symbol).catch(err => {
                 this.$toast(this.$t('hint.operateFail'), err);
                 console.warn(err);
@@ -105,7 +105,7 @@ export default {
         switchTxPair() {
             bridge['pri.switchPair']().then(data => {
                 this.$store.commit('switchTradePair', data);
-                this.$store.commit('initFavorite');
+                // this.$store.commit('initFavorite');
                 this.$store.dispatch('dexFetchActiveTxPair');
             }).catch(err => {
                 console.warn(err);
