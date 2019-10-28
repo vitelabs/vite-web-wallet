@@ -13,7 +13,7 @@ const mutations = {
     exSetFavorite(state, symbol) {
         state.favoriteList.push(symbol);
     },
-    exDeletetFavorite(state, symbol) {
+    exDeleteFavorite(state, symbol) {
         const i = state.favoriteList.indexOf(symbol);
         if (i < 0) {
             return;
@@ -44,10 +44,10 @@ const actions = {
             commit('exSetFavorite', symbol);
         });
     },
-    exDeletetFavorite({ commit }, symbol) {
+    exDeleteFavorite({ commit }, symbol) {
         return bridge['pri.deleteFavPair']({ symbol }).then(data => {
             console.log('pri.deleteFavPair', data);
-            commit('exDeletetFavorite', symbol);
+            commit('exDeleteFavorite', symbol);
         });
     }
 };
