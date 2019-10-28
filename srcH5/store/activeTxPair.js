@@ -40,13 +40,13 @@ const actions = {
 
         assignPairTask = new subTask('assignPair', ({ data }) => {
             commit('setActiveTxPairLoading', false);
-            if (!data || !data.length) {
+
+            const activeTxPair = data.length ? data[0] : data;
+            if (!activeTxPair) {
                 return;
             }
 
-            const activeTxPair = data[0];
             const currActiveTxPair = state.activeTxPair;
-
             if (currActiveTxPair && activeTxPair.symbol !== currActiveTxPair.symbol) {
                 return;
             }
