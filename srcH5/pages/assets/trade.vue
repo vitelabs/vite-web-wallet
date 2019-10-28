@@ -119,7 +119,8 @@ export default {
         padding: 10px 16px;
         border-bottom: 1px solid rgba(211,223,239,1);
         .symbol {
-            line-height: 20px;
+            display: flex;
+            align-items: center;
             font-size: 16px;
             @include font-bold();
             color: rgba(36,39,43,1);
@@ -136,6 +137,7 @@ export default {
             line-height: 16px;
             .real {
                 color: rgba(62,74,89,0.6);
+                margin-left: 4px;
             }
         }
         .right {
