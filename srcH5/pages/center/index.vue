@@ -18,6 +18,7 @@
 <script>
 import loading from 'components/loading';
 import openOrder from 'h5Components/orderOpen.vue';
+import { bridge } from 'h5Utils/bridge';
 import depth from './depth/depth.vue';
 import limitPrice from './limitPrice/limitPrice.vue';
 import centerHead from './head/head.vue';
@@ -32,6 +33,10 @@ export default {
         this.$store.dispatch('exFetchLimitAmounts');
         this.$store.dispatch('startLoopDexFundeUnreceived');
         this.$store.dispatch('initFavorite');
+
+        bridge.subscribe('page.onShow', () => {
+            this.$store.dispatch('initFavorite');
+        });
     },
     destroyed() {
         this.$store.dispatch('stopLoopDexFundUnreceived');
