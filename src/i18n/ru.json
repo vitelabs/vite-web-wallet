@@ -1262,7 +1262,9 @@
     },
     "mobileAssets": {
         "allAssets": "Estimated Assets Value ({token})",
-        "tokenInfoTitle": "Token Details"
+        "tokenInfoTitle": "Token Details",
+        "transfer": "Перевод",
+        "trade": "Trade"
     },
     "mobileTradeCenter": {
         "highPrice": "High",
