@@ -7,7 +7,7 @@
 
         <div class="info">
             <div class="symbol-wrapper">
-                <img class="cmc-img" v-show="isCMC" src="~assets/imgs/cmc.svg"/>
+                <img class="cmc-img" v-show="isCMC" @click="gotoCMC" src="~assets/imgs/cmc.svg"/>
                 <span @click="_showDetail('token')">{{ ftokenDetail ? ftokenDetail.symbol : '' }}</span>
                 <span @click="_showDetail('token')" class="ttoken">
                     /{{ ttokenDetail ? ttokenDetail.symbol : '' }}
@@ -29,6 +29,7 @@
 import operatorIcon from 'h5Assets/imgs/operator_default.svg';
 import { bridge } from 'h5Utils/bridge';
 import { getTokenIcon } from 'utils/tokenParser';
+import openUrl from 'utils/openUrl';
 
 export default {
     props: {
@@ -111,6 +112,9 @@ export default {
                 console.warn(err);
                 this.$toast(this.$t('hint.operateFail'), err);
             });
+        },
+        gotoCMC() {
+            openUrl('https://coinmarketcap.com/exchanges/vitex/');
         }
     }
 };
