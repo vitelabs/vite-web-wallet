@@ -1287,6 +1287,8 @@
         "3month": "3 months",
         "1month": "1 month",
         "1week": "1 week",
-        "1day": "1 day"
+        "1day": "1 day",
+        "clear": "清空",
+        "submit": "确定"
     }
 }
