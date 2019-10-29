@@ -1,24 +1,24 @@
 <template>
     <div class="filter-root" ref="filterRoot" @click="close">
         <div class="filter-head">
-            <div class="item" :class="{'active': filterType === 'date'}"
+            <div class="item __ellipsis" :class="{'active': filterType === 'date'}"
                  @click="triggerFilter('date')">
-                {{ $t("mobileOrder.filterDate") }}
+                {{ filterTypeDate }}
                 <span class="arrow"></span>
             </div>
-            <div class="item" :class="{'active': filterType === 'token'}"
+            <div class="item __ellipsis" :class="{'active': filterType === 'token'}"
                  @click="triggerFilter('token')">
-                {{ $t("mobileOrder.filterToken") }}
+                {{ filterTypeToken }}
                 <span class="arrow"></span>
             </div>
-            <div class="item" :class="{'active': filterType === 'side'}"
+            <div class="item __ellipsis" :class="{'active': filterType === 'side'}"
                  @click="triggerFilter('side')">
-                {{ $t("tradeOrderHistory.filter.side") }}
+                {{ filterTypeSide }}
                 <span class="arrow"></span>
             </div>
-            <div class="item" :class="{'active': filterType === 'status'}"
+            <div class="item __ellipsis" :class="{'active': filterType === 'status'}"
                  @click="triggerFilter('status')">
-                {{ $t("tradeOrderHistory.filter.status") }}
+                {{ filterTypeStatus }}
                 <span class="arrow"></span>
             </div>
         </div>
@@ -27,7 +27,7 @@
             <div class="filter-content" v-show="filterType === 'date'">
                 <div v-for="_d in ['all', '3month', '1month', '1week', '1day']" :key="_d"
                      class="normal-item" @click="selectDate(_d)"
-                     :class="{'active': date === _d}">
+                     :class="{'active': date === _d || (_d === 'all' && !date)}">
                     {{ $t(`mobileOrder.${_d}`) }}
                 </div>
             </div>
@@ -66,6 +66,11 @@
                      :class="{'active': status === s}">
                     {{ $t(`tradeOrderHistory.status.${s}`) }}
                 </div>
+            </div>
+
+            <div class="btn-wrapper">
+                <div class="clear" @click="clear">{{ $t('mobileOrder.clear') }}</div>
+                <div class="submit" @click="submit">{{ $t('mobileOrder.submit') }}</div>
             </div>
         </div>
     </div>
@@ -107,6 +112,25 @@ export default {
         });
     },
     computed: {
+        filterTypeDate() {
+            return this.date ? this.$t(`mobileOrder.${ this.date }`) : this.$t('mobileOrder.filterDate');
+        },
+        filterTypeToken() {
+            return this.ttoken && this.ftoken ? `${ this.ttoken }/${ this.ftoken }` : this.$t('mobileOrder.filterToken');
+        },
+        filterTypeSide() {
+            if (this.side === '') {
+                return this.$t('tradeOrderHistory.filter.side');
+            }
+            return this.side === '0' ? this.$t('tradeOrderHistory.filter.buy') : this.$t('tradeOrderHistory.filter.sell');
+        },
+        filterTypeStatus() {
+            if (this.status === '') {
+                return this.$t('mobileOrder.all');
+            }
+            return this.$t(`tradeOrderHistory.status.${ this.status }`);
+        },
+
         activeAddr() {
             return this.$store.getters.activeAddr;
         },
@@ -171,7 +195,17 @@ export default {
                 return;
             }
             this.filterType = '';
-
+            this.clear();
+        },
+        clear() {
+            this.date = '';
+            this.side = '';
+            this.status = '';
+            this.ftoken = '';
+            this.ttoken = '';
+        },
+        submit() {
+            this.filterType = '';
             statistics.event(`H5${ this.$route.name }`, 'search', this.activeAddr || '');
             this.$emit('submit', {
                 startTime: this.fromDate,
@@ -182,6 +216,7 @@ export default {
             });
         },
         selectDate(date) {
+            date = date === 'all' ? '' : date;
             this.date = date;
         },
         selectTtoken(ttoken) {
@@ -211,11 +246,14 @@ export default {
         padding: 0px 24px 14px;
         display: flex;
         flex-direction: row;
-        justify-content: space-between;
+        justify-content: space-around;
         .item {
             font-size: 12px;
             color: rgba(62,74,89,0.6);
             line-height: 16px;
+            flex: 1;
+            text-align: center;
+            box-sizing: border-box;
             .arrow {
                 display: inline-block;
                 width: 10px;
@@ -293,6 +331,28 @@ export default {
                         background: rgba(247,247,249,1);
                     }
                 }
+            }
+        }
+        .btn-wrapper {
+            display: flex;
+            background: #fff;
+            flex-direction: row;
+            font-size: 14px;
+            @include font-bold();
+            .clear, .submit {
+                flex: 1;
+                text-align: center;
+            }
+            .clear {
+                padding: 10px 0;
+                border: 1px solid $blue;
+                box-sizing: border-box;
+                color: $blue;
+            }
+            .submit {
+                padding: 11px 0;
+                background: $blue;
+                color: #fff;
             }
         }
     }
