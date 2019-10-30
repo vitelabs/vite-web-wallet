@@ -101,6 +101,7 @@ export default {
     watch: {
         availableAmount() {
             this.validAmount();
+            this.isAll = false;
         }
     },
     methods: {
@@ -119,6 +120,7 @@ export default {
         },
         switchTransfer() {
             this.isFromWallet = !this.isFromWallet;
+            this.isAll = false;
             this.validAmount();
         },
         validAmount() {
