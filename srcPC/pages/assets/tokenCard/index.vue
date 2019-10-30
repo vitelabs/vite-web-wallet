@@ -53,11 +53,8 @@
                 {{ `${avaliableExBalance || 0} ${token.tokenSymbol}` }}
             </div>
             <div class="op_group">
-                <div class="op" @click="_exCharge">
-                    {{ $t("tokenCard.actionType.EXCHARGE") }}
-                </div>
-                <div class="op" @click="_exWithdraw">
-                    {{ $t("tokenCard.actionType.EXWITHDRAW") }}
+                <div class="op" @click="_exTransfer">
+                    {{ $t("tokenCard.actionType.EXTRANSFER") }}
                 </div>
                 <div class="op readonly" @click="exRecord">
                     {{ $t("tokenCard.actionType.EXRECRODS") }}
@@ -79,12 +76,9 @@
             ></div>
         </div>
         <Alert ref="alert" :token="token" />
-        <transaction
-            :closeTrans="closeTrans"
-            :token="token"
-            v-if="isShowTrans"
-        />
 
+        <transaction :closeTrans="closeTrans" :token="token" v-if="isShowTrans"/>
+        <exTransfer ref="exTransfer" :tokenInfo="token"></exTransfer>
         <important-hint ref="importantHintDom" :tokenInfo="token"></important-hint>
     </div>
 </template>
@@ -94,10 +88,9 @@ import {
     receiveDialog,
     chargeDialog,
     withdrawDialog,
-    tokenInfoDialog,
-    exWithdrawDialog,
-    exChargeDialog
+    tokenInfoDialog
 } from '../dialog';
+import exTransfer from '../dialog/exTransfer';
 import importantHint from '../dialog/importantHint';
 import statistics from 'utils/statistics';
 import bigNumber from 'utils/bigNumber';
@@ -108,7 +101,7 @@ import transaction from '../transaction';
 import Alert from '../alert.vue';
 
 export default {
-    components: { transaction, Alert, importantHint },
+    components: { transaction, Alert, importantHint, exTransfer },
     props: {
         token: {
             type: Object,
@@ -231,24 +224,14 @@ export default {
                 console.error(e);
             });
         },
-        _exCharge() {
-            statistics.event(this.$route.name, 'exchange-deposit', this.address || '');
-            this.exCharge();
+        _exTransfer() {
+            statistics.event(this.$route.name, 'exchange-transfer', this.address || '');
+            this.exTransfer();
         },
-        _exWithdraw() {
-            statistics.event(this.$route.name, 'exchange-withdraw', this.address || '');
-            this.exWithdraw();
-        },
-        exCharge: execWithValid(function () {
-            exChargeDialog({ token: this.token }).catch(e => {
-                console.error(e);
-            });
+        exTransfer: execWithValid(function () {
+            this.$refs.exTransfer.show();
         }),
-        exWithdraw: execWithValid(function () {
-            exWithdrawDialog({ token: this.token }).catch(e => {
-                console.error(e);
-            });
-        }),
+
         _send() {
             statistics.event(this.$route.name, 'wallet-transfer', this.address || '');
             this.send();
