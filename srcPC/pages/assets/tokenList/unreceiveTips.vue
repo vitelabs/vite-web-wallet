@@ -1,9 +1,8 @@
 <template>
     <span v-show="unreceivedNum !== 0" class="unreceive-bubble __pointer">
         {{ unreceivedNum }}
-        <tooltips class="fee-tips" v-show="!isLogin" :content="$t('hint.unreceived')"></tooltips>
-        <tooltips class="bubble" v-show="isShowBubble"
-                  :content="$t('hint.unreceivedNum', {number: unreceivedNum})"></tooltips>
+        <tooltips class="fee-tips" v-show="!isLogin && !isShowBubble" :content="$t('hint.unreceived')"></tooltips>
+        <tooltips class="fee-tips bubble" v-show="isShowBubble" :content="$t('hint.unreceivedNum', {number: unreceivedNum})">></tooltips>
     </span>
 </template>
 
@@ -56,17 +55,17 @@ export default {
 .unreceive-bubble {
     position: relative;
     display: inline-block;
-    margin-left: 3px;
     overflow: visible;
-    width: 16px;
-    height: 16px;
-    border-radius: 16px;
+    width: 13px;
+    height: 13px;
+    border-radius: 20px;
     background: #E5494D;
     text-align: center;
-    line-height: 16px;
     color: #fff;
-    font-size: 12px;
+    font-size: 11px;
+    line-height: 13px;
     @include font-family-normal();
+    font-weight: 300;
 
     .fee-tips {
         z-index: 100;
@@ -87,28 +86,11 @@ export default {
             left: 50%;
         }
     }
-    &:hover .fee-tips {
+    .fee-tips.bubble {
         display: inline-block;
     }
-}
-
-.bubble {
-    position: absolute;
-    top: -14px;
-    left: 50%;
-    z-index: 100;
-    transform: translateX(-50%) translateY(-100%);
-    color: #5E6875;
-    width: 200px;
-    word-break: break-word;
-    box-shadow: 0px 5px 20px 0px rgba(176,192,237,0.4);
-    /deep/.trigle {
-        border: 7px solid transparent;
-        border-top: 7px solid #fff;
-        bottom: -14px;
-        top: unset;
-        transform: translateX(-50%);
-        left: 50%;
+    &:hover .fee-tips {
+        display: inline-block;
     }
 }
 </style>
