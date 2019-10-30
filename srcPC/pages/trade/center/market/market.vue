@@ -143,14 +143,14 @@ export default {
                 return [];
             }
 
-            let list = this.searchText
+            const list = this.searchText
                 ? this.searchList
                 : this.isShowFavorite
                     ? this.favoriteList
                     : this.txPairList;
-            list = [].concat(list);
 
-            return list;
+            const newList = list.filter(v => this.hideTxPairs.indexOf(v.symbol) === -1);
+            return [].concat(newList);
         },
         activePairCode() {
             return this.activeTxPair
@@ -162,6 +162,9 @@ export default {
         },
         address() {
             return this.$store.getters.activeAddr;
+        },
+        hideTxPairs() {
+            return this.$store.state.uiConfig.hideTxPairs || [];
         }
     },
     watch: {

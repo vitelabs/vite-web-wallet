@@ -3,7 +3,8 @@ import { getUiConfig } from 'services/config.ts';
 const state = {
     inviteAddrList: [],
     allShowInvite: false,
-    versionList: []
+    versionList: [],
+    hideTxPairs: []
 };
 
 const mutations = {
@@ -15,6 +16,9 @@ const mutations = {
     },
     setVersionList(state, payload = []) {
         state.versionList = payload;
+    },
+    setHideTxPairs(state, payload = []) {
+        state.hideTxPairs = payload;
     }
 };
 
@@ -24,6 +28,7 @@ const actions = {
             commit('setInviteAddrList', data['inviteAddrList']);
             commit('setAllShowInvite', data['allShowInvite']);
             commit('setVersionList', data['versionList'] || []);
+            commit('setHideTxPairs', data['hideTxPairs'] || []);
         });
     }
 };
