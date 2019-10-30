@@ -34,9 +34,12 @@
     max-width: 681px;
 }
 
+.big.no-padding-confirm .confirm-wrapper .content-wrapper {
+    min-height: 300px;
+}
+
 .no-padding-confirm .confirm-wrapper .content-wrapper {
     padding: 0;
-    min-height: 300px;
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
