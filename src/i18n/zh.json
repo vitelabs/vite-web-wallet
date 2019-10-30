@@ -271,20 +271,28 @@
             "gate":"钱包跨链网关",
             "totalExAmount":"交易所总余额",
             "availableExAmount":"交易所可用余额",
-            "balanceTips": "点击转账，可以从Vite 钱包给其他地址转币",
+            "balanceTips": "点击链内转账，可以从Vite钱包给其他地址进行Vite链内转账",
             "gateTips": "点击跨链转入，可以将其他币种跨链映射到Vite网络，转入Vite钱包；点击跨链转出仍可以将资产转至其他平台。*转入转出过程可能会产生手续费，且有金额限制",
             "availableExAmountTips": "点击充值至交易所，将钱包中的资产划转至交易所；点击提现至钱包，将交易所资产划转至钱包。以上划转过程不需要手续费",
             "unreceivedTips": "登录状态下可自动接收在途金额"
         },
         "actionType": {
-            "SEND": "转账",
+            "SEND": "链内转账",
             "RECEIVE": "接收",
-            "CHARGE": "跨链转入",
-            "WITHDRAW": "跨链转出",
+            "CHARGE": "跨链充值",
+            "WITHDRAW": "跨链提现",
+            "EXTRANSFER": "资金划转",
             "EXCHARGE": "充值至交易所",
             "EXWITHDRAW": "提币至钱包",
             "EXRECRODS": "交易所充提记录",
             "RECRODS":"跨链充提记录"
+        },
+        "transferConfirm": {
+            "from": "从",
+            "to": "到",
+            "wallet": "钱包账户",
+            "dex": "交易所账户",
+            "avaliableAmount": "可用余额"
         },
         "type": {
             "native": "原生代币",
