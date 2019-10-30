@@ -56,17 +56,17 @@ export default {
 .unreceive-bubble {
     position: relative;
     display: inline-block;
-    margin-left: 3px;
     overflow: visible;
-    width: 16px;
-    height: 16px;
-    border-radius: 16px;
+    width: 13px;
+    height: 13px;
+    border-radius: 20px;
     background: #E5494D;
     text-align: center;
-    line-height: 16px;
     color: #fff;
-    font-size: 12px;
+    font-size: 11px;
+    line-height: 13px;
     @include font-family-normal();
+    font-weight: 300;
 
     .fee-tips {
         z-index: 100;
