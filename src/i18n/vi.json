@@ -404,7 +404,7 @@
                 "overMax": "Send amount should be less than {max}",
                 "lessMin": "Send amount should not be less than {min}"
             },
-            "feeTips": "Số tiền phí giao dịch được đặt bởi Nhà vận hành cổng",
+            "feeTips": "Transaction fee is set by gateway operator",
             "addressErr": "Định dạng địa chỉ không đúng",
             "labels": {
                 "balance": "Số dư",
