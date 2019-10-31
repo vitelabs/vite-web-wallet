@@ -404,7 +404,7 @@
                 "overMax": "Send amount should be less than {max}",
                 "lessMin": "Send amount should not be less than {min}"
             },
-            "feeTips": "Transaction fee amount is set by gateway operator",
+            "feeTips": "Transaction fee is set by gateway operator",
             "addressErr": "Address format is incorrect",
             "labels": {
                 "balance": "Balance",
