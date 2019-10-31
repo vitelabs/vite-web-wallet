@@ -158,10 +158,10 @@ export default {
 <style lang="scss" scoped>
 @import "~h5Components/confirm/moreTabConfirm.scss";
 
-.tab-content {
-    height: 270px;
-}
 .click-able {
     margin-right: 10px;
+}
+.tab-content {
+    height: 270px;
 }
 </style>

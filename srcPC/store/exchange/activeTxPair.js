@@ -15,11 +15,11 @@ const mutations = {
 };
 
 const actions = {
-    exFetchActiveTxPair({ state, dispatch, commit, rootState }, txPair) {
+    exFetchActiveTxPair({ state, dispatch, commit }, txPair) {
         const activeTxPair = state.activeTxPair;
 
         if (txPair) {
-            history.replaceState(null, null, `${ location.origin }/trade?symbol=${ txPair.symbol }&category=${ rootState.exchangeMarket.curentCategory }`);
+            history.replaceState(null, null, `${ location.origin }/trade?symbol=${ txPair.symbol }`);
             commit('exSetActiveTxPair', txPair);
         }
 
