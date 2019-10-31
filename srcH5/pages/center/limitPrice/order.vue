@@ -93,7 +93,8 @@ export default {
     },
     watch: {
         activeTxPair: function (val, old) {
-            if (old && old.symbol === this.activeTxPair.symbol) {
+            if (!this.activeTxPair
+                || (old && old.symbol === this.activeTxPair.symbol)) {
                 return;
             }
 

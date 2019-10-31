@@ -1238,7 +1238,9 @@
     },
     "mobileAssets": {
         "allAssets": "Estimated Assets Value ({token})",
-        "tokenInfoTitle": "Token Details"
+        "tokenInfoTitle": "Token Details",
+        "transfer": "Transfer",
+        "trade": "Trade"
     },
     "mobileTradeCenter": {
         "highPrice": "High",

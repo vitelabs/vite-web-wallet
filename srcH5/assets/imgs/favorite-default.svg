@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="28px" height="28px" viewBox="0 0 28 28" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 58 (84663) - https://sketch.com -->
+    <title>default</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <path d="M13.9499642,20.6071609 L8.45943681,23.6335087 C8.19001783,23.782011 7.85678712,23.6734102 7.71514518,23.3909422 C7.65874262,23.278462 7.63927949,23.1496248 7.65976892,23.0243762 L8.70836635,16.6144685 L4.26643637,12.0749467 C4.04847184,11.8521933 4.04401189,11.4863629 4.2564748,11.2578414 C4.34107865,11.166843 4.45193511,11.1076231 4.57188233,11.0893495 L10.7104786,10.1541566 L13.4557423,4.32222994 C13.5904518,4.03605857 13.9209261,3.91856363 14.1938773,4.05979765 C14.3025679,4.11603777 14.3905441,4.208275 14.4441861,4.32222994 L17.1894499,10.1541566 L23.3280461,11.0893495 C23.6292657,11.1352392 23.83797,11.4284539 23.7942002,11.7442627 C23.7767709,11.8700195 23.7202867,11.9862451 23.6334921,12.0749467 L19.1915621,16.6144685 L20.2401595,23.0243762 C20.291614,23.338909 20.090126,23.6376205 19.7901236,23.6915671 C19.670661,23.7130489 19.5477757,23.6926431 19.4404916,23.6335087 L13.9499642,20.6071609 Z" id="path-1"></path>
+        <filter x="-2.5%" y="-2.5%" width="105.1%" height="105.1%" filterUnits="objectBoundingBox" id="filter-2">
+            <feGaussianBlur stdDeviation="0.5" in="SourceAlpha" result="shadowBlurInner1"></feGaussianBlur>
+            <feOffset dx="0" dy="0" in="shadowBlurInner1" result="shadowOffsetInner1"></feOffset>
+            <feComposite in="shadowOffsetInner1" in2="SourceAlpha" operator="arithmetic" k2="-1" k3="1" result="shadowInnerInner1"></feComposite>
+            <feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.1 0" type="matrix" in="shadowInnerInner1"></feColorMatrix>
+        </filter>
+    </defs>
+    <g id="页面-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="资产备份-127" transform="translate(-327.000000, -78.000000)">
+            <g id="收藏" transform="translate(327.000000, 78.000000)">
+                <g id="星形">
+                    <use fill="#B7D2EB" fill-rule="evenodd" xlink:href="#path-1"></use>
+                    <use fill="black" fill-opacity="1" filter="url(#filter-2)" xlink:href="#path-1"></use>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
