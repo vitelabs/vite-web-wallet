@@ -2,13 +2,20 @@ import { baseToken, marketsClosed } from 'services/trade';
 import getQuery from 'utils/query';
 
 const quoteTokenCategory = [ 'BTC', 'ETH', 'VITE', 'USDT' ];
-const categoryTransLimit = { 'BTC': 3, 'ETH': 2, 'VITE': 1, 'USDT': 1 }; // [TODO] Merge quoteTokenCategory
+const categoryTransLimit = { 'BTC': 3, 'ETH': 2, 'VITE': 1, 'USDT': 1 };
 
 const query = getQuery();
-const category = query.category;
 const symbol = query.symbol;
-const DefaultCategory = category && quoteTokenCategory.indexOf(category) !== -1 ? category : 'BTC';
 const DefaultSymbol = symbol || 'VITE_BTC-000';
+
+let DefaultCategory = 'BTC';
+try {
+    const quoteToken = DefaultSymbol.split('_')[1];
+    const category = quoteToken.split('-')[0];
+    DefaultCategory = category && quoteTokenCategory.indexOf(category) !== -1 ? category : 'BTC';
+} catch (err) {
+    console.warn(err);
+}
 
 const state = {
     quoteTokenCategory,
