@@ -404,7 +404,7 @@
                 "overMax": "Send amount should be less than {max}",
                 "lessMin": "Send amount should not be less than {min}"
             },
-            "feeTips": "取引手数料の金額はゲートウェイオペレーターが設定します",
+            "feeTips": "Transaction fee is set by gateway operator",
             "addressErr": "アドレス形式が不正です",
             "labels": {
                 "balance": "残高",
