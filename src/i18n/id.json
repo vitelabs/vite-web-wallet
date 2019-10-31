@@ -404,7 +404,7 @@
                 "overMax": "Send amount should be less than {max}",
                 "lessMin": "Send amount should not be less than {min}"
             },
-            "feeTips": "Jumlah biaya transaksi ditentukan oleh operator gateway",
+            "feeTips": "Transaction fee is set by gateway operator",
             "addressErr": "Format alamat salah",
             "labels": {
                 "balance": "Saldo",
