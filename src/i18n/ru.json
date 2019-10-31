@@ -404,7 +404,7 @@
                 "overMax": "Send amount should be less than {max}",
                 "lessMin": "Send amount should not be less than {min}"
             },
-            "feeTips": "Размер комиссии за транзакцию устанавливается оператором шлюза",
+            "feeTips": "Transaction fee is set by gateway operator",
             "addressErr": "Неверный формат адреса",
             "labels": {
                 "balance": "Баланс",
