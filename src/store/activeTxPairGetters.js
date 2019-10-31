@@ -117,7 +117,10 @@ const getters = {
             'GRIN-000_ETH-000': 0.92,
             'GRIN-000_VITE': 0.92,
             'BTC-000_USDT-000': 0.95,
-            'ETH-000_USDT-000': 0.95
+            'ETH-000_USDT-000': 0.95,
+            'VITE_BTC-000': 0.85,
+            'VITE_ETH-000': 0.85,
+            'VITE_USDT-000': 0.85
         };
 
         const symbol = activeTxPair.symbol;
@@ -129,6 +132,19 @@ const getters = {
             return '';
         }
         return BigNumber.onlyFormat(getters.activeTxPairMiningPrice);
+    },
+    activeTxPairIsCMC(state, getters, rootState) {
+        const activeTxPair = rootState.exchangeActiveTxPair.activeTxPair;
+        if (!activeTxPair) {
+            return null;
+        }
+
+        const CMCTxPairs = [
+            'VITE_USDT-000', 'ETH-000_BTC-000', 'GRIN-000_VITE', 'VITE_ETH-000',
+            'GRIN-000_BTC-000', 'GRIN-000_ETH-000', 'VITE_BTC-000',
+            'ETH-000_USDT-000', 'BTC-000_USDT-000'
+        ];
+        return CMCTxPairs.indexOf(activeTxPair.symbol) !== -1;
     }
 };
 

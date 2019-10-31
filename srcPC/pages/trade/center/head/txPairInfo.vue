@@ -6,6 +6,7 @@
         </div>
 
         <div class="t-item">
+            <img class="cmc-img" v-show="isCMC" @click="gotoCMC" src="~assets/imgs/cmc.svg"/>
             <span class="symbol" @click="_showDetail('token')">
                 {{ ftokenDetail ? ftokenDetail.symbol : '' }}
             </span> /
@@ -27,6 +28,7 @@
 <script>
 import tooltips from 'components/tooltips';
 import operatorIcon from 'assets/imgs/operator_icon.svg';
+import openUrl from 'utils/openUrl';
 
 export default {
     components: { tooltips },
@@ -37,6 +39,9 @@ export default {
         }
     },
     computed: {
+        isCMC() {
+            return this.$store.getters.activeTxPairIsCMC;
+        },
         isMining() {
             return this.$store.getters.activeTxPairIsMining;
         },
@@ -91,6 +96,9 @@ export default {
     methods: {
         _showDetail(tab = 'token') {
             this.showDetail && this.showDetail(tab);
+        },
+        gotoCMC() {
+            openUrl('https://coinmarketcap.com/exchanges/vitex/');
         }
     }
 };
@@ -147,6 +155,11 @@ export default {
     color: rgba(29, 32, 36, 1);
     line-height: 14px;
     margin-left: 36px;
+    .cmc-img {
+        width: 20px;
+        height: 20px;
+        margin-bottom: -5px;
+    }
 
     .symbol {
         position: relative;
