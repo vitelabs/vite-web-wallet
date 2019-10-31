@@ -404,7 +404,7 @@
                 "overMax": "Send amount should be less than {max}",
                 "lessMin": "Send amount should not be less than {min}"
             },
-            "feeTips": "거래 수수료 금액은 게이트웨이 오퍼레이터가 설정합니다",
+            "feeTips": "Transaction fee is set by gateway operator",
             "addressErr": "주소 형식이 잘못되었습니다",
             "labels": {
                 "balance": "보유자산",
