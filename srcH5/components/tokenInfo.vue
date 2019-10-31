@@ -72,7 +72,7 @@ export default {
         },
         _tokenDetail: {
             type: Object,
-            required: true
+            required: false
         },
         isNeedFetch: {
             type: Boolean,
@@ -160,5 +160,8 @@ export default {
 
 .click-able {
     margin-right: 10px;
+}
+.tab-content {
+    height: 270px;
 }
 </style>

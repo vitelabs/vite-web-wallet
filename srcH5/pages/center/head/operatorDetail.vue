@@ -1,10 +1,7 @@
 <template>
-    <confirm v-show="tab" class="big no-padding-confirm" :title="$t('tradeCenter.operatorTxPair.operatorTab')"
+    <confirm v-show="tab" class="no-padding-confirm" :title="$t('tradeCenter.operatorTxPair.operatorTab')"
              :closeIcon="true" :close="close">
-        <div class="head">
-            <tx-pair-info class="confirm"></tx-pair-info>
-        </div>
-        <div v-show="tab === 'operator'" class="tab-content">
+        <div class="tab-content">
             <div class="content__item">
                 <span class="label">{{ $t('tradeCenter.operator.name') }}:</span>
                 {{ operatorInfo ? operatorInfo.name : $t('tradeCenter.operator.noName') }}
@@ -37,11 +34,10 @@ import confirm from 'h5Components/confirm/confirm.vue';
 import { getExplorerLink } from 'utils/getLink';
 import openUrl from 'utils/openUrl';
 import BigNumber from 'utils/bigNumber';
-import txPairInfo from './txPairInfo.vue';
 import operatorIcon from 'assets/imgs/operator_icon.svg';
 
 export default {
-    components: { confirm, txPairInfo },
+    components: { confirm },
     data() {
         return { tab: '' };
     },
@@ -127,6 +123,11 @@ export default {
 
 <style lang="scss" scoped>
 @import "~h5Components/confirm/moreTabConfirm.scss";
+
+.tab-content {
+    border-top: 1px solid #d4dee7;
+    height: 350px;
+}
 
 .content__item {
     word-break: break-word;
