@@ -1,5 +1,4 @@
 import { subTask } from 'utils/proto/subTask';
-import env from 'h5Utils/envFromURL';
 
 let assignPairTask = null;
 
@@ -10,6 +9,11 @@ const state = {
 
 const mutations = {
     exSetActiveTxPair(state, txPair) {
+        if (!txPair) {
+            state.activeTxPair = null;
+            return;
+        }
+
         const old = state.activeTxPair;
         let isChange = !old;
         for (const key in old) {
@@ -27,30 +31,27 @@ const mutations = {
 
 const actions = {
     dexFetchActiveTxPair({ state, dispatch, commit, rootState }, txPair, isInit = true) {
-        txPair = txPair || {
-            symbol: rootState.exchangeMarket.currentSymbol,
-            quoteToken: env.quoteToken,
-            tradeToken: env.tradeToken
-        };
+        txPair = txPair || { symbol: rootState.exchangeMarket.currentSymbol };
         isInit && commit('setActiveTxPairLoading', true);
+        commit('exSetActiveTxPair', null);
 
         assignPairTask && assignPairTask.stop();
         assignPairTask = null;
 
         assignPairTask = new subTask('assignPair', ({ data }) => {
             commit('setActiveTxPairLoading', false);
-            if (!data || !data.length) {
+
+            const activeTxPair = data.length ? data[0] : data;
+            if (!activeTxPair) {
                 return;
             }
 
-            const activeTxPair = data[0];
             const currActiveTxPair = state.activeTxPair;
             if (currActiveTxPair && activeTxPair.symbol !== currActiveTxPair.symbol) {
                 return;
             }
 
             commit('exSetActiveTxPair', activeTxPair);
-
             if (isInit) {
                 isInit = false;
                 dispatch('addRateTokens', [activeTxPair.quoteToken]);
