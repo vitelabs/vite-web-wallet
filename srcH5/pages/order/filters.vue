@@ -116,7 +116,7 @@ export default {
             return this.date ? this.$t(`mobileOrder.${ this.date }`) : this.$t('mobileOrder.filterDate');
         },
         filterTypeToken() {
-            return this.ttoken && this.ftoken ? `${ this.ttoken }/${ this.ftoken }` : this.$t('mobileOrder.filterToken');
+            return this.ttoken && this.ftoken ? `${ this.ftoken }/${ this.ttoken }` : this.$t('mobileOrder.filterToken');
         },
         filterTypeSide() {
             if (this.side === '') {
