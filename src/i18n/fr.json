@@ -279,7 +279,9 @@
             "WITHDRAW": "Withdraw",
             "EXTRANSFER": "Transfer",
             "EXRECRODS": "History",
-            "RECRODS": "History"
+            "RECRODS": "History",
+            "EXCHARGE": "Deposit",
+            "EXWITHDRAW": "Withdraw"
         },
         "transferConfirm": {
             "from": "From",
