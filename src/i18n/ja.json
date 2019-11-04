@@ -279,7 +279,9 @@
             "WITHDRAW": "引き出し",
             "EXTRANSFER": "転送",
             "EXRECRODS": "履歴",
-            "RECRODS": "履歴"
+            "RECRODS": "履歴",
+            "EXCHARGE": "入金",
+            "EXWITHDRAW": "引き出し"
         },
         "transferConfirm": {
             "from": "From",
