@@ -151,8 +151,8 @@
         "bigger0": "Nilai harus lebih besar dari 0",
         "operateSuccess": "Operasi sukses",
         "operateFail": "Operasi gagal",
-        "unreceived": "请登录后接收在途金额",
-        "unreceivedNum": "请登录后接收在途金额，当前共有{number}笔待接收交易"
+        "unreceived": "Please sign in to collect unreceived funds",
+        "unreceivedNum": "Please sign in to collect unreceived funds, currently you have {number} unreceived transaction(s)"
     },
     "beforeUse": {
         "title": "Baca Sebelum Digunakan",
@@ -263,14 +263,14 @@
         "heads": {
             "name": "Nama",
             "balance": "Saldo Dompet",
-            "onroad": "Jumlah Dompet yang Tidak Dapat Diterima",
+            "onroad": "Wallet Unreceived Funds",
             "gate": "Gateway Lintas Rantai Dompet",
             "totalExAmount": "Total Saldo Pertukaran",
             "availableExAmount": "Saldo Tersedia Pertukaran",
             "balanceTips": "On-chain send is available for users who would like to send transactions from your Vite wallet to other Vite addresses",
             "gateTips": "In this cross-chain section, you can map other coins/tokens into Vite network. Click 'Deposit' button to deposit assets to your Vite Wallet. Click 'Withdraw' button to transfer your assets to other platforms. * Cross-chain deposit/withdrawal process may cause fees, it also has its transfer limit.",
             "availableExAmountTips": "You can transfer your assets between Vite Wallet and ViteX Exchange via clicking 'Transfer' button. No transaction fees caused during these processes.",
-            "unreceivedTips": "Unreceived amount will be received automatically when logged in"
+            "unreceivedTips": "Unreceived funds will be received automatically after signing in"
         },
         "actionType": {
             "SEND": "On-Chain Send",
