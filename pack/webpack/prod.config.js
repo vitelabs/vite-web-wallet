@@ -8,6 +8,11 @@ module.exports = {
                 target: 'https://x.vite.net',
                 changeOrigin: true,
                 secure: false
+            },
+            '/dns/*': {
+                target: 'https://config.vitewallet.com/',
+                changeOrigin: true,
+                secure: false
             }
         }
     },

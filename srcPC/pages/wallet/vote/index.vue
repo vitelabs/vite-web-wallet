@@ -59,6 +59,7 @@ import sendTx from 'pcUtils/sendTx';
 import { execWithValid } from 'pcUtils/execWithValid';
 import openUrl from 'utils/openUrl';
 import statistics from 'utils/statistics';
+import { getExplorerLink } from 'utils/getLink';
 import { getCurrSBPNodeList } from 'services/viteServer';
 
 const Vite_Token_Info = constant.Vite_Token_Info;
@@ -265,12 +266,10 @@ export default {
             });
         },
         goToNodeDetail(nodeName) {
-            const locale = this.$i18n.locale === 'zh' ? 'zh/' : '';
-            openUrl(`${ process.env.viteNet }${ locale }SBPDetail/${ nodeName }`);
+            return openUrl(`${ getExplorerLink(this.$i18n.locale) }SBPDetail/${ nodeName }`);
         },
         goToDetail(addr) {
-            const locale = this.$i18n.locale === 'zh' ? 'zh/' : '';
-            openUrl(`${ process.env.viteNet }${ locale }account/${ addr }`);
+            return openUrl(`${ getExplorerLink(this.$i18n.locale) }account/${ addr }`);
         },
         openReward() {
             if (this.cache) {

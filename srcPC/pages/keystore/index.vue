@@ -27,6 +27,7 @@
 </template>
 
 <script>
+import { getExplorerLink } from 'utils/getLink';
 import lock from './lock';
 import importKeystore from './import';
 import sendTx from './sendTx';
@@ -55,8 +56,7 @@ export default {
     },
     methods: {
         goNet() {
-            const locale = this.$i18n.locale === 'zh' ? 'zh/' : '';
-            openUrl(`${ process.env.viteNet }${ locale }account/${ this.address }`);
+            openUrl(`${ getExplorerLink(this.$i18n.locale) }account/${ this.address }`);
         },
         getKeystore(obj) {
             this.address = obj.addr;

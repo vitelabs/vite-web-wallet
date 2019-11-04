@@ -101,14 +101,14 @@ interface IProxyRelation {
 }
 
 export function getProxyRelation({ address }): Promise<IProxyRelation> {
-    return ViteXAPI({
+    return ViteXAPI.request({
         method: 'GET',
         path: 'relation/proxy',
         params: { address }
     });
 }
 export function getProxyGrantor({ address }): Promise<IProxyRelation> {
-    return ViteXAPI({
+    return ViteXAPI.request({
         method: 'GET',
         path: 'relation/grantor',
         params: { address }
@@ -117,5 +117,5 @@ export function getProxyGrantor({ address }): Promise<IProxyRelation> {
 
 
 export function getProxyAblePairs(): Promise<IProxyPair[]> {
-    return ViteXAPI({ method: 'GET', path: 'proxy/market' });
+    return ViteXAPI.request({ method: 'GET', path: 'proxy/market' });
 }

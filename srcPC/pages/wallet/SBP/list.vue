@@ -74,6 +74,7 @@
 <script>
 import { constant as viteConstant } from '@vite/vitejs';
 import date from 'utils/date.js';
+import { getExplorerLink } from 'utils/getLink';
 import ellipsisAddr from 'utils/ellipsisAddr.js';
 import BigNumber from 'utils/bigNumber';
 import sendTx from 'pcUtils/sendTx';
@@ -194,7 +195,7 @@ export default {
             return date(time, 'zh');
         },
         getUrl(name) {
-            return `${ process.env.viteNet }${ this.$i18n.locale === 'zh' ? 'zh/' : '' }SBPDetail/${ name }`;
+            return `${ getExplorerLink(this.$i18n.locale) }SBPDetail/${ name }`;
         },
 
         sendRegisterTx(item) {
