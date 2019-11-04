@@ -4,8 +4,8 @@
     "start": "開始",
     "login": "ログイン",
     "regAcc": "登録",
-    "unlockAcc": "アカウントのアンロック",
-    "changeAcc": "アカウントの変更",
+    "unlockAcc": "Unlock",
+    "changeAcc": "Switch Account",
     "existingAcc": "既存のアカウント",
     "restore": "ニーモニックワードのインポート",
     "register": "サインアップ",
@@ -38,7 +38,7 @@
         "assets": [
             "取引所への入金",
             "Walletへの出金",
-            "Cross-Chain Receive & Send"
+            "Cross-Chain Deposit & Withdrawal"
         ]
     },
     "dealReminder": {
@@ -267,27 +267,25 @@
             "gate": "ウォレット クロスチェ－ンゲートウェイ",
             "totalExAmount": "取引所合計残高",
             "availableExAmount": "取引可能残高",
-            "balanceTips": "点击链内转账，可以从Vite钱包给其他地址进行Vite链内转账",
-            "gateTips": "In this cross-chain section, you can map other tokens into Vite network. Click 'Receive' button to deposit assets to your Vite Wallet. Click 'Send' button to transfer your assets to other platforms. * Cross-chain receive/send process may charge fees, it also has its transfer limit.",
-            "availableExAmountTips": "You can transfer your assets from Vite Wallet to ViteX Exchange via clicking 'Deposit' button. Click 'Withdraw' button to transfer assets from ViteX Exchange to Vite Wallet. No transaction fees caused during these processes.",
+            "balanceTips": "On-chain send is available for users who would like to send transactions from your Vite wallet to other Vite addresses",
+            "gateTips": "In this cross-chain section, you can map other coins/tokens into Vite network. Click 'Deposit' button to deposit assets to your Vite Wallet. Click 'Withdraw' button to transfer your assets to other platforms. * Cross-chain deposit/withdrawal process may cause fees, it also has its transfer limit.",
+            "availableExAmountTips": "You can transfer your assets between Vite Wallet and ViteX Exchange via clicking 'Transfer' button. No transaction fees caused during these processes.",
             "unreceivedTips": "Unreceived amount will be received automatically when logged in"
         },
         "actionType": {
-            "SEND": "链内转账Send",
-            "RECEIVE": "受信",
-            "CHARGE": "受信",
-            "WITHDRAW": "跨链充值Send",
-            "EXCHARGE": "跨链提现Deposit",
-            "EXTRANSFER": "资金划转",
-            "EXWITHDRAW": "引き出し",
+            "SEND": "On-Chain Send",
+            "RECEIVE": "入金",
+            "CHARGE": "入金",
+            "WITHDRAW": "引き出し",
+            "EXTRANSFER": "転送",
             "EXRECRODS": "履歴",
             "RECRODS": "履歴"
         },
         "transferConfirm": {
             "from": "From",
             "to": "To",
-            "wallet": "钱包账户",
-            "dex": "交易所账户",
+            "wallet": "Wallet Account",
+            "dex": "Exchange Account",
             "avaliableAmount": "残高"
         },
         "addToken": {
@@ -394,24 +392,25 @@
             "amountPlaceholder": "受信量を入力して下さい"
         },
         "charge": {
-            "title": "クロスチェーン受信",
+            "title": "Cross-Chain Deposit",
             "addrErr": "ゲートウェイノードに問題が発生しました ネットワーク設定を確認してください",
             "addressTitle": "受取アドレス",
             "labelTips": "(Please use this '{labelName}' with your recipient address, otherwise your assets will lose",
             "labelCodeTips": "Please Scan the QR code from {labelName}",
             "codeTips": "Scan QR code to deposit. Please send funds with the wallet that supports {tokenSymbol}",
             "tips": [
-                "Cross-Chain Receive operation will do {tokenSymbol} Cross-Chain mapping to VITE network, you can still transfer the assets to other platform after receiving them",
+                "Cross-Chain Deposit operation will do {tokenSymbol} Cross-Chain mapping to VITE network, you can still transfer the assets to other platform after receiving them",
                 "このアドレスから送信できるのは{tokenSymbol}のみで、金額は{min}未満にできません",
                 "{confirmationCount}の確認後にアセットを受け取ります しばらくお待ちください"
             ]
         },
         "withdraw": {
-            "title": "Cross-Chain Send",
+            "title": "Cross-Chain Withdrawal",
+            "btn": "引き出し",
             "balanceErrMap": {
                 "notEnough": "残高不足",
-                "overMax": "Send amount should be less than {max}",
-                "lessMin": "Send amount should not be less than {min}"
+                "overMax": "Withdrawal amount should be less than {max}",
+                "lessMin": "Withdrawal amount should not be less than {min}"
             },
             "feeTips": "Transaction fee is set by gateway operator",
             "addressErr": "アドレス形式が不正です",
@@ -1332,7 +1331,7 @@
         "1month": "1 month",
         "1week": "1 week",
         "1day": "1 day",
-        "clear": "清空",
-        "submit": "确定"
+        "clear": "Clear",
+        "submit": "検索"
     }
 }
