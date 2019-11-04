@@ -151,7 +151,8 @@
         "bigger0": "Value must be greater than 0",
         "operateSuccess": "Operation Successful",
         "operateFail": "Operation Failed",
-        "unreceived": "Unlock you wallet before use"
+        "unreceived": "请登录后接收在途金额",
+        "unreceivedNum": "请登录后接收在途金额，当前共有{number}笔待接收交易"
     },
     "beforeUse": {
         "title": "Read Before Use",
@@ -266,20 +267,28 @@
             "gate": "Wallet Cross-Chain Gateway",
             "totalExAmount": "Exchange Total Balance",
             "availableExAmount": "Exchange Available Balance",
-            "balanceTips": "You can transfer your assets to other addresses via clicking 'Send' button",
+            "balanceTips": "点击链内转账，可以从Vite钱包给其他地址进行Vite链内转账",
             "gateTips": "In this cross-chain section, you can map other tokens into Vite network. Click 'Receive' button to deposit assets to your Vite Wallet. Click 'Send' button to transfer your assets to other platforms. * Cross-chain receive/send process may charge fees, it also has its transfer limit.",
             "availableExAmountTips": "You can transfer your assets from Vite Wallet to ViteX Exchange via clicking 'Deposit' button. Click 'Withdraw' button to transfer assets from ViteX Exchange to Vite Wallet. No transaction fees caused during these processes.",
             "unreceivedTips": "Unreceived amount will be received automatically when logged in"
         },
         "actionType": {
-            "SEND": "Send",
+            "SEND": "链内转账Send",
             "RECEIVE": "Receive",
             "CHARGE": "Receive",
-            "WITHDRAW": "Send",
-            "EXCHARGE": "Deposit",
+            "WITHDRAW": "跨链充值Send",
+            "EXCHARGE": "跨链提现Deposit",
+            "EXTRANSFER": "资金划转",
             "EXWITHDRAW": "Withdraw",
             "EXRECRODS": "History",
             "RECRODS": "History"
+        },
+        "transferConfirm": {
+            "from": "From",
+            "to": "To",
+            "wallet": "钱包账户",
+            "dex": "交易所账户",
+            "avaliableAmount": "Balance"
         },
         "addToken": {
             "title": "Add Token",
@@ -422,7 +431,10 @@
         "nodeErr": "Gateway node is invalid, please check the gateway settings"
     },
     "viteExplorer": {
-        "title": "Block Explorer"
+        "title": "Vite Block Explorer"
+    },
+    "viteScanExplorer": {
+        "title": "ViteScan"
     },
     "wallet": {
         "title": "Quota Management",
@@ -1319,6 +1331,8 @@
         "3month": "3 months",
         "1month": "1 month",
         "1week": "1 week",
-        "1day": "1 day"
+        "1day": "1 day",
+        "clear": "清空",
+        "submit": "确定"
     }
 }
