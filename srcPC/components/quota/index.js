@@ -1,7 +1,5 @@
 import Vue from 'vue';
 import i18n from 'pcI18n';
-
-// [TODO]
 import router from 'pcRouter/index.js';
 import quotaCancelComponent from './cancel.vue';
 
