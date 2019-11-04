@@ -279,7 +279,9 @@
             "WITHDRAW": "Penarikan",
             "EXTRANSFER": "Transfer",
             "EXRECRODS": "Riwayat",
-            "RECRODS": "Riwayat"
+            "RECRODS": "Riwayat",
+            "EXCHARGE": "Deposito",
+            "EXWITHDRAW": "Penarikan"
         },
         "transferConfirm": {
             "from": "Dari",
