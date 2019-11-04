@@ -283,7 +283,9 @@
             "WITHDRAW": "跨链提现",
             "EXTRANSFER": "资金划转",
             "EXRECRODS": "交易所充提记录",
-            "RECRODS":"跨链充提记录"
+            "RECRODS":"跨链充提记录",
+            "EXCHARGE": "充值至交易所",
+            "EXWITHDRAW": "提币至钱包"
         },
         "transferConfirm": {
             "from": "从",
