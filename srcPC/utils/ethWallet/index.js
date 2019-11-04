@@ -7,7 +7,7 @@ const ethProvider = require('web3-providers-http');
 import localStorage from 'pcUtils/store';
 import { bind as gwBind, balance as gwBalance } from 'pcServices/conversion';
 import { timer } from 'utils/asyncFlow';
-import { setWatch } from 'utils/dnsHostIP';
+import { setWatch } from 'services/dnsHostIP';
 import { getWalletAddr, getWrongWalletAddr } from './address';
 import { viteContractAbi, viteContractAddr, blackHole, signBinding } from './viteContract';
 

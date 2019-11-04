@@ -1,4 +1,4 @@
-import { DNSClient } from 'utils/dnsHostIP';
+import { DNSClient } from 'services/dnsHostIP';
 
 export const ViteXAPI = new DNSClient({
     serverKey: 'dexAPI',

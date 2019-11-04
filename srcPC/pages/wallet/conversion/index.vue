@@ -46,7 +46,7 @@
 
 <script>
 import openUrl from 'utils/openUrl';
-import { Server } from 'utils/dnsHostIP';
+import { Server } from 'services/dnsHostIP';
 import { timer } from 'utils/asyncFlow';
 import _ethWallet from 'pcUtils/ethWallet/index.js';
 import secTitle from 'pcComponents/secTitle';

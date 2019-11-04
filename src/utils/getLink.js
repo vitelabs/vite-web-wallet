@@ -1,4 +1,4 @@
-import { Server } from 'utils/dnsHostIP';
+import { Server } from 'services/dnsHostIP';
 
 export function getExplorerLink(locale) {
     locale = locale === 'zh' ? 'zh/' : '';

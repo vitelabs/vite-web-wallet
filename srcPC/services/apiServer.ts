@@ -1,4 +1,4 @@
-import { DNSClient } from 'utils/dnsHostIP';
+import { DNSClient } from 'services/dnsHostIP';
 import i18n from 'pcI18n';
 
 const langMap = {
