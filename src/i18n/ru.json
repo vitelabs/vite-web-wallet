@@ -151,8 +151,8 @@
         "bigger0": "Значение должно быть больше 0",
         "operateSuccess": "Операция Выполнена Успешно",
         "operateFail": "Операция Не Выполнена",
-        "unreceived": "请登录后接收在途金额",
-        "unreceivedNum": "请登录后接收在途金额，当前共有{number}笔待接收交易"
+        "unreceived": "Please sign in to collect unreceived funds",
+        "unreceivedNum": "Please sign in to collect unreceived funds, currently you have {number} unreceived transaction(s)"
     },
     "beforeUse": {
         "title": "Прочитайте перед использованием",
@@ -263,14 +263,14 @@
         "heads": {
             "name": "Название",
             "balance": "Баланс Кошелька",
-            "onroad": "Неполученная Сумма Кошелька",
+            "onroad": "Wallet Unreceived Funds",
             "gate": "Кросс-чейн Шлюз Кошелька",
             "totalExAmount": "Общий Баланс на Бирже",
             "availableExAmount": "Доступный Баланс на Бирже",
             "balanceTips": "On-chain send is available for users who would like to send transactions from your Vite wallet to other Vite addresses",
             "gateTips": "In this cross-chain section, you can map other coins/tokens into Vite network. Click 'Deposit' button to deposit assets to your Vite Wallet. Click 'Withdraw' button to transfer your assets to other platforms. * Cross-chain deposit/withdrawal process may cause fees, it also has its transfer limit.",
             "availableExAmountTips": "You can transfer your assets between Vite Wallet and ViteX Exchange via clicking 'Transfer' button. No transaction fees caused during these processes.",
-            "unreceivedTips": "Unreceived amount will be received automatically when logged in"
+            "unreceivedTips": "Unreceived funds will be received automatically after signing in"
         },
         "actionType": {
             "SEND": "On-Chain Send",
