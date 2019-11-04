@@ -1,8 +1,7 @@
 import Connector from '@vite/connector';
 import { setCurrHDAcc, getCurrHDAcc } from './index';
 import store from 'pcStore';
-
-export const BRIDGE = process.env.viteConnect;
+import { Server } from 'services/dnsHostIP';
 
 export class VB extends Connector {
     constructor(opts, meta) {
@@ -55,7 +54,12 @@ export function getVbInstance() {
 }
 
 export function initVB(meta = null) {
-    vbInstance = new VB({ bridge: BRIDGE }, meta);
+    if (!Server.isReady) {
+        console.log('DNS not ready');
+        return;
+    }
+
+    vbInstance = new VB({ bridge: Server.viteConnect.url }, meta);
     vbInstance.createSession().then(() => console.log('connect uri', vbInstance.uri));
     return vbInstance;
 }

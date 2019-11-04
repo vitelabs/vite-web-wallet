@@ -1,5 +1,5 @@
 import { constant } from '@vite/vitejs';
-import viteClient from 'utils/viteClient';
+import { viteClient } from './apiServer';
 
 const DexFund_Addr = constant.DexFund_Addr;
 const Snapshot_Gid = constant.Snapshot_Gid;
