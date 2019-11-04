@@ -37,6 +37,11 @@ const ethExplorer = { // http-DNS
     test: '\'https://ropsten.etherscan.io\'',
     dev: '\'https://ropsten.etherscan.io\''
 };
+const conversionGate = { // http-DNS
+    production: '\'https://vite.wallet.net\'',
+    test: '',
+    dev: ''
+};
 const viteConnect = {
     production: '\'wss://biforst.vitewallet.com\'',
     test: '\'ws://139.155.7.172:5001\'',
@@ -67,6 +72,7 @@ module.exports = {
         'process.env.pushServer': pushServer[Node_Env],
         'process.env.dexApiServer': dexApiServer[Node_Env],
         'process.env.viteConnect': viteConnect[Node_Env],
-        'process.env.gatewayInfosServer': gatewayInfosServer[Node_Env]
+        'process.env.gatewayInfosServer': gatewayInfosServer[Node_Env],
+        'process.env.conversionGate': conversionGate[Node_Env]
     }
 };
