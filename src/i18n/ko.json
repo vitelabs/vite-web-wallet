@@ -151,7 +151,8 @@
         "bigger0": "값은 0 보다 커야 합니다.",
         "operateSuccess": "작업에 성공했습니다",
         "operateFail": "작업에 실패하였습니다",
-        "unreceived": "사용하기 전에 지갑을 잠금 해제하세요"
+        "unreceived": "请登录后接收在途金额",
+        "unreceivedNum": "请登录后接收在途金额，当前共有{number}笔待接收交易"
     },
     "beforeUse": {
         "title": "사용하기 전에 읽어주세요",
@@ -266,20 +267,28 @@
             "gate": "지갑 크로스체인 게이트웨이",
             "totalExAmount": "거래소 총 보유자산",
             "availableExAmount": "거래소 거래 가능 자산",
-            "balanceTips": "You can transfer your assets to other addresses via clicking 'Send' button",
+            "balanceTips": "点击链内转账，可以从Vite钱包给其他地址进行Vite链内转账",
             "gateTips": "In this cross-chain section, you can map other tokens into Vite network. Click 'Receive' button to deposit assets to your Vite Wallet. Click 'Send' button to transfer your assets to other platforms. * Cross-chain receive/send process may charge fees, it also has its transfer limit.",
             "availableExAmountTips": "You can transfer your assets from Vite Wallet to ViteX Exchange via clicking 'Deposit' button. Click 'Withdraw' button to transfer assets from ViteX Exchange to Vite Wallet. No transaction fees caused during these processes.",
             "unreceivedTips": "Unreceived amount will be received automatically when logged in"
         },
         "actionType": {
-            "SEND": "전송",
+            "SEND": "链内转账Send",
             "RECEIVE": "수령하기",
             "CHARGE": "수령하기",
-            "WITHDRAW": "전송",
-            "EXCHARGE": "입금하기",
+            "WITHDRAW": "跨链充值Send",
+            "EXCHARGE": "跨链提现Deposit",
+            "EXTRANSFER": "资金划转",
             "EXWITHDRAW": "출금하기",
             "EXRECRODS": "내역",
             "RECRODS": "내역"
+        },
+        "transferConfirm": {
+            "from": "발신자",
+            "to": "수신자",
+            "wallet": "钱包账户",
+            "dex": "交易所账户",
+            "avaliableAmount": "보유자산"
         },
         "addToken": {
             "title": "토큰 추가",
@@ -422,7 +431,10 @@
         "nodeErr": "게이트웨이 노드가 유효하지 않습니다. 게이트웨이 설정을 확인하십시오"
     },
     "viteExplorer": {
-        "title": "블록 탐색기"
+        "title": "Vite Block Explorer"
+    },
+    "viteScanExplorer": {
+        "title": "ViteScan"
     },
     "wallet": {
         "title": "할당량 관리",
@@ -1319,6 +1331,8 @@
         "3month": "3 months",
         "1month": "1 month",
         "1week": "1 week",
-        "1day": "1 day"
+        "1day": "1 day",
+        "clear": "清空",
+        "submit": "确定"
     }
 }
