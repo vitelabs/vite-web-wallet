@@ -96,7 +96,6 @@ export class Client {
             path = `${ location.protocol }//${ path }`;
         }
 
-        // [TODO] 暂时解决自定义网关跨域问题
         return request({ method, path, params, timeout, afterResponse: this.afterResponse, headers });
     }
 }
