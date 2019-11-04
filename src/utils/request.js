@@ -91,7 +91,7 @@ export class Client {
 
         path = `${ host }/${ path }`;
         headers = { ...this.headersBase, ...headers };
-        console.log(path);
+
         if ((path.indexOf('.') !== -1 || path.indexOf(':') !== -1) && path.indexOf('http') !== 0) {
             path = `${ location.protocol }//${ path }`;
         }
