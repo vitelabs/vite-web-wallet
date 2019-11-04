@@ -7,6 +7,7 @@ import 'assets/scss/mixins.scss';
 import 'h5Assets/scss/mixins.scss';
 import 'h5Utils/avoidScroll';
 import 'utils/performance';
+import 'utils/dnsHostIp';
 import 'utils/viteClient';
 import 'h5Utils/envFromURL';
 import { bridge } from 'h5Utils/bridge';

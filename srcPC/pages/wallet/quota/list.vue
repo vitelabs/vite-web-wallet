@@ -53,6 +53,7 @@ import openUrl from 'utils/openUrl';
 import { timer } from 'utils/asyncFlow';
 import BigNumber from 'utils/bigNumber';
 import statistics from 'utils/statistics';
+import { getExplorerLink } from 'utils/getLink';
 import ellipsisAddr from 'utils/ellipsisAddr.js';
 import { execWithValid } from 'pcUtils/execWithValid';
 
@@ -169,8 +170,7 @@ export default {
             return;
         },
         gotoDetail(addr) {
-            const locale = this.$i18n.locale === 'zh' ? 'zh/' : '';
-            openUrl(`${ process.env.viteNet }${ locale }account/${ addr }`);
+            openUrl(`${ getExplorerLink(this.$i18n.locale) }account/${ addr }`);
         },
         showCancel: execWithValid(function (item) {
             if (this.loading) {

@@ -3,6 +3,7 @@ require('es6-promise').polyfill();
 
 import 'assets/scss/mixins.scss';
 import 'utils/performance';
+import 'utils/dnsHostIp';
 import 'utils/viteClient.js';
 import './wallet';
 

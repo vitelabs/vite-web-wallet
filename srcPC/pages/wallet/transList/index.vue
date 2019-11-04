@@ -70,6 +70,7 @@ import secTitle from 'pcComponents/secTitle';
 import date from 'utils/date.js';
 import { timer } from 'utils/asyncFlow';
 import BigNumber from 'utils/bigNumber';
+import { getExplorerLink } from 'utils/getLink';
 import ellipsisAddr from 'utils/ellipsisAddr.js';
 import openUrl from 'utils/openUrl.js';
 
@@ -182,8 +183,7 @@ export default {
     },
     methods: {
         goDetail(trans) {
-            const locale = this.$i18n.locale === 'zh' ? 'zh/' : '';
-            openUrl(`${ process.env.viteNet }${ locale }transaction/${ trans.rawData.hash }`);
+            return openUrl(`${ getExplorerLink(this.$i18n.locale) }transaction/${ trans.rawData.hash }`);
         },
 
         toPage(pageNumber) {

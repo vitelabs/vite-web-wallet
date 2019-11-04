@@ -86,7 +86,6 @@ const getters = {
 
         for (const tokenId in state.onroad.balanceInfos) {
             const item = state.onroad.balanceInfos[tokenId];
-            console.log(item);
             const tokenInfo = item.tokenInfo;
             const decimals = tokenInfo.decimals;
             const balance = bigNumber.toBasic(item.totalAmount, decimals);

@@ -2,12 +2,13 @@ import Connector from '@vite/connector';
 import { setCurrHDAcc, getCurrHDAcc } from './index';
 import store from 'pcStore';
 
-export const BRIDGE = process.env.NODE_ENV === 'production' ? 'wss://biforst.vitewallet.com' : 'ws://139.155.7.172:5001';
+export const BRIDGE = process.env.viteConnect;
+
 export class VB extends Connector {
     constructor(opts, meta) {
         super(opts, meta);
         // eslint-disable-next-line
-    this.on("connect", (err, payload) => {
+        this.on("connect", (err, payload) => {
             const { accounts } = payload.params[0];
             if (!accounts || !accounts[0]) throw new Error('address is null');
             setCurrHDAcc({
@@ -46,10 +47,13 @@ export class VB extends Connector {
         });
     }
 }
+
 export let vbInstance = null;
+
 export function getVbInstance() {
     return vbInstance;
 }
+
 export function initVB(meta = null) {
     vbInstance = new VB({ bridge: BRIDGE }, meta);
     vbInstance.createSession().then(() => console.log('connect uri', vbInstance.uri));

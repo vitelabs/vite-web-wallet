@@ -1,5 +1,8 @@
+import { Server } from 'utils/dnsHostIP';
+
 export function getExplorerLink(locale) {
-    return `${ process.env.viteNet }${ locale === 'en' ? '' : `${ locale }/` }`;
+    locale = locale === 'zh' ? 'zh/' : '';
+    return `${ Server.viteExplorer.url }/${ locale }`;
 }
 
 export function getAppLink(locale) {

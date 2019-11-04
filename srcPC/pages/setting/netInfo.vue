@@ -30,6 +30,7 @@
 
 <script>
 import openUrl from 'utils/openUrl';
+import { getExplorerLink } from 'utils/getLink';
 
 export default {
     mounted() {
@@ -41,7 +42,7 @@ export default {
     data() {
         return {
             version: process.env.version,
-            netService: process.env.viteNet
+            netService: getExplorerLink(this.$i18n.locale)
         };
     },
     computed: {
@@ -51,8 +52,7 @@ export default {
     },
     methods: {
         goNet() {
-            const locale = this.$i18n.locale === 'zh' ? 'zh/' : '';
-            this.go(`${ process.env.viteNet }${ locale }`);
+            this.go(this.netService);
         },
         openEmail() {
             window.open('mailto:info@vite.org');
