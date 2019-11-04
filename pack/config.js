@@ -39,13 +39,18 @@ const ethExplorer = { // http-DNS
 };
 const conversionGate = { // http-DNS
     production: '\'https://vite.wallet.net\'',
-    test: '',
-    dev: ''
+    test: '\'\'',
+    dev: '\'\''
 };
 const viteConnect = {
     production: '\'wss://biforst.vitewallet.com\'',
     test: '\'ws://139.155.7.172:5001\'',
     dev: '\'ws://139.155.7.172:5001\''
+};
+const dnsHostServer = {
+    production: '\'https://config.vitewallet.com\'',
+    test: '\'\'',
+    dev: '\'\''
 };
 
 const contractAddress = {
@@ -73,6 +78,7 @@ module.exports = {
         'process.env.dexApiServer': dexApiServer[Node_Env],
         'process.env.viteConnect': viteConnect[Node_Env],
         'process.env.gatewayInfosServer': gatewayInfosServer[Node_Env],
-        'process.env.conversionGate': conversionGate[Node_Env]
+        'process.env.conversionGate': conversionGate[Node_Env],
+        'process.env.dnsHostServer': dnsHostServer[Node_Env]
     }
 };
