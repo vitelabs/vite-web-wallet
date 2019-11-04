@@ -151,7 +151,8 @@
         "bigger0": "この値は{0} より大きい数字にしなければなりません",
         "operateSuccess": "オペレーション成功",
         "operateFail": "操作に失敗しました。",
-        "unreceived": "使用前にウォレットをアンロックしてください"
+        "unreceived": "请登录后接收在途金额",
+        "unreceivedNum": "请登录后接收在途金额，当前共有{number}笔待接收交易"
     },
     "beforeUse": {
         "title": "利用前に読んで下さい",
@@ -266,20 +267,28 @@
             "gate": "ウォレット クロスチェ－ンゲートウェイ",
             "totalExAmount": "取引所合計残高",
             "availableExAmount": "取引可能残高",
-            "balanceTips": "You can transfer your assets to other addresses via clicking 'Send' button",
+            "balanceTips": "点击链内转账，可以从Vite钱包给其他地址进行Vite链内转账",
             "gateTips": "In this cross-chain section, you can map other tokens into Vite network. Click 'Receive' button to deposit assets to your Vite Wallet. Click 'Send' button to transfer your assets to other platforms. * Cross-chain receive/send process may charge fees, it also has its transfer limit.",
             "availableExAmountTips": "You can transfer your assets from Vite Wallet to ViteX Exchange via clicking 'Deposit' button. Click 'Withdraw' button to transfer assets from ViteX Exchange to Vite Wallet. No transaction fees caused during these processes.",
             "unreceivedTips": "Unreceived amount will be received automatically when logged in"
         },
         "actionType": {
-            "SEND": "送信",
+            "SEND": "链内转账Send",
             "RECEIVE": "受信",
             "CHARGE": "受信",
-            "WITHDRAW": "送信",
-            "EXCHARGE": "入金",
+            "WITHDRAW": "跨链充值Send",
+            "EXCHARGE": "跨链提现Deposit",
+            "EXTRANSFER": "资金划转",
             "EXWITHDRAW": "引き出し",
             "EXRECRODS": "履歴",
             "RECRODS": "履歴"
+        },
+        "transferConfirm": {
+            "from": "From",
+            "to": "To",
+            "wallet": "钱包账户",
+            "dex": "交易所账户",
+            "avaliableAmount": "残高"
         },
         "addToken": {
             "title": "トークンを追加",
@@ -422,7 +431,10 @@
         "nodeErr": "ゲートウェイノードが無効です ゲートウェイ設定を確認してください"
     },
     "viteExplorer": {
-        "title": "ブロックエクスプローラー"
+        "title": "Vite Block Explorer"
+    },
+    "viteScanExplorer": {
+        "title": "ViteScan"
     },
     "wallet": {
         "title": "クオータ管理",
@@ -1319,6 +1331,8 @@
         "3month": "3 months",
         "1month": "1 month",
         "1week": "1 week",
-        "1day": "1 day"
+        "1day": "1 day",
+        "clear": "清空",
+        "submit": "确定"
     }
 }
