@@ -1,8 +1,7 @@
 import sendTx from 'pcUtils/sendTx';
 import { constant } from '@vite/vitejs';
 import i18n from 'pcI18n';
-import viteClient from 'utils/viteClient';
-import { ViteXAPI } from 'services/apiServer';
+import { ViteXAPI, viteClient } from 'services/apiServer';
 
 export function bindCode(code: number) {
     return new Promise((res, rej) => {

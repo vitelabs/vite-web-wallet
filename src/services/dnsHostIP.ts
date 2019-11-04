@@ -1,6 +1,9 @@
 import { Client } from 'utils/request';
 
 export const Server = {
+    isReady: false,
+    onReady: [],
+
     crosschainGate: { // PC
         hostKey: 'CROSSCHAIN',
         url: process.env.gatewayInfosServer,
@@ -26,6 +29,7 @@ export const Server = {
         url: process.env.ethServer,
         watchList: []
     },
+
     viteConnect: { // PC
         hostKey: 'VITE_CONNECT',
         url: process.env.viteConnect,
@@ -41,6 +45,7 @@ export const Server = {
         url: process.env.goViteServer,
         watchList: []
     },
+
     dexAPI: { // BOTH
         hostKey: 'VITEX',
         url: process.env.dexApiServer,
@@ -86,6 +91,14 @@ export function setWatch(serverKey, cb) {
     return Server[serverKey].url;
 }
 
+export function onReady(cb: Function) {
+    if (!cb) {
+        return;
+    }
+    const list: Array<Function> = Server.onReady;
+    list.push(cb);
+}
+
 new Client('/dns', function (xhr) {
     const { code, msg, data, error, subCode } = JSON.parse(xhr.responseText);
 
@@ -100,6 +113,7 @@ new Client('/dns', function (xhr) {
     return Promise.resolve(data || null);
 }).request({ path: '/hostips' })
     .then(data => {
+        callReady();
         if (!data) {
             return;
         }
@@ -124,5 +138,14 @@ new Client('/dns', function (xhr) {
         }
     })
     .catch(err => {
+        callReady();
         console.warn(err);
     });
+
+
+function callReady() {
+    Server.isReady = true;
+    Server.onReady.forEach((cb: Function) => {
+        cb && cb();
+    });
+}

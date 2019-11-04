@@ -9,7 +9,7 @@ const HEARTBEAT = 10000;
 const RetryInterval = 3000;
 const MaxRetryTimes = 5;
 
-class WsProtoClient {
+export class WsProtoClient {
     constructor(wsUrl, isRetry = true) {
         this.MESSAGETYPE = { SUB: 'sub', UNSUB: 'un_sub', PING: 'ping', PONG: 'pong', PUSH: 'push' };
         this.wsUrl = wsUrl;
@@ -186,7 +186,6 @@ class WsProtoClient {
     }
 }
 
-export const client = new WsProtoClient(process.env.pushServer);
 
 function getRealData(data) {
     if (data.error_code) {

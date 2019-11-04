@@ -16,7 +16,7 @@
 import viteCrypto from 'testwebworker';
 import { account, keystore } from '@vite/vitejs';
 import loading from 'components/loading.vue';
-import $ViteJS from 'utils/viteClient';
+import { viteClient } from 'services/apiServer';
 
 export default {
     components: { loading },
@@ -44,7 +44,7 @@ export default {
 
                 this.unlockSuccess(new account({
                     privateKey,
-                    client: $ViteJS
+                    client: viteClient
                 }));
             }).catch(err => {
                 console.warn(err);
