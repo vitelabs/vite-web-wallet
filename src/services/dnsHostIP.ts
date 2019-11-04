@@ -100,7 +100,7 @@ export function onReady(cb: Function) {
 }
 
 if (process.env.NODE_ENV === 'production') {
-    new Client('/dns', function (xhr) {
+    new Client('https://config.vitewallet.com/dns', function (xhr) {
         const { code, msg, data, error, subCode } = JSON.parse(xhr.responseText);
 
         if (code !== 0) {
