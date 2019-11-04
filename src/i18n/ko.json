@@ -151,8 +151,8 @@
         "bigger0": "값은 0 보다 커야 합니다.",
         "operateSuccess": "작업에 성공했습니다",
         "operateFail": "작업에 실패하였습니다",
-        "unreceived": "请登录后接收在途金额",
-        "unreceivedNum": "请登录后接收在途金额，当前共有{number}笔待接收交易"
+        "unreceived": "Please sign in to collect unreceived funds",
+        "unreceivedNum": "Please sign in to collect unreceived funds, currently you have {number} unreceived transaction(s)"
     },
     "beforeUse": {
         "title": "사용하기 전에 읽어주세요",
@@ -263,14 +263,14 @@
         "heads": {
             "name": "토큰명",
             "balance": "지갑 자산",
-            "onroad": "지갑 수령 예정 금액",
+            "onroad": "Wallet Unreceived Funds",
             "gate": "지갑 크로스체인 게이트웨이",
             "totalExAmount": "거래소 총 보유자산",
             "availableExAmount": "거래소 거래 가능 자산",
             "balanceTips": "On-chain send is available for users who would like to send transactions from your Vite wallet to other Vite addresses",
             "gateTips": "In this cross-chain section, you can map other coins/tokens into Vite network. Click 'Deposit' button to deposit assets to your Vite Wallet. Click 'Withdraw' button to transfer your assets to other platforms. * Cross-chain deposit/withdrawal process may cause fees, it also has its transfer limit.",
             "availableExAmountTips": "You can transfer your assets between Vite Wallet and ViteX Exchange via clicking 'Transfer' button. No transaction fees caused during these processes.",
-            "unreceivedTips": "Unreceived amount will be received automatically when logged in"
+            "unreceivedTips": "Unreceived funds will be received automatically after signing in"
         },
         "actionType": {
             "SEND": "On-Chain Send",
