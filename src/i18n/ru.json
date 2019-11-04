@@ -279,7 +279,9 @@
             "WITHDRAW": "Вывести Средства",
             "EXTRANSFER": "Перевод",
             "EXRECRODS": "История",
-            "RECRODS": "История"
+            "RECRODS": "История",
+            "EXCHARGE": "Пополнить",
+            "EXWITHDRAW": "Вывести Средства"
         },
         "transferConfirm": {
             "from": "От",
