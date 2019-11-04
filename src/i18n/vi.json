@@ -279,7 +279,9 @@
             "WITHDRAW": "Rút",
             "EXTRANSFER": "Chuyển",
             "EXRECRODS": "Lịch sử",
-            "RECRODS": "Lịch sử"
+            "RECRODS": "Lịch sử",
+            "EXCHARGE": "Nạp",
+            "EXWITHDRAW": "Rút"
         },
         "transferConfirm": {
             "from": "Từ",
