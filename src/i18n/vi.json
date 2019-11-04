@@ -151,8 +151,8 @@
         "bigger0": "Số lượng phải lớn hơn 0",
         "operateSuccess": "Thao tác Thành công",
         "operateFail": "Thao tác Thất bại",
-        "unreceived": "请登录后接收在途金额",
-        "unreceivedNum": "请登录后接收在途金额，当前共有{number}笔待接收交易"
+        "unreceived": "Please sign in to collect unreceived funds",
+        "unreceivedNum": "Please sign in to collect unreceived funds, currently you have {number} unreceived transaction(s)"
     },
     "beforeUse": {
         "title": "Đọc kỹ trước khi sử dụng",
@@ -263,14 +263,14 @@
         "heads": {
             "name": "Tên",
             "balance": "Số dư trong Ví",
-            "onroad": "Số lượng Đang chuyển giao",
+            "onroad": "Wallet Unreceived Funds",
             "gate": "Cổng ví Chuỗi chéo",
             "totalExAmount": "Tổng số dư trên sàn",
             "availableExAmount": "Tổng số dư sẵn có trên sàn",
             "balanceTips": "On-chain send is available for users who would like to send transactions from your Vite wallet to other Vite addresses",
             "gateTips": "In this cross-chain section, you can map other coins/tokens into Vite network. Click 'Deposit' button to deposit assets to your Vite Wallet. Click 'Withdraw' button to transfer your assets to other platforms. * Cross-chain deposit/withdrawal process may cause fees, it also has its transfer limit.",
             "availableExAmountTips": "You can transfer your assets between Vite Wallet and ViteX Exchange via clicking 'Transfer' button. No transaction fees caused during these processes.",
-            "unreceivedTips": "Unreceived amount will be received automatically when logged in"
+            "unreceivedTips": "Unreceived funds will be received automatically after signing in"
         },
         "actionType": {
             "SEND": "On-Chain Send",
