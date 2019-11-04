@@ -47,10 +47,9 @@ block originContent
                 span.click-able(v-for="(link, i) in tokenDetail.whitepaperLink" :key="i" @click="openUrl(link)") {{ link || '--' }}
         .content__item
             .label {{$t("tokenCard.tokenInfo.labels.explorer")}}:
-            div(v-if="tokenDetail.gateway")
-                span.click-able(v-for="(link, i) in tokenDetail.explorerLink || []" :key="i" @click="openUrl(link)") {{link || '--' }}
+            div(v-if="!tokenDetail.explorerLink || !tokenDetail.explorerLink.length") {{'--'}}
             div(v-else)
-                span.click-able(@click="goToTokenDetail") {{ tokenDetail.explorerLink && tokenDetail.explorerLink.length ? tokenDetail.explorerLink[0] : '--' }}
+                span.click-able(v-for="(link, i) in tokenDetail.explorerLink" :key="i" @click="openUrl(link)") {{link || '--' }}
         .content__item
             .label {{$t("tokenCard.tokenInfo.labels.github")}}:
             div(v-if="!tokenDetail.githubLink || !tokenDetail.githubLink.length") {{'--'}}
