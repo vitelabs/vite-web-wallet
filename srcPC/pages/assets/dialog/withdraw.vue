@@ -63,7 +63,7 @@ export default {
             feeMin: '',
             isAddrCorrect: true,
             dTitle: this.$t('tokenCard.withdraw.title'),
-            dSTxt: this.$t('tokenCard.withdraw.title'),
+            dSTxt: this.$t('tokenCard.withdraw.btn'),
             failTips: '',
             isFeeTipsShow: false,
             fetchingFee: true,
