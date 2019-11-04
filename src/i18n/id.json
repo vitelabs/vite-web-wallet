@@ -151,7 +151,8 @@
         "bigger0": "Nilai harus lebih besar dari 0",
         "operateSuccess": "Operasi sukses",
         "operateFail": "Operasi gagal",
-        "unreceived": "Buka kunci dompet Anda sebelum digunakan"
+        "unreceived": "请登录后接收在途金额",
+        "unreceivedNum": "请登录后接收在途金额，当前共有{number}笔待接收交易"
     },
     "beforeUse": {
         "title": "Baca Sebelum Digunakan",
@@ -266,20 +267,28 @@
             "gate": "Gateway Lintas Rantai Dompet",
             "totalExAmount": "Total Saldo Pertukaran",
             "availableExAmount": "Saldo Tersedia Pertukaran",
-            "balanceTips": "You can transfer your assets to other addresses via clicking 'Send' button",
+            "balanceTips": "点击链内转账，可以从Vite钱包给其他地址进行Vite链内转账",
             "gateTips": "In this cross-chain section, you can map other tokens into Vite network. Click 'Receive' button to deposit assets to your Vite Wallet. Click 'Send' button to transfer your assets to other platforms. * Cross-chain receive/send process may charge fees, it also has its transfer limit.",
             "availableExAmountTips": "You can transfer your assets from Vite Wallet to ViteX Exchange via clicking 'Deposit' button. Click 'Withdraw' button to transfer assets from ViteX Exchange to Vite Wallet. No transaction fees caused during these processes.",
             "unreceivedTips": "Unreceived amount will be received automatically when logged in"
         },
         "actionType": {
-            "SEND": "Kirim",
+            "SEND": "链内转账Send",
             "RECEIVE": "Menerima",
             "CHARGE": "Menerima",
-            "WITHDRAW": "Kirim",
-            "EXCHARGE": "Deposito",
+            "WITHDRAW": "跨链充值Send",
+            "EXCHARGE": "跨链提现Deposit",
+            "EXTRANSFER": "资金划转",
             "EXWITHDRAW": "Penarikan",
             "EXRECRODS": "Riwayat",
             "RECRODS": "Riwayat"
+        },
+        "transferConfirm": {
+            "from": "Dari",
+            "to": "Untuk",
+            "wallet": "钱包账户",
+            "dex": "交易所账户",
+            "avaliableAmount": "Saldo"
         },
         "addToken": {
             "title": "Tambahkan Token",
@@ -422,7 +431,10 @@
         "nodeErr": "Node gateway tidak valid, periksa pengaturan gateway"
     },
     "viteExplorer": {
-        "title": "Block Explorer"
+        "title": "Vite Block Explorer"
+    },
+    "viteScanExplorer": {
+        "title": "ViteScan"
     },
     "wallet": {
         "title": "Manajemen Kuota",
@@ -1319,6 +1331,8 @@
         "3month": "3 months",
         "1month": "1 month",
         "1week": "1 week",
-        "1day": "1 day"
+        "1day": "1 day",
+        "clear": "清空",
+        "submit": "确定"
     }
 }
