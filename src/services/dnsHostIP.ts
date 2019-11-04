@@ -1,4 +1,4 @@
-import { Client } from './request';
+import { Client } from 'utils/request';
 
 export const Server = {
     crosschainGate: { // PC
@@ -31,11 +31,6 @@ export const Server = {
         url: process.env.viteConnect,
         watchList: []
     },
-    dexAPI: { // BOTH
-        hostKey: 'VITEX',
-        url: process.env.dexApiServer,
-        watchList: []
-    },
     dexPush: { // BOTH
         hostKey: 'DEXPUSHSERVER',
         url: process.env.pushServer,
@@ -44,6 +39,11 @@ export const Server = {
     gViteAPI: { // BOTH
         hostKey: 'WALLETWSAPI',
         url: process.env.goViteServer,
+        watchList: []
+    },
+    dexAPI: { // BOTH
+        hostKey: 'VITEX',
+        url: process.env.dexApiServer,
         watchList: []
     },
     viteExplorer: { // BOTH
