@@ -11,7 +11,7 @@ export const Server = {
     },
     conversionGate: { // PC
         hostKey: 'GATEWAY',
-        url: '',
+        url: process.env.conversionGate,
         watchList: []
     },
     h5Config: { // PC
@@ -99,48 +99,53 @@ export function onReady(cb: Function) {
     list.push(cb);
 }
 
-new Client('/dns', function (xhr) {
-    const { code, msg, data, error, subCode } = JSON.parse(xhr.responseText);
+if (process.env.NODE_ENV === 'production') {
+    new Client('/dns', function (xhr) {
+        const { code, msg, data, error, subCode } = JSON.parse(xhr.responseText);
 
-    if (code !== 0) {
-        return Promise.reject({
-            code,
-            subCode,
-            message: msg || error
-        });
-    }
-
-    return Promise.resolve(data || null);
-}).request({ path: '/hostips' })
-    .then(data => {
-        callReady();
-        if (!data) {
-            return;
-        }
-
-        for (const key in Server) {
-            const { hostKey, url } = Server[key];
-
-            const hostConfig = data[hostKey];
-            if (!hostConfig || !hostConfig.hostNameList || !hostConfig.hostNameList.length) {
-                continue;
-            }
-
-            const hostIp = hostConfig.hostNameList[0];
-            if (hostIp === url) {
-                continue;
-            }
-
-            Server[key].url = hostIp;
-            Server[key].watchList.forEach(cb => {
-                cb && cb(hostIp);
+        if (code !== 0) {
+            return Promise.reject({
+                code,
+                subCode,
+                message: msg || error
             });
         }
-    })
-    .catch(err => {
-        callReady();
-        console.warn(err);
-    });
+
+        return Promise.resolve(data || null);
+    }).request({ path: '/hostips' })
+        .then(data => {
+            if (!data) {
+                callReady();
+                return;
+            }
+
+            for (const key in Server) {
+                const { hostKey, url } = Server[key];
+
+                const hostConfig = data[hostKey];
+                if (!hostConfig || !hostConfig.hostNameList || !hostConfig.hostNameList.length) {
+                    continue;
+                }
+
+                const hostIp = hostConfig.hostNameList[0];
+                if (hostIp === url) {
+                    continue;
+                }
+
+                Server[key].url = hostIp;
+                Server[key].watchList.forEach(cb => {
+                    cb && cb(hostIp);
+                });
+            }
+            callReady();
+        })
+        .catch(err => {
+            callReady();
+            console.warn(err);
+        });
+} else {
+    callReady();
+}
 
 
 function callReady() {
