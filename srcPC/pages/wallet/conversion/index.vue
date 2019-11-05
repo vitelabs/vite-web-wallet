@@ -46,6 +46,7 @@
 
 <script>
 import openUrl from 'utils/openUrl';
+import { Server } from 'services/dnsHostIP';
 import { timer } from 'utils/asyncFlow';
 import _ethWallet from 'pcUtils/ethWallet/index.js';
 import secTitle from 'pcComponents/secTitle';
@@ -123,7 +124,7 @@ export default {
             this.transToken = '';
         },
         toRecord() {
-            openUrl(`${ process.env.ethNet }/address/${ this.address }#tokentxns`);
+            openUrl(`${ Server.ethExplorer.url }/address/${ this.address }#tokentxns`);
         },
 
         startLoopBalance() {

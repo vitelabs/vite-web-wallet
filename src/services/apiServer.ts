@@ -1,20 +1,33 @@
-import { getClient } from 'utils/request';
+import provider from '@vite/vitejs-ws';
+import { client } from '@vite/vitejs';
+import { DNSClient, setWatch } from './dnsHostIP';
 
-const ViteX_API_Path = `${ process.env.dexApiServer }v1`;
-const Conversion_API_Path = '/gw';
+export const ViteXAPI = new DNSClient({
+    serverKey: 'dexAPI',
+    afterResponse: xhr => {
+        const { code, msg, data, error, subCode } = JSON.parse(xhr.responseText);
 
-export const ViteXAPI = getClient(ViteX_API_Path, function (xhr) {
-    const { code, msg, data, error, subCode } = JSON.parse(xhr.responseText);
+        if (code !== 0) {
+            return Promise.reject({
+                code,
+                subCode,
+                message: msg || error
+            });
+        }
 
-    if (code !== 0) {
-        return Promise.reject({
-            code,
-            subCode,
-            message: msg || error
-        });
-    }
-
-    return Promise.resolve(data || null);
+        return Promise.resolve(data || null);
+    },
+    baseUrl: `${ process.env.NODE_ENV === 'production' ? '' : '/test' }/api/v1`
 });
 
-export const ConversionAPI = getClient(Conversion_API_Path);
+const url = setWatch('gViteAPI', url => {
+    WS_RPC.disconnect();
+    viteClient.setProvider(new provider(url), () => {
+        console.log('reconnect cussess');
+    }, false);
+});
+
+const WS_RPC = new provider(url);
+export const viteClient = new client(WS_RPC, () => {
+    console.log('Connect success');
+});

@@ -74,19 +74,28 @@ export default function request({
     });
 }
 
-export const getClient = function (baseUrl = '', afterResponse, headersBase = {}) {
-    return function ({ method = 'GET', path, params = {}, timeout = reqTimeout, host = baseUrl, headers = {} }) {
+export class Client {
+    constructor(host = '', afterResponse, headersBase = {}) {
+        this.host = host;
+        this.afterResponse = afterResponse;
+        this.headersBase = headersBase;
+    }
+
+    setHost(host) {
+        this.host = host;
+    }
+
+    request({ method = 'GET', path, params = {}, timeout = reqTimeout, host = this.host, headers = {} }) {
         host.slice(-1) === '/' && (host = host.slice(0, -1));
         path.indexOf('/') === 0 && (path = path.slice(1));
-        path = `${ host }/${ path }`;
 
-        headers = { ...headersBase, ...headers };
+        path = `${ host }/${ path }`;
+        headers = { ...this.headersBase, ...headers };
 
         if ((path.indexOf('.') !== -1 || path.indexOf(':') !== -1) && path.indexOf('http') !== 0) {
             path = `${ location.protocol }//${ path }`;
         }
 
-        // [TODO] 暂时解决自定义网关跨域问题
-        return request({ method, path, params, timeout, afterResponse, headers });
-    };
-};
+        return request({ method, path, params, timeout, afterResponse: this.afterResponse, headers });
+    }
+}

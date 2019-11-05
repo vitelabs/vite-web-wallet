@@ -29,7 +29,7 @@ import { execWithValid } from 'pcUtils/execWithValid';
 import { pledgeForSuperVIp } from 'pcServices/tradeOperation';
 import { constant } from '@vite/vitejs';
 import date from 'utils/date';
-import $ViteJS from 'utils/viteClient';
+import { viteClient } from 'services/apiServer';
 
 const Vite_Token_Info = constant.Vite_Token_Info;
 const vipStakingAmount = 1000000;
@@ -111,7 +111,7 @@ export default {
                 return;
             }
 
-            $ViteJS.request('pledge_getAgentPledgeInfo', {
+            viteClient.request('pledge_getAgentPledgeInfo', {
                 pledgeAddr: this.address,
                 agentAddr: constant.DexFund_Addr,
                 beneficialAddr: constant.DexFund_Addr,

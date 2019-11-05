@@ -1,14 +1,14 @@
 import { ViteXAPI } from 'services/apiServer';
 
 export const limit = function () {
-    return ViteXAPI({
+    return ViteXAPI.request({
         path: '/limit',
         method: 'GET'
     });
 };
 
 export const klineHistory = function ({ startTime, endTime, symbol, interval }) {
-    return ViteXAPI({
+    return ViteXAPI.request({
         path: '/klines',
         method: 'GET',
         params: {
@@ -22,7 +22,7 @@ export const klineHistory = function ({ startTime, endTime, symbol, interval }) 
 };
 
 export const depth = function ({ symbol, step, limit = 100 }) {
-    return ViteXAPI({
+    return ViteXAPI.request({
         path: '/depth',
         method: 'GET',
         params: { symbol, step, limit }
@@ -30,7 +30,7 @@ export const depth = function ({ symbol, step, limit = 100 }) {
 };
 
 export const order = function ({ address, total, startTime, endTime, tradeTokenSymbol, quoteTokenSymbol, side, offset, limit, status }) {
-    return ViteXAPI({
+    return ViteXAPI.request({
         path: '/orders',
         method: 'GET',
         params: { address, startTime, endTime, total, tradeTokenSymbol, quoteTokenSymbol, side, offset, limit, status }
@@ -38,7 +38,7 @@ export const order = function ({ address, total, startTime, endTime, tradeTokenS
 };
 
 export const orderDetail = function ({ orderId, symbol, offset, limit, side }) {
-    return ViteXAPI({
+    return ViteXAPI.request({
         path: '/trades',
         method: 'GET',
         params: { orderId, symbol, offset, limit, side }
@@ -46,7 +46,7 @@ export const orderDetail = function ({ orderId, symbol, offset, limit, side }) {
 };
 
 export const latestTx = function ({ symbol }) {
-    return ViteXAPI({
+    return ViteXAPI.request({
         path: '/trades',
         method: 'GET',
         params: {
@@ -57,20 +57,20 @@ export const latestTx = function ({ symbol }) {
 };
 
 export const rate = function () {
-    return ViteXAPI({ path: '/rate/usd-cny' });
+    return ViteXAPI.request({ path: '/rate/usd-cny' });
 };
 
 export const rateToken = function ({ tokenIdList = [] }) {
     const tokenIds = tokenIdList.join(',');
 
-    return ViteXAPI({
+    return ViteXAPI.request({
         path: '/exchange-rate',
         params: { tokenIds }
     });
 };
 
 export const defaultPair = function ({ quoteTokenCategory }) {
-    return ViteXAPI({
+    return ViteXAPI.request({
         path: '/ticker/24hr',
         method: 'GET',
         params: { quoteTokenCategory }
@@ -78,7 +78,7 @@ export const defaultPair = function ({ quoteTokenCategory }) {
 };
 
 export const assignPair = function ({ symbols = [] }) {
-    return ViteXAPI({
+    return ViteXAPI.request({
         path: '/ticker/24hr',
         method: 'GET',
         params: { symbols: symbols.join(',') }
@@ -86,7 +86,7 @@ export const assignPair = function ({ symbols = [] }) {
 };
 
 export const marketsReserve = function ({ quoteTokenSymbol }) {
-    return ViteXAPI({
+    return ViteXAPI.request({
         path: '/token/unmapped',
         method: 'GET',
         params: { quoteTokenSymbol }
@@ -94,7 +94,7 @@ export const marketsReserve = function ({ quoteTokenSymbol }) {
 };
 
 export const tokenDetail = function ({ tokenId }) {
-    return ViteXAPI({
+    return ViteXAPI.request({
         path: '/token/detail',
         method: 'GET',
         params: { tokenId }
@@ -102,7 +102,7 @@ export const tokenDetail = function ({ tokenId }) {
 };
 
 export const baseToken = function () {
-    return ViteXAPI({
+    return ViteXAPI.request({
         path: '/tokens',
         method: 'GET',
         params: { category: 'quote' }
@@ -110,15 +110,15 @@ export const baseToken = function () {
 };
 
 export const tokenMap = function ({ symbol }) {
-    return ViteXAPI({
+    return ViteXAPI.request({
         path: '/token/mapped',
         method: 'GET',
         params: { quoteTokenSymbol: symbol }
     });
 };
 
-export async function chargeDetail({ tokenId, address }) {
-    return await ViteXAPI({
+export function chargeDetail({ tokenId, address }) {
+    return ViteXAPI.request({
         path: '/deposit-withdraw',
         method: 'GET',
         params: {
@@ -130,16 +130,16 @@ export async function chargeDetail({ tokenId, address }) {
     });
 }
 
-export async function tokenInfoFromGithub({ tokenSymbol, platformSymbol = 'VITE', tokenAddress }:{tokenSymbol?:string, platformSymbol:string, tokenAddress?:string} = { platformSymbol: 'VITE' }) {
-    return await ViteXAPI({
+export function tokenInfoFromGithub({ tokenSymbol, platformSymbol = 'VITE', tokenAddress }:{tokenSymbol?:string, platformSymbol:string, tokenAddress?:string} = { platformSymbol: 'VITE' }) {
+    return ViteXAPI.request({
         path: '/cryptocurrency/info/query',
         method: 'POST',
         params: { tokenSymbol, platformSymbol, tokenAddress }
     });
 }
 
-export async function tokenRateFromCMC({ tokenSymbol, platformSymbol = 'VITE', tokenAddress }:{tokenSymbol?:string, platformSymbol:string, tokenAddress?:string} = { platformSymbol: 'VITE' }) {
-    return await ViteXAPI({
+export function tokenRateFromCMC({ tokenSymbol, platformSymbol = 'VITE', tokenAddress }:{tokenSymbol?:string, platformSymbol:string, tokenAddress?:string} = { platformSymbol: 'VITE' }) {
+    return ViteXAPI.request({
         path: '/cryptocurrency/rate/query',
         method: 'POST',
         params: { tokenSymbol, platformSymbol, tokenAddress }
@@ -147,7 +147,7 @@ export async function tokenRateFromCMC({ tokenSymbol, platformSymbol = 'VITE', t
 }
 
 export function miningTrade({ address, offset, limit = 30 }) {
-    return ViteXAPI({
+    return ViteXAPI.request({
         path: '/mining/trade',
         method: 'GET',
         params: { address, offset, limit }
@@ -155,7 +155,7 @@ export function miningTrade({ address, offset, limit = 30 }) {
 }
 
 export function tradeFee({ address }) {
-    return ViteXAPI({
+    return ViteXAPI.request({
         path: '/trade/fee',
         method: 'GET',
         params: { address }
@@ -163,7 +163,7 @@ export function tradeFee({ address }) {
 }
 
 export function miningPledge({ address, offset, limit = 30 }) {
-    return ViteXAPI({
+    return ViteXAPI.request({
         path: '/mining/pledge',
         method: 'GET',
         params: { address, offset, limit }
@@ -171,7 +171,7 @@ export function miningPledge({ address, offset, limit = 30 }) {
 }
 
 export function dividend({ address, offset, limit = 30 }) {
-    return ViteXAPI({
+    return ViteXAPI.request({
         path: '/dividend',
         method: 'GET',
         params: { address, offset, limit }
@@ -179,14 +179,14 @@ export function dividend({ address, offset, limit = 30 }) {
 }
 
 export function marketsClosed() {
-    return ViteXAPI({
+    return ViteXAPI.request({
         path: '/markets/closed',
         method: 'GET'
     });
 }
 
 export function operator(operatorId) {
-    return ViteXAPI({
+    return ViteXAPI.request({
         path: '/operator',
         method: 'GET',
         params: {
@@ -198,7 +198,7 @@ export function operator(operatorId) {
 }
 
 export function operatorTokens(operatorId) {
-    return ViteXAPI({
+    return ViteXAPI.request({
         path: '/operator/tokens',
         method: 'GET',
         params: {
@@ -210,7 +210,7 @@ export function operatorTokens(operatorId) {
 }
 
 export function operatorMarkets({ operatorId, tradeToken, offset, limit = 30 }) {
-    return ViteXAPI({
+    return ViteXAPI.request({
         path: '/operator/markets',
         method: 'GET',
         params: { operatorId, tradeToken, offset, limit }
@@ -218,7 +218,7 @@ export function operatorMarkets({ operatorId, tradeToken, offset, limit = 30 }) 
 }
 
 export function operatorIncome({ operatorId, tradeToken, quoteToken, offset, limit = 30 }) {
-    return ViteXAPI({
+    return ViteXAPI.request({
         path: '/operator/income',
         method: 'GET',
         params: { operatorId, tradeToken, quoteToken, offset, limit }
@@ -226,7 +226,7 @@ export function operatorIncome({ operatorId, tradeToken, quoteToken, offset, lim
 }
 
 export function operatorTradepair({ tradeToken, quoteToken }) {
-    return ViteXAPI({
+    return ViteXAPI.request({
         path: '/operator/tradepair',
         method: 'GET',
         params: { tradeToken, quoteToken }
@@ -244,7 +244,7 @@ interface IInviterInfo {
     };
 }
 export function getInviteInfo(address: string): Promise<IInviterInfo> {
-    return ViteXAPI({ method: 'GET', path: 'inviter', params: { address } });
+    return ViteXAPI.request({ method: 'GET', path: 'inviter', params: { address } });
 }
 
 interface IInviteMiningDetail {
@@ -265,7 +265,7 @@ export function getInviteMiningDetail({
     offset,
     limit
 }): Promise<IInviteMiningDetail> {
-    return ViteXAPI({
+    return ViteXAPI.request({
         method: 'GET',
         path: 'mining/invite',
         params: { address, offset, limit }
@@ -288,7 +288,7 @@ export function getOrderMiningDetail({
     offset,
     limit
 }): Promise<IOrderMiningDetail> {
-    return ViteXAPI({
+    return ViteXAPI.request({
         method: 'GET',
         path: 'mining/order/address',
         params: { address, offset, limit }
@@ -296,14 +296,14 @@ export function getOrderMiningDetail({
 }
 
 export function getMiningSetting() {
-    return ViteXAPI({
+    return ViteXAPI.request({
         method: 'GET',
         path: 'mining/setting'
     });
 }
 
 export function getMarketsByTradeToken({ tradeTokenSymbol }) {
-    return ViteXAPI({
+    return ViteXAPI.request({
         method: 'GET',
         path: 'ticker/24hr',
         params: { tradeTokenSymbol }
@@ -311,7 +311,7 @@ export function getMarketsByTradeToken({ tradeTokenSymbol }) {
 }
 
 export function getMarketsByQuoteToken({ quoteTokenSymbol }) {
-    return ViteXAPI({
+    return ViteXAPI.request({
         method: 'GET',
         path: 'ticker/24hr',
         params: { quoteTokenSymbol }

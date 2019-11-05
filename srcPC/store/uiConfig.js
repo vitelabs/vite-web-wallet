@@ -1,4 +1,4 @@
-import { getUiConfig } from 'services/config.ts';
+import { getUiConfig } from 'pcServices/config.ts';
 
 const state = {
     inviteAddrList: [],
