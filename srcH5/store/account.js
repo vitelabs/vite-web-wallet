@@ -1,6 +1,6 @@
 import { addrAccount } from '@vite/vitejs';
 
-import client from 'utils/viteClient';
+import { viteClient } from 'services/apiServer';
 import bigNumber from 'utils/bigNumber';
 import { timer } from 'utils/asyncFlow';
 import { defaultTokenMap } from 'utils/constant';
@@ -9,7 +9,7 @@ import env from 'h5Utils/envFromURL';
 import { getTokenIcon } from 'utils/tokenParser';
 
 let balanceInfoInst = null;
-const activeAcc = env.address ? new addrAccount({ address: env.address, client }) : null;
+const activeAcc = env.address ? new addrAccount({ address: env.address, client: viteClient }) : null;
 
 const state = {
     activeAcc,
@@ -27,7 +27,7 @@ const mutations = {
         }
 
         state.address = address;
-        state.activeAcc = new addrAccount({ address, client });
+        state.activeAcc = new addrAccount({ address, client: viteClient });
     },
     commitBalanceInfo(state, payload) {
         if (!payload) {

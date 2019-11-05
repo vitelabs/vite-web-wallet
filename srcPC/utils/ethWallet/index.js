@@ -5,14 +5,14 @@ const Tx = require('ethereumjs-tx');
 const ethProvider = require('web3-providers-http');
 
 import localStorage from 'pcUtils/store';
-import { bind as gwBind, balance as gwBalance } from 'services/conversion';
+import { bind as gwBind, balance as gwBalance } from 'pcServices/conversion';
 import { timer } from 'utils/asyncFlow';
+import { setWatch } from 'services/dnsHostIP';
 import { getWalletAddr, getWrongWalletAddr } from './address';
 import { viteContractAbi, viteContractAddr, blackHole, signBinding } from './viteContract';
 
 const DefaultAddr = 'conversionDefaultAddr';
 const balanceTime = 2000;
-let provider = null;
 
 class ethWallet {
     constructor({ mnemonic }) {
@@ -25,8 +25,11 @@ class ethWallet {
         this.wrongAddrObj = getWrongWalletAddr(this.mnemonic, 0);
         this.activeAddr = this.addrObj;
 
-        provider = provider || new ethProvider(process.env.ethServer);
-        this.web3 = new web3Eth(provider);
+        const ethServerUrl = setWatch('ethServer', url => {
+            this.setProvider(url);
+        });
+        this.provider = new ethProvider(ethServerUrl);
+        this.web3 = new web3Eth(this.provider);
 
         this.contract = new this.web3.Contract(viteContractAbi, viteContractAddr);
         this.tokenList = {
@@ -49,6 +52,11 @@ class ethWallet {
         this.balanceInfoInst = null;
         this.viteBalanceInfoInst = null;
         this.wrongLoop = null;
+    }
+
+    setProvider(url) {
+        this.provider = new ethProvider(url);
+        this.web3 = new web3Eth(this.provider);
     }
 
     init(cb) {

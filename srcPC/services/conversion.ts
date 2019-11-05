@@ -1,7 +1,7 @@
-import { ConversionAPI } from 'services/apiServer';
+import { ConversionAPI } from 'pcServices/apiServer';
 
 export const bind = function ({ pub_key, eth_tx_hash, eth_addr, vite_addr, value, signature }) {
-    return ConversionAPI({
+    return ConversionAPI.request({
         path: '/bind',
         method: 'POST',
         params: { pub_key, eth_tx_hash, eth_addr, vite_addr, value, signature },
@@ -10,7 +10,7 @@ export const bind = function ({ pub_key, eth_tx_hash, eth_addr, vite_addr, value
 };
 
 export const balance = function ({ address }) {
-    return ConversionAPI({
+    return ConversionAPI.request({
         path: '/balance',
         method: 'GET',
         params: { address, token: 'VITE' },

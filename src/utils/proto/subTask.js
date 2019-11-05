@@ -1,5 +1,6 @@
-import { client } from './index';
+import { WsProtoClient } from './index';
 import { timer } from 'utils/asyncFlow';
+import { onReady, Server } from 'services/dnsHostIP';
 import { httpServicesMap, wsServicesMap } from './subService';
 
 // Http + ws 订阅任务；
@@ -8,6 +9,16 @@ import { httpServicesMap, wsServicesMap } from './subService';
 // 2，ws订阅失败时以轮询代替
 // 3，支持参数更新时自动切换订阅key
 // 4，ws自动恢复
+
+let client = null;
+
+if (Server.isReady) {
+    client = new WsProtoClient(Server.dexPush.url);
+} else {
+    onReady(() => {
+        client = new WsProtoClient(Server.dexPush.url);
+    });
+}
 
 export class subTask extends timer {
     constructor(key, callback, interval = 2000) {
@@ -38,7 +49,7 @@ export class subTask extends timer {
             }
 
             // Use http if sub unavalible
-            if (!client.closed) {
+            if (client && !client.closed) {
                 return;
             }
             this.httpRequest();
@@ -75,7 +86,7 @@ export class subTask extends timer {
 
         // Unsub oldKey
         // console.log('[subTask] Unsub oldKey');
-        client.unSub(oldkey, this.subCallback);
+        client && client.unSub(oldkey, this.subCallback);
 
         // Update subKey and subCallback.
         // console.log('[subTask] Update subKey and subCallback.');
@@ -93,7 +104,7 @@ export class subTask extends timer {
         };
 
         // Sub currentKey
-        client.sub(currentKey, this.subCallback);
+        client && client.sub(currentKey, this.subCallback);
     }
 
     start(argsGetter, isNeedAllDataFirst = true) {
@@ -116,7 +127,7 @@ export class subTask extends timer {
     stop() {
         super.stop();
 
-        client.unSub(this.subKey, this.subCallback);
+        client && client.unSub(this.subKey, this.subCallback);
         this.argsGetter = null;
         this._subKey = null;
     }

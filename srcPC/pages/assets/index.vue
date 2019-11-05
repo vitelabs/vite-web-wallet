@@ -13,6 +13,7 @@
 <script>
 import { debounce } from 'lodash';
 import openUrl from 'utils/openUrl';
+import { getExplorerLink } from 'utils/getLink';
 import { gateStorage } from 'pcServices/gate';
 import pageLayout from 'pcComponents/pageLayout/index';
 import accountHead from './head';
@@ -93,8 +94,7 @@ export default {
             addTokenDialog();
         },
         goDetail() {
-            const locale = this.$i18n.locale === 'zh' ? 'zh/' : '';
-            openUrl(`${ process.env.viteNet }${ locale }account/${ this.account.addr }`);
+            openUrl(`${ getExplorerLink(this.$i18n.locale) }account/${ this.account.addr }`);
         }
     }
 };

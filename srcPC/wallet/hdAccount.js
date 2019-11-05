@@ -7,7 +7,7 @@ import {
 } from '@vite/vitejs';
 import viteCrypto from 'testwebworker';
 import statistics from 'utils/statistics';
-import $ViteJS from 'utils/viteClient';
+import { viteClient } from 'services/apiServer';
 import { constant as u_constant } from 'pcUtils/store';
 
 import {
@@ -220,7 +220,7 @@ export class HDAccount {
             }
 
             this.activeAccount = new account({
-                client: $ViteJS,
+                client: viteClient,
                 address: this.activeAddr
             });
             return;
@@ -242,7 +242,7 @@ export class HDAccount {
         }
 
         this.activeAccount = new account({
-            client: $ViteJS,
+            client: viteClient,
             privateKey,
             address: this.activeAddr
         });
@@ -384,7 +384,7 @@ export class VBAccount {
 
     setActiveAcc() {
         const account = new addrAccount({
-            client: $ViteJS,
+            client: viteClient,
             address: this.activeAddr
         });
         const proxyActiveAcc = Object.create(null);
