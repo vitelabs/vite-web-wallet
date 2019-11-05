@@ -6,8 +6,11 @@
             </div>
             <div class="else-input-wrapper" :class="{'err': priceErr}">
                 <span v-show="focusInput === 'price' && priceErr" class="tips">{{  priceErr || '' }}</span>
-                <span v-show="isShowMining" class="tips">
-                    {{ $t('tradeCenter.miningPrice', { price: miningPrice }) }}
+                <span v-show="isShowBuyMining" class="tips">
+                    {{ $t('tradeCenter.buyMiningPrice', { price: buyMiningPrice }) }}
+                </span>
+                <span v-show="isShowSellMining" class="tips">
+                    {{ $t('tradeCenter.sellMiningPrice', { price: sellMiningPrice }) }}
                 </span>
                 <vite-input v-model="price" @input="priceChanged" type="number"
                             @focus="showTips('price')" @blur="hideTips('price')">
@@ -185,11 +188,17 @@ export default {
         operatorInfo() {
             return this.$store.state.exchangeTokens.operator;
         },
-        isShowMining() {
-            return this.orderType === 'buy' && this.focusInput === 'price' && !this.priceErr && this.miningPrice;
+        isShowBuyMining() {
+            return this.orderType === 'buy' && this.focusInput === 'price' && !this.priceErr && this.buyMiningPrice;
         },
-        miningPrice() {
+        isShowSellMining() {
+            return this.orderType === 'sell' && this.focusInput === 'price' && !this.priceErr && this.sellMiningPrice;
+        },
+        buyMiningPrice() {
             return this.$store.getters.showActiveTxPairBuyMiningPrice;
+        },
+        sellMiningPrice() {
+            return this.$store.getters.showActiveTxPairSellMiningPrice;
         },
         blockingLevel() {
             return this.$store.getters.dexBlockingLever;

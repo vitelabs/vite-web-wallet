@@ -138,6 +138,41 @@ const getters = {
         }
         return BigNumber.onlyFormat(getters.activeTxPairBuyMiningPrice);
     },
+    activeTxPairSellMiningPrice(state, getters, rootState) {
+        // No activeTxPair
+        const activeTxPair = rootState.exchangeActiveTxPair.activeTxPair;
+        if (!activeTxPair) {
+            return '';
+        }
+
+        // No orderMining
+        if (getters.activeTxPairIsMining < 2) {
+            return '';
+        }
+
+        // No buyOnePrice
+        const buyOne = getters.activeTxPairBuyOnePrice;
+        if (!buyOne) {
+            return '';
+        }
+
+        const symbol = activeTxPair.symbol;
+        const orderMiningSettings = rootState.exchangeMine.orderMiningSettings;
+
+        // No orderMiningSetting
+        if (!orderMiningSettings || !orderMiningSettings[symbol]) {
+            return '';
+        }
+
+        const percent = BigNumber.minus(1, orderMiningSettings[symbol].sellRangeMax);
+        return BigNumber.multi(buyOne, percent);
+    },
+    showActiveTxPairSellMiningPrice(state, getters) {
+        if (!getters.activeTxPairSellMiningPrice) {
+            return '';
+        }
+        return BigNumber.onlyFormat(getters.activeTxPairSellMiningPrice);
+    },
     activeTxPairIsCMC(state, getters, rootState) {
         const activeTxPair = rootState.exchangeActiveTxPair.activeTxPair;
         if (!activeTxPair) {
