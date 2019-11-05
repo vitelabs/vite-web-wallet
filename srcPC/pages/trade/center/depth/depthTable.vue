@@ -65,6 +65,12 @@ export default {
             }
             return this.$store.getters.exDepthBuyMiningSeparator;
         },
+        sellMiningSeparator() {
+            if (this.dataType !== 'sell') {
+                return -1;
+            }
+            return this.$store.getters.exDepthSellMiningSeparator;
+        },
         isLoading() {
             return this.$store.state.exchangeDepth.isLoading;
         },
@@ -101,14 +107,25 @@ export default {
     },
     watch: {
         buyMiningSeparator() {
+            if (this.dataType !== 'buy') {
+                return;
+            }
             if (this.buyMiningSeparator < 0) {
+                this.hideMiningPrice();
+            }
+        },
+        sellMiningSeparator() {
+            if (this.dataType !== 'sell') {
+                return;
+            }
+            if (this.sellMiningSeparator < 0) {
                 this.hideMiningPrice();
             }
         }
     },
     methods: {
         showMiningPrice(item, i) {
-            if (i !== this.buyMiningSeparator) {
+            if (i !== this.buyMiningSeparator && i !== this.sellMiningSeparator) {
                 return;
             }
 
@@ -195,7 +212,6 @@ export default {
     min-height: 0;
     height: inherit;
     &.sell {
-        overflow: auto;
         .depth-table-wrapper {
             height: auto;
             position: absolute;

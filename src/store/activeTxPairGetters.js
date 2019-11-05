@@ -164,7 +164,7 @@ const getters = {
             return '';
         }
 
-        const percent = BigNumber.minus(1, orderMiningSettings[symbol].sellRangeMax);
+        const percent = BigNumber.plus(1, orderMiningSettings[symbol].sellRangeMax);
         return BigNumber.multi(buyOne, percent);
     },
     showActiveTxPairSellMiningPrice(state, getters) {
