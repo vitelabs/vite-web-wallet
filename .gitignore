@@ -16,3 +16,5 @@ static.tar
 h5Static.tar
 upload.sh
 deploy.sh
+backup.sh
+rollback.sh
