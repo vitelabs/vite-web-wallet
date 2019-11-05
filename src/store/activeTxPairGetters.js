@@ -86,11 +86,15 @@ const getters = {
     activeTxPairIsMining(state, getters, rootState) {
         const activeTxPair = rootState.exchangeActiveTxPair.activeTxPair;
         if (!activeTxPair) {
-            return false;
+            return 0;
         }
 
-        const miningSymbols = rootState.exchangeMine.miningSymbols;
-        return miningSymbols.indexOf(activeTxPair.symbol) !== -1;
+        const tradeMiningSymbols = rootState.exchangeMine.tradeMiningSymbols;
+        const orderMiningSymbols = rootState.exchangeMine.orderMiningSymbols;
+
+        const isTradeMining = tradeMiningSymbols.indexOf(activeTxPair.symbol) === -1 ? 0 : 1;
+        const isOrderMining = orderMiningSymbols.indexOf(activeTxPair.symbol) === -1 ? 0 : 2;
+        return isOrderMining + isTradeMining;
     },
     activeTxPairMiningPrice(state, getters, rootState) {
         // No activeTxPair

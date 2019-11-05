@@ -13,8 +13,10 @@
             <span class="symbol ttoken" @click="_showDetail('token')">
                 {{ ttokenDetail ? ttokenDetail.symbol : '' }}
             </span>
-            <span class="mining" v-show="isMining">
-                <img src="~assets/imgs/big_mining.svg"/>
+            <span class="mining" v-show="+isMining">
+                <img v-show="isMining === 1" src="~assets/imgs/trade_mining.svg"/>
+                <img v-show="isMining === 2" src="~assets/imgs/order_mining.svg"/>
+                <img v-show="isMining === 3" src="~assets/imgs/mining.svg"/>
                 <tooltips class="tips" :content="$t('tradeCenter.supportMining')"></tooltips>
             </span>
             <span class="gate" @click="_showDetail('operator')">
@@ -184,7 +186,10 @@ export default {
             }
         }
         img {
-            margin-bottom: -1px;
+            margin-bottom: -2px;
+            width: 14px;
+            height: 14px;
+
         }
     }
     .gate {
