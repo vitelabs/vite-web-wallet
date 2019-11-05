@@ -149,8 +149,7 @@ export default {
                     ? this.favoriteList
                     : this.txPairList;
 
-            const newList = list.filter(v => this.hideTxPairs.indexOf(v.symbol) === -1);
-            return [].concat(newList);
+            return [].concat(list);
         },
         activePairCode() {
             return this.activeTxPair
@@ -162,9 +161,6 @@ export default {
         },
         address() {
             return this.$store.getters.activeAddr;
-        },
-        hideTxPairs() {
-            return this.$store.state.uiConfig.hideTxPairs || [];
         }
     },
     watch: {
@@ -233,11 +229,6 @@ export default {
                         this.txPairList[i] = data;
                         break;
                     }
-                }
-
-                if (i === this.txPairList.length) {
-                    this.txPairList.push(data);
-                    return;
                 }
 
                 this.txPairList = [].concat(this.txPairList);
