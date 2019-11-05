@@ -74,9 +74,6 @@ export default {
         ftoken() {
             return this.$store.state.exchangeTokens.ftoken;
         },
-        miningPrice() {
-            return this.$store.getters.activeTxPairMiningPrice;
-        },
         maxQuantity() {
             const arr = [].concat(this.depthData);
             arr.sort((a, b) => b.quantity - a.quantity);

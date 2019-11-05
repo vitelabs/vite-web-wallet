@@ -76,6 +76,13 @@ const getters = {
 
         return getMinDecimals(tradeTokenDetail.tokenDecimals, activeTxPair.quantityPrecision);
     },
+    activeTxPairBuyOnePrice(state, getters, rootState) {
+        const buy = rootState.exchangeDepth.buy;
+        if (!buy || !buy.length) {
+            return '';
+        }
+        return buy[0].price || '';
+    },
     activeTxPairSellOnePrice(state, getters, rootState) {
         const sell = rootState.exchangeDepth.sell;
         if (!sell || !sell.length) {
@@ -96,7 +103,7 @@ const getters = {
         const isOrderMining = orderMiningSymbols.indexOf(activeTxPair.symbol) === -1 ? 0 : 2;
         return isOrderMining + isTradeMining;
     },
-    activeTxPairMiningPrice(state, getters, rootState) {
+    activeTxPairBuyMiningPrice(state, getters, rootState) {
         // No activeTxPair
         const activeTxPair = rootState.exchangeActiveTxPair.activeTxPair;
         if (!activeTxPair) {
@@ -104,8 +111,7 @@ const getters = {
         }
 
         // No orderMining
-        const orderMiningSymbols = rootState.exchangeMine.orderMiningSymbols;
-        if (orderMiningSymbols.indexOf(activeTxPair.symbol) === -1) {
+        if (getters.activeTxPairIsMining < 2) {
             return '';
         }
 
@@ -115,27 +121,22 @@ const getters = {
             return '';
         }
 
-        const miningSymbols = {
-            'ETH-000_BTC-000': 0.95,
-            'GRIN-000_BTC-000': 0.92,
-            'GRIN-000_ETH-000': 0.92,
-            'GRIN-000_VITE': 0.92,
-            'BTC-000_USDT-000': 0.95,
-            'ETH-000_USDT-000': 0.95,
-            'VITE_BTC-000': 0.85,
-            'VITE_ETH-000': 0.85,
-            'VITE_USDT-000': 0.85
-        };
-
         const symbol = activeTxPair.symbol;
-        const price = BigNumber.multi(sellOne, miningSymbols[symbol] || 0.9);
-        return BigNumber.normalFormatNum(price);
-    },
-    showActiveTxPairMiningPrice(state, getters) {
-        if (!getters.activeTxPairMiningPrice) {
+        const orderMiningSettings = rootState.exchangeMine.orderMiningSettings;
+
+        // No orderMiningSetting
+        if (!orderMiningSettings || !orderMiningSettings[symbol]) {
             return '';
         }
-        return BigNumber.onlyFormat(getters.activeTxPairMiningPrice);
+
+        const percent = BigNumber.minus(1, orderMiningSettings[symbol].buyRangeMax);
+        return BigNumber.multi(sellOne, percent);
+    },
+    showActiveTxPairBuyMiningPrice(state, getters) {
+        if (!getters.activeTxPairBuyMiningPrice) {
+            return '';
+        }
+        return BigNumber.onlyFormat(getters.activeTxPairBuyMiningPrice);
     },
     activeTxPairIsCMC(state, getters, rootState) {
         const activeTxPair = rootState.exchangeActiveTxPair.activeTxPair;

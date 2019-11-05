@@ -189,7 +189,7 @@ export default {
             return this.orderType === 'buy' && this.focusInput === 'price' && !this.priceErr && this.miningPrice;
         },
         miningPrice() {
-            return this.$store.getters.showActiveTxPairMiningPrice;
+            return this.$store.getters.showActiveTxPairBuyMiningPrice;
         },
         blockingLevel() {
             return this.$store.getters.dexBlockingLever;
