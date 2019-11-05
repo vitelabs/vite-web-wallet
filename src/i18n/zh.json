@@ -1158,7 +1158,8 @@
             "date": "日期",
             "ratio": "占比",
             "mining": "挖矿金额"
-        }
+        },
+        "market": "{name}市场"
     },
     "tradeDividend": {
         "title": "分红",
