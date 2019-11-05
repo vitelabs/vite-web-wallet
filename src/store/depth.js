@@ -80,11 +80,8 @@ const actions = {
 };
 
 const getters = {
-    exBuyOnePrice(state) {
-        return state.buy && state.buy.length ? state.buy[0].price : '';
-    },
     exDepthBuyMiningSeparator(state, getters, rootState, rootGetters) {
-        const miningPrice = rootGetters.activeTxPairMiningPrice;
+        const miningPrice = rootGetters.activeTxPairBuyMiningPrice;
         if (!state.buy || !state.buy.length || !miningPrice) {
             return -1;
         }

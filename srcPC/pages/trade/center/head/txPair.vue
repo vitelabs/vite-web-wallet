@@ -84,7 +84,7 @@ export default {
             return `${ BigNumber.formatNum(this.activeTxPair.amount, 1) } ${ this.activeTxPair.quoteTokenSymbol }`;
         },
         buyOne() {
-            return this.$store.getters.exBuyOnePrice;
+            return this.$store.getters.activeTxPairBuyOnePrice;
         },
         sellOne() {
             return this.$store.getters.activeTxPairSellOnePrice;
