@@ -277,13 +277,15 @@ interface IOrderMiningDetail {
     total: string;
     miningList: [
         {
-        date: number;
-        miningAmount: string;
-        miningRatio: string;
+            date: number;
+            miningAmount: string;
+            miningRatio: string;
+            cycleKey: number;
         }
     ];
 }
-export function getOrderMiningDetail({
+
+export function getOrderMining({
     address,
     offset,
     limit
@@ -292,6 +294,22 @@ export function getOrderMiningDetail({
         method: 'GET',
         path: 'mining/order/address',
         params: { address, offset, limit }
+    });
+}
+
+export function getOrderMiningEstimate({ address }) {
+    return ViteXAPI.request({
+        method: 'GET',
+        path: 'mining/order/estimate',
+        params: { address }
+    });
+}
+
+export function getOrderMiningDetails({ address, cycleKey }) {
+    return ViteXAPI.request({
+        method: 'GET',
+        path: 'mining/order/details',
+        params: { address, cycleKey }
     });
 }
 

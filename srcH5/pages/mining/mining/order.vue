@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import { getOrderMiningDetail } from 'services/trade';
+import { getOrderMining } from 'services/trade';
 import bigNumber from 'utils/bigNumber';
 import date from 'utils/date';
 import myIncome from './myIncome';
@@ -79,7 +79,7 @@ export default {
                 return;
             }
 
-            getOrderMiningDetail({
+            getOrderMining({
                 address: this.address,
                 offset
             }).then(data => {

@@ -1161,7 +1161,8 @@
             "date": "Date",
             "ratio": "Ratio",
             "mining": "Amount"
-        }
+        },
+        "market": "{name}市场"
     },
     "tradeDividend": {
         "title": "Dividends",
