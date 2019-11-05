@@ -1,6 +1,12 @@
 <template>
-    <div class="trade-mining-section">
-        <wallet-table class="mint-trade-table tb" :clickRow="clickRow"
+    <div class="trade-mining-section shadow">
+        <div class="my-divident">
+            <div class="item" v-for="tokenType in ['VITE', 'BTC', 'ETH', 'USDT']" :key="tokenType">
+                <div class="item-title">{{ $t("orderMining.estimate", { name: tokenType }) }}</div>
+                <div class="item-price">{{ estimateInfo[tokenType] || '--' }}</div>
+            </div>
+        </div>
+        <wallet-table class="mint-trade-table no-shadow tb" :clickRow="clickRow"
                       :headList="headList" :contentList="content">
 
             <div class="detail-wrapper" :slot="`${activeIndex}Row`">
@@ -24,7 +30,7 @@
 </template>
 
 <script>
-import { getOrderMining, getOrderMiningDetails } from 'services/trade';
+import { getOrderMining, getOrderMiningDetails, getOrderMiningEstimate } from 'services/trade';
 import walletTable from 'components/table/index.vue';
 import pagination from 'components/pagination.vue';
 import loading from 'components/loading';
@@ -56,11 +62,14 @@ export default {
             orderMiningDetails: [],
             activeIndex: null,
             isLoadingDetail: false,
-            errMsg: ''
+            errMsg: '',
+
+            estimateInfo: {}
         };
     },
     beforeMount() {
         this.updateData();
+        this.fetchEstimate();
     },
     watch: {
         address() {
@@ -74,6 +83,7 @@ export default {
             this.errMsg = '';
 
             this.updateData();
+            this.fetchEstimate();
         }
     },
     computed: {
@@ -82,7 +92,8 @@ export default {
                 return {
                     date: date(item.date * 1000, this.$i18n.locale),
                     ratio: `${ bigNumber.multi(item.miningRatio, 100, 2) }%`,
-                    mining: `${ bigNumber.formatNum(item.miningAmount || 0, 8) } VX`
+                    mining: `${ bigNumber.formatNum(item.miningAmount || 0, 8) } VX`,
+                    cycleKey: item.cycleKey
                 };
             });
         },
@@ -149,12 +160,31 @@ export default {
                 this.errMsg = 'Retry~~';
                 this.isLoadingDetail = false;
             });
+        },
+        fetchEstimate() {
+            this.estimateInfo = {};
+
+            getOrderMiningEstimate({ address: this.address }).then(data => {
+                if (!data || !data.orderMiningStat) {
+                    return;
+                }
+                const orderMiningStat = data.orderMiningStat;
+                for (const tokenName in orderMiningStat) {
+                    const amount = orderMiningStat[tokenName];
+                    orderMiningStat[tokenName] = `${ bigNumber.formatNum(amount || 0, 8) } VX`;
+                }
+                this.estimateInfo = data.orderMiningStat;
+            }).catch(err => {
+                console.warn(err);
+            });
         }
     }
 };
 </script>
 
 <style lang="scss" scoped>
+@import "~assets/scss/vars.scss";
+
 .detail-wrapper {
     position: relative;
     min-height: 32px;
@@ -166,6 +196,36 @@ export default {
     .err-msg {
         line-height: 32px;
         text-align: center;
+    }
+}
+
+.my-divident {
+    background: url('~assets/imgs/mint_pledge_bg.png') rgba(234,248,255,0.2);
+    background-size: 100% 100%;
+    font-size: 12px;
+    font-family: $font-normal;
+    line-height: 18px;
+    display: flex;
+    flex-direction: row;
+    border-radius: 2px;
+
+    .item {
+        flex: 1;
+        box-sizing: border-box;
+        padding: 14px 30px;
+        border-right: 1px solid rgba(227,235,245,0.6);
+        &:last-child {
+            border-right: none;
+        }
+        .item-title {
+            color: rgba(94,104,117,1);
+        }
+        .item-price {
+            font-size: 16px;
+            color: rgba(29,32,36,1);
+            line-height: 20px;
+            font-family: $font-bold;
+        }
     }
 }
 </style>
