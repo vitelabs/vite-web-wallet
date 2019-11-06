@@ -69,7 +69,7 @@ export default function request({
             rej(x);
         };
         xhr.ontimeout = function () {
-            rej('timeout');
+            rej(`timeout ${ path }`);
         };
     });
 }
