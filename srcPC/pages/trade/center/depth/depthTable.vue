@@ -1,10 +1,5 @@
 <template>
-    <div class="depth-table" :class="{
-        'show-all': isShowAll,
-        'sell': dataType === 'sell',
-        'buy': dataType === 'buy'
-    }">
-        <span v-show="isShowMiningPrice" class="mining-price" :style="`top: ${top}px`">{{ $t('tradeCenter.depthMiningPrice') }}</span>
+    <div class="depth-table" :class="{ 'show-all': isShowAll, 'sell': dataType === 'sell' }">
         <div ref="depthTable" class="depth-table-wrapper">
             <loading loadingType="dot" class="ex-center-loading" v-show="isLoading"></loading>
             <price v-if="!isShowAll && dataType === 'buy'" class="border_b"></price>
@@ -25,6 +20,10 @@
                 <span class="__center-tb-item depth amount">{{ formatNum(item.amount, quoteTokenDigit) }}</span>
                 <span class="percent-wrapper" :class="dataType" :style="{ 'width': getWidth(item) + '%' }"></span>
             </div>
+            <price v-if="!isShowAll && dataType === 'sell'" :class="{
+                'border_all': depthData.length,
+                'border_b': !depthData.length
+            }"></price>
         </div>
     </div>
 </template>
@@ -49,12 +48,6 @@ export default {
             type: Boolean,
             default: true
         }
-    },
-    data() {
-        return {
-            isShowMiningPrice: false,
-            top: 0
-        };
     },
     destroyed() {
         this.$store.dispatch('exStopDepthTimer');
@@ -136,18 +129,21 @@ export default {
             const elTop = this.$refs[`depthRow${ i }`][0].getBoundingClientRect().top;
             const listTop = this.$refs.depthTable.getBoundingClientRect().top;
             const height = this.$refs.depthTable.clientHeight;
-            const top = elTop - listTop + this.$refs[`depthRow${ i }`][0].clientHeight;
+            const rowHeight = this.$refs[`depthRow${ i }`][0].clientHeight;
+            const top = elTop - listTop + rowHeight;
 
             if (top > listTop + height) {
                 this.hideMiningPrice();
                 return;
             }
 
-            this.top = top;
-            this.isShowMiningPrice = true;
+            if (this.dataType === 'buy') {
+                return this.$emit('showMiningPrice', elTop + rowHeight);
+            }
+            this.$emit('showMiningPrice', elTop);
         },
         hideMiningPrice() {
-            this.isShowMiningPrice = false;
+            this.$emit('hideMiningPrice');
         },
         isInOpenOrders(price) {
             if (!this.currentOpenOrders) {
@@ -206,16 +202,15 @@ export default {
 
 .depth-table {
     position: relative;
-    &.buy {
-        flex: 1;
-        height: inherit;
-    }
+    flex: 1;
+    height: inherit;
 }
 .show-all {
     flex: 1;
     min-height: 0;
     height: inherit;
     &.sell {
+        overflow: hidden;
         .depth-table-wrapper {
             height: auto;
             position: absolute;
@@ -230,6 +225,11 @@ export default {
 .border_b {
     border-bottom: 1px solid rgba(229, 237, 243, 1);
 }
+.border_all {
+    border-bottom: 1px solid rgba(229, 237, 243, 1);
+    border-top: 1px solid rgba(229, 237, 243, 1);
+}
+
 .depth-table-wrapper {
     height: 100%;
     overflow: auto;
@@ -237,36 +237,11 @@ export default {
     font-family: $font-H;
 }
 
-.mining-price {
-    position: absolute;
-    left: -10px;
-    transform: translateX(-100%) translateY(-50%);
-    line-height: 16px;
-    padding: 10px;
-    font-size: 12px;
-    @include font-family-normal();
-    color: rgba(94,104,117,1);
-    background: rgba(215,215,215,1);
-    box-shadow: 0px 5px 20px 0px rgba(0,0,0,0.1);
-
-    &::after {
-        content: ' ';
-        border: 5px solid transparent;
-        border-left: 5px solid #d7d7d7;
-        position: absolute;
-        top: 50%;
-        right: 0;
-        margin-top: -5px;
-        margin-right: -10px;
-    }
-}
-
 .__center-tb-row {
     &.in_mining {
         background: rgba(75,116,255,0.05);
     }
     &.border_b {
-        position: relative;
         border-bottom: 1px dashed rgba(189,196,208,1);
     }
     &.border_t {
@@ -287,11 +262,9 @@ export default {
     right: 0;
     top: 0;
     bottom: 0;
-
     &.buy {
         background: rgba(0, 215, 100, 0.08);
     }
-
     &.sell {
         background: rgba(237, 81, 88, 0.08);
     }

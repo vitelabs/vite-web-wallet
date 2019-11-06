@@ -30,15 +30,18 @@
             }) }}</span>
         </div>
 
-        <div class="depth-content-wrapper" :class="{'only-sell': !isShowBuy && isShowSell}">
+        <div ref="depthContentWrapper" class="depth-content-wrapper">
+            <span v-show="miningPriceText" class="mining-price" :style="`top: ${top}px`">{{ miningPriceText }}</span>
+
             <depth-table v-show="isShowSell" :isShowAll="isShowBuy && isShowSell"
-                         dataType="sell" :depthData="depthSell"></depth-table>
-            <price v-if="!(isShowBuy && !isShowSell)" :class="{
-                border_all: true,
-                no_border_t: !isShowSell || (isShowSell && !isShowBuy && (!depthSell || !depthSell.length))
-            }"></price>
+                         dataType="sell" :depthData="depthSell"
+                         @showMiningPrice="showSellMiningPrice"
+                         @hideMiningPrice="hideMiningPrice"></depth-table>
+            <price v-if="isShowBuy && isShowSell" class="border_all"></price>
             <depth-table v-show="isShowBuy" :isShowAll="isShowBuy && isShowSell"
-                         dataType="buy" :depthData="depthBuy"></depth-table>
+                         dataType="buy" :depthData="depthBuy"
+                         @showMiningPrice="showBuyMiningPrice"
+                         @hideMiningPrice="hideMiningPrice"></depth-table>
         </div>
     </div>
 </template>
@@ -53,7 +56,9 @@ export default {
     data() {
         return {
             isShowBuy: true,
-            isShowSell: true
+            isShowSell: true,
+            miningPriceText: '',
+            top: 0
         };
     },
     computed: {
@@ -74,6 +79,21 @@ export default {
         showTable(isShowBuy, isShowSell) {
             this.isShowBuy = isShowBuy;
             this.isShowSell = isShowSell;
+        },
+        showSellMiningPrice(top) {
+            this.miningPriceText = this.$t('tradeCenter.depthSellMiningPrice');
+            this.showMiningPrice(top);
+        },
+        showBuyMiningPrice(top) {
+            this.miningPriceText = this.$t('tradeCenter.depthBuyMiningPrice');
+            this.showMiningPrice(top);
+        },
+        showMiningPrice(top) {
+            const wrapperTop = this.$refs.depthContentWrapper.getBoundingClientRect().top;
+            this.top = top - wrapperTop;
+        },
+        hideMiningPrice() {
+            this.miningPriceText = '';
         }
     }
 };
@@ -89,6 +109,7 @@ export default {
     flex-direction: column;
 
     .depth-content-wrapper {
+        position: relative;
         width: 100%;
         height: 100%;
         display: flex;
@@ -105,6 +126,30 @@ export default {
     }
     .no_border_t {
         border-top: none;
+    }
+}
+
+.mining-price {
+    position: absolute;
+    left: -10px;
+    transform: translateX(-100%) translateY(-50%);
+    line-height: 16px;
+    padding: 10px;
+    font-size: 12px;
+    @include font-family-normal();
+    color: rgba(94,104,117,1);
+    background: rgba(215,215,215,1);
+    box-shadow: 0px 5px 20px 0px rgba(0,0,0,0.1);
+
+    &::after {
+        content: ' ';
+        border: 5px solid transparent;
+        border-left: 5px solid #d7d7d7;
+        position: absolute;
+        top: 50%;
+        right: 0;
+        margin-top: -5px;
+        margin-right: -10px;
     }
 }
 </style>

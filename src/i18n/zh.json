@@ -806,7 +806,8 @@
             "tokenTab": "代币详情",
             "operatorTab": "运营商信息"
         },
-        "depthMiningPrice": "此线上方为有效挂单区域"
+        "depthBuyMiningPrice": "此线上方为有效挂单区域",
+        "depthSellMiningPrice": "此线下方为有效挂单区域"
     },
     "trade": {
         "more":"更多",
