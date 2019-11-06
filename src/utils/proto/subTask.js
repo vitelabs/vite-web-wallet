@@ -48,10 +48,12 @@ export class subTask extends timer {
                 return;
             }
 
-            // Use http if sub unavalible
-            if (client && !client.closed) {
+            if (!client
+                || (client && !client.closed)) {
                 return;
             }
+
+            // Use http if sub unavalible
             this.httpRequest();
         };
 
@@ -114,8 +116,8 @@ export class subTask extends timer {
 
         // Init
         this.argsGetter = argsGetter;
-        this.subKey = wsServicesMap[this.key](this.args);
         super.start();
+        this.subKey = wsServicesMap[this.key](this.args);
 
         // Get all data from http at first if need
         if (!isNeedAllDataFirst) {
