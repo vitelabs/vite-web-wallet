@@ -17,7 +17,7 @@
                 <img v-show="isMining === 1" src="~assets/imgs/trade_mining.svg"/>
                 <img v-show="isMining === 2" src="~assets/imgs/order_mining.svg"/>
                 <img v-show="isMining === 3" src="~assets/imgs/mining.svg"/>
-                <tooltips class="tips" :content="$t('tradeCenter.supportMining')"></tooltips>
+                <tooltips class="tips" :content="supportMining"></tooltips>
             </span>
             <span class="gate" @click="_showDetail('operator')">
                 <img class="gate-img" :src="operatorIcon" />
@@ -41,6 +41,19 @@ export default {
         }
     },
     computed: {
+        supportMining() {
+            if (!this.isMining) {
+                return '';
+            }
+
+            if (this.isMining === 1) {
+                return this.$t('tradeCenter.supportTradeMining');
+            } else if (this.isMining === 2) {
+                return this.$t('tradeCenter.supportOrderMining');
+            } else if (this.isMining === 3) {
+                return this.$t('tradeCenter.supportMining');
+            }
+        },
         isCMC() {
             return this.$store.getters.activeTxPairIsCMC;
         },
