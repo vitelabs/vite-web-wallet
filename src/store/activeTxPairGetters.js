@@ -5,6 +5,7 @@ const maxDigit = 8;
 const getters = {
     exActiveTxPair(state, getters, rootState) {
         const _activeTxPair = rootState.exchangeActiveTxPair.activeTxPair;
+
         if (!_activeTxPair) {
             return null;
         }
