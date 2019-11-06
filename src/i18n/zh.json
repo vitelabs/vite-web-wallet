@@ -789,7 +789,9 @@
         "mergeDepth": "深度合并",
         "depthStep": "{step}位小数",
         "blocking": "网络拥堵, 请稍候重试",
-        "supportMining": "支持挖矿的交易对",
+        "supportMining": "支持交易挖矿&挂单挖矿",
+        "supportTradeMining": "支持交易挖矿",
+        "supportOrderMining": "支持挂单挖矿",
         "buyMiningPrice": "买入价大于{price}时满足挂单挖矿条件",
         "sellMiningPrice": "卖出价小于{price}时满足挂单挖矿条件",
         "operator": {
