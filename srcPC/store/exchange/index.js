@@ -1,34 +1,12 @@
-import fee from 'store/fee';
-import limit from 'store/limit';
-import mine from 'store/mine.js';
-import rate from 'store/rate.js';
-import tokens from 'store/tokens';
-import depth from 'store/depth.js';
-import balance from 'store/balance';
-import activeTx from 'store/activeTx';
-import latestOrder from 'store/latestOrder';
-import dexFundUnreceived from 'store/dexFundUnreceived';
-import currentOpenOrders from 'store/currentOpenOrders';
-import activeTxPairGetters from 'store/activeTxPairGetters';
+import commonStore from 'store/index';
 
 import market from './market';
 import latestTx from './latestTx';
 import activeTxPair from './activeTxPair';
 
 export default {
-    exchangeFee: fee,
-    exchangeMine: mine,
-    exchangeRate: rate,
-    exchangeDepth: depth,
-    exchangeLimit: limit,
+    ...commonStore,
     exchangeMarket: market,
-    exchangeTokens: tokens,
-    exchangeBalance: balance,
     exchangeLatestTx: latestTx,
-    exchangeActiveTx: activeTx,
-    exchangeLatestOrder: latestOrder,
-    exchangeActiveTxPair: activeTxPair,
-    exchangeCurrentOpenOrders: currentOpenOrders,
-    exchangeDexFundUnreceived: dexFundUnreceived,
-    exchangeActiveTxPairGetters: activeTxPairGetters
+    exchangeActiveTxPair: activeTxPair
 };
