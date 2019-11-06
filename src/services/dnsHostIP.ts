@@ -73,13 +73,19 @@ export class DNSClient extends Client {
         if (!Server[serverKey]) {
             throw 'No Server Key or no callback';
         }
-        const { url } = Server[serverKey];
 
-        super(`${ url }${ baseUrl }`, afterResponse, headersBase);
+        const { url } = Server[serverKey];
+        super(getUrl(url, baseUrl), afterResponse, headersBase);
+
         setWatch(serverKey, url => {
-            this.setHost(`${ url }${ baseUrl }`);
+            this.setHost(getUrl(url, baseUrl));
         });
     }
+}
+function getUrl(pre, after) {
+    pre.slice(-1) === '/' && (pre = pre.slice(0, -1));
+    after.indexOf('/') === 0 && (after = after.slice(1));
+    return `${ pre }/${ after }`;
 }
 
 export function setWatch(serverKey, cb) {

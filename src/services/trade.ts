@@ -1,4 +1,4 @@
-import { ViteXAPI } from 'services/apiServer';
+import { ViteXAPI, ViteXAPIV2 } from 'services/apiServer';
 
 export const limit = function () {
     return ViteXAPI.request({
@@ -70,7 +70,7 @@ export const rateToken = function ({ tokenIdList = [] }) {
 };
 
 export const defaultPair = function ({ quoteTokenCategory }) {
-    return ViteXAPI.request({
+    return ViteXAPIV2.request({
         path: '/ticker/24hr',
         method: 'GET',
         params: { quoteTokenCategory }
@@ -78,12 +78,28 @@ export const defaultPair = function ({ quoteTokenCategory }) {
 };
 
 export const assignPair = function ({ symbols = [] }) {
-    return ViteXAPI.request({
+    return ViteXAPIV2.request({
         path: '/ticker/24hr',
         method: 'GET',
         params: { symbols: symbols.join(',') }
     });
 };
+
+export function getMarketsByTradeToken({ tradeTokenSymbol }) {
+    return ViteXAPIV2.request({
+        method: 'GET',
+        path: 'ticker/24hr',
+        params: { tradeTokenSymbol }
+    });
+}
+
+export function getMarketsByQuoteToken({ quoteTokenSymbol }) {
+    return ViteXAPIV2.request({
+        method: 'GET',
+        path: 'ticker/24hr',
+        params: { quoteTokenSymbol }
+    });
+}
 
 export const marketsReserve = function ({ quoteTokenSymbol }) {
     return ViteXAPI.request({
@@ -320,18 +336,3 @@ export function getMiningSetting() {
     });
 }
 
-export function getMarketsByTradeToken({ tradeTokenSymbol }) {
-    return ViteXAPI.request({
-        method: 'GET',
-        path: 'ticker/24hr',
-        params: { tradeTokenSymbol }
-    });
-}
-
-export function getMarketsByQuoteToken({ quoteTokenSymbol }) {
-    return ViteXAPI.request({
-        method: 'GET',
-        path: 'ticker/24hr',
-        params: { quoteTokenSymbol }
-    });
-}

@@ -2,22 +2,30 @@ import provider from '@vite/vitejs-ws';
 import { client } from '@vite/vitejs';
 import { DNSClient, setWatch } from './dnsHostIP';
 
+function viteXAPIAfterRes(xhr) {
+    const { code, msg, data, error, subCode } = JSON.parse(xhr.responseText);
+
+    if (code !== 0) {
+        return Promise.reject({
+            code,
+            subCode,
+            message: msg || error
+        });
+    }
+
+    return Promise.resolve(data || null);
+}
+
 export const ViteXAPI = new DNSClient({
     serverKey: 'dexAPI',
-    afterResponse: xhr => {
-        const { code, msg, data, error, subCode } = JSON.parse(xhr.responseText);
-
-        if (code !== 0) {
-            return Promise.reject({
-                code,
-                subCode,
-                message: msg || error
-            });
-        }
-
-        return Promise.resolve(data || null);
-    },
+    afterResponse: viteXAPIAfterRes,
     baseUrl: `${ process.env.NODE_ENV === 'production' ? '' : '/test' }/api/v1`
+});
+
+export const ViteXAPIV2 = new DNSClient({
+    serverKey: 'dexAPI',
+    afterResponse: viteXAPIAfterRes,
+    baseUrl: `${ process.env.NODE_ENV === 'production' ? '' : '/test' }/api/v2`
 });
 
 const url = setWatch('gViteAPI', url => {
