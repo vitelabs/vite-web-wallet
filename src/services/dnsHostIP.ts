@@ -112,7 +112,7 @@ if (process.env.NODE_ENV === 'production') {
         }
 
         return Promise.resolve(data || null);
-    }).request({ path: '/hostips' })
+    }).request({ path: '/hostips', timeout: 3000 })
         .then(data => {
             if (!data) {
                 callReady();
