@@ -13,8 +13,9 @@
                  @mouseenter="showMiningPrice(item, i)"
                  @mouseleave="hideMiningPrice(item)"
                  :class="{
-                     'in_mining': buyMiningSeparator >= 0 && i <= buyMiningSeparator,
-                     'border_b': buyMiningSeparator >= 0 && i === buyMiningSeparator
+                     'in_mining': miningSeparatorArr.indexOf(i) !== -1,
+                     'border_b': miningSeparator >= 0 && dataType === 'buy' && i === miningSeparator,
+                     'border_t': miningSeparator >= 0 && dataType === 'sell' && i === miningSeparator,
             }" v-for="(item, i) in depthData" :key="i">
                 <span class="__center-tb-item depth price __ellipsis" :class="dataType">
                     {{ formatNum(item.price, quoteTokenDepthDigit) }}
@@ -59,17 +60,28 @@ export default {
         this.$store.dispatch('exStopDepthTimer');
     },
     computed: {
-        buyMiningSeparator() {
-            if (this.dataType !== 'buy') {
-                return -1;
+        miningSeparatorArr() {
+            if (this.miningSeparator < 0) {
+                return [];
             }
-            return this.$store.getters.exDepthBuyMiningSeparator;
+
+            const arr = [];
+            if (this.dataType === 'buy') {
+                for (let i = 0; i <= this.miningSeparator; i++) {
+                    arr.push(i);
+                }
+                return arr;
+            }
+
+            for (let i = this.miningSeparator; i < this.depthData.length; i++) {
+                arr.push(i);
+            }
+            return arr;
         },
-        sellMiningSeparator() {
-            if (this.dataType !== 'sell') {
-                return -1;
-            }
-            return this.$store.getters.exDepthSellMiningSeparator;
+        miningSeparator() {
+            return this.dataType === 'buy'
+                ? this.$store.getters.exDepthBuyMiningSeparator
+                : this.$store.getters.exDepthSellMiningSeparator;
         },
         isLoading() {
             return this.$store.state.exchangeDepth.isLoading;
@@ -106,26 +118,18 @@ export default {
         }
     },
     watch: {
-        buyMiningSeparator() {
+        miningSeparator() {
             if (this.dataType !== 'buy') {
                 return;
             }
-            if (this.buyMiningSeparator < 0) {
-                this.hideMiningPrice();
-            }
-        },
-        sellMiningSeparator() {
-            if (this.dataType !== 'sell') {
-                return;
-            }
-            if (this.sellMiningSeparator < 0) {
+            if (this.miningSeparator < 0) {
                 this.hideMiningPrice();
             }
         }
     },
     methods: {
         showMiningPrice(item, i) {
-            if (i !== this.buyMiningSeparator && i !== this.sellMiningSeparator) {
+            if (i !== this.miningSeparator) {
                 return;
             }
 
@@ -264,6 +268,9 @@ export default {
     &.border_b {
         position: relative;
         border-bottom: 1px dashed rgba(189,196,208,1);
+    }
+    &.border_t {
+        border-top: 1px dashed rgba(189,196,208,1);
     }
 }
 
