@@ -30,38 +30,31 @@ export default {
             return this.$store.state.exchangeTokens.ttoken;
         },
         maxStep() {
-            if (!this.ttokenDetail || !this.activeTxPair) {
-                return '';
-            }
-
-            const tDigit = this.ttokenDetail.tokenDecimals;
-            const pariDigit = this.activeTxPair.pricePrecision;
-
-            const digit = tDigit > pariDigit ? pariDigit : tDigit;
-            return digit > maxDigit ? maxDigit : digit;
+            return this.$store.getters.exTxPairMaxStep;
+        },
+        minStep() {
+            return this.$store.getters.exTxPairMinStep;
         },
         stepList() {
-            if (!this.maxStep && this.maxStep !== 0) {
+            if (this.maxStep < 0) {
                 return [];
             }
 
             const list = [];
-            for (let i = 0; i <= this.maxStep; i++) {
+            for (let i = this.minStep; i <= this.maxStep; i++) {
                 list.push(i);
             }
             return list;
         }
     },
     watch: {
-        maxStep() {
-            if ((!this.step && this.step !== 0)
-                || this.step > this.maxStep) {
-                this.$store.dispatch('exSetDepthStep', this.maxStep);
-            }
-        },
         activeTxPair(val, oldval) {
             if (oldval && val && val.symbol === oldval.symbol) {
                 return;
+            }
+
+            if (this.maxStep < 0) {
+                this.$store.dispatch('exSetDepthStep', maxDigit);
             }
             this.$store.dispatch('exSetDepthStep', this.maxStep);
         }

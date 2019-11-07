@@ -112,9 +112,6 @@ export default {
     },
     watch: {
         miningSeparator() {
-            if (this.dataType !== 'buy') {
-                return;
-            }
             if (this.miningSeparator < 0) {
                 this.hideMiningPrice();
             }

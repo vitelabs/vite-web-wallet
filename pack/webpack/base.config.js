@@ -37,13 +37,13 @@ module.exports = {
                     priority: -20,
                     reuseExistingChunk: true
                 }
-                //     commons: {
-                //         name: 'comomns',
-                //         test: /src(?!(\/utils))/,
-                //         minChunks: 2,
-                //         minSize: 0,
-                //         priority: 1
-                //     },
+                // commons: {
+                //     name: 'comomns',
+                //     test: /src(?!(\/utils))/,
+                //     minChunks: 2,
+                //     minSize: 0,
+                //     priority: 1
+                // }
             }
         }
     },
