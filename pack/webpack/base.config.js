@@ -25,15 +25,13 @@ module.exports = {
         splitChunks: {
             hidePathInfo: true,
             chunks: 'all',
-            maxSize: 2048000,
-            minSize: 800000,
-            maxAsyncRequests: 5,
-            maxInitialRequests: 4,
             cacheGroups: {
                 vendors: {
                     test: /[\\/]node_modules[\\/]/,
                     name: 'vendors',
-                    chunks: 'all'
+                    chunks: 'all',
+                    maxSize: 2048000,
+                    minSize: 800000
                 },
                 default: {
                     name: 'default',
