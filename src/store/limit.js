@@ -1,17 +1,27 @@
 import { limit } from 'services/trade';
 
-const state = { minAmount: {} };
+const state = {
+    minAmount: {},
+    depthStepsLimit: {}
+};
 
 const mutations = {
-    exSetLimitAmounts(state, data) {
-        state.minAmount = data && data.minAmount ? data.minAmount : {};
+    exSetLimitAmounts(state, minAmount) {
+        state.minAmount = minAmount || {};
+    },
+    exSetDepthStepsLimit(state, depthStepsLimit) {
+        state.depthStepsLimit = depthStepsLimit || {};
     }
 };
 
 const actions = {
     exFetchLimitAmounts({ commit }) {
         limit().then(data => {
-            commit('exSetLimitAmounts', data);
+            if (!data) {
+                return;
+            }
+            commit('exSetLimitAmounts', data.minAmount);
+            commit('exSetDepthStepsLimit', data.depthStepsLimit);
         }).catch(err => {
             console.warn(err);
         });

@@ -74,6 +74,10 @@ const actions = {
         commit('exSetDepthBuy', []);
     },
     exSetDepthStep({ commit, dispatch }, step) {
+        if (step < 0) {
+            return;
+        }
+
         commit('exSetDepthStep', step);
         dispatch('exFetchDepth');
     }
@@ -116,6 +120,34 @@ const getters = {
         }
 
         return -1;
+    },
+    exTxPairMaxStep(state, getters, rootState) {
+        const activeTxPair = rootState.exchangeActiveTxPair.activeTxPair;
+        if (!activeTxPair) {
+            return -1;
+        }
+
+        const depthStepsLimit = rootState.exchangeLimit.depthStepsLimit;
+        const symbol = activeTxPair.symbol;
+        if (!depthStepsLimit[symbol]) {
+            return -1;
+        }
+
+        return depthStepsLimit[symbol].max;
+    },
+    exTxPairMinStep(state, getters, rootState) {
+        const activeTxPair = rootState.exchangeActiveTxPair.activeTxPair;
+        if (!activeTxPair) {
+            return 0;
+        }
+
+        const depthStepsLimit = rootState.exchangeLimit.depthStepsLimit;
+        const symbol = activeTxPair.symbol;
+        if (!depthStepsLimit[symbol]) {
+            return 0;
+        }
+
+        return depthStepsLimit[symbol].min;
     }
 };
 
