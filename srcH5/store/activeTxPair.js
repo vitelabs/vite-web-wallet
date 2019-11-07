@@ -69,6 +69,8 @@ const actions = {
 
         assignPairTask.start(() => {
             return { symbol: txPair.symbol };
+        }).then(() => {
+            console.log('success');
         }).catch(err => {
             commit('setActiveTxPairLoading', false);
             console.warn(err);
