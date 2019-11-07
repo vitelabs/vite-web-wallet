@@ -30,8 +30,12 @@ module.exports = {
     },
     optimization: {
         splitChunks: {
-            maxSize: 1024000,
-            minSize: 400000
+            cacheGroups: {
+                vendors: {
+                    maxSize: 1024000,
+                    minSize: 400000
+                }
+            }
         }
     }
 };
