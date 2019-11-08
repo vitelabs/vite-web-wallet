@@ -74,10 +74,7 @@ const actions = {
         commit('exSetDepthBuy', []);
     },
     exSetDepthStep({ commit, dispatch }, step) {
-        if (step < 0) {
-            return;
-        }
-
+        step = +step < 0 ? '' : step;
         commit('exSetDepthStep', step);
         dispatch('exFetchDepth');
     }
