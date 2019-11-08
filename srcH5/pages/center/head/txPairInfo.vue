@@ -12,7 +12,7 @@
                 <span @click="_showDetail('token')" class="ttoken">
                     /{{ ttokenDetail ? ttokenDetail.symbol : '' }}
                 </span>
-                <img class="mining" src="~h5Assets/imgs/mining.png"/>
+                <img v-if="isMining" class="mining" src="~h5Assets/imgs/mining.png"/>
                 <img v-if="isSupportSwitch" @click="switchTxPair" class="mining" src="~h5Assets/imgs/down.svg"/>
             </div>
             <div class="gate" @click="_showDetail('operator')">
