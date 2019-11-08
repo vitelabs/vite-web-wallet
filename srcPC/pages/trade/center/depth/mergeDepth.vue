@@ -13,8 +13,6 @@
 </template>
 
 <script>
-const maxDigit = 8;
-
 export default {
     data() {
         return { isShowStepList: false };
@@ -53,9 +51,6 @@ export default {
                 return;
             }
 
-            if (this.maxStep < 0) {
-                this.$store.dispatch('exSetDepthStep', maxDigit);
-            }
             this.$store.dispatch('exSetDepthStep', this.maxStep);
         }
     },
