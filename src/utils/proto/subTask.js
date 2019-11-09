@@ -48,12 +48,11 @@ export class subTask extends timer {
                 return;
             }
 
-            if (!client
-                || (client && !client.closed)) {
+            if (client && !client.closed) {
                 return;
             }
 
-            // Use http if sub unavalible
+            // Use http if sub unavalible or no client
             this.httpRequest();
         };
 
@@ -86,9 +85,13 @@ export class subTask extends timer {
             return;
         }
 
+        if (!client) {
+            return;
+        }
+
         // Unsub oldKey
         // console.log('[subTask] Unsub oldKey');
-        client && client.unSub(oldkey, this.subCallback);
+        client.unSub(oldkey, this.subCallback);
 
         // Update subKey and subCallback.
         // console.log('[subTask] Update subKey and subCallback.');
@@ -106,7 +109,7 @@ export class subTask extends timer {
         };
 
         // Sub currentKey
-        client && client.sub(currentKey, this.subCallback);
+        client.sub(currentKey, this.subCallback);
     }
 
     start(argsGetter, isNeedAllDataFirst = true) {
