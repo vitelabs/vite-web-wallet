@@ -471,8 +471,16 @@
             "inviteNum":"邀请人数",
             "inviteBenifit":"邀请挖矿收益",
             "inviteRule":"邀请规则",
-            "ruleItems":["花费<span class='strong'>1000 VITE</span>生成邀请码，<span class='strong'>1000 VITE</span> 会算作交易所收益，分给持有VX的用户","使用邀请码的用户交易过程中产生手续费，产生手续费的 <span class='strong'>5%</span>，视为邀请用户产生的交易手续费，可进行挖矿VX","使用邀请码的用户，在交易过程中手续费可<span class='strong'>9折</span>"]
-
+            "ruleItems":[
+                "花费 <span class='strong'>1000 VITE</span> 生成邀请码，<span class='strong'>1000 VITE</span> 被销毁",
+                "计算交易挖矿时，邀请人增加被邀请人的交易手续费权重 <span class='strong'>5%</span> ",
+                "计算挂单挖矿时，邀请人增加被邀请人的挂单挖矿权重 <span class='strong'>2.5%</span> "
+            ],
+            "receiveRuleItems": [
+                "计算交易挖矿时，交易手续费权重增加 <span class='strong'>2.5%</span> ",
+                "计算挂单挖矿时，挂单挖矿权重增加 <span class='strong'>1.25%</span> ",
+                "使用邀请码的用户，在交易过程中手续费可 <span class='strong'>9折</span> "
+            ]
         }
     },
     "walletConversion": {
@@ -1133,7 +1141,7 @@
         },
         "txTitle": "交易挖矿总收益",
         "quotaTitle": "抵押挖矿总收益",
-        "addHint": "每日约13:00(UTC+8)计算抵押挖矿收益；抵押生效后，您可3天后可手动取回",
+        "addHint": "每日约13:00(UTC+8)计算抵押挖矿收益；抵押生效后，您可30天后可手动取回",
         "withdrawHint": "取回后，您将无法再挖矿VX",
         "addTitle": "抵押VITE挖矿",
         "withdrawTitle": "取回抵押VITE",

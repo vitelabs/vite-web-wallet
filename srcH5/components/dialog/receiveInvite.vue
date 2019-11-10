@@ -9,7 +9,7 @@ block content
             .err(v-if="formatErr") {{$t('assets.invite.formatErr')}}
         vite-input.invite-input(v-model="code")
     .block__title {{$t('assets.invite.inviteRule')}}
-    .illustrate(v-for="(i,j) in $t('assets.invite.ruleItems')" :key="j")
+    .illustrate(v-for="(i,j) in $t('assets.invite.receiveRuleItems')" :key="j")
         span(v-html="i")
         .dot
 
