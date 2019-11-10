@@ -12,7 +12,7 @@
                 </div>
 
                 <div class="item __pointer" v-click-outside="hideMyList"  @click.stop="showMyList(tokenType)"
-                     v-for="tokenType in ['VITE', 'BTC', 'ETH', 'USDT']" :key="tokenType">
+                     v-for="tokenType in ['BTC', 'ETH', 'USDT']" :key="tokenType">
                     <div class="item-title">{{ tokenType }}</div>
                     <div class="item-amount">
                         {{ myDividend[tokenType] ? formatNum(myDividend[tokenType].dividendAmount, tokenType) : 0 }}
@@ -32,7 +32,7 @@
                 <div class="slot-row __tb_row __tb_content_row" v-if="activeRow" :slot="`${activeIndex}Row`">
                     <div class="__tb_cell"></div>
                     <div class="__tb_cell"></div>
-                    <div class="__tb_cell" v-for="tokenType in ['VITE', 'BTC', 'ETH', 'USDT']" :key="tokenType">
+                    <div class="__tb_cell" v-for="tokenType in ['BTC', 'ETH', 'USDT']" :key="tokenType">
                         <div v-for="(item, i) in activeRow[tokenType] ? activeRow[tokenType].tokenDividends : []" :key="i" >
                             {{ item.tokenSymbol + ' ' + formatNum(item.amount, tokenType) }}
                         </div>
@@ -40,8 +40,6 @@
                     <div class="__tb_cell"></div>
                 </div>
 
-                <span v-for="(item, i) in contentList" :key="i" :slot="`${i}VITEAfter`"
-                      class="arrow-icon" :class="{'active': activeIndex === i}"></span>
                 <span v-for="(item, i) in contentList" :key="i" :slot="`${i}BTCAfter`"
                       class="arrow-icon" :class="{'active': activeIndex === i}"></span>
                 <span v-for="(item, i) in contentList" :key="i" :slot="`${i}ETHAfter`"
@@ -98,9 +96,6 @@ export default {
             }, {
                 text: this.$t('tradeDividend.VX'),
                 cell: 'vxQuantity'
-            }, {
-                text: `VITE ${ this.$t('tradeDividend.amount') }`,
-                cell: 'VITE'
             }, {
                 text: `BTC ${ this.$t('tradeDividend.amount') }`,
                 cell: 'BTC'
