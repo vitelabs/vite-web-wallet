@@ -4,56 +4,48 @@ import i18n from 'pcI18n';
 import { ViteXAPI, viteClient } from 'services/apiServer';
 
 export function bindCode(code: number) {
-    return new Promise((res, rej) => {
-        sendTx({
-            abi: JSON.stringify(constant.DexFundBindInviteCode_Abi),
-            description: {
-                function: {
-                    name: {
-                        base: i18n.t('assets.invite.receiveInviteTitle', 'en'),
-                        zh: i18n.t('assets.invite.receiveInviteTitle', 'zh')
-                    }
-                },
-                inputs: [
-                    {
-                        name: {
-                            base: i18n.t('assets.invite.codeLable'),
-                            zh: i18n.t('assets.invite.codeLable')
-                        }
-                    }
-                ]
+    return sendTx({
+        abi: JSON.stringify(constant.DexFundBindInviteCode_Abi),
+        description: {
+            function: {
+                name: {
+                    base: i18n.t('assets.invite.receiveInviteTitle', 'en'),
+                    zh: i18n.t('assets.invite.receiveInviteTitle', 'zh')
+                }
             },
-            methodName: 'dexFundBindInviteCode',
-            data: { code },
-            config: { pow: true }
-        })
-            .then(block => res(block))
-            .catch(e => rej(e));
+            inputs: [
+                {
+                    name: {
+                        base: i18n.t('assets.invite.codeLable'),
+                        zh: i18n.t('assets.invite.codeLable')
+                    }
+                }
+            ]
+        },
+        methodName: 'dexFundBindInviteCode',
+        data: { code },
+        config: { pow: true }
     });
 }
 
 export function genCode() {
-    return new Promise((res, rej) => {
-        sendTx({
-            abi: JSON.stringify(constant.DexFundNewInviter_Abi),
-            description: {
-                function: {
-                    name: {
-                        base: i18n.t('assets.invite.inviteTitle', 'en'),
-                        zh: i18n.t('assets.invite.inviteTitle', 'en')
-                    }
-                },
-                inputs: []
+    return sendTx({
+        abi: JSON.stringify(constant.DexFundNewInviter_Abi),
+        description: {
+            function: {
+                name: {
+                    base: i18n.t('assets.invite.inviteTitle', 'en'),
+                    zh: i18n.t('assets.invite.inviteTitle', 'en')
+                }
             },
-            vbExtends: {
-                type: 'dexNewInviter',
-                cost: '1000 VITE'
-            },
-            methodName: 'dexFundNewInviter',
-            config: { pow: true }
-        })
-            .then(data => res(data))
-            .catch(e => rej(e));
+            inputs: []
+        },
+        vbExtends: {
+            type: 'dexNewInviter',
+            cost: '1000 VITE'
+        },
+        methodName: 'dexFundNewInviter',
+        config: { pow: true }
     });
 }
 
@@ -63,28 +55,19 @@ export function getInviteeCode(address: string) {
 }
 
 export function pledgeForSuperVIp({ actionType }) {
-    console.log(constant.DexFundPledgeForSuperVip_Abi);
-    return new Promise((res, rej) => {
-        sendTx({
-            abi: JSON.stringify(constant.DexFundPledgeForSuperVip_Abi),
-            methodName: 'dexFundPledgeForSuperVip',
-            data: { actionType },
-            config: { pow: true }
-        })
-            .then(data => res(data))
-            .catch(e => rej(e));
+    return sendTx({
+        abi: JSON.stringify(constant.DexFundPledgeForSuperVip_Abi),
+        methodName: 'dexFundPledgeForSuperVip',
+        data: { actionType },
+        config: { pow: true }
     });
 }
 export function configMarketsAgent({ actionType, agent, tradeTokens, quoteTokens }) {
-    return new Promise((res, rej) => {
-        sendTx({
-            abi: JSON.stringify(constant.DexFundConfigMarketsAgent_Abi),
-            methodName: 'dexFundConfigMarketsAgent',
-            data: { actionType, agent, tradeTokens, quoteTokens },
-            config: { pow: true }
-        })
-            .then(data => res(data))
-            .catch(e => rej(e));
+    return sendTx({
+        abi: JSON.stringify(constant.DexFundConfigMarketsAgent_Abi),
+        methodName: 'dexFundConfigMarketsAgent',
+        data: { actionType, agent, tradeTokens, quoteTokens },
+        config: { pow: true }
     });
 }
 
