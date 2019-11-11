@@ -1277,7 +1277,8 @@
         "allAssets": "Estimated Assets Value ({token})",
         "tokenInfoTitle": "Token Details",
         "transfer": "Перевод",
-        "trade": "Trade"
+        "trade": "Trade",
+        "chooseTxPair": "Choose Trading Pair"
     },
     "mobileTradeCenter": {
         "highPrice": "High",
