@@ -7,7 +7,7 @@
 
         <div class="t-item">
             <span class="cmc-img" v-show="isCMC" @click="gotoCMC">
-                <tooltips class="tips" :content="supportMining"></tooltips>
+                <tooltips class="tips" :content="$t('tradeCenter.cmcHelp')"></tooltips>
             </span>
             <span class="symbol" @click="_showDetail('token')">
                 {{ ftokenDetail ? ftokenDetail.symbol : '' }}
@@ -182,6 +182,7 @@ export default {
         background-size: 20px 20px;
         .tips {
             display: none;
+            @include font-family-normal();
             z-index: 10;
         }
         &:hover {

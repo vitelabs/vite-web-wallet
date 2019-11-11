@@ -63,6 +63,7 @@ export function getInviteeCode(address: string) {
 }
 
 export function pledgeForSuperVIp({ actionType }) {
+    console.log(constant.DexFundPledgeForSuperVip_Abi);
     return new Promise((res, rej) => {
         sendTx({
             abi: JSON.stringify(constant.DexFundPledgeForSuperVip_Abi),

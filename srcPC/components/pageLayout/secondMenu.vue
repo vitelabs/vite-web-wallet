@@ -61,6 +61,9 @@ export default {
             }, {
                 name: this.$t('trade.proxy.title'),
                 value: 'proxy'
+            }, {
+                name: this.$t('tradeVip.title'),
+                value: 'tradeVip'
             } ];
         },
         showInvite() {
@@ -91,6 +94,7 @@ export default {
         operateAction(action) {
             action === 'operator' && this.goOperator();
             action === 'proxy' && this.goProxy();
+            action === 'tradeVip' && this.goTradeVip();
         },
         inviteDialog(v) {
             this.selectInvite = this.showInvite ? 'invite' : 'receiveInvite';
@@ -117,6 +121,10 @@ export default {
         goProxy() {
             statistics.event('secondMenu', `${ this.$route.name }-tradeTrust`, this.address || '');
             this.$router.push({ name: 'tradeTrust' });
+        },
+        goTradeVip() {
+            statistics.event('secondMenu', `${ this.$route.name }-tradeVip`, this.address || '');
+            this.$router.push({ name: 'tradeVip' });
         },
         goHelp() {
             statistics.event('secondMenu', `${ this.$route.name }-help`, this.address || '');

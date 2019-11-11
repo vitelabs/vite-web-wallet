@@ -4,7 +4,7 @@
 
         <loading v-if="loadingToken" class="loading"></loading>
 
-        <confirm v-if="showConfirmType && showConfirmType === 'cancel'" class="small"
+        <confirm v-if="showConfirmType === 'cancel'" class="small"
                  :title="$t(`walletQuota.withdrawalStaking`)" :closeIcon="false" :showMask="true"
                  :leftBtnTxt="$t(`walletQuota.confirm.cancel.leftBtn`)" :leftBtnClick="closeConfirm"
                  :rightBtnTxt="$t(`walletQuota.confirm.cancel.rightBtn`)"

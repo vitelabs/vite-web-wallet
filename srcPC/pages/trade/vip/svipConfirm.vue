@@ -5,16 +5,19 @@ block content
         .block__title {{ $t('tokenCard.heads.availableExAmount') }}
         .block__content.edit.space
             .token__title
-                img(:src="viteTokenInfo.icon")
+                img(:src="viteTokenInfo ? viteTokenInfo.icon : ''")
                 .symbol VITE
             .right.blue {{exViteBalance}}
-        .block__title {{ $t('trade.svipConfirm.openStakingAmount') }}
-            .err(v-if="dBtnUnuse") {{$t('trade.vipConfirm.noBalance')}}
+        .block__title {{ $t('tradeVip.svipConfirm.openStakingAmount') }}
+            .err(v-if="isNoBalance") {{ $t('tradeVip.vipConfirm.noBalance') }}
         .block__content.edit {{vipStakingAmount}} VITE
+        .block__title {{ $t('tradeVip.svipConfirm.address') }}
+            .err(v-if="!isAddress") {{ $t('hint.addrFormat') }}
+        vite-input.block_input(v-model="inputAddress" :placeholder="$t('tradeVip.svipConfirm.addressPlaceholder')")
         .charge-tips {{tip}}
             .dot
     .content-wrapper(v-else)
-        .block__title {{ $t('trade.svipConfirm.cancelStakingAmount') }}
+        .block__title {{ $t('tradeVip.svipConfirm.cancelStakingAmount') }}
             .err(v-if="dBtnUnuse") {{$t('walletQuota.list.unexpired')}}
         .block__content.edit {{vipStakingAmount}} VITE
         .charge-tips {{tip}}
@@ -23,25 +26,29 @@ block content
 </template>
 
 <script>
+import { constant, hdAddr } from '@vite/vitejs';
 import debounce from 'lodash/debounce';
+import date from 'utils/date';
 import BigNumber from 'utils/bigNumber';
+import { viteClient } from 'services/apiServer';
 import { execWithValid } from 'pcUtils/execWithValid';
 import { pledgeForSuperVIp } from 'pcServices/tradeOperation';
-import { constant } from '@vite/vitejs';
-import date from 'utils/date';
-import { viteClient } from 'services/apiServer';
+import viteInput from 'components/viteInput';
 
 const Vite_Token_Info = constant.Vite_Token_Info;
 const vipStakingAmount = 1000000;
 
 export default {
+    components: { viteInput },
     data() {
         return {
             stakeAmount: '',
             stakingObj: {},
             isAddrCorrect: true,
             loading: true,
-            vipStakingAmount
+            vipStakingAmount,
+
+            inputAddress: ''
         };
     },
     beforeMount() {
@@ -56,13 +63,13 @@ export default {
             return this.$store.state.ledger.currentHeight;
         },
         tip() {
-            return this.isSVip ? this.$t('trade.svipConfirm.cancelHint', { time: this.stakingObj.withdrawTime ? date(this.stakingObj.withdrawTime * 1000, ' Pzh') : '' }) : this.$t('trade.svipConfirm.openHint');
+            return this.isSVip ? this.$t('tradeVip.svipConfirm.cancelHint', { time: this.stakingObj.withdrawTime ? date(this.stakingObj.withdrawTime * 1000, ' Pzh') : '' }) : this.$t('tradeVip.svipConfirm.openHint');
         },
         dTitle() {
-            return this.isSVip ? this.$t('trade.svipConfirm.cancelVip') : this.$t('trade.svipConfirm.openVip');
+            return this.isSVip ? this.$t('tradeVip.svipConfirm.cancelVip') : this.$t('tradeVip.svipConfirm.openVip');
         },
         dSTxt() {
-            return this.isSVip ? this.$t('trade.svipConfirm.cancelVip') : this.$t('trade.svipConfirm.openVip');
+            return this.isSVip ? this.$t('tradeVip.svipConfirm.cancelVip') : this.$t('tradeVip.svipConfirm.openVip');
         },
         isSVip() {
             return this.$store.state.exchangeFee.isSVip;
@@ -76,17 +83,30 @@ export default {
         viteTokenInfo() {
             return this.$store.getters.viteTokenInfo;
         },
+        isNoBalance() {
+            if (this.isSVip) {
+                return false;
+            }
+            if (!this.rawBalance || !+this.rawBalance.availableExAmount) {
+                return true;
+            }
+            const minAmount = BigNumber.toMin(vipStakingAmount, Vite_Token_Info.decimals);
+            return BigNumber.compared(minAmount, this.rawBalance.availableExAmount) > 0;
+        },
+        isAddress() {
+            if (!this.inputAddress) {
+                return true;
+            }
+            return hdAddr.isValidHexAddr(this.inputAddress);
+        },
         dBtnUnuse() {
+            // SVIP
             if (this.isSVip) {
                 return !(this.stakingObj && this.stakingObj.withdrawHeight <= this.height);
             }
 
-            if (!this.rawBalance || !+this.rawBalance.availableExAmount) {
-                return true;
-            }
-
-            const minAmount = BigNumber.toMin(vipStakingAmount, Vite_Token_Info.decimals);
-            return BigNumber.compared(minAmount, this.rawBalance.availableExAmount) > 0;
+            // Not SVIP
+            return !this.inputAddress || !this.isAddress || this.isNoBalance;
         },
         address() {
             return this.$store.getters.activeAddr;
@@ -128,12 +148,12 @@ export default {
                 this.isLoading = true;
                 pledgeForSuperVIp({ actionType }).then(() => {
                     this.isLoading = false;
-                    this.$toast(this.isSVip ? this.$t('trade.svipConfirm.cancelSuccess') : this.$t('trade.svipConfirm.openSuccess'));
+                    this.$toast(this.isSVip ? this.$t('tradeVip.svipConfirm.cancelSuccess') : this.$t('tradeVip.svipConfirm.openSuccess'));
                     res();
                 }).catch(err => {
                     console.warn(err);
                     this.isLoading = false;
-                    this.$toast(this.isSVip ? this.$t('trade.svipConfirm.cancelFail') : this.$t('trade.svipConfirm.openFail'));
+                    this.$toast(this.isSVip ? this.$t('tradeVip.svipConfirm.cancelFail') : this.$t('tradeVip.svipConfirm.openFail'));
                     rej();
                 });
             });
@@ -200,6 +220,9 @@ export default {
         background: rgba(243, 246, 249, 1);
         @include font-family-bold();
     }
+}
+.block_input {
+    margin-top: 12px;
 }
 .charge-tips {
     @include font-family-normal();
