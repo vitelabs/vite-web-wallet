@@ -2,4 +2,5 @@
 /gw/* http://132.232.60.116:8001/gw/:splat 200
 /mobileDex/* /mobileDex.html 200
 /mobiledex/* /mobileDex.html 200
+/apple-app-site-association /apple-app-site-association 200
 /*    /index.html   200
