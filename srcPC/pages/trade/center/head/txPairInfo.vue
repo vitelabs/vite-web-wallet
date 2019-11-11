@@ -6,7 +6,9 @@
         </div>
 
         <div class="t-item">
-            <img class="cmc-img" v-show="isCMC" @click="gotoCMC" src="~assets/imgs/cmc.svg"/>
+            <span class="cmc-img" v-show="isCMC" @click="gotoCMC">
+                <tooltips class="tips" :content="supportMining"></tooltips>
+            </span>
             <span class="symbol" @click="_showDetail('token')">
                 {{ ftokenDetail ? ftokenDetail.symbol : '' }}
             </span> /
@@ -171,9 +173,22 @@ export default {
     line-height: 14px;
     margin-left: 36px;
     .cmc-img {
+        position: relative;
+        display: inline-block;
         width: 20px;
         height: 20px;
         margin-bottom: -5px;
+        background: url("~assets/imgs/cmc.svg");
+        background-size: 20px 20px;
+        .tips {
+            display: none;
+            z-index: 10;
+        }
+        &:hover {
+            .tips {
+                display: inline-block;
+            }
+        }
     }
 
     .symbol {
