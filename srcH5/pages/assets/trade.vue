@@ -1,5 +1,5 @@
 <template>
-    <confirm v-show="isShow" class="no-padding-confirm" :title="$t('tradeCenter.operatorTxPair.operatorTab')"
+    <confirm v-show="isShow" class="no-padding-confirm" :title="$t('mobileAssets.chooseTxPair')"
              :closeIcon="true" :close="close">
         <loading loadingType="dot" class="ex-center-loading" v-show="isLoading"></loading>
         <no-data v-if="!isLoading && !txPairList.length"></no-data>
