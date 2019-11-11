@@ -1255,7 +1255,8 @@
         "allAssets": "总资产折合({token})",
         "tokenInfoTitle": "代币详情",
         "transfer": "资产划转",
-        "trade": "去交易"
+        "trade": "去交易",
+        "chooseTxPair": "选择交易对"
     },
     "mobileTradeCenter": {
         "highPrice": "高",

@@ -1,0 +1,11 @@
+{
+    "applinks": {
+        "apps": [],
+        "details": [
+            {
+                "appID": "5SR42372L5.net.vite.wallet",
+                "paths": [ "/walletQuota", "/webview/*"]
+            }
+        ]
+    }
+}
