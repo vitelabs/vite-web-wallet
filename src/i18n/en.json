@@ -790,6 +790,7 @@
         "depthStep": "{step} digits",
         "blocking": "Network congestion occurs, please try again later",
         "supportMining": "Eligible for trading and market-making as mining",
+        "cmcHelp": "View VITE on CoinMarketCap",
         "supportTradeMining": "Eligible for trading as mining",
         "supportOrderMining": "Eligible for market-making as mining",
         "buyMiningPrice": "You would meet the mining qualification when buy price is greater than {price}",
@@ -903,35 +904,6 @@
             "inviteFeeDiscount":"Referral Discount: {fee} off",
             "svipFee":"SVIP: 0% base transaction fee",
             "feeRule":"(Base Transaction Fee - VIP discount + Operator Fees) * Referral Discount. ATTENTION: The adjustment and discount of fees will only affect new orders, the former orders' charge remains the same."
-        },        
-        "vipConfirm": {
-            "cancelVip": "Cancel VIP",
-            "openVip": "Become a VIP",
-            "openStakingAmount": "Staking Amount for Becoming a VIP",
-            "cancelStakingAmount": "Retrievable Stake",
-            "noBalance": "Insufficient Balance",
-            "openHint": "You will enjoy the privilege of 0.1% trading fee discount after becoming a VIP. The staking amount of 10,000 VITE can be manually retrieved after 30 days.",
-            "cancelHint": "You can retrieve your stake at approximately {time}. By then, you will lose your VIP privilege.",
-            "openSuccess": "Applied Successful! VIP status will come into effect later.",
-            "openFail": "Failed to apply VIP",
-            "cancelSuccess": "Cancel VIP Successful",
-            "cancelFail": "Cancel Failed",
-            "adviseToCancel":"There will be no base transaction fees with your current status as our SVIP, we therefore recommend you to revoke the staked VITE，which is required for general VIP members."
-        },
-        "svipConfirm": {
-            "open":"Upgrade",
-            "cancel":"Cancel",
-            "cancelVip": "Cancel SVIP",
-            "openVip": "Become a SVIP",
-            "openStakingAmount": "Staking Amount for Becoming a SVIP",
-            "cancelStakingAmount": "Retrievable Stake",
-            "noBalance": "Insufficient Balance",
-            "openHint": "You will enjoy 0% base transaction fee when upgrading to SVIP. The stake of 1,000,000 VITE can be manually retrieved after 30 days.",
-            "cancelHint": "You can retrieve your stake at approximately {time}. You will lose your SVIP privilege after retrieving.",
-            "openSuccess": "Applied Successful! SVIP status will come into effect later.",
-            "openFail": "Failed to apply SVIP",
-            "cancelSuccess": "Cancel SVIP Successful",
-            "cancelFail": "Cancel Failed"
         },
         "proxy":{
             "title":"Trade Delegation",
@@ -1163,6 +1135,52 @@
         "view": "View Live Mining Dashboard",
         "inviteCount": "Referrals",
         "help": "Current trading fees displayed on this page contains only the 0.2% ViteX base transaction fees, please note that operator fees shall be taken into consideration when calculating mining cost"
+    },
+    "tradeVip": {
+        "title": "管理VIP",    
+        "help": {
+            "title": "About VIP"
+        },
+        "helpConfirm": {
+            "t1": "VIP",
+            "txt1": "开通VIP，可享有降低0.1%手续费特权，开通VIP需抵押10000VITE，30天后可手动取回",
+            "t2": "SVIP",
+            "txt2": "SVIP开通后，可免除基础手续费，开通SVIP需抵押 1,000,000VITE，30天后可手动取回",
+            "txt3": "SVIP支持代理抵押，帮他人抵押并开通SVIP，抵押到期后，抵押用户可随时取回，撤销代理抵押"
+        },       
+        "vipConfirm": {
+            "cancelVip": "Cancel VIP",
+            "openVip": "Become a VIP",
+            "openStakingAmount": "Staking Amount for Becoming a VIP",
+            "cancelStakingAmount": "Retrievable Stake",
+            "noBalance": "Insufficient Balance",
+            "openHint": "You will enjoy the privilege of 0.1% trading fee discount after becoming a VIP. The staking amount of 10,000 VITE can be manually retrieved after 30 days.",
+            "cancelHint": "You can retrieve your stake at approximately {time}. By then, you will lose your VIP privilege.",
+            "openSuccess": "Applied Successful! VIP status will come into effect later.",
+            "openFail": "Failed to apply VIP",
+            "cancelSuccess": "Cancel VIP Successful",
+            "cancelFail": "Cancel Failed",
+            "adviseToCancel":"There will be no base transaction fees with your current status as our SVIP, we therefore recommend you to revoke the staked VITE，which is required for general VIP members.",
+            "address": "开通VIP地址",
+            "addressPlaceholder": "地址不可修改，默认为当前登录地址"
+        },
+        "svipConfirm": {
+            "open":"Upgrade",
+            "cancel":"Cancel",
+            "cancelVip": "Cancel SVIP",
+            "openVip": "Become a SVIP",
+            "openStakingAmount": "Staking Amount for Becoming a SVIP",
+            "cancelStakingAmount": "Retrievable Stake",
+            "noBalance": "Insufficient Balance",
+            "openHint": "You will enjoy 0% base transaction fee when upgrading to SVIP. The stake of 1,000,000 VITE can be manually retrieved after 30 days.",
+            "cancelHint": "You can retrieve your stake at approximately {time}. You will lose your SVIP privilege after retrieving.",
+            "openSuccess": "Applied Successful! SVIP status will come into effect later.",
+            "openFail": "Failed to apply SVIP",
+            "cancelSuccess": "Cancel SVIP Successful",
+            "cancelFail": "Cancel Failed",
+            "address": "开通SVIP地址",
+            "addressPlaceholder": "请输入开通SVIP地址"
+        }
     },
     "inviteMining":{
         "title":"Referring as Mining Total Income"

@@ -14,7 +14,7 @@
 
         <div class="__row">
             <div class="__row_t">{{ stakingText }}
-                <div v-show="!canOrder && !isVip" class="__err">{{ $t('trade.vipConfirm.noBalance') }}</div>
+                <div v-show="!canOrder && !isVip" class="__err">{{ $t('tradeVip.vipConfirm.noBalance') }}</div>
                 <div v-show="!canOrder && isVip" class="__err">{{ $t('walletQuota.list.unexpired') }}</div>
             </div>
             <div class="__input_row __unuse_input">10,000 VITE</div>
@@ -92,13 +92,13 @@ export default {
             return this.$store.state.exchangeFee.isVip;
         },
         confirmTitle() {
-            return this.isVip ? this.$t('trade.vipConfirm.cancelVip') : this.$t('trade.vipConfirm.openVip');
+            return this.isVip ? this.$t('tradeVip.vipConfirm.cancelVip') : this.$t('tradeVip.vipConfirm.openVip');
         },
         stakingText() {
-            return this.isVip ? this.$t('trade.vipConfirm.cancelStakingAmount') : this.$t('trade.vipConfirm.openStakingAmount');
+            return this.isVip ? this.$t('tradeVip.vipConfirm.cancelStakingAmount') : this.$t('tradeVip.vipConfirm.openStakingAmount');
         },
         hint() {
-            return this.isVip ? this.$t('trade.vipConfirm.cancelHint', { time: this.stakingObj.withdrawTime ? date(this.stakingObj.withdrawTime * 1000, 'zh') : '' }) : this.$t('trade.vipConfirm.openHint');
+            return this.isVip ? this.$t('tradeVip.vipConfirm.cancelHint', { time: this.stakingObj.withdrawTime ? date(this.stakingObj.withdrawTime * 1000, 'zh') : '' }) : this.$t('tradeVip.vipConfirm.openHint');
         }
     },
     watch: {
@@ -128,13 +128,13 @@ export default {
                 }
             }).then(() => {
                 this.isLoading = false;
-                // this.$toast(this.isVip ? this.$t('trade.vipConfirm.cancelSuccess') : this.$t('trade.vipConfirm.openSuccess'));
+                // this.$toast(this.isVip ? this.$t('tradeVip.vipConfirm.cancelSuccess') : this.$t('tradeVip.vipConfirm.openSuccess'));
                 this.close && this.close();
                 this.$store.dispatch('startLoopVip', !this.isVip);
             }).catch(err => {
                 console.warn(err);
                 this.isLoading = false;
-                // this.$toast(this.isVip ? this.$t('trade.vipConfirm.cancelFail') : this.$t('trade.vipConfirm.openFail'));
+                // this.$toast(this.isVip ? this.$t('tradeVip.vipConfirm.cancelFail') : this.$t('tradeVip.vipConfirm.openFail'));
             });
         },
 
