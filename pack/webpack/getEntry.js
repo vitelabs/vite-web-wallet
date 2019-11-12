@@ -1,6 +1,6 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
-const allNameList = [ 'debug', 'mobileDex', 'index' ];
+// const allNameList = [ 'debug', 'mobileDex', 'index' ];
 
 module.exports = function (entryFile) {
     const entry = {};
@@ -8,7 +8,7 @@ module.exports = function (entryFile) {
 
     for (const entryName in entryFile) {
         entry[entryName] = entryFile[entryName].path;
-        const excludeChunks = allNameList.filter(name => name !== entryName);
+        // const excludeChunks = allNameList.filter(name => name !== entryName);
 
         htmlWebpackPlugins.push(new HtmlWebpackPlugin({
             title: entryFile[entryName].title,
@@ -16,8 +16,8 @@ module.exports = function (entryFile) {
             template: entryFile[entryName].template,
             filename: `${ entryName }.html`,
             hash: true,
-            // chunks: [ entryName, 'vendors', 'default' ],
-            excludeChunks,
+            chunks: [ entryName, 'vendors', 'default' ],
+            // excludeChunks,
             minify: {
                 removeAttributeQuotes: true,
                 removeComments: true,
