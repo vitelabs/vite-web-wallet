@@ -1201,14 +1201,14 @@
         "listTitle": "My Dividends",
         "allPrice": "Total Estimated Value",
         "date": "Date",
-        "VX": "Holding VX",
+        "VX": "锁仓VX",
         "coin": "Type",
         "amount": "Amount",
         "price": "Total Estimated Value",
         "hintTitle": "Important Notice",
         "comingHint": "VX mining and dividend functions are coming soon, stay tuned. The system will distribute 1% of BTC, ETH, VITE, USDT of the total pool to all VX users proportional to the amount of VX they hold. The initial dividend pool will start at 0 and will grow according to the amount of fees collected by ViteX. Traders must have a minimum of 10 VX in order to receive dividends from a shared dividend pool comprised of base transaction, listing and referral code generating fees. ",
         "more": "Learn more about VX dividend rules",
-        "help": "VX dividend reward rules: 1. VX must be held on the ViteX exchange account. 2. You must hold a minimum of 10 VX."
+        "help": "分红规则：1. 分红需VX锁仓在交易所内，且锁仓金额大于10 2. 提交锁仓VX后立即生效，可参与最近一次分红 3. 解锁需要经过完整的7个周期后释放"
     },
     "tradeOperator": {
         "title": "Operator",

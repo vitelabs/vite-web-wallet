@@ -1,166 +1,22 @@
 <template>
     <div class="quota-wrapper">
         <quota-head></quota-head>
-
-        <loading v-if="loadingToken" class="loading"></loading>
-
-        <confirm v-if="showConfirmType === 'cancel'" class="small"
-                 :title="$t(`walletQuota.withdrawalStaking`)" :closeIcon="false" :showMask="true"
-                 :leftBtnTxt="$t(`walletQuota.confirm.cancel.leftBtn`)" :leftBtnClick="closeConfirm"
-                 :rightBtnTxt="$t(`walletQuota.confirm.cancel.rightBtn`)"
-                 :rightBtnClick="submit" :btnUnuse="!!cancelUnuse">
-            {{ $t(`walletQuota.confirm.cancel.describe`, { amount: showStakingAmount }) }}
-            <div class="cancel-amount" v-show="amountErr">{{ amountErr }}</div>
-            <vite-input class="cancel-input" v-model="cancelAmount" :valid="testAmount"
-                        :placeholder="$t('walletQuota.inputWithdrawAmount')"></vite-input>
-        </confirm>
-
-        <div v-show="!loadingToken" class="content">
+        <div class="content">
             <my-quota class="my-quota _content_border"></my-quota>
-            <pledge-tx class="pledge-tx" :sendPledgeTx="sendPledgeTx"></pledge-tx>
+            <pledge-tx class="pledge-tx"></pledge-tx>
         </div>
-
-        <list v-show="!loadingToken" ref="txList" :sendPledgeTx="sendPledgeTx"
-              :showConfirm="showConfirm"></list>
+        <list></list>
     </div>
 </template>
 
 <script>
-import { constant } from '@vite/vitejs';
-import Vue from 'vue';
 import quotaHead from './quotaHead';
 import myQuota from './myQuota';
 import pledgeTx from './pledgeTx';
 import list from './list';
-import confirm from 'components/confirm/confirm.vue';
-import loading from 'components/loading';
 import viteInput from 'components/viteInput';
-import { initPwd } from 'pcComponents/password/index.js';
-import sendTx from 'pcUtils/sendTx';
-import BigNumber from 'utils/bigNumber';
-import { verifyWithdrawAmount } from 'pcUtils/validations';
-import { execWithValid } from 'pcUtils/execWithValid';
 
-const Vite_Token_Info = constant.Vite_Token_Info;
-
-export default {
-    components: { quotaHead, myQuota, pledgeTx, confirm, list, loading, viteInput },
-    data() {
-        return {
-            loadingToken: false,
-            showConfirmType: '',
-
-            stakingAmount: '',
-            cancelAmount: '',
-            amountErr: '',
-            stopWatch: false
-        };
-    },
-    computed: {
-        cancelUnuse() {
-            return this.showConfirmType === 'cancel' && (!this.cancelAmount || this.amountErr);
-        },
-        netStatus() {
-            return this.$store.state.env.clientStatus;
-        },
-        showStakingAmount() {
-            if (!this.stakingAmount) {
-                return '';
-            }
-            return BigNumber.toBasic(this.stakingAmount || 0, Vite_Token_Info.decimals);
-        }
-    },
-    methods: {
-        testAmount() {
-            if (this.stopWatch) {
-                return;
-            }
-
-            this.amountErr = verifyWithdrawAmount({
-                stakingAmount: this.stakingAmount,
-                decimals: Vite_Token_Info.decimals
-            }, this.cancelAmount);
-
-            return !this.amountErr;
-        },
-
-        showConfirm(type, amount) {
-            this.showConfirmType = type;
-            if (!amount) {
-                return;
-            }
-            this.stakingAmount = amount;
-        },
-        closeConfirm() {
-            this.stopWatch = true;
-            this.cancelAmount = '';
-            this.amountErr = '';
-            Vue.nextTick(() => {
-                this.stopWatch = false;
-            });
-            this.showConfirmType = '';
-        },
-        submit: execWithValid(function () {
-            this.testAmount();
-            if (this.amountErr) {
-                return;
-            }
-
-            const amount = this.cancelAmount;
-            this.closeConfirm();
-
-            initPwd({
-                submit: () => {
-                    const txListEle = this.$refs.txList;
-                    if (!txListEle) {
-                        return;
-                    }
-                    txListEle._sendCancelPledgeTx(amount);
-                }
-            });
-        }),
-
-        sendPledgeTx({ toAddress, amount }, type, cb) {
-            if (!this.netStatus) {
-                this.$toast(this.$t('hint.noNet'));
-                cb && cb(false);
-                return;
-            }
-
-            amount = BigNumber.toMin(amount || 0, Vite_Token_Info.decimals);
-
-            sendTx({
-                methodName: type,
-                data: {
-                    tokenId: Vite_Token_Info.tokenId,
-                    toAddress,
-                    amount
-                },
-                config: {
-                    pow: true,
-                    powConfig: {
-                        cancel: () => {
-                            cb && cb(false);
-                        }
-                    }
-                }
-            }).then(() => {
-                cb && cb(true);
-            }).catch(err => {
-                console.warn(err);
-                cb && cb(false, err);
-            })
-                .powSuccessed(() => {
-                    this.closeConfirm();
-                    cb && cb(true);
-                })
-                .powFailed(err => {
-                    this.closeConfirm();
-                    cb && cb(false, err);
-                });
-        }
-    }
-};
+export default { components: { quotaHead, myQuota, pledgeTx, list, viteInput } };
 </script>
 
 <style lang="scss" scoped>
@@ -172,27 +28,6 @@ export default {
     height: 100%;
     display: flex;
     flex-direction: column;
-
-    .loading {
-        width: 60px;
-        height: 60px;
-        margin-top: -30px;
-        margin-left: -30px;
-    }
-
-    .cancel-amount {
-        position: absolute;
-        right: 30px;
-        left: 30px;
-        font-size: 12px;
-        color: #ff2929;
-        line-height: 22px;
-        word-break: break-word;
-    }
-
-    .cancel-input {
-        margin-top: 27px;
-    }
 }
 
 .content {
