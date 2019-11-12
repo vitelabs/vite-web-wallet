@@ -3,6 +3,4 @@
 /mobileDex/* /mobileDex.html 200
 /mobiledex/* /mobileDex.html 200
 /apple-app-site-association /apple-app-site-association 200
-/webview/test_navite.html   /webview/test_navite.html  200
-/webview/*  /webview/:splat  200
 /*    /index.html   200
