@@ -54,6 +54,7 @@ import viteInput from 'components/viteInput';
 import { initPwd } from 'pcComponents/password/index.js';
 import BigNumber from 'utils/bigNumber';
 import statistics from 'utils/statistics';
+import sendTx from 'pcUtils/sendTx';
 import { verifyAmount } from 'pcUtils/validations';
 import { execWithValid } from 'pcUtils/execWithValid';
 
@@ -63,12 +64,6 @@ const minNum = 134;
 
 export default {
     components: { viteInput },
-    props: {
-        sendPledgeTx: {
-            type: Function,
-            default: () => {}
-        }
-    },
     destroyed() {
         this.clearAll();
     },
@@ -84,6 +79,9 @@ export default {
         };
     },
     computed: {
+        netStatus() {
+            return this.$store.state.env.clientStatus;
+        },
         addr() {
             return this.$store.getters.activeAddr;
         },
@@ -144,7 +142,10 @@ export default {
         addToAddrWithMine() {
             this.toAddr = this.addr;
         },
-        validTx: execWithValid(function () {
+        validTx() {
+            this._validTx();
+        },
+        _validTx: execWithValid(function () {
             if (this.btnUnuse) {
                 return;
             }
@@ -163,26 +164,45 @@ export default {
                 cancelTxt: this.$t('walletQuota.confirm.submit.leftBtn'),
                 content: this.$t('walletQuota.confirm.submit.describe', { amount: this.amount }),
                 submit: () => {
-                    this._sendPledgeTx();
+                    this.sendPledgeTx();
                 }
             }, true);
         }),
-        _sendPledgeTx() {
+
+        sendPledgeTx() {
             statistics.event(this.$route.name, 'ConfirmQuota', this.addr || '');
+
+            if (!this.netStatus) {
+                this.$toast(this.$t('hint.noNet'));
+                return;
+            }
+
             this.loading = true;
+            const amount = BigNumber.toMin(this.amount || 0, Vite_Token_Info.decimals);
 
-            this.sendPledgeTx({
-                toAddress: this.toAddr,
-                amount: this.amount
-            }, 'getQuota', (result, err) => {
-                this.loading = false;
-                if (!result) {
-                    err && this.$toast(this.$t('walletQuota.pledgeFail'), err);
-                    return;
+            sendTx({
+                methodName: 'getQuota',
+                data: {
+                    tokenId: Vite_Token_Info.tokenId,
+                    toAddress: this.toAddr,
+                    amount
+                },
+                config: {
+                    pow: true,
+                    powConfig: {
+                        cancel: () => {
+                            this.loading = false;
+                        }
+                    }
                 }
-
-                this.$toast(this.$t('hint.request', { name: this.$t('submitStaking') }), err);
+            }).then(() => {
+                this.loading = false;
+                this.$toast(this.$t('hint.request', { name: this.$t('submitStaking') }));
                 this.clearAll();
+            }).catch(err => {
+                console.warn(err);
+                this.loading = false;
+                err && this.$toast(this.$t('walletQuota.pledgeFail'), err);
             });
         }
     }
