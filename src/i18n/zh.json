@@ -1175,7 +1175,10 @@
             "cancelFail": "取消失败",
             "address": "开通SVIP地址",
             "addressPlaceholder": "请输入开通SVIP地址"
-        }
+        },
+        "vipListTitle": "VIP 记录",
+        "openAddress": "开通地址",
+        "type": "VIP类型"
     },
     "inviteMining":{
         "title":"邀请挖矿总收益"
@@ -1203,7 +1206,20 @@
         "hintTitle": "重要通知",
         "comingHint": "VX挖矿分红功能即将开启，敬请期待。系统每天自动将分红池1%的VITE、BTC、ETH、USDT等分红给VX持有者。初始分红池的资金为0。分红池中包含交易所基础手续费，5000VITE上币费以及生成邀请码的1000VITE。持有VX的数量大于等于10VX可持续获得手续费分红。",
         "more": "了解更多VX分红规则",
-        "help": "分红规则：1. 分红需VX锁仓在交易所内，且锁仓金额大于10 2. 提交锁仓VX后立即生效，可参与最近一次分红 3. 解锁需要经过完整的7个周期后释放"
+        "help": "分红规则：1. 分红需VX锁仓在交易所内，且锁仓金额大于10 2. 提交锁仓VX后立即生效，可参与最近一次分红 3. 解锁需要经过完整的7个周期后释放",
+        "lockedAmount": "锁仓金额",
+        "lockAmountTips": "少于10VX无法参与分红",
+        "unlockAmount": "解锁中金额",
+        "openAutoLock": {
+            "title": "开启自动锁仓",
+            "text": "开启后，挖矿发放的所有VX都自动锁仓"
+        },
+        "closeAutoLock": {
+            "title": "关闭自动锁仓",
+            "text": "关闭后，挖矿发放的所有VX都不锁仓"
+        },
+        "lock": "锁仓",
+        "unlock": "解锁"
     },
     "tradeOperator": {
         "title": "运营商中心",
