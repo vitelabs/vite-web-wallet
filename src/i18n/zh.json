@@ -1313,7 +1313,7 @@
         "orderTotalIncome": "挂单挖矿总收益({token})",
         "fee": "手续费金额",
         "listTitle": "挖矿明细",
-        "viewLink": "实时挖矿数据" 
+        "viewLink": "实时挖矿数据"
     },
     "mobileBottomBar": {
         "center": "交易",

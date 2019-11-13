@@ -22,6 +22,13 @@
                 </div>
             </div>
 
+            <span v-for="(item, i) in content" :key="i" :slot="`${i}dateAfter`"
+                  class="arrow-icon" :class="{'active': activeIndex === i}"></span>
+            <span v-for="(item, i) in content" :key="i" :slot="`${i}ratioAfter`"
+                  class="arrow-icon" :class="{'active': activeIndex === i}"></span>
+            <span v-for="(item, i) in content" :key="i" :slot="`${i}miningAfter`"
+                  class="arrow-icon" :class="{'active': activeIndex === i}"></span>
+
             <pagination slot="tableBottom" class="__tb_pagination"
                         :currentPage="currentPage + 1" :toPage="updateData"
                         :totalPage="taotalPage"></pagination>
@@ -196,6 +203,17 @@ export default {
     .err-msg {
         line-height: 32px;
         text-align: center;
+    }
+}
+
+.arrow-icon {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    background: url("~assets/imgs/decend.svg") center no-repeat;
+    margin-bottom: -4px;
+    &.active {
+        background: url("~assets/imgs/ascend.svg") center no-repeat;
     }
 }
 
