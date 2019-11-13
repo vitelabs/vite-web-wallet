@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="apple-itunes-app" content="app-id=1437629486">
+        <meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1.0, maximum-scale=1.0">
+        <title>邀请挖矿</title>
+    </head>
+    <body>
+        <h1 id="agent"></h1>
+        <h1>邀请码是 <span id="invite_code"></span></h1>
+
+        <script>
+            document.querySelector('#agent').innerHTML = navigator.userAgent;
+            
+            const codeSpan = document.querySelector('#invite_code');
+            const search = location.search
+            if (search) {
+                const query = search.slice(1)
+                const args = query.split('=')
+                const params = {};
+                for (let i = 0; i < args.length; i+=2) {
+                    params[args[i]] = args[i+1]
+                }
+                
+                codeSpan.innerHTML = params['invite_code']
+            }
+        </script>
+    </body>
+</html>
