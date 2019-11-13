@@ -11,30 +11,41 @@
             <div class="help-txt">{{ $t('tradeVip.helpConfirm.txt2') }}</div>
             <div class="help-txt">{{ $t('tradeVip.helpConfirm.txt3') }}</div>
         </confirm>
+
         <div class="btn_group">
-            <div class="btn btn__ok __pointer" @click="_showVipConfirm">
-                {{ isVip ? $t('tradeVip.vipConfirm.cancelVip') : $t('tradeVip.vipConfirm.openVip') }}
+            <div v-show="!isVip" class="btn __pointer unuse" @click="openVIP">
+                {{ $t('tradeVip.vipConfirm.openVip') }}
             </div>
-            <div class="btn btn__cancel __pointer" @click="_showSVipConfirm">
-                {{ isSVip ? $t('tradeVip.svipConfirm.cancelVip') : $t('tradeVip.svipConfirm.openVip') }}
+            <div v-show="isVip" class="btn unuse" @click="openVIP">
+                {{ $t('tradeVip.vipConfirm.openVip') }}
+            </div>
+            <div v-show="!isSVip" class="btn __pointer" @click="openSVIP">
+                {{ $t('tradeVip.svipConfirm.openVip') }}
+            </div>
+            <div v-show="isSVip" class="btn unuse" @click="openVIP">
+                {{ $t('tradeVip.svipConfirm.openVip') }}
             </div>
         </div>
+
+        <div class="__second-title">{{ $t('tradeVip.vipListTitle') }}</div>
+        <vip-list></vip-list>
     </div>
 </template>
 
 <script>
-import vipConfirm from './vipConfirm.vue';
 import { insertTo } from 'pcUtils/insertTo';
 import statistics from 'utils/statistics';
 import { execWithValid } from 'pcUtils/execWithValid';
 import component2function from 'pcComponents/dialog/utils';
-import svipComp from './svipConfirm';
 import { doUntill } from 'utils/asyncFlow';
 import secTitle from 'pcComponents/secTitle';
 import confirm from 'components/confirm/confirm.vue';
+import svipComp from './svipConfirm';
+import vipConfirm from './vipConfirm.vue';
+import vipList from './vipList.vue';
 
 export default {
-    components: { secTitle, confirm },
+    components: { secTitle, confirm, vipList },
     data() {
         return { isShowHelp: false };
     },
@@ -57,25 +68,21 @@ export default {
             this.isShowHelp = false;
         },
 
-
-        _showVipConfirm() {
-            statistics.event(this.$route.name, `switchVIP-${ this.isVip ? 'cancel' : 'open' }`, this.address || '');
+        openVIP() {
+            statistics.event(this.$route.name, 'switchVIP-open', this.address || '');
             this.showVipConfirm();
         },
         showVipConfirm: execWithValid(function () {
             this.vipConfirm = insertTo(vipConfirm, {
                 close: () => {
-                    this.hideVipConfirm();
+                    this.vipConfirm
+                        && this.vipConfirm.destroyInstance()
+                        && (this.vipConfirm = null);
                 }
             });
         }),
-        hideVipConfirm() {
-            this.vipConfirm
-                && this.vipConfirm.destroyInstance()
-                && (this.vipConfirm = null);
-        },
-        _showSVipConfirm() {
-            statistics.event(this.$route.name, `switchSVIP-${ this.isSVip ? 'cancel' : 'open' }`, this.address || '');
+        openSVIP() {
+            statistics.event(this.$route.name, 'switchSVIP-open', this.address || '');
             this.showSVipConfirm();
         },
         showSVipConfirm: execWithValid(function () {
@@ -87,6 +94,13 @@ export default {
 
 <style lang="scss" scoped>
 @import "~assets/scss/vars.scss";
+
+.trade-vip-container {
+    height: 100%;
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+}
 
 .help-t {
     @include font-family-normal();
@@ -117,8 +131,17 @@ export default {
     margin-right: 11px;
     color: #fff;
     background-color: #007aff;
-    box-shadow: 0px 2px 10px 1px rgba(176, 192, 237, 0.42);
     border-radius: 2px;
     font-size: 12px;
+    &.unuse {
+        color: rgba(94, 104, 117, 0.3);
+        border: 1px solid rgba(198,203,212,0.3);
+        cursor: not-allowed;
+        background: none;
+    }
+}
+
+.__second-title {
+    margin: 14px 0;
 }
 </style>

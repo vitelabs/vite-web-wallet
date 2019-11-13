@@ -49,11 +49,6 @@ export function genCode() {
     });
 }
 
-export function getInviteeCode(address: string) {
-    // get who invited me
-    return viteClient.request('dexfund_getInviteeCode', address);
-}
-
 export function pledgeForSuperVIp({ actionType }) {
     return sendTx({
         abi: JSON.stringify(constant.DexFundPledgeForSuperVip_Abi),

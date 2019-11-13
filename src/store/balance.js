@@ -6,14 +6,21 @@ const loopTime = 2 * 1000;
 let balanceTimer = null;
 let address = null;
 
-const state = { balanceList: {} };
+const state = {
+    balanceList: {},
+    accountFundInfo: {}
+};
 
 const mutations = {
-    setExchangeBalance(state, balanceList) {
+    setExchangeBalance(state, result) {
+        const balanceList = Object.assign({}, result);
+        delete balanceList.accountFundInfo;
         state.balanceList = balanceList;
+        state.accountFundInfo = result.accountFundInfo;
     },
     clearDexBalance(state) {
         state.balanceList = {};
+        state.accountFundInfo = {};
     }
 };
 

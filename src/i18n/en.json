@@ -1180,7 +1180,10 @@
             "cancelFail": "Cancel Failed",
             "address": "开通SVIP地址",
             "addressPlaceholder": "请输入开通SVIP地址"
-        }
+        },
+        "vipListTitle": "VIP记录",
+        "openAddress": "开通地址",
+        "type": "VIP类型"
     },
     "inviteMining":{
         "title":"Referring as Mining Total Income"
@@ -1208,7 +1211,20 @@
         "hintTitle": "Important Notice",
         "comingHint": "VX mining and dividend functions are coming soon, stay tuned. The system will distribute 1% of BTC, ETH, VITE, USDT of the total pool to all VX users proportional to the amount of VX they hold. The initial dividend pool will start at 0 and will grow according to the amount of fees collected by ViteX. Traders must have a minimum of 10 VX in order to receive dividends from a shared dividend pool comprised of base transaction, listing and referral code generating fees. ",
         "more": "Learn more about VX dividend rules",
-        "help": "分红规则：1. 分红需VX锁仓在交易所内，且锁仓金额大于10 2. 提交锁仓VX后立即生效，可参与最近一次分红 3. 解锁需要经过完整的7个周期后释放"
+        "help": "分红规则：1. 分红需VX锁仓在交易所内，且锁仓金额大于10 2. 提交锁仓VX后立即生效，可参与最近一次分红 3. 解锁需要经过完整的7个周期后释放",
+        "lockedAmount": "锁仓金额",
+        "lockAmountTips": "少于10VX无法参与分红",
+        "unlockAmount": "解锁中金额",
+        "openAutoLock": {
+            "title": "开启自动锁仓",
+            "text": "开启后，挖矿发放的所有VX都自动锁仓"
+        },
+        "closeAutoLock": {
+            "title": "关闭自动锁仓",
+            "text": "关闭后，挖矿发放的所有VX都不锁仓"
+        },
+        "lock": "锁仓",
+        "unlock": "解锁"
     },
     "tradeOperator": {
         "title": "Operator",

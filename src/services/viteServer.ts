@@ -6,16 +6,16 @@ const Snapshot_Gid = constant.Snapshot_Gid;
 
 export function getCode(address: string) {
     // get my code
-    return viteClient.request('dexfund_getInviterCode', address);
+    return viteClient.request('dex_getInviteCode', address);
 }
 
 export function getInviteeCode(address: string) {
     // get who invited me
-    return viteClient.request('dexfund_getInviteeCode', address);
+    return viteClient.request('dex_getInviteCodeBinding', address);
 }
 
 export function getAccountDexBalance(address: string) {
-    return viteClient.request('dexfund_getAccountFundInfo', address);
+    return viteClient.request('dex_getAccountBalanceInfo', address);
 }
 
 export function getAccountBalance(address: string) {
@@ -27,11 +27,11 @@ export function getDexFundAddrOnroadInfo() {
 }
 
 export function isPledgeVip(address: string) {
-    return viteClient.request('dexfund_isPledgeVip', address);
+    return viteClient.request('dex_isVIP', address);
 }
 
 export function getMarketInfo(tradeToken: string, quoteToken: string) {
-    return viteClient.request('dexfund_getMarketInfo', tradeToken, quoteToken);
+    return viteClient.request('dex_getMarketInfo', tradeToken, quoteToken);
 }
 
 export function getAgentMiningPledgeInfo(address: string) {
@@ -62,7 +62,7 @@ export function getAgentSVipPledgeInfo(address: string) {
 }
 
 export function getCurrDividendPools() {
-    return viteClient.request('dexfund_getCurrentDividendPools');
+    return viteClient.request('dex_getDividendPools');
 }
 
 export function getSnapshotChainHeight() {
@@ -106,19 +106,19 @@ export function getAccountTxList({ address, pageIndex, pageCount }) {
 }
 
 export function getSvipStatus(address:string) {
-    return viteClient.request('dexfund_isPledgeSuperVip', address);
+    return viteClient.request('dex_isSuperVIP', address);
 }
 
 export function getCurrentVxMineInfo() {
-    return viteClient.request('dexfund_getCurrentVxMineInfo');
+    return viteClient.request('dex_getCurrentMiningAmountInfo');
 }
 
 export function getCurrentFeesForMine() {
-    return viteClient.request('dexfund_getCurrentFeesForMine');
+    return viteClient.request('dex_getCurrentFeesValidForMining');
 }
 
 export function getCurrentPledgeForVxSum() {
-    return viteClient.request('dexfund_getCurrentPledgeForVxSum');
+    return viteClient.request('dex_getCurrentStakeValidForMining');
 }
 
 export function getAllFeesOfAddress(address) {
@@ -127,4 +127,12 @@ export function getAllFeesOfAddress(address) {
 
 export function getMinThresholdForTradeAndMining() {
     return viteClient.request('dex_getMinThresholdForTradeAndMining');
+}
+
+export function getIsAutoLockMinedVx(address) {
+    return viteClient.request('dex_isAutoLockMinedVx', address);
+}
+
+export function getVIPStakeInfoList(address, pageIndex, pageCount = 30) {
+    return viteClient.request('dex_getVIPStakeInfoList', address, pageIndex, pageCount);
 }
