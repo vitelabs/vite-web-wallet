@@ -1287,7 +1287,7 @@
         "orderTotalIncome": "Total Income ({token})",
         "fee": "Fees",
         "listTitle": "Mining History",
-        "viewLink": "Live Mining Dashboard" 
+        "viewLink": "Live Mining Dashboard"
     },
     "mobileBottomBar": {
         "center": "Trade",
