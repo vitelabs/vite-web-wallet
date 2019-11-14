@@ -110,7 +110,7 @@ export default {
         },
         getIsAutoLockMinedVx() {
             this.isInitAutoLock = false;
-            getIsAutoLockMinedVx().then(data => {
+            getIsAutoLockMinedVx(this.address).then(data => {
                 this.isInitAutoLock = true;
                 this.isAutoLock = !!data;
             }).catch(err => {
