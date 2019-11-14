@@ -9,7 +9,7 @@
             <div class="__row_t">{{ confirmText.available }}</div>
             <div class="__input_row __unuse_input __bold">
                 <img :src="vxTokenInfo.icon" class="__icon" />VX
-                <span class="__right">{{ availableAmount }}</span>
+                <span class="__right">{{ basicAvailableAmount }}</span>
             </div>
         </div>
 
@@ -32,7 +32,12 @@
 import bigNumber from 'utils/bigNumber';
 import viteInput from 'components/viteInput';
 import confirm from 'components/confirm/confirm.vue';
+import sendTx from 'pcUtils/sendTx';
 import { verifyAmount } from 'pcUtils/validations';
+import { initPwd } from 'pcComponents/password/index.js';
+
+const lockVXAbi = { 'type': 'function', 'name': 'LockVxForDividend', 'inputs': [ { 'name': 'actionType', 'type': 'uint8' }, { 'name': 'amount', 'type': 'uint256' } ] };
+const contractAddress = 'vite_0000000000000000000000000000000000000006e82b8ba657';
 
 export default {
     components: { confirm, viteInput },
@@ -80,6 +85,9 @@ export default {
                 ? this.vxBalanceInfo.available || 0
                 : this.vxBalanceInfo.vxLocked || 0;
         },
+        basicAvailableAmount() {
+            return bigNumber.toBasic(this.availableAmount, this.vxTokenDecimals);
+        },
         canSubmit() {
             return +this.amount && !this.amountErr;
         }
@@ -87,11 +95,14 @@ export default {
     methods: {
         validAmount() {
             this.amountErr = verifyAmount({
-                minAmount: 1,
+                minAmount: bigNumber.toMin(1, this.vxTokenDecimals),
                 formatDecimals: 8,
                 decimals: this.vxTokenDecimals,
                 balance: this.availableAmount,
-                errorMap: { notEnough: this.confirmText.notEnough }
+                errorMap: {
+                    notEnough: this.confirmText.notEnough,
+                    lessMin: this.$t('tradeDividend.lessMin')
+                }
             })(this.amount);
             return !this.amountErr;
         },
@@ -115,14 +126,25 @@ export default {
             this.isAll = false;
         },
         submit() {
-            if (this.isLockVX) {
-                this.lockVX();
-                return;
-            }
-            this.unlockVx();
-        },
-        lockVX() {},
-        unlockVx() {}
+            initPwd({
+                submit: () => {
+                    sendTx({
+                        methodName: 'callContract',
+                        data: {
+                            abi: lockVXAbi,
+                            toAddress: contractAddress,
+                            params: [ this.isLockVX ? 1 : 2, this.amount ]
+                        }
+                        // abi: JSON.stringify(autoLockAbi)
+                    }).then(() => {
+                        this.$toast(this.$t('hint.operateSuccess'));
+                        this.close();
+                    }).catch(err => {
+                        this.$toast(this.$t('hint.operateFail'), err);
+                    });
+                }
+            });
+        }
     }
 };
 </script>

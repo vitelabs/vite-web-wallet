@@ -1221,6 +1221,7 @@
         },
         "lock": "锁仓",
         "unlock": "解锁",
+        "lessMin": "最少1VX",
         "lockVXConfirm": {
             "title": "锁仓VX分红",
             "available": "交易所可用余额",

@@ -618,7 +618,6 @@ export default {
         }),
         prepareOrder() {
             initPwd({
-                // yztood
                 submit: () => {
                     this.newOrder({
                         price: this.price,
