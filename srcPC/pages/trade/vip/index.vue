@@ -13,7 +13,7 @@
         </confirm>
 
         <div class="btn_group">
-            <div v-show="!isVip" class="btn __pointer unuse" @click="openVIP">
+            <div v-show="!isVip" class="btn __pointer" @click="openVIP">
                 {{ $t('tradeVip.vipConfirm.openVip') }}
             </div>
             <div v-show="isVip" class="btn unuse" @click="openVIP">
