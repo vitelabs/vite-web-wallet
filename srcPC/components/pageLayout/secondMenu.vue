@@ -14,7 +14,8 @@
 
         <ul class="right-lab-list">
             <SwitchComp class="tab __pointer invite-switch" :optList="inviteOptLit" :value="selectInvite" @input="inviteDialog" v-show="$route.name.indexOf('trade') !== -1"/>
-            <div class="tab __pointer" @click="goHelp">{{ $t("help") }}</div>
+            <div v-show="$route.name.indexOf('trade') === -1" class="tab __pointer" @click="goAnnouncements">{{ $t("announcements") }}</div>
+            <div v-show="$route.name.indexOf('trade') === -1" class="tab __pointer" @click="goHelp">{{ $t("help") }}</div>
             <div v-show="!isHaveUsers" @click="login"
                  class="tab __pointer"> {{ $t("login") }}</div>
             <div v-show="!isLogin && isHaveUsers" @click="_unlock" class="tab __pointer">{{ $t("unlockAcc") }}</div>
@@ -55,7 +56,7 @@ export default {
     },
     computed: {
         moreOptList() {
-            return [ {
+            const list = [ {
                 name: this.$t('tradeOperator.title'),
                 value: 'operator'
             }, {
@@ -65,6 +66,19 @@ export default {
                 name: this.$t('tradeVip.title'),
                 value: 'tradeVip'
             } ];
+
+            if (this.$route.name.indexOf('trade') !== -1) {
+                list.push({
+                    name: this.$t('announcements'),
+                    value: 'announcements'
+                });
+                list.push({
+                    name: this.$t('help'),
+                    value: 'help'
+                });
+            }
+
+            return list;
         },
         showInvite() {
             if (this.address && this.$store.state.uiConfig.allShowInvite) {
@@ -95,6 +109,8 @@ export default {
             action === 'operator' && this.goOperator();
             action === 'proxy' && this.goProxy();
             action === 'tradeVip' && this.goTradeVip();
+            action === 'help' && this.goHelp();
+            action === 'announcements' && this.goAnnouncements();
         },
         inviteDialog(v) {
             this.selectInvite = this.showInvite ? 'invite' : 'receiveInvite';
@@ -133,6 +149,14 @@ export default {
                 return;
             }
             openUrl('https://forum.vite.net/topic/2251/if-you-have-a-question-about-using-vitex-please-read-this-article');
+        },
+        goAnnouncements() {
+            statistics.event('secondMenu', `${ this.$route.name }-announcements`, this.address || '');
+            if (this.$i18n.locale === 'zh') {
+                openUrl('https://vitex.zendesk.com/hc/zh-cn');
+                return;
+            }
+            openUrl('https://vitex.zendesk.com/hc/en-001');
         },
 
         _unlock() {
