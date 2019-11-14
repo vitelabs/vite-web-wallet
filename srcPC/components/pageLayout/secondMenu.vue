@@ -56,26 +56,19 @@ export default {
     },
     computed: {
         moreOptList() {
-            const list = [ {
+            return [ {
                 name: this.$t('tradeOperator.title'),
                 value: 'operator'
             }, {
                 name: this.$t('trade.proxy.title'),
                 value: 'proxy'
+            }, {
+                name: this.$t('announcements'),
+                value: 'announcements'
+            }, {
+                name: this.$t('help'),
+                value: 'help'
             } ];
-
-            if (this.$route.name.indexOf('trade') !== -1) {
-                list.push({
-                    name: this.$t('announcements'),
-                    value: 'announcements'
-                });
-                list.push({
-                    name: this.$t('help'),
-                    value: 'help'
-                });
-            }
-
-            return list;
         },
         showInvite() {
             if (this.address && this.$store.state.uiConfig.allShowInvite) {
