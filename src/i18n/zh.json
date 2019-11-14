@@ -1,6 +1,7 @@
 {
     "lang": "中文",
-    "help": "帮助",
+    "help": "帮助中心",
+    "announcements": "公告中心",
     "start": "开始",
     "login": "登录",
     "regAcc": "注册账户",
