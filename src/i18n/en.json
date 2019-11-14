@@ -1225,7 +1225,23 @@
             "text": "关闭后，挖矿发放的所有VX都不锁仓"
         },
         "lock": "锁仓",
-        "unlock": "解锁"
+        "unlock": "解锁",
+        "lockVXConfirm": {
+            "title": "锁仓VX分红",
+            "available": "交易所可用余额",
+            "amountPlaceholder": "请输入锁仓金额，最少1VX",
+            "notEnough": "交易所可用余额不足",
+            "submit": "提交锁仓",
+            "amountText": "锁仓金额"
+        },
+        "unlockVXConfirm": {
+            "title": "解锁 VX",
+            "available": "可解锁金额",
+            "amountPlaceholder": "请输入解锁金额，最少1VX",
+            "notEnough": "可解锁金额不足",
+            "submit": "确认锁仓",
+            "amountText": "解锁金额"
+        }
     },
     "tradeOperator": {
         "title": "Operator",

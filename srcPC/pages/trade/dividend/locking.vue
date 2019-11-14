@@ -7,39 +7,47 @@
                     <tooltips class="tips" :content="$t('tradeDividend.lockAmountTips')"></tooltips>
                 </span>
             </div>
-            <div class="bold">{{ dexAccountFundInfo.vxLocked || '--' }}</div>
+            <div class="bold">{{ vxBalanceInfo.vxLocked || 0 }}</div>
         </div>
         <div class="item" :class="{ 'no-border': !isInitAutoLock }">
             <div>{{ $t("tradeDividend.unlockAmount") }}</div>
-            <div class="bold">{{ dexAccountFundInfo.vxUnlocking || '--' }}</div>
+            <div class="bold">{{ vxBalanceInfo.vxUnlocking || 0 }}</div>
         </div>
-        <div v-if="isInitAutoLock" @click.stop="tooggleAutoLock" class="item check no-border">
+        <div v-if="isInitAutoLock" @click="tooggleAutoLock" class="item check no-border">
             <Checkbox v-model="isAutoLock" :canClick="false" class="check-box"></Checkbox>
             {{ isAutoLock ? $t("tradeDividend.closeAutoLock.title") : $t("tradeDividend.openAutoLock.title") }}
         </div>
 
         <div class="operations">
-            <div class="btn add __pointer">
+            <div class="btn add __pointer" @click="showVXConfirm(true)">
                 {{ $t("tradeDividend.lock") }}
             </div>
-            <div v-show="!dexAccountFundInfo.vxUnlocking" class="btn unuse">
+            <div v-show="!vxBalanceInfo.vxUnlocking" class="btn unuse">
                 {{ $t("tradeDividend.unlock") }}
             </div>
-            <div v-show="dexAccountFundInfo.vxUnlocking" class="btn cancel __pointer">
+            <div v-show="vxBalanceInfo.vxUnlocking" @click="showVXConfirm(false)" class="btn cancel __pointer">
                 {{ $t("tradeDividend.unlock") }}
             </div>
         </div>
+
+        <vx-confirm ref="vxConfirm"></vx-confirm>
     </div>
 </template>
 
 <script>
 import Checkbox from 'uiKit/checkbox';
 import tooltips from 'components/tooltips';
-import confirm from 'components/confirm/index.js';
 import { getIsAutoLockMinedVx } from 'services/viteServer';
+import { execWithValid } from 'pcUtils/execWithValid';
+import sendTx from 'pcUtils/sendTx';
+import { initPwd } from 'pcComponents/password/index.js';
+import vxConfirm from './vxConfirm';
+
+const autoLockAbi = { 'type': 'function', 'name': 'SwitchConfig', 'inputs': [ { 'name': 'switchType', 'type': 'uint8' }, { 'name': 'enable', 'type': 'bool' } ] };
+const contractAddress = 'vite_0000000000000000000000000000000000000006e82b8ba657';
 
 export default {
-    components: { Checkbox, tooltips },
+    components: { Checkbox, tooltips, vxConfirm },
     beforeMount() {
         this.getIsAutoLockMinedVx();
     },
@@ -53,8 +61,8 @@ export default {
         address() {
             return this.$store.getters.activeAddr;
         },
-        dexAccountFundInfo() {
-            return this.$store.state.exchangeBalance.accountFundInfo || {};
+        vxBalanceInfo() {
+            return this.$store.state.exchangeBalance.vxBalanceInfo || {};
         }
     },
     watch: {
@@ -63,7 +71,10 @@ export default {
         }
     },
     methods: {
-        tooggleAutoLock() {
+        showVXConfirm: execWithValid(function (isLockVX) {
+            this.$refs.vxConfirm.show(isLockVX);
+        }),
+        tooggleAutoLock: execWithValid(function () {
             const title = this.isAutoLock
                 ? this.$t('tradeDividend.closeAutoLock.title')
                 : this.$t('tradeDividend.openAutoLock.title');
@@ -71,17 +82,30 @@ export default {
                 ? this.$t('tradeDividend.closeAutoLock.text')
                 : this.$t('tradeDividend.openAutoLock.text');
 
-            confirm({
+            initPwd({
                 title,
                 content,
-                size: 'small',
-                leftBtn: { text: this.$t('btn.cancel') },
-                rightBtn: {
-                    text: this.$t('btn.submit'),
-                    click: () => {
-                        // this.fetchStopTx(item);
-                    }
+                submitTxt: this.$t('btn.submit'),
+                cancelTxt: this.$t('btn.cancel'),
+                submit: () => {
+                    this.sendAutoLockTx();
                 }
+            }, true);
+        }),
+
+        sendAutoLockTx() {
+            sendTx({
+                methodName: 'callContract',
+                data: {
+                    abi: autoLockAbi,
+                    toAddress: contractAddress,
+                    params: [ '1', !this.isAutoLock ]
+                }
+                // abi: JSON.stringify(autoLockAbi)
+            }).then(() => {
+                this.$toast(this.$t('hint.operateSuccess'));
+            }).catch(err => {
+                this.$toast(this.$t('hint.operateFail'), err);
             });
         },
         getIsAutoLockMinedVx() {

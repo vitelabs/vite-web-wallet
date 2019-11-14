@@ -1,6 +1,6 @@
 import { constant } from '@vite/vitejs';
 import { timer } from 'utils/asyncFlow';
-import { defaultTokenMap } from 'utils/constant';
+import { defaultTokenMap, VX_TOKENID } from 'utils/constant';
 import { tokenInfoFromGithub } from 'services/trade';
 import { getTokenInfoById, getSnapshotChainHeight, getTokenInfoList } from 'services/viteServer';
 
@@ -123,6 +123,12 @@ const getters = {
             return null;
         }
         return state.tokenInfoMaps[ViteId];
+    },
+    vxTokenInfo(state) {
+        if (!state.tokenInfoMaps[VX_TOKENID]) {
+            return null;
+        }
+        return state.tokenInfoMaps[VX_TOKENID];
     }
 };
 
