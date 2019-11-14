@@ -146,10 +146,10 @@ export default {
         goAnnouncements() {
             statistics.event('secondMenu', `${ this.$route.name }-announcements`, this.address || '');
             if (this.$i18n.locale === 'zh') {
-                openUrl('https://vitex.zendesk.com/hc/zh-cn');
+                openUrl('https://vitex.zendesk.com/hc/zh-cn/categories/360002539494-%E5%85%AC%E5%91%8A');
                 return;
             }
-            openUrl('https://vitex.zendesk.com/hc/en-001');
+            openUrl('https://vitex.zendesk.com/hc/en-001/categories/360002539494-Announcement');
         },
 
         _unlock() {
