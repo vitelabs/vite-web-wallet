@@ -27,7 +27,7 @@ export function getDexFundAddrOnroadInfo() {
 }
 
 export function isPledgeVip(address: string) {
-    return viteClient.request('dex_isVIP', address);
+    return viteClient.request('dex_hasStakedForVIP', address);
 }
 
 export function getMarketInfo(tradeToken: string, quoteToken: string) {
@@ -62,7 +62,7 @@ export function getAgentSVipPledgeInfo(address: string) {
 }
 
 export function getCurrDividendPools() {
-    return viteClient.request('dex_getDividendPools');
+    return viteClient.request('dex_getDividendPoolsInfo');
 }
 
 export function getSnapshotChainHeight() {
@@ -106,7 +106,7 @@ export function getAccountTxList({ address, pageIndex, pageCount }) {
 }
 
 export function getSvipStatus(address:string) {
-    return viteClient.request('dex_isSuperVIP', address);
+    return viteClient.request('dex_hasStakedForSVIP', address);
 }
 
 export function getCurrentVxMineInfo() {
