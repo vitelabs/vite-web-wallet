@@ -1135,7 +1135,8 @@
     },
     "tradeVip": {
         "title": "管理VIP",
-        "open": "开通VIP",       
+        "open": "开通VIP",      
+        "cancel": "撤销 {type}", 
         "help": {
             "title": "关于VIP"
         },
@@ -1153,7 +1154,7 @@
             "cancelStakingAmount": "可取回抵押金额",
             "noBalance": "交易所可用余额不足",
             "openHint": "VIP开通后，可享有降低0.1%手续费特权，开通VIP需抵押10000VITE，30天后可手动取回",
-            "cancelHint": "预计 {time} 可取回抵押，取回抵押后，您将无法再使用VIP特权",
+            "cancelHint": "取回抵押后，您将无法再使用VIP特权",
             "openSuccess": "申请开通VIP成功，稍后生效",
             "openFail": "开通失败",
             "cancelSuccess": "申请取消VIP成功",
@@ -1169,13 +1170,14 @@
             "cancelStakingAmount": "可取回抵押金额",
             "noBalance": "交易所可用余额不足",
             "openHint": "SVIP开通后，可免除基础手续费，开通SVIP需抵押 1,000,000VITE，30天后可手动取回",
-            "cancelHint": "预计 {time} 可取回抵押，取回抵押后，您将无法再使用SVIP特权",
+            "cancelHint": "取回抵押后，将无法再使用SVIP特权",
             "openSuccess": "申请开通SVIP成功，稍后生效",
             "openFail": "开通失败",
             "cancelSuccess": "申请取消SVIP成功",
             "cancelFail": "取消失败",
             "address": "开通SVIP地址",
-            "addressPlaceholder": "请输入开通SVIP地址"
+            "addressPlaceholder": "请输入开通SVIP地址",
+            "cancelAddress": "SVIP 地址"
         },
         "vipListTitle": "VIP 记录",
         "openAddress": "开通地址",

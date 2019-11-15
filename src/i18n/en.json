@@ -1139,6 +1139,8 @@
     },
     "tradeVip": {
         "title": "管理VIP",    
+        "open": "开通VIP",      
+        "cancel": "撤销 {type}", 
         "help": {
             "title": "About VIP"
         },
@@ -1156,7 +1158,7 @@
             "cancelStakingAmount": "Retrievable Stake",
             "noBalance": "Insufficient Balance",
             "openHint": "You will enjoy the privilege of 0.1% trading fee discount after becoming a VIP. The staking amount of 10,000 VITE can be manually retrieved after 30 days.",
-            "cancelHint": "You can retrieve your stake at approximately {time}. By then, you will lose your VIP privilege.",
+            "cancelHint": "取回抵押后，您将无法再使用VIP特权",
             "openSuccess": "Applied Successful! VIP status will come into effect later.",
             "openFail": "Failed to apply VIP",
             "cancelSuccess": "Cancel VIP Successful",
@@ -1174,13 +1176,14 @@
             "cancelStakingAmount": "Retrievable Stake",
             "noBalance": "Insufficient Balance",
             "openHint": "You will enjoy 0% base transaction fee when upgrading to SVIP. The stake of 1,000,000 VITE can be manually retrieved after 30 days.",
-            "cancelHint": "You can retrieve your stake at approximately {time}. You will lose your SVIP privilege after retrieving.",
+            "cancelHint": "取回抵押后，将无法再使用SVIP特权",
             "openSuccess": "Applied Successful! SVIP status will come into effect later.",
             "openFail": "Failed to apply SVIP",
             "cancelSuccess": "Cancel SVIP Successful",
             "cancelFail": "Cancel Failed",
             "address": "开通SVIP地址",
-            "addressPlaceholder": "请输入开通SVIP地址"
+            "addressPlaceholder": "请输入开通SVIP地址",
+            "cancelAddress": "SVIP 地址"
         },
         "vipListTitle": "VIP记录",
         "openAddress": "开通地址",
