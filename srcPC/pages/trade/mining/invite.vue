@@ -5,10 +5,10 @@
                 <div>{{ $t('tradeMining.inviteCount')}}</div>
                 <div class="bold">{{ inviter ? inviter.inviteCount || 0 : 0 }}</div>
             </div>
-            <!-- <div class="item">
+            <div class="item">
                 <div>{{ $t('assets.invite.inviteBenifit') }}</div>
                 <div class="bold">{{ inviter ? inviter.miningTotal || 0 : '--' }} VX</div>
-            </div> -->
+            </div>
         </div>
 
         <wallet-table class="mint-trade-table no-shadow tb"

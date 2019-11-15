@@ -1,7 +1,7 @@
 import sendTx from 'pcUtils/sendTx';
 import { constant } from '@vite/vitejs';
 import i18n from 'pcI18n';
-import { ViteXAPI, viteClient } from 'services/apiServer';
+import { ViteXAPI } from 'services/apiServer';
 
 export function bindCode(code: number) {
     return sendTx({
@@ -49,14 +49,34 @@ export function genCode() {
     });
 }
 
-export function pledgeForSuperVIp({ actionType }) {
+export function pledgeForSuperVIP({ actionType }) {
+    const superVipAbi = { 'type': 'function', 'name': 'StakeForSVIP', 'inputs': [{ 'name': 'actionType', 'type': 'uint8' }] };
+
     return sendTx({
-        abi: JSON.stringify(constant.DexFundPledgeForSuperVip_Abi),
-        methodName: 'dexFundPledgeForSuperVip',
-        data: { actionType },
-        config: { pow: true }
+        abi: JSON.stringify(superVipAbi),
+        methodName: 'callContract',
+        data: {
+            abi: superVipAbi,
+            params: [actionType],
+            toAddress: 'vite_0000000000000000000000000000000000000006e82b8ba657'
+        }
     });
 }
+
+export function stakeForPrincipalSVIP({ actionType, principal }) {
+    const StakeForPrincipalSVIPAbi = { 'type': 'function', 'name': 'StakeForPrincipalSVIP', 'inputs': [ { 'name': 'actionType', 'type': 'uint8' }, { 'name': 'principal', 'type': 'address' } ] };
+
+    return sendTx({
+        abi: JSON.stringify(StakeForPrincipalSVIPAbi),
+        methodName: 'callContract',
+        data: {
+            abi: StakeForPrincipalSVIPAbi,
+            params: [ actionType, principal ],
+            toAddress: 'vite_0000000000000000000000000000000000000006e82b8ba657'
+        }
+    });
+}
+
 export function configMarketsAgent({ actionType, agent, tradeTokens, quoteTokens }) {
     return sendTx({
         abi: JSON.stringify(constant.DexFundConfigMarketsAgent_Abi),

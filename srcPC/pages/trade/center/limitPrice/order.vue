@@ -101,7 +101,6 @@ import { isNumber, verifyAmount } from 'pcUtils/validations';
 import { execWithValid } from 'pcUtils/execWithValid';
 import statistics from 'utils/statistics';
 
-
 export default {
     components: { viteInput, slider },
     props: {

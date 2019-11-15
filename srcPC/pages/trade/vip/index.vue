@@ -13,27 +13,26 @@
         </confirm>
 
         <div class="btn_group">
-            <div v-show="!isVip" class="btn __pointer" @click="openVIP">
+            <div v-show="!isVip" class="btn __pointer" @click="switchVIP">
                 {{ $t('tradeVip.vipConfirm.openVip') }}
             </div>
-            <div v-show="isVip" class="btn unuse" @click="openVIP">
+            <div v-show="isVip" class="btn unuse">
                 {{ $t('tradeVip.vipConfirm.openVip') }}
             </div>
-            <div v-show="!isSVip" class="btn __pointer" @click="openSVIP">
-                {{ $t('tradeVip.svipConfirm.openVip') }}
-            </div>
-            <div v-show="isSVip" class="btn unuse" @click="openVIP">
+            <div class="btn __pointer" @click="openSVIP">
                 {{ $t('tradeVip.svipConfirm.openVip') }}
             </div>
         </div>
 
         <div class="__second-title">{{ $t('tradeVip.vipListTitle') }}</div>
-        <vip-list></vip-list>
+        <vip-list :showVipConfirm="switchVIP" :showSVipConfirm="showCancelSVIPConfirm"></vip-list>
+
+        <vip-confirm ref="vipConfirm"></vip-confirm>
+        <cancelSVIPConfirm ref="cancelSVIPConfirm"></cancelSVIPConfirm>
     </div>
 </template>
 
 <script>
-import { insertTo } from 'pcUtils/insertTo';
 import statistics from 'utils/statistics';
 import { execWithValid } from 'pcUtils/execWithValid';
 import component2function from 'pcComponents/dialog/utils';
@@ -43,18 +42,22 @@ import confirm from 'components/confirm/confirm.vue';
 import svipComp from './svipConfirm';
 import vipConfirm from './vipConfirm.vue';
 import vipList from './vipList.vue';
+import cancelSVIPConfirm from './cancelSVIPConfirm';
 
 export default {
-    components: { secTitle, confirm, vipList },
+    components: { secTitle, confirm, vipList, vipConfirm, cancelSVIPConfirm },
+    mounted() {
+        this.$store.dispatch('startLoopHeight');
+    },
+    destroyed() {
+        this.$store.dispatch('stopLoopHeight');
+    },
     data() {
         return { isShowHelp: false };
     },
     computed: {
         isVip() {
             return this.$store.state.exchangeFee.isVip;
-        },
-        isSVip() {
-            return this.$store.state.exchangeFee.isSVip;
         },
         address() {
             return this.$store.getters.activeAddr;
@@ -68,18 +71,12 @@ export default {
             this.isShowHelp = false;
         },
 
-        openVIP() {
-            statistics.event(this.$route.name, 'switchVIP-open', this.address || '');
+        switchVIP() {
+            statistics.event(this.$route.name, 'switchVIP', this.address || '');
             this.showVipConfirm();
         },
         showVipConfirm: execWithValid(function () {
-            this.vipConfirm = insertTo(vipConfirm, {
-                close: () => {
-                    this.vipConfirm
-                        && this.vipConfirm.destroyInstance()
-                        && (this.vipConfirm = null);
-                }
-            });
+            this.$refs.vipConfirm.show();
         }),
         openSVIP() {
             statistics.event(this.$route.name, 'switchSVIP-open', this.address || '');
@@ -87,6 +84,10 @@ export default {
         },
         showSVipConfirm: execWithValid(function () {
             component2function(svipComp)().then(() => doUntill({ createPromise: () => this.$store.dispatch('exFetchSVip'), interval: 1000, times: 3 }));
+        }),
+        showCancelSVIPConfirm: execWithValid(function (cancelItem) {
+            this.$refs.cancelSVIPConfirm.cancelItem = cancelItem;
+            this.$refs.cancelSVIPConfirm.show();
         })
     }
 };
