@@ -7,15 +7,17 @@
         </div>
 
         <div class="item pool-item">
-            <div class="token-wrapper" v-for="tokenType in typeList" :key="tokenType.name">
-                <div class="token-name">
-                    <img class="icon" :src="tokenType.icon" />
-                    <span class="token-name">{{ tokenType.name }}</span>
+            <template v-for="tokenType in typeList">
+                <div class="token-wrapper" v-if="tokenType.name !== 'VITE'" :key="tokenType.name">
+                    <div class="token-name">
+                        <img class="icon" :src="tokenType.icon" />
+                        <span class="token-name">{{ tokenType.name }}</span>
+                    </div>
+                    <div class="token-amount">
+                        {{ pool[tokenType.name] ? formatNum(pool[tokenType.name].amount, tokenType.name) : '--' }}
+                    </div>
                 </div>
-                <div class="token-amount">
-                    {{ pool[tokenType.name] ? formatNum(pool[tokenType.name].amount, tokenType.name) : '--' }}
-                </div>
-            </div>
+            </template>
         </div>
     </div>
 </template>
