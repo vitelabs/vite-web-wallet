@@ -91,7 +91,7 @@ export function getSvipStatus(address:string) {
 }
 
 export function getCurrentVxMineInfo() {
-    return viteClient.request('dex_getCurrentMiningAmountInfo');
+    return viteClient.request('dex_getCurrentMiningInfo');
 }
 
 export function getCurrentFeesForMine() {
