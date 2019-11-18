@@ -2,7 +2,7 @@
     <div class="vip-container">
         <span class="vip svip" v-if="isSVip"></span>
         <span class="vip" :class="{ active: isVip }" v-else></span>
-        <span class="vip-operate __pointer" @click="showSVipConfirm" v-if="isSVip && !isVip">
+        <span class="vip-operate __pointer" @click="goTradeVip" v-if="isSVip && !isVip">
             {{ $t("trade.limitPrice.cancelVip") }}
         </span>
         <span class="vip-operate drop_menu __pointer" @click="goTradeVip">
@@ -41,6 +41,7 @@ export default {
         @include font-family-normal();
         &.drop_menu {
             border: none;
+            margin-left: 10px;
         }
         &.active {
             color: #007aff;

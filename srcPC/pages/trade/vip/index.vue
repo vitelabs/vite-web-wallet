@@ -13,7 +13,7 @@
         </confirm>
 
         <div class="btn_group">
-            <div v-show="!isVip" class="btn __pointer" @click="switchVIP">
+            <div v-show="!isVip" class="btn __pointer" @click="openVIP">
                 {{ $t('tradeVip.vipConfirm.openVip') }}
             </div>
             <div v-show="isVip" class="btn unuse">
@@ -25,9 +25,10 @@
         </div>
 
         <div class="__second-title">{{ $t('tradeVip.vipListTitle') }}</div>
-        <vip-list :showVipConfirm="switchVIP" :showSVipConfirm="showCancelSVIPConfirm"></vip-list>
+        <vip-list :showVipConfirm="_showCancelVIP" :showSVipConfirm="showCancelSVIPConfirm"></vip-list>
 
         <vip-confirm ref="vipConfirm"></vip-confirm>
+        <cancelVIPConfirm ref="cancelVIPConfirm"></cancelVIPConfirm>
         <cancelSVIPConfirm ref="cancelSVIPConfirm"></cancelSVIPConfirm>
     </div>
 </template>
@@ -43,9 +44,10 @@ import svipComp from './svipConfirm';
 import vipConfirm from './vipConfirm.vue';
 import vipList from './vipList.vue';
 import cancelSVIPConfirm from './cancelSVIPConfirm';
+import cancelVIPConfirm from './cancelVIPConfirm';
 
 export default {
-    components: { secTitle, confirm, vipList, vipConfirm, cancelSVIPConfirm },
+    components: { secTitle, confirm, vipList, vipConfirm, cancelVIPConfirm, cancelSVIPConfirm },
     mounted() {
         this.$store.dispatch('startLoopHeight');
     },
@@ -71,13 +73,21 @@ export default {
             this.isShowHelp = false;
         },
 
-        switchVIP() {
-            statistics.event(this.$route.name, 'switchVIP', this.address || '');
-            this.showVipConfirm();
+        openVIP(item) {
+            statistics.event(this.$route.name, 'openVIP', this.address || '');
+            this.showOpenVIPConfirm(item);
         },
-        showVipConfirm: execWithValid(function () {
-            this.$refs.vipConfirm.show();
+        showOpenVIPConfirm: execWithValid(function (item) {
+            this.$refs.vipConfirm.show(item);
         }),
+        _showCancelVIP(item) {
+            statistics.event(this.$route.name, 'cancelVIP', this.address || '');
+            this.showCancelVIPConfirm(item);
+        },
+        showCancelVIPConfirm: execWithValid(function (item) {
+            this.$refs.cancelVIPConfirm.show(item);
+        }),
+
         openSVIP() {
             statistics.event(this.$route.name, 'switchSVIP-open', this.address || '');
             this.showSVipConfirm();

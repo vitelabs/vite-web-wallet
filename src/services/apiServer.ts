@@ -40,31 +40,38 @@ export const viteClient = new client(WS_RPC, () => {
     console.log('Connect success');
 });
 
-const superVipAbi = { 'type': 'function', 'name': 'StakeForSVIP', 'inputs': [{ 'name': 'actionType', 'type': 'uint8' }] };
-const StakeForPrincipalSVIPAbi = { 'type': 'function', 'name': 'StakeForPrincipalSVIP', 'inputs': [ { 'name': 'actionType', 'type': 'uint8' }, { 'name': 'principal', 'type': 'address' } ] };
+const SwitchConfigAbi = { 'type': 'function', 'name': 'SwitchConfig', 'inputs': [ { 'name': 'switchType', 'type': 'uint8' }, { 'name': 'enable', 'type': 'bool' } ] };
+const LockVxForDividendAbi = { 'type': 'function', 'name': 'LockVxForDividend', 'inputs': [ { 'name': 'actionType', 'type': 'uint8' }, { 'name': 'amount', 'type': 'uint256' } ] };
 const StakeForVIPAbi = { 'type': 'function', 'name': 'StakeForVIP', 'inputs': [{ 'name': 'actionType', 'type': 'uint8' }] };
-const autoLockAbi = { 'type': 'function', 'name': 'SwitchConfig', 'inputs': [ { 'name': 'switchType', 'type': 'uint8' }, { 'name': 'enable', 'type': 'bool' } ] };
-const lockVXAbi = { 'type': 'function', 'name': 'LockVxForDividend', 'inputs': [ { 'name': 'actionType', 'type': 'uint8' }, { 'name': 'amount', 'type': 'uint256' } ] };
+const StakeForSuperVIPAbi = { 'type': 'function', 'name': 'StakeForSVIP', 'inputs': [{ 'name': 'actionType', 'type': 'uint8' }] };
+const StakeForPrincipalSVIPAbi = { 'type': 'function', 'name': 'StakeForPrincipalSVIP', 'inputs': [{ 'name': 'principal', 'type': 'address' }] };
+const CancelStakeByIdAbi = { 'type': 'function', 'name': 'CancelStakeById', 'inputs': [{ 'name': 'id', 'type': 'bytes32' }] };
 
-viteClient.addTxType({
-    SwitchConfig: {
-        contractAddr: 'vite_0000000000000000000000000000000000000006e82b8ba657',
-        abi: autoLockAbi
-    },
-    LockVxForDividend: {
-        contractAddr: 'vite_0000000000000000000000000000000000000006e82b8ba657',
-        abi: lockVXAbi
-    },
+export const abiList = {
     StakeForVIP: {
-        contractAddr: 'vite_0000000000000000000000000000000000000006e82b8ba657',
-        abi: StakeForVIPAbi
+        abi: StakeForVIPAbi,
+        contractAddr: 'vite_0000000000000000000000000000000000000006e82b8ba657'
     },
-    StakeForSVIP: {
-        contractAddr: 'vite_0000000000000000000000000000000000000006e82b8ba657',
-        abi: superVipAbi
+    StakeForSuperVip: {
+        abi: StakeForSuperVIPAbi,
+        contractAddr: 'vite_0000000000000000000000000000000000000006e82b8ba657'
     },
     StakeForPrincipalSVIP: {
-        contractAddr: 'vite_0000000000000000000000000000000000000006e82b8ba657',
-        abi: StakeForPrincipalSVIPAbi
+        abi: StakeForPrincipalSVIPAbi,
+        contractAddr: 'vite_0000000000000000000000000000000000000006e82b8ba657'
+    },
+    CancelStakeById: {
+        abi: CancelStakeByIdAbi,
+        contractAddr: 'vite_0000000000000000000000000000000000000006e82b8ba657'
+    },
+    LockVxForDividend: {
+        abi: LockVxForDividendAbi,
+        contractAddr: 'vite_0000000000000000000000000000000000000006e82b8ba657'
+    },
+    SwitchConfig: {
+        abi: SwitchConfigAbi,
+        contractAddr: 'vite_0000000000000000000000000000000000000006e82b8ba657'
     }
-});
+};
+
+viteClient.addTxType(abiList);
