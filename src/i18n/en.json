@@ -1243,8 +1243,13 @@
             "available": "可解锁金额",
             "amountPlaceholder": "请输入解锁金额，最少1VX",
             "notEnough": "可解锁金额不足",
-            "submit": "确认锁仓",
+            "submit": "确认解锁",
             "amountText": "解锁金额"
+        },
+        "unlockList": {
+            "title": "解锁中",
+            "amount": "金额",
+            "time": "到期时间"
         }
     },
     "tradeOperator": {

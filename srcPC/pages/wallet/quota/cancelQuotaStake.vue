@@ -19,6 +19,7 @@ import { initPwd } from 'pcComponents/password/index.js';
 import sendTx from 'pcUtils/sendTx';
 import BigNumber from 'utils/bigNumber';
 import confirm from 'components/confirm/confirm.vue';
+import { abiList } from 'services/apiServer';
 
 const Vite_Token_Info = constant.Vite_Token_Info;
 
@@ -84,18 +85,19 @@ export default {
             });
         },
         cancelQuotaStake() {
-            // sendTx({
-            //     methodName: 'withdrawalOfQuota',
-            //     data: {
-            //         tokenId: Vite_Token_Info.tokenId,
-            //         toAddress: this.address,
-            //         amount: this.activeItem.amount
-            //     }
-            // }).then(() => {
-            //     this.handleFinish(true);
-            // }).catch(err => {
-            //     this.handleFinish(false, err);
-            // });
+            sendTx({
+                abi: JSON.stringify(abiList.CancelQuotaStaking.abi),
+                methodName: 'callContract',
+                data: {
+                    abi: abiList.CancelQuotaStaking.abi,
+                    toAddress: abiList.CancelQuotaStaking.contractAddr,
+                    params: [this.activeItem.rawData.id]
+                }
+            }).then(() => {
+                this.handleFinish(true);
+            }).catch(err => {
+                this.handleFinish(false, err);
+            });
         },
         handleFinish(result, err) {
             this.close();

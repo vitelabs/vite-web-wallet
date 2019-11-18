@@ -7,11 +7,14 @@
                     <tooltips class="tips" :content="$t('tradeDividend.lockAmountTips')"></tooltips>
                 </span>
             </div>
-            <div class="bold">{{ vxBalanceInfo.vxLocked || 0 }}</div>
+            <div class="bold">{{ vxLocked || 0 }}</div>
         </div>
         <div class="item" :class="{ 'no-border': !isInitAutoLock }">
             <div>{{ $t("tradeDividend.unlockAmount") }}</div>
-            <div class="bold">{{ vxBalanceInfo.vxUnlocking || 0 }}</div>
+            <div class="bold">
+                {{ vxUnlocking || 0 }}
+                <span v-show="vxBalanceInfo.vxUnlocking" @click="showVxUnlockingDetails" class="down-icon __pointer"></span>
+            </div>
         </div>
         <div v-if="isInitAutoLock" @click="tooggleAutoLock" class="item check no-border">
             <Checkbox v-model="isAutoLock" :canClick="false" class="check-box"></Checkbox>
@@ -22,32 +25,33 @@
             <div class="btn add __pointer" @click="showVXConfirm(true)">
                 {{ $t("tradeDividend.lock") }}
             </div>
-            <div v-show="!vxBalanceInfo.vxUnlocking" class="btn unuse">
+            <div v-show="!vxBalanceInfo.vxLocked" class="btn unuse">
                 {{ $t("tradeDividend.unlock") }}
             </div>
-            <div v-show="vxBalanceInfo.vxUnlocking" @click="showVXConfirm(false)" class="btn cancel __pointer">
+            <div v-show="vxBalanceInfo.vxLocked" @click="showVXConfirm(false)" class="btn cancel __pointer">
                 {{ $t("tradeDividend.unlock") }}
             </div>
         </div>
 
         <vx-confirm ref="vxConfirm"></vx-confirm>
+        <vxUnlockingConfirm ref="vxUnlockingDetail"></vxUnlockingConfirm>
     </div>
 </template>
 
 <script>
+import bigNumber from 'utils/bigNumber';
 import Checkbox from 'uiKit/checkbox';
 import tooltips from 'components/tooltips';
+import { abiList } from 'services/apiServer';
 import { getIsAutoLockMinedVx } from 'services/viteServer';
 import { execWithValid } from 'pcUtils/execWithValid';
 import sendTx from 'pcUtils/sendTx';
 import { initPwd } from 'pcComponents/password/index.js';
 import vxConfirm from './vxConfirm';
-
-const autoLockAbi = { 'type': 'function', 'name': 'SwitchConfig', 'inputs': [ { 'name': 'switchType', 'type': 'uint8' }, { 'name': 'enable', 'type': 'bool' } ] };
-const contractAddress = 'vite_0000000000000000000000000000000000000006e82b8ba657';
+import vxUnlockingConfirm from './vxUnlockingConfirm';
 
 export default {
-    components: { Checkbox, tooltips, vxConfirm },
+    components: { Checkbox, tooltips, vxConfirm, vxUnlockingConfirm },
     beforeMount() {
         this.getIsAutoLockMinedVx();
     },
@@ -58,11 +62,25 @@ export default {
         };
     },
     computed: {
+        vxTokenInfo() {
+            return this.$store.getters.vxTokenInfo || {};
+        },
+        vxTokenDecimals() {
+            return this.vxTokenInfo.decimals;
+        },
         address() {
             return this.$store.getters.activeAddr;
         },
         vxBalanceInfo() {
             return this.$store.state.exchangeBalance.vxBalanceInfo || {};
+        },
+        vxUnlocking() {
+            const vxUnlocking = this.vxBalanceInfo.vxUnlocking || 0;
+            return bigNumber.toBasic(vxUnlocking, this.vxTokenDecimals);
+        },
+        vxLocked() {
+            const vxLocked = this.vxBalanceInfo.vxLocked || 0;
+            return bigNumber.toBasic(vxLocked, this.vxTokenDecimals);
         }
     },
     watch: {
@@ -74,6 +92,9 @@ export default {
         showVXConfirm: execWithValid(function (isLockVX) {
             this.$refs.vxConfirm.show(isLockVX);
         }),
+        showVxUnlockingDetails() {
+            this.$refs.vxUnlockingDetail.show();
+        },
         tooggleAutoLock: execWithValid(function () {
             const title = this.isAutoLock
                 ? this.$t('tradeDividend.closeAutoLock.title')
@@ -95,13 +116,13 @@ export default {
 
         sendAutoLockTx() {
             sendTx({
+                abi: JSON.stringify(abiList.SwitchConfig.abi),
                 methodName: 'callContract',
                 data: {
-                    abi: autoLockAbi,
-                    toAddress: contractAddress,
+                    abi: abiList.SwitchConfig.abi,
+                    toAddress: abiList.SwitchConfig.contractAddr,
                     params: [ '1', !this.isAutoLock ]
                 }
-                // abi: JSON.stringify(autoLockAbi)
             }).then(() => {
                 this.$toast(this.$t('hint.operateSuccess'));
             }).catch(err => {
@@ -153,5 +174,14 @@ export default {
             display: inline-block;
         }
     }
+}
+
+.down-icon {
+    display: inline-block;
+    background: url('~assets/imgs/dividendInfo.svg');
+    background-size: 100% 100%;
+    width: 16px;
+    height: 16px;
+    margin-bottom: -4px;
 }
 </style>

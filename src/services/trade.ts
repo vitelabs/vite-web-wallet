@@ -335,4 +335,3 @@ export function getMiningSetting() {
         path: 'mining/setting'
     });
 }
-
