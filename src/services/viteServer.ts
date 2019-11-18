@@ -44,10 +44,10 @@ export function getAgentMiningPledgeInfo(address: string) {
 }
 
 export function getAgentVipPledgeInfo(address: string) {
-    return viteClient.request('pledge_getAgentPledgeInfo', {
-        pledgeAddr: address,
-        agentAddr: DexFund_Addr,
-        beneficialAddr: DexFund_Addr,
+    return viteClient.request('contract_getDelegatedStakeInfo', {
+        stakeAddress: address,
+        delegateAddress: 'vite_0000000000000000000000000000000000000006e82b8ba657',
+        beneficiary: 'vite_0000000000000000000000000000000000000006e82b8ba657',
         bid: 2
     });
 }
