@@ -33,6 +33,7 @@ import bigNumber from 'utils/bigNumber';
 import statistics from 'utils/statistics';
 import { verifyAmount } from 'pcUtils/validations';
 import router from 'pcRouter';
+import { abiList } from 'services/apiServer';
 
 const minLimit = 134;
 
@@ -98,11 +99,16 @@ export default {
         staking() {
             statistics.event(router.currentRoute.name, 'addQuota-submit', this.accountAddr || '');
 
+
+            const amount = bigNumber.toMin(this.amount, this.viteTokenInfo.decimals);
             sendTx({
-                methodName: 'dexFundPledgeForVx',
+                abi: JSON.stringify(abiList.StakeForMining.abi),
+                methodName: 'callContract',
                 data: {
-                    amount: bigNumber.toMin(this.amount, this.viteTokenInfo.decimals),
-                    actionType: 1
+                    abi: abiList.StakeForMining.abi,
+                    toAddress: abiList.StakeForMining.contractAddr,
+                    params: [ 1, amount ],
+                    tokenId: this.viteTokenInfo.tokenId
                 }
             }).then(() => {
                 this.$toast(this.$t('hint.request', { name: this.$t('submitStaking') }));

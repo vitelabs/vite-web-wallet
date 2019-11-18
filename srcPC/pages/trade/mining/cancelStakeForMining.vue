@@ -23,6 +23,7 @@ import router from 'pcRouter';
 import sendTx from 'pcUtils/sendTx';
 import { initPwd } from 'pcComponents/password/index.js';
 import { cancelStakeById } from 'pcServices/tradeOperation';
+import { abiList } from 'services/apiServer';
 
 export default {
     components: { confirm },
@@ -74,10 +75,13 @@ export default {
         },
         cancelV1() {
             return sendTx({
-                methodName: 'dexFundPledgeForVx',
+                abi: JSON.stringify(abiList.StakeForMining.abi),
+                methodName: 'callContract',
                 data: {
-                    amount: this.stakingObj.rawData.stakeAmount,
-                    actionType: 2
+                    abi: abiList.StakeForMining.abi,
+                    toAddress: abiList.StakeForMining.contractAddr,
+                    params: [ 2, this.stakingObj.rawData.stakeAmount ],
+                    tokenId: this.viteTokenInfo.tokenId
                 }
             });
         },
