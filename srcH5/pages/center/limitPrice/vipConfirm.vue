@@ -29,6 +29,7 @@ import { constant } from '@vite/vitejs';
 
 import confirm from 'h5Components/confirm/confirm.vue';
 import { getAgentVipPledgeInfo } from 'services/viteServer';
+import { abiList } from 'services/apiServer';
 import date from 'utils/date';
 import BigNumber from 'utils/bigNumber';
 import statistics from 'utils/statistics';
@@ -111,22 +112,11 @@ export default {
     },
     methods: {
         changeVip() {
-            const actionType = this.isVip ? 2 : 1;
+            statistics.event(`H5${ this.$route.name }`, `VIP-${ this.isVip ? 'cancel' : 'open' }`, this.accountAddr || '');
+            const func = this.isVip ? this.cancelVIP : this.openVIP;
             this.isLoading = true;
 
-            statistics.event(`H5${ this.$route.name }`, `VIP-${ actionType === 2 ? 'cancel' : 'open' }`, this.accountAddr || '');
-
-            sendTx({
-                methodName: 'dexFundPledgeForVip',
-                data: {
-                    amount: '0',
-                    actionType
-                },
-                vbExtends: {
-                    'type': 'dexFundPledgeForVip',
-                    'amount': '10,000 VITE'
-                }
-            }).then(() => {
+            func().then(() => {
                 this.isLoading = false;
                 // this.$toast(this.isVip ? this.$t('tradeVip.vipConfirm.cancelSuccess') : this.$t('tradeVip.vipConfirm.openSuccess'));
                 this.close && this.close();
@@ -136,6 +126,37 @@ export default {
                 this.isLoading = false;
                 // this.$toast(this.isVip ? this.$t('tradeVip.vipConfirm.cancelFail') : this.$t('tradeVip.vipConfirm.openFail'));
             });
+        },
+
+        stakeForVIP({ actionType }) {
+            return sendTx({
+                abi: JSON.stringify(abiList.StakeForVIP.abi),
+                methodName: 'callContract',
+                data: {
+                    abi: abiList.StakeForVIP.abi,
+                    params: [actionType],
+                    toAddress: abiList.StakeForVIP.contractAddr
+                }
+            });
+        },
+        cancelStakeById({ id }) {
+            return sendTx({
+                abi: JSON.stringify(abiList.CancelStakeById.abi),
+                methodName: 'callContract',
+                data: {
+                    abi: abiList.CancelStakeById.abi,
+                    params: [id],
+                    toAddress: abiList.CancelStakeById.contractAddr
+                }
+            });
+        },
+        openVIP() {
+            return this.stakeForVIP({ actionType: 1 });
+        },
+        cancelVIP() {
+            return this.stakingObj.id
+                ? this.cancelStakeById({ id: this.stakingObj.id })
+                : this.stakeForVIP({ actionType: 2 });
         },
 
         fetchStakingObj() {
