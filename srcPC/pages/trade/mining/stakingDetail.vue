@@ -2,53 +2,40 @@
     <div class="staking-detail">
         <div class="item">
             <div>{{ $t("stakingAmount") }}</div>
-            <div class="bold">{{ stakingDetail.amount }}</div>
+            <div class="bold">
+                {{ totalStakingAmount }}
+                <span v-show="stakingObj && stakingObj.totalStakeAmount" @click="showStakingList" class="down-icon __pointer"></span>
+            </div>
         </div>
-        <div class="item">
+
+        <div class="item no-border">
             <div>{{ $t('tradeMining.dividends') }}</div>
             <div class="bold">{{ `${expectedDividends} VX` }}</div>
         </div>
-        <div class="item">
-            <div>{{ $t("withdrawHeight") }}</div>
-            <div class="bold">{{ stakingDetail.withdrawHeight }}</div>
-        </div>
-        <div class="item no-border">
-            <div>{{ $t("walletQuota.list.withdrawTime") }}</div>
-            <div class="bold">{{ stakingDetail.withdrawTime }}</div>
-        </div>
 
         <div class="operations">
-            <div class="btn add __pointer" @click="showVxConfirm(1)">
+            <div class="btn add __pointer" @click="showVxConfirm">
                 {{ $t("tradeMining.add") }}
             </div>
-            <div v-show="!canCancel" class="btn unuse">
-                {{ $t("tradeMining.withdraw") }}
-            </div>
-            <div
-                v-show="canCancel"
-                class="btn cancel __pointer"
-                @click="showVxConfirm(2)"
-            >
-                {{ $t("tradeMining.withdraw") }}
-            </div>
         </div>
+
+        <stakingList ref="stakingList" :cancelStake="cancelStake"></stakingList>
+        <cancelStakeForMining ref="cancelStakeForMining"></cancelStakeForMining>
     </div>
 </template>
 
 <script>
-import date from 'utils/date';
 import bigNumber from 'utils/bigNumber';
 import { constant } from '@vite/vitejs';
+import stakingList from './stakingList';
+import cancelStakeForMining from './cancelStakeForMining.vue';
 
 const Vite_Token_Info = constant.Vite_Token_Info;
 
 export default {
+    components: { stakingList, cancelStakeForMining },
     mounted() {
         this.$store.dispatch('getCurrentPledgeForVxSum');
-        this.$store.dispatch('startLoopHeight');
-    },
-    destroyed() {
-        this.$store.dispatch('stopLoopHeight');
     },
     props: {
         showVxConfirm: {
@@ -60,30 +47,25 @@ export default {
         stakingObj() {
             return this.$store.state.exchangeMine.userPledgeInfo;
         },
-        height() {
-            return this.$store.state.ledger.currentHeight;
-        },
         canCancel() {
             return this.stakingObj.withdrawHeight <= this.height;
         },
-        stakingDetail() {
+        totalStakingAmount() {
             if (!this.stakingObj) {
-                return {
-                    amount: '',
-                    withdrawTime: '',
-                    withdrawHeight: ''
-                };
+                return 0;
             }
-            return {
-                withdrawTime: date(this.stakingObj.withdrawTime * 1000,
-                    this.$i18n.locale),
-                amount: bigNumber.toBasic(this.stakingObj.amount || 0,
-                    Vite_Token_Info.decimals),
-                withdrawHeight: this.stakingObj.withdrawHeight
-            };
+            return bigNumber.toBasic(this.stakingObj.totalStakeAmount || 0, Vite_Token_Info.decimals);
         },
         expectedDividends() {
             return this.$store.getters.stakingDividends;
+        }
+    },
+    methods: {
+        showStakingList() {
+            this.$refs.stakingList.show();
+        },
+        cancelStake(cancelItem) {
+            this.$refs.cancelStakeForMining.show(cancelItem);
         }
     }
 };
@@ -91,4 +73,13 @@ export default {
 
 <style lang="scss" scoped>
 @import "../components/stakingDetail.scss";
+
+.down-icon {
+    display: inline-block;
+    background: url('~assets/imgs/dividendInfo.svg');
+    background-size: 100% 100%;
+    width: 16px;
+    height: 16px;
+    margin-bottom: -4px;
+}
 </style>
