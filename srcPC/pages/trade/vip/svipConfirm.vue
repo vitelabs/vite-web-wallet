@@ -23,8 +23,7 @@ block content
 <script>
 import { constant, hdAddr } from '@vite/vitejs';
 import BigNumber from 'utils/bigNumber';
-import { execWithValid } from 'pcUtils/execWithValid';
-import { pledgeForSuperVIP, stakeForPrincipalSVIP } from 'pcServices/tradeOperation';
+import { stakeForSuperVIP, stakeForPrincipalSVIP } from 'pcServices/tradeOperation';
 import viteInput from 'components/viteInput';
 import { initPwd } from 'pcComponents/password/index.js';
 
@@ -86,14 +85,14 @@ export default {
         fillMyAddr() {
             this.inputAddress = this.address;
         },
-        inspector: execWithValid(function () {
+        inspector() {
             return new Promise((res, rej) => {
                 initPwd({
                     submit: () => {
                         this.isLoading = true;
 
                         const func = this.inputAddress === this.address
-                            ? pledgeForSuperVIP({ actionType: 1 })
+                            ? stakeForSuperVIP({ actionType: 1 })
                             : stakeForPrincipalSVIP({
                                 actionType: 1,
                                 principal: this.inputAddress
@@ -114,7 +113,7 @@ export default {
                     }
                 });
             });
-        })
+        }
     }
 };
 </script>

@@ -1,7 +1,7 @@
 import sendTx from 'pcUtils/sendTx';
 import { constant } from '@vite/vitejs';
 import i18n from 'pcI18n';
-import { ViteXAPI } from 'services/apiServer';
+import { ViteXAPI, abiList } from 'services/apiServer';
 
 export function bindCode(code: number) {
     return sendTx({
@@ -49,34 +49,6 @@ export function genCode() {
     });
 }
 
-export function pledgeForSuperVIP({ actionType }) {
-    const superVipAbi = { 'type': 'function', 'name': 'StakeForSVIP', 'inputs': [{ 'name': 'actionType', 'type': 'uint8' }] };
-
-    return sendTx({
-        abi: JSON.stringify(superVipAbi),
-        methodName: 'callContract',
-        data: {
-            abi: superVipAbi,
-            params: [actionType],
-            toAddress: 'vite_0000000000000000000000000000000000000006e82b8ba657'
-        }
-    });
-}
-
-export function stakeForPrincipalSVIP({ actionType, principal }) {
-    const StakeForPrincipalSVIPAbi = { 'type': 'function', 'name': 'StakeForPrincipalSVIP', 'inputs': [ { 'name': 'actionType', 'type': 'uint8' }, { 'name': 'principal', 'type': 'address' } ] };
-
-    return sendTx({
-        abi: JSON.stringify(StakeForPrincipalSVIPAbi),
-        methodName: 'callContract',
-        data: {
-            abi: StakeForPrincipalSVIPAbi,
-            params: [ actionType, principal ],
-            toAddress: 'vite_0000000000000000000000000000000000000006e82b8ba657'
-        }
-    });
-}
-
 export function configMarketsAgent({ actionType, agent, tradeTokens, quoteTokens }) {
     return sendTx({
         abi: JSON.stringify(constant.DexFundConfigMarketsAgent_Abi),
@@ -85,7 +57,6 @@ export function configMarketsAgent({ actionType, agent, tradeTokens, quoteTokens
         config: { pow: true }
     });
 }
-
 
 interface IProxyPair {
   symbol: string;
@@ -112,8 +83,55 @@ export function getProxyGrantor({ address }): Promise<IProxyRelation> {
         params: { address }
     });
 }
-
-
 export function getProxyAblePairs(): Promise<IProxyPair[]> {
     return ViteXAPI.request({ method: 'GET', path: 'proxy/market' });
+}
+
+
+export function stakeForVIP({ actionType }) {
+    return sendTx({
+        abi: JSON.stringify(abiList.StakeForVIP.abi),
+        methodName: 'callContract',
+        data: {
+            abi: abiList.StakeForVIP.abi,
+            params: [actionType],
+            toAddress: abiList.StakeForVIP.contractAddr
+        }
+    });
+}
+
+export function stakeForSuperVIP({ actionType }) {
+    return sendTx({
+        abi: JSON.stringify(abiList.StakeForSuperVip.abi),
+        methodName: 'callContract',
+        data: {
+            abi: abiList.StakeForSuperVip.abi,
+            params: [actionType],
+            toAddress: abiList.StakeForSuperVip.contractAddr
+        }
+    });
+}
+
+export function stakeForPrincipalSVIP({ principal }) {
+    return sendTx({
+        abi: JSON.stringify(abiList.StakeForPrincipalSVIP.abi),
+        methodName: 'callContract',
+        data: {
+            abi: abiList.StakeForPrincipalSVIP.abi,
+            params: [principal],
+            toAddress: abiList.StakeForPrincipalSVIP.contractAddr
+        }
+    });
+}
+
+export function cancelStakeById({ id }) {
+    return sendTx({
+        abi: JSON.stringify(abiList.CancelStakeById.abi),
+        methodName: 'callContract',
+        data: {
+            abi: abiList.CancelStakeById.abi,
+            params: [id],
+            toAddress: abiList.CancelStakeById.contractAddr
+        }
+    });
 }

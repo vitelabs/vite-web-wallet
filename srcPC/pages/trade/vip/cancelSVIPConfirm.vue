@@ -23,7 +23,7 @@ import { constant } from '@vite/vitejs';
 import BigNumber from 'utils/bigNumber';
 import confirm from 'components/confirm/confirm.vue';
 import { initPwd } from 'pcComponents/password/index.js';
-import { pledgeForSuperVIP, stakeForPrincipalSVIP } from 'pcServices/tradeOperation';
+import { stakeForSuperVIP, cancelStakeById } from 'pcServices/tradeOperation';
 
 const Vite_Token_Info = constant.Vite_Token_Info;
 
@@ -64,10 +64,9 @@ export default {
         cancelSVip() {
             this.isLoading = true;
 
-            const actionType = 2;
-            const func = this.myAddress === this.cancelItem.address
-                ? pledgeForSuperVIP({ actionType })
-                : stakeForPrincipalSVIP({ actionType, principal: this.cancelItem.address });
+            const func = this.cancelItem.id
+                ? cancelStakeById({ id: this.cancelItem.id })
+                : stakeForSuperVIP({ actionType: 2 });
 
             func.then(() => {
                 this.isLoading = false;

@@ -122,7 +122,7 @@ export default {
             }
 
             if (item.type === 'VIP') {
-                this.showVipConfirm();
+                this.showVipConfirm(item);
                 return;
             }
             this.showSVipConfirm(item);

@@ -46,6 +46,7 @@ export function pwdConfirm({
         cancel && cancel();
     };
     instance.submit = () => {
+        console.log('instance submit');
         _close();
         submit && submit();
     };
