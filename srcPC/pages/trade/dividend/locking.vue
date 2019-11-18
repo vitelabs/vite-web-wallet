@@ -7,12 +7,12 @@
                     <tooltips class="tips" :content="$t('tradeDividend.lockAmountTips')"></tooltips>
                 </span>
             </div>
-            <div class="bold">{{ vxLocked || 0 }}</div>
+            <div class="bold">{{ vxLocked || 0 }} VX</div>
         </div>
         <div class="item" :class="{ 'no-border': !isInitAutoLock }">
             <div>{{ $t("tradeDividend.unlockAmount") }}</div>
             <div class="bold">
-                {{ vxUnlocking || 0 }}
+                {{ vxUnlocking || 0 }} VX
                 <span v-show="vxBalanceInfo.vxUnlocking" @click="showVxUnlockingDetails" class="down-icon __pointer"></span>
             </div>
         </div>

@@ -2,10 +2,7 @@
     <div class="staking-detail">
         <div class="item">
             <div>{{ $t("stakingAmount") }}</div>
-            <div class="bold">
-                {{ totalStakingAmount }}
-                <span v-show="stakingObj && stakingObj.totalStakeAmount" @click="showStakingList" class="down-icon __pointer"></span>
-            </div>
+            <div class="bold">{{ totalStakingAmount }}</div>
         </div>
 
         <div class="item no-border">
@@ -16,6 +13,9 @@
         <div class="operations">
             <div class="btn add __pointer" @click="showVxConfirm">
                 {{ $t("tradeMining.add") }}
+            </div>
+            <div class="btn cancel __pointer" @click="showStakingList">
+                {{ $t("tradeMining.withdraw") }}
             </div>
         </div>
 
