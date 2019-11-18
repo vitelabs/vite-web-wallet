@@ -67,7 +67,7 @@ export default {
         },
         canOrder() {
             if (this.isVip) {
-                return this.stakingObj && this.stakingObj.withdrawHeight <= this.height;
+                return this.stakingObj && this.stakingObj.expirationHeight <= this.height;
             }
 
             if (!this.rawBalance || !+this.rawBalance.availableExAmount) {
@@ -98,7 +98,7 @@ export default {
             return this.isVip ? this.$t('tradeVip.vipConfirm.cancelStakingAmount') : this.$t('tradeVip.vipConfirm.openStakingAmount');
         },
         hint() {
-            return this.isVip ? this.$t('tradeVip.vipConfirm.cancelHint', { time: this.stakingObj.withdrawTime ? date(this.stakingObj.withdrawTime * 1000, 'zh') : '' }) : this.$t('tradeVip.vipConfirm.openHint');
+            return this.isVip ? this.$t('tradeVip.vipConfirm.cancelHint', { time: this.stakingObj.expirationTime ? date(this.stakingObj.expirationTime * 1000, 'zh') : '' }) : this.$t('tradeVip.vipConfirm.openHint');
         }
     },
     watch: {
