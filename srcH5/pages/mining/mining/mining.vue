@@ -23,7 +23,6 @@ export default {
     },
     data() {
         return {
-            currVxMineInfo: null,
             tabList: {
                 'trade': this.$t('mobileMining.miningTrade'),
                 'staking': this.$t('mobileMining.miningStaking'),

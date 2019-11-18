@@ -34,13 +34,8 @@ export function getMarketInfo(tradeToken: string, quoteToken: string) {
     return viteClient.request('dex_getMarketInfo', tradeToken, quoteToken);
 }
 
-export function getAgentMiningPledgeInfo(address: string) {
-    return viteClient.request('pledge_getAgentPledgeInfo', {
-        pledgeAddr: address,
-        agentAddr: DexFund_Addr,
-        beneficialAddr: DexFund_Addr,
-        bid: 1
-    });
+export function getAgentMiningPledgeInfo(address: string, pageIndex, pageCount = 10) {
+    return viteClient.request('dex_getMiningStakeInfoList', address, pageIndex, pageCount);
 }
 
 export function getAgentVipPledgeInfo(address: string) {
@@ -104,7 +99,7 @@ export function getCurrentFeesForMine() {
 }
 
 export function getCurrentPledgeForVxSum() {
-    return viteClient.request('dex_getCurrentStakeValidForMining');
+    return viteClient.request('dex_getCurrentStakingValidForMining');
 }
 
 export function getAllFeesOfAddress(address) {

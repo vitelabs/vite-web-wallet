@@ -26,7 +26,6 @@
 
 <script>
 import { constant } from '@vite/vitejs';
-
 import confirm from 'h5Components/confirm/confirm.vue';
 import { getAgentVipPledgeInfo } from 'services/viteServer';
 import { abiList } from 'services/apiServer';

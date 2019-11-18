@@ -91,7 +91,6 @@ export default {
     },
     data() {
         return {
-            currVxMineInfo: null,
             tradeMiningTotal: 0,
             stakingMiningTotal: 0,
             inviteMiningTotal: 0,
