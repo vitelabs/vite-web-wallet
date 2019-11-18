@@ -112,6 +112,9 @@ export default {
     },
     watch: {
         address() {
+            this.list = [];
+            this.pageIndex = 0;
+            this.totalNum = 0;
             this.getVipList();
         }
     },

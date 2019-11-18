@@ -135,3 +135,15 @@ export function cancelStakeById({ id }) {
         }
     });
 }
+
+export function lockVxForDividend({ actionType, amount }) {
+    return sendTx({
+        abi: JSON.stringify(abiList.LockVxForDividend.abi),
+        methodName: 'callContract',
+        data: {
+            abi: abiList.LockVxForDividend.abi,
+            params: [ actionType, amount ],
+            toAddress: abiList.LockVxForDividend.contractAddr
+        }
+    });
+}

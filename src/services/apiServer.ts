@@ -46,8 +46,18 @@ const StakeForVIPAbi = { 'type': 'function', 'name': 'StakeForVIP', 'inputs': [{
 const StakeForSuperVIPAbi = { 'type': 'function', 'name': 'StakeForSVIP', 'inputs': [{ 'name': 'actionType', 'type': 'uint8' }] };
 const StakeForPrincipalSVIPAbi = { 'type': 'function', 'name': 'StakeForPrincipalSVIP', 'inputs': [{ 'name': 'principal', 'type': 'address' }] };
 const CancelStakeByIdAbi = { 'type': 'function', 'name': 'CancelStakeById', 'inputs': [{ 'name': 'id', 'type': 'bytes32' }] };
+const StakeForQuotaAbi = { 'type': 'function', 'name': 'StakeForQuota', 'inputs': [{ 'name': 'beneficiary', 'type': 'address' }] };
+const CancelQuotaStakingAbi = { 'type': 'function', 'name': 'CancelQuotaStaking', 'inputs': [{ 'name': 'id', 'type': 'bytes32' }] };
 
 export const abiList = {
+    StakeForQuota: {
+        abi: StakeForQuotaAbi,
+        contractAddr: 'vite_0000000000000000000000000000000000000003f6af7459b9'
+    },
+    CancelQuotaStaking: {
+        abi: CancelQuotaStakingAbi,
+        contractAddr: 'vite_0000000000000000000000000000000000000003f6af7459b9'
+    },
     StakeForVIP: {
         abi: StakeForVIPAbi,
         contractAddr: 'vite_0000000000000000000000000000000000000006e82b8ba657'

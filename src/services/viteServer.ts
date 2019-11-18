@@ -44,21 +44,7 @@ export function getAgentMiningPledgeInfo(address: string) {
 }
 
 export function getAgentVipPledgeInfo(address: string) {
-    return viteClient.request('contract_getDelegatedStakeInfo', {
-        stakeAddress: address,
-        delegateAddress: 'vite_0000000000000000000000000000000000000006e82b8ba657',
-        beneficiary: 'vite_0000000000000000000000000000000000000006e82b8ba657',
-        bid: 2
-    });
-}
-
-export function getAgentSVipPledgeInfo(address: string) {
-    return viteClient.request('pledge_getAgentPledgeInfo', {
-        pledgeAddr: address,
-        agentAddr: DexFund_Addr,
-        beneficialAddr: DexFund_Addr,
-        bid: 3
-    });
+    return viteClient.request('dex_getStakedForVIP', address);
 }
 
 export function getCurrDividendPools() {
@@ -135,4 +121,8 @@ export function getIsAutoLockMinedVx(address) {
 
 export function getVIPStakeInfoList(address, pageIndex, pageCount = 30) {
     return viteClient.request('dex_getVIPStakeInfoList', address, pageIndex, pageCount);
+}
+
+export function getVxUnlockList(address, pageIndex, pageCount = 10) {
+    return viteClient.request('dex_getVxUnlockList', address, pageIndex, pageCount);
 }

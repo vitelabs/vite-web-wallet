@@ -32,12 +32,9 @@
 import bigNumber from 'utils/bigNumber';
 import viteInput from 'components/viteInput';
 import confirm from 'components/confirm/confirm.vue';
-import sendTx from 'pcUtils/sendTx';
 import { verifyAmount } from 'pcUtils/validations';
 import { initPwd } from 'pcComponents/password/index.js';
-
-const lockVXAbi = { 'type': 'function', 'name': 'LockVxForDividend', 'inputs': [ { 'name': 'actionType', 'type': 'uint8' }, { 'name': 'amount', 'type': 'uint256' } ] };
-const contractAddress = 'vite_0000000000000000000000000000000000000006e82b8ba657';
+import { lockVxForDividend } from 'pcServices/tradeOperation';
 
 export default {
     components: { confirm, viteInput },
@@ -74,7 +71,7 @@ export default {
                 available: this.$t('tradeDividend.unlockVXConfirm.available'),
                 notEnough: this.$t('tradeDividend.unlockVXConfirm.notEnough'),
                 amountPlaceholder: this.$t('tradeDividend.unlockVXConfirm.amountPlaceholder'),
-                amountText: this.$t('tradeDividend.lockVXConfirm.amountText')
+                amountText: this.$t('tradeDividend.unlockVXConfirm.amountText')
             };
         },
         vxBalanceInfo() {
@@ -126,17 +123,12 @@ export default {
             this.isAll = false;
         },
         submit() {
+            const actionType = this.isLockVX ? 1 : 2;
+            const amount = this.isAll ? this.availableAmount : bigNumber.toMin(this.amount, this.vxTokenDecimals);
+
             initPwd({
                 submit: () => {
-                    sendTx({
-                        methodName: 'callContract',
-                        data: {
-                            abi: lockVXAbi,
-                            toAddress: contractAddress,
-                            params: [ this.isLockVX ? 1 : 2, this.amount ]
-                        }
-                        // abi: JSON.stringify(autoLockAbi)
-                    }).then(() => {
+                    lockVxForDividend({ actionType, amount }).then(() => {
                         this.$toast(this.$t('hint.operateSuccess'));
                         this.close();
                     }).catch(err => {
