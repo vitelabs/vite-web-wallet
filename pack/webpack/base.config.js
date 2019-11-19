@@ -29,9 +29,9 @@ module.exports = {
                 vendors: {
                     test: /[\\/]node_modules[\\/]/,
                     name: 'vendors',
-                    chunks: 'all',
-                    maxSize: 2048000,
-                    minSize: 800000
+                    chunks: 'all'
+                    // maxSize: 2048000,
+                    // minSize: 800000
                 },
                 default: {
                     name: 'default',
