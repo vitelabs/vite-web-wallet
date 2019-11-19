@@ -40,9 +40,13 @@ export default {
     },
     computed: {
         miningSeparator() {
-            return this.dataType === 'buy'
-                ? this.$store.getters.exDepthBuyMiningSeparator
-                : this.depthData.length - 1 - this.$store.getters.exDepthSellMiningSeparator;
+            if (this.dataType === 'buy') {
+                return this.$store.getters.exDepthBuyMiningSeparator;
+            }
+            if (this.$store.getters.exDepthSellMiningSeparator < 0) {
+                return -1;
+            }
+            return this.depthData.length - 1 - this.$store.getters.exDepthSellMiningSeparator;
         },
         ttoken() {
             return this.$store.state.exchangeTokens.ttoken;
