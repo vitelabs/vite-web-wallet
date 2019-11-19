@@ -76,7 +76,7 @@
 
 <script>
 import openUrl from 'utils/openUrl';
-import { miningTrade, miningPledge, getInviteMiningDetail, getOrderMiningDetail } from 'services/trade';
+import { miningTrade, miningPledge, getInviteMiningDetail, getOrderMining } from 'services/trade';
 import inviteMinComp from './invite.vue';
 import orderMinComp from './order.vue';
 import tradeMinComp from './trade.vue';
@@ -137,7 +137,7 @@ export default {
                 miningTrade({ address }).then(data => (this.tradeMiningTotal = data.miningTotal)),
                 miningPledge({ address }).then(data => (this.stakingMiningTotal = data.miningTotal)),
                 getInviteMiningDetail({ address }).then(data => (this.inviteMiningTotal = data.miningTotal)),
-                getOrderMiningDetail({ address }).then(data => (this.orderMiningTotal = data.miningTotal))
+                getOrderMining({ address }).then(data => (this.orderMiningTotal = data.miningTotal))
             ]);
         },
         goLink() {

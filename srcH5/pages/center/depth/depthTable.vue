@@ -4,8 +4,8 @@
              :class="{
                  'buy': dataType === 'buy',
                  'sell': dataType === 'sell',
-                 'in_mining': buyMiningSeparator >= 0 && i <= buyMiningSeparator,
-                 'border_b': buyMiningSeparator >= 0 && i === buyMiningSeparator
+                 'in_mining': miningSeparator >= 0 && i <= miningSeparator,
+                 'border_b': miningSeparator >= 0 && i === miningSeparator
         }" v-for="(item, i) in depthData" :key="i">
             <span v-if="dataType === 'sell'" class="price">
                 {{ formatNum(item.price, 'ttoken') }}
@@ -39,11 +39,10 @@ export default {
         this.$store.dispatch('exStopDepthTimer');
     },
     computed: {
-        buyMiningSeparator() {
-            if (this.dataType !== 'buy') {
-                return -1;
-            }
-            return this.$store.getters.exDepthBuyMiningSeparator;
+        miningSeparator() {
+            return this.dataType === 'buy'
+                ? this.$store.getters.exDepthBuyMiningSeparator
+                : this.depthData.length - 1 - this.$store.getters.exDepthSellMiningSeparator;
         },
         ttoken() {
             return this.$store.state.exchangeTokens.ttoken;

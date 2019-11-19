@@ -74,17 +74,15 @@ const actions = {
         commit('exSetDepthBuy', []);
     },
     exSetDepthStep({ commit, dispatch }, step) {
+        step = +step < 0 ? '' : step;
         commit('exSetDepthStep', step);
         dispatch('exFetchDepth');
     }
 };
 
 const getters = {
-    exBuyOnePrice(state) {
-        return state.buy && state.buy.length ? state.buy[0].price : '';
-    },
     exDepthBuyMiningSeparator(state, getters, rootState, rootGetters) {
-        const miningPrice = rootGetters.activeTxPairMiningPrice;
+        const miningPrice = rootGetters.activeTxPairBuyMiningPrice;
         if (!state.buy || !state.buy.length || !miningPrice) {
             return -1;
         }
@@ -93,10 +91,10 @@ const getters = {
             const currPrice = state.buy[i].price;
             const nextPrice = i + 1 >= state.buy.length ? 0 : state.buy[i + 1].price;
 
-            if (isInMining(currPrice, miningPrice)
+            if (isInBuyMining(currPrice, miningPrice)
                 && (
                     i + 1 >= state.buy.length
-                    || !isInMining(nextPrice, miningPrice)
+                    || !isInBuyMining(nextPrice, miningPrice)
                 )
             ) {
                 return i;
@@ -104,14 +102,64 @@ const getters = {
         }
 
         return -1;
+    },
+    exDepthSellMiningSeparator(state, getters, rootState, rootGetters) {
+        const miningPrice = rootGetters.activeTxPairSellMiningPrice;
+        if (!state.sell || !state.sell.length || !miningPrice) {
+            return -1;
+        }
+
+        for (let i = 0; i < state.sell.length; i++) {
+            const currPrice = state.sell[i].price;
+            if (isInSellMining(currPrice, miningPrice)) {
+                return i;
+            }
+        }
+
+        return -1;
+    },
+    exTxPairMaxStep(state, getters, rootState) {
+        const activeTxPair = rootState.exchangeActiveTxPair.activeTxPair;
+        if (!activeTxPair) {
+            return -1;
+        }
+
+        const depthStepsLimit = rootState.exchangeLimit.depthStepsLimit;
+        const symbol = activeTxPair.symbol;
+        if (!depthStepsLimit[symbol]) {
+            return -1;
+        }
+
+        return depthStepsLimit[symbol].max;
+    },
+    exTxPairMinStep(state, getters, rootState) {
+        const activeTxPair = rootState.exchangeActiveTxPair.activeTxPair;
+        if (!activeTxPair) {
+            return 0;
+        }
+
+        const depthStepsLimit = rootState.exchangeLimit.depthStepsLimit;
+        const symbol = activeTxPair.symbol;
+        if (!depthStepsLimit[symbol]) {
+            return 0;
+        }
+
+        return depthStepsLimit[symbol].min;
     }
 };
 
-function isInMining(price, miningPrice) {
+function isInBuyMining(price, miningPrice) {
     if (!miningPrice || !price) {
         return false;
     }
     return bigNumber.compared(price, miningPrice) >= 0;
+}
+
+function isInSellMining(price, miningPrice) {
+    if (!miningPrice || !price) {
+        return false;
+    }
+    return bigNumber.compared(price, miningPrice) <= 0;
 }
 
 export default {

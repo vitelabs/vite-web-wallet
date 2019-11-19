@@ -53,7 +53,7 @@ const state = {
 
     tradeMiningSymbols: [],
     orderMiningSymbols: [],
-    miningSymbols: []
+    orderMiningSettings: {}
 };
 
 const mutations = {
@@ -81,7 +81,7 @@ const mutations = {
         }
         state.tradeMiningSymbols = data.tradeSymbols || [];
         state.orderMiningSymbols = data.orderSymbols || [];
-        state.miningSymbols = state.tradeMiningSymbols.concat(state.orderMiningSymbols);
+        state.orderMiningSettings = data.orderMiningSettings || {};
     }
 };
 
