@@ -1,6 +1,7 @@
 {
     "lang": "영어",
-    "help": "도움말",
+    "help": "Help Center",
+    "announcements": "Announcements",
     "start": "시작하기",
     "login": "로그인",
     "regAcc": "계정생성",
@@ -801,8 +802,11 @@
         "mergeDepth": "그룹",
         "depthStep": "{step} 자리 수",
         "blocking": "네트워크 연결 오류가 발생하였습니다. 잠시 후 다시 시도해주세요.",
-        "supportMining": "Mineable Trading Pairs",
-        "miningPrice": "You would meet the mining qualification when buy price is greater than {price}",
+        "supportMining": "Eligible for trading and market-making as mining",
+        "supportTradeMining": "Eligible for trading as mining",
+        "supportOrderMining": "Eligible for market-making as mining",
+        "buyMiningPrice": "You would meet the mining qualification when buy price is greater than {price}",
+        "sellMiningPrice": "卖出价小于{price}时满足挂单挖矿条件",
         "operator": {
             "noName": "Anonymous Gateway",
             "overview": "소개",
@@ -817,7 +821,8 @@
             "tokenTab": "Token Details",
             "operatorTab": "오퍼레이터 세부사항"
         },
-        "depthMiningPrice": "Above this line is valid mining area"
+        "depthBuyMiningPrice": "Above this line is valid mining area",
+        "depthSellMiningPrice": "此线下方为有效挂单区域"
     },
     "trade": {
         "more": "More",
@@ -1191,7 +1196,9 @@
             "date": "날짜",
             "ratio": "Ratio",
             "mining": "수량"
-        }
+        },
+        "market": "{name}市场",
+        "estimate": "{name}市场预计今日可挖"
     },
     "tradeDividend": {
         "title": "배당",
