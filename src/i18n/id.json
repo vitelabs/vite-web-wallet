@@ -1,6 +1,7 @@
 {
     "lang": "Indonesia",
-    "help": "Bantuan",
+    "help": "Help Center",
+    "announcements": "Announcements",
     "start": "Mulai",
     "login": "Masuk",
     "regAcc": "Daftar",
@@ -801,8 +802,11 @@
         "mergeDepth": "Grup",
         "depthStep": "{step} digit",
         "blocking": "Terjadi kemacetan jaringan, silakan coba lagi nanti",
-        "supportMining": "Mineable Trading Pairs",
-        "miningPrice": "You would meet the mining qualification when buy price is greater than {price}",
+        "supportMining": "Eligible for trading and market-making as mining",
+        "supportTradeMining": "Eligible for trading as mining",
+        "supportOrderMining": "Eligible for market-making as mining",
+        "buyMiningPrice": "You would meet the mining qualification when buy price is greater than {price}",
+        "sellMiningPrice": "卖出价小于{price}时满足挂单挖矿条件",
         "operator": {
             "noName": "Anonymous Gateway",
             "overview": "Pengantar",
@@ -817,7 +821,8 @@
             "tokenTab": "Token Details",
             "operatorTab": "Detail Operator"
         },
-        "depthMiningPrice": "Above this line is valid mining area"
+        "depthBuyMiningPrice": "Above this line is valid mining area",
+        "depthSellMiningPrice": "此线下方为有效挂单区域"
     },
     "trade": {
         "more": "More",
@@ -1191,7 +1196,9 @@
             "date": "Tanggal",
             "ratio": "Ratio",
             "mining": "Jumlah"
-        }
+        },
+        "market": "{name}市场",
+        "estimate": "{name}市场预计今日可挖"
     },
     "tradeDividend": {
         "title": "Dividen",
