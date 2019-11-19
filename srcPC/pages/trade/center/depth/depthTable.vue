@@ -124,15 +124,7 @@ export default {
             }
 
             const elTop = this.$refs[`depthRow${ i }`][0].getBoundingClientRect().top;
-            const listTop = this.$refs.depthTable.getBoundingClientRect().top;
-            const height = this.$refs.depthTable.clientHeight;
             const rowHeight = this.$refs[`depthRow${ i }`][0].clientHeight;
-            const top = elTop - listTop + rowHeight;
-
-            if (top > listTop + height) {
-                this.hideMiningPrice();
-                return;
-            }
 
             if (this.dataType === 'buy') {
                 return this.$emit('showMiningPrice', elTop + rowHeight);
