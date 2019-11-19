@@ -1,0 +1,9 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta http-equiv="X-UA-Compatible" content="ie=edge"><title>落地页</title><link href="/vitex_invite_outer/index.fd11e4.css" rel="stylesheet"></head><body><div class="main"><p>邀请您加入我的ViteX挖矿战队</p><div class="invite-code-box"><div class="invite-code"><span>邀请码：</span> <span id="invite_code"></span></div><input type="text" id="code_input"> <button type="button" class="icon-copy icon" id="btn_cppy"></button></div><div><img></div><a class="link-join" id="link_join" href="">加入矿队</a></div><script>// outer 页面不承载渲染逻辑，落地页内容交给 middle 页面处理。
+        // 原因是：middle 页面是 universal_link，微信中直接打开 universal_link 会提示弹窗
+        // 从 outer 跳转到 universal_link 则不会被弹窗阻拦
+
+        // 页面逻辑:
+        // 1. 从 query 中取出 `vitex_invite_code`
+        // 2. 将 code 存入剪切板
+        // 3. 如果是 App 内打开，跳转到站内页
+        // 4. 否则跳转到 vitex_invite_middle (universal_link) 页面</script><script type="text/javascript" src="/vitex_invite_outer/index.58a370.js"></script></body></html>
