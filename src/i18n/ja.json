@@ -1,6 +1,7 @@
 {
     "lang": "日本語",
-    "help": "ヘルプ",
+    "help": "Help Center",
+    "announcements": "Announcements",
     "start": "開始",
     "login": "ログイン",
     "regAcc": "登録",
@@ -801,8 +802,11 @@
         "mergeDepth": "グループ",
         "depthStep": "{step}桁",
         "blocking": "ネットワークの混雑が発生しています しばらくしてからもう一度お試しください",
-        "supportMining": "Mineable Trading Pairs",
-        "miningPrice": "You would meet the mining qualification when buy price is greater than {price}",
+        "supportMining": "Eligible for trading and market-making as mining",
+        "supportTradeMining": "Eligible for trading as mining",
+        "supportOrderMining": "Eligible for market-making as mining",
+        "buyMiningPrice": "You would meet the mining qualification when buy price is greater than {price}",
+        "sellMiningPrice": "卖出价小于{price}时满足挂单挖矿条件",
         "operator": {
             "noName": "Anonymous Gateway",
             "overview": "はじめに",
@@ -817,7 +821,8 @@
             "tokenTab": "Token Details",
             "operatorTab": "オペレータ詳細"
         },
-        "depthMiningPrice": "Above this line is valid mining area"
+        "depthBuyMiningPrice": "Above this line is valid mining area",
+        "depthSellMiningPrice": "此线下方为有效挂单区域"
     },
     "trade": {
         "more": "More",
@@ -1191,7 +1196,9 @@
             "date": "日付",
             "ratio": "Ratio",
             "mining": "量"
-        }
+        },
+        "market": "{name}市场",
+        "estimate": "{name}市场预计今日可挖"
     },
     "tradeDividend": {
         "title": "配当金",
