@@ -1,4 +1,4 @@
-import { ViteXAPI } from 'services/apiServer';
+import { ViteXAPI, ViteXAPIV2 } from 'services/apiServer';
 
 export const limit = function () {
     return ViteXAPI.request({
@@ -70,7 +70,7 @@ export const rateToken = function ({ tokenIdList = [] }) {
 };
 
 export const defaultPair = function ({ quoteTokenCategory }) {
-    return ViteXAPI.request({
+    return ViteXAPIV2.request({
         path: '/ticker/24hr',
         method: 'GET',
         params: { quoteTokenCategory }
@@ -78,12 +78,28 @@ export const defaultPair = function ({ quoteTokenCategory }) {
 };
 
 export const assignPair = function ({ symbols = [] }) {
-    return ViteXAPI.request({
+    return ViteXAPIV2.request({
         path: '/ticker/24hr',
         method: 'GET',
         params: { symbols: symbols.join(',') }
     });
 };
+
+export function getMarketsByTradeToken({ tradeTokenSymbol }) {
+    return ViteXAPIV2.request({
+        method: 'GET',
+        path: 'ticker/24hr',
+        params: { tradeTokenSymbol }
+    });
+}
+
+export function getMarketsByQuoteToken({ quoteTokenSymbol }) {
+    return ViteXAPIV2.request({
+        method: 'GET',
+        path: 'ticker/24hr',
+        params: { quoteTokenSymbol }
+    });
+}
 
 export const marketsReserve = function ({ quoteTokenSymbol }) {
     return ViteXAPI.request({
@@ -277,13 +293,15 @@ interface IOrderMiningDetail {
     total: string;
     miningList: [
         {
-        date: number;
-        miningAmount: string;
-        miningRatio: string;
+            date: number;
+            miningAmount: string;
+            miningRatio: string;
+            cycleKey: number;
         }
     ];
 }
-export function getOrderMiningDetail({
+
+export function getOrderMining({
     address,
     offset,
     limit
@@ -295,6 +313,22 @@ export function getOrderMiningDetail({
     });
 }
 
+export function getOrderMiningEstimate({ address }) {
+    return ViteXAPI.request({
+        method: 'GET',
+        path: 'mining/order/estimate',
+        params: { address }
+    });
+}
+
+export function getOrderMiningDetails({ address, cycleKey }) {
+    return ViteXAPI.request({
+        method: 'GET',
+        path: 'mining/order/details',
+        params: { address, cycleKey }
+    });
+}
+
 export function getMiningSetting() {
     return ViteXAPI.request({
         method: 'GET',
@@ -302,18 +336,3 @@ export function getMiningSetting() {
     });
 }
 
-export function getMarketsByTradeToken({ tradeTokenSymbol }) {
-    return ViteXAPI.request({
-        method: 'GET',
-        path: 'ticker/24hr',
-        params: { tradeTokenSymbol }
-    });
-}
-
-export function getMarketsByQuoteToken({ quoteTokenSymbol }) {
-    return ViteXAPI.request({
-        method: 'GET',
-        path: 'ticker/24hr',
-        params: { quoteTokenSymbol }
-    });
-}

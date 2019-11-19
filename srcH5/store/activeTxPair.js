@@ -41,7 +41,13 @@ const actions = {
         assignPairTask = new subTask('assignPair', ({ data }) => {
             commit('setActiveTxPairLoading', false);
 
-            const activeTxPair = data.length ? data[0] : data;
+            let activeTxPair = null;
+            if (data instanceof Array) {
+                activeTxPair = data.length ? data[0] : null;
+            } else {
+                activeTxPair = data;
+            }
+
             if (!activeTxPair) {
                 return;
             }

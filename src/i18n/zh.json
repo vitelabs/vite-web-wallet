@@ -1,6 +1,7 @@
 {
     "lang": "中文",
-    "help": "帮助",
+    "help": "帮助中心",
+    "announcements": "公告中心",
     "start": "开始",
     "login": "登录",
     "regAcc": "注册账户",
@@ -789,8 +790,11 @@
         "mergeDepth": "深度合并",
         "depthStep": "{step}位小数",
         "blocking": "网络拥堵, 请稍候重试",
-        "supportMining": "支持挖矿的交易对",
-        "miningPrice": "买入价大于{price}时满足挂单挖矿条件",
+        "supportMining": "支持交易挖矿&挂单挖矿",
+        "supportTradeMining": "支持交易挖矿",
+        "supportOrderMining": "支持挂单挖矿",
+        "buyMiningPrice": "买入价大于{price}时满足挂单挖矿条件",
+        "sellMiningPrice": "卖出价小于{price}时满足挂单挖矿条件",
         "operator": {
             "noName": "匿名网关",
             "overview": "介绍",
@@ -805,7 +809,8 @@
             "tokenTab": "代币详情",
             "operatorTab": "运营商信息"
         },
-        "depthMiningPrice": "此线上方为有效挂单区域"
+        "depthBuyMiningPrice": "此线上方为有效挂单区域",
+        "depthSellMiningPrice": "此线下方为有效挂单区域"
     },
     "trade": {
         "more":"更多",
@@ -1157,7 +1162,9 @@
             "date": "日期",
             "ratio": "占比",
             "mining": "挖矿金额"
-        }
+        },
+        "market": "{name}市场",
+        "estimate": "{name}市场预计今日可挖"
     },
     "tradeDividend": {
         "title": "分红",
@@ -1282,7 +1289,7 @@
         "orderTotalIncome": "挂单挖矿总收益({token})",
         "fee": "手续费金额",
         "listTitle": "挖矿明细",
-        "viewLink": "实时挖矿数据" 
+        "viewLink": "实时挖矿数据"
     },
     "mobileBottomBar": {
         "center": "交易",

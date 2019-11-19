@@ -1,6 +1,7 @@
 {
     "lang": "EN",
-    "help": "Help",
+    "help": "Help Center",
+    "announcements": "Announcements",
     "start": "Start",
     "login": "Log In",
     "regAcc": "Register",
@@ -780,8 +781,11 @@
         "mergeDepth": "Group",
         "depthStep": "{step} digits",
         "blocking": "Network congestion occurs, please try again later",
-        "supportMining": "Mineable Trading Pairs",
-        "miningPrice": "You would meet the mining qualification when buy price is greater than {price}",
+        "supportMining": "Eligible for trading and market-making as mining",
+        "supportTradeMining": "Eligible for trading as mining",
+        "supportOrderMining": "Eligible for market-making as mining",
+        "buyMiningPrice": "You would meet the mining qualification when buy price is greater than {price}",
+        "sellMiningPrice": "卖出价小于{price}时满足挂单挖矿条件",
         "operator": {
             "noName": "Anonymous Gateway",
             "overview": "Introduction",
@@ -796,7 +800,8 @@
             "tokenTab": "Token Details",
             "operatorTab": "Operator Details"
         },
-        "depthMiningPrice": "Above this line is valid mining area"
+        "depthBuyMiningPrice": "Above this line is valid mining area",
+        "depthSellMiningPrice": "此线下方为有效挂单区域"
     },
     "trade": {
         "more":"More",
@@ -1160,7 +1165,9 @@
             "date": "Date",
             "ratio": "Ratio",
             "mining": "Amount"
-        }
+        },
+        "market": "{name}市场",
+        "estimate": "{name}市场预计今日可挖"
     },
     "tradeDividend": {
         "title": "Dividends",
@@ -1282,7 +1289,7 @@
         "orderTotalIncome": "Total Income ({token})",
         "fee": "Fees",
         "listTitle": "Mining History",
-        "viewLink": "Live Mining Dashboard" 
+        "viewLink": "Live Mining Dashboard"
     },
     "mobileBottomBar": {
         "center": "Trade",

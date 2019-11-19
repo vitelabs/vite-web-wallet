@@ -2,6 +2,14 @@
     <div class="trade-mining-section">
         <my-income :miningTotal="`${miningTotal}`"
                    :title="$t('mobileMining.orderTotalIncome', {token: 'VX'})">
+            <div class="my-dividend">
+                <div class="dividend-item" v-for="item in typeList" :key="item.name">
+                    <span class="item-title">
+                        <img :src="item.icon" /> {{ $t('tradeMining.dividends')}}
+                    </span>
+                    <span class="item-dividend">{{ estimateInfo[item.name] || '--' }}</span>
+                </div>
+            </div>
         </my-income>
         <list-title></list-title>
         <list-view v-show="content && content.length" class="list-wrapper-view" :reachEnd="reachEnd">
@@ -12,7 +20,7 @@
 </template>
 
 <script>
-import { getOrderMiningDetail } from 'services/trade';
+import { getOrderMining, getOrderMiningEstimate } from 'services/trade';
 import bigNumber from 'utils/bigNumber';
 import date from 'utils/date';
 import myIncome from './myIncome';
@@ -37,11 +45,13 @@ export default {
                 },
                 { cell: 'amount' },
                 { cell: 'date' }
-            ]
+            ],
+            estimateInfo: {}
         };
     },
     beforeMount() {
         this.updateData();
+        this.fetchEstimate();
     },
     watch: {
         address() {
@@ -53,6 +63,9 @@ export default {
         }
     },
     computed: {
+        typeList() {
+            return this.$store.state.exchangeMine.showTypeList;
+        },
         content() {
             return this.miningList.map(item => {
                 return {
@@ -79,7 +92,7 @@ export default {
                 return;
             }
 
-            getOrderMiningDetail({
+            getOrderMining({
                 address: this.address,
                 offset
             }).then(data => {
@@ -96,13 +109,54 @@ export default {
             }).catch(err => {
                 console.warn(err);
             });
+        },
+        fetchEstimate() {
+            this.estimateInfo = {};
+
+            getOrderMiningEstimate({ address: this.address }).then(data => {
+                if (!data || !data.orderMiningStat) {
+                    return;
+                }
+                const orderMiningStat = data.orderMiningStat;
+                for (const tokenName in orderMiningStat) {
+                    const amount = orderMiningStat[tokenName];
+                    orderMiningStat[tokenName] = `${ bigNumber.formatNum(amount || 0, 8) } VX`;
+                }
+                this.estimateInfo = data.orderMiningStat;
+            }).catch(err => {
+                console.warn(err);
+            });
         }
     }
 };
 </script>
 
 <style lang="scss" scoped>
+@import "~assets/scss/vars.scss";
+
 .list-wrapper-view {
     max-height: 450px;
+}
+
+.my-dividend {
+    padding: 0 8px 14px;
+    border-top: 1px dashed rgba(211,223,239,1);
+    font-size: 12px;
+    line-height: 16px;
+    color: rgba(107, 128, 153, 0.6);
+
+    .dividend-item {
+        margin-top: 14px;
+    }
+    img {
+        display: inline-block;
+        width: 16px;
+        height: 16px;
+        margin-bottom: -3px;
+    }
+    .item-dividend {
+        float: right;
+        font-family: $font-bold;
+    }
 }
 </style>

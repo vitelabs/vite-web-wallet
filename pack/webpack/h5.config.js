@@ -27,5 +27,15 @@ module.exports = {
             h5Utils: path.join(H5_SRC_PATH, '/utils'),
             h5I18n: path.join(H5_SRC_PATH, '/i18n')
         }
+    },
+    optimization: {
+        splitChunks: {
+            cacheGroups: {
+                vendors: {
+                    maxSize: 1024000,
+                    minSize: 400000
+                }
+            }
+        }
     }
 };

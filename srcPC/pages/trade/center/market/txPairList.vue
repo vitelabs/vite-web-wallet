@@ -13,7 +13,9 @@
                           @click.stop="setFavorite(txPair)"></span>
                     <span class="describe">
                         {{ getTxPairShowSymbol(txPair) }}
-                        <img v-show="isMining(txPair)" src="~assets/imgs/mining.svg"/>
+                        <img v-show="isMining(txPair) === 1" src="~assets/imgs/trade_mining.svg"/>
+                        <img v-show="isMining(txPair) === 2" src="~assets/imgs/order_mining.svg"/>
+                        <img v-show="isMining(txPair) === 3" src="~assets/imgs/mining.svg"/>
                     </span>
                 </span>
                 <span class="__center-tb-item">
@@ -72,8 +74,11 @@ export default {
         };
     },
     computed: {
-        miningSymbols() {
-            return this.$store.state.exchangeMine.miningSymbols;
+        tradeMiningSymbols() {
+            return this.$store.state.exchangeMine.tradeMiningSymbols;
+        },
+        orderMiningSymbols() {
+            return this.$store.state.exchangeMine.orderMiningSymbols;
         },
         transLimit() {
             return this.$store.getters.exCategoryTransLimit;
@@ -126,7 +131,15 @@ export default {
     },
     methods: {
         isMining(item) {
-            return this.miningSymbols.indexOf(item.symbol) !== -1;
+            const isTradeMining = this.isTradeMining(item) ? 1 : 0;
+            const isOrderMining = this.isOrderMining(item) ? 2 : 0;
+            return isTradeMining + isOrderMining;
+        },
+        isTradeMining(item) {
+            return this.tradeMiningSymbols.indexOf(item.symbol) !== -1;
+        },
+        isOrderMining(item) {
+            return this.orderMiningSymbols.indexOf(item.symbol) !== -1;
         },
         getTxPairShowSymbol(txPair) {
             const tradeTokenSymbol = txPair.tradeTokenSymbol.split('-')[0];
@@ -295,6 +308,8 @@ export default {
         width: 80px;
         img {
             margin-bottom: -2px;
+            width: 12px;
+            height: 12px;
         }
     }
 
