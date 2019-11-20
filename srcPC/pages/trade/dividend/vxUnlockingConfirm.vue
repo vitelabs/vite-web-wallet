@@ -81,7 +81,7 @@ export default {
         getUnlockingList(pageIndex = 1) {
             pageIndex = pageIndex - 1;
 
-            getVxUnlockList(this.address, pageIndex).then(({ count, unlocks }) => {
+            getVxUnlockList(this.address, pageIndex, 10).then(({ count, unlocks }) => {
                 this.pageIndex = pageIndex;
                 this.totalNum = count;
                 this.list = unlocks || [];
