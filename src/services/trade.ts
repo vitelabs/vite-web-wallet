@@ -288,6 +288,18 @@ export function getInviteMiningDetail({
     });
 }
 
+export function getInviteOrderMining({
+    address,
+    offset,
+    limit = 30
+}): Promise<IInviteMiningDetail> {
+    return ViteXAPI.request({
+        method: 'GET',
+        path: 'mining/order/invite',
+        params: { address, offset, limit }
+    });
+}
+
 interface IOrderMiningDetail {
     miningTotal: string;
     total: string;

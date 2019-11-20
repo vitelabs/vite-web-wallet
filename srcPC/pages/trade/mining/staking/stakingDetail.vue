@@ -72,7 +72,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "../components/stakingDetail.scss";
+@import "../../components/stakingDetail.scss";
 
 .down-icon {
     display: inline-block;
