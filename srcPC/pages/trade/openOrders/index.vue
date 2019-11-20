@@ -20,9 +20,6 @@ const Page_Size = 50;
 
 export default {
     components: { openTable, pagination, Filters },
-    mounted() {
-        this.init();
-    },
     data() {
         return {
             filters: {},
