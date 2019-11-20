@@ -2,9 +2,13 @@
     <wallet-table class="vip-list-table" :headList="headList" :contentList="contentList" :clickCell="clickCell">>
         <div v-for="(item, i) in contentList" :key="i"
              :slot="`${i}addrBefore`">
-            <span class="beneficial-addr">{{ item.showAddress }}</span>
+            <span class="beneficial-addr">{{ item.address }}</span>
             <img v-if="item.address === address" class="beneficial-img" src='~assets/imgs/mine.svg'/>
         </div>
+
+        <span v-for="(item, i) in contentList" :key="i"
+              :slot="`${i}typeiconAfter`"
+              class="icon" :class=item.type></span>
 
         <span v-for="(item, i) in contentList" :key="i"
               :slot="`${i}cancelBefore`"
@@ -25,7 +29,6 @@ import walletTable from 'components/table/index.vue';
 import date from 'utils/date';
 import bigNumber from 'utils/bigNumber';
 import { timer } from 'utils/asyncFlow';
-import ellipsisAddr from 'utils/ellipsisAddr.js';
 
 const Vite_Token_Info = constant.Vite_Token_Info;
 let vipListInst = null;
@@ -61,7 +64,7 @@ export default {
                 },
                 {
                     text: this.$t('tradeVip.type'),
-                    cell: 'type'
+                    cell: 'typeicon'
                 },
                 {
                     text: this.$t('walletQuota.list.amount'),
@@ -101,7 +104,6 @@ export default {
                     ...item,
                     address,
                     isMaturity: bigNumber.compared(item.expirationHeight, this.currentHeight) <= 0,
-                    showAddress: ellipsisAddr(address),
                     type: typeList[item.bid],
                     amount: bigNumber.toBasic(item.stakeAmount, Vite_Token_Info.decimals),
                     time: date(item.expirationTime * 1000, 'zh')
@@ -160,6 +162,21 @@ export default {
     margin-bottom: -2px;
     width: 12px;
     height: 12px;
+}
+
+.icon {
+    display: inline-block;
+    width: 36px;
+    height: 16px;
+    margin-bottom: -4px;
+    &.VIP {
+        background: url("~assets/imgs/vip.svg");
+        background-size: 100% 100%;
+    }
+    &.SVIP {
+        background: url("~assets/imgs/svip.png");
+        background-size: 100% 100%;
+    }
 }
 
 .cancel {

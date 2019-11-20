@@ -24,6 +24,7 @@
         .bold {
             @include font-family-bold();
             color: #1d2024;
+            font-size: 16px;
         }
     }
     .operations {

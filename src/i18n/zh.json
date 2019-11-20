@@ -1106,6 +1106,7 @@
         "addQuota": "新增抵押挖矿",
         "add": "增加",
         "withdraw": "取回",
+        "withdrawList": "取回列表",
         "tbHead": {
             "date": "日期",
             "fee": "交易手续费金额",
