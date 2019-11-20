@@ -17,7 +17,6 @@
             </div>
         </div>
 
-
         <div class="operations">
             <div v-if="isInitAutoLock" @click="tooggleAutoLock" class="check">
                 <Checkbox v-model="isAutoLock" :canClick="false" class="check-box"></Checkbox>
