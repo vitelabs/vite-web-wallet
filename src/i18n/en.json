@@ -1110,6 +1110,7 @@
         "addQuota": "Create a new staking",
         "add": "Add",
         "withdraw": "Retrieve",
+        "withdrawList": "取回列表",
         "tbHead": {
             "date": "Date",
             "fee": "Trading Fees",

@@ -9,19 +9,20 @@
             </div>
             <div class="bold">{{ vxLocked || 0 }} VX</div>
         </div>
-        <div class="item" :class="{ 'no-border': !isInitAutoLock }">
+        <div class="item no-border">
             <div>{{ $t("tradeDividend.unlockAmount") }}</div>
             <div class="bold">
                 {{ vxUnlocking || 0 }} VX
                 <span v-show="vxBalanceInfo.vxUnlocking" @click="showVxUnlockingDetails" class="down-icon __pointer"></span>
             </div>
         </div>
-        <div v-if="isInitAutoLock" @click="tooggleAutoLock" class="item check no-border">
-            <Checkbox v-model="isAutoLock" :canClick="false" class="check-box"></Checkbox>
-            {{ isAutoLock ? $t("tradeDividend.closeAutoLock.title") : $t("tradeDividend.openAutoLock.title") }}
-        </div>
+
 
         <div class="operations">
+            <div v-if="isInitAutoLock" @click="tooggleAutoLock" class="check">
+                <Checkbox v-model="isAutoLock" :canClick="false" class="check-box"></Checkbox>
+                {{ isAutoLock ? $t("tradeDividend.closeAutoLock.title") : $t("tradeDividend.openAutoLock.title") }}
+            </div>
             <div class="btn add __pointer" @click="showVXConfirm(true)">
                 {{ $t("tradeDividend.lock") }}
             </div>
@@ -147,13 +148,15 @@ export default {
 
 .staking-detail {
     background: none;
-    .item.check {
+    .check {
+        font-size: 12px;
+        margin-right: 30px;
+        color: #5e6875;
         .check-box {
-            margin-right: 6px;
+            display: inline-block;
+            margin-right: 4px;
+            margin-bottom: -3px;
         }
-        flex-direction: row;
-        justify-content: left;
-        align-items: center;
     }
 }
 
@@ -178,10 +181,11 @@ export default {
 
 .down-icon {
     display: inline-block;
-    background: url('~assets/imgs/dividendInfo.svg');
+    background: url('~assets/imgs/moreRecords.svg');
     background-size: 100% 100%;
     width: 16px;
     height: 16px;
-    margin-bottom: -4px;
+    margin-bottom: -2px;
+    margin-left: 4px;
 }
 </style>

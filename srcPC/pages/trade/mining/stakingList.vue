@@ -1,7 +1,7 @@
 <template>
     <confirm v-if="isShow" class="big no-padding-confirm" :closeIcon="true" :showMask="true"
              :title="$t('walletQuota.list.title')" :close="close">
-        <wallet-table class="trade-list-table" :clickCell="clickCell"
+        <wallet-table class="mining-small-staking-list-table" :clickCell="clickCell"
                       :headList="heads" :contentList="contentList">
 
             <span v-for="(item, i) in contentList" :key="i"
@@ -122,7 +122,7 @@ export default {
         getStakingList(pageIndex = 1) {
             pageIndex = pageIndex - 1;
 
-            getAgentMiningPledgeInfo(this.address, pageIndex).then(({ totalStakeCount, stakeList }) => {
+            getAgentMiningPledgeInfo(this.address, pageIndex, 10).then(({ totalStakeCount, stakeList }) => {
                 this.pageIndex = pageIndex;
                 this.totalNum = totalStakeCount;
                 this.list = stakeList || [];

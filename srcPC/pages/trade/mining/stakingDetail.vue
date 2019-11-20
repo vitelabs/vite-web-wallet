@@ -15,7 +15,7 @@
                 {{ $t("tradeMining.add") }}
             </div>
             <div class="btn cancel __pointer" @click="showStakingList">
-                {{ $t("tradeMining.withdraw") }}
+                {{ $t("tradeMining.withdrawList") }}
             </div>
         </div>
 

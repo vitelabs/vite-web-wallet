@@ -114,6 +114,7 @@ export default {
 @import "./tradeList.scss";
 @import "./incomeList.scss";
 @import "./vipList.scss";
+@import "./smallStakingList.scss";
 
 // [TODO] Delete keystore
 .keystore-table-item {

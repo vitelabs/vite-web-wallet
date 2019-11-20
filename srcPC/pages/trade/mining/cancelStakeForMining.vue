@@ -1,8 +1,9 @@
 <template>
-    <confirm v-show="isShow" :showMask="true" :title="$t('tradeMining.withdrawTitle')"
+    <confirm v-show="isShow"
+             :showMask="true" :title="$t('tradeMining.withdrawTitle')"
              :closeIcon="true" :close="close"
-             :leftBtnClick="_cancelStake" :leftBtnTxt="$t('tradeMining.withdrawBtn')"
-             :singleBtn="true">
+             :rightBtnClick="_cancelStake" :rightBtnTxt="$t('tradeMining.withdrawBtn')"
+             :leftBtnClick="close" :leftBtnTxt="$t('walletQuota.confirm.cancel.leftBtn')">
 
         <div class="__row">
             <div class="__row_t">{{ $t('tradeMining.stakingBalance') }}</div>
