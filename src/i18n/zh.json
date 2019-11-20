@@ -1185,7 +1185,10 @@
         "type": "VIP类型"
     },
     "inviteMining":{
-        "title":"邀请挖矿总收益"
+        "title": "邀请挖矿总收益",
+        "myInviteIncome": "我的邀请收益",
+        "inviteTradeIncome": "邀请交易挖矿收益",
+        "inviteOrderIncome": "邀请挂单挖矿收益"
     },
     "orderMining":{
         "title":"挂单挖矿总收益",

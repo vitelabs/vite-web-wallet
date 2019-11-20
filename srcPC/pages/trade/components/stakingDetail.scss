@@ -10,14 +10,11 @@
         justify-content: center;
         box-sizing: border-box;
         width: 25%;
-        padding: 16px 30px;
+        padding: 12px 30px;
         border-right: 1px solid rgba(227, 235, 245, 0.6);
         font-size: 12px;
         @include font-family-normal();
         color: #5e6875;
-        > div {
-            height: 16px;
-        }
         &.no-border {
             border-right: none;
         }

@@ -1191,7 +1191,10 @@
         "type": "VIP类型"
     },
     "inviteMining":{
-        "title":"Referring as Mining Total Income"
+        "title": "Referring as Mining Total Income",
+        "myInviteIncome": "我的邀请收益",
+        "inviteTradeIncome": "邀请交易挖矿收益",
+        "inviteOrderIncome": "邀请挂单挖矿收益"
     },
     "orderMining":{
         "title":"Market-Making as Mining Total Income",
