@@ -51,7 +51,7 @@ export const latestTx = function ({ symbol }) {
         method: 'GET',
         params: {
             symbol,
-            limit: 100
+            limit: 30
         }
     });
 };
