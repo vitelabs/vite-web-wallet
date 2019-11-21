@@ -9,6 +9,10 @@ export default {
         value: {
             type: Boolean,
             default: false
+        },
+        canClick: {
+            type: Boolean,
+            default: true
         }
     },
     data() {
@@ -16,6 +20,9 @@ export default {
     },
     methods: {
         toggle() {
+            if (!this.canClick) {
+                return;
+            }
             this.inner_value = !this.inner_value;
             this.$emit('input', this.inner_value);
         }

@@ -5,7 +5,7 @@
                 <div class="item-tilte">
                     <img src="~h5Assets/imgs/staking_amount.svg" />{{ $t("stakingAmount") }}
                 </div>
-                <div class="bold">{{ stakingDetail.amount }}</div>
+                <div class="bold">{{ totalStakingAmount }}</div>
             </div>
             <div class="item">
                 <div class="item-tilte">
@@ -14,7 +14,7 @@
                 <div class="bold">{{ expectedDividends }}</div>
             </div>
         </div>
-
+        <!--
         <div class="operation">
             <div class="item">
                 <div class="item-tilte">
@@ -28,36 +28,32 @@
                 </div>
                 <div class="bold">{{ stakingDetail.withdrawTime }}</div>
             </div>
-        </div>
+        </div> -->
 
         <div class="operation">
-            <span class="item btn add" @click="showVxConfirm(1)">
+            <span class="item btn add" @click="stake">
                 {{ $t("tradeMining.add") }}
             </span>
-            <span v-show="!canCancel" class="item btn unuse">
-                {{ $t("tradeMining.withdraw") }}
-            </span>
-            <span v-show="canCancel" class="item btn cancel" @click="showVxConfirm(2)">
+            <span class="item btn cancel" @click="showVxConfirm(2)">
                 {{ $t("tradeMining.withdraw") }}
             </span>
         </div>
+
+        <stakeForMining ref="stakeForMining"></stakeForMining>
     </div>
 </template>
 
 <script>
-import date from 'utils/date';
 import bigNumber from 'utils/bigNumber';
 import { constant } from '@vite/vitejs';
+import stakeForMining from './stakeForMining';
 
 const Vite_Token_Info = constant.Vite_Token_Info;
 
 export default {
+    components: { stakeForMining },
     mounted() {
         this.$store.dispatch('getCurrentPledgeForVxSum');
-        this.$store.dispatch('startLoopHeight');
-    },
-    destroyed() {
-        this.$store.dispatch('stopLoopHeight');
     },
     props: {
         showVxConfirm: {
@@ -69,31 +65,19 @@ export default {
         stakingObj() {
             return this.$store.state.exchangeMine.userPledgeInfo;
         },
-        height() {
-            return this.$store.state.env.currentHeight;
-        },
-        canCancel() {
-            return this.stakingObj.withdrawHeight <= this.height;
-        },
-        stakingDetail() {
+        totalStakingAmount() {
             if (!this.stakingObj) {
-                return {
-                    amount: '',
-                    withdrawTime: '',
-                    withdrawHeight: ''
-                };
+                return 0;
             }
-
-            return {
-                withdrawTime: date(this.stakingObj.withdrawTime * 1000,
-                    this.$i18n.locale),
-                amount: bigNumber.toBasic(this.stakingObj.amount || 0,
-                    Vite_Token_Info.decimals),
-                withdrawHeight: this.stakingObj.withdrawHeight
-            };
+            return bigNumber.toBasic(this.stakingObj.totalStakeAmount || 0, Vite_Token_Info.decimals);
         },
         expectedDividends() {
             return this.$store.getters.stakingDividends;
+        }
+    },
+    methods: {
+        stake() {
+            this.$refs.stakeForMining.show();
         }
     }
 };

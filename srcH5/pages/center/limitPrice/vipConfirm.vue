@@ -14,7 +14,7 @@
 
         <div class="__row">
             <div class="__row_t">{{ stakingText }}
-                <div v-show="!canOrder && !isVip" class="__err">{{ $t('trade.vipConfirm.noBalance') }}</div>
+                <div v-show="!canOrder && !isVip" class="__err">{{ $t('tradeVip.vipConfirm.noBalance') }}</div>
                 <div v-show="!canOrder && isVip" class="__err">{{ $t('walletQuota.list.unexpired') }}</div>
             </div>
             <div class="__input_row __unuse_input">10,000 VITE</div>
@@ -26,9 +26,9 @@
 
 <script>
 import { constant } from '@vite/vitejs';
-
 import confirm from 'h5Components/confirm/confirm.vue';
 import { getAgentVipPledgeInfo } from 'services/viteServer';
+import { abiList } from 'services/apiServer';
 import date from 'utils/date';
 import BigNumber from 'utils/bigNumber';
 import statistics from 'utils/statistics';
@@ -67,7 +67,7 @@ export default {
         },
         canOrder() {
             if (this.isVip) {
-                return this.stakingObj && this.stakingObj.withdrawHeight <= this.height;
+                return this.stakingObj && this.stakingObj.expirationHeight <= this.height;
             }
 
             if (!this.rawBalance || !+this.rawBalance.availableExAmount) {
@@ -92,13 +92,13 @@ export default {
             return this.$store.state.exchangeFee.isVip;
         },
         confirmTitle() {
-            return this.isVip ? this.$t('trade.vipConfirm.cancelVip') : this.$t('trade.vipConfirm.openVip');
+            return this.isVip ? this.$t('tradeVip.vipConfirm.cancelVip') : this.$t('tradeVip.vipConfirm.openVip');
         },
         stakingText() {
-            return this.isVip ? this.$t('trade.vipConfirm.cancelStakingAmount') : this.$t('trade.vipConfirm.openStakingAmount');
+            return this.isVip ? this.$t('tradeVip.vipConfirm.cancelStakingAmount') : this.$t('tradeVip.vipConfirm.openStakingAmount');
         },
         hint() {
-            return this.isVip ? this.$t('trade.vipConfirm.cancelHint', { time: this.stakingObj.withdrawTime ? date(this.stakingObj.withdrawTime * 1000, 'zh') : '' }) : this.$t('trade.vipConfirm.openHint');
+            return this.isVip ? this.$t('tradeVip.vipConfirm.cancelHint', { time: this.stakingObj.expirationTime ? date(this.stakingObj.expirationTime * 1000, 'zh') : '' }) : this.$t('tradeVip.vipConfirm.openHint');
         }
     },
     watch: {
@@ -111,31 +111,51 @@ export default {
     },
     methods: {
         changeVip() {
-            const actionType = this.isVip ? 2 : 1;
+            statistics.event(`H5${ this.$route.name }`, `VIP-${ this.isVip ? 'cancel' : 'open' }`, this.accountAddr || '');
+            const func = this.isVip ? this.cancelVIP : this.openVIP;
             this.isLoading = true;
 
-            statistics.event(`H5${ this.$route.name }`, `VIP-${ actionType === 2 ? 'cancel' : 'open' }`, this.accountAddr || '');
-
-            sendTx({
-                methodName: 'dexFundPledgeForVip',
-                data: {
-                    amount: '0',
-                    actionType
-                },
-                vbExtends: {
-                    'type': 'dexFundPledgeForVip',
-                    'amount': '10,000 VITE'
-                }
-            }).then(() => {
+            func().then(() => {
                 this.isLoading = false;
-                // this.$toast(this.isVip ? this.$t('trade.vipConfirm.cancelSuccess') : this.$t('trade.vipConfirm.openSuccess'));
+                // this.$toast(this.isVip ? this.$t('tradeVip.vipConfirm.cancelSuccess') : this.$t('tradeVip.vipConfirm.openSuccess'));
                 this.close && this.close();
                 this.$store.dispatch('startLoopVip', !this.isVip);
             }).catch(err => {
                 console.warn(err);
                 this.isLoading = false;
-                // this.$toast(this.isVip ? this.$t('trade.vipConfirm.cancelFail') : this.$t('trade.vipConfirm.openFail'));
+                // this.$toast(this.isVip ? this.$t('tradeVip.vipConfirm.cancelFail') : this.$t('tradeVip.vipConfirm.openFail'));
             });
+        },
+
+        stakeForVIP({ actionType }) {
+            return sendTx({
+                abi: JSON.stringify(abiList.StakeForVIP.abi),
+                methodName: 'callContract',
+                data: {
+                    abi: abiList.StakeForVIP.abi,
+                    params: [actionType],
+                    toAddress: abiList.StakeForVIP.contractAddr
+                }
+            });
+        },
+        cancelStakeById({ id }) {
+            return sendTx({
+                abi: JSON.stringify(abiList.CancelStakeById.abi),
+                methodName: 'callContract',
+                data: {
+                    abi: abiList.CancelStakeById.abi,
+                    params: [id],
+                    toAddress: abiList.CancelStakeById.contractAddr
+                }
+            });
+        },
+        openVIP() {
+            return this.stakeForVIP({ actionType: 1 });
+        },
+        cancelVIP() {
+            return this.stakingObj.id
+                ? this.cancelStakeById({ id: this.stakingObj.id })
+                : this.stakeForVIP({ actionType: 2 });
         },
 
         fetchStakingObj() {
