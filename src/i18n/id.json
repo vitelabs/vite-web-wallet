@@ -821,8 +821,8 @@
             "tokenTab": "Token Details",
             "operatorTab": "Detail Operator"
         },
-        "depthBuyMiningPrice": "Above this line is valid mining area",
-        "depthSellMiningPrice": "此线下方为有效挂单区域"
+        "depthBuyMiningPrice": "Mining Range Above",
+        "depthSellMiningPrice": "Mining Range Below"
     },
     "trade": {
         "more": "More",
