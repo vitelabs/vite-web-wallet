@@ -108,7 +108,7 @@ export default {
     }
 
     .item {
-        padding: 20px 6px 15px;
+        padding: 20px 6px 14px;
         .item-title {
             color: rgba(62,74,89,0.6);
             margin-bottom: 6px;

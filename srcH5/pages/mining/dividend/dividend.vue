@@ -177,7 +177,7 @@ export default {
     background: rgba(0,122,255,0.06);
     border-radius: 2px;
     line-height: 16px;
-    margin: 16px 0;
+    margin: 14px 0;
     .item {
         padding: 14px;
         &:first-child {

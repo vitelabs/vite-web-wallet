@@ -14,49 +14,30 @@
                 <div class="bold">{{ expectedDividends }}</div>
             </div>
         </div>
-        <!--
-        <div class="operation">
-            <div class="item">
-                <div class="item-tilte">
-                    <img src="~h5Assets/imgs/snapshot.svg" />{{ $t("withdrawHeight") }}
-                </div>
-                <div class="bold">{{ stakingDetail.withdrawHeight }}</div>
-            </div>
-            <div class="item">
-                <div class="item-tilte">
-                    <img src="~h5Assets/imgs/staking_time.svg" />{{ $t("walletQuota.list.withdrawTime") }}
-                </div>
-                <div class="bold">{{ stakingDetail.withdrawTime }}</div>
-            </div>
-        </div> -->
 
         <div class="operation">
-            <span class="item btn add" @click="stake">
+            <span class="item btn add" @click="addStaking">
                 {{ $t("tradeMining.add") }}
             </span>
-            <span class="item btn cancel" @click="showVxConfirm(2)">
-                {{ $t("tradeMining.withdraw") }}
+            <span class="item btn cancel" @click="goTradeMiningList">
+                {{ $t("tradeMining.withdrawList") }}
             </span>
         </div>
-
-        <stakeForMining ref="stakeForMining"></stakeForMining>
     </div>
 </template>
 
 <script>
 import bigNumber from 'utils/bigNumber';
 import { constant } from '@vite/vitejs';
-import stakeForMining from './stakeForMining';
 
 const Vite_Token_Info = constant.Vite_Token_Info;
 
 export default {
-    components: { stakeForMining },
     mounted() {
         this.$store.dispatch('getCurrentPledgeForVxSum');
     },
     props: {
-        showVxConfirm: {
+        addStaking: {
             type: Function,
             default: () => {}
         }
@@ -76,8 +57,8 @@ export default {
         }
     },
     methods: {
-        stake() {
-            this.$refs.stakeForMining.show();
+        goTradeMiningList() {
+            this.$router.push({ name: 'miningStakingList' });
         }
     }
 };
