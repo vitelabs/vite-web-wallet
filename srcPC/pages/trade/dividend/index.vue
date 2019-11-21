@@ -4,27 +4,31 @@
         <pool></pool>
         <section-title :title="$t('tradeDividend.listTitle')" :help="$t('tradeDividend.help')"></section-title>
         <div class="content">
-            <div class="my-divident">
-                <div class="item">
-                    <div class="item-title">{{ $t('tradeDividend.price') }}</div>
-                    <div class="item-amount">{{ myFullBtcIncome }}</div>
-                    <div class="item-price">{{ myFullIncome }}</div>
-                </div>
+            <div class="divident-wrapper">
+                <div class="my-divident">
+                    <div class="item">
+                        <div class="item-title">{{ $t('tradeDividend.price') }}</div>
+                        <div class="item-amount">{{ myFullBtcIncome }}</div>
+                        <div class="item-price">{{ myFullIncome }}</div>
+                    </div>
 
-                <div class="item __pointer" v-click-outside="hideMyList"  @click.stop="showMyList(tokenType)"
-                     v-for="tokenType in ['VITE', 'BTC', 'ETH', 'USDT']" :key="tokenType">
-                    <div class="item-title">{{ tokenType }}</div>
-                    <div class="item-amount">
-                        {{ myDividend[tokenType] ? formatNum(myDividend[tokenType].dividendAmount, tokenType) : 0 }}
-                        <span v-show="isShowMyDividendList(tokenType)" class="down-icon"></span>
-                        <div class="item-content" v-show="isShowMyDividendList(tokenType) && isShowMyList === tokenType">
-                            <div class="row" v-for="(dividentItem, i) in getMyList(tokenType)" :key="i">
-                                <span class="symbol">{{ dividentItem.tokenSymbol }}: </span>
-                                <span class="amount">{{ formatNum(dividentItem.amount, tokenType) }}</span>
+                    <div class="item __pointer" v-click-outside="hideMyList"  @click.stop="showMyList(tokenType)"
+                         v-for="tokenType in ['BTC', 'ETH', 'USDT']" :key="tokenType">
+                        <div class="item-title">{{ tokenType }}</div>
+                        <div class="item-amount">
+                            {{ myDividend[tokenType] ? formatNum(myDividend[tokenType].dividendAmount, tokenType) : 0 }}
+                            <span v-show="isShowMyDividendList(tokenType)" class="down-icon"></span>
+                            <div class="item-content" v-show="isShowMyDividendList(tokenType) && isShowMyList === tokenType">
+                                <div class="row" v-for="(dividentItem, i) in getMyList(tokenType)" :key="i">
+                                    <span class="symbol">{{ dividentItem.tokenSymbol }}: </span>
+                                    <span class="amount">{{ formatNum(dividentItem.amount, tokenType) }}</span>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
+
+                <locking></locking>
             </div>
 
             <wallet-table class="dividend-table tb" :clickRow="clickRow"
@@ -32,7 +36,7 @@
                 <div class="slot-row __tb_row __tb_content_row" v-if="activeRow" :slot="`${activeIndex}Row`">
                     <div class="__tb_cell"></div>
                     <div class="__tb_cell"></div>
-                    <div class="__tb_cell" v-for="tokenType in ['VITE', 'BTC', 'ETH', 'USDT']" :key="tokenType">
+                    <div class="__tb_cell" v-for="tokenType in ['BTC', 'ETH', 'USDT']" :key="tokenType">
                         <div v-for="(item, i) in activeRow[tokenType] ? activeRow[tokenType].tokenDividends : []" :key="i" >
                             {{ item.tokenSymbol + ' ' + formatNum(item.amount, tokenType) }}
                         </div>
@@ -40,8 +44,6 @@
                     <div class="__tb_cell"></div>
                 </div>
 
-                <span v-for="(item, i) in contentList" :key="i" :slot="`${i}VITEAfter`"
-                      class="arrow-icon" :class="{'active': activeIndex === i}"></span>
                 <span v-for="(item, i) in contentList" :key="i" :slot="`${i}BTCAfter`"
                       class="arrow-icon" :class="{'active': activeIndex === i}"></span>
                 <span v-for="(item, i) in contentList" :key="i" :slot="`${i}ETHAfter`"
@@ -66,9 +68,10 @@ import date from 'utils/date';
 import bigNumber from 'utils/bigNumber';
 import openUrl from 'utils/openUrl';
 import sectionTitle from './sectionTitle';
+import locking from './locking';
 
 export default {
-    components: { sectionTitle, walletTable, pagination, pool },
+    components: { sectionTitle, walletTable, pagination, pool, locking },
     mounted() {
         this.fetchList();
     },
@@ -98,9 +101,6 @@ export default {
             }, {
                 text: this.$t('tradeDividend.VX'),
                 cell: 'vxQuantity'
-            }, {
-                text: `VITE ${ this.$t('tradeDividend.amount') }`,
-                cell: 'VITE'
             }, {
                 text: `BTC ${ this.$t('tradeDividend.amount') }`,
                 cell: 'BTC'
@@ -267,15 +267,18 @@ export default {
     width: 100%;
     height: 100%;
     box-shadow: 0px 2px 10px 1px rgba(176,192,237,0.42);
-    .my-divident {
+    .divident-wrapper {
         background: url('~assets/imgs/mint_pledge_bg.png') rgba(234,248,255,0.2);
         background-size: 100% 100%;
+
+    }
+    .my-divident {
+        border-bottom: 1px solid rgba(227, 235, 245, 0.6);
         font-size: 12px;
         font-family: $font-normal;
         line-height: 16px;
         display: flex;
         flex-direction: row;
-
         .item {
             flex: 1;
             box-sizing: border-box;

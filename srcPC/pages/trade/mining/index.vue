@@ -77,10 +77,10 @@
 <script>
 import openUrl from 'utils/openUrl';
 import { miningTrade, miningPledge, getInviteMiningDetail, getOrderMining } from 'services/trade';
-import inviteMinComp from './invite.vue';
+import inviteMinComp from './invite/invite.vue';
 import orderMinComp from './order.vue';
 import tradeMinComp from './trade.vue';
-import stakingMinComp from './staking.vue';
+import stakingMinComp from './staking/staking.vue';
 
 export default {
     components: {
@@ -91,7 +91,6 @@ export default {
     },
     data() {
         return {
-            currVxMineInfo: null,
             tradeMiningTotal: 0,
             stakingMiningTotal: 0,
             inviteMiningTotal: 0,
@@ -136,7 +135,7 @@ export default {
             Promise.all([
                 miningTrade({ address }).then(data => (this.tradeMiningTotal = data.miningTotal)),
                 miningPledge({ address }).then(data => (this.stakingMiningTotal = data.miningTotal)),
-                getInviteMiningDetail({ address }).then(data => (this.inviteMiningTotal = data.miningTotal)),
+                getInviteMiningDetail({ address }).then(data => (this.inviteMiningTotal = data.allMiningTotal)),
                 getOrderMining({ address }).then(data => (this.orderMiningTotal = data.miningTotal))
             ]);
         },
@@ -262,6 +261,7 @@ export default {
         .amount {
             font-size: 16px;
             color: #1d2024;
+            line-height: 18px;
         }
     }
 }

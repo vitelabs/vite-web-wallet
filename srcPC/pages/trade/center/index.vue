@@ -27,8 +27,6 @@ import orderTab from './orderTab';
 export default {
     components: { layout, depth, market, latestTx, limitPrice, centerHead, centerView, orderTab },
     mounted() {
-        this.$store.dispatch('exFetchVip');
-        this.$store.dispatch('exFetchSVip');
         this.$store.dispatch('exFetchActiveTxPair');
         this.$store.dispatch('startLoopDexFundeUnreceived');
         this.$store.dispatch('getMiningSettingInfo');
