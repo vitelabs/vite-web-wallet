@@ -5,7 +5,7 @@
             <div class="my-dividend">
                 <div class="dividend-item" v-for="item in typeList" :key="item.name">
                     <span class="item-title">
-                        <img :src="item.icon" /> {{ $t('tradeMining.dividends')}}
+                        <img :src="item.h5Icon" /> {{ $t('tradeMining.dividends')}}
                     </span>
                     <span class="item-dividend">{{ estimateInfo[item.name] || '--' }}</span>
                 </div>
