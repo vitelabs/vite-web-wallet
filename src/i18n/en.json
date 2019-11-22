@@ -1347,7 +1347,9 @@
         "title": "Dividends",
         "poolTitle": "Dividend Pool ({token})",
         "myDividendTitle": "Total Estimated Value of Dividends ({token})",
-        "listTitle": "Dividend Details"
+        "listTitle": "Dividend Details",
+        "lockingTitle": "我的锁仓",
+        "viewLink": "查看解锁明细"
     },
     "mobileMining": {
         "title": "Mining",

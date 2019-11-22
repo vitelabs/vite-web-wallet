@@ -6,17 +6,12 @@
                 <div class="list-item" v-show="contentList && contentList.length"
                      v-for="(item, i) in contentList" :key="i">
                     <div class="row">
-                        <span>{{ $t('withdrawHeight') }}</span>
-                        <span>{{ item.height }}</span>
+                        <span>{{ $t('tradeDividend.unlockList.amount') }}</span>
+                        <span class="amount">{{ item.amount }}</span>
                     </div>
                     <div class="row">
-                        <span>{{ $t('walletQuota.list.withdrawTime') }}</span>
+                        <span>{{ $t('tradeDividend.unlockList.time')}}</span>
                         <span>{{ item.time }}</span>
-                    </div>
-                    <div class="row clearfix">
-                        <span><b class="amount">{{ item.amount }}</b> VITE</span>
-                        <span class="btn" :class="{ 'unuse': !item.canCancel }"
-                              @click="clickCell(item)">{{ $t("tradeMining.withdraw") }}</span>
                     </div>
                 </div>
             </div>
@@ -24,31 +19,21 @@
                 <loading loadingType="dot" class="ex-center-loading"></loading>
             </div>
         </list-view>
-
-        <cancel-staking ref="cancelStaking"></cancel-staking>
     </div>
 </template>
 
 <script>
-import { constant } from '@vite/vitejs';
 import date from 'utils/date';
 import bigNumber from 'utils/bigNumber';
-import { getAgentMiningPledgeInfo } from 'services/viteServer';
+import { getVxUnlockList } from 'services/viteServer';
 import noData from 'h5Components/noData';
 import listView from 'h5Components/listView.vue';
 import loading from 'components/loading';
-import cancelStaking from './cancelStaking';
-
-const Vite_Token_Info = constant.Vite_Token_Info;
 
 export default {
-    components: { listView, noData, loading, cancelStaking },
+    components: { listView, noData, loading },
     beforeMount() {
-        this.$store.dispatch('startLoopHeight');
         this.init();
-    },
-    destroyed() {
-        this.$store.dispatch('stopLoopHeight');
     },
     data() {
         return {
@@ -60,9 +45,6 @@ export default {
         };
     },
     computed: {
-        height() {
-            return this.$store.state.ledger.currentHeight;
-        },
         address() {
             return this.$store.getters.activeAddr;
         },
@@ -70,26 +52,14 @@ export default {
             const list = [];
             this.list.forEach(item => {
                 list.push({
-                    time: date(item.expirationTime * 1000, 'zh'),
-                    amount: bigNumber.toBasic(item.stakeAmount, Vite_Token_Info.decimals),
-                    height: item.expirationHeight,
-                    canCancel: bigNumber.compared(item.expirationHeight, this.currentHeight) <= 0,
-                    rawData: item
+                    amount: `${ bigNumber.toBasic(item.amount, this.vxTokenDecimals) } VX`,
+                    time: date(item.expirationTime * 1000, 'zh')
                 });
             });
             return list;
         }
     },
     methods: {
-        clickCell(item) {
-            if (!item.canCancel) {
-                return;
-            }
-
-            this.$refs.cancelStaking.show(item, () => {
-                this.init();
-            });
-        },
         init() {
             this.list = [];
             this.pageIndex = -1;
@@ -114,15 +84,15 @@ export default {
 
             this.isLoading = true;
 
-            getAgentMiningPledgeInfo(this.address, pageIndex, 10).then(({ totalStakeCount, stakeList }) => {
+            getVxUnlockList(this.address, pageIndex, 10).then(({ count, unlocks }) => {
                 if (!this.isLoading || (this.isInit && this.pageIndex >= pageIndex)) {
                     console.log(this.isLoading, this.pageIndex, pageIndex);
                     return;
                 }
 
                 this.pageIndex = pageIndex;
-                this.totalNum = totalStakeCount;
-                this.list = [].concat(this.list, stakeList);
+                this.totalNum = count;
+                this.list = [].concat(this.list, unlocks);
                 this.isLoading = false;
                 this.isInit = true;
             }).catch(err => {
@@ -173,23 +143,7 @@ export default {
                 @include font-bold();
                 color: rgba(62,74,89,1);
             }
-            .btn {
-                padding: 3px 12px;
-                border-radius: 12px;
-                color: #fff;
-                background: $blue;
-                &.unuse {
-                    background: #cfcfcf;
-                }
-            }
         }
-    }
-}
-
-.cancel {
-    color: #ced1d5;
-    &.active {
-        color: #007aff;
     }
 }
 </style>

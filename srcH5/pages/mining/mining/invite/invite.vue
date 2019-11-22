@@ -33,8 +33,8 @@
                 </div>
             </div>
         </list-title>
+        <mining-trade-list v-show="!isShowMiningOrder" @setMiningTotal="setMiningTotal" @setMiningTradeTotal="setMiningTradeTotal"></mining-trade-list>
         <mining-order-list v-show="isShowMiningOrder" @setMiningOrderTotal="setMiningOrderTotal"></mining-order-list>
-        <mining-trade-list v-show="!isShowMiningOrder" @setMiningTradeTotal="setMiningTradeTotal"></mining-trade-list>
     </div>
 </template>
 
@@ -77,6 +77,9 @@ export default {
         },
         toggleMore() {
             this.isShowMore = !this.isShowMore;
+        },
+        setMiningTotal(miningTotal) {
+            this.inviteTotal = miningTotal;
         },
         setMiningTradeTotal(miningTradeTotal) {
             this.miningTradeTotal = miningTradeTotal;
