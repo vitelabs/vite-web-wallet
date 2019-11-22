@@ -40,6 +40,7 @@
 </template>
 
 <script>
+import { doUntill } from 'utils/asyncFlow';
 import { VX_TOKENID } from 'utils/constant';
 import bigNumber from 'utils/bigNumber';
 import Checkbox from 'uiKit/checkbox';
@@ -102,6 +103,12 @@ export default {
                     toAddress: abiList.SwitchConfig.contractAddr,
                     params: [ '1', !this.isAutoLock ]
                 }
+            }).then(() => {
+                doUntill({
+                    createPromise: () => this.getIsAutoLockMinedVx(),
+                    interval: 1000,
+                    times: 3
+                });
             }).catch(err => {
                 console.warn(err);
             });
