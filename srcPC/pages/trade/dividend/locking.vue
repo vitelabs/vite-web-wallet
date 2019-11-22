@@ -146,7 +146,8 @@ export default {
 @import "../components/stakingDetail.scss";
 
 .staking-detail {
-    background: none;
+    border-bottom: 1px solid rgba(227, 235, 245, 0.6);
+    background: rgba(247,249,251,1);
     .check {
         font-size: 12px;
         margin-right: 30px;
