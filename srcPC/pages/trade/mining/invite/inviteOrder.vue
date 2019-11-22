@@ -86,7 +86,6 @@ export default {
 
             getInviteOrderMining({
                 address: this.address,
-                // address: 'vite_553462bca137bac29f440e9af4ab2e2c1bb82493e41d2bc8b2',
                 offset,
                 limit: 30
             }).then(data => {

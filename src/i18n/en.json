@@ -1361,7 +1361,9 @@
         "orderTotalIncome": "Total Income ({token})",
         "fee": "Fees",
         "listTitle": "Mining History",
-        "viewLink": "Live Mining Dashboard"
+        "viewLink": "Live Mining Dashboard",
+        "inviteTradeIncome": "邀请交易挖矿明细",
+        "inviteOrderIncome": "邀请挂单挖矿明细"
     },
     "mobileBottomBar": {
         "center": "Trade",
