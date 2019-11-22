@@ -72,6 +72,10 @@ export default {
                     return;
                 }
 
+                this.$emit('setMiningTotal', data.allMiningTotal
+                    ? bigNumber.formatNum(data.allMiningTotal, 8)
+                    : 0);
+
                 this.$emit('setMiningTradeTotal', data.miningTotal
                     ? bigNumber.formatNum(data.miningTotal, 8)
                     : 0);

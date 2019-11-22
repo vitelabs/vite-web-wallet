@@ -1,10 +1,9 @@
 <template>
-    <confirm v-if="isShow" :showMask="true"
+    <confirm v-show="isShow" :showMask="true"
              :title="confirmText.title"
              :closeIcon="true" :close="close"
              :leftBtnClick="submit" :leftBtnTxt="confirmText.submit"
              :singleBtn="true" :btnUnuse="!canSubmit">
-
         <div class="__row">
             <div class="__row_t">{{ confirmText.available }}</div>
             <div class="__input_row __unuse_input __bold">
@@ -29,12 +28,13 @@
 </template>
 
 <script>
-import bigNumber from 'utils/bigNumber';
+import { VX_TOKENID } from 'utils/constant';
 import viteInput from 'components/viteInput';
-import confirm from 'components/confirm/confirm.vue';
-import { verifyAmount } from 'pcUtils/validations';
-import { initPwd } from 'pcComponents/password/index.js';
-import { lockVxForDividend } from 'pcServices/tradeOperation';
+import confirm from 'h5Components/confirm/confirm.vue';
+import bigNumber from 'utils/bigNumber';
+import sendTx from 'h5Utils/sendTx';
+import { verifyAmount } from 'h5Utils/validations';
+import { abiList } from 'services/apiServer';
 
 export default {
     components: { confirm, viteInput },
@@ -49,7 +49,7 @@ export default {
     },
     computed: {
         vxTokenInfo() {
-            return this.$store.getters.vxTokenInfo || {};
+            return this.$store.state.env.tokenMap[VX_TOKENID];
         },
         vxTokenDecimals() {
             return this.vxTokenInfo.decimals;
@@ -126,15 +126,18 @@ export default {
             const actionType = this.isLockVX ? 1 : 2;
             const amount = this.isAll ? this.availableAmount : bigNumber.toMin(this.amount, this.vxTokenDecimals);
 
-            initPwd({
-                submit: () => {
-                    lockVxForDividend({ actionType, amount }).then(() => {
-                        this.$toast(this.$t('hint.operateSuccess'));
-                        this.close();
-                    }).catch(err => {
-                        this.$toast(this.$t('hint.operateFail'), err);
-                    });
+            sendTx({
+                abi: JSON.stringify(abiList.LockVxForDividend.abi),
+                methodName: 'callContract',
+                data: {
+                    abi: abiList.LockVxForDividend.abi,
+                    toAddress: abiList.LockVxForDividend.contractAddr,
+                    params: [ actionType, amount ]
                 }
+            }).then(() => {
+                this.close();
+            }).catch(err => {
+                console.warn(err);
             });
         }
     }
@@ -146,7 +149,6 @@ export default {
     color: #007AFF;
     font-size: 12px;
     margin: 0 15px;
-    cursor: pointer;
     .all {
         border-bottom: 1px dashed #007AFF;
     }
