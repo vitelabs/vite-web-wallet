@@ -39,6 +39,7 @@
 </template>
 
 <script>
+import { doUntill } from 'utils/asyncFlow';
 import bigNumber from 'utils/bigNumber';
 import Checkbox from 'uiKit/checkbox';
 import tooltips from 'components/tooltips';
@@ -125,6 +126,11 @@ export default {
                 }
             }).then(() => {
                 this.$toast(this.$t('hint.operateSuccess'));
+                doUntill({
+                    createPromise: () => this.getIsAutoLockMinedVx(),
+                    interval: 1000,
+                    times: 3
+                });
             }).catch(err => {
                 this.$toast(this.$t('hint.operateFail'), err);
             });

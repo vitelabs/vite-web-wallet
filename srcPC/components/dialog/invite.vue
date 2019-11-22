@@ -88,13 +88,11 @@ export default {
                         createPromise: () => this.getCode(),
                         interval: 1000,
                         times: 3
-                    })
-                        .then(res => {
-                            console.log(res);
-                        })
-                        .catch(e => {
-                            this.$toast(this.$t('assets.invite.noResult'), e);
-                        });
+                    }).then(res => {
+                        console.log(res);
+                    }).catch(e => {
+                        this.$toast(this.$t('assets.invite.noResult'), e);
+                    });
                 })
                 .catch(e => {
                     this.$toast(this.$t('assets.invite.failToast'), e);
