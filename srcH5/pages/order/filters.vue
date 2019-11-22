@@ -113,7 +113,10 @@ export default {
     },
     computed: {
         filterTypeDate() {
-            return this.date ? this.$t(`mobileOrder.${ this.date }`) : this.$t('mobileOrder.filterDate');
+            if (this.date && this.date !== 'all') {
+                return this.$t(`mobileOrder.${ this.date }`);
+            }
+            return this.$t('mobileOrder.filterDate');
         },
         filterTypeToken() {
             return this.ttoken && this.ftoken ? `${ this.ftoken }/${ this.ttoken }` : this.$t('mobileOrder.filterToken');
@@ -125,10 +128,10 @@ export default {
             return this.side === '0' ? this.$t('tradeOrderHistory.filter.buy') : this.$t('tradeOrderHistory.filter.sell');
         },
         filterTypeStatus() {
-            if (this.status === '') {
-                return this.$t('mobileOrder.all');
+            if (this.status && this.status !== 'all') {
+                return this.$t(`tradeOrderHistory.status.${ this.status }`);
             }
-            return this.$t(`tradeOrderHistory.status.${ this.status }`);
+            return this.$t('tradeOrderHistory.filter.status');
         },
 
         activeAddr() {
