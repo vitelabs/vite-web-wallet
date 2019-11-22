@@ -6,17 +6,14 @@
                 <div class="list-item" v-show="contentList && contentList.length"
                      v-for="(item, i) in contentList" :key="i">
                     <div class="row">
-                        <span>{{ $t('withdrawHeight') }}</span>
-                        <span>{{ item.height }}</span>
+                        <span>{{ $t('withdrawHeight') }}: {{ item.height }}</span>
+                        <span><b class="amount">{{ item.amount }}</b> VITE</span>
                     </div>
                     <div class="row">
-                        <span>{{ $t('walletQuota.list.withdrawTime') }}</span>
-                        <span>{{ item.time }}</span>
-                    </div>
-                    <div class="row clearfix">
-                        <span><b class="amount">{{ item.amount }}</b> VITE</span>
+                        <span>{{ $t('walletQuota.list.withdrawTime') }}: {{ item.time }}</span>
                         <span class="btn" :class="{ 'unuse': !item.canCancel }"
-                              @click="clickCell(item)">{{ $t("tradeMining.withdraw") }}</span>
+                              @click="clickCell(item)">
+                            {{ $t("tradeMining.withdraw") }}</span>
                     </div>
                 </div>
             </div>
@@ -71,7 +68,7 @@ export default {
             this.list.forEach(item => {
                 list.push({
                     time: date(item.expirationTime * 1000, 'zh'),
-                    amount: bigNumber.toBasic(item.stakeAmount, Vite_Token_Info.decimals),
+                    amount: bigNumber.toBasic(item.stakeAmount, Vite_Token_Info.decimals, 4),
                     height: item.expirationHeight,
                     canCancel: bigNumber.compared(item.expirationHeight, this.currentHeight) <= 0,
                     rawData: item
@@ -156,9 +153,9 @@ export default {
     }
 
     .list-item {
-        font-size: 14px;
+        font-size: 12px;
         color: rgba(62,74,89,0.6);
-        line-height: 18px;
+        line-height: 16px;
         padding-top: 13px;
         margin: 0 24px;
         border-bottom: 1px solid #D3DFEF;
@@ -169,7 +166,7 @@ export default {
             align-items: center;
             padding-bottom: 10px;
             .amount {
-                font-size: 16px;
+                font-size: 14px;
                 @include font-bold();
                 color: rgba(62,74,89,1);
             }
