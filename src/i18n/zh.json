@@ -1344,7 +1344,9 @@
         "title": "分红",
         "poolTitle": "手续费分红池({token})",
         "myDividendTitle": "我的分红收益总估值({token})",
-        "listTitle": "分红明细"
+        "listTitle": "分红明细",
+        "lockingTitle": "我的锁仓",
+        "viewLink": "查看解锁明细"
     },
     "mobileMining": {
         "title": "挖矿",
