@@ -72,13 +72,11 @@ export default {
                         createPromise: () => this.getInviteeCode(),
                         interval: 1000,
                         times: 3
-                    })
-                        .then(res => {
-                            console.log('code', res);
-                        })
-                        .catch(e => {
-                            this.$toast(this.$t('assets.invite.noResult'), e);
-                        });
+                    }).then(res => {
+                        console.log('code', res);
+                    }).catch(e => {
+                        this.$toast(this.$t('assets.invite.noResult'), e);
+                    });
                 })
                 .catch(e => {
                     if (e && e.error && e.error.code === 12002) {
