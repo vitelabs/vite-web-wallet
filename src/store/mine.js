@@ -8,6 +8,7 @@ import ethIcon from 'assets/imgs/eth.svg';
 import usdIcon from 'assets/imgs/usd.svg';
 import btcIcon from 'assets/imgs/BTC.svg';
 
+import h5ViteIcon from 'h5Assets/imgs/vite.png';
 import h5EthIcon from 'h5Assets/imgs/eth.png';
 import h5UsdIcon from 'h5Assets/imgs/usd.png';
 import h5BtcIcon from 'h5Assets/imgs/btc.png';
@@ -44,7 +45,7 @@ const state = {
     showTypeList: [ {
         name: 'VITE',
         icon: viteIcon,
-        h5Icon: viteIcon
+        h5Icon: h5ViteIcon
     }, {
         name: 'BTC',
         icon: btcIcon,
