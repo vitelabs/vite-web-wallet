@@ -72,7 +72,7 @@ export default {
                     return;
                 }
 
-                this.$emit('setMiningOrderTotal', data.miningTotal
+                this.$emit('setMiningTradeTotal', data.miningTotal
                     ? bigNumber.formatNum(data.miningTotal, 8)
                     : 0);
 
@@ -90,8 +90,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-// @import "~h5Assets/scss/vars.scss";
-
 .list-wrapper-view {
     max-height: 450px;
 }
