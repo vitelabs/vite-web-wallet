@@ -8,6 +8,10 @@ import ethIcon from 'assets/imgs/eth.svg';
 import usdIcon from 'assets/imgs/usd.svg';
 import btcIcon from 'assets/imgs/BTC.svg';
 
+import h5EthIcon from 'h5Assets/imgs/eth.png';
+import h5UsdIcon from 'h5Assets/imgs/usd.png';
+import h5BtcIcon from 'h5Assets/imgs/btc.png';
+
 const Vite_Token_Info = constant.Vite_Token_Info;
 const VX_Decimals = 18;
 const typeList = {
@@ -39,16 +43,20 @@ const state = {
     currVxMineInfo: null,
     showTypeList: [ {
         name: 'VITE',
-        icon: viteIcon
+        icon: viteIcon,
+        h5Icon: viteIcon
     }, {
         name: 'BTC',
-        icon: btcIcon
+        icon: btcIcon,
+        h5Icon: h5BtcIcon
     }, {
         name: 'ETH',
-        icon: ethIcon
+        icon: ethIcon,
+        h5Icon: h5EthIcon
     }, {
         name: 'USDT',
-        icon: usdIcon
+        icon: usdIcon,
+        h5Icon: h5UsdIcon
     } ],
 
     tradeMiningSymbols: [],

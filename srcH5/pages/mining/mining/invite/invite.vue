@@ -11,7 +11,7 @@
                 </div>
                 <div class="item">
                     <div class="item-title">
-                        <img src="~h5Assets/imgs/invite.svg" />{{ $t("inviteMining.inviteTradeIncome") }}
+                        <img src="~h5Assets/imgs/trade-mining.png" />{{ $t("inviteMining.inviteTradeIncome") }}
                     </div>
                     <div class="bold">{{ miningTradeTotal }}</div>
                 </div>
@@ -19,7 +19,7 @@
             <div class="operation">
                 <div class="item">
                     <div class="item-title">
-                        <img src="~h5Assets/imgs/invite.svg" />{{ $t("inviteMining.inviteOrderIncome") }}
+                        <img src="~h5Assets/imgs/order-mining.png" />{{ $t("inviteMining.inviteOrderIncome") }}
                     </div>
                     <div class="bold">{{ miningOrderTotal }}</div>
                 </div>

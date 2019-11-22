@@ -6,7 +6,7 @@
             <div class="my-dividend">
                 <div class="dividend-item" v-for="item in typeList" :key="item.name">
                     <div class="item-title">
-                        <img :src="item.icon" /> {{ $t('tradeMining.fee') }}
+                        <img :src="item.h5Icon" /> {{ $t('tradeMining.fee') }}
                         <span>
                             {{ expectedDividends && expectedDividends[item.name] ? expectedDividends[item.name].fee : 0 }}
                             {{ item.name }}
