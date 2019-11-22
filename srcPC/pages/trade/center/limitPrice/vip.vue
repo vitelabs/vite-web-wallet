@@ -2,92 +2,33 @@
     <div class="vip-container">
         <span class="vip svip" v-if="isSVip"></span>
         <span class="vip" :class="{ active: isVip }" v-else></span>
-        <span
-            class="vip-operate __pointer"
-            @click="showSVipConfirm"
-            v-if="isSVip && !isVip"
-        >
+        <span class="vip-operate __pointer" @click="goTradeVip" v-if="isSVip && !isVip">
             {{ $t("trade.limitPrice.cancelVip") }}
         </span>
-        <VSwitch
-            v-else
-            class="vip-operate drop_menu"
-            @input="action"
-            :optList="optList"
-            :title="isVip && isSVip ? $t('trade.svipConfirm.cancel') : $t('trade.svipConfirm.open')"
-        />
+        <span class="vip-operate drop_menu __pointer" @click="goTradeVip">
+            {{ isVip && isSVip ? $t('tradeVip.title') : $t('tradeVip.open') }}
+        </span>
     </div>
 </template>
-<script>
-import vipConfirm from './vipConfirm.vue';
-import { insertTo } from 'pcUtils/insertTo';
-import statistics from 'utils/statistics';
-import { execWithValid } from 'pcUtils/execWithValid';
-import VSwitch from 'uiKit/switch';
-import component2function from 'pcComponents/dialog/utils';
-import svipComp from './svipConfirm';
-import { doUntill } from 'utils/asyncFlow';
 
+<script>
 export default {
-    components: { VSwitch },
     computed: {
         isVip() {
             return this.$store.state.exchangeFee.isVip;
         },
         isSVip() {
             return this.$store.state.exchangeFee.isSVip;
-        },
-        optList() {
-            return [
-                {
-                    name: this.isVip && this.isSVip ? this.$t('trade.vipConfirm.cancelVip') : this.$t('trade.svipConfirm.openVip'),
-                    value: this.isVip && this.isSVip ? 'vip' : 'svip'
-                },
-                {
-                    name:
-                        !this.isVip && !this.isSVip
-                            ? this.$t('trade.vipConfirm.openVip')
-                            : this.isVip && !this.isSVip
-                                ? this.$t('trade.vipConfirm.cancelVip')
-                                : this.$t('trade.svipConfirm.cancelVip'),
-                    value: this.isVip && this.isSVip ? 'svip' : 'vip'
-                }
-            ];
         }
     },
     methods: {
-        action(item) {
-            if (item === 'vip') {
-                this._showVipConfirm();
-            } else {
-                this.showSVipConfirm();
-            }
-        },
-        _showVipConfirm() {
-            statistics.event(this.$route.name,
-                `switchVIP-${ this.isVip ? 'cancel' : 'open' }`,
-                this.address || '');
-            this.showVipConfirm();
-        },
-        hideVipConfirm() {
-            this.vipConfirm
-                && this.vipConfirm.destroyInstance()
-                && (this.vipConfirm = null);
-        },
-        showVipConfirm: execWithValid(function () {
-            this.vipConfirm = insertTo(vipConfirm, {
-                close: () => {
-                    this.hideVipConfirm();
-                }
-            });
-        }),
-        showSVipConfirm: execWithValid(function () {
-            component2function(svipComp)().then(() =>
-                doUntill({ createPromise: () => this.$store.dispatch('exFetchSVip'), interval: 1000, times: 3 }));
-        })
+        goTradeVip() {
+            this.$router.push({ name: 'tradeVip' });
+        }
     }
 };
 </script>
+
 <style lang="scss" scoped>
 @import "~assets/scss/vars.scss";
 .vip-container {
@@ -98,14 +39,9 @@ export default {
         color: #9EA4AD;
         font-size: 12px;
         @include font-family-normal();
-
-        /deep/ .list{
-            width: 120px!important;
-            color: #9EA4AD;
-            font-size: 12px;
-        }
         &.drop_menu {
             border: none;
+            margin-left: 10px;
         }
         &.active {
             color: #007aff;

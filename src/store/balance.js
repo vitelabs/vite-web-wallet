@@ -1,19 +1,25 @@
 import { timer } from 'utils/asyncFlow';
 import BigNumber from 'utils/bigNumber';
 import { getAccountDexBalance } from 'services/viteServer';
+import { VX_TOKENID } from 'utils/constant';
 
 const loopTime = 2 * 1000;
 let balanceTimer = null;
 let address = null;
 
-const state = { balanceList: {} };
+const state = {
+    balanceList: {},
+    vxBalanceInfo: {}
+};
 
 const mutations = {
     setExchangeBalance(state, balanceList) {
         state.balanceList = balanceList;
+        state.vxBalanceInfo = state.balanceList ? state.balanceList[VX_TOKENID] || {} : {};
     },
     clearDexBalance(state) {
         state.balanceList = {};
+        state.vxBalanceInfo = {};
     }
 };
 

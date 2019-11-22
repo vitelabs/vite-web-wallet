@@ -141,7 +141,8 @@ const actions = {
     },
     getAgentMiningPledgeInfo({ commit, rootGetters }) {
         const address = rootGetters.activeAddr;
-        return getAgentMiningPledgeInfo(address).then(data => {
+
+        return getAgentMiningPledgeInfo(address, 0).then(data => {
             if (address !== rootGetters.activeAddr) {
                 return;
             }

@@ -1,14 +1,10 @@
 <template>
     <div class="trade-mining-section shadow">
         <div class="staking-detail">
-            <div class="item">
-                <div>{{ $t('tradeMining.inviteCount')}}</div>
-                <div class="bold">{{ inviter ? inviter.inviteCount || 0 : 0 }}</div>
+            <div class="item no-border">
+                <div>{{ $t('inviteMining.inviteOrderIncome')}}</div>
+                <div class="bold">{{ inviteTotal || '--' }}</div>
             </div>
-            <!-- <div class="item">
-                <div>{{ $t('assets.invite.inviteBenifit') }}</div>
-                <div class="bold">{{ inviter ? inviter.miningTotal || 0 : '--' }} VX</div>
-            </div> -->
         </div>
 
         <wallet-table class="mint-trade-table no-shadow tb"
@@ -26,7 +22,7 @@
 
 <script>
 import pagination from 'components/pagination.vue';
-import { getInviteMiningDetail, getInviteInfo } from 'services/trade';
+import { getInviteOrderMining } from 'services/trade';
 import walletTable from 'components/table/index.vue';
 import bigNumber from 'utils/bigNumber';
 import date from 'utils/date';
@@ -35,7 +31,6 @@ export default {
     components: { walletTable, pagination },
     data() {
         return {
-            inviter: null,
             inviteCurrentPage: 0,
             inviteTotal: 0,
             inviteListTotal: 0,
@@ -46,8 +41,8 @@ export default {
                     cell: 'date'
                 },
                 {
-                    text: this.$t('tradeMining.tbHead.fee'),
-                    cell: 'fee'
+                    text: this.$t('orderMining.tbHead.ratio'),
+                    cell: 'ratio'
                 },
                 {
                     text: this.$t('tradeMining.tbHead.mining'),
@@ -58,17 +53,14 @@ export default {
     },
     beforeMount() {
         this.fetchMiningInvite();
-        this.getInviteInfo();
     },
     watch: {
         address() {
-            this.inviter = null;
             this.inviteListTotal = 0;
             this.inviteCurrentPage = 0;
             this.inviteTotal = 0;
             this.inviteList = [];
             this.fetchMiningInvite();
-            this.getInviteInfo();
         }
     },
     computed: {
@@ -76,13 +68,8 @@ export default {
             return this.inviteList.map(item => {
                 return {
                     date: date(item.date * 1000, this.$i18n.locale),
-                    fee: `${ bigNumber.formatNum(item.feeAmount || 0, 8) } ${
-                        item.miningToken
-                    }`,
-                    pledge: `${ bigNumber.formatNum(item.pledgeAmount || 0,
-                        8) } VITE`,
-                    mining: `${ bigNumber.formatNum(item.miningAmount || 0,
-                        8) } VX`
+                    ratio: `${ bigNumber.multi(item.miningPercent, 100, 2) }%`,
+                    mining: `${ bigNumber.formatNum(item.miningAmount || 0, 8) } VX`
                 };
             });
         },
@@ -94,39 +81,32 @@ export default {
         }
     },
     methods: {
-        getInviteInfo() {
-            getInviteInfo(this.address).then(data => {
-                this.inviter = data || null;
-            }).catch(err => {
-                console.warn(err);
-            });
-        },
         fetchMiningInvite(pageNumber) {
             const offset = pageNumber ? (pageNumber - 1) * 30 : 0;
 
-            getInviteMiningDetail({
-                address: this.address,
-                offset
-            })
-                .then(data => {
-                    if (!data) {
-                        return;
-                    }
-                    this.inviteListTotal = data.total || 0;
-                    this.inviteCurrentPage = pageNumber ? pageNumber - 1 : 0;
-                    this.inviteTotal = data.miningTotal
-                        ? bigNumber.formatNum(data.miningTotal, 8)
-                        : 0;
-                    this.inviteList = data.miningList || [];
-                })
-                .catch(err => {
-                    console.warn(err);
-                });
+            getInviteOrderMining({
+                // address: this.address,
+                address: 'vite_553462bca137bac29f440e9af4ab2e2c1bb82493e41d2bc8b2',
+                offset,
+                limit: 30
+            }).then(data => {
+                if (!data) {
+                    return;
+                }
+                this.inviteListTotal = data.total || 0;
+                this.inviteCurrentPage = pageNumber ? pageNumber - 1 : 0;
+                this.inviteTotal = data.miningTotal
+                    ? bigNumber.formatNum(data.miningTotal, 8)
+                    : 0;
+                this.inviteList = data.miningList || [];
+            }).catch(err => {
+                console.warn(err);
+            });
         }
     }
 };
 </script>
 
 <style lang="scss" scoped>
-@import "../components/stakingDetail.scss";
+@import "../../components/stakingDetail.scss";
 </style>

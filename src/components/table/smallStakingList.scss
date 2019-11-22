@@ -1,0 +1,16 @@
+.mining-small-staking-list-table {
+    min-width: 0px;
+    flex: 1;
+    @include rowWith {
+        width: 25%;
+        &:nth-child(2) {
+            width: 100px;
+        }
+        &:nth-child(3) {
+            width: 120px;
+        }
+        &:nth-child(4) {
+            width: 120px;
+        }
+    }    
+}

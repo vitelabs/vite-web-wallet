@@ -205,6 +205,7 @@ export default {
 
 <style lang="scss" scoped>
 @import "~assets/scss/vars.scss";
+
 .proxy {
     display: flex;
     flex-direction: column;
@@ -212,6 +213,7 @@ export default {
     height: 100%;
     .super-title {
         font-size: 18px;
+        @include font-family-bold();
     }
     .item {
         display: flex;

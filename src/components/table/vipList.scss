@@ -1,0 +1,23 @@
+.vip-list-table {
+    width: 100%;
+    min-width: 0;
+    min-height: 300px;
+    flex: 1;
+    @include rowWith {
+        &:first-child {
+            width: 500px;
+        }
+        &:nth-child(2) {
+            width: 70px;
+        }
+        &:nth-child(3) {
+            width: 100px;
+        }
+        &:nth-child(4) {
+            width: 200px;
+        }
+        &:nth-child(5) {
+            width: 160px;
+        }
+    }
+}

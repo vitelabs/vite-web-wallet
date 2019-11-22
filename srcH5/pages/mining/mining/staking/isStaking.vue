@@ -1,32 +1,27 @@
 <template>
     <div class="quota-detail">
-        <div v-if="!stakingObj" @click="_showVxConfirm(1)" class="no-detail __pointer">
+        <div v-if="!stakingObj" @click="addStaking" class="no-detail __pointer">
             {{ $t("tradeMining.addQuota") }}
         </div>
-        <staking-detail v-else :stakingObj="stakingObj"
-                        :showVxConfirm="_showVxConfirm"></staking-detail>
+        <staking-detail v-else :stakingObj="stakingObj" :addStaking="addStaking"></staking-detail>
+        <stakeForMining ref="stakeForMining"></stakeForMining>
     </div>
 </template>
 
 <script>
-import { insertTo } from 'h5Utils/insertTo';
-import VxConfirm from './vxConfirm.vue';
 import statistics from 'utils/statistics';
 import stakingDetail from './stakingDetail.vue';
 import { timer } from 'utils/asyncFlow';
+import stakeForMining from './stakeForMining';
 
 let stakingInfoTimer = null;
 
 export default {
-    components: { stakingDetail },
-    data() {
-        return { vxConfirm: null };
-    },
+    components: { stakeForMining, stakingDetail },
     beforeMount() {
         this.loopStakingInfo();
     },
     destroyed() {
-        this.vxConfirm && this.vxConfirm.$destroy() && (this.vxConfirm = null);
         this.stopStakingInfo();
     },
     watch: {
@@ -43,29 +38,10 @@ export default {
         }
     },
     methods: {
-        hideVxConfirm() {
-            if (!this.vxConfirm) {
-                return;
-            }
-            this.vxConfirm.destroyInstance();
-            this.vxConfirm = null;
+        addStaking() {
+            statistics.event(`H5${ this.$route.name }`, 'addQuota', this.address || '');
+            this.$refs.stakeForMining.show();
         },
-        _showVxConfirm(actionType) {
-            statistics.event(`H5${ this.$route.name }`,
-                actionType === 1 ? 'addQuota' : 'withdrawQuota',
-                this.address || '');
-            this.showVxConfirm(actionType);
-        },
-        showVxConfirm(actionType) {
-            this.vxConfirm = insertTo(VxConfirm, {
-                actionType,
-                stakingObj: this.stakingObj,
-                close: () => {
-                    this.hideVxConfirm();
-                }
-            });
-        },
-
         stopStakingInfo() {
             stakingInfoTimer && stakingInfoTimer.stop();
             stakingInfoTimer = null;

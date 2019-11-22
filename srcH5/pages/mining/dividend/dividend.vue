@@ -10,7 +10,7 @@
             </div>
 
             <div class="item my-dividend-token">
-                <div class="small-amount" v-for="tokenType in ['VITE', 'BTC', 'ETH', 'USDT']" :key="tokenType">
+                <div class="small-amount" v-for="tokenType in ['BTC', 'ETH', 'USDT']" :key="tokenType">
                     {{ myDividend[tokenType] ? formatNum(myDividend[tokenType].dividendAmount, tokenType) : 0 }} {{ tokenType }}
                 </div>
             </div>
@@ -24,7 +24,6 @@
                          v-for="(item, i) in contentList" :key="i">
                         <span class="small-item big">{{ item.date }}</span>
                         <span class="small-item big"><span class="vx-amount">{{ item.vxQuantity }}</span> VX</span>
-                        <span class="small-item">{{ item.VITE }} VITE</span>
                         <span class="small-item">{{ item.BTC }} BTC</span>
                         <span class="small-item">{{ item.ETH }} ETH</span>
                         <span class="small-item">{{ item.USDT }} USDT</span>
@@ -61,30 +60,6 @@ export default {
     computed: {
         address() {
             return this.$store.getters.activeAddr;
-        },
-        headList() {
-            return [ {
-                text: this.$t('tradeDividend.date'),
-                cell: 'date'
-            }, {
-                text: this.$t('tradeDividend.VX'),
-                cell: 'vxQuantity'
-            }, {
-                text: `VITE ${ this.$t('tradeDividend.amount') }`,
-                cell: 'VITE'
-            }, {
-                text: `BTC ${ this.$t('tradeDividend.amount') }`,
-                cell: 'BTC'
-            }, {
-                text: `ETH ${ this.$t('tradeDividend.amount') }`,
-                cell: 'ETH'
-            }, {
-                text: `USDT ${ this.$t('tradeDividend.amount') }`,
-                cell: 'USDT'
-            }, {
-                text: this.$t('tradeDividend.price'),
-                cell: 'price'
-            } ];
         },
         contentList() {
             const list = [];
@@ -202,7 +177,7 @@ export default {
     background: rgba(0,122,255,0.06);
     border-radius: 2px;
     line-height: 16px;
-    margin: 16px 0;
+    margin: 14px 0;
     .item {
         padding: 14px;
         &:first-child {
