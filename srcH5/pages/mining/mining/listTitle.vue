@@ -1,9 +1,19 @@
 <template>
-    <div class="title">{{ $t('mobileMining.listTitle') }}</div>
+    <div class="title">
+        {{ title || $t('mobileMining.listTitle') }}
+        <slot></slot>
+    </div>
 </template>
 
 <script>
-export default {};
+export default {
+    props: {
+        title: {
+            type: String,
+            default: ''
+        }
+    }
+};
 </script>
 
 <style lang="scss" scoped>
