@@ -63,3 +63,5 @@ export function initVB(meta = null) {
     vbInstance.createSession().then(() => console.log('connect uri', vbInstance.uri));
     return vbInstance;
 }
+
+// vite_f953d55bd0c6f33c211dc4b02587aa662edd9d0d7305c8ef19
