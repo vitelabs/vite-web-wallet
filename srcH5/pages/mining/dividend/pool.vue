@@ -10,7 +10,7 @@
             <template v-for="tokenType in typeList">
                 <div class="token-wrapper" v-if="tokenType.name !== 'VITE'" :key="tokenType.name">
                     <div class="token-name">
-                        <img class="icon" :src="tokenType.icon" />
+                        <img class="icon" :src="tokenType.h5Icon" />
                         <span class="token-name">{{ tokenType.name }}</span>
                     </div>
                     <div class="token-amount">

@@ -1,7 +1,7 @@
 <template>
     <div class="token-card">
         <div class="token-meta" @click="showDetail">
-            <img :src="tokenDetail.urlIcon || token.icon" class="icon"/>{{ getTokenSymbolString(token.tokenSymbol, token.index) }}
+            <img :src="tokenDetail ? tokenDetail.urlIcon || token.icon : token.icon" class="icon"/>{{ getTokenSymbolString(token.tokenSymbol, token.index) }}
         </div>
         <div class="col">
             <span>{{ $t('tokenCard.heads.balance') }}</span>
@@ -123,6 +123,10 @@ export default {
 
         fetchTokenDetail() {
             tokenDetail({ tokenId: this.token.tokenId }).then(data => {
+                if (!data) {
+                    return;
+                }
+
                 this.tokenDetail = data;
                 if (data.links) {
                     for (const key in data.links) {
