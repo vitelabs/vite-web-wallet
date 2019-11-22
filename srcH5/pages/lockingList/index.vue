@@ -126,9 +126,9 @@ export default {
     }
 
     .list-item {
-        font-size: 14px;
+        font-size: 12px;
         color: rgba(62,74,89,0.6);
-        line-height: 18px;
+        line-height: 16px;
         padding-top: 13px;
         margin: 0 24px;
         border-bottom: 1px solid #D3DFEF;
@@ -139,7 +139,7 @@ export default {
             align-items: center;
             padding-bottom: 10px;
             .amount {
-                font-size: 16px;
+                font-size: 14px;
                 @include font-bold();
                 color: rgba(62,74,89,1);
             }
