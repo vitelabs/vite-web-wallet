@@ -26,11 +26,11 @@ export default {
             inviteList: [],
             inviteHeadList: [
                 {
-                    text: this.$t('tradeMining.tbHead.mining'),
-                    cell: 'mining'
+                    text: this.$t('orderMining.tbHead.ratio'),
+                    cell: 'ratio'
                 },
-                { cell: 'date' },
-                { cell: 'ratio' }
+                { cell: 'amount' },
+                { cell: 'date' }
             ]
         };
     },
@@ -90,8 +90,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-// @import "~h5Assets/scss/vars.scss";
-
 .list-wrapper-view {
     max-height: 450px;
 }
