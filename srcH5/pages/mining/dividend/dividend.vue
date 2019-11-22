@@ -16,6 +16,8 @@
             </div>
         </div>
 
+        <locking></locking>
+
         <div class="list-wrapper">
             <div class="list-title">{{ $t('mobileDividend.listTitle') }}</div>
             <list-view class="list-wrapper-view" :reachEnd="reachEnd">
@@ -37,6 +39,7 @@
 
 <script>
 import pool from './pool.vue';
+import locking from './locking.vue';
 import { dividend } from 'services/trade';
 import date from 'utils/date';
 import bigNumber from 'utils/bigNumber';
@@ -44,7 +47,7 @@ import listView from 'h5Components/listView.vue';
 import noData from 'h5Components/noData';
 
 export default {
-    components: { noData, pool, listView },
+    components: { noData, pool, listView, locking },
     mounted() {
         this.fetchList();
     },
