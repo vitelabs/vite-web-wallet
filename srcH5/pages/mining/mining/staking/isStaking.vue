@@ -1,9 +1,9 @@
 <template>
     <div class="quota-detail">
-        <div v-if="!stakingObj" @click="addStaking" class="no-detail __pointer">
+        <div v-if="!stakingObj || +!stakingObj.totalStakeCount" @click="addStaking" class="no-detail __pointer">
             {{ $t("tradeMining.addQuota") }}
         </div>
-        <staking-detail v-else :stakingObj="stakingObj" :addStaking="addStaking"></staking-detail>
+        <staking-detail v-else :addStaking="addStaking"></staking-detail>
         <stakeForMining ref="stakeForMining"></stakeForMining>
     </div>
 </template>
@@ -34,6 +34,7 @@ export default {
             return this.$store.getters.activeAddr;
         },
         stakingObj() {
+            console.log(this.$store.state.exchangeMine.userPledgeInfo);
             return this.$store.state.exchangeMine.userPledgeInfo;
         }
     },
@@ -59,27 +60,25 @@ export default {
 <style lang="scss" scoped>
 @import "~h5Assets/scss/vars.scss";
 
-.quota-detail {
-    padding: 0px 8px 14px;
+.no-detail {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    font-size: 14px;
+    @include font-bold();
+    color: rgba(62,74,89,1);
+    line-height: 18px;
+    padding: 14px 8px;
     border-top: 1px dashed rgba(211,223,239,1);
-    .no-detail {
-        width: 100%;
-        padding-top: 14px;
-        text-align: center;
-        font-size: 14px;
-        @include font-bold();
-        color: rgba(62,74,89,1);
-        line-height: 18px;
-        &::before {
-            content: ' ';
-            display: inline-block;
-            width: 22px;
-            height: 22px;
-            background: url('~h5Assets/imgs/add_quota.svg');
-            background-size: 100% 100%;
-            margin-bottom: -5px;
-            margin-right: 5px;
-        }
+    &::before {
+        content: ' ';
+        display: inline-block;
+        width: 22px;
+        height: 22px;
+        background: url('~h5Assets/imgs/add_quota.svg');
+        background-size: 100% 100%;
+        margin-right: 5px;
     }
 }
 </style>

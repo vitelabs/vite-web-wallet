@@ -1,12 +1,9 @@
 <template>
-    <div class="my-divident">
-        <div class="item-top">
-            <span class="item-title">{{ $t('mobileDividend.lockingTitle') }}</span>
-            <span class="view-link" @click="goView">{{ $t('mobileDividend.viewLink') }}</span>
-        </div>
-
-        <div class="staking-detail">
-            <div class="operation">
+    <div>
+        <my-income class="my-divident" :isShowMiningLink="false"
+                   :isShowLockLink="true" :isShowTotal="false"
+                   :title="$t('mobileDividend.lockingTitle')">
+            <div class="head-detail">
                 <div class="item">
                     <div class="item-tilte">{{ $t("tradeDividend.lockedAmount") }}</div>
                     <div class="bold">{{ vxLocked }}</div>
@@ -15,31 +12,28 @@
                     <div class="item-tilte">{{ $t("tradeDividend.unlockAmount") }}</div>
                     <div class="bold">{{ vxUnlocking }}</div>
                 </div>
-            </div>
-
-            <div v-if="isInitAutoLock" @click="tooggleAutoLock" class="check">
-                <Checkbox v-model="isAutoLock" :canClick="false" class="check-box"></Checkbox>
-                {{ isAutoLock ? $t("tradeDividend.closeAutoLock.title") : $t("tradeDividend.openAutoLock.title") }}
-            </div>
-
-            <div class="operation no">
-                <span class="item btn add" @click="showVXConfirm(true)">
+                <div v-if="isInitAutoLock" @click="tooggleAutoLock" class="check">
+                    <Checkbox v-model="isAutoLock" :canClick="false" class="check-box"></Checkbox>
+                    {{ isAutoLock ? $t("tradeDividend.closeAutoLock.title") : $t("tradeDividend.openAutoLock.title") }}
+                </div>
+                <div class="item btn add" @click="showVXConfirm(true)">
                     {{ $t("tradeDividend.lock") }}
-                </span>
-                <span v-show="!vxBalanceInfo.vxLocked" class="item btn unuse">
+                </div>
+                <div v-show="!vxBalanceInfo.vxLocked" class="item btn unuse">
                     {{ $t("tradeDividend.unlock") }}
-                </span>
-                <span v-show="vxBalanceInfo.vxLocked" class="item btn cancel" @click="showVXConfirm(false)">
+                </div>
+                <div v-show="vxBalanceInfo.vxLocked" class="item btn cancel" @click="showVXConfirm(false)">
                     {{ $t("tradeDividend.unlock") }}
-                </span>
+                </div>
             </div>
-        </div>
+        </my-income>
 
         <lock-confirm ref="lockConfirm"></lock-confirm>
     </div>
 </template>
 
 <script>
+import myIncome from 'h5Components/myIncome/index';
 import { doUntill } from 'utils/asyncFlow';
 import { VX_TOKENID } from 'utils/constant';
 import bigNumber from 'utils/bigNumber';
@@ -49,9 +43,10 @@ import { abiList } from 'services/apiServer';
 import { getIsAutoLockMinedVx } from 'services/viteServer';
 import sendTx from 'h5Utils/sendTx';
 import lockConfirm from './lockConfirm';
+import confirm from 'h5Components/confirm/index';
 
 export default {
-    components: { Checkbox, tooltips, lockConfirm },
+    components: { myIncome, Checkbox, tooltips, lockConfirm },
     beforeMount() {
         this.getIsAutoLockMinedVx();
     },
@@ -91,7 +86,24 @@ export default {
             this.$refs.lockConfirm.show(isLockVX);
         },
         tooggleAutoLock() {
-            this.sendAutoLockTx();
+            const title = this.isAutoLock
+                ? this.$t('tradeDividend.closeAutoLock.title')
+                : this.$t('tradeDividend.openAutoLock.title');
+            const content = this.isAutoLock
+                ? this.$t('tradeDividend.closeAutoLock.text')
+                : this.$t('tradeDividend.openAutoLock.text');
+
+            confirm({
+                title,
+                content,
+                singleBtn: true,
+                leftBtn: {
+                    text: this.$t('btn.submit'),
+                    click: () => {
+                        this.sendAutoLockTx();
+                    }
+                }
+            });
         },
 
         sendAutoLockTx() {
@@ -127,10 +139,11 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "~h5Assets/scss/vars.scss";
+@import "~h5Components/myIncome/headDetail.scss";
 
 .check {
-    margin-top: 14px;
+    width: 100%;
+    margin-bottom: 7px;
     font-size: 12px;
     margin-right: 30px;
     color: rgba(62,74,89,0.45);
@@ -143,114 +156,6 @@ export default {
 
 .my-divident {
     background: rgba(0,122,255,0.06);
-    border-radius: 2px;
-    line-height: 16px;
-    margin: 14px 0;
-    .item-top {
-        padding: 14px;
-        .view-link {
-            float: right;
-            color: $blue;
-            line-height: 16px;
-            margin-top: 5px;
-            &::after {
-                width: 16px;
-                height: 16px;
-                content: ' ';
-                display: inline-block;
-                background: url('~h5Assets/imgs/right_arrow.svg');
-                background-size: 100% 100%;
-                margin-bottom: -4px;
-            }
-        }
-        &:first-child {
-            border-bottom: 1px dashed rgba(211,223,239,1);
-        }
-        .item-title {
-            color: rgba(62, 74, 89, 0.3);
-            line-height: 26px;
-        }
-        .item-amount {
-            font-size: 24px;
-            @include font-bold();
-            line-height: 30px;
-            color: rgba(36, 39, 43, 1);
-            margin-bottom: 6px;
-        }
-        .item-price {
-            line-height: 18px;
-            color: rgba(36, 39, 43, 1)
-        }
-    }
-
-    .my-dividend-token {
-        display: flex;
-        flex-direction: row;
-        flex-wrap: wrap;
-        padding-bottom: 0;
-
-        .small-amount {
-            width: 50%;
-            white-space: nowrap;
-            color: rgba(62,74,89,0.6);
-            line-height: 16px;
-            margin-bottom: 14px;
-        }
-    }
-}
-
-.staking-detail {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    font-size: 12px;
-    @include font-normal();
-    color: rgba(62,74,89,0.6);
-    line-height: 16px;
-    padding: 0 14px 14px;
-    .item {
-        flex: 1;
-        &:first-child {
-            margin-right: 23px;
-        }
-        .item-tilte {
-            margin-bottom: 5px;
-        }
-        .bold {
-            @include font-bold();
-        }
-    }
-    .operation {
-        display: flex;
-        flex-direction: row;
-        width: 100%;
-        margin-top: 14px;
-        &.no {
-            margin-top: 7px;
-        }
-    }
-    .btn {
-        display: inline-block;
-        border-radius: 2px;
-        padding: 0 13px;
-        height: 30px;
-        line-height: 30px;
-        box-sizing: border-box;
-        font-size: 14px;
-        @include font-bold();
-        text-align: center;
-        &.add {
-            color: #fff;
-            background: $blue;
-        }
-        &.cancel {
-            color: $blue;
-            border: 1px solid $blue;
-        }
-        &.unuse {
-            border: 1px solid rgba(201,217,239,1);
-            color: rgba(201,217,239,1);
-        }
-    }
+    margin-top: 14px;
 }
 </style>

@@ -1,8 +1,8 @@
 <template>
     <div class="trade-mining-section">
-        <my-income :miningTotal="`${inviteTotal}`"
+        <my-income :total="`${inviteTotal}`"
                    :title="$t('mobileMining.inviteTotalIncome', {token: 'VX'})">
-            <div class="operation border_t">
+            <div class="head-detail">
                 <div class="item">
                     <div class="item-title">
                         <img src="~h5Assets/imgs/invite.svg" />{{ $t("tradeMining.inviteCount") }}
@@ -15,8 +15,6 @@
                     </div>
                     <div class="bold">{{ miningTradeTotal }}</div>
                 </div>
-            </div>
-            <div class="operation">
                 <div class="item">
                     <div class="item-title">
                         <img src="~h5Assets/imgs/order-mining.png" />{{ $t("inviteMining.inviteOrderIncome") }}
@@ -42,7 +40,7 @@
 import { getInviteInfo } from 'services/trade';
 import listView from 'h5Components/listView.vue';
 import noData from 'h5Components/noData';
-import myIncome from '../myIncome';
+import myIncome from 'h5Components/myIncome/index';
 import miningTable from '../table';
 import listTitle from '../listTitle.vue';
 import miningOrderList from './miningOrderList.vue';
@@ -100,37 +98,7 @@ export default {
 
 <style lang="scss" scoped>
 @import "~h5Assets/scss/vars.scss";
-
-.border_t {
-    border-top: 1px dashed rgba(211,223,239,1);
-    padding-top: 14px;
-}
-.operation {
-    display: flex;
-    align-items: center;
-    flex-direction: row;
-    width: 100%;
-    .item {
-        flex: 1;
-        padding-top: 0;
-        &:first-child {
-            margin-right: 23px;
-        }
-        .item-title {
-            margin-bottom: 5px;
-            img {
-                width: 16px;
-                height: 16px;
-                margin-bottom: -4px;
-                margin-right: 2px;
-            }
-        }
-        .bold {
-            @include font-bold();
-            color: rgba(62,74,89,0.6);
-        }
-    }
-}
+@import "~h5Components/myIncome/headDetail.scss";
 
 .more {
     position: relative;

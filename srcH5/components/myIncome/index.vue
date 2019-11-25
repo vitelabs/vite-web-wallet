@@ -1,6 +1,6 @@
 <template>
     <div class="my-income">
-        <div class="item">
+        <div class="my-income-item">
             <div class="item-title">
                 <span class="item-title-text">
                     {{ title }}
@@ -9,10 +9,11 @@
                         <span v-show="isShowHelpTips" class="help-text">{{ helpTips }}</span>
                     </span>
                 </span>
-
-                <span class="view-link" @click="goView">{{ $t('mobileMining.viewLink') }}</span>
+                <span v-if="isShowMiningLink" class="view-link" @click="goView">{{ $t('mobileMining.viewLink') }}</span>
+                <span v-if="isShowLockLink" class="view-link" @click="goLockView">{{ $t('mobileDividend.viewLink') }}</span>
             </div>
-            <div class="item-amount">{{ miningTotal | formatNum }}</div>
+            <div v-if="isShowTotal" class="item-amount">{{ total | formatNum }}</div>
+            <div v-if="isShowActualTotal" class="item-actual">{{ actualTotal }}</div>
         </div>
         <slot></slot>
     </div>
@@ -27,7 +28,19 @@ export default {
             type: String,
             default: ''
         },
-        miningTotal: {
+        isShowTotal: {
+            type: Boolean,
+            default: true
+        },
+        total: {
+            type: String,
+            default: '0'
+        },
+        isShowActualTotal: {
+            type: Boolean,
+            default: false
+        },
+        actualTotal: {
             type: String,
             default: '0'
         },
@@ -38,6 +51,14 @@ export default {
         helpTips: {
             type: String,
             default: ''
+        },
+        isShowMiningLink: {
+            type: Boolean,
+            default: true
+        },
+        isShowLockLink: {
+            type: Boolean,
+            default: false
         }
     },
     data() {
@@ -46,6 +67,9 @@ export default {
     methods: {
         goView() {
             openUrl('https://vitex.net/');
+        },
+        goLockView() {
+            this.$router.push({ name: 'lockingList' });
         },
         triggerHelp() {
             this.isShowHelpTips = !this.isShowHelpTips;
@@ -66,7 +90,7 @@ export default {
     border-radius: 2px;
     line-height: 16px;
     padding: 0 6px;
-    margin: 20px 0;
+    margin-top: 20px;
     font-size: 12px;
     @include font-normal();
 
@@ -107,11 +131,10 @@ export default {
         }
     }
 
-    .item {
+    .my-income-item {
         padding: 20px 6px 14px;
         .item-title {
             color: rgba(62,74,89,0.6);
-            margin-bottom: 6px;
             .view-link {
                 float: right;
                 color: $blue;
@@ -132,6 +155,13 @@ export default {
             @include font-bold();
             line-height: 30px;
             color: rgba(62,74,89,1);
+            margin-top: 6px;
+        }
+        .item-actual {
+            font-size: 14px;
+            color: rgba(36,39,43,1);
+            line-height: 18px;
+            margin-top: 6px;
         }
     }
 }
