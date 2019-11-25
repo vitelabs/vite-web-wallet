@@ -25,5 +25,6 @@ export default {
     color: rgba(62,74,89,1);
     line-height: 20px;
     margin-bottom: 14px;
+    margin-top: 20px;
 }
 </style>
