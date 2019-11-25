@@ -1,6 +1,6 @@
 <template>
     <div class="trade-mining-section">
-        <my-income class="staking-income-wrapper" :miningTotal="`${miningTotal}`"
+        <my-income class="staking-income-wrapper" :total="`${miningTotal}`"
                    :title="$t('mobileMining.stakingTotalIncome', {token: 'VX'})">
             <is-staking></is-staking>
         </my-income>
@@ -16,7 +16,7 @@
 import { miningPledge } from 'services/trade';
 import bigNumber from 'utils/bigNumber';
 import date from 'utils/date';
-import myIncome from '../myIncome';
+import myIncome from 'h5Components/myIncome/index';
 import isStaking from './isStaking';
 import miningTable from '../table';
 import listView from 'h5Components/listView.vue';

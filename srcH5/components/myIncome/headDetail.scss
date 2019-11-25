@@ -1,0 +1,53 @@
+@import "~h5Assets/scss/vars.scss";
+
+.head-detail {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    font-size: 12px;
+    line-height: 16px;
+    color: rgba(62, 74, 89, 0.6);
+    padding: 14px 8px 0;
+    border-top: 1px dashed rgba(211,223,239,1);
+    justify-content: space-between;
+    .item {
+        margin-bottom: 14px;
+        width: 47%;
+    }
+    .item-title {
+        margin-bottom: 5px;
+        img {
+            display: inline-block;
+            width: 16px;
+            height: 16px;
+            margin-right: 2px;
+            margin-bottom: -3px;
+        }
+    }
+    .bold {
+        @include font-bold();
+    }
+    .btn {
+        display: inline-block;
+        border-radius: 2px;
+        padding: 0 13px;
+        height: 30px;
+        line-height: 30px;
+        box-sizing: border-box;
+        font-size: 14px;
+        @include font-bold();
+        text-align: center;
+        &.add {
+            color: #fff;
+            background: $blue;
+        }
+        &.cancel {
+            color: $blue;
+            border: 1px solid $blue;
+        }
+        &.unuse {
+            border: 1px solid rgba(201,217,239,1);
+            color: rgba(201,217,239,1);
+        }
+    }
+}

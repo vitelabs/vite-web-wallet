@@ -133,6 +133,7 @@ export default {
 
 <style lang="scss" scoped>
 @import "~h5Assets/scss/vars.scss";
+@import "~h5Assets/scss/listItem.scss";
 
 .mining-list-wrapper {
     height: 100%;
@@ -150,43 +151,6 @@ export default {
             position: relative;
             text-align: center;
         }
-    }
-
-    .list-item {
-        font-size: 12px;
-        color: rgba(62,74,89,0.6);
-        line-height: 16px;
-        padding-top: 13px;
-        margin: 0 24px;
-        border-bottom: 1px solid #D3DFEF;
-        .row {
-            display: flex;
-            flex-direction: row;
-            justify-content: space-between;
-            align-items: center;
-            padding-bottom: 10px;
-            .amount {
-                font-size: 14px;
-                @include font-bold();
-                color: rgba(62,74,89,1);
-            }
-            .btn {
-                padding: 3px 12px;
-                border-radius: 12px;
-                color: #fff;
-                background: $blue;
-                &.unuse {
-                    background: #cfcfcf;
-                }
-            }
-        }
-    }
-}
-
-.cancel {
-    color: #ced1d5;
-    &.active {
-        color: #007aff;
     }
 }
 </style>
