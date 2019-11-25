@@ -60,7 +60,7 @@
         "symbol": "Отправить"
     },
     "compliance": {
-        "text": "ViteX не обслуживает клиентов в следующих странах / регионах / территориях: Гонконг, Куба, Иран, Северная Корея, Крым, Судан, Малайзия, Сирия, США [включая все территории США, такие как Пуэрто-Рико, Американское Самоа, Гуам, Северный остров Мариана и Виргинские острова США (Сент-Круа, Сент-Джон и Сент-Томас)], Бангладеш, Боливия, Эквадор и Кыргызстан. Для получения дополнительной информации, пожалуйста, прочитайте наши Условия Предоставления Услуг и Политику Конфиденциальности",
+        "text": "ViteX does not serve customers in the following countries/regions/territories: China, Hong Kong, Cuba, Iran, North Korea, Crimea, Sudan, Malaysia, Syria, USA [including all USA territories like Puerto Rico, American Samoa, Guam, Northern Mariana Island, and the US Virgin Islands (St. Croix, St. John and St. Thomas)], Bangladesh, Bolivia, Ecuador, and Kyrgyzstan. For more information, please read our Terms of Service and Privacy Policy",
         "title": "Важное Замечание"
     },
     "errCode": {
