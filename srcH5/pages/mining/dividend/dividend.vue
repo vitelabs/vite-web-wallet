@@ -2,19 +2,17 @@
     <div class="trade-dividend-wrapper">
         <pool></pool>
 
-        <div class="my-divident">
-            <div class="item">
-                <div class="item-title">{{ $t('mobileDividend.myDividendTitle', { token: 'BTC' }) }}</div>
-                <div class="item-amount">{{ myFullBtcIncome }}</div>
-                <div class="item-price">{{ myFullIncome }}</div>
+        <my-income class="my-divident" :total="`${myFullBtcIncome}`" :actualTotal="`${myFullIncome}`"
+                   :isShowMiningLink="false" :isShowActualTotal="true"
+                   :title="$t('mobileDividend.myDividendTitle', { token: 'BTC' })">
+            <div class="head-detail">
+                <template v-for="tokenType in ['BTC', 'ETH', 'USDT']">
+                    <div class="item" :key="tokenType">
+                        {{ myDividend[tokenType] ? formatNum(myDividend[tokenType].dividendAmount, tokenType) : 0 }} {{ tokenType }}
+                    </div>
+                </template>
             </div>
-
-            <div class="item my-dividend-token">
-                <div class="small-amount" v-for="tokenType in ['BTC', 'ETH', 'USDT']" :key="tokenType">
-                    {{ myDividend[tokenType] ? formatNum(myDividend[tokenType].dividendAmount, tokenType) : 0 }} {{ tokenType }}
-                </div>
-            </div>
-        </div>
+        </my-income>
 
         <locking></locking>
 
@@ -45,9 +43,10 @@ import date from 'utils/date';
 import bigNumber from 'utils/bigNumber';
 import listView from 'h5Components/listView.vue';
 import noData from 'h5Components/noData';
+import myIncome from 'h5Components/myIncome/index';
 
 export default {
-    components: { noData, pool, listView, locking },
+    components: { myIncome, noData, pool, listView, locking },
     mounted() {
         this.fetchList();
     },
@@ -169,6 +168,7 @@ export default {
 
 <style lang="scss" scoped>
 @import "~h5Assets/scss/vars.scss";
+@import "~h5Components/myIncome/headDetail.scss";
 
 .trade-dividend-wrapper {
     font-size: 12px;
@@ -178,50 +178,13 @@ export default {
 
 .my-divident {
     background: rgba(0,122,255,0.06);
-    border-radius: 2px;
-    line-height: 16px;
     margin: 14px 0;
-    .item {
-        padding: 14px;
-        &:first-child {
-            border-bottom: 1px dashed rgba(211,223,239,1);
-        }
-        .item-title {
-            color: rgba(62, 74, 89, 0.3);
-            line-height: 26px;
-        }
-        .item-amount {
-            font-size: 24px;
-            @include font-bold();
-            line-height: 30px;
-            color: rgba(36, 39, 43, 1);
-            margin-bottom: 6px;
-        }
-        .item-price {
-            line-height: 18px;
-            color: rgba(36, 39, 43, 1)
-        }
-    }
-
-    .my-dividend-token {
-        display: flex;
-        flex-direction: row;
-        flex-wrap: wrap;
-        padding-bottom: 0;
-
-        .small-amount {
-            width: 50%;
-            white-space: nowrap;
-            color: rgba(62,74,89,0.6);
-            line-height: 16px;
-            margin-bottom: 14px;
-        }
-    }
 }
 
 .list-wrapper {
     @include font-normal();
     color: rgba(62,74,89,0.6);
+    margin-top: 20px;
     .list-wrapper-view {
         max-height: 450px;
     }
