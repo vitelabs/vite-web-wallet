@@ -8,7 +8,7 @@
     </div>
 </template>
 
-<script>
+<script lang="ts">
 import centerIcon from 'h5Assets/imgs/center_bar.png';
 import centerActiveIcon from 'h5Assets/imgs/center_bar_active.png';
 import orderIcon from 'h5Assets/imgs/order_bar.png';

@@ -1,4 +1,9 @@
 module.exports = {
+    "parser": "vue-eslint-parser",
+    "extends": [
+        "eslint:recommended",
+        'plugin:vue/essential'
+    ],
     "env": {
         "browser": true,
         "commonjs": true,
@@ -6,7 +11,7 @@ module.exports = {
         "node": true
     },
     "parserOptions": {
-        "parser": "babel-eslint",
+        "parser": "@typescript-eslint/parser",
         "ecmaFeatures": {
             "jsx": true
         },
@@ -18,10 +23,6 @@ module.exports = {
         "_hmt": true,
         "viteWalletStorage": true
     },
-    "extends": [
-        "eslint:recommended",
-        'plugin:vue/essential'
-    ],
     "rules": {
         "eqeqeq": "error",
         "no-else-return": "error",
