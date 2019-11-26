@@ -1,42 +1,38 @@
+import { utils } from '@vite/vitejs';
 import { CrosschainGate } from 'pcServices/apiServer';
-import { utils } from "@vite/vitejs";
-import sendTx from "pcUtils/sendTx";
-import { addrSpace } from "pcUtils/storageSpace";
+import sendTx from 'pcUtils/sendTx';
+import { addrSpace } from 'pcUtils/storageSpace';
 
-const STORAGEKEY = "INDEX_COLLECT_TOKEN";
+const STORAGEKEY = 'INDEX_COLLECT_TOKEN';
 
 export const getGateInfos = () =>
-    CrosschainGate.request({
-        path: "registration/certified_gateways"
-    });
+    CrosschainGate.request({ path: 'registration/certified_gateways' });
 
 export const getChargeAddr = ({ tokenId, addr: walletAddress }, url) =>
     CrosschainGate.request({
-        path: "deposit-info",
+        path: 'deposit-info',
         params: { tokenId, walletAddress },
         host: url
     });
 
-export const verifyAddr = ({ tokenId, withdrawAddress,label }, url) =>
+export const verifyAddr = ({ tokenId, withdrawAddress, label }, url) =>
     CrosschainGate.request({
-        path: "withdraw-address/verification",
-        params: { tokenId, withdrawAddress,label },
+        path: 'withdraw-address/verification',
+        params: { tokenId, withdrawAddress, label },
         host: url
     });
 
 export const getWithdrawInfo = ({ tokenId, walletAddress }, url) =>
     CrosschainGate.request({
-        path: "withdraw-info",
+        path: 'withdraw-info',
         params: { tokenId, walletAddress },
         host: url
     });
 
-export function getWithdrawFee(
-    { tokenId, walletAddress, amount, containsFee = false },
-    url
-) {
+export function getWithdrawFee({ tokenId, walletAddress, amount, containsFee = false },
+    url) {
     return CrosschainGate.request({
-        path: "withdraw-fee",
+        path: 'withdraw-fee',
         params: { tokenId, walletAddress, amount, containsFee },
         host: url
     });
@@ -44,14 +40,14 @@ export function getWithdrawFee(
 
 export const getMetaInfo = ({ tokenId }, url) =>
     CrosschainGate.request({
-        path: "meta-info",
+        path: 'meta-info',
         params: { tokenId },
         host: url
     });
 
 export const getDepositInfo = ({ tokenId, addr: walletAddress }, url) =>
     CrosschainGate.request({
-        path: "deposit-info",
+        path: 'deposit-info',
         params: { tokenId, walletAddress },
         host: url
     });
@@ -63,33 +59,33 @@ export const withdraw = async ({
     tokenId,
     type,
     fee,
-    labelValue = "",
+    labelValue = '',
     labelName
 }) => {
     if (type !== 0 && type !== 1) {
-        throw new Error("unexcepted address type");
+        throw new Error('unexcepted address type');
     }
     if (!withdrawAddress) {
-        throw new Error("lack withdrawAddress");
+        throw new Error('lack withdrawAddress');
     }
-    const data =
-        type === 0
-        ? Buffer.concat([
-                Buffer.from(utils.hexToBytes("0bc3")),
+    const data
+        = type === 0
+            ? Buffer.concat([
+                Buffer.from(utils.hexToBytes('0bc3')),
                 Buffer.from([type]),
                 Buffer.from(withdrawAddress)
-          ]).toString("base64")
-        : Buffer.concat([
-                Buffer.from(utils.hexToBytes("0bc3")),
+            ]).toString('base64')
+            : Buffer.concat([
+                Buffer.from(utils.hexToBytes('0bc3')),
                 Buffer.from([type]),
                 Buffer.from([Buffer.from(withdrawAddress).length]),
                 Buffer.from(withdrawAddress),
                 Buffer.from([Buffer.from(labelValue).length]),
                 Buffer.from(labelValue)
-          ]).toString("base64");
+            ]).toString('base64');
 
     return sendTx({
-        methodName: "asyncSendTx",
+        methodName: 'asyncSendTx',
         data: {
             toAddress: gateAddr,
             amount,
@@ -101,37 +97,33 @@ export const withdraw = async ({
             powConfig: { isShowCancel: true }
         },
         vbExtends: {
-            type: "crossChainTransfer",
+            type: 'crossChainTransfer',
             fee,
             labelTitle: type === 1
-                ? { 
+                ? {
                     name: {
                         base: labelName,
                         zh: labelName
                     }
-                  } 
+                }
                 : undefined
         }
     });
 };
 
-export function getWithdrawRecords(
-    { tokenId, walletAddress, pageNum, pageSize },
-    url
-) {
+export function getWithdrawRecords({ tokenId, walletAddress, pageNum, pageSize },
+    url) {
     return CrosschainGate.request({
-        path: "withdraw-records",
+        path: 'withdraw-records',
         params: { tokenId, walletAddress, pageNum, pageSize },
         host: url
     });
 }
 
-export function getDepositRecords(
-    { tokenId, walletAddress, pageNum, pageSize },
-    url
-) {
+export function getDepositRecords({ tokenId, walletAddress, pageNum, pageSize },
+    url) {
     return CrosschainGate.request({
-        path: "deposit-records",
+        path: 'deposit-records',
         params: { tokenId, walletAddress, pageNum, pageSize },
         host: url
     });

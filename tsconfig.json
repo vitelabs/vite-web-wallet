@@ -1,35 +1,54 @@
 {
-  "compilerOptions": {
-    "baseUrl": "./src",
-    "module": "commonjs",
-    "target": "es5",
-    "lib": ["es2017", "dom"],
-    "strict": false,
-    "allowJs": true,
-    // "composite": true,
-    // "declaration": true,
-    // "declarationMap": true,
-    "sourceMap": true,
-    "moduleResolution": "node",
-    "allowSyntheticDefaultImports": true,
-    "esModuleInterop": true,
-    "forceConsistentCasingInFileNames": true,
-    "downlevelIteration": true,
-    "noImplicitReturns": true,
-    "noImplicitThis": true,
-    "noImplicitAny": false,
-    "preserveSymlinks": true,
-    "importHelpers": true,
-    "strictNullChecks": true,
-    "suppressImplicitAnyIndexErrors": true,
-    "noUnusedLocals": true,
-    // "paths": {
-    //     "*": [
-    //     "src/*"
-    //   ]
-    // },
-    "typeRoots": ["./typings","@types"],
-    "types": ["node"]
-  }
-  
+    "include": [
+        "./src/**/*", "./srcPC/**/*", "./srcH5/**/*", "./typings/*"
+    ],
+    "compilerOptions": {
+        "baseUrl": "./",
+        "module": "commonjs",
+        "target": "es5",
+        "lib": ["es2017", "dom"],
+        "strict": false,
+        "allowJs": true,
+        // "composite": true,
+        // "declaration": true,
+        // "declarationMap": true,
+        "sourceMap": true,
+        "moduleResolution": "node",
+        "allowSyntheticDefaultImports": true,
+        "esModuleInterop": true,
+        "forceConsistentCasingInFileNames": true,
+        "downlevelIteration": true,
+        "noImplicitReturns": true,
+        "noImplicitThis": true,
+        "noImplicitAny": false,
+        "preserveSymlinks": true,
+        "importHelpers": true,
+        "strictNullChecks": true,
+        "suppressImplicitAnyIndexErrors": true,
+        "noUnusedLocals": true,
+        "paths": {
+            "*": [ "./src/*" ],
+            "h5Pages/*": ["./srcH5/pages/*"],
+            "h5Router/*": ["./srcH5/pagrouteres/*"],
+            "h5Components/*": ["./srcH5/components/*"],
+            "h5Assets/*": ["./srcH5/assets/*"],
+            "h5Store/*": ["./srcH5/store/*"],
+            "h5Services/*": ["./srcH5/services/*"],
+            "h5Utils/*": ["./srcH5/utils/*"],
+            "h5I18n/*": ["./srcH5/i18n/*"],
+            "pcPages/*": ["./srcPC/pages/*"],
+            "pcRouter/*": ["./srcPC/pagrouteres/*"],
+            "pcComponents/*": ["./srcPC/components/*"],
+            "pcAssets/*": ["./srcPC/assets/*"],
+            "pcStore/*": ["./srcPC/store/*"],
+            "pcServices/*": ["./srcPC/services/*"],
+            "pcUtils/*": ["./srcPC/utils/*"],
+            "pcI18n": ["./srcPC/i18n/index"],
+            "pcI18n/*": ["./srcPC/i18n/*"],
+            "wallet/*": ["./srcPC/wallet/*"],
+            "wallet": ["./srcPC/wallet/index"]
+        },
+        "typeRoots": ["./typings", "@types"],
+        "types": ["node"]
+    }
 }
