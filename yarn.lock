@@ -2234,20 +2234,20 @@
     "@ethersproject/strings" "^5.0.0-beta.125"
     "@types/node" "^12.0.12"
 
-"@vite/vitejs-ws@2.2.0":
-  version "2.2.0"
-  resolved "https://registry.npmjs.org/@vite/vitejs-ws/-/vitejs-ws-2.2.0.tgz#e0faaa1cde975f0499adf3f13d949d88c5cfd630"
-  integrity sha512-LZEZVLvDs2SLvtkF2xzFi/RMeLehe3vUrHmNZGNg9mNLOGaSLZnCW288c/oYDSZjVAjj37lfmFvHilmk3q5jdw==
+"@vite/vitejs-ws@2.3.0-alpha.3":
+  version "2.3.0-alpha.3"
+  resolved "https://registry.npmjs.org/@vite/vitejs-ws/-/vitejs-ws-2.3.0-alpha.3.tgz#a2fea2107367c5d85c2b414ef3ae9f7bfc6b7f63"
+  integrity sha512-4XSgzyed7TxDBOOWAxdERCxOeYr7wX+S64s5iRfiXvex8L66hzcfFCKkFxzZ0pLxWSBtTvcefG7D1cx94ElJbg==
 
-"@vite/vitejs@2.2.11-alpha.0":
-  version "2.2.11-alpha.0"
-  resolved "https://registry.npmjs.org/@vite/vitejs/-/vitejs-2.2.11-alpha.0.tgz#c4ae983526cdb286c3cd3b5832b54dc16d6de8bb"
-  integrity sha512-grQazIO4+9D7T/PuVUzEFCkRWnnN5iG/GtIGL/Ipd8HcbJR6FySJYOMNqBV4qMB5wdRgToZUdFXEpJvgp267TQ==
+"@vite/vitejs@2.3.0-alpha.4":
+  version "2.3.0-alpha.4"
+  resolved "https://registry.npmjs.org/@vite/vitejs/-/vitejs-2.3.0-alpha.4.tgz#01fda1459beeea23eae97beb08af6c814f0c7313"
+  integrity sha512-zdR0fGnvBKQWT6CuUIc13iuTp3gDhjtPp0b9QqJen0flHYv12cJiqsfb1If872SLQicpNadvz9Z3F1JYkNsMwQ==
   dependencies:
     "@sisi/ed25519-blake2b-hd-key" "^1.0.2"
     "@sisi/tweetnacl-blake2b" "^1.0.0"
     babel-loader "^8.0.4"
-    bip39 "^2.5.0"
+    bip39 "^3.0.2"
     blake2b "^2.1.3"
     blakejs "^1.1.0"
     bn.js "^4.11.8"
@@ -3291,7 +3291,7 @@ bindings@^1.2.1, bindings@^1.5.0:
   dependencies:
     file-uri-to-path "1.0.0"
 
-bip39@^2.4.0, bip39@^2.5.0:
+bip39@^2.4.0:
   version "2.6.0"
   resolved "https://registry.npmjs.org/bip39/-/bip39-2.6.0.tgz#9e3a720b42ec8b3fbe4038f1e445317b6a99321c"
   integrity sha512-RrnQRG2EgEoqO24ea+Q/fftuPUZLmrEM3qNhhGsA3PbaXaCW791LTzPuVyx/VprXQcTbPJ3K3UeTna8ZnVl2sg==
@@ -3302,7 +3302,7 @@ bip39@^2.4.0, bip39@^2.5.0:
     safe-buffer "^5.0.1"
     unorm "^1.3.3"
 
-bip39@~3.0.2:
+bip39@^3.0.2, bip39@~3.0.2:
   version "3.0.2"
   resolved "https://registry.npmjs.org/bip39/-/bip39-3.0.2.tgz#2baf42ff3071fc9ddd5103de92e8f80d9257ee32"
   integrity sha512-J4E1r2N0tUylTKt07ibXvhpT2c5pyAFgvuA5q1H9uDy6dEGpjV8jmymh3MTYJDLCNbIVClSB9FbND49I6N24MQ==
@@ -5580,6 +5580,13 @@ escape-string-regexp@^1.0.0, escape-string-regexp@^1.0.2, escape-string-regexp@^
   version "1.0.5"
   resolved "https://registry.npmjs.org/escape-string-regexp/-/escape-string-regexp-1.0.5.tgz#1b61c0562190a8dff6ae3bb2cf0200ca130b86d4"
   integrity sha1-G2HAViGQqN/2rjuyzwIAyhMLhtQ=
+
+eslint-plugin-typescript@^0.14.0:
+  version "0.14.0"
+  resolved "https://registry.npmjs.org/eslint-plugin-typescript/-/eslint-plugin-typescript-0.14.0.tgz#068549c3f4c7f3f85d88d398c29fa96bf500884c"
+  integrity sha512-2u1WnnDF2mkWWgU1lFQ2RjypUlmRoBEvQN02y9u+IL12mjWlkKFGEBnVsjs9Y8190bfPQCvWly1c2rYYUSOxWw==
+  dependencies:
+    requireindex "~1.1.0"
 
 eslint-plugin-vue@^4.7.1:
   version "4.7.1"
@@ -11661,6 +11668,11 @@ require-main-filename@^2.0.0:
   version "2.0.0"
   resolved "https://registry.npmjs.org/require-main-filename/-/require-main-filename-2.0.0.tgz#d0b329ecc7cc0f61649f62215be69af54aa8989b"
   integrity sha512-NKN5kMDylKuldxYLSUfrbo5Tuzh4hd+2E8NPPX02mZtn1VuREQToYe/ZdlJy+J3uCpfaiGF05e7B8W0iXbQHmg==
+
+requireindex@~1.1.0:
+  version "1.1.0"
+  resolved "https://registry.npmjs.org/requireindex/-/requireindex-1.1.0.tgz#e5404b81557ef75db6e49c5a72004893fe03e162"
+  integrity sha1-5UBLgVV+91225JxacgBIk/4D4WI=
 
 requires-port@^1.0.0:
   version "1.0.0"

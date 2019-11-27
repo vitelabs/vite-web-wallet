@@ -1,8 +1,7 @@
 import { constant } from '@vite/vitejs';
 import { viteClient } from './apiServer';
 
-const DexFund_Addr = constant.DexFund_Addr;
-const Snapshot_Gid = constant.Snapshot_Gid;
+const DexFund_Addr = constant.DexFund_ContractAddress;
 
 export function getCode(address: string) {
     // get my code
@@ -19,11 +18,11 @@ export function getAccountDexBalance(address: string) {
 }
 
 export function getAccountBalance(address: string) {
-    return viteClient.getBalance(address);
+    return viteClient.getBalanceInfo(address);
 }
 
 export function getDexFundAddrOnroadInfo() {
-    return viteClient.request('onroad_getOnroadInfoByAddress', DexFund_Addr);
+    return viteClient.request('ledger_getUnreceivedTransactionSummaryByAddress', DexFund_Addr);
 }
 
 export function isPledgeVip(address: string) {
@@ -47,42 +46,42 @@ export function getCurrDividendPools() {
 }
 
 export function getSnapshotChainHeight() {
-    return viteClient.ledger.getSnapshotChainHeight();
+    return viteClient.request('ledger_getSnapshotChainHeight');
 }
 
 export function getTokenInfoById(tokenId: string) {
-    return viteClient.mintage.getTokenInfoById(tokenId);
+    return viteClient.request('contract_getTokenInfoById', tokenId);
 }
 
 export function getSBPAvailableReward(name: string) {
-    return viteClient.request('register_getAvailableReward', '00000000000000000001', name);
+    return viteClient.request('contract_getSBPRewardPendingWithdrawal', name);
 }
 
 export function getTokenInfoList(pageIndex, pageCount) {
-    return viteClient.mintage.getTokenInfoList(pageIndex, pageCount);
+    return viteClient.request('contract_getTokenInfoList', pageIndex, pageCount);
 }
 
 export function getCurrSBPNodeList() {
-    return viteClient.register.getCandidateList(Snapshot_Gid);
+    return viteClient.request('contract_getSBPVoteList');
 }
 
 export function getAccountQuota(address: string) {
-    return viteClient.pledge.getPledgeQuota(address);
+    return viteClient.request('contract_getQuotaByAccount', address);
 }
 
 export function getAccountPledgeList(address, pageIndex, pageCount) {
-    return viteClient.pledge.getPledgeList(address, pageIndex, pageCount);
+    return viteClient.request('contract_getStakeList', address, pageIndex, pageCount);
 }
 
 export function getAccountSBPList(address: string) {
-    return viteClient.register.getRegistrationList(Snapshot_Gid, address);
+    return viteClient.request('contract_getSBPList', address);
 }
 
 export function getAccountTxList({ address, pageIndex, pageCount }) {
-    return viteClient.getTxList({
-        addr: address,
-        index: pageIndex,
-        pageCount
+    return viteClient.getTransactionList({
+        address,
+        pageIndex,
+        pageSize: pageCount
     });
 }
 

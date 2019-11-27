@@ -1,6 +1,4 @@
-import { addrAccount } from '@vite/vitejs';
-
-import { viteClient } from 'services/apiServer';
+import { getAccountBalance } from 'services/viteServer';
 import bigNumber from 'utils/bigNumber';
 import { timer } from 'utils/asyncFlow';
 import { defaultTokenMap } from 'utils/constant';
@@ -9,10 +7,8 @@ import env from 'h5Utils/envFromURL';
 import { getTokenIcon } from 'utils/tokenParser';
 
 let balanceInfoInst = null;
-const activeAcc = env.address ? new addrAccount({ address: env.address, client: viteClient }) : null;
 
 const state = {
-    activeAcc,
     address: env.address || '',
     balance: {}
 };
@@ -27,14 +23,13 @@ const mutations = {
         }
 
         state.address = address;
-        state.activeAcc = new addrAccount({ address, client: viteClient });
     },
     commitBalanceInfo(state, payload) {
         if (!payload) {
             state.balance = {};
             return;
         }
-        state.balance = payload.tokenBalanceInfoMap || {};
+        state.balance = payload.balance.balanceInfoMap || {};
     },
     commitClearBalance(state) {
         state.balance = {};
@@ -48,9 +43,14 @@ const actions = {
     },
     startLoopBalance({ state, commit, dispatch }) {
         dispatch('stopLoopBalance');
-        balanceInfoInst = new timer(() => state.activeAcc.getAccountBalance().then(data => {
-            commit('commitBalanceInfo', data);
-        }), 1000);
+        balanceInfoInst = new timer(() => {
+            if (!state.address) {
+                return;
+            }
+            return getAccountBalance(state.address).then(data => {
+                commit('commitBalanceInfo', data);
+            });
+        }, 1000);
         balanceInfoInst.start();
     },
     stopLoopBalance() {

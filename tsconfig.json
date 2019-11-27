@@ -9,6 +9,7 @@
         "lib": ["es2017", "dom"],
         "strict": false,
         "allowJs": true,
+        // "checkJs": true,
         // "composite": true,
         // "declaration": true,
         // "declarationMap": true,
@@ -46,9 +47,9 @@
             "pcI18n": ["./srcPC/i18n/index"],
             "pcI18n/*": ["./srcPC/i18n/*"],
             "wallet/*": ["./srcPC/wallet/*"],
-            "wallet": ["./srcPC/wallet/index"]
+            "wallet": ["./srcPC/wallet/index"],
+            "typings/*": ["./typings/*"]
         },
-        "typeRoots": ["./typings", "@types"],
-        "types": ["node"]
+        "typeRoots": ["./typings/*", "@types"]
     }
 }

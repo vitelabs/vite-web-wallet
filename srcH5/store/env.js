@@ -56,6 +56,7 @@ const actions = {
     },
     addTokenInfo({ commit }, tokenId) {
         return getTokenInfoById(tokenId).then(result => {
+            result.tokenId = tokenId;
             commit('addTokenInfo', result);
             return result;
         });

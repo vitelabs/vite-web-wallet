@@ -323,7 +323,7 @@ export default {
         reward: execWithValid(function (item) {
             this.totalReward = null;
             getSBPAvailableReward(item.rawData.name).then(data => {
-                if (!data || data.drained || !+data.totalReward) {
+                if (!data || data.allRewardWithdrawed || !+data.totalReward) {
                     this.$toast(this.$t('walletSBP.noReward'));
                     return;
                 }

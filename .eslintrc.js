@@ -1,5 +1,8 @@
 module.exports = {
     "parser": "vue-eslint-parser",
+    "plugins": [
+        'typescript',
+    ],
     "extends": [
         "eslint:recommended",
         'plugin:vue/essential'
@@ -125,7 +128,9 @@ module.exports = {
         "prefer-template": "error",
         "rest-spread-spacing": ["error", "never"],
         "yield-star-spacing": ["error", "before"],
-        "template-curly-spacing": ["error", "always"]
+        "template-curly-spacing": ["error", "always"],
+        "@typescript-eslint/no-unused-vars": false,
+        "no-unused-vars": [1]
         // "require-jsdoc": ["error", {
         //     "require": {
         //         "FunctionDeclaration": true,

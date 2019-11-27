@@ -1,10 +1,11 @@
+import { constant } from '@vite/vitejs';
 import bigNumber from 'utils/bigNumber';
 import { timer } from 'utils/asyncFlow';
-import { StatusMap } from 'wallet';
 import { defaultTokenMap } from 'utils/constant';
-import { gateStorage } from 'pcServices/gate';
-import { constant } from '@vite/vitejs';
 import { getTokenIcon } from 'utils/tokenParser';
+import { getAccountBalance } from 'services/viteServer';
+import { StatusMap } from 'wallet';
+import { gateStorage } from 'pcServices/gate';
 
 let balanceInfoInst = null;
 
@@ -22,13 +23,13 @@ const mutations = {
         }
 
         state.balance = payload.balance || {};
-        state.balance.balanceInfos = state.balance && state.balance.tokenBalanceInfoMap
-            ? state.balance.tokenBalanceInfoMap
+        state.balance.balanceInfos = state.balance && state.balance.balanceInfoMap
+            ? state.balance.balanceInfoMap
             : {};
 
-        state.onroad = payload.onroad || {};
-        state.onroad.balanceInfos = state.onroad && state.onroad.tokenBalanceInfoMap
-            ? state.onroad.tokenBalanceInfoMap
+        state.onroad = payload.unreceived || {};
+        state.onroad.balanceInfos = state.onroad && state.onroad.balanceInfoMap
+            ? state.onroad.balanceInfoMap
             : {};
     },
     commitClearBalance(state) {
@@ -49,11 +50,7 @@ const actions = {
                 return;
             }
 
-            if (rootState.wallet.status === StatusMap.UNLOCK && !activeAcc.isBifrost) {
-                return commit('commitBalanceInfo', activeAcc.balance);
-            }
-
-            return activeAcc.getBalance().then(data => {
+            return getAccountBalance(activeAcc.address).then(data => {
                 commit('commitBalanceInfo', data);
             });
         }, 1000);
