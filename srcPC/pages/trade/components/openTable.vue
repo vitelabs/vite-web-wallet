@@ -37,13 +37,10 @@
 
 <script>
 import d from 'dayjs';
-import { utils } from '@vite/vitejs';
 import sendTx from 'pcUtils/sendTx';
 import statistics from 'utils/statistics';
 import { execWithValid } from 'pcUtils/execWithValid';
 import { initPwd } from 'pcComponents/password/index.js';
-
-const { _Buffer } = utils;
 
 export default {
     props: {
@@ -95,9 +92,9 @@ export default {
                 cancelTxt: this.$t('tradeOpenOrders.confirm.cancelTxt'),
                 submit: () => {
                     sendTx({
-                        methodName: 'dexTradeCancelOrder',
+                        methodName: 'dexCancelOrder',
                         data: {
-                            orderId: _Buffer.from(order.orderId, 'hex').toString('base64'),
+                            orderId: order.orderId,
                             tradeToken: order.tradeToken
                         },
                         vbExtends: {

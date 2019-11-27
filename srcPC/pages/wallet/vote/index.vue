@@ -60,7 +60,7 @@ import { execWithValid } from 'pcUtils/execWithValid';
 import openUrl from 'utils/openUrl';
 import statistics from 'utils/statistics';
 import { getExplorerLink } from 'utils/getLink';
-import { getCurrSBPNodeList } from 'services/viteServer';
+import { getCurrSBPNodeList, getVoteInfo } from 'services/viteServer';
 
 const Vite_Token_Info = constant.Vite_Token_Info;
 
@@ -207,15 +207,12 @@ export default {
         nodeNoDataText() {
             return this.filterKey ? this.$t('walletVote.section2.noSearchData') : this.$t('hint.noData');
         },
-        activeAcc() {
-            return this.$store.state.wallet.activeAcc;
-        },
         activeAddr() {
             return this.$store.getters.activeAddr;
         }
     },
     watch: {
-        activeAcc() {
+        activeAddr() {
             this.startVoteData();
         }
     },
@@ -247,7 +244,7 @@ export default {
             this.isResisterTipsShow = !this.isResisterTipsShow;
         },
         updateVoteData() {
-            return this.activeAcc.getVoteInfo().then(result => {
+            return getVoteInfo(this.activeAddr).then(result => {
                 this.voteData = result ? [result] : [];
                 this.voteData[0] && (this.voteData[0].voteStatus = 'voted');
                 return this.voteData;
@@ -276,8 +273,7 @@ export default {
                 return;
             }
             const locale = this.$i18n.locale === 'zh' ? 'zh' : 'en';
-            const activeAccount = this.$store.state.wallet.activeAcc;
-            openUrl(`https://reward.vite.net?language=${ locale }&address=${ activeAccount ? activeAccount.address : '' }`);
+            openUrl(`https://reward.vite.net?language=${ locale }&address=${ this.activeAddr || '' }`);
         },
         _cancelVote(v) {
             statistics.event(this.$route.name, 'vote_revoke', this.activeAddr || '');

@@ -1,10 +1,7 @@
-// typings/common
-
-import { StatusMap } from 'typings/common';
-
 import viteCrypto from 'testwebworker';
-import { keystore, wallet } from '@vite/vitejs';
+import { keystore, wallet, accountBlock as accountBlockUtils } from '@vite/vitejs';
 
+import { timer } from 'utils/asyncFlow';
 import statistics from 'utils/statistics';
 import { viteClient } from 'services/apiServer';
 
@@ -13,6 +10,12 @@ import { getAddr, addHdAccount, setAcc, getAcc, setAccInfo, setAddr, setLastAcc 
 const Default_Lang = 'english';
 const Max_Addr_Num = 10;
 
+let unreceivedTimer;
+
+export enum StatusMap {
+    'LOCK' = 0,
+    'UNLOCK' = 1
+}
 
 export class WebAccount {
     id: string;
@@ -149,25 +152,21 @@ export class WebAccount {
         this.setAddrList();
     }
 
-    // [TODO]
     activate() {
         if (this.status === StatusMap.LOCK || !this.activeAccount) {
             return;
         }
 
-        // auto receive tx
-        // this.activeAccount.activate(2000, true, true);
-        // return this.activeAccount;
+        // Auto receive TX
+        unreceivedTimer = new timer(() => receiveTx(this.activeAccount.privateKey, this.activeAccount.address), 2000);
+        unreceivedTimer.start();
+        return;
     }
 
-    // [TODO]
     freeze() {
-        if (!this.activeAccount) {
-            return;
-        }
-
-        // kill auto receive
-        this.activeAccount.freeze();
+        // Kill auto receive
+        unreceivedTimer && unreceivedTimer.stop();
+        unreceivedTimer = null;
     }
 
     addAddr() {
@@ -246,8 +245,7 @@ export class WebAccount {
         const privateKey = addrObj.privKey;
 
         if (this.activeAccount && this.activeAccount.address === this.activeAddr) {
-            !this.activeAccount.privateKey
-                && this.activeAccount.setPrivateKey(privateKey);
+            !this.activeAccount.privateKey && (this.activeAccount.privateKey = privateKey);
             return;
         }
 
@@ -311,4 +309,19 @@ export class WebAccount {
 
         return null;
     }
+}
+
+
+async function receiveTx(privateKey, address) {
+    const data = await viteClient.request('ledger_getUnreceivedBlocksByAddress', address, 0, 1);
+    if (!data || !data.length) {
+        return;
+    }
+
+    const accountBlock = accountBlockUtils.createAccountBlock('receive', {
+        address,
+        sendBlockHash: data[0].hash
+    }).setProvider(viteClient).setPrivateKey(privateKey);
+
+    return accountBlock.autoSendByPoW();
 }

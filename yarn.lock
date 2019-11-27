@@ -2234,10 +2234,10 @@
     "@ethersproject/strings" "^5.0.0-beta.125"
     "@types/node" "^12.0.12"
 
-"@vite/vitejs-ws@2.3.0-alpha.3":
-  version "2.3.0-alpha.3"
-  resolved "https://registry.npmjs.org/@vite/vitejs-ws/-/vitejs-ws-2.3.0-alpha.3.tgz#a2fea2107367c5d85c2b414ef3ae9f7bfc6b7f63"
-  integrity sha512-4XSgzyed7TxDBOOWAxdERCxOeYr7wX+S64s5iRfiXvex8L66hzcfFCKkFxzZ0pLxWSBtTvcefG7D1cx94ElJbg==
+"@vite/vitejs-ws@2.2.10":
+  version "2.2.10"
+  resolved "https://registry.npmjs.org/@vite/vitejs-ws/-/vitejs-ws-2.2.10.tgz#556f61b4de96e936bad912f093b6bce6df13c2da"
+  integrity sha512-67h+slvRPggCvfV7lHs3INXmalTSDDczehAIrFwqto4EMSw2YNnaHjjdx77m+CDZDYQaxXGTrtxLE8nEFtm1fg==
 
 "@vite/vitejs@2.3.0-alpha.4":
   version "2.3.0-alpha.4"

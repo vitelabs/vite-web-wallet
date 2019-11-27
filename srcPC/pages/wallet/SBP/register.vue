@@ -59,7 +59,7 @@
 </template>
 
 <script>
-import { hdAddr, constant } from '@vite/vitejs';
+import { wallet, constant } from '@vite/vitejs';
 import viteInput from 'components/viteInput';
 import { initPwd } from 'pcComponents/password/index.js';
 import sendTx from 'pcUtils/sendTx';
@@ -157,16 +157,14 @@ export default {
                 return;
             }
 
-            if (!hdAddr.isValidHexAddr(this.producerAddr)) {
+            if (!wallet.isValidAddress(this.producerAddr)) {
                 this.producerAddrErr = this.$t('walletSBP.section1.addrErr');
-
                 return;
             }
 
             const nodeName = this.nodeName.trim();
             if (!this.canUseAddr(nodeName, this.producerAddr)) {
                 this.producerAddrErr = this.$t('walletSBP.section1.addrUsed');
-
                 return;
             }
 

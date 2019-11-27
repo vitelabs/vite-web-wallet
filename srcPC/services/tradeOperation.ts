@@ -1,14 +1,11 @@
-// typings/common.d.ts
-
 import sendTx from 'pcUtils/sendTx';
 import { constant } from '@vite/vitejs';
 import i18n from 'pcI18n';
 import { ViteXAPI, abiList } from 'services/apiServer';
-import { tokenId, tokenSymbol } from 'typings/common';
 
 export function bindCode(code: number) {
     return sendTx({
-        abi: JSON.stringify(constant.DexFundBindInviteCode_Abi),
+        abi: JSON.stringify(constant.Contracts.DexBindInviteCode.abi),
         description: {
             function: {
                 name: {
@@ -25,7 +22,7 @@ export function bindCode(code: number) {
                 }
             ]
         },
-        methodName: 'dexFundBindInviteCode',
+        methodName: 'dexBindInviteCode',
         data: { code },
         config: { pow: true }
     });
@@ -33,7 +30,7 @@ export function bindCode(code: number) {
 
 export function genCode() {
     return sendTx({
-        abi: JSON.stringify(constant.DexFundNewInviter_Abi),
+        abi: JSON.stringify(constant.Contracts.DexCreateNewInviter.abi),
         description: {
             function: {
                 name: {
@@ -47,15 +44,14 @@ export function genCode() {
             type: 'dexNewInviter',
             cost: '1000 VITE'
         },
-        methodName: 'dexFundNewInviter',
-        config: { pow: true }
+        methodName: 'dexCreateNewInviter'
     });
 }
 
 export function configMarketsAgent({ actionType, agent, tradeTokens, quoteTokens }) {
     return sendTx({
-        abi: JSON.stringify(constant.DexFundConfigMarketsAgent_Abi),
-        methodName: 'dexFundConfigMarketsAgent',
+        abi: JSON.stringify(constant.Contracts.DexConfigMarketAgents),
+        methodName: 'dexConfigMarketAgents',
         data: { actionType, agent, tradeTokens, quoteTokens },
         config: { pow: true }
     });
@@ -63,10 +59,10 @@ export function configMarketsAgent({ actionType, agent, tradeTokens, quoteTokens
 
 interface IProxyPair {
   symbol: string;
-  tradeToken: tokenId;
-  tradeTokenSymbol: tokenSymbol;
-  quoteToken: tokenId;
-  quoteTokenSymbol: tokenSymbol;
+  tradeToken: string;
+  tradeTokenSymbol: string;
+  quoteToken: string;
+  quoteTokenSymbol: string;
 }
 interface IProxyRelation {
   [key: string]: Array<IProxyPair>;

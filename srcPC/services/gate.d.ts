@@ -1,5 +1,3 @@
-import { TokenId, Address } from '@vite/vitejs';
-
 type responseWrapper<T> = {
   code: number;
   msg: string;
@@ -11,7 +9,7 @@ type client = (params: any) => Promise<any>;
 
 // ----------gateinfo
 type GateTokenInfo = {
-  tokenId: TokenId;
+  tokenId: string;
   gateway: string;
   mappedNet: string;
   mappedTokenId: string;
@@ -55,12 +53,9 @@ declare function getGateInfos(): Promise<GateInfo[]>;
 
 // ---------deposit records
 type getDepositRecordsParams = {
-  tokenId: TokenId;
-
-  walletAddress: Address;
-
+  tokenId: string;
+  walletAddress: string;
   pageNum: number;
-
   pageSize: number;
 };
 
@@ -93,12 +88,9 @@ export declare function getDepositRecords(
 
 // withdraw records
 type getWithdrawRecordsParams = {
-  tokenId: TokenId;
-
-  walletAddress: Address;
-
+  tokenId: string;
+  walletAddress: string;
   pageNum: number;
-
   pageSize: number;
 };
 

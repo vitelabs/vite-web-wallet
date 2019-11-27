@@ -49,7 +49,7 @@
 </template>
 
 <script>
-import { hdAddr, constant } from '@vite/vitejs';
+import { wallet, constant } from '@vite/vitejs';
 import viteInput from 'components/viteInput';
 import { initPwd } from 'pcComponents/password/index.js';
 import BigNumber from 'utils/bigNumber';
@@ -120,7 +120,7 @@ export default {
             }
 
             try {
-                this.isValidAddress = hdAddr.isValidHexAddr(this.toAddr);
+                this.isValidAddress = wallet.isValidAddress(this.toAddr);
             } catch (err) {
                 console.warn(err);
                 this.isValidAddress = false;
