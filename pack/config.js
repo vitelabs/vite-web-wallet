@@ -46,7 +46,8 @@ const conversionGate = { // http-DNS
 };
 const viteConnect = {
     production: '\'wss://biforst.vitewallet.com\'',
-    test: '\'ws://139.155.7.172:5001\'',
+    test: '\'wss://biforst.vitewallet.com\'',
+    // test: '\'ws://139.155.7.172:5001\'',
     dev: '\'ws://139.155.7.172:5001\''
 };
 const dnsHostServer = {
