@@ -71,7 +71,7 @@
 
 <script>
 import Vue from 'vue';
-import { utils, hdAddr } from '@vite/vitejs';
+import { utils, wallet } from '@vite/vitejs';
 
 import { initPwd } from 'pcComponents/password/index.js';
 import confirm from 'components/confirm/confirm.vue';
@@ -158,7 +158,7 @@ export default {
         },
         validAddr() {
             this.isValidAddress
-                = this.inAddress && hdAddr.isValidHexAddr(this.inAddress);
+                = this.inAddress && wallet.isValidAddress(this.inAddress);
         },
 
         testAmount() {

@@ -19,7 +19,7 @@ block content
 
 <script>
 import { throttle } from 'lodash';
-import { hdAddr } from '@vite/vitejs';
+import { wallet } from '@vite/vitejs';
 import PairItem from './pairItem';
 import SearchTips from 'uiKit/searchTips';
 import viteInput from 'components/viteInput';
@@ -74,7 +74,7 @@ export default {
                 this.isValidAddress = true;
                 return;
             }
-            this.isValidAddress = hdAddr.isValidHexAddr(this.userInputAddress);
+            this.isValidAddress = wallet.isValidAddress(this.userInputAddress);
         },
         addItem(item) {
             if (this.selectedPairs.find(i => i.id === item.id)) {

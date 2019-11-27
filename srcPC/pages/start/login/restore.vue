@@ -24,7 +24,7 @@
 </template>
 
 <script>
-import { hdAddr } from '@vite/vitejs';
+import { wallet } from '@vite/vitejs';
 import { getAccountBalance } from 'services/viteServer';
 import loading from 'components/loading.vue';
 import { saveHDAccount } from 'wallet';
@@ -96,13 +96,16 @@ export default {
                 this.isLoading = false;
             }
 
+            const myWallet = new wallet(mnemonic);
+
+            // [TODO] hdAddrObj
             saveHDAccount({
                 name,
                 pass,
                 hdAddrObj: {
                     addr: addrObj,
-                    id: hdAddr.getId(mnemonic),
-                    entropy: hdAddr.getEntropyFromMnemonic(mnemonic)
+                    id: myWallet.id,
+                    entropy: myWallet.entropy
                 },
                 addrNum
             }).then(id => {
@@ -127,7 +130,8 @@ export default {
             let addrs;
 
             try {
-                addrs = hdAddr.getAddrsFromMnemonic(mnemonic, 0, num);
+                const myWallet = wallet.createWallet(mnemonic);
+                addrs = myWallet.deriveAddressList(mnemonic, 0, num - 1);
             } catch (err) {
                 throw { code: 500005 };
             }

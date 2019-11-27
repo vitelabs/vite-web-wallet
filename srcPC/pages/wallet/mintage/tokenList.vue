@@ -126,14 +126,15 @@
 </template>
 
 <script>
-import { hdAddr } from '@vite/vitejs';
+import { wallet } from '@vite/vitejs';
 import showConfirm from 'components/confirm/confirm.vue';
 import walletTable from 'components/table/index.vue';
 import { initPwd } from 'pcComponents/password/index.js';
 import viteInput from 'components/viteInput';
 import tooltips from 'components/tooltips';
-import sendTx from 'pcUtils/sendTx';
 import BigNumber from 'utils/bigNumber';
+import { getTokenListByOwner } from 'services/viteServer';
+import sendTx from 'pcUtils/sendTx';
 import { verifyAmount } from 'pcUtils/validations';
 import { execWithValid } from 'pcUtils/execWithValid';
 
@@ -182,7 +183,7 @@ export default {
     },
     methods: {
         validAddr() {
-            this.isValidAddress = this.address && hdAddr.isValidHexAddr(this.address);
+            this.isValidAddress = this.address && wallet.isValidAddress(this.address);
         },
         validAmount() {
             this.amountErr = verifyAmount({
@@ -195,12 +196,7 @@ export default {
         },
 
         getOwnerToken() {
-            const activeAccount = this.$store.state.wallet.activeAcc;
-            if (!activeAccount) {
-                return;
-            }
-
-            activeAccount.getTokenInfoListByOwner().then(data => {
+            getTokenListByOwner(this.activeAddress).then(data => {
                 this.tokenList = data;
             }).catch(err => {
                 console.warn(err);

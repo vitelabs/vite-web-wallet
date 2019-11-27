@@ -37,7 +37,7 @@
 </template>
 
 <script>
-import { hdAddr } from '@vite/vitejs';
+import { wallet } from '@vite/vitejs';
 import sendTx from 'pcUtils/sendTx';
 import BigNumber from 'utils/bigNumber';
 import { initPwd } from 'pcComponents/password/index.js';
@@ -121,7 +121,7 @@ export default {
                 this.isValidAddress = true;
                 return;
             }
-            this.isValidAddress = hdAddr.isValidHexAddr(this.address);
+            this.isValidAddress = wallet.isValidAddress(this.address);
         },
         unlock: execWithValid(function () {
             this.isShowPermission = true;

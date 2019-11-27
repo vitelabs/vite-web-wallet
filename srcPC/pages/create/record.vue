@@ -28,7 +28,7 @@
 </template>
 
 <script>
-import { hdAddr } from '@vite/vitejs';
+import { wallet } from '@vite/vitejs';
 import { saveHDAccount } from 'wallet';
 import copy from 'components/copy';
 import loading from 'components/loading.vue';
@@ -54,7 +54,7 @@ export default {
         this.isLoading = false;
     },
     data() {
-        const hdAddrObj = hdAddr.newAddr();
+        const hdAddrObj = wallet.createWallet();
 
         return {
             hdAddrObj,
@@ -64,16 +64,16 @@ export default {
     },
     computed: {
         mnemonicList() {
-            return this.hdAddrObj.mnemonic.split(/\s/);
+            return this.hdAddrObj.mnemonics.split(/\s/);
         }
     },
     methods: {
         copy() {
-            this.$refs.copyDome.copy(this.hdAddrObj.mnemonic);
+            this.$refs.copyDome.copy(this.hdAddrObj.mnemonics);
         },
         change() {
             const bits = this.len === 12 ? 128 : 256;
-            this.hdAddrObj = hdAddr.newAddr(bits);
+            this.hdAddrObj = wallet.createWallet(bits);
             this.len = this.len === 24 ? 12 : 24;
         },
 
@@ -84,6 +84,7 @@ export default {
 
             this.isLoading = true;
 
+            // [TODO] hdAddrObj hdAddr
             saveHDAccount({
                 name: this.name,
                 pass: this.pass,

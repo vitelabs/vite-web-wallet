@@ -142,17 +142,6 @@ export default {
                 return;
             }
 
-            if (item.agent) {
-                if (constant.DexFund_Addr === item.agentAddress && +item.bid === 1) {
-                    this.$toast(this.$t('walletQuota.list.mining'));
-                } else if (constant.DexFund_Addr === item.agentAddress && +item.bid === 2) {
-                    this.$toast(this.$t('walletQuota.list.vip'));
-                } else {
-                    this.$toast(this.$t('walletQuota.list.other'));
-                }
-                return;
-            }
-
             statistics.event(this.$route.name, 'other-withdrawQuota', this.address || '');
             this.showCancel(item, index);
             return;

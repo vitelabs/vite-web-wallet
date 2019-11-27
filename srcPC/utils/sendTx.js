@@ -1,4 +1,4 @@
-import { utils } from '@vite/vitejs';
+import { utils, accountBlock as accountBlockUtils } from '@vite/vitejs';
 import { getActiveAcc } from 'wallet';
 import { powProcess } from 'pcComponents/pow/index';
 import { quotaConfirm } from 'pcComponents/quota/index';
@@ -48,6 +48,8 @@ const sendTx = execWithValid(function ({
         });
         vbInstance = compInstance;
     }
+
+    const accountBlock = accountBlockUtils.createAccountBlock(methodName, data);
 
     activeAccount
         .sendPowTx({

@@ -1,16 +1,12 @@
-import { keystore, constant, utils } from '@vite/vitejs';
 import viteCrypto from 'testwebworker';
+import { keystore, constant, utils } from '@vite/vitejs';
+
 import { getOldAccList, setOldAccList } from 'pcUtils/store';
-import { HDAccount, StatusMap as _StatusMap, VBAccount } from './hdAccount';
+
+import { WebAccount as HDAccount, StatusMap as _StatusMap } from './webAccount';
+import VBAccount from './vbAccount';
 import { getLastAcc, addHdAccount, setAcc, getAccList } from './store';
-function constructAccount(acc) {
-    if (acc.isBifrost || acc.id.startsWith('VITEBIFROST_')) {
-        currentHDAccount = new VBAccount(acc);
-    } else {
-        currentHDAccount = new HDAccount(acc);
-    }
-    return currentHDAccount;
-}
+
 const { LangList } = constant;
 const { checkParams } = utils;
 
@@ -29,11 +25,10 @@ export function setCurrHDAcc(acc) {
         return;
     }
 
-    if (
-        acc.isBifrost
-    && currentHDAccount
-    && currentHDAccount.isBifrost
-    && currentHDAccount.activeAddr === acc.activeAddr
+    if (acc.isBifrost
+        && currentHDAccount
+        && currentHDAccount.isBifrost
+        && currentHDAccount.activeAddr === acc.activeAddr
     ) {
         return currentHDAccount;
     }
@@ -113,19 +108,7 @@ export function saveHDAccount({
         return id;
     });
 }
-// export function saveVBAccount({id,addr,lang,name=""}){
-//     setAcc(id, {
-//         name,
-//         addrNum=1,
-//         activeAddr: addr,
-//         activeIdx: 0
-//     });
-//     addHdAccount({
-//         id,
-//         lang,
-//         keystore: {}
-//     })
-// }
+
 
 function initCurrHDAccount() {
     const lastAcc = getLastAcc();
@@ -133,4 +116,13 @@ function initCurrHDAccount() {
         return;
     }
     return constructAccount(lastAcc);
+}
+
+function constructAccount(acc) {
+    if (acc.isBifrost || acc.id.startsWith('VITEBIFROST_')) {
+        currentHDAccount = new VBAccount(acc);
+    } else {
+        currentHDAccount = new HDAccount(acc);
+    }
+    return currentHDAccount;
 }

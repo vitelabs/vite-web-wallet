@@ -4,7 +4,6 @@ import { timer } from 'utils/asyncFlow';
 import { defaultTokenMap } from 'utils/constant';
 import { getTokenIcon } from 'utils/tokenParser';
 import { getAccountBalance } from 'services/viteServer';
-import { StatusMap } from 'wallet';
 import { gateStorage } from 'pcServices/gate';
 
 let balanceInfoInst = null;

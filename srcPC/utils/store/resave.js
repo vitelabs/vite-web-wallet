@@ -1,8 +1,6 @@
-import { hdAddr, keystore as _keystore, constant } from '@vite/vitejs';
+import { wallet, keystore as _keystore } from '@vite/vitejs';
 
 import { setOldAccList, setKeystoreAccList, storage } from './index';
-
-const { LangList } = constant;
 
 const AccListKey = 'ACC_LIST';
 const LastKey = 'ACC_LAST';
@@ -58,13 +56,15 @@ export function resaveAccList() {
         if (isV1Keystore) {
             // Change to V3 Keystore
             const entropy = item.entropy;
-            const mnemonic = hdAddr.getMnemonicFromEntropy(entropy);
+            const mnemonic = wallet.getMnemonicsFromEntropy(entropy);
             const keystore = _keystore.encryptV1ToV3(entropy, JSON.stringify(item.encryptObj));
-            const id = hdAddr.getId(mnemonic);
+
+            const myWallet = wallet.getWallet(mnemonic);
+            const id = myWallet.id;
 
             pushResaveAccList({
                 id,
-                lang: LangList.english,
+                lang: 'english',
                 keystore: JSON.parse(keystore)
             });
             resaveAccItemList.push({ id, resaveAccItem });
@@ -91,7 +91,7 @@ export function resaveAccList() {
 
         pushResaveAccList({
             id,
-            lang: item.lang || LangList.english,
+            lang: item.lang || 'english',
             keystore: item.encryptObj
         });
         resaveAccItemList.push({ id, resaveAccItem });

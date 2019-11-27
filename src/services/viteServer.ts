@@ -1,8 +1,6 @@
 import { constant } from '@vite/vitejs';
 import { viteClient } from './apiServer';
 
-const DexFund_Addr = constant.DexFund_ContractAddress;
-
 export function getCode(address: string) {
     // get my code
     return viteClient.request('dex_getInviteCode', address);
@@ -22,7 +20,7 @@ export function getAccountBalance(address: string) {
 }
 
 export function getDexFundAddrOnroadInfo() {
-    return viteClient.request('ledger_getUnreceivedTransactionSummaryByAddress', DexFund_Addr);
+    return viteClient.request('ledger_getUnreceivedTransactionSummaryByAddress', constant.DexFund_ContractAddress);
 }
 
 export function isPledgeVip(address: string) {
@@ -119,4 +117,12 @@ export function getVIPStakeInfoList(address, pageIndex, pageCount = 30) {
 
 export function getVxUnlockList(address, pageIndex, pageCount = 10) {
     return viteClient.request('dex_getVxUnlockList', address, pageIndex, pageCount);
+}
+
+export function getVoteInfo(address) {
+    return viteClient.request('contract_getVotedSBP', address);
+}
+
+export function getTokenListByOwner(address) {
+    return viteClient.request('contract_getTokenInfoListByOwner', address);
 }

@@ -4,11 +4,6 @@ declare type bnStr = string
 declare type tokenId = string
 declare type tokenSymbol = string
 
-export declare enum StatusMap {
-    'LOCK' = 0,
-    'UNLOCK' = 1
-}
-
 declare interface HDAccount {
     id: string;
     lang: string;

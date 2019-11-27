@@ -29,7 +29,7 @@
 </template>
 
 <script>
-import { hdAddr, constant } from '@vite/vitejs';
+import { wallet, constant } from '@vite/vitejs';
 import secTitle from 'pcComponents/secTitle';
 import loading from 'components/loading';
 import confirm from 'components/confirm/confirm.vue';
@@ -97,7 +97,7 @@ export default {
             }
 
             if (!this.addr
-                || !hdAddr.isValidHexAddr(this.addr)) {
+                || !wallet.isValidAddress(this.addr)) {
                 this.addrErr = this.$t('walletSBP.section1.addrErr');
 
                 return;
