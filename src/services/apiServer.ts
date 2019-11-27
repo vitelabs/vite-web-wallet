@@ -1,5 +1,5 @@
 import provider from '@vite/vitejs-ws';
-import { client } from '@vite/vitejs';
+import { ViteAPI } from '@vite/vitejs';
 import { DNSClient, setWatch } from './dnsHostIP';
 
 function viteXAPIAfterRes(xhr) {
@@ -36,7 +36,7 @@ const url = setWatch('gViteAPI', url => {
 });
 
 const WS_RPC = new provider(url);
-export const viteClient = new client(WS_RPC, () => {
+export const viteClient = new ViteAPI(WS_RPC, () => {
     console.log('Connect success');
 });
 
@@ -88,5 +88,3 @@ export const abiList = {
         contractAddr: 'vite_0000000000000000000000000000000000000006e82b8ba657'
     }
 };
-
-viteClient.addTxType(abiList);

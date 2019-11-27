@@ -5,9 +5,15 @@
         "./srcH5/**/*",
         "./typings/*"
     ],
+    "module": "commonjs",
+    "target": "es5",
+    "lib": ["es2017", "dom"],
+    "strict": false,
+    "allowJs": true,
     "checkJs": true,
     "compilerOptions": {
         "baseUrl": "./",
+        "checkJs": true,
         "paths": {
             "*": [ "./src/*" ],
             "h5Pages/*": ["./srcH5/pages/*"],
@@ -28,7 +34,9 @@
             "pcI18n": ["./srcPC/i18n/index"],
             "pcI18n/*": ["./srcPC/i18n/*"],
             "wallet/*": ["./srcPC/wallet/*"],
-            "wallet": ["./srcPC/wallet/index"]
+            "wallet": ["./srcPC/wallet/index"],
+            "typings/*": ["./typings/*"]
         }
-    }
+    },
+    "typeRoots": ["./typings/*", "@types", "@vite/vitejs/type.ts"]
 }

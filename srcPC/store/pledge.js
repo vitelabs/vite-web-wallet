@@ -22,13 +22,13 @@ const mutations = {
         state.currentPage = pageIndex;
     },
     commitPledgeList(state, payload) {
-        state.totalPledgeAmount = payload.totalPledgeAmount;
-        state.pledgeList = payload.pledgeInfoList || [];
-        state.totalNum = payload.totalCount || 0;
+        state.totalPledgeAmount = payload.totalStakeAmount;
+        state.pledgeList = payload.stakeList || [];
+        state.totalNum = payload.totalStakeCount || 0;
     },
     commitQuota(state, payload) {
-        state.quotaAmount = payload.current;
-        state.pledgeTransNum = payload.currentUt;
+        state.quotaAmount = payload.stakeAmount;
+        state.pledgeTransNum = payload.currentQuota;
     },
     commitClearPledge(state) {
         // Amount data

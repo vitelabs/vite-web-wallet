@@ -1,7 +1,10 @@
+// typings/common.d.ts
+
 import sendTx from 'pcUtils/sendTx';
 import { constant } from '@vite/vitejs';
 import i18n from 'pcI18n';
 import { ViteXAPI, abiList } from 'services/apiServer';
+import { tokenId, tokenSymbol } from 'typings/common';
 
 export function bindCode(code: number) {
     return sendTx({

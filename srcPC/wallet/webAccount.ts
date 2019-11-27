@@ -1,42 +1,57 @@
-import { keystore, constant, hdAddr, account, addrAccount } from '@vite/vitejs';
+// typings/common
+
+import { StatusMap } from 'typings/common';
+
 import viteCrypto from 'testwebworker';
+import { keystore, wallet } from '@vite/vitejs';
+
 import statistics from 'utils/statistics';
 import { viteClient } from 'services/apiServer';
-import { constant as u_constant } from 'pcUtils/store';
 
-import {
-    getAddr,
-    addHdAccount,
-    setAcc,
-    getAcc,
-    setAccInfo,
-    setAddr,
-    setLastAcc
-} from './store';
+import { getAddr, addHdAccount, setAcc, getAcc, setAccInfo, setAddr, setLastAcc } from './store';
 
-const { LangList } = constant;
-const maxAddrNum = 10;
+const Default_Lang = 'english';
+const Max_Addr_Num = 10;
 
-export const StatusMap = {
-    LOCK: 0,
-    UNLOCK: 1
-};
 
-export class HDAccount {
+export class WebAccount {
+    id: string;
+    lang: string;
+    keystore;
+    status: StatusMap;
+    name: string;
+    addrNum: number;
+    activeIdx: number;
+    mnemonic: string;
+    pass: string;
+    activeAddr: string;
+    addrList: any[];
+
+    activeAccount: any;
+
+
     constructor({
         id,
         lang,
         keystore,
-        name,
-        addrNum,
+        name = '',
+        addrNum = 1,
         activeAddr,
         activeIdx
+    }: {
+        id: string,
+        lang: string,
+        keystore,
+        name?: string,
+        addrNum?: number,
+        activeAddr: string,
+        activeIdx: number
     }) {
         this.status = StatusMap.LOCK;
 
         this.id = id;
         this.keystore = keystore;
-        this.lang = lang || LangList.english;
+        this.lang = lang || Default_Lang;
         this.name = name || '';
 
         // Set Active (Addr Idx Account)
@@ -85,10 +100,6 @@ export class HDAccount {
         return getAcc(this.id);
     }
 
-    // saveOnActiveAddr() {
-    //     setAddrInfo()
-    // }
-
     verify(pass) {
         if (!this.pass) {
             return this.unlock(pass);
@@ -101,20 +112,18 @@ export class HDAccount {
 
     async unlock(pass) {
         const before = new Date().getTime();
-        const entropy = await keystore.decrypt(JSON.stringify(this.keystore),
-            pass,
-            viteCrypto);
+        const entropy: any = await keystore.decrypt(JSON.stringify(this.keystore), pass, viteCrypto);
         const after = new Date().getTime();
-        statistics.event('mnemonic-decrypt',
-            this.keystore.version,
-            'time',
-            after - before);
+
+        statistics.event('mnemonic-decrypt', this.keystore.version, 'time', after - before);
 
         // Set Base Info
         this.status = StatusMap.UNLOCK;
         this.pass = pass;
-        this.mnemonic = hdAddr.getMnemonicFromEntropy(entropy, this.lang);
-        this.id = hdAddr.getId(this.mnemonic, this.lang);
+        this.mnemonic = wallet.getMnemonicsFromEntropy(entropy);
+
+        const myWallet = wallet.getWallet(this.mnemonic);
+        this.id = myWallet.id;
 
         setLastAcc(this);
 
@@ -136,24 +145,28 @@ export class HDAccount {
         this.status = StatusMap.LOCK;
         this.pass = '';
         this.mnemonic = '';
-        this.activeAccount && this.activeAccount.clearPrivateKey();
+        this.activeAccount && (this.activeAccount.privateKey = null);
         this.setAddrList();
     }
 
+    // [TODO]
     activate() {
-        // auto receive tx
         if (this.status === StatusMap.LOCK || !this.activeAccount) {
             return;
         }
-        this.activeAccount.activate(2000, true, true);
-        return this.activeAccount;
+
+        // auto receive tx
+        // this.activeAccount.activate(2000, true, true);
+        // return this.activeAccount;
     }
 
+    // [TODO]
     freeze() {
-        // kill auto receive
         if (!this.activeAccount) {
             return;
         }
+
+        // kill auto receive
         this.activeAccount.freeze();
     }
 
@@ -163,19 +176,22 @@ export class HDAccount {
         }
 
         const index = this.addrList.length;
-        if (index >= maxAddrNum) {
+        if (index >= Max_Addr_Num) {
             return null;
         }
 
-        const addrObj = hdAddr.getAddrFromMnemonic(this.mnemonic, index, this.lang);
-        addrObj.address = addrObj.hexAddr;
-        addrObj.idx = index;
-        addrObj.id = this.id;
+        const myWallet = wallet.getWallet(this.mnemonic);
+        const addrObj = myWallet.deriveAddress(index);
+        const _addrObj = {
+            ...addrObj,
+            idx: index,
+            id: this.id
+        };
 
-        this.addrList.push(addrObj);
+        this.addrList.push(_addrObj);
         this.addrNum = this.addrList.length;
         this.saveAcc();
-        return addrObj;
+        return _addrObj;
     }
 
     rename(name) {
@@ -203,7 +219,7 @@ export class HDAccount {
         this.activate();
     }
 
-    setActiveAcc(index, address) {
+    setActiveAcc(index?, address?) {
         if (this.status === StatusMap.LOCK) {
             this.activeIdx = index || 0;
             this.activeAddr = address || '';
@@ -213,10 +229,10 @@ export class HDAccount {
                 return;
             }
 
-            this.activeAccount = new account({
-                client: viteClient,
+            this.activeAccount = {
+                isBifrost: false,
                 address: this.activeAddr
-            });
+            };
             return;
         }
 
@@ -225,7 +241,7 @@ export class HDAccount {
             return;
         }
 
-        this.activeAddr = addrObj.hexAddr;
+        this.activeAddr = addrObj.address;
         this.activeIdx = addrObj.idx;
         const privateKey = addrObj.privKey;
 
@@ -235,21 +251,21 @@ export class HDAccount {
             return;
         }
 
-        this.activeAccount = new account({
-            client: viteClient,
-            privateKey,
-            address: this.activeAddr
-        });
+        this.activeAccount = {
+            isBifrost: false,
+            address: this.activeAddr,
+            privateKey
+        };
     }
 
-    setAddrList() {
+    setAddrList(): any[] {
         if (this.status === StatusMap.LOCK) {
             if (!this.activeAddr) {
                 this.addrList = [];
                 return this.addrList;
             }
 
-            const item = getAddr(this.activeAddr);
+            const item: any = getAddr(this.activeAddr);
             item.address = this.activeAddr;
             item.id = this.id;
             item.idx = this.activeIdx;
@@ -257,22 +273,21 @@ export class HDAccount {
             return this.addrList;
         }
 
-        const list = hdAddr.getAddrsFromMnemonic(this.mnemonic,
-            0,
-            this.addrNum,
-            this.lang);
-        const addrList = [];
+        const myWallet = wallet.getWallet(this.mnemonic);
+        const list = myWallet.deriveAddressList(0, this.addrNum - 1);
+        const addrList: any[] = [];
+
         list.forEach((addrObj, i) => {
             const item = {
                 ...addrObj,
-                ...getAddr(addrObj.hexAddr)
+                ...getAddr(addrObj.address)
             };
-            item.address = addrObj.hexAddr;
             item.id = this.id;
             item.idx = i;
             addrList.push(item);
         });
         this.addrList = addrList;
+        return this.addrList;
     }
 
     getAddrObj(index, address) {
@@ -295,132 +310,5 @@ export class HDAccount {
         }
 
         return null;
-    }
-}
-
-export class VBAccount {
-    constructor({
-        id,
-        lang,
-        name,
-        activeAddr
-    }) {
-        this.id = id || `VITEBIFROST_${ activeAddr }`;
-        this.lang = lang || LangList.english;
-        this.name = name || '';
-        this.activeAddr = activeAddr;
-        this.status = StatusMap.LOCK;
-        this.setActiveAcc();
-        this.addrList = [{
-            address: activeAddr,
-            id: this.id,
-            idx: 0
-        }];
-        // Set Addr Num
-        this.addrNum = 1;
-        this.save();
-
-        this.id.startsWith('VITEBIFROST_') && (this.isBifrost = true);
-    }
-
-    set activeAccount(v) {
-        this._activeAccount = v;
-    }
-
-    get activeAccount() {
-        return this._activeAccount;
-    }
-
-    save() {
-        addHdAccount({
-            id: this.id,
-            lang: this.lang,
-            keystore: 'bifrost'
-        });
-        this.saveAcc();
-    }
-
-    saveAcc() {
-        setAcc(this.id, {
-            name: this.name,
-            addrNum: this.addrNum,
-            activeAddr: this.activeAddr,
-            activeIdx: this.activeIdx
-        });
-    }
-
-    activate() {
-        return this.activeAccount;
-    }
-
-    freeze() {}
-    saveOnAcc(key, info) {
-        if (!this.id) {
-            return;
-        }
-        setAccInfo(this.id, key, info);
-    }
-
-    getAccInfo() {
-        if (!this.id) {
-            return;
-        }
-        return Object.assign({}, getAcc(this.id), { [u_constant.HoldPwdKey]: true });
-    }
-
-    lock() {
-        this.vb && this.vb.destroy();
-
-        this.proxyActiveAcc.sendPowTx = undefined;
-        this.status = StatusMap.LOCK;
-        this.vb = null;
-    }
-
-    setActiveAcc() {
-        const account = new addrAccount({
-            client: viteClient,
-            address: this.activeAddr
-        });
-        const proxyActiveAcc = Object.create(null);
-        proxyActiveAcc.address = this.activeAddr;
-        proxyActiveAcc.isBifrost = true;
-        this._activeAccount = new Proxy(account, {
-            get(target, name) {
-                if (proxyActiveAcc[name]) {
-                    return proxyActiveAcc[name];
-                }
-                return target[name];
-            }
-        });
-        this.proxyActiveAcc = proxyActiveAcc;
-    }
-
-    unlock(vb) {
-        if (!vb) {
-            return;
-        }
-        this.vb = vb;
-        const sendPowTx = async ({
-            methodName,
-            params = [],
-            vbExtends,
-            abi,
-            description
-        }) => {
-            if (params[0]) {
-                params[0].prevHash = 'hack for bifrost';
-                params[0].height = 34;
-            }
-            const block = await this.activeAccount.getBlock[methodName](params[0], 'sync');
-            return vb.sendVbTx({
-                block,
-                extend: vbExtends,
-                abi,
-                description
-            });
-        };
-        this.status = StatusMap.UNLOCK;
-        this.proxyActiveAcc.sendPowTx = sendPowTx;
-        setLastAcc({ id: this.id });
     }
 }

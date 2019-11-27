@@ -20,6 +20,7 @@ const defaultConfig = {
     }
 };
 
+// [TODO]
 const sendTx = execWithValid(function ({
     config = defaultConfig,
     methodName,
@@ -35,6 +36,7 @@ const sendTx = execWithValid(function ({
 
     let powInstance = null;
     let vbInstance = null;
+
     if (activeAccount.isBifrost) {
         const confirmPromise = vbConfirmDialog();
         const { compInstance } = confirmPromise;
@@ -46,6 +48,7 @@ const sendTx = execWithValid(function ({
         });
         vbInstance = compInstance;
     }
+
     activeAccount
         .sendPowTx({
             methodName,
@@ -57,9 +60,8 @@ const sendTx = execWithValid(function ({
                 // console.log('[beforePow]');
 
                 const activeAccount = getActiveAcc();
-                if (
-                    !activeAccount
-          || activeAccount.address !== accountBlock.accountAddress
+                if (!activeAccount
+                    || activeAccount.address !== accountBlock.accountAddress
                 ) {
                     return Promise.reject({
                         code: '1000000',
