@@ -71,7 +71,7 @@
 
 <script>
 import Vue from 'vue';
-import { utils, wallet } from '@vite/vitejs';
+import { utils, wallet, accountBlock as accountBlockUtils } from '@vite/vitejs';
 
 import { initPwd } from 'pcComponents/password/index.js';
 import confirm from 'components/confirm/confirm.vue';
@@ -235,12 +235,12 @@ export default {
             };
 
             sendTx({
-                methodName: 'asyncSendTx',
+                methodName: 'send',
                 data: {
                     toAddress: this.inAddress,
                     tokenId: this.token.tokenId,
                     amount,
-                    message: this.message
+                    data: accountBlockUtils.utils.messageToData(this.message)
                 },
                 config: {
                     pow: true,
@@ -251,43 +251,14 @@ export default {
                         }
                     }
                 }
-            })
-                .then(() => {
-                    this.loading = false;
-                    this.$toast(this.$t('hint.transSucc'));
-                    this.closeTrans();
-                })
-                .powStarted(() => {
-                    this.isShowTrans = false;
-                })
-                .powFailed((err, type) => {
-                    if (!err && !type) {
-                        return;
-                    }
-                    console.warn(type, err);
-
-                    if (type === 0) {
-                        transError(this.$t('wallet.trans.powErr'), err);
-                        return;
-                    }
-
-                    const code
-                        = err && err.error
-                            ? err.error.code || -1
-                            : err
-                                ? err.code
-                                : -1;
-                    if (code === -35002) {
-                        transError(this.$t('wallet.trans.powTransErr'));
-                        return;
-                    }
-
-                    transError(null, err);
-                })
-                .catch(err => {
-                    console.warn(err);
-                    transError(null, err);
-                });
+            }).then(() => {
+                this.loading = false;
+                this.$toast(this.$t('hint.transSucc'));
+                this.closeTrans();
+            }).catch(err => {
+                console.warn(err);
+                transError(null, err);
+            });
         })
     }
 };

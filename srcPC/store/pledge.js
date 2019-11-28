@@ -23,8 +23,8 @@ const mutations = {
     },
     commitPledgeList(state, payload) {
         state.totalPledgeAmount = payload.totalStakeAmount;
-        state.pledgeList = payload.stakeList || [];
         state.totalNum = payload.totalStakeCount || 0;
+        state.pledgeList = payload.stakeList || [];
     },
     commitQuota(state, payload) {
         state.quotaAmount = payload.stakeAmount;

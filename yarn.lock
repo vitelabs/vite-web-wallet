@@ -2234,15 +2234,15 @@
     "@ethersproject/strings" "^5.0.0-beta.125"
     "@types/node" "^12.0.12"
 
-"@vite/vitejs-ws@2.2.10":
-  version "2.2.10"
-  resolved "https://registry.npmjs.org/@vite/vitejs-ws/-/vitejs-ws-2.2.10.tgz#556f61b4de96e936bad912f093b6bce6df13c2da"
-  integrity sha512-67h+slvRPggCvfV7lHs3INXmalTSDDczehAIrFwqto4EMSw2YNnaHjjdx77m+CDZDYQaxXGTrtxLE8nEFtm1fg==
+"@vite/vitejs-ws@2.3.0-alpha.5":
+  version "2.3.0-alpha.5"
+  resolved "https://registry.npmjs.org/@vite/vitejs-ws/-/vitejs-ws-2.3.0-alpha.5.tgz#4884cbb46d8a72bb584e12ea1840821dcebc7882"
+  integrity sha512-RpqtQ8Gz2N92oiWp6LrXOsnhvgaUyeuzmZsLDrF3QwNFrmqdkX45jQ4tQne4RijTjbImRTgR+UoHhu2TR9pgYg==
 
-"@vite/vitejs@2.3.0-alpha.4":
-  version "2.3.0-alpha.4"
-  resolved "https://registry.npmjs.org/@vite/vitejs/-/vitejs-2.3.0-alpha.4.tgz#01fda1459beeea23eae97beb08af6c814f0c7313"
-  integrity sha512-zdR0fGnvBKQWT6CuUIc13iuTp3gDhjtPp0b9QqJen0flHYv12cJiqsfb1If872SLQicpNadvz9Z3F1JYkNsMwQ==
+"@vite/vitejs@2.3.0-alpha.5":
+  version "2.3.0-alpha.5"
+  resolved "https://registry.npmjs.org/@vite/vitejs/-/vitejs-2.3.0-alpha.5.tgz#f2f6a75c7507c31b7cf779d3ee57878221216670"
+  integrity sha512-u34aGDPcpaOAYWZVYQP+zpKUhhkxbctrvUfjT1IA8rcfUCs165IBVriMcwrJ6s1OhKqzP3h6Q3Zbjq1hgCA2Fw==
   dependencies:
     "@sisi/ed25519-blake2b-hd-key" "^1.0.2"
     "@sisi/tweetnacl-blake2b" "^1.0.0"

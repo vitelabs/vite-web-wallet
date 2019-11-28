@@ -33,6 +33,7 @@
             "h5Router/*": ["./srcH5/pagrouteres/*"],
             "h5Components/*": ["./srcH5/components/*"],
             "h5Assets/*": ["./srcH5/assets/*"],
+            "h5Store": ["./srcH5/store/index"],
             "h5Store/*": ["./srcH5/store/*"],
             "h5Services/*": ["./srcH5/services/*"],
             "h5Utils/*": ["./srcH5/utils/*"],

@@ -85,7 +85,7 @@ export const withdraw = async ({
             ]).toString('base64');
 
     return sendTx({
-        methodName: 'asyncSendTx',
+        methodName: 'send',
         data: {
             toAddress: gateAddr,
             amount,

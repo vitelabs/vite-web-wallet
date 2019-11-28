@@ -115,7 +115,6 @@ export default {
 
             if (!this.toAddr) {
                 this.isValidAddress = true;
-
                 return;
             }
 
