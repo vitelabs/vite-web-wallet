@@ -1,14 +1,12 @@
-import store from 'h5Store';
+import { accountBlock as accountBlockUtils } from '@vite/vitejs';
+
 import { bridge } from 'h5Utils/bridge';
 import toast from 'components/toast/index';
 
 const isDev = process.env.NODE_ENV !== 'production';
 
 export default async function ({ methodName, data }) {
-    const activeAcc = store.state.account.activeAcc;
-
-    // [TODO] hack prevHash and height
-    const accountBlock = await activeAcc.getBlock[methodName](data, 'sync');
+    const accountBlock = accountBlockUtils.createAccountBlock(methodName, data).accountBlock;
     console.log(accountBlock);
 
     return new Promise((res, rej) => {

@@ -1,13 +1,13 @@
 import viteCrypto from 'testwebworker';
-import { keystore, constant, utils } from '@vite/vitejs';
+import { keystore, utils } from '@vite/vitejs';
 
 import { getOldAccList, setOldAccList } from 'pcUtils/store';
 
 import { WebAccount as HDAccount, StatusMap as _StatusMap } from './webAccount';
-import VBAccount from './vbAccount';
+import { VBAccount } from './vbAccount';
 import { getLastAcc, addHdAccount, setAcc, getAccList } from './store';
 
-const { LangList } = constant;
+const Default_Lang = 'english';
 const { checkParams } = utils;
 
 let currentHDAccount = null;
@@ -75,21 +75,18 @@ export function deleteOldAcc(acc) {
 export function saveHDAccount({
     name,
     pass,
-    hdAddrObj,
-    lang = LangList.english,
+    entropy,
+    id,
+    address,
+    lang = Default_Lang,
     addrNum = 1
 }) {
-    const err = checkParams({ name, pass, hdAddrObj, lang }, [
-        'name',
-        'pass',
-        'hdAddrObj',
-        'lang'
+    const err = checkParams({ name, pass, entropy, id, address, lang }, [
+        'name', 'pass', 'entropy', 'id', 'address', 'lang'
     ]);
     if (err) {
         throw err;
     }
-
-    const { addr, entropy, id } = hdAddrObj;
 
     return keystore.encrypt(entropy, pass, null, viteCrypto).then(keystoreStr => {
         const keystoreObj = JSON.parse(keystoreStr);
@@ -102,7 +99,7 @@ export function saveHDAccount({
         setAcc(id, {
             name,
             addrNum,
-            activeAddr: addr.hexAddr,
+            activeAddr: address,
             activeIdx: 0
         });
         return id;

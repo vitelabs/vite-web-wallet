@@ -156,7 +156,7 @@ export class WebAccount {
         if (this.status === StatusMap.LOCK || !this.activeAccount) {
             return;
         }
-
+        console.log(this.activeAccount, this.addrList);
         // Auto receive TX
         unreceivedTimer = new timer(() => receiveTx(this.activeAccount.privateKey, this.activeAccount.address), 2000);
         unreceivedTimer.start();
@@ -242,7 +242,7 @@ export class WebAccount {
 
         this.activeAddr = addrObj.address;
         this.activeIdx = addrObj.idx;
-        const privateKey = addrObj.privKey;
+        const privateKey = addrObj.privateKey;
 
         if (this.activeAccount && this.activeAccount.address === this.activeAddr) {
             !this.activeAccount.privateKey && (this.activeAccount.privateKey = privateKey);
@@ -274,6 +274,8 @@ export class WebAccount {
         const myWallet = wallet.getWallet(this.mnemonic);
         const list = myWallet.deriveAddressList(0, this.addrNum - 1);
         const addrList: any[] = [];
+
+        console.log(list);
 
         list.forEach((addrObj, i) => {
             const item = {

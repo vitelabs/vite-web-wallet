@@ -93,14 +93,16 @@ export default {
             }, 1500);
         },
 
-        stopCount(next) {
+        stopCount() {
             if (this.isTimeUp) {
-                return next();
+                return Promise.resolve(!this.isShow);
             }
 
-            const _next = () => next(!this.isShow);
-            this.timtUpCb = _next;
-            return _next;
+            return new Promise(res => {
+                this.timtUpCb = () => {
+                    res(!this.isShow);
+                };
+            });
         }
     }
 };

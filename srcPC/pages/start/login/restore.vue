@@ -81,11 +81,8 @@ export default {
             this.isLoading = true;
 
             let addrNum;
-            let addrObj;
             try {
-                const res = await this.fetchAddrNum(mnemonic);
-                addrNum = res.addrNum;
-                addrObj = res.addrObj;
+                addrNum = await this.fetchAddrNum(mnemonic);
             } catch (err) {
                 console.warn(err);
                 if (err && err.code === 500005) {
@@ -96,17 +93,15 @@ export default {
                 this.isLoading = false;
             }
 
-            const myWallet = new wallet(mnemonic);
+            const myWallet = wallet.getWallet(mnemonic);
+            const myAddress = myWallet.deriveAddress(0);
 
-            // [TODO] hdAddrObj
             saveHDAccount({
                 name,
                 pass,
-                hdAddrObj: {
-                    addr: addrObj,
-                    id: myWallet.id,
-                    entropy: myWallet.entropy
-                },
+                id: myWallet.id,
+                entropy: myWallet.entropy,
+                address: myAddress.address,
                 addrNum
             }).then(id => {
                 if (!this.isLoading) {
@@ -128,17 +123,18 @@ export default {
         async fetchAddrNum(mnemonic) {
             const num = 10;
             let addrs;
-
             try {
-                const myWallet = wallet.createWallet(mnemonic);
-                addrs = myWallet.deriveAddressList(mnemonic, 0, num - 1);
+                const myWallet = wallet.getWallet(mnemonic);
+                console.log(myWallet);
+                addrs = myWallet.deriveAddressList(0, num - 1);
             } catch (err) {
+                console.warn(err);
                 throw { code: 500005 };
             }
 
             const requests = [];
             for (let i = 0; i < num; i++) {
-                requests.push(getAccountBalance(addrs[i].hexAddr));
+                requests.push(getAccountBalance(addrs[i].address));
             }
 
             const data = await Promise.all(requests);
@@ -148,17 +144,14 @@ export default {
                 if (!item) {
                     return;
                 }
-                const account = item.balance;
-                const onroad = item.onroad;
-                if ((account && +account.totalNumber) || (onroad && +onroad.totalNumber)) {
+                const balance = item.balance;
+                const unreceived = item.unreceived;
+                if ((+balance.blockCount) || (+unreceived.blockCount)) {
                     index = i;
                 }
             });
 
-            return {
-                addrNum: index + 1,
-                addrObj: addrs[0]
-            };
+            return index + 1;
         }
     }
 };

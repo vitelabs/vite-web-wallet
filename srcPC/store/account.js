@@ -65,33 +65,33 @@ const getters = {
     balanceInfo(state) {
         // -------- merge balance & onroad
         const balanceInfo = Object.create(null);
-        for (const tokenId in state.balance.balanceInfos) {
-            const item = state.balance.balanceInfos[tokenId];
+        for (const tokenId in state.balance.balanceInfoMap) {
+            const item = state.balance.balanceInfoMap[tokenId];
 
             const tokenInfo = item.tokenInfo;
             const decimals = tokenInfo.decimals;
-            const balance = bigNumber.toBasic(item.totalAmount, decimals);
+            const balance = bigNumber.toBasic(item.balance, decimals);
 
             balanceInfo[tokenId] = {
                 ...tokenInfo,
                 balance,
-                transNum: item.number,
-                totalAmount: item.totalAmount
+                transNum: item.transactionCount,
+                totalAmount: item.balance
             };
         }
 
-        for (const tokenId in state.onroad.balanceInfos) {
-            const item = state.onroad.balanceInfos[tokenId];
+        for (const tokenId in state.onroad.balanceInfoMap) {
+            const item = state.onroad.balanceInfoMap[tokenId];
             const tokenInfo = item.tokenInfo;
             const decimals = tokenInfo.decimals;
-            const balance = bigNumber.toBasic(item.totalAmount, decimals);
+            const balance = bigNumber.toBasic(item.balance, decimals);
 
             balanceInfo[tokenId] = balanceInfo[tokenId] || {};
             balanceInfo[tokenId].tokenId = balanceInfo[tokenId].tokenId || tokenInfo.tokenId;
             balanceInfo[tokenId].fundFloat = balance;
             balanceInfo[tokenId].decimals = balanceInfo[tokenId].decimals || tokenInfo.decimals;
             balanceInfo[tokenId].tokenSymbol = balanceInfo[tokenId].tokenSymbol || tokenInfo.tokenSymbol;
-            balanceInfo[tokenId].onroadNum = item.number;
+            balanceInfo[tokenId].onroadNum = item.transactionCount;
         }
         return balanceInfo;
     },

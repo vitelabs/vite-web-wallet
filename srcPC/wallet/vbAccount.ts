@@ -1,24 +1,32 @@
-import { accountBlock as accountBlockUtils } from '@vite/vitejs';
-
 import { constant } from 'pcUtils/store';
 
 import { addHdAccount, setAcc, getAcc, setAccInfo, setLastAcc } from './store';
 
 const Default_Lang = 'english';
+enum StatusMap {
+    'LOCK' = 0,
+    'UNLOCK' = 1
+}
 
-const StatusMap = {
-    LOCK: 0,
-    UNLOCK: 1
-};
+export class VBAccount {
+    id: string;
+    lang: string;
+    status: StatusMap;
+    name: string;
+    addrNum: number;
+    activeIdx: number;
+    activeAddr: string;
+    addrList: any[];
+    vb: any;
+    activeAccount: any;
+    isBifrost: boolean;
 
-export default class VBAccount {
     constructor({
-        id,
         lang,
         name,
         activeAddr
     }) {
-        this.id = id || `VITEBIFROST_${ activeAddr }`;
+        this.id = `VITEBIFROST_${ activeAddr }`;
         this.lang = lang || Default_Lang;
         this.name = name || '';
         this.activeAddr = activeAddr;
@@ -30,15 +38,11 @@ export default class VBAccount {
             idx: 0
         }];
 
+        this.isBifrost = true;
+
         // Set Addr Num
         this.addrNum = 1;
         this.save();
-
-        this.id.startsWith('VITEBIFROST_') && (this.isBifrost = true);
-    }
-
-    get activeAccount() {
-        return this._activeAccount;
     }
 
     save() {
@@ -78,54 +82,24 @@ export default class VBAccount {
 
     lock() {
         this.vb && this.vb.destroy();
-
-        this.proxyActiveAcc.sendPowTx = undefined;
         this.status = StatusMap.LOCK;
         this.vb = null;
     }
 
     setActiveAcc() {
-        const proxyActiveAcc = Object.create(null);
-        proxyActiveAcc.address = this.activeAddr;
-        proxyActiveAcc.isBifrost = true;
-        this._activeAccount = {
+        this.activeAccount = {
             isBifrost: true,
             address: this.activeAddr
         };
-        this.proxyActiveAcc = proxyActiveAcc;
     }
 
     unlock(vb) {
         if (!vb) {
             return;
         }
+
         this.vb = vb;
-
-        const sendPowTx = async ({
-            methodName,
-            params = [],
-            vbExtends,
-            abi,
-            description
-        }) => {
-            if (params[0]) {
-                params[0].prevHash = 'hack for bifrost';
-                params[0].height = 34;
-            }
-
-            // accountBlockUtils.createAccountBlock(methodName, )
-
-            const block = await this.activeAccount.getBlock[methodName](params[0], 'sync');
-            return vb.sendVbTx({
-                block,
-                extend: vbExtends,
-                abi,
-                description
-            });
-        };
-
         this.status = StatusMap.UNLOCK;
-        this.proxyActiveAcc.sendPowTx = sendPowTx;
         setLastAcc({ id: this.id });
     }
 }

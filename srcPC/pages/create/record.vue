@@ -54,26 +54,26 @@ export default {
         this.isLoading = false;
     },
     data() {
-        const hdAddrObj = wallet.createWallet();
+        const myWallet = wallet.createWallet();
 
         return {
-            hdAddrObj,
+            myWallet,
             len: 12,
             isLoading: false
         };
     },
     computed: {
         mnemonicList() {
-            return this.hdAddrObj.mnemonics.split(/\s/);
+            return this.myWallet.mnemonics.split(/\s/);
         }
     },
     methods: {
         copy() {
-            this.$refs.copyDome.copy(this.hdAddrObj.mnemonics);
+            this.$refs.copyDome.copy(this.myWallet.mnemonics);
         },
         change() {
             const bits = this.len === 12 ? 128 : 256;
-            this.hdAddrObj = wallet.createWallet(bits);
+            this.myWallet = wallet.createWallet(bits);
             this.len = this.len === 24 ? 12 : 24;
         },
 
@@ -84,11 +84,14 @@ export default {
 
             this.isLoading = true;
 
-            // [TODO] hdAddrObj hdAddr
+            const myFirstAddress = this.myWallet.deriveAddress(0);
+
             saveHDAccount({
                 name: this.name,
                 pass: this.pass,
-                hdAddrObj: this.hdAddrObj
+                entropy: this.myWallet.entropy,
+                id: this.myWallet.id,
+                address: myFirstAddress.address
             }).then(id => {
                 if (!this.isLoading) {
                     return;
