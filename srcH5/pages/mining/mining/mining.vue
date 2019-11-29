@@ -25,10 +25,10 @@ export default {
         return {
             currVxMineInfo: null,
             tabList: {
-                'trade': this.$t('mobileMining.miningTrade'),
-                'staking': this.$t('mobileMining.miningStaking'),
-                'invite': this.$t('mobileMining.miningInvite'),
-                'order': this.$t('mobileMining.miningOrder')
+                'trade': 'mobileMining.miningTrade',
+                'staking': 'mobileMining.miningStaking',
+                'invite': 'mobileMining.miningInvite',
+                'order': 'mobileMining.miningOrder'
             },
             tabName: 'trade'
         };
