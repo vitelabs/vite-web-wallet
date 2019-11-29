@@ -139,11 +139,10 @@ export default {
         },
         transList() {
             const transList = this.$store.getters.transList;
-            // console.log(transList);
             const nowList = [];
 
             transList.forEach(trans => {
-                const txType = trans.rawData.txType || 'TxReq';
+                const txType = trans.rawData.transactionType || 'TxReq';
 
                 const status = [ 'unconfirmed', 'confirms', 'confirmed' ][trans.status];
                 const statusText = this.$t(`walletTransList.status.${ status }`) + (status === 'confirms' ? `(${ trans.confirms })` : '');

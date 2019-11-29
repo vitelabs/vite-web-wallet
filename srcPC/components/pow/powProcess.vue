@@ -66,15 +66,6 @@ export default {
             };
             addProcessNum();
         },
-        gotoFinish(cb) {
-            this.clearProcessTimeout();
-            this.processNum = 100;
-
-            setTimeout(() => {
-                this.isShow = false;
-                cb && cb();
-            }, 1000);
-        },
         _cancel() {
             this.clearProcessTimeout();
             this.isShow = false;
@@ -89,18 +80,23 @@ export default {
             this.clearLimitTimeout();
             limitTimeout = setTimeout(() => {
                 this.isTimeUp = true;
-                this.timtUpCb && this.timtUpCb();
+                this.clearProcessTimeout();
+                this.processNum = 100;
+                setTimeout(() => {
+                    this.isShow = false;
+                    this.timtUpCb && this.timtUpCb();
+                }, 1000);
             }, 1500);
         },
 
         stopCount() {
             if (this.isTimeUp) {
-                return Promise.resolve(!this.isShow);
+                return Promise.resolve();
             }
 
             return new Promise(res => {
                 this.timtUpCb = () => {
-                    res(!this.isShow);
+                    res();
                 };
             });
         }

@@ -10,7 +10,8 @@ let balanceInfoInst = null;
 
 const state = {
     onroad: { balanceInfos: {} },
-    balance: { balanceInfos: {} }
+    balance: { balanceInfos: {} },
+    accountBlockCount: 0
 };
 
 const mutations = {
@@ -18,9 +19,11 @@ const mutations = {
         if (!payload) {
             state.balance = { balanceInfos: {} };
             state.onroad = { balanceInfos: {} };
+            state.accountBlockCount = 0;
             return;
         }
 
+        state.accountBlockCount = payload.balance ? payload.balance.blockCount || 0 : 0;
         state.balance = payload.balance || {};
         state.balance.balanceInfos = state.balance && state.balance.balanceInfoMap
             ? state.balance.balanceInfoMap
