@@ -16,7 +16,7 @@ export default {
     components: { mining, dividend, selectTab },
     data() {
         return {
-            tabList: { 'mining': this.$t('mobileMining.title'), 'dividend': this.$t('mobileDividend.title') },
+            tabList: { 'mining': 'mobileMining.title', 'dividend': 'mobileDividend.title' },
             activeTab: 'mining'
         };
     }

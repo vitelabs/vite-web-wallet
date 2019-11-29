@@ -19,8 +19,8 @@ export default {
     data() {
         return {
             tabList: {
-                'openOrders': this.$t('tradeOpenOrders.title'),
-                'historyOrders': this.$t('tradeOrderHistory.title')
+                'openOrders': 'tradeOpenOrders.title',
+                'historyOrders': 'tradeOrderHistory.title'
             },
             activeTab: 'openOrders'
         };
