@@ -24,4 +24,6 @@ const i18nConf = {
 };
 
 Vue.use(VueI18n);
-export default new VueI18n(i18nConf);
+const myVueI18n = new VueI18n(i18nConf);
+
+export default myVueI18n;

@@ -2,7 +2,7 @@
     <div class="select-tab-wrapper">
         <span class="select-tab" :class="{'active': activeTab === key}"
               v-for="(tab, key) in tabList" :key="key"
-              @click="selectTab(key)">{{ tab }}</span>
+              @click="selectTab(key)">{{ $t(tab) }}</span>
     </div>
 </template>
 
