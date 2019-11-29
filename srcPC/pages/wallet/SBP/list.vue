@@ -95,10 +95,6 @@ export default {
         showConfirm: {
             type: Function,
             default: () => {}
-        },
-        getParams: {
-            type: Function,
-            default: () => {}
         }
     },
     mounted() {
@@ -208,9 +204,15 @@ export default {
                 return;
             }
 
+            const minAmount = BigNumber.toMin(amount || 0, Vite_Token_Info.decimals);
             sendTx({
-                methodName: 'SBPreg',
-                data: this.getParams({ producerAddr, amount, nodeName }),
+                methodName: 'registerSBP',
+                data: {
+                    sbpName: nodeName,
+                    blockProducingAddress: producerAddr,
+                    rewardWithdrawAddress: producerAddr,
+                    amount: minAmount
+                },
                 config: {
                     pow: false,
                     confirm: {
@@ -263,8 +265,8 @@ export default {
                     const producer = item.rawData.nodeAddr;
 
                     sendTx({
-                        methodName: 'revokeReg',
-                        data: this.getParams({ nodeName }),
+                        methodName: 'revokeSBP',
+                        data: { sbpName: nodeName },
                         config: {
                             pow: false,
                             confirm: {
@@ -293,10 +295,10 @@ export default {
         }),
         sendReward() {
             sendTx({
-                methodName: 'retrieveReward',
+                methodName: 'withdrawSBPReward',
                 data: {
-                    nodeName: this.rewardItem.rawData.name,
-                    toAddress: this.address
+                    sbpName: this.rewardItem.rawData.name,
+                    receiveAddress: this.address
                 },
                 config: {
                     pow: false,

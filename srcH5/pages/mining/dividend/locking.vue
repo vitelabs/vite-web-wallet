@@ -108,12 +108,10 @@ export default {
 
         sendAutoLockTx() {
             sendTx({
-                abi: JSON.stringify(abiList.SwitchConfig.abi),
-                methodName: 'callContract',
+                methodName: 'dexSwitchConfig',
                 data: {
-                    abi: abiList.SwitchConfig.abi,
-                    toAddress: abiList.SwitchConfig.contractAddr,
-                    params: [ '1', !this.isAutoLock ]
+                    switchType: '1',
+                    enable: !this.isAutoLock
                 }
             }).then(() => {
                 doUntill({

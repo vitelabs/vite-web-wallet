@@ -240,7 +240,7 @@ export default {
                     toAddress: this.inAddress,
                     tokenId: this.token.tokenId,
                     amount,
-                    data: accountBlockUtils.utils.messageToData(this.message)
+                    data: this.message ? accountBlockUtils.utils.messageToData(this.message) : null
                 },
                 config: {
                     pow: true,

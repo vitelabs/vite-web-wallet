@@ -34,7 +34,6 @@ import confirm from 'h5Components/confirm/confirm.vue';
 import bigNumber from 'utils/bigNumber';
 import sendTx from 'h5Utils/sendTx';
 import { verifyAmount } from 'h5Utils/validations';
-import { abiList } from 'services/apiServer';
 
 export default {
     components: { confirm, viteInput },
@@ -127,13 +126,8 @@ export default {
             const amount = this.isAll ? this.availableAmount : bigNumber.toMin(this.amount, this.vxTokenDecimals);
 
             sendTx({
-                abi: JSON.stringify(abiList.LockVxForDividend.abi),
-                methodName: 'callContract',
-                data: {
-                    abi: abiList.LockVxForDividend.abi,
-                    toAddress: abiList.LockVxForDividend.contractAddr,
-                    params: [ actionType, amount ]
-                }
+                methodName: 'dexLockVxForDividend',
+                data: { actionType, amount }
             }).then(() => {
                 this.close();
             }).catch(err => {
