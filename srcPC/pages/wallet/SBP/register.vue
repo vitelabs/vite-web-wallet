@@ -73,10 +73,6 @@ const amount = 1000000;
 export default {
     components: { viteInput },
     props: {
-        getParams: {
-            type: Function,
-            default: () => {}
-        },
         canUseAddr: {
             type: Function,
             default: () => {}
@@ -216,8 +212,13 @@ export default {
             const producerAddr = this.producerAddr;
 
             sendTx({
-                methodName: 'SBPreg',
-                data: this.getParams({ producerAddr, amount, nodeName }),
+                methodName: 'registerSBP',
+                data: {
+                    sbpName: nodeName,
+                    blockProducingAddress: producerAddr,
+                    rewardWithdrawAddress: producerAddr,
+                    amount: BigNumber.toMin(amount, Vite_Token_Info.decimals)
+                },
                 config: {
                     pow: false,
                     confirm: {

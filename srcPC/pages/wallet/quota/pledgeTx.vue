@@ -181,13 +181,9 @@ export default {
             const amount = BigNumber.toMin(this.amount || 0, Vite_Token_Info.decimals);
 
             sendTx({
-                abi: JSON.stringify(abiList.StakeForQuota.abi),
-                methodName: 'callContract',
+                methodName: 'stakeForQuota',
                 data: {
-                    abi: abiList.StakeForQuota.abi,
-                    toAddress: abiList.StakeForQuota.contractAddr,
-                    params: [this.toAddr],
-                    tokenId: Vite_Token_Info.tokenId,
+                    beneficiaryAddress: this.toAddr,
                     amount
                 },
                 config: {

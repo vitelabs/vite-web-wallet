@@ -89,13 +89,10 @@ export default {
         staking() {
             const amount = bigNumber.toMin(this.amount, Vite_Token_Info.decimals);
             sendTx({
-                abi: JSON.stringify(abiList.StakeForMining.abi),
-                methodName: 'callContract',
+                methodName: 'dexStakeForMining',
                 data: {
-                    abi: abiList.StakeForMining.abi,
-                    toAddress: abiList.StakeForMining.contractAddr,
-                    params: [ 1, amount ],
-                    tokenId: Vite_Token_Info.tokenId
+                    actionType: 1,
+                    amount
                 }
             }).then(() => {
                 this.close();

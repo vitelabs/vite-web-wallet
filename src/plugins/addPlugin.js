@@ -46,6 +46,15 @@ export default {
             const code = error ? error.code || -1 : -1;
             const errMsg = error ? error.message || error.msg || '' : '';
 
+            // code 11000 wc error
+            // 11012 用户拒绝
+            // 11020 链接断开
+            // 11021 用户关闭弹窗，继续下面操作
+
+            // code 12000 web error
+            // code 12001 未解锁
+            // code 12002 无激活账户
+
             // Show quota confirm, don't neet toast
             if (code === '1000001') {
                 return;

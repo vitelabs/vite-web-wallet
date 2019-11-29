@@ -102,13 +102,10 @@ export default {
 
             const amount = bigNumber.toMin(this.amount, this.viteTokenInfo.decimals);
             sendTx({
-                abi: JSON.stringify(abiList.StakeForMining.abi),
-                methodName: 'callContract',
+                methodName: 'dexStakeForMining',
                 data: {
-                    abi: abiList.StakeForMining.abi,
-                    toAddress: abiList.StakeForMining.contractAddr,
-                    params: [ 1, amount ],
-                    tokenId: this.viteTokenInfo.tokenId
+                    actionType: 1,
+                    amount
                 }
             }).then(() => {
                 this.$toast(this.$t('hint.request', { name: this.$t('submitStaking') }));

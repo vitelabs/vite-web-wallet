@@ -91,14 +91,14 @@ export default {
             const decimals = this.tokenInfo.decimals || 0;
             const totalSupply = BigNumber.toMin(this.tokenInfo.totalSupply || 0, decimals);
             const maxSupply = this.tokenInfo.isReIssuable ? BigNumber.toMin(this.tokenInfo.maxSupply || 0, decimals) : '0';
-            const ownerBurnOnly = this.tokenInfo.isReIssuable ? !!this.tokenInfo.ownerBurnOnly : false;
+            const isOwnerBurnOnly = this.tokenInfo.isReIssuable ? !!this.tokenInfo.ownerBurnOnly : false;
 
             sendTx({
-                methodName: 'mintage',
+                methodName: 'issueToken',
                 data: {
                     decimals,
                     maxSupply,
-                    ownerBurnOnly,
+                    isOwnerBurnOnly,
                     totalSupply,
                     isReIssuable: !!this.tokenInfo.isReIssuable,
                     tokenName: this.tokenInfo.tokenName,

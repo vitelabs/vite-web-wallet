@@ -88,7 +88,7 @@ export default {
                     ? this.token.availableExAmount
                     : bigNumber.toMin(this.withdrawAmount, this.token.decimals);
                 sendTx({
-                    methodName: 'dexFundUserWithdraw',
+                    methodName: 'dexWithdraw',
                     data: {
                         tokenId: this.token.tokenId,
                         amount

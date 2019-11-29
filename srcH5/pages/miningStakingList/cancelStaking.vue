@@ -69,25 +69,17 @@ export default {
         },
         cancelV1() {
             return sendTx({
-                abi: JSON.stringify(abiList.StakeForMining.abi),
-                methodName: 'callContract',
+                methodName: 'dexStakeForMining',
                 data: {
-                    abi: abiList.StakeForMining.abi,
-                    toAddress: abiList.StakeForMining.contractAddr,
-                    params: [ 2, this.stakingObj.rawData.stakeAmount ],
-                    tokenId: this.viteTokenInfo.tokenId
+                    actionType: 2,
+                    amount: this.stakingObj.rawData.stakeAmount
                 }
             });
         },
         cancelStakeById() {
             return sendTx({
-                abi: JSON.stringify(abiList.CancelStakeById.abi),
-                methodName: 'callContract',
-                data: {
-                    abi: abiList.CancelStakeById.abi,
-                    params: [this.stakingObj.rawData.id],
-                    toAddress: abiList.CancelStakeById.contractAddr
-                }
+                methodName: 'dexCancelStakeById',
+                data: { id: this.stakingObj.rawData.id }
             });
         }
     }

@@ -93,10 +93,7 @@ export default {
                 submit: () => {
                     sendTx({
                         methodName: 'dexCancelOrder',
-                        data: {
-                            orderId: order.orderId,
-                            tradeToken: order.tradeToken
-                        },
+                        data: { orderId: order.orderId },
                         vbExtends: {
                             'type': 'dexCancel',
                             'side': order.side,

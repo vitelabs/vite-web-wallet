@@ -23,8 +23,7 @@ export function bindCode(code: number) {
             ]
         },
         methodName: 'dexBindInviteCode',
-        data: { code },
-        config: { pow: true }
+        data: { code }
     });
 }
 
@@ -50,10 +49,8 @@ export function genCode() {
 
 export function configMarketsAgent({ actionType, agent, tradeTokens, quoteTokens }) {
     return sendTx({
-        abi: JSON.stringify(constant.Contracts.DexConfigMarketAgents),
         methodName: 'dexConfigMarketAgents',
-        data: { actionType, agent, tradeTokens, quoteTokens },
-        config: { pow: true }
+        data: { actionType, agent, tradeTokens, quoteTokens }
     });
 }
 
@@ -89,60 +86,35 @@ export function getProxyAblePairs(): Promise<IProxyPair[]> {
 
 export function stakeForVIP({ actionType }) {
     return sendTx({
-        abi: JSON.stringify(abiList.StakeForVIP.abi),
-        methodName: 'callContract',
-        data: {
-            abi: abiList.StakeForVIP.abi,
-            params: [actionType],
-            toAddress: abiList.StakeForVIP.contractAddr
-        }
+        methodName: 'dexStakeForVIP',
+        data: { actionType }
     });
 }
 
 export function stakeForSuperVIP({ actionType }) {
     return sendTx({
-        abi: JSON.stringify(abiList.StakeForSuperVip.abi),
-        methodName: 'callContract',
-        data: {
-            abi: abiList.StakeForSuperVip.abi,
-            params: [actionType],
-            toAddress: abiList.StakeForSuperVip.contractAddr
-        }
+        methodName: 'dexStakeForSuperVIP',
+        data: { actionType }
     });
 }
 
 export function stakeForPrincipalSVIP({ principal }) {
     return sendTx({
-        abi: JSON.stringify(abiList.StakeForPrincipalSVIP.abi),
-        methodName: 'callContract',
-        data: {
-            abi: abiList.StakeForPrincipalSVIP.abi,
-            params: [principal],
-            toAddress: abiList.StakeForPrincipalSVIP.contractAddr
-        }
+        methodName: 'dexStakeForPrincipalSVIP',
+        data: { principal }
     });
 }
 
 export function cancelStakeById({ id }) {
     return sendTx({
-        abi: JSON.stringify(abiList.CancelStakeById.abi),
-        methodName: 'callContract',
-        data: {
-            abi: abiList.CancelStakeById.abi,
-            params: [id],
-            toAddress: abiList.CancelStakeById.contractAddr
-        }
+        methodName: 'dexCancelStakeById',
+        data: { id }
     });
 }
 
 export function lockVxForDividend({ actionType, amount }) {
     return sendTx({
-        abi: JSON.stringify(abiList.LockVxForDividend.abi),
-        methodName: 'callContract',
-        data: {
-            abi: abiList.LockVxForDividend.abi,
-            params: [ actionType, amount ],
-            toAddress: abiList.LockVxForDividend.contractAddr
-        }
+        methodName: 'dexLockVxForDividend',
+        data: { actionType, amount }
     });
 }

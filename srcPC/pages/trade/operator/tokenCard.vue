@@ -146,10 +146,10 @@ export default {
                     this.isLoading = true;
 
                     sendTx({
-                        methodName: 'dexFundTransferTokenOwner',
+                        methodName: 'dexTransferTokenOwnership',
                         data: {
                             tokenId,
-                            owner: this.address
+                            newOwner: this.address
                         }
                     }).then(() => {
                         this.isLoading = false;

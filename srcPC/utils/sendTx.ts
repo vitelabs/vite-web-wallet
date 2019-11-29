@@ -111,15 +111,20 @@ async function webSendTx({ methodName, params, config, privateKey }) {
 }
 
 function vbSendTx({ methodName, params, vbExtends, abi, description }) {
-    const confirmPromise = vbConfirmDialog();
-    console.log(confirmPromise);
-    // const { compInstance } = confirmPromise;
+    const confirmPromise: any = vbConfirmDialog();
+    const { compInstance } = confirmPromise;
 
     confirmPromise.then(() => {
         // 如果点击了关闭窗口，则不再提示
+        compInstance && compInstance.close();
     });
 
     const accountBlock = createAccountBlock(methodName, params).accountBlock;
+    console.log(accountBlock);
+
+    if (!accountBlock.data) {
+        delete accountBlock.data;
+    }
 
     const vb = getVbInstance();
     return vb.sendVbTx({
@@ -128,7 +133,7 @@ function vbSendTx({ methodName, params, vbExtends, abi, description }) {
         abi,
         description
     }).finally(() => {
-        // compInstance && compInstance.close();
+        compInstance && compInstance.close();
     });
 }
 

@@ -298,7 +298,7 @@ export default {
             };
 
             const sendCancel = () => {
-                sendTx({ methodName: 'revokeVoting', data: { tokenId: Vite_Token_Info.tokenId }, config: { pow: true } }).then(successCancel).catch(failCancel);
+                sendTx({ methodName: 'cancelSBPVoting', config: { pow: true } }).then(successCancel).catch(failCancel);
             };
 
             initPwd({
@@ -337,11 +337,8 @@ export default {
 
             const sendVote = () => {
                 sendTx({
-                    methodName: 'voting',
-                    data: {
-                        nodeName: v.name,
-                        tokenId: Vite_Token_Info.tokenId
-                    }
+                    methodName: 'voteForSBP',
+                    data: { sbpName: v.name }
                 }).then(successVote).catch(failVote);
             };
 
