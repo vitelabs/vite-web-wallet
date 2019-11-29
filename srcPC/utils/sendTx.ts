@@ -64,6 +64,8 @@ async function webSendTx({ methodName, params, config, privateKey }) {
     await accountBlock.autoSetPreviousAccountBlock();
 
     const difficulty = await accountBlock.getDifficulty();
+    console.log(difficulty);
+
     if (!difficulty) {
         return accountBlock.sign().send();
     }
@@ -77,28 +79,11 @@ async function webSendTx({ methodName, params, config, privateKey }) {
     }
 
     const powInstance = powProcess({ ...config.powConfig });
-    await accountBlock.PoW(difficulty);
-
-    if (!powInstance || !powInstance.isShow) {
-        throw {
-            code: '1000002',
-            message: 'Already canceled pow.'
-        };
-    }
-
-    await powInstance.stopCount();
-
-    if (!powInstance || !powInstance.isShow) {
-        throw {
-            code: '1000002',
-            message: 'Already canceled pow.'
-        };
-    }
 
     try {
-        const result = await accountBlock.sign().send();
-        powInstance && powInstance.isShow && powInstance.gotoFinish();
-        return result;
+        await accountBlock.PoW(difficulty);
+        await powInstance.stopCount();
+        return accountBlock.sign().send();
     } catch (err) {
         console.error('send err', err);
 

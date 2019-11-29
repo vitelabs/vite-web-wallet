@@ -26,7 +26,7 @@ const mutations = {
 };
 
 const actions = {
-    fetchTransList({ commit, state, dispatch }, { address, pageIndex }) {
+    fetchTransList({ commit, state, rootState, dispatch }, { address, pageIndex }) {
         const fetchTime = new Date().getTime();
         lastFetchTime = fetchTime;
         commit('commitSetCurrent', pageIndex);
@@ -38,7 +38,13 @@ const actions = {
                 return null;
             }
 
-            commit('commitTransList', data);
+            const accountBlockCount = rootState.account.accountBlockCount;
+            const list = data || [];
+
+            commit('commitTransList', {
+                list,
+                totalNum: accountBlockCount < list.length ? list.length : accountBlockCount
+            });
             data.list && dispatch('setTokenInfoList', data.list);
 
             return data;
@@ -56,7 +62,7 @@ const getters = {
 
         list.forEach(item => {
             // ( confirms )
-            const confirms = item.confirmedTimes || 0;
+            const confirms = item.confirmations || 0;
 
             // Unconfirmed
             let status = 0;

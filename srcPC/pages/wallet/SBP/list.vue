@@ -147,23 +147,23 @@ export default {
             const list = [];
 
             registrationList.forEach(item => {
-                const isMaturity = BigNumber.compared(item.withdrawHeight, this.currentHeight) <= 0;
-                const isCancel = item.cancelTime && !BigNumber.isEqual(item.cancelTime, 0);
+                const isMaturity = BigNumber.compared(item.expirationHeight, this.currentHeight) <= 0;
+                const isCancel = item.revokeTime && !BigNumber.isEqual(item.revokeTime, 0);
                 const isReReg = isCancel
-                    ? (new Date().getTime() - item.cancelTime * 1000) > 75000
+                    ? (new Date().getTime() - item.revokeTime * 1000) > 75000
                     : false;
-                const addr = ellipsisAddr(item.nodeAddr, 6);
+                const addr = ellipsisAddr(item.blockProducingAddress, 6);
 
-                const day = date(item.withdrawTime * 1000, this.$i18n.locale);
+                const day = date(item.expirationTime * 1000, this.$i18n.locale);
                 list.push({
                     name: item.name,
                     addr,
-                    amount: item.isCancel ? '--' : `${ BigNumber.toBasic(item.pledgeAmount, decimals) } ${ Vite_Token_Info.tokenSymbol }`,
+                    amount: item.isCancel ? '--' : `${ BigNumber.toBasic(item.stakeAmount, decimals) } ${ Vite_Token_Info.tokenSymbol }`,
 
                     isMaturity,
                     isCancel,
                     isReReg,
-                    withdrawHeight: item.withdrawHeight,
+                    withdrawHeight: item.expirationHeight,
                     time: day,
                     rawData: item
                 });
@@ -197,7 +197,7 @@ export default {
         sendRegisterTx(item) {
             const rawData = item.rawData;
             const nodeName = rawData.name;
-            const producerAddr = rawData.nodeAddr;
+            const producerAddr = rawData.blockProducingAddress;
 
             if (!this.netStatus) {
                 this.$toast(this.$t('hint.noNet'));
@@ -262,7 +262,7 @@ export default {
                 content: this.$t('walletSBP.section2.cancelConfirm.describe', { amount: item.amount }),
                 submit: () => {
                     const nodeName = item.rawData.name;
-                    const producer = item.rawData.nodeAddr;
+                    const producer = item.rawData.blockProducingAddress;
 
                     sendTx({
                         methodName: 'revokeSBP',

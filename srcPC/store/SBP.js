@@ -56,7 +56,7 @@ const actions = {
                 }
 
                 const operate = nodeNameList[nodeName].operate;
-                const isCancel = item.cancelTime && !BigNumber.isEqual(item.cancelTime, 0);
+                const isCancel = item.revokeTime && !BigNumber.isEqual(item.revokeTime, 0);
                 switch (operate) {
                 // Cancel
                 case 0:
@@ -68,7 +68,7 @@ const actions = {
                     break;
                 // Update
                 case 2:
-                    nodeNameList[nodeName].producer === item.nodeAddr && delete nodeNameList[nodeName];
+                    nodeNameList[nodeName].producer === item.blockProducingAddress && delete nodeNameList[nodeName];
                     break;
                 default: break;
                 }
@@ -81,7 +81,6 @@ const actions = {
 
             if (!length) {
                 dispatch('stopLoopRegList');
-
                 return;
             }
 
