@@ -74,7 +74,7 @@ export default {
             };
         },
         vxBalanceInfo() {
-            return this.$store.state.exchangeBalance.vxBalanceInfo || {};
+            return this.$store.getters.exVXBalanceInfo || {};
         },
         availableAmount() {
             return this.isLockVX

@@ -147,7 +147,6 @@ export default {
 @import "~assets/scss/vars.scss";
 
 .quota-detail {
-    border-bottom: 1px solid #d4dee7;
     box-sizing: border-box;
     .no-detail {
         box-sizing: border-box;

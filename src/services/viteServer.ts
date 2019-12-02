@@ -126,3 +126,7 @@ export function getVoteInfo(address) {
 export function getTokenListByOwner(address) {
     return viteClient.request('contract_getTokenInfoListByOwner', address);
 }
+
+export function getCancellingStakeList(address, pageIndex, pageCount) {
+    return viteClient.request('dex_getCancelStakeList', address, pageIndex, pageCount);
+}
