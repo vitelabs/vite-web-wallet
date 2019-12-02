@@ -73,7 +73,7 @@ export default {
             return this.$store.getters.activeAddr;
         },
         vxBalanceInfo() {
-            return this.$store.state.exchangeBalance.vxBalanceInfo || {};
+            return this.$store.getters.exVXBalanceInfo;
         },
         vxUnlocking() {
             const vxUnlocking = this.vxBalanceInfo.vxUnlocking || 0;
@@ -136,12 +136,11 @@ export default {
             });
         },
         getIsAutoLockMinedVx() {
-            this.isInitAutoLock = false;
-            getIsAutoLockMinedVx(this.address).then(data => {
+            this.isInitAutoLock = this.isInitAutoLock || false;
+            return getIsAutoLockMinedVx(this.address).then(data => {
                 this.isInitAutoLock = true;
                 this.isAutoLock = !!data;
-            }).catch(err => {
-                console.warn(err);
+                return data;
             });
         }
     }

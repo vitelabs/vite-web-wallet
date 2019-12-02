@@ -67,7 +67,7 @@ export default {
             return this.$store.getters.activeAddr;
         },
         vxBalanceInfo() {
-            return this.$store.state.exchangeBalance.vxBalanceInfo || {};
+            return this.$store.getterss.exVXBalanceInfo || {};
         },
         vxUnlocking() {
             const vxUnlocking = this.vxBalanceInfo.vxUnlocking || 0;
