@@ -1365,7 +1365,8 @@
         "listTitle": "Mining History",
         "viewLink": "Live Mining Dashboard",
         "inviteTradeIncome": "邀请交易挖矿明细",
-        "inviteOrderIncome": "邀请挂单挖矿明细"
+        "inviteOrderIncome": "邀请挂单挖矿明细",
+        "myStaking": "我的抵押"
     },
     "mobileBottomBar": {
         "center": "Trade",
