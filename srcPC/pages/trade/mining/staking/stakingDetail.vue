@@ -3,11 +3,17 @@
         <div class="item">
             <div>{{ $t("stakingAmount") }}</div>
             <div class="bold">{{ totalStakingAmount }}</div>
+            <div class="light">
+                <span>{{ $t('tradeMining.dividends') }}</span> {{ `${expectedDividends} VX` }}
+            </div>
         </div>
 
         <div class="item no-border">
-            <div>{{ $t('tradeMining.dividends') }}</div>
-            <div class="bold">{{ `${expectedDividends} VX` }}</div>
+            <div>{{ $t("tradeDividend.unlockAmount") }}</div>
+            <div class="bold">
+                {{ `${cancellingStake} VITE` }}
+                <span v-show="viteBalanceInfo.cancellingStake" @click="showCancelStakeDetails" class="down-icon __pointer"></span>
+            </div>
         </div>
 
         <div class="operations">
@@ -21,6 +27,7 @@
 
         <stakingList ref="stakingList" :cancelStake="cancelStake"></stakingList>
         <cancelStakeForMining ref="cancelStakeForMining"></cancelStakeForMining>
+        <cancelling-details ref="cancelStakeDetail"></cancelling-details>
     </div>
 </template>
 
@@ -29,11 +36,12 @@ import bigNumber from 'utils/bigNumber';
 import { constant } from '@vite/vitejs';
 import stakingList from './stakingList';
 import cancelStakeForMining from './cancelStakeForMining.vue';
+import cancellingDetails from './cancellingDetails.vue';
 
 const Vite_Token_Info = constant.Vite_Token_Info;
 
 export default {
-    components: { stakingList, cancelStakeForMining },
+    components: { stakingList, cancelStakeForMining, cancellingDetails },
     mounted() {
         this.$store.dispatch('getCurrentPledgeForVxSum');
     },
@@ -44,6 +52,13 @@ export default {
         }
     },
     computed: {
+        viteBalanceInfo() {
+            return this.$store.getters.exViteBalanceInfo;
+        },
+        cancellingStake() {
+            const cancellingStake = this.viteBalanceInfo.cancellingStake || 0;
+            return bigNumber.toBasic(cancellingStake, Vite_Token_Info.decimals);
+        },
         stakingObj() {
             return this.$store.state.exchangeMine.userPledgeInfo;
         },
@@ -66,6 +81,9 @@ export default {
         },
         cancelStake(cancelItem) {
             this.$refs.cancelStakeForMining.show(cancelItem);
+        },
+        showCancelStakeDetails() {
+            this.$refs.cancelStakeDetail.show();
         }
     }
 };
@@ -76,10 +94,11 @@ export default {
 
 .down-icon {
     display: inline-block;
-    background: url('~assets/imgs/dividendInfo.svg');
+    background: url('~assets/imgs/moreRecords.svg');
     background-size: 100% 100%;
     width: 16px;
     height: 16px;
-    margin-bottom: -4px;
+    margin-bottom: -2px;
+    margin-left: 4px;
 }
 </style>

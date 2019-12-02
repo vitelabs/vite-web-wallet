@@ -121,3 +121,7 @@ export function getVIPStakeInfoList(address, pageIndex, pageCount = 30) {
 export function getVxUnlockList(address, pageIndex, pageCount = 10) {
     return viteClient.request('dex_getVxUnlockList', address, pageIndex, pageCount);
 }
+
+export function getCancellingStakeList(address, pageIndex, pageCount) {
+    return viteClient.request('dex_getCancelStakeList', address, pageIndex, pageCount);
+}

@@ -1225,7 +1225,7 @@
         "unlockAmount": "解锁中金额",
         "openAutoLock": {
             "title": "开启自动锁仓",
-            "text": "开启后，挖矿发放的所有VX都自动锁仓"
+            "text": "开启后，挖矿获得的VX将自动锁仓（主动购买的VX不自动锁仓）"
         },
         "closeAutoLock": {
             "title": "关闭自动锁仓",
@@ -1365,7 +1365,8 @@
         "listTitle": "Mining History",
         "viewLink": "Live Mining Dashboard",
         "inviteTradeIncome": "邀请交易挖矿明细",
-        "inviteOrderIncome": "邀请挂单挖矿明细"
+        "inviteOrderIncome": "邀请挂单挖矿明细",
+        "myStaking": "我的抵押"
     },
     "mobileBottomBar": {
         "center": "Trade",

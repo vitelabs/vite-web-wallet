@@ -1,9 +1,11 @@
 <template>
     <div class="v-checkbox __pointer" :style="style" @click="toggle"></div>
 </template>
+
 <script>
 import SelectedIcon from 'assets/imgs/uiKit/checkbox/selected.svg';
 import UnselectIcon from 'assets/imgs/uiKit/checkbox/unselect.svg';
+
 export default {
     props: {
         value: {
@@ -17,6 +19,12 @@ export default {
     },
     data() {
         return { inner_value: this.value };
+    },
+    model: { prop: 'value' },
+    watch: {
+        value() {
+            this.inner_value = this.value;
+        }
     },
     methods: {
         toggle() {

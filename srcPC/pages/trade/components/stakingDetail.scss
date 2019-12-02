@@ -7,7 +7,6 @@
     .item {
         display: flex;
         flex-direction: column;
-        justify-content: center;
         box-sizing: border-box;
         width: 25%;
         padding: 12px 30px;
@@ -22,6 +21,9 @@
             @include font-family-bold();
             color: #1d2024;
             font-size: 16px;
+        }
+        .light {
+            color: rgba(94,104,117,0.58);
         }
     }
     .operations {

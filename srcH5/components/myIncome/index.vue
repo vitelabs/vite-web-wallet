@@ -11,6 +11,7 @@
                 </span>
                 <span v-if="isShowMiningLink" class="view-link" @click="goView">{{ $t('mobileMining.viewLink') }}</span>
                 <span v-if="isShowLockLink" class="view-link" @click="goLockView">{{ $t('mobileDividend.viewLink') }}</span>
+                <span v-if="isShowCancelling" class="view-link" @click="goCellingView">{{ $t('mobileDividend.viewLink') }}</span>
             </div>
             <div v-if="isShowTotal" class="item-amount">{{ total | formatNum }}</div>
             <div v-if="isShowActualTotal" class="item-actual">{{ actualTotal }}</div>
@@ -59,6 +60,10 @@ export default {
         isShowLockLink: {
             type: Boolean,
             default: false
+        },
+        isShowCancelling: {
+            type: Boolean,
+            default: false
         }
     },
     data() {
@@ -70,6 +75,9 @@ export default {
         },
         goLockView() {
             this.$router.push({ name: 'lockingList' });
+        },
+        goCellingView() {
+            this.$router.push({ name: 'cellingList' });
         },
         triggerHelp() {
             this.isShowHelpTips = !this.isShowHelpTips;

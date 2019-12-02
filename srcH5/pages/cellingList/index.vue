@@ -25,8 +25,8 @@
 <script>
 import date from 'utils/date';
 import bigNumber from 'utils/bigNumber';
-import { VX_TOKENID } from 'utils/constant';
-import { getVxUnlockList } from 'services/viteServer';
+import { VITE_TOKENID } from 'utils/constant';
+import { getCancellingStakeList } from 'services/viteServer';
 import noData from 'h5Components/noData';
 import listView from 'h5Components/listView.vue';
 import loading from 'components/loading';
@@ -46,11 +46,11 @@ export default {
         };
     },
     computed: {
-        vxTokenInfo() {
-            return this.$store.state.env.tokenMap[VX_TOKENID];
+        viteTokenInfo() {
+            return this.$store.state.env.tokenMap[VITE_TOKENID];
         },
-        vxTokenDecimals() {
-            return this.vxTokenInfo.decimals;
+        viteTokenDecimals() {
+            return this.viteTokenInfo.decimals;
         },
         address() {
             return this.$store.getters.activeAddr;
@@ -59,7 +59,7 @@ export default {
             const list = [];
             this.list.forEach(item => {
                 list.push({
-                    amount: `${ bigNumber.toBasic(item.amount, this.vxTokenDecimals) } VX`,
+                    amount: `${ bigNumber.toBasic(item.amount, this.viteTokenDecimals) } VITE`,
                     time: date(item.expirationTime * 1000, 'zh')
                 });
             });
@@ -91,7 +91,7 @@ export default {
 
             this.isLoading = true;
 
-            getVxUnlockList(this.address, pageIndex, 10).then(({ count, unlocks }) => {
+            getCancellingStakeList(this.address, pageIndex, 10).then(({ count, cancels }) => {
                 if (!this.isLoading || (this.isInit && this.pageIndex >= pageIndex)) {
                     console.log(this.isLoading, this.pageIndex, pageIndex);
                     return;
@@ -99,7 +99,7 @@ export default {
 
                 this.pageIndex = pageIndex;
                 this.totalNum = count;
-                this.list = [].concat(this.list, unlocks);
+                this.list = [].concat(this.list, cancels);
                 this.isLoading = false;
                 this.isInit = true;
             }).catch(err => {
