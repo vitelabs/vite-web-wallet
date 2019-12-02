@@ -3,55 +3,37 @@
         <div v-if="!stakingObj || +!stakingObj.totalStakeCount" @click="addStaking" class="no-detail __pointer">
             {{ $t("tradeMining.addQuota") }}
         </div>
-        <staking-detail v-else :addStaking="addStaking"></staking-detail>
-        <stakeForMining ref="stakeForMining"></stakeForMining>
+        <div v-else class="amount-detail">
+            <div class="item-title">
+                <img :src="vxIcon" /> {{ $t('tradeMining.dividends')}}
+                <span>{{ expectedDividends || '--' }} VX</span>
+            </div>
+        </div>
     </div>
 </template>
 
 <script>
-import statistics from 'utils/statistics';
-import stakingDetail from './stakingDetail.vue';
-import { timer } from 'utils/asyncFlow';
-import stakeForMining from './stakeForMining';
-
-let stakingInfoTimer = null;
+import vxIcon from 'assets/imgs/vx.png';
 
 export default {
-    components: { stakeForMining, stakingDetail },
-    beforeMount() {
-        this.loopStakingInfo();
-    },
-    destroyed() {
-        this.stopStakingInfo();
-    },
-    watch: {
-        address() {
-            this.loopStakingInfo();
+    props: {
+        addStaking: {
+            type: Function,
+            default: () => {}
         }
+    },
+    data() {
+        return { vxIcon };
     },
     computed: {
         address() {
             return this.$store.getters.activeAddr;
         },
         stakingObj() {
-            console.log(this.$store.state.exchangeMine.userPledgeInfo);
             return this.$store.state.exchangeMine.userPledgeInfo;
-        }
-    },
-    methods: {
-        addStaking() {
-            statistics.event(`H5${ this.$route.name }`, 'addQuota', this.address || '');
-            this.$refs.stakeForMining.show();
         },
-        stopStakingInfo() {
-            stakingInfoTimer && stakingInfoTimer.stop();
-            stakingInfoTimer = null;
-        },
-        loopStakingInfo() {
-            this.stopStakingInfo();
-            this.$store.dispatch('getAgentMiningPledgeInfo');
-            stakingInfoTimer = new timer(() => this.$store.dispatch('getAgentMiningPledgeInfo'), 2000);
-            stakingInfoTimer.start();
+        expectedDividends() {
+            return this.$store.getters.stakingDividends;
         }
     }
 };
@@ -59,6 +41,7 @@ export default {
 
 <style lang="scss" scoped>
 @import "~h5Assets/scss/vars.scss";
+@import "~h5Components/myIncome/amountDetail.scss";
 
 .no-detail {
     display: flex;
@@ -79,6 +62,15 @@ export default {
         background: url('~h5Assets/imgs/add_quota.svg');
         background-size: 100% 100%;
         margin-right: 5px;
+    }
+}
+
+.amount-detail {
+    padding-top: 14px;
+    img {
+        box-sizing: border-box;
+        border-radius: 20px;
+        margin-right: 4px;
     }
 }
 </style>
