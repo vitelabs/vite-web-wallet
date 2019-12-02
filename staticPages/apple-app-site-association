@@ -4,7 +4,7 @@
         "details": [
             {
                 "appID": "5SR42372L5.net.vite.wallet",
-                "paths": [ "/native_app/*", "/webview/*"]
+                "paths": [ "/walletQuota", "/webview/*"]
             }
         ]
     }
