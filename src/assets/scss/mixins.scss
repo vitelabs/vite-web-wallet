@@ -20,6 +20,7 @@ html {
     width: 100%;
     height: 100%;
 }
+
 body {
     width: 100%;
     height: 100%;
@@ -171,4 +172,13 @@ textarea {
     src: url("../font/DINPro.otf");
     font-weight: normal;
     font-style: normal;
+}
+
+@mixin page_bg_color() {
+    [data-theme="0"] & {
+        background-color: $background-color-theme1;
+    }
+    [data-theme="1"] & {
+        background-color: $background-color-theme2;
+    }
 }
