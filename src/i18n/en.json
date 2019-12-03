@@ -598,6 +598,12 @@
         "tAddress": "Address",
         "sum": "Amount"
     },
+    "walletFullNode": {
+        "title": "全节点",
+        "help": {
+            "title": "关于全节点"
+        }
+    },
     "walletSBP": {
         "title": "SBP",
         "help": {
