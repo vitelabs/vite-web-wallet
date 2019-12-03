@@ -99,26 +99,27 @@ function vbSendTx({ methodName, params, vbExtends, abi, description }) {
     const confirmPromise: any = vbConfirmDialog();
     const { compInstance } = confirmPromise;
 
-    confirmPromise.then(() => {
-        // 如果点击了关闭窗口，则不再提示
-        compInstance && compInstance.close();
-    });
+    return new Promise((res, rej) => {
+        confirmPromise.then(() => {
+            // 如果点击了关闭窗口，则不再提示
+            compInstance && compInstance.close();
+            rej({ code: '11021' });
+        });
 
-    const accountBlock = createAccountBlock(methodName, params).accountBlock;
-    console.log(accountBlock);
+        const accountBlock = createAccountBlock(methodName, params).accountBlock;
+        // if (!accountBlock.data) {
+        //     delete accountBlock.data;
+        // }
 
-    if (!accountBlock.data) {
-        delete accountBlock.data;
-    }
-
-    const vb = getVbInstance();
-    return vb.sendVbTx({
-        block: accountBlock,
-        extend: vbExtends,
-        abi,
-        description
-    }).finally(() => {
-        compInstance && compInstance.close();
+        const vb = getVbInstance();
+        return vb.sendVbTx({
+            block: accountBlock,
+            extend: vbExtends,
+            abi,
+            description
+        }).finally(() => {
+            compInstance && compInstance.close();
+        });
     });
 }
 

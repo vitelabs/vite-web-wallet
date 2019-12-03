@@ -56,14 +56,14 @@ export default {
             // code 12002 无激活账户
 
             // Show quota confirm, don't neet toast
-            if (code === '1000001') {
+            if (+code === 1000001) {
                 return;
             }
-            if (code === 11012 || code === 11020 || code === 11021) {
+            if (+code === 11012 || +code === 11020 || +code === 11021) {
                 // wc 取消授权，断开
                 return;
             }
-            if (code === 12001) {
+            if (+code === 12001) {
                 // 未解锁
                 return;
             }
