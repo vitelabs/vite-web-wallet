@@ -221,14 +221,17 @@ export default {
                         : err
                             ? err.code
                             : -1;
-                if (code === -35001) {
+
+                if (+code === -35001) {
                     this.$toast(this.$t('hint.insufficientBalance'));
                     this.amountErr = this.$t('hint.insufficientBalance');
                     return;
                 }
-                if (code === 11021) {
+
+                if (+code === 11021) {
                     this.loading = false;
                     this.closeTrans();
+                    return;
                 }
 
                 this.$toast(msg, err);
