@@ -34,7 +34,6 @@ import bigNumber from 'utils/bigNumber';
 import statistics from 'utils/statistics';
 import { verifyAmount } from 'pcUtils/validations';
 import router from 'pcRouter';
-import { abiList } from 'services/apiServer';
 
 const minLimit = 134;
 

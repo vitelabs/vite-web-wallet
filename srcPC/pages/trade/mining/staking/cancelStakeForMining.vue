@@ -24,7 +24,6 @@ import router from 'pcRouter';
 import sendTx from 'pcUtils/sendTx';
 import { initPwd } from 'pcComponents/password/index.js';
 import { cancelStakeById } from 'pcServices/tradeOperation';
-import { abiList } from 'services/apiServer';
 
 export default {
     components: { confirm },

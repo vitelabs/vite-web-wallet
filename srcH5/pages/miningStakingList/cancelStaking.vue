@@ -18,7 +18,6 @@
 
 <script>
 import { constant } from '@vite/vitejs';
-import { abiList } from 'services/apiServer';
 import confirm from 'h5Components/confirm/confirm.vue';
 import sendTx from 'h5Utils/sendTx';
 

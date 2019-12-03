@@ -39,7 +39,6 @@ import { VX_TOKENID } from 'utils/constant';
 import bigNumber from 'utils/bigNumber';
 import Checkbox from 'uiKit/checkbox';
 import tooltips from 'components/tooltips';
-import { abiList } from 'services/apiServer';
 import { getIsAutoLockMinedVx } from 'services/viteServer';
 import sendTx from 'h5Utils/sendTx';
 import lockConfirm from './lockConfirm';
