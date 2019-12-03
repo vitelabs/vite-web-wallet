@@ -295,6 +295,7 @@ export default {
 
             const successCancel = () => {
                 const t = Object.assign({}, v);
+                t.blockProducerName = v.sbpName || v.nodeName;
                 t.isCache = true;
                 // 撤销投票中
                 t.voteStatus = 'canceling';
@@ -324,6 +325,7 @@ export default {
         vote: execWithValid(function (v) {
             const successVote = () => {
                 const t = Object.assign({}, v);
+                t.blockProducerName = v.sbpName || v.nodeName;
                 t.isCache = true;
                 // 投票中
                 t.voteStatus = 'voting';

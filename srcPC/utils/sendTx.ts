@@ -107,9 +107,6 @@ function vbSendTx({ methodName, params, vbExtends, abi, description }) {
         });
 
         const accountBlock = createAccountBlock(methodName, params).accountBlock;
-        // if (!accountBlock.data) {
-        //     delete accountBlock.data;
-        // }
 
         const vb = getVbInstance();
         return vb.sendVbTx({
@@ -117,9 +114,14 @@ function vbSendTx({ methodName, params, vbExtends, abi, description }) {
             extend: vbExtends,
             abi,
             description
-        }).finally(() => {
-            compInstance && compInstance.close();
-        });
+        }).then(data => {
+            res(data);
+        }).catch(err => {
+            rej(err);
+        })
+            .finally(() => {
+                compInstance && compInstance.close();
+            });
     });
 }
 

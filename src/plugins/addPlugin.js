@@ -54,19 +54,12 @@ export default {
             // code 12000 web error
             // code 12001 未解锁
             // code 12002 无激活账户
+            // code 1000001 Show quota confirm, don't neet toast
 
-            // Show quota confirm, don't neet toast
-            if (+code === 1000001) {
+            if ([ 1000001, 11012, 11020, 11021, 12001 ].indexOf(+code) !== -1) {
                 return;
             }
-            if (+code === 11012 || +code === 11020 || +code === 11021) {
-                // wc 取消授权，断开
-                return;
-            }
-            if (+code === 12001) {
-                // 未解锁
-                return;
-            }
+
             if (!this || !this.$t) {
                 return;
             }

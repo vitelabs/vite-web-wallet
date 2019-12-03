@@ -30,7 +30,6 @@ import confirm from 'h5Components/confirm/confirm.vue';
 import bigNumber from 'utils/bigNumber';
 import sendTx from 'h5Utils/sendTx';
 import { verifyAmount } from 'h5Utils/validations';
-import { abiList } from 'services/apiServer';
 
 const Vite_Token_Info = constant.Vite_Token_Info;
 const minLimit = 134;

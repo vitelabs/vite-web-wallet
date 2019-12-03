@@ -57,7 +57,6 @@ import statistics from 'utils/statistics';
 import sendTx from 'pcUtils/sendTx';
 import { verifyAmount } from 'pcUtils/validations';
 import { execWithValid } from 'pcUtils/execWithValid';
-import { abiList } from 'services/apiServer';
 
 const Vite_Token_Info = constant.Vite_Token_Info;
 const amountTimeout = null;
