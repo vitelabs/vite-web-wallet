@@ -237,7 +237,9 @@
             "30": "30 Minutes",
             "60": "1 Hour",
             "720": "12 Hours"
-        }
+        },
+        "theme": "主题颜色",
+        "themeList": ["白天主题", "暗黑主题"]
     },
     "create": {
         "input": "Please enter your password",

@@ -13,9 +13,10 @@ export const HoldPwdKey = 'isHoldPWD';
 export const CurrencyKey = 'currency';
 export const LangKey = 'lang';
 export const GateKey = 'gate';
+export const ThemeKey = 'theme';
 export const ShowHoldPWDNumKey = 'showHoldPWDNum';
 
-export const SettingKeys = [ FirstKey, LangKey, AutoLogoutKey, CurrencyKey, HoldPwdKey, ShowHoldPWDNumKey, GateKey ];
+export const SettingKeys = [ FirstKey, LangKey, AutoLogoutKey, CurrencyKey, HoldPwdKey, ShowHoldPWDNumKey, GateKey, ThemeKey ];
 export const TradeKeys = [ 'favoriteTickers', 'beginnerGuide' ];
 
 export const AccBaseKeys = [ 'name', 'addrNum', 'idx', 'addr' ];

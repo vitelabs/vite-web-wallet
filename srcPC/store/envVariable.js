@@ -7,6 +7,7 @@ const currencyKey = constant.CurrencyKey;
 const autoLogoutKey = constant.AutoLogoutKey;
 const LangKey = constant.LangKey;
 const GateKey = constant.GateKey;
+const ThemeKey = constant.ThemeKey;
 
 const state = {
     clientStatus: -1,
@@ -14,6 +15,7 @@ const state = {
     currency: localStorage.getItem(currencyKey) || '',
     autoLogoutTime: localStorage.getItem(autoLogoutKey) || 5,
     gate: +localStorage.getItem(GateKey) || 0,
+    theme: +localStorage.getItem(ThemeKey) || 0,
     lastPage: '',
     isShowCompliance: false
 };
@@ -35,6 +37,11 @@ const mutations = {
     setGate(state, isOpen) {
         localStorage.setItem(GateKey, isOpen ? 1 : 0);
         state.gate = isOpen ? 1 : 0;
+    },
+    setTheme(state, theme) {
+        localStorage.setItem(ThemeKey, theme);
+        state.theme = theme;
+        document.documentElement.setAttribute('data-theme', theme);
     },
     setCurrency(state, currency) {
         currency = currency.toLowerCase();
