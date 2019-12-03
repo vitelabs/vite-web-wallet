@@ -1,6 +1,15 @@
 import '@babel/polyfill';
 require('es6-promise').polyfill();
 
+import {
+    storage as localStorage,
+    constant
+} from 'pcUtils/store';
+const ThemeKey = constant.ThemeKey;
+
+const theme = +localStorage.getItem(ThemeKey) || 0;
+document.documentElement.setAttribute('data-theme', theme);
+
 import 'assets/scss/mixins.scss';
 import 'utils/performance';
 import 'services/dnsHostIP';

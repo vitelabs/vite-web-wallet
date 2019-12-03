@@ -18,6 +18,7 @@
                     <lang></lang>
                     <currency></currency>
                     <gate></gate>
+                    <theme></theme>
                 </div>
 
                 <div class="area">
@@ -36,6 +37,7 @@ import holdPwd from 'pcComponents/password/holdPwd.vue';
 import netInfo from './netInfo';
 import lang from './lang.vue';
 import gate from './gate.vue';
+import theme from './theme.vue';
 import autoLogout from './autoLogout.vue';
 import accList from './accList.vue';
 import mnemonic from './mnemonic.vue';
@@ -53,7 +55,8 @@ export default {
         accList,
         mnemonic,
         currency,
-        gate
+        gate,
+        theme
     },
     data() {
         return { isTestEnv: process.env.NODE_ENV === 'dev' || process.env.NODE_ENV === 'test' };
