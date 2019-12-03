@@ -50,14 +50,6 @@
                        src="https://www.facebook.com/tr?id=132237230747897&ev=PageView&noscript=1"
         /></noscript>
         <!-- End Facebook Pixel Code -->
-
-        <script>
-            let theme = 0;
-            try {
-                theme = localStorage.getItem('theme') || 0;
-            } catch(err) {}
-            document.documentElement.setAttribute('data-theme', theme);
-        </script>
     </head>
 
     <body>
@@ -224,5 +216,13 @@
                 }
             }
         </style>
+
+        <script>
+            let theme = 0;
+            try {
+                theme = localStorage.getItem('theme') || 0;
+            } catch(err) {}
+            document.documentElement.setAttribute('data-theme', theme);
+        </script>
     </body>
 </html>
