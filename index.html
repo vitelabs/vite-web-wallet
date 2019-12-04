@@ -172,13 +172,8 @@
                 opacity: 1;
                 transition: all 0.8s ease-in-out;
             }
-            .big-spinner {
-                width: 200px;
-                height: 200px;
-            }
             .dis {
-                width: 350px;
-                height: 350px;
+                transform: scale(3, 3);
                 opacity: 0;
             }
             .loading {
@@ -220,7 +215,7 @@
         <script>
             let theme = 0;
             try {
-                theme = localStorage.getItem('theme') || 0;
+                theme = localStorage.getItem('VITE_WEB_WALLET:theme') || 0;
             } catch(err) {}
             document.documentElement.setAttribute('data-theme', theme);
         </script>
