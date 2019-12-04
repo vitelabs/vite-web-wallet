@@ -12,7 +12,7 @@
 
 <script>
 import { order } from 'services/trade';
-import pagination from 'components/pagination';
+import pagination from 'pcComponents/pagination';
 import openTable from '../components/openTable';
 import Filters from '../components/filters';
 

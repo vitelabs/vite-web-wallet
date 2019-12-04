@@ -27,8 +27,8 @@
 </template>
 
 <script>
-import walletTable from 'components/table/index.vue';
-import pagination from 'components/pagination';
+import walletTable from 'pcComponents/table/index.vue';
+import pagination from 'pcComponents/pagination';
 import { miningTrade } from 'services/trade';
 import bigNumber from 'utils/bigNumber';
 import date from 'utils/date';

@@ -17,8 +17,8 @@
 
 <script>
 import confirm from 'components/confirm/confirm.vue';
-import walletTable from 'components/table/index.vue';
-import pagination from 'components/pagination.vue';
+import walletTable from 'pcComponents/table/index.vue';
+import pagination from 'pcComponents/pagination.vue';
 import { operatorIncome } from 'services/trade';
 import date from 'utils/date';
 import BigNumber from 'utils/bigNumber';

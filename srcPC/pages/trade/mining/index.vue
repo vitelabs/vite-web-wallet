@@ -1,9 +1,8 @@
 <template>
     <div class="trade-mining-wrapper">
-        <div class="fee-title">
-            {{ $t('tradeMining.todayTrade') }}
+        <sec-title :isShowHelp="false" :title="$t('tradeMining.todayTrade')">
             <span class="link __pointer" @click="goView">{{ $t('tradeMining.view') }}</span>
-        </div>
+        </sec-title>
 
         <div class="tab_title">
             <div
@@ -76,6 +75,7 @@
 
 <script>
 import openUrl from 'utils/openUrl';
+import secTitle from 'pcComponents/secTitle';
 import { miningTrade, miningPledge, getInviteMiningDetail, getOrderMining } from 'services/trade';
 import inviteMinComp from './invite/invite.vue';
 import orderMinComp from './order.vue';
@@ -87,7 +87,8 @@ export default {
         inviteMinComp,
         orderMinComp,
         tradeMinComp,
-        stakingMinComp
+        stakingMinComp,
+        secTitle
     },
     data() {
         return {
@@ -198,29 +199,21 @@ export default {
     flex-direction: column;
 }
 
-.fee-title {
-    font-size: 18px;
-    line-height: 22px;
-    padding: 10px 0 14px;
-    display: flex;
+.link {
+    display: inline-block;
     align-items: center;
-    @include font-family-bold();
-    color: rgba(36,39,43,1);
-    .link {
-        display: flex;
-        align-items: center;
-        font-size: 12px;
-        color: #007aff;
-        margin-left: 14px;
-        &::before {
-            display: inline-block;
-            content: ' ';
-            width: 16px;
-            height: 16px;
-            background: url('~assets/imgs/info_link.svg');
-            background-size: 100% 100%;
-            margin-right: 5px;
-        }
+    font-size: 12px;
+    color: #007aff;
+    margin-left: 10px;
+    &::before {
+        display: inline-block;
+        content: ' ';
+        width: 16px;
+        height: 16px;
+        background: url('~assets/imgs/info_link.svg');
+        background-size: 100% 100%;
+        margin-right: 5px;
+        margin-bottom: -3px;
     }
 }
 

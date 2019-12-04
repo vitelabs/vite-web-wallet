@@ -121,7 +121,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '~assets/scss/table.scss';
+@import '~pcAssets/scss/table.scss';
 
 .__tb {
     flex: 1;

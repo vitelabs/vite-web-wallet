@@ -120,6 +120,7 @@
         "px2rem-loader": "^0.1.9",
         "qrcode.es": "~1.0.0",
         "qs": "~6.5.2",
+        "sass-resources-loader": "^2.0.1",
         "testwebworker": "git+https://github.com/vitelabs/cryptojsAccelerator.git",
         "url": "~0.11.0",
         "vue-echarts": "~4.0.1",

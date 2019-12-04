@@ -91,8 +91,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "~assets/scss/vars.scss";
-
 .menu.switch-address-wrapper {
     .list-title {
         border: none;
@@ -104,7 +102,12 @@ export default {
 
 .switch-address-wrapper {
     width: 100%;
-    color: #73767A;
+    [data-theme="0"] & {
+        color: #73767A;
+    }
+    [data-theme="1"] & {
+        color: $white-color;
+    }
     @include font-family-bold();
     font-weight: 600;
     font-size: 13px;
@@ -149,16 +152,17 @@ export default {
         width: 250px;
         max-height: 220px;
         overflow: auto;
-        background: rgba(255,255,255,1);
+        background: $white-color;
         box-shadow: 0px 5px 10px 0px rgba(176,192,237,0.69);
         margin-top: 10px;
         word-break: break-all;
         .item {
+            @include bg_color_1();
             box-sizing: border-box;
             padding: 8px 12px;
             line-height: 16px;
             &:hover {
-                background: rgba(75,116,255,0.1);
+                @include hover_color();
             }
             .name {
                 font-size: 12px;

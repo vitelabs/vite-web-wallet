@@ -177,13 +177,16 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "~assets/scss/vars.scss";
-
 .head {
     box-sizing: border-box;
     line-height: 43px;
     margin: 0 10px;
-    border-bottom: 1px solid rgba(198, 203, 212, 0.3);
+    [data-theme="0"] & {
+        border-bottom: 1px solid rgba(198, 203, 212, 0.3);
+    }
+    [data-theme="1"] & {
+        border-bottom: 1px solid $black-color-2;
+    }
     justify-content: space-between;
     display: flex;
     flex-wrap: nowrap;
@@ -214,34 +217,6 @@ export default {
                     padding: 0!important;
                 }
             }
-            .unlock-bubble {
-                text-align: left;
-                white-space: normal;
-                width: 150px;
-                box-sizing: border-box;
-                padding: 10px 12px;
-                background: rgba(255,255,255,1);
-                box-shadow: 0px 3px 10px 0px rgba(176,192,237,0.69);
-                position: absolute;
-                top: 40px;
-                z-index: 1;
-                line-height: 16px;
-                font-size: 12px;
-                @include font-family-normal();
-                color: rgba(94,104,117,1);
-                .bubble-btn {
-                    margin-top: 10px;
-                    color: rgba(0,122,255,1);
-                }
-                &:after {
-                    top: -12px;
-                    position: absolute;
-                    content: ' ';
-                    display: inline-block;
-                    border: 6px solid transparent;
-                    border-bottom: 6px solid #fff;
-                }
-            }
         }
     }
 
@@ -252,9 +227,9 @@ export default {
     }
 
     .tab {
-        color: #bdc1d1;
-        font-size: 13px;
+        @include second_title_font_color();
         @include font-family-bold();
+        font-size: 13px;
         display: inline-block;
         box-sizing: border-box;
         height: 100%;
@@ -264,14 +239,14 @@ export default {
         user-select: none;
         &.active {
             position: relative;
-            color: rgba(0, 122, 255, 1);
-            border-bottom: 2px solid rgba(0, 122, 255, 1);
+            color: $blue-color-1;
+            border-bottom: 2px solid $blue-color-1;
 
             &::after {
                 content: "";
                 display: inline-block;
                 border: 6px solid transparent;
-                border-bottom: 6px solid rgba(0, 122, 255, 1);
+                border-bottom: 6px solid $blue-color-1;
                 position: absolute;
                 bottom: 0;
                 left: 50%;

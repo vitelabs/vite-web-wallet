@@ -26,7 +26,7 @@
 </template>
 
 <script>
-// [TODO] Need components/confirm and components/table
+// [TODO] Need components/confirm and pcComponents/table
 import { chargeDetail } from 'services/trade';
 import date from 'utils/date';
 
@@ -86,7 +86,7 @@ export default {
 
 <style lang="scss" scoped>
 @import "~components/confirm/confirm.scss";
-@import "~assets/scss/table.scss";
+@import "~pcAssets/scss/table.scss";
 
 .__tb {
     min-width: 0px;

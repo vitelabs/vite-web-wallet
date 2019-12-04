@@ -108,7 +108,16 @@ module.exports = {
                             ]
                         }
                     },
-                    { loader: 'sass-loader' }
+                    { loader: 'sass-loader' },
+                    {
+                        loader: 'sass-resources-loader',
+                        options: {
+                            resources: [
+                                path.resolve(srcPath, './assets/scss/var.scss'),
+                                path.resolve(srcPath, './assets/scss/mixins.scss')
+                            ]
+                        }
+                    }
                 ]
             }, {
                 test: /(\.ttf$|\.ttc$|\.otf$)/,
