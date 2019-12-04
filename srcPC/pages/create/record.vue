@@ -114,6 +114,7 @@ export default {
 
 <style lang="scss" scoped>
 @import "~assets/scss/vars.scss";
+@import "./create.scss";
 
 .__btn.__btn_all_in.unuse {
     background: rgba(191,191,191,1);

@@ -1,0 +1,9 @@
+@import "~assets/scss/vars.scss";
+
+.__second-title {
+    font-size: 14px;
+    @include font-family-bold();
+    font-weight: 600;
+    color: rgba(29,32,36,1);
+    line-height: 18px;
+}

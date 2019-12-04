@@ -373,6 +373,7 @@ export default {
 
 <style lang="scss" scoped>
 @import "~assets/scss/vars.scss";
+@import "~pcAssets/scss/title.scss";
 
 .vote {
     height: 100%;

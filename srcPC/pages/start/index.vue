@@ -30,6 +30,7 @@ export default {
 
 <style lang="scss" scoped>
 @import "~assets/scss/vars.scss";
+@import "./start.scss";
 
 .index-layout-wrapper {
     position: relative;

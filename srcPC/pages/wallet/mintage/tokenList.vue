@@ -298,6 +298,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import "~pcAssets/scss/title.scss";
+
 .list-wrapper {
     margin-top: 20px;
     flex: 1;

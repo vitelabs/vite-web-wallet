@@ -40,6 +40,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import "../start.scss";
+
 .account-list-wrapper {
     position: absolute;
     z-index: 100;

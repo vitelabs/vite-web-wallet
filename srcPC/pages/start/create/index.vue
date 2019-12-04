@@ -32,6 +32,7 @@ export default {
 
 <style lang="scss" scoped>
 @import "~assets/scss/vars.scss";
+@import "../start.scss";
 
 .create-account-wrapper{
     max-width: 360px;

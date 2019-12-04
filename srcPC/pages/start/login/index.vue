@@ -56,48 +56,30 @@
             </div>
             <div v-if="tabName === 'existingAcc'" class="existing-acc">
                 <div class="bottom __btn __pointer" v-click-outside.includeChildrens="hideAccountList">
-                    <div
-                        @click="toggleAccountList"
-                    >
-                        <div
-                            v-show="
-                                currAcc &&
-                                    !currAcc.activeAddr &&
-                                    !currAcc.isBifrost
-                            "
-                            class="__btn __btn_input"
-                        >
+                    <div @click="toggleAccountList">
+                        <div v-show="currAcc && !currAcc.activeAddr && !currAcc.isBifrost" class="__btn __btn_input">
                             <div class="name __ellipsis">
                                 {{ currAcc.name }}
                             </div>
                         </div>
 
-                        <account-item
-                            v-show="currAcc && currAcc.activeAddr"
-                            class="__btn"
-                            :account="currAcc"
-                        ></account-item>
+                        <account-item class="no-border-b"
+                                      v-show="currAcc && currAcc.activeAddr"
+                                      :account="currAcc"></account-item>
 
-                        <span
-                            :class="{
-                                slide: true,
-                                down: !isShowAccountList,
-                                up: isShowAccountList
-                            }"
-                        ></span>
+                        <span :class="{
+                            slide: true,
+                            down: !isShowAccountList,
+                            up: isShowAccountList
+                        }" ></span>
                     </div>
 
-                    <account-list
-                        ref="accList"
-                        v-show="isShowAccountList"
-                        :clickAccount="chooseAccount"
-                    ></account-list>
+                    <account-list ref="accList" v-show="isShowAccountList"
+                                  :clickAccount="chooseAccount"></account-list>
                 </div>
 
-                <div
-                    class="bottom __btn __btn_input"
-                    :class="{ active: !!password || inputItem === 'pass' }"
-                >
+                <div class="bottom __btn __btn_input"
+                     :class="{ active: !!password || inputItem === 'pass' }">
                     <input
                         ref="passInput"
                         autofocus
@@ -375,6 +357,11 @@ export default {
 
 <style lang="scss" scoped>
 @import "~assets/scss/vars.scss";
+@import "../start.scss";
+
+.no-border-b {
+    border-bottom: none;
+}
 
 .login-wrapper {
     display: flex;
@@ -382,7 +369,6 @@ export default {
     align-items: center;
     .__btn {
         position: relative;
-
         &.__btn_input {
             .name {
                 width: 89%;
