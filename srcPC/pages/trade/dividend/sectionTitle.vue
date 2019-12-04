@@ -41,7 +41,12 @@ export default {
     line-height: 18px;
     font-size: 13px;
     @include font-family-bold();
-    color: rgba(94,104,117,0.8);
+    [data-theme="0"] & {
+        color: rgba(94,104,117,0.8);
+    }
+    [data-theme="1"] & {
+        color: $white-color;
+    }
 }
 
 .help {

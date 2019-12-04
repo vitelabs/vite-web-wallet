@@ -157,7 +157,7 @@ export default {
         margin-top: 10px;
         word-break: break-all;
         .item {
-            @include bg_color_1();
+            @include bg_color_2();
             box-sizing: border-box;
             padding: 8px 12px;
             line-height: 16px;

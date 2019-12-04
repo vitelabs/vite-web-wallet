@@ -93,10 +93,11 @@ export default {
         left: 0px;
         right: 0px;
         overflow: auto;
-        background: #fff;
-        box-shadow: 0px 2px 10px 1px rgba(176, 192, 237, 0.42);
         border-radius: 2px;
-
+        @include bg_color_2();
+        [data-theme="0"] & {
+            box-shadow: 0px 2px 10px 1px rgba(176, 192, 237, 0.42);
+        }
         .content {
             max-width: 510px;
             padding: 0 20px 20px;

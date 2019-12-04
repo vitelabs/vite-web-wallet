@@ -2,7 +2,7 @@
 
 .setting.common-list-wrapper {
     width: 250px;
-    border: 1px solid #D4DEE7;
+    @include common_border();
     border-radius: 2px;
     font-size: 14px;
     color: #5E6875;
@@ -12,7 +12,7 @@
         width: 100%;
         box-sizing: border-box;
         padding: 10px 12px;
-        background: #FFFFFF;
+        @include bg_color_2();
         &:after {
             content: '';
             display: inline-block;
@@ -40,8 +40,8 @@
         li {
             box-sizing: border-box;
             padding: 10px 12px;
-            background: #FFFFFF;
-            border-top: 1px solid #D4DEE7;
+            @include bg_color_2();
+            @include common_border();
         }
     }
 }
