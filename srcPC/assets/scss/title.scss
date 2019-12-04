@@ -3,7 +3,12 @@
 .__second-title {
     font-size: 14px;
     @include font-family-bold();
-    font-weight: 600;
-    color: rgba(29,32,36,1);
+    [data-theme="0"] & {
+        color: rgba(29,32,36,1);
+    }
+    [data-theme="1"] & {
+        color: $white-color;
+    }
+    
     line-height: 18px;
 }
