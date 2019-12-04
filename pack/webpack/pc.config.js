@@ -25,7 +25,8 @@ module.exports = {
             pcStore: path.join(PC_SRC_PATH, '/store'),
             pcUtils: path.join(PC_SRC_PATH, '/utils'),
             pcComponents: path.join(PC_SRC_PATH, '/components'),
-            pcServices: path.join(PC_SRC_PATH, '/services')
+            pcServices: path.join(PC_SRC_PATH, '/services'),
+            pcAssets: path.join(PC_SRC_PATH, '/assets')
         }
     }
 };

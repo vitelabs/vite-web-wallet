@@ -202,6 +202,7 @@ export default {
 
 <style lang="scss" scoped>
 @import "~assets/scss/vars.scss";
+@import "~pcAssets/scss/title.scss";
 
 .list-wrapper {
     flex: 1;

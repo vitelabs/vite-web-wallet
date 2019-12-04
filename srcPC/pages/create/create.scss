@@ -1,0 +1,46 @@
+@import "~assets/scss/vars.scss";
+
+.__title {
+    @include font-family-bold();
+    font-size: 26px;
+    color: #FFFFFF;
+    letter-spacing: 0;
+    text-align: center;
+    padding: 0 0 30px;
+}
+
+.__btn {
+    display: block;
+    box-sizing: border-box;
+    height: 60px;
+    line-height: 60px;
+    text-align: center;
+    font-size: 16px;
+}
+
+.__btn_all_in {
+    background: #007AFF;
+    color: #FFFFFF;
+    border-radius: 3px;
+    @include font-family-bold();
+}
+
+.__btn_border {
+    border-radius: 2px;
+    background: #fff;
+    color: #195ADD;
+    @include font-family-bold();
+}
+
+.__btn_list {
+    .__btn {
+        display: inline-block;
+        width: 167px;
+        &:first-child {
+            float: left;
+        }
+        &:last-child {
+            float: right;
+        }
+    }
+}

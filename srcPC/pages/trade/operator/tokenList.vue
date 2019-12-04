@@ -45,6 +45,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import "~pcAssets/scss/title.scss";
+
 .__second-title {
     margin: 14px 0 0;
 }

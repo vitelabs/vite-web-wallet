@@ -34,7 +34,10 @@ export default {
     }
 };
 </script>
+
 <style lang="scss" scoped>
+@import "./create.scss";
+
 .create-account-wrapper {
     position: absolute;
     padding: 50px;
