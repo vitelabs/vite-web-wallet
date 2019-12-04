@@ -109,7 +109,13 @@ export default {
 
 .content {
     background: #f3f6f9;
-    border: 1px solid #d4dee7;
+    [data-theme="0"] & {
+        background: #f3f6f9;
+        border: 1px solid #d4dee7;
+    }
+    [data-theme="1"] & {
+        background: $black-color-1;
+    }
     border-radius: 2px;
     padding: 10px 15px;
     font-size: 14px;

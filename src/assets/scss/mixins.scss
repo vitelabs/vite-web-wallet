@@ -80,39 +80,3 @@ textarea {
     font-weight: normal;
     font-style: normal;
 }
-
-@mixin page_bg_color() {
-    [data-theme="0"] & {
-        background-color: $white-color;
-    }
-    [data-theme="1"] & {
-        background-color: $black-color-3;
-    }
-}
-
-@mixin bg_color_1() {
-    [data-theme="0"] & {
-        background-color: $white-color;
-    }
-    [data-theme="1"] & {
-        background-color: $black-color-2;
-    }
-}
-
-@mixin hover_color() {
-    [data-theme="0"] & {
-        background-color: $hover-color-1;
-    }
-    [data-theme="1"] & {
-        background-color: $hover-color-2;
-    }
-}
-
-@mixin second_title_font_color() {
-    [data-theme="0"] & {
-        color: $gray-color-1;
-    }
-    [data-theme="1"] & {
-        color: $gray-color-2;
-    }
-}

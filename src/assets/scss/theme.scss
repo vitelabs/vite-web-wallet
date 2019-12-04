@@ -1,0 +1,55 @@
+/* theme: 0-white, 1-black **/
+
+@mixin bg_color_1() {
+    [data-theme="0"] & {
+        background-color: $white-color;
+    }
+    [data-theme="1"] & {
+        background-color: $black-color-1;
+    }
+}
+
+@mixin bg_color_2() {
+    [data-theme="0"] & {
+        background-color: $white-color;
+    }
+    [data-theme="1"] & {
+        background-color: $black-color-2;
+    }
+}
+
+@mixin bg_color_3() {
+    [data-theme="0"] & {
+        background-color: $white-color;
+    }
+    [data-theme="1"] & {
+        background-color: $black-color-3;
+    }
+}
+
+@mixin hover_color() {
+    [data-theme="0"] & {
+        background-color: $hover-color-1;
+    }
+    [data-theme="1"] & {
+        background-color: $hover-color-2;
+    }
+}
+
+@mixin second_title_font_color() {
+    [data-theme="0"] & {
+        color: $gray-color-1;
+    }
+    [data-theme="1"] & {
+        color: $gray-color-2;
+    }
+}
+
+@mixin common_border() {
+    [data-theme="0"] & {
+        border: 1px solid #D4DEE7;
+    }
+    [data-theme="1"] & {
+        border: 1px solid $black-color-4;
+    }
+}

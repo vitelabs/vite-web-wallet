@@ -114,7 +114,8 @@ module.exports = {
                         options: {
                             resources: [
                                 path.resolve(srcPath, './assets/scss/var.scss'),
-                                path.resolve(srcPath, './assets/scss/mixins.scss')
+                                path.resolve(srcPath, './assets/scss/mixins.scss'),
+                                path.resolve(srcPath, './assets/scss/theme.scss')
                             ]
                         }
                     }
