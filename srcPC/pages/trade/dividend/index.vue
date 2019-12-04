@@ -345,7 +345,12 @@ export default {
 }
 
 .slot-row {
-    background: rgba(247,249,251,1);
+    [data-theme="0"] & {
+        background: rgba(247,249,251,1);
+    }
+    [data-theme="1"] & {
+        background: rgba(21,28,50,1) rgba(1,8,31,0.25);
+    }
     font-size: 12px;
     font-family: $font-normal;
     font-weight: 400;
@@ -356,9 +361,6 @@ export default {
     }
     &.__tb_row.__tb_content_row {
         height: unset;
-        &:hover {
-            background: rgba(247,249,251,1);
-        }
     }
 }
 .arrow-icon {

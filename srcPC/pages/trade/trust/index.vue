@@ -16,7 +16,7 @@
             </div>
         </div>
         <div class="active item">
-            <div class="title">{{ $t("trade.proxy.active.title") }}</div>
+            <div class="__second-title">{{ $t("trade.proxy.active.title") }}</div>
             <div class="proxytb">
                 <div class="proxytb_row head">
                     <div class="proxytb_cell">
@@ -95,7 +95,7 @@
             </div>
         </div>
         <div class="passive item">
-            <div class="title">{{ $t("trade.proxy.passive.title") }}</div>
+            <div class="__second-title">{{ $t("trade.proxy.passive.title") }}</div>
             <div class="proxytb">
                 <div class="proxytb_row head">
                     <div class="proxytb_cell">
@@ -209,26 +209,21 @@ export default {
 
 <style lang="scss" scoped>
 @import "~assets/scss/vars.scss";
+@import "~pcAssets/scss/title.scss";
+
+.__second-title {
+    margin-bottom: 14px;
+}
 
 .proxy {
     display: flex;
     flex-direction: column;
     padding-top: 10px;
     height: 100%;
-    .super-title {
-        font-size: 18px;
-        @include font-family-bold();
-    }
     .item {
         display: flex;
         flex-direction: column;
         margin-top: 14px;
-        .title {
-            font-size: 14px;
-            color: #1d2024;
-            @include font-family-bold();
-            margin-bottom: 14px;
-        }
     }
     .op {
         .btn_group {
