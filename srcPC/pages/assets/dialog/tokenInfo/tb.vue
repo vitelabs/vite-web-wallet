@@ -65,9 +65,9 @@
 </template>
 
 <script>
-// [TODO] Need components/table
+// [TODO] Need pcComponents/table
 
-import Pagination from 'components/pagination.vue';
+import Pagination from 'pcComponents/pagination.vue';
 import { getDepositRecords, getWithdrawRecords } from 'pcServices/gate';
 import shortify from 'utils/ellipsisAddr';
 import b from 'utils/bigNumber';
@@ -183,8 +183,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "~assets/scss/table.scss";
-@import "assets/scss/vars.scss";
+@import "~pcAssets/scss/table.scss";
+@import "~assets/scss/vars.scss";
 
 .click-able {
     cursor: pointer;

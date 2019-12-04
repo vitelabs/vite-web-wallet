@@ -95,12 +95,17 @@ export default {
     display: inline-block;
     width: 30px;
     height: 30px;
-    border: 1px solid rgba(198,203,212,1);
     border-radius: 2px;
     line-height: 30px;
     font-size: 12px;
-    color: rgba(51,51,51,1);
+    color: #333;
     margin-left: 6px;
+    [data-theme="0"] & {
+        border: 1px solid rgba(198,203,212,1);
+    }
+    [data-theme="1"] & {
+        border: 1px solid $black-color-4;
+    }
 
     &:first-child {
         margin-left: 0;
@@ -111,9 +116,11 @@ export default {
     }
 
     &.active {
-        background: #007aff;
-        color: #fff;
-        border: none;
+        [data-theme="0"] & {
+            background: $blue-color-1;
+            border: none;
+        }
+        color: $white-color;
         top: -1px;
         position: relative;
     }

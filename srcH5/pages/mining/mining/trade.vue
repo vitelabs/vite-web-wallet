@@ -29,18 +29,17 @@
 </template>
 
 <script>
-import walletTable from 'components/table/index.vue';
+import { miningTrade } from 'services/trade';
 import noData from 'h5Components/noData';
 import listView from 'h5Components/listView.vue';
-import { miningTrade } from 'services/trade';
+import myIncome from 'h5Components/myIncome/index';
 import date from 'utils/date';
 import bigNumber from 'utils/bigNumber';
-import myIncome from 'h5Components/myIncome/index';
 import miningTable from './table';
 import listTitle from './listTitle.vue';
 
 export default {
-    components: { noData, walletTable, myIncome, miningTable, listView, listTitle },
+    components: { noData, myIncome, miningTable, listView, listTitle },
     props: {
         totalDividend: {
             type: Object,

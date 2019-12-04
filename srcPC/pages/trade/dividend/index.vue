@@ -59,8 +59,8 @@
 
 <script>
 import pool from './pool.vue';
-import walletTable from 'components/table/index.vue';
-import pagination from 'components/pagination.vue';
+import walletTable from 'pcComponents/table/index.vue';
+import pagination from 'pcComponents/pagination.vue';
 import { dividend } from 'services/trade';
 import date from 'utils/date';
 import bigNumber from 'utils/bigNumber';
@@ -246,7 +246,7 @@ export default {
 
 <style lang="scss" scoped>
 @import "~assets/scss/vars.scss";
-@import "~assets/scss/table.scss";
+@import "~pcAssets/scss/table.scss";
 
 .trade-dividend-wrapper {
     width: 100%;

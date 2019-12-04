@@ -69,30 +69,50 @@ textarea {
     text-overflow: ellipsis;
     white-space: nowrap;
 }
-
 .__pointer {
     cursor: pointer;
     user-select: none;
 }
 
-@media only screen and (max-width: 500px) {
-    .__btn_list .__btn {
-        width: 48%;
-    }
-}
-
 @font-face {
     font-family: "DINPro";
-    src: url("../font/DINPro.otf");
+    src: url("~assets/font/DINPro.otf");
     font-weight: normal;
     font-style: normal;
 }
 
 @mixin page_bg_color() {
     [data-theme="0"] & {
-        background-color: $background-color-theme1;
+        background-color: $white-color;
     }
     [data-theme="1"] & {
-        background-color: $background-color-theme2;
+        background-color: $black-color-3;
+    }
+}
+
+@mixin bg_color_1() {
+    [data-theme="0"] & {
+        background-color: $white-color;
+    }
+    [data-theme="1"] & {
+        background-color: $black-color-2;
+    }
+}
+
+@mixin hover_color() {
+    [data-theme="0"] & {
+        background-color: $hover-color-1;
+    }
+    [data-theme="1"] & {
+        background-color: $hover-color-2;
+    }
+}
+
+@mixin second_title_font_color() {
+    [data-theme="0"] & {
+        color: $gray-color-1;
+    }
+    [data-theme="1"] & {
+        color: $gray-color-2;
     }
 }

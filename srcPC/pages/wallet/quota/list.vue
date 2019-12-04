@@ -26,8 +26,8 @@
 
 <script>
 import { constant } from '@vite/vitejs';
-import pagination from 'components/pagination.vue';
-import walletTable from 'components/table/index.vue';
+import pagination from 'pcComponents/pagination.vue';
+import walletTable from 'pcComponents/table/index.vue';
 import date from 'utils/date.js';
 import openUrl from 'utils/openUrl';
 import { timer } from 'utils/asyncFlow';

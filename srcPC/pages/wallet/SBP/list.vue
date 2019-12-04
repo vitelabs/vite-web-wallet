@@ -80,7 +80,7 @@ import BigNumber from 'utils/bigNumber';
 import sendTx from 'pcUtils/sendTx';
 import { constant } from 'pcUtils/store';
 import tooltips from 'components/tooltips';
-import walletTable from 'components/table/index.vue';
+import walletTable from 'pcComponents/table/index.vue';
 import { initPwd } from 'pcComponents/password/index.js';
 import password from 'pcComponents/password/password.vue';
 import { execWithValid } from 'pcUtils/execWithValid';

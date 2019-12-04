@@ -52,8 +52,8 @@
 
 <script>
 import { operatorMarkets } from 'services/trade';
-import pagination from 'components/pagination.vue';
-import walletTable from 'components/table/index.vue';
+import pagination from 'pcComponents/pagination.vue';
+import walletTable from 'pcComponents/table/index.vue';
 import secTitle from 'pcComponents/secTitle.vue';
 import confirm from 'components/confirm/index.js';
 import { initPwd } from 'pcComponents/password/index.js';

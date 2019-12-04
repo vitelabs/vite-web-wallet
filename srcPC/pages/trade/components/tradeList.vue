@@ -7,7 +7,7 @@
 
 <script>
 import confirm from 'components/confirm/confirm.vue';
-import walletTable from 'components/table/index.vue';
+import walletTable from 'pcComponents/table/index.vue';
 
 export default {
     components: { confirm, walletTable },

@@ -38,8 +38,8 @@
 
 <script>
 import { getOrderMining, getOrderMiningDetails, getOrderMiningEstimate } from 'services/trade';
-import walletTable from 'components/table/index.vue';
-import pagination from 'components/pagination.vue';
+import walletTable from 'pcComponents/table/index.vue';
+import pagination from 'pcComponents/pagination.vue';
 import loading from 'components/loading';
 import bigNumber from 'utils/bigNumber';
 import date from 'utils/date';

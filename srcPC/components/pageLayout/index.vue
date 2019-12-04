@@ -129,7 +129,7 @@ export default {
     height: 100%;
     padding: 0;
     margin: 0;
-    background: #fafcff;
+    @include page_bg_color();
     overflow: auto;
 
     .sidebar {

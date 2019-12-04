@@ -1,6 +1,7 @@
 <template>
     <div class="proxy">
-        <div class="super-title">{{ $t("trade.proxy.title") }}</div>
+        <sec-title :isShowHelp="false" :title="$t('trade.proxy.title')"></sec-title>
+
         <div class="op item">
             <div class="btn_group">
                 <div
@@ -131,6 +132,7 @@
         </div>
     </div>
 </template>
+
 <script>
 import { getProxyRelation, getProxyGrantor } from 'pcServices/tradeOperation';
 import { addDialog } from './dialog';
@@ -138,8 +140,10 @@ import PairItem from './dialog/pairItem';
 import { doUntill } from 'utils/asyncFlow';
 import { execWithValid } from 'pcUtils/execWithValid';
 import openUrl from 'utils/openUrl';
+import secTitle from 'pcComponents/secTitle';
+
 export default {
-    components: { PairItem },
+    components: { PairItem, secTitle },
     data() {
         return { relation: {}, grantor: {} };
     },

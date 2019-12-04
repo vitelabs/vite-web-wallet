@@ -6,6 +6,7 @@
             <i class="icon"></i>
             <span class="help-text">{{ $t(helpTitle) }}</span>
         </span>
+        <slot></slot>
     </div>
 </template>
 
@@ -73,8 +74,13 @@ export default {
 
 .sec-title-container {
     @include font-family-bold();
+    [data-theme="0"] & {
+        color: $black-color-5;
+    }
+    [data-theme="1"] & {
+        color: $white-color;
+    }
     font-weight: 600;
-    color: rgba(29,32,36,1);
     font-size: 18px;
     line-height: 22px;
     padding: 10px 0 14px 0;
@@ -88,13 +94,13 @@ export default {
         margin-bottom: -3px;
         margin-right: 6px;
         border-radius: 2px;
-        border: 1px solid rgba(0,122,255,1);
+        border: 1px solid $blue-color-1;
     }
 
     .help {
         align-items: center;
         font-size: 12px;
-        color: #007aff;
+        color: $blue-color-1;
         text-align: right;
         line-height: 16px;
         margin-left: 12px;

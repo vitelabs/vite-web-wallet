@@ -75,3 +75,8 @@
         }
     }
 }
+@media only screen and (max-width: 500px) {
+    .__btn_list .__btn {
+        width: 48%;
+    }
+}

@@ -25,8 +25,8 @@
 import d from 'dayjs';
 import statistics from 'utils/statistics';
 import { orderDetail } from 'services/trade';
-import pagination from 'components/pagination';
-import walletTable from 'components/table/index';
+import pagination from 'pcComponents/pagination';
+import walletTable from 'pcComponents/table/index';
 import confirm from './tradeList';
 
 export default {

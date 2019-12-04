@@ -108,8 +108,10 @@ export default {
 .sidebar-wrapper {
     height: 100%;
     overflow: auto;
-    background: #fff;
-    box-shadow: 0 2px 40px 1px rgba(221, 229, 252, 0.5);
+    @include bg_color_1();
+    [data-theme="0"] & {
+        box-shadow: 0 2px 40px 1px rgba(221, 229, 252, 0.5);;
+    }
 
     .content {
         display: flex;
