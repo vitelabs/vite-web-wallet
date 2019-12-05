@@ -1,22 +1,41 @@
 @import "~assets/scss/vars.scss";
 
+@mixin self_bg_color_2() {
+    [data-theme="0"] & {
+        background-color: rgba(0, 122, 255, 0.06);
+    }
+    [data-theme="1"] & {
+        background-color: $black-color-1;
+    }
+}
+
+@mixin tab_font_color() {
+    [data-theme="0"] & {
+        color: #5e6875;
+    }
+    [data-theme="1"] & {
+        color: $white-color;
+    }
+}
+
 .head {
-    border-bottom: 1px solid rgba(212, 222, 231, 0.3);
     box-sizing: border-box;
     padding: 20px 30px;
     display: flex;
-    background: rgba(0, 122, 255, 0.05);
-    @include font-family-normal();
     line-height: 18px;
-
+    @include bg_color_3();
+    @include font-family-normal();
+    [data-theme="0"] & {
+        border-bottom: 1px solid rgba(212, 222, 231, 0.3);
+    }
     .head_info {
         display: flex;
         flex-direction: column;
     }
     .gate_info {
         font-size: 12px;
-        color: #007aff;
-        background: rgba(0, 122, 255, 0.06);
+        color: $blue-color-1;
+        @include self_bg_color_2();
         padding: 0 4px;
         align-self: flex-start;
         border-radius: 2px;
@@ -31,12 +50,12 @@
     }
     &__name {
         @include font-family-bold();
-        color: rgba(29, 32, 36, 1);
+        @include common_font_color();
         font-size: 14px;
         line-height: 18px;
         &__gate {
-            color: #007aff;
-            background-color: rgba(0, 122, 255, 0.06);
+            color: $blue-color-1;
+            @include self_bg_color_2();
             @include font-family-normal();
             font-size: 12px;
             height: 20px;
@@ -48,8 +67,8 @@
     }
     &__symbol {
         @include font-family-normal();
+        @include gray_font_color_1();
         font-size: 12px;
-        color: rgba(94, 104, 117, 1);
         margin-top: 8px;
         line-height: 16px;
     }
@@ -58,21 +77,21 @@
     padding: 0 30px;
     height: 40px;
     display: flex;
-    border-bottom: 1px solid #d4dee7;
     flex-shrink: 0;
+    @include bg_color_1();
+    @include common_border_one(bottom);
     &__item {
         @include font-family-bold();
         font-size: 12px;
-        color: rgba(189, 193, 209, 1);
         height: 100%;
         box-sizing: border-box;
         margin-right: 40px;
-        color: #5e6875;
+        @include tab_font_color();
         display: flex;
         align-items: center;
         cursor: pointer;
         &.active {
-            border-bottom: 2px solid #007aff;
+            border-bottom: 2px solid $blue-color-1;
         }
     }
 }
@@ -82,6 +101,7 @@
     padding: 30px;
     position: relative;
     overflow: scroll;
+    @include bg_color_2();
     &.no-padding {
         padding: 0;
     }
@@ -92,7 +112,12 @@
         margin-bottom: 20px;
         display: flex;
         text-align: left;
-        color: rgba(94,104,117,1);
+        [data-theme="0"] & {
+            color: rgba(94,104,117,1);
+        }
+        [data-theme="1"] & {
+            color: $white-color;
+        }
         .media-icon {
             width: 20px;
             height: 20px;
@@ -113,13 +138,18 @@
             word-break: break-word;
         }
         .label {
-            color: rgba(94,104,117,0.58);
+            [data-theme="0"] & {
+                color: rgba(94,104,117,0.58);
+            }
+            [data-theme="1"] & {
+                color: $gray-color-2;
+            }
             margin-right: 10px;
             word-break: keep-all;
             white-space: nowrap;
         }
         .click-able {
-            color: #007aff;
+            color: $blue-color-1;
             cursor: pointer;
         }
         .btn {
@@ -133,8 +163,8 @@
             padding: 0 20px;
             white-space: nowrap;
             margin-left: 23px;
-            background: rgba(0, 122, 255, 1);
-            color: rgba(255, 255, 255, 1);
+            background: $blue-color-1;
+            color: $white-color;
             &.unuse {
                 @include gray_btn_color();
             }

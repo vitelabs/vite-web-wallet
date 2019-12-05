@@ -16,7 +16,6 @@
     height: 34px;
     line-height: 34px;
     font-size: 12px;
-    @include common_border();
     @include font-family-normal();
     &.__bold {
         @include font-family-bold();
@@ -40,13 +39,21 @@
     @include input_color();
     input {
         width: 100%;
+        @include bg_color_1();
+        @include input_color();
     }
 }
 
 .__unuse_input {
     font-size: 12px;
-    background: rgba(243,246,249,1);
-    color: rgba(94,104,117,1);
+    [data-theme="0"] & {    
+        background: rgba(243,246,249,1);
+        color: rgba(94,104,117,1);
+    }
+    [data-theme="1"] & {
+        background-color: $black-color-1;
+        color: $white-color;
+    }
 }
 
 .__row {
@@ -62,7 +69,7 @@
         position: relative;
         @include font-family-bold();
         line-height: 16px;
-        color: rgba(29,32,36,1);
+        @include common_font_color();
         padding-bottom: 12px;
         overflow: auto;
         zoom: 1;
@@ -89,8 +96,7 @@
     line-height: 16px;
     font-size: 12px;
     @include font-family-normal();
-    font-weight: 400;
-    color: rgba(94,104,117,1);
+    @include gray_font_color_1();
     span {
         display: inline-block;
         margin-left: 10px;
@@ -99,7 +105,7 @@
     &:before {
         width: 6px;
         height: 6px;
-        background: rgba(0,122,255,1);
+        background: $blue-color-1;
         border-radius: 6px;
         content: ' ';
         display: inline-block;

@@ -1,16 +1,25 @@
 @import "~assets/scss/vars.scss";
 
+@mixin placeholder_color() {
+    [data-theme="0"] & {
+        color: rgba(94,104,117,0.3);
+    }
+    [data-theme="1"] & {
+        color: #545F75;
+    }
+}
+
 :-moz-placeholder { /* Mozilla Firefox 4 to 18 */
-    color: rgba(94,104,117,0.3);
+    @include placeholder_color();
 }
 ::-moz-placeholder { /* Mozilla Firefox 19+ */
-    color: rgba(94,104,117,0.3);
+    @include placeholder_color();
 }
 ::-webkit-input-placeholder { /* WebKit browsers */
-    color: rgba(94,104,117,0.3);
+    @include placeholder_color();
 }
 :-ms-input-placeholder { /* Internet Explorer 10+ */
-    color: rgba(94,104,117,0.3);
+    @include placeholder_color();
 }
 input[type=number]::-webkit-inner-spin-button {
     -webkit-appearance: none;

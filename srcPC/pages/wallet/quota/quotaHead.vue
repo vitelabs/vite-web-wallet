@@ -72,7 +72,6 @@ export default {
 .help-txt {
     opacity: 0.66;
     font-size: 12px;
-    color: #172c39;
     line-height: 22px;
     margin-bottom: 10px;
     word-break: break-all;
