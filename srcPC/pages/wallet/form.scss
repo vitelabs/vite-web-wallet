@@ -34,8 +34,7 @@
     @include font-family-bold();
 
     &.unuse {
-        background: rgba(191,191,191,1);
-        color: rgba(255,255,255,1);
+        @include gray_btn_color();
         cursor: not-allowed;
     }
 }

@@ -1,5 +1,14 @@
 @import "~assets/scss/vars.scss";
 
+@mixin title_bg_color() {
+    [data-theme="0"] & {
+        background-color: $blue-color-3;
+    }
+    [data-theme="1"] & {
+        background-color: $black-color-1;
+    }
+}
+
 .confirm-container {
     position: fixed;
     top: 0;
@@ -71,18 +80,19 @@
     display: flex;
     flex-direction: column;
     border-radius: 2px;
-    background: rgba(255,255,255,1);
-    box-shadow: 0 2px 48px 1px rgba(176, 192, 237, 0.42);
+    @include bg_color_2();
+    [data-theme="0"] & {
+        box-shadow: 0 2px 48px 1px rgba(176, 192, 237, 0.42);
+    }
 
     .title {
         height: 50px;
-        background: rgba(38,142,255,1);
         line-height: 50px;
         padding: 0 30px;
-        @include font-family-bold();
         font-size: 14px;
-        line-height: 50px;
         color: #fff;
+        @include font-family-bold();
+        @include title_bg_color();
         .close-icon {
             padding: 25px 0;
             box-sizing: border-box;
@@ -100,7 +110,7 @@
         padding: 30px;
         font-size: 13px;
         @include font-family-bold();
-        color: rgba(29,32,36,1);
+        @include common_font_color();
         line-height: 22px;
         overflow: auto;
         flex: 1;
@@ -119,11 +129,10 @@
             width: 48%;
             white-space: nowrap;
             @include font-family-bold();
-            color: #fff;
             height: 40px;
             line-height: 40px;
             font-size: 14px;
-            color: rgba(0,122,255,1);
+            color: $blue-color-1;
             box-sizing: border-box;
             text-align: center;
 
@@ -135,18 +144,17 @@
 
             &.btn-border {
                 border-radius: 2px;
-                border: 1px solid rgba(0,122,255,1);
-                color: #007aff;
+                border: 1px solid $blue-color-1;
+                color: $blue-color-1;
             }
 
             &.btn-blue {
-                background: rgba(0,122,255,1);
-                color: rgba(255,255,255,1);
+                background: $blue-color-1;
+                color: $white-color;
             }
 
             &.btn-gray {
-                background: rgba(191,191,191,1);
-                color: rgba(255,255,255,1);
+                @include gray_btn_color();
             }
         }
     }

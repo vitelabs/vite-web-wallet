@@ -103,7 +103,7 @@ export default {
 .switch-address-wrapper {
     width: 100%;
     [data-theme="0"] & {
-        color: #73767A;
+        color: $gray-color-3;
     }
     [data-theme="1"] & {
         color: $white-color;
@@ -116,7 +116,7 @@ export default {
         position: relative;
         box-sizing: border-box;
         border-radius: 2px;
-        border: 1px solid rgba(212,222,231,1);
+        @include common_border();
         padding: 0 8px;
         white-space: nowrap;
 
@@ -144,7 +144,6 @@ export default {
                 transform: rotateX(180deg);
             }
         }
-
     }
     .list {
         position: absolute;
@@ -152,7 +151,6 @@ export default {
         width: 250px;
         max-height: 220px;
         overflow: auto;
-        background: $white-color;
         box-shadow: 0px 5px 10px 0px rgba(176,192,237,0.69);
         margin-top: 10px;
         word-break: break-all;
@@ -167,13 +165,11 @@ export default {
             .name {
                 font-size: 12px;
                 @include font-family-bold();
-                font-weight: 600;
                 color: rgba(115,118,122,1);
             }
             .switch-address {
                 font-size: 11px;
                 @include font-family-normal();
-                font-weight: 400;
                 color: rgba(162,167,175,1);
             }
         }

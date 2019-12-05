@@ -53,3 +53,22 @@
         border: 1px solid $black-color-4;
     }
 }
+
+@mixin common_font_color() {
+    [data-theme="0"] & {
+        color: rgba(29,32,36,1);
+    }
+    [data-theme="1"] & {
+        color: $white-color;
+    }
+}
+
+@mixin gray_btn_color() {
+    color: $white-color;
+    [data-theme="0"] & {
+        background: rgba(191,191,191,1);
+    }
+    [data-theme="1"] & {
+        background: $gray-color-2;
+    }
+}

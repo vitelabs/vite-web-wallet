@@ -74,7 +74,7 @@ import Vue from 'vue';
 import { utils, wallet, accountBlock as accountBlockUtils } from '@vite/vitejs';
 
 import { initPwd } from 'pcComponents/password/index.js';
-import confirm from 'components/confirm/confirm.vue';
+import confirm from 'pcComponents/confirm/confirm.vue';
 import viteInput from 'components/viteInput';
 import sendTx from 'pcUtils/sendTx';
 import bigNumber from 'utils/bigNumber';

@@ -21,9 +21,14 @@ export default {
         this.$store.dispatch('startLoopBalance');
         this.$store.dispatch('startLoopExchangeBalance');
         this.$store.dispatch('exFetchLatestOrder');
-        if (Number(this.$route.query['ldfjacia']) > 0) {
-            emptySpace.setItem(inviteCodeKey, this.$route.query['ldfjacia']);
+        try {
+            if (Number(this.$route.query['ldfjacia']) > 0) {
+                emptySpace.setItem(inviteCodeKey, this.$route.query['ldfjacia']);
+            }
+        } catch (err) {
+            console.warn(err);
         }
+
         this.$store
             .dispatch('getInvitedCode')
             .then(code => Number(code) === 0 && this.checkInvite())

@@ -28,7 +28,7 @@
 <script>
 import { constant } from '@vite/vitejs';
 import loading from 'components/loading';
-import confirm from 'components/confirm/confirm.vue';
+import confirm from 'pcComponents/confirm/confirm.vue';
 import viteInput from 'components/viteInput';
 import BigNumber from 'utils/bigNumber';
 import sendTx from 'pcUtils/sendTx';

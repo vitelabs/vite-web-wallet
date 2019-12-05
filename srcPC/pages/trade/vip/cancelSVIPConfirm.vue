@@ -21,7 +21,7 @@
 <script>
 import { constant } from '@vite/vitejs';
 import BigNumber from 'utils/bigNumber';
-import confirm from 'components/confirm/confirm.vue';
+import confirm from 'pcComponents/confirm/confirm.vue';
 import { initPwd } from 'pcComponents/password/index.js';
 import { stakeForSuperVIP, cancelStakeById } from 'pcServices/tradeOperation';
 

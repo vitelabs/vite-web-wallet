@@ -270,7 +270,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "~components/confirm/moreTabConfirm.scss";
+@import "~pcComponents/confirm/moreTabConfirm.scss";
 
 .click-able {
     margin-right: 10px;

@@ -136,7 +136,7 @@
             background: rgba(0, 122, 255, 1);
             color: rgba(255, 255, 255, 1);
             &.unuse {
-                background: rgba(191, 191, 191, 1);
+                @include gray_btn_color();
             }
         }
     }

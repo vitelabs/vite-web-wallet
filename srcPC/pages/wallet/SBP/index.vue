@@ -29,19 +29,16 @@
 </template>
 
 <script>
-import { wallet, constant } from '@vite/vitejs';
+import { wallet } from '@vite/vitejs';
 import secTitle from 'pcComponents/secTitle';
 import loading from 'components/loading';
-import confirm from 'components/confirm/confirm.vue';
+import confirm from 'pcComponents/confirm/confirm.vue';
 import viteInput from 'components/viteInput';
 import { initPwd } from 'pcComponents/password/index.js';
 import { execWithValid } from 'pcUtils/execWithValid';
-import BigNumber from 'utils/bigNumber';
 import sendTx from 'pcUtils/sendTx';
 import register from './register';
 import list from './list';
-
-const Vite_Token_Info = constant.Vite_Token_Info;
 
 export default {
     components: { secTitle, register, list, loading, confirm, viteInput },
@@ -289,10 +286,9 @@ export default {
         box-sizing: border-box;
 
         &.unuse {
-            background: #f3f6f9;
-            font-size: 14px;
-            color: #5e6875;
+            @include gray_btn_color();
             @include font-family-normal();
+            font-size: 14px;
         }
 
         input {
