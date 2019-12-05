@@ -63,6 +63,15 @@
         "text": "ViteX does not serve customers in the following countries/regions/territories: Mainland China, Hong Kong, Cuba, Iran, North Korea, Crimea, Sudan, Malaysia, Syria, USA [including all USA territories like Puerto Rico, American Samoa, Guam, Northern Mariana Island, and the US Virgin Islands (St. Croix, St. John and St. Thomas)], Bangladesh, Bolivia, Ecuador, and Kyrgyzstan. For more information, please read our Terms of Service and Privacy Policy",
         "title": "Важное Замечание"
     },
+    "bnbConf": {
+        "title": "Важное Замечание",
+        "t1": "VITE Binance Listing Coming! Please vote to have VITE listed on Binance.",
+        "t2": "Voting Period: 12:00 pm Dec 12 to 12:00 pm Dec 13 (HKT)",
+        "t3": "Voting Method: Holding 50 BNB allows for 1 vote (10 votes max)",
+        "t4": "Voting Rewards: All voted users will be rewarded with an airdrop totaling 21,000,000 VITE based on executed votes.",
+        "btn": "Vote Now!!!",
+        "notice": "[Attention]: You must have 50-500 BNBs in your Binance Account starting Dec 5 and last through Dec 13 to Qualify for Voting!"
+    },
     "errCode": {
         "35003": "{name} Конфликт ID, пожалуйста, повторите попытку позже",
         "35004": "Неверные параметры",
