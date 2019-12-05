@@ -1,17 +1,26 @@
 @import "~assets/scss/vars.scss";
 
+@mixin input_color() {
+    [data-theme="0"] & {
+        color: rgba(94,104,117,0.3);
+    }
+    [data-theme="1"] & {
+        color: $gray-color-2;
+    }
+}
+
 .__input_row {
-    border-radius: 2px;
-    border: 1px solid rgba(212,222,231,1);
     box-sizing: border-box;
+    border-radius: 2px;
     padding: 0 15px;
     height: 34px;
     line-height: 34px;
     font-size: 12px;
+    @include common_border();
     @include font-family-normal();
     &.__bold {
         @include font-family-bold();
-        color: rgba(29,32,36,1);
+        @include common_font_color();
     }
     .__icon {
         width: 20px;
@@ -27,8 +36,8 @@
 
 .__input {
     font-size: 12px;
-    background: rgba(255,255,255,1);
-    color: rgba(94,104,117,0.3);
+    @include bg_color_1();
+    @include input_color();
     input {
         width: 100%;
     }

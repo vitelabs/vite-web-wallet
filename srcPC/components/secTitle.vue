@@ -12,7 +12,7 @@
 
 <script>
 import { blackHole } from 'pcUtils/ethWallet/viteContract';
-import confirm from 'components/confirm/index.js';
+import confirm from 'pcComponents/confirm/index.js';
 
 export default {
     props: {

@@ -39,7 +39,7 @@ import { execWithValid } from 'pcUtils/execWithValid';
 import component2function from 'pcComponents/dialog/utils';
 import { doUntill } from 'utils/asyncFlow';
 import secTitle from 'pcComponents/secTitle';
-import confirm from 'components/confirm/confirm.vue';
+import confirm from 'pcComponents/confirm/confirm.vue';
 import svipComp from './svipConfirm';
 import vipConfirm from './vipConfirm.vue';
 import vipList from './vipList.vue';

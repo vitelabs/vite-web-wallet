@@ -31,7 +31,7 @@
 <script>
 import bigNumber from 'utils/bigNumber';
 import viteInput from 'components/viteInput';
-import confirm from 'components/confirm/confirm.vue';
+import confirm from 'pcComponents/confirm/confirm.vue';
 import { verifyAmount } from 'pcUtils/validations';
 import { initPwd } from 'pcComponents/password/index.js';
 import { lockVxForDividend } from 'pcServices/tradeOperation';

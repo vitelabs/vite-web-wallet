@@ -25,7 +25,7 @@
 
 <script>
 import { wallet } from '@vite/vitejs';
-import confirm from 'components/confirm/confirm.vue';
+import confirm from 'pcComponents/confirm/confirm.vue';
 import viteInput from 'components/viteInput';
 
 export default {

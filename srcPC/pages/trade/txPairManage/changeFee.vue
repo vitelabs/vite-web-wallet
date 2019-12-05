@@ -56,8 +56,8 @@
 </template>
 
 <script>
-import confirm from 'components/confirm/confirm.vue';
-import alertConfirm from 'components/confirm/index.js';
+import confirm from 'pcComponents/confirm/confirm.vue';
+import alertConfirm from 'pcComponents/confirm/index.js';
 import slider from 'components/slider';
 
 const minFee = 0;

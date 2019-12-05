@@ -120,7 +120,7 @@
 </template>
 
 <script>
-import confirm from 'components/confirm/confirm.vue';
+import confirm from 'pcComponents/confirm/confirm.vue';
 import { getExplorerLink } from 'utils/getLink';
 import openUrl from 'utils/openUrl';
 import statistics from 'utils/statistics';
@@ -218,7 +218,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "~components/confirm/moreTabConfirm.scss";
+@import "~pcComponents/confirm/moreTabConfirm.scss";
 
 .click-able {
     margin-right: 10px;

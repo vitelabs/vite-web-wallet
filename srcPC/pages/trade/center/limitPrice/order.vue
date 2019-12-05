@@ -93,7 +93,7 @@
 import { StatusMap } from 'wallet';
 import slider from 'components/slider';
 import viteInput from 'components/viteInput';
-import viteConfirm from 'components/confirm/index.js';
+import viteConfirm from 'pcComponents/confirm/index.js';
 import { initPwd } from 'pcComponents/password/index.js';
 import sendTx from 'pcUtils/sendTx';
 import BigNumber from 'utils/bigNumber';

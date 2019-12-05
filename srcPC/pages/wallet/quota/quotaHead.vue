@@ -17,7 +17,7 @@
 
 <script>
 import secTitle from 'pcComponents/secTitle';
-import confirm from 'components/confirm/confirm.vue';
+import confirm from 'pcComponents/confirm/confirm.vue';
 
 export default {
     components: { secTitle, confirm },

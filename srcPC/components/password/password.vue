@@ -17,7 +17,7 @@
 <script>
 import { StatusMap } from 'wallet';
 import { constant } from 'pcUtils/store';
-import confirm from 'components/confirm/confirm.vue';
+import confirm from 'pcComponents/confirm/confirm.vue';
 import holdPwdView from './holdPwd.vue';
 
 let lastE = null;

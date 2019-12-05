@@ -14,7 +14,7 @@
 </template>
 
 <script>
-import confirm from 'components/confirm/index.js';
+import confirm from 'pcComponents/confirm/index.js';
 import layout from './layout';
 import depth from './depth/depth.vue';
 import market from './market/market.vue';

@@ -39,7 +39,7 @@
 </template>
 
 <script>
-import confirm from 'components/confirm/confirm.vue';
+import confirm from 'pcComponents/confirm/confirm.vue';
 import viteInput from 'components/viteInput';
 import bigNumber from 'utils/bigNumber';
 import { verifyAmount } from 'pcUtils/validations';

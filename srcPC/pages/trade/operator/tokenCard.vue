@@ -41,7 +41,7 @@ import { wallet } from '@vite/vitejs';
 import sendTx from 'pcUtils/sendTx';
 import BigNumber from 'utils/bigNumber';
 import { initPwd } from 'pcComponents/password/index.js';
-import confirm from 'components/confirm/confirm.vue';
+import confirm from 'pcComponents/confirm/confirm.vue';
 import viteInput from 'components/viteInput';
 import { execWithValid } from 'pcUtils/execWithValid';
 
@@ -219,8 +219,7 @@ export default {
                 margin-right: 12px;
             }
             &.unuse {
-                background: rgba(191,191,191,1);
-                color: rgba(255,255,255,1);
+                @include gray_btn_color();
                 border: none;
             }
         }

@@ -134,8 +134,7 @@ export default {
                 }
 
                 &.unuse {
-                    background: rgba(238, 241, 245, 1);
-                    color: rgba(255, 255, 255, 1);
+                    @include gray_btn_color();
                 }
 
                 &:first-child {
