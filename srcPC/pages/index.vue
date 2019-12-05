@@ -5,17 +5,31 @@
     }">
         <router-view/>
         <notice-list></notice-list>
+        <confirm class="bnb-conf" v-show="isShowConfirm" :showMask="true" :singleBtn="true"
+                 :title="$t('bnbConf.title')" :closeIcon="true"
+                 :close="close" :leftBtnTxt="$t('bnbConf.btn')"
+                 :leftBtnClick="goLink">
+            <img class="bnb-img" src="~assets/imgs/bnb.png"/>
+            <div class="help-t">{{ $t('bnbConf.t1') }}</div>
+            <div class="help-txt">{{ $t('bnbConf.t2') }}</div>
+            <div class="help-txt">{{ $t('bnbConf.t3') }}</div>
+            <div class="help-txt">{{ $t('bnbConf.t4') }}</div>
+            <div class="__notice"><span>{{ $t('bnbConf.notice') }}</span></div>
+        </confirm>
     </div>
 </template>
 
 <script>
+import confirm from 'components/confirm/confirm.vue';
 import noticeList from 'pcComponents/noticeList.vue';
-import { emptySpace } from 'pcUtils/storageSpace';
 import { receiveInviteDialog } from 'pcComponents/dialog';
+import { emptySpace } from 'pcUtils/storageSpace';
+import openUrl from 'utils/openUrl';
+
 const inviteCodeKey = 'INVITE_CODE';
 
 export default {
-    components: { noticeList },
+    components: { noticeList, confirm },
     beforeMount() {
         this.$store.commit('setLang', this.$i18n.locale);
         this.$store.dispatch('startLoopBalance');
@@ -31,12 +45,20 @@ export default {
                 this.checkInvite();
             });
     },
+    data() {
+        return { isShowConfirm: true };
+    },
     computed: {
         currHDAcc() {
             return this.$store.state.wallet.currHDAcc;
         },
         address() {
             return this.$store.getters.activeAddr;
+        },
+        link() {
+            return this.$i18n.locale === 'zh'
+                ? 'https://www.binance.com/cn/vote'
+                : 'https://www.binance.com/en/vote';
         }
     },
     methods: {
@@ -47,6 +69,12 @@ export default {
                     receiveInviteDialog();
                 }
             }
+        },
+        goLink() {
+            openUrl(this.link);
+        },
+        close() {
+            this.isShowConfirm = false;
         }
     },
     watch: {
@@ -68,6 +96,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import "~assets/scss/vars.scss";
+
 .app-wrapper {
     position: absolute;
     top: 0;
@@ -75,5 +105,40 @@ export default {
     right: 0;
     bottom: 0;
     overflow: auto;
+    .bnb-conf {
+        z-index: 1000;
+        text-align: center;
+        .bnb-img {
+            width: 100px;
+            height: 100px;
+            margin: 30px 0;
+        }
+    }
+}
+
+.help-t {
+    @include font-family-bold();
+    font-size: 14px;
+    line-height: 14px;
+    margin-bottom: 12px;
+    word-break: break-all;
+    text-align: left;
+    .link {
+        color: #118bff;
+    }
+}
+
+.help-txt {
+    text-align: left;
+    opacity: 0.66;
+    font-size: 12px;
+    color: #333;
+    line-height: 22px;
+    margin-bottom: 10px;
+    word-break: break-all;
+    @include font-family-bold();
+}
+.__notice {
+    text-align: left;
 }
 </style>
