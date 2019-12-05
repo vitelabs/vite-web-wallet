@@ -16,7 +16,7 @@ const inviteCodeKey = 'INVITE_CODE';
 
 export default {
     components: { noticeList },
-    mounted() {
+    beforeMount() {
         this.$store.commit('setLang', this.$i18n.locale);
         this.$store.dispatch('startLoopBalance');
         this.$store.dispatch('startLoopExchangeBalance');
