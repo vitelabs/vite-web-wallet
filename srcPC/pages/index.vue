@@ -12,6 +12,9 @@
 import noticeList from 'pcComponents/noticeList.vue';
 import { emptySpace } from 'pcUtils/storageSpace';
 import { receiveInviteDialog } from 'pcComponents/dialog';
+import getQuery from 'utils/query';
+
+const query = getQuery() || {};
 const inviteCodeKey = 'INVITE_CODE';
 
 export default {
@@ -21,9 +24,19 @@ export default {
         this.$store.dispatch('startLoopBalance');
         this.$store.dispatch('startLoopExchangeBalance');
         this.$store.dispatch('exFetchLatestOrder');
-        if (Number(this.$route.query['ldfjacia']) > 0) {
-            emptySpace.setItem(inviteCodeKey, this.$route.query['ldfjacia']);
+
+        let _invite_code = '';
+        try {
+            _invite_code = this.$route.query['ldfjacia'];
+        } catch (err) {
+            console.warn(err);
         }
+
+        _invite_code = _invite_code || query['ldfjacia'];
+        if (Number(_invite_code) > 0) {
+            emptySpace.setItem(inviteCodeKey, _invite_code);
+        }
+
         this.$store
             .dispatch('getInvitedCode')
             .then(code => Number(code) === 0 && this.checkInvite())
