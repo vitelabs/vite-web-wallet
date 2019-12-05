@@ -183,7 +183,10 @@ const getters = {
         const CMCTxPairs = [
             'VITE_USDT-000', 'ETH-000_BTC-000', 'GRIN-000_VITE', 'VITE_ETH-000',
             'GRIN-000_BTC-000', 'GRIN-000_ETH-000', 'VITE_BTC-000',
-            'ETH-000_USDT-000', 'BTC-000_USDT-000'
+            'ETH-000_USDT-000', 'BTC-000_USDT-000', 'BIS-000_BTC-000',
+            'DERO-000_BTC-000', 'ERG-000_BTC-000', 'BEAM-000_BTC-000',
+            'TRTL-000_ETH-000', 'TERA-000_BTC-000', 'ANKR-000_BTC-000',
+            'PASC-000_BTC-000', 'PASC-000_ETH-000', 'PASC-000_USDT-000'
         ];
         return CMCTxPairs.indexOf(activeTxPair.symbol) !== -1;
     }
