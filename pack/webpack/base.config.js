@@ -10,6 +10,7 @@ const Buffer_Path = path.join(__dirname, '../../node_modules/buffer/index.js');
 module.exports = {
     output: {
         path: staticPath,
+        publicPath: '/',
         filename: '[name].[chunkhash].js'
     },
     plugins: [
