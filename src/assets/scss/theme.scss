@@ -54,12 +54,32 @@
     }
 }
 
+@mixin common_border_one($b) {
+    @if $b == bottom {
+        [data-theme="0"] & {
+            border-bottom: 1px solid #D4DEE7;
+        }
+        [data-theme="1"] & {
+            border-bottom: 1px solid $black-color-4;
+        }
+    }
+}
+
 @mixin common_font_color() {
     [data-theme="0"] & {
         color: rgba(29,32,36,1);
     }
     [data-theme="1"] & {
         color: $white-color;
+    }
+}
+
+@mixin gray_font_color_1() {
+    [data-theme="0"] & {
+        color: $gray-color-4;
+    }
+    [data-theme="1"] & {
+        color: $gray-color-2;
     }
 }
 
