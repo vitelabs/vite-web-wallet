@@ -83,6 +83,15 @@
     }
 }
 
+@mixin font_color_1() {
+    [data-theme="0"] & {
+        color: $black-color-5;
+    }
+    [data-theme="1"] & {
+        color: $white-color;
+    }
+}
+
 @mixin gray_btn_color() {
     color: $white-color;
     [data-theme="0"] & {

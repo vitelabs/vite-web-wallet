@@ -74,12 +74,7 @@ export default {
 
 .sec-title-container {
     @include font-family-bold();
-    [data-theme="0"] & {
-        color: $black-color-5;
-    }
-    [data-theme="1"] & {
-        color: $white-color;
-    }
+    @include font_color_1();
     font-weight: 600;
     font-size: 18px;
     line-height: 22px;
