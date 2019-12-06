@@ -781,9 +781,14 @@
             "inviteBenifit": "リファラルマイニング収入",
             "inviteRule": "ルール",
             "ruleItems": [
-                "あなたは<span class = 'strong'> 1000 VITE </ span>を使って紹介コードを作成できます。このファンドは配当プールに入れられ、VX保有者に分配されます",
-                "紹介コードを使用するユーザーによって生成された取引手数料の<span class = 'strong'> 5％</ span>は、VXをマイニングできる取引手数料として扱われます。",
-                "リファラルコードを使用するトレーダーは、取引中に<span class = 'strong'> 10％</ span>割引を受けることができます"
+                "The <span class='strong'>1,000 VITE</span> payment to generate an invitation code will be burned",
+                "Referee will be weighted with referral proceeds when calculating mining rewards <span class='strong'>5%</span> ",
+                "Referee will be weighted with referral proceeds when calculating mining rewards <span class='strong'>2.5%</span> "
+            ],
+            "receiveRuleItems": [
+                "Mining rewards will be weighted with referral proceeds <span class='strong'>2.5%</span> ",
+                "Mining rewards will be weighted with referral proceeds <span class='strong'>1.25%</span> ",
+                "Enjoy <span class='strong'>10%</span> off trading fees with an invitation code"
             ]
         }
     },
@@ -812,10 +817,11 @@
         "depthStep": "{step}桁",
         "blocking": "ネットワークの混雑が発生しています しばらくしてからもう一度お試しください",
         "supportMining": "Eligible for trading and market-making as mining",
+        "cmcHelp": "View VITE on CoinMarketCap",
         "supportTradeMining": "Eligible for trading as mining",
         "supportOrderMining": "Eligible for market-making as mining",
-        "buyMiningPrice": "You would meet the mining qualification when buy price is greater than {price}",
-        "sellMiningPrice": "卖出价小于{price}时满足挂单挖矿条件",
+        "buyMiningPrice": "Qualifies for mining when buy price is greater than {price}",
+        "sellMiningPrice": "Qualifies for mining when sell price is less than {price}",
         "operator": {
             "noName": "Anonymous Gateway",
             "overview": "はじめに",
@@ -925,35 +931,6 @@
             "inviteFeeDiscount": "リファラルディスカウント: {fee} off",
             "svipFee": "SVIP: 0% base transaction fee",
             "feeRule": "(Base Transaction Fee - VIP discount + Operator Fees) * Referral Discount. ATTENTION: The adjustment and discount of fees will only affect new orders, the former orders' charge remains the same."
-        },
-        "vipConfirm": {
-            "cancelVip": "VIPをキャンセル",
-            "openVip": "VIPになる",
-            "openStakingAmount": "VIPになるためのステーキング量",
-            "cancelStakingAmount": "Retrievable Stake",
-            "noBalance": "残高不足",
-            "openHint": "VIPになると0.1％の取引手数料割引の特典をお楽しみいただけます。 10,000 VITEのステーキング量は、30日後に手動で取得できます。",
-            "cancelHint": "You can retrieve your stake at approximately {time}. By then, you will lose your VIP privilege.",
-            "openSuccess": "成功しました！ VIPステータスは後で有効になります。",
-            "openFail": "VIPを適用できませんでした",
-            "cancelSuccess": "VIPをキャンセルしました",
-            "cancelFail": "キャンセルできませんでした",
-            "adviseToCancel": "There will be no base transaction fees with your current status as our SVIP, we therefore recommend you to revoke the staked VITE，which is required for general VIP members."
-        },
-        "svipConfirm": {
-            "open": "Upgrade",
-            "cancel": "キャンセル",
-            "cancelVip": "Cancel SVIP",
-            "openVip": "Become a SVIP",
-            "openStakingAmount": "Staking Amount for Becoming a SVIP",
-            "cancelStakingAmount": "Retrievable Stake",
-            "noBalance": "残高不足",
-            "openHint": "You will enjoy 0% base transaction fee when upgrading to SVIP. The stake of 1,000,000 VITE can be manually retrieved after 30 days.",
-            "cancelHint": "You can retrieve your stake at approximately {time}. You will lose your SVIP privilege after retrieving.",
-            "openSuccess": "Applied Successful! SVIP status will come into effect later.",
-            "openFail": "Failed to apply SVIP",
-            "cancelSuccess": "Cancel SVIP Successful",
-            "cancelFail": "キャンセルできませんでした"
         },
         "proxy": {
             "title": "Trade Delegation",
@@ -1169,6 +1146,7 @@
         "addQuota": "新しいステーキングを作成する",
         "add": "追加",
         "withdraw": "復元",
+        "withdrawList": "Withdrawal List",
         "tbHead": {
             "date": "日付",
             "fee": "取引手数料",
@@ -1177,7 +1155,9 @@
         },
         "txTitle": "トレードマイニング総収入",
         "quotaTitle": "ステーキングマイニング総収入",
-        "addHint": "Income of Staking as Mining will be calculated at 13:00(UTC+8) everyday. You can manually retrieve your stake after the staking comes into effective",
+        "addHint1": "A minimum of 10 VX must be staked to receive dividends",
+        "addHint2": "Submission of staking request allows for dividends starting the nearest distribution",
+        "addHint3": "Staked amount will be released after the 7-day waiting period",
         "withdrawHint": "取得後にVXをマイニングできなくなります",
         "addTitle": "マイニングのためのVITEステーキング",
         "withdrawTitle": "ステークVITEの取得",
@@ -1196,8 +1176,63 @@
         "inviteCount": "Referrals",
         "help": "Current trading fees displayed on this page contains only the 0.2% ViteX base transaction fees, please note that operator fees shall be taken into consideration when calculating mining cost"
     },
+    "tradeVip": {
+        "title": "Manage VIP",
+        "open": "VIPになる",
+        "cancel": "Cancel {type}",
+        "help": {
+            "title": "About VIP"
+        },
+        "helpConfirm": {
+            "t1": "VIP",
+            "txt1": "Stake 10,000 VITE to acquire VIP status and receive 50% off trading fees. Staking can be retrieved after 30 days.",
+            "t2": "SVIP",
+            "txt2": "Stake 1 million VITE to become a SVIP and enjoy 0 basic trading fees. Staking can be retrieved after 30 days.",
+            "txt3": "SVIP supports Stake Delegation, stake for others to acquire SVIP status. Staking can be revoked and retrieved manually after 30 days."
+        },
+        "vipConfirm": {
+            "cancelVip": "VIPをキャンセル",
+            "openVip": "VIPになる",
+            "openStakingAmount": "VIPになるためのステーキング量",
+            "cancelStakingAmount": "Retrievable Stake",
+            "noBalance": "残高不足",
+            "openHint": "VIPになると0.1％の取引手数料割引の特典をお楽しみいただけます。 10,000 VITEのステーキング量は、30日後に手動で取得できます。",
+            "cancelHint": "VIP privileges will be discontinued once staking is revoked.",
+            "openSuccess": "成功しました！ VIPステータスは後で有効になります。",
+            "openFail": "VIPを適用できませんでした",
+            "cancelSuccess": "VIPをキャンセルしました",
+            "cancelFail": "キャンセルできませんでした",
+            "adviseToCancel": "There will be no base transaction fees with your current status as our SVIP, we therefore recommend you to revoke the staked VITE，which is required for general VIP members.",
+            "address": "Enable VIP Status",
+            "addressPlaceholder": "Current address is the default address, address cannot be modified later"
+        },
+        "svipConfirm": {
+            "open": "Upgrade",
+            "cancel": "キャンセル",
+            "cancelVip": "Cancel SVIP",
+            "openVip": "Become a SVIP",
+            "openStakingAmount": "Staking Amount for Becoming a SVIP",
+            "cancelStakingAmount": "Retrievable Stake",
+            "noBalance": "残高不足",
+            "openHint": "You will enjoy 0% base transaction fee when upgrading to SVIP. The stake of 1,000,000 VITE can be manually retrieved after 30 days.",
+            "cancelHint": "SVIP privileges will be discontinued once staking is revoked",
+            "openSuccess": "Applied Successful! SVIP status will come into effect later.",
+            "openFail": "Failed to apply SVIP",
+            "cancelSuccess": "Cancel SVIP Successful",
+            "cancelFail": "キャンセルできませんでした",
+            "address": "Enable SVIP Status",
+            "addressPlaceholder": "Address to be Enabled with SVIP Status",
+            "cancelAddress": "SVIP Address"
+        },
+        "vipListTitle": "VIP Records",
+        "openAddress": "Enabled Address",
+        "type": "VIP Type"
+    },
     "inviteMining": {
-        "title": "リファラルマイニング総収入"
+        "title": "リファラルマイニング総収入",
+        "myInviteIncome": "Referral Proceeds",
+        "inviteTradeIncome": "Referred Trading Proceeds",
+        "inviteOrderIncome": "Referred Market-Making Proceeds"
     },
     "orderMining": {
         "title": "Market-Making as Mining Total Income",
@@ -1206,8 +1241,8 @@
             "ratio": "Ratio",
             "mining": "量"
         },
-        "market": "{name}市场",
-        "estimate": "{name}市场预计今日可挖"
+        "market": "{name} Market",
+        "estimate": "{name} Today's Minable Amount"
     },
     "tradeDividend": {
         "title": "配当金",
@@ -1215,14 +1250,49 @@
         "listTitle": "配当",
         "allPrice": "合計推定値",
         "date": "日付",
-        "VX": "保有VX",
+        "VX": "Stake VX",
         "coin": "タイプ",
         "amount": "量",
         "price": "合計推定値",
         "hintTitle": "重要なお知らせ",
         "comingHint": "VXマイニングおよび配当詳細は近日公開予定です。ご期待ください。 システムは、保有するVXの量に比例して、BTC、ETH、VITE、USDTの合計プールの1％をすべてのVXユーザーに配布します。 最初の配当プールは0から始まり、ViteX徴収手数料量に応じて増加します。 トレーダーは、トレード、リスティング、リファラルコード、マーケットメイキングによりVXを獲得できますが、共有配当プールから配当を受け取るためには最低10 VXが必要です。",
         "more": "VX配当ルールの詳細",
-        "help": "VX dividend reward rules: 1. VX must be held on the ViteX exchange account. 2. You must hold a minimum of 10 VX."
+        "help": "Reward Rules: 1. A minimum of 10 VX must be staked to receive dividends. 2. Submission of staking request allows for dividends starting the nearest distribution. 3. Staked amount will be released after the 7-day waiting period",
+        "lockedAmount": "ステーキング量",
+        "lockAmountTips": "Receive Dividends on 10 VX or Above",
+        "unlockAmount": "Retrieving Amount",
+        "openAutoLock": {
+            "title": "Enable Automatic Staking",
+            "text": "Mined VX will be automatically staked once enabled"
+        },
+        "closeAutoLock": {
+            "title": "Disable Automatic Staking",
+            "text": "Mined VX will not be automatically staked when turned off"
+        },
+        "lock": "Stake",
+        "unlock": "復元",
+        "lessMin": "Minimum 1 VX",
+        "lockVXConfirm": {
+            "title": "Staking Earnings",
+            "available": "取引可能残高",
+            "amountPlaceholder": "Please input staking amount, minimum 1 VX",
+            "notEnough": "Insufficient Exchange Balance",
+            "submit": "ステーキング申請",
+            "amountText": "ステーキング量"
+        },
+        "unlockVXConfirm": {
+            "title": "Retrieve VX",
+            "available": "Retrievable Amount",
+            "amountPlaceholder": "Please input amount, minimum 1 VX",
+            "notEnough": "Insufficient Amount",
+            "submit": "Confirm Retrieval",
+            "amountText": "Retrieving Amount"
+        },
+        "unlockList": {
+            "title": "Retrieving",
+            "amount": "量",
+            "time": "Available Date"
+        }
     },
     "tradeOperator": {
         "title": "オペレーター",
@@ -1320,7 +1390,9 @@
         "title": "配当金",
         "poolTitle": "Dividend Pool ({token})",
         "myDividendTitle": "Total Estimated Value of Dividends ({token})",
-        "listTitle": "Dividend Details"
+        "listTitle": "Dividend Details",
+        "lockingTitle": "My Staking",
+        "viewLink": "Staking Details"
     },
     "mobileMining": {
         "title": "マイニング",
@@ -1334,7 +1406,10 @@
         "orderTotalIncome": "Total Income ({token})",
         "fee": "手数料",
         "listTitle": "Mining History",
-        "viewLink": "Live Mining Dashboard"
+        "viewLink": "Live Mining Dashboard",
+        "inviteTradeIncome": "Referred Trading Details",
+        "inviteOrderIncome": "Referred Market-Making Details",
+        "myStaking": "My Staking"
     },
     "mobileBottomBar": {
         "center": "Trade",
