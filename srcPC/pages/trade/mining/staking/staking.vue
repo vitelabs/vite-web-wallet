@@ -1,10 +1,7 @@
 <template>
     <div class="trade-mining-section shadow">
         <div class="quota-detail">
-            <div v-if="!stakingObj" @click="_stake" class="no-detail __pointer">
-                {{ $t("tradeMining.addQuota") }}
-            </div>
-            <staking-detail v-else :showVxConfirm="_stake"></staking-detail>
+            <staking-detail :showVxConfirm="_stake"></staking-detail>
         </div>
         <wallet-table
             class="mint-trade-table no-shadow tb"
