@@ -130,7 +130,7 @@ module.exports = {
     },
     resolve: {
         alias: {
-            // '@vite/vitejs': '@vite/vitejs/es5/index.js',
+            '@vite/vitejs': '@vite/vitejs/es5/index.js',
             vue: 'vue/dist/vue.js',
             charting: CHARTING_PATH,
             src: srcPath,
