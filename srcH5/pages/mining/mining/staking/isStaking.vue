@@ -1,9 +1,6 @@
 <template>
     <div class="quota-detail">
-        <div v-if="!stakingObj || +!stakingObj.totalStakeCount" @click="addStaking" class="no-detail __pointer">
-            {{ $t("tradeMining.addQuota") }}
-        </div>
-        <div v-else class="amount-detail">
+        <div class="amount-detail">
             <div class="item-title">
                 <img :src="vxIcon" /> {{ $t('tradeMining.dividends')}}
                 <span>{{ expectedDividends || '--' }} VX</span>
