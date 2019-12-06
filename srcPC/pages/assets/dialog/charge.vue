@@ -115,7 +115,7 @@ export default {
 @import "~assets/scss/vars.scss";
 @import "pcComponents/confirm/confirmRow.scss";
 @import "./dialog.scss";
-@include block;
+// @include block;
 
 .strong{
     color: $blue-color-1;
