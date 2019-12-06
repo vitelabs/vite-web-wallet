@@ -781,9 +781,14 @@
             "inviteBenifit": "Thu nhập Khai thác giới thiệu",
             "inviteRule": "Quy tắc",
             "ruleItems": [
-                "Bạn có thể chi <span class = 'strong'> 1000 VITE </span> để tạo mã giới thiệu. Số VITE đó sẽ được đưa vào nhóm cổ tức và phân phối cho chủ sở hữu VX",
-                " <span class='strong'> 5% </span> phí giao dịch được tạo bởi người dùng sử dụng mã giới thiệu sẽ là phí giao dịch có thể khai thác VX.",
-                "Các nhà giao dịch sử dụng mã giới thiệu có thể được giảm <span class='strong'>10% </span> khi giao dịch"
+                "The <span class='strong'>1,000 VITE</span> payment to generate an invitation code will be burned",
+                "Referee will be weighted with referral proceeds when calculating mining rewards <span class='strong'>5%</span> ",
+                "Referee will be weighted with referral proceeds when calculating mining rewards <span class='strong'>2.5%</span> "
+            ],
+            "receiveRuleItems": [
+                "Mining rewards will be weighted with referral proceeds <span class='strong'>2.5%</span> ",
+                "Mining rewards will be weighted with referral proceeds <span class='strong'>1.25%</span> ",
+                "Enjoy <span class='strong'>10%</span> off trading fees with an invitation code"
             ]
         }
     },
@@ -812,10 +817,11 @@
         "depthStep": "{step} chữ số",
         "blocking": "Đã xảy ra lỗi mạng, vui lòng thử lại",
         "supportMining": "Eligible for trading and market-making as mining",
+        "cmcHelp": "View VITE on CoinMarketCap",
         "supportTradeMining": "Eligible for trading as mining",
         "supportOrderMining": "Eligible for market-making as mining",
-        "buyMiningPrice": "You would meet the mining qualification when buy price is greater than {price}",
-        "sellMiningPrice": "卖出价小于{price}时满足挂单挖矿条件",
+        "buyMiningPrice": "Qualifies for mining when buy price is greater than {price}",
+        "sellMiningPrice": "Qualifies for mining when sell price is less than {price}",
         "operator": {
             "noName": "Anonymous Gateway",
             "overview": "Giới thiệu",
@@ -925,35 +931,6 @@
             "inviteFeeDiscount": "Chiết khấu Mã giới thiệu: giảm {fee}",
             "svipFee": "SVIP: 0% base transaction fee",
             "feeRule": "(Base Transaction Fee - VIP discount + Operator Fees) * Referral Discount. ATTENTION: The adjustment and discount of fees will only affect new orders, the former orders' charge remains the same."
-        },
-        "vipConfirm": {
-            "cancelVip": "Hủy VIP",
-            "openVip": "Trở thành VIP",
-            "openStakingAmount": "Đặc cược token để trở thành VIP",
-            "cancelStakingAmount": "Retrievable Stake",
-            "noBalance": "Không đủ số dư",
-            "openHint": "Bạn sẽ được hưởng đặc quyền chiết khẩu 0,1% phí giao dịch sau khi trở thành VIP. Số 10.000 VITE đã đặt cược có thể được lấy lại thủ công sau 30 ngày.",
-            "cancelHint": "You can retrieve your stake at approximately {time}. By then, you will lose your VIP privilege.",
-            "openSuccess": "Đăng ký thành công! Trạng thái VIP sẽ có hiệu lực sau ít phút.",
-            "openFail": "Đăng ký VIP không thành công",
-            "cancelSuccess": "Hủy VIP thành công",
-            "cancelFail": "Hủy không thành công",
-            "adviseToCancel": "There will be no base transaction fees with your current status as our SVIP, we therefore recommend you to revoke the staked VITE，which is required for general VIP members."
-        },
-        "svipConfirm": {
-            "open": "Upgrade",
-            "cancel": "Hủy",
-            "cancelVip": "Cancel SVIP",
-            "openVip": "Become a SVIP",
-            "openStakingAmount": "Staking Amount for Becoming a SVIP",
-            "cancelStakingAmount": "Retrievable Stake",
-            "noBalance": "Không đủ số dư",
-            "openHint": "You will enjoy 0% base transaction fee when upgrading to SVIP. The stake of 1,000,000 VITE can be manually retrieved after 30 days.",
-            "cancelHint": "You can retrieve your stake at approximately {time}. You will lose your SVIP privilege after retrieving.",
-            "openSuccess": "Applied Successful! SVIP status will come into effect later.",
-            "openFail": "Failed to apply SVIP",
-            "cancelSuccess": "Cancel SVIP Successful",
-            "cancelFail": "Hủy không thành công"
         },
         "proxy": {
             "title": "Trade Delegation",
@@ -1169,6 +1146,7 @@
         "addQuota": "Tạo đặt cược mới",
         "add": "Thêm",
         "withdraw": "Thu hồi",
+        "withdrawList": "Withdrawal List",
         "tbHead": {
             "date": "Ngày",
             "fee": "Phí giao dịch",
@@ -1177,7 +1155,9 @@
         },
         "txTitle": "Tổng thu nhập Giao dịch dưới dạng Khai thác",
         "quotaTitle": "Tổng thu nhập Đặt cược là khai thác",
-        "addHint": "Income of Staking as Mining will be calculated at 13:00(UTC+8) everyday. You can manually retrieve your stake after the staking comes into effective",
+        "addHint1": "A minimum of 10 VX must be staked to receive dividends",
+        "addHint2": "Submission of staking request allows for dividends starting the nearest distribution",
+        "addHint3": "Staked amount will be released after the 7-day waiting period",
         "withdrawHint": "Bạn sẽ không thể khai thác VX sau khi thu hồi",
         "addTitle": "Đặt cược VITE để Khai thác",
         "withdrawTitle": "Thu hồi VITE đã thế chấp",
@@ -1196,8 +1176,63 @@
         "inviteCount": "Referrals",
         "help": "Current trading fees displayed on this page contains only the 0.2% ViteX base transaction fees, please note that operator fees shall be taken into consideration when calculating mining cost"
     },
+    "tradeVip": {
+        "title": "Manage VIP",
+        "open": "Trở thành VIP",
+        "cancel": "Cancel {type}",
+        "help": {
+            "title": "About VIP"
+        },
+        "helpConfirm": {
+            "t1": "VIP",
+            "txt1": "Stake 10,000 VITE to acquire VIP status and receive 50% off trading fees. Staking can be retrieved after 30 days.",
+            "t2": "SVIP",
+            "txt2": "Stake 1 million VITE to become a SVIP and enjoy 0 basic trading fees. Staking can be retrieved after 30 days.",
+            "txt3": "SVIP supports Stake Delegation, stake for others to acquire SVIP status. Staking can be revoked and retrieved manually after 30 days."
+        },
+        "vipConfirm": {
+            "cancelVip": "Hủy VIP",
+            "openVip": "Trở thành VIP",
+            "openStakingAmount": "Đặc cược token để trở thành VIP",
+            "cancelStakingAmount": "Retrievable Stake",
+            "noBalance": "Không đủ số dư",
+            "openHint": "Bạn sẽ được hưởng đặc quyền chiết khẩu 0,1% phí giao dịch sau khi trở thành VIP. Số 10.000 VITE đã đặt cược có thể được lấy lại thủ công sau 30 ngày.",
+            "cancelHint": "VIP privileges will be discontinued once staking is revoked.",
+            "openSuccess": "Đăng ký thành công! Trạng thái VIP sẽ có hiệu lực sau ít phút.",
+            "openFail": "Đăng ký VIP không thành công",
+            "cancelSuccess": "Hủy VIP thành công",
+            "cancelFail": "Hủy không thành công",
+            "adviseToCancel": "There will be no base transaction fees with your current status as our SVIP, we therefore recommend you to revoke the staked VITE，which is required for general VIP members.",
+            "address": "Enable VIP Status",
+            "addressPlaceholder": "Current address is the default address, address cannot be modified later"
+        },
+        "svipConfirm": {
+            "open": "Upgrade",
+            "cancel": "Hủy",
+            "cancelVip": "Cancel SVIP",
+            "openVip": "Become a SVIP",
+            "openStakingAmount": "Staking Amount for Becoming a SVIP",
+            "cancelStakingAmount": "Retrievable Stake",
+            "noBalance": "Không đủ số dư",
+            "openHint": "You will enjoy 0% base transaction fee when upgrading to SVIP. The stake of 1,000,000 VITE can be manually retrieved after 30 days.",
+            "cancelHint": "SVIP privileges will be discontinued once staking is revoked",
+            "openSuccess": "Applied Successful! SVIP status will come into effect later.",
+            "openFail": "Failed to apply SVIP",
+            "cancelSuccess": "Cancel SVIP Successful",
+            "cancelFail": "Hủy không thành công",
+            "address": "Enable SVIP Status",
+            "addressPlaceholder": "Address to be Enabled with SVIP Status",
+            "cancelAddress": "SVIP Address"
+        },
+        "vipListTitle": "VIP Records",
+        "openAddress": "Enabled Address",
+        "type": "VIP Type"
+    },
     "inviteMining": {
-        "title": "Tổng thu nhập Giới thiệu là Khai thác"
+        "title": "Tổng thu nhập Giới thiệu là Khai thác",
+        "myInviteIncome": "Referral Proceeds",
+        "inviteTradeIncome": "Referred Trading Proceeds",
+        "inviteOrderIncome": "Referred Market-Making Proceeds"
     },
     "orderMining": {
         "title": "Market-Making as Mining Total Income",
@@ -1206,8 +1241,8 @@
             "ratio": "Ratio",
             "mining": "Số lượng"
         },
-        "market": "{name}市场",
-        "estimate": "{name}市场预计今日可挖"
+        "market": "{name} Market",
+        "estimate": "{name} Today's Minable Amount"
     },
     "tradeDividend": {
         "title": "Cổ tức",
@@ -1215,14 +1250,49 @@
         "listTitle": "Cổ tức của tôi",
         "allPrice": "Tổng Giá trị ước tính",
         "date": "Ngày",
-        "VX": "Nắm giữ VX",
+        "VX": "Stake VX",
         "coin": "Loại",
         "amount": "Số lượng",
         "price": "Tổng Giá trị ước tính",
         "hintTitle": "Thông báo Quan trọng",
         "comingHint": "Chức năng khai thác và cổ tức VX sẽ sớm ra mắt, hãy cùng chờ đón! Hệ thống sẽ phân phối 1% BTC, ETH, VITE, USDT của tổng số vốn chung cho tất cả người dùng VX, tỷ lệ thuận với lượng VX họ nắm giữ. Nhóm cổ tức ban đầu sẽ bắt đầu từ 0 và sẽ tăng theo mức phí mà ViteX thu được. Trader phải có tối thiểu 10 VX để nhận cổ tức từ nhóm vốn chung cổ tức bao gồm phí giao dịch cơ sở, phí niêm yết và phí tạo mã giới thiệu. ",
         "more": "Tìm hiểu về Quy tắc cổ tức VX",
-        "help": "VX dividend reward rules: 1. VX must be held on the ViteX exchange account. 2. You must hold a minimum of 10 VX."
+        "help": "Reward Rules: 1. A minimum of 10 VX must be staked to receive dividends. 2. Submission of staking request allows for dividends starting the nearest distribution. 3. Staked amount will be released after the 7-day waiting period",
+        "lockedAmount": "Số lượng Đặt cược",
+        "lockAmountTips": "Receive Dividends on 10 VX or Above",
+        "unlockAmount": "Retrieving Amount",
+        "openAutoLock": {
+            "title": "Enable Automatic Staking",
+            "text": "Mined VX will be automatically staked once enabled"
+        },
+        "closeAutoLock": {
+            "title": "Disable Automatic Staking",
+            "text": "Mined VX will not be automatically staked when turned off"
+        },
+        "lock": "Stake",
+        "unlock": "Thu hồi",
+        "lessMin": "Minimum 1 VX",
+        "lockVXConfirm": {
+            "title": "Staking Earnings",
+            "available": "Tổng số dư sẵn có trên sàn",
+            "amountPlaceholder": "Please input staking amount, minimum 1 VX",
+            "notEnough": "Insufficient Exchange Balance",
+            "submit": "Tiến hành Đặt cược",
+            "amountText": "Số lượng Đặt cược"
+        },
+        "unlockVXConfirm": {
+            "title": "Retrieve VX",
+            "available": "Retrievable Amount",
+            "amountPlaceholder": "Please input amount, minimum 1 VX",
+            "notEnough": "Insufficient Amount",
+            "submit": "Confirm Retrieval",
+            "amountText": "Retrieving Amount"
+        },
+        "unlockList": {
+            "title": "Retrieving",
+            "amount": "Số lượng",
+            "time": "Available Date"
+        }
     },
     "tradeOperator": {
         "title": "Nhà vận hành",
@@ -1320,7 +1390,9 @@
         "title": "Cổ tức",
         "poolTitle": "Dividend Pool ({token})",
         "myDividendTitle": "Total Estimated Value of Dividends ({token})",
-        "listTitle": "Dividend Details"
+        "listTitle": "Dividend Details",
+        "lockingTitle": "My Staking",
+        "viewLink": "Staking Details"
     },
     "mobileMining": {
         "title": "Khai thác",
@@ -1334,7 +1406,10 @@
         "orderTotalIncome": "Total Income ({token})",
         "fee": "Phí",
         "listTitle": "Mining History",
-        "viewLink": "Live Mining Dashboard"
+        "viewLink": "Live Mining Dashboard",
+        "inviteTradeIncome": "Referred Trading Details",
+        "inviteOrderIncome": "Referred Market-Making Details",
+        "myStaking": "My Staking"
     },
     "mobileBottomBar": {
         "center": "Trade",
