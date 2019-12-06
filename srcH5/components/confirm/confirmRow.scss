@@ -76,15 +76,20 @@
 }
 
 .__hint {
-    margin-top: 16px;
+    display: flex;
+    flex-direction: row;
     line-height: 16px;
     font-size: 12px;
     @include font-normal();
     color: rgba(62, 74, 89, 1);
+    margin-top: 6px;
+    &.distance {
+        margin-top: 16px;
+    }
     span {
         display: inline-block;
         margin-left: 10px;
-        margin-top: -13px;
+        flex: 1;
     }
     &:before {
         width: 4px;
@@ -93,6 +98,7 @@
         border-radius: 4px;
         content: ' ';
         display: inline-block;
+        margin-top: 6px;
     }
 }
 

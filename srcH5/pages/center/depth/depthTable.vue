@@ -46,7 +46,11 @@ export default {
             if (this.$store.getters.exDepthSellMiningSeparator < 0) {
                 return -1;
             }
-            return this.depthData.length - 1 - this.$store.getters.exDepthSellMiningSeparator;
+            const sell = this.$store.state.exchangeDepth.sell;
+            if (!sell || !sell.length) {
+                return -1;
+            }
+            return sell.length - 1 - this.$store.getters.exDepthSellMiningSeparator;
         },
         ttoken() {
             return this.$store.state.exchangeTokens.ttoken;
