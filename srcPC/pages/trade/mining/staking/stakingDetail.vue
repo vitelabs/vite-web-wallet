@@ -17,7 +17,10 @@
         </div>
 
         <div class="operations">
-            <div class="btn add __pointer" @click="showVxConfirm">
+            <!-- <div class="btn add __pointer" @click="showVxConfirm">
+                {{ $t("tradeMining.add") }}
+            </div> -->
+            <div class="btn unuse __pointer">
                 {{ $t("tradeMining.add") }}
             </div>
             <div class="btn cancel __pointer" @click="showStakingList">
