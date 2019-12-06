@@ -97,6 +97,7 @@ export default {
                 title,
                 content,
                 singleBtn: true,
+                closeBtn: { show: true },
                 leftBtn: {
                     text: this.$t('btn.submit'),
                     click: () => {
