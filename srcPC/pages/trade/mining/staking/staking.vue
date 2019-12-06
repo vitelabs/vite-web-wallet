@@ -1,14 +1,10 @@
 <template>
     <div class="trade-mining-section shadow">
         <div class="quota-detail">
-            <div
-                v-if="!stakingObj"
-                @click="_showVxConfirm(1)"
-                class="no-detail __pointer"
-            >
+            <div v-if="!stakingObj" @click="_stake" class="no-detail __pointer">
                 {{ $t("tradeMining.addQuota") }}
             </div>
-            <staking-detail v-else :showVxConfirm="_showVxConfirm"></staking-detail>
+            <staking-detail v-else :showVxConfirm="_stake"></staking-detail>
         </div>
         <wallet-table
             class="mint-trade-table no-shadow tb"
@@ -23,12 +19,11 @@
                 :totalPage="stakeTotalPage"
             ></pagination>
         </wallet-table>
+        <stakeForMining ref="stakeForMining"></stakeForMining>
     </div>
 </template>
 
 <script>
-import { insertTo } from 'pcUtils/insertTo';
-import VxConfirm from './vxConfirm.vue';
 import statistics from 'utils/statistics';
 import { execWithValid } from 'pcUtils/execWithValid';
 import stakingDetail from './stakingDetail.vue';
@@ -38,11 +33,12 @@ import pagination from 'components/pagination';
 import { miningPledge } from 'services/trade';
 import bigNumber from 'utils/bigNumber';
 import date from 'utils/date';
+import stakeForMining from './stakeForMining.vue';
 
 let stakingInfoTimer = null;
 
 export default {
-    components: { walletTable, pagination, stakingDetail },
+    components: { walletTable, pagination, stakingDetail, stakeForMining },
     data() {
         return {
             stakeCurrentPage: 0,
@@ -107,25 +103,12 @@ export default {
         }
     },
     methods: {
-        hideVxConfirm() {
-            this.vxConfirm
-                && this.vxConfirm.destroyInstance()
-                && (this.vxConfirm = null);
+        _stake() {
+            statistics.event(this.$route.name, 'addQuota', this.address || '');
+            this.stake();
         },
-        _showVxConfirm(actionType) {
-            statistics.event(this.$route.name,
-                actionType === 1 ? 'addQuota' : 'withdrawQuota',
-                this.address || '');
-            this.showVxConfirm(actionType);
-        },
-        showVxConfirm: execWithValid(function (actionType) {
-            this.vxConfirm = insertTo(VxConfirm, {
-                actionType,
-                stakingObj: this.stakingObj,
-                close: () => {
-                    this.hideVxConfirm();
-                }
-            });
+        stake: execWithValid(function () {
+            this.$refs.stakeForMining.show();
         }),
 
         stopStakingInfo() {
@@ -164,7 +147,6 @@ export default {
 @import "~assets/scss/vars.scss";
 
 .quota-detail {
-    border-bottom: 1px solid #d4dee7;
     box-sizing: border-box;
     .no-detail {
         box-sizing: border-box;

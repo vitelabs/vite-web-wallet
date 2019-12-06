@@ -97,7 +97,8 @@ export default {
             return this.$store.getters.activeAddr;
         },
         icon() {
-            return this.tokenDetail.urlIcon || this.token.icon || defaultTokenIcon;
+            const urlIcon = this.tokenDetail ? this.tokenDetail.urlIcon : null;
+            return urlIcon || this.token.icon || defaultTokenIcon;
         }
     },
     watch: {

@@ -1,21 +1,36 @@
 <template>
     <div class="v-checkbox __pointer" :style="style" @click="toggle"></div>
 </template>
+
 <script>
 import SelectedIcon from 'assets/imgs/uiKit/checkbox/selected.svg';
 import UnselectIcon from 'assets/imgs/uiKit/checkbox/unselect.svg';
+
 export default {
     props: {
         value: {
             type: Boolean,
             default: false
+        },
+        canClick: {
+            type: Boolean,
+            default: true
         }
     },
     data() {
         return { inner_value: this.value };
     },
+    model: { prop: 'value' },
+    watch: {
+        value() {
+            this.inner_value = this.value;
+        }
+    },
     methods: {
         toggle() {
+            if (!this.canClick) {
+                return;
+            }
             this.inner_value = !this.inner_value;
             this.$emit('input', this.inner_value);
         }

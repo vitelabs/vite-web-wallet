@@ -9,7 +9,7 @@ block content
             .err(v-if="formatErr") {{$t('assets.invite.formatErr')}}
         input.block__content(v-model="code")
     .block__title {{$t('assets.invite.inviteRule')}}
-    .illustrate(v-for="(i,j) in $t('assets.invite.ruleItems')" :key="j")
+    .illustrate(v-for="(i,j) in $t('assets.invite.receiveRuleItems')" :key="j")
         span(v-html="i")
         .dot
 
@@ -72,13 +72,11 @@ export default {
                         createPromise: () => this.getInviteeCode(),
                         interval: 1000,
                         times: 3
-                    })
-                        .then(res => {
-                            console.log('code', res);
-                        })
-                        .catch(e => {
-                            this.$toast(this.$t('assets.invite.noResult'), e);
-                        });
+                    }).then(res => {
+                        console.log('code', res);
+                    }).catch(e => {
+                        this.$toast(this.$t('assets.invite.noResult'), e);
+                    });
                 })
                 .catch(e => {
                     if (e && e.error && e.error.code === 12002) {

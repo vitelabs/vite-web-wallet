@@ -1,9 +1,19 @@
 <template>
-    <div class="title">{{ $t('mobileMining.listTitle') }}</div>
+    <div class="title">
+        {{ title || $t('mobileMining.listTitle') }}
+        <slot></slot>
+    </div>
 </template>
 
 <script>
-export default {};
+export default {
+    props: {
+        title: {
+            type: String,
+            default: ''
+        }
+    }
+};
 </script>
 
 <style lang="scss" scoped>
@@ -15,5 +25,6 @@ export default {};
     color: rgba(62,74,89,1);
     line-height: 20px;
     margin-bottom: 14px;
+    margin-top: 20px;
 }
 </style>

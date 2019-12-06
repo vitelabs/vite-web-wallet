@@ -36,7 +36,7 @@ const mutations = {
         });
 
         arr = list.concat(arr);
-        arr = arr.slice(0, 100);
+        arr = arr.slice(0, 30);
         state.txList = arr || [];
     },
     exSetLatestTxLoading(state, isLoading) {

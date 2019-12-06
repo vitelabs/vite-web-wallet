@@ -9,7 +9,7 @@ block content
             .err(v-if="formatErr") {{$t('assets.invite.formatErr')}}
         vite-input.invite-input(v-model="code")
     .block__title {{$t('assets.invite.inviteRule')}}
-    .illustrate(v-for="(i,j) in $t('assets.invite.ruleItems')" :key="j")
+    .illustrate(v-for="(i,j) in $t('assets.invite.receiveRuleItems')" :key="j")
         span(v-html="i")
         .dot
 
@@ -72,7 +72,6 @@ export default {
                 methodName: 'dexFundBindInviteCode',
                 data: { code: this.code }
             }).then(() => {
-                // this.$toast(this.$t('assets.invite.successToast'));
                 doUntill({
                     createPromise: () => this.getInviteeCode(),
                     interval: 1000,
@@ -84,12 +83,6 @@ export default {
                 });
             }).catch(e => {
                 console.warn(e);
-                // if (e && e.error && e.error.code === 12002) {
-                //     router.push({ name: 'startLogin' });
-                //     this.close();
-                //     return;
-                // }
-                // this.$toast(this.$t('assets.invite.failToast'), e);
             });
 
             return Promise.reject('no close');

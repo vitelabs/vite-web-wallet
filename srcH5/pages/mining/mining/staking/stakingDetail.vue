@@ -1,66 +1,40 @@
 <template>
-    <div class="staking-detail">
-        <div class="operation">
+    <my-income class="my-divident" :isShowMiningLink="false"
+               :isShowLockLink="false" :isShowCancelling="true"
+               :isShowTotal="false" :title="$t('mobileMining.myStaking')">
+        <div class="head-detail">
             <div class="item">
-                <div class="item-tilte">
-                    <img src="~h5Assets/imgs/staking_amount.svg" />{{ $t("stakingAmount") }}
-                </div>
-                <div class="bold">{{ stakingDetail.amount }}</div>
+                <div class="item-title">{{ $t("stakingAmount") }}</div>
+                <div class="bold">{{ totalStakingAmount }}</div>
             </div>
             <div class="item">
-                <div class="item-tilte">
-                    <img src="~h5Assets/imgs/small_mine.svg" />{{ $t("tradeMining.dividends") }}
-                </div>
-                <div class="bold">{{ expectedDividends }}</div>
+                <div class="item-tilte">{{ $t("tradeDividend.unlockAmount") }}</div>
+                <div class="bold">{{ cancellingStake }}</div>
             </div>
-        </div>
-
-        <div class="operation">
-            <div class="item">
-                <div class="item-tilte">
-                    <img src="~h5Assets/imgs/snapshot.svg" />{{ $t("withdrawHeight") }}
-                </div>
-                <div class="bold">{{ stakingDetail.withdrawHeight }}</div>
-            </div>
-            <div class="item">
-                <div class="item-tilte">
-                    <img src="~h5Assets/imgs/staking_time.svg" />{{ $t("walletQuota.list.withdrawTime") }}
-                </div>
-                <div class="bold">{{ stakingDetail.withdrawTime }}</div>
-            </div>
-        </div>
-
-        <div class="operation">
-            <span class="item btn add" @click="showVxConfirm(1)">
+            <div class="item btn add" @click="addStaking">
                 {{ $t("tradeMining.add") }}
-            </span>
-            <span v-show="!canCancel" class="item btn unuse">
-                {{ $t("tradeMining.withdraw") }}
-            </span>
-            <span v-show="canCancel" class="item btn cancel" @click="showVxConfirm(2)">
-                {{ $t("tradeMining.withdraw") }}
-            </span>
+            </div>
+            <div class="item btn cancel" @click="goTradeMiningList">
+                {{ $t("tradeMining.withdrawList") }}
+            </div>
         </div>
-    </div>
+    </my-income>
 </template>
 
 <script>
-import date from 'utils/date';
+import myIncome from 'h5Components/myIncome/index';
 import bigNumber from 'utils/bigNumber';
 import { constant } from '@vite/vitejs';
 
 const Vite_Token_Info = constant.Vite_Token_Info;
 
 export default {
+    components: { myIncome },
     mounted() {
         this.$store.dispatch('getCurrentPledgeForVxSum');
-        this.$store.dispatch('startLoopHeight');
-    },
-    destroyed() {
-        this.$store.dispatch('stopLoopHeight');
     },
     props: {
-        showVxConfirm: {
+        addStaking: {
             type: Function,
             default: () => {}
         }
@@ -69,93 +43,33 @@ export default {
         stakingObj() {
             return this.$store.state.exchangeMine.userPledgeInfo;
         },
-        height() {
-            return this.$store.state.env.currentHeight;
-        },
-        canCancel() {
-            return this.stakingObj.withdrawHeight <= this.height;
-        },
-        stakingDetail() {
+        totalStakingAmount() {
             if (!this.stakingObj) {
-                return {
-                    amount: '',
-                    withdrawTime: '',
-                    withdrawHeight: ''
-                };
+                return 0;
             }
-
-            return {
-                withdrawTime: date(this.stakingObj.withdrawTime * 1000,
-                    this.$i18n.locale),
-                amount: bigNumber.toBasic(this.stakingObj.amount || 0,
-                    Vite_Token_Info.decimals),
-                withdrawHeight: this.stakingObj.withdrawHeight
-            };
+            return bigNumber.toBasic(this.stakingObj.totalStakeAmount || 0, Vite_Token_Info.decimals);
         },
-        expectedDividends() {
-            return this.$store.getters.stakingDividends;
+        viteBalanceInfo() {
+            return this.$store.getters.exViteBalanceInfo;
+        },
+        cancellingStake() {
+            const cancellingStake = this.viteBalanceInfo.cancellingStake || 0;
+            return bigNumber.toBasic(cancellingStake, Vite_Token_Info.decimals);
+        }
+    },
+    methods: {
+        goTradeMiningList() {
+            this.$router.push({ name: 'miningStakingList' });
         }
     }
 };
 </script>
 
 <style lang="scss" scoped>
-@import "~h5Assets/scss/vars.scss";
+@import "~h5Components/myIncome/headDetail.scss";
 
-.staking-detail {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    font-size: 12px;
-    @include font-normal();
-    color: rgba(62,74,89,0.6);
-    line-height: 16px;
-    .item {
-        flex: 1;
-        &:first-child {
-            margin-right: 23px;
-        }
-        .item-tilte {
-            margin-bottom: 5px;
-            img {
-                width: 16px;
-                height: 16px;
-                margin-bottom: -4px;
-                margin-right: 2px;
-            }
-        }
-        .bold {
-            @include font-bold();
-        }
-    }
-    .operation {
-        display: flex;
-        flex-direction: row;
-        width: 100%;
-        margin-top: 14px;
-    }
-    .btn {
-        display: inline-block;
-        border-radius: 2px;
-        padding: 0 13px;
-        height: 30px;
-        line-height: 30px;
-        box-sizing: border-box;
-        font-size: 14px;
-        @include font-bold();
-        text-align: center;
-        &.add {
-            color: #fff;
-            background: $blue;
-        }
-        &.cancel {
-            color: $blue;
-            border: 1px solid $blue;
-        }
-        &.unuse {
-            border: 1px solid rgba(201,217,239,1);
-            color: rgba(201,217,239,1);
-        }
-    }
+.my-divident {
+    background: rgba(0,122,255,0.06);
+    margin-top: 14px;
 }
 </style>

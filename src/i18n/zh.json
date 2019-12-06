@@ -481,8 +481,16 @@
             "inviteNum":"邀请人数",
             "inviteBenifit":"邀请挖矿收益",
             "inviteRule":"邀请规则",
-            "ruleItems":["花费<span class='strong'>1000 VITE</span>生成邀请码，<span class='strong'>1000 VITE</span> 会算作交易所收益，分给持有VX的用户","使用邀请码的用户交易过程中产生手续费，产生手续费的 <span class='strong'>5%</span>，视为邀请用户产生的交易手续费，可进行挖矿VX","使用邀请码的用户，在交易过程中手续费可<span class='strong'>9折</span>"]
-
+            "ruleItems":[
+                "花费 <span class='strong'>1000 VITE</span> 生成邀请码，<span class='strong'>1000 VITE</span> 被销毁",
+                "计算交易挖矿时，邀请人增加被邀请人的交易手续费权重 <span class='strong'>5%</span> ",
+                "计算挂单挖矿时，邀请人增加被邀请人的挂单挖矿权重 <span class='strong'>2.5%</span> "
+            ],
+            "receiveRuleItems": [
+                "计算交易挖矿时，交易手续费权重增加 <span class='strong'>2.5%</span> ",
+                "计算挂单挖矿时，挂单挖矿权重增加 <span class='strong'>1.25%</span> ",
+                "使用邀请码的用户，在交易过程中手续费可 <span class='strong'>9折</span> "
+            ]
         }
     },
     "walletConversion": {
@@ -800,6 +808,7 @@
         "depthStep": "{step}位小数",
         "blocking": "网络拥堵, 请稍候重试",
         "supportMining": "支持交易挖矿&挂单挖矿",
+        "cmcHelp": "请在CoinMarketCap查看VITE详情",
         "supportTradeMining": "支持交易挖矿",
         "supportOrderMining": "支持挂单挖矿",
         "buyMiningPrice": "买入价大于{price}时满足挂单挖矿条件",
@@ -912,35 +921,6 @@
             "svipFee":"超级VIP：交易所基础费率为0",
             "inviteFeeDiscount":"邀请码折扣：{fee} off",
             "feeRule":"手续费 = (基础费率-VIP抵扣+运营商费率)*邀请折扣。（费率折扣及费率调整只影响新订单，此前挂单依旧执行旧费率）"
-        },
-        "vipConfirm": {
-            "cancelVip": "取消VIP",
-            "openVip": "开通VIP",
-            "openStakingAmount": "开通VIP抵押金额",
-            "cancelStakingAmount": "可取回抵押金额",
-            "noBalance": "交易所可用余额不足",
-            "openHint": "VIP开通后，可享有降低0.1%手续费特权，开通VIP需抵押10000VITE，30天后可手动取回",
-            "cancelHint": "预计 {time} 可取回抵押，取回抵押后，您将无法再使用VIP特权",
-            "openSuccess": "申请开通VIP成功，稍后生效",
-            "openFail": "开通失败",
-            "cancelSuccess": "申请取消VIP成功",
-            "cancelFail": "取消失败",
-            "adviseToCancel":"由于您已成为超级VIP，平台手续费已为0，建议您取回普通VIP的抵押金额。"
-        },
-        "svipConfirm": {
-            "open":"开通",
-            "cancel":"取消",
-            "cancelVip": "取消SVIP",
-            "openVip": "开通SVIP",
-            "openStakingAmount": "开通SVIP抵押金额",
-            "cancelStakingAmount": "可取回抵押金额",
-            "noBalance": "交易所可用余额不足",
-            "openHint": "SVIP开通后，可免除基础手续费，开通SVIP需抵押 1,000,000VITE，30天后可手动取回",
-            "cancelHint": "预计 {time} 可取回抵押，取回抵押后，您将无法再使用SVIP特权",
-            "openSuccess": "申请开通SVIP成功，稍后生效",
-            "openFail": "开通失败",
-            "cancelSuccess": "申请取消SVIP成功",
-            "cancelFail": "取消失败"
         },
         "proxy":{
             "title":"委托代理",
@@ -1135,6 +1115,7 @@
         "addQuota": "新增抵押挖矿",
         "add": "增加",
         "withdraw": "取回",
+        "withdrawList": "取回列表",
         "tbHead": {
             "date": "日期",
             "fee": "交易手续费金额",
@@ -1143,7 +1124,9 @@
         },
         "txTitle": "交易挖矿总收益",
         "quotaTitle": "抵押挖矿总收益",
-        "addHint": "每日约13:00(UTC+8)计算抵押挖矿收益；抵押生效后，您可3天后可手动取回",
+        "addHint1": "分红需VITE锁仓在交易所内，且锁仓金额大于10",
+        "addHint2": "提交锁仓VITE后立即生效，可参与最近一次挖矿",
+        "addHint3": "解锁需要经过完整的7个周期（7天）后释放",
         "withdrawHint": "取回后，您将无法再挖矿VX",
         "addTitle": "抵押VITE挖矿",
         "withdrawTitle": "取回抵押VITE",
@@ -1162,8 +1145,61 @@
         "inviteCount": "邀请人数",
         "help": "当前页面展示的手续费花销仅为平台基础手续费0.2%，实际估算成本时请注意不同交易对的运营商手续费"
     },
+    "tradeVip": {
+        "title": "管理VIP",
+        "open": "开通VIP",      
+        "cancel": "撤销 {type}", 
+        "help": {
+            "title": "关于VIP"
+        },
+        "helpConfirm": {
+            "t1": "VIP",
+            "txt1": "开通VIP，可享有降低0.1%手续费特权，开通VIP需抵押10000VITE，30天后可手动取回",
+            "t2": "SVIP",
+            "txt2": "SVIP开通后，可免除基础手续费，开通SVIP需抵押 1,000,000VITE，30天后可手动取回",
+            "txt3": "SVIP支持代理抵押，帮他人抵押并开通SVIP，抵押到期后，抵押用户可随时取回，撤销代理抵押"
+        },        
+        "vipConfirm": {
+            "cancelVip": "取消VIP",
+            "openVip": "开通VIP",
+            "openStakingAmount": "开通VIP抵押金额",
+            "cancelStakingAmount": "可取回抵押金额",
+            "noBalance": "交易所可用余额不足",
+            "openHint": "VIP开通后，可享有降低0.1%手续费特权，开通VIP需抵押10000VITE，30天后可手动取回",
+            "cancelHint": "取回抵押后，您将无法再使用VIP特权",
+            "openSuccess": "申请开通VIP成功，稍后生效",
+            "openFail": "开通失败",
+            "cancelSuccess": "申请取消VIP成功",
+            "cancelFail": "取消失败",
+            "adviseToCancel":"由于您已成为超级VIP，平台手续费已为0，建议您取回普通VIP的抵押金额。",
+            "address": "开通VIP地址",
+            "addressPlaceholder": "地址不可修改，默认为当前登录地址"
+        },
+        "svipConfirm": {
+            "cancelVip": "取消SVIP",
+            "openVip": "开通SVIP",
+            "openStakingAmount": "开通SVIP抵押金额",
+            "cancelStakingAmount": "可取回抵押金额",
+            "noBalance": "交易所可用余额不足",
+            "openHint": "SVIP开通后，可免除基础手续费，开通SVIP需抵押 1,000,000VITE，30天后可手动取回",
+            "cancelHint": "取回抵押后，将无法再使用SVIP特权",
+            "openSuccess": "申请开通SVIP成功，稍后生效",
+            "openFail": "开通失败",
+            "cancelSuccess": "申请取消SVIP成功",
+            "cancelFail": "取消失败",
+            "address": "开通SVIP地址",
+            "addressPlaceholder": "请输入开通SVIP地址",
+            "cancelAddress": "SVIP 地址"
+        },
+        "vipListTitle": "VIP 记录",
+        "openAddress": "开通地址",
+        "type": "VIP类型"
+    },
     "inviteMining":{
-        "title":"邀请挖矿总收益"
+        "title": "邀请挖矿总收益",
+        "myInviteIncome": "我的邀请收益",
+        "inviteTradeIncome": "邀请交易挖矿收益",
+        "inviteOrderIncome": "邀请挂单挖矿收益"
     },
     "orderMining":{
         "title":"挂单挖矿总收益",
@@ -1181,14 +1217,49 @@
         "listTitle": "我的分红",
         "allPrice": "总估值",
         "date": "日期",
-        "VX": "持有VX",
+        "VX": "锁仓VX",
         "coin": "分红币种",
         "amount": "分红金额",
         "price": "分红总估值",
         "hintTitle": "重要通知",
         "comingHint": "VX挖矿分红功能即将开启，敬请期待。系统每天自动将分红池1%的VITE、BTC、ETH、USDT等分红给VX持有者。初始分红池的资金为0。分红池中包含交易所基础手续费，5000VITE上币费以及生成邀请码的1000VITE。持有VX的数量大于等于10VX可持续获得手续费分红。",
         "more": "了解更多VX分红规则",
-        "help": "持有VX参与分红需满足条件：1. VX在交易所账户中 2. 余额不少于10VX"
+        "help": "分红规则：1. 分红需VX锁仓在交易所内，且锁仓金额大于10 2. 提交锁仓VX后立即生效，可参与最近一次分红 3. 解锁需要经过完整的7个周期后释放",
+        "lockedAmount": "锁仓金额",
+        "lockAmountTips": "少于10VX无法参与分红",
+        "unlockAmount": "解锁中金额",
+        "openAutoLock": {
+            "title": "开启自动锁仓",
+            "text": "开启后，挖矿获得的VX将自动锁仓（主动购买的VX不自动锁仓）"
+        },
+        "closeAutoLock": {
+            "title": "关闭自动锁仓",
+            "text": "关闭后，挖矿发放的所有VX都不锁仓"
+        },
+        "lock": "锁仓",
+        "unlock": "解锁",
+        "lessMin": "最少1VX",
+        "lockVXConfirm": {
+            "title": "锁仓VX分红",
+            "available": "交易所可用余额",
+            "amountPlaceholder": "请输入锁仓金额，最少1VX",
+            "notEnough": "交易所可用余额不足",
+            "submit": "提交锁仓",
+            "amountText": "锁仓金额"
+        },
+        "unlockVXConfirm": {
+            "title": "解锁 VX",
+            "available": "可解锁金额",
+            "amountPlaceholder": "请输入解锁金额，最少1VX",
+            "notEnough": "可解锁金额不足",
+            "submit": "确认解锁",
+            "amountText": "解锁金额"
+        },
+        "unlockList": {
+            "title": "解锁中",
+            "amount": "金额",
+            "time": "到期时间"
+        }
     },
     "tradeOperator": {
         "title": "运营商中心",
@@ -1284,7 +1355,9 @@
         "title": "分红",
         "poolTitle": "手续费分红池({token})",
         "myDividendTitle": "我的分红收益总估值({token})",
-        "listTitle": "分红明细"
+        "listTitle": "分红明细",
+        "lockingTitle": "我的锁仓",
+        "viewLink": "查看解锁明细"
     },
     "mobileMining": {
         "title": "挖矿",
@@ -1298,7 +1371,10 @@
         "orderTotalIncome": "挂单挖矿总收益({token})",
         "fee": "手续费金额",
         "listTitle": "挖矿明细",
-        "viewLink": "实时挖矿数据"
+        "viewLink": "实时挖矿数据",
+        "inviteTradeIncome": "邀请交易挖矿明细",
+        "inviteOrderIncome": "邀请挂单挖矿明细",
+        "myStaking": "我的抵押"
     },
     "mobileBottomBar": {
         "center": "交易",

@@ -10,7 +10,7 @@
 
 <script>
 import tabList from 'h5Components/tabList.vue';
-import inviteMinComp from './invite.vue';
+import inviteMinComp from './invite/invite.vue';
 import orderMinComp from './order.vue';
 import tradeMinComp from './trade.vue';
 import stakingMinComp from './staking/staking.vue';
@@ -23,7 +23,6 @@ export default {
     },
     data() {
         return {
-            currVxMineInfo: null,
             tabList: {
                 'trade': 'mobileMining.miningTrade',
                 'staking': 'mobileMining.miningStaking',

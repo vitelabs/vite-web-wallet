@@ -51,7 +51,7 @@ export const latestTx = function ({ symbol }) {
         method: 'GET',
         params: {
             symbol,
-            limit: 100
+            limit: 30
         }
     });
 };
@@ -288,6 +288,18 @@ export function getInviteMiningDetail({
     });
 }
 
+export function getInviteOrderMining({
+    address,
+    offset,
+    limit = 30
+}): Promise<IInviteMiningDetail> {
+    return ViteXAPI.request({
+        method: 'GET',
+        path: 'mining/order/invite',
+        params: { address, offset, limit }
+    });
+}
+
 interface IOrderMiningDetail {
     miningTotal: string;
     total: string;
@@ -335,4 +347,3 @@ export function getMiningSetting() {
         path: 'mining/setting'
     });
 }
-

@@ -101,7 +101,6 @@ import { isNumber, verifyAmount } from 'pcUtils/validations';
 import { execWithValid } from 'pcUtils/execWithValid';
 import statistics from 'utils/statistics';
 
-
 export default {
     components: { viteInput, slider },
     props: {
@@ -618,7 +617,6 @@ export default {
         }),
         prepareOrder() {
             initPwd({
-                // yztood
                 submit: () => {
                     this.newOrder({
                         price: this.price,

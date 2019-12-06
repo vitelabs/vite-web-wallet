@@ -85,9 +85,6 @@ export default {
         },
         isSVip() {
             return this.$store.state.exchangeFee.isSVip;
-        },
-        markerInfo() {
-            return this.$store.state.exchangeFee.marketInfo;
         }
     },
     methods: {

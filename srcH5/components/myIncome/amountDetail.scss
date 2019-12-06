@@ -1,0 +1,26 @@
+.amount-detail {
+    padding: 0 8px 14px;
+    border-top: 1px dashed rgba(211,223,239,1);
+    font-size: 12px;
+    line-height: 16px;
+    .amount-detail-item {
+        margin-top: 14px;
+    }
+    .item-title {
+        color: rgba(62,74,89,0.6);
+        img {
+            display: inline-block;
+            width: 16px;
+            height: 16px;
+            margin-bottom: -3px;
+        }
+        span {
+            float: right;
+        }
+    }
+    .item-dividend {
+        margin-top: 5px;
+        text-align: right;
+        color: rgba(62,74,89,0.45);
+    }
+}
