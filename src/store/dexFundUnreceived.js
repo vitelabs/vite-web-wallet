@@ -14,7 +14,7 @@ const mutations = {
         if (!data) {
             return;
         }
-        state.unreveivedNum = data.totalNum || 0;
+        state.unreveivedNum = data.blockCount || 0;
     },
     dexClearUnreveived(state) {
         state.unreveivedNum = 0;

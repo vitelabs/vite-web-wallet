@@ -1,3 +1,1 @@
-export const statusMixins={
-
-}
+export const statusMixins = {};

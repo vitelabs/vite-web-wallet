@@ -115,9 +115,4 @@ export default {
 @import "./incomeList.scss";
 @import "./vipList.scss";
 @import "./smallStakingList.scss";
-
-// [TODO] Delete keystore
-.keystore-table-item {
-    width: 25%;
-}
 </style>

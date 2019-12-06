@@ -49,7 +49,7 @@
 </template>
 
 <script>
-import { hdAddr, constant } from '@vite/vitejs';
+import { wallet, constant } from '@vite/vitejs';
 import viteInput from 'components/viteInput';
 import { initPwd } from 'pcComponents/password/index.js';
 import BigNumber from 'utils/bigNumber';
@@ -57,7 +57,6 @@ import statistics from 'utils/statistics';
 import sendTx from 'pcUtils/sendTx';
 import { verifyAmount } from 'pcUtils/validations';
 import { execWithValid } from 'pcUtils/execWithValid';
-import { abiList } from 'services/apiServer';
 
 const Vite_Token_Info = constant.Vite_Token_Info;
 const amountTimeout = null;
@@ -115,12 +114,11 @@ export default {
 
             if (!this.toAddr) {
                 this.isValidAddress = true;
-
                 return;
             }
 
             try {
-                this.isValidAddress = hdAddr.isValidHexAddr(this.toAddr);
+                this.isValidAddress = wallet.isValidAddress(this.toAddr);
             } catch (err) {
                 console.warn(err);
                 this.isValidAddress = false;
@@ -182,13 +180,9 @@ export default {
             const amount = BigNumber.toMin(this.amount || 0, Vite_Token_Info.decimals);
 
             sendTx({
-                abi: JSON.stringify(abiList.StakeForQuota.abi),
-                methodName: 'callContract',
+                methodName: 'stakeForQuota',
                 data: {
-                    abi: abiList.StakeForQuota.abi,
-                    toAddress: abiList.StakeForQuota.contractAddr,
-                    params: [this.toAddr],
-                    tokenId: Vite_Token_Info.tokenId,
+                    beneficiaryAddress: this.toAddr,
                     amount
                 },
                 config: {

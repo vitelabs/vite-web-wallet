@@ -8,7 +8,7 @@
     </div>
 </template>
 
-<script>
+<script lang="ts">
 let reachTopTimeout = null;
 
 export default {

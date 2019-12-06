@@ -24,7 +24,7 @@
 </template>
 
 <script>
-import { hdAddr } from '@vite/vitejs';
+import { wallet } from '@vite/vitejs';
 import { getAccountBalance } from 'services/viteServer';
 import loading from 'components/loading.vue';
 import { saveHDAccount } from 'wallet';
@@ -81,11 +81,8 @@ export default {
             this.isLoading = true;
 
             let addrNum;
-            let addrObj;
             try {
-                const res = await this.fetchAddrNum(mnemonic);
-                addrNum = res.addrNum;
-                addrObj = res.addrObj;
+                addrNum = await this.fetchAddrNum(mnemonic);
             } catch (err) {
                 console.warn(err);
                 if (err && err.code === 500005) {
@@ -96,14 +93,15 @@ export default {
                 this.isLoading = false;
             }
 
+            const myWallet = wallet.getWallet(mnemonic);
+            const myAddress = myWallet.deriveAddress(0);
+
             saveHDAccount({
                 name,
                 pass,
-                hdAddrObj: {
-                    addr: addrObj,
-                    id: hdAddr.getId(mnemonic),
-                    entropy: hdAddr.getEntropyFromMnemonic(mnemonic)
-                },
+                id: myWallet.id,
+                entropy: myWallet.entropy,
+                address: myAddress.address,
                 addrNum
             }).then(id => {
                 if (!this.isLoading) {
@@ -125,16 +123,18 @@ export default {
         async fetchAddrNum(mnemonic) {
             const num = 10;
             let addrs;
-
             try {
-                addrs = hdAddr.getAddrsFromMnemonic(mnemonic, 0, num);
+                const myWallet = wallet.getWallet(mnemonic);
+                console.log(myWallet);
+                addrs = myWallet.deriveAddressList(0, num - 1);
             } catch (err) {
+                console.warn(err);
                 throw { code: 500005 };
             }
 
             const requests = [];
             for (let i = 0; i < num; i++) {
-                requests.push(getAccountBalance(addrs[i].hexAddr));
+                requests.push(getAccountBalance(addrs[i].address));
             }
 
             const data = await Promise.all(requests);
@@ -144,17 +144,14 @@ export default {
                 if (!item) {
                     return;
                 }
-                const account = item.balance;
-                const onroad = item.onroad;
-                if ((account && +account.totalNumber) || (onroad && +onroad.totalNumber)) {
+                const balance = item.balance;
+                const unreceived = item.unreceived;
+                if ((+balance.blockCount) || (+unreceived.blockCount)) {
                     index = i;
                 }
             });
 
-            return {
-                addrNum: index + 1,
-                addrObj: addrs[0]
-            };
+            return index + 1;
         }
     }
 };

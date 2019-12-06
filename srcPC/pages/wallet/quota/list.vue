@@ -95,23 +95,23 @@ export default {
 
             const nowList = [];
             pledgeList.forEach(pledge => {
-                const isMaturity = BigNumber.compared(pledge.withdrawHeight, this.currentHeight) <= 0;
+                const isMaturity = BigNumber.compared(pledge.expirationHeight, this.currentHeight) <= 0;
 
                 const pledgeDate = isMaturity
                     ? this.$t('walletQuota.maturity')
-                    : date(pledge.withdrawTime * 1000, this.$i18n.locale);
+                    : date(pledge.expirationTime * 1000, this.$i18n.locale);
 
-                const showAmount = BigNumber.toBasic(pledge.amount || 0, Vite_Token_Info.decimals);
+                const showAmount = BigNumber.toBasic(pledge.stakeAmount || 0, Vite_Token_Info.decimals);
 
                 nowList.push({
-                    agent: pledge.agent,
-                    agentAddress: pledge.agentAddress,
+                    agent: !!pledge.bid,
+                    agentAddress: pledge.delegateAddress,
                     bid: pledge.bid,
-                    beneficialAddr: pledge.beneficialAddr,
-                    withdrawHeight: pledge.withdrawHeight,
-                    amount: pledge.amount,
+                    beneficialAddr: pledge.beneficiary,
+                    withdrawHeight: pledge.expirationHeight,
+                    amount: pledge.stakeAmount,
                     pledgeDate,
-                    showAddr: ellipsisAddr(pledge.beneficialAddr),
+                    showAddr: ellipsisAddr(pledge.beneficiary),
                     showAmount,
                     isMaturity,
                     rawData: pledge
@@ -143,9 +143,9 @@ export default {
             }
 
             if (item.agent) {
-                if (constant.DexFund_Addr === item.agentAddress && +item.bid === 1) {
+                if (constant.DexFund_ContractAddress === item.agentAddress && +item.bid === 1) {
                     this.$toast(this.$t('walletQuota.list.mining'));
-                } else if (constant.DexFund_Addr === item.agentAddress && +item.bid === 2) {
+                } else if (constant.DexFund_ContractAddress === item.agentAddress && +item.bid === 2) {
                     this.$toast(this.$t('walletQuota.list.vip'));
                 } else {
                     this.$toast(this.$t('walletQuota.list.other'));
@@ -176,10 +176,9 @@ export default {
             this.fetchPledgeList(this.currentPage, true).then(data => {
                 data && this.$refs.tableContent && (this.$refs.tableContent.scrollTop = 0);
                 this.startLoopPledgeList();
-            })
-                .catch(() => {
-                    this.startLoopPledgeList();
-                });
+            }).catch(() => {
+                this.startLoopPledgeList();
+            });
         },
 
         startLoopPledgeList() {

@@ -145,7 +145,7 @@ export default {
                 return;
             }
 
-            const methodName = this.isFromWallet ? 'dexFundUserDeposit' : 'dexFundUserWithdraw';
+            const methodName = this.isFromWallet ? 'dexDeposit' : 'dexWithdraw';
             const successMsg = this.isFromWallet
                 ? this.$t('tradeAssets.confirmrecharge.successToast')
                 : this.$t('tradeAssets.confirmwithdraw.successToast');

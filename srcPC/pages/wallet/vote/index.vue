@@ -60,7 +60,7 @@ import { execWithValid } from 'pcUtils/execWithValid';
 import openUrl from 'utils/openUrl';
 import statistics from 'utils/statistics';
 import { getExplorerLink } from 'utils/getLink';
-import { getCurrSBPNodeList } from 'services/viteServer';
+import { getCurrSBPNodeList, getVoteInfo } from 'services/viteServer';
 
 const Vite_Token_Info = constant.Vite_Token_Info;
 
@@ -119,7 +119,7 @@ export default {
         },
         voteHeadList() {
             const headList = [];
-            const keyList = [ 'nodeName', 'nodeStatusText', 'voteNum', 'voteStatusText', 'operateKey' ];
+            const keyList = [ 'blockProducerName', 'nodeStatusText', 'voteNum', 'voteStatusText', 'operateKey' ];
             for (let i = 0; i < this.$t('walletVote.section1.head').length; i++) {
                 headList.push({
                     text: this.$t('walletVote.section1.head')[i],
@@ -133,14 +133,15 @@ export default {
                 const data = Object.assign({}, voteRecord);
 
                 // Update nodestatus from nodelist or voteNum from balance
-                this.nodeList.some(v => v.nodeName === data.nodeName)
+                this.nodeList.some(v => v.nodeName === data.sbpName)
                     ? (data.nodeStatus = 1)
                     : (data.nodeStatus = 2);
 
                 // VoteNotWork first
-                if (this.voteData[0] && this.voteData[0].nodeName === data.nodeName) {
-                    data.nodeStatus = this.voteData[0].nodeStatus;
+                if (this.voteData[0] && this.voteData[0].sbpName === data.sbpName) {
+                    data.nodeStatus = this.voteData[0].status;
                 }
+
                 data.nodeStatus === 2 && (data.voteStatus = 'voteNotWork');
                 data.nodeStatusText = this.$t('walletVote.section1.nodeStatusMap')[data.nodeStatus];
                 data.voteStatusText = this.$t('walletVote.section1.voteStatusMap')[data.voteStatus];
@@ -156,7 +157,7 @@ export default {
                 // Update cache
                 if (this.cache.voteStatus === 'voting'
                     && this.voteData[0]
-                    && this.voteData[0].nodeName === this.cache.nodeName
+                    && this.voteData[0].sbpName === this.cache.sbpName
                 ) {
                     // Voting and voting success
                     this.cleanCache();
@@ -178,7 +179,7 @@ export default {
         },
         nodeHeadList() {
             const headList = [];
-            const keyList = [ 'rank', 'nodeName', 'nodeAddr', 'voteNum', 'operateKey' ];
+            const keyList = [ 'rank', 'nodeName', 'blockProducingAddress', 'voteNum', 'operateKey' ];
             const classList = [ '', 'clickable', 'clickable', '', 'clickable' ];
             for (let i = 0; i < this.$t('walletVote.section2.head').length; i++) {
                 headList.push({
@@ -192,7 +193,7 @@ export default {
         nodeList() {
             return this.nodeData.map(v => {
                 // Tans
-                v.voteNum = BigNumber.toBasic(v.voteNum, Vite_Token_Info.decimals) || 0;
+                v.voteNum = BigNumber.toBasic(v.votes, Vite_Token_Info.decimals) || 0;
                 v.operate = this.$t('walletVote.section2.operateBtn');
                 return v;
             }).filter(v => {
@@ -201,21 +202,18 @@ export default {
                 }
 
                 return new RegExp(this.filterKey.trim(), 'i').test(v.nodeName)
-                        || new RegExp(this.filterKey.trim(), 'i').test(v.nodeAddr);
+                        || new RegExp(this.filterKey.trim(), 'i').test(v.blockProducingAddress);
             });
         },
         nodeNoDataText() {
             return this.filterKey ? this.$t('walletVote.section2.noSearchData') : this.$t('hint.noData');
-        },
-        activeAcc() {
-            return this.$store.state.wallet.activeAcc;
         },
         activeAddr() {
             return this.$store.getters.activeAddr;
         }
     },
     watch: {
-        activeAcc() {
+        activeAddr() {
             this.startVoteData();
         }
     },
@@ -225,17 +223,6 @@ export default {
             this.voteDataTimer = null;
             this.voteDataTimer = new timer(this.updateVoteData, 3 * 1000);
             this.voteDataTimer.start();
-        },
-        clickCell(cell, item) {
-            if (cell === 'nodeName') {
-                this.goToNodeDetail(item.nodeName);
-                return;
-            }
-
-            if (cell === 'nodeAddr') {
-                this.goToDetail(item.nodeAddr);
-                return;
-            }
         },
         cleanCache() {
             this.cache = null;
@@ -247,9 +234,15 @@ export default {
             this.isResisterTipsShow = !this.isResisterTipsShow;
         },
         updateVoteData() {
-            return this.activeAcc.getVoteInfo().then(result => {
-                this.voteData = result ? [result] : [];
-                this.voteData[0] && (this.voteData[0].voteStatus = 'voted');
+            return getVoteInfo(this.activeAddr).then(result => {
+                if (!result) {
+                    this.voteData = [];
+                    return null;
+                }
+
+                result.voteStatus = 'voted';
+                result.sbpName = result.blockProducerName;
+                this.voteData = [result];
                 return this.voteData;
             });
         },
@@ -258,12 +251,24 @@ export default {
                 this.nodeData = result.map(v => {
                     return {
                         ...v,
-                        nodeName: v.name
+                        nodeName: v.sbpName
                     };
                 }) || [];
 
                 return this.nodeData;
             });
+        },
+
+        clickCell(cell, item) {
+            if (cell === 'nodeName') {
+                this.goToNodeDetail(item.nodeName);
+                return;
+            }
+
+            if (cell === 'blockProducingAddress') {
+                this.goToDetail(item.blockProducingAddress);
+                return;
+            }
         },
         goToNodeDetail(nodeName) {
             return openUrl(`${ getExplorerLink(this.$i18n.locale) }SBPDetail/${ nodeName }`);
@@ -276,9 +281,9 @@ export default {
                 return;
             }
             const locale = this.$i18n.locale === 'zh' ? 'zh' : 'en';
-            const activeAccount = this.$store.state.wallet.activeAcc;
-            openUrl(`https://reward.vite.net?language=${ locale }&address=${ activeAccount ? activeAccount.address : '' }`);
+            openUrl(`https://reward.vite.net?language=${ locale }&address=${ this.activeAddr || '' }`);
         },
+
         _cancelVote(v) {
             statistics.event(this.$route.name, 'vote_revoke', this.activeAddr || '');
             this.cancelVote(v);
@@ -290,6 +295,7 @@ export default {
 
             const successCancel = () => {
                 const t = Object.assign({}, v);
+                t.blockProducerName = v.sbpName || v.nodeName;
                 t.isCache = true;
                 // 撤销投票中
                 t.voteStatus = 'canceling';
@@ -302,7 +308,7 @@ export default {
             };
 
             const sendCancel = () => {
-                sendTx({ methodName: 'revokeVoting', data: { tokenId: Vite_Token_Info.tokenId }, config: { pow: true } }).then(successCancel).catch(failCancel);
+                sendTx({ methodName: 'cancelSBPVoting', config: { pow: true } }).then(successCancel).catch(failCancel);
             };
 
             initPwd({
@@ -319,6 +325,7 @@ export default {
         vote: execWithValid(function (v) {
             const successVote = () => {
                 const t = Object.assign({}, v);
+                t.blockProducerName = v.sbpName || v.nodeName;
                 t.isCache = true;
                 // 投票中
                 t.voteStatus = 'voting';
@@ -341,11 +348,8 @@ export default {
 
             const sendVote = () => {
                 sendTx({
-                    methodName: 'voting',
-                    data: {
-                        nodeName: v.name,
-                        tokenId: Vite_Token_Info.tokenId
-                    }
+                    methodName: 'voteForSBP',
+                    data: { sbpName: v.sbpName }
                 }).then(successVote).catch(failVote);
             };
 

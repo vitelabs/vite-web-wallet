@@ -1,16 +1,17 @@
+import { constant } from '@vite/vitejs';
 import bigNumber from 'utils/bigNumber';
 import { timer } from 'utils/asyncFlow';
-import { StatusMap } from 'wallet';
 import { defaultTokenMap } from 'utils/constant';
-import { gateStorage } from 'pcServices/gate';
-import { constant } from '@vite/vitejs';
 import { getTokenIcon } from 'utils/tokenParser';
+import { getAccountBalance } from 'services/viteServer';
+import { gateStorage } from 'pcServices/gate';
 
 let balanceInfoInst = null;
 
 const state = {
     onroad: { balanceInfos: {} },
-    balance: { balanceInfos: {} }
+    balance: { balanceInfos: {} },
+    accountBlockCount: 0
 };
 
 const mutations = {
@@ -18,17 +19,19 @@ const mutations = {
         if (!payload) {
             state.balance = { balanceInfos: {} };
             state.onroad = { balanceInfos: {} };
+            state.accountBlockCount = 0;
             return;
         }
 
+        state.accountBlockCount = payload.balance ? payload.balance.blockCount || 0 : 0;
         state.balance = payload.balance || {};
-        state.balance.balanceInfos = state.balance && state.balance.tokenBalanceInfoMap
-            ? state.balance.tokenBalanceInfoMap
+        state.balance.balanceInfos = state.balance && state.balance.balanceInfoMap
+            ? state.balance.balanceInfoMap
             : {};
 
-        state.onroad = payload.onroad || {};
-        state.onroad.balanceInfos = state.onroad && state.onroad.tokenBalanceInfoMap
-            ? state.onroad.tokenBalanceInfoMap
+        state.onroad = payload.unreceived || {};
+        state.onroad.balanceInfos = state.onroad && state.onroad.balanceInfoMap
+            ? state.onroad.balanceInfoMap
             : {};
     },
     commitClearBalance(state) {
@@ -49,11 +52,7 @@ const actions = {
                 return;
             }
 
-            if (rootState.wallet.status === StatusMap.UNLOCK && !activeAcc.isBifrost) {
-                return commit('commitBalanceInfo', activeAcc.balance);
-            }
-
-            return activeAcc.getBalance().then(data => {
+            return getAccountBalance(activeAcc.address).then(data => {
                 commit('commitBalanceInfo', data);
             });
         }, 1000);
@@ -69,33 +68,33 @@ const getters = {
     balanceInfo(state) {
         // -------- merge balance & onroad
         const balanceInfo = Object.create(null);
-        for (const tokenId in state.balance.balanceInfos) {
-            const item = state.balance.balanceInfos[tokenId];
+        for (const tokenId in state.balance.balanceInfoMap) {
+            const item = state.balance.balanceInfoMap[tokenId];
 
             const tokenInfo = item.tokenInfo;
             const decimals = tokenInfo.decimals;
-            const balance = bigNumber.toBasic(item.totalAmount, decimals);
+            const balance = bigNumber.toBasic(item.balance, decimals);
 
             balanceInfo[tokenId] = {
                 ...tokenInfo,
                 balance,
-                transNum: item.number,
-                totalAmount: item.totalAmount
+                transNum: item.transactionCount,
+                totalAmount: item.balance
             };
         }
 
-        for (const tokenId in state.onroad.balanceInfos) {
-            const item = state.onroad.balanceInfos[tokenId];
+        for (const tokenId in state.onroad.balanceInfoMap) {
+            const item = state.onroad.balanceInfoMap[tokenId];
             const tokenInfo = item.tokenInfo;
             const decimals = tokenInfo.decimals;
-            const balance = bigNumber.toBasic(item.totalAmount, decimals);
+            const balance = bigNumber.toBasic(item.balance, decimals);
 
             balanceInfo[tokenId] = balanceInfo[tokenId] || {};
             balanceInfo[tokenId].tokenId = balanceInfo[tokenId].tokenId || tokenInfo.tokenId;
             balanceInfo[tokenId].fundFloat = balance;
             balanceInfo[tokenId].decimals = balanceInfo[tokenId].decimals || tokenInfo.decimals;
             balanceInfo[tokenId].tokenSymbol = balanceInfo[tokenId].tokenSymbol || tokenInfo.tokenSymbol;
-            balanceInfo[tokenId].onroadNum = item.number;
+            balanceInfo[tokenId].onroadNum = item.transactionCount;
         }
         return balanceInfo;
     },
