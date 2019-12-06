@@ -8,10 +8,10 @@ import ethIcon from 'assets/imgs/eth.svg';
 import usdIcon from 'assets/imgs/usd.svg';
 import btcIcon from 'assets/imgs/BTC.svg';
 
-import h5ViteIcon from 'h5Assets/imgs/vite.png';
-import h5EthIcon from 'h5Assets/imgs/eth.png';
-import h5UsdIcon from 'h5Assets/imgs/usd.png';
-import h5BtcIcon from 'h5Assets/imgs/btc.png';
+import h5ViteIcon from 'assets/imgs/trade/vite.png';
+import h5EthIcon from 'assets/imgs/trade/eth.png';
+import h5UsdIcon from 'assets/imgs/trade/usd.png';
+import h5BtcIcon from 'assets/imgs/trade/btc.png';
 
 const Vite_Token_Info = constant.Vite_Token_Info;
 const VX_Decimals = 18;

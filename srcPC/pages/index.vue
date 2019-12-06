@@ -57,7 +57,7 @@ export default {
         },
         link() {
             return this.$i18n.locale === 'zh'
-                ? 'https://www.binance.com/cn/vote'
+                ? 'https://www.binancezh.com/cn/vote'
                 : 'https://www.binance.com/en/vote';
         }
     },
