@@ -69,11 +69,8 @@ const mixin = {
             return this.RTxt || this.LTxt || this.STxt;
         },
         s() {
-            const theme = this.$store.state.env.theme || 0;
-            return this[`theme${ theme }`];
-        },
-        theme0() {
-            return {
+            const theme = this[`theme${ this.$store.state.env.theme || 0 }`];
+            const baseTheme = {
                 container: {
                     'background': this.ShowMask ? 'rgba(0, 0, 0, 0.4)' : '--',
                     position: 'fixed',
@@ -92,18 +89,17 @@ const mixin = {
                     'max-height': '85%',
                     display: 'flex',
                     'flex-direction': 'column',
-                    background: '#ffffff',
-                    'box-shadow': '0 2px 48px 1px rgba(176, 192, 237, 0.42)',
-                    'border-radius': '2px'
+                    'border-radius': '2px',
+                    ...theme.wrapper
                 },
                 title: {
                     'font-size': '14px',
-                    background: 'rgba(38,142,255,1)',
                     height: '50px',
                     'line-height': '50px',
                     'padding': '0 30px',
+                    'font-family': 'PingFangSC-Semibold, arial, sans-serif',
                     color: '#ffffff',
-                    'font-family': 'PingFangSC-Semibold, arial, sans-serif'
+                    ...theme.title
                 },
                 close: {
                     cursor: 'pointer',
@@ -127,8 +123,8 @@ const mixin = {
                     padding: '30px',
                     overflow: 'auto',
                     'font-size': '14px',
-                    color: 'rgba(29,32,36,1)',
-                    'line-height': '18px'
+                    'line-height': '18px',
+                    ...theme.body
                 },
                 btnGroup: {
                     'font-family': 'PingFangSC-Semibold, arial, sans-serif',
@@ -158,102 +154,27 @@ const mixin = {
                     color: '#007aff',
                     'margin-right': '20px'
                 },
-                unUse: {
-                    background: '#efefef',
-                    color: '#666'
-                }
+                unUse: { color: '#fff' }
+            };
+            return baseTheme;
+        },
+        theme0() {
+            return {
+                wrapper: {
+                    background: '#ffffff',
+                    'box-shadow': '0 2px 48px 1px rgba(176, 192, 237, 0.42)'
+                },
+                title: { background: '#4B74FF' },
+                body: { color: 'rgba(29,32,36,1)' },
+                unUse: { background: 'rgba(191,191,191,1)' }
             };
         },
         theme1() {
             return {
-                container: {
-                    'background': this.ShowMask ? 'rgba(0, 0, 0, 0.4)' : '--',
-                    position: 'fixed',
-                    top: 0,
-                    bottom: 0,
-                    right: 0,
-                    left: 0,
-                    overflow: 'auto',
-                    display: 'flex',
-                    'justify-content': 'center',
-                    'align-items': 'center',
-                    'z-index': 100
-                },
-                wrapper: {
-                    width: widthMap[this.Width],
-                    'max-height': '85%',
-                    display: 'flex',
-                    'flex-direction': 'column',
-                    background: '#ffffff',
-                    'box-shadow': '0 2px 48px 1px rgba(176, 192, 237, 0.42)',
-                    'border-radius': '2px'
-                },
-                title: {
-                    'font-size': '14px',
-                    background: 'rgba(38,142,255,1)',
-                    height: '50px',
-                    'line-height': '50px',
-                    'padding': '0 30px',
-                    color: '#ffffff',
-                    'font-family': 'PingFangSC-Semibold, arial, sans-serif'
-                },
-                close: {
-                    cursor: 'pointer',
-                    'box-sizing': 'border-box',
-                    display: 'block',
-                    float: 'right',
-                    padding: '25px 0',
-                    width: '20px',
-                    height: '20px',
-                    background: `url(${ closeIcon })`,
-                    'background-repeat': 'no-repeat',
-                    'background-position': 'center',
-                    'background-size': '20px 20px'
-                },
-                body: {
-                    display: 'flex',
-                    'flex-direction': 'column',
-                    flex: 1,
-                    position: 'relative',
-                    'box-sizing': 'border-box',
-                    padding: '30px',
-                    overflow: 'auto',
-                    'font-size': '14px',
-                    color: 'rgba(29,32,36,1)',
-                    'line-height': '18px'
-                },
-                btnGroup: {
-                    'font-family': 'PingFangSC-Semibold, arial, sans-serif',
-                    padding: '0 30px',
-                    display: 'flex',
-                    'min-height': '40px',
-                    'height': '40px',
-                    'box-sizing': 'border-box',
-                    'justify-content': 'space-between',
-                    'margin-bottom': '30px',
-                    'font-size': '14px'
-                },
-                lBtn: { 'margin-right': '20px' },
-                btn: {
-                    cursor: 'pointer',
-                    'flex-grow': 1,
-                    'white-space': 'nowrap',
-                    color: '#ffffff',
-                    background: '#007AFF',
-                    'display': 'flex',
-                    'align-items': 'center',
-                    'justify-content': 'center'
-                },
-                left: {
-                    border: '1px solid rgba(0,122,255,1)',
-                    'border-radius': '2px',
-                    color: '#007aff',
-                    'margin-right': '20px'
-                },
-                unUse: {
-                    background: '#efefef',
-                    color: '#666'
-                }
+                wrapper: { background: '#151C32' },
+                title: { background: '#0F162D' },
+                body: { color: '#fff' },
+                unUse: { background: '#545F75' }
             };
         }
     },
