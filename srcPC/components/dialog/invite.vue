@@ -20,7 +20,7 @@ block content
                     .content {{(inviteInfo&&inviteInfo.miningTotal)?formatNum(inviteInfo.miningTotal):0}}
     div.__row(v-else)
         .__row_t {{ $t('assets.invite.cost') }}
-            .__err(v-if="this.avaliableExAmount && Number(this.avaliableExAmount) >= 1000") {{$t('assets.invite.avaliable')}} {{`${avaliableExAmount||0}VITE`}}
+            .__row_hint(v-if="this.avaliableExAmount && Number(this.avaliableExAmount) >= 1000") {{$t('assets.invite.avaliable')}} {{`${avaliableExAmount||0}VITE`}}
             .__err(v-else) {{$t('assets.invite.notEnough')}}
         .__input_row.__unuse_input 1000 VITE
     .__row.__row_t {{$t('assets.invite.inviteRule')}}

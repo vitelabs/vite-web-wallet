@@ -2,35 +2,32 @@
 extends /components/dialog/base.pug
 block head
     .head
-        .charge-tips
+        .__hint.no_top
             i18n(path='tokenCard.charge.tips.0' tag="span")
-                span.strong(place="tokenSymbol") {{getTokenSymbol(token)}}
-            .dot
-        .charge-tips
+                span.strong(place="tokenSymbol") {{ getTokenSymbol(token) }}
+        .__hint
             i18n(path='tokenCard.charge.tips.1' tag="span")
-                span.strong(place="tokenSymbol") {{getTokenSymbol(token)}}
-                span.strong(place="min") {{minimumDepositAmount}}
-            .dot
-        .charge-tips
+                span.strong(place="tokenSymbol") {{ getTokenSymbol(token) }}
+                span.strong(place="min") {{ minimumDepositAmount }}
+        .__hint
             i18n(path='tokenCard.charge.tips.2' tag="span")
-                span.strong(place="confirmationCount") {{confirmationCount}}
-            .dot
+                span.strong(place="confirmationCount") {{ confirmationCount }}
 block content
-    .block__title.no_top
-        span {{$t('tokenCard.charge.addressTitle')}}
-        img.title_icon.copy.__pointer(v-show="!isLoading" src="~assets/imgs/copy_default.svg" @click="copy")
+    .__row
+        span.__row_t {{$t('tokenCard.charge.addressTitle')}}
+        img.copy.__pointer(v-show="!isLoading" src="~assets/imgs/copy_default.svg" @click="copy")
     div.ex-center-loading(v-show="isLoading")
         loading(loadingType="dot")
     div(v-show="!isLoading")
-        .block__content(:class="{err:addrErr}") {{addrErr||address}}
+        .__input_row.__unuse_input.top {{ addrErr || address }}
         .qrcode-container
             .qrcode-container__title {{$t('tokenCard.charge.codeTips',{tokenSymbol:getTokenSymbol(token)})}}
             qrcode(:text="addressQrcode" :options="qrOptions" class="qrcode-container__content")
-        .block__title(v-if="!!labelName&&!!labelValue")
-            span {{labelName}}
-                span.red {{$t('tokenCard.charge.labelTips',{labelName})}}
-            img.title_icon.copy.__pointer(src="~assets/imgs/copy_default.svg" @click="copyLabel")
-        .block__content(v-if="!!labelName") {{labelValue}}
+        .__row(v-if="!!labelName&&!!labelValue")
+            span.__row_t {{labelName}}
+                span.red {{ $t('tokenCard.charge.labelTips',{labelName}) }}
+            img.copy.__pointer(src="~assets/imgs/copy_default.svg" @click="copyLabel")
+        .__input_row.__unuse_input.top(v-if="!!labelName") {{ labelValue }}
         .qrcode-container(v-if="!!labelName")
             .qrcode-container__title {{$t('tokenCard.charge.labelCodeTips',{labelName})}}
             qrcode(:text="labelValue" :options="qrOptions" class="qrcode-container__content")
@@ -116,29 +113,31 @@ export default {
 
 <style lang="scss" scoped>
 @import "~assets/scss/vars.scss";
+@import "pcComponents/confirm/confirmRow.scss";
 @import "./dialog.scss";
 @include block;
 
+.strong{
+    color: $blue-color-1;
+    @include font-family-bold();
+}
+.no_top {
+    margin-top: 0;
+}
+.copy {
+    float: right;
+}
 .ex-center-loading {
     text-align: center;
 }
-.block__title {
-    &.no_top {
-        margin-top: 0;
-    }
-    .title_icon {
-        width: 18px;
-        height: 18px;
-        float: right;
-    }
-    .red {
-        color: #ff2929;
-    }
+.top {
+    margin-top: 12px;
 }
-.block__content {
-    background: rgba(243, 246, 249, 1);
-    color: #5e6875;
+.red {
+    color: $red-color;
+    margin-left: 4px;
 }
+
 .qrcode-container {
     background: rgba(243, 246, 249, 1);
     border: 1px solid rgba(212, 222, 231, 1);
@@ -155,41 +154,20 @@ export default {
     }
 }
 .head {
-    border-bottom: 1px solid rgba(212, 222, 231, 1);
-    box-sizing: border-box;
     padding: 20px 30px;
-    display: flex;
-    flex-direction: column;
-    background: rgba(0, 122, 255, 0.05);
-    @include font-family-normal();
-    line-height: 18px;
-    .charge-tips {
-        @include font-family-normal();
-        line-height: 16px;
-        font-size: 12px;
-        color: rgba(94, 104, 117, 1);
-        padding-left: 13px;
-        margin-top: 10px;
-        position: relative;
-        width: 100%;
-        margin-top: 20px;
-        &:first-child{
-            margin-top: 0px;
-        }
-        .strong{
-            color: #007aff;
-            @include font-family-bold();
-        }
-        .dot {
-            width: 4px;
-            height: 4px;
-            background: rgba(0, 122, 255, 1);
-            border-radius: 100%;
-            position: absolute;
-            left: 0;
-            top: 4px;
-        }
+    box-sizing: border-box;
+
+    [data-theme="0"] & {
+        border-bottom: 1px solid rgba(212, 222, 231, 1);
+        background: rgba(0, 122, 255, 0.05);
     }
+    [data-theme="1"] & {
+        background: $black-color-3;
+    }
+    // display: flex;
+    // flex-direction: column;
+    // @include font-family-normal();
+    // line-height: 18px;
 }
 </style>
 
