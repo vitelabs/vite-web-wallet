@@ -2,28 +2,7 @@
     <div class="list-wrapper">
         <div class="__second-title">{{ $t('walletQuota.list.title') }}</div>
         <div class="total">{{ $t('walletQuota.list.total', { amount: totalAmount }) }}</div>
-        <wallet-table class="wallet-quota-table" :headList="[{
-            class: 'addr __pointer',
-            text: $t('walletQuota.beneficialAddr'),
-            cell: 'addr'
-        },{
-            class: 'amount',
-            text: $t('walletQuota.list.amount'),
-            cell: 'showAmount'
-        },{
-            class: 'height',
-            text: $t('withdrawHeight'),
-            cell: 'withdrawHeight'
-        },{
-            class: 'time',
-            text: $t('walletQuota.list.withdrawTime'),
-            cell: 'pledgeDate'
-        },{
-            class: 'operate __pointer',
-            text: $t('action'),
-            cell: 'cancel'
-        }]" :contentList="pledgeList" :clickCell="clickCell">
-
+        <wallet-table class="wallet-quota-table" :headList="headList" :contentList="pledgeList" :clickCell="clickCell">
             <div v-for="(item, i) in pledgeList" :key="i"
                  :slot="`${i}addrBefore`">
                 <span class="beneficial-addr">{{ item.showAddr }}</span>
@@ -40,12 +19,13 @@
             <pagination slot="tableBottom" class="__tb_pagination" :currentPage="currentPage + 1"
                         :totalPage="totalPage" :toPage="toPage"></pagination>
         </wallet-table>
+
+        <cancel-quota-stake ref="cancelQuotaStake"></cancel-quota-stake>
     </div>
 </template>
 
 <script>
 import { constant } from '@vite/vitejs';
-import { StatusMap } from 'wallet';
 import pagination from 'components/pagination.vue';
 import walletTable from 'components/table/index.vue';
 import date from 'utils/date.js';
@@ -56,22 +36,13 @@ import statistics from 'utils/statistics';
 import { getExplorerLink } from 'utils/getLink';
 import ellipsisAddr from 'utils/ellipsisAddr.js';
 import { execWithValid } from 'pcUtils/execWithValid';
+import cancelQuotaStake from './cancelQuotaStake.vue';
 
 const Vite_Token_Info = constant.Vite_Token_Info;
 let pledgeListInst;
 
 export default {
-    components: { pagination, walletTable },
-    props: {
-        showConfirm: {
-            type: Function,
-            default: () => {}
-        },
-        sendPledgeTx: {
-            type: Function,
-            default: () => {}
-        }
-    },
+    components: { pagination, walletTable, cancelQuotaStake },
     mounted() {
         this.$store.dispatch('startLoopHeight');
         this.startLoopPledgeList();
@@ -81,16 +52,9 @@ export default {
         this.stopLoopPledgeList();
     },
     data() {
-        return {
-            currentPage: 0,
-            activeItem: null,
-            loading: false
-        };
+        return { currentPage: 0 };
     },
     computed: {
-        isLogin() {
-            return this.$store.state.wallet.status === StatusMap.UNLOCK;
-        },
         address() {
             return this.$store.getters.activeAddr;
         },
@@ -102,6 +66,29 @@ export default {
         },
         currentHeight() {
             return this.$store.state.ledger.currentHeight || 0;
+        },
+        headList() {
+            return [ {
+                class: 'addr __pointer',
+                text: this.$t('walletQuota.beneficialAddr'),
+                cell: 'addr'
+            }, {
+                class: 'amount',
+                text: this.$t('walletQuota.list.amount'),
+                cell: 'showAmount'
+            }, {
+                class: 'height',
+                text: this.$t('withdrawHeight'),
+                cell: 'withdrawHeight'
+            }, {
+                class: 'time',
+                text: this.$t('walletQuota.list.withdrawTime'),
+                cell: 'pledgeDate'
+            }, {
+                class: 'operate __pointer',
+                text: this.$t('action'),
+                cell: 'cancel'
+            } ];
         },
         pledgeList() {
             const pledgeList = this.$store.state.pledge.pledgeList;
@@ -126,7 +113,8 @@ export default {
                     pledgeDate,
                     showAddr: ellipsisAddr(pledge.beneficialAddr),
                     showAmount,
-                    isMaturity
+                    isMaturity,
+                    rawData: pledge
                 });
             });
 
@@ -173,24 +161,8 @@ export default {
             openUrl(`${ getExplorerLink(this.$i18n.locale) }account/${ addr }`);
         },
         showCancel: execWithValid(function (item) {
-            if (this.loading) {
-                return;
-            }
-            this.activeItem = item;
-            this.showConfirm('cancel', item.amount);
+            this.$refs.cancelQuotaStake.show(item);
         }),
-
-        _sendCancelPledgeTx(amount) {
-            this.sendPledgeTx({
-                toAddress: this.activeItem.beneficialAddr,
-                amount
-            }, 'withdrawalOfQuota', (result, err) => {
-                this.loading = false;
-                this.activeItem = null;
-                result && this.$toast(this.$t('hint.request', { name: this.$t('walletQuota.withdrawalStaking') }));
-                !result && err && this.$toast(this.$t('walletQuota.canclePledgeFail'), err);
-            });
-        },
 
         toPage(pageNumber) {
             const pageIndex = pageNumber - 1;

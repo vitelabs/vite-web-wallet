@@ -1,17 +1,5 @@
 <template>
-    <div class="trade-mining-section">
-        <my-income :miningTotal="`${inviteTotal}`"
-                   :title="$t('mobileMining.inviteTotalIncome', {token: 'VX'})">
-            <div class="operation">
-                <div class="item">
-                    <div class="item-title">
-                        <img src="~h5Assets/imgs/invite.svg" />{{ $t("tradeMining.inviteCount") }}
-                    </div>
-                    <div class="bold">{{ inviter ? inviter.inviteCount || 0 : 0 }}</div>
-                </div>
-            </div>
-        </my-income>
-        <list-title></list-title>
+    <div>
         <list-view v-show="content && content.length" class="list-wrapper-view" :reachEnd="reachEnd">
             <mining-table slot="content" :headList="inviteHeadList" :contentList="content"></mining-table>
         </list-view>
@@ -20,23 +8,20 @@
 </template>
 
 <script>
-import { getInviteMiningDetail, getInviteInfo } from 'services/trade';
-import myIncome from './myIncome';
+import { getInviteMiningDetail } from 'services/trade';
 import bigNumber from 'utils/bigNumber';
 import date from 'utils/date';
-import miningTable from './table';
 import listView from 'h5Components/listView.vue';
-import listTitle from './listTitle.vue';
 import noData from 'h5Components/noData';
+import miningTable from '../table';
 
 export default {
-    components: { noData, miningTable, myIncome, listView, listTitle },
+    components: { noData, miningTable, listView },
     data() {
         return {
             inviter: null,
             isInit: false,
             inviteCurrentPage: 0,
-            inviteTotal: 0,
             inviteListTotal: 0,
             inviteList: [],
             inviteHeadList: [
@@ -51,28 +36,13 @@ export default {
     },
     beforeMount() {
         this.fetchMiningInvite();
-        this.getInviteInfo();
-    },
-    watch: {
-        address() {
-            this.inviteListTotal = 0;
-            this.inviteCurrentPage = 0;
-            this.inviteTotal = 0;
-            this.inviteList = [];
-            this.isInit = false;
-            this.inviter = null;
-            this.fetchMiningInvite();
-            this.getInviteInfo();
-        }
     },
     computed: {
         content() {
             return this.inviteList.map(item => {
                 return {
                     date: date(item.date * 1000, this.$i18n.locale),
-                    fee: `${ bigNumber.formatNum(item.feeAmount || 0, 8) } ${
-                        item.miningToken
-                    }`,
+                    fee: `${ bigNumber.formatNum(item.feeAmount || 0, 8) } ${ item.miningToken }`,
                     amount: {
                         amount: `${ bigNumber.formatNum(item.miningAmount || 0, 8) }`,
                         token: 'VX'
@@ -102,21 +72,19 @@ export default {
                     return;
                 }
 
-                this.inviteListTotal = data.total || 0;
-                this.inviteTotal = data.miningTotal
+                this.$emit('setMiningTotal', data.allMiningTotal
+                    ? bigNumber.formatNum(data.allMiningTotal, 8)
+                    : 0);
+
+                this.$emit('setMiningTradeTotal', data.miningTotal
                     ? bigNumber.formatNum(data.miningTotal, 8)
-                    : 0;
+                    : 0);
+
+                this.inviteListTotal = data.total || 0;
                 this.inviteCurrentPage = pageNumber || 0;
                 const list = data.miningList || [];
                 this.inviteList = [].concat(this.inviteList, list);
                 this.isInit = true;
-            }).catch(err => {
-                console.warn(err);
-            });
-        },
-        getInviteInfo() {
-            getInviteInfo(this.address).then(data => {
-                this.inviter = data || null;
             }).catch(err => {
                 console.warn(err);
             });
@@ -126,34 +94,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "~h5Assets/scss/vars.scss";
-
 .list-wrapper-view {
     max-height: 450px;
-}
-.operation {
-    display: flex;
-    align-items: center;
-    flex-direction: row;
-    width: 100%;
-    border-top: 1px dashed rgba(211,223,239,1);
-}
-.item {
-    flex: 1;
-    &:first-child {
-        margin-right: 23px;
-    }
-    .item-title {
-        margin-bottom: 5px;
-        img {
-            width: 16px;
-            height: 16px;
-            margin-bottom: -4px;
-            margin-right: 2px;
-        }
-    }
-    .bold {
-        @include font-bold();
-    }
 }
 </style>

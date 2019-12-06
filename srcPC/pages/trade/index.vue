@@ -14,6 +14,8 @@ import pageLayout from 'pcComponents/pageLayout/index';
 export default {
     components: { pageLayout },
     mounted() {
+        this.$store.dispatch('exFetchVip');
+        this.$store.dispatch('exFetchSVip');
         this.$store.dispatch('startLoopExchangeRate');
     }
 };

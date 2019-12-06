@@ -24,9 +24,6 @@ export default {
             filters: {}
         };
     },
-    mounted() {
-        this.update();
-    },
     computed: {
         defaultAddr() {
             return this.$store.getters.activeAddr;

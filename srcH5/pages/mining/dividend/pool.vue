@@ -1,30 +1,29 @@
 <template>
-    <div class="pool-detail">
-        <div class="item">
-            <div class="title">{{ $t('mobileDividend.poolTitle', { token: 'BTC' }) }}</div>
-            <div class="btc-amount">{{ allBtc }}</div>
-            <div class="real-amount">{{ allPrice }}</div>
-        </div>
-
-        <div class="item pool-item">
-            <div class="token-wrapper" v-for="tokenType in typeList" :key="tokenType.name">
-                <div class="token-name">
-                    <img class="icon" :src="tokenType.icon" />
-                    <span class="token-name">{{ tokenType.name }}</span>
+    <my-income class="pool-my-income" :total="`${allBtc}`" :actualTotal="`${allPrice}`"
+               :isShowMiningLink="false" :isShowActualTotal="true"
+               :title="$t('mobileDividend.poolTitle', { token: 'BTC' })">
+        <div class="head-detail">
+            <template v-for="tokenType in typeList">
+                <div class="item" v-if="tokenType.name !== 'VITE'" :key="tokenType.name">
+                    <div class="item-title">
+                        <img :src="tokenType.h5Icon" />{{ tokenType.name }}
+                    </div>
+                    <div class="bold">
+                        {{ pool[tokenType.name] ? formatNum(pool[tokenType.name].amount, tokenType.name) : '--' }}
+                    </div>
                 </div>
-                <div class="token-amount">
-                    {{ pool[tokenType.name] ? formatNum(pool[tokenType.name].amount, tokenType.name) : '--' }}
-                </div>
-            </div>
+            </template>
         </div>
-    </div>
+    </my-income>
 </template>
 
 <script>
+import myIncome from 'h5Components/myIncome/index';
 import bigNumber from 'utils/bigNumber';
 import { getCurrDividendPools } from 'services/viteServer';
 
 export default {
+    components: { myIncome },
     beforeMount() {
         this.fetchPool();
     },
@@ -141,63 +140,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "~h5Assets/scss/vars.scss";
+@import "~h5Components/myIncome/headDetail.scss";
 
-.pool-detail {
-    font-size: 12px;
-    @include font-normal();
-    color: rgba(62,74,89,0.6);
-    border-radius: 2px;
-    background: url('~h5Assets/imgs/assets.svg') no-repeat;
-    background-size: cover;
-    .title {
-        line-height: 26px;
-    }
-    .btc-amount {
-        font-size: 24px;
-        @include font-bold();
-        color: rgba(36,39,43,1);
-        line-height: 30px;
-        margin-bottom: 6px;
-    }
-    .real-amount {
-        font-size: 14px;
-        color: rgba(36,39,43,1);
-        line-height: 18px;
-    }
-}
-
-.item {
-    padding: 14px;
-    &:first-child {
-        border-bottom: 1px dashed rgba(211,223,239,1);
-    }
-}
-
-.pool-item {
-    padding-bottom: 0;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    font-size: 12px;
-    line-height: 16px;
-    color: rgba(62, 74, 89, 0.6);
-    .token-wrapper {
-        margin-bottom: 14px;
-        width: 50%;
-    }
-    .token-name {
-        margin-bottom: 5px;
-        .icon {
-            display: inline-block;
-            width: 16px;
-            height: 16px;
-            margin-right: 2px;
-            margin-bottom: -3px;
-        }
-    }
-    .token-amount {
-        @include font-bold();
-    }
+.pool-my-income {
+    margin-top: 0px;
 }
 </style>

@@ -1,12 +1,12 @@
 <template>
     <div class="trade-mining-section">
-        <myIncome class="staking-income-wrapper" :miningTotal="`${miningTotal}`"
+        <myIncome class="staking-income-wrapper" :total="`${miningTotal}`"
                   :isShowHelp="true" :helpTips="$t('tradeMining.help')"
                   :title="$t('mobileMining.tradeTotalIncome', {token: 'VX'})">
-            <div class="my-dividend">
-                <div class="dividend-item" v-for="item in typeList" :key="item.name">
+            <div class="amount-detail">
+                <div class="amount-detail-item" v-for="item in typeList" :key="item.name">
                     <div class="item-title">
-                        <img :src="item.icon" /> {{ $t('tradeMining.fee') }}
+                        <img :src="item.h5Icon" /> {{ $t('tradeMining.fee') }}
                         <span>
                             {{ expectedDividends && expectedDividends[item.name] ? expectedDividends[item.name].fee : 0 }}
                             {{ item.name }}
@@ -35,7 +35,7 @@ import listView from 'h5Components/listView.vue';
 import { miningTrade } from 'services/trade';
 import date from 'utils/date';
 import bigNumber from 'utils/bigNumber';
-import myIncome from './myIncome';
+import myIncome from 'h5Components/myIncome/index';
 import miningTable from './table';
 import listTitle from './listTitle.vue';
 
@@ -144,33 +144,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import "~h5Components/myIncome/amountDetail.scss";
+
 .list-wrapper-view {
     max-height: 450px;
-}
-.my-dividend {
-    padding: 0 8px 14px;
-    border-top: 1px dashed rgba(211,223,239,1);
-    font-size: 12px;
-    line-height: 16px;
-    .dividend-item {
-        margin-top: 16px;
-    }
-    .item-title {
-        color: rgba(62,74,89,0.6);
-        margin-bottom: 5px;
-        img {
-            display: inline-block;
-            width: 16px;
-            height: 16px;
-            margin-bottom: -3px;
-        }
-        span {
-            float: right;
-        }
-    }
-    .item-dividend {
-        text-align: right;
-        color: rgba(62,74,89,0.45);
-    }
 }
 </style>

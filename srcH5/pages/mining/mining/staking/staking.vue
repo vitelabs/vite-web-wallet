@@ -1,10 +1,16 @@
 <template>
     <div class="trade-mining-section">
-        <my-income class="staking-income-wrapper" :miningTotal="`${miningTotal}`"
+        <my-income class="staking-income-wrapper" :total="`${miningTotal}`"
                    :title="$t('mobileMining.stakingTotalIncome', {token: 'VX'})">
-            <is-staking></is-staking>
+            <is-staking :addStaking="addStaking"></is-staking>
         </my-income>
+
+        <staking-detail v-if="stakingObj && +stakingObj.totalStakeCount" :addStaking="addStaking"></staking-detail>
+
+        <stakeForMining ref="stakeForMining"></stakeForMining>
+
         <list-title></list-title>
+
         <list-view v-show="content && content.length" class="list-wrapper-view" :reachEnd="reachEnd">
             <mining-table slot="content" :headList="pledgeHeadList" :contentList="content"></mining-table>
         </list-view>
@@ -13,18 +19,26 @@
 </template>
 
 <script>
-import { miningPledge } from 'services/trade';
-import bigNumber from 'utils/bigNumber';
 import date from 'utils/date';
-import myIncome from '../myIncome';
-import isStaking from './isStaking';
-import miningTable from '../table';
-import listView from 'h5Components/listView.vue';
-import listTitle from '../listTitle.vue';
+import { timer } from 'utils/asyncFlow';
+import bigNumber from 'utils/bigNumber';
+import statistics from 'utils/statistics';
+import { miningPledge } from 'services/trade';
+
 import noData from 'h5Components/noData';
+import listView from 'h5Components/listView.vue';
+import myIncome from 'h5Components/myIncome/index';
+
+import miningTable from '../table';
+import isStaking from './isStaking';
+import listTitle from '../listTitle';
+import stakingDetail from './stakingDetail';
+import stakeForMining from './stakeForMining';
+
+let stakingInfoTimer = null;
 
 export default {
-    components: { noData, myIncome, isStaking, miningTable, listView, listTitle },
+    components: { noData, myIncome, isStaking, miningTable, listView, listTitle, stakingDetail, stakeForMining },
     data() {
         return {
             isInit: false,
@@ -44,6 +58,10 @@ export default {
     },
     beforeMount() {
         this.fetchMiningStake();
+        this.loopStakingInfo();
+    },
+    destroyed() {
+        this.stopStakingInfo();
     },
     watch: {
         address() {
@@ -69,9 +87,27 @@ export default {
         },
         address() {
             return this.$store.getters.activeAddr;
+        },
+        stakingObj() {
+            return this.$store.state.exchangeMine.userPledgeInfo;
         }
     },
     methods: {
+        addStaking() {
+            statistics.event(`H5${ this.$route.name }`, 'addQuota', this.address || '');
+            this.$refs.stakeForMining.show();
+        },
+        stopStakingInfo() {
+            stakingInfoTimer && stakingInfoTimer.stop();
+            stakingInfoTimer = null;
+        },
+        loopStakingInfo() {
+            this.stopStakingInfo();
+            this.$store.dispatch('getAgentMiningPledgeInfo');
+            stakingInfoTimer = new timer(() => this.$store.dispatch('getAgentMiningPledgeInfo'), 2000);
+            stakingInfoTimer.start();
+        },
+
         reachEnd() {
             this.fetchMiningStake(this.stakeCurrentPage + 1);
         },

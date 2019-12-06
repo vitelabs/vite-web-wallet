@@ -62,6 +62,7 @@ import FlatPickr from 'vue-flatpickr-component';
 import { tokenMap } from 'services/trade';
 import 'flatpickr/dist/flatpickr.css';
 import statistics from 'utils/statistics';
+import { VITE_TOKENID } from 'utils/constant';
 
 export default {
     components: { FlatPickr },
@@ -73,6 +74,7 @@ export default {
     },
     data() {
         return {
+            isInitFtoken: false,
             fromDate: '',
             toDate: '',
             tradeType: '',
@@ -82,7 +84,7 @@ export default {
             ftokenMap: []
         };
     },
-    mounted() {
+    beforeMount() {
         this.ttoken = this.marketMap[0].symbol;
     },
     computed: {
@@ -95,7 +97,19 @@ export default {
     },
     watch: {
         ttoken() {
-            tokenMap({ symbol: this.ttoken }).then(data => (this.ftokenMap = data));
+            this.getFtoken();
+        },
+        ftokenMap() {
+            if (this.isInitFtoken || this.ftoken || !this.ftokenMap || !this.ftokenMap.length) {
+                return;
+            }
+
+            const filterToken = this.ftokenMap.filter(t => t.tokenId === VITE_TOKENID);
+            this.ftoken = filterToken.length > 0 ? 'VITE' : this.ftokenMap[0].symbol;
+            this.isInitFtoken = true;
+        },
+        isInitFtoken() {
+            this.submit();
         }
     },
     methods: {
@@ -128,6 +142,23 @@ export default {
                 tradeTokenSymbol: this.ftoken,
                 quoteTokenSymbol: this.ttoken,
                 status: this.status
+            });
+        },
+        getFtoken() {
+            if (!this.ttoken) {
+                return;
+            }
+
+            const symbol = this.ttoken;
+            this.ftokenMap = [];
+
+            tokenMap({ symbol }).then(data => {
+                if (this.ttoken !== symbol) {
+                    return;
+                }
+                this.ftokenMap = data;
+            }).catch(err => {
+                console.warn(err);
             });
         }
     }

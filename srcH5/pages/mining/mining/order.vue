@@ -1,13 +1,11 @@
 <template>
     <div class="trade-mining-section">
-        <my-income :miningTotal="`${miningTotal}`"
+        <my-income :total="`${miningTotal}`"
                    :title="$t('mobileMining.orderTotalIncome', {token: 'VX'})">
-            <div class="my-dividend">
-                <div class="dividend-item" v-for="item in typeList" :key="item.name">
-                    <span class="item-title">
-                        <img :src="item.icon" /> {{ $t('tradeMining.dividends')}}
-                    </span>
-                    <span class="item-dividend">{{ estimateInfo[item.name] || '--' }}</span>
+            <div class="amount-detail">
+                <div class="item-title" v-for="item in typeList" :key="item.name">
+                    <img :src="item.h5Icon" /> {{ $t('tradeMining.dividends')}}
+                    <span>{{ estimateInfo[item.name] || '--' }}</span>
                 </div>
             </div>
         </my-income>
@@ -23,7 +21,7 @@
 import { getOrderMining, getOrderMiningEstimate } from 'services/trade';
 import bigNumber from 'utils/bigNumber';
 import date from 'utils/date';
-import myIncome from './myIncome';
+import myIncome from 'h5Components/myIncome/index';
 import miningTable from './table';
 import listView from 'h5Components/listView.vue';
 import listTitle from './listTitle.vue';
@@ -132,31 +130,12 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "~assets/scss/vars.scss";
+@import "~h5Components/myIncome/amountDetail.scss";
 
 .list-wrapper-view {
     max-height: 450px;
 }
-
-.my-dividend {
-    padding: 0 8px 14px;
-    border-top: 1px dashed rgba(211,223,239,1);
-    font-size: 12px;
-    line-height: 16px;
-    color: rgba(107, 128, 153, 0.6);
-
-    .dividend-item {
-        margin-top: 14px;
-    }
-    img {
-        display: inline-block;
-        width: 16px;
-        height: 16px;
-        margin-bottom: -3px;
-    }
-    .item-dividend {
-        float: right;
-        font-family: $font-bold;
-    }
+.item-title {
+    margin-top: 14px;
 }
 </style>

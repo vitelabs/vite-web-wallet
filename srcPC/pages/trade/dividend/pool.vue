@@ -9,23 +9,25 @@
             </div>
         </div>
 
-        <div class="pool-item" v-for="tokenType in typeList" :key="tokenType.name">
-            <img class="icon" :src="tokenType.icon" />
-            <div class="token-wrapper __pointer" v-click-outside="hideTokenList"  @click.stop="showTokenList(tokenType)">
-                <div class="token-name">{{ tokenType.name }}</div>
-                <div class="token-amount">
-                    {{ pool[tokenType.name] ? formatNum(pool[tokenType.name].amount, tokenType.name) : '--' }}
-                    <span class="down-icon"></span>
-                </div>
+        <template v-for="tokenType in typeList">
+            <div class="pool-item" v-if="tokenType.name !== 'VITE'" :key="tokenType.name">
+                <img class="icon" :src="tokenType.icon" />
+                <div class="token-wrapper __pointer" v-click-outside="hideTokenList"  @click.stop="showTokenList(tokenType)">
+                    <div class="token-name">{{ tokenType.name }}</div>
+                    <div class="token-amount">
+                        {{ pool[tokenType.name] ? formatNum(pool[tokenType.name].amount, tokenType.name) : '--' }}
+                        <span class="down-icon"></span>
+                    </div>
 
-                <div class="token-list" v-if="pool[tokenType.name] && isShowTokenList === tokenType.name">
-                    <div class="row" v-for="(token, i) in pool[tokenType.name].tokens" :key="i">
-                        <span class="symbol">{{ getSymbol(token.tokenInfo)  }}:</span>
-                        <span class="amount">{{ formatNum(token.amount, tokenType.name) }}</span>
+                    <div class="token-list" v-if="pool[tokenType.name] && isShowTokenList === tokenType.name">
+                        <div class="row" v-for="(token, i) in pool[tokenType.name].tokens" :key="i">
+                            <span class="symbol">{{ getSymbol(token.tokenInfo)  }}:</span>
+                            <span class="amount">{{ formatNum(token.amount, tokenType.name) }}</span>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
+        </template>
     </div>
 </template>
 

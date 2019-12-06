@@ -1,6 +1,7 @@
 import { timer } from 'utils/asyncFlow';
 import BigNumber from 'utils/bigNumber';
 import { getAccountDexBalance } from 'services/viteServer';
+import { VX_TOKENID, VITE_TOKENID } from 'utils/constant';
 
 const loopTime = 2 * 1000;
 let balanceTimer = null;
@@ -63,6 +64,18 @@ const getters = {
         });
 
         return balance;
+    },
+    exVXBalanceInfo(state) {
+        if (!state.balanceList || !state.balanceList[VX_TOKENID]) {
+            return {};
+        }
+        return state.balanceList[VX_TOKENID];
+    },
+    exViteBalanceInfo(state) {
+        if (!state.balanceList || !state.balanceList[VITE_TOKENID]) {
+            return {};
+        }
+        return state.balanceList[VITE_TOKENID];
     }
 };
 
