@@ -1,4 +1,12 @@
 module.exports = {
+    "parser": "vue-eslint-parser",
+    "plugins": [
+        'typescript',
+    ],
+    "extends": [
+        "eslint:recommended",
+        'plugin:vue/essential'
+    ],
     "env": {
         "browser": true,
         "commonjs": true,
@@ -6,7 +14,7 @@ module.exports = {
         "node": true
     },
     "parserOptions": {
-        "parser": "babel-eslint",
+        "parser": "@typescript-eslint/parser",
         "ecmaFeatures": {
             "jsx": true
         },
@@ -18,10 +26,6 @@ module.exports = {
         "_hmt": true,
         "viteWalletStorage": true
     },
-    "extends": [
-        "eslint:recommended",
-        'plugin:vue/essential'
-    ],
     "rules": {
         "eqeqeq": "error",
         "no-else-return": "error",
@@ -124,7 +128,9 @@ module.exports = {
         "prefer-template": "error",
         "rest-spread-spacing": ["error", "never"],
         "yield-star-spacing": ["error", "before"],
-        "template-curly-spacing": ["error", "always"]
+        "template-curly-spacing": ["error", "always"],
+        "@typescript-eslint/no-unused-vars": false,
+        "no-unused-vars": [1]
         // "require-jsdoc": ["error", {
         //     "require": {
         //         "FunctionDeclaration": true,

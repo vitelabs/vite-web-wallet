@@ -24,10 +24,9 @@
 </template>
 
 <script>
-import { hdAddr } from '@vite/vitejs';
+import { wallet } from '@vite/vitejs';
 import confirm from 'components/confirm/confirm.vue';
 import viteInput from 'components/viteInput';
-
 
 export default {
     components: { confirm, viteInput },
@@ -62,7 +61,7 @@ export default {
                 this.isValidAddress = true;
                 return;
             }
-            this.isValidAddress = hdAddr.isValidHexAddr(this.address);
+            this.isValidAddress = wallet.isValidAddress(this.address);
         },
         trans() {
             this.fetchConfig({

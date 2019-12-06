@@ -39,7 +39,6 @@ import { VX_TOKENID } from 'utils/constant';
 import bigNumber from 'utils/bigNumber';
 import Checkbox from 'uiKit/checkbox';
 import tooltips from 'components/tooltips';
-import { abiList } from 'services/apiServer';
 import { getIsAutoLockMinedVx } from 'services/viteServer';
 import sendTx from 'h5Utils/sendTx';
 import lockConfirm from './lockConfirm';
@@ -97,6 +96,7 @@ export default {
                 title,
                 content,
                 singleBtn: true,
+                closeBtn: { show: true },
                 leftBtn: {
                     text: this.$t('btn.submit'),
                     click: () => {
@@ -108,12 +108,10 @@ export default {
 
         sendAutoLockTx() {
             sendTx({
-                abi: JSON.stringify(abiList.SwitchConfig.abi),
-                methodName: 'callContract',
+                methodName: 'dexSwitchConfig',
                 data: {
-                    abi: abiList.SwitchConfig.abi,
-                    toAddress: abiList.SwitchConfig.contractAddr,
-                    params: [ '1', !this.isAutoLock ]
+                    switchType: '1',
+                    enable: !this.isAutoLock
                 }
             }).then(() => {
                 doUntill({

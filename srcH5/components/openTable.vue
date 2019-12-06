@@ -44,11 +44,8 @@ export default {
             statistics.event(`H5${ this.$route.name }`, 'openOrder-cancel', this.address || '');
 
             sendTx({
-                methodName: 'dexTradeCancelOrder',
-                data: {
-                    orderId: _Buffer.from(order.orderId, 'hex').toString('base64'),
-                    tradeToken: order.tradeToken
-                },
+                methodName: 'dexCancelOrder',
+                data: { orderId: order.orderId },
                 vbExtends: {
                     'type': 'dexCancel',
                     'side': order.side,

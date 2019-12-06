@@ -43,7 +43,6 @@ import { doUntill } from 'utils/asyncFlow';
 import bigNumber from 'utils/bigNumber';
 import Checkbox from 'uiKit/checkbox';
 import tooltips from 'components/tooltips';
-import { abiList } from 'services/apiServer';
 import { getIsAutoLockMinedVx } from 'services/viteServer';
 import { execWithValid } from 'pcUtils/execWithValid';
 import sendTx from 'pcUtils/sendTx';
@@ -117,12 +116,10 @@ export default {
 
         sendAutoLockTx() {
             sendTx({
-                abi: JSON.stringify(abiList.SwitchConfig.abi),
-                methodName: 'callContract',
+                methodName: 'dexSwitchConfig',
                 data: {
-                    abi: abiList.SwitchConfig.abi,
-                    toAddress: abiList.SwitchConfig.contractAddr,
-                    params: [ '1', !this.isAutoLock ]
+                    switchType: '1',
+                    enable: !this.isAutoLock
                 }
             }).then(() => {
                 this.$toast(this.$t('hint.operateSuccess'));

@@ -1,11 +1,11 @@
 import sendTx from 'pcUtils/sendTx';
 import { constant } from '@vite/vitejs';
 import i18n from 'pcI18n';
-import { ViteXAPI, abiList } from 'services/apiServer';
+import { ViteXAPI } from 'services/apiServer';
 
 export function bindCode(code: number) {
     return sendTx({
-        abi: JSON.stringify(constant.DexFundBindInviteCode_Abi),
+        abi: JSON.stringify(constant.Contracts.DexBindInviteCode.abi),
         description: {
             function: {
                 name: {
@@ -22,15 +22,14 @@ export function bindCode(code: number) {
                 }
             ]
         },
-        methodName: 'dexFundBindInviteCode',
-        data: { code },
-        config: { pow: true }
+        methodName: 'dexBindInviteCode',
+        data: { code }
     });
 }
 
 export function genCode() {
     return sendTx({
-        abi: JSON.stringify(constant.DexFundNewInviter_Abi),
+        abi: JSON.stringify(constant.Contracts.DexCreateNewInviter.abi),
         description: {
             function: {
                 name: {
@@ -44,26 +43,23 @@ export function genCode() {
             type: 'dexNewInviter',
             cost: '1000 VITE'
         },
-        methodName: 'dexFundNewInviter',
-        config: { pow: true }
+        methodName: 'dexCreateNewInviter'
     });
 }
 
 export function configMarketsAgent({ actionType, agent, tradeTokens, quoteTokens }) {
     return sendTx({
-        abi: JSON.stringify(constant.DexFundConfigMarketsAgent_Abi),
-        methodName: 'dexFundConfigMarketsAgent',
-        data: { actionType, agent, tradeTokens, quoteTokens },
-        config: { pow: true }
+        methodName: 'dexConfigMarketAgents',
+        data: { actionType, agent, tradeTokens, quoteTokens }
     });
 }
 
 interface IProxyPair {
   symbol: string;
-  tradeToken: tokenId;
-  tradeTokenSymbol: tokenSymbol;
-  quoteToken: tokenId;
-  quoteTokenSymbol: tokenSymbol;
+  tradeToken: string;
+  tradeTokenSymbol: string;
+  quoteToken: string;
+  quoteTokenSymbol: string;
 }
 interface IProxyRelation {
   [key: string]: Array<IProxyPair>;
@@ -90,60 +86,35 @@ export function getProxyAblePairs(): Promise<IProxyPair[]> {
 
 export function stakeForVIP({ actionType }) {
     return sendTx({
-        abi: JSON.stringify(abiList.StakeForVIP.abi),
-        methodName: 'callContract',
-        data: {
-            abi: abiList.StakeForVIP.abi,
-            params: [actionType],
-            toAddress: abiList.StakeForVIP.contractAddr
-        }
+        methodName: 'dexStakeForVIP',
+        data: { actionType }
     });
 }
 
 export function stakeForSuperVIP({ actionType }) {
     return sendTx({
-        abi: JSON.stringify(abiList.StakeForSuperVip.abi),
-        methodName: 'callContract',
-        data: {
-            abi: abiList.StakeForSuperVip.abi,
-            params: [actionType],
-            toAddress: abiList.StakeForSuperVip.contractAddr
-        }
+        methodName: 'dexStakeForSuperVIP',
+        data: { actionType }
     });
 }
 
 export function stakeForPrincipalSVIP({ principal }) {
     return sendTx({
-        abi: JSON.stringify(abiList.StakeForPrincipalSVIP.abi),
-        methodName: 'callContract',
-        data: {
-            abi: abiList.StakeForPrincipalSVIP.abi,
-            params: [principal],
-            toAddress: abiList.StakeForPrincipalSVIP.contractAddr
-        }
+        methodName: 'dexStakeForPrincipalSVIP',
+        data: { principal }
     });
 }
 
 export function cancelStakeById({ id }) {
     return sendTx({
-        abi: JSON.stringify(abiList.CancelStakeById.abi),
-        methodName: 'callContract',
-        data: {
-            abi: abiList.CancelStakeById.abi,
-            params: [id],
-            toAddress: abiList.CancelStakeById.contractAddr
-        }
+        methodName: 'dexCancelStakeById',
+        data: { id }
     });
 }
 
 export function lockVxForDividend({ actionType, amount }) {
     return sendTx({
-        abi: JSON.stringify(abiList.LockVxForDividend.abi),
-        methodName: 'callContract',
-        data: {
-            abi: abiList.LockVxForDividend.abi,
-            params: [ actionType, amount ],
-            toAddress: abiList.LockVxForDividend.contractAddr
-        }
+        methodName: 'dexLockVxForDividend',
+        data: { actionType, amount }
     });
 }

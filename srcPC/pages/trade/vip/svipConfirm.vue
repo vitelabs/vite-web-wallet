@@ -21,7 +21,7 @@ block content
 </template>
 
 <script>
-import { constant, hdAddr } from '@vite/vitejs';
+import { constant, wallet } from '@vite/vitejs';
 import BigNumber from 'utils/bigNumber';
 import { stakeForSuperVIP, stakeForPrincipalSVIP } from 'pcServices/tradeOperation';
 import viteInput from 'components/viteInput';
@@ -65,7 +65,7 @@ export default {
             if (!this.inputAddress) {
                 return true;
             }
-            return hdAddr.isValidHexAddr(this.inputAddress);
+            return wallet.isValidAddress(this.inputAddress);
         },
         dBtnUnuse() {
             return !this.inputAddress || !this.isAddress || this.isNoBalance;

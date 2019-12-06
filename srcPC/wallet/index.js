@@ -1,17 +1,13 @@
-import { keystore, constant, utils } from '@vite/vitejs';
 import viteCrypto from 'testwebworker';
+import { keystore, utils } from '@vite/vitejs';
+
 import { getOldAccList, setOldAccList } from 'pcUtils/store';
-import { HDAccount, StatusMap as _StatusMap, VBAccount } from './hdAccount';
+
+import { WebAccount as HDAccount, StatusMap as _StatusMap } from './webAccount';
+import { VBAccount } from './vbAccount';
 import { getLastAcc, addHdAccount, setAcc, getAccList } from './store';
-function constructAccount(acc) {
-    if (acc.isBifrost || acc.id.startsWith('VITEBIFROST_')) {
-        currentHDAccount = new VBAccount(acc);
-    } else {
-        currentHDAccount = new HDAccount(acc);
-    }
-    return currentHDAccount;
-}
-const { LangList } = constant;
+
+const Default_Lang = 'english';
 const { checkParams } = utils;
 
 let currentHDAccount = null;
@@ -29,11 +25,10 @@ export function setCurrHDAcc(acc) {
         return;
     }
 
-    if (
-        acc.isBifrost
-    && currentHDAccount
-    && currentHDAccount.isBifrost
-    && currentHDAccount.activeAddr === acc.activeAddr
+    if (acc.isBifrost
+        && currentHDAccount
+        && currentHDAccount.isBifrost
+        && currentHDAccount.activeAddr === acc.activeAddr
     ) {
         return currentHDAccount;
     }
@@ -80,21 +75,18 @@ export function deleteOldAcc(acc) {
 export function saveHDAccount({
     name,
     pass,
-    hdAddrObj,
-    lang = LangList.english,
+    entropy,
+    id,
+    address,
+    lang = Default_Lang,
     addrNum = 1
 }) {
-    const err = checkParams({ name, pass, hdAddrObj, lang }, [
-        'name',
-        'pass',
-        'hdAddrObj',
-        'lang'
+    const err = checkParams({ name, pass, entropy, id, address, lang }, [
+        'name', 'pass', 'entropy', 'id', 'address', 'lang'
     ]);
     if (err) {
         throw err;
     }
-
-    const { addr, entropy, id } = hdAddrObj;
 
     return keystore.encrypt(entropy, pass, null, viteCrypto).then(keystoreStr => {
         const keystoreObj = JSON.parse(keystoreStr);
@@ -107,25 +99,13 @@ export function saveHDAccount({
         setAcc(id, {
             name,
             addrNum,
-            activeAddr: addr.hexAddr,
+            activeAddr: address,
             activeIdx: 0
         });
         return id;
     });
 }
-// export function saveVBAccount({id,addr,lang,name=""}){
-//     setAcc(id, {
-//         name,
-//         addrNum=1,
-//         activeAddr: addr,
-//         activeIdx: 0
-//     });
-//     addHdAccount({
-//         id,
-//         lang,
-//         keystore: {}
-//     })
-// }
+
 
 function initCurrHDAccount() {
     const lastAcc = getLastAcc();
@@ -133,4 +113,13 @@ function initCurrHDAccount() {
         return;
     }
     return constructAccount(lastAcc);
+}
+
+function constructAccount(acc) {
+    if (acc.isBifrost || acc.id.startsWith('VITEBIFROST_')) {
+        currentHDAccount = new VBAccount(acc);
+    } else {
+        currentHDAccount = new HDAccount(acc);
+    }
+    return currentHDAccount;
 }

@@ -28,7 +28,6 @@
 import { constant } from '@vite/vitejs';
 import confirm from 'h5Components/confirm/confirm.vue';
 import { getAgentVipPledgeInfo } from 'services/viteServer';
-import { abiList } from 'services/apiServer';
 import date from 'utils/date';
 import BigNumber from 'utils/bigNumber';
 import statistics from 'utils/statistics';
@@ -129,24 +128,14 @@ export default {
 
         stakeForVIP({ actionType }) {
             return sendTx({
-                abi: JSON.stringify(abiList.StakeForVIP.abi),
-                methodName: 'callContract',
-                data: {
-                    abi: abiList.StakeForVIP.abi,
-                    params: [actionType],
-                    toAddress: abiList.StakeForVIP.contractAddr
-                }
+                methodName: 'dexStakeForVIP',
+                data: { actionType }
             });
         },
         cancelStakeById({ id }) {
             return sendTx({
-                abi: JSON.stringify(abiList.CancelStakeById.abi),
-                methodName: 'callContract',
-                data: {
-                    abi: abiList.CancelStakeById.abi,
-                    params: [id],
-                    toAddress: abiList.CancelStakeById.contractAddr
-                }
+                methodName: 'dexCancelStakeById',
+                data: { id }
             });
         },
         openVIP() {
