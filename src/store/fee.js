@@ -103,10 +103,10 @@ const getters = {
         return state.isVip ? 0.001 : 0;
     },
     operatorMakerFee(state) {
-        return getOperatorFee(state.marketInfo.makerBrokerFeeRate);
+        return getOperatorFee(state.marketInfo.makerOperatorFeeRate);
     },
     operatorTakerFee(state) {
-        return getOperatorFee(state.marketInfo.takerBrokerFeeRate);
+        return getOperatorFee(state.marketInfo.takerOperatorFeeRate);
     },
     inviteFeeDiscount(state) {
         if (Number(state.invitedCode) > 0) {
