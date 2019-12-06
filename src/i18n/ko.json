@@ -781,9 +781,14 @@
             "inviteBenifit": "추천 마이닝 수익",
             "inviteRule": "규칙",
             "ruleItems": [
-                "<span class = 'strong'> 1000 VITE </ span>를 사용하여 추천 코드를 만들 수 있습니다. 해당 펀드는 배당풀에 넣어 VX 보유자에게 분배됩니다",
-                "추천코드를 사용하는 사용자가 생성한 거래 수수료의 <span class = 'strong'> 5 % </ span>는 VX를 채굴할 수있는 거래 수수료로 처리됩니다.",
-                "추천코드를 사용하는 거래자는 거래중에 <span class = 'strong'> 10 % </ span> 할인 혜택을 누릴 수 있습니다"
+                "The <span class='strong'>1,000 VITE</span> payment to generate an invitation code will be burned",
+                "Referee will be weighted with referral proceeds when calculating mining rewards <span class='strong'>5%</span> ",
+                "Referee will be weighted with referral proceeds when calculating mining rewards <span class='strong'>2.5%</span> "
+            ],
+            "receiveRuleItems": [
+                "Mining rewards will be weighted with referral proceeds <span class='strong'>2.5%</span> ",
+                "Mining rewards will be weighted with referral proceeds <span class='strong'>1.25%</span> ",
+                "Enjoy <span class='strong'>10%</span> off trading fees with an invitation code"
             ]
         }
     },
@@ -812,10 +817,11 @@
         "depthStep": "{step} 자리 수",
         "blocking": "네트워크 연결 오류가 발생하였습니다. 잠시 후 다시 시도해주세요.",
         "supportMining": "Eligible for trading and market-making as mining",
+        "cmcHelp": "View VITE on CoinMarketCap",
         "supportTradeMining": "Eligible for trading as mining",
         "supportOrderMining": "Eligible for market-making as mining",
-        "buyMiningPrice": "You would meet the mining qualification when buy price is greater than {price}",
-        "sellMiningPrice": "卖出价小于{price}时满足挂单挖矿条件",
+        "buyMiningPrice": "Qualifies for mining when buy price is greater than {price}",
+        "sellMiningPrice": "Qualifies for mining when sell price is less than {price}",
         "operator": {
             "noName": "Anonymous Gateway",
             "overview": "소개",
@@ -925,35 +931,6 @@
             "inviteFeeDiscount": "추천 할인 : {fee} 할인",
             "svipFee": "SVIP: 0% base transaction fee",
             "feeRule": "(Base Transaction Fee - VIP discount + Operator Fees) * Referral Discount. ATTENTION: The adjustment and discount of fees will only affect new orders, the former orders' charge remains the same."
-        },
-        "vipConfirm": {
-            "cancelVip": "VIP 취소",
-            "openVip": "VIP되기",
-            "openStakingAmount": "VIP가 되기 위한 스테이킹 수량",
-            "cancelStakingAmount": "Retrievable Stake",
-            "noBalance": "자산 불충분",
-            "openHint": "VIP가 된 후 0.1 %의 거래 수수료 할인 혜택을 누릴수 있습니다. 10,000 VITE의 스테이킹 금액은 30일 후에 수동으로 회수 할 수 있습니다.",
-            "cancelHint": "You can retrieve your stake at approximately {time}. By then, you will lose your VIP privilege.",
-            "openSuccess": "VIP 신청에 성공했습니다! VIP 상태는 곧 적용됩니다",
-            "openFail": "VIP 신청에 실패했습니다",
-            "cancelSuccess": "VIP를 취소했습니다",
-            "cancelFail": "취소에 실패했습니다",
-            "adviseToCancel": "There will be no base transaction fees with your current status as our SVIP, we therefore recommend you to revoke the staked VITE，which is required for general VIP members."
-        },
-        "svipConfirm": {
-            "open": "Upgrade",
-            "cancel": "취소",
-            "cancelVip": "Cancel SVIP",
-            "openVip": "Become a SVIP",
-            "openStakingAmount": "Staking Amount for Becoming a SVIP",
-            "cancelStakingAmount": "Retrievable Stake",
-            "noBalance": "자산이 부족합니다",
-            "openHint": "You will enjoy 0% base transaction fee when upgrading to SVIP. The stake of 1,000,000 VITE can be manually retrieved after 30 days.",
-            "cancelHint": "You can retrieve your stake at approximately {time}. You will lose your SVIP privilege after retrieving.",
-            "openSuccess": "Applied Successful! SVIP status will come into effect later.",
-            "openFail": "Failed to apply SVIP",
-            "cancelSuccess": "Cancel SVIP Successful",
-            "cancelFail": "취소에 실패했습니다"
         },
         "proxy": {
             "title": "Trade Delegation",
@@ -1169,6 +1146,7 @@
         "addQuota": "새로운 스테이킹 생성하기",
         "add": "추가하기",
         "withdraw": "회수하기",
+        "withdrawList": "Withdrawal List",
         "tbHead": {
             "date": "날짜",
             "fee": "거래 수수료",
@@ -1177,7 +1155,9 @@
         },
         "txTitle": "채굴 총 수입으로 트레이딩하기",
         "quotaTitle": "채굴 총 수입으로 스테이킹하기",
-        "addHint": "Income of Staking as Mining will be calculated at 13:00(UTC+8) everyday. You can manually retrieve your stake after the staking comes into effective",
+        "addHint1": "A minimum of 10 VX must be staked to receive dividends",
+        "addHint2": "Submission of staking request allows for dividends starting the nearest distribution",
+        "addHint3": "Staked amount will be released after the 7-day waiting period",
         "withdrawHint": "회수 후 더이상 VX를 채굴할 수 없습니다",
         "addTitle": "채굴을 위한 VITE 스테이킹",
         "withdrawTitle": "스테이킹된 VITE 회수",
@@ -1196,8 +1176,63 @@
         "inviteCount": "Referrals",
         "help": "Current trading fees displayed on this page contains only the 0.2% ViteX base transaction fees, please note that operator fees shall be taken into consideration when calculating mining cost"
     },
+    "tradeVip": {
+        "title": "Manage VIP",
+        "open": "VIP되기",
+        "cancel": "Cancel {type}",
+        "help": {
+            "title": "About VIP"
+        },
+        "helpConfirm": {
+            "t1": "VIP",
+            "txt1": "Stake 10,000 VITE to acquire VIP status and receive 50% off trading fees. Staking can be retrieved after 30 days.",
+            "t2": "SVIP",
+            "txt2": "Stake 1 million VITE to become a SVIP and enjoy 0 basic trading fees. Staking can be retrieved after 30 days.",
+            "txt3": "SVIP supports Stake Delegation, stake for others to acquire SVIP status. Staking can be revoked and retrieved manually after 30 days."
+        },
+        "vipConfirm": {
+            "cancelVip": "VIP 취소",
+            "openVip": "VIP되기",
+            "openStakingAmount": "VIP가 되기 위한 스테이킹 수량",
+            "cancelStakingAmount": "Retrievable Stake",
+            "noBalance": "자산이 부족합니다",
+            "openHint": "VIP가 된 후 0.1 %의 거래 수수료 할인 혜택을 누릴수 있습니다. 10,000 VITE의 스테이킹 금액은 30일 후에 수동으로 회수 할 수 있습니다.",
+            "cancelHint": "VIP privileges will be discontinued once staking is revoked.",
+            "openSuccess": "VIP 신청에 성공했습니다! VIP 상태는 곧 적용됩니다",
+            "openFail": "VIP 신청에 실패했습니다",
+            "cancelSuccess": "VIP를 취소했습니다",
+            "cancelFail": "취소에 실패했습니다",
+            "adviseToCancel": "There will be no base transaction fees with your current status as our SVIP, we therefore recommend you to revoke the staked VITE，which is required for general VIP members.",
+            "address": "Enable VIP Status",
+            "addressPlaceholder": "Current address is the default address, address cannot be modified later"
+        },
+        "svipConfirm": {
+            "open": "Upgrade",
+            "cancel": "취소",
+            "cancelVip": "Cancel SVIP",
+            "openVip": "Become a SVIP",
+            "openStakingAmount": "Staking Amount for Becoming a SVIP",
+            "cancelStakingAmount": "Retrievable Stake",
+            "noBalance": "자산이 부족합니다",
+            "openHint": "You will enjoy 0% base transaction fee when upgrading to SVIP. The stake of 1,000,000 VITE can be manually retrieved after 30 days.",
+            "cancelHint": "SVIP privileges will be discontinued once staking is revoked",
+            "openSuccess": "Applied Successful! SVIP status will come into effect later.",
+            "openFail": "Failed to apply SVIP",
+            "cancelSuccess": "Cancel SVIP Successful",
+            "cancelFail": "취소에 실패했습니다",
+            "address": "Enable SVIP Status",
+            "addressPlaceholder": "Address to be Enabled with SVIP Status",
+            "cancelAddress": "SVIP Address"
+        },
+        "vipListTitle": "VIP Records",
+        "openAddress": "Enabled Address",
+        "type": "VIP Type"
+    },
     "inviteMining": {
-        "title": "Referring as Mining Total Income"
+        "title": "Referring as Mining Total Income",
+        "myInviteIncome": "Referral Proceeds",
+        "inviteTradeIncome": "Referred Trading Proceeds",
+        "inviteOrderIncome": "Referred Market-Making Proceeds"
     },
     "orderMining": {
         "title": "Market-Making as Mining Total Income",
@@ -1206,8 +1241,8 @@
             "ratio": "Ratio",
             "mining": "수량"
         },
-        "market": "{name}市场",
-        "estimate": "{name}市场预计今日可挖"
+        "market": "{name} Market",
+        "estimate": "{name} Today's Minable Amount"
     },
     "tradeDividend": {
         "title": "배당",
@@ -1215,14 +1250,49 @@
         "listTitle": "나의 배당",
         "allPrice": "총 예상 가치",
         "date": "날짜",
-        "VX": "VX 보유",
+        "VX": "Stake VX",
         "coin": "유형",
         "amount": "수량",
         "price": "총 예상 가치",
         "hintTitle": "중요 공지",
         "comingHint": "VX 채굴 및 배당 기능은 곧 제공됩니다. 이 시스템은 보유한 VX의 양에 비례하여 모든 VX 사용자에게 전체 풀의 BTC, ETH, VITE, USDT의 1 %를 분배합니다. 초기 배당금은 0에서 시작하며 ViteX가 징수한 수수료 금액에 따라 증가합니다. 거래는 기본 거래, 상장 및 추천 코드 생성 수수료로 구성된 공유 배당풀에서 배당을 받으려면 최소 10 VX가 있어야합니다. ",
         "more": "VX 배당 규칙 자세히 알기",
-        "help": "VX dividend reward rules: 1. VX must be held on the ViteX exchange account. 2. You must hold a minimum of 10 VX."
+        "help": "Reward Rules: 1. A minimum of 10 VX must be staked to receive dividends. 2. Submission of staking request allows for dividends starting the nearest distribution. 3. Staked amount will be released after the 7-day waiting period",
+        "lockedAmount": "스테이킹 수량",
+        "lockAmountTips": "Receive Dividends on 10 VX or Above",
+        "unlockAmount": "Retrieving Amount",
+        "openAutoLock": {
+            "title": "Enable Automatic Staking",
+            "text": "Mined VX will be automatically staked once enabled"
+        },
+        "closeAutoLock": {
+            "title": "Disable Automatic Staking",
+            "text": "Mined VX will not be automatically staked when turned off"
+        },
+        "lock": "Stake",
+        "unlock": "회수하기",
+        "lessMin": "Minimum 1 VX",
+        "lockVXConfirm": {
+            "title": "Staking Earnings",
+            "available": "거래소 거래 가능 자산",
+            "amountPlaceholder": "Please input staking amount, minimum 1 VX",
+            "notEnough": "Insufficient Exchange Balance",
+            "submit": "스테이킹 제출하기",
+            "amountText": "스테이킹 수량"
+        },
+        "unlockVXConfirm": {
+            "title": "Retrieve VX",
+            "available": "Retrievable Amount",
+            "amountPlaceholder": "Please input amount, minimum 1 VX",
+            "notEnough": "Insufficient Amount",
+            "submit": "Confirm Retrieval",
+            "amountText": "Retrieving Amount"
+        },
+        "unlockList": {
+            "title": "Retrieving",
+            "amount": "수량",
+            "time": "Available Date"
+        }
     },
     "tradeOperator": {
         "title": "오퍼레이터",
@@ -1320,7 +1390,9 @@
         "title": "배당",
         "poolTitle": "Dividend Pool ({token})",
         "myDividendTitle": "Total Estimated Value of Dividends ({token})",
-        "listTitle": "Dividend Details"
+        "listTitle": "Dividend Details",
+        "lockingTitle": "My Staking",
+        "viewLink": "Staking Details"
     },
     "mobileMining": {
         "title": "채굴",
@@ -1334,7 +1406,10 @@
         "orderTotalIncome": "Total Income ({token})",
         "fee": "수수료",
         "listTitle": "Mining History",
-        "viewLink": "Live Mining Dashboard"
+        "viewLink": "Live Mining Dashboard",
+        "inviteTradeIncome": "Referred Trading Details",
+        "inviteOrderIncome": "Referred Market-Making Details",
+        "myStaking": "My Staking"
     },
     "mobileBottomBar": {
         "center": "Trade",
