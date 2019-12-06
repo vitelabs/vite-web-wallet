@@ -69,7 +69,7 @@ export default {
         },
         inspector() {
             sendTx({
-                methodName: 'dexFundBindInviteCode',
+                methodName: 'dexBindInviteCode',
                 data: { code: this.code }
             }).then(() => {
                 doUntill({

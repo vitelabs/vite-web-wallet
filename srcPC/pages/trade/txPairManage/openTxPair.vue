@@ -76,7 +76,7 @@ export default {
             initPwd({
                 submit: () => {
                     sendTx({
-                        methodName: 'dexFundNewMarket',
+                        methodName: 'dexOpenNewMarket',
                         data: {
                             tradeToken: this.txPair.txPairDetail.tradeToken,
                             quoteToken: this.txPair.txPairDetail.quoteToken

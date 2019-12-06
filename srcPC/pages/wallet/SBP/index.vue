@@ -6,12 +6,12 @@
 
         <div v-if="!loadingToken" class="section">
             <div class="__second-title">{{ $t('walletSBP.section1.title') }}</div>
-            <register :canUseAddr="canUseAddr" :getParams="getParams" class="content"></register>
+            <register :canUseAddr="canUseAddr" class="content"></register>
         </div>
 
         <div v-if="!loadingToken" class="section">
             <div class="__second-title">{{ $t('walletSBP.section2.title') }}</div>
-            <list :showConfirm="showConfirm" :getParams="getParams"></list>
+            <list :showConfirm="showConfirm"></list>
         </div>
 
         <confirm v-if="showConfirmType" :showMask="true" class="small"
@@ -29,7 +29,7 @@
 </template>
 
 <script>
-import { hdAddr, constant } from '@vite/vitejs';
+import { wallet, constant } from '@vite/vitejs';
 import secTitle from 'pcComponents/secTitle';
 import loading from 'components/loading';
 import confirm from 'components/confirm/confirm.vue';
@@ -97,7 +97,7 @@ export default {
             }
 
             if (!this.addr
-                || !hdAddr.isValidHexAddr(this.addr)) {
+                || !wallet.isValidAddress(this.addr)) {
                 this.addrErr = this.$t('walletSBP.section1.addrErr');
 
                 return;
@@ -169,8 +169,11 @@ export default {
             }
 
             sendTx({
-                methodName: 'updateReg',
-                data: this.getParams({ producerAddr: producer }),
+                methodName: 'updateSBPBlockProducingAddress',
+                data: {
+                    blockProducingAddress: producer,
+                    sbpName: this.activeItem.name
+                },
                 config: {
                     pow: false,
                     confirm: {
@@ -192,17 +195,6 @@ export default {
                 this.loading = false;
                 this.$toast(this.$t('walletSBP.section2.updateFail'), err);
             });
-        },
-
-        getParams({ producerAddr, nodeName, amount }) {
-            const toAmount = BigNumber.toMin(amount || 0, Vite_Token_Info.decimals);
-
-            return {
-                tokenId: Vite_Token_Info.tokenId,
-                nodeName: nodeName || this.activeItem.name,
-                amount: toAmount,
-                toAddress: producerAddr || ''
-            };
         }
     }
 };

@@ -644,7 +644,7 @@ export default {
             quantity = BigNumber.toMin(quantity, tokenDecimals);
 
             sendTx({
-                methodName: 'dexFundNewOrder',
+                methodName: 'dexPlaceOrder',
                 data: { tradeToken, quoteToken, side, price, quantity },
                 config: {
                     pow: true,

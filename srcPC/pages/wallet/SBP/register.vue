@@ -59,7 +59,7 @@
 </template>
 
 <script>
-import { hdAddr, constant } from '@vite/vitejs';
+import { wallet, constant } from '@vite/vitejs';
 import viteInput from 'components/viteInput';
 import { initPwd } from 'pcComponents/password/index.js';
 import sendTx from 'pcUtils/sendTx';
@@ -73,10 +73,6 @@ const amount = 1000000;
 export default {
     components: { viteInput },
     props: {
-        getParams: {
-            type: Function,
-            default: () => {}
-        },
         canUseAddr: {
             type: Function,
             default: () => {}
@@ -157,16 +153,14 @@ export default {
                 return;
             }
 
-            if (!hdAddr.isValidHexAddr(this.producerAddr)) {
+            if (!wallet.isValidAddress(this.producerAddr)) {
                 this.producerAddrErr = this.$t('walletSBP.section1.addrErr');
-
                 return;
             }
 
             const nodeName = this.nodeName.trim();
             if (!this.canUseAddr(nodeName, this.producerAddr)) {
                 this.producerAddrErr = this.$t('walletSBP.section1.addrUsed');
-
                 return;
             }
 
@@ -218,8 +212,13 @@ export default {
             const producerAddr = this.producerAddr;
 
             sendTx({
-                methodName: 'SBPreg',
-                data: this.getParams({ producerAddr, amount, nodeName }),
+                methodName: 'registerSBP',
+                data: {
+                    sbpName: nodeName,
+                    blockProducingAddress: producerAddr,
+                    rewardWithdrawAddress: producerAddr,
+                    amount: BigNumber.toMin(amount, Vite_Token_Info.decimals)
+                },
                 config: {
                     pow: false,
                     confirm: {

@@ -1,5 +1,5 @@
 <template>
-    <confirm :title="$t('quotaConfirm.title')" :showMask="showMask"
+    <confirm class="small" :title="$t('quotaConfirm.title')" :showMask="showMask"
              :leftBtnTxt="$t('quotaConfirm.noOperate', { 'operate': operate })"
              :leftBtnClick="_cancel"
              :rightBtnTxt="$t('quotaConfirm.goQuota')" :rightBtnClick="_submit">

@@ -240,8 +240,8 @@ export default {
         },
         onlyFetchConfig({ operationCode, tradeToken, quoteToken, owner = this.address, takerFeeRate = 0, makerFeeRate = 0, stopMarket = false }) {
             return sendTx({
-                methodName: 'dexFundMarketOwnerConfig',
-                data: { operationCode, tradeToken, quoteToken, owner, takerFeeRate, makerFeeRate, stopMarket }
+                methodName: 'dexMarketAdminConfig',
+                data: { operationCode, tradeToken, quoteToken, marketOwner: owner, takerFeeRate, makerFeeRate, stopMarket }
             });
         },
         fetchOperatorMarkets(pageNum) {

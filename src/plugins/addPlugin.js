@@ -46,18 +46,20 @@ export default {
             const code = error ? error.code || -1 : -1;
             const errMsg = error ? error.message || error.msg || '' : '';
 
-            // Show quota confirm, don't neet toast
-            if (code === '1000001') {
+            // code 11000 wc error
+            // 11012 用户拒绝
+            // 11020 链接断开
+            // 11021 用户关闭弹窗，继续下面操作
+
+            // code 12000 web error
+            // code 12001 未解锁
+            // code 12002 无激活账户
+            // code 1000001 Show quota confirm, don't neet toast
+
+            if ([ 1000001, 11012, 11020, 11021, 12001 ].indexOf(+code) !== -1) {
                 return;
             }
-            if (code === 11012 || code === 11020 || code === 11021) {
-                // wc 取消授权，断开
-                return;
-            }
-            if (code === 12001) {
-                // 未解锁
-                return;
-            }
+
             if (!this || !this.$t) {
                 return;
             }
