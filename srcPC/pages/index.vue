@@ -20,7 +20,7 @@
 </template>
 
 <script>
-import confirm from 'components/confirm/confirm.vue';
+import confirm from 'pcComponents/confirm/confirm.vue';
 import noticeList from 'pcComponents/noticeList.vue';
 import { receiveInviteDialog } from 'pcComponents/dialog';
 import { emptySpace } from 'pcUtils/storageSpace';

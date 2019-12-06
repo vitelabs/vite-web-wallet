@@ -184,6 +184,17 @@ export default {
 <style lang="scss" scoped>
 @import '~assets/scss/vars.scss';
 
+input {
+    width: 100%;
+    @include bg_color_1();
+    [data-theme="0"] & {
+        color: rgba(94,104,117,0.3);
+    }
+    [data-theme="1"] & {
+        color: $gray-color-2;
+    }
+}
+
 .unlock-user.distance {
     margin-top: 30px;
 }
