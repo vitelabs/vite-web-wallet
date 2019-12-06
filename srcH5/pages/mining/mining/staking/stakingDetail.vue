@@ -11,10 +11,7 @@
                 <div class="item-tilte">{{ $t("tradeDividend.unlockAmount") }}</div>
                 <div class="bold">{{ cancellingStake }}</div>
             </div>
-            <!-- <div class="item btn add" @click="addStaking">
-                {{ $t("tradeMining.add") }}
-            </div> -->
-            <div class="item btn unuse">
+            <div class="item btn add" @click="addStaking">
                 {{ $t("tradeMining.add") }}
             </div>
             <div class="item btn cancel" @click="goTradeMiningList">
