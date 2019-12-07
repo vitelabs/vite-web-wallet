@@ -82,7 +82,7 @@ export default {
                     time: date(item.expirationTime * 1000, 'zh'),
                     amount: `${ bigNumber.toBasic(item.stakeAmount, Vite_Token_Info.decimals) } VITE`,
                     height: item.expirationHeight,
-                    canCancel: bigNumber.compared(item.expirationHeight, this.currentHeight) <= 0,
+                    canCancel: bigNumber.compared(item.expirationHeight, this.height) <= 0,
                     rawData: item
                 });
             });
@@ -99,7 +99,7 @@ export default {
     },
     methods: {
         clickCell(cell, item) {
-            if (cell !== 'cancel' && !item.canCancel) {
+            if (cell !== 'cancel' || !item.canCancel) {
                 return;
             }
             this.cancelStake(item);
