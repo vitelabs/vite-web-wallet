@@ -2,22 +2,31 @@
     <div>
         <div>Balance</div><br/>
         <wallet-table :headList="headList" :contentList="balanceList"></wallet-table>
-        <br/><div>Onroad</div><br/>
+        <br/><div>Unreceived</div><br/>
         <wallet-table :headList="headList" :contentList="onroadList"></wallet-table>
     </div>
 </template>
 
 <script>
+import bigNumber from 'utils/bigNumber';
+import { timer } from 'utils/asyncFlow';
+import { viteClient } from 'services/apiServer';
 import walletTable from 'components/table/index.vue';
+
+let balanceTimer = null;
 
 export default {
     components: { walletTable },
+    beforeMount() {
+        this.startLoopBalance();
+    },
+    destroyed() {
+        this.stopLoopBalance();
+    },
     props: {
-        balance: {
-            type: Object,
-            default: () => {
-                return {};
-            }
+        address: {
+            type: String,
+            default: ''
         }
     },
     data() {
@@ -27,10 +36,6 @@ export default {
                 cell: 'tokenSymbol',
                 class: 'keystore-table-item'
             }, {
-                text: 'Decimals',
-                cell: 'decimals',
-                class: 'keystore-table-item'
-            }, {
                 text: 'Balance',
                 cell: 'balance',
                 class: 'keystore-table-item'
@@ -38,7 +43,8 @@ export default {
                 text: 'Token Id',
                 cell: 'tokenId',
                 class: 'keystore-table-item'
-            } ]
+            } ],
+            balance: null
         };
     },
     computed: {
@@ -57,20 +63,19 @@ export default {
     },
     methods: {
         getList(balance) {
-            console.log(balance);
-            if (!balance.tokenBalanceInfoMap) {
+            if (!balance.balanceInfoMap) {
                 return [];
             }
 
             const list = [];
-            const tokenBalanceInfoMap = balance.tokenBalanceInfoMap;
+            const tokenBalanceInfoMap = balance.balanceInfoMap;
             for (const tokenId in tokenBalanceInfoMap) {
                 if (!tokenBalanceInfoMap[tokenId]) {
                     continue;
                 }
 
                 const tokenInfo = tokenBalanceInfoMap[tokenId].tokenInfo;
-                const totalAmount = tokenBalanceInfoMap[tokenId].totalAmount;
+                const totalAmount = bigNumber.toBasic(tokenBalanceInfoMap[tokenId].balance, tokenInfo.decimals);
 
                 if (!tokenInfo || !+totalAmount) {
                     continue;
@@ -79,12 +84,27 @@ export default {
                 list.push({
                     tokenId,
                     tokenSymbol: tokenInfo.tokenSymbol,
-                    decimals: tokenInfo.decimals,
                     balance: totalAmount
                 });
             }
-
             return list;
+        },
+
+        startLoopBalance() {
+            this.stopLoopBalance();
+
+            balanceTimer = new timer(() => {
+                viteClient.getBalanceInfo(this.address).then(data => {
+                    this.balance = data;
+                    this.$emit('updateBalance', data);
+                });
+            }, 2000);
+
+            balanceTimer.start();
+        },
+        stopLoopBalance() {
+            balanceTimer && balanceTimer.stop();
+            balanceTimer = null;
         }
     }
 };

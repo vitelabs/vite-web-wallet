@@ -4,12 +4,14 @@
             <input :placeholder="'toAddress'" v-model="toAddress" />
         </div>
 
-        <div @click="sendAllBalance" class="totop __btn __btn_all_in __pointer">Send Tx (All balance)</div>
+        <div @click="sendAllBalance" v-show="!isLoading" class="totop __btn __btn_all_in __pointer">Send Tx (All balance)</div>
+        <div v-show="isLoading" class="totop __btn __btn_all_in __pointer">Sending...</div>
     </div>
 </template>
 
 <script>
-import { hdAddr } from '@vite/vitejs';
+import { wallet, accountBlock as accountBlockUtils } from '@vite/vitejs';
+import { viteClient } from 'services/apiServer';
 
 export default {
     props: {
@@ -19,13 +21,20 @@ export default {
                 return {};
             }
         },
+        address: {
+            type: String,
+            default: ''
+        },
         privateKey: {
             type: String,
-            default: () => ''
+            default: ''
         }
     },
     data() {
-        return { toAddress: '' };
+        return {
+            toAddress: '',
+            isLoading: false
+        };
     },
     methods: {
         sendAllBalance() {
@@ -33,34 +42,48 @@ export default {
                 this.$toast('No Balance!');
                 return;
             }
-            if (!this.toAddress || !hdAddr.isValidHexAddr(this.toAddress.trim())) {
+
+            if (!this.toAddress || !wallet.isValidAddress(this.toAddress.trim())) {
                 this.$toast('Invailid toAddress!');
                 return;
             }
 
             const reqList = [];
-            const balanceInfos = this.balance.balance.tokenBalanceInfoMap ? this.balance.balance.tokenBalanceInfoMap : {};
+            const balanceInfos = this.balance.balance.balanceInfoMap ? this.balance.balance.balanceInfoMap : {};
+
             for (const tokenId in balanceInfos) {
                 const item = balanceInfos[tokenId];
 
-                const amount = item.totalAmount;
+                const amount = item.balance;
                 if (+amount === 0) {
                     continue;
                 }
 
-                // reqList.push(this.account.sendTx({
-                //     toAddress: this.toAddress.trim(),
-                //     amount,
-                //     tokenId
-                // }, true, true));
+                reqList.push(this.sendTx(tokenId, amount));
             }
 
+            this.isLoading = true;
             Promise.all(reqList).then(() => {
                 this.$toast('Success. Check please.');
+                this.isLoading = false;
             }).catch(err => {
-                this.$toast('Error. Retry please.', err);
                 console.warn(err);
+                this.$toast('Error. Retry please.', err);
+                this.isLoading = false;
             });
+        },
+
+        async sendTx(tokenId, amount) {
+            const accountBlock = accountBlockUtils.createAccountBlock('send', {
+                amount,
+                tokenId,
+                address: this.address,
+                toAddress: this.toAddress,
+                data: accountBlockUtils.utils.messageToData('keystore send to')
+            }).setProvider(viteClient).setPrivateKey(this.privateKey);
+
+            await accountBlock.autoSetPreviousAccountBlock();
+            return accountBlock.sendByPoW();
         }
     }
 };
