@@ -33,13 +33,6 @@ import { keystore } from '@vite/vitejs';
 import { getKeystoreAccList } from 'pcUtils/store';
 
 export default {
-    props: {
-        getKeystoreCB: {
-            type: Function,
-            default: () => {}
-        }
-    },
-
     data() {
         const accountList = getKeystoreAccList() || [];
 
@@ -88,9 +81,12 @@ export default {
                 this.getKeystoreCB({
                     keystore: keystoreObj,
                     addr: keystoreObj.hexaddress
-                }, 'file');
+                });
             };
             reader.readAsText(file);
+        },
+        getKeystoreCB(info) {
+            this.$emit('getKeystore', info);
         }
     }
 };

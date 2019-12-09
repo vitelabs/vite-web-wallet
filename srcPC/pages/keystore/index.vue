@@ -3,47 +3,39 @@
         <div class="__title">{{ $t('keystore.title') }}</div>
 
         <div class="__wrapper">
-            <import-keystore v-show="!keystore" :getKeystoreCB="getKeystore"></import-keystore>
+            <import-keystore v-show="!keystore" @getKeystore="getKeystore"></import-keystore>
 
             <div v-show="keystore" class="__btn_input_active __pointer" @click="goNet">
                 <div class="name">{{ name }}</div>
                 <div class="address __ellipsis">{{ address }}</div>
             </div>
 
-            <lock v-show="keystore && !privateKey"
-                  :keystore="keystore"
-                  :unlockSuccess="unlockSuccess"></lock>
+            <unlock v-show="keystore && !privateKey" :keystore="keystore"
+                    @unlockSuccess="unlockSuccess"></unlock>
         </div>
 
-        <balance v-show="keystore && privateKey" class="detail-wrapper" :balance="balance"></balance>
+        <balance v-if="keystore && privateKey" class="detail-wrapper"
+                 :address="address" @updateBalance="updateBalance"></balance>
 
-        <div v-show="keystore && privateKey" class="__wrapper">
-            <div v-show="balance" class="totop __btn __btn_all_in __pointer" @click="activate">
-                {{ !isActive ? 'Auto Receive Tx' : 'Auto Receiving....' }}
-            </div>
-            <send-tx :balance="balance" :privateKey="privateKey"></send-tx>
+        <div v-if="keystore && privateKey" class="__wrapper">
+            <receive-tx v-show="balance" :address="address" :privateKey="privateKey"></receive-tx>
+            <send-tx :balance="balance" :address="address" :privateKey="privateKey"></send-tx>
         </div>
     </div>
 </template>
 
 <script>
+
 import { getExplorerLink } from 'utils/getLink';
-import lock from './lock';
+import unlock from './unlock';
 import importKeystore from './import';
 import sendTx from './sendTx';
 import balance from './balance';
-import { timer } from 'utils/asyncFlow';
+import receiveTx from './receiveTx';
 import openUrl from 'utils/openUrl';
-import { viteClient } from 'services/apiServer';
-
-let balanceTimer = null;
 
 export default {
-    components: { importKeystore, lock, sendTx, balance },
-    destroyed() {
-        this.stopLoopBalance();
-        // this.account.freeze();
-    },
+    components: { importKeystore, unlock, balance, sendTx, receiveTx },
     data() {
         return {
             address: '',
@@ -64,31 +56,11 @@ export default {
             this.keystore = obj.keystore;
             this.name = obj.name || '';
         },
-        activate() {
-            if (this.isActive) {
-                return;
-            }
-            // this.account.activate(2000, true, true);
-            this.isActive = true;
-        },
         unlockSuccess(privateKey) {
             this.privateKey = privateKey;
-            this.startLoopBalance();
         },
-        startLoopBalance() {
-            this.stopLoopBalance();
-
-            balanceTimer = new timer(() => {
-                viteClient.getBalanceInfo(this.address).then(data => {
-                    this.balance = data;
-                });
-            }, 2000);
-
-            balanceTimer.start();
-        },
-        stopLoopBalance() {
-            balanceTimer && balanceTimer.stop();
-            balanceTimer = null;
+        updateBalance(balance) {
+            this.balance = balance;
         }
     }
 };

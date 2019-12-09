@@ -23,10 +23,6 @@ export default {
         keystore: {
             type: Object,
             default: null
-        },
-        unlockSuccess: {
-            type: Function,
-            default: () => {}
         }
     },
     data() {
@@ -40,7 +36,7 @@ export default {
             this.isLoading = true;
             keystore.decrypt(JSON.stringify(this.keystore), this.password, viteCrypto).then(privateKey => {
                 this.isLoading = false;
-                this.unlockSuccess(privateKey);
+                this.$emit('unlockSuccess', privateKey);
             }).catch(err => {
                 console.warn(err);
                 this.isLoading = false;
