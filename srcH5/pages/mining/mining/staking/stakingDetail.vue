@@ -14,6 +14,9 @@
             <div class="item btn add" @click="addStaking">
                 {{ $t("tradeMining.add") }}
             </div>
+            <!-- <div class="item btn unuse">
+                {{ $t("tradeMining.add") }}
+            </div> -->
             <div class="item btn cancel" @click="goTradeMiningList">
                 {{ $t("tradeMining.withdrawList") }}
             </div>
