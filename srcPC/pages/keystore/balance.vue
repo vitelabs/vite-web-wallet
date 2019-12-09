@@ -11,7 +11,7 @@
 import bigNumber from 'utils/bigNumber';
 import { timer } from 'utils/asyncFlow';
 import { viteClient } from 'services/apiServer';
-import walletTable from 'components/table/index.vue';
+import walletTable from 'pcComponents/table/index.vue';
 
 let balanceTimer = null;
 
