@@ -36,7 +36,7 @@ export default {
         return {
             stakeAmount: '',
             isAddrCorrect: true,
-            loading: true,
+            isLoading: false,
             vipStakingAmount,
             inputAddress: ''
         };
@@ -68,7 +68,7 @@ export default {
             return hdAddr.isValidHexAddr(this.inputAddress);
         },
         dBtnUnuse() {
-            return !this.inputAddress || !this.isAddress || this.isNoBalance;
+            return !this.inputAddress || !this.isAddress || this.isNoBalance || this.isLoading;
         },
         address() {
             return this.$store.getters.activeAddr;
