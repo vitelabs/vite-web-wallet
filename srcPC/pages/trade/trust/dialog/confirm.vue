@@ -1,13 +1,15 @@
 <template lang="pug">
 extends /components/dialog/base.pug
 block content
-    .content-wrapper(v-if="isDeleteAll")
+    div(v-if="isDeleteAll")
         i18n.strong(path='trade.proxy.dialog.cancelAllTips' tag="span")
             div.address_container(place="trustAddress") {{trustAddress}}
-    .content-wrapper(v-else)
-        .block__title {{$t('trade.proxy.passive.head.0')}}
-        div.block__content(v-if="!!trustAddress") {{trustAddress}}
-        .block__title {{$t('trade.proxy.passive.head.1')}}
+    div(v-else)
+        .__row
+            .__row_t {{$t('trade.proxy.passive.head.0')}}
+            .__input_row.__unuse_input.__ellipsis(v-if="!!trustAddress") {{trustAddress}}
+        .__row
+            .__row_t {{$t('trade.proxy.passive.head.1')}}
         div.block__content
             span.pure-pair(v-for="t in pairArray" :key="t") {{t}}
 
@@ -52,24 +54,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "~assets/scss/vars.scss";
-.block__title {
-    height: 16px;
-    font-size: 12px;
-    @include font-family-bold();
-    color: rgba(29, 32, 36, 1);
-    line-height: 16px;
-    margin-top: 20px;
-    display: flex;
-    justify-content: space-between;
-    .err {
-        color: #ff2929;
-        font-size: 12px;
-    }
-    &:first-child {
-        margin-top: 0;
-    }
-}
+@import "pcComponents/confirm/confirmRow.scss";
+@import "./confirm.scss";
 
 .block__content {
     position: relative;
@@ -86,16 +72,6 @@ export default {
     .pure-pair {
         margin-right: 10px;
     }
-}
-.strong {
-    color: #1d2024;
-    font-size: 14px;
-}
-.address_container {
-    font-size: 12px;
-    color: #5e6875;
-    word-break: break-all;
-    line-height: 14px;
 }
 </style>
 

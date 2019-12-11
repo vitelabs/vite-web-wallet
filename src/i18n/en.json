@@ -398,13 +398,6 @@
                 "WRONG_WITHDRAW_ADDRESS":"Transfer address is incorrect"
             }
         },
-        "receive": {
-            "title": "Receive",
-            "codeTips": "Scan the QR code and transfer {tokenSymbol} to me",
-            "addressTitle": "Recipient Address",
-            "amountTitle": "Receive Amount",
-            "amountPlaceholder": "Please input receive amount"
-        },
         "charge": {
             "title": "Cross-Chain Deposit",
             "addrErr": "Something went wrong with gateway node, please check your network settings",

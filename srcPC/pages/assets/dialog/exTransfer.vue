@@ -30,8 +30,8 @@
             </div>
             <vite-input v-model="amount" :valid="validAmount" @input="noAll"
                         :placeholder="$t('wallet.placeholder.amount')">
-                <span slot="after" @click="all" class="all-wrapper">
-                    <span class="all">{{ $t('tradeAssets.all') }}</span>
+                <span slot="after" @click="all" class="__all_wrapper __pointer">
+                    <span class="__all">{{ $t('tradeAssets.all') }}</span>
                 </span>
             </vite-input>
         </div>
@@ -191,14 +191,17 @@ export default {
 
 <style lang="scss" scoped>
 @import "~assets/scss/vars.scss";
+@import "pcComponents/confirm/confirmRow.scss";
 
 .transfer-head {
     display: flex;
     flex-direction: row;
     padding: 0 30px;
     background: rgba(0,122,255,0.05);
-    border: 1px solid rgba(212,222,231,1);
     align-items: center;
+    [data-theme="0"] & {
+        border: 1px solid rgba(212,222,231,1);
+    }
     .point {
         margin-right: 11px;
         .line {
@@ -226,7 +229,7 @@ export default {
         flex: 1;
         font-size: 12px;
         @include font-family-bold();
-        color: rgba(29,32,36,1);
+        @include common_font_color();
         line-height: 16px;
         .line {
             padding: 20px 5px;
@@ -251,16 +254,6 @@ export default {
     padding: 0px 30px;
     &:last-child {
         padding-bottom: 30px;
-    }
-}
-
-.all-wrapper {
-    color: #007AFF;
-    font-size: 12px;
-    margin: 0 15px;
-    cursor: pointer;
-    .all {
-        border-bottom: 1px dashed #007AFF;
     }
 }
 </style>

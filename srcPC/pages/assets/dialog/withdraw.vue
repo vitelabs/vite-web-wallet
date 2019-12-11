@@ -1,32 +1,32 @@
 <template lang="pug">
 extends /components/dialog/base.pug
 block content
-    .block__title {{$t("tokenCard.withdraw.labels.balance")}}
-    .block__content.edit.space
-        .token__title
-            img(:src="token.icon||getIcon(token.tokenId)")
-            .symbol {{token.tokenSymbol}}
-        .right.blue {{token.balance||'0'}}
-    .block__title {{$t("tokenCard.withdraw.labels.address")}}
-        .err {{isAddrCorrect?'':$t("tokenCard.withdraw.addressErr")}}
-    input.block__content(v-model="withdrawAddr" :placeholder="$t('tokenCard.withdraw.addressPlaceholder', {token: token.tokenSymbol === 'USDT' && token.index === 0 ? 'USDT(ERC20)' : ''})")
-    .block__title(v-if="type===1") {{labelName}}
-    input.block__content(v-if="type===1" v-model="labelValue" :placeholder="$t('tokenCard.withdraw.labelPlaceholder',{labelName})")
-    .block__title {{$t("tokenCard.withdraw.labels.amount")}}
-        .err {{ammountErr}}
-    .block__content
-        input(v-model="withdrawAmount" :placeholder="$t('tokenCard.withdraw.amountPlaceholder',{min})")
-        .all(@click="withdrawAll") {{$t("tokenCard.withdraw.labels.all")}}
-    .block__title
-        .tips-container {{$t("tokenCard.withdraw.labels.fee")}}
+    .__row
+        .__row_t {{$t("tokenCard.withdraw.labels.balance")}}
+        .__input_row.__unuse_input.__bold
+            img.__icon(:src="token.icon||getIcon(token.tokenId)")
+            span.__right {{token.balance||'0'}}
+    .__row
+        .__row_t {{$t("tokenCard.withdraw.labels.address")}}
+            .__err {{isAddrCorrect?'':$t("tokenCard.withdraw.addressErr")}}
+        vite-input(v-model="withdrawAddr" :placeholder="$t('tokenCard.withdraw.addressPlaceholder', {token: token.tokenSymbol === 'USDT' && token.index === 0 ? 'USDT(ERC20)' : ''})")
+    .__row(v-if="type===1")
+        .__row_t {{labelName}}
+        vite-input(v-model="labelValue" :placeholder="$t('tokenCard.withdraw.labelPlaceholder',{labelName})")
+    .__row
+        .__row_t {{$t("tokenCard.withdraw.labels.amount")}}
+            .__err {{ammountErr}}
+        vite-input(v-model="withdrawAmount" :placeholder="$t('tokenCard.withdraw.amountPlaceholder',{min})")
+            span.__all_wrapper.__pointer(slot="after" @click="withdrawAll")
+                span.__all {{$t("tokenCard.withdraw.labels.all")}}
+    .__row
+        .__row_t {{$t("tokenCard.withdraw.labels.fee")}}
             i(class="tipsicon hoveraction" @click.self.stop="toggleTips")
                 tooltips(v-show="isFeeTipsShow" v-click-outside="hideTips" :content="$t('tokenCard.withdraw.feeTips')" class="fee-tips")
-    .block__content.edit.space
-        div   {{$t("tokenCard.withdraw.labels.fee")}}
-        div {{(fee||'--') }} <span class="light">{{token.tokenSymbol}}</span>
-    .err_submit(v-if="failTips") {{failTips}}
-        .dot
-
+        .__input_row.__unuse_input.__bold  {{ $t("tokenCard.withdraw.labels.fee") }}
+            .__right {{( fee||'--') }} <span class="light">{{token.tokenSymbol}}</span>
+    .__hint.__err(v-if="failTips")
+        span {{ failTips }}
 </template>
 
 <script>
@@ -37,10 +37,10 @@ import bigNumber from 'utils/bigNumber';
 import tooltips from 'components/tooltips';
 import { getTokenIcon } from 'utils/tokenParser';
 import { execWithValid } from 'pcUtils/execWithValid';
-
+import viteInput from 'components/viteInput';
 
 export default {
-    components: { tooltips },
+    components: { tooltips, viteInput },
     props: {
         token: {
             type: Object,
@@ -186,56 +186,33 @@ export default {
 
 <style lang="scss" scoped>
 @import "~assets/scss/vars.scss";
-@import "./dialog.scss";
-@include block;
-.block__title {
-    .title_icon {
-        float: right;
-        &.copy {
-            margin-right: 10px;
-        }
-    }
-    .tips-container{
+@import "pcComponents/confirm/confirmRow.scss";
+
+.__row {
+    overflow: visible;
+    .__row_t {
         overflow: visible;
     }
-    .hoveraction {
-        &.tipsicon {
-            margin-left: 4px;
-            background-repeat: no-repeat;
-            position: relative;
-            display: inline-block;
-            background: url(~assets/imgs/hover_help.svg);
-            overflow: visible;
-            width: 16px;
-            height: 16px;
-            vertical-align: sub;
-            cursor: pointer;
-            .fee-tips{
-                color: #5E6875;
-                min-width: 150px;
-                @include font-family-normal();
-            }
-        }
-    }
 }
-.err_submit{
-    padding-left: 13px;
-    position: relative;
-    width: 100%;
-    color: #FF2929;
-    font-size: 14px;
-    @include font-family-normal();
-    margin-top: 6px;
-    top: 14px;
-    .dot {
-        width: 6px;
-        height: 6px;
-        background: #FF2929;
-        border-radius: 100%;
-        position: absolute;
-        left: 0;
-        top: 10px;
+
+.hoveraction {
+    &.tipsicon {
+        margin-left: 4px;
+        background-repeat: no-repeat;
+        position: relative;
+        display: inline-block;
+        background: url(~assets/imgs/hover_help.svg);
+        overflow: visible;
+        width: 16px;
+        height: 16px;
+        vertical-align: sub;
+        cursor: pointer;
+        .fee-tips{
+            color: #5E6875;
+            min-width: 170px;
+            @include font-family-normal();
+            left: 30px;
+        }
     }
 }
 </style>
-

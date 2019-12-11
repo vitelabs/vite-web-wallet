@@ -16,6 +16,7 @@
         </div>
     </div>
 </template>
+
 <script>
 import throttle from 'lodash/throttle';
 
@@ -54,15 +55,13 @@ export default {
 </script>
 
 <style lang="scss">
-@import "~assets/scss/vars.scss";
-
 .v-search-tips {
-    color: #1d2024;
     font-size: 12px;
     max-height: 203px;
     min-height: 34px;
     display: flex;
     flex-direction: column;
+    @include font_color_1();
     @include font-family-bold();
     .search-input-container {
         display: flex;
@@ -70,13 +69,20 @@ export default {
         justify-content: flex-start;
         align-items: center;
         border-radius: 2px 2px 0px 0px;
-        border: 1px solid rgba(212, 222, 231, 1);
-
+        @include common_border();
+        @include bg_color_1();
         .search-input {
             flex-grow: 1;
             height: 34px;
             padding-left: 6px;
             font-size: 12px;
+            @include bg_color_1();
+            [data-theme="0"] & {
+                color: #000;
+            }
+            [data-theme="1"] & {
+                color: $white-color;
+            }
         }
         .search-icon {
             width: 12px;
@@ -87,7 +93,7 @@ export default {
         flex: 1;
         overflow-y: scroll;
         border-radius: 0px 0px 2px 2px;
-        border: 1px solid rgba(212, 222, 231, 1);
+        @include common_border();
         border-top: none;
         .tips-item {
             height: 34px;
@@ -95,7 +101,7 @@ export default {
             display: flex;
             align-items: center;
             &:hover {
-                background: rgba(0, 122, 255, 0.03);
+                background: rgba(0, 122, 255, 0.05);
             }
         }
     }

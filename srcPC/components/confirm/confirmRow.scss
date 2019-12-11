@@ -17,6 +17,9 @@
     line-height: 34px;
     font-size: 12px;
     @include font-family-normal();
+    [data-theme="0"] & {    
+        border: 1px solid #d4dee7;
+    }
     &.__bold {
         @include font-family-bold();
         @include common_font_color();
@@ -91,12 +94,27 @@
     }
 }
 
+.__all_wrapper {
+    color: $blue-color-1;
+    font-size: 12px;
+    margin: 0 15px;
+    .__all {
+        border-bottom: 1px dashed $blue-color-1;
+    }
+}
+
 .__hint {
     margin-top: 20px;
     line-height: 16px;
     font-size: 12px;
     @include font-family-normal();
     @include gray_font_color_1();
+    &.__err {
+        color: #FF2929;
+        &:before {
+            background: #FF2929;
+        }
+    }
     span {
         display: inline-block;
         margin-left: 10px;

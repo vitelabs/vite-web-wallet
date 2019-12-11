@@ -20,16 +20,14 @@ block content
         loading(loadingType="dot")
     div(v-show="!isLoading")
         .__input_row.__unuse_input.top {{ addrErr || address }}
-        .qrcode-container
-            .qrcode-container__title {{$t('tokenCard.charge.codeTips',{tokenSymbol:getTokenSymbol(token)})}}
+        .qrcode-container {{ $t('tokenCard.charge.codeTips',{tokenSymbol:getTokenSymbol(token)}) }}
             qrcode(:text="addressQrcode" :options="qrOptions" class="qrcode-container__content")
         .__row(v-if="!!labelName&&!!labelValue")
             span.__row_t {{labelName}}
                 span.red {{ $t('tokenCard.charge.labelTips',{labelName}) }}
             img.copy.__pointer(src="~assets/imgs/copy_default.svg" @click="copyLabel")
         .__input_row.__unuse_input.top(v-if="!!labelName") {{ labelValue }}
-        .qrcode-container(v-if="!!labelName")
-            .qrcode-container__title {{$t('tokenCard.charge.labelCodeTips',{labelName})}}
+        .qrcode-container(v-if="!!labelName") {{ $t('tokenCard.charge.labelCodeTips',{labelName}) }}
             qrcode(:text="labelValue" :options="qrOptions" class="qrcode-container__content")
 </template>
 
@@ -114,8 +112,6 @@ export default {
 <style lang="scss" scoped>
 @import "~assets/scss/vars.scss";
 @import "pcComponents/confirm/confirmRow.scss";
-@import "./dialog.scss";
-// @include block;
 
 .strong{
     color: $blue-color-1;
@@ -139,14 +135,19 @@ export default {
 }
 
 .qrcode-container {
-    background: rgba(243, 246, 249, 1);
-    border: 1px solid rgba(212, 222, 231, 1);
+    [data-theme="0"] & {
+        background: rgba(243, 246, 249, 1);
+        border: 1px solid rgba(212, 222, 231, 1);
+    }
+    [data-theme="1"] & {
+        background-color: $black-color-1;
+    }
     margin-top: 20px;
     padding: 20px;
     font-size: 14px;
     line-height: 18px;
     @include font-family-normal();
-    color: rgba(29, 32, 36, 1);
+    @include common_font_color();
     box-sizing: border-box;
     text-align: center;
     &__content {
@@ -156,7 +157,6 @@ export default {
 .head {
     padding: 20px 30px;
     box-sizing: border-box;
-
     [data-theme="0"] & {
         border-bottom: 1px solid rgba(212, 222, 231, 1);
         background: rgba(0, 122, 255, 0.05);
@@ -164,10 +164,6 @@ export default {
     [data-theme="1"] & {
         background: $black-color-3;
     }
-    // display: flex;
-    // flex-direction: column;
-    // @include font-family-normal();
-    // line-height: 18px;
 }
 </style>
 

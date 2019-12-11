@@ -4,10 +4,7 @@
 
         <div class="op item">
             <div class="btn_group">
-                <div
-                    class="btn btn__ok __pointer"
-                    @click="addProxy({ actionType: 'new' })"
-                >
+                <div class="btn btn__ok __pointer" @click="addProxy({ actionType: 'new' })">
                     {{ $t("trade.proxy.new") }}
                 </div>
                 <div class="btn btn__cancel __pointer" @click="gotoProxyInfo">
@@ -15,7 +12,8 @@
                 </div>
             </div>
         </div>
-        <div class="active item">
+
+        <div class="tb item">
             <div class="__second-title">{{ $t("trade.proxy.active.title") }}</div>
             <div class="proxytb">
                 <div class="proxytb_row head">
@@ -94,7 +92,8 @@
                 </div>
             </div>
         </div>
-        <div class="passive item">
+
+        <div class="tb item">
             <div class="__second-title">{{ $t("trade.proxy.passive.title") }}</div>
             <div class="proxytb">
                 <div class="proxytb_row head">
@@ -208,7 +207,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "~assets/scss/vars.scss";
 @import "~pcAssets/scss/title.scss";
 
 .__second-title {
@@ -235,10 +233,7 @@ export default {
             }
         }
     }
-    .active {
-        flex: 1;
-    }
-    .passive {
+    .tb {
         flex: 1;
     }
 }

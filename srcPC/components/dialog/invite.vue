@@ -114,4 +114,8 @@ export default {
 <style lang="scss" scoped>
 @import "~assets/scss/vars.scss";
 @import './invite.scss';
+
+.__row_hint {
+    top: 0;
+}
 </style>
