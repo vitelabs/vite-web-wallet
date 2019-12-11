@@ -413,13 +413,6 @@
                 "WRONG_WITHDRAW_ADDRESS":"转出地址填写错误"            
             }
         },
-        "receive": {
-            "title": "接收",
-            "codeTips": "请扫码向我转入{tokenSymbol}",
-            "addressTitle": "接收地址",
-            "amountTitle": "请输入接收金额",
-            "amountPlaceholder": "请输入接收金额"
-        },
         "charge": {
             "title": "跨链转入",
             "addrErr":"网关节点出错，请检查网关设置",

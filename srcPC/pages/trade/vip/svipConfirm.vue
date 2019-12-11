@@ -1,23 +1,24 @@
 <template lang="pug">
 extends /components/dialog/base.pug
 block content
-    .content-wrapper
-        .block__title {{ $t('tokenCard.heads.availableExAmount') }}
-        .block__content.space
-            .token__title
-                img(:src="viteTokenInfo ? viteTokenInfo.icon : ''")
-                .symbol VITE
-            .right.blue {{exViteBalance}}
-        .block__title {{ $t('tradeVip.svipConfirm.openStakingAmount') }}
-            .err(v-if="isNoBalance") {{ $t('tradeVip.vipConfirm.noBalance') }}
-        .block__content.edit 1,000,000 VITE
-        .block__title {{ $t('tradeVip.svipConfirm.address') }}
-            .err(v-if="!isAddress") {{ $t('hint.addrFormat') }}
+    .__row
+        .__row_t {{ $t('tokenCard.heads.availableExAmount') }}
+        .__input_row.__unuse_input.__bold
+            img.__icon(:src="viteTokenInfo ? viteTokenInfo.icon : ''")
+            span {{ "VITE" }}
+            span.__right.blue {{ exViteBalance }}
+    .__row
+        .__row_t {{ $t('tradeVip.svipConfirm.openStakingAmount') }}
+            .__err(v-if="isNoBalance") {{ $t('tradeVip.vipConfirm.noBalance') }}
+        .__input_row.__unuse_input 1,000,000 VITE
+    .__row
+        .__row_t {{ $t('tradeVip.svipConfirm.address') }}
+            .__err(v-if="!isAddress") {{ $t('hint.addrFormat') }}
         vite-input.block_input(v-model="inputAddress" :placeholder="$t('tradeVip.svipConfirm.addressPlaceholder')")
-            span.all-wrapper(slot="after" @click="fillMyAddr")
-                span.all {{ $t('walletQuota.myAddr') }}
-        .charge-tips {{ $t('tradeVip.svipConfirm.openHint') }}
-            .dot
+            span.__all_wrapper.__pointer(slot="after" @click="fillMyAddr")
+                span.__all {{ $t('walletQuota.myAddr') }}
+    .__hint
+        span {{ $t('tradeVip.svipConfirm.openHint') }}
 </template>
 
 <script>
@@ -119,104 +120,5 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "~assets/scss/vars.scss";
-.block__title {
-    height: 16px;
-    font-size: 12px;
-    @include font-family-bold();
-    color: rgba(29, 32, 36, 1);
-    line-height: 16px;
-    margin-top: 20px;
-    display: flex;
-    justify-content: space-between;
-    .err {
-        color: #ff2929;
-        font-size: 12px;
-    }
-    &:first-child {
-        margin-top: 0;
-    }
-}
-
-.block__content {
-    position: relative;
-    border-radius: 2px;
-    border: 1px solid rgba(212, 222, 231, 1);
-    font-size: 12px;
-    word-break: break-word;
-    width: 100%;
-    box-sizing: border-box;
-    margin-top: 16px;
-    padding: 7px 15px;
-    align-items: center;
-    display: flex;
-    width: 100%;
-    justify-content: space-between;
-    .token__title {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        @include font-family-bold();
-        img {
-            width: 20px;
-            height: 20px;
-            margin-right: 10px;
-        }
-    }
-    input {
-        width: 100%;
-    }
-    .light {
-        color: #5e6875;
-    }
-    .blue {
-        color: #007aff;
-    }
-    &.edit {
-        text-align: left;
-        background: rgba(243, 246, 249, 1);
-        color: #5e6875;
-        @include font-family-normal();
-    }
-}
-.block_input {
-    margin-top: 12px;
-}
-.charge-tips {
-    @include font-family-normal();
-    line-height: 16px;
-    font-size: 12px;
-    color: rgba(94, 104, 117, 1);
-    padding-left: 13px;
-    margin-top: 10px;
-    position: relative;
-    width: 100%;
-    margin-top: 20px;
-    &:first-child {
-        margin-top: 0px;
-    }
-    .strong {
-        color: #007aff;
-        @include font-family-bold();
-    }
-    .dot {
-        width: 4px;
-        height: 4px;
-        background: rgba(0, 122, 255, 1);
-        border-radius: 100%;
-        position: absolute;
-        left: 0;
-        top: 4px;
-    }
-}
-
-.all-wrapper {
-    color: #007AFF;
-    font-size: 12px;
-    margin: 0 15px;
-    cursor: pointer;
-    .all {
-        border-bottom: 1px dashed #007AFF;
-    }
-}
+@import "pcComponents/confirm/confirmRow.scss";
 </style>

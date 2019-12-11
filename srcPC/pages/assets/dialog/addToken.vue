@@ -8,7 +8,7 @@ block content
         .search-tips
             .search-tips__item(v-for="token in searchRes" :class="{active:selectedTokenIds.indexOf(token.tokenId)>=0}")
                 input(type="checkbox" name="addTokenSelected" v-model="selectedTokenIds" :value="token.tokenId" )
-                img(:src="token.icon||token.tokenId|id2icon")
+                img(:src="token.icon")
                 .info
                     .title
                         .name {{token.tokenName}}
@@ -82,8 +82,10 @@ export default {
         height: 45px;
         padding-left: 33px;
         border-radius: 2px 2px 0px 0px;
-        border: 1px solid rgba(212,222,231,1);
         font-size: 12px;
+        @include bg_color_1();
+        @include common_border();
+        @include font_color_1();
     }
     .search-icon{
         width: 12px;
@@ -100,7 +102,7 @@ export default {
     height: 260px;
     overflow-y: scroll;
     border-radius: 0px 0px 2px 2px;
-    border: 1px solid rgba(212,222,231,1);
+    @include common_border();
     border-top: none;
     &__item{
         display: flex;
@@ -109,7 +111,7 @@ export default {
         align-items: center;
         cursor: pointer;
         &.active, &:hover{
-            background: rgba(0,122,255,0.03);
+            @include hover_color();
         }
         input {
             height: 16px;
@@ -128,7 +130,7 @@ export default {
                 display: flex;
                 .name{
                     @include font-family-bold();
-                    color: #1D2024;
+                    @include common_font_color();
                     font-size: 14px;
                     line-height: 18px;
                 }
@@ -136,13 +138,13 @@ export default {
                     background: rgba(0,122,255,0.06);
                     border-radius: 2px;
                     height: 18px;
-                    color: #007AFF;
+                    color: $blue-color-1;
                     line-height: 18px;
                     padding: 0 4px;
                 }
             }
             .desc {
-                color: rgba(94,104,117,0.6);
+                @include gray_font_color_1();
             }
         }
     }

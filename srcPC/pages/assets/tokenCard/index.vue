@@ -85,7 +85,6 @@
 
 <script>
 import {
-    receiveDialog,
     chargeDialog,
     withdrawDialog,
     tokenInfoDialog
@@ -192,11 +191,6 @@ export default {
         },
         unbind() {
             gateStorage.unbindToken(this.token.tokenId);
-        },
-        receive() {
-            receiveDialog({ token: this.token }).catch(e => {
-                console.error(e);
-            });
         },
         charge() {
             statistics.event(this.$route.name, 'Cross-Chain-receive', this.address || '');

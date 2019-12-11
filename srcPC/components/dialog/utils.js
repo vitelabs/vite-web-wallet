@@ -154,7 +154,10 @@ const mixin = {
                     color: '#007aff',
                     'margin-right': '20px'
                 },
-                unUse: { color: '#fff' }
+                unUse: {
+                    color: '#fff',
+                    ...theme.unUse
+                }
             };
             return baseTheme;
         },
@@ -164,7 +167,7 @@ const mixin = {
                     background: '#ffffff',
                     'box-shadow': '0 2px 48px 1px rgba(176, 192, 237, 0.42)'
                 },
-                title: { background: '#4B74FF' },
+                title: { background: '#007AFF' },
                 body: { color: 'rgba(29,32,36,1)' },
                 unUse: { background: 'rgba(191,191,191,1)' }
             };
