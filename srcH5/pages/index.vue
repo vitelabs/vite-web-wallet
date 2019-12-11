@@ -6,6 +6,17 @@
         <loading v-if="isLoading" loadingType="dot" class="ex-center-loading"></loading>
         <bottom-bar class="bottom-bar"></bottom-bar>
         <order-notice-list class="notice-list"></order-notice-list>
+        <confirm class="bnb-conf" v-show="isShowConfirm" :showMask="true" :singleBtn="true"
+                 :title="$t('bnbConf.title')" :closeIcon="true"
+                 :close="close" :leftBtnTxt="$t('bnbConf.btn')"
+                 :leftBtnClick="goLink">
+            <img class="bnb-img" src="~assets/imgs/bnb.png"/>
+            <div class="help-t">{{ $t('bnbConf.t1') }}</div>
+            <div class="help-txt">{{ $t('bnbConf.t2') }}</div>
+            <div class="help-txt">{{ $t('bnbConf.t3') }}</div>
+            <div class="help-txt">{{ $t('bnbConf.t4') }}</div>
+            <div class="__notice"><span>{{ $t('bnbConf.notice') }}</span></div>
+        </confirm>
     </div>
 </template>
 
@@ -17,9 +28,11 @@ import env from 'h5Utils/envFromURL';
 import { setItem } from 'h5Utils/storage';
 import { bridge } from 'h5Utils/bridge';
 import bottomBar from 'h5Components/bottomBar';
+import confirm from 'h5Components/confirm/confirm.vue';
+import openUrl from 'utils/openUrl';
 
 export default {
-    components: { orderNoticeList, bottomBar, loading },
+    components: { orderNoticeList, bottomBar, loading, confirm },
     created() {
         bridge['wallet.currentAddress']().then(address => {
             console.log('get address', address);
@@ -46,18 +59,36 @@ export default {
         }
     },
     data() {
-        return { isLoading: !this.$store.state.account.address };
+        return {
+            isLoading: !this.$store.state.account.address,
+            isShowConfirm: true
+        };
+    },
+    computed: {
+        link() {
+            return this.$i18n.locale === 'zh'
+                ? 'https://www.binancezh.com/cn/vote'
+                : 'https://www.binance.com/en/vote';
+        }
     },
     methods: {
         init() {
             this.$store.dispatch('startLoopExchangeBalance');
             this.$store.dispatch('exFetchLatestOrder');
+        },
+        close() {
+            this.isShowConfirm = false;
+        },
+        goLink() {
+            openUrl(this.link);
         }
     }
 };
 </script>
 
 <style lang="scss" scoped>
+@import "~assets/scss/vars.scss";
+
 .trade-container {
     position: fixed;
     top: 0;
@@ -94,5 +125,40 @@ export default {
     width: 100%;
     max-height: 100%;
     overflow: auto;
+}
+
+.bnb-conf {
+    z-index: 1000;
+    text-align: center;
+    .bnb-img {
+        width: 100px;
+        height: 100px;
+        margin: 30px 0;
+    }
+    .help-t {
+        @include font-family-bold();
+        font-size: 14px;
+        line-height: 14px;
+        margin-bottom: 12px;
+        word-break: break-all;
+        text-align: left;
+        .link {
+            color: #118bff;
+        }
+    }
+
+    .help-txt {
+        text-align: left;
+        opacity: 0.66;
+        font-size: 12px;
+        color: #333;
+        line-height: 22px;
+        margin-bottom: 10px;
+        word-break: break-all;
+        @include font-family-bold();
+    }
+    .__notice {
+        text-align: left;
+    }
 }
 </style>
