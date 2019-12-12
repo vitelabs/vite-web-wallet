@@ -372,8 +372,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "~assets/scss/vars.scss";
-@import "~pcAssets/scss/title.scss";
+@import "~pcAssets/scss/common.scss";
+
+@include secondTitle();
 
 .vote {
     height: 100%;

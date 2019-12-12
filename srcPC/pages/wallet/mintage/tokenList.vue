@@ -298,7 +298,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "~pcAssets/scss/title.scss";
+@import "~pcAssets/scss/common.scss";
+
+@include secondTitle();
 
 .list-wrapper {
     margin-top: 20px;

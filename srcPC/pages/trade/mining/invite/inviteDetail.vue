@@ -42,8 +42,9 @@ export default {
 
 <style lang="scss" scoped>
 @import "~assets/scss/vars.scss";
-@import "~pcAssets/scss/title.scss";
+@import "~pcAssets/scss/common.scss";
 
+@include secondTitle();
 .__second-title {
     margin-bottom: 8px;
 }

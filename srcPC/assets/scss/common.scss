@@ -1,0 +1,34 @@
+@import "~assets/scss/vars.scss";
+
+@mixin secondTitle {
+    .__second-title {
+        font-size: 14px;
+        line-height: 18px;
+        @include font-family-bold();
+        @include common_font_color();
+    }
+}
+
+@mixin tradeBtn {
+    .__trade-btn {
+        [data-theme="0"] & {
+            box-shadow: 0px 2px 10px 1px rgba(176, 192, 237, 0.42);
+        }
+        line-height: 30px;
+        text-align: center;
+        width: 125px;
+        height: 30px;
+        display: inline-block;
+        box-sizing: border-box;
+        padding: 0 5px;
+        margin-right: 11px;
+        color: #fff;
+        background-color: $blue-color-1;
+        border-radius: 2px;
+        font-size: 12px;
+        &__cancel {
+            @include bg_color_4();
+            color: $blue-color-1;
+        }
+    }
+}

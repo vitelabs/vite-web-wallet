@@ -13,13 +13,13 @@
         </confirm>
 
         <div class="btn_group">
-            <div v-show="!isVip" class="btn __pointer" @click="openVIP">
+            <div v-show="!isVip" class="__trade-btn __pointer" @click="openVIP">
                 {{ $t('tradeVip.vipConfirm.openVip') }}
             </div>
-            <div v-show="isVip" class="btn unuse">
+            <div v-show="isVip" class="__trade-btn unuse">
                 {{ $t('tradeVip.vipConfirm.openVip') }}
             </div>
-            <div class="btn __pointer" @click="openSVIP">
+            <div class="__trade-btn __pointer" @click="openSVIP">
                 {{ $t('tradeVip.svipConfirm.openVip') }}
             </div>
         </div>
@@ -104,8 +104,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "~assets/scss/vars.scss";
-@import "~pcAssets/scss/title.scss";
+@import "~pcAssets/scss/common.scss";
+
+@include secondTitle();
+@include tradeBtn();
 
 .trade-vip-container {
     height: 100%;
@@ -131,24 +133,10 @@ export default {
     @include font-family-normal();
 }
 
-.btn {
-    line-height: 30px;
-    text-align: center;
-    width: 125px;
-    height: 30px;
-    display: inline-block;
-    box-sizing: border-box;
-    padding: 0 5px;
-    margin-right: 11px;
-    color: #fff;
-    background-color: #007aff;
-    border-radius: 2px;
-    font-size: 12px;
+.__trade-btn {
     &.unuse {
-        color: rgba(94, 104, 117, 0.3);
-        border: 1px solid rgba(198,203,212,0.3);
+        @include gray_btn_color();
         cursor: not-allowed;
-        background: none;
     }
 }
 
