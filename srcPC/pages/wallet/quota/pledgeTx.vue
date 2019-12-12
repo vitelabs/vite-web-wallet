@@ -213,19 +213,16 @@ export default {
 
 .pledge-tx-wrapper {
     position: relative;
-
     .row {
         display: flex;
         justify-content: space-between;
         flex-wrap: wrap;
-
         .item {
             display: inline-block;
             width: 49%;
             min-width: 510px;
             margin-top: 14px;
         }
-
         .about, .__form_btn {
             display: inline-block;
             width: 48%;
@@ -237,13 +234,13 @@ export default {
     }
 
     .unit {
+        @include common_font_color();
         padding: 0 15px;
     }
 
     .add-unit {
         padding: 0 10px;
         position: relative;
-
         .add-icon {
             display: inline-block;
             margin-top: 7px;
@@ -265,7 +262,6 @@ export default {
             white-space: nowrap;
             background: rgba(255, 255, 255, 1);
             box-shadow: 0 5px 20px 0 rgba(0, 0, 0, 0.1);
-
             &::after {
                 content: ' ';
                 display: inline-block;

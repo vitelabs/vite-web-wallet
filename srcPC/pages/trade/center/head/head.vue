@@ -108,9 +108,13 @@ export default {
     font-size: 12px;
     font-weight: 600;
     line-height: 16px;
-    background: rgba(247,249,251,1);
     align-items: center;
-
+    [data-theme="0"] & {
+        background: rgba(247,249,251,1);
+    }
+    [data-theme="1"] & {
+        background: $black-color-3;
+    }
     .content {
         display: flex;
         flex: 1;
@@ -127,16 +131,20 @@ export default {
             flex: 1;
         }
         .token-title {
-            @include font-family-normal();
-            color: #5e6875;
-            font-weight: 400;
             white-space: nowrap;
+            @include font-family-normal();
+            [data-theme="0"] & {
+                color: #5e6875;
+            }
+            [data-theme="1"] & {
+                color: #545F75;
+            }
         }
         .token-content {
             font-family: $font-H;
             margin-top: 4px;
             font-weight: 600;
-            color: #1d2024;
+            @include font_color_1();
             &.down {
                 color: $down-font-color;
             }

@@ -30,16 +30,13 @@ export default {
 .order-arrow-wrapper {
     display: inline-block;
     height: 100%;
-
     .arrow-icon {
         display: block;
         width: 12px;
         height: 50%;
-
         &:first-child {
             background: url("~assets/imgs/ascend.svg") bottom no-repeat;
         }
-
         &:last-child {
             background: url("~assets/imgs/decend.svg") top no-repeat;
         }

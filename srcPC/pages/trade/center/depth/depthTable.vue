@@ -212,11 +212,11 @@ export default {
     }
 }
 .border_b {
-    border-bottom: 1px solid rgba(229, 237, 243, 1);
+    @include center_border(bottom);
 }
 .border_all {
-    border-bottom: 1px solid rgba(229, 237, 243, 1);
-    border-top: 1px solid rgba(229, 237, 243, 1);
+    @include center_border(top);
+    @include center_border(bottom);
 }
 
 .depth-table-wrapper {

@@ -80,7 +80,7 @@ export default {
         width: 100%;
         flex: 1;
         overflow: auto;
-        box-shadow: 0px 2px 10px 1px rgba(176,192,237,0.42);
+        @include box_shadow();
         .tb_content {
             height: 100%;
         }

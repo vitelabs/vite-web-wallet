@@ -93,6 +93,12 @@ export default {
 <style lang="scss" scoped>
 .menu.switch-address-wrapper {
     .list-title {
+        [data-theme="0"] & {
+            border: none;
+        }
+        [data-theme="1"] & {
+            border: none;
+        }
         border: none;
     }
     .list {

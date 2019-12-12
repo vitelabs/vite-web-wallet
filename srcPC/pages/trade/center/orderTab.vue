@@ -48,7 +48,7 @@ export default {
     display: flex;
     flex-direction: column;
     background: #fff;
-    box-shadow: 0 2px 48px 1px rgba(176, 192, 237, 0.42);
+    @include box_shadow();
     margin-top: 0;
     border-radius: 2px;
 

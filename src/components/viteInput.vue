@@ -99,12 +99,7 @@ export default {
         font-size: 12px;
         text-indent: 15px;
         @include bg_color_1();
-        [data-theme="0"] & {
-            color: #000;
-        }
-        [data-theme="1"] & {
-            color: $white-color;
-        }
+        @include default_font_color();
     }
 }
 </style>

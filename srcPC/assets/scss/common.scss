@@ -11,9 +11,7 @@
 
 @mixin tradeBtn {
     .__trade-btn {
-        [data-theme="0"] & {
-            box-shadow: 0px 2px 10px 1px rgba(176, 192, 237, 0.42);
-        }
+        @include box_shadow();
         line-height: 30px;
         text-align: center;
         width: 125px;

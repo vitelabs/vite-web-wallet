@@ -64,40 +64,34 @@ export default {
     text-align: center;
     font-family: $font-H;
     font-weight: 600;
-
     .price {
         font-size: 14px;
-        color: #000;
+        @include default_font_color();
         &.down {
             color: $down-font-color;
         }
-
         &.up {
             color: $up-font-color;
         }
     }
-
     .p-icon {
         display: inline-block;
         width: 10px;
         height: 12px;
         margin-top: 9px;
-
         &.up-icon {
             background: url('~assets/imgs/ex-up-arrow.svg');
             background-size: 100% 100%;
         }
-
         &.down-icon {
             background: url('~assets/imgs/ex-down-arrow.svg');
             background-size: 100% 100%;
         }
     }
-
     .real-price {
         font-size: 12px;
-        color: #24272b;
         margin-left: 10px;
+        @include font_color_to_white(#24272b)
     }
 }
 </style>

@@ -264,7 +264,7 @@ export default {
     flex-direction: column;
     width: 100%;
     height: 100%;
-    box-shadow: 0px 2px 10px 1px rgba(176,192,237,0.42);
+    @include box_shadow();
     .my-divident {
         background: url('~assets/imgs/mint_pledge_bg.png') rgba(234,248,255,0.2);
         background-size: 100% 100%;
@@ -349,7 +349,7 @@ export default {
         background: rgba(247,249,251,1);
     }
     [data-theme="1"] & {
-        background: rgba(21,28,50,1) rgba(1,8,31,0.25);
+        background: rgba(1,8,31,0.25);
     }
     font-size: 12px;
     font-family: $font-normal;

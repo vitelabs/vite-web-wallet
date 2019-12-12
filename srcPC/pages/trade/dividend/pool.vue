@@ -168,7 +168,7 @@ export default {
 @import "~assets/scss/vars.scss";
 
 .pool-detail {
-    box-shadow: 0px 2px 10px 1px rgba(176,192,237,0.42);
+    @include box_shadow();
     border-radius: 2px;
     display: flex;
     flex-direction: row;
