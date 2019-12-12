@@ -2,7 +2,7 @@
     <div class="quota-wrapper">
         <quota-head></quota-head>
         <div class="content">
-            <my-quota class="my-quota _content_border"></my-quota>
+            <my-quota class="my-quota __form_border"></my-quota>
             <pledge-tx class="pledge-tx"></pledge-tx>
         </div>
         <list></list>
@@ -20,7 +20,7 @@ export default { components: { quotaHead, myQuota, pledgeTx, list, viteInput } }
 </script>
 
 <style lang="scss" scoped>
-@import "~assets/scss/vars.scss";
+@import "../form.scss";
 
 .quota-wrapper {
     position: relative;
@@ -36,20 +36,12 @@ export default { components: { quotaHead, myQuota, pledgeTx, list, viteInput } }
     justify-content: space-between;
     flex-wrap: wrap;
     margin-bottom: 14px;
-
-    ._content_border {
-        background: #fff;
-        box-shadow: 0px 2px 10px 1px rgba(176,192,237,0.42);
-        border-radius: 2px;
-    }
-
     .my-quota {
         box-sizing: border-box;
         min-width: 170px;
         margin-right: 10px;
         padding: 22px 30px;
     }
-
     .pledge-tx {
         flex: 1;
         max-width: 100%;

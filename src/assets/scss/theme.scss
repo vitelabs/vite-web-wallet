@@ -72,11 +72,37 @@
             border-bottom: 1px solid $black-color-4;
         }
     }
+    @if $b == right {
+        [data-theme="0"] & {
+            border-right: 1px solid #D4DEE7;
+        }
+        [data-theme="1"] & {
+            border-right: 1px solid $black-color-4;
+        }
+    }
 }
 
 @mixin common_font_color() {
     [data-theme="0"] & {
         color: rgba(29,32,36,1);
+    }
+    [data-theme="1"] & {
+        color: $white-color;
+    }
+}
+
+@mixin default_font_color() {
+    [data-theme="0"] & {
+        color: #000;
+    }
+    [data-theme="1"] & {
+        color: $white-color;
+    }
+}
+
+@mixin font_color_to_white($color) {
+    [data-theme="0"] & {
+        color: $color;
     }
     [data-theme="1"] & {
         color: $white-color;
@@ -108,5 +134,11 @@
     }
     [data-theme="1"] & {
         background: $gray-color-2;
+    }
+}
+
+@mixin box_shadow {
+    [data-theme="0"] & {
+        box-shadow: 0 2px 10px 1px rgba(176, 192, 237, 0.42);
     }
 }

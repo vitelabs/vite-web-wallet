@@ -47,25 +47,20 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "~assets/scss/vars.scss";
-
 .my-quota-wrapper {
     padding: 35px 24px;
 }
 
 .row {
     @include font-family-bold();
-
+    @include font_color_1();
     .title {
         font-size: 14px;
-        color: #1d2024;
         letter-spacing: 0.35px;
         margin-bottom: 14px;
     }
-
     .text {
         font-size: 18px;
-        color: #1d2024;
         line-height: 22px;
     }
 }

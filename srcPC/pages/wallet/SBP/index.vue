@@ -6,7 +6,7 @@
 
         <div v-if="!loadingToken" class="section">
             <div class="__second-title">{{ $t('walletSBP.section1.title') }}</div>
-            <register :canUseAddr="canUseAddr" class="content"></register>
+            <register :canUseAddr="canUseAddr"></register>
         </div>
 
         <div v-if="!loadingToken" class="section">
@@ -252,12 +252,6 @@ export default {
 
     .__second-title {
         margin-bottom: 14px;
-    }
-
-    .content {
-        background: #fff;
-        box-shadow: 0px 2px 10px 1px rgba(176,192,237,0.42);
-        border-radius: 2px;
     }
 }
 

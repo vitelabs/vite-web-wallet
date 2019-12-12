@@ -1,5 +1,33 @@
 @import "~assets/scss/vars.scss";
 
+@mixin center_color {
+    [data-theme="0"] & {
+        color: rgba(29,32,36,0.6);
+    }
+    [data-theme="1"] & {
+        color: $gray-color-2;
+    }
+}
+
+@mixin center_border($b) {
+    @if $b == bottom {
+        [data-theme="0"] & {
+            border-bottom: 1px solid rgba(229, 237, 243, 1);
+        }
+        [data-theme="1"] & {
+            border-bottom: 1px solid $black-color-4;
+        }
+    }
+    @if $b == top {
+        [data-theme="0"] & {
+            border-top: 1px solid rgba(229, 237, 243, 1);
+        }
+        [data-theme="1"] & {
+            border-top: 1px solid $black-color-4;
+        }
+    }
+}
+
 $blue: #007AFF;
 $red: #E5494D;
 $green: #00D764;
@@ -23,20 +51,26 @@ $up-font-color: $green;
     display: flex;
     padding-top: 4px;
     width: 100%;
-    background: rgba(243,245,249,1);
     padding: 4px 0 0px 0;
+    [data-theme="0"] & {
+        background: rgba(243,245,249,1);
+    }
+    [data-theme="1"] & {
+        background-color: $black-color-1;
+    }
     .ex-tab {
         display: inline-block;
-        line-height: 17px;
-        padding-bottom: 4px;
-        font-size: 13px;
-        color: rgba(29,32,36,0.6);
-        @include font-family-bold();
         margin-top: 6px;
-
+        padding-bottom: 4px;
+        line-height: 17px;
+        font-size: 13px;
+        @include font-family-bold();
+        @include center_color();
         span {
-            border-left: 1px solid rgba(205,204,204,1);
             padding: 0px 6px;
+            [data-theme="0"] & {
+                border-left: 1px solid rgba(205,204,204,1);
+            }
         }
         &:first-child span {
             border: none;
@@ -47,9 +81,12 @@ $up-font-color: $green;
         &.active {
             margin-top: 0;
             padding-top: 6px;
-            background: #fff;
             line-height: 17px;
             border-radius: 4px 4px 0px 0px;
+            @include bg_color_1();
+            [data-theme="1"] & {
+                color: $white-color;
+            }
             span {
                 border: none;
             }
@@ -72,9 +109,13 @@ $up-font-color: $green;
     line-height: 17px;
     font-size: 13px;
     @include font-family-bold();
-    font-weight: 600;
-    color: rgba(29,32,36,0.6);
-    background: #f7f9fb;
+    @include center_color();
+    [data-theme="0"] & {
+        background: #f7f9fb;
+    }
+    [data-theme="1"] & {
+        background: $black-color-1;
+    }
 }
 
 .__center-tb-title {
@@ -83,10 +124,16 @@ $up-font-color: $green;
     padding: 0 6px;
     height: 27px;
     line-height: 27px;
-    border-bottom: 1px solid rgba(212,222,231,0.5);
     font-size: 12px;
     font-weight: 400;
-    color: rgba(94,104,117,0.58);;
+    [data-theme="0"] & {
+        border-bottom: 1px solid rgba(212,222,231,0.5);
+        color: rgba(94,104,117,0.58);
+    }
+    [data-theme="1"] & {
+        border-bottom: 1px solid $black-color-4;
+        color: $gray-color-2;
+    }
 }
 .__center-tb-row {
     position: relative;
@@ -98,7 +145,12 @@ $up-font-color: $green;
     font-size: 12px;
     font-weight: 400;
     font-family: $font-H;
-    color: rgba(94,104,117,1);
+    [data-theme="0"] & {
+        color: $gray-color-4;
+    }
+    [data-theme="1"] & {
+        color: $white-color;
+    }
     &:hover {
         background: rgba(75, 116, 255, 0.1);    
     }

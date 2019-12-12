@@ -302,7 +302,6 @@ export default {
     .__center-tb-item {
         position: relative;
     }
-
     .describe {
         display: inline-block;
         width: 80px;
@@ -312,7 +311,6 @@ export default {
             height: 12px;
         }
     }
-
     &.active {
         background: rgba(75, 116, 255, 0.1);
     }

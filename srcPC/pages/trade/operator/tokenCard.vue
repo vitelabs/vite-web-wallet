@@ -173,7 +173,7 @@ export default {
 
 .token-card-wrapper {
     background: rgba(255,255,255,1);
-    box-shadow: 0px 2px 10px 1px rgba(176,192,237,0.42);
+    @include box_shadow();
     border-radius: 2px;
     box-sizing: border-box;
     padding: 20px 30px;

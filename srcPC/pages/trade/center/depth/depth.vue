@@ -107,7 +107,6 @@ export default {
     height: 100%;
     display: flex;
     flex-direction: column;
-
     .depth-content-wrapper {
         position: relative;
         width: 100%;
@@ -119,10 +118,9 @@ export default {
             overflow: auto;
         }
     }
-
     .border_all {
-        border-top: 1px solid rgba(229, 237, 243, 1);
-        border-bottom: 1px solid rgba(229, 237, 243, 1);
+        @include center_border(top);
+        @include center_border(bottom);
     }
     .no_border_t {
         border-top: none;

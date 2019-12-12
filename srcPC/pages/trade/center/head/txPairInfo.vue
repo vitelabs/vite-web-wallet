@@ -166,12 +166,11 @@ export default {
 
 .t-item {
     display: inline-block;
-    font-size: 12px;
-    @include font-family-bold();
-    font-weight: 600;
-    color: rgba(29, 32, 36, 1);
     line-height: 14px;
     margin-left: 36px;
+    font-size: 12px;
+    @include font-family-bold();
+    @include common_font_color();
     .cmc-img {
         position: relative;
         display: inline-block;
@@ -200,7 +199,12 @@ export default {
             font-size: 16px;
         }
         &.ttoken {
-            color: #5E6875;
+            [data-theme="0"] & {
+                color: #5e6875;
+            }
+            [data-theme="1"] & {
+                color: #545F75;
+            }
         }
     }
     .mining {
@@ -223,7 +227,7 @@ export default {
     }
     .gate {
         @include font-family-normal();
-        color: #007AFF;
+        color: $blue-color-1;
         display: flex;
         margin-top: 2px;
         .gate-img {

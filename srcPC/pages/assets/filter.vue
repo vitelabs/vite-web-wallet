@@ -105,7 +105,7 @@ export default {
         &:first-child {
             width: 260px;
             height: 100%;
-            box-shadow: 0px 2px 10px 1px rgba(176, 192, 237, 0.42);
+            @include box_shadow();
             input {
                 width: 100%;
                 height: 100%;
