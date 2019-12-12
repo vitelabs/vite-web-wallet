@@ -17,6 +17,17 @@ export default {
         this.$store.dispatch('exFetchVip');
         this.$store.dispatch('exFetchSVip');
         this.$store.dispatch('startLoopExchangeRate');
+    },
+    computed: {
+        address() {
+            return this.$store.getters.activeAddr;
+        }
+    },
+    watch: {
+        address() {
+            this.$store.dispatch('exFetchVip');
+            this.$store.dispatch('exFetchSVip');
+        }
     }
 };
 </script>

@@ -50,12 +50,6 @@ export default {
         address() {
             return this.$store.getters.activeAddr;
         }
-    },
-    watch: {
-        address() {
-            this.$store.dispatch('exFetchVip');
-            this.$store.dispatch('exFetchSVip');
-        }
     }
 };
 </script>

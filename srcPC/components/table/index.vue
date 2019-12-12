@@ -115,4 +115,5 @@ export default {
 @import "./incomeList.scss";
 @import "./vipList.scss";
 @import "./smallStakingList.scss";
+@import "./proxyTb.scss";
 </style>

@@ -27,6 +27,15 @@
     }
 }
 
+@mixin bg_color_4() {
+    [data-theme="0"] & {
+        background-color: $white-color;
+    }
+    [data-theme="1"] & {
+        background-color: $black-color-4;
+    }
+}
+
 @mixin hover_color() {
     [data-theme="0"] & {
         background-color: $hover-color-1;
