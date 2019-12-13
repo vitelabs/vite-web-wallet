@@ -6,17 +6,6 @@
         <loading v-if="isLoading" loadingType="dot" class="ex-center-loading"></loading>
         <bottom-bar class="bottom-bar"></bottom-bar>
         <order-notice-list class="notice-list"></order-notice-list>
-        <!--<confirm class="bnb-conf" v-show="isShowConfirm" :showMask="true" :singleBtn="true"-->
-                 <!--:title="$t('bnbConf.title')" :closeIcon="true"-->
-                 <!--:close="close" :leftBtnTxt="$t('bnbConf.btn')"-->
-                 <!--:leftBtnClick="goLink">-->
-            <!--<img class="bnb-img" src="~assets/imgs/bnb.png"/>-->
-            <!--<div class="help-t">{{ $t('bnbConf.t1') }}</div>-->
-            <!--<div class="help-txt">{{ $t('bnbConf.t2') }}</div>-->
-            <!--<div class="help-txt">{{ $t('bnbConf.t3') }}</div>-->
-            <!--<div class="help-txt">{{ $t('bnbConf.t4') }}</div>-->
-            <!--<div class="__notice"><span>{{ $t('bnbConf.notice') }}</span></div>-->
-        <!--</confirm>-->
     </div>
 </template>
 
@@ -29,7 +18,6 @@ import { setItem } from 'h5Utils/storage';
 import { bridge } from 'h5Utils/bridge';
 import bottomBar from 'h5Components/bottomBar';
 import confirm from 'h5Components/confirm/confirm.vue';
-import openUrl from 'utils/openUrl';
 
 export default {
     components: { orderNoticeList, bottomBar, loading, confirm },
@@ -59,28 +47,12 @@ export default {
         }
     },
     data() {
-        return {
-            isLoading: !this.$store.state.account.address,
-            isShowConfirm: true
-        };
-    },
-    computed: {
-        link() {
-            return this.$i18n.locale === 'zh'
-                ? 'https://www.binancezh.com/cn/vote'
-                : 'https://www.binance.com/en/vote';
-        }
+        return { isLoading: !this.$store.state.account.address };
     },
     methods: {
         init() {
             this.$store.dispatch('startLoopExchangeBalance');
             this.$store.dispatch('exFetchLatestOrder');
-        },
-        close() {
-            this.isShowConfirm = false;
-        },
-        goLink() {
-            openUrl(this.link);
         }
     }
 };
