@@ -19,10 +19,10 @@
                 <div class="item btn add" @click="showVXConfirm(true)">
                     {{ $t("tradeDividend.lock") }}
                 </div>
-                <div v-show="!vxBalanceInfo.vxLocked" class="item btn unuse">
+                <div v-show="!canIUnlock" class="item btn unuse">
                     {{ $t("tradeDividend.unlock") }}
                 </div>
-                <div v-show="vxBalanceInfo.vxLocked" class="item btn cancel" @click="showVXConfirm(false)">
+                <div v-show="canIUnlock" class="item btn cancel" @click="showVXConfirm(false)">
                     {{ $t("tradeDividend.unlock") }}
                 </div>
             </div>
@@ -75,6 +75,10 @@ export default {
         vxLocked() {
             const vxLocked = this.vxBalanceInfo.vxLocked || 0;
             return bigNumber.toBasic(vxLocked, this.vxTokenDecimals);
+        },
+        canIUnlock() {
+            const minNumber = bigNumber.toMin(10, this.vxTokenDecimals);
+            return +this.vxBalanceInfo.vxLocked && bigNumber.compared(minNumber, this.vxBalanceInfo.vxLocked) <= 0;
         }
     },
     methods: {
