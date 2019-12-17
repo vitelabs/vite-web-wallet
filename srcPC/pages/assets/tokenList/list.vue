@@ -79,10 +79,10 @@ export default {
     display: flex;
     flex-direction: column;
     align-items: center;
-    box-shadow: 0px 2px 10px 1px rgba(176,192,237,0.32);
     border-radius: 2px;
     flex-grow: 1;
-    background-color: #fff;
+    @include box_shadow();
+    @include bg_color_2();
     .no-data {
         position: absolute;
         top: 50%;
@@ -106,14 +106,12 @@ export default {
         display: flex;
         width: 100%;
         justify-content: flex-start;
-        color: #5e6875;
-        border-bottom: 1px solid rgba(198,203,212,1);
-        background-color: #fff;
         font-size: 12px;
+        @include font_color_2();
+        @include common_border_one(bottom);
         .col {
             @include colWidth;
             padding: 9px;
-            color: rgba(94, 104, 117, 0.58);
             overflow: visible;
             .asset-switch {
                 color: rgba(94, 104, 117, 0.58);;

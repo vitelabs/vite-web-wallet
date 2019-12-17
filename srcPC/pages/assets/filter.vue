@@ -93,6 +93,7 @@ export default {
         border: none;
         display: flex;
         align-items: center;
+
         &.more {
             position: absolute;
             right: 0;
@@ -106,6 +107,9 @@ export default {
             width: 260px;
             height: 100%;
             @include box_shadow();
+            [data-theme="1"] & {
+                border: 1px solid $black-color-4;
+            }
             input {
                 width: 100%;
                 height: 100%;

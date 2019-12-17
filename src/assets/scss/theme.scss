@@ -45,15 +45,6 @@
     }
 }
 
-@mixin second_title_font_color() {
-    [data-theme="0"] & {
-        color: $gray-color-1;
-    }
-    [data-theme="1"] & {
-        color: $gray-color-2;
-    }
-}
-
 @mixin common_border() {
     [data-theme="0"] & {
         border: 1px solid #D4DEE7;
@@ -91,6 +82,15 @@
     }
 }
 
+@mixin second_title_font_color() {
+    [data-theme="0"] & {
+        color: $gray-color-1;
+    }
+    [data-theme="1"] & {
+        color: $gray-color-2;
+    }
+}
+
 @mixin default_font_color() {
     [data-theme="0"] & {
         color: #000;
@@ -124,6 +124,15 @@
     }
     [data-theme="1"] & {
         color: $white-color;
+    }
+}
+
+@mixin font_color_2() {
+    [data-theme="0"] & {
+        color: #5e6875;
+    }
+    [data-theme="1"] & {
+        color: $gray-color-2;
     }
 }
 
