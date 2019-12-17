@@ -266,8 +266,7 @@ export default {
     height: 100%;
     @include box_shadow();
     .my-divident {
-        background: url('~assets/imgs/mint_pledge_bg.png') rgba(234,248,255,0.2);
-        background-size: 100% 100%;
+        @include background_common_img("mint_pledge_bg.png");
         font-size: 12px;
         font-family: $font-normal;
         line-height: 16px;

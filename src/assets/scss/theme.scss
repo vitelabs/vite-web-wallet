@@ -151,3 +151,14 @@
         box-shadow: 0 2px 10px 1px rgba(176, 192, 237, 0.42);
     }
 }
+
+@mixin background_common_img($img_name) {
+    [data-theme="0"] & {
+        background: url("~assets/imgs/" + $img_name);
+        background-size: 100% 100%;
+    }
+    [data-theme="1"] & {
+        background: url("~assets/theme1_imgs/" + $img_name);
+        background-size: 100% 100%;
+    }
+}

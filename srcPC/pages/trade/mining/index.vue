@@ -5,11 +5,8 @@
         </sec-title>
 
         <div class="tab_title">
-            <div
-                class="tab_title_item"
-                @click="tabName = 'trade'"
-                :class="{ active: tabName === 'trade' }"
-            >
+            <div class="tab_title_item" @click="tabName = 'trade'"
+                 :class="{ active: tabName === 'trade' }">
                 <img src="~assets/imgs/exchange/mining/trade.png" />
                 <div>
                     <div class="label">{{ $t("tradeMining.txTitle") }}
@@ -23,11 +20,8 @@
                 </div>
             </div>
             <div class="gap"></div>
-            <div
-                class="tab_title_item"
-                @click="tabName = 'staking'"
-                :class="{ active: tabName === 'staking' }"
-            >
+            <div class="tab_title_item" @click="tabName = 'staking'"
+                 :class="{ active: tabName === 'staking' }">
                 <img src="~assets/imgs/exchange/mining/staking.png" />
                 <div>
                     <div class="label">{{ $t("tradeMining.quotaTitle") }}</div>
@@ -37,11 +31,8 @@
                 </div>
             </div>
             <div class="gap"></div>
-            <div
-                class="tab_title_item"
-                @click="tabName = 'invite'"
-                :class="{ active: tabName === 'invite' }"
-            >
+            <div class="tab_title_item" @click="tabName = 'invite'"
+                 :class="{ active: tabName === 'invite' }">
                 <img src="~assets/imgs/exchange/mining/invite.png" />
                 <div>
                     <div class="label">{{ $t("inviteMining.title") }}</div>
@@ -51,11 +42,8 @@
                 </div>
             </div>
             <div class="gap"></div>
-            <div
-                class="tab_title_item"
-                @click="tabName = 'order'"
-                :class="{ active: tabName === 'order' }"
-            >
+            <div class="tab_title_item" @click="tabName = 'order'"
+                 :class="{ active: tabName === 'order' }">
                 <img src="~assets/imgs/exchange/mining/order.png" />
                 <div>
                     <div class="label">{{ $t("orderMining.title") }}</div>
@@ -221,13 +209,17 @@ export default {
     display: flex;
     align-items: center;
     margin-bottom: 14px;
-    background-color: #ffffff;
-    box-shadow: 0px 2px 10px 1px rgba(176,192,237,0.42);
-    .gap{
+    @include bg_color_2();
+    @include box_shadow();
+    .gap {
         width: 0;
-        border-left: 1px solid rgba(227, 235, 245, 0.6);
         height: 60px;
-
+        [data-theme="0"] & {
+            border-left: 1px solid rgba(227, 235, 245, 0.6);
+        }
+        [data-theme="1"] & {
+            border-left: 1px solid $black-color-4;
+        }
     }
     &_item {
         cursor: pointer;
@@ -237,10 +229,14 @@ export default {
         display: flex;
         align-items: center;
         justify-content: flex-start;
-        @include font-family-bold();
         &.active {
-            background: rgba(0, 122, 255, 0.04);
-            border-bottom: 2px solid rgba(0, 122, 255, 1);
+            [data-theme="0"] & {
+                background: rgba(0, 122, 255, 0.04);
+            }
+            [data-theme="1"] & {
+                background: rgba(75,116,255,0.1);;
+            }
+            border-bottom: 2px solid $blue-color-1;
         }
         img {
             margin-right: 20px;
@@ -248,13 +244,14 @@ export default {
             width: 34px;
         }
         .label {
-            font-size: 13px;
-            color: #5e6875;
+            font-size: 12px;
+            line-height: 18px;
+            @include font_color_2();
         }
         .amount {
             font-size: 16px;
-            color: #1d2024;
-            line-height: 18px;
+            @include font_color_1();
+            @include font-family-bold();
         }
     }
 }
@@ -265,7 +262,7 @@ export default {
     display: flex;
     flex-direction: column;
     &.shadow {
-        box-shadow: 0px 2px 10px 1px rgba(176,192,237,0.42);
+        @include box_shadow();
         border-radius: 2px;
     }
     .no-shadow {

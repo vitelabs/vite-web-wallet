@@ -169,11 +169,10 @@ export default {
 
 .pool-detail {
     @include box_shadow();
+    @include background_common_img("mint_pledge_bg.png");
     border-radius: 2px;
     display: flex;
     flex-direction: row;
-    background: url('~assets/imgs/mint_pledge_bg.png') rgba(234,248,255,0.2);
-    background-size: 100% 100%;
 }
 
 .pool-item {
