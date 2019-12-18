@@ -119,7 +119,7 @@ export default {
 
                 this.pageIndex = pageIndex;
                 this.totalNum = totalStakeCount;
-                this.list = [].concat(this.list, stakeList);
+                this.list = [].concat(this.list, stakeList || []);
                 this.isLoading = false;
                 this.isInit = true;
             }).catch(err => {
