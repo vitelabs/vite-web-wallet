@@ -103,15 +103,18 @@ export default {
 @import '../center.scss';
 
 .depth-wrapper {
+    position: relative;
     width: 100%;
     height: 100%;
     display: flex;
     flex-direction: column;
 
     .depth-content-wrapper {
-        position: relative;
-        width: 100%;
-        height: 100%;
+        position: absolute;
+        top: 60px;
+        bottom: 0;
+        left: 0;
+        right: 0;
         display: flex;
         flex-direction: column;
         &.only-sell {
