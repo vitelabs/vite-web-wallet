@@ -191,8 +191,7 @@ export default {
 
 .depth-table {
     position: relative;
-    flex: 1;
-    height: inherit;
+    height: 100%;
 }
 .show-all {
     flex: 1;
