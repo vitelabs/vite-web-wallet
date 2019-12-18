@@ -84,7 +84,6 @@ export default {
             const successSubmit = () => {
                 this.$toast(this.$t('tradeOpenOrders.confirm.successToast'));
             };
-            console.log(order.orderId);
             initPwd({
                 title: this.$t('tradeOpenOrders.confirm.title'),
                 content: this.$t('tradeOpenOrders.confirm.content'),
