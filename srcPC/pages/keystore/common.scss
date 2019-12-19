@@ -1,0 +1,39 @@
+@import "~assets/scss/vars.scss";
+
+.__btn {
+    margin-top: 20px;
+}
+.__btn_input_active {
+    border: 1px solid #d4dee7;
+    padding: 10px 40px 8px 20px;
+    text-align: left;
+    background: #fff;
+    &:hover {
+        background: rgba(88, 145, 255, 0.13);
+    }
+}
+.__btn_input {
+    border: 1px solid #d4dee7;
+}
+.__title {
+    color: #000;
+}
+.__wrapper {
+    position: absolute;
+    width: 500px;
+    left: 50%;
+    margin-left: -227px;
+}
+.name {
+    @include font-family-bold();
+    font-size: 14px;
+    color: #333;
+    line-height: 20px;
+}
+.address {
+    width: 100%;
+    font-family: $font-normal-b;
+    font-size: 12px;
+    line-height: 20px;
+    color: #333;
+}

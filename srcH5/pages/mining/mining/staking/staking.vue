@@ -2,10 +2,9 @@
     <div class="trade-mining-section">
         <my-income class="staking-income-wrapper" :total="`${miningTotal}`"
                    :title="$t('mobileMining.stakingTotalIncome', {token: 'VX'})">
-            <is-staking :addStaking="addStaking"></is-staking>
         </my-income>
 
-        <staking-detail v-if="stakingObj && +stakingObj.totalStakeCount" :addStaking="addStaking"></staking-detail>
+        <staking-detail :addStaking="addStaking"></staking-detail>
 
         <stakeForMining ref="stakeForMining"></stakeForMining>
 

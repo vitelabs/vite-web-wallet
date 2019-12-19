@@ -1,5 +1,5 @@
 Arguments: 
-  /Users/sisi/.nvm/versions/node/v12.13.0/bin/node /usr/local/Cellar/yarn/1.15.2/libexec/bin/yarn.js add @vite-vitejs@2.3.0-alpha.4
+  /Users/sisi/.nvm/versions/node/v12.13.0/bin/node /usr/local/Cellar/yarn/1.15.2/libexec/bin/yarn.js add @vitejs-ws@2.3.0
 
 PATH: 
   /Users/sisi/.nvm/versions/node/v12.13.0/bin:/Library/Frameworks/Python.framework/Versions/3.7/bin:/Users/sisi/workspace/vite-web-wallet/flutter/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Library/Frameworks/Python.framework/Versions/3.7/bin://flutter/bin:/usr/local/mysql/bin:/usr/local/mysql/bin:/Users/sisi/.nvm/versions/node/v12.13.0/bin
@@ -14,7 +14,7 @@ Platform:
   darwin x64
 
 Trace: 
-  Error: https://registry.npmjs.org/@vite-vitejs: Request "https://registry.npmjs.org/@vite-vitejs" returned a 405
+  Error: https://registry.npmjs.org/@vitejs-ws: Request "https://registry.npmjs.org/@vitejs-ws" returned a 405
       at Request.params.callback [as _callback] (/usr/local/Cellar/yarn/1.15.2/libexec/lib/cli.js:66067:18)
       at Request.self.callback (/usr/local/Cellar/yarn/1.15.2/libexec/lib/cli.js:129541:22)
       at Request.emit (events.js:210:5)
@@ -119,8 +119,8 @@ npm manifest:
           "@babel/preset-typescript": "~7.3.3",
           "@vite/bridge": "^1.0.14",
           "@vite/connector": "^0.0.2-0",
-          "@vite/vitejs": "2.3.0-alpha.3",
-          "@vite/vitejs-ws": "2.3.0-alpha.3",
+          "@vite/vitejs": "2.3.0",
+          "@vite/vitejs-ws": "2.3.0-alpha.5",
           "babel-plugin-syntax-dynamic-import": "~6.18.0",
           "babel-preset-minify": "^0.5.0",
           "bignumber.js": "~7.2.1",
@@ -2398,15 +2398,15 @@ Lockfile:
       "@ethersproject/strings" "^5.0.0-beta.125"
       "@types/node" "^12.0.12"
   
-  "@vite/vitejs-ws@2.3.0-alpha.3":
-    version "2.3.0-alpha.3"
-    resolved "https://registry.npmjs.org/@vite/vitejs-ws/-/vitejs-ws-2.3.0-alpha.3.tgz#a2fea2107367c5d85c2b414ef3ae9f7bfc6b7f63"
-    integrity sha512-4XSgzyed7TxDBOOWAxdERCxOeYr7wX+S64s5iRfiXvex8L66hzcfFCKkFxzZ0pLxWSBtTvcefG7D1cx94ElJbg==
+  "@vite/vitejs-ws@2.3.0-alpha.5":
+    version "2.3.0-alpha.5"
+    resolved "https://registry.npmjs.org/@vite/vitejs-ws/-/vitejs-ws-2.3.0-alpha.5.tgz#4884cbb46d8a72bb584e12ea1840821dcebc7882"
+    integrity sha512-RpqtQ8Gz2N92oiWp6LrXOsnhvgaUyeuzmZsLDrF3QwNFrmqdkX45jQ4tQne4RijTjbImRTgR+UoHhu2TR9pgYg==
   
-  "@vite/vitejs@2.3.0-alpha.3":
-    version "2.3.0-alpha.3"
-    resolved "https://registry.npmjs.org/@vite/vitejs/-/vitejs-2.3.0-alpha.3.tgz#bda6dbc957ddcd6d0a960a1e9594c48ae8bb389b"
-    integrity sha512-/or5rhnr1NpFGCOnoKV7cKdQdixUlFVul2vuT4qOInA2tvH3gsUMpS6MNsETT/6EGZAIa0P0NWryArA/wsisdQ==
+  "@vite/vitejs@2.3.0":
+    version "2.3.0"
+    resolved "https://registry.npmjs.org/@vite/vitejs/-/vitejs-2.3.0.tgz#dbd8d40d499630ed28add02e70684577e99c6d04"
+    integrity sha512-BOpbfS5GIBdFRElag4fjXNyA7R4UvNeT3OHvkVF9PnKC6TWcZs7g6wXFmyFFTEh+57d0wvme6+mLkxJ0QH8/eg==
     dependencies:
       "@sisi/ed25519-blake2b-hd-key" "^1.0.2"
       "@sisi/tweetnacl-blake2b" "^1.0.0"

@@ -17,9 +17,10 @@ import env from 'h5Utils/envFromURL';
 import { setItem } from 'h5Utils/storage';
 import { bridge } from 'h5Utils/bridge';
 import bottomBar from 'h5Components/bottomBar';
+import confirm from 'h5Components/confirm/confirm.vue';
 
 export default {
-    components: { orderNoticeList, bottomBar, loading },
+    components: { orderNoticeList, bottomBar, loading, confirm },
     created() {
         bridge['wallet.currentAddress']().then(address => {
             console.log('get address', address);
@@ -58,6 +59,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import "~assets/scss/vars.scss";
+
 .trade-container {
     position: fixed;
     top: 0;
@@ -94,5 +97,40 @@ export default {
     width: 100%;
     max-height: 100%;
     overflow: auto;
+}
+
+.bnb-conf {
+    z-index: 1000;
+    text-align: center;
+    .bnb-img {
+        width: 100px;
+        height: 100px;
+        margin: 30px 0;
+    }
+    .help-t {
+        @include font-family-bold();
+        font-size: 14px;
+        line-height: 14px;
+        margin-bottom: 12px;
+        word-break: break-all;
+        text-align: left;
+        .link {
+            color: #118bff;
+        }
+    }
+
+    .help-txt {
+        text-align: left;
+        opacity: 0.66;
+        font-size: 12px;
+        color: #333;
+        line-height: 22px;
+        margin-bottom: 10px;
+        word-break: break-all;
+        @include font-family-bold();
+    }
+    .__notice {
+        text-align: left;
+    }
 }
 </style>

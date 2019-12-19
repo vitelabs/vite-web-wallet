@@ -1,10 +1,10 @@
 <template>
     <div class="trade-mining-wrapper">
-        <tab-list :tabList="tabList" defaultTab="trade" v-model="tabName"></tab-list>
-        <tradeMinComp class="section" v-if="tabName === 'trade'"></tradeMinComp>
-        <stakingMinComp class="section" v-if="tabName === 'staking'"></stakingMinComp>
-        <inviteMinComp class="section" v-if="tabName === 'invite'"></inviteMinComp>
-        <orderMinComp class="section" v-if="tabName === 'order'"></orderMinComp>
+        <tab-list :tabList="tabList" :defaultTab="activeTab" v-model="tabName"></tab-list>
+        <tradeMinComp class="section" v-if="tabName === 'miningTrade'"></tradeMinComp>
+        <stakingMinComp class="section" v-if="tabName === 'miningStaking'"></stakingMinComp>
+        <inviteMinComp class="section" v-if="tabName === 'miningInvite'"></inviteMinComp>
+        <orderMinComp class="section" v-if="tabName === 'miningOrder'"></orderMinComp>
     </div>
 </template>
 
@@ -21,15 +21,21 @@ export default {
         this.$store.dispatch('getCurrentVxMineInfo');
         this.$store.dispatch('getMinThresholdForTradeAndMining');
     },
+    props: {
+        activeTab: {
+            type: String,
+            default: 'miningTrade'
+        }
+    },
     data() {
         return {
             tabList: {
-                'trade': 'mobileMining.miningTrade',
-                'staking': 'mobileMining.miningStaking',
-                'invite': 'mobileMining.miningInvite',
-                'order': 'mobileMining.miningOrder'
+                'miningTrade': 'mobileMining.miningTrade',
+                'miningStaking': 'mobileMining.miningStaking',
+                'miningInvite': 'mobileMining.miningInvite',
+                'miningOrder': 'mobileMining.miningOrder'
             },
-            tabName: 'trade'
+            tabName: this.activeTab
         };
     }
 };
