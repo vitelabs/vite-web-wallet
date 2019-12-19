@@ -153,6 +153,7 @@ export default {
         background: rgba(0,0,0,0.5);
         z-index: 100;
         left: 0;
+        top: 0;
         &:after {
             position: absolute;
             bottom: 0;
