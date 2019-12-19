@@ -10,13 +10,14 @@
 
 <script>
 import noticeList from 'pcComponents/noticeList.vue';
-import { emptySpace } from 'pcUtils/storageSpace';
 import { receiveInviteDialog } from 'pcComponents/dialog';
+import { emptySpace } from 'pcUtils/storageSpace';
+
 const inviteCodeKey = 'INVITE_CODE';
 
 export default {
     components: { noticeList },
-    mounted() {
+    beforeMount() {
         this.$store.commit('setLang', this.$i18n.locale);
         this.$store.dispatch('startLoopBalance');
         this.$store.dispatch('startLoopExchangeBalance');
@@ -68,6 +69,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import "~assets/scss/vars.scss";
+
 .app-wrapper {
     position: absolute;
     top: 0;
@@ -75,5 +78,40 @@ export default {
     right: 0;
     bottom: 0;
     overflow: auto;
+    .bnb-conf {
+        z-index: 1000;
+        text-align: center;
+        .bnb-img {
+            width: 100px;
+            height: 100px;
+            margin: 30px 0;
+        }
+    }
+}
+
+.help-t {
+    @include font-family-bold();
+    font-size: 14px;
+    line-height: 14px;
+    margin-bottom: 12px;
+    word-break: break-all;
+    text-align: left;
+    .link {
+        color: #118bff;
+    }
+}
+
+.help-txt {
+    text-align: left;
+    opacity: 0.66;
+    font-size: 12px;
+    color: #333;
+    line-height: 22px;
+    margin-bottom: 10px;
+    word-break: break-all;
+    @include font-family-bold();
+}
+.__notice {
+    text-align: left;
 }
 </style>

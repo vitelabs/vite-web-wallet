@@ -58,7 +58,7 @@ export default {
     },
     computed: {
         height() {
-            return this.$store.state.ledger.currentHeight;
+            return this.$store.state.env.currentHeight;
         },
         address() {
             return this.$store.getters.activeAddr;
@@ -70,7 +70,7 @@ export default {
                     time: date(item.expirationTime * 1000, 'zh'),
                     amount: bigNumber.toBasic(item.stakeAmount, Vite_Token_Info.decimals, 4),
                     height: item.expirationHeight,
-                    canCancel: bigNumber.compared(item.expirationHeight, this.currentHeight) <= 0,
+                    canCancel: bigNumber.compared(item.expirationHeight, this.height) <= 0,
                     rawData: item
                 });
             });
@@ -119,7 +119,7 @@ export default {
 
                 this.pageIndex = pageIndex;
                 this.totalNum = totalStakeCount;
-                this.list = [].concat(this.list, stakeList);
+                this.list = [].concat(this.list, stakeList || []);
                 this.isLoading = false;
                 this.isInit = true;
             }).catch(err => {

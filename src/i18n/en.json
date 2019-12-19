@@ -63,6 +63,15 @@
         "text": "ViteX does not serve customers in the following countries/regions/territories: Mainland China, Hong Kong, Cuba, Iran, North Korea, Crimea, Sudan, Malaysia, Syria, USA [including all USA territories like Puerto Rico, American Samoa, Guam, Northern Mariana Island, and the US Virgin Islands (St. Croix, St. John and St. Thomas)], Bangladesh, Bolivia, Ecuador, and Kyrgyzstan. For more information, please read our Terms of Service and Privacy Policy",
         "title": "Important Notice"
     },
+    "bnbConf": {
+        "title": "Important Notice",
+        "t1": "VITE Binance Listing Coming! Please vote to have VITE listed on Binance.",
+        "t2": "Voting Period: 12:00 pm Dec 12 to 12:00 pm Dec 13 (HKT)",
+        "t3": "Voting Method: Holding 50 BNB allows for 1 vote (10 votes max)",
+        "t4": "Voting Rewards: All voted users will be rewarded with an airdrop totaling 21,000,000 VITE based on executed votes.",
+        "btn": "Vote Now!!!",
+        "notice": "[Attention]: You must have 50-500 BNBs in your Binance Account starting Dec 5 and last through Dec 13 to Qualify for Voting!"
+    },
     "errCode": {
         "35003": "{name} ID conflict occurs, please re-submit later",
         "35004": "Invalid parameters",
@@ -778,14 +787,14 @@
             "inviteBenifit":"Referral Mining Income",
             "inviteRule":"Rules",
             "ruleItems":[
-                "花费 <span class='strong'>1000 VITE</span> 生成邀请码，<span class='strong'>1000 VITE</span> 被销毁",
-                "计算交易挖矿时，邀请人增加被邀请人的交易手续费权重 <span class='strong'>5%</span> ",
-                "计算挂单挖矿时，邀请人增加被邀请人的挂单挖矿权重 <span class='strong'>2.5%</span> "
+                "The <span class='strong'>1,000 VITE</span> payment to generate an invitation code will be burned",
+                "Referee will be weighted with referral proceeds when calculating mining rewards <span class='strong'>5%</span> ",
+                "Referee will be weighted with referral proceeds when calculating mining rewards <span class='strong'>2.5%</span> "
             ],
             "receiveRuleItems": [
-                "计算交易挖矿时，交易手续费权重增加 <span class='strong'>2.5%</span> ",
-                "计算挂单挖矿时，挂单挖矿权重增加 <span class='strong'>1.25%</span> ",
-                "使用邀请码的用户，在交易过程中手续费可 <span class='strong'>9折</span> "
+                "Mining rewards will be weighted with referral proceeds <span class='strong'>2.5%</span> ",
+                "Mining rewards will be weighted with referral proceeds <span class='strong'>1.25%</span> ",
+                "Enjoy <span class='strong'>10%</span> off trading fees with an invitation code"
             ]
         }
     },
@@ -817,8 +826,8 @@
         "cmcHelp": "View VITE on CoinMarketCap",
         "supportTradeMining": "Eligible for trading as mining",
         "supportOrderMining": "Eligible for market-making as mining",
-        "buyMiningPrice": "You would meet the mining qualification when buy price is greater than {price}",
-        "sellMiningPrice": "卖出价小于{price}时满足挂单挖矿条件",
+        "buyMiningPrice": "Qualifies for mining when buy price is greater than {price}",
+        "sellMiningPrice": "Qualifies for mining when sell price is less than {price}",
         "operator": {
             "noName": "Anonymous Gateway",
             "overview": "Introduction",
@@ -1133,7 +1142,7 @@
         "addQuota": "Create a new staking",
         "add": "Add",
         "withdraw": "Retrieve",
-        "withdrawList": "取回列表",
+        "withdrawList": "Withdrawal List",
         "tbHead": {
             "date": "Date",
             "fee": "Trading Fees",
@@ -1142,9 +1151,9 @@
         },
         "txTitle": "Trading as Mining Total Income",
         "quotaTitle": "Staking as Mining Total Income",
-        "addHint1": "分红需VITE锁仓在交易所内，且锁仓金额大于10",
-        "addHint2": "提交锁仓VITE后立即生效，可参与最近一次挖矿",
-        "addHint3": "解锁需要经过完整的7个周期（7天）后释放",
+        "addHint1": "A minimum of 10 VX must be staked to receive dividends",
+        "addHint2": "Submission of staking request allows for dividends starting the nearest distribution",
+        "addHint3": "Staked amount will be released after the 7-day waiting period",
         "withdrawHint": "You will no longer be able to mining VX after retrieving",
         "addTitle": "Staking VITE for Mining",
         "withdrawTitle": "Retrieving Staked VITE",
@@ -1164,18 +1173,18 @@
         "help": "Current trading fees displayed on this page contains only the 0.2% ViteX base transaction fees, please note that operator fees shall be taken into consideration when calculating mining cost"
     },
     "tradeVip": {
-        "title": "管理VIP",    
-        "open": "开通VIP",      
-        "cancel": "撤销 {type}", 
+        "title": "Manage VIP",    
+        "open": "Become a VIP",      
+        "cancel": "Cancel {type}", 
         "help": {
             "title": "About VIP"
         },
         "helpConfirm": {
             "t1": "VIP",
-            "txt1": "开通VIP，可享有降低0.1%手续费特权，开通VIP需抵押10000VITE，30天后可手动取回",
+            "txt1": "Stake 10,000 VITE to acquire VIP status and receive 50% off trading fees. Staking can be retrieved after 30 days.",
             "t2": "SVIP",
-            "txt2": "SVIP开通后，可免除基础手续费，开通SVIP需抵押 1,000,000VITE，30天后可手动取回",
-            "txt3": "SVIP支持代理抵押，帮他人抵押并开通SVIP，抵押到期后，抵押用户可随时取回，撤销代理抵押"
+            "txt2": "Stake 1 million VITE to become a SVIP and enjoy 0 basic trading fees. Staking can be retrieved after 30 days.",
+            "txt3": "SVIP supports Stake Delegation, stake for others to acquire SVIP status. Staking can be revoked and retrieved manually after 30 days."
         },       
         "vipConfirm": {
             "cancelVip": "Cancel VIP",
@@ -1184,14 +1193,14 @@
             "cancelStakingAmount": "Retrievable Stake",
             "noBalance": "Insufficient Balance",
             "openHint": "You will enjoy the privilege of 0.1% trading fee discount after becoming a VIP. The staking amount of 10,000 VITE can be manually retrieved after 30 days.",
-            "cancelHint": "取回抵押后，您将无法再使用VIP特权",
+            "cancelHint": "VIP privileges will be discontinued once staking is revoked.",
             "openSuccess": "Applied Successful! VIP status will come into effect later.",
             "openFail": "Failed to apply VIP",
             "cancelSuccess": "Cancel VIP Successful",
             "cancelFail": "Cancel Failed",
             "adviseToCancel":"There will be no base transaction fees with your current status as our SVIP, we therefore recommend you to revoke the staked VITE，which is required for general VIP members.",
-            "address": "开通VIP地址",
-            "addressPlaceholder": "地址不可修改，默认为当前登录地址"
+            "address": "Enable VIP Status",
+            "addressPlaceholder": "Current address is the default address, address cannot be modified later"
         },
         "svipConfirm": {
             "open":"Upgrade",
@@ -1202,24 +1211,24 @@
             "cancelStakingAmount": "Retrievable Stake",
             "noBalance": "Insufficient Balance",
             "openHint": "You will enjoy 0% base transaction fee when upgrading to SVIP. The stake of 1,000,000 VITE can be manually retrieved after 30 days.",
-            "cancelHint": "取回抵押后，将无法再使用SVIP特权",
+            "cancelHint": "SVIP privileges will be discontinued once staking is revoked",
             "openSuccess": "Applied Successful! SVIP status will come into effect later.",
             "openFail": "Failed to apply SVIP",
             "cancelSuccess": "Cancel SVIP Successful",
             "cancelFail": "Cancel Failed",
-            "address": "开通SVIP地址",
-            "addressPlaceholder": "请输入开通SVIP地址",
-            "cancelAddress": "SVIP 地址"
+            "address": "Enable SVIP Status",
+            "addressPlaceholder": "Address to be Enabled with SVIP Status",
+            "cancelAddress": "SVIP Address"
         },
-        "vipListTitle": "VIP记录",
-        "openAddress": "开通地址",
-        "type": "VIP类型"
+        "vipListTitle": "VIP Records",
+        "openAddress": "Enabled Address",
+        "type": "VIP Type"
     },
     "inviteMining":{
         "title": "Referring as Mining Total Income",
-        "myInviteIncome": "我的邀请收益",
-        "inviteTradeIncome": "邀请交易挖矿收益",
-        "inviteOrderIncome": "邀请挂单挖矿收益"
+        "myInviteIncome": "Referral Proceeds",
+        "inviteTradeIncome": "Referred Trading Proceeds",
+        "inviteOrderIncome": "Referred Market-Making Proceeds"
     },
     "orderMining":{
         "title":"Market-Making as Mining Total Income",
@@ -1228,8 +1237,8 @@
             "ratio": "Ratio",
             "mining": "Amount"
         },
-        "market": "{name}市场",
-        "estimate": "{name}市场预计今日可挖"
+        "market": "{name} Market",
+        "estimate": "{name} Today's Minable Amount"
     },
     "tradeDividend": {
         "title": "Dividends",
@@ -1237,48 +1246,48 @@
         "listTitle": "My Dividends",
         "allPrice": "Total Estimated Value",
         "date": "Date",
-        "VX": "锁仓VX",
+        "VX": "Stake VX",
         "coin": "Type",
         "amount": "Amount",
         "price": "Total Estimated Value",
         "hintTitle": "Important Notice",
         "comingHint": "VX mining and dividend functions are coming soon, stay tuned. The system will distribute 1% of BTC, ETH, VITE, USDT of the total pool to all VX users proportional to the amount of VX they hold. The initial dividend pool will start at 0 and will grow according to the amount of fees collected by ViteX. Traders must have a minimum of 10 VX in order to receive dividends from a shared dividend pool comprised of base transaction, listing and referral code generating fees. ",
         "more": "Learn more about VX dividend rules",
-        "help": "分红规则：1. 分红需VX锁仓在交易所内，且锁仓金额大于10 2. 提交锁仓VX后立即生效，可参与最近一次分红 3. 解锁需要经过完整的7个周期后释放",
-        "lockedAmount": "锁仓金额",
-        "lockAmountTips": "少于10VX无法参与分红",
-        "unlockAmount": "解锁中金额",
+        "help": "Reward Rules: 1. A minimum of 10 VX must be staked to receive dividends. 2. Submission of staking request allows for dividends starting the nearest distribution. 3. Staked amount will be released after the 7-day waiting period",
+        "lockedAmount": "Staking Amount",
+        "lockAmountTips": "Receive Dividends on 10 VX or Above",
+        "unlockAmount": "Retrieving Amount",
         "openAutoLock": {
-            "title": "开启自动锁仓",
-            "text": "开启后，挖矿获得的VX将自动锁仓（主动购买的VX不自动锁仓）"
+            "title": "Enable Automatic Staking",
+            "text": "Mined VX will be automatically staked once enabled"
         },
         "closeAutoLock": {
-            "title": "关闭自动锁仓",
-            "text": "关闭后，挖矿发放的所有VX都不锁仓"
+            "title": "Disable Automatic Staking",
+            "text": "Mined VX will not be automatically staked when turned off"
         },
-        "lock": "锁仓",
-        "unlock": "解锁",
-        "lessMin": "最少1VX",
+        "lock": "Stake",
+        "unlock": "Retrieve",
+        "lessMin": "Minimum 1 VX",
         "lockVXConfirm": {
-            "title": "锁仓VX分红",
-            "available": "交易所可用余额",
-            "amountPlaceholder": "请输入锁仓金额，最少1VX",
-            "notEnough": "交易所可用余额不足",
-            "submit": "提交锁仓",
-            "amountText": "锁仓金额"
+            "title": "Staking Earnings",
+            "available": "Exchange Available Balance",
+            "amountPlaceholder": "Please input staking amount, minimum 1 VX",
+            "notEnough": "Insufficient Exchange Balance",
+            "submit": "Submit Staking",
+            "amountText": "Staking Amount"
         },
         "unlockVXConfirm": {
-            "title": "解锁 VX",
-            "available": "可解锁金额",
-            "amountPlaceholder": "请输入解锁金额，最少1VX",
-            "notEnough": "可解锁金额不足",
-            "submit": "确认解锁",
-            "amountText": "解锁金额"
+            "title": "Retrieve VX",
+            "available": "Retrievable Amount",
+            "amountPlaceholder": "Please input amount, minimum 1 VX",
+            "notEnough": "Insufficient Amount",
+            "submit": "Confirm Retrieval",
+            "amountText": "Retrieving Amount"
         },
         "unlockList": {
-            "title": "解锁中",
-            "amount": "金额",
-            "time": "到期时间"
+            "title": "Retrieving",
+            "amount": "Amount",
+            "time": "Available Date"
         }
     },
     "tradeOperator": {
@@ -1373,8 +1382,8 @@
         "poolTitle": "Dividend Pool ({token})",
         "myDividendTitle": "Total Estimated Value of Dividends ({token})",
         "listTitle": "Dividend Details",
-        "lockingTitle": "我的锁仓",
-        "viewLink": "查看解锁明细"
+        "lockingTitle": "My Staking",
+        "viewLink": "Staking Details"
     },
     "mobileMining": {
         "title": "Mining",
@@ -1389,9 +1398,9 @@
         "fee": "Fees",
         "listTitle": "Mining History",
         "viewLink": "Live Mining Dashboard",
-        "inviteTradeIncome": "邀请交易挖矿明细",
-        "inviteOrderIncome": "邀请挂单挖矿明细",
-        "myStaking": "我的抵押"
+        "inviteTradeIncome": "Referred Trading Details",
+        "inviteOrderIncome": "Referred Market-Making Details",
+        "myStaking": "My Staking"
     },
     "mobileBottomBar": {
         "center": "Trade",
