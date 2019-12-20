@@ -25,8 +25,14 @@ export default {
     margin-left: 3px;
     position: relative;
     display: inline-block;
-    background: url(~assets/imgs/gray_hover_help.svg) center no-repeat;
-    background-size: 100% 100%;
+    [data-theme="0"] & {
+        background: url(~assets/imgs/gray_hover_help.svg) center no-repeat;
+        background-size: 100% 100%;
+    }
+    [data-theme="1"] & {
+        background: url(~assets/theme1_imgs/gray_hover_help.png) center no-repeat;
+        background-size: 100% 100%;
+    }
     overflow: visible;
     width: 16px;
     height: 16px;
@@ -39,14 +45,21 @@ export default {
         left: 50%;
         transform: translateX(-50%);
         display: none;
-        color: #5E6875;
         width: 200px;
-        box-shadow: 0px 5px 20px 0px rgba(176,192,237,0.4);
         word-break: break-word;
+        @include font_color_2();
         @include font-family-normal();
+        [data-theme="0"] & {
+            box-shadow: 0px 5px 20px 0px rgba(176,192,237,0.4);
+        }
         /deep/.trigle {
+            [data-theme="0"] & {
+                border-bottom: 7px solid $white-color;
+            }
+            [data-theme="1"] & {
+                border-bottom: 7px solid $black-color-4;
+            }
             border: 7px solid transparent;
-            border-bottom: 7px solid #fff;
             top: -14px;
             transform: translateX(-50%);
             left: 50%;

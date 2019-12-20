@@ -12,6 +12,5 @@ export default { components: { changeLang } };
 </script>
 
 <style lang="scss" scoped>
-@import "~assets/scss/vars.scss";
 @import "./setting.scss";
 </style>

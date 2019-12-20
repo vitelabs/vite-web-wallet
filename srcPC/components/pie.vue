@@ -81,6 +81,7 @@
         </div>
     </div>
 </template>
+
 <script>
 import { path } from 'd3-path';
 
@@ -144,6 +145,7 @@ export default {
     }
 };
 </script>
+
 <style lang="scss" scoped>
 .pie {
     display: flex;
@@ -168,11 +170,11 @@ export default {
     }
     .text__group {
         width: 65px;
-        color: #5e6875;
         font-size: 12px;
         position: absolute;
         top: 40px;
         left: 15px;
+        @include font_color_to_white(#5e6875);
         span {
             word-break: break-all;
         }
@@ -197,8 +199,8 @@ export default {
             }
             .text {
                 font-size: 12px;
-                color: #24272b;
                 margin-right: 22px;
+                @include font_color_to_white(#24272b);
             }
         }
     }

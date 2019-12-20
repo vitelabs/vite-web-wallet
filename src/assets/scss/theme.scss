@@ -63,12 +63,28 @@
             border-bottom: 1px solid $black-color-4;
         }
     }
+    @if $b == top {
+        [data-theme="0"] & {
+            border-top: 1px solid #D4DEE7;
+        }
+        [data-theme="1"] & {
+            border-top: 1px solid $black-color-4;
+        }
+    }
     @if $b == right {
         [data-theme="0"] & {
             border-right: 1px solid #D4DEE7;
         }
         [data-theme="1"] & {
             border-right: 1px solid $black-color-4;
+        }
+    }
+    @if $b == left {
+        [data-theme="0"] & {
+            border-left: 1px solid #D4DEE7;
+        }
+        [data-theme="1"] & {
+            border-left: 1px solid $black-color-4;
         }
     }
 }
@@ -159,6 +175,17 @@
     }
     [data-theme="1"] & {
         background: url("~assets/theme1_imgs/" + $img_name);
+        background-size: 100% 100%;
+    }
+}
+
+@mixin background_common_img_suffix($img_name, $theme0, $theme1) {
+    [data-theme="0"] & {
+        background: url("~assets/imgs/" + $img_name + '.' + $theme0);
+        background-size: 100% 100%;
+    }
+    [data-theme="1"] & {
+        background: url("~assets/theme1_imgs/" + $img_name + '.' + $theme1);
         background-size: 100% 100%;
     }
 }
