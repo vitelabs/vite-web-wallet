@@ -45,6 +45,9 @@ const Vite_Token_Info = constant.Vite_Token_Info;
 const amountTimeout = null;
 const minNum = 10000;
 
+const StakeABI = { 'inputs': [], 'name': 'stake', 'outputs': [], 'payable': true, 'type': 'function' };
+const StakeABIContractAddress = 'vite_aef2d0c5965e680368064f61891bc89a051a88468624f03467';
+
 export default {
     components: { viteInput },
     destroyed() {
@@ -113,7 +116,7 @@ export default {
                 title: this.$t('submitStaking'),
                 submitTxt: this.$t('walletQuota.confirm.submit.rightBtn'),
                 cancelTxt: this.$t('walletQuota.confirm.submit.leftBtn'),
-                content: this.$t('walletQuota.confirm.submit.describe', { amount: this.amount }),
+                content: this.$t('walletFullNode.confirmText', { amount: this.amount, days: 30 }),
                 submit: () => {
                     this.sendPledgeTx();
                 }
@@ -121,7 +124,7 @@ export default {
         }),
 
         sendPledgeTx() {
-            statistics.event(this.$route.name, 'ConfirmQuota', this.addr || '');
+            statistics.event(this.$route.name, 'FullNode-ConfirmQuota', this.addr || '');
 
             if (!this.netStatus) {
                 this.$toast(this.$t('hint.noNet'));
@@ -132,8 +135,13 @@ export default {
             const amount = BigNumber.toMin(this.amount || 0, Vite_Token_Info.decimals);
 
             sendTx({
-                methodName: 'stakeForQuota',
-                data: { amount },
+                methodName: 'callContract',
+                data: {
+                    toAddress: StakeABIContractAddress,
+                    abi: StakeABI,
+                    tokenId: Vite_Token_Info.tokenId,
+                    amount
+                },
                 config: {
                     pow: true,
                     powConfig: {
