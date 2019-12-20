@@ -1,56 +1,67 @@
 <template>
-    <div class="my-quota-wrapper">
-        <div class="row">
-            <div class="row-item">
+    <div class="flex-wrapper">
+        <div class="row flex-wrapper">
+            <div class="row-item add-padding">
                 <div class="title">{{ $t('walletFullNode.quotaContent.onlineReward') }}</div>
-                <div class="text">{{ txNum || 0 }} UT</div>
+                <div class="light">{{ $t('walletFullNode.quotaContent.yesterday') }}</div>
+                <div class="text">{{ info.totalYesterdayFullReward || '--' }} VITE</div>
+                <div class="light">{{ $t('walletFullNode.quotaContent.all', {
+                    num: info.totalFullReward || '--'
+                }) }}</div>
             </div>
-            <div class="row-item">
+            <div class="row-item add-padding">
                 <div class="title">{{ $t('walletFullNode.quotaContent.voteReward') }}</div>
-                <div class="text">{{ txNum || 0 }} UT</div>
+                <div class="light">{{ $t('walletFullNode.quotaContent.yesterday') }}</div>
+                <div class="text">{{ info.totalYesterdayVoteReward || '--' }} VITE</div>
+                <div class="light">{{ $t('walletFullNode.quotaContent.all', {
+                    num: info.totalVoteReward || '--'
+                }) }}</div>
             </div>
         </div>
-        <div class="row">
-            <div class="title">{{ $t('walletQuota.myQuota') }}</div>
-            <div class="text">{{ txNum || 0 }} UT</div>
+        <div class="row add-padding">
+            <div class="title add-margin">{{ $t('walletFullNode.quotaContent.nodeInfo') }}</div>
+            <div class="flex-wrapper">
+                <div class="row-item">
+                    <div class="light">{{ $t('walletFullNode.quotaContent.onlineNodes') }}</div>
+                    <div class="text">{{ info.onlineNodeCount || '--' }}</div>
+                </div>
+                <div class="row-item">
+                    <div class="light">{{ $t('walletFullNode.quotaContent.rewardNodes') }}</div>
+                    <div class="text">{{ info.pledgeNodeCount || '--' }}</div>
+                </div>
+                <div class="row-item">
+                    <div class="light">{{ $t('walletFullNode.quotaContent.stakeAmount') }}</div>
+                    <div class="text">{{ info.pledgeAmount || '--' }} VITE</div>
+                </div>
+            </div>
         </div>
     </div>
 </template>
 
 <script>
-import { timer } from 'utils/asyncFlow';
-
-let quotaInst;
+import { getRewardPledgeFullStat } from 'pcServices/reward';
 
 export default {
-    mounted() {
-        this.startLoopQuota();
-    },
-    beforeDestroy() {
-        this.stopLoopQuota();
+    data() {
+        return { info: {} };
     },
     computed: {
-        txNum() {
-            return this.$store.state.pledge.pledgeTransNum;
-        },
         addr() {
             return this.$store.getters.activeAddr;
         }
     },
     watch: {
         addr() {
-            this.startLoopQuota();
+            this.getRewardPledgeFullStat();
         }
     },
     methods: {
-        startLoopQuota() {
-            this.stopLoopQuota();
-            quotaInst = new timer(() => this.$store.dispatch('fetchQuota'), 1000);
-            quotaInst.start();
-        },
-        stopLoopQuota() {
-            quotaInst && quotaInst.stop();
-            quotaInst = null;
+        getRewardPledgeFullStat() {
+            getRewardPledgeFullStat({ address: this.addr }).then(data => {
+                this.info = data || {};
+            }).catch(err => {
+                console.warn(err);
+            });
         }
     }
 };
@@ -59,13 +70,16 @@ export default {
 <style lang="scss" scoped>
 @import "~assets/scss/vars.scss";
 
-.my-quota-wrapper {
+.flex-wrapper {
     display: flex;
     flex-direction: row;
 }
 
+.add-padding {
+    padding: 15px 30px;
+}
+
 .row {
-    display: flex;
     flex: 1;
     margin-right: 10px;
     background: #fff;
@@ -73,22 +87,28 @@ export default {
     box-shadow: 0 2px 10px 1px rgba(176, 192, 237, 0.42);
     @include font-family-bold();
     color: #1d2024;
+    line-height: 16px;
     &:last-child {
         margin-left: 0px;
     }
-
     .row-item {
-        padding: 15px 30px;
         flex: 1;
     }
     .title {
-        font-size: 14px;
-        letter-spacing: 0.35px;
-        margin-bottom: 14px;
+        font-size: 12px;
+        margin-bottom: 12px;
+        &.add-margin {
+            margin-bottom: 20px;
+        }
     }
     .text {
-        font-size: 18px;
-        line-height: 22px;
+        font-size: 16px;
+        line-height: 20px;
+    }
+    .light {
+        @include font-family-normal();
+        color: rgba(94,104,117,1);
+        font-size: 12px;
     }
 }
 </style>
