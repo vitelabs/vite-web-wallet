@@ -127,9 +127,6 @@ export default {
     box-shadow: none;
     .__tb_content_row {
         transition: all 0.4s ease-in-out;
-        &:hover {
-            background: #fff;
-        }
         &.active {
             background: rgba(0,122,255,0.07);;
         }

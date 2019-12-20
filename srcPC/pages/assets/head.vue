@@ -1,7 +1,7 @@
 <template>
     <div class="account-head-wrapper">
         <div class="head__item" v-if="!account.isBifrost">
-            <img class="icon" src="~assets/imgs/head_acc.png" />
+            <img class="icon" :src="iconList.headAcc" />
             <div class="head-right">
                 <div class="head-title">
                     <span>{{ $t("accountName") }}</span>
@@ -27,7 +27,7 @@
             </div>
         </div>
         <div class="head__item">
-            <img class="icon" src="~assets/imgs/head_addr.svg" />
+            <img class="icon" :src="iconList.headAcc" />
             <div class="head-right">
                 <SwitchAddr :isShowAddr="false"></SwitchAddr>
                 <span class="address-content">
@@ -47,7 +47,7 @@
             </div>
         </div>
         <div class="worth head__item">
-            <img class="icon" src="~assets/imgs/head_asset.png" />
+            <img class="icon" :src="iconList.headAsset" />
             <div class="assets">
                 <AssetSwitch v-model="assetsType" class="asset-switch" />
                 <div class="asset__btc">{{ assetBtc }} BTC</div>
@@ -69,14 +69,22 @@
 import Vue from 'vue';
 import { utils } from '@vite/vitejs';
 import { getCurrHDAcc } from 'wallet';
-import Pie from 'components/pie';
 import copy from 'components/copy';
 import QrcodePopup from 'components/qrcodePopup';
+import Pie from 'pcComponents/pie';
 import SwitchAddr from 'pcComponents/switchAddress';
 import bigNumber from 'utils/bigNumber';
 import statistics from 'utils/statistics';
 import { getTokenSymbolString } from 'utils/tokenParser';
 import AssetSwitch from './assetSwitch';
+
+import headAcc from 'assets/imgs/head_acc.png';
+import headAddr from 'assets/imgs/head_addr.svg';
+import headAsset from 'assets/imgs/head_asset.png';
+
+import theme1headAcc from 'assets/theme1_imgs/head_acc.png';
+import theme1headAddr from 'assets/theme1_imgs/head_addr.png';
+import theme1headAsset from 'assets/theme1_imgs/head_asset.png';
 
 const assetsType = {
     TOTAL: 'TOTAL',
@@ -95,6 +103,23 @@ export default {
         };
     },
     computed: {
+        theme() {
+            return +this.$store.state.env.theme;
+        },
+        iconList() {
+            if (+this.theme === 0) {
+                return {
+                    headAcc,
+                    headAddr,
+                    headAsset
+                };
+            }
+            return {
+                headAcc: theme1headAcc,
+                headAddr: theme1headAddr,
+                headAsset: theme1headAsset
+            };
+        },
         pieData() {
             const data = JSON.parse(JSON.stringify(this.assetMap));
             data.forEach(t => (t.symbol = getTokenSymbolString(t.tokenSymbol, t.index)));
@@ -253,7 +278,13 @@ export default {
 .account-head-wrapper {
     position: relative;
     text-align: center;
-    background: #fff;
+    [data-theme="0"] & {
+        background: #fff;
+    }
+    [data-theme="1"] & {
+        background: url("~assets/theme1_imgs/mint_pledge_bg.png");
+        background-size: 100% 100%;
+    }
     border-radius: 2px;
     display: flex;
     min-height: 124px;
@@ -267,7 +298,12 @@ export default {
         flex-grow: 1;
     }
     .head__item {
-        border-left: 1px solid rgba(227, 235, 245, 0.6);
+        [data-theme="0"] & {
+            border-left: 1px solid rgba(227, 235, 245, 0.6);
+        }
+        [data-theme="1"] & {
+            border-left: 1px solid $black-color-4;
+        }
         display: flex;
         align-items: center;
         padding: 0 30px;
@@ -275,7 +311,12 @@ export default {
         flex-grow: 1;
         box-sizing: border-box;
         &:first-child {
-            border-left: none;
+            [data-theme="0"] & {
+                border-left: none;
+            }
+            [data-theme="1"] & {
+                border-left: none;
+            }
             min-width: 220px;
         }
         &:nth-child(2) {
@@ -297,8 +338,6 @@ export default {
             font-size: 14px;
             word-break: break-word;
             box-sizing: border-box;
-            background: #f3f6f9;
-            color: #bdc1d1;
             padding: 5px 9px;
             display: flex;
             align-items: center;
@@ -306,6 +345,14 @@ export default {
             display: flex;
             position: relative;
             font-family: $font-normal;
+            [data-theme="0"] & {
+                color: #bdc1d1;
+                background: #f3f6f9;
+            }
+            [data-theme="1"] & {
+                color: $gray-color-1;
+                background: $black-color-1;
+            }
             .copy-tips{
                 top: -50%;
             }
@@ -323,7 +370,7 @@ export default {
         }
         .head-right {
             font-size: 20px;
-            color: #1d2024;
+            @include font_color_1();
             text-align: left;
             font-family: $font-bold;
             word-break: break-word;
@@ -341,7 +388,7 @@ export default {
                 letter-spacing: 0.35px;
                 margin-bottom: 10px;
                 font-family: $font-bold;
-                color: #5e6875;
+                @include font_color_to_white(#5e6875);
                 .edit {
                     display: inline-block;
                     width: 20px;
@@ -381,6 +428,9 @@ export default {
                     line-height: 24px;
                     margin-bottom: 10px;
                     /deep/.list-title {
+                        [data-theme="1"] & {
+                            color: $white-color;
+                        }
                         &:after {
                             position: absolute;
                             right: 6px;
@@ -393,9 +443,15 @@ export default {
                     line-height: 26px;
                     font-family: $font-bold;
                     white-space: nowrap;
+                    @include default_font_color();
                 }
                 .asset__cash {
-                    color: #5e687594;
+                    [data-theme="0"] & {
+                        color: #5e6875;
+                    }
+                    [data-theme="1"] & {
+                        color: #C0C6D3;
+                    }
                     font-size: 12px;
                 }
             }

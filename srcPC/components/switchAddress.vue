@@ -157,9 +157,11 @@ export default {
         width: 250px;
         max-height: 220px;
         overflow: auto;
-        box-shadow: 0px 5px 10px 0px rgba(176,192,237,0.69);
         margin-top: 10px;
         word-break: break-all;
+        [data-theme="0"] & {
+            box-shadow: 0px 5px 10px 0px rgba(176,192,237,0.69);
+        }
         .item {
             @include bg_color_2();
             box-sizing: border-box;

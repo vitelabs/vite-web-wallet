@@ -42,6 +42,11 @@ import settingActive from 'assets/imgs/settings_pressed.svg';
 import trade from 'assets/imgs/trade_default.svg';
 import tradeActive from 'assets/imgs/trade_pressed.svg';
 
+import theme1viteLogo from 'assets/theme1_imgs/sidebar_logo.png';
+import theme1wallet from 'assets/theme1_imgs/wallet_default.png';
+import theme1walletActive from 'assets/theme1_imgs/wallet_pressed.png';
+import theme1trade from 'assets/theme1_imgs/trade_default.png';
+
 export default {
     components: { testNotice },
     props: {
@@ -55,10 +60,34 @@ export default {
         }
     },
     data() {
-        return {
-            isShowNotice: false,
-            viteLogo,
-            icon: {
+        return { isShowNotice: false };
+    },
+    computed: {
+        theme() {
+            return +this.$store.state.env.theme;
+        },
+        viteLogo() {
+            if (+this.theme === 0) {
+                return viteLogo;
+            }
+            return theme1viteLogo;
+        },
+        icon() {
+            if (+this.theme) {
+                return {
+                    assets,
+                    assetsActive,
+                    wallet: theme1wallet,
+                    walletActive: theme1walletActive,
+                    trade: theme1trade,
+                    tradeActive,
+                    setting,
+                    settingActive,
+                    index: theme1trade,
+                    indexActive: tradeActive
+                };
+            }
+            return {
                 assets,
                 assetsActive,
                 wallet,
@@ -68,11 +97,9 @@ export default {
                 setting,
                 settingActive,
                 index: trade,
-                indexActive: trade
-            }
-        };
-    },
-    computed: {
+                indexActive: tradeActive
+            };
+        },
         settingIndex() {
             return this.menuList.indexOf('setting');
         },

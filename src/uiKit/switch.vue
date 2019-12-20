@@ -132,12 +132,14 @@ export default {
         z-index: 100;
         max-height: 220px;
         overflow: auto;
-        box-shadow: 0px 5px 10px 0px rgba(176, 192, 237, 0.69);
         margin-top: 10px;
         word-break: break-all;
         font-size: 12px;
         @include font-family-bold();
         @include switch_list_color();
+        [data-theme="0"] & {
+            box-shadow: 0px 5px 10px 0px rgba(176, 192, 237, 0.69);
+        }
         .item {
             box-sizing: border-box;
             padding: 8px 12px;

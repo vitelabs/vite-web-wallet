@@ -114,9 +114,9 @@ export default {
             padding: 9px;
             overflow: visible;
             .asset-switch {
-                color: rgba(94, 104, 117, 0.58);;
-                font-size: 12px;
                 @include font-family-normal();
+                color: rgba(94, 104, 117, 0.58);
+                font-size: 12px;
                 border: none;
                 margin-left: -10px;
                 /deep/.list-title {
@@ -127,10 +127,20 @@ export default {
                     border-radius: 2px;
                     margin-top: 8px;
                     @include font-family-normal();
-                    color: rgba(94,104,117,0.58);
-                    .item:hover {
-                        background: rgba(75,116,255,0.1);
+                    [data-theme="0"] & {
+                        color: rgba(94,104,117,0.58);
                     }
+                    [data-theme="1"] & {
+                        color: #C0C6D3;
+                    }
+                    // .item:hover {
+                    //     [data-theme="0"] & {
+                    //         background: #151C32;
+                    //     }
+                    //     [data-theme="1"] & {
+                    //         background: #1E2745;
+                    //     }
+                    // }
                 }
             }
         }

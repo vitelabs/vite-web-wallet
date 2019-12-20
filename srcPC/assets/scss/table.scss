@@ -42,7 +42,7 @@
             content: ' ';
             width: 60px;
             height: 60px;
-            background: url('~assets/imgs/dexEmpty.svg') 100% 100%;
+            @include background_common_img_suffix("dexEmpty", "svg", "png");
         }
     }
     .__tb_pagination {

@@ -41,7 +41,7 @@
             box-sizing: border-box;
             padding: 10px 12px;
             @include bg_color_2();
-            @include common_border();
+            @include common_border_one(top);
         }
     }
 }
