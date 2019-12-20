@@ -37,12 +37,8 @@
             <div class="item">
                 <div class="__form_input_title">{{ $t('walletQuota.time') }}</div>
                 <span class="__form_input unuse about">{{ $t('walletQuota.aboutDays', { day: '3' }) }}</span>
-                <span v-show="!btnUnuse" class="__form_btn __pointer" :class="{
-                    'unuse': btnUnuse
-                }" @click="validTx">{{ $t('submitStaking') }}</span>
-                <span v-show="btnUnuse"  class="__form_btn __pointer" :class="{
-                    'unuse': btnUnuse
-                }">{{ $t('submitStaking') }}</span>
+                <span v-show="!btnUnuse" class="__form_btn __pointer" @click="validTx">{{ $t('submitStaking') }}</span>
+                <span v-show="btnUnuse"  class="__form_btn __pointer unuse">{{ $t('submitStaking') }}</span>
             </div>
         </div>
     </div>
