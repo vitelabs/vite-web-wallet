@@ -17,7 +17,7 @@
 
 <script>
 import secTitle from 'pcComponents/secTitle';
-import confirm from 'components/confirm/confirm.vue';
+import confirm from 'pcComponents/confirm/confirm.vue';
 
 export default {
     components: { secTitle, confirm },
@@ -49,7 +49,7 @@ export default {
 .help-txt {
     opacity: 0.66;
     font-size: 12px;
-    color: #172c39;
+    opacity: 0.66;
     line-height: 22px;
     word-break: break-all;
     @include font-family-normal();

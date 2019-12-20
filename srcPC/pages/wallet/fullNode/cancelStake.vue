@@ -14,9 +14,9 @@
 </template>
 
 <script>
-import { initPwd } from 'pcComponents/password/index.js';
 import sendTx from 'pcUtils/sendTx';
-import confirm from 'components/confirm/confirm.vue';
+import confirm from 'pcComponents/confirm/confirm.vue';
+import { initPwd } from 'pcComponents/password/index.js';
 
 export default {
     components: { confirm },
