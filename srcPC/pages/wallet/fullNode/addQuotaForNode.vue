@@ -189,6 +189,7 @@ export default {
         margin-top: 28px;
     }
     .unit {
+        @include common_font_color();
         padding: 0 15px;
     }
 }
