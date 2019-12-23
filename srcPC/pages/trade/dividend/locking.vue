@@ -1,5 +1,5 @@
 <template>
-    <div class="staking-detail">
+    <div class="staking-detail locking">
         <div class="item">
             <div>
                 {{ $t("tradeDividend.lockedAmount") }}
@@ -151,18 +151,19 @@ export default {
 <style lang="scss" scoped>
 @import "../components/stakingDetail.scss";
 
-.staking-detail {
-    border-bottom: 1px solid rgba(227, 235, 245, 0.6);
+.staking-detail.locking {
     [data-theme="0"] & {
         background: #f7f9fb;
+        border-bottom: 1px solid rgba(227, 235, 245, 0.6);
     }
     [data-theme="1"] & {
         background: $black-color-2;
+        border-bottom: 1px solid $black-color-4;
     }
     .check {
         font-size: 12px;
         margin-right: 30px;
-        color: #5e6875;
+        @include font_color_2();
         .check-box {
             display: inline-block;
             margin-right: 4px;
@@ -173,8 +174,7 @@ export default {
 
 .help {
     position: relative;
-    background: url('~assets/imgs/info.svg');
-    background-size: 100% 100%;
+    @include background_common_img("info.svg");
     width: 12px;
     height: 12px;
     display: inline-block;
@@ -188,15 +188,5 @@ export default {
             display: inline-block;
         }
     }
-}
-
-.down-icon {
-    display: inline-block;
-    background: url('~assets/imgs/moreRecords.svg');
-    background-size: 100% 100%;
-    width: 16px;
-    height: 16px;
-    margin-bottom: -2px;
-    margin-left: 4px;
 }
 </style>

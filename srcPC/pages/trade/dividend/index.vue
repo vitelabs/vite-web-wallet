@@ -4,22 +4,22 @@
         <pool></pool>
         <section-title :title="$t('tradeDividend.listTitle')" :help="$t('tradeDividend.help')"></section-title>
         <div class="content">
-            <div class="my-divident">
+            <div class="staking-detail">
                 <div class="item">
-                    <div class="item-title">{{ $t('tradeDividend.price') }}</div>
-                    <div class="item-amount">{{ myFullBtcIncome }}</div>
-                    <div class="item-price">{{ myFullIncome }}</div>
+                    <div>{{ $t('tradeDividend.price') }}</div>
+                    <div class="bold">{{ myFullBtcIncome }}</div>
+                    <div class="light">{{ myFullIncome }}</div>
                 </div>
 
                 <div class="item __pointer" v-click-outside="hideMyList"  @click.stop="showMyList(tokenType)"
                      v-for="tokenType in ['BTC', 'ETH', 'USDT']" :key="tokenType">
-                    <div class="item-title">{{ tokenType }}</div>
-                    <div class="item-amount">
+                    <div>{{ tokenType }}</div>
+                    <div class="bold">
                         {{ myDividend[tokenType] ? formatNum(myDividend[tokenType].dividendAmount, tokenType) : 0 }}
                         <span v-show="isShowMyDividendList(tokenType)" class="down-icon"></span>
                         <div class="item-content" v-show="isShowMyDividendList(tokenType) && isShowMyList === tokenType">
                             <div class="row" v-for="(dividentItem, i) in getMyList(tokenType)" :key="i">
-                                <span class="symbol">{{ dividentItem.tokenSymbol }}: </span>
+                                <span class="light">{{ dividentItem.tokenSymbol }}: </span>
                                 <span class="amount">{{ formatNum(dividentItem.amount, tokenType) }}</span>
                             </div>
                         </div>
@@ -247,6 +247,7 @@ export default {
 <style lang="scss" scoped>
 @import "~assets/scss/vars.scss";
 @import "~pcAssets/scss/table.scss";
+@import "../components/stakingDetail.scss";
 
 .trade-dividend-wrapper {
     width: 100%;
@@ -265,115 +266,14 @@ export default {
     width: 100%;
     height: 100%;
     @include box_shadow();
-    .my-divident {
-        @include background_common_img("mint_pledge_bg.png");
-        font-size: 12px;
-        font-family: $font-normal;
-        line-height: 16px;
-        display: flex;
-        flex-direction: row;
-        .item {
-            flex: 1;
-            box-sizing: border-box;
-            padding: 14px 30px;
-            border-right: 1px solid rgba(227,235,245,0.6);
-            &:last-child {
-                border-right: none;
-            }
-            .item-title {
-                color: rgba(94,104,117,1);
-                margin-bottom: 2px;
-            }
-            .item-amount {
-                font-size: 16px;
-                position: relative;
-                font-family: $font-bold;
-                line-height: 20px;
-                color: rgba(29,32,36,1);
-                .down-icon {
-                    display: inline-block;
-                    background: url('~assets/imgs/dividendInfo.svg');
-                    background-size: 100% 100%;
-                    width: 16px;
-                    height: 16px;
-                    margin-bottom: -4px;
-                }
-            }
-            .item-price {
-                color: rgba(94,104,117,0.58);
-                margin-top: 2px;
-            }
-        }
-    }
     .tb {
         flex: 1;
         box-shadow: none;
     }
 }
 
-.item-content {
-    position: absolute;
-    margin-top: 10px;
-    width: 200px;
-    padding: 8px 12px 0;
-    background: #fff;
-    box-shadow: 0px 5px 20px 0px rgba(176,192,237,0.4);
-    border-radius: 2px;
-    z-index: 1;
-    .row {
-        line-height: 15px;
-        margin-bottom: 8px;
-        font-size: 11px;
-        font-family: $font-normal;
-        font-weight: 400;
-        .symbol {
-            color: rgba(94,104,117,0.58);
-        }
-        .amount {
-            color: rgba(29,32,36,1);
-        }
-    }
-    &:before {
-        top: -12px;
-        position: absolute;
-        content: ' ';
-        display: inline-block;
-        border: 6px solid transparent;
-        border-bottom: 6px solid #fff;
-    }
-}
-
-.slot-row {
-    [data-theme="0"] & {
-        background: rgba(247,249,251,1);
-    }
-    [data-theme="1"] & {
-        background: rgba(1,8,31,0.25);
-    }
-    font-size: 12px;
-    font-family: $font-normal;
-    font-weight: 400;
-    color: rgba(94,104,117,1);
-    line-height: 16px;
-    .item {
-        display: inline-block;
-    }
-    &.__tb_row.__tb_content_row {
-        height: unset;
-    }
-}
-.arrow-icon {
-    display: inline-block;
-    width: 16px;
-    height: 16px;
-    background: url("~assets/imgs/decend.svg") center no-repeat;
-    margin-bottom: -4px;
-    &.active {
-        background: url("~assets/imgs/ascend.svg") center no-repeat;
-    }
-}
 .link {
-    color: #007aff;
+    color: $blue-color-1;
     text-decoration: underline;
 }
 </style>

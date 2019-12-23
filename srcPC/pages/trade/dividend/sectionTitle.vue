@@ -51,8 +51,7 @@ export default {
 
 .help {
     position: relative;
-    background: url('~assets/imgs/info.svg');
-    background-size: 100% 100%;
+    @include background_common_img("info.svg");
     width: 12px;
     height: 12px;
     display: inline-block;
@@ -64,11 +63,13 @@ export default {
         height: 36px;
         line-height: 36px;
         padding: 0 10px;
-        background: #fff;
-        box-shadow: 0px 5px 20px 0px rgba(0,0,0,0.1);
+        @include bg_color_4();
+        [data-theme="0"] & {
+            box-shadow: 0px 5px 20px 0px rgba(0,0,0,0.1);
+        }
         border-radius: 2px;
         @include font-family-normal();
-        color: rgba(94,104,117,1);
+        @include font_color_2();
         font-size: 12px;
         white-space: nowrap;
         &:after {
@@ -79,7 +80,12 @@ export default {
             transform: translate(-100%, -50%);
             display: inline-block;
             border: 6px solid transparent;
-            border-right: 6px solid #fff;
+            [data-theme="0"] & {
+                border-right: 6px solid #fff;
+            }
+            [data-theme="1"] & {
+                border-right: 6px solid $black-color-4;
+            }
         }
     }
 }

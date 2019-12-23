@@ -106,10 +106,9 @@ export default {
         align-items: center;
         &:after {
             content: "";
-            width: 16px;
-            height: 16px;
-            background: url("~assets/imgs/uiKit/select/down.svg");
-            background-size: 16px 16px;
+            width: 14px;
+            height: 7px;
+            @include background_common_img("decend.svg");
         }
         &.not-allowed {
             &:after {
@@ -124,6 +123,7 @@ export default {
         &.up {
             &:after {
                 transform: rotateX(180deg);
+                margin-bottom: 2px;
             }
         }
     }
@@ -144,7 +144,7 @@ export default {
             box-sizing: border-box;
             padding: 8px 12px;
             line-height: 16px;
-            @include bg_color_2();
+            @include bg_color_1();
             &:hover {
                 @include hover_color();
             }

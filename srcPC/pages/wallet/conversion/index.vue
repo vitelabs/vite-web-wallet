@@ -218,8 +218,7 @@ export default {
     margin: 30px 0;
     font-size: 18px;
     @include font-family-bold();
-    font-weight: 600;
-    color: rgba(29, 32, 36, 1);
+    @include common_font_color();
 
     img {
         display: inline-block;
@@ -240,7 +239,7 @@ export default {
         color: #007aff;
 
         &:active {
-            background: #007aff;
+            background: $blue-color-1;
             color: #edf1ff;
         }
     }

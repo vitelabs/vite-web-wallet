@@ -227,13 +227,22 @@ export default {
 
 .__center-tb-row {
     &.in_mining {
-        background: rgba(75,116,255,0.05);
+        [data-theme="0"] & {
+            background: rgba(75,116,255,0.05);
+        }
+        [data-theme="1"] & {
+            background: rgba(75,116,255,0.1);
+        }
     }
     &.border_b {
-        border-bottom: 1px dashed rgba(189,196,208,1);
+        [data-theme="0"] & {
+            border-bottom: 1px dashed rgba(189,196,208,1);
+        }
     }
     &.border_t {
-        border-top: 1px dashed rgba(189,196,208,1);
+        [data-theme="0"] & {
+            border-top: 1px dashed rgba(189,196,208,1);
+        }
     }
 }
 

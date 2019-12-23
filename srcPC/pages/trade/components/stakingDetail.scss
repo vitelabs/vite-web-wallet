@@ -25,6 +25,13 @@
             @include font-family-bold();
             @include font_color_1();
             font-size: 16px;
+            .down-icon {
+                display: inline-block;
+                width: 16px;
+                height: 16px;
+                margin-bottom: -4px;
+                @include background_common_img("dividendInfo.svg");
+            }
         }
         .light {
             [data-theme="0"] & {
@@ -70,5 +77,80 @@
             border: 1px solid rgba(198,203,212,0.3);
             cursor: not-allowed;
         }
+    }
+
+    .item-content {
+        position: absolute;
+        margin-top: 10px;
+        width: 200px;
+        padding: 8px 12px 0;        
+        @include bg_color_4();
+        [data-theme="0"] & {
+            box-shadow: 0px 5px 20px 0px rgba(176,192,237,0.4);
+        }
+        border-radius: 2px;
+        z-index: 1;
+        .row {
+            line-height: 15px;
+            margin-bottom: 8px;
+            font-size: 11px;        
+            .amount {
+                @include common_font_color();
+            }
+        }
+        &:before {
+            top: -12px;
+            position: absolute;
+            content: ' ';
+            display: inline-block;            
+            border: 6px solid transparent;
+            [data-theme="0"] & {
+                border-bottom: 6px solid #fff;
+            }
+            [data-theme="1"] & {
+                border-bottom: 6px solid $black-color-4;
+            }
+        }
+    }
+}
+
+.arrow-icon {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    margin-bottom: -4px;
+    [data-theme="0"] & {
+        background: url("~assets/imgs/decend.svg") center no-repeat;
+    }
+    [data-theme="1"] & {
+        background: url("~assets/theme1_imgs/decend.svg") center no-repeat;
+    }
+    &.active {
+        [data-theme="0"] & {
+            background: url("~assets/imgs/ascend.svg") center no-repeat;
+        }
+        [data-theme="1"] & {
+            background: url("~assets/theme1_imgs/ascend.svg") center no-repeat;
+        }
+    }
+}
+
+.slot-row {
+    [data-theme="0"] & {
+        background: rgba(247,249,251,1);
+    }
+    [data-theme="1"] & {
+        background: rgba(1,8,31,0.25);
+    }
+    font-size: 12px;
+    font-family: $font-normal;
+    font-weight: 400;
+    color: rgba(94,104,117,1);
+    line-height: 16px;
+    .item {
+        display: inline-block;
+    }
+    &.__tb_row.__tb_content_row {
+        height: unset;
     }
 }

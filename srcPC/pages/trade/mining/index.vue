@@ -7,7 +7,7 @@
         <div class="tab_title">
             <div class="tab_title_item" @click="tabName = 'trade'"
                  :class="{ active: tabName === 'trade' }">
-                <img src="~assets/imgs/exchange/mining/trade.png" />
+                <span class="tab_img trade"></span>
                 <div>
                     <div class="label">{{ $t("tradeMining.txTitle") }}
                         <span class="help __pointer" @mouseenter="showHelp" @mouseleave="hideHelp">
@@ -22,7 +22,7 @@
             <div class="gap"></div>
             <div class="tab_title_item" @click="tabName = 'staking'"
                  :class="{ active: tabName === 'staking' }">
-                <img src="~assets/imgs/exchange/mining/staking.png" />
+                <span class="tab_img staking"></span>
                 <div>
                     <div class="label">{{ $t("tradeMining.quotaTitle") }}</div>
                     <div class="amount">
@@ -33,7 +33,7 @@
             <div class="gap"></div>
             <div class="tab_title_item" @click="tabName = 'invite'"
                  :class="{ active: tabName === 'invite' }">
-                <img src="~assets/imgs/exchange/mining/invite.png" />
+                <span class="tab_img invite"></span>
                 <div>
                     <div class="label">{{ $t("inviteMining.title") }}</div>
                     <div class="amount">
@@ -44,7 +44,7 @@
             <div class="gap"></div>
             <div class="tab_title_item" @click="tabName = 'order'"
                  :class="{ active: tabName === 'order' }">
-                <img src="~assets/imgs/exchange/mining/order.png" />
+                <span class="tab_img order"></span>
                 <div>
                     <div class="label">{{ $t("orderMining.title") }}</div>
                     <div class="amount">
@@ -146,8 +146,7 @@ export default {
 
 .help {
     position: relative;
-    background: url('~assets/imgs/info.svg');
-    background-size: 100% 100%;
+    @include background_common_img("info.svg");
     width: 16px;
     height: 16px;
     display: inline-block;
@@ -158,12 +157,14 @@ export default {
         right: 8px;
         width: 200px;
         padding: 10px;
-        background: #fff;
         transform: translateX(50%);
-        box-shadow: 0 2px 10px 1px rgba(176, 192, 237, 0.42);
         border-radius: 2px;
         font-family: $font-H;
-        color: #5e6875;
+        @include bg_color_4();
+        [data-theme="0"] & {
+            box-shadow: 0 2px 10px 1px rgba(176, 192, 237, 0.42);
+        }
+        @include font_color_2();
         font-size: 12px;
         line-height: 16px;
         &:after {
@@ -174,7 +175,12 @@ export default {
             transform: translate(-50%, -100%);
             display: inline-block;
             border: 6px solid transparent;
-            border-bottom: 6px solid #fff;
+            [data-theme="0"] & {
+                border-right: 6px solid $white-color;
+            }
+            [data-theme="1"] & {
+                border-right: 6px solid $black-color-4;
+            }
         }
     }
 }
@@ -191,7 +197,7 @@ export default {
     display: inline-block;
     align-items: center;
     font-size: 12px;
-    color: #007aff;
+    color: $blue-color-1;
     margin-left: 10px;
     &::before {
         display: inline-block;
@@ -238,10 +244,23 @@ export default {
             }
             border-bottom: 2px solid $blue-color-1;
         }
-        img {
+        .tab_img {
             margin-right: 20px;
             height: 34px;
             width: 34px;
+            display: inline-block;
+            &.order {
+                @include background_common_img_suffix('mining_order', 'png', 'svg');
+            }
+            &.trade {
+                @include background_common_img_suffix('mining_trade', 'png', 'svg');
+            }
+            &.staking {
+                @include background_common_img_suffix('mining_staking', 'png', 'svg');
+            }
+            &.invite {
+                @include background_common_img_suffix('mining_invite', 'png', 'svg');
+            }
         }
         .label {
             font-size: 12px;

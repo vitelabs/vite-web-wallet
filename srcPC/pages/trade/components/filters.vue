@@ -166,8 +166,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "assets/scss/vars.scss";
-
 .filter-root {
     display: flex;
     align-items: flex-end;
@@ -175,10 +173,9 @@ export default {
     font-size: 12px;
 
     .filter {
-        color: #5e6875;
+        @include font_color_2();
         @include font-family-normal();
         width: 132px;
-
         > * {
             width: 100%;
         }
@@ -197,16 +194,22 @@ export default {
         height: 28px;
         margin: 0 8px;
         display: flex;
-        color: #d4dee7;
+        [data-theme="0"] & {
+            color: #d4dee7;
+        }
+        [data-theme="1"] & {
+            color: $black-color-2;
+        }
     }
 
     .filter_content {
         margin-top: 6px;
         height: 28px;
-        background: #fff;
         border-radius: 2px;
-        border: 1px solid rgba(212, 222, 231, 1);
         box-sizing: border-box;
+        @include default_font_color();
+        @include bg_color_3();
+        @include common_border();
     }
 
     .search {

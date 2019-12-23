@@ -79,7 +79,7 @@ export default {
         box-shadow: 0px 5px 20px 0px rgba(0,0,0,0.1);
         border-radius: 2px;
         @include font-family-normal();
-        color: rgba(94, 104, 117, 1);
+        @include font_color_2();
         font-size: 12px;
         &:after {
             position: absolute;
