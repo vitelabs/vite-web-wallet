@@ -131,7 +131,7 @@ export default {
                 line-height: 18px;
                 font-size: 14px;
                 @include font-family-bold();
-                color: rgba(94,104,117,1);
+                @include font_color_2();
             }
             .token-amount {
                 font-size: 20px;

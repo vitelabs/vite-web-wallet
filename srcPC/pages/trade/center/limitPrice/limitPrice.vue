@@ -117,8 +117,7 @@ export default {
         font-size: 12px;
         float: right;
         @include font-family-normal();
-        color: rgba(94, 104, 117, 1);
-        font-weight: 400;
+        @include font_color_2();
         display: flex;
         >span {
             position: relative;
@@ -133,8 +132,7 @@ export default {
     }
 
     .help {
-        background: url('~assets/imgs/info.svg');
-        background-size: 100% 100%;
+        @include background_common_img("info.svg");
         width: 16px;
         height: 16px;
         display: inline-block;
@@ -147,18 +145,25 @@ export default {
         right: -13px;
         min-width: 300px;
         padding: 10px 10px 0;
-        background: #fff;
         transform: translateY(-100%);
-        box-shadow: 0 2px 10px 1px rgba(176, 192, 237, 0.42);
         border-radius: 2px;
         font-family: $font-H;
+        @include bg_color_4();
+        [data-theme="0"] & {
+            box-shadow: 0 2px 10px 1px rgba(176, 192, 237, 0.42);
+        }
         &:after {
             right: 15px;
             position: absolute;
             content: ' ';
             display: inline-block;
             border: 6px solid transparent;
-            border-top: 6px solid #fff;
+            [data-theme="0"] & {
+                border-right: 6px solid $white-color;
+            }
+            [data-theme="1"] & {
+                border-top: 6px solid $black-color-4;
+            }
         }
         >span {
             display: block;

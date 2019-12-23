@@ -353,8 +353,7 @@ export default {
     .hint {
         text-align: center;
         font-size: 12px;
-        font-weight: 400;
-        color: rgba(94, 104, 117, 1);
+        @include font_color_2();
         margin-top: 20px;
     }
 
@@ -386,7 +385,7 @@ export default {
                 width: 12px;
                 height: 12px;
                 border-radius: 10px;
-                border: 1px solid rgba(188, 196, 201, 1);
+                @include common_border();
                 margin-right: 4px;
                 margin-bottom: -2px;
 

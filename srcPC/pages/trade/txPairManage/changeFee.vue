@@ -173,7 +173,7 @@ export default {
     width: 100%;
     font-size: 12px;
     @include font-family-normal();
-    color: rgba(94, 104, 117, 1);
+    @include font_color_2();
     line-height: 16px;
     padding-top: 20px;
 }

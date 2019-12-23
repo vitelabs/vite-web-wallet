@@ -177,8 +177,7 @@ export default {
         width: 20px;
         height: 20px;
         margin-bottom: -5px;
-        background: url("~assets/imgs/cmc.svg");
-        background-size: 20px 20px;
+        @include background_common_img("cmc.svg");
         .tips {
             display: none;
             @include font-family-normal();

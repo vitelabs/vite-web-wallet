@@ -39,8 +39,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "~assets/scss/vars.scss";
-
 .radio-wrapper {
     line-height: 32px;
 }
@@ -49,9 +47,7 @@ export default {
     display: inline-block;
     font-size: 12px;
     @include font-family-normal();
-    font-weight: 400;
-    color: #5E6875;
-
+    @include font_color_to_white(#5E6875);
     &:last-child {
         margin-left: 32px;
     }
@@ -63,7 +59,7 @@ export default {
         width: 16px;
         height: 16px;
         border-radius: 10px;
-        border: 1px solid #D4DEE7;
+        @include common_border();
         margin-right: 8px;
         margin-bottom: -4px;
 
@@ -77,7 +73,7 @@ export default {
             display: inline-block;
             width: 8px;
             height: 8px;
-            background: #007aff;
+            background: $blue-color-1;
             border-radius: 5px;
         }
     }

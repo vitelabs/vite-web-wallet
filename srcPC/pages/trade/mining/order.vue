@@ -196,25 +196,18 @@ export default {
 .detail-wrapper {
     position: relative;
     min-height: 32px;
-    background: rgba(247,249,251,1);
-    color: #5E6875;
+    [data-theme="0"] & {
+        background: rgba(247,249,251,1);
+    }
+    [data-theme="1"] & {
+        background: rgba(1,8,31,0.25);
+    }
     /deep/ .ex-center-loading .dot {
         position: absolute;
     }
     .err-msg {
         line-height: 32px;
         text-align: center;
-    }
-}
-
-.arrow-icon {
-    display: inline-block;
-    width: 16px;
-    height: 16px;
-    background: url("~assets/imgs/decend.svg") center no-repeat;
-    margin-bottom: -4px;
-    &.active {
-        background: url("~assets/imgs/ascend.svg") center no-repeat;
     }
 }
 </style>

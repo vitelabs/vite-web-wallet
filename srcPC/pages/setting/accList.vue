@@ -220,7 +220,7 @@ export default {
     .describe {
         display: block;
         width: 93%;
-        color: rgba(94,104,117,1);
+        @include font_color_2();
         .name-input {
             display: block;
             width: 100%;
