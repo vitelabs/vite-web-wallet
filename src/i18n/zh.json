@@ -1180,7 +1180,8 @@
         "addHint1": "分红需VITE锁仓在交易所内，且锁仓金额大于10",
         "addHint2": "提交锁仓VITE后立即生效，可参与最近一次挖矿",
         "addHint3": "解锁需要经过完整的7个周期（7天）后释放",
-        "withdrawHint": "取回后，您将无法再挖矿VX",
+        "withdrawHint1": "取回后，您将无法再挖矿VX",
+        "withdrawHint2": "取回需约7天时间到账",
         "addTitle": "抵押VITE挖矿",
         "withdrawTitle": "取回抵押VITE",
         "addPlaceHolder": "请输入抵押金额，最少134VITE",
@@ -1306,7 +1307,8 @@
             "amountPlaceholder": "请输入解锁金额，最少1VX",
             "notEnough": "可解锁金额不足",
             "submit": "确认解锁",
-            "amountText": "解锁金额"
+            "amountText": "解锁金额",
+            "hint": "解锁需约7天时间到账"
         },
         "unlockList": {
             "title": "解锁中",
