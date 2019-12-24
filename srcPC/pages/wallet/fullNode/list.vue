@@ -19,6 +19,8 @@
 </template>
 
 <script>
+import { constant } from '@vite/vitejs';
+
 import pagination from 'pcComponents/pagination.vue';
 import walletTable from 'pcComponents/table/index.vue';
 import date from 'utils/date.js';
@@ -32,6 +34,7 @@ import { getRewardPledgeFullList } from 'pcServices/reward';
 
 let pledgeListInst;
 const limit = 30;
+const Vite_TokenInfo = constant.Vite_Token_Info;
 
 export default {
     components: { pagination, walletTable },
@@ -82,8 +85,8 @@ export default {
         },
         pledgeList() {
             const pledgeList = this.list;
-
             const nowList = [];
+
             pledgeList.forEach(pledge => {
                 const isMaturity = BigNumber.compared(pledge.endHeight, this.currentHeight) <= 0;
 
@@ -95,8 +98,7 @@ export default {
                     pledgeDate,
                     isMaturity,
                     withdrawHeight: pledge.endHeight,
-                    amount: pledge.amount,
-                    showAmount: pledge.amount,
+                    showAmount: BigNumber.toBasic(pledge.amount, Vite_TokenInfo.decimals),
                     rawData: pledge
                 });
             });
@@ -138,37 +140,27 @@ export default {
             }
 
             this.currentPage = pageIndex;
-            this.stopLoopTransList();
 
-            this.fetchPledgeList(this.currentPage, true).then(data => {
-                this.startLoopPledgeList();
-                if (!data) {
-                    return;
-                }
-
-                this.$refs.tableContent && (this.$refs.tableContent.scrollTop = 0);
-                this.total = data.total;
-                this.list = data.fullNodePledgeInfos;
-            }).catch(() => {
-                this.startLoopPledgeList();
+            getRewardPledgeFullList({
+                limit,
+                address: this.address,
+                offset: pageIndex ? (pageIndex - 1) * limit : 0
+            }).then(data => {
+                this.total = data ? data.total || 0 : 0;
+                this.list = data ? data.fullNodePledgeInfos || [] : [];
+            }).catch(error => {
+                console.warn(error);
             });
         },
 
         startLoopPledgeList() {
             this.stopLoopPledgeList();
-            pledgeListInst = new timer(() => this.fetchPledgeList(this.currentPage), 1000);
+            pledgeListInst = new timer(() => this.toPage(this.currentPage + 1), 5000);
             pledgeListInst.start();
         },
         stopLoopPledgeList() {
             pledgeListInst && pledgeListInst.stop();
             pledgeListInst = null;
-        },
-        fetchPledgeList(pageIndex) {
-            return getRewardPledgeFullList({
-                limit,
-                address: this.address,
-                offset: pageIndex ? (pageIndex - 1) * limit : 0
-            });
         }
     }
 };
