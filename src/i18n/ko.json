@@ -1286,7 +1286,8 @@
             "amountPlaceholder": "Please input amount, minimum 1 VX",
             "notEnough": "Insufficient Amount",
             "submit": "Confirm Retrieval",
-            "amountText": "Retrieving Amount"
+            "amountText": "Retrieving Amount",
+            "hint": "It takes about 7 days to unlock."
         },
         "unlockList": {
             "title": "Retrieving",
