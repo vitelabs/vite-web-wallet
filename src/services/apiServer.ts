@@ -20,7 +20,6 @@ export const ViteXAPI = new DNSClient({
     serverKey: 'dexAPI',
     afterResponse: viteXAPIAfterRes,
     baseUrl: `${ process.env.NODE_ENV === 'production' ? '' : '/test' }/api/v1`
-    // baseUrl: `${ process.env.NODE_ENV === 'production' ? '' : '/dev' }/api`
 });
 
 export const ViteXAPIV2 = new DNSClient({
