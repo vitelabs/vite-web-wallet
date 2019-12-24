@@ -46,7 +46,7 @@ const amountTimeout = null;
 const minNum = 10000;
 
 const StakeABI = { 'inputs': [], 'name': 'stake', 'outputs': [], 'payable': true, 'type': 'function' };
-const StakeABIContractAddress = 'vite_aef2d0c5965e680368064f61891bc89a051a88468624f03467';
+const StakeABIContractAddress = 'vite_d1e0e6ed537123dc42df067968366a736234fb20905f07566f';
 
 export default {
     components: { viteInput },

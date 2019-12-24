@@ -6,9 +6,9 @@
              :rightBtnClick="submit">
         <div class="__row">
             <div class="__row_t">
-                {{ $t(`walletQuota.confirm.cancel.describe`, { amount: showStakingAmount }) }}
+                {{ $t(`walletQuota.confirm.cancel.describe`, { amount: activeItem.showAmount }) }}
             </div>
-            <div class="__input_row __unuse_input">{{ showStakingAmount }} VITE</div>
+            <div class="__input_row __unuse_input">{{ activeItem.showAmount }} VITE</div>
         </div>
     </confirm>
 </template>
@@ -27,9 +27,6 @@ export default {
         };
     },
     computed: {
-        showStakingAmount() {
-            return this.activeItem.amount || 0;
-        },
         netStatus() {
             return this.$store.state.env.clientStatus;
         },
@@ -60,9 +57,9 @@ export default {
             sendTx({
                 methodName: 'callContract',
                 data: {
-                    toAddress: 'vite_aef2d0c5965e680368064f61891bc89a051a88468624f03467',
+                    toAddress: 'vite_d1e0e6ed537123dc42df067968366a736234fb20905f07566f',
                     abi: { 'inputs': [{ 'name': 'id', 'type': 'bytes32' }], 'name': 'cancelStake', 'payable': false, 'type': 'function' },
-                    params: [this.activeItem.sendHash]
+                    params: [this.activeItem.rawData.sendHash]
                 }
             }).then(() => {
                 this.close();

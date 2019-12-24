@@ -31,7 +31,7 @@
                 </div>
                 <div class="row-item">
                     <div class="light">{{ $t('walletFullNode.quotaContent.stakeAmount') }}</div>
-                    <div class="text">{{ info.pledgeAmount || '--' }} VITE</div>
+                    <div class="text">{{ (info.pledgeAmount||0)|formatNum  }} VITE</div>
                 </div>
             </div>
         </div>
@@ -42,6 +42,9 @@
 import { getRewardPledgeFullStat } from 'pcServices/reward';
 
 export default {
+    created() {
+        this.getRewardPledgeFullStat();
+    },
     data() {
         return { info: {} };
     },
