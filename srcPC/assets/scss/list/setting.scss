@@ -18,21 +18,19 @@
             display: inline-block;
             position: absolute;
             top: 50%;
-            right: 20px;
-            width: 16px;
-            height: 16px;
-            margin-top: -8px;
+            right: 10px;
+            width: 20px;
+            height: 10px;
+            margin-top: -5px;
         }
         &.down {
             &:after {
-                background: url('~assets/imgs/down_icon.svg');
-                background-size: 16px 16px;
+                @include background_common_img("decend.svg");
             }
         }
         &.up {
             &:after {
-                background: url('~assets/imgs/up_icon.svg');
-                background-size: 16px 16px;
+                @include background_common_img("ascend.svg");
             }
         }
     }

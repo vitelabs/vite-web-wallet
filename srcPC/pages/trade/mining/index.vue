@@ -10,9 +10,7 @@
                 <span class="tab_img trade"></span>
                 <div>
                     <div class="label">{{ $t("tradeMining.txTitle") }}
-                        <span class="help __pointer" @mouseenter="showHelp" @mouseleave="hideHelp">
-                            <span v-show="isShowHelp" class="help-text">{{ $t('tradeMining.help') }}</span>
-                        </span>
+                        <help-tips :helpText="$t('tradeMining.help')"></help-tips>
                     </div>
                     <div class="amount">
                         {{ tradeMiningTotal | formatNum }} VX
@@ -64,6 +62,7 @@
 <script>
 import openUrl from 'utils/openUrl';
 import secTitle from 'pcComponents/secTitle';
+import helpTips from 'pcComponents/helpTips';
 import { miningTrade, miningPledge, getInviteMiningDetail, getOrderMining } from 'services/trade';
 import inviteMinComp from './invite/invite.vue';
 import orderMinComp from './order.vue';
@@ -76,7 +75,8 @@ export default {
         orderMinComp,
         tradeMinComp,
         stakingMinComp,
-        secTitle
+        secTitle,
+        helpTips
     },
     data() {
         return {
@@ -84,8 +84,7 @@ export default {
             stakingMiningTotal: 0,
             inviteMiningTotal: 0,
             orderMiningTotal: 0,
-            tabName: 'trade',
-            isShowHelp: false
+            tabName: 'trade'
         };
     },
     beforeMount() {
@@ -112,12 +111,6 @@ export default {
         }
     },
     methods: {
-        showHelp() {
-            this.isShowHelp = true;
-        },
-        hideHelp() {
-            this.isShowHelp = false;
-        },
         init() {
             if (!this.address) return;
             const address = this.address;
@@ -145,44 +138,9 @@ export default {
 @import "~assets/scss/vars.scss";
 
 .help {
-    position: relative;
-    @include background_common_img("info.svg");
     width: 16px;
     height: 16px;
-    display: inline-block;
     margin-bottom: -3px;
-    .help-text {
-        position: absolute;
-        top: 25px;
-        right: 8px;
-        width: 200px;
-        padding: 10px;
-        transform: translateX(50%);
-        border-radius: 2px;
-        font-family: $font-H;
-        @include bg_color_4();
-        [data-theme="0"] & {
-            box-shadow: 0 2px 10px 1px rgba(176, 192, 237, 0.42);
-        }
-        @include font_color_2();
-        font-size: 12px;
-        line-height: 16px;
-        &:after {
-            position: absolute;
-            content: ' ';
-            top: 0;
-            left: 50%;
-            transform: translate(-50%, -100%);
-            display: inline-block;
-            border: 6px solid transparent;
-            [data-theme="0"] & {
-                border-right: 6px solid $white-color;
-            }
-            [data-theme="1"] & {
-                border-right: 6px solid $black-color-4;
-            }
-        }
-    }
 }
 
 .trade-mining-wrapper {

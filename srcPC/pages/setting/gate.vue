@@ -2,9 +2,7 @@
     <div class="currency-wrapper">
         <div class="small-title bold">
             {{ $t('setting.gate') }}
-            <span class="help __pointer" @mouseenter="showHelp" @mouseleave="hideHelp">
-                <span v-show="isShowHelp" class="help-text">{{ $t('setting.gateHelp') }}</span>
-            </span>
+            <help-tips :helpText="$t('setting.gateHelp')"></help-tips>
         </div>
 
         <div class="setting common-list-wrapper __pointer">
@@ -21,12 +19,13 @@
 </template>
 
 <script>
+import helpTips from 'pcComponents/helpTips';
 
 export default {
+    components: { helpTips },
     data() {
         return {
             isShow: false,
-            isShowHelp: false,
             list: [ 0, 1 ]
         };
     },
@@ -42,12 +41,6 @@ export default {
         },
         toggleList() {
             this.isShow = !this.isShow;
-        },
-        showHelp() {
-            this.isShowHelp = true;
-        },
-        hideHelp() {
-            this.isShowHelp = false;
         }
     }
 };
@@ -56,41 +49,4 @@ export default {
 <style lang="scss" scoped>
 @import "~pcAssets/scss/list/setting.scss";
 @import "./setting.scss";
-
-.help {
-    position: relative;
-    background: url('~assets/imgs/info.svg');
-    background-size: 100% 100%;
-    width: 12px;
-    height: 12px;
-    display: inline-block;
-    margin-bottom: -1px;
-    .help-text {
-        position: absolute;
-        left: 24px;
-        top: 6px;
-        transform: translateY(-50%);
-        z-index: 100;
-        width: 200px;
-        word-break: break-word;
-        line-height: 16px;
-        padding: 10px;
-        background: #fff;
-        box-shadow: 0px 5px 20px 0px rgba(0,0,0,0.1);
-        border-radius: 2px;
-        @include font-family-normal();
-        @include font_color_2();
-        font-size: 12px;
-        &:after {
-            position: absolute;
-            content: ' ';
-            top: 50%;
-            left: 0;
-            transform: translate(-100%, -50%);
-            display: inline-block;
-            border: 6px solid transparent;
-            border-right: 6px solid #fff;
-        }
-    }
-}
 </style>
