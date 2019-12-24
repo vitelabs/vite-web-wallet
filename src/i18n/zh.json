@@ -1253,7 +1253,8 @@
             "amountPlaceholder": "请输入解锁金额，最少1VX",
             "notEnough": "可解锁金额不足",
             "submit": "确认解锁",
-            "amountText": "解锁金额"
+            "amountText": "解锁金额",
+            "hint": "解锁需约7天时间到账"
         },
         "unlockList": {
             "title": "解锁中",
