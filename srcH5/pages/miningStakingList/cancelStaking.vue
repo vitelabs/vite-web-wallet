@@ -12,7 +12,8 @@
             </div>
         </div>
 
-        <div class="__hint"><span>{{ $t('tradeMining.withdrawHint') }}</span></div>
+        <div class="__hint distance"><span>{{ $t('tradeMining.withdrawHint1') }}</span></div>
+        <div class="__hint"><span>{{ $t('tradeMining.withdrawHint2') }}</span></div>
     </confirm>
 </template>
 

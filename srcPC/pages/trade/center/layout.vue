@@ -47,6 +47,7 @@
         margin-right: 10px;
         .t {
             flex: 1;
+            height: 480px;
             margin-bottom: 10px;
         }
         .b {

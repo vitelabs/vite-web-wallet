@@ -25,6 +25,8 @@
                 </span>
             </vite-input>
         </div>
+
+        <div v-if="!isLockVX" class="__hint distance"><span>{{ $t('tradeDividend.unlockVXConfirm.hint') }}</span></div>
     </confirm>
 </template>
 
