@@ -76,13 +76,6 @@ export default {
         right: 100%;
         transform: translateX(20px);
         z-index: 1;
-        .code {
-            width: 146px;
-            height: 146px;
-            padding: 10px;
-            background: #fff;
-        }
-
         .btn {
             background: $blue-color-1;
             border-radius: 2px;
