@@ -237,7 +237,12 @@ export default {
                 margin-right: 15px;
             }
             &:first-child {
-                border-bottom: 1px solid rgba(211,223,239,1);
+                [data-theme="0"] & {
+                    border-bottom: 1px solid rgba(211,223,239,1);
+                }
+                [data-theme="1"] & {
+                    border-bottom: 1px solid $black-color-2;
+                }
             }
         }
     }
