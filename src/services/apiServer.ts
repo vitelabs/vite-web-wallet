@@ -1,5 +1,6 @@
 import provider from '@vite/vitejs-ws';
 import { ViteAPI } from '@vite/vitejs';
+import { Client } from 'utils/request';
 import { DNSClient, setWatch } from './dnsHostIP';
 
 function viteXAPIAfterRes(xhr) {
@@ -27,6 +28,8 @@ export const ViteXAPIV2 = new DNSClient({
     afterResponse: viteXAPIAfterRes,
     baseUrl: `${ process.env.NODE_ENV === 'production' ? '' : '/test' }/api/v2`
 });
+
+export const RewardAPI = new Client('api/', viteXAPIAfterRes);
 
 const url = setWatch('gViteAPI', url => {
     WS_RPC.disconnect();

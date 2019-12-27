@@ -1,7 +1,7 @@
-import { ViteXAPI } from 'services/apiServer';
+import { RewardAPI } from 'services/apiServer';
 
 export function getRewardPledgeFullStat({ address }) {
-    return ViteXAPI.request({
+    return RewardAPI.request({
         method: 'GET',
         path: 'reward/pledge/full/stat',
         params: { address }
@@ -9,7 +9,7 @@ export function getRewardPledgeFullStat({ address }) {
 }
 
 export function getRewardPledgeFullList({ address, offset, limit }) {
-    return ViteXAPI.request({
+    return RewardAPI.request({
         method: 'GET',
         path: 'reward/pledge/full/list',
         params: { address, offset, limit }

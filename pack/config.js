@@ -56,6 +56,11 @@ const dnsHostServer = {
     test: '\'\'',
     dev: '\'\''
 };
+const rewardApiServer = {
+    production: '\'https://reward.vite.net/\'',
+    test: '',
+    dev: ''
+};
 
 const contractAddress = {
     production: '\'0x1b793e49237758dbd8b752afc9eb4b329d5da016\'',
@@ -83,6 +88,7 @@ module.exports = {
         'process.env.viteConnect': viteConnect[Node_Env],
         'process.env.gatewayInfosServer': gatewayInfosServer[Node_Env],
         'process.env.conversionGate': conversionGate[Node_Env],
-        'process.env.dnsHostServer': dnsHostServer[Node_Env]
+        'process.env.dnsHostServer': dnsHostServer[Node_Env],
+        'process.env.rewardApiServer': rewardApiServer[Node_Env]
     }
 };

@@ -23,6 +23,11 @@ module.exports = {
                 target: 'https://config.vitewallet.com/',
                 changeOrigin: true,
                 secure: false
+            },
+            '/api/reward/*': {
+                target: 'http://132.232.22.247:8080/test/',
+                changeOrigin: true,
+                secure: false
             }
         }
     }
