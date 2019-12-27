@@ -1,6 +1,6 @@
 # Redirect default Netlify subdomain to primary domain
 /gw/* http://132.232.60.116:8001/gw/:splat 200
-/api/reward/* http://132.232.60.116:8080/test/api/reward:splat 200
+/api/reward/* http://132.232.22.247:8080/test/api/reward:splat 200
 /mobileDex/* /mobileDex.html 200
 /mobiledex/* /mobileDex.html 200
 /apple-app-site-association /apple-app-site-association 200
