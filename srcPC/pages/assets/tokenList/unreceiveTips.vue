@@ -75,12 +75,19 @@ export default {
         display: none;
         color: #5E6875;
         width: 200px;
-        box-shadow: 0px 5px 20px 0px rgba(176,192,237,0.4);
+        [data-theme="0"] & {
+            box-shadow: 0px 5px 20px 0px rgba(176,192,237,0.4);
+        }
         word-break: break-word;
         @include font-family-normal();
         /deep/.trigle {
             border: 7px solid transparent;
-            border-bottom: 7px solid #fff;
+            [data-theme="0"] & {
+                border-bottom: 7px solid $white-color;
+            }
+            [data-theme="1"] & {
+                border-bottom: 7px solid $black-color-4;
+            }
             top: -14px;
             transform: translateX(-50%);
             left: 50%;

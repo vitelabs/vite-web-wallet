@@ -172,7 +172,7 @@ export default {
 @import "~assets/scss/vars.scss";
 
 .token-card-wrapper {
-    background: rgba(255,255,255,1);
+    @include bg_color_2();
     @include box_shadow();
     border-radius: 2px;
     box-sizing: border-box;
@@ -181,29 +181,39 @@ export default {
     .symbol {
         font-size: 14px;
         @include font-family-bold();
-        color: rgba(94,104,117,1);
+        @include font_color_2();
         line-height: 18px;
         padding-bottom: 12px;
-        border-bottom: 1px dashed rgba(211,223,239,1);
+        [data-theme="0"] & {
+            border-bottom: 1px dashed rgba(211,223,239,1);
+        }
+        [data-theme="1"] & {
+            border-bottom: 1px dashed #1E2745;
+        }
     }
     .amount {
         font-size: 18px;
         @include font-family-bold();
-        color: rgba(29,32,36,1);
+        @include common_font_color();
         line-height: 22px;
         margin: 18px 0 8px;
     }
     .currency {
         font-size: 12px;
         @include font-family-normal();
-        color: rgba(91,99,141,0.82);
+        [data-theme="0"] & {
+            color: rgba(91,99,141,0.82);
+        }
+        [data-theme="1"] & {
+            color: $gray-color-2;
+        }
         line-height: 16px;
         margin-bottom: 18px;
     }
     .btn-list {
         font-size: 12px;
         @include font-family-bold();
-        color: rgba(0,122,255,1);
+        color: $blue-color-1;
         span {
             display: inline-block;
             box-sizing: border-box;
@@ -212,14 +222,20 @@ export default {
             text-align: center;
             height: 30px;
             line-height: 30px;
-            background: rgba(0,122,255,0.05);
             border-radius: 2px;
-            border: 1px solid rgba(0,122,255,0.3);
+            [data-theme="0"] & {
+                background: rgba(0,122,255,0.05);
+                border: 1px solid rgba(0,122,255,0.3);
+            }
+            [data-theme="1"] & {
+                background: $black-color-4;
+            }
             &:first-child {
                 margin-right: 12px;
             }
             &.unuse {
                 @include gray_btn_color();
+                cursor: not-allowed;
                 border: none;
             }
         }

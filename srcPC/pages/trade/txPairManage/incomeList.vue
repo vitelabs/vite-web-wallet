@@ -124,11 +124,11 @@ export default {
     font-size: 12px;
     .total-income-title {
         @include font-family-normal();
-        color: rgba(94,104,117,1);
+        @include font_color_2();
     }
     .income {
         @include font-family-bold();
-        color: rgba(29,32,36,1);
+        @include common_font_color();
     }
 }
 </style>

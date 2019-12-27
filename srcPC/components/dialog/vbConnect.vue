@@ -54,12 +54,10 @@ export default {
     padding: 20px;
     display: flex;
     font-size: 14px;
-    color: #333;
     font-family: $font-bold;
+    @include font_color_to_white(#333);
 }
 .code_container {
-    width: 163px;
-    height: 163px;
     margin: 0 auto;
     justify-content: center;
 }

@@ -30,6 +30,9 @@ export default {
         },
         netStatus() {
             return this.$store.state.env.clientStatus;
+        },
+        theme() {
+            return this.$store.state.env.theme;
         }
     },
     watch: {
@@ -61,7 +64,8 @@ export default {
 
             this.tvKline = new kline({
                 locale: this.$i18n.locale,
-                activeTxPair: this.activeTxPair
+                activeTxPair: this.activeTxPair,
+                theme: this.theme
             }, () => {
                 this.createDepthBtn();
             });

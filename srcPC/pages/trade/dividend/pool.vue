@@ -1,7 +1,7 @@
 <template>
     <div class="staking-detail pool">
         <div class="item pool">
-            <img class="icon" src="~assets/imgs/smallAssets.svg" />
+            <span class="icon"></span>
             <div class="token-wrapper">
                 <div>{{ $t('tradeDividend.allPrice') }}</div>
                 <div class="bold">{{ allBtc }}</div>
@@ -49,7 +49,7 @@ export default {
     },
     computed: {
         typeList() {
-            return this.$store.state.exchangeMine.showTypeList;
+            return this.$store.getters.tokenShowTypeList;
         },
         allPrice() {
             const coin = this.$store.state.env.currency;
@@ -184,6 +184,8 @@ export default {
     padding: 14px 30px;
     flex-direction: row;
     .icon {
+        display: inline-block;
+        @include background_common_img('head_asset.svg');
         width: 24px;
         height: 24px;
         margin-right: 10px;

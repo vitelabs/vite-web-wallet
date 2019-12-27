@@ -119,6 +119,12 @@ export default {
             return _l;
         },
         deptChartOption() {
+            const lineColor = +this.theme === 0 ? '#ccc' : '#1E2745';
+            const fontColor = +this.theme === 0 ? '#333' : '#545F75';
+
+            const axisLine = { lineStyle: { color: lineColor } };
+            const axisLabel = { color: fontColor };
+
             return {
                 tooltip: {
                     confine: true,
@@ -141,38 +147,51 @@ export default {
                         return res;
                     },
                     trigger: 'axis',
-                    axisPointer: {
-                        type: 'line',
-                        lineStyle: { color: 'rgba(0, 0, 0, 1)' }
-                    },
-                    backgroundColor: '#afafaf',
-                    textStyle: {
-                        color: '#fff',
-                        fontSize: '12px'
-                    },
-                    extraCssText: 'box-shadow: 0 0 16px 0 rgba(0, 0, 0, .2); border-radius: 4px;'
+                    ...this.tooltipStyle
                 },
                 xAxis: {
                     type: 'category',
                     boundaryGap: false,
-                    data: this.priceList
+                    data: this.priceList,
+                    axisLine,
+                    axisLabel
                 },
-                yAxis: [{ type: 'value' }],
+                yAxis: {
+                    type: 'value',
+                    axisLine,
+                    axisLabel,
+                    splitLine: { lineStyle: { color: [lineColor] } }
+                },
                 series: [ {
                     name: this.$t('trade.quantityTable'),
                     type: 'line',
+                    data: this.buyQuantityList,
                     itemStyle: { normal: { color: '#4cc453' } },
                     lineStyle: { normal: { color: '#00D764' } },
-                    areaStyle: { color: '#00D764' },
-                    data: this.buyQuantityList
+                    areaStyle: { color: '#00D764' }
                 }, {
                     name: this.$t('trade.quantityTable'),
                     type: 'line',
+                    data: this.sellQuantityList,
                     itemStyle: { normal: { color: '#e94c4c' } },
                     lineStyle: { normal: { color: '#ED5158' } },
-                    areaStyle: { color: '#ED5158' },
-                    data: this.sellQuantityList
+                    areaStyle: { color: '#ED5158' }
                 } ]
+            };
+        },
+        theme() {
+            return +this.$store.state.env.theme;
+        },
+        tooltipStyle() {
+            const extraCssText = 'box-shadow: 0 0 16px 0 rgba(0, 0, 0, .2); border-radius: 4px; font-size: 12px; color: #fff';
+
+            return {
+                axisPointer: {
+                    type: 'line',
+                    lineStyle: { color: +this.theme === 0 ? 'rgba(0, 0, 0, 1)' : '#1E2745' }
+                },
+                backgroundColor: +this.theme === 0 ? '#afafaf' : '#1E2745',
+                extraCssText
             };
         }
     }
@@ -185,7 +204,12 @@ export default {
     flex-direction: column;
     width: 100%;
     height: 100%;
-    background: #f7f9fb;
+    [data-theme="0"] & {
+        background: #f7f9fb;
+    }
+    [data-theme="1"] & {
+        background: $black-color-2;
+    }
     padding: 0 6px 10px;
     box-sizing: border-box;
 
@@ -193,7 +217,7 @@ export default {
         display: flex;
         height: 38px;
         width: 100%;
-        background: #fff;
+        @include bg_color_2();
         flex-direction: row;
         margin-bottom: 6px;
         align-items: center;
@@ -201,16 +225,24 @@ export default {
         justify-content: flex-end;
         .btn {
             line-height: 40px;
-            color: #4c525e;
+            [data-theme="0"] & {
+                color: #4c525e;
+                &:hover {
+                    color: #131722;;
+                }
+            }
+            [data-theme="1"] & {
+                color: #C0C6D3;
+                &:hover {
+                    color: #9db2bd;;
+                }
+            }
             padding: 0 10px;
             text-align: right;
             user-select: none;
             font-size: 14px;
             font-family: Trebuchet MS, Tahoma, Arial, sans-serif;
             transition: color 0.06s ease;
-            &:hover {
-                color: #131722;;
-            }
             &.active {
                 background: rgba(75, 116, 255, 0.1);
             }
@@ -222,8 +254,13 @@ export default {
         width: 100%;
         height: 100%;
         box-sizing: border-box;
-        background: #fff;
-        border: 1px solid #dadde0;
+        @include bg_color_2();
+        [data-theme="0"] & {
+            border: 1px solid #dadde0;
+        }
+        [data-theme="1"] & {
+            border: 1px solid $black-color-4;
+        }
     }
 }
 </style>

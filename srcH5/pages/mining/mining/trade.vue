@@ -82,7 +82,7 @@ export default {
     },
     computed: {
         typeList() {
-            return this.$store.state.exchangeMine.showTypeList;
+            return this.$store.getters.tokenShowTypeList;
         },
         content() {
             return this.tradeList.map(item => {
