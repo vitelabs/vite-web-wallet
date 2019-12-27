@@ -135,6 +135,7 @@ export default {
         margin-top: 10px;
         word-break: break-all;
         font-size: 12px;
+        @include bg_color_1();
         @include font-family-bold();
         @include switch_list_color();
         [data-theme="0"] & {
