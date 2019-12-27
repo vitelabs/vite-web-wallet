@@ -1,7 +1,6 @@
 import viteCrypto from 'testwebworker';
 import { keystore, wallet, accountBlock as accountBlockUtils } from '@vite/vitejs';
 
-import { timer } from 'utils/asyncFlow';
 import statistics from 'utils/statistics';
 import { viteClient } from 'services/apiServer';
 
@@ -9,8 +8,6 @@ import { getAddr, addHdAccount, setAcc, getAcc, setAccInfo, setAddr, setLastAcc 
 
 const Default_Lang = 'english';
 const Max_Addr_Num = 10;
-
-let unreceivedTimer;
 
 export enum StatusMap {
     'LOCK' = 0,
@@ -31,7 +28,7 @@ export class WebAccount {
     addrList: any[];
 
     activeAccount: any;
-
+    private receiveTask: any;
 
     constructor({
         id,
@@ -69,6 +66,7 @@ export class WebAccount {
 
         this.mnemonic = '';
         this.pass = '';
+        this.receiveTask = null;
     }
 
     save() {
@@ -156,17 +154,20 @@ export class WebAccount {
         if (this.status === StatusMap.LOCK || !this.activeAccount) {
             return;
         }
-        console.log(this.activeAccount, this.addrList);
-        // Auto receive TX
-        unreceivedTimer = new timer(() => receiveTx(this.activeAccount.privateKey, this.activeAccount.address), 2000);
-        unreceivedTimer.start();
+
+        this.receiveTask = new accountBlockUtils.ReceiveAccountBlockTask({
+            address: this.activeAccount.address,
+            privateKey: this.activeAccount.privateKey,
+            provider: viteClient
+        });
+        this.receiveTask.start();
         return;
     }
 
     freeze() {
         // Kill auto receive
-        unreceivedTimer && unreceivedTimer.stop();
-        unreceivedTimer = null;
+        this.receiveTask && this.receiveTask.stop();
+        this.receiveTask = null;
     }
 
     addAddr() {
@@ -311,19 +312,4 @@ export class WebAccount {
 
         return null;
     }
-}
-
-
-async function receiveTx(privateKey, address) {
-    const data = await viteClient.request('ledger_getUnreceivedBlocksByAddress', address, 0, 1);
-    if (!data || !data.length) {
-        return;
-    }
-
-    const accountBlock = accountBlockUtils.createAccountBlock('receive', {
-        address,
-        sendBlockHash: data[0].hash
-    }).setProvider(viteClient).setPrivateKey(privateKey);
-
-    return accountBlock.autoSendByPoW();
 }
