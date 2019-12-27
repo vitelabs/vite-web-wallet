@@ -127,13 +127,18 @@ export default {
     font-size: 14px;
     font-family: $font-normal;
     font-weight: 400;
-    color: rgba(29,32,36,1);
+    @include common_font_color();
     ._row_title {
-        color: rgba(94,104,117,0.58);
+        [data-theme="0"] & {
+            color: rgba(94,104,117,0.58);
+        }
+        [data-theme="1"] & {
+            color: $gray-color-2;
+        }
     }
     .err {
         padding: 0 5px;
-        border-left: 1px solid #D4DEE7;
+        @include common_border();
         color: rgba(255,0,8,1);
     }
 }
