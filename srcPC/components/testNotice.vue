@@ -27,18 +27,19 @@ export default {
     left: 65px;
     padding: 20px 0 0 20px;
     width: 350px;
-    z-index: 100;
+    z-index: 1000;
 }
 
 .hover-notice {
     max-width: 260px;
     padding: 30px;
     text-align: left;
-    background: #fff;
-    border: 1px solid #e5edf3;
-    box-shadow: 0 2px 15px 1px rgba(176, 192, 237, 0.17);
     border-radius: 8px;
-
+    @include bg_color_3();
+    [data-theme="0"] & {
+        border: 1px solid #e5edf3;
+        box-shadow: 0 2px 15px 1px rgba(176, 192, 237, 0.17);
+    }
     .hover-title {
         @include font-family-bold();
         text-align: left;
@@ -48,18 +49,15 @@ export default {
         margin-bottom: 16px;
         word-break: break-all;
     }
-
     .hover-content {
         opacity: 0.66;
         font-size: 14px;
-        color: #172c39;
         line-height: 22px;
         margin-bottom: 10px;
-
+        @include font_color_to_white(#172c39);
         &:last-child {
             margin-bottom: 0;
         }
-
         &.bold {
             font-weight: bolder;
         }

@@ -11,9 +11,11 @@
 }
 
 .bg-img {
+    display: inline-block;
     height: 140px;
     width: 140px;
     margin: 0 auto 29px;
+    @include background_common_img('invite.png')
 }
 
 .invite-code {

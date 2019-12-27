@@ -150,8 +150,11 @@ export default {
     @include common_font_color();
     box-sizing: border-box;
     text-align: center;
+    display: flex;
+    flex-direction: column;
     &__content {
-        margin-top: 20px;
+        margin: 20px auto 0;
+        justify-content: center;
     }
 }
 .head {

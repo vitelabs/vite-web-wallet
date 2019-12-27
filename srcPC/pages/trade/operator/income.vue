@@ -1,7 +1,7 @@
 <template>
     <div class="income-wrapper">
         <div class="item">
-            <img class="icon" src="~assets/imgs/head_asset.svg" />
+            <span class="icon"></span>
             <div class="token-wrapper">
                 <div class="token-title">{{ $t('tradeOperator.totalIncome') }}</div>
                 <div class="token-amount">{{ totalAmount }}</div>
@@ -30,7 +30,7 @@ export default {
     },
     computed: {
         typeList() {
-            return this.$store.state.exchangeMine.showTypeList;
+            return this.$store.getters.tokenShowTypeList;
         },
         address() {
             return this.$store.getters.activeAddr;
@@ -107,23 +107,29 @@ export default {
 .income-wrapper {
     border-radius: 2px;
     @include box_shadow();
-    background: url('~assets/imgs/mint_pledge_bg.png') rgba(255,255,255,1);
-    background-size: 100% 100%;
+    @include background_common_img('mint_pledge_bg.png');
     display: flex;
     flex-direction: row;
     padding: 20px 0;
     .item {
         flex: 1;
         padding: 5px 30px;
-        border-right: 1px solid rgba(198,203,212,0.3);
+        [data-theme="0"] & {
+            border-right: 1px solid rgba(198,203,212,0.3);
+        }
+        [data-theme="1"] & {
+            border-right: 1px solid $black-color-4;
+        }
         &:last-child {
             border: none;
         }
         .icon {
+            display: inline-block;
             width: 34px;
             height: 34px;
             margin-right: 10px;
             margin-bottom: 5px;
+            @include background_common_img('head_asset.svg');
         }
         .token-wrapper {
             display: inline-block;
@@ -136,7 +142,7 @@ export default {
             .token-amount {
                 font-size: 20px;
                 @include font-family-bold();
-                color: rgba(29,32,36,1);
+                @include common_font_color();
                 line-height: 24px;
                 margin-top: 13px;
             }

@@ -113,7 +113,7 @@ export default {
         background: rgba(247,249,251,1);
     }
     [data-theme="1"] & {
-        background: $black-color-3;
+        background: $black-color-1;
     }
     .content {
         display: flex;

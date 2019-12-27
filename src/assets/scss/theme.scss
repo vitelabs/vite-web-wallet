@@ -91,7 +91,7 @@
 
 @mixin common_font_color() {
     [data-theme="0"] & {
-        color: rgba(29,32,36,1);
+        color: rgba(29,32,36,1); // 1D2024
     }
     [data-theme="1"] & {
         color: $white-color;

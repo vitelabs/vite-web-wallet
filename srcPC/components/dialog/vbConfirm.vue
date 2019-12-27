@@ -3,7 +3,7 @@ extends /components/dialog/base.pug
 block head
     .head {{$t('assets.vb.confirm.tips')}}
 block content
-    img.block-ctx(src="~assets/imgs/vb_confirm.png")
+    span.block-ctx
 </template>
 
 <script>
@@ -22,20 +22,22 @@ export default {
 <style lang="scss" scoped>
 @import "~assets/scss/vars.scss";
 .head {
-    border-bottom: 1px solid #d4dee7;
     box-sizing: border-box;
     padding: 23px;
     display: flex;
     background: rgba(0, 122, 255, 0.05);
-    color: #1D2024;
     font-size: 16px;
+    @include common_font_color();
+    @include common_border_one(bottom);
 }
 .block-ctx {
+    display: inline-block;
     height: 138px;
     width: 140px;
     display: flex;
     justify-content: center;
     margin: 0 auto;
+    @include background_common_img('vb_confirm.png');
 }
 </style>
 

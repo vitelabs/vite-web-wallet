@@ -1,7 +1,7 @@
 <template lang="pug">
 extends /components/dialog/base.pug
 block content
-    img.bg-img(src="~assets/imgs/invite.png")
+    span.bg-img
     div(v-if="inviteCode")
         .invite-code {{$t('assets.invite.myCode')}}{{this.inviteCode}}
             img.copy-share.__pointer(src="~assets/imgs/share.svg" @click="copyShare()")

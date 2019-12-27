@@ -5,7 +5,7 @@
              :leftBtnClick="exchange ? _submit : _cancle"  :rightBtnClick="exchange ? _cancle : _submit">
         <slot></slot>
 
-        <img v-show="isShowPWD" :class="{ 'distance': !!content }" class="unlock-user" src="~assets/imgs/unlock-user.svg"/>
+        <span v-show="isShowPWD" :class="{ 'distance': !!content }" class="unlock-user"></span>
         <form autocomplete="off" v-show="isShowPWD" class="__input __input_row">
             <input ref="passInput" v-model="password" :placeholder="$t('pwdConfirm.placeholder')" type="password"/>
         </form>
@@ -199,11 +199,13 @@ input {
     margin-top: 30px;
 }
 .unlock-user {
+    display: inline-block;
     width: 100px;
     height: 100px;
     position: relative;
     left: 50%;
     margin-left: -50px;
     margin-bottom: 30px;
+    @include background_common_img('unlock-user.svg');
 }
 </style>

@@ -8,6 +8,11 @@ import ethIcon from 'assets/imgs/eth.svg';
 import usdIcon from 'assets/imgs/usd.svg';
 import btcIcon from 'assets/imgs/BTC.svg';
 
+import theme1viteIcon from 'assets/theme1_imgs/vite-dividend.svg';
+import theme1ethIcon from 'assets/theme1_imgs/eth.svg';
+import theme1usdIcon from 'assets/theme1_imgs/usd.svg';
+import theme1btcIcon from 'assets/theme1_imgs/BTC.svg';
+
 import h5ViteIcon from 'assets/imgs/trade/vite.png';
 import h5EthIcon from 'assets/imgs/trade/eth.png';
 import h5UsdIcon from 'assets/imgs/trade/usd.png';
@@ -42,23 +47,6 @@ const state = {
 
     minThreshold: {},
     currVxMineInfo: null,
-    showTypeList: [ {
-        name: 'VITE',
-        icon: viteIcon,
-        h5Icon: h5ViteIcon
-    }, {
-        name: 'BTC',
-        icon: btcIcon,
-        h5Icon: h5BtcIcon
-    }, {
-        name: 'ETH',
-        icon: ethIcon,
-        h5Icon: h5EthIcon
-    }, {
-        name: 'USDT',
-        icon: usdIcon,
-        h5Icon: h5UsdIcon
-    } ],
 
     tradeMiningSymbols: [],
     orderMiningSymbols: [],
@@ -168,13 +156,33 @@ const actions = {
 };
 
 const getters = {
-    tradeTotalDividend() {
+    tokenShowTypeList(state, getters, rootState) {
+        const theme = rootState.env.theme || '0';
+        return [ {
+            name: 'VITE',
+            icon: +theme === 0 ? viteIcon : theme1viteIcon,
+            h5Icon: h5ViteIcon
+        }, {
+            name: 'BTC',
+            icon: +theme === 0 ? btcIcon : theme1btcIcon,
+            h5Icon: h5BtcIcon
+        }, {
+            name: 'ETH',
+            icon: +theme === 0 ? ethIcon : theme1ethIcon,
+            h5Icon: h5EthIcon
+        }, {
+            name: 'USDT',
+            icon: +theme === 0 ? usdIcon : theme1usdIcon,
+            h5Icon: h5UsdIcon
+        } ];
+    },
+    tradeTotalDividend(state) {
         if (!state.currVxMineInfo) {
             return null;
         }
         return state.currVxMineInfo.feeMineDetail || null;
     },
-    pledgeTotalDividend() {
+    pledgeTotalDividend(state) {
         if (!state.currVxMineInfo) {
             return '0';
         }

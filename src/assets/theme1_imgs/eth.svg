@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 58 (84663) - https://sketch.com -->
+    <title>eth</title>
+    <desc>Created with Sketch.</desc>
+    <g id="页面-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="分红" transform="translate(-652.000000, -128.000000)">
+            <g id="手续费分红池" transform="translate(80.000000, 90.000000)">
+                <g id="bg">
+                    <g id="ETH" transform="translate(572.000000, 22.000000)">
+                        <g id="BTC" transform="translate(0.000000, 16.000000)">
+                            <g id="eth-icon">
+                                <path d="M12,0.5 C5.64872538,0.5 0.5,5.64872538 0.5,12 C0.5,18.3512746 5.64872538,23.5 12,23.5 C18.3512746,23.5 23.5,18.3512746 23.5,12 C23.5,5.64872538 18.3512746,0.5 12,0.5 Z" id="Rectangle-3" stroke="#5BC500" fill="#5BC500"></path>
+                                <g id="eth" transform="translate(7.200000, 4.800000)" fill="#FFFFFF">
+                                    <g id="Group" opacity="0.6" transform="translate(0.485505, 5.314695)">
+                                        <polygon id="Path" points="4.42891227 0.00694731336 0.01042097 2.0164577 4.42891227 4.6269107 8.84566674 2.0164577"></polygon>
+                                    </g>
+                                    <g id="Group" opacity="0.45" transform="translate(0.485505, 0.000000)">
+                                        <polygon id="Path" points="0.01042097 7.33115242 4.42891227 9.94160542 4.42891227 0"></polygon>
+                                    </g>
+                                    <g id="Group" opacity="0.8" transform="translate(4.914417, 0.000000)">
+                                        <polygon id="Path" points="0 0 0 9.94160542 4.41675447 7.33115242"></polygon>
+                                    </g>
+                                    <g id="Group" opacity="0.45" transform="translate(0.485505, 8.163093)">
+                                        <polygon id="Path" points="0.01042097 0.00521048502 4.42891227 6.23000326 4.42891227 2.61566348"></polygon>
+                                    </g>
+                                    <g id="Group" opacity="0.8" transform="translate(4.914417, 8.163093)">
+                                        <polygon id="Path" points="0 2.61566348 0 6.23000326 4.42022813 0.00521048502"></polygon>
+                                    </g>
+                                </g>
+                            </g>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

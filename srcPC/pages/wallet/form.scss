@@ -69,11 +69,16 @@
     left: 50%;
     bottom: 48px;
     transform: translate(-50%, 0);
-    background: #fff;
-    box-shadow: 0 5px 20px 0 rgba(0, 0, 0, 0.1);
+    @include bg_color_4();
     border-radius: 4px;
     font-size: 12px;
-    color: #3e4a59;
+    [data-theme="0"] & {
+        box-shadow: 0px 5px 20px 0px rgba(0,0,0,0.1);
+        color: #3e4a59; 
+    }
+    [data-theme="1"] & {
+        color: $gray-color-2;
+    }
     box-sizing: border-box;
     @include font-family-normal();
     opacity: 0;
@@ -92,7 +97,12 @@
         content: ' ';
         display: inline-block;
         border: 6px solid transparent;
-        border-top: 6px solid #fff;
+        [data-theme="0"] & {
+            border-top: 6px solid #fff;
+        }
+        [data-theme="1"] & {
+            border-top: 6px solid $black-color-4;
+        }
         position: absolute;
         bottom: -12px;
         left: 50%;
