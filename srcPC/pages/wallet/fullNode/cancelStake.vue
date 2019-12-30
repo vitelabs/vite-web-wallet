@@ -57,7 +57,7 @@ export default {
             sendTx({
                 methodName: 'callContract',
                 data: {
-                    toAddress: 'vite_d1e0e6ed537123dc42df067968366a736234fb20905f07566f',
+                    toAddress: 'vite_cb32bcf771b2b871dbe33b1f8c24cf34c5483c9c94a851da72',
                     abi: { 'inputs': [{ 'name': 'id', 'type': 'bytes32' }], 'name': 'cancelStake', 'payable': false, 'type': 'function' },
                     params: [this.activeItem.rawData.sendHash]
                 }
