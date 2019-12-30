@@ -50,15 +50,13 @@ export default {
     [data-theme="1"] & {
         border: 1px solid rgba(30,39,69,1);
     }
-
     .icon {
         display: inline-block;
-        background: url(~assets/imgs/search.svg);
         width: 16px;
         height: 16px;
         margin-right: 8px;
+        @include background_common_img_suffix('search', 'svg', 'png');
     }
-
     input {
         flex: 1;
         @include bg_color_3();
