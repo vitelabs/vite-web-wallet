@@ -195,7 +195,6 @@ export default {
             right: 4px;
             display: inline-block;
             width: 4px;
-            height: 24px;
             background-image: linear-gradient(-90deg, #1b3bd8 100%, #176ce0 100%, #0b92e7 100%, #0bb6eb 100%, #00e0f2 100%);
         }
     }

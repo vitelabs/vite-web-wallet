@@ -10,11 +10,9 @@
               class="title_icon __pointer qrcode">
             <img src="~assets/imgs/qrcode_default.svg" @click="toggleQrCode"/>
             <div class="code-container" v-show="qrcodeShow">
-                <div class="code">
-                    <qrcode :text="addressQrcode"
-                            :options="{ size: 146 }"
-                            @genImage="getImage"></qrcode>
-                </div>
+                <qrcode :text="addressQrcode"
+                        :options="{ size: 146 }"
+                        @genImage="getImage"></qrcode>
                 <div class="btn" @click="downLoadQrCode">
                     {{ $t("saveQrcode") }}
                 </div>
@@ -102,6 +100,7 @@ export default {
     @include font-family-bold();
     .pre-title {
         flex: 1;
+        @include default_font_color();
     }
 }
 
@@ -111,23 +110,18 @@ export default {
     }
 
     .code-container {
-        box-shadow: 0 2px 48px 1px rgba(176, 192, 237, 0.42);
         width: 166px;
         padding: 10px;
         position: absolute;
         right: 100%;
         transform: translateX(20px);
-        background: #fff;
         z-index: 1;
-
-        .code {
-            width: 146px;
-            height: 146px;
-            margin: 10px;
+        @include bg_color_4();
+        [data-theme="0"] & {
+            box-shadow: 0 2px 48px 1px rgba(176, 192, 237, 0.42);
         }
-
         .btn {
-            background: #007aff;
+            background: $blue-color-1;
             border-radius: 2px;
             color: #fff;
             margin: 10px 8px;
