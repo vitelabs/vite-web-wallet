@@ -180,7 +180,7 @@ export default {
         padding: 10px 15px;
         display: flex;
         align-items: center;
-        @include common_border();
+        @include common_border_one(bottom);
         &:last-child {
             border: none;
         }
@@ -198,7 +198,7 @@ export default {
         line-height: 36px;
         font-size: 12px;
         color: $blue-color-1;
-        @include common_border();
+        @include common_border_one(top);
 
         .acc-add {
             display: inline-block;
