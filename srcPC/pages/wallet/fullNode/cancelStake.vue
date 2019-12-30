@@ -17,6 +17,7 @@
 import { initPwd } from 'pcComponents/password/index.js';
 import sendTx from 'pcUtils/sendTx';
 import confirm from 'components/confirm/confirm.vue';
+import { customContracts } from 'services/apiServer';
 
 export default {
     components: { confirm },
@@ -57,8 +58,8 @@ export default {
             sendTx({
                 methodName: 'callContract',
                 data: {
-                    toAddress: 'vite_cb32bcf771b2b871dbe33b1f8c24cf34c5483c9c94a851da72',
-                    abi: { 'inputs': [{ 'name': 'id', 'type': 'bytes32' }], 'name': 'cancelStake', 'payable': false, 'type': 'function' },
+                    toAddress: customContracts.FullNodeCancelStake.contractAddress,
+                    abi: customContracts.FullNodeCancelStake.abi,
                     params: [this.activeItem.rawData.sendHash]
                 }
             }).then(() => {
