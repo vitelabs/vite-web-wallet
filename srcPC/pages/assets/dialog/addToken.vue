@@ -3,7 +3,7 @@ extends /components/dialog/base.pug
 block content
     .content-wrapper
         .search-container
-            img.search-icon(src="~assets/imgs/search_gray.png")
+            span.search-icon
             input(v-model="userInput" class="search-input" :placeholder="$t('tokenCard.addToken.placeholder')")
         .search-tips
             .search-tips__item(v-for="token in searchRes" :class="{active:selectedTokenIds.indexOf(token.tokenId)>=0}")
@@ -88,12 +88,13 @@ export default {
         @include font_color_1();
     }
     .search-icon{
-        width: 12px;
-        height: 12px;
+        width: 18px;
+        height: 18px;
         position: absolute;
         left: 12px;
         top: 50%;
         transform: translateY(-50%);
+        @include background_common_img_suffix('search', 'svg', 'png');
     }
 }
 

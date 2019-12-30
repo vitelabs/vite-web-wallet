@@ -46,6 +46,8 @@ import theme1viteLogo from 'assets/theme1_imgs/sidebar_logo.png';
 import theme1wallet from 'assets/theme1_imgs/wallet_default.png';
 import theme1walletActive from 'assets/theme1_imgs/wallet_pressed.png';
 import theme1trade from 'assets/theme1_imgs/trade_default.png';
+import theme1assets from 'assets/theme1_imgs/assets_default.png';
+import theme1setting from 'assets/theme1_imgs/settings_default.png';
 
 export default {
     components: { testNotice },
@@ -75,13 +77,13 @@ export default {
         icon() {
             if (+this.theme) {
                 return {
-                    assets,
+                    assets: theme1assets,
                     assetsActive,
                     wallet: theme1wallet,
                     walletActive: theme1walletActive,
                     trade: theme1trade,
                     tradeActive,
-                    setting,
+                    setting: theme1setting,
                     settingActive,
                     index: theme1trade,
                     indexActive: tradeActive
