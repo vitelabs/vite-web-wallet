@@ -18,7 +18,7 @@ block content
 
 <script>
 import { gateStorage } from 'pcServices/gate';
-import { throttle } from 'lodash';
+import throttle from 'lodash/throttle';
 import statistics from 'utils/statistics';
 
 const MAX_RES_NUMS = 10;
