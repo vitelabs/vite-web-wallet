@@ -19,7 +19,8 @@
         "lint:all": "eslint --ext ts,js,vue --fix .",
         "lint": "eslint --ext ts,js,vue --cache --fix .",
         "stylelint": "stylelint **/*.vue --custom-syntax postcss-html --fix",
-        "deploy-prod": ""
+        "deploy-prod": "",
+        "app": ""
     },
     "pre-commit": [
         "lint",
