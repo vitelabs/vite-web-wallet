@@ -102,7 +102,7 @@ import openUrl from 'utils/openUrl';
 import BigNumber from 'utils/bigNumber';
 import Tb from './tb';
 import viteInput from 'components/viteInput';
-import { throttle } from 'lodash';
+import throttle from 'lodash/throttle';
 
 export default {
     components: { Tb, viteInput },

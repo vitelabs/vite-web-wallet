@@ -11,7 +11,7 @@
 </template>
 
 <script>
-import { debounce } from 'lodash';
+import debounce from 'lodash/debounce';
 import openUrl from 'utils/openUrl';
 import { getExplorerLink } from 'utils/getLink';
 import { gateStorage } from 'pcServices/gate';
