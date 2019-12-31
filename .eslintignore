@@ -4,6 +4,7 @@
 static/*
 dist/*
 distH5/*
+distAPP/*
 routes.js
 charting_library.min.js
 charting_library/*
