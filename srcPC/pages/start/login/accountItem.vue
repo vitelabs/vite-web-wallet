@@ -32,7 +32,6 @@ export default {
     padding: 10px 40px 8px 20px;
     text-align: left;
     background: #fff;
-
     &:last-child {
         border-bottom: none;
     }

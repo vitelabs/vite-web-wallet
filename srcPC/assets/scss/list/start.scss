@@ -1,14 +1,17 @@
-@import "~assets/scss/vars.scss";
-
 .start.common-list-wrapper{
     position: relative;
     height: 100%;
     font-size: 14px;
-    color: #FFFFFF;
     letter-spacing: 0;
     margin-top: 5px;
     @include font-family-bold();
     z-index: 101;
+    [data-theme="0"] & {
+        color: #FFFFFF;
+    }
+    [data-theme="1"] & {
+        color: #7E8085;
+    }
     .list-title {
         display: inline-block;
         min-width: 50px;

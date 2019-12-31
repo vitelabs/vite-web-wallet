@@ -233,21 +233,21 @@ export default {
     }
 }
 
-/deep/ .trade-mining-section {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    &.shadow {
-        @include box_shadow();
-        border-radius: 2px;
-    }
-    .no-shadow {
-        box-shadow: none;
-        border-radius: none;
-    }
-    .mint-trade-table {
-        flex: 1;
-    }
-}
+// /deep/ .trade-mining-section {
+//     width: 100%;
+//     height: 100%;
+//     display: flex;
+//     flex-direction: column;
+//     .shadow {
+//         border-radius: 2px;
+//         box-shadow: 0 2px 10px 1px rgba(176, 192, 237, 0.42);
+//     }
+//     .no-shadow {
+//         box-shadow: none;
+//         border-radius: none;
+//     }
+//     .mint-trade-table {
+//         flex: 1;
+//     }
+// }
 </style>

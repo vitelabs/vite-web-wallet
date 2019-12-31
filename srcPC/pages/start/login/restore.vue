@@ -198,7 +198,12 @@ export default {
 
 .note {
     font-size: 14px;
-    color: #fff;
+    [data-theme="0"] & {
+        color: #fff;
+    }
+    [data-theme="1"] & {
+        color: #333;
+    }
     text-align: left;
     line-height: 20px;
     margin: 30px 0;
