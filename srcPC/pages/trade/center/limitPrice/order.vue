@@ -767,9 +767,8 @@ $font-black: rgba(36, 39, 43, 0.8);
                 display: inline-block;
                 width: 16px;
                 height: 16px;
-                background: url("~assets/imgs/ex-wallet-icon.svg");
-                background-size: 100% 100%;
                 margin-bottom: -4px;
+                @include background_common_img_suffix('ex-wallet-icon', 'svg', 'png');
             }
         }
     }

@@ -80,11 +80,11 @@ export default {
         height: 12px;
         margin-top: 9px;
         &.up-icon {
-            background: url('~assets/imgs/ex-up-arrow.svg');
+            background: url('~assets/imgs/ex-up-arrow.png');
             background-size: 100% 100%;
         }
         &.down-icon {
-            background: url('~assets/imgs/ex-down-arrow.svg');
+            background: url('~assets/imgs/ex-down-arrow.png');
             background-size: 100% 100%;
         }
     }

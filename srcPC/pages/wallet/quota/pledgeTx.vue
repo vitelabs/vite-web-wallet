@@ -242,8 +242,7 @@ export default {
             margin-top: 7px;
             width: 18px;
             height: 18px;
-            background: url('~assets/imgs/add-quota-icon.svg');
-            background-size: 18px 18px;
+            @include background_common_img_suffix('add-quota-icon', 'svg', 'png');
         }
 
         .list {
@@ -251,20 +250,27 @@ export default {
             right: -4px;
             padding: 10px;
             font-size: 12px;
-            @include font-family-normal();
-            @include font_color_2();
             line-height: 18px;
             white-space: nowrap;
-            background: rgba(255, 255, 255, 1);
-            box-shadow: 0 5px 20px 0 rgba(0, 0, 0, 0.1);
+            @include font-family-normal();
+            @include font_color_2();
+            @include bg_color_4();
+            [data-theme="0"] & {
+                box-shadow: 0 5px 20px 0 rgba(0, 0, 0, 0.1);
+            }
             &::after {
                 content: ' ';
                 display: inline-block;
-                border: 6px solid transparent;
-                border-bottom: 6px solid #fff;
                 position: absolute;
                 top: -12px;
                 left: 15px;
+                border: 6px solid transparent;
+                [data-theme="0"] & {
+                    border-bottom: 6px solid #fff;
+                }
+                [data-theme="1"] & {
+                    border-bottom: 6px solid $black-color-4;
+                }
             }
         }
     }

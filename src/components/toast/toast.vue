@@ -46,13 +46,16 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "~assets/scss/vars.scss";
-
 .mint-toast {
     box-sizing: border-box;
     position: fixed;
-    background: #fff;
-    box-shadow: 0 2px 48px 1px rgba(176, 192, 237, 0.42);
+    [data-theme="0"] & {
+        background: #fff;
+        box-shadow: 0 2px 48px 1px rgba(176, 192, 237, 0.42);
+    }
+    [data-theme="1"] & {
+        background: #18203A;
+    }
     border-radius: 2px;
     max-width: 100%;
     text-align: center;
@@ -63,7 +66,7 @@ export default {
     z-index: 1000;
     word-break: keep-all;
     @include font-family-bold();
-    color: #1d2024;
+    @include common_font_color();
 
     .line {
         position: absolute;
@@ -71,7 +74,12 @@ export default {
         left: 0;
         height: 100%;
         width: 4px;
-        background-image: linear-gradient(138deg, #052ef5 0%, #0d6df0 31%, #0b92e7 49%, #0bb6eb 71%, #00e0f2 100%);
+        [data-theme="0"] & {
+            background-image: linear-gradient(138deg, #052ef5 0%, #0d6df0 31%, #0b92e7 49%, #0bb6eb 71%, #00e0f2 100%);
+        }
+        [data-theme="1"] & {
+            background: linear-gradient(136deg, rgba(84,182,255,1) 0%, rgba(42,127,255,1) 100%);
+        }
     }
 
     &.top {

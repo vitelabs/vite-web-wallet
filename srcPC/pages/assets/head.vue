@@ -5,11 +5,7 @@
             <div class="head-right">
                 <div class="head-title">
                     <span>{{ $t("accountName") }}</span>
-                    <img
-                        @click="startRename"
-                        class="edit __pointer"
-                        src="~assets/imgs/edit_default.svg"
-                    />
+                    <span @click="startRename" class="edit __pointer"></span>
                 </div>
                 <div v-if="!isShowNameInput" class="name" @click="startRename">
                     {{ account.isBifrost?$t('assets.vb.accountName'):account.name }}
@@ -33,16 +29,10 @@
                 <span class="address-content">
                     <copy ref="copyDom" class="copy-tips"></copy>
                     <span class="addr_item">{{ activeAddr }}</span>
-                    <QrcodePopup :qrcodeString="addressQrcode"
-                    ><img
-                        class="address-content__operate click-able"
-                        src="~assets/imgs/qrcode_default.svg"
-                    /></QrcodePopup>
-                    <img
-                        class="address-content__operate click-able"
-                        src="~assets/imgs/copy_default.svg"
-                        @click="copy"
-                    />
+                    <QrcodePopup :qrcodeString="addressQrcode">
+                        <span class="address-content__operate qrcode click-able"></span>
+                    </QrcodePopup>
+                    <span class="address-content__operate copy click-able" @click="copy"></span>
                 </span>
             </div>
         </div>
@@ -363,6 +353,13 @@ export default {
                 width: 16px;
                 height: 16px;
                 margin-left: 10px;
+                &.qrcode {
+                    @include background_common_img_suffix('qrcode_default', 'svg', 'png');
+                }
+                &.copy {
+                    @include background_common_img_suffix('copy_default', 'svg', 'png');
+                    width: 24px;
+                }
             }
             .copy-wrapper {
                 top: -30px;
@@ -394,13 +391,13 @@ export default {
                     width: 20px;
                     height: 20px;
                     margin-left: 20px;
+                    @include background_common_img_suffix('edit_default', 'svg', 'png');
                 }
             }
             .name {
                 font-size: 18px;
                 line-height: 26px;
             }
-
             input {
                 height: 32px;
                 line-height: 32px;

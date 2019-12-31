@@ -235,10 +235,19 @@ export default {
         height: 30px;
         margin-bottom: -8px;
         margin-right: 6px;
+        background: #fff;
+        border-radius: 30px;
+        padding: 6px;
+        box-sizing: border-box;
     }
     .record {
         float: right;
-        background: #edf1ff;
+        [data-theme="0"] & {
+            background: #edf1ff;
+        }
+        [data-theme="1"] & {
+            background: #1E2745;
+        }
         border-radius: 2px;
         padding: 0 12px;
         font-size: 14px;

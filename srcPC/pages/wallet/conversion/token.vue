@@ -92,6 +92,10 @@ export default {
             height: 20px;
             margin-bottom: -3px;
             margin-right: 6px;
+            background: #fff;
+            border-radius: 20px;
+            padding: 4px;
+            box-sizing: border-box;
         }
     }
     .content {
