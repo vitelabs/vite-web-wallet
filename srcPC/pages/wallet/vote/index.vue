@@ -51,7 +51,7 @@ import tooltips from 'components/tooltips';
 import search from 'components/search';
 import secTitle from 'pcComponents/secTitle';
 import loading from 'components/loading';
-import walletTable from 'components/table/index.vue';
+import walletTable from 'pcComponents/table/index.vue';
 import { initPwd } from 'pcComponents/password/index.js';
 import { timer } from 'utils/asyncFlow';
 import BigNumber from 'utils/bigNumber';
@@ -372,7 +372,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "~assets/scss/vars.scss";
+@import "~pcAssets/scss/common.scss";
+
+@include secondTitle();
 
 .vote {
     height: 100%;

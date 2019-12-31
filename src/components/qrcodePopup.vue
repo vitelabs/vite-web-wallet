@@ -66,22 +66,18 @@ export default {
         display: flex;
     }
     .code-container {
-        box-shadow: 0 2px 48px 1px rgba(176, 192, 237, 0.42);
+        [data-theme="0"] & {
+            box-shadow: 0 2px 48px 1px rgba(176, 192, 237, 0.42);
+        }
+        @include bg_color_4();
         width: 166px;
         padding: 10px;
         position: absolute;
         right: 100%;
         transform: translateX(20px);
-        background: #fff;
         z-index: 1;
-        .code {
-            width: 146px;
-            height: 146px;
-            margin: 10px;
-        }
-
         .btn {
-            background: #007aff;
+            background: $blue-color-1;
             border-radius: 2px;
             color: #fff;
             margin: 10px 8px;

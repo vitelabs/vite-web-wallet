@@ -64,8 +64,8 @@ import txTransImg from 'assets/imgs/txTrans.svg';
 import txVoteImg from 'assets/imgs/txVote.svg';
 import txDexImg from 'assets/imgs/txDex.svg';
 
-import pagination from 'components/pagination.vue';
-import walletTable from 'components/table/index.vue';
+import pagination from 'pcComponents/pagination.vue';
+import walletTable from 'pcComponents/table/index.vue';
 import secTitle from 'pcComponents/secTitle';
 import date from 'utils/date.js';
 import { timer } from 'utils/asyncFlow';

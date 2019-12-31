@@ -1,0 +1,191 @@
+/* theme: 0-white, 1-black **/
+
+@mixin bg_color_1() {
+    [data-theme="0"] & {
+        background-color: $white-color;
+    }
+    [data-theme="1"] & {
+        background-color: $black-color-1;
+    }
+}
+
+@mixin bg_color_2() {
+    [data-theme="0"] & {
+        background-color: $white-color;
+    }
+    [data-theme="1"] & {
+        background-color: $black-color-2;
+    }
+}
+
+@mixin bg_color_3() {
+    [data-theme="0"] & {
+        background-color: $white-color;
+    }
+    [data-theme="1"] & {
+        background-color: $black-color-3;
+    }
+}
+
+@mixin bg_color_4() {
+    [data-theme="0"] & {
+        background-color: $white-color;
+    }
+    [data-theme="1"] & {
+        background-color: $black-color-4;
+    }
+}
+
+@mixin hover_color() {
+    [data-theme="0"] & {
+        background-color: $hover-color-1;
+    }
+    [data-theme="1"] & {
+        background-color: $hover-color-2;
+    }
+}
+
+@mixin common_border() {
+    [data-theme="0"] & {
+        border: 1px solid #D4DEE7;
+    }
+    [data-theme="1"] & {
+        border: 1px solid $black-color-4;
+    }
+}
+
+@mixin common_border_one($b) {
+    @if $b == bottom {
+        [data-theme="0"] & {
+            border-bottom: 1px solid #D4DEE7;
+        }
+        [data-theme="1"] & {
+            border-bottom: 1px solid $black-color-4;
+        }
+    }
+    @if $b == top {
+        [data-theme="0"] & {
+            border-top: 1px solid #D4DEE7;
+        }
+        [data-theme="1"] & {
+            border-top: 1px solid $black-color-4;
+        }
+    }
+    @if $b == right {
+        [data-theme="0"] & {
+            border-right: 1px solid #D4DEE7;
+        }
+        [data-theme="1"] & {
+            border-right: 1px solid $black-color-4;
+        }
+    }
+    @if $b == left {
+        [data-theme="0"] & {
+            border-left: 1px solid #D4DEE7;
+        }
+        [data-theme="1"] & {
+            border-left: 1px solid $black-color-4;
+        }
+    }
+}
+
+@mixin common_font_color() {
+    [data-theme="0"] & {
+        color: rgba(29,32,36,1); // 1D2024
+    }
+    [data-theme="1"] & {
+        color: $white-color;
+    }
+}
+
+@mixin second_title_font_color() {
+    [data-theme="0"] & {
+        color: $gray-color-1;
+    }
+    [data-theme="1"] & {
+        color: $gray-color-2;
+    }
+}
+
+@mixin default_font_color() {
+    [data-theme="0"] & {
+        color: #000;
+    }
+    [data-theme="1"] & {
+        color: $white-color;
+    }
+}
+
+@mixin font_color_to_white($color) {
+    [data-theme="0"] & {
+        color: $color;
+    }
+    [data-theme="1"] & {
+        color: $white-color;
+    }
+}
+
+@mixin gray_font_color_1() {
+    [data-theme="0"] & {
+        color: $gray-color-4;
+    }
+    [data-theme="1"] & {
+        color: $gray-color-2;
+    }
+}
+
+@mixin font_color_1() {
+    [data-theme="0"] & {
+        color: $black-color-5;
+    }
+    [data-theme="1"] & {
+        color: $white-color;
+    }
+}
+
+@mixin font_color_2() {
+    [data-theme="0"] & {
+        color: #5e6875; // color: rgba(94,104,117,1);
+    }
+    [data-theme="1"] & {
+        color: $gray-color-2;
+    }
+}
+
+@mixin gray_btn_color() {
+    color: $white-color;
+    [data-theme="0"] & {
+        background: rgba(191,191,191,1);
+    }
+    [data-theme="1"] & {
+        background: $gray-color-2;
+    }
+}
+
+@mixin box_shadow {
+    [data-theme="0"] & {
+        box-shadow: 0 2px 10px 1px rgba(176, 192, 237, 0.42);
+    }
+}
+
+@mixin background_common_img($img_name) {
+    [data-theme="0"] & {
+        background: url("~assets/imgs/" + $img_name);
+        background-size: 100% 100%;
+    }
+    [data-theme="1"] & {
+        background: url("~assets/theme1_imgs/" + $img_name);
+        background-size: 100% 100%;
+    }
+}
+
+@mixin background_common_img_suffix($img_name, $theme0, $theme1) {
+    [data-theme="0"] & {
+        background: url("~assets/imgs/" + $img_name + '.' + $theme0);
+        background-size: 100% 100%;
+    }
+    [data-theme="1"] & {
+        background: url("~assets/theme1_imgs/" + $img_name + '.' + $theme1);
+        background-size: 100% 100%;
+    }
+}

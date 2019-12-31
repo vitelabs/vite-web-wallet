@@ -21,9 +21,9 @@
 </template>
 
 <script>
-import pagination from 'components/pagination.vue';
+import pagination from 'pcComponents/pagination.vue';
 import { getInviteMiningDetail } from 'services/trade';
-import walletTable from 'components/table/index.vue';
+import walletTable from 'pcComponents/table/index.vue';
 import bigNumber from 'utils/bigNumber';
 import date from 'utils/date';
 

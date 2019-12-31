@@ -5,7 +5,7 @@
         <div class="search-wrapper">
             <vite-input class="market-search-input" v-model="searchText"
                         :placeholder="$t('trade.search')">
-                <img slot="before" class="icon" src="~assets/imgs/search.svg"/>
+                <span slot="before" class="icon"></span>
             </vite-input>
 
             <div class="select-icon-wrapper __pointer" @click="toogleShowCol('updown')">
@@ -353,28 +353,28 @@ export default {
     .hint {
         text-align: center;
         font-size: 12px;
-        font-weight: 400;
-        color: rgba(94, 104, 117, 1);
+        @include font_color_2();
         margin-top: 20px;
     }
 
     .search-wrapper {
         display: flex;
-        border-bottom: 1px solid rgba(212, 222, 231, 1);
         padding: 4px 6px;
         box-sizing: border-box;
+        @include common_border_one(bottom);
 
         .market-search-input {
             flex: 1;
-            background: rgba(245, 250, 255, 1);
             border-radius: 2px;
+            [data-theme="0"] & {
+                background: rgba(245, 250, 255, 1);
+            }
         }
 
         .select-icon-wrapper {
             font-size: 11px;
             @include font-family-normal();
-            font-weight: 400;
-            color: rgba(94, 104, 117, 1);
+            @include gray_font_color_1();
             margin-left: 10px;
             line-height: 20px;
 
@@ -385,7 +385,7 @@ export default {
                 width: 12px;
                 height: 12px;
                 border-radius: 10px;
-                border: 1px solid rgba(188, 196, 201, 1);
+                @include common_border();
                 margin-right: 4px;
                 margin-bottom: -2px;
 
@@ -400,7 +400,7 @@ export default {
                         display: inline-block;
                         width: 4px;
                         height: 4px;
-                        background: #007aff;
+                        background: $blue-color-1;
                         border-radius: 5px;
                     }
                 }
@@ -415,19 +415,22 @@ export default {
     box-sizing: border-box;
     height: 20px;
     line-height: 20px;
-    border: none;
-
+    [data-theme="0"] & {
+        border: none;
+    }
     .icon {
         width: 12px;
         height: 12px;
         margin: 4px 6px 4px 6px;
+        @include background_common_img_suffix('search', 'svg', 'png');
     }
-
     input {
         text-indent: 0;
         font-weight: 400;
         font-size: 11px;
-        background: rgba(245, 250, 255, 1);
+        [data-theme="0"] & {
+            background: rgba(245, 250, 255, 1);
+        }
     }
 }
 </style>

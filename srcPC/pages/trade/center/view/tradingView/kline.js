@@ -1,12 +1,13 @@
 import { widget } from 'charting/charting_library.min';
-import config from './config.ts';
+import { commonConfig, theme0Config, theme1Config } from './config.ts';
 import datafeedClass from './datafeeds.js';
 
 class kline {
-    constructor({ activeTxPair, locale }, onReady) {
+    constructor({ activeTxPair, locale, theme }, onReady) {
         this.tvWidget = null;
         this.isLoading = true;
 
+        this.theme = theme;
         this.locale = locale;
         this.activeTxPair = activeTxPair;
         this.datafeed = new datafeedClass(this.activeTxPair);
@@ -29,20 +30,24 @@ class kline {
         }
 
         this.datafeed.init(this.activeTxPair);
-        this.tvWidget.setSymbol(this.symbolName, config.interval);
+        this.tvWidget.setSymbol(this.symbolName, commonConfig.interval);
     }
 
     create(onReady) {
         this.isLoading = true;
 
         this.remove();
-
-        config.datafeed = this.datafeed;
-        config.locale = this.locale;
-
         const historySymbol = this.symbolName;
+        const themeConfig = +this.theme === 0 ? theme0Config : theme1Config;
+        const theme = +this.theme === 0 ? 'Light' : 'Dark';
 
-        this.tvWidget = new widget(config);
+        this.tvWidget = new widget({
+            datafeed: this.datafeed,
+            locale: this.locale,
+            theme,
+            ...commonConfig,
+            ...themeConfig
+        });
         this.tvWidget.onChartReady(() => {
             this.isLoading = false;
 

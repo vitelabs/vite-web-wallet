@@ -270,19 +270,29 @@ export default {
         right: -10px;
         z-index: 1;
         transform: translateX(100%);
-        background: rgba(215,215,215,1);
-        box-shadow: 0px 5px 20px 0px rgba(0,0,0,0.1);
-        border: 1px solid rgba(212,222,231,1);
+        [data-theme="0"] & {
+            color: rgba(94,104,117,1);
+            background: rgba(215,215,215,1);
+            box-shadow: 0px 5px 20px 0px rgba(0,0,0,0.1);
+        }
+        [data-theme="1"] & {
+            color: $white-color;
+            background: $black-color-1;
+        }
         font-size: 12px;
         line-height: 18px;
-        color: rgba(94,104,117,1);
         font-family: $font-H;
         font-weight: 400;
 
         &::after {
             content: ' ';
             border: 5px solid transparent;
-            border-right: 5px solid rgba(215,215,215,1);
+            [data-theme="0"] & {
+                border-right: 5px solid rgba(215,215,215,1);
+            }
+            [data-theme="1"] & {
+                border-right: 5px solid $black-color-1;
+            }
             position: absolute;
             top: 50%;
             left: 0;
@@ -302,7 +312,6 @@ export default {
     .__center-tb-item {
         position: relative;
     }
-
     .describe {
         display: inline-block;
         width: 80px;
@@ -312,7 +321,6 @@ export default {
             height: 12px;
         }
     }
-
     &.active {
         background: rgba(75, 116, 255, 0.1);
     }

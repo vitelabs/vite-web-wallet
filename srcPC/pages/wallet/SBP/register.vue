@@ -1,5 +1,5 @@
 <template>
-    <div class="register-wrapper">
+    <div class="register-wrapper __form_border">
         <div class="row">
             <div class="item">
                 <div class="__form_input_title">

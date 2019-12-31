@@ -48,7 +48,7 @@
 </template>
 
 <script>
-import confirm from 'components/confirm/confirm.vue';
+import confirm from 'pcComponents/confirm/confirm.vue';
 import BigNumber from 'utils/bigNumber';
 
 export default {
@@ -112,7 +112,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "~assets/scss/vars.scss";
 @import '../center.scss';
 
 .tx-pair-wrapper {
@@ -122,23 +121,22 @@ export default {
         flex: 1;
         font-size: 12px;
         @include font-family-bold();
-        font-weight: 600;
         line-height: 16px;
         .item-title {
-            color: rgba(29,32,36,1);
+            @include common_font_color();
             &:before {
                 display: inline-block;
                 content: ' ';
                 width: 5px;
                 height: 5px;
-                background: rgba(0,122,255,1);
+                background: $blue-color-1;
                 margin-right: 6px;
                 margin-bottom: 2px;
                 border-radius: 5px;
             }
         }
         .item-row {
-            color: rgba(36,39,43,1);
+            @include font_color_to_white(rgba(36,39,43,1));
             margin-top: 15px;
             margin-left: 12px;
             &.down {
@@ -149,8 +147,7 @@ export default {
             }
             span {
                 @include font-family-normal();
-                font-weight: 400;
-                color: rgba(94,104,117,1);
+                @include gray_font_color_1();
             }
         }
     }

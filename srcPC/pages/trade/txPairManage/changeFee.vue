@@ -56,8 +56,8 @@
 </template>
 
 <script>
-import confirm from 'components/confirm/confirm.vue';
-import alertConfirm from 'components/confirm/index.js';
+import confirm from 'pcComponents/confirm/confirm.vue';
+import alertConfirm from 'pcComponents/confirm/index.js';
 import slider from 'components/slider';
 
 const minFee = 0;
@@ -173,7 +173,7 @@ export default {
     width: 100%;
     font-size: 12px;
     @include font-family-normal();
-    color: rgba(94, 104, 117, 1);
+    @include font_color_2();
     line-height: 16px;
     padding-top: 20px;
 }

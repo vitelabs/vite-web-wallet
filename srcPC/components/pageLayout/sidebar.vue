@@ -42,6 +42,13 @@ import settingActive from 'assets/imgs/settings_pressed.svg';
 import trade from 'assets/imgs/trade_default.svg';
 import tradeActive from 'assets/imgs/trade_pressed.svg';
 
+import theme1viteLogo from 'assets/theme1_imgs/sidebar_logo.png';
+import theme1wallet from 'assets/theme1_imgs/wallet_default.png';
+import theme1walletActive from 'assets/theme1_imgs/wallet_pressed.png';
+import theme1trade from 'assets/theme1_imgs/trade_default.png';
+import theme1assets from 'assets/theme1_imgs/assets_default.png';
+import theme1setting from 'assets/theme1_imgs/settings_default.png';
+
 export default {
     components: { testNotice },
     props: {
@@ -55,10 +62,34 @@ export default {
         }
     },
     data() {
-        return {
-            isShowNotice: false,
-            viteLogo,
-            icon: {
+        return { isShowNotice: false };
+    },
+    computed: {
+        theme() {
+            return +this.$store.state.env.theme;
+        },
+        viteLogo() {
+            if (+this.theme === 0) {
+                return viteLogo;
+            }
+            return theme1viteLogo;
+        },
+        icon() {
+            if (+this.theme) {
+                return {
+                    assets: theme1assets,
+                    assetsActive,
+                    wallet: theme1wallet,
+                    walletActive: theme1walletActive,
+                    trade: theme1trade,
+                    tradeActive,
+                    setting: theme1setting,
+                    settingActive,
+                    index: theme1trade,
+                    indexActive: tradeActive
+                };
+            }
+            return {
                 assets,
                 assetsActive,
                 wallet,
@@ -68,11 +99,9 @@ export default {
                 setting,
                 settingActive,
                 index: trade,
-                indexActive: trade
-            }
-        };
-    },
-    computed: {
+                indexActive: tradeActive
+            };
+        },
         settingIndex() {
             return this.menuList.indexOf('setting');
         },
@@ -108,8 +137,10 @@ export default {
 .sidebar-wrapper {
     height: 100%;
     overflow: auto;
-    background: #fff;
-    box-shadow: 0 2px 40px 1px rgba(221, 229, 252, 0.5);
+    @include bg_color_2();
+    [data-theme="0"] & {
+        box-shadow: 0 2px 40px 1px rgba(221, 229, 252, 0.5);;
+    }
 
     .content {
         display: flex;
@@ -166,7 +197,6 @@ export default {
             right: 4px;
             display: inline-block;
             width: 4px;
-            height: 24px;
             background-image: linear-gradient(-90deg, #1b3bd8 100%, #176ce0 100%, #0b92e7 100%, #0bb6eb 100%, #00e0f2 100%);
         }
     }

@@ -10,9 +10,9 @@
 </template>
 
 <script>
-import pagination from 'components/pagination';
-import walletTable from 'components/table/index.vue';
-import confirm from 'components/confirm/confirm.vue';
+import pagination from 'pcComponents/pagination';
+import walletTable from 'pcComponents/table/index.vue';
+import confirm from 'pcComponents/confirm/confirm.vue';
 import date from 'utils/date';
 import bigNumber from 'utils/bigNumber';
 import { getVxUnlockList } from 'services/viteServer';

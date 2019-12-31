@@ -7,7 +7,7 @@
         >
         </Search>
         <div class="filter op __pointer" @click="addToken">
-            <img src="~assets/imgs/add_token.svg" class="op__input" />
+            <span class="op__input add_token" ></span>
             <div>{{ $t("tokenCard.addToken.title") }}</div>
         </div>
         <div class="filter op">
@@ -16,7 +16,7 @@
         </div>
         <div class="filter op click-able more __pointer" @click="more">
             {{ $t("tokenCard.moreRecords") }}
-            <img src="~assets/imgs/moreRecords.svg" />
+            <span class="more_records"></span>
         </div>
     </div>
 </template>
@@ -72,9 +72,8 @@ export default {
     }
 };
 </script>
-<style lang="scss" scoped>
-@import "~assets/scss/vars.scss";
 
+<style lang="scss" scoped>
 .filter-root {
     display: flex;
     align-items: flex-end;
@@ -93,19 +92,26 @@ export default {
         border: none;
         display: flex;
         align-items: center;
+
         &.more {
             position: absolute;
             right: 0;
             bottom: 0px;
             cursor: pointer;
-            img{
+            .more_records {
+                width: 16px;
+                height: 16px;
                 margin-left: 8px;
+                @include background_common_img_suffix('moreRecords', 'svg', 'png');
             }
         }
         &:first-child {
             width: 260px;
             height: 100%;
-            box-shadow: 0px 2px 10px 1px rgba(176, 192, 237, 0.42);
+            @include box_shadow();
+            [data-theme="1"] & {
+                border: 1px solid $black-color-4;
+            }
             input {
                 width: 100%;
                 height: 100%;
@@ -121,6 +127,9 @@ export default {
                 width: 16px;
                 cursor: pointer;
                 margin-right: 10px;
+                &.add_token {
+                    @include background_common_img_suffix('add_token', 'svg', 'png');
+                }
             }
             display: flex;
         }

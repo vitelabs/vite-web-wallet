@@ -24,6 +24,7 @@ export default {
 
 <style lang="scss" scoped>
 @import "~assets/scss/vars.scss";
+@import "../start.scss";
 
 .__btn_input_active {
     border: 1px solid #d4dee7;

@@ -64,7 +64,7 @@
 import icon from 'assets/imgs/eth_logo.svg';
 import BigNumber from 'utils/bigNumber';
 import { verifyAmount } from 'pcUtils/validations';
-import confirm from 'components/confirm/confirm.vue';
+import confirm from 'pcComponents/confirm/confirm.vue';
 import viteInput from 'components/viteInput';
 import process from 'components/slider';
 import { initPwd } from 'pcComponents/password/index.js';
@@ -282,8 +282,7 @@ export default {
     width: 100%;
     font-size: 12px;
     @include font-family-normal();
-    font-weight: 400;
-    color: rgba(94, 104, 117, 1);
+    @include font_color_2();
     line-height: 16px;
     padding-top: 16px;
     .left {

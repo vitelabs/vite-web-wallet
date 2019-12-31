@@ -35,7 +35,7 @@ export default {
     },
     computed: {
         typeList() {
-            return this.$store.state.exchangeMine.showTypeList;
+            return this.$store.getters.tokenShowTypeList;
         },
         allPrice() {
             const coin = this.$store.state.env.currency;

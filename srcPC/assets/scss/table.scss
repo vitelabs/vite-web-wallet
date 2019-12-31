@@ -1,0 +1,109 @@
+@import "~assets/scss/vars.scss";
+
+@mixin rowWith () {
+    .__tb_row .__tb_cell {
+        @content
+    }
+}
+
+.__tb {
+    display: flex;
+    flex-direction: column;
+    max-height: 100%;
+    min-width: 1050px;
+    overflow: hidden;
+    border-radius: 2px;
+    @include bg_color_2();
+    @include box_shadow();
+
+    .__tb_content {
+        flex: 1;
+        position: relative;
+        overflow-x: hidden;
+        overflow-y: auto;
+    }
+    .__tb_content_no_data {
+        min-height: 200px;
+    }
+    .__tb_no_data {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translateY(-50%) translateX(-50%);
+        font-size: 12px;
+        @include font-family-normal();
+        font-weight: 400;
+        color: rgba(94,104,117,0.58);
+        line-height: 16px;
+        text-align: center;
+        &:before {
+            display: inline-block;
+            margin-bottom: 16px;
+            content: ' ';
+            width: 60px;
+            height: 60px;
+            @include background_common_img_suffix("dexEmpty", "svg", "png");
+        }
+    }
+    .__tb_pagination {
+        height: 75px;
+        line-height: 75px;
+        text-align: center;
+    }
+
+    .__tb_head {
+        flex: none;
+        @include font-family-normal();
+        [data-theme="0"] & {
+            color: rgba(94,104,117,0.58);
+            border-bottom: 1px solid #c6cbd4;
+        }
+        [data-theme="1"] & {
+            color: $gray-color-2;
+            border-bottom: 1px solid $black-color-4;
+        }
+    }
+    .__tb_row {
+        display: flex;
+        justify-content: space-between;
+        height: 32px;
+        line-height: 32px;
+        box-sizing: border-box;
+    }
+    .__tb_content_row {
+        cursor: pointer;
+        [data-theme="0"] & {
+            color: #5E6875;
+            border-bottom: 1px solid rgba(227, 235, 245, 0.6);
+        }
+        [data-theme="1"] & {
+            color: $white-color;
+            border-bottom: 1px solid $black-color-4;
+        }
+        &.active:hover {
+            background: rgba(88,145,255,.13);
+        }
+    }
+
+    .__tb_cell {
+        display: inline-block;
+        text-align: left;
+        font-size: 12px;
+        margin: 0 3px;    
+        @include font-family-normal();
+        white-space: nowrap;
+        box-sizing: border-box;
+        &:first-child {
+            padding-left: 30px;
+            margin-left: 0;
+        }
+        &:last-child {
+            padding-right: 30px;
+            margin-right: 0;
+        }
+    }
+    .click-able {
+        cursor: pointer;
+        color: $blue-color-1;
+    }
+}

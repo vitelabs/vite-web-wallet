@@ -40,13 +40,11 @@ import statistics from 'utils/statistics';
 import sendTx from 'pcUtils/sendTx';
 import { verifyAmount } from 'pcUtils/validations';
 import { execWithValid } from 'pcUtils/execWithValid';
+import { customContracts } from 'services/apiServer';
 
 const Vite_Token_Info = constant.Vite_Token_Info;
 const amountTimeout = null;
 const minNum = 10000;
-
-const StakeABI = { 'inputs': [], 'name': 'stake', 'outputs': [], 'payable': true, 'type': 'function' };
-const StakeABIContractAddress = 'vite_cb32bcf771b2b871dbe33b1f8c24cf34c5483c9c94a851da72';
 
 export default {
     components: { viteInput },
@@ -137,8 +135,8 @@ export default {
             sendTx({
                 methodName: 'callContract',
                 data: {
-                    toAddress: StakeABIContractAddress,
-                    abi: StakeABI,
+                    toAddress: customContracts.FullNodeStake.contractAddress,
+                    abi: customContracts.FullNodeStake.abi,
                     tokenId: Vite_Token_Info.tokenId,
                     amount
                 },
@@ -189,6 +187,7 @@ export default {
         margin-top: 28px;
     }
     .unit {
+        @include common_font_color();
         padding: 0 15px;
     }
 }

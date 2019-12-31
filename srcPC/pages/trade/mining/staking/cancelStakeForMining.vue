@@ -19,10 +19,10 @@
 </template>
 
 <script>
-import confirm from 'components/confirm/confirm.vue';
 import statistics from 'utils/statistics';
 import router from 'pcRouter';
 import sendTx from 'pcUtils/sendTx';
+import confirm from 'pcComponents/confirm/confirm.vue';
 import { initPwd } from 'pcComponents/password/index.js';
 import { cancelStakeById } from 'pcServices/tradeOperation';
 

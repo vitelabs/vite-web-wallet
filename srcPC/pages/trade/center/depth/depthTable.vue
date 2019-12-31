@@ -211,11 +211,11 @@ export default {
     }
 }
 .border_b {
-    border-bottom: 1px solid rgba(229, 237, 243, 1);
+    @include center_border(bottom);
 }
 .border_all {
-    border-bottom: 1px solid rgba(229, 237, 243, 1);
-    border-top: 1px solid rgba(229, 237, 243, 1);
+    @include center_border(top);
+    @include center_border(bottom);
 }
 
 .depth-table-wrapper {
@@ -227,13 +227,22 @@ export default {
 
 .__center-tb-row {
     &.in_mining {
-        background: rgba(75,116,255,0.05);
+        [data-theme="0"] & {
+            background: rgba(75,116,255,0.05);
+        }
+        [data-theme="1"] & {
+            background: rgba(75,116,255,0.1);
+        }
     }
     &.border_b {
-        border-bottom: 1px dashed rgba(189,196,208,1);
+        [data-theme="0"] & {
+            border-bottom: 1px dashed rgba(189,196,208,1);
+        }
     }
     &.border_t {
-        border-top: 1px dashed rgba(189,196,208,1);
+        [data-theme="0"] & {
+            border-top: 1px dashed rgba(189,196,208,1);
+        }
     }
 }
 
@@ -241,7 +250,7 @@ export default {
     display: inline-block;
     width: 8px;
     height: 8px;
-    background: url('~assets/imgs/owner.svg');
+    background: url('~assets/imgs/owner.png');
     background-size: 100% 100%;
 }
 

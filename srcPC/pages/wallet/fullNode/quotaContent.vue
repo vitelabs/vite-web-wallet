@@ -71,8 +71,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "~assets/scss/vars.scss";
-
 .flex-wrapper {
     display: flex;
     flex-direction: row;
@@ -85,14 +83,14 @@ export default {
 .row {
     flex: 1;
     margin-right: 10px;
-    background: #fff;
     border-radius: 2px;
-    box-shadow: 0 2px 10px 1px rgba(176, 192, 237, 0.42);
-    @include font-family-bold();
-    color: #1d2024;
     line-height: 16px;
+    @include bg_color_2();
+    @include box_shadow();
+    @include font-family-bold();
+    @include font_color_1();
     &:last-child {
-        margin-left: 0px;
+        margin-right: 0px;
     }
     .row-item {
         flex: 1;
@@ -110,7 +108,7 @@ export default {
     }
     .light {
         @include font-family-normal();
-        color: rgba(94,104,117,1);
+        @include gray_font_color_1();
         font-size: 12px;
     }
 }

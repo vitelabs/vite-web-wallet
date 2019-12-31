@@ -85,7 +85,6 @@
 
 <script>
 import {
-    receiveDialog,
     chargeDialog,
     withdrawDialog,
     tokenInfoDialog
@@ -193,11 +192,6 @@ export default {
         unbind() {
             gateStorage.unbindToken(this.token.tokenId);
         },
-        receive() {
-            receiveDialog({ token: this.token }).catch(e => {
-                console.error(e);
-            });
-        },
         charge() {
             statistics.event(this.$route.name, 'Cross-Chain-receive', this.address || '');
             this.$refs.importantHintDom.showConfirm(() => {
@@ -253,15 +247,51 @@ export default {
 @import "~assets/scss/vars.scss";
 @import "./colWidth.scss";
 
+@mixin border_one($b) {
+    @if $b == bottom {
+        [data-theme="0"] & {
+            border-bottom: 1px solid rgba(227, 235, 245, 0.6);
+        }
+        [data-theme="1"] & {
+            border-bottom: 1px solid $black-color-4;
+        }
+    }
+    @if $b == right {
+        [data-theme="0"] & {
+            border-right: 1px solid rgba(227, 235, 245, 0.6);
+        }
+        [data-theme="1"] & {
+            border-right: 1px solid $black-color-4;
+        }
+    }
+}
+
+@mixin gray_font_color() {
+    [data-theme="0"] & {
+        color: #5e6875;
+    }
+    [data-theme="1"] & {
+        color: #C0C6D3;
+    }
+}
+
+@mixin set_gray_font_color($color) {
+    [data-theme="0"] & {
+        color: $color;
+    }
+    [data-theme="1"] & {
+        color: #C0C6D3;
+    }
+}
+
 .token-card {
     box-sizing: border-box;
     position: relative;
-    background: #fff;
     display: flex;
     width: 100%;
     align-items: center;
-    border-bottom: 1px solid rgba(227, 235, 245, 0.6);
     height: 71px;
+    @include border_one(bottom);
     .click-able {
         cursor: pointer;
     }
@@ -271,7 +301,7 @@ export default {
         align-items: flex-start;
         justify-content: space-between;
         padding: 8px 0;
-        color: #5e6875;
+        @include font_color_to_white(#5e6875);
         font-size: 12px;
         align-self: stretch;
         position: relative;
@@ -290,7 +320,7 @@ export default {
             border-bottom: 1px dotted #5e6875;
         }
         .separate {
-            border-right: 1px solid rgba(227, 235, 245, 0.6);
+            @include border_one(right);
             height: 52px;
             position: absolute;
             right: 0;
@@ -305,12 +335,11 @@ export default {
                 border: 1px solid rgba(0, 122, 255, 0.3);
                 line-height: 16px;
                 cursor: pointer;
-                color: #007aff;
+                color: $blue-color-1;
                 margin-right: 6px;
-                padding-right: 2px;
-                padding-left: 2px;
+                padding: 0 2px;
                 &.readonly {
-                    color: #5e6875;
+                    @include font_color_to_white(#5e6875);
                     background: rgba(94, 104, 117, 0.05);
                     border: 1px solid rgba(94, 104, 117, 0.3);
                 }
@@ -320,13 +349,13 @@ export default {
             display: flex;
             flex-direction: column;
             .est_cash {
-                color: #5e687594;
+                @include gray_font_color();
                 margin-top: 4px;
             }
         }
         &.title {
             @include font-family-bold();
-            color: #5e6875;
+            @include font_color_to_white(#5e6875);
             .icon {
                 height: 16px;
                 width: 16px;
@@ -342,7 +371,7 @@ export default {
                     .token-name {
                         font-size: 11px;
                         @include font-family-normal();
-                        color: rgba(94,104,117,0.58);
+                        @include set_gray_font_color(rgba(94,104,117,0.58));
                         line-height: 15px;
                     }
                 }

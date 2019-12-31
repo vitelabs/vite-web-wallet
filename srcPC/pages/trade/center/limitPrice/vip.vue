@@ -30,28 +30,27 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "~assets/scss/vars.scss";
 .vip-container {
     display: flex;
     .vip-operate {
         padding-right: 6px;
-        border-right: 1px solid rgba(205, 204, 204, 1);
-        color: #9EA4AD;
         font-size: 12px;
+        @include common_border_one(right);
         @include font-family-normal();
+        @include gray_font_color_1();
         &.drop_menu {
             border: none;
             margin-left: 10px;
         }
         &.active {
-            color: #007aff;
+            color: $blue-color-1;
         }
     }
     .vip {
         display: inline-block;
         margin-bottom: -3px;
         margin-right: 6px;
-        color: rgba(255, 255, 255, 1);
+        color: $white-color;
         width: 36px;
         height: 16px;
         background-image: url("~assets/imgs/not_vip.svg");

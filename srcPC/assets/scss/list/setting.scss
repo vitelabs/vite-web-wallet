@@ -1,0 +1,45 @@
+@import "~assets/scss/vars.scss";
+
+.setting.common-list-wrapper {
+    width: 250px;
+    @include common_border();
+    border-radius: 2px;
+    font-size: 14px;
+    color: #5E6875;
+    .list-title {
+        position: relative;
+        display: inline-block;
+        width: 100%;
+        box-sizing: border-box;
+        padding: 10px 12px;
+        @include bg_color_2();
+        &:after {
+            content: '';
+            display: inline-block;
+            position: absolute;
+            top: 50%;
+            right: 10px;
+            width: 20px;
+            height: 10px;
+            margin-top: -5px;
+        }
+        &.down {
+            &:after {
+                @include background_common_img("decend.svg");
+            }
+        }
+        &.up {
+            &:after {
+                @include background_common_img("ascend.svg");
+            }
+        }
+    }
+    .list {
+        li {
+            box-sizing: border-box;
+            padding: 10px 12px;
+            @include bg_color_2();
+            @include common_border_one(top);
+        }
+    }
+}

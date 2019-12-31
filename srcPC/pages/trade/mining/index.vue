@@ -1,22 +1,16 @@
 <template>
     <div class="trade-mining-wrapper">
-        <div class="fee-title">
-            {{ $t('tradeMining.todayTrade') }}
+        <sec-title :isShowHelp="false" :title="$t('tradeMining.todayTrade')">
             <span class="link __pointer" @click="goView">{{ $t('tradeMining.view') }}</span>
-        </div>
+        </sec-title>
 
         <div class="tab_title">
-            <div
-                class="tab_title_item"
-                @click="tabName = 'trade'"
-                :class="{ active: tabName === 'trade' }"
-            >
-                <img src="~assets/imgs/exchange/mining/trade.png" />
+            <div class="tab_title_item" @click="tabName = 'trade'"
+                 :class="{ active: tabName === 'trade' }">
+                <span class="tab_img trade"></span>
                 <div>
                     <div class="label">{{ $t("tradeMining.txTitle") }}
-                        <span class="help __pointer" @mouseenter="showHelp" @mouseleave="hideHelp">
-                            <span v-show="isShowHelp" class="help-text">{{ $t('tradeMining.help') }}</span>
-                        </span>
+                        <help-tips :helpText="$t('tradeMining.help')"></help-tips>
                     </div>
                     <div class="amount">
                         {{ tradeMiningTotal | formatNum }} VX
@@ -24,12 +18,9 @@
                 </div>
             </div>
             <div class="gap"></div>
-            <div
-                class="tab_title_item"
-                @click="tabName = 'staking'"
-                :class="{ active: tabName === 'staking' }"
-            >
-                <img src="~assets/imgs/exchange/mining/staking.png" />
+            <div class="tab_title_item" @click="tabName = 'staking'"
+                 :class="{ active: tabName === 'staking' }">
+                <span class="tab_img staking"></span>
                 <div>
                     <div class="label">{{ $t("tradeMining.quotaTitle") }}</div>
                     <div class="amount">
@@ -38,12 +29,9 @@
                 </div>
             </div>
             <div class="gap"></div>
-            <div
-                class="tab_title_item"
-                @click="tabName = 'invite'"
-                :class="{ active: tabName === 'invite' }"
-            >
-                <img src="~assets/imgs/exchange/mining/invite.png" />
+            <div class="tab_title_item" @click="tabName = 'invite'"
+                 :class="{ active: tabName === 'invite' }">
+                <span class="tab_img invite"></span>
                 <div>
                     <div class="label">{{ $t("inviteMining.title") }}</div>
                     <div class="amount">
@@ -52,12 +40,9 @@
                 </div>
             </div>
             <div class="gap"></div>
-            <div
-                class="tab_title_item"
-                @click="tabName = 'order'"
-                :class="{ active: tabName === 'order' }"
-            >
-                <img src="~assets/imgs/exchange/mining/order.png" />
+            <div class="tab_title_item" @click="tabName = 'order'"
+                 :class="{ active: tabName === 'order' }">
+                <span class="tab_img order"></span>
                 <div>
                     <div class="label">{{ $t("orderMining.title") }}</div>
                     <div class="amount">
@@ -76,6 +61,8 @@
 
 <script>
 import openUrl from 'utils/openUrl';
+import secTitle from 'pcComponents/secTitle';
+import helpTips from 'pcComponents/helpTips';
 import { miningTrade, miningPledge, getInviteMiningDetail, getOrderMining } from 'services/trade';
 import inviteMinComp from './invite/invite.vue';
 import orderMinComp from './order.vue';
@@ -87,7 +74,9 @@ export default {
         inviteMinComp,
         orderMinComp,
         tradeMinComp,
-        stakingMinComp
+        stakingMinComp,
+        secTitle,
+        helpTips
     },
     data() {
         return {
@@ -95,8 +84,7 @@ export default {
             stakingMiningTotal: 0,
             inviteMiningTotal: 0,
             orderMiningTotal: 0,
-            tabName: 'trade',
-            isShowHelp: false
+            tabName: 'trade'
         };
     },
     beforeMount() {
@@ -123,12 +111,6 @@ export default {
         }
     },
     methods: {
-        showHelp() {
-            this.isShowHelp = true;
-        },
-        hideHelp() {
-            this.isShowHelp = false;
-        },
         init() {
             if (!this.address) return;
             const address = this.address;
@@ -156,38 +138,9 @@ export default {
 @import "~assets/scss/vars.scss";
 
 .help {
-    position: relative;
-    background: url('~assets/imgs/info.svg');
-    background-size: 100% 100%;
     width: 16px;
     height: 16px;
-    display: inline-block;
     margin-bottom: -3px;
-    .help-text {
-        position: absolute;
-        top: 25px;
-        right: 8px;
-        width: 200px;
-        padding: 10px;
-        background: #fff;
-        transform: translateX(50%);
-        box-shadow: 0 2px 10px 1px rgba(176, 192, 237, 0.42);
-        border-radius: 2px;
-        font-family: $font-H;
-        color: #5e6875;
-        font-size: 12px;
-        line-height: 16px;
-        &:after {
-            position: absolute;
-            content: ' ';
-            top: 0;
-            left: 50%;
-            transform: translate(-50%, -100%);
-            display: inline-block;
-            border: 6px solid transparent;
-            border-bottom: 6px solid #fff;
-        }
-    }
 }
 
 .trade-mining-wrapper {
@@ -198,29 +151,21 @@ export default {
     flex-direction: column;
 }
 
-.fee-title {
-    font-size: 18px;
-    line-height: 22px;
-    padding: 10px 0 14px;
-    display: flex;
+.link {
+    display: inline-block;
     align-items: center;
-    @include font-family-bold();
-    color: rgba(36,39,43,1);
-    .link {
-        display: flex;
-        align-items: center;
-        font-size: 12px;
-        color: #007aff;
-        margin-left: 14px;
-        &::before {
-            display: inline-block;
-            content: ' ';
-            width: 16px;
-            height: 16px;
-            background: url('~assets/imgs/info_link.svg');
-            background-size: 100% 100%;
-            margin-right: 5px;
-        }
+    font-size: 12px;
+    color: $blue-color-1;
+    margin-left: 10px;
+    &::before {
+        display: inline-block;
+        content: ' ';
+        width: 16px;
+        height: 16px;
+        background: url('~assets/imgs/info_link.svg');
+        background-size: 100% 100%;
+        margin-right: 5px;
+        margin-bottom: -3px;
     }
 }
 
@@ -228,13 +173,17 @@ export default {
     display: flex;
     align-items: center;
     margin-bottom: 14px;
-    background-color: #ffffff;
-    box-shadow: 0px 2px 10px 1px rgba(176,192,237,0.42);
-    .gap{
+    @include bg_color_2();
+    @include box_shadow();
+    .gap {
         width: 0;
-        border-left: 1px solid rgba(227, 235, 245, 0.6);
         height: 60px;
-
+        [data-theme="0"] & {
+            border-left: 1px solid rgba(227, 235, 245, 0.6);
+        }
+        [data-theme="1"] & {
+            border-left: 1px solid $black-color-4;
+        }
     }
     &_item {
         cursor: pointer;
@@ -244,24 +193,42 @@ export default {
         display: flex;
         align-items: center;
         justify-content: flex-start;
-        @include font-family-bold();
         &.active {
-            background: rgba(0, 122, 255, 0.04);
-            border-bottom: 2px solid rgba(0, 122, 255, 1);
+            [data-theme="0"] & {
+                background: rgba(0, 122, 255, 0.04);
+            }
+            [data-theme="1"] & {
+                background: rgba(75,116,255,0.1);;
+            }
+            border-bottom: 2px solid $blue-color-1;
         }
-        img {
+        .tab_img {
             margin-right: 20px;
             height: 34px;
             width: 34px;
+            display: inline-block;
+            &.order {
+                @include background_common_img_suffix('mining_order', 'png', 'svg');
+            }
+            &.trade {
+                @include background_common_img_suffix('mining_trade', 'png', 'svg');
+            }
+            &.staking {
+                @include background_common_img_suffix('mining_staking', 'png', 'svg');
+            }
+            &.invite {
+                @include background_common_img_suffix('mining_invite', 'png', 'svg');
+            }
         }
         .label {
-            font-size: 13px;
-            color: #5e6875;
+            font-size: 12px;
+            line-height: 18px;
+            @include font_color_2();
         }
         .amount {
             font-size: 16px;
-            color: #1d2024;
-            line-height: 18px;
+            @include font_color_1();
+            @include font-family-bold();
         }
     }
 }
@@ -272,7 +239,7 @@ export default {
     display: flex;
     flex-direction: column;
     &.shadow {
-        box-shadow: 0px 2px 10px 1px rgba(176,192,237,0.42);
+        @include box_shadow();
         border-radius: 2px;
     }
     .no-shadow {

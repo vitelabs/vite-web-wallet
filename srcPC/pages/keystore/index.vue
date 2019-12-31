@@ -25,7 +25,6 @@
 </template>
 
 <script>
-
 import { getExplorerLink } from 'utils/getLink';
 import unlock from './unlock';
 import importKeystore from './import';

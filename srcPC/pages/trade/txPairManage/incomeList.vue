@@ -16,9 +16,9 @@
 </template>
 
 <script>
-import confirm from 'components/confirm/confirm.vue';
-import walletTable from 'components/table/index.vue';
-import pagination from 'components/pagination.vue';
+import confirm from 'pcComponents/confirm/confirm.vue';
+import walletTable from 'pcComponents/table/index.vue';
+import pagination from 'pcComponents/pagination.vue';
 import { operatorIncome } from 'services/trade';
 import date from 'utils/date';
 import BigNumber from 'utils/bigNumber';
@@ -124,11 +124,11 @@ export default {
     font-size: 12px;
     .total-income-title {
         @include font-family-normal();
-        color: rgba(94,104,117,1);
+        @include font_color_2();
     }
     .income {
         @include font-family-bold();
-        color: rgba(29,32,36,1);
+        @include common_font_color();
     }
 }
 </style>

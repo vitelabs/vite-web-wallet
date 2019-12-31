@@ -18,3 +18,4 @@ upload.sh
 deploy.sh
 backup.sh
 rollback.sh
+yarn-error.log

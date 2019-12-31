@@ -93,7 +93,7 @@
 import { StatusMap } from 'wallet';
 import slider from 'components/slider';
 import viteInput from 'components/viteInput';
-import viteConfirm from 'components/confirm/index.js';
+import viteConfirm from 'pcComponents/confirm/index.js';
 import { initPwd } from 'pcComponents/password/index.js';
 import sendTx from 'pcUtils/sendTx';
 import BigNumber from 'utils/bigNumber';
@@ -692,23 +692,27 @@ $font-black: rgba(36, 39, 43, 0.8);
         box-sizing: border-box;
         padding: 0 6px;
         font-size: 12px;
-        color: rgba(94, 104, 117, 0.58);
+        [data-theme="0"] & {
+            color: rgba(94, 104, 117, 0.58);
+        }
+        [data-theme="1"] & {
+            color: $gray-color-2;
+        }
     }
     .ex-order-token {
-        font-size: 12px;
-        @include font-family-normal();
-        font-weight: 400;
-        color: rgba(94, 104, 117, 1);
         width: 95px;
-        white-space: nowrap;
         margin-right: 6px;
+        font-size: 12px;
+        white-space: nowrap;
+        @include font-family-normal();
+        @include gray_font_color_1();
     }
     .else-input-wrapper {
         position: relative;
         border-radius: 2px;
-        border: 1px solid rgba(212, 222, 231, 1);
         box-sizing: border-box;
         flex: 1;
+        @include common_border();
         &.err {
             border: 1px solid $red;
         }
@@ -747,14 +751,12 @@ $font-black: rgba(36, 39, 43, 0.8);
 .order-wrapper {
     flex: 1;
     padding: 0 6px;
-
     .order-title {
         height: 17px;
         line-height: 17px;
         font-size: 12px;
         @include font-family-bold();
-        font-weight: 600;
-        color: #1d2024;
+        @include font_color_1();
         margin-bottom: 10px;
         .wallet {
             font-family: $font-H;
@@ -765,9 +767,8 @@ $font-black: rgba(36, 39, 43, 0.8);
                 display: inline-block;
                 width: 16px;
                 height: 16px;
-                background: url("~assets/imgs/ex-wallet-icon.svg");
-                background-size: 100% 100%;
                 margin-bottom: -4px;
+                @include background_common_img_suffix('ex-wallet-icon', 'svg', 'png');
             }
         }
     }
@@ -787,22 +788,18 @@ $font-black: rgba(36, 39, 43, 0.8);
         font-weight: 600;
         color: #fff;
         &.red {
-            background: linear-gradient(
-                270deg,
-                rgba(226, 43, 116, 1) 0%,
-                rgba(237, 81, 88, 1) 100%
-            );
+            background: linear-gradient(270deg,rgba(226,43,116,1) 0%,rgba(237,81,88,1) 100%);
         }
         &.green {
-            background: linear-gradient(
-                270deg,
-                rgba(0, 212, 208, 1) 0%,
-                rgba(0, 215, 100, 1) 100%
-            );
+            [data-theme="0"] & {
+                background: linear-gradient(270deg,rgba(0, 212, 208, 1) 0%,rgba(0, 215, 100, 1) 100%);
+            }
+            [data-theme="1"] & {
+                background: $green-color;
+            }
         }
         &.gray {
-            color: rgba(29, 32, 36, 0.6);
-            background: #f3f5f9;
+            @include gray_btn_color();
         }
     }
 }
@@ -814,7 +811,9 @@ $font-black: rgba(36, 39, 43, 0.8);
 .dex-input-wrapper .input-wrapper {
     height: 100%;
     line-height: 30px;
-    border: none;
+    [data-theme="0"] & {
+        border: none;
+    }
     input {
         font-family: $font-H;
         font-size: 12px;

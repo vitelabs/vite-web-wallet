@@ -127,8 +127,8 @@
 
 <script>
 import { wallet } from '@vite/vitejs';
-import showConfirm from 'components/confirm/confirm.vue';
-import walletTable from 'components/table/index.vue';
+import showConfirm from 'pcComponents/confirm/confirm.vue';
+import walletTable from 'pcComponents/table/index.vue';
 import { initPwd } from 'pcComponents/password/index.js';
 import viteInput from 'components/viteInput';
 import tooltips from 'components/tooltips';
@@ -298,6 +298,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import "~pcAssets/scss/common.scss";
+
+@include secondTitle();
+
 .list-wrapper {
     margin-top: 20px;
     flex: 1;

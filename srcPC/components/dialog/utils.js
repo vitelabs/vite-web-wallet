@@ -69,7 +69,8 @@ const mixin = {
             return this.RTxt || this.LTxt || this.STxt;
         },
         s() {
-            return {
+            const theme = this[`theme${ this.$store.state.env.theme || 0 }`];
+            const baseTheme = {
                 container: {
                     'background': this.ShowMask ? 'rgba(0, 0, 0, 0.4)' : '--',
                     position: 'fixed',
@@ -88,18 +89,17 @@ const mixin = {
                     'max-height': '85%',
                     display: 'flex',
                     'flex-direction': 'column',
-                    background: '#ffffff',
-                    'box-shadow': '0 2px 48px 1px rgba(176, 192, 237, 0.42)',
-                    'border-radius': '2px'
+                    'border-radius': '2px',
+                    ...theme.wrapper
                 },
                 title: {
                     'font-size': '14px',
-                    background: 'rgba(38,142,255,1)',
                     height: '50px',
                     'line-height': '50px',
                     'padding': '0 30px',
+                    'font-family': 'PingFangSC-Semibold, arial, sans-serif',
                     color: '#ffffff',
-                    'font-family': 'PingFangSC-Semibold, arial, sans-serif'
+                    ...theme.title
                 },
                 close: {
                     cursor: 'pointer',
@@ -123,8 +123,8 @@ const mixin = {
                     padding: '30px',
                     overflow: 'auto',
                     'font-size': '14px',
-                    color: 'rgba(29,32,36,1)',
-                    'line-height': '18px'
+                    'line-height': '18px',
+                    ...theme.body
                 },
                 btnGroup: {
                     'font-family': 'PingFangSC-Semibold, arial, sans-serif',
@@ -155,9 +155,29 @@ const mixin = {
                     'margin-right': '20px'
                 },
                 unUse: {
-                    background: '#efefef',
-                    color: '#666'
+                    color: '#fff',
+                    ...theme.unUse
                 }
+            };
+            return baseTheme;
+        },
+        theme0() {
+            return {
+                wrapper: {
+                    background: '#ffffff',
+                    'box-shadow': '0 2px 48px 1px rgba(176, 192, 237, 0.42)'
+                },
+                title: { background: '#007AFF' },
+                body: { color: 'rgba(29,32,36,1)' },
+                unUse: { background: 'rgba(191,191,191,1)' }
+            };
+        },
+        theme1() {
+            return {
+                wrapper: { background: '#151C32' },
+                title: { background: '#0F162D' },
+                body: { color: '#fff' },
+                unUse: { background: '#545F75' }
             };
         }
     },

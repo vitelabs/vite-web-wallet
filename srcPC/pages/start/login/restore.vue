@@ -158,6 +158,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import "../start.scss";
+
 .wrapper {
     box-sizing: border-box;
     position: relative;

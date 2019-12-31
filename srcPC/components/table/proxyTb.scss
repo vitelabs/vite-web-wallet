@@ -1,0 +1,15 @@
+.proxy-table {
+    flex: 1;
+
+    @include rowWith {
+        &:first-child {
+            width: 480px;
+        }
+        &:nth-child(2) {
+            width: 550px;
+        }
+        &:nth-child(3) {
+            width: 400px;
+        }
+    }
+}

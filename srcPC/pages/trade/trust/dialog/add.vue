@@ -1,20 +1,22 @@
 <template lang="pug">
 extends /components/dialog/base.pug
 block content
-    .content-wrapper(v-if="actionType==='deleteAll'")
+    div(v-if="actionType==='deleteAll'")
         i18n.strong(path='trade.proxy.dialog.cancelAllTips' tag="span")
             div.address_container(place="trustAddress") {{trustAddress}}
-    .content-wrapper(v-else)
-        .block__title {{$t('trade.proxy.passive.head.0')}}
-            .err(v-if="!isValidAddress") {{$t('hint.addrFormat')}}
-        .block__content.edit(v-if="!!trustAddress") {{trustAddress}}
-        viteInput.block__content(v-else v-model="userInputAddress" :valid="validAddr" :placeholder="$t('wallet.placeholder.addr')")
-        .block__title {{$t('trade.proxy.passive.head.1')}}
-        .pair_section.exists
+    div(v-else)
+        .__row
+            .__row_t {{ $t('trade.proxy.passive.head.0') }}
+                .__err(v-if="!isValidAddress") {{$t('hint.addrFormat')}}
+            .__input_row.__unuse_input(v-if="!!trustAddress") {{trustAddress}}
+            viteInput(v-else v-model="userInputAddress" :valid="validAddr" :placeholder="$t('wallet.placeholder.addr')")
+        .__row
+            .__row_t {{$t('trade.proxy.passive.head.1')}}
+        .pair_section.exists(v-if="existsPair && existsPair.length")
             PairItem(v-for="item in existsPair" :key="item.id" :item="item" class="pairs" :cancelAble="actionType==='delete'" @cancelItem="deleteExist(item)")
-        .pair_section(:class="{pair_section__border_top:this.existsPair&&this.existsPair.length>0}")
+        .pair_section(v-if="selectedPairs && selectedPairs.length" :class="{ pair_section__border_top: this.existsPair && this.existsPair.length>0 }")
             PairItem(v-for="item in selectedPairs" :key="item.id" :item="item" :cancelAble="true" @cancelItem="deleteItem(item)" class="pairs")
-        SearchTips( :filterMethod="filterMethod" @selected="addItem" class="search" v-if="actionType==='new'||actionType==='add'")
+        SearchTips(:filterMethod="filterMethod" @selected="addItem" class="search" v-if="actionType==='new'||actionType==='add'")
 </template>
 
 <script>
@@ -23,10 +25,7 @@ import { wallet } from '@vite/vitejs';
 import PairItem from './pairItem';
 import SearchTips from 'uiKit/searchTips';
 import viteInput from 'components/viteInput';
-import {
-    getProxyAblePairs,
-    configMarketsAgent
-} from 'pcServices/tradeOperation';
+import { getProxyAblePairs, configMarketsAgent } from 'pcServices/tradeOperation';
 import { confirmDialog } from './index';
 
 export default {
@@ -62,7 +61,6 @@ export default {
         };
     },
     beforeMount() {
-        window.fffff = this;
         (this.actionType === 'new' || this.actionType === 'add')
             && getProxyAblePairs().then(data => {
                 this.allProxyAblePairs = data;
@@ -148,17 +146,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "~assets/scss/vars.scss";
-.strong {
-    color: #1d2024;
-    font-size: 14px;
-}
-.address_container {
-    font-size: 12px;
-    color: #5e6875;
-    word-break: break-all;
-    line-height: 14px;
-}
+@import "pcComponents/confirm/confirmRow.scss";
+@import "./confirm.scss";
+
 .pair_section {
     display: flex;
     flex-wrap: wrap;
@@ -171,76 +161,8 @@ export default {
         margin-right: 0;
     }
 }
-.block__title {
-    height: 16px;
-    font-size: 12px;
-    @include font-family-bold();
-    color: rgba(29, 32, 36, 1);
-    line-height: 16px;
-    margin-top: 20px;
-    display: flex;
-    justify-content: space-between;
-    .err {
-        color: #ff2929;
-        font-size: 12px;
-    }
-    &:first-child {
-        margin-top: 0;
-    }
-}
 
-.block__content {
-    position: relative;
-    border-radius: 2px;
-    border: 1px solid rgba(212, 222, 231, 1);
-    font-size: 12px;
-    word-break: break-word;
-    width: 100%;
-    box-sizing: border-box;
-    margin-top: 16px;
-    padding: 7px 15px;
-    align-items: center;
-    display: flex;
-    width: 100%;
-    justify-content: space-between;
-
-    .all {
-        color: rgba(0, 122, 255, 1);
-        line-height: 16px;
-        font-size: 12px;
-        border-bottom: 1px dashed rgba(0, 122, 255, 1);
-        cursor: pointer;
-        float: right;
-        display: flex;
-        word-break: keep-all;
-    }
-    .token__title {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        img {
-            width: 20px;
-            height: 20px;
-            margin-right: 20px;
-        }
-    }
-    input {
-        width: 100%;
-    }
-    .light {
-        color: #5e6875;
-    }
-    .blue {
-        color: #007aff;
-    }
-    &.edit {
-        text-align: left;
-        background: rgba(243, 246, 249, 1);
-        @include font-family-bold();
-    }
-}
 .search {
     height: 205px;
 }
 </style>
-

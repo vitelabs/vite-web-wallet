@@ -43,21 +43,24 @@ export default {
     width: 397px;
     padding: 10px;
     box-sizing: border-box;
-    background: #fff;
     display: flex;
     height: 34px;
-    box-shadow: 0px 2px 10px 1px rgba(176,192,237,0.42);
-
+    @include bg_color_3();
+    @include box_shadow();
+    [data-theme="1"] & {
+        border: 1px solid rgba(30,39,69,1);
+    }
     .icon {
         display: inline-block;
-        background: url(~assets/imgs/search.svg);
         width: 16px;
         height: 16px;
         margin-right: 8px;
+        @include background_common_img_suffix('search', 'svg', 'png');
     }
-
     input {
         flex: 1;
+        @include bg_color_3();
+        @include common_font_color();
     }
 }
 </style>

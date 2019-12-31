@@ -1,27 +1,27 @@
 <template lang="pug">
 extends /components/dialog/base.pug
 block content
-    img.bg-img(src="~assets/imgs/invite.png")
-    div(v-if="inviteeCode&&+inviteeCode!==0")
-        .invite-code {{$t('assets.invite.invited')}}{{this.inviteeCode}}
-    div(v-else)
-        .block__title {{ $t('assets.invite.codeLable') }}
-            .err(v-if="formatErr") {{$t('assets.invite.formatErr')}}
-        input.block__content(v-model="code")
-    .block__title {{$t('assets.invite.inviteRule')}}
-    .illustrate(v-for="(i,j) in $t('assets.invite.receiveRuleItems')" :key="j")
+    span.bg-img
+    div(v-if="inviteeCode && +inviteeCode!==0")
+        .invite-code {{ $t('assets.invite.invited') }}{{ this.inviteeCode }}
+    div.__row(v-else)
+        .__row_t {{ $t('assets.invite.codeLable') }}
+            .__err(v-if="formatErr") {{ $t('assets.invite.formatErr') }}
+        vite-input(v-model="code")
+    .__row.__row_t {{ $t('assets.invite.inviteRule') }}
+    .__hint(v-for="(i,j) in $t('assets.invite.receiveRuleItems')" :key="j")
         span(v-html="i")
-        .dot
-
 </template>
 
 <script>
+import viteInput from 'components/viteInput';
 import { bindCode } from 'pcServices/tradeOperation';
 import { doUntill } from 'utils/asyncFlow';
 import { emptySpace } from 'pcUtils/storageSpace';
 import router from 'pcRouter';
 
 export default {
+    components: { viteInput },
     async beforeMount() {
         try {
             await this.getInviteeCode();
@@ -30,7 +30,7 @@ export default {
         }
         const code = emptySpace.getItem('INVITE_CODE');
         if (code) {
-            this.code = code;
+            this.code = `${ code }`;
         }
         this.status = 'LOADED';
     },
@@ -94,122 +94,6 @@ export default {
 
 <style lang="scss" scoped>
 @import "~assets/scss/vars.scss";
-/deep/ .strong {
-    color: #1d2024;
-    @include font-family-bold();
-}
-.bg-img {
-    height: 140px;
-    width: 140px;
-    margin: 0 auto 29px;
-}
-.block__title {
-    height: 16px;
-    font-size: 12px;
-    @include font-family-bold();
-    color: rgba(29, 32, 36, 1);
-    line-height: 16px;
-    margin-top: 20px;
-    display: flex;
-    justify-content: space-between;
-    .err {
-        color: #ff2929;
-        font-size: 12px;
-    }
-    .right {
-        color: #767f8b;
-        font-size: 12px;
-    }
-    &:first-child {
-        margin-top: 0;
-    }
-}
-
-.block__content {
-    position: relative;
-    height: 34px;
-    border-radius: 2px;
-    border: 1px solid rgba(212, 222, 231, 1);
-    font-size: 12px;
-    word-break: break-word;
-    width: 100%;
-    line-height: 34px;
-    box-sizing: border-box;
-    margin-top: 16px;
-    padding: 10px 15px;
-    align-items: center;
-    display: flex;
-    width: 100%;
-    justify-content: space-between;
-
-    .all {
-        border-radius: 2px;
-        background: #007aff;
-        color: #fff;
-        cursor: pointer;
-        font-size: 12px;
-        padding: 0 6px;
-        height: 18px;
-        line-height: 18px;
-        float: right;
-        display: flex;
-        word-break: keep-all;
-    }
-    .token__title {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        img {
-            width: 20px;
-            height: 20px;
-            margin-right: 20px;
-        }
-    }
-    input {
-        width: 100%;
-    }
-    .light {
-        color: #5e6875;
-    }
-    .blue {
-        color: #007aff;
-    }
-    &.edit {
-        text-align: left;
-        background-color: rgba(176, 192, 237, 0.42);
-        border: 1px solid #d4dee7;
-        @include font-family-bold();
-    }
-}
-.illustrate {
-    font-size: 12px;
-    color: #5e6875;
-    line-height: 16px;
-    padding-left: 13px;
-    margin-top: 12px;
-    position: relative;
-    width: 100%;
-    .dot {
-        width: 4px;
-        height: 4px;
-        background: rgba(0, 122, 255, 1);
-        border-radius: 100%;
-        position: absolute;
-        left: 0;
-        top: 6px;
-    }
-}
-.invite-code {
-    height: 56px;
-    border-radius: 2px;
-    border: 1px dashed rgba(0, 122, 255, 0.7);
-    text-align: center;
-    position: relative;
-    display: flex;
-    align-items: center;
-    color: #1d2024;
-    @include font-family-bold();
-    justify-content: center;
-}
+@import './invite.scss';
 </style>
 

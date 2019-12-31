@@ -1,27 +1,27 @@
 <template>
-    <div class="pool-detail">
-        <div class="pool-item">
-            <img class="icon" src="~assets/imgs/smallAssets.svg" />
+    <div class="staking-detail pool">
+        <div class="item pool">
+            <span class="icon"></span>
             <div class="token-wrapper">
-                <div class="token-name">{{ $t('tradeDividend.allPrice') }}</div>
-                <div class="token-amount">{{ allBtc }}</div>
-                <div class="price">{{ allPrice }}</div>
+                <div>{{ $t('tradeDividend.allPrice') }}</div>
+                <div class="bold">{{ allBtc }}</div>
+                <div class="light">{{ allPrice }}</div>
             </div>
         </div>
 
         <template v-for="tokenType in typeList">
-            <div class="pool-item" v-if="tokenType.name !== 'VITE'" :key="tokenType.name">
+            <div class="pool item" v-if="tokenType.name !== 'VITE'" :key="tokenType.name">
                 <img class="icon" :src="tokenType.icon" />
-                <div class="token-wrapper __pointer" v-click-outside="hideTokenList"  @click.stop="showTokenList(tokenType)">
-                    <div class="token-name">{{ tokenType.name }}</div>
-                    <div class="token-amount">
+                <div class="token-wrapper __pointer" v-click-outside="hideTokenList" @click.stop="showTokenList(tokenType)">
+                    <div>{{ tokenType.name }}</div>
+                    <div class="bold">
                         {{ pool[tokenType.name] ? formatNum(pool[tokenType.name].amount, tokenType.name) : '--' }}
                         <span class="down-icon"></span>
                     </div>
 
-                    <div class="token-list" v-if="pool[tokenType.name] && isShowTokenList === tokenType.name">
+                    <div class="item-content" v-if="pool[tokenType.name] && isShowTokenList === tokenType.name">
                         <div class="row" v-for="(token, i) in pool[tokenType.name].tokens" :key="i">
-                            <span class="symbol">{{ getSymbol(token.tokenInfo)  }}:</span>
+                            <span class="light">{{ getSymbol(token.tokenInfo)  }}:</span>
                             <span class="amount">{{ formatNum(token.amount, tokenType.name) }}</span>
                         </div>
                     </div>
@@ -49,7 +49,7 @@ export default {
     },
     computed: {
         typeList() {
-            return this.$store.state.exchangeMine.showTypeList;
+            return this.$store.getters.tokenShowTypeList;
         },
         allPrice() {
             const coin = this.$store.state.env.currency;
@@ -166,37 +166,26 @@ export default {
 
 <style lang="scss" scoped>
 @import "~assets/scss/vars.scss";
+@import "../components/stakingDetail.scss";
 
-.pool-detail {
-    box-shadow: 0px 2px 10px 1px rgba(176,192,237,0.42);
-    border-radius: 2px;
-    display: flex;
-    flex-direction: row;
-    background: url('~assets/imgs/mint_pledge_bg.png') rgba(234,248,255,0.2);
-    background-size: 100% 100%;
+@mixin font_color_price() {
+    [data-theme="0"] & {
+        color: rgba(94,104,117,0.58);
+    }
+    [data-theme="1"] & {
+        color: $gray-color-2;
+    }
+}
+.pool.staking-detail {
+    @include box_shadow();
 }
 
-.pool-item {
-    flex: 1;
+.item.pool {
     padding: 14px 30px;
-    box-sizing: border-box;
-    font-size: 12px;
-    display: flex;
     flex-direction: row;
-    font-size: 12px;
-    font-family: $font-normal;
-    line-height: 16px;
-    border-right: 1px solid rgba(227,235,245,0.6);
-    &:last-child {
-        border-right: none;
-    }
-
-    .price {
-        color: rgba(94,104,117,0.58);
-        margin-top: 2px;
-    }
-
     .icon {
+        display: inline-block;
+        @include background_common_img('head_asset.svg');
         width: 24px;
         height: 24px;
         margin-right: 10px;
@@ -204,58 +193,9 @@ export default {
         top: 50%;
         margin-top: -12px;
     }
-
     .token-wrapper {
         position: relative;
         flex: 1;
-        .token-name {
-            color: rgba(94,104,117,1);
-            margin-bottom: 2px;
-        }
-        .token-amount {
-            font-size: 16px;
-            font-family: $font-bold;
-            color: rgba(29,32,36,1);
-            line-height: 20px;
-            .down-icon {
-                display: inline-block;
-                background: url('~assets/imgs/dividendInfo.svg');
-                background-size: 100% 100%;
-                width: 16px;
-                height: 16px;
-                margin-bottom: -4px;
-            }
-        }
-    }
-
-    .token-list {
-        position: absolute;
-        margin-top: 10px;
-        width: 200px;
-        padding: 8px 12px 0;
-        background: #fff;
-        box-shadow: 0px 5px 20px 0px rgba(176,192,237,0.4);
-        border-radius: 2px;
-        z-index: 1;
-        .row {
-            line-height: 15px;
-            margin-bottom: 8px;
-            font-size: 11px;
-            .symbol {
-                color: rgba(94,104,117,0.58);
-            }
-            .amount {
-                color: rgba(29,32,36,1);
-            }
-        }
-        &:before {
-            top: -12px;
-            position: absolute;
-            content: ' ';
-            display: inline-block;
-            border: 6px solid transparent;
-            border-bottom: 6px solid #fff;
-        }
     }
 }
 </style>

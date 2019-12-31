@@ -41,6 +41,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import "~assets/scss/vars.scss";
+@import "~pcAssets/scss/common.scss";
+
+@include secondTitle();
 .__second-title {
     margin-bottom: 8px;
 }

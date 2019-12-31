@@ -1,0 +1,161 @@
+@import "~assets/scss/vars.scss";
+
+@mixin title_bg_color() {
+    [data-theme="0"] & {
+        background-color: $blue-color-3;
+    }
+    [data-theme="1"] & {
+        background-color: $black-color-1;
+    }
+}
+
+.confirm-container {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    overflow: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+    &.gray {
+        background: rgba(0, 0, 0, 0.4);
+    }
+}
+
+.small .confirm-wrapper {
+    max-width: 380px;
+    .bottom .btn.btn-single {
+        min-width: 200px;
+        width: auto;
+        box-sizing: border-box;
+        padding: 0 20px;
+    }
+}
+
+.middle .confirm-wrapper {
+    max-width: 515px;
+}
+
+.big .confirm-wrapper {
+    max-width: 681px;
+}
+
+.big.no-padding-confirm .confirm-wrapper .content-wrapper {
+    min-height: 300px;
+}
+
+.no-padding-confirm .confirm-wrapper .content-wrapper {
+    padding: 0;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+}
+
+.description .confirm-wrapper {
+    .content-wrapper {
+        @include font-family-normal();
+    }
+}
+
+.generalTips .confirm-wrapper {
+    .content-wrapper {
+        @include font-family-normal();
+    }
+    .general-tips-icon {
+        margin-bottom: 30px;
+        width: 50px;
+        height: 50px;
+        margin-left: 50%;
+        transform: translateX(-50%);
+    }
+}
+
+.confirm-wrapper {
+    width: 80%;
+    max-width: 515px;
+    max-height: 85%;
+    display: flex;
+    flex-direction: column;
+    border-radius: 2px;
+    @include bg_color_2();
+    [data-theme="0"] & {
+        box-shadow: 0 2px 48px 1px rgba(176, 192, 237, 0.42);
+    }
+
+    .title {
+        height: 50px;
+        line-height: 50px;
+        padding: 0 30px;
+        font-size: 14px;
+        color: #fff;
+        @include font-family-bold();
+        @include title_bg_color();
+        .close-icon {
+            padding: 25px 0;
+            box-sizing: border-box;
+            display: block;
+            float: right;
+            width: 20px;
+            height: 20px;
+            background: url('~assets/imgs/confirm_close.svg') no-repeat center;
+            background-size: 20px 20px;
+        }
+    }
+
+    .content-wrapper {
+        position: relative;
+        padding: 30px;
+        font-size: 13px;
+        @include font-family-bold();
+        @include common_font_color();
+        line-height: 22px;
+        overflow: auto;
+        flex: 1;
+    }
+
+    .bottom {
+        padding: 0 30px 30px;
+        box-sizing: border-box;
+        display: flex;
+        justify-content: space-between;
+        &.single {
+            justify-content: space-around;
+        }
+
+        .btn {
+            width: 48%;
+            white-space: nowrap;
+            @include font-family-bold();
+            height: 40px;
+            line-height: 40px;
+            font-size: 14px;
+            color: $blue-color-1;
+            box-sizing: border-box;
+            text-align: center;
+
+            &.btn-single {
+                width: 100%;
+                min-width: 200px;
+                max-width: 100%;
+            }
+
+            &.btn-border {
+                border-radius: 2px;
+                border: 1px solid $blue-color-1;
+                color: $blue-color-1;
+            }
+
+            &.btn-blue {
+                background: $blue-color-1;
+                color: $white-color;
+            }
+
+            &.btn-gray {
+                @include gray_btn_color();
+            }
+        }
+    }
+}

@@ -83,18 +83,23 @@ export default {
 .input-wrapper {
     display: flex;
     width: 100%;
-    border: 1px solid #d4dee7;
     border-radius: 2px;
     font-size: 14px;
     height: 34px;
     line-height: 34px;
     box-sizing: border-box;
+    @include bg_color_1();
+    [data-theme="0"] & {
+        border: 1px solid #d4dee7;
+    }
 
     input {
         flex: 1;
         width: 100%;
         font-size: 12px;
         text-indent: 15px;
+        @include bg_color_1();
+        @include default_font_color();
     }
 }
 </style>

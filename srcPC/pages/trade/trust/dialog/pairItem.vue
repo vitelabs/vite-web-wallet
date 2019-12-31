@@ -1,6 +1,7 @@
 <template>
-    <div class="pair-item" :class="{'cancel-able':cancelAble}">{{item.name}}<div class="cancel __pointer" v-if="cancelAble" @click="cancel"></div></div>
+    <div class="pair-item" :class="{'cancel-able':cancelAble}">{{ item.name }}<div class="cancel __pointer" v-if="cancelAble" @click="cancel"></div></div>
 </template>
+
 <script>
 export default {
     props: {
@@ -20,16 +21,19 @@ export default {
     }
 };
 </script>
+
 <style lang="scss">
 .pair-item {
     padding: 4px 6px;
-    background: rgba(243, 246, 249, 1);
     border-radius: 2px;
     border: 1px solid rgba(212, 222, 231, 1);
-    color: rgba(29, 32, 36, 1);
+    @include common_font_color();
     font-size: 12px;
     display: flex;
     align-items: center;
+    [data-theme="0"] & {
+        background: rgba(243, 246, 249, 1);
+    }
     &.cancel-able {
         background: rgba(0, 122, 255, 0.05);
         border: 1px solid rgba(0, 122, 255, 0.3);

@@ -161,24 +161,34 @@ export default {
     box-sizing: border-box;
     width: 100%;
     max-width: 548px;
-    background: rgba(255, 255, 255, 1);
-    box-shadow: 0 2px 48px 1px rgba(176, 192, 237, 0.42);
     border-radius: 2px;
-    border: 1px solid rgba(246, 245, 245, 1);
+    @include bg_color_2();
+    [data-theme="0"] & {
+        box-shadow: 0 2px 48px 1px rgba(176, 192, 237, 0.42);
+        border: 1px solid rgba(246, 245, 245, 1);
+    }
 }
 
 .address-wrapper {
     font-size: 14px;
     word-break: break-all;
     width: 100%;
-    color: #283d4a;
+    [data-theme="0"] & {
+        color: #283d4a;
+    }
+    [data-theme="1"] & {
+        color: $white-color;
+        border: 1px solid #1E2745;
+    }
 
     .active-addr {
         position: relative;
         line-height: 20px;
         box-sizing: border-box;
-        background: #f3f6f9;
-        border: 1px solid #d4dee7;
+        [data-theme="0"] & {
+            background: #f3f6f9;
+        }
+        @include common_border();
         border-radius: 2px;
         padding: 10px;
 
@@ -187,29 +197,28 @@ export default {
             position: absolute;
             top: 50%;
             right: 20px;
-            width: 16px;
-            height: 16px;
-            margin-top: -6px;
-
+            width: 20px;
+            height: 10px;
+            margin-top: -4px;
             &.down {
-                background: url('~assets/imgs/down_icon.svg');
-                background-size: 16px 16px;
+                @include background_common_img("decend.svg");
             }
 
             &.up {
-                background: url('~assets/imgs/up_icon.svg');
-                background-size: 16px 16px;
+                @include background_common_img("ascend.svg");
             }
         }
     }
 
     .addr-list {
         line-height: 20px;
-        border: 1px solid #d4dee7;
         border-top: none;
         padding: 8px 10px;
         text-align: left;
-        background: #fff;
+        @include common_border();
+        [data-theme="0"] & {
+            background: #fff;
+        }
     }
 }
 
@@ -217,30 +226,34 @@ export default {
     max-width: 548px;
     margin: 30px 0;
     font-size: 18px;
+    line-height: 30px;
     @include font-family-bold();
-    font-weight: 600;
-    color: rgba(29, 32, 36, 1);
-
+    @include common_font_color();
     img {
         display: inline-block;
         width: 30px;
         height: 30px;
         margin-bottom: -8px;
         margin-right: 6px;
+        background: #fff;
+        border-radius: 30px;
+        padding: 6px;
+        box-sizing: border-box;
     }
-
-    line-height: 30px;
-
     .record {
         float: right;
-        background: #edf1ff;
+        [data-theme="0"] & {
+            background: #edf1ff;
+        }
+        [data-theme="1"] & {
+            background: #1E2745;
+        }
         border-radius: 2px;
         padding: 0 12px;
         font-size: 14px;
         color: #007aff;
-
         &:active {
-            background: #007aff;
+            background: $blue-color-1;
             color: #edf1ff;
         }
     }

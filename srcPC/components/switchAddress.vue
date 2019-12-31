@@ -91,10 +91,14 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "~assets/scss/vars.scss";
-
 .menu.switch-address-wrapper {
     .list-title {
+        [data-theme="0"] & {
+            border: none;
+        }
+        [data-theme="1"] & {
+            border: none;
+        }
         border: none;
     }
     .list {
@@ -104,7 +108,12 @@ export default {
 
 .switch-address-wrapper {
     width: 100%;
-    color: #73767A;
+    [data-theme="0"] & {
+        color: $gray-color-3;
+    }
+    [data-theme="1"] & {
+        color: $white-color;
+    }
     @include font-family-bold();
     font-weight: 600;
     font-size: 13px;
@@ -113,18 +122,16 @@ export default {
         position: relative;
         box-sizing: border-box;
         border-radius: 2px;
-        border: 1px solid rgba(212,222,231,1);
+        @include common_border();
         padding: 0 8px;
         white-space: nowrap;
 
         &:after {
             content: '';
             display: inline-block;
-            width: 16px;
-            height: 16px;
-            margin-bottom: -3px;
-            background: url('~assets/imgs/uiKit/select/down.svg');
-            background-size: 16px 16px;
+            width: 14px;
+            height: 7px;
+            @include background_common_img("decend.svg");
         }
         &.not-allowed {
             &:after {
@@ -139,9 +146,9 @@ export default {
         &.up {
             &:after {
                 transform: rotateX(180deg);
+                margin-bottom: 2px;
             }
         }
-
     }
     .list {
         position: absolute;
@@ -149,27 +156,27 @@ export default {
         width: 250px;
         max-height: 220px;
         overflow: auto;
-        background: rgba(255,255,255,1);
-        box-shadow: 0px 5px 10px 0px rgba(176,192,237,0.69);
         margin-top: 10px;
         word-break: break-all;
+        [data-theme="0"] & {
+            box-shadow: 0px 5px 10px 0px rgba(176,192,237,0.69);
+        }
         .item {
+            @include bg_color_2();
             box-sizing: border-box;
             padding: 8px 12px;
             line-height: 16px;
             &:hover {
-                background: rgba(75,116,255,0.1);
+                @include hover_color();
             }
             .name {
                 font-size: 12px;
                 @include font-family-bold();
-                font-weight: 600;
                 color: rgba(115,118,122,1);
             }
             .switch-address {
                 font-size: 11px;
                 @include font-family-normal();
-                font-weight: 400;
                 color: rgba(162,167,175,1);
             }
         }

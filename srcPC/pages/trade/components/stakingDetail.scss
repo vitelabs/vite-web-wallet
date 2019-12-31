@@ -1,8 +1,7 @@
 @import "~assets/scss/vars.scss";
 
 .staking-detail {
-    background: url("~assets/imgs/mint_pledge_bg.png") rgba(234, 248, 255, 0.2);
-    background-size: 100% 100%;
+    @include background_common_img("mint_pledge_bg.png");
     display: flex;
     .item {
         display: flex;
@@ -10,20 +9,37 @@
         box-sizing: border-box;
         width: 25%;
         padding: 12px 30px;
-        border-right: 1px solid rgba(227, 235, 245, 0.6);
         font-size: 12px;
         @include font-family-normal();
-        color: #5e6875;
+        @include font_color_2();
+        [data-theme="0"] & {
+            border-right: 1px solid rgba(227, 235, 245, 0.6);
+        }
+        [data-theme="1"] & {
+            border-right: 1px solid $black-color-4;
+        }
         &.no-border {
             border-right: none;
         }
         .bold {
             @include font-family-bold();
-            color: #1d2024;
+            @include font_color_1();
             font-size: 16px;
+            .down-icon {
+                display: inline-block;
+                width: 16px;
+                height: 16px;
+                margin-bottom: -4px;
+                @include background_common_img("dividendInfo.svg");
+            }
         }
         .light {
-            color: rgba(94,104,117,0.58);
+            [data-theme="0"] & {
+                color: rgba(94, 104, 117, 0.58)
+            }
+            [data-theme="1"] & {
+                color: $gray-color-2;
+            }
         }
     }
     .operations {
@@ -46,13 +62,13 @@
         line-height: 16px;
         &.add {
             color: #fff;
-            background: rgba(0, 122, 255, 1);
+            background: $blue-color-1;
             margin-right: 13px;
             margin-bottom: -1px;
         }
         &.cancel {
-            color: rgba(0, 122, 255, 1);
-            border: 1px solid rgba(0,122,255,1);
+            color: $blue-color-1;
+            border: 1px solid $blue-color-1;
             margin-right: 30px;
         }
         &.unuse {
@@ -61,5 +77,80 @@
             border: 1px solid rgba(198,203,212,0.3);
             cursor: not-allowed;
         }
+    }
+
+    .item-content {
+        position: absolute;
+        margin-top: 10px;
+        width: 200px;
+        padding: 8px 12px 0;        
+        @include bg_color_4();
+        [data-theme="0"] & {
+            box-shadow: 0px 5px 20px 0px rgba(176,192,237,0.4);
+        }
+        border-radius: 2px;
+        z-index: 1;
+        .row {
+            line-height: 15px;
+            margin-bottom: 8px;
+            font-size: 11px;        
+            .amount {
+                @include common_font_color();
+            }
+        }
+        &:before {
+            top: -12px;
+            position: absolute;
+            content: ' ';
+            display: inline-block;            
+            border: 6px solid transparent;
+            [data-theme="0"] & {
+                border-bottom: 6px solid #fff;
+            }
+            [data-theme="1"] & {
+                border-bottom: 6px solid $black-color-4;
+            }
+        }
+    }
+}
+
+.arrow-icon {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    margin-bottom: -4px;
+    [data-theme="0"] & {
+        background: url("~assets/imgs/decend.svg") center no-repeat;
+    }
+    [data-theme="1"] & {
+        background: url("~assets/theme1_imgs/decend.svg") center no-repeat;
+    }
+    &.active {
+        [data-theme="0"] & {
+            background: url("~assets/imgs/ascend.svg") center no-repeat;
+        }
+        [data-theme="1"] & {
+            background: url("~assets/theme1_imgs/ascend.svg") center no-repeat;
+        }
+    }
+}
+
+.slot-row {
+    [data-theme="0"] & {
+        background: rgba(247,249,251,1);
+    }
+    [data-theme="1"] & {
+        background: rgba(1,8,31,0.25);
+    }
+    font-size: 12px;
+    font-family: $font-normal;
+    font-weight: 400;
+    color: rgba(94,104,117,1);
+    line-height: 16px;
+    .item {
+        display: inline-block;
+    }
+    &.__tb_row.__tb_content_row {
+        height: unset;
     }
 }

@@ -24,8 +24,8 @@
 <script>
 import { constant } from '@vite/vitejs';
 import { getVIPStakeInfoList } from 'services/viteServer';
-import pagination from 'components/pagination';
-import walletTable from 'components/table/index.vue';
+import pagination from 'pcComponents/pagination';
+import walletTable from 'pcComponents/table/index.vue';
 import date from 'utils/date';
 import bigNumber from 'utils/bigNumber';
 import { timer } from 'utils/asyncFlow';

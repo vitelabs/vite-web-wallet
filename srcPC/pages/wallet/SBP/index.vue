@@ -6,7 +6,7 @@
 
         <div v-if="!loadingToken" class="section">
             <div class="__second-title">{{ $t('walletSBP.section1.title') }}</div>
-            <register :canUseAddr="canUseAddr" class="content"></register>
+            <register :canUseAddr="canUseAddr"></register>
         </div>
 
         <div v-if="!loadingToken" class="section">
@@ -29,19 +29,16 @@
 </template>
 
 <script>
-import { wallet, constant } from '@vite/vitejs';
+import { wallet } from '@vite/vitejs';
 import secTitle from 'pcComponents/secTitle';
 import loading from 'components/loading';
-import confirm from 'components/confirm/confirm.vue';
+import confirm from 'pcComponents/confirm/confirm.vue';
 import viteInput from 'components/viteInput';
 import { initPwd } from 'pcComponents/password/index.js';
 import { execWithValid } from 'pcUtils/execWithValid';
-import BigNumber from 'utils/bigNumber';
 import sendTx from 'pcUtils/sendTx';
 import register from './register';
 import list from './list';
-
-const Vite_Token_Info = constant.Vite_Token_Info;
 
 export default {
     components: { secTitle, register, list, loading, confirm, viteInput },
@@ -201,7 +198,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "~assets/scss/vars.scss";
+@import "~pcAssets/scss/common.scss";
+
+@include secondTitle();
 
 .SBP-wrapper {
     position: relative;
@@ -254,12 +253,6 @@ export default {
     .__second-title {
         margin-bottom: 14px;
     }
-
-    .content {
-        background: #fff;
-        box-shadow: 0px 2px 10px 1px rgba(176,192,237,0.42);
-        border-radius: 2px;
-    }
 }
 
 .row {
@@ -288,10 +281,9 @@ export default {
         box-sizing: border-box;
 
         &.unuse {
-            background: #f3f6f9;
-            font-size: 14px;
-            color: #5e6875;
+            @include gray_btn_color();
             @include font-family-normal();
+            font-size: 14px;
         }
 
         input {

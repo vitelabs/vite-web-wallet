@@ -18,7 +18,7 @@ import { constant } from '@vite/vitejs';
 import { initPwd } from 'pcComponents/password/index.js';
 import sendTx from 'pcUtils/sendTx';
 import BigNumber from 'utils/bigNumber';
-import confirm from 'components/confirm/confirm.vue';
+import confirm from 'pcComponents/confirm/confirm.vue';
 
 const Vite_Token_Info = constant.Vite_Token_Info;
 

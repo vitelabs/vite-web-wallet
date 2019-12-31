@@ -28,23 +28,11 @@ Vue.use(plugin);
 Vue.use(directives);
 
 Vue.config.devtools = process.env.NODE_ENV !== 'production';
-
-// Start loading animate
-const element = document.getElementById('loading');
-element.className += 'spinner big-spinner';
-
-setTimeout(() => {
-    element.className += ' dis';
-}, 800);
-
-// Loading finish and App init finish also.
-setTimeout(() => {
-    new Vue({
-        el: '#app',
-        components: { App },
-        template: '<App/>',
-        store,
-        router,
-        i18n
-    });
-}, 1800);
+new Vue({
+    el: '#app',
+    components: { App },
+    template: '<App/>',
+    store,
+    router,
+    i18n
+});

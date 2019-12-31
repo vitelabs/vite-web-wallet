@@ -6,7 +6,7 @@
             <div v-for="(item, i) in pledgeList" :key="i"
                  :slot="`${i}addrBefore`">
                 <span class="beneficial-addr">{{ item.showAddr }}</span>
-                <img v-if="item.beneficialAddr === address" class="beneficial-img" src='~assets/imgs/mine.svg'/>
+                <span v-if="item.beneficialAddr === address" class="beneficial-img"></span>
             </div>
 
             <span v-for="(item, i) in pledgeList" :key="i"
@@ -26,8 +26,8 @@
 
 <script>
 import { constant } from '@vite/vitejs';
-import pagination from 'components/pagination.vue';
-import walletTable from 'components/table/index.vue';
+import pagination from 'pcComponents/pagination.vue';
+import walletTable from 'pcComponents/table/index.vue';
 import date from 'utils/date.js';
 import openUrl from 'utils/openUrl';
 import { timer } from 'utils/asyncFlow';
@@ -201,7 +201,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "~assets/scss/vars.scss";
+@import "~pcAssets/scss/common.scss";
+
+@include secondTitle();
 
 .list-wrapper {
     flex: 1;
@@ -220,10 +222,13 @@ export default {
 }
 
 .beneficial-img {
+    display: inline-block;
     margin-left: 8px;
     margin-bottom: -2px;
     width: 12px;
     height: 12px;
+    background: url('~assets/imgs/owner.png');
+    background-size: 100% 100%;
 }
 
 .__second-title {

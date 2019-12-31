@@ -15,11 +15,7 @@
             <div class="__row">
                 <div class="__row_t">{{ $t("balance") }}</div>
                 <div class="__input_row __unuse_input __bold">
-                    <img
-                        :src="token.icon || getIcon(token.tokenId)"
-                        class="__icon"
-                    />
-                    {{ token.tokenSymbol }}
+                    <img :src="token.icon || getIcon(token.tokenId)" class="__icon"/> {{ token.tokenSymbol }}
                     <span class="__right">{{ showAccBalance }}</span>
                 </div>
             </div>
@@ -27,9 +23,7 @@
             <div class="__row">
                 <div class="__row_t">
                     {{ $t("wallet.inAddress") }}
-                    <span v-show="!isValidAddress" class="__err">{{
-                        $t("hint.addrFormat")
-                    }}</span>
+                    <span v-show="!isValidAddress" class="__err">{{ $t("hint.addrFormat") }}</span>
                 </div>
                 <vite-input
                     v-model="inAddress"
@@ -74,7 +68,7 @@ import Vue from 'vue';
 import { utils, wallet, accountBlock as accountBlockUtils } from '@vite/vitejs';
 
 import { initPwd } from 'pcComponents/password/index.js';
-import confirm from 'components/confirm/confirm.vue';
+import confirm from 'pcComponents/confirm/confirm.vue';
 import viteInput from 'components/viteInput';
 import sendTx from 'pcUtils/sendTx';
 import bigNumber from 'utils/bigNumber';

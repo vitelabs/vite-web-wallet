@@ -4,7 +4,7 @@
         <income v-show="!noData" v-model="isIncome"></income>
         <token-list v-show="!noData" v-model="isTokenList"></token-list>
         <div v-show="noData" class="become-operator">
-            <img src="~assets/imgs/no_operator.svg"/>
+            <span class="no-operator"></span>
             <div class="text">{{ $t('tradeOperator.noOperator') }}</div>
             <div class="btn __pointer" @click="goOperatorTutorial">{{ $t('tradeOperator.learnMore') }}</div>
         </div>
@@ -53,15 +53,16 @@ export default {
     width: 100%;
     align-items: center;
     justify-content: center;
-    img {
+    .no-operator {
         display: inline-block;
         width: 340px;
         height: 340px;
+        @include background_common_img('no_operator.svg');
     }
     .text {
         font-size: 16px;
         @include font-family-normal();
-        color: rgba(36,39,43,1);
+        @include font_color_to_white(rgba(36,39,43,1));
         line-height: 20px;
     }
     .btn {
@@ -69,7 +70,7 @@ export default {
         display: inline-block;
         width: 196px;
         height: 44px;
-        background: rgba(0,122,255,1);
+        background: $blue-color-1;
         border-radius: 2px;
         text-align: center;
         line-height: 44px;

@@ -84,7 +84,6 @@ export default {
             const successSubmit = () => {
                 this.$toast(this.$t('tradeOpenOrders.confirm.successToast'));
             };
-
             initPwd({
                 title: this.$t('tradeOpenOrders.confirm.title'),
                 content: this.$t('tradeOpenOrders.confirm.content'),
@@ -121,16 +120,13 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '~assets/scss/table.scss';
+@import '~pcAssets/scss/table.scss';
 
 .__tb {
     flex: 1;
     box-shadow: none;
     .__tb_content_row {
         transition: all 0.4s ease-in-out;
-        &:hover {
-            background: #fff;
-        }
         &.active {
             background: rgba(0,122,255,0.07);;
         }

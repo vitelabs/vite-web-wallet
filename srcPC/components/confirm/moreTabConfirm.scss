@@ -1,0 +1,173 @@
+@import "~assets/scss/vars.scss";
+
+@mixin self_bg_color_2() {
+    [data-theme="0"] & {
+        background-color: rgba(0, 122, 255, 0.06);
+    }
+    [data-theme="1"] & {
+        background-color: $black-color-1;
+    }
+}
+
+@mixin tab_font_color() {
+    [data-theme="0"] & {
+        color: #5e6875;
+    }
+    [data-theme="1"] & {
+        color: $white-color;
+    }
+}
+
+.head {
+    box-sizing: border-box;
+    padding: 20px 30px;
+    display: flex;
+    line-height: 18px;
+    @include bg_color_3();
+    @include font-family-normal();
+    [data-theme="0"] & {
+        border-bottom: 1px solid rgba(212, 222, 231, 0.3);
+    }
+    .head_info {
+        display: flex;
+        flex-direction: column;
+    }
+    .gate_info {
+        font-size: 12px;
+        color: $blue-color-1;
+        @include self_bg_color_2();
+        padding: 0 4px;
+        align-self: flex-start;
+        border-radius: 2px;
+        margin-left: 6px;
+    }
+    .icon {
+        width: 40px;
+        height: 40px;
+        margin-right: 10px;
+        border: 1px solid rgba(212,222,231,1);
+        border-radius: 40px;
+    }
+    &__name {
+        @include font-family-bold();
+        @include common_font_color();
+        font-size: 14px;
+        line-height: 18px;
+        &__gate {
+            color: $blue-color-1;
+            @include self_bg_color_2();
+            @include font-family-normal();
+            font-size: 12px;
+            height: 20px;
+            padding: 0 4px;
+            margin-left: 6px;
+            line-height: 20px;
+            display: flex;
+        }
+    }
+    &__symbol {
+        @include font-family-normal();
+        @include gray_font_color_1();
+        font-size: 12px;
+        margin-top: 8px;
+        line-height: 16px;
+    }
+}
+.tab {
+    padding: 0 30px;
+    height: 40px;
+    display: flex;
+    flex-shrink: 0;
+    @include bg_color_1();
+    @include common_border_one(bottom);
+    &__item {
+        @include font-family-bold();
+        font-size: 12px;
+        height: 100%;
+        box-sizing: border-box;
+        margin-right: 40px;
+        @include tab_font_color();
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+        &.active {
+            border-bottom: 2px solid $blue-color-1;
+        }
+    }
+}
+.tab-content {
+    box-sizing: border-box;
+    height: 470px;
+    padding: 30px;
+    position: relative;
+    overflow: scroll;
+    @include bg_color_2();
+    &.no-padding {
+        padding: 0;
+    }
+    .content__item {
+        font-size: 12px;
+        @include font-family-normal();
+        line-height: 16px;
+        margin-bottom: 20px;
+        display: flex;
+        text-align: left;
+        [data-theme="0"] & {
+            color: rgba(94,104,117,1);
+        }
+        [data-theme="1"] & {
+            color: $white-color;
+        }
+        .media-icon {
+            width: 20px;
+            height: 20px;
+            margin-right: 14px;
+            cursor: pointer;
+        }
+        .view-more {
+            margin-left: 6px;
+        }
+        &.center {
+            align-items: center;
+            div {
+                display: flex;
+                align-items: center;
+            }
+        }
+        :last-child {
+            word-break: break-word;
+        }
+        .label {
+            [data-theme="0"] & {
+                color: rgba(94,104,117,0.58);
+            }
+            [data-theme="1"] & {
+                color: $gray-color-2;
+            }
+            margin-right: 10px;
+            word-break: keep-all;
+            white-space: nowrap;
+        }
+        .click-able {
+            color: $blue-color-1;
+            cursor: pointer;
+        }
+        .btn {
+            cursor: pointer;
+            user-select: none;
+            height: 34px;
+            line-height: 34px;
+            border-radius: 2px;
+            font-size: 14px;
+            @include font-family-bold();
+            padding: 0 20px;
+            white-space: nowrap;
+            margin-left: 23px;
+            background: $blue-color-1;
+            color: $white-color;
+            &.unuse {
+                @include gray_btn_color();
+            }
+        }
+    }
+}

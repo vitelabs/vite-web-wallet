@@ -31,7 +31,7 @@
 
 <script>
 import tooltips from 'components/tooltips';
-import operatorIcon from 'assets/imgs/operator_icon.svg';
+import operatorIcon from 'assets/imgs/operator.png';
 import openUrl from 'utils/openUrl';
 
 export default {
@@ -103,6 +103,9 @@ export default {
         operatorInfo() {
             return this.$store.state.exchangeTokens.operator;
         },
+        theme() {
+            return this.$store.state.env.theme;
+        },
         operatorIcon() {
             if (this.operatorInfo) {
                 return this.operatorInfo.icon || '';
@@ -166,20 +169,18 @@ export default {
 
 .t-item {
     display: inline-block;
-    font-size: 12px;
-    @include font-family-bold();
-    font-weight: 600;
-    color: rgba(29, 32, 36, 1);
     line-height: 14px;
     margin-left: 36px;
+    font-size: 12px;
+    @include font-family-bold();
+    @include common_font_color();
     .cmc-img {
         position: relative;
         display: inline-block;
         width: 20px;
         height: 20px;
         margin-bottom: -5px;
-        background: url("~assets/imgs/cmc.svg");
-        background-size: 20px 20px;
+        @include background_common_img("cmc.svg");
         .tips {
             display: none;
             @include font-family-normal();
@@ -200,7 +201,12 @@ export default {
             font-size: 16px;
         }
         &.ttoken {
-            color: #5E6875;
+            [data-theme="0"] & {
+                color: #5e6875;
+            }
+            [data-theme="1"] & {
+                color: #545F75;
+            }
         }
     }
     .mining {
@@ -223,7 +229,7 @@ export default {
     }
     .gate {
         @include font-family-normal();
-        color: #007AFF;
+        color: $blue-color-1;
         display: flex;
         margin-top: 2px;
         .gate-img {
@@ -233,7 +239,9 @@ export default {
             margin-right: 4px;
             box-sizing: border-box;
             border-radius: 2px;
-            border: 1px solid rgba(212,222,231,1);
+            [data-theme="0"] & {
+                border: 1px solid rgba(212,222,231,1);
+            }
         }
     }
 }

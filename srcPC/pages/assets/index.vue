@@ -119,8 +119,8 @@ export default {
     .account_head {
         position: relative;
         text-align: center;
-        box-shadow: 0px 2px 10px 1px rgba(176,192,237,0.32);
         border-radius: 2px;
+        @include box_shadow();
     }
 }
 </style>

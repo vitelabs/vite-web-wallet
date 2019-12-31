@@ -55,3 +55,10 @@ export default {
     }
 };
 </script>
+
+<style lang="scss" scoped>
+.qrcode {
+    background: #fff;
+    padding: 10px;
+}
+</style>

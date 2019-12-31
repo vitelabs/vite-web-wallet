@@ -1,9 +1,9 @@
 <template>
     <div class="trade-mining-section shadow">
-        <div class="my-divident">
+        <div class="staking-detail">
             <div class="item" v-for="tokenType in ['VITE', 'BTC', 'ETH', 'USDT']" :key="tokenType">
-                <div class="item-title">{{ $t("orderMining.estimate", { name: tokenType }) }}</div>
-                <div class="item-price">{{ estimateInfo[tokenType] || '--' }}</div>
+                <div>{{ $t("orderMining.estimate", { name: tokenType }) }}</div>
+                <div class="bold">{{ estimateInfo[tokenType] || '--' }}</div>
             </div>
         </div>
         <wallet-table class="mint-trade-table no-shadow tb" :clickRow="clickRow"
@@ -38,8 +38,8 @@
 
 <script>
 import { getOrderMining, getOrderMiningDetails, getOrderMiningEstimate } from 'services/trade';
-import walletTable from 'components/table/index.vue';
-import pagination from 'components/pagination.vue';
+import walletTable from 'pcComponents/table/index.vue';
+import pagination from 'pcComponents/pagination.vue';
 import loading from 'components/loading';
 import bigNumber from 'utils/bigNumber';
 import date from 'utils/date';
@@ -191,59 +191,23 @@ export default {
 
 <style lang="scss" scoped>
 @import "~assets/scss/vars.scss";
+@import "../components/stakingDetail.scss";
 
 .detail-wrapper {
     position: relative;
     min-height: 32px;
-    background: rgba(247,249,251,1);
-    color: #5E6875;
+    [data-theme="0"] & {
+        background: rgba(247,249,251,1);
+    }
+    [data-theme="1"] & {
+        background: rgba(1,8,31,0.25);
+    }
     /deep/ .ex-center-loading .dot {
         position: absolute;
     }
     .err-msg {
         line-height: 32px;
         text-align: center;
-    }
-}
-
-.arrow-icon {
-    display: inline-block;
-    width: 16px;
-    height: 16px;
-    background: url("~assets/imgs/decend.svg") center no-repeat;
-    margin-bottom: -4px;
-    &.active {
-        background: url("~assets/imgs/ascend.svg") center no-repeat;
-    }
-}
-
-.my-divident {
-    background: url('~assets/imgs/mint_pledge_bg.png') rgba(234,248,255,0.2);
-    background-size: 100% 100%;
-    font-size: 12px;
-    font-family: $font-normal;
-    line-height: 18px;
-    display: flex;
-    flex-direction: row;
-    border-radius: 2px;
-
-    .item {
-        flex: 1;
-        box-sizing: border-box;
-        padding: 14px 30px;
-        border-right: 1px solid rgba(227,235,245,0.6);
-        &:last-child {
-            border-right: none;
-        }
-        .item-title {
-            color: rgba(94,104,117,1);
-        }
-        .item-price {
-            font-size: 16px;
-            color: rgba(29,32,36,1);
-            line-height: 20px;
-            font-family: $font-bold;
-        }
     }
 }
 </style>

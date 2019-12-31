@@ -254,7 +254,9 @@
             "30": "30分钟",
             "60": "1小时",
             "720": "12小时"
-        }
+        },
+        "theme": "主题颜色",
+        "themeList": ["白天主题", "暗黑主题"]
     },
     "create": {
         "input": "请输入密码",
@@ -410,13 +412,6 @@
                 "OPPOSITE_CONFIRMED": "已完成",
                 "WRONG_WITHDRAW_ADDRESS":"转出地址填写错误"            
             }
-        },
-        "receive": {
-            "title": "接收",
-            "codeTips": "请扫码向我转入{tokenSymbol}",
-            "addressTitle": "接收地址",
-            "amountTitle": "请输入接收金额",
-            "amountPlaceholder": "请输入接收金额"
         },
         "charge": {
             "title": "跨链转入",

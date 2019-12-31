@@ -5,6 +5,8 @@
 <script>
 import SelectedIcon from 'assets/imgs/uiKit/checkbox/selected.svg';
 import UnselectIcon from 'assets/imgs/uiKit/checkbox/unselect.svg';
+import theme1SelectedIcon from 'assets/theme1_imgs/selected.png';
+import theme1UnselectIcon from 'assets/theme1_imgs/unselect.png';
 
 export default {
     props: {
@@ -36,8 +38,17 @@ export default {
         }
     },
     computed: {
+        theme() {
+            return this.$store.state.env.theme;
+        },
+        selectedIcon() {
+            return +this.theme === 0 ? SelectedIcon : theme1SelectedIcon;
+        },
+        unSelectIcon() {
+            return +this.theme === 0 ? UnselectIcon : theme1UnselectIcon;
+        },
         style() {
-            return { 'background-image': `url(${ this.inner_value ? SelectedIcon : UnselectIcon })` };
+            return { 'background-image': `url(${ this.inner_value ? this.selectedIcon : this.unSelectIcon })` };
         }
     }
 

@@ -108,7 +108,6 @@ export default {
     height: 100%;
     display: flex;
     flex-direction: column;
-
     .depth-content-wrapper {
         position: absolute;
         top: 60px;
@@ -122,10 +121,9 @@ export default {
             overflow: auto;
         }
     }
-
     .border_all {
-        border-top: 1px solid rgba(229, 237, 243, 1);
-        border-bottom: 1px solid rgba(229, 237, 243, 1);
+        @include center_border(top);
+        @include center_border(bottom);
     }
     .no_border_t {
         border-top: none;
@@ -140,14 +138,25 @@ export default {
     padding: 10px;
     font-size: 12px;
     @include font-family-normal();
-    color: rgba(94,104,117,1);
-    background: rgba(215,215,215,1);
-    box-shadow: 0px 5px 20px 0px rgba(0,0,0,0.1);
+    [data-theme="0"] & {
+        color: rgba(94,104,117,1);
+        background: rgba(215,215,215,1);
+        box-shadow: 0px 5px 20px 0px rgba(0,0,0,0.1);
+    }
+    [data-theme="1"] & {
+        color: $white-color;
+        background: $black-color-1;
+    }
 
     &::after {
         content: ' ';
         border: 5px solid transparent;
-        border-left: 5px solid #d7d7d7;
+        [data-theme="0"] & {
+            border-left: 5px solid #d7d7d7;
+        }
+        [data-theme="1"] & {
+            border-left: 5px solid $black-color-1;
+        }
         position: absolute;
         top: 50%;
         right: 0;

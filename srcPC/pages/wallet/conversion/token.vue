@@ -74,49 +74,47 @@ export default {
 .token-wrapper {
     box-sizing: border-box;
     min-width: 254px;
-    background: rgba(255, 255, 255, 1);
-    box-shadow: 0 2px 48px 1px rgba(176, 192, 237, 0.42);
     border-radius: 2px;
     margin-top: 30px;
     @include font-family-bold();
-    font-weight: 600;
-
+    @include bg_color_2();
+    [data-theme="0"] & {
+        box-shadow: 0 2px 48px 1px rgba(176, 192, 237, 0.42);
+    }
     .title {
         padding: 18px 25px;
         font-size: 18px;
-        color: rgba(29, 32, 36, 1);
-        border-bottom: 1px solid rgba(229, 237, 243, 1);
-
+        @include common_font_color();
+        @include common_border_one(bottom);
         img {
             display: inline-block;
             width: 20px;
             height: 20px;
             margin-bottom: -3px;
             margin-right: 6px;
+            background: #fff;
+            border-radius: 20px;
+            padding: 4px;
+            box-sizing: border-box;
         }
     }
-
     .content {
         padding: 20px;
-
         .balance {
             font-size: 14px;
-            color: rgba(29, 32, 36, 1);
+            @include common_font_color();
             line-height: 20px;
-
             .num {
                 float: right;
                 font-size: 20px;
-                color: rgba(0, 122, 255, 1);
+                color: $blue-color-1;
                 margin-left: 10px;
             }
         }
-
         .btn-list {
             margin-top: 30px;
             display: flex;
             justify-content: space-between;
-
             .btn {
                 box-sizing: border-box;
                 height: 40px;
@@ -127,17 +125,15 @@ export default {
                 text-align: center;
                 margin-left: 10px;
                 white-space: nowrap;
-
+                background: $blue-color-1;
+                color: $white-color;
                 &.only {
                     min-width: 100%;
                     width: 100%;
                 }
-
                 &.unuse {
-                    background: rgba(238, 241, 245, 1);
-                    color: rgba(255, 255, 255, 1);
+                    @include gray_btn_color();
                 }
-
                 &:first-child {
                     margin-left: 0;
                 }

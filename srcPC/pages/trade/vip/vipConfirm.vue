@@ -30,7 +30,7 @@
 
 <script>
 import { constant } from '@vite/vitejs';
-import confirm from 'components/confirm/confirm.vue';
+import confirm from 'pcComponents/confirm/confirm.vue';
 import BigNumber from 'utils/bigNumber';
 import { initPwd } from 'pcComponents/password/index.js';
 import { stakeForVIP } from 'pcServices/tradeOperation';

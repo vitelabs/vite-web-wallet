@@ -154,8 +154,10 @@ export default {
 @import "./setting.scss";
 
 .acc-list {
-    background: #fff;
-    border: 1px solid #d4dee7;
+    @include bg_color_1();
+    [data-theme="0"] & {
+        border: 1px solid #d4dee7;
+    }
     border-radius: 2px;
     font-size: 12px;
 
@@ -176,9 +178,9 @@ export default {
         line-height: 20px;
         position: relative;
         padding: 10px 15px;
-        border-bottom: 1px solid #d4dee7;
         display: flex;
         align-items: center;
+        @include common_border_one(bottom);
         &:last-child {
             border: none;
         }
@@ -195,8 +197,8 @@ export default {
         height: 36px;
         line-height: 36px;
         font-size: 12px;
-        color: #007aff;
-        border-top: 1px solid #d4dee7;
+        color: $blue-color-1;
+        @include common_border_one(top);
 
         .acc-add {
             display: inline-block;
@@ -211,14 +213,14 @@ export default {
             display: inline;
             position: relative;
             bottom: 3px;
-            color: #007aff;
+            color: $blue-color-1;
         }
     }
 
     .describe {
         display: block;
         width: 93%;
-        color: rgba(94,104,117,1);
+        @include font_color_2();
         .name-input {
             display: block;
             width: 100%;
@@ -234,14 +236,12 @@ export default {
         display: block;
         box-sizing: border-box;
         width: 16px;
-        height: 16px;
-        background: #fff;
-        border: 1px solid #d4dee7;
+        height: 14px;
         border-radius: 16px;
-
+        @include bg_color_1();
+        @include common_border();
         &.active {
-            background: url('~assets/imgs/presnet.svg') no-repeat center;
-            background-size: 16px 16px;
+            @include background_common_img_suffix('presnet', 'svg', 'png');
         }
     }
 }

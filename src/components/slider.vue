@@ -178,7 +178,12 @@ $green: linear-gradient(270deg, rgba(0,212,208,1) 0%, rgba(0,215,100,1) 100%);
     .line-wrapper {
         height: 2px;
         border-radius: 2px;
-        background: rgba(229,235,241,1);
+        [data-theme="0"] & {
+            background: rgba(229,235,241,1);
+        }
+        [data-theme="1"] & {
+            background: $black-color-4;
+        }
     }
     .line {
         .drag {
@@ -214,7 +219,7 @@ $green: linear-gradient(270deg, rgba(0,212,208,1) 0%, rgba(0,215,100,1) 100%);
                 font-size: 12px;
                 font-family: $font-H;
                 font-weight: 400;
-                color: rgba(255,255,255,1);
+                color: $white-color;
                 line-height: 16px;
                 transition: all 0.2s linear;
                 user-select: none;
@@ -269,8 +274,14 @@ $green: linear-gradient(270deg, rgba(0,212,208,1) 0%, rgba(0,215,100,1) 100%);
             display: inline-block;
             width: 8px;
             height: 8px;
-            background: rgba(255,255,255,1);
-            border: 2px solid rgba(212,222,231,1);
+            [data-theme="0"] & {
+                background: rgba(255,255,255,1);
+                border: 2px solid rgba(212,222,231,1);
+            }
+            [data-theme="1"] & {
+                background: $black-color-2;
+                border: 2px solid $black-color-4;
+            }
             border-radius: 8px;
             box-sizing: border-box;
             &.active {
@@ -290,7 +301,7 @@ $green: linear-gradient(270deg, rgba(0,212,208,1) 0%, rgba(0,215,100,1) 100%);
                 .percent {
                     background: $green;
                     &::before {
-                        border-top: 6px solid #00d764;
+                        border-top: 6px solid $green-color;
                     }
                 }
             }

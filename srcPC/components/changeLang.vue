@@ -34,6 +34,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "~assets/scss/list/start.scss";
-@import "~assets/scss/list/setting.scss";
+@import "~pcAssets/scss/list/start.scss";
+@import "~pcAssets/scss/list/setting.scss";
 </style>

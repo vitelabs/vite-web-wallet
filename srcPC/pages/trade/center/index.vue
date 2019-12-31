@@ -14,7 +14,7 @@
 </template>
 
 <script>
-import confirm from 'components/confirm/index.js';
+import confirm from 'pcComponents/confirm/index.js';
 import layout from './layout';
 import depth from './depth/depth.vue';
 import market from './market/market.vue';
@@ -49,12 +49,6 @@ export default {
     computed: {
         address() {
             return this.$store.getters.activeAddr;
-        }
-    },
-    watch: {
-        address() {
-            this.$store.dispatch('exFetchVip');
-            this.$store.dispatch('exFetchSVip');
         }
     }
 };
