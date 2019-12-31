@@ -247,8 +247,8 @@
             "60": "1 Hour",
             "720": "12 Hours"
         },
-        "theme": "主题颜色",
-        "themeList": ["白天主题", "暗黑主题"]
+        "theme": "Theme color",
+        "themeList": ["Light", "Dark"]
     },
     "create": {
         "input": "Please enter your password",
