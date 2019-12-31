@@ -1,15 +1,18 @@
 @import "~assets/scss/vars.scss";
 
+@mixin setting_common_color() {
+    [data-theme="0"] & {
+        color: #5e6875;
+    }
+    [data-theme="1"] & {
+        color: #545F75;
+    }
+}
+
 .big-title {
     font-size: 14px;
     @include font-family-bold();
-    font-weight: 600;
-    [data-theme="0"] & {
-        color: #1D2024;
-    }
-    [data-theme="1"] & {
-        color: $white-color;
-    }
+    @include font_color_to_white(#1D2024);
     margin-bottom: 12px;
     margin-top: 20px;
     line-height: 16px;
@@ -17,16 +20,12 @@
 
 .small-title {
     font-size: 12px;
-    [data-theme="0"] & {
-        color: #5e6875;
-    }
-    [data-theme="1"] & {
-        color: #545F75;
-    }
     letter-spacing: 0.3px;
     line-height: 16px;
     margin: 10px 0;
+    @include setting_common_color();
     &.bold {
+        @include font_color_to_white(#5e6875);
         @include font-family-bold();
     }
 }
