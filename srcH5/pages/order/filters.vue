@@ -32,6 +32,7 @@
                 </div>
             </div>
             <div class="filter-content token" v-show="filterType === 'token'">
+                <loading v-show="isLoadingMarketMap" loadingType="dot" class="ex-center-loading"></loading>
                 <div v-show="!isLoadingMarketMap" class="token-side">
                     <div class="token-item" :class="{'active': !ttoken}"
                          @click="selectTtoken('')">{{ $t('mobileOrder.all') }}</div>
@@ -39,8 +40,7 @@
                          @click="selectTtoken(t.symbol)"
                          v-for="t in marketMap" :key="t.symbol">{{ t.symbol }}</div>
                 </div>
-                <loading v-show="isLoadingMarketMap" loadingType="dot" class="ex-center-loading"></loading>
-                <div class="token-side">
+                <div v-show="!isLoadingMarketMap" class="token-side">
                     <loading v-show="isLoadingFtokenMap" loadingType="dot" class="ex-center-loading"></loading>
                     <div v-show="!isLoadingFtokenMap" class="token-item"
                          :class="{'active': ftoken === token.symbol}"
@@ -316,6 +316,8 @@ export default {
                 }
             }
             &.token {
+                position: relative;
+                height: 200px;
                 display: flex;
                 flex-direction: row;
                 .token-side {
