@@ -391,6 +391,9 @@ export default {
                     width: 20px;
                     height: 20px;
                     margin-left: 20px;
+                    [data-theme="1"] & {
+                        width: 30px;
+                    }
                     @include background_common_img_suffix('edit_default', 'svg', 'png');
                 }
             }
