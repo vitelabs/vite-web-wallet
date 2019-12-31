@@ -1,4 +1,6 @@
-require('./pack/prePack/index.js');
+if (process.env.isAPP !== 'true') {
+    require('./pack/prePack/index.js');
+}
 
 const merge = require('webpack-merge');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
@@ -11,6 +13,7 @@ const testConfig = require('./pack/webpack/test.config.js');
 const prodConfig = require('./pack/webpack/prod.config.js');
 const pcConfig = require('./pack/webpack/pc.config.js');
 const h5Config = require('./pack/webpack/h5.config.js');
+const appConfig = require('./pack/webpack/app.config.js');
 const debugConfig = require('./pack/webpack/debug.config.js');
 
 console.log(`\n ======== process.env.NODE_ENV: ${ process.env.NODE_ENV } ======== \n`);
@@ -31,6 +34,8 @@ if (process.env.isPC === 'true') {
             filename: '[name].[chunkhash].js'
         }
     });
+} else if (process.env.isAPP === 'true') {
+    webpackConfig = merge(webpackConfig, appConfig);
 } else {
     webpackConfig = merge(webpackConfig, pcConfig);
     webpackConfig = merge(webpackConfig, h5Config);
