@@ -43,13 +43,14 @@ export const viteClient = new ViteAPI(WS_RPC, () => {
     console.log('Connect success');
 });
 
+const FullNodeContractAddress = 'vite_a11faa6b72487054ac5fd85415e6e9dc871cae44def1923cb4';
 export const customContracts = {
     FullNodeStake: {
-        contractAddress: 'vite_cb32bcf771b2b871dbe33b1f8c24cf34c5483c9c94a851da72',
+        contractAddress: FullNodeContractAddress,
         abi: { 'inputs': [], 'name': 'stake', 'outputs': [], 'payable': true, 'type': 'function' }
     },
     FullNodeCancelStake: {
-        contractAddress: 'vite_cb32bcf771b2b871dbe33b1f8c24cf34c5483c9c94a851da72',
+        contractAddress: FullNodeContractAddress,
         abi: { 'inputs': [{ 'name': 'id', 'type': 'bytes32' }], 'name': 'cancelStake', 'payable': false, 'type': 'function' }
     }
 };
