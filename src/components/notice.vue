@@ -39,8 +39,13 @@ export default {
 
 .notice-wrapper {
     position: relative;
-    background: #fff;
-    box-shadow: 0 2px 48px 1px rgba(176, 192, 237, 0.42);
+    [data-theme="0"] & {
+        background: #fff;
+        box-shadow: 0 2px 48px 1px rgba(176, 192, 237, 0.42);
+    }
+    [data-theme="1"] & {
+        background: #18203A;
+    }
     border-radius: 2px;
     width: 360px;
     margin-bottom: 20px;
@@ -82,14 +87,14 @@ export default {
 
     .title {
         font-size: 14px;
-        color: #1d2024;
+        @include common_font_color();
         line-height: 24px;
     }
 
     .describe {
         font-size: 12px;
         @include font-family-normal();
-        color: #5e6875;
+        @include font_color_to_white(#5e6875);
         line-height: 28px;
     }
 }
