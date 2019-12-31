@@ -141,7 +141,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "~assets/scss/vars.scss";
+@import "../../components/stakingDetail.scss";
 
 .quota-detail {
     box-sizing: border-box;
