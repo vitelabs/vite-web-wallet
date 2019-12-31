@@ -681,12 +681,13 @@ $font-black: rgba(36, 39, 43, 0.8);
     .else-input-wrapper {
         position: relative;
         border-radius: 2px;
-        border: 1px solid rgba(212, 222, 231, 1);
         box-sizing: border-box;
         flex: 1;
         height: 40px;
         &.err {
-            border: 1px solid $red;
+            /deep/ .input-wrapper {
+                border: 1px solid $red;
+            }
         }
     }
 }
