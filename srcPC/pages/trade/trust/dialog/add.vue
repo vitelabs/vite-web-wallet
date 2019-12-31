@@ -20,7 +20,7 @@ block content
 </template>
 
 <script>
-import { throttle } from 'lodash';
+import throttle from 'lodash/throttle';
 import { wallet } from '@vite/vitejs';
 import PairItem from './pairItem';
 import SearchTips from 'uiKit/searchTips';

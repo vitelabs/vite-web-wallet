@@ -22,7 +22,7 @@
 </template>
 
 <script>
-import { debounce } from 'lodash';
+import debounce from 'lodash/debounce';
 import Search from 'components/search';
 import { addTokenDialog } from './dialog';
 import Checkbox from 'uiKit/checkbox';
