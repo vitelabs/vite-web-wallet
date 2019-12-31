@@ -72,27 +72,24 @@ export default {
     line-height: 28px;
     letter-spacing: 0.35px;
     font-size: 14px;
-    color: #5e6875;
-
+    @include font_color_to_white(#5e6875);
     .a-link {
-        color: #5e6875;
+        @include setting_common_color();
         margin-left: 20px;
         white-space: nowrap;
-
         &:first-child {
             margin-left: 0;
         }
     }
-
     .title {
         margin-right: 15px;
         opacity: 0.8;
         font-size: 14px;
         @include font-family-bold();
+        @include setting_common_color();
     }
-
     .link {
-        color: #118bff;
+        color: $blue-color-1;
     }
 }
 </style>

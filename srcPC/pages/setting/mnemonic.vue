@@ -108,7 +108,6 @@ export default {
 }
 
 .content {
-    background: #f3f6f9;
     [data-theme="0"] & {
         background: #f3f6f9;
         border: 1px solid #d4dee7;
@@ -119,7 +118,7 @@ export default {
     border-radius: 2px;
     padding: 10px 15px;
     font-size: 14px;
-    color: #5e6875;
+    @include setting_common_color();
     word-wrap: break-word;
 }
 </style>

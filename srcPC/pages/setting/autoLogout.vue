@@ -51,6 +51,6 @@ export default {
     font-size: 12px;
     font-weight: 400;
     margin-bottom: 10px;
-    color: #5E6875;
+    @include setting_common_color();
 }
 </style>
