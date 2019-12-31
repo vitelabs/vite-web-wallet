@@ -96,7 +96,9 @@ $up-font-color: $green;
             display: inline-block;
             width: 10px;
             height: 10px;
-            background: url('~assets/imgs/trade/favorite-tab.svg') no-repeat center;
+            margin: 0px 6px;
+            padding: 0;
+            @include background_common_img_suffix('favorite-tab', 'svg', 'png');
             &.active {
                 background: url('~assets/imgs/trade/favorite-active.svg') no-repeat center;
             }
@@ -192,8 +194,9 @@ $up-font-color: $green;
         left: 0;
         display: inline-block;
         width: 10px;
-        height: 100%;
-        background: url('~assets/imgs/trade/favorite.svg') no-repeat center left;
+        height: 10px;
+        margin: 4px 0;
+        @include background_common_img_suffix('favorite', 'svg', 'png');
         &.active {
             background: url('~assets/imgs/trade/favorite-active.svg') no-repeat center left;
         }

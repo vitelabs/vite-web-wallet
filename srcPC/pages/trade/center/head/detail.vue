@@ -126,7 +126,7 @@ import openUrl from 'utils/openUrl';
 import statistics from 'utils/statistics';
 import BigNumber from 'utils/bigNumber';
 import txPairInfo from './txPairInfo.vue';
-import operatorIcon from 'assets/imgs/operator_icon.svg';
+import operatorIcon from 'assets/imgs/operator.png';
 
 export default {
     components: { confirm, txPairInfo },
@@ -237,7 +237,9 @@ export default {
         margin-top: -8px;
         box-sizing: border-box;
         border-radius: 2px;
-        border: 1px solid rgba(212,222,231,1);
+        [data-theme="0"] & {
+            border: 1px solid rgba(212,222,231,1);
+        }
     }
     .tx-pair-list {
         display: flex;

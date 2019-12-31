@@ -5,3 +5,6 @@
     position: unset;
     width: 0;
 }
+.chart-page .chart-container {
+    border-color: #e5edf3;
+}

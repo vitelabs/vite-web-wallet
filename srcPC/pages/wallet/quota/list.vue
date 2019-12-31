@@ -6,7 +6,7 @@
             <div v-for="(item, i) in pledgeList" :key="i"
                  :slot="`${i}addrBefore`">
                 <span class="beneficial-addr">{{ item.showAddr }}</span>
-                <img v-if="item.beneficialAddr === address" class="beneficial-img" src='~assets/imgs/mine.svg'/>
+                <span v-if="item.beneficialAddr === address" class="beneficial-img"></span>
             </div>
 
             <span v-for="(item, i) in pledgeList" :key="i"
@@ -222,10 +222,13 @@ export default {
 }
 
 .beneficial-img {
+    display: inline-block;
     margin-left: 8px;
     margin-bottom: -2px;
     width: 12px;
     height: 12px;
+    background: url('~assets/imgs/owner.png');
+    background-size: 100% 100%;
 }
 
 .__second-title {

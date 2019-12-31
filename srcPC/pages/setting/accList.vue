@@ -236,14 +236,12 @@ export default {
         display: block;
         box-sizing: border-box;
         width: 16px;
-        height: 16px;
-        background: #fff;
-        @include common_border();
+        height: 14px;
         border-radius: 16px;
-
+        @include bg_color_1();
+        @include common_border();
         &.active {
-            background: url('~assets/imgs/presnet.svg') no-repeat center;
-            background-size: 16px 16px;
+            @include background_common_img_suffix('presnet', 'svg', 'png');
         }
     }
 }

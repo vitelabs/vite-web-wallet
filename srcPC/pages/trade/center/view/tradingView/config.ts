@@ -27,7 +27,16 @@ export const theme0Config = {
     overrides: {
         'mainSeriesProperties.style': 0,
         'symbolWatermarkProperties.color': '#944',
-        'volumePaneSize': 'medium'
+        'volumePaneSize': 'medium',
+        'mainSeriesProperties.candleStyle.upColor': '#00D764',
+        'mainSeriesProperties.candleStyle.downColor': '#E5494D',
+        'mainSeriesProperties.candleStyle.borderUpColor': '#00D764',
+        'mainSeriesProperties.candleStyle.borderDownColor': '#E5494D',
+        'paneProperties.vertGridProperties.style': 0,
+        'paneProperties.crossHairProperties.color': '#545F75',
+        'scalesProperties.lineColor': '#bdc1d1',
+        'scalesProperties.textColor': '#5e6875',
+        'scalesProperties.fontSize': 10
     },
     studies_overrides: {
         'bollinger bands.median.color': '#33FF88',
@@ -42,7 +51,17 @@ export const theme1Config = {
     overrides: {
         'mainSeriesProperties.style': 0,
         'symbolWatermarkProperties.color': '#E5494D',
-        'volumePaneSize': 'medium'
+        'volumePaneSize': 'medium',
+        'paneProperties.background': '#151C32',
+        'mainSeriesProperties.candleStyle.upColor': '#00D764',
+        'mainSeriesProperties.candleStyle.downColor': '#E5494D',
+        'mainSeriesProperties.candleStyle.borderUpColor': '#00D764',
+        'mainSeriesProperties.candleStyle.borderDownColor': '#E5494D',
+        'paneProperties.vertGridProperties.style': 0,
+        'paneProperties.crossHairProperties.color': '#1E2745',
+        'scalesProperties.textColor': '#545F75',
+        'scalesProperties.lineColor': '#01081F',
+        'scalesProperties.fontSize': 10
     },
     studies_overrides: {
         'bollinger bands.median.color': '#00D764',

@@ -5,7 +5,7 @@
         <div class="search-wrapper">
             <vite-input class="market-search-input" v-model="searchText"
                         :placeholder="$t('trade.search')">
-                <img slot="before" class="icon" src="~assets/imgs/search.svg"/>
+                <span slot="before" class="icon"></span>
             </vite-input>
 
             <div class="select-icon-wrapper __pointer" @click="toogleShowCol('updown')">
@@ -422,6 +422,7 @@ export default {
         width: 12px;
         height: 12px;
         margin: 4px 6px 4px 6px;
+        @include background_common_img_suffix('search', 'svg', 'png');
     }
     input {
         text-indent: 0;

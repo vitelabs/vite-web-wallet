@@ -250,7 +250,7 @@ export default {
     display: inline-block;
     width: 8px;
     height: 8px;
-    background: url('~assets/imgs/owner.svg');
+    background: url('~assets/imgs/owner.png');
     background-size: 100% 100%;
 }
 

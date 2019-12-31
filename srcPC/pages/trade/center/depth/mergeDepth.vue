@@ -67,27 +67,35 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '~assets/scss/vars.scss';
-
 .merge-depth-wrapper {
     position: relative;
     float: right;
     font-size: 12px;
     @include font-family-normal();
-    color: rgba(158,164,173,1);
     line-height: 16px;
     padding: 6px 6px 3px;
+    [data-theme="0"] & {
+        color: #9ea4ad;
+    }
+    [data-theme="1"] & {
+        color: $gray-color-2;
+    }
     .select-list {
         position: relative;
         display: inline-block;
-        background: rgba(255,255,255,1);
         border-radius: 2px;
-        border: 1px solid rgba(212,222,231,1);
         padding: 2px 4px;
         font-size: 11px;
-        color: rgba(115,118,122,1);
         line-height: 12px;
         min-width: 60px;
+        @include bg_color_1();
+        @include common_border();
+        [data-theme="0"] & {
+            color: #73767a;
+        }
+        [data-theme="1"] & {
+            color: #C0C6D3;
+        }
         &::before {
             content: '';
             float: right;
@@ -101,8 +109,10 @@ export default {
         }
         .list {
             position: absolute;
-            background: rgba(255,255,255,1);
-            box-shadow: 0px 5px 10px 0px rgba(176,192,237,0.69);
+            @include bg_color_1();
+            [data-theme="0"] & {
+                box-shadow: 0px 5px 10px 0px rgba(176,192,237,0.69);
+            }
             border-radius: 2px;
             z-index: 2;
             margin-top: 6px;

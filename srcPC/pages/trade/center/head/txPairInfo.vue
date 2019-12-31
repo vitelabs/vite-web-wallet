@@ -31,7 +31,7 @@
 
 <script>
 import tooltips from 'components/tooltips';
-import operatorIcon from 'assets/imgs/operator_icon.svg';
+import operatorIcon from 'assets/imgs/operator.png';
 import openUrl from 'utils/openUrl';
 
 export default {
@@ -102,6 +102,9 @@ export default {
         },
         operatorInfo() {
             return this.$store.state.exchangeTokens.operator;
+        },
+        theme() {
+            return this.$store.state.env.theme;
         },
         operatorIcon() {
             if (this.operatorInfo) {
@@ -236,7 +239,9 @@ export default {
             margin-right: 4px;
             box-sizing: border-box;
             border-radius: 2px;
-            border: 1px solid rgba(212,222,231,1);
+            [data-theme="0"] & {
+                border: 1px solid rgba(212,222,231,1);
+            }
         }
     }
 }
