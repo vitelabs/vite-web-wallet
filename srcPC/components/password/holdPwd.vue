@@ -33,8 +33,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "~assets/scss/vars.scss";
-
 .hold-pwd {
     line-height: 16px;
     margin-top: 12px;
@@ -48,13 +46,12 @@ export default {
         width: 15px;
         height: 15px;
         box-sizing: border-box;
-        background: #fff;
-        border: 1px solid #d4dee7;
+        @include bg_color_1();
+        @include common_border();
         border-radius: 15px;
         margin-right: 4px;
         &.active {
-            background: url('~assets/imgs/presnet.svg') no-repeat center;
-            background-size: 16px 16px;
+            @include background_common_img_suffix('presnet', 'svg', 'png');
         }
     }
 }

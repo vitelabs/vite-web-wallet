@@ -168,7 +168,7 @@ export default {
 
     .bold {
         @include font-family-bold();
-        font-weight: 600;
+        @include font_color_to_white(#5e6875);
     }
     .normal {
         font-weight: 400;
