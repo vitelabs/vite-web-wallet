@@ -1,7 +1,7 @@
 <template>
     <div class="index-layout-wrapper">
         <div class="header">
-            <img @click="goVX" class="header-logo __pointer" src="~assets/imgs/ViteLogo1.svg"/>
+            <span @click="goVX" class="header-logo __pointer"></span>
             <change-lang class="start change-lang __pointer"></change-lang>
         </div>
         <div class="confirm-wrapper">
@@ -29,7 +29,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "~assets/scss/vars.scss";
 @import "./start.scss";
 
 .index-layout-wrapper {
@@ -37,17 +36,21 @@ export default {
     width: 100%;
     height: 100%;
     overflow: auto;
-    animation: key-opacity 0.3s ease-in-out;
-    background: url(~assets/imgs/bg.svg) rgba(255, 255, 255, 0.1) no-repeat;
-    background-size: cover;
-    @keyframes key-opacity {
-        0% {
-            opacity: 0.1;
+    [data-theme="0"] & {
+        animation: key-opacity 0.3s ease-in-out;
+        background: url(~assets/imgs/bg.svg) rgba(255, 255, 255, 0.1) no-repeat;
+        background-size: cover;
+        @keyframes key-opacity {
+            0% {
+                opacity: 0.1;
+            }
+            100% {
+                opacity: 1;
+            }
         }
-
-        100% {
-            opacity: 1;
-        }
+    }
+    [data-theme="1"] & {
+        background: #F6F8F9;
     }
 
     .header {
@@ -55,11 +58,27 @@ export default {
         top: 0;
         left: 0;
         right: 0;
-        padding: 40px;
-
+        [data-theme="0"] & {
+            padding: 40px;
+        }
+        [data-theme="1"] & {
+            background: #fff;
+            padding: 14px;
+        }
         .header-logo {
             display: inline-block;
-            height: 50px;
+            [data-theme="0"] & {
+                height: 50px;
+                width: 152px;
+                background: url("~assets/imgs/ViteLogo1.svg");
+                background-size: 100% 100%;
+            }
+            [data-theme="1"] & {
+                width: 52px;
+                height: 52px;
+                background: url("~assets/imgs/logo.png");
+                background-size: 100% 100%;
+            }
         }
         .change-lang {
             float: right;

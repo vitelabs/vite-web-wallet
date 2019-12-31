@@ -63,7 +63,7 @@
                             </div>
                         </div>
 
-                        <account-item class="no-border-b"
+                        <account-item class="no-border"
                                       v-show="currAcc && currAcc.activeAddr"
                                       :account="currAcc"></account-item>
 
@@ -356,17 +356,24 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "~assets/scss/vars.scss";
 @import "../start.scss";
 
-.no-border-b {
-    border-bottom: none;
+.no-border {
+    border: none;
 }
 
 .login-wrapper {
     display: flex;
     flex-direction: column;
     align-items: center;
+    .__title {
+        [data-theme="0"] & {
+            color: #fff;
+        }
+        [data-theme="1"] & {
+            color: #171C34;
+        }
+    }
     .__btn {
         position: relative;
         &.__btn_input {
