@@ -90,7 +90,7 @@ async function webSendTx({ methodName, params, config, privateKey }) {
         if (!powInstance || !powInstance.isShow) {
             return;
         }
-        powInstance.gotoFinish();
+        powInstance.stop();
         throw err;
     }
 }
