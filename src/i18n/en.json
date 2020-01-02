@@ -146,8 +146,8 @@
         "ResponseFail": "Transfer",
         "RefundByContractRequest": "Transfer",
         "GenesisResponse": "Genesis",
-        "FullNodeStake": "全节点抵押",
-        "FullNodeCancelStake": "取回全节点抵押"
+        "FullNodeStake": "Stake for Full Node",
+        "FullNodeCancelStake": "Retrieve Full Node Stakes"
     },
     "btn": {
         "cancel": "Cancel",

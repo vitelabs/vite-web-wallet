@@ -1,7 +1,5 @@
 <template>
     <div>
-        <div class="__title">File</div>
-
         <div ref="fileArea" class="file-drag" @drop="dragFile">
             {{ $t('keystore.dragDrop.text') }}
             <span class="msg __err_msg" v-show="errMsg" >
@@ -93,7 +91,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "~assets/scss/vars.scss";
 @import "./common.scss";
 
 .hint {

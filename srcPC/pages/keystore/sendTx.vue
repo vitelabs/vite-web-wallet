@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div class="__btn __btn_input">
+        <div class="__btn_input">
             <input :placeholder="'toAddress'" v-model="toAddress" />
         </div>
 
@@ -91,4 +91,7 @@ export default {
 
 <style lang="scss" scoped>
 @import "./common.scss";
+.__btn_input {
+    margin-top: 20px;
+}
 </style>
