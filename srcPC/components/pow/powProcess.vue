@@ -99,6 +99,12 @@ export default {
                     res();
                 };
             });
+        },
+
+        stop() {
+            this.clearLimitTimeout();
+            this.isShow = false;
+            this.isTimeUp = true;
         }
     }
 };
