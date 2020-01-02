@@ -1,7 +1,11 @@
-@import "~assets/scss/vars.scss";
-
 .__btn {
     margin-top: 20px;
+    background: $blue-color-1;
+    color: #fff;
+    height: 34px;
+    line-height: 34px;
+    text-align: center;
+    border-radius: 2px;
 }
 .__btn_input_active {
     border: 1px solid #d4dee7;
@@ -14,9 +18,16 @@
 }
 .__btn_input {
     border: 1px solid #d4dee7;
+    padding: 10px 20px;
+    input {
+        width: 100%;
+    }
 }
 .__title {
     color: #000;
+    text-align: center;
+    padding: 20px;
+    @include font-family-bold();
 }
 .__wrapper {
     position: absolute;

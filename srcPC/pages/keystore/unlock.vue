@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div class="__btn __btn_input">
+        <div class="__btn_input">
             <input autofocus :placeholder="$t('create.input')"
                    v-model="password" :type="'password'" />
         </div>
@@ -49,4 +49,7 @@ export default {
 
 <style lang="scss" scoped>
 @import "./common.scss";
+.__btn_input {
+    margin-top: 20px;
+}
 </style>
