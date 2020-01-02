@@ -19,7 +19,7 @@ block content
     div.ex-center-loading(v-show="isLoading")
         loading(loadingType="dot")
     div(v-show="!isLoading")
-        .__input_row.__unuse_input.top {{ addrErr || address }}
+        .__input_row.__unuse_input.top.more {{ addrErr || address }}
         .qrcode-container {{ $t('tokenCard.charge.codeTips',{tokenSymbol:getTokenSymbol(token)}) }}
             qrcode(:text="addressQrcode" :options="qrOptions" class="qrcode-container__content")
         .__row(v-if="!!labelName&&!!labelValue")
@@ -132,6 +132,10 @@ export default {
 .red {
     color: $red-color;
     margin-left: 4px;
+}
+.__input_row.more {
+    height: auto;
+    word-break: break-word;
 }
 
 .qrcode-container {
