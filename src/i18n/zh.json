@@ -153,7 +153,9 @@
         "Response": "转账",
         "ResponseFail": "转账",
         "RefundByContractRequest": "转账",
-        "GenesisResponse": "Genesis"
+        "GenesisResponse": "Genesis",
+        "FullNodeStake": "全节点抵押",
+        "FullNodeCancelStake": "取回全节点抵押"
     },
     "btn": {
         "cancel": "取消",
