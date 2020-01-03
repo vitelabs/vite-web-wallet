@@ -197,10 +197,13 @@ export default {
             width: 16px;
             height: 16px;
             margin-left: 6px;
+            margin-bottom: 4px;
         }
         .mining-mul {
             color: $blue-color-1;
-            margin-left: 4px;
+            margin-left: 2px;
+            @include font-normal();
+            font-size: 11px;
         }
     }
     .gate {
