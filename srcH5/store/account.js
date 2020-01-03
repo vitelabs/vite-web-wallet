@@ -70,12 +70,12 @@ const getters = {
 
             const tokenInfo = item.tokenInfo;
             const decimals = tokenInfo.decimals;
-            const balance = bigNumber.toBasic(item.totalAmount, decimals);
+            const balance = bigNumber.toBasic(item.balance, decimals);
 
             balanceInfo[tokenId] = {
                 ...tokenInfo,
                 balance: balance,
-                totalAmount: item.totalAmount
+                totalAmount: item.balance
             };
         }
         return balanceInfo;
