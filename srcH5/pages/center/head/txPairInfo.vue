@@ -15,6 +15,7 @@
                 <img v-show="isMining === 1" class="mining" src="~assets/imgs/trade_mining.svg"/>
                 <img v-show="isMining === 2" class="mining" src="~assets/imgs/order_mining.svg"/>
                 <img v-show="isMining === 3" class="mining" src="~assets/imgs/mining.svg"/>
+                <span class="mining-mul">{{ orderMiningMultiples }}</span>
                 <img v-if="isSupportSwitch" @click="switchTxPair" class="mining" src="~h5Assets/imgs/down.svg"/>
             </div>
             <div class="gate" @click="_showDetail('operator')">
@@ -55,6 +56,9 @@ export default {
         },
         isMining() {
             return this.$store.getters.activeTxPairIsMining;
+        },
+        orderMiningMultiples() {
+            return this.$store.getters.activeTxPairOrderMiningMultiples;
         },
         closeMarket() {
             return this.$store.state.exchangeMarket.marketClosed;
@@ -193,6 +197,10 @@ export default {
             width: 16px;
             height: 16px;
             margin-left: 6px;
+        }
+        .mining-mul {
+            color: $blue-color-1;
+            margin-left: 4px;
         }
     }
     .gate {
