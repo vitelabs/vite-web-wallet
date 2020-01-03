@@ -12,10 +12,13 @@
                     <span class="favorite-icon" :class="{'active': !!favoritePairs[txPair.symbol]}"
                           @click.stop="setFavorite(txPair)"></span>
                     <span class="describe">
-                        {{ getTxPairShowSymbol(txPair) }}
-                        <img v-show="isMining(txPair) === 1" src="~assets/imgs/trade_mining.svg"/>
-                        <img v-show="isMining(txPair) === 2" src="~assets/imgs/order_mining.svg"/>
-                        <img v-show="isMining(txPair) === 3" src="~assets/imgs/mining.svg"/>
+                        <span class="des-text __ellipsis">{{ getTxPairShowSymbol(txPair) }}</span>
+                        <span class="mining-icon">
+                            <img v-show="isMining(txPair) === 1" src="~assets/imgs/trade_mining.svg"/>
+                            <img v-show="isMining(txPair) === 2" src="~assets/imgs/order_mining.svg"/>
+                            <img v-show="isMining(txPair) === 3" src="~assets/imgs/mining.svg"/>
+                            {{ miningMultiples(txPair) }}
+                        </span>
                     </span>
                 </span>
                 <span class="__center-tb-item">
@@ -80,6 +83,9 @@ export default {
         orderMiningSymbols() {
             return this.$store.state.exchangeMine.orderMiningSymbols;
         },
+        orderMiningMultiples() {
+            return this.$store.state.exchangeMine.orderMiningMultiples;
+        },
         transLimit() {
             return this.$store.getters.exCategoryTransLimit;
         },
@@ -134,6 +140,10 @@ export default {
             const isTradeMining = this.isTradeMining(item) ? 1 : 0;
             const isOrderMining = this.isOrderMining(item) ? 2 : 0;
             return isTradeMining + isOrderMining;
+        },
+        miningMultiples(item) {
+            const mul = this.orderMiningMultiples[item.symbol];
+            return mul ? `X${ mul }` : '';
         },
         isTradeMining(item) {
             return this.tradeMiningSymbols.indexOf(item.symbol) !== -1;
@@ -313,12 +323,19 @@ export default {
         position: relative;
     }
     .describe {
-        display: inline-block;
+        display: flex;
         width: 80px;
+        box-sizing: border-box;
+        .des-text {
+            flex: 1;
+        }
+        .mining-icon {
+            color: $blue-color-1;
+        }
         img {
-            margin-bottom: -2px;
             width: 12px;
             height: 12px;
+            margin-bottom: -2px;
         }
     }
     &.active {
