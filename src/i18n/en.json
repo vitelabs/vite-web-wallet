@@ -145,7 +145,9 @@
         "Response": "Transfer",
         "ResponseFail": "Transfer",
         "RefundByContractRequest": "Transfer",
-        "GenesisResponse": "Genesis"
+        "GenesisResponse": "Genesis",
+        "FullNodeStake": "Stake for Full Node",
+        "FullNodeCancelStake": "Retrieve Full Node Stakes"
     },
     "btn": {
         "cancel": "Cancel",
@@ -603,31 +605,31 @@
         "sum": "Amount"
     },
     "walletFullNode": {
-        "title": "全节点",
+        "title": "Full Nodes",
         "help": {
-            "title": "关于全节点",
-            "t1": "名词解释",
-            "txt1": "[注册节点数]  使用当前VITE地址注册的节点数量",
-            "txt2": "[在线节点数]  使用当前地址注册，且目前有效在线的节点数量",
-            "txt3": "[有效奖励节点数]  发送节点奖励的节点数量",
-            "t2": "注册全节点时候，多个全节点可使用同一个地址，但需要保证每个节点最少抵押10000vite，如果抵押金额/10000的整数大于等于在线节点数，则在线节点数全部有效，如果抵押金额/10000的整数小于在线节点数，则视有效节点数为（抵押金额/10000的整数部分），最终都将按照有效节点数发送节点奖励。",
-            "t3": "全节点投票奖励不收节点数影响，按照抵押金额发送投票奖励。"
+            "title": "About",
+            "t1": "Glossary",
+            "txt1": "[Number of Registered Nodes]  The number of full nodes registered with the current address",
+            "txt2": "[Number of Active Nodes]  The number of active full nodes registered with the current address",
+            "txt3": "[Number of Rewarding nodes]  Number of nodes being rewarded",
+            "t2": "Multiple Full nodes can be registered with the same address, but must be staked individually at least 10,000 VITE each; When calculating Active Node Reward, if staking amount / 10000 yields a whole number that is greater than or equal to the number of active nodes, all active nodes will be rewarded; If staking amount / 10000 yields a whole number that is less than the number of active nodes, the number of nodes being rewarded equals to the whole number.",
+            "t3": "Calculation of voting rewards does not depend on the number of nodes, but the staking amount."
         },               
-        "confirmText": "Make sure to stake {amount} VITE to obtain quota, you cannot withdraw until about {days} days after staking comes into effect.",     
+        "confirmText": "Confirm to stake {amount} VITE for quota, staking can be retrieved after {days} days",     
         "addQuota": {
             "address": "Staking Address",
             "stakeDays": "Staking Period",
-            "placeholder": "最少抵押{min}VITE"
+            "placeholder": "Minimum Stake {min} VITE"
         },
         "quotaContent": {
-            "onlineReward": "节点在线奖励",
-            "voteReward": "节点投票奖励",
-            "yesterday": "昨日",
-            "all": "累计 {num} VITE",
-            "nodeInfo": "当前地址节点信息",
-            "onlineNodes": "在线节点数",
-            "rewardNodes": "发放奖励节点数",
-            "stakeAmount": "抵押节点金额"
+            "onlineReward": "Active Node Reward",
+            "voteReward": "Voting Reward",
+            "yesterday": "yesterday",
+            "all": "Accumulated VITE: {num}",
+            "nodeInfo": "Node Information",
+            "onlineNodes": "Active Nodes",
+            "rewardNodes": "Rewarding Nodes",
+            "stakeAmount": "Node Staking"
         }
     },
     "walletSBP": {

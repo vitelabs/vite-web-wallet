@@ -19,6 +19,7 @@
                 <img v-show="isMining === 1" src="~assets/imgs/trade_mining.svg"/>
                 <img v-show="isMining === 2" src="~assets/imgs/order_mining.svg"/>
                 <img v-show="isMining === 3" src="~assets/imgs/mining.svg"/>
+                {{ orderMiningMultiples }}
                 <tooltips class="tips" :content="supportMining"></tooltips>
             </span>
             <span class="gate" @click="_showDetail('operator')">
@@ -61,6 +62,9 @@ export default {
         },
         isMining() {
             return this.$store.getters.activeTxPairIsMining;
+        },
+        orderMiningMultiples() {
+            return this.$store.getters.activeTxPairOrderMiningMultiples;
         },
         closeMarket() {
             return this.$store.state.exchangeMarket.marketClosed;
@@ -211,6 +215,7 @@ export default {
     }
     .mining {
         position: relative;
+        color: $blue-color-1;
         .tips {
             display: none;
             @include font-family-normal();
@@ -218,6 +223,7 @@ export default {
         &:hover {
             .tips {
                 display: inline-block;
+                @include font_color_1();
             }
         }
         img {
