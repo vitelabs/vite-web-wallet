@@ -29,7 +29,7 @@ export const ViteXAPIV2 = new DNSClient({
     baseUrl: `${ process.env.NODE_ENV === 'production' ? '' : '/test' }/api/v2`
 });
 
-export const RewardAPI = new Client('api/', viteXAPIAfterRes);
+export const RewardAPI = new Client(`${ process.env.rewardApiServer }api/`, viteXAPIAfterRes);
 
 const url = setWatch('gViteAPI', url => {
     WS_RPC.disconnect();
