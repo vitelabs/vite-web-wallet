@@ -43,7 +43,7 @@ export const viteClient = new ViteAPI(WS_RPC, () => {
     console.log('Connect success');
 });
 
-const FullNodeContractAddress = 'vite_a11faa6b72487054ac5fd85415e6e9dc871cae44def1923cb4';
+const FullNodeContractAddress = 'vite_b3b6335ef23ef3826cff125b81efd158dac3c2209748e0601a';
 export const customContracts = {
     FullNodeStake: {
         contractAddress: FullNodeContractAddress,
