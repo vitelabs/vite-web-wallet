@@ -58,8 +58,8 @@ const dnsHostServer = {
 };
 const rewardApiServer = {
     production: '\'https://reward.vite.net/\'',
-    test: '',
-    dev: ''
+    test: '\'https://reward.vite.net/\'',
+    dev: '\'https://reward.vite.net/\''
 };
 
 const contractAddress = {
