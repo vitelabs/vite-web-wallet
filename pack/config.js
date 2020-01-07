@@ -57,7 +57,7 @@ const dnsHostServer = {
     dev: '\'\''
 };
 const rewardApiServer = {
-    production: '\'https://reward.vite.net/\'',
+    production: '"https://vitex.vite.net"',
     test: '',
     dev: ''
 };
