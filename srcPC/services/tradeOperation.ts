@@ -87,7 +87,11 @@ export function getProxyAblePairs(): Promise<IProxyPair[]> {
 export function stakeForVIP({ actionType }) {
     return sendTx({
         methodName: 'dexStakeForVIP',
-        data: { actionType }
+        data: { actionType },
+        vbExtends: {
+            type: 'dexFundPledgeForVip',
+            amount: '10000 VITE'
+        }
     });
 }
 
