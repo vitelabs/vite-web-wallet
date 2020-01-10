@@ -10,9 +10,9 @@ block content
         .__row_t {{$t("tokenCard.withdraw.labels.address")}}
             .__err {{isAddrCorrect?'':$t("tokenCard.withdraw.addressErr")}}
         vite-input(v-model="withdrawAddr" :placeholder="$t('tokenCard.withdraw.addressPlaceholder', {token: token.tokenSymbol === 'USDT' && token.index === 0 ? 'USDT(ERC20)' : ''})")
-    .__row(v-if="type===1")
-        .__row_t {{labelName}}
-        vite-input(v-model="labelValue" :placeholder="$t('tokenCard.withdraw.labelPlaceholder',{labelName})")
+    .__row(v-if="showLabel")
+        .__row_t {{info.labelName}}
+        vite-input(v-model="labelValue" :placeholder="$t('tokenCard.withdraw.labelPlaceholder',{labelName:info.labelName})")
     .__row
         .__row_t {{$t("tokenCard.withdraw.labels.amount")}}
             .__err {{ammountErr}}
@@ -30,7 +30,7 @@ block content
 </template>
 
 <script>
-import { verifyAddr, getWithdrawInfo, getWithdrawFee, withdraw, getDepositInfo, getMetaInfo } from 'pcServices/gate';
+import { verifyAddr, getWithdrawInfo, getWithdrawFee, withdraw, getMetaInfo } from 'pcServices/gate';
 import debounce from 'lodash/debounce';
 import { getValidBalance } from 'pcUtils/validations';
 import bigNumber from 'utils/bigNumber';
@@ -55,7 +55,6 @@ export default {
                 'gatewayAddress': ''
             },
             type: -1,
-            labelName: '',
             labelValue: '',
             withdrawAddr: '',
             withdrawAmountMin: '',
@@ -72,15 +71,16 @@ export default {
         };
     },
     beforeMount() {
-        Promise.all([ getDepositInfo({ tokenId: this.token.tokenId, addr: this.defaultAddr }, this.token.gateInfo.url).then(res => {
-            this.labelName = res.labelName;
-        }),
-        getMetaInfo({ tokenId: this.token.tokenId }, this.token.gateInfo.url).then(res => {
-            this.type = res.type;
-        }),
-        getWithdrawInfo({ walletAddress: this.defaultAddr, tokenId: this.token.tokenId }, this.token.gateInfo.url).then(data => (this.info = data)) ]).then(() => (this.loading = false));
+        Promise.all([
+            getMetaInfo({ tokenId: this.token.tokenId }, this.token.gateInfo.url).then(res => {
+                this.type = res.type;
+            }),
+            getWithdrawInfo({ walletAddress: this.defaultAddr, tokenId: this.token.tokenId }, this.token.gateInfo.url).then(data => (this.info = data)) ]).then(() => (this.loading = false));
     },
     computed: {
+        showLabel() {
+            return this.type === 1 && this.info.labelName;
+        },
         fee() {
             return bigNumber.toBasic(this.feeMin, this.token.decimals);
         },
@@ -107,7 +107,7 @@ export default {
                 return;
             }
             this.verifingAddr = true;
-            verifyAddr({ tokenId: this.token.tokenId, withdrawAddress: val, label: this.type === 1 ? this.labelValue : undefined }, this.token.gateInfo.url).then(d => {
+            verifyAddr({ tokenId: this.token.tokenId, withdrawAddress: val, label: this.showLabel ? this.labelValue : undefined }, this.token.gateInfo.url).then(d => {
                 this.isAddrCorrect = d.isValidAddress;
                 this.verifingAddr = false;
             });
@@ -118,7 +118,7 @@ export default {
                 return;
             }
             this.verifingAddr = true;
-            verifyAddr({ tokenId: this.token.tokenId, withdrawAddress: this.withdrawAddr, label: this.type === 1 ? val : undefined }, this.token.gateInfo.url).then(d => {
+            verifyAddr({ tokenId: this.token.tokenId, withdrawAddress: this.withdrawAddr, label: this.showLabel ? val : undefined }, this.token.gateInfo.url).then(d => {
                 this.isAddrCorrect = d.isValidAddress;
                 this.verifingAddr = false;
             });
@@ -169,7 +169,7 @@ export default {
         },
         inspector: execWithValid(function () {
             return new Promise((res, rej) => {
-                withdraw({ fee: this.feeMin, amount: bigNumber.plus(this.withdrawAmountMin || bigNumber.toMin(this.withdrawAmount, this.token.decimals), this.feeMin, 0), withdrawAddress: this.withdrawAddr, gateAddr: this.info.gatewayAddress, tokenId: this.token.tokenId, labelValue: this.labelValue, type: this.type, labelName: this.labelName }, this.token.gateInfo.url)
+                withdraw({ fee: this.feeMin, amount: bigNumber.plus(this.withdrawAmountMin || bigNumber.toMin(this.withdrawAmount, this.token.decimals), this.feeMin, 0), withdrawAddress: this.withdrawAddr, gateAddr: this.info.gatewayAddress, tokenId: this.token.tokenId, labelValue: this.labelValue, type: this.type, labelName: this.info.labelName }, this.token.gateInfo.url)
                     .then(d => {
                         this.$toast(this.$t('tokenCard.withdraw.successTips'));
                         res(d);
