@@ -22,12 +22,12 @@ block content
         .__input_row.__unuse_input.top.more {{ addrErr || address }}
         .qrcode-container {{ $t('tokenCard.charge.codeTips',{tokenSymbol:getTokenSymbol(token)}) }}
             qrcode(:text="addressQrcode" :options="qrOptions" class="qrcode-container__content")
-        .__row(v-if="!!labelName&&!!labelValue")
+        .__row(v-if="showLabel")
             span.__row_t {{labelName}}
                 span.red {{ $t('tokenCard.charge.labelTips',{labelName}) }}
             img.copy.__pointer(src="~assets/imgs/copy_default.svg" @click="copyLabel")
-        .__input_row.__unuse_input.top(v-if="!!labelName") {{ labelValue }}
-        .qrcode-container(v-if="!!labelName") {{ $t('tokenCard.charge.labelCodeTips',{labelName}) }}
+        .__input_row.__unuse_input.top(v-if="showLabel") {{ labelValue }}
+        .qrcode-container(v-if="showLabel") {{ $t('tokenCard.charge.labelCodeTips',{labelName}) }}
             qrcode(:text="labelValue" :options="qrOptions" class="qrcode-container__content")
 </template>
 
@@ -36,7 +36,7 @@ import loading from 'components/loading';
 import qrcode from 'components/qrcode';
 import copy from 'utils/copy';
 import { modes } from 'qrcode.es';
-import { getDepositInfo } from 'pcServices/gate';
+import { getDepositInfo, getMetaInfo } from 'pcServices/gate';
 import bigNumber from 'utils/bigNumber';
 
 export default {
@@ -49,20 +49,21 @@ export default {
     },
     beforeMount() {
         this.isLoading = true;
-        getDepositInfo({ addr: this.defaultAddr, tokenId: this.token.tokenId },
-            this.token.gateInfo.url)
-            .then(res => {
-                this.isLoading = false;
-                this.address = res.depositAddress;
-                this.minimumDepositAmountMin = res.minimumDepositAmount;
-                this.labelName = res.labelName;
-                this.labelValue = res.label;
-                this.confirmationCount = res.confirmationCount;
-            })
-            .catch(() => {
-                this.isLoading = false;
-                this.addrErr = this.$t('tokenCard.charge.addrErr');
-            });
+        Promise.all([
+            getMetaInfo({ tokenId: this.token.tokenId }, this.token.gateInfo.url).then(res => {
+                this.type = res.type;
+            }),
+            getDepositInfo({ addr: this.defaultAddr, tokenId: this.token.tokenId },
+                this.token.gateInfo.url)
+                .then(res => {
+                    this.address = res.depositAddress;
+                    this.minimumDepositAmountMin = res.minimumDepositAmount;
+                    this.labelName = res.labelName;
+                    this.labelValue = res.label;
+                    this.confirmationCount = res.confirmationCount;
+                }) ]).catch(() => (this.addrErr = this.$t('tokenCard.charge.addrErr'))).finally(() => {
+            this.isLoading = false;
+        });
     },
     data() {
         return {
@@ -73,12 +74,16 @@ export default {
             amount: 0,
             qrOptions: { size: 124, mode: modes.NORMAL },
             dTitle: this.$t('tokenCard.charge.title'),
+            type: -1,
             addrErr: '',
             labelName: '',
             labelValue: ''
         };
     },
     computed: {
+        showLabel() {
+            return this.type === 1 && !!this.labelName && !!this.labelValue;
+        },
         minimumDepositAmount() {
             return bigNumber.toBasic(this.minimumDepositAmountMin,
                 this.token.decimals);
