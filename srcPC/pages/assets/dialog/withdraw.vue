@@ -11,8 +11,8 @@ block content
             .__err {{isAddrCorrect?'':$t("tokenCard.withdraw.addressErr")}}
         vite-input(v-model="withdrawAddr" :placeholder="$t('tokenCard.withdraw.addressPlaceholder', {token: token.tokenSymbol === 'USDT' && token.index === 0 ? 'USDT(ERC20)' : ''})")
     .__row(v-if="showLabel")
-        .__row_t {{labelName}}
-        vite-input(v-model="labelValue" :placeholder="$t('tokenCard.withdraw.labelPlaceholder',{labelName})")
+        .__row_t {{info.labelName}}
+        vite-input(v-model="labelValue" :placeholder="$t('tokenCard.withdraw.labelPlaceholder',{labelName:info.labelName})")
     .__row
         .__row_t {{$t("tokenCard.withdraw.labels.amount")}}
             .__err {{ammountErr}}

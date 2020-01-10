@@ -62,7 +62,7 @@ export default {
                     this.labelValue = res.label;
                     this.confirmationCount = res.confirmationCount;
                 }) ]).catch(() => (this.addrErr = this.$t('tokenCard.charge.addrErr'))).finally(() => {
-            this.loading = false;
+            this.isLoading = false;
         });
     },
     data() {
