@@ -75,7 +75,7 @@ export default {
                 methodName: 'cancelQuotaStake_V2',
                 data: {
                     // beneficiaryAddress: this.address,
-                    beneficiaryAddress: this.activeItem.addr,
+                    beneficiaryAddress: this.activeItem.beneficialAddr,
                     amount: this.activeItem.amount
                 }
             }).then(() => {
