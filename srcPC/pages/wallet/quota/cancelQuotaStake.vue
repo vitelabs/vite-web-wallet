@@ -71,6 +71,7 @@ export default {
             this.cancelQuotaStake();
         },
         cancelQuotaStakeV2() {
+            console.log('cancelQuotaStakeV2', this.activeItem);
             sendTx({
                 methodName: 'cancelQuotaStake_V2',
                 data: {
