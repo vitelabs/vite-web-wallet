@@ -66,6 +66,7 @@ export default {
 
             if (!this.activeItem.rawData.id) {
                 this.cancelQuotaStakeV2();
+                return;
             }
             this.cancelQuotaStake();
         },
@@ -73,7 +74,8 @@ export default {
             sendTx({
                 methodName: 'cancelQuotaStake_V2',
                 data: {
-                    beneficiaryAddress: this.address,
+                    // beneficiaryAddress: this.address,
+                    beneficiaryAddress: this.activeItem.addr,
                     amount: this.activeItem.amount
                 }
             }).then(() => {
