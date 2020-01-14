@@ -4,6 +4,7 @@ dist
 distH5
 distAPP
 static
+!staticPages/**/static
 .eslintcache
 .idea
 .vscode
