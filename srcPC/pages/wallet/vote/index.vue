@@ -147,7 +147,7 @@ export default {
                 data.voteStatusText = this.$t('walletVote.section1.voteStatusMap')[data.voteStatus];
 
                 // Tans
-                data.voteNum = BigNumber.toBasic(data.balance, Vite_Token_Info.decimals) || this.balance || 0;
+                data.voteNum = BigNumber.toBasic(data.votes, Vite_Token_Info.decimals) || this.balance || 0;
                 data.operate = this.$t('walletVote.section1.operateBtn');
 
                 return data;
