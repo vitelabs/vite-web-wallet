@@ -1175,7 +1175,7 @@
         "txTitle": "交易挖矿总收益",
         "quotaTitle": "抵押挖矿总收益",
         "addHint1": "分红需VITE锁仓在交易所内，且锁仓金额大于10",
-        "addHint2": "提交锁仓VITE后立即生效，可参与最近一次挖矿",
+        "addHint2": "提交锁仓VITE后立即生效，三天后可取回",
         "addHint3": "解锁需要经过完整的7个周期（7天）后释放",
         "withdrawHint1": "取回后，您将无法再挖矿VX",
         "withdrawHint2": "取回需约7天时间到账",
