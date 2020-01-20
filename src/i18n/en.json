@@ -1171,7 +1171,7 @@
         "txTitle": "Trading as Mining Total Income",
         "quotaTitle": "Staking as Mining Total Income",
         "addHint1": "A minimum of 10 VX must be staked to receive dividends",
-        "addHint2": "Submission of staking request allows for dividends starting the nearest distribution",
+        "addHint2": "VITE Staking will be effective immediately after submission. Staking can be retrieved after 3 days",
         "addHint3": "Staked amount will be released after the 7-day waiting period",
         "withdrawHint1": "You will no longer be able to mining VX after retrieving",
         "withdrawHint2": "It takes about 7 days to retrieve",
