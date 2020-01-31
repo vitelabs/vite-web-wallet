@@ -1,7 +1,7 @@
 const urlLibs = require('url');
 
 const protocols = [ 'http:', 'https:' ];
-const middlePage = 'https://middlejump.netlify.com/';
+// const middlePage = 'https://middlejump.netlify.com/';
 
 export default function (url) {
     const urlRes = urlLibs.parse(url);
@@ -9,6 +9,6 @@ export default function (url) {
         return;
     }
 
-    window.open(`${ middlePage }?target=${ encodeURIComponent(urlRes.href) }`);
+    window.open(urlRes.href);
+    // window.open(`${ middlePage }?target=${ encodeURIComponent(urlRes.href) }`);
 }
-
