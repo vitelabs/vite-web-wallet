@@ -204,8 +204,8 @@ const getters = {
             const walletAsset = rate ? bigNumber.multi(bigNumber.toBasic(totalAmount || 0, decimals), rate) : 0;
             const totalAsset = bigNumber.plus(totalExAsset, walletAsset);
             const rateBtc = rootState.exchangeRate.rateMap[i] && rootState.exchangeRate.rateMap[i]['btcRate'];
-            const totalExAssetBtc = rateBtc ? bigNumber.multi(bigNumber.toBasic(totalExAmount || 0, decimals), rateBtc) : 0;
-            const walletAssetBtc = rateBtc ? bigNumber.multi(bigNumber.toBasic(totalAmount || 0, decimals), rateBtc) : 0;
+            const totalExAssetBtc = rateBtc ? ((tokenSymbol === 'BTC') ? bigNumber.toBasic(totalExAmount || 0, decimals) : bigNumber.multi(bigNumber.toBasic(totalExAmount || 0, decimals), rateBtc)) : 0;
+            const walletAssetBtc = rateBtc ? ((tokenSymbol === 'BTC') ? bigNumber.toBasic(totalAmount || 0, decimals) : bigNumber.multi(bigNumber.toBasic(totalAmount || 0, decimals), rateBtc)) : 0;
             const totalAssetBtc = bigNumber.plus(totalExAssetBtc, walletAssetBtc);
             return {
                 totalExAssetBtc,
