@@ -1,6 +1,7 @@
 import { getAccountQuota, getAccountPledgeList } from 'services/viteServer';
 
 const pageCount = 50;
+const quotaPerUT = 21000;
 
 let lastFetchTime = null;
 let lastFetchQuotaTime = null;
@@ -27,8 +28,8 @@ const mutations = {
         state.pledgeList = payload.stakeList || [];
     },
     commitQuota(state, payload) {
-        state.quotaAmount = payload.stakeAmount;
-        state.pledgeTransNum = payload.currentQuota;
+        state.quotaAmount = payload.currentQuota;
+        state.pledgeTransNum = payload.currentQuota / quotaPerUT;
     },
     commitClearPledge(state) {
         // Amount data
