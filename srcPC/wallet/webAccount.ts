@@ -231,7 +231,8 @@ export class WebAccount {
 
             this.activeAccount = {
                 isBifrost: false,
-                address: this.activeAddr
+                address: this.activeAddr,
+                isSeparateKey: false
             };
             return;
         }

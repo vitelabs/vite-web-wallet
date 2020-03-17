@@ -486,6 +486,31 @@
             },
             "accountName":"ViteConnect 地址"
         },
+        "ledger": {
+            "title": "Ledger Device",
+            "accountName": "Ledger Wallet",
+            "start": {
+                "title": "Connect your hardware wallet here by following the on-screen instructions"
+            },
+            "connectWithUSB": "Connect with USB",
+            "connectWithBlu": "Connect with Bluetooth",
+            "connectLedger": "Connect to Ledger",
+            "connectError": "连接错误，请确保在Ledger上已打开Vite App软件！",
+            "connect": {
+                "title": "地址选择",
+                "tips": "请从以下地址中选择一个地址：",
+                "selectConnectType": "请选择 Ledger 硬件的连接方式："
+            },
+            "addressSelect": {
+                "index": "Index",
+                "address": "地址",
+                "balance": "余额",
+                "unreceived": "待接收余额",
+                "nextPage": "下一页",
+                "prePage": "上一页",
+                "confirm": "确认"
+            }
+        },
         "invite":{
             "inviteTitle":"邀请好友",
             "receiveInviteTitle":"接受邀请",

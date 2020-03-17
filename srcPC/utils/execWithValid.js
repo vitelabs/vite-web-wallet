@@ -1,10 +1,16 @@
 import { StatusMap, getCurrHDAcc, getActiveAcc } from 'wallet';
 import { pwdConfirm } from 'pcComponents/password/index.js';
-import { vbConnectDialog } from 'pcComponents/dialog';
+import { vbConnectDialog, hwAddressSelectDialog } from 'pcComponents/dialog';
 
 export function execWithValid(funcName, noActive) {
     return function (...args) {
         const currHDACC = getCurrHDAcc();
+
+        if (currHDACC && currHDACC.isHardware) {
+            hwAddressSelectDialog();
+            return Promise.reject({ error: { code: 12001 } });
+        }
+
         if (currHDACC.status === StatusMap.UNLOCK) {
             return funcName.call(this, ...args);
         }

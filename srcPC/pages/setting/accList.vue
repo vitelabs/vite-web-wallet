@@ -24,14 +24,14 @@
                             <div class="__ellipsis">{{ addrObj.address }}</div>
                         </div>
                         <img @click.stop="startRename(addrObj.address, index)" class="icon __pointer" :class="{
-                            'not-allowed': !isLogin&&currHDAcc.isBifrost
+                            'not-allowed': !isLogin&&currHDAcc.isSeparateKey
                         }" src="~assets/imgs/edit_default.svg"/>
                         <img @click.stop="copy(addrObj.address)" class="icon __pointer" src="~assets/imgs/copy_default.svg"/>
                     </div>
                 </div>
             </div>
 
-            <div v-show="isLogin && addrList.length < 10&&!currHDAcc.isBifrost" class="add" @click="addAddr">
+            <div v-show="isLogin && addrList.length < 10&&!currHDAcc.isSeparateKey" class="add" @click="addAddr">
                 <span class="acc-add"></span><span class="describe bold">{{ $t('setting.addAddr') }}</span>
             </div>
         </div>

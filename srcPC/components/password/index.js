@@ -72,7 +72,7 @@ export function initPwd({
     const currHDAcc = store.state.wallet.currHDAcc;
     const accInfo = currHDAcc ? currHDAcc.getAccInfo() : null;
     const isHoldPWD = accInfo ? !!accInfo[constant.HoldPwdKey] : false;
-    const isHide = (!isConfirm && isHoldPWD) || currHDAcc.isBifrost;
+    const isHide = (!isConfirm && isHoldPWD) || currHDAcc.isSeparateKey;
 
     if (isHide) {
         submit && submit();

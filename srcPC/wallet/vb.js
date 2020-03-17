@@ -12,12 +12,14 @@ export class VB extends Connector {
             if (!accounts || !accounts[0]) throw new Error('address is null');
             setCurrHDAcc({
                 activeAddr: accounts[0],
-                isBifrost: true
+                isBifrost: true,
+                isSeparateKey: true
             });
             getCurrHDAcc().unlock(this);
             store.commit('switchHDAcc', {
                 activeAddr: accounts[0],
-                isBifrost: true
+                isBifrost: true,
+                isSeparateKey: true
             });
             store.commit('setCurrHDAccStatus');
         });
