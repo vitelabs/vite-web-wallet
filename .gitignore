@@ -21,3 +21,4 @@ deploy.sh
 backup.sh
 rollback.sh
 yarn-error.log
+test_accountBlock.json

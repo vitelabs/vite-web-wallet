@@ -35,7 +35,7 @@ import switchAddr from 'pcComponents/switchAddress';
 
 import statistics from 'utils/statistics';
 import SwitchComp from 'uiKit/switch.vue';
-import { inviteDialog, receiveInviteDialog } from 'pcComponents/dialog';
+import { inviteDialog, receiveInviteDialog, hwAddressSelectDialog } from 'pcComponents/dialog';
 import { execWithValid } from 'pcUtils/execWithValid';
 import openUrl from 'utils/openUrl';
 

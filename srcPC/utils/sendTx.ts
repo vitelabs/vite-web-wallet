@@ -1,10 +1,11 @@
 import { utils, accountBlock as accountBlockUtils } from '@vite/vitejs';
-import { getActiveAcc } from 'wallet';
+import { getActiveAcc, getCurrHDAcc } from 'wallet';
 import { powProcess } from 'pcComponents/pow/index';
 import { quotaConfirm } from 'pcComponents/quota/index';
 import { vbConfirmDialog } from 'pcComponents/dialog';
 import { execWithValid } from 'pcUtils/execWithValid';
 import { getVbInstance } from 'wallet/vb';
+import { getLedgerInstance } from 'wallet/ledgerHW';
 import { viteClient } from 'services/apiServer';
 
 const { createAccountBlock } = accountBlockUtils;
@@ -33,6 +34,7 @@ const sendTx = execWithValid(function ({
     const activeAccount = getActiveAcc();
     console.log(activeAccount);
 
+
     if (activeAccount.isBifrost) {
         return vbSendTx({
             abi,
@@ -43,6 +45,17 @@ const sendTx = execWithValid(function ({
                 ...data,
                 address: activeAccount.address
             }
+        });
+    }
+
+    if (activeAccount.isHardware) {
+        return hwSendTx({
+            methodName,
+            params: {
+                ...data,
+                address: activeAccount.address
+            },
+            config: formatConfig(config)
         });
     }
 
@@ -123,6 +136,53 @@ function vbSendTx({ methodName, params, vbExtends, abi, description }) {
                 compInstance && compInstance.close();
             });
     });
+}
+
+// 硬件钱包发送交易
+async function hwSendTx({ methodName, params, config }) {
+    const accountBlock = createAccountBlock(methodName, params).setProvider(viteClient);
+    await accountBlock.autoSetPreviousAccountBlock();
+
+    const difficulty = await accountBlock.getDifficulty();
+    console.log(difficulty);
+
+    const { sendHwTx } = getLedgerInstance();
+
+    const publicKey = getCurrHDAcc().publicKey;
+    accountBlock.setPublicKey(publicKey);
+
+
+    if (!difficulty) {
+        const { signature } = await sendHwTx(accountBlock);
+        accountBlock.setSignature(signature);
+        return accountBlock.send();
+    }
+
+    if (!config.pow) {
+        quotaConfirm(config.confirmConfig);
+        throw {
+            code: '1000001',
+            message: 'Don\'t need pow, already show confirm.'
+        };
+    }
+
+    const powInstance = powProcess({ ...config.powConfig });
+
+    try {
+        await accountBlock.PoW(difficulty);
+        await powInstance.stopCount();
+        const { signature } = await sendHwTx(accountBlock);
+        accountBlock.setSignature(signature);
+        return accountBlock.send();
+    } catch (err) {
+        console.error('send err', err);
+
+        if (!powInstance || !powInstance.isShow) {
+            return;
+        }
+        powInstance.stop();
+        throw err;
+    }
 }
 
 function formatConfig(config) {

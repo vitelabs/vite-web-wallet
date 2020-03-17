@@ -15,6 +15,15 @@
                 {{ $t("assets.vb.title") }}
             </div>
             <div
+                class="btn-item __pointer"
+                :class="{ active: tabName === 'ledger' }"
+                @click="toggleTab('ledger')"
+                :key="'tb'"
+            >
+                <div class="star"></div>
+                {{ $t("assets.ledger.title") }}
+            </div>
+            <div
                 v-show="isHaveList"
                 class="btn-item __pointer"
                 :class="{ active: tabName === 'existingAcc' }"
@@ -54,10 +63,27 @@
                     {{ $t("addAccount") }}
                 </div>
             </div>
+            <!-- Ledger wallet login panel -->
+            <div class="vb" v-if="tabName === 'ledger'">
+                <div class="code_container">
+                    <div class="code_tips">
+                        {{ $t("assets.ledger.start.title") }}
+                    </div>
+                    <!-- <div class="code_tips">
+                        {{ $t("assets.vb.start.downloadTips")
+                        }}<span class="action_get_app" @click="getWallet"
+                        >{{ $t("assets.vb.start.download") }}&rarr;</span
+                        >
+                    </div> -->
+                </div>
+                <div class="__btn __btn_all_in __pointer" @click="connectLedger()">
+                    {{ $t("assets.ledger.connectLedger") }}
+                </div>
+            </div>
             <div v-if="tabName === 'existingAcc'" class="existing-acc">
                 <div class="bottom __btn __pointer" v-click-outside.includeChildrens="hideAccountList">
                     <div @click="toggleAccountList">
-                        <div v-show="currAcc && !currAcc.activeAddr && !currAcc.isBifrost" class="__btn __btn_input">
+                        <div v-show="currAcc && !currAcc.activeAddr && !currAcc.isSeparateKey" class="__btn __btn_input">
                             <div class="name __ellipsis">
                                 {{ currAcc.name }}
                             </div>
@@ -130,18 +156,22 @@ import { getAppLink } from 'utils/getLink';
 import openUrl from 'utils/openUrl';
 import { getList, deleteOldAcc } from 'wallet';
 
+
 import accountItem from './accountItem.vue';
 import restore from './restore.vue';
 import accountList from './accountList.vue';
+import { hwAddressSelectDialog } from 'pcComponents/dialog';
 
 import qrcode from 'components/qrcode';
 import { initVB } from 'wallet/vb';
+import { initLedger } from 'wallet/ledgerHW';
 import icon from 'assets/imgs/start_qrcode_icon.svg';
 
 const TABNAME = {
     vb: 'vb',
     existingAcc: 'existingAcc',
-    restore: 'restore'
+    restore: 'restore',
+    ledger: 'ledger'
 };
 
 export default {
@@ -261,7 +291,7 @@ export default {
             }
 
             // Second: from current
-            if (this.currHDAcc && !this.currHDAcc.isBifrost) {
+            if (this.currHDAcc && !this.currHDAcc.isSeparateKey) {
                 return {
                     id: this.currHDAcc.id,
                     showAddr: this.currHDAcc.activeAddr
@@ -350,6 +380,14 @@ export default {
                     this.isLoading = false;
                     this.$toast(this.$t('hint.pwErr'));
                 });
+        },
+        connectLedger() {
+            hwAddressSelectDialog({ width: 'wide' }).then(({ status }) => {
+                if (status === hwAddressSelectDialog['STATUS']['CONFIRMED']) {
+                    const name = this.$store.state.env.lastPage || 'tradeCenter';
+                    this.$router.push({ name });
+                }
+            });
         }
     }
 };

@@ -1,6 +1,6 @@
 <template>
     <div class="account-head-wrapper">
-        <div class="head__item" v-if="!account.isBifrost">
+        <div class="head__item" v-if="!account.isSeparateKey">
             <img class="icon" :src="iconList.headAcc" />
             <div class="head-right">
                 <div class="head-title">
@@ -8,7 +8,7 @@
                     <span @click="startRename" class="edit __pointer"></span>
                 </div>
                 <div v-if="!isShowNameInput" class="name" @click="startRename">
-                    {{ account.isBifrost?$t('assets.vb.accountName'):account.name }}
+                    {{ account.isSeparateKey?$t('assets.vb.accountName'):account.name }}
                 </div>
                 <form autocomplete="off" v-else>
                     <input
@@ -133,7 +133,7 @@ export default {
             return {
                 name: this.$store.state.wallet.name,
                 addr: this.activeAddr,
-                isBifrost: getCurrHDAcc() && getCurrHDAcc().isBifrost
+                isSeparateKey: getCurrHDAcc() && getCurrHDAcc().isSeparateKey
             };
         },
         netStatus() {
@@ -222,7 +222,7 @@ export default {
         startRename() {
             statistics.event(this.$route.name, 'changeName', this.activeAddr || '');
 
-            if (this.isShowNameInput || getCurrHDAcc().isBifrost) {
+            if (this.isShowNameInput || getCurrHDAcc().isSeparateKey) {
                 return;
             }
             this.isShowNameInput = true;
