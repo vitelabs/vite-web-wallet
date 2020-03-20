@@ -1,4 +1,6 @@
 import { constant } from 'pcUtils/store';
+import { accountBlock as accountBlockUtils } from '@vite/vitejs';
+import { viteClient } from 'services/apiServer';
 
 import { addHdAccount, setAcc, getAcc, setAccInfo, setLastAcc } from './store';
 
@@ -21,6 +23,7 @@ export class HWAccount {
     activeAccount: any;
     isHardware: boolean;
     addressIndex: number;
+    private receiveTask: any;
 
     // 用于判断是否私钥是存储在其他地方，例如：硬件钱包和手机钱包里。在多数情况下，两者的表现形式差不多，所以将单独用一个字段来标明
     isSeparateKey: boolean;
@@ -81,8 +84,33 @@ export class HWAccount {
         });
     }
 
-    activate() {}
-    freeze() {}
+    activate() {
+        if (this.status === StatusMap.LOCK || !this.activeAccount) {
+            return;
+        }
+
+        this.receiveTask = new accountBlockUtils.ReceiveAccountBlockTask({
+            address: this.activeAccount.address,
+            provider: viteClient,
+            sign: async (_accountBlock) => {
+                if (!this.hw) return;
+                try {
+                    const { signature } = await this.hw.signHwTx(this.addressIndex, _accountBlock);
+                    _accountBlock.setPublicKey(this.publicKey);
+                    _accountBlock.setSignature(signature);
+                } catch (err) {
+                    console.log(err);
+                }
+            }
+        });
+        this.receiveTask.start();
+        return;
+    }
+    freeze() {
+        // Kill auto receive
+        this.receiveTask && this.receiveTask.stop();
+        this.receiveTask = null;
+    }
 
     saveOnAcc(key, info) {
         if (!this.id) {
@@ -99,6 +127,7 @@ export class HWAccount {
     }
 
     lock() {
+        this.freeze();
         this.hw && this.hw.destroy();
         this.status = StatusMap.LOCK;
         this.hw = null;
@@ -121,5 +150,6 @@ export class HWAccount {
         this.hw = hw;
         this.status = StatusMap.UNLOCK;
         setLastAcc({ id: this.id });
+        this.activate();
     }
 }

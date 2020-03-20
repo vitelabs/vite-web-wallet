@@ -146,14 +146,14 @@ async function hwSendTx({ methodName, params, config }) {
     const difficulty = await accountBlock.getDifficulty();
     console.log(difficulty);
 
-    const { sendHwTx } = getLedgerInstance();
+    const { signHwTx } = getLedgerInstance();
 
-    const publicKey = getCurrHDAcc().publicKey;
+    const { publicKey, addressIndex } = getCurrHDAcc();
     accountBlock.setPublicKey(publicKey);
 
 
     if (!difficulty) {
-        const { signature } = await sendHwTx(accountBlock);
+        const { signature } = await signHwTx(addressIndex, accountBlock);
         accountBlock.setSignature(signature);
         return accountBlock.send();
     }
@@ -171,7 +171,7 @@ async function hwSendTx({ methodName, params, config }) {
     try {
         await accountBlock.PoW(difficulty);
         await powInstance.stopCount();
-        const { signature } = await sendHwTx(accountBlock);
+        const { signature } = await signHwTx(addressIndex, accountBlock);
         accountBlock.setSignature(signature);
         return accountBlock.send();
     } catch (err) {

@@ -2298,10 +2298,10 @@
   resolved "https://registry.npmjs.org/@vite/vitejs-ws/-/vitejs-ws-2.3.0.tgz#0d73523914bfabf21a93fe4991e5da9398a78d23"
   integrity sha512-zXTW4QfaBBTmgG2l/hqS2WQzKFYeQzm/xzVCTUcI0ltGTGbpF0WHpQQCpyDlAf5lW9C5nMeBxXOdv69CGCaDfQ==
 
-"@vite/vitejs@^2.3.3":
-  version "2.3.3"
-  resolved "https://registry.npmjs.org/@vite/vitejs/-/vitejs-2.3.3.tgz#48203f9cf07ce34f77ae04cac99d2302a2fa6ccf"
-  integrity sha512-4mj1urXHPLrsAfCy/3TOQ13bny2ye1ESMkluMfLcBJH5UTywDhZEYRlGCLh9cMGFjkrHgLgyv3TJePbxguOsPg==
+"@vite/vitejs@2.3.6-alpha.3":
+  version "2.3.6-alpha.3"
+  resolved "https://registry.npmjs.org/@vite/vitejs/-/vitejs-2.3.6-alpha.3.tgz#680900dbbc94ec1e355db8626fdc20be7367155c"
+  integrity sha512-4y/hMUD1n7iVhnwc09LVR7wsIJCXFyrntHJvCFye8OyHDB2Cnbj1AT9QCtB0ety1Zn72zPNhDWkvJrnWz1u0Jw==
   dependencies:
     "@sisi/ed25519-blake2b-hd-key" "^1.0.2"
     "@sisi/tweetnacl-blake2b" "^1.0.0"
