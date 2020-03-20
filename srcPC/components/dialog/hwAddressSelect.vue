@@ -71,7 +71,7 @@ export default {
     },
     methods: {
         async getAddressList(type = 'next') {
-            let hw = getLedgerInstance();
+            const hw = getLedgerInstance();
             if (!hw || !hw.connector) return;
             let startIndex = this.startIndex;
             if (type === 'pre') startIndex = this.startIndex - this.addrNum * 2;
