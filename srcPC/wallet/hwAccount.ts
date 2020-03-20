@@ -92,7 +92,7 @@ export class HWAccount {
         this.receiveTask = new accountBlockUtils.ReceiveAccountBlockTask({
             address: this.activeAccount.address,
             provider: viteClient,
-            sign: async (_accountBlock) => {
+            sign: async _accountBlock => {
                 if (!this.hw) return;
                 try {
                     const { signature } = await this.hw.signHwTx(this.addressIndex, _accountBlock);
@@ -106,6 +106,7 @@ export class HWAccount {
         this.receiveTask.start();
         return;
     }
+
     freeze() {
         // Kill auto receive
         this.receiveTask && this.receiveTask.stop();
