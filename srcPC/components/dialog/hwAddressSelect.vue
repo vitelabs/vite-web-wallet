@@ -115,9 +115,9 @@ export default {
 
             // ledgerMock
             getLedgerInstance().emit('connected', {
-                address: 'vite_f7360aa760739f2f318e189c68fec0b9770950e01783d91295',
-                addressIndex: 0,
-                publicKey: 'public_key'
+                address: this.selected.address,
+                addressIndex: this.selected.index,
+                publicKey: this.selected.publicKey
             });
             this.rClick();
         },

@@ -2,6 +2,8 @@ import TransportWebBLE from '@ledgerhq/hw-transport-web-ble';
 import TransportWebUSB from '@ledgerhq/hw-transport-webusb';
 import LedgerVite from '@vite/ledgerjs-hw-app-vite';
 import Eventemitter from 'eventemitter3';
+import { accountBlock } from '@vite/vitejs';
+const { utils } = accountBlock;
 
 import { setCurrHDAcc, getCurrHDAcc } from './index';
 import store from 'pcStore';
@@ -63,7 +65,10 @@ export class Ledger extends Eventemitter {
             const address = await this.connector.getAddress(i, false)
                 // ledgerMock
                 .catch(() => {
-                    return { address: 'vite_847e1672c9a775ca0f3c3a2d3bf389ca466e5501cbecdb7107' };
+                    return { 
+                        address: 'vite_574963ad867047fef64a941e53f1fd01ce7ba241b80c20f537',
+                        publicKey: `publicKey_${i}`
+                    };
                 });
             list.push({
                 ...address,
@@ -73,7 +78,12 @@ export class Ledger extends Eventemitter {
         return list;
     }
 
-    async sendHwTx({ addressIndex, height, _toAddress, amount, tokenId, data, fee, previousHash, nonce }) {
+    async signHwTx(addressIndex, _accountBlock) {
+        const { height, _toAddress, amount, tokenId, data, fee, previousHash, nonce, sendBlockHash, blockType } = _accountBlock;
+
+        if (utils.isResponseBlock(blockType)) {
+            return this.connector.signResponseAccountBlock(addressIndex, height, sendBlockHash, previousHash, nonce);
+        }
         return this.connector.signRequestAccountBlock(addressIndex,
             height,
             _toAddress,
