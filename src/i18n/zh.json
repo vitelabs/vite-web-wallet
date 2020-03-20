@@ -513,7 +513,8 @@
                 "unreceived": "待接收余额",
                 "nextPage": "下一页",
                 "prePage": "上一页",
-                "confirm": "确认"
+                "confirm": "确认",
+                "unUsedAccount": "未使用"
             }
         },
         "invite":{

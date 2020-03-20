@@ -17,7 +17,10 @@ block content
                     th
                         checkbox(@input="onSelect(address, $event)" v-model="address.isChecked")
                     th {{address.index}}
-                    th {{address.address | shotAddr}}
+                    th 
+                        a(:href="'https://vitescan.io/address/' + address.address" target="_blank") {{address.address | shotAddr}}
+                        span.code_small_btn(v-if="!address.blockCount && address.blockCount !== undefined ") {{ $t('assets.ledger.addressSelect.unUsedAccount') }}
+
                     th {{address.balance | toBasic(18)}}
                     th {{address.unreceived | toBasic(18)}}
         div.hw_btn_wrapper
@@ -76,23 +79,26 @@ export default {
                 viteClient.getBalanceInfo(address).then(({ balance, unreceived }) => {
                     let _balance = 0;
                     let _unreceived = 0;
+                    let _blockCount = 0;
                     if (balance && balance.balanceInfoMap) {
                         _balance = balance.balanceInfoMap[VITE_TOKENID].balance;
+                        _blockCount = balance.blockCount;
                     }
                     if (unreceived && unreceived.balanceInfoMap) {
                         _unreceived = unreceived.balanceInfoMap[VITE_TOKENID].balance;
                     }
-                    this.updateAddressBalance(address, _balance, _unreceived);
+                    this.updateAddressBalance(address, _balance, _unreceived, _blockCount);
                 });
             });
             this.addressList = addressList;
         },
-        updateAddressBalance(address, balance, unreceived) {
+        updateAddressBalance(address, balance, unreceived, blockCount) {
             if (!this.addressList) return;
             for (let i = 0; i < this.addressList.length; i++) {
                 if (this.addressList[i].address === address) {
                     Vue.set(this.addressList[i], 'balance', balance);
                     Vue.set(this.addressList[i], 'unreceived', unreceived);
+                    Vue.set(this.addressList[i], 'blockCount', blockCount);
                 }
             }
         },
@@ -186,6 +192,20 @@ export default {
         @include gray_font_color_1();
         tr {
             @include common_border_one('bottom');
+            a {
+                @include gray_font_color_1();
+            }
+            .code_small_btn {
+                font-size: 12px;
+                word-break: keep-all;
+                background: rgba(0,122,255,0.05);
+                border-radius: 2px;
+                border: 1px solid rgba(0,122,255,0.3);
+                line-height: 15px;
+                color: #007AFF;
+                padding: 0 3px;
+                margin-left: 5px;
+            }
             &:hover {
                 @include hover_color();
             }
