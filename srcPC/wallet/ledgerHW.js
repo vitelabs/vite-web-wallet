@@ -65,9 +65,9 @@ export class Ledger extends Eventemitter {
             const address = await this.connector.getAddress(i, false)
                 // ledgerMock
                 .catch(() => {
-                    return { 
+                    return {
                         address: 'vite_574963ad867047fef64a941e53f1fd01ce7ba241b80c20f537',
-                        publicKey: `publicKey_${i}`
+                        publicKey: `publicKey_${ i }`
                     };
                 });
             list.push({
