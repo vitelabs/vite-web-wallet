@@ -64,17 +64,18 @@
                 </div>
             </div>
             <!-- Ledger wallet login panel -->
-            <div class="vb" v-if="tabName === 'ledger'">
+            <div class="ledger" v-if="tabName === 'ledger'">
                 <div class="code_container">
                     <div class="code_tips">
                         {{ $t("assets.ledger.start.title") }}
                     </div>
-                    <!-- <div class="code_tips">
-                        {{ $t("assets.vb.start.downloadTips")
-                        }}<span class="action_get_app" @click="getWallet"
-                        >{{ $t("assets.vb.start.download") }}&rarr;</span
-                        >
-                    </div> -->
+                    <div class="img_wrapper">
+                        <img src="~assets/imgs/ledger_logo.svg" alt="">
+                    </div>
+                    <div class="code_tips_introduction">
+                        <a :href="$t('assets.ledger.start.introductionUrl')" target="_blank">{{ $t("assets.ledger.start.introduction") }}</a>
+                        <a :href="$t('assets.ledger.start.connectErrorUrl')" target="_blank">{{ $t("assets.ledger.start.connectError") }}</a>
+                    </div>
                 </div>
                 <div class="__btn __btn_all_in __pointer" @click="connectLedger()">
                     {{ $t("assets.ledger.connectLedger") }}
@@ -520,6 +521,42 @@ export default {
             }
             .vb_qrcode {
                 margin: 30px auto;
+            }
+        }
+    }
+    .ledger {
+        width: 100%;
+        .code_container {
+            width: 100%;
+            padding: 20px;
+            box-sizing: border-box;
+            background: #fff;
+            margin-bottom: 20px;
+            font-size: 14px;
+            .img_wrapper {
+                margin: 30px 0;
+            }
+            .code_tips {
+                text-align: left;
+                word-break: break-all;
+                color: #333333;
+                line-height: 18px;
+            }
+            .code_tips_introduction {
+                color: $blue-color-1;
+                font-size: 14px;
+                display: flex;
+                flex-direction: row;
+                a {
+                    color: $blue-color-1;
+                    flex: 1;
+                    &:first-child {
+                        text-align: left;
+                    }
+                    &:last-child {
+                        text-align: right;
+                    }
+                }
             }
         }
     }
