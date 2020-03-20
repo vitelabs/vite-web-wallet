@@ -3,6 +3,8 @@ import { accountBlock as accountBlockUtils } from '@vite/vitejs';
 import { viteClient } from 'services/apiServer';
 
 import { addHdAccount, setAcc, getAcc, setAccInfo, setLastAcc } from './store';
+import toast from 'components/toast/index.js';
+import i18n from 'pcI18n';
 
 const Default_Lang = 'english';
 enum StatusMap {
@@ -102,6 +104,9 @@ export class HWAccount {
                     console.log(err);
                 }
             }
+        });
+        this.receiveTask.onSuccess(() => {
+            toast(i18n.t('assets.ledger.connect.receiveBlockSuccess'));
         });
         this.receiveTask.start();
         return;
