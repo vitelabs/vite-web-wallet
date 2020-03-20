@@ -28,7 +28,7 @@ block content
             span.code_small_btn(@click="getAddressList('next')") {{ $t('assets.ledger.addressSelect.nextPage') }}
 
         div.__row.btn_wrapper
-            div.btn.btn-blue.__pointer(@click="confirm" :class="{'btn-gray': isBtnUnuse}") {{ $t('assets.ledger.addressSelect.confirm') }}
+            div.btn.btn-blue.__pointer(@click="confirm()" :class="{'btn-gray': isBtnUnuse}") {{ $t('assets.ledger.addressSelect.confirm') }}
     div.__row(v-else)
         div.__row.ledger_connect_btn
             div.btn.btn-blue.__pointer(@click="connect('usb')") {{ $t("assets.ledger.connectWithUSB") }}
@@ -53,7 +53,7 @@ export default {
             addressList: [],
             selected: null,
             isConnected: ledgerInstance && ledgerInstance.status,
-            addrNum: 4
+            addrNum: 6
         };
     },
     beforeMount() {
@@ -74,8 +74,13 @@ export default {
             if (!getLedgerInstance()) return;
             let startIndex = this.startIndex;
             if (type === 'pre') startIndex = this.startIndex - this.addrNum * 2;
-            const addressList = await getLedgerInstance().getAddressList(startIndex, 4);
-            addressList.forEach(({ address }) => {
+            const addressList = await getLedgerInstance().getAddressList(startIndex, this.addrNum);
+            console.log(addressList);
+            this.addressList = addressList;
+            this.getBalanceInfo();
+        },
+        getBalanceInfo() {
+            this.addressList.forEach(({ address }) => {
                 viteClient.getBalanceInfo(address).then(({ balance, unreceived }) => {
                     let _balance = 0;
                     let _unreceived = 0;
@@ -90,7 +95,6 @@ export default {
                     this.updateAddressBalance(address, _balance, _unreceived, _blockCount);
                 });
             });
-            this.addressList = addressList;
         },
         updateAddressBalance(address, balance, unreceived, blockCount) {
             if (!this.addressList) return;
@@ -113,13 +117,6 @@ export default {
         },
         confirm() {
             if (this.isBtnUnuse) return;
-
-            // this.getLedgerInstance().onConnect(null, {
-            //     address: this.selected.address,
-            //     addressIndex: this.selected.index
-            // });
-
-            // ledgerMock
             getLedgerInstance().emit('connected', {
                 address: this.selected.address,
                 addressIndex: this.selected.index,
@@ -129,20 +126,17 @@ export default {
         },
         connect(connectType) {
             initLedger({ connectType })
-                .then(appConfig => {
-                    this.getAddressList().then(() => {
-                        this.isConnected = true;
-                        console.log('Ledger conneected !!!!!!!!!!!!!!!!');
-                    });
+                .then(() => this.getAddressList())
+                .then(() => {
+                    this.isConnected = true;
+                    console.log('Ledger conneected !!!!!!!!!!!!!!!!');
                 })
                 .catch(err => {
                     console.log(err);
 
                     this.isConnected = false;
                     if (err) {
-                        if (err.statusCode === 28160) return this.$toast(this.$t('assets.ledger.connect.connectError'));
-                        if (err.name === 'TransportOpenUserCancelled') return this.$toast(this.$t('assets.ledger.connect.cancelSelect'));
-                        if (err.message) this.$toast(err.message);
+                        getLedgerInstance().emit('error', err);
                     }
                 });
         }

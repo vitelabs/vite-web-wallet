@@ -2,12 +2,15 @@ import TransportWebBLE from '@ledgerhq/hw-transport-web-ble';
 import TransportWebUSB from '@ledgerhq/hw-transport-webusb';
 import LedgerVite from '@vite/ledgerjs-hw-app-vite';
 import Eventemitter from 'eventemitter3';
+import Vue from 'vue';
 import { accountBlock } from '@vite/vitejs';
 const { utils } = accountBlock;
 
 import { setCurrHDAcc, getCurrHDAcc } from './index';
 import store from 'pcStore';
 import { Server } from 'services/dnsHostIP';
+import i18n from 'pcI18n';
+import toast from 'components/toast/index.js';
 
 export class Ledger extends Eventemitter {
     constructor({ connectType = 'usb' }) {
@@ -35,6 +38,14 @@ export class Ledger extends Eventemitter {
                 publicKey
             });
             store.commit('setCurrHDAccStatus');
+        });
+
+        this.on('error', (err) => {
+            console.log(err);
+            if (err.statusCode === 28160) return toast(i18n.t('assets.ledger.connect.connectError'));
+            if (err.name === 'TransportOpenUserCancelled') return toast(i18n.t('assets.ledger.connect.cancelSelect'));
+            if (err.name === 'TransportInterfaceNotAvailable') return toast(i18n.t('assets.ledger.connect.interfaceNotAvailable'))
+            if (err.message) toast(err.message);
         });
     }
 
@@ -116,6 +127,7 @@ export async function initLedger({ connectType }) {
     await ledgerInstance.connect();
 
     // ledgerMock
-    const appConfig = await ledgerInstance.connector.getAppConfig().catch(err => err);
+    const appConfig = await ledgerInstance.connector.getAppConfig().catch(err => console.log(err));
+    console.log(appConfig);
     return appConfig;
 }

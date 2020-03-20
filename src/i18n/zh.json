@@ -489,6 +489,7 @@
         "ledger": {
             "title": "Ledger Device",
             "accountName": "Ledger Wallet",
+            "verifyAddress": "验证该地址",
             "start": {
                 "title": "支持 Ledger nano S 或 Ledger nano X",
                 "connectError": "连接错误",
@@ -504,7 +505,8 @@
                 "tips": "请从以下地址中选择一个地址：",
                 "selectConnectType": "请选择 Ledger 硬件钱包的连接方式：（注意：仅 Ledger nano X 支持蓝牙连接）",
                 "cancelSelect": "请选择一个设备进行连接",
-                "connectError": "连接错误，请确保在Ledger上已打开Vite App软件！"
+                "connectError": "连接错误，请确保在Ledger上已打开Vite App软件！",
+                "interfaceNotAvailable": "连接失败，请尝试重新连接USB线，或者重启蓝牙再次尝试"
             },
             "addressSelect": {
                 "index": "Index",

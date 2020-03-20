@@ -34,6 +34,9 @@
                     </QrcodePopup>
                     <span class="address-content__operate copy click-able" @click="copy"></span>
                 </span>
+                <span v-if="isHardware && isLogin" @click="verifyHwAddress" class="address-content__verify">
+                    <span>{{ $t('assets.ledger.verifyAddress') }}</span>
+                </span>
             </div>
         </div>
         <div class="worth head__item">
@@ -58,7 +61,8 @@
 <script>
 import Vue from 'vue';
 import { utils } from '@vite/vitejs';
-import { getCurrHDAcc } from 'wallet';
+import { getCurrHDAcc, StatusMap } from 'wallet';
+import { getLedgerInstance } from 'wallet/ledgerHW';
 import copy from 'components/copy';
 import QrcodePopup from 'components/qrcodePopup';
 import Pie from 'pcComponents/pie';
@@ -67,6 +71,7 @@ import bigNumber from 'utils/bigNumber';
 import statistics from 'utils/statistics';
 import { getTokenSymbolString } from 'utils/tokenParser';
 import AssetSwitch from './assetSwitch';
+
 
 import headAcc from 'assets/imgs/head_acc.png';
 import headAddr from 'assets/imgs/head_addr.svg';
@@ -203,6 +208,13 @@ export default {
         },
         activeAddr() {
             return this.$store.getters.activeAddr;
+        },
+        isHardware() {
+            const currAcc = this.$store.state.wallet.currHDAcc;
+            return currAcc && currAcc.isHardware;
+        },
+        isLogin() {
+            return this.$store.state.wallet.status === StatusMap.UNLOCK;
         }
     },
     methods: {
@@ -254,6 +266,12 @@ export default {
 
             this.$store.commit('renameCurrHDAcc', this.editName);
             this.clearEditName();
+        },
+        verifyHwAddress() {
+            const currentAccount = getCurrHDAcc();
+            if (!currentAccount || !currentAccount.hw) return 
+            currentAccount.hw.connector
+                .getAddress(currentAccount.addressIndex, true).catch(err => currentAccount.hw.emit('error', err));
         }
     }
 };
@@ -375,6 +393,13 @@ export default {
             flex-direction: column;
             align-self: stretch;
             flex-grow: 1;
+            .address-content__verify {
+                @include gray_font_color_1();
+                font-size: 14px;
+                & > span {
+                    @include small_btn();
+                }
+            }
             .head-title {
                 display: flex;
                 align-items: center;
