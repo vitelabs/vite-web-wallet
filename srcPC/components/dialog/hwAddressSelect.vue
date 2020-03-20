@@ -17,7 +17,7 @@ block content
                     th
                         checkbox(@input="onSelect(address, $event)" v-model="address.isChecked")
                     th {{address.index}}
-                    th 
+                    th
                         a(:href="'https://vitescan.io/address/' + address.address" target="_blank") {{address.address | shotAddr}}
                         span.code_small_btn(v-if="!address.blockCount && address.blockCount !== undefined ") {{ $t('assets.ledger.addressSelect.unUsedAccount') }}
 
@@ -141,7 +141,7 @@ export default {
                     this.isConnected = false;
                     if (err) {
                         if (err.statusCode === 28160) return this.$toast(this.$t('assets.ledger.connect.connectError'));
-                        if (err.name === 'TransportOpenUserCancelled') return this.$toast(this.$t('assets.ledger.connect.cancelSelect'))
+                        if (err.name === 'TransportOpenUserCancelled') return this.$toast(this.$t('assets.ledger.connect.cancelSelect'));
                         if (err.message) this.$toast(err.message);
                     }
                 });
