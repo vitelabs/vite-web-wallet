@@ -40,11 +40,11 @@ export class Ledger extends Eventemitter {
             store.commit('setCurrHDAccStatus');
         });
 
-        this.on('error', (err) => {
+        this.on('error', err => {
             console.log(err);
             if (err.statusCode === 28160) return toast(i18n.t('assets.ledger.connect.connectError'));
             if (err.name === 'TransportOpenUserCancelled') return toast(i18n.t('assets.ledger.connect.cancelSelect'));
-            if (err.name === 'TransportInterfaceNotAvailable') return toast(i18n.t('assets.ledger.connect.interfaceNotAvailable'))
+            if (err.name === 'TransportInterfaceNotAvailable') return toast(i18n.t('assets.ledger.connect.interfaceNotAvailable'));
             if (err.message) toast(err.message);
         });
     }

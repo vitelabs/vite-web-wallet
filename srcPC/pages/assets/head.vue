@@ -269,7 +269,7 @@ export default {
         },
         verifyHwAddress() {
             const currentAccount = getCurrHDAcc();
-            if (!currentAccount || !currentAccount.hw) return 
+            if (!currentAccount || !currentAccount.hw) return;
             currentAccount.hw.connector
                 .getAddress(currentAccount.addressIndex, true).catch(err => currentAccount.hw.emit('error', err));
         }
