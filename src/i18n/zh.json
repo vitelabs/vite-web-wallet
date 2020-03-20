@@ -490,16 +490,21 @@
             "title": "Ledger Device",
             "accountName": "Ledger Wallet",
             "start": {
-                "title": "Connect your hardware wallet here by following the on-screen instructions"
+                "title": "支持 Ledger nano S 或 Ledger nano X",
+                "connectError": "连接错误",
+                "introduction": "安装说明 & 使用说明",
+                "introductionUrl": "https://support.ledger.com/hc/en-us/articles/115005165269-Connection-issues-with-Windows-or-Linux",
+                "connectErrorUrl": "https://support.ledger.com/hc/en-us/articles/115005165269-Connection-issues-with-Windows-or-Linux"
             },
             "connectWithUSB": "Connect with USB",
             "connectWithBlu": "Connect with Bluetooth",
             "connectLedger": "Connect to Ledger",
-            "connectError": "连接错误，请确保在Ledger上已打开Vite App软件！",
             "connect": {
                 "title": "地址选择",
                 "tips": "请从以下地址中选择一个地址：",
-                "selectConnectType": "请选择 Ledger 硬件的连接方式："
+                "selectConnectType": "请选择 Ledger 硬件钱包的连接方式：（注意：仅 Ledger nano X 支持蓝牙连接）",
+                "cancelSelect": "请选择一个设备进行连接",
+                "connectError": "连接错误，请确保在Ledger上已打开Vite App软件！"
             },
             "addressSelect": {
                 "index": "Index",

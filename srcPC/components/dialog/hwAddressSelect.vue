@@ -134,7 +134,8 @@ export default {
 
                     this.isConnected = false;
                     if (err) {
-                        if (err.statusCode === 28160) return this.$toast(this.$t('assets.ledger.connectError'));
+                        if (err.statusCode === 28160) return this.$toast(this.$t('assets.ledger.connect.connectError'));
+                        if (err.name === 'TransportOpenUserCancelled') return this.$toast(this.$t('assets.ledger.connect.cancelSelect'))
                         if (err.message) this.$toast(err.message);
                     }
                 });
