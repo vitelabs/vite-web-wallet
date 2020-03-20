@@ -18,7 +18,7 @@
                 class="btn-item __pointer"
                 :class="{ active: tabName === 'ledger' }"
                 @click="toggleTab('ledger')"
-                :key="'tb'"
+                :key="'ledger'"
             >
                 <div class="star"></div>
                 {{ $t("assets.ledger.title") }}
@@ -165,7 +165,6 @@ import { hwAddressSelectDialog } from 'pcComponents/dialog';
 
 import qrcode from 'components/qrcode';
 import { initVB } from 'wallet/vb';
-import { initLedger } from 'wallet/ledgerHW';
 import icon from 'assets/imgs/start_qrcode_icon.svg';
 
 const TABNAME = {
