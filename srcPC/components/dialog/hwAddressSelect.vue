@@ -71,10 +71,11 @@ export default {
     },
     methods: {
         async getAddressList(type = 'next') {
-            if (!getLedgerInstance()) return;
+            let hw = getLedgerInstance();
+            if (!hw || !hw.connector) return;
             let startIndex = this.startIndex;
             if (type === 'pre') startIndex = this.startIndex - this.addrNum * 2;
-            const addressList = await getLedgerInstance().getAddressList(startIndex, this.addrNum);
+            const addressList = await hw.getAddressList(startIndex, this.addrNum);
             console.log(addressList);
             this.addressList = addressList;
             this.getBalanceInfo();
