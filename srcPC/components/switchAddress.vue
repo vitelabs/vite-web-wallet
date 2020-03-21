@@ -23,8 +23,8 @@
 <script>
 import statistics from 'utils/statistics';
 import ellipsisAddr from 'utils/ellipsisAddr.js';
-import { execWithValid } from 'pcUtils/execWithValid';
 import { StatusMap, getCurrHDAcc } from 'wallet';
+import { hwAddressSelectDialog } from 'pcComponents/dialog';
 
 export default {
     props: {
@@ -89,10 +89,7 @@ export default {
         },
         toggleList() {
             if (this.isHardware) {
-                return execWithValid(function () {},
-                    function () {
-                        this.go('startLogin');
-                    })();
+                return hwAddressSelectDialog();
             }
 
             if (this.notAllowed) {

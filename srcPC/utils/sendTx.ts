@@ -146,16 +146,19 @@ async function hwSendTx({ methodName, params, config }) {
     const difficulty = await accountBlock.getDifficulty();
     console.log(difficulty);
 
-    const { signHwTx } = getLedgerInstance();
+    const hw = getLedgerInstance();
 
-    const { publicKey, addressIndex } = getCurrHDAcc();
+    const { publicKey, activeIdx } = getCurrHDAcc();
     accountBlock.setPublicKey(publicKey);
 
 
     if (!difficulty) {
-        const { signature } = await signHwTx(addressIndex, accountBlock);
+        const confirmDialog = hwConfirmDialog();
+        const { signature } = await hw.signHwTx(activeIdx, accountBlock);
         accountBlock.setSignature(signature);
-        return accountBlock.send();
+        await accountBlock.send();
+        confirmDialog.compInstance && confirmDialog.compInstance.close();
+        return;
     }
 
     if (!config.pow) {
@@ -171,11 +174,8 @@ async function hwSendTx({ methodName, params, config }) {
     try {
         await accountBlock.PoW(difficulty);
         await powInstance.stopCount();
-        const { signature } = await signHwTx(addressIndex, accountBlock);
-        accountBlock.setSignature(signature);
-        return accountBlock.send();
     } catch (err) {
-        console.error('send err', err);
+        console.error('pow err', err);
 
         if (!powInstance || !powInstance.isShow) {
             return;
@@ -183,6 +183,29 @@ async function hwSendTx({ methodName, params, config }) {
         powInstance.stop();
         throw err;
     }
+
+    const confirmDialog = hwConfirmDialog();
+    try {
+        const { signature } = await hw.signHwTx(activeIdx, accountBlock);
+        accountBlock.setSignature(signature);
+        await accountBlock.send();
+    }
+    
+    finally {
+        confirmDialog.compInstance && confirmDialog.compInstance.close();
+    }
+
+}
+
+function hwConfirmDialog() {
+    const confirmPromise: any = vbConfirmDialog();
+    const { compInstance } = confirmPromise;
+    confirmPromise.then(() => {
+        // 如果点击了关闭窗口，则不再提示
+        compInstance && compInstance.close();
+        throw ({ code: '11021' });
+    });
+    return confirmPromise;
 }
 
 function formatConfig(config) {
