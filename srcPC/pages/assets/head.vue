@@ -71,6 +71,7 @@ import bigNumber from 'utils/bigNumber';
 import statistics from 'utils/statistics';
 import { getTokenSymbolString } from 'utils/tokenParser';
 import AssetSwitch from './assetSwitch';
+import { hwVerifyAddressDialog, baseDialog } from 'pcComponents/dialog';
 
 
 import headAcc from 'assets/imgs/head_acc.png';
@@ -270,8 +271,29 @@ export default {
         verifyHwAddress() {
             const currentAccount = getCurrHDAcc();
             if (!currentAccount || !currentAccount.hw) return;
+            const dialog = hwVerifyAddressDialog();
+
             currentAccount.hw.connector
-                .getAddress(currentAccount.addressIndex, true).catch(err => currentAccount.hw.emit('error', err));
+                .getAddress(currentAccount.activeIdx, true)
+                .catch(err => { 
+                    if (err && err.statusCode === 27013) {
+                        baseDialog({
+                            title: this.$t('assets.ledger.confirm.alert'),
+                            content: this.$t('assets.ledger.confirm.alertContent'),
+                            lTxt: this.$t('assets.ledger.confirm.alertLeftBtn'),
+                            rTxt: this.$t('assets.ledger.confirm.alertRightBtn')
+                        }).then(({ status }) => {
+                            if (status === 'CONFRIMED') {
+                                window.open('https://vitex.zendesk.com/');
+                            }
+                        })
+                        return;
+                    };
+                    currentAccount.hw.emit('error', err) 
+                }) 
+                .finally(() => {
+                    dialog.compInstance.close();
+                })
         }
     }
 };

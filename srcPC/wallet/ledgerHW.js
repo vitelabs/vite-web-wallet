@@ -23,7 +23,7 @@ export class Ledger extends Eventemitter {
         this.status = 0;
 
         // 选择完地址之后触发
-        this.on('connected', ({ address, addressIndex, publicKey }) => {
+        this.on('connected', ({ address, activeIdx, publicKey }) => {
             if (!address) throw new Error('address is null');
             setCurrHDAcc({
                 activeAddr: address,
@@ -31,10 +31,11 @@ export class Ledger extends Eventemitter {
                 publicKey
             });
             getCurrHDAcc().unlock(this);
+            getCurrHDAcc().switchActiveAcc(activeIdx, address, publicKey);
             store.commit('switchHDAcc', {
                 activeAddr: address,
                 isHardware: true,
-                addressIndex,
+                activeIdx,
                 publicKey
             });
             store.commit('setCurrHDAccStatus');
@@ -75,12 +76,12 @@ export class Ledger extends Eventemitter {
         for (let i = startIndex; i < startIndex + length; i++) {
             const address = await this.connector.getAddress(i, false)
                 // ledgerMock
-                .catch(() => {
-                    return {
-                        address: 'vite_574963ad867047fef64a941e53f1fd01ce7ba241b80c20f537',
-                        publicKey: `publicKey_${ i }`
-                    };
-                });
+                // .catch(() => {
+                //     return {
+                //         address: 'vite_574963ad867047fef64a941e53f1fd01ce7ba241b80c20f537',
+                //         publicKey: `publicKey_${ i }`
+                //     };
+                // });
             list.push({
                 ...address,
                 index: i
@@ -89,13 +90,13 @@ export class Ledger extends Eventemitter {
         return list;
     }
 
-    async signHwTx(addressIndex, _accountBlock) {
+    async signHwTx(activeIdx, _accountBlock) {
         const { height, _toAddress, amount, tokenId, data, fee, previousHash, nonce, sendBlockHash, blockType } = _accountBlock;
 
         if (utils.isResponseBlock(blockType)) {
-            return this.connector.signResponseAccountBlock(addressIndex, height, sendBlockHash, previousHash, nonce);
+            return this.connector.signResponseAccountBlock(activeIdx, height, sendBlockHash, previousHash, nonce);
         }
-        return this.connector.signRequestAccountBlock(addressIndex,
+        return this.connector.signRequestAccountBlock(activeIdx,
             height,
             _toAddress,
             amount,
@@ -127,7 +128,14 @@ export async function initLedger({ connectType }) {
     await ledgerInstance.connect();
 
     // ledgerMock
-    const appConfig = await ledgerInstance.connector.getAppConfig().catch(err => console.log(err));
-    console.log(appConfig);
-    return appConfig;
+    try {
+        const appConfig = await ledgerInstance.connector.getAppConfig();
+        console.log(appConfig);
+        return appConfig;
+    } catch (err) {
+        console.log(err);
+        ledgerInstance.connector = null;
+        ledgerInstance.status = 0;
+        throw err;
+    }
 }

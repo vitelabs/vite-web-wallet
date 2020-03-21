@@ -1,7 +1,7 @@
 <template lang="pug">
 extends /components/dialog/base.pug
 block head
-    .head {{$t('assets.vb.confirm.tips')}}
+    .head {{ isHardware ? $t('assets.ledger.confirm.tips') : $t('assets.vb.confirm.tips')}}
 block content
     span.block-ctx
 </template>
@@ -9,7 +9,19 @@ block content
 <script>
 export default {
     data() {
-        return { dShowClose: false, dTitle: this.$t('assets.vb.title'), dSTxt: this.$t('assets.vb.closeAlert') };
+        return { 
+            dShowClose: false
+        };
+    },
+    beforeMount() {
+        this.dTitle = this.isHardware ? this.$t('assets.ledger.title') : this.$t('assets.vb.title');
+        this.dSTxt = this.isHardware ? this.$t('assets.ledger.closeAlert'): this.$t('assets.vb.closeAlert') ;
+    },
+    computed: {
+        isHardware() {
+            const currAcc = this.$store.state.wallet.currHDAcc;
+            return currAcc && currAcc.isHardware;
+        }
     },
     methods: {
         inspector() {

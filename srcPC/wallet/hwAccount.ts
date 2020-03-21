@@ -24,7 +24,6 @@ export class HWAccount {
     hw: any;
     activeAccount: any;
     isHardware: boolean;
-    addressIndex: number;
     private receiveTask: any;
 
     // 用于判断是否私钥是存储在其他地方，例如：硬件钱包和手机钱包里。在多数情况下，两者的表现形式差不多，所以将单独用一个字段来标明
@@ -37,23 +36,22 @@ export class HWAccount {
         lang,
         name,
         activeAddr,
-        addressIndex = 0,
+        activeIdx = 0,
         publicKey
     }) {
         this.id = `VITEHARDWARE_${ activeAddr }`;
         this.lang = lang || Default_Lang;
         this.name = name || '';
         this.activeAddr = activeAddr;
-        this.addressIndex = addressIndex;
         this.status = StatusMap.LOCK;
 
         this.isHardware = true;
-        this.addressIndex = addressIndex;
+        this.activeIdx = activeIdx;
         this.isSeparateKey = true;
         this.publicKey = publicKey;
 
 
-        this.setActiveAcc();
+        this.setActiveAcc(activeIdx, activeAddr);
         this.addrList = [{
             address: activeAddr,
             id: this.id,
@@ -81,7 +79,6 @@ export class HWAccount {
             activeAddr: this.activeAddr,
             activeIdx: this.activeIdx,
             isHardware: this.isHardware,
-            addressIndex: this.addressIndex,
             isSeparateKey: this.isSeparateKey
         });
     }
@@ -91,13 +88,15 @@ export class HWAccount {
             return;
         }
 
+        this.freeze();
+
         this.receiveTask = new accountBlockUtils.ReceiveAccountBlockTask({
             address: this.activeAccount.address,
             provider: viteClient,
             sign: async _accountBlock => {
                 if (!this.hw) return;
                 try {
-                    const { signature } = await this.hw.signHwTx(this.addressIndex, _accountBlock);
+                    const { signature } = await this.hw.signHwTx(this.activeIdx, _accountBlock);
                     _accountBlock.setPublicKey(this.publicKey);
                     _accountBlock.setSignature(signature);
                 } catch (err) {
@@ -105,8 +104,9 @@ export class HWAccount {
                 }
             }
         });
-        this.receiveTask.onSuccess(() => {
-            toast(i18n.t('assets.ledger.connect.receiveBlockSuccess'));
+        this.receiveTask.onSuccess(({ message }) => {
+            console.log(message);
+            // toast(i18n.t('assets.ledger.connect.receiveBlockSuccess'));
         });
         this.receiveTask.start();
         return;
@@ -139,12 +139,25 @@ export class HWAccount {
         this.hw = null;
     }
 
-    setActiveAcc() {
+    switchActiveAcc(index, address, publicKey) {
+        if (this.status === StatusMap.LOCK) {
+            return;
+        }
+        this.freeze();
+        this.setActiveAcc(index, address, publicKey);
+        this.activate();
+    }
+
+    setActiveAcc(activeIdx, activeAddr, publicKey) {
+        this.activeIdx = activeIdx;
+        this.activeAddr = activeAddr;
+        this.publicKey = publicKey;
+
         this.activeAccount = {
             isHardware: true,
-            address: this.activeAddr,
+            address: activeAddr,
             isSeparateKey: true,
-            publicKey: this.publicKey
+            publicKey
         };
     }
 
@@ -156,6 +169,5 @@ export class HWAccount {
         this.hw = hw;
         this.status = StatusMap.UNLOCK;
         setLastAcc({ id: this.id });
-        this.activate();
     }
 }

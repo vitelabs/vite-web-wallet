@@ -4,7 +4,7 @@ block head
     .head {{ !(isConnected) ? $t('assets.ledger.connect.selectConnectType') : $t('assets.ledger.connect.tips')}}
 block content
     div.__row(v-if="isConnected")
-        table.hw_table
+        table.hw_table(v-if="addressList && addressList.length")
             thead
                 tr
                     th
@@ -23,16 +23,22 @@ block content
 
                     th {{address.balance | toBasic(18)}}
                     th {{address.unreceived | toBasic(18)}}
-        div.hw_btn_wrapper
+        div(class="loading_wrapper" v-else)
+            loading(class="loading" class="ex-center-loading" loadingType="dot")
+        div.hw_btn_wrapper(v-if="addressList && addressList.length")
             span.code_small_btn(@click="getAddressList('pre')" v-show="(this.startIndex - this.addrNum) > 0") {{ $t('assets.ledger.addressSelect.prePage') }}
             span.code_small_btn(@click="getAddressList('next')") {{ $t('assets.ledger.addressSelect.nextPage') }}
 
-        div.__row.btn_wrapper
+        div.__row.btn_wrapper(v-if="addressList && addressList.length")
             div.btn.btn-blue.__pointer(@click="confirm()" :class="{'btn-gray': isBtnUnuse}") {{ $t('assets.ledger.addressSelect.confirm') }}
     div.__row(v-else)
         div.__row.ledger_connect_btn
-            div.btn.btn-blue.__pointer(@click="connect('usb')") {{ $t("assets.ledger.connectWithUSB") }}
-            div.btn.btn-blue.__pointer(@click="connect('blu')") {{ $t("assets.ledger.connectWithBlu") }}
+            div.btn.btn-blue.__pointer(@click="connect('usb')") 
+                loading(loadingType="dot" v-show="connectPending")
+                span(v-show="!connectPending") {{ $t("assets.ledger.connectWithUSB") }}
+            div.btn.btn-blue.__pointer(@click="connect('blu')") 
+                span(v-show="!connectPending") {{ $t("assets.ledger.connectWithBlu") }}
+                loading(loadingType="dot" v-show="connectPending")
 </template>
 
 <script>
@@ -43,22 +49,25 @@ import icon from 'assets/imgs/start_qrcode_icon.svg';
 import Checkbox from 'uiKit/checkbox';
 import { viteClient } from 'services/apiServer';
 import { VITE_TOKENID } from 'utils/constant';
+import loading from 'components/loading.vue';
 import Vue from 'vue';
 
 export default {
-    components: { Checkbox },
+    components: { Checkbox, loading },
     data() {
         const ledgerInstance = getLedgerInstance();
         return {
             addressList: [],
             selected: null,
-            isConnected: ledgerInstance && ledgerInstance.status,
-            addrNum: 6
+            isConnected: ledgerInstance && ledgerInstance.status && ledgerInstance.connector,
+            addrNum: 5,
+            connectPending: false
         };
     },
     beforeMount() {
         this.getAddressList();
-        this.isConnected = getLedgerInstance() && getLedgerInstance().status;
+        this.isConnected = getLedgerInstance() && getLedgerInstance().status && getLedgerInstance().connector;
+        this.width = 'wide';
     },
     computed: {
         isBtnUnuse() {
@@ -120,12 +129,14 @@ export default {
             if (this.isBtnUnuse) return;
             getLedgerInstance().emit('connected', {
                 address: this.selected.address,
-                addressIndex: this.selected.index,
+                activeIdx: this.selected.index,
                 publicKey: this.selected.publicKey
             });
             this.rClick();
         },
         connect(connectType) {
+            if (this.connectPending) return;
+            this.connectPending = true;
             initLedger({ connectType })
                 .then(() => this.getAddressList())
                 .then(() => {
@@ -139,7 +150,10 @@ export default {
                     if (err) {
                         getLedgerInstance().emit('error', err);
                     }
-                });
+                })
+                .finally(() => {
+                    this.connectPending = false;
+                })
         }
     }
 };
@@ -161,6 +175,11 @@ export default {
 .code_container {
     margin: 0 auto;
     justify-content: center;
+}
+
+.loading_wrapper {
+    height: 120px;
+    position: relative;
 }
 
 .hw_table {
