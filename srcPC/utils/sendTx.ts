@@ -189,12 +189,9 @@ async function hwSendTx({ methodName, params, config }) {
         const { signature } = await hw.signHwTx(activeIdx, accountBlock);
         accountBlock.setSignature(signature);
         await accountBlock.send();
-    }
-    
-    finally {
+    } finally {
         confirmDialog.compInstance && confirmDialog.compInstance.close();
     }
-
 }
 
 function hwConfirmDialog() {

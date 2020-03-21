@@ -33,10 +33,10 @@ block content
             div.btn.btn-blue.__pointer(@click="confirm()" :class="{'btn-gray': isBtnUnuse}") {{ $t('assets.ledger.addressSelect.confirm') }}
     div.__row(v-else)
         div.__row.ledger_connect_btn
-            div.btn.btn-blue.__pointer(@click="connect('usb')") 
+            div.btn.btn-blue.__pointer(@click="connect('usb')")
                 loading(loadingType="dot" v-show="connectPending")
                 span(v-show="!connectPending") {{ $t("assets.ledger.connectWithUSB") }}
-            div.btn.btn-blue.__pointer(@click="connect('blu')") 
+            div.btn.btn-blue.__pointer(@click="connect('blu')")
                 span(v-show="!connectPending") {{ $t("assets.ledger.connectWithBlu") }}
                 loading(loadingType="dot" v-show="connectPending")
 </template>
@@ -153,7 +153,7 @@ export default {
                 })
                 .finally(() => {
                     this.connectPending = false;
-                })
+                });
         }
     }
 };

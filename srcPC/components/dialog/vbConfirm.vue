@@ -9,13 +9,11 @@ block content
 <script>
 export default {
     data() {
-        return { 
-            dShowClose: false
-        };
+        return { dShowClose: false };
     },
     beforeMount() {
         this.dTitle = this.isHardware ? this.$t('assets.ledger.title') : this.$t('assets.vb.title');
-        this.dSTxt = this.isHardware ? this.$t('assets.ledger.closeAlert'): this.$t('assets.vb.closeAlert') ;
+        this.dSTxt = this.isHardware ? this.$t('assets.ledger.closeAlert') : this.$t('assets.vb.closeAlert') ;
     },
     computed: {
         isHardware() {
