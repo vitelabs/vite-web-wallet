@@ -74,14 +74,14 @@ export class Ledger extends Eventemitter {
     async getAddressList(startIndex = 0, length = 5) {
         const list = [];
         for (let i = startIndex; i < startIndex + length; i++) {
-            const address = await this.connector.getAddress(i, false)
-                // ledgerMock
-                // .catch(() => {
-                //     return {
-                //         address: 'vite_574963ad867047fef64a941e53f1fd01ce7ba241b80c20f537',
-                //         publicKey: `publicKey_${ i }`
-                //     };
-                // });
+            const address = await this.connector.getAddress(i, false);
+            // ledgerMock
+            // .catch(() => {
+            //     return {
+            //         address: 'vite_574963ad867047fef64a941e53f1fd01ce7ba241b80c20f537',
+            //         publicKey: `publicKey_${ i }`
+            //     };
+            // });
             list.push({
                 ...address,
                 index: i

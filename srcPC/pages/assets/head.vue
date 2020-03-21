@@ -275,7 +275,7 @@ export default {
 
             currentAccount.hw.connector
                 .getAddress(currentAccount.activeIdx, true)
-                .catch(err => { 
+                .catch(err => {
                     if (err && err.statusCode === 27013) {
                         baseDialog({
                             title: this.$t('assets.ledger.confirm.alert'),
@@ -286,14 +286,14 @@ export default {
                             if (status === 'CONFRIMED') {
                                 window.open('https://vitex.zendesk.com/');
                             }
-                        })
+                        });
                         return;
-                    };
-                    currentAccount.hw.emit('error', err) 
-                }) 
+                    }
+                    currentAccount.hw.emit('error', err);
+                })
                 .finally(() => {
                     dialog.compInstance.close();
-                })
+                });
         }
     }
 };

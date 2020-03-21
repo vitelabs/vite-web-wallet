@@ -3,7 +3,7 @@ extends /components/dialog/base.pug
 block head
     .head {{ $t('assets.ledger.confirm.verifyAddress') }}
 block content
-    span.block-ctx 
+    span.block-ctx
         span.first {{activeAddr.substr(0, 10)}}
         span.mid {{activeAddr.substring(10, activeAddr.length - 5)}}
         span.last {{activeAddr.substring(activeAddr.length - 5)}}
@@ -12,9 +12,7 @@ block content
 <script>
 export default {
     data() {
-        return { 
-            dShowClose: false
-        };
+        return { dShowClose: false };
     },
     beforeMount() {
         this.title = this.$t('assets.ledger.title');
