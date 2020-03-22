@@ -32,7 +32,7 @@ block content
         div.__row.btn_wrapper(v-if="addressList && addressList.length")
             div.btn.btn-blue.__pointer(@click="confirm()" :class="{'btn-gray': isBtnUnuse}") {{ $t('assets.ledger.addressSelect.confirm') }}
     div.__row(v-else)
-        div.ledger_introduction 
+        div.ledger_introduction
             span.ledger_introduction__header {{$t('assets.ledger.connect.introduction.1.title')}}
             span.ledger_introduction__content {{$t('assets.ledger.connect.introduction.1.content')}}
         lottie(type="plugAndPinCode" class="ledger_lottie")

@@ -1,7 +1,7 @@
 <template lang="pug">
 extends /components/dialog/base.pug
 block head
-    .head 
+    .head
         span.block-ctx
             span.first {{activeAddr.substr(0, 10)}}
             span.mid {{activeAddr.substring(10, activeAddr.length - 5)}}
