@@ -3,11 +3,15 @@ extends /components/dialog/base.pug
 block head
     .head {{ isHardware ? $t('assets.ledger.confirm.tips') : $t('assets.vb.confirm.tips')}}
 block content
-    span.block-ctx
+    span.block-ctx(v-if="!isHardware")
+    lottie(v-else type="validate" class="ledger_lottie")
 </template>
 
 <script>
+import Lottie from 'pcComponents/animation/lottie.vue';
+
 export default {
+    components: { Lottie },
     data() {
         return { dShowClose: false };
     },

@@ -498,8 +498,8 @@
                 "introductionUrl": "https://support.ledger.com/hc/en-us/articles/115005165269-Connection-issues-with-Windows-or-Linux",
                 "connectErrorUrl": "https://support.ledger.com/hc/en-us/articles/115005165269-Connection-issues-with-Windows-or-Linux"
             },
-            "connectWithUSB": "Connect with USB",
-            "connectWithBlu": "Connect with Bluetooth",
+            "connectWithUSB": "USB 连接",
+            "connectWithBlu": "蓝牙 连接",
             "connectLedger": "Connect to Ledger",
             "connect": {
                 "title": "地址选择",
@@ -508,7 +508,17 @@
                 "cancelSelect": "请选择一个设备进行连接",
                 "connectError": "连接错误，请确保在Ledger上已打开Vite App软件！",
                 "interfaceNotAvailable": "连接失败，请尝试重新连接USB线，或者重启蓝牙再次尝试",
-                "receiveBlockSuccess": "成功签收一个 Response 块"
+                "receiveBlockSuccess": "成功签收一个 Response 块",
+                "introduction": {
+                    "1": {
+                        "title": "第一步: ",
+                        "content": "请连接 Ledger 设备并输入PIN"
+                    },
+                    "2": {
+                        "title": "第二步: ",
+                        "content": "请在 Ledger 设备里打开Vite App"
+                    }
+                }
             },
             "addressSelect": {
                 "index": "Index",
