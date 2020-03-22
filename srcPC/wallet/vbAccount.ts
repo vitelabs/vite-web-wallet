@@ -21,6 +21,9 @@ export class VBAccount {
     activeAccount: any;
     isBifrost: boolean;
 
+    // 用于判断是否私钥是存储在其他地方，例如：硬件钱包和手机钱包里。在多数情况下，两者的表现形式差不多，所以将单独用一个字段来标明
+    isSeparateKey: boolean;
+
     constructor({
         lang,
         name,
@@ -39,6 +42,7 @@ export class VBAccount {
         }];
 
         this.isBifrost = true;
+        this.isSeparateKey = true;
 
         // Set Addr Num
         this.addrNum = 1;

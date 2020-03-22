@@ -1253,6 +1253,55 @@
     unique-filename "^1.1.1"
     which "^1.3.1"
 
+"@ledgerhq/devices@^5.11.0":
+  version "5.11.0"
+  resolved "https://registry.npmjs.org/@ledgerhq/devices/-/devices-5.11.0.tgz#34c79e80539160df3116795ddb7d2aee904645e3"
+  integrity sha512-S+azwTA/L3g1l6ARN+rVYZeOu6b3uHxf6Ha5oj6UHbXxIdz1DyCVSUHz8SNrjDh0mUlbJugpAgaKBDdC2v9nNA==
+  dependencies:
+    "@ledgerhq/errors" "^5.11.0"
+    "@ledgerhq/logs" "^5.11.0"
+    rxjs "^6.5.4"
+
+"@ledgerhq/errors@^5.11.0":
+  version "5.11.0"
+  resolved "https://registry.npmjs.org/@ledgerhq/errors/-/errors-5.11.0.tgz#722151b36ce1d53f555eeaae3e66f819c2362b28"
+  integrity sha512-o9Mx10+qZwuS6tKe6Z2mQJMClIvVtRNt/tdz4P/pNcGeT/0d6jdUfyF+J5P7RF3au0e9HTxG2LMCPFPZ2Tnibg==
+
+"@ledgerhq/hw-transport-web-ble@^5.11.0":
+  version "5.11.0"
+  resolved "https://registry.npmjs.org/@ledgerhq/hw-transport-web-ble/-/hw-transport-web-ble-5.11.0.tgz#3100367a5f42c4bb0e417749eedd536a5a38bb40"
+  integrity sha512-U9AzbOJR3d2fs1Cfs/DNOeZxiFcLUgf6iV/fDJEhljT6eGCGYTe/6GuJGVbChu6i1qEjyexyBOSvrsz+uLzy7g==
+  dependencies:
+    "@ledgerhq/devices" "^5.11.0"
+    "@ledgerhq/errors" "^5.11.0"
+    "@ledgerhq/hw-transport" "^5.11.0"
+    "@ledgerhq/logs" "^5.11.0"
+    rxjs "^6.5.4"
+
+"@ledgerhq/hw-transport-webusb@^5.11.0":
+  version "5.11.0"
+  resolved "https://registry.npmjs.org/@ledgerhq/hw-transport-webusb/-/hw-transport-webusb-5.11.0.tgz#b0dfa5cf0863225ba3fac814882c64bbc38bf9ee"
+  integrity sha512-V3Q8PukBmmEUPvavJjEsXX5edHlXsIYSMGxjz5ubI1yCayjXA15LZU/eUGmQWaZWbgT4Ix4tqltykTgZeqnkBw==
+  dependencies:
+    "@ledgerhq/devices" "^5.11.0"
+    "@ledgerhq/errors" "^5.11.0"
+    "@ledgerhq/hw-transport" "^5.11.0"
+    "@ledgerhq/logs" "^5.11.0"
+
+"@ledgerhq/hw-transport@^5.11.0", "@ledgerhq/hw-transport@^5.3.0":
+  version "5.11.0"
+  resolved "https://registry.npmjs.org/@ledgerhq/hw-transport/-/hw-transport-5.11.0.tgz#f5c45a34d9b68d81fd2f6641b49815527720364b"
+  integrity sha512-z56iwv0DZZu20T5q9sNMHFQNVuRKYqzCuNFhY9woWSpmOQkyVHCRiEgOQbN5h6kVri6fkfPkDzqqcsYjJlnT9g==
+  dependencies:
+    "@ledgerhq/devices" "^5.11.0"
+    "@ledgerhq/errors" "^5.11.0"
+    events "^3.1.0"
+
+"@ledgerhq/logs@^5.11.0":
+  version "5.11.0"
+  resolved "https://registry.npmjs.org/@ledgerhq/logs/-/logs-5.11.0.tgz#9ad2aefceeef48cf9d77972f67e63ba478dd04cc"
+  integrity sha512-NiFDdxLU/z1VGQy0/cbpv7UScMDQ/rU8SznqILSHYTnhK2xvvNFTUkd1W2mpmf9E/hzXFI0UAOieLQ44qovX3w==
+
 "@lerna/add@3.19.0":
   version "3.19.0"
   resolved "https://registry.npm.taobao.org/@lerna/add/download/@lerna/add-3.19.0.tgz#33b6251c669895f842c14f05961432d464166249"
@@ -2234,15 +2283,25 @@
     "@ethersproject/strings" "^5.0.0-beta.125"
     "@types/node" "^12.0.12"
 
+"@vite/ledgerjs-hw-app-vite@^1.0.0":
+  version "1.0.0"
+  resolved "https://registry.npmjs.org/@vite/ledgerjs-hw-app-vite/-/ledgerjs-hw-app-vite-1.0.0.tgz#cb1180ae4fb67a88228c3d72e68b5a1c9871f4c7"
+  integrity sha512-4QI12xAiLkuUa8OYYCE+4UAas4UyYq9Uh7ffX4iq1LS2ZukzwivPlWvSSWOxpSf/vM/SPcGVb69jnjNn1hCBOw==
+  dependencies:
+    "@ledgerhq/hw-transport" "^5.3.0"
+    big-integer "^1.6.43"
+    bip32-path "^0.4.2"
+    blakejs "^1.1.0"
+
 "@vite/vitejs-ws@2.3.0":
   version "2.3.0"
   resolved "https://registry.npmjs.org/@vite/vitejs-ws/-/vitejs-ws-2.3.0.tgz#0d73523914bfabf21a93fe4991e5da9398a78d23"
   integrity sha512-zXTW4QfaBBTmgG2l/hqS2WQzKFYeQzm/xzVCTUcI0ltGTGbpF0WHpQQCpyDlAf5lW9C5nMeBxXOdv69CGCaDfQ==
 
-"@vite/vitejs@^2.3.3":
-  version "2.3.3"
-  resolved "https://registry.npmjs.org/@vite/vitejs/-/vitejs-2.3.3.tgz#48203f9cf07ce34f77ae04cac99d2302a2fa6ccf"
-  integrity sha512-4mj1urXHPLrsAfCy/3TOQ13bny2ye1ESMkluMfLcBJH5UTywDhZEYRlGCLh9cMGFjkrHgLgyv3TJePbxguOsPg==
+"@vite/vitejs@2.3.6-alpha.3":
+  version "2.3.6-alpha.3"
+  resolved "https://registry.npmjs.org/@vite/vitejs/-/vitejs-2.3.6-alpha.3.tgz#680900dbbc94ec1e355db8626fdc20be7367155c"
+  integrity sha512-4y/hMUD1n7iVhnwc09LVR7wsIJCXFyrntHJvCFye8OyHDB2Cnbj1AT9QCtB0ety1Zn72zPNhDWkvJrnWz1u0Jw==
   dependencies:
     "@sisi/ed25519-blake2b-hd-key" "^1.0.2"
     "@sisi/tweetnacl-blake2b" "^1.0.0"
@@ -3216,6 +3275,11 @@ bfj@^6.1.1:
     hoopy "^0.1.4"
     tryer "^1.0.1"
 
+big-integer@^1.6.43:
+  version "1.6.48"
+  resolved "https://registry.npmjs.org/big-integer/-/big-integer-1.6.48.tgz#8fd88bd1632cba4a1c8c3e3d7159f08bb95b4b9e"
+  integrity sha512-j51egjPa7/i+RdiRuJbPdJ2FIUYYPhvYLjzoYbcMMm62ooO6F94fETG4MTs46zPAF9Brs04OajboA/qTGuz78w==
+
 big.js@^3.1.3:
   version "3.2.0"
   resolved "https://registry.npm.taobao.org/big.js/download/big.js-3.2.0.tgz#a5fc298b81b9e0dca2e458824784b65c52ba588e"
@@ -3290,6 +3354,11 @@ bindings@^1.2.1, bindings@^1.5.0:
   integrity sha1-EDU8npRTNLwFEabZCzj7x8nFBN8=
   dependencies:
     file-uri-to-path "1.0.0"
+
+bip32-path@^0.4.2:
+  version "0.4.2"
+  resolved "https://registry.npmjs.org/bip32-path/-/bip32-path-0.4.2.tgz#5db0416ad6822712f077836e2557b8697c0c7c99"
+  integrity sha1-XbBBataCJxLwd4NuJVe4aXwMfJk=
 
 bip39@^2.4.0:
   version "2.6.0"
@@ -5882,13 +5951,18 @@ eventemitter3@^3.1.0:
 
 eventemitter3@^4.0.0:
   version "4.0.0"
-  resolved "https://registry.npm.taobao.org/eventemitter3/download/eventemitter3-4.0.0.tgz#d65176163887ee59f386d64c82610b696a4a74eb"
-  integrity sha1-1lF2FjiH7lnzhtZMgmELaWpKdOs=
+  resolved "https://registry.npmjs.org/eventemitter3/-/eventemitter3-4.0.0.tgz#d65176163887ee59f386d64c82610b696a4a74eb"
+  integrity sha512-qerSRB0p+UDEssxTtm6EDKcE7W4OaoisfIMl4CngyEhjpYglocpNg6UEqCvemdGhosAsg4sO2dXJOdyBifPGCg==
 
 events@^3.0.0:
   version "3.0.0"
   resolved "https://registry.npm.taobao.org/events/download/events-3.0.0.tgz#9a0a0dfaf62893d92b875b8f2698ca4114973e88"
   integrity sha1-mgoN+vYok9krh1uPJpjKQRSXPog=
+
+events@^3.1.0:
+  version "3.1.0"
+  resolved "https://registry.npmjs.org/events/-/events-3.1.0.tgz#84279af1b34cb75aa88bf5ff291f6d0bd9b31a59"
+  integrity sha512-Rv+u8MLHNOdMjTAFeT3nCjHn2aGlx435FP/sDHNaRhDEMwyI/aB22Kj2qIN8R0cw3z28psEQLYwxVKLsKrMgWg==
 
 eventsource@^1.0.7:
   version "1.0.7"
@@ -11905,6 +11979,13 @@ rxjs@^6.1.0, rxjs@^6.4.0:
   version "6.5.3"
   resolved "https://registry.npm.taobao.org/rxjs/download/rxjs-6.5.3.tgz#510e26317f4db91a7eb1de77d9dd9ba0a4899a3a"
   integrity sha1-UQ4mMX9NuRp+sd532d2boKSJmjo=
+  dependencies:
+    tslib "^1.9.0"
+
+rxjs@^6.5.4:
+  version "6.5.4"
+  resolved "https://registry.npmjs.org/rxjs/-/rxjs-6.5.4.tgz#e0777fe0d184cec7872df147f303572d414e211c"
+  integrity sha512-naMQXcgEo3csAEGvw/NydRA0fuS2nDZJiw1YUWFKU7aPPAPGZEsD4Iimit96qwCieH6y614MCLYwdkrWx7z/7Q==
   dependencies:
     tslib "^1.9.0"
 

@@ -6,7 +6,7 @@ div(:style="s.container")
         block originContent
             div(:style="s.body")
                 block content
-                    div(v-if="Content")
+                    div(v-if="Content") {{content}}
         div(:style="s.btnGroup" v-if="ShowBottom")
             div(:style="[s.btn,BtnUnuse||btnUnuse?s.unUse:undefined]" v-if="!!STxt" @click="rClick") {{STxt}}
             div(:style="[s.lBtn,s.btn]" v-if="!STxt"  @click="lClick") {{LTxt}}

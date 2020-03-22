@@ -19,7 +19,7 @@
             <vite-input v-model="amount" :valid="testAmount" :placeholder="$t('tradeMining.addPlaceHolder')"></vite-input>
         </div>
 
-        <div class="__hint distance"><span>{{ $t('tradeMining.addHint1') }}</span></div>
+        <!-- <div class="__hint distance"><span>{{ $t('tradeMining.addHint1') }}</span></div> -->
         <div class="__hint"><span>{{ $t('tradeMining.addHint2') }}</span></div>
         <div class="__hint"><span>{{ $t('tradeMining.addHint3') }}</span></div>
     </confirm>
