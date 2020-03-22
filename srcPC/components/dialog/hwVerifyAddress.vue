@@ -1,16 +1,20 @@
 <template lang="pug">
 extends /components/dialog/base.pug
 block head
-    .head {{ $t('assets.ledger.confirm.verifyAddress') }}
+    .head 
+        span.block-ctx
+            span.first {{activeAddr.substr(0, 10)}}
+            span.mid {{activeAddr.substring(10, activeAddr.length - 5)}}
+            span.last {{activeAddr.substring(activeAddr.length - 5)}}
 block content
-    span.block-ctx
-        span.first {{activeAddr.substr(0, 10)}}
-        span.mid {{activeAddr.substring(10, activeAddr.length - 5)}}
-        span.last {{activeAddr.substring(activeAddr.length - 5)}}
+    div.verify__tips {{ $t('assets.ledger.confirm.verifyAddress') }}
+    lottie(type="validate" class="ledger_lottie")
 </template>
 
 <script>
+import Lottie from 'pcComponents/animation/lottie.vue';
 export default {
+    components: { Lottie },
     data() {
         return { dShowClose: false };
     },
@@ -48,6 +52,16 @@ export default {
     @include common_font_color();
     @include common_border_one(bottom);
     @include bg_color_2();
+}
+
+.verify__tips {
+    text-align: center;
+    @include font-family-bold();
+    text-align: center;
+}
+
+.ledger_lottie {
+    height: 180px;
 }
 .block-ctx {
     @include font-family-bold();

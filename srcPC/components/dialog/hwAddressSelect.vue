@@ -32,6 +32,14 @@ block content
         div.__row.btn_wrapper(v-if="addressList && addressList.length")
             div.btn.btn-blue.__pointer(@click="confirm()" :class="{'btn-gray': isBtnUnuse}") {{ $t('assets.ledger.addressSelect.confirm') }}
     div.__row(v-else)
+        div.ledger_introduction 
+            span.ledger_introduction__header {{$t('assets.ledger.connect.introduction.1.title')}}
+            span.ledger_introduction__content {{$t('assets.ledger.connect.introduction.1.content')}}
+        lottie(type="plugAndPinCode" class="ledger_lottie")
+        div.ledger_introduction
+            span.ledger_introduction__header {{$t('assets.ledger.connect.introduction.2.title')}}
+            span.ledger_introduction__content {{$t('assets.ledger.connect.introduction.2.content')}}
+        lottie(type="openApp" class="ledger_lottie")
         div.__row.ledger_connect_btn
             div.btn.btn-blue.__pointer(@click="connect('usb')")
                 loading(loadingType="dot" v-show="connectPending")
@@ -42,6 +50,8 @@ block content
 </template>
 
 <script>
+import Vue from 'vue';
+
 import { initVB } from 'wallet/vb';
 import { getLedgerInstance, initLedger } from 'wallet/ledgerHW';
 import { getCurrHDAcc } from 'wallet';
@@ -50,10 +60,10 @@ import Checkbox from 'uiKit/checkbox';
 import { viteClient } from 'services/apiServer';
 import { VITE_TOKENID } from 'utils/constant';
 import loading from 'components/loading.vue';
-import Vue from 'vue';
+import Lottie from 'pcComponents/animation/lottie.vue';
 
 export default {
-    components: { Checkbox, loading },
+    components: { Checkbox, loading, Lottie },
     data() {
         const ledgerInstance = getLedgerInstance();
         return {
@@ -180,6 +190,19 @@ export default {
 .loading_wrapper {
     height: 120px;
     position: relative;
+}
+
+.ledger_introduction {
+    .ledger_introduction__header {
+        @include font-family-bold();
+    }
+    .ledger_introduction__content {
+        @include font-family-normal();
+    }
+}
+
+.ledger_lottie {
+    height: 180px;
 }
 
 .hw_table {
