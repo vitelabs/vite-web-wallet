@@ -838,7 +838,9 @@
                 "alert": "Warning",
                 "alertContent": "Address has been denied on Ledger device. Please double verify if this address matches the address displayed on your Ledger device. If yes, ignore this message and go ahead to confirm the transaction, otherwise DO NOT send asset to the address and quit immediately.",
                 "alertLeftBtn": "I confirm the addresses are matched",
-                "alertRightBtn": "Addresses mismatch. Get me out of here!"
+                "alertRightBtn": "Addresses mismatch. Get me out of here!",
+                "userCancel": "Transaction is cancelled on Ledger",
+                "userCancelByWeb": "You cancelled the transaction in Vite wallet. In this case, the transaction will be abandoned and never go through to blockchain even if it is confirmed on your Ledger device."
             }
         },
         "invite":{
