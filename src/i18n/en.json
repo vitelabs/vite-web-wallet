@@ -788,6 +788,61 @@
             },
             "accountName":"ViteConnect Address"
         },
+        "ledger": {
+            "title": "Ledger Device",
+            "accountName": "Ledger Wallet",
+            "verifyAddress": "Verify address",
+            "closeAlert": "Cancel",
+            "start": {
+                "title": "Support Hardware Wallets: Ledger Nano S / Ledger Nano X",
+                "connectError": "Having Connection Issues?",
+                "introduction": "App Installation & Usage Instructions",
+                "introductionUrl": "https://support.ledger.com/hc/en-us/articles/115005165269-Connection-issues-with-Windows-or-Linux",
+                "connectErrorUrl": "https://support.ledger.com/hc/en-us/articles/115005165269-Connection-issues-with-Windows-or-Linux"
+            },
+            "connectWithUSB": "Use USB",
+            "connectWithBlu": "Use Bluetooth",
+            "connectLedger": "Connect to Ledger",
+            "connect": {
+                "title": "Address Select",
+                "tips": "Select an address to use:",
+                "selectConnectType": "Choose connection type: (Bluetooth is only supported on Ledger Nano X)",
+                "cancelSelect": "Select a device to connect",
+                "connectError": "Connect failed. Please confirm Vite app is opened on device",
+                "interfaceNotAvailable": "Connect failed. Please check USB cable is connected. If you connect through Bluetooth, switch off Bluetooth and switch on again",
+                "receiveBlockSuccess": "Successfully received a transaction",
+                "introduction": {
+                    "1": {
+                        "title": "Step 1: ",
+                        "content": "Connect Ledger device and enter PIN code"
+                    },
+                    "2": {
+                        "title": "Step 2: ",
+                        "content": "Open Vite app on Ledger"
+                    }
+                }
+            },
+            "addressSelect": {
+                "index": "Index",
+                "address": "Address",
+                "balance": "Balance",
+                "unreceived": "Unreceived",
+                "nextPage": "Next page",
+                "prePage": "Last page",
+                "confirm": "Confirm",
+                "unUsedAccount": "New"
+            },
+            "confirm": {
+                "tips": "Please confirm the transaction on your Ledger device",
+                "verifyAddress": "Please verify the address on your Ledger device",
+                "alert": "Warning",
+                "alertContent": "Address has been denied on Ledger device. Please double verify if this address matches the address displayed on your Ledger device. If yes, ignore this message and go ahead to confirm the transaction, otherwise DO NOT send asset to the address and quit immediately.",
+                "alertLeftBtn": "I confirm the addresses are matched",
+                "alertRightBtn": "Addresses mismatch. Get me out of here!",
+                "userCancel": "You have canceled the transaction",
+                "userCancelByWeb": "您取消了交易，即使在 Ledger 钱包里确认该交易，该交易也不会广播出去"
+            }
+        },
         "invite":{
             "inviteTitle":"Invite Friends",
             "receiveInviteTitle":"Use Referral Code",
