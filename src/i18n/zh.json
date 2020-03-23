@@ -500,7 +500,7 @@
             },
             "connectWithUSB": "USB 连接",
             "connectWithBlu": "蓝牙 连接",
-            "connectLedger": "Connect to Ledger",
+            "connectLedger": "连接 Ledger",
             "connect": {
                 "title": "地址选择",
                 "tips": "请从以下地址中选择一个地址：",

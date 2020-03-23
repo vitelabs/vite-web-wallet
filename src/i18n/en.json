@@ -792,7 +792,7 @@
             "title": "Ledger Device",
             "accountName": "Ledger Wallet",
             "verifyAddress": "Verify address",
-            "closeAlert": "Close window",
+            "closeAlert": "Cancel",
             "start": {
                 "title": "Support Hardware Wallets: Ledger Nano S / Ledger Nano X",
                 "connectError": "Having Connection Issues?",
