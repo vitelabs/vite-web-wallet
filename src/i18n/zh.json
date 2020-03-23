@@ -490,7 +490,7 @@
             "title": "Ledger Device",
             "accountName": "Ledger Wallet",
             "verifyAddress": "验证该地址",
-            "closeAlert": "关闭弹窗",
+            "closeAlert": "取消交易",
             "start": {
                 "title": "支持 Ledger nano S 或 Ledger nano X",
                 "connectError": "连接错误",
@@ -538,7 +538,7 @@
                 "alertLeftBtn": "误操作",
                 "alertRightBtn": "确实不一致",
                 "userCancel": "您在 Ledger 钱包里取消了交易",
-                "userCancelByWeb": "您取消了交易，即使在 Ledger 钱包里点击确认该交易也不会广播出去"
+                "userCancelByWeb": "您取消了交易，即使在 Ledger 钱包里确认该交易，该交易也不会广播出去"
             }
         },
         "invite":{
