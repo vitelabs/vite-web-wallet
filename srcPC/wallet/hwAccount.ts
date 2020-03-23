@@ -1,5 +1,5 @@
 import { constant } from 'pcUtils/store';
-import { accountBlock as accountBlockUtils } from '@vite/vitejs';
+import { accountBlock as accountBlockUtils, accountBlock } from '@vite/vitejs';
 import { viteClient } from 'services/apiServer';
 
 import { addHdAccount, setAcc, getAcc, setAccInfo, setLastAcc } from './store';
@@ -51,7 +51,7 @@ export class HWAccount {
         this.publicKey = publicKey;
 
 
-        this.setActiveAcc(activeIdx, activeAddr);
+        this.setActiveAcc(activeIdx, activeAddr, publicKey);
         this.addrList = [{
             address: activeAddr,
             id: this.id,
@@ -104,9 +104,11 @@ export class HWAccount {
                 }
             }
         });
-        this.receiveTask.onSuccess(({ message }) => {
+        this.receiveTask.onSuccess(({ message, accountBlockList }) => {
             console.log(message);
-            // toast(i18n.t('assets.ledger.connect.receiveBlockSuccess'));
+            if (accountBlockList && accountBlockList.length) {
+                toast(i18n.t('assets.ledger.connect.receiveBlockSuccess', { num: accountBlockList.length }));
+            }
         });
         this.receiveTask.start();
         return;

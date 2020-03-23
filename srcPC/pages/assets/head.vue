@@ -34,8 +34,8 @@
                     </QrcodePopup>
                     <span class="address-content__operate copy click-able" @click="copy"></span>
                 </span>
-                <span v-if="isHardware && isLogin" @click="verifyHwAddress" class="address-content__verify">
-                    <span>{{ $t('assets.ledger.verifyAddress') }}</span>
+                <span v-if="isHardware && isLogin" class="address-content__verify">
+                    <span @click="verifyHwAddress">{{ $t('assets.ledger.verifyAddress') }}</span>
                 </span>
             </div>
         </div>
