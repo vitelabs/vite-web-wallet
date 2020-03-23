@@ -281,7 +281,8 @@ export default {
                             title: this.$t('assets.ledger.confirm.alert'),
                             content: this.$t('assets.ledger.confirm.alertContent'),
                             lTxt: this.$t('assets.ledger.confirm.alertLeftBtn'),
-                            rTxt: this.$t('assets.ledger.confirm.alertRightBtn')
+                            rTxt: this.$t('assets.ledger.confirm.alertRightBtn'),
+                            width: 'wide'
                         }).then(({ status }) => {
                             if (status === 'CONFRIMED') {
                                 window.open('https://vitex.zendesk.com/');
