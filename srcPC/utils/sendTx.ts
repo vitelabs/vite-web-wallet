@@ -146,19 +146,12 @@ async function hwSendTx({ methodName, params, config }) {
     const difficulty = await accountBlock.getDifficulty();
     console.log(difficulty);
 
-    const hw = getLedgerInstance();
-
     const { publicKey, activeIdx } = getCurrHDAcc();
     accountBlock.setPublicKey(publicKey);
 
 
     if (!difficulty) {
-        const confirmDialog = hwConfirmDialog();
-        const { signature } = await hw.signHwTx(activeIdx, accountBlock);
-        accountBlock.setSignature(signature);
-        await accountBlock.send();
-        confirmDialog.compInstance && confirmDialog.compInstance.close();
-        return;
+        return signHwTx(activeIdx, accountBlock);
     }
 
     if (!config.pow) {
@@ -184,25 +177,39 @@ async function hwSendTx({ methodName, params, config }) {
         throw err;
     }
 
-    const confirmDialog = hwConfirmDialog();
-    try {
-        const { signature } = await hw.signHwTx(activeIdx, accountBlock);
-        accountBlock.setSignature(signature);
-        await accountBlock.send();
-    } finally {
-        confirmDialog.compInstance && confirmDialog.compInstance.close();
-    }
+    return signHwTx(activeIdx, accountBlock);
 }
 
-function hwConfirmDialog() {
-    const confirmPromise: any = vbConfirmDialog();
-    const { compInstance } = confirmPromise;
-    confirmPromise.then(() => {
-        // 如果点击了关闭窗口，则不再提示
-        compInstance && compInstance.close();
-        throw ({ code: '11021' });
+
+function signHwTx(activeIdx, accountBlock) {
+    return new Promise((resolve, reject) => {
+        const confirmPromise: any = vbConfirmDialog();
+        const { compInstance } = confirmPromise;
+        let isRejected = false;
+        confirmPromise.then(() => {
+            // 如果点击了关闭窗口，则不再提示
+            compInstance && compInstance.close();
+            isRejected = true;
+            getLedgerInstance().handleError({name: 'CancelByWeb'});
+            reject({ code: '11021' });
+        });
+        getLedgerInstance().signHwTx(activeIdx, accountBlock).catch((err) => {
+            !isRejected && getLedgerInstance().handleError(err);
+            throw err;
+        })
+            .finally(() => {
+                compInstance && compInstance.close();
+            })
+            .then(({ signature }) => accountBlock.setSignature(signature))
+            .then(() => {
+                if (isRejected) {
+                    throw new Error();
+                }
+                return accountBlock.send();
+            })
+            .then((data) => resolve(data))
+            .catch((err) => reject(err));
     });
-    return confirmPromise;
 }
 
 function formatConfig(config) {
