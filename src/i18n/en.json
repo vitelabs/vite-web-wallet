@@ -792,7 +792,7 @@
             "title": "Ledger Device",
             "accountName": "Ledger Wallet",
             "verifyAddress": "Verify address",
-            "closeAlert": "Close window",
+            "closeAlert": "Cancel",
             "start": {
                 "title": "Support Hardware Wallets: Ledger Nano S / Ledger Nano X",
                 "connectError": "Having Connection Issues?",
@@ -838,7 +838,9 @@
                 "alert": "Warning",
                 "alertContent": "Address has been denied on Ledger device. Please double verify if this address matches the address displayed on your Ledger device. If yes, ignore this message and go ahead to confirm the transaction, otherwise DO NOT send asset to the address and quit immediately.",
                 "alertLeftBtn": "I confirm the addresses are matched",
-                "alertRightBtn": "Addresses mismatch. Get me out of here!"
+                "alertRightBtn": "Addresses mismatch. Get me out of here!",
+                "userCancel": "You have canceled the transaction",
+                "userCancelByWeb": "您取消了交易，即使在 Ledger 钱包里确认该交易，该交易也不会广播出去"
             }
         },
         "invite":{
