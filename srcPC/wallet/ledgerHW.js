@@ -43,11 +43,17 @@ export class Ledger extends Eventemitter {
 
         this.on('error', err => {
             console.log(err);
-            if (err.statusCode === 28160) return toast(i18n.t('assets.ledger.connect.connectError'));
-            if (err.name === 'TransportOpenUserCancelled') return toast(i18n.t('assets.ledger.connect.cancelSelect'));
-            if (err.name === 'TransportInterfaceNotAvailable') return toast(i18n.t('assets.ledger.connect.interfaceNotAvailable'));
-            if (err.message) toast(err.message);
+            this.handleError(err);
         });
+    }
+
+    handleError(err) {
+        if (err.statusCode === 28160) return toast(i18n.t('assets.ledger.connect.connectError'));
+        if (err.statusCode === 27013) return toast(i18n.t('assets.ledger.confirm.userCancel'));
+        if (err.name === 'CancelByWeb') return toast(i18n.t('assets.ledger.confirm.userCancelByWeb'), 4000); // 用户在前端取消了弹窗
+        if (err.name === 'TransportOpenUserCancelled') return toast(i18n.t('assets.ledger.connect.cancelSelect'));
+        if (err.name === 'TransportInterfaceNotAvailable') return toast(i18n.t('assets.ledger.connect.interfaceNotAvailable'));
+        if (err.message) toast(err.message);
     }
 
     async connect() {

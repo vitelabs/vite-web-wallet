@@ -4,8 +4,8 @@ const packJson = require('../package.json');
 const goViteServer = { // http-DNS
     production: '\'wss://api.vitewallet.com/ws\'',
     test: '\'wss://premainnet.vitewallet.com/test/ws\'',
-    // dev: '\'wss://premainnet.vitewallet.com/test/ws\''
-    dev: '\'wss://api.vitewallet.com/ws\''
+    dev: '\'wss://premainnet.vitewallet.com/test/ws\''
+    // dev: '\'wss://api.vitewallet.com/ws\''
     // dev: '\'ws://148.70.30.139:41423\''
     // dev: '\'ws://111.231.218.73:41423\''
 };
