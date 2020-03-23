@@ -61,7 +61,7 @@ export function getList() {
     const oldAccList = getOldAccList() || [];
     return accList
         .concat(oldAccList)
-        .filter(acc => acc.id && (!acc.id.startsWith('VITEBIFROST_') && !acc.id.startsWith('VITEHARDWARE_') )); // filter vb and hardware accounts
+        .filter(acc => acc.id && (!acc.id.startsWith('VITEBIFROST_') && !acc.id.startsWith('VITEHARDWARE_'))); // filter vb and hardware accounts
 }
 
 export function deleteOldAcc(acc) {
