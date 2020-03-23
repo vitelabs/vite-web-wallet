@@ -810,7 +810,7 @@
                 "cancelSelect": "Select a device to connect",
                 "connectError": "Connect failed. Please confirm Vite app is opened on device",
                 "interfaceNotAvailable": "Connect failed. Please check USB cable is connected. If you connect through Bluetooth, switch off Bluetooth and switch on again",
-                "receiveBlockSuccess": "Successfully received a transaction",
+                "receiveBlockSuccess": "Successfully received {num} transaction",
                 "introduction": {
                     "1": {
                         "title": "Step 1: ",
