@@ -190,10 +190,10 @@ function signHwTx(activeIdx, accountBlock) {
             // 如果点击了关闭窗口，则不再提示
             compInstance && compInstance.close();
             isRejected = true;
-            getLedgerInstance().handleError({name: 'CancelByWeb'});
+            getLedgerInstance().handleError({ name: 'CancelByWeb' });
             reject({ code: '11021' });
         });
-        getLedgerInstance().signHwTx(activeIdx, accountBlock).catch((err) => {
+        getLedgerInstance().signHwTx(activeIdx, accountBlock).catch(err => {
             !isRejected && getLedgerInstance().handleError(err);
             throw err;
         })
@@ -207,8 +207,8 @@ function signHwTx(activeIdx, accountBlock) {
                 }
                 return accountBlock.send();
             })
-            .then((data) => resolve(data))
-            .catch((err) => reject(err));
+            .then(data => resolve(data))
+            .catch(err => reject(err));
     });
 }
 
