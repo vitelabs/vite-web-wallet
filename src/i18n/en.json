@@ -810,7 +810,7 @@
                 "cancelSelect": "Select a device to connect",
                 "connectError": "Connect failed. Please confirm Vite app is opened on device",
                 "interfaceNotAvailable": "Connect failed. Please check USB cable is connected. If you connect through Bluetooth, switch off Bluetooth and switch on again",
-                "receiveBlockSuccess": "Successfully received a transaction",
+                "receiveBlockSuccess": "Successfully received {num} transaction",
                 "introduction": {
                     "1": {
                         "title": "Step 1: ",
@@ -839,8 +839,8 @@
                 "alertContent": "Address has been denied on Ledger device. Please double verify if this address matches the address displayed on your Ledger device. If yes, ignore this message and go ahead to confirm the transaction, otherwise DO NOT send asset to the address and quit immediately.",
                 "alertLeftBtn": "I confirm the addresses are matched",
                 "alertRightBtn": "Addresses mismatch. Get me out of here!",
-                "userCancel": "You have canceled the transaction",
-                "userCancelByWeb": "您取消了交易，即使在 Ledger 钱包里确认该交易，该交易也不会广播出去"
+                "userCancel": "Transaction is cancelled on Ledger",
+                "userCancelByWeb": "You cancelled the transaction in Vite wallet. In this case, the transaction will be abandoned and never go through to blockchain even if it is confirmed on your Ledger device."
             }
         },
         "invite":{
