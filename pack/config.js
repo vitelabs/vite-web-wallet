@@ -50,7 +50,7 @@ const viteConnect = {
     production: '\'wss://biforst.vitewallet.com\'',
     test: '\'wss://biforst.vitewallet.com\'',
     // test: '\'ws://139.155.7.172:5001\'',
-    dev: '\'ws://139.155.7.172:5001\''
+    dev: '\'wss://biforst.vitewallet.com\''
 };
 const dnsHostServer = {
     production: '\'https://config.leanfaces.com\'',
