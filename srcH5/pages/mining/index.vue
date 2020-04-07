@@ -1,6 +1,6 @@
 <template>
     <div class="m-d-wrapper __wrapper">
-        <select-tab class="mining-select" :tabList="tabList" :defaultTab="defaultTab"
+        <select-tab v-if="!hideSelectTab" class="mining-select" :tabList="tabList" :defaultTab="defaultTab"
                     v-model="activeTab"></select-tab>
         <mining v-show="activeTab === 'mining'" :activeTab="miningTab"></mining>
         <dividend v-show="activeTab === 'dividend'"></dividend>
@@ -25,6 +25,7 @@ export default {
 
         this.defaultTab = query.activeTab === 'dividend' ? query.activeTab : 'mining';
         this.activeTab = this.defaultTab;
+        this.hideSelectTab = query.hideSelectTab === 'true';
 
         if (this.activeTab === 'mining') {
             this.miningTab = query.activeTab;
@@ -35,7 +36,8 @@ export default {
             tabList: { 'mining': 'mobileMining.title', 'dividend': 'mobileDividend.title' },
             defaultTab: 'mining',
             activeTab: 'mining',
-            miningTab: 'miningTrade'
+            miningTab: 'miningTrade',
+            hideSelectTab: false
         };
     }
 };
