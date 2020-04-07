@@ -18,6 +18,7 @@ const query = getQuery() || {};
 export default {
     components: { mining, dividend, selectTab },
     beforeMount() {
+        this.hideSelectTab = query.hideSelectTab === 'true';
         const activeTabList = [ 'dividend', 'miningTrade', 'miningStaking', 'miningInvite', 'miningOrder' ];
         if (!query.activeTab || activeTabList.indexOf(query.activeTab) === -1) {
             return;
@@ -25,7 +26,6 @@ export default {
 
         this.defaultTab = query.activeTab === 'dividend' ? query.activeTab : 'mining';
         this.activeTab = this.defaultTab;
-        this.hideSelectTab = query.hideSelectTab === 'true';
 
         if (this.activeTab === 'mining') {
             this.miningTab = query.activeTab;
