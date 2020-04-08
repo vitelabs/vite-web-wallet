@@ -69,7 +69,6 @@ const sendTx = execWithValid(function ({
         privateKey: activeAccount.privateKey
     });
 });
-export default sendTx;
 
 
 async function webSendTx({ methodName, params, config, privateKey }) {
@@ -254,3 +253,11 @@ function formatConfig(config) {
 
     return { pow, powConfig, confirmConfig };
 }
+
+
+export async function signText({ text }) {
+    const { publicKey } = getCurrHDAcc();
+    return '';
+}
+
+export default sendTx;
