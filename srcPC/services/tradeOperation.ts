@@ -1,7 +1,9 @@
-import sendTx from 'pcUtils/sendTx';
+import sendTx, { signText } from 'pcUtils/sendTx';
 import { constant } from '@vite/vitejs';
 import i18n from 'pcI18n';
 import { ViteXAPI } from 'services/apiServer';
+import { getCurrHDAcc } from 'wallet';
+
 
 export function bindCode(code: number) {
     return sendTx({
@@ -120,5 +122,48 @@ export function lockVxForDividend({ actionType, amount }) {
     return sendTx({
         methodName: 'dexLockVxForDividend',
         data: { actionType, amount }
+    });
+}
+
+
+// OpenApi: Get Agent Address
+export function getAgentAddress({ address }) {
+    return ViteXAPI.request({
+        method: 'GET',
+        path: 'agent/new',
+        params: { address }
+    });
+}
+
+// OpenApi: Create Open Api Key
+export async function createOpenApiKey({ address, agentAddress }) {
+    const signature = await signText({ text: 'signText' });
+    const { publicKey = '8Np6DQ78vi8A/QnuvbMWta8QGK7ZThBgxpRGR1QoWDo=' } = getCurrHDAcc();
+    return ViteXAPI.request({
+        method: 'GET',
+        path: 'agent/key',
+        params: {
+            address,
+            agentAddress,
+            signature,
+            pubKey: publicKey
+        }
+    }).catch(err => {
+        // openapi mock
+        return {
+            'agentAddress': 'vite_b042f14a53793f3895ba14639a9349578cf6ef41c08adec4e8',
+            'type': 1,
+            'apiKey': '01CA41B8DA499783B6AB7F1380B98B3F',
+            'apiSecret': '454AB3CD01475A627020A2C021DF8F22',
+            'isValid': null,
+            'invalidCode': null,
+            'balanceLimit': 1000,
+            'agentPledgeAmount': null,
+            'rights': [
+                1
+            ],
+            'createTime': 1585907461000,
+            'expireTime': null
+        };
     });
 }
