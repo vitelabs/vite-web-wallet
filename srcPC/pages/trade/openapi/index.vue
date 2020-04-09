@@ -1,16 +1,49 @@
 <template>
     <div class="proxy openapi">
-        <sec-title :isShowHelp="false" :title="$t('trade.openapi.title')"></sec-title>
+        <sec-title :isShowHelp="false" :title="hasKey ? $t('trade.openapi.myKey') : $t('trade.openapi.title')"></sec-title>
         <div class="__form_border">
-            <div class="item">
+            <div v-if="hasKey" class="item">
                 <div class="row">
-                    <div class="__form_input_title">
-                        {{$t('trade.openapi.permissions')}}
+                    <div class="__form_input_title"> {{$t('trade.openapi.createTime')}} </div>
+                    <div class="__form__input_content">{{ apiInfo.createTime | date($i18n.locale) }}</div>
+                </div>
+                <div class="row">
+                    <div class="__form_input_title"> {{$t('trade.openapi.permissions')}} </div>
+                    <div class="__form__input_content permissions">
+                        <pair-item v-for="pair in permissions" :key="pair" :item="{name:pair}" ></pair-item>
                     </div>
-                    <div>
-                        <span class="permissionsContent"> {{$t('trade.openapi.permissionsContent')}} </span>
+                    <span class="click-able __small_btn" @click="_addProxy('add')">
+                        {{ $t("trade.proxy.active.operate.0") }}
+                    </span>
+                    <span class="click-able __small_btn" @click="_addProxy('delete')">
+                        {{ $t("trade.proxy.active.operate.1") }}
+                    </span>
+                </div>
+                <div class="row">
+                    <div class="__form_input_title"> {{$t('trade.openapi.keyConfirm.accessKey')}} </div>
+                    <div class="__form__input_content permissions"> {{apiInfo.apiKey}} </div>
+                </div>
+                <div class="row">
+                    <div class="__form_input_title"> {{$t('trade.openapi.keyConfirm.agentAddress')}} </div>
+                    <div class="__form__input_content permissions"> {{agentAddress}} </div>
+                </div>
+                <div class="row">
+                    <div class="__form_input_title"> {{$t('trade.openapi.agentAddressStakingAmount')}} </div>
+                    <div class="__form__input_content staking-amount">
+                        {{apiInfo.agentPledgeAmount | formatNum(18, 0)}} VITE
+                        <span class="__small_btn" @click="goStaking">{{$t('trade.openapi.staking')}}</span>
                     </div>
                 </div>
+                <div class="row">
+                    <div class="__form_input_title">{{$t('trade.openapi.package')}}</div>
+                    <div class="__form__input_content package" v-if="packageInfo">
+                        <package-info :data="packageInfo" :upgrade="true">
+                            <span class="__small_btn" @click="goUpgrade">{{$t('trade.openapi.upgrade')}}</span>
+                        </package-info>
+                    </div>
+                </div>
+            </div>
+            <div v-else class="item">
                 <div class="row">
                     <div @click="createApiKey" class="create-open-api __form_btn __pointer">{{ $t('trade.openapi.createKey') }}</div>
                 </div>
@@ -33,9 +66,10 @@
 </template>
 
 <script>
-import { getProxyRelation, getProxyGrantor, getAgentAddress, createOpenApiKey } from 'pcServices/tradeOperation';
-import { addDialog, keyConfirmDialog } from './dialog';
+import { getProxyRelation, getProxyGrantor, getAgentAddress, createOpenApiKey, getPackageList } from 'pcServices/tradeOperation';
+import { addDialog, keyConfirmDialog, stakingDialog } from './dialog';
 import PairItem from './dialog/pairItem';
+import PackageInfo from './package';
 import { doUntill } from 'utils/asyncFlow';
 import { execWithValid } from 'pcUtils/execWithValid';
 import openUrl from 'utils/openUrl';
@@ -45,50 +79,38 @@ import tips from 'pcComponents/tips.vue';
 
 
 export default {
-    components: { PairItem, secTitle, walletTable, tips },
-    beforeMount() {
+    components: { PairItem, secTitle, walletTable, tips, PackageInfo },
+    async beforeMount() {
         this.updateData();
-        this.getAgentAddress();
     },
     data() {
         return {
-            relation: {},
-            grantor: {},
             agentAddress: null,
-            apiInfo: {}
+            permissions: [],
+            pairList: {},
+            packageList: [],
+            apiInfo: {
+                apiKey: null,
+                apiSecret: null,
+                createTime: null,
+                agentPledgeAmount: null,
+                type: 1 // Open Api package type
+            }
         };
     },
     computed: {
         address() {
             return this.$store.getters.activeAddr;
         },
-        relationList() {
-            const list = [];
-            for (const addr in this.relation) {
-                const pairList = this.transUtil(this.relation[addr]);
-                list.push({
-                    addr,
-                    pairList: pairList.join(' ')
-                });
-            }
-            return list;
+        hasKey() {
+            return !!this.apiInfo.apiKey;
         },
-        grantorList() {
-            const list = [];
-            for (const addr in this.grantor) {
-                const pairList = this.transUtil(this.grantor[addr]);
-                list.push({
-                    addr,
-                    pairList: pairList.join(' ')
-                });
-            }
-            return list;
+        packageInfo() {
+            return this.packageList.find(item => item.type === this.apiInfo.type);
         }
     },
     watch: {
         address() {
-            this.relation = {};
-            this.grantor = {};
             this.updateData();
         }
     },
@@ -97,19 +119,28 @@ export default {
             openUrl('https://github.com/vitelabs/vite-wiki/blob/mainnet/docs/zh/dex/api/proxy.md');
         },
         updateData() {
-            return Promise.all([
-                getProxyRelation({ address: this.address }).then(data => {
-                    this.relation = data.relations;
-                }),
-                getProxyGrantor({ address: this.address }).then(data => {
-                    this.grantor = data.relations;
-                })
-            ]);
+            this.getAgentAddress()
+                .then(() => {
+                    if (this.agentAddress) {
+                        return this.getPermissions();
+                    }
+                });
+            this.getPackageList();
         },
-        _addProxy: execWithValid(function (item, actionType) {
+
+        // Get grant permissions
+        getPermissions() {
+            getProxyGrantor({ address: this.agentAddress }).then(data => {
+                if (data.relations[this.address]) {
+                    this.permissions = this.transUtil(data.relations[this.address]);
+                    this.pairList = data.relations[this.address];
+                }
+            });
+        },
+        _addProxy: execWithValid(function (actionType) {
             this.addProxy({
-                trustAddress: item.addr,
-                existsPair: this.relation[item.addr],
+                trustAddress: this.agentAddress,
+                existsPair: this.pairList,
                 actionType
             });
         }),
@@ -140,31 +171,44 @@ export default {
             if (!pairs || pairs.length === 0) return [];
             return pairs.map(p => p.symbol.replace('_', '/'));
         },
-        async getAgentAddress() {
+        getAgentAddress() {
             if (!this.address) return;
-            const result = await getAgentAddress({ address: this.address });
-            this.agentAddress = result.agentAddress;
-            console.log(result);
+            return getAgentAddress({ address: this.address }).then(result => {
+                this.agentAddress = result.agentAddress;
+                this.apiInfo = result;
+            });
         },
         _createApiKey: execWithValid(function () {
             this.createApiKey();
         }),
-        async createApiKey() {
-            // if (!this.agentAddress) return;
+        createApiKey() {
+            if (!this.agentAddress) return;
             createOpenApiKey({
                 address: this.address,
                 agentAddress: this.agentAddress
             }).then(apiInfo => {
                 this.apiInfo = apiInfo;
-                console.log(apiInfo);
-                keyConfirmDialog({
-                    accessKey: apiInfo.apiKey,
-                    secretKey: apiInfo.apiSecret,
-                    agentAddress: apiInfo.agentAddress
-                });
+                if (apiInfo.apiSecret) {
+                    keyConfirmDialog({
+                        accessKey: apiInfo.apiKey,
+                        secretKey: apiInfo.apiSecret,
+                        agentAddress: apiInfo.agentAddress
+                    });
+                }
             }).catch(err => {
                 console.log(err);
                 this.$toast(err.message);
+            });
+        },
+        goStaking() {
+            stakingDialog({ agentAddress: this.agentAddress });
+        },
+        goUpgrade() {
+
+        },
+        getPackageList() {
+            getPackageList().then(list => {
+                this.packageList = list || [];
             });
         }
     }
@@ -209,8 +253,23 @@ export default {
             .__form_input_title {
                 margin-top: 12px;
             }
-            .permissionsContent {
+            .__form__input_content {
                 font-size: 14px;
+                &.permissions {
+                    display: flex;
+                    .pair-item {
+                        margin-right: 10px;
+                    }
+                }
+                &.staking-amount {
+                    .__small_btn {
+                        margin-left: 20px;
+                    }
+                }
+            }
+            .__small_btn {
+                @include small_btn();
+                margin-right: 10px;
             }
             .create-open-api {
                 float: left;
