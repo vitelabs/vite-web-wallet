@@ -1070,10 +1070,21 @@
         },
         "openapi": {
             "title": "创建 API Key",
+            "myKey": "我的 API Key",
+            "createTime": "创建时间",
             "permissions": "API 权限",
             "permissionsContent": "交易权限",
             "enabledTadingPairs": "委托交易对",
             "createKey": "创建 API Key",
+            "agentAddressStakingAmount": "委托地址抵押金额",
+            "staking": "抵押",
+            "package": "套餐",
+            "expireTime": "到期时间",
+            "callNum": "调用次数",
+            "callNumInfo": "最高 {maxCount} 次/分钟",
+            "price": "价格",
+            "priceInfo": "{price} VITE/月",
+            "upgrade": "升级套餐",
             "tips": {
                 "title": "提示",
                 "0": "ViteX 为您提供了API，您可以通过使用交易权限，创建API有如下两步：",
@@ -1083,6 +1094,12 @@
                 "1": "每个地址最多申请1个API",
                 "2": "请不要泄漏您的API Key, 以免造成资产损失",
                 "3": "创建API后默认为免费套餐，可以点击升级至高级套餐"
+            },
+            "stakingForQuota": {
+                "title": "委托地址抵押",
+                "agentAddress": "委托地址",
+                "stakingAmount": "抵押金额",
+                "ok": "确认"
             },
             "keyConfirm": {
                 "accessKey": "Access Key",
