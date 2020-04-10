@@ -383,7 +383,7 @@ export default {
         },
         connectLedger() {
             hwAddressSelectDialog({ width: 'wide' }).then(({ status }) => {
-                if (status === hwAddressSelectDialog['STATUS']['CONFIRMED']) {
+                if (status === 'CONFIRMED') {
                     const name = this.$store.state.env.lastPage || 'tradeCenter';
                     this.$router.push({ name });
                 }

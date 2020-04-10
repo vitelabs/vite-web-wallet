@@ -179,7 +179,7 @@ export async function getPackageList() {
 
 export async function upgradePackage({ address, agentAddress, type, packageTime }) {
     return ViteXAPI.request({
-        method: 'GET',
+        method: 'POST',
         path: 'agent/update',
         params: {
             address,

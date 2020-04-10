@@ -1,5 +1,5 @@
 <template>
-    <div class="package-info">
+    <div class="package-info" :class="{active: active}" @click="onClick">
         <span class="package-info-title">{{$t('trade.openapi.package') + ' ' + data.type}}</span>
         <span class="left">{{$t('trade.openapi.callNum')}}:</span>
         {{$t('trade.openapi.callNumInfo', data)}}
@@ -17,6 +17,15 @@ export default {
         data: {
             type: Object,
             default: () => {}
+        },
+        active: {
+            type: Boolean,
+            default: false
+        }
+    },
+    methods: {
+        onClick() {
+            this.$emit('click');
         }
     }
 };
@@ -33,6 +42,11 @@ export default {
     @include box_shadow();
     &:hover {
         cursor: pointer;
+    }
+    &.active {
+        background-color: $blue-color-3;
+        border: 1px solid transparent;
+        color: white;
     }
     .slot {
         margin-top: 10px;
