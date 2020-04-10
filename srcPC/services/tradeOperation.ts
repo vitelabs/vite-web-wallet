@@ -149,24 +149,24 @@ export async function createOpenApiKey({ address, agentAddress }) {
             pubKey: publicKey
         }
     })
-    .catch(err => {
+        .catch(err => {
         // openapi mock
-        return {
-            'agentAddress': 'vite_8942dbbe95adaa65b1603970cee2ed0c0867ae8ed958c4cac5',
-            'type': 1,
-            'apiKey': '01CA41B8DA499783B6AB7F1380B98B3F',
-            // 'apiSecret': '454AB3CD01475A627020A2C021DF8F22',
-            'isValid': null,
-            'invalidCode': null,
-            'balanceLimit': 1000,
-            'agentPledgeAmount': 1,
-            'rights': [
-                1
-            ],
-            'createTime': 1585907461000,
-            'expireTime': null
-        };
-    })
+            return {
+                'agentAddress': 'vite_8942dbbe95adaa65b1603970cee2ed0c0867ae8ed958c4cac5',
+                'type': 1,
+                'apiKey': '01CA41B8DA499783B6AB7F1380B98B3F',
+                // 'apiSecret': '454AB3CD01475A627020A2C021DF8F22',
+                'isValid': null,
+                'invalidCode': null,
+                'balanceLimit': 1000,
+                'agentPledgeAmount': 1,
+                'rights': [
+                    1
+                ],
+                'createTime': 1585907461000,
+                'expireTime': null
+            };
+        });
 }
 
 // OpenApi: Get package List
