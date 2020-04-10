@@ -76,7 +76,7 @@ import tips from 'pcComponents/tips.vue';
 
 import { keyConfirmDialog, stakingDialog } from './dialog';
 import PackageInfo from './package';
-import { addDialog } from '../trust/dialog'
+import { addDialog } from '../trust/dialog';
 import PairItem from '../trust/dialog/pairItem';
 
 
@@ -123,13 +123,13 @@ export default {
         updateData() {
             return Promise.all([
                 this.getAgentAddress()
-                .then(() => {
-                    if (this.agentAddress) {
-                        return this.getPermissions();
-                    }
-                }),
+                    .then(() => {
+                        if (this.agentAddress) {
+                            return this.getPermissions();
+                        }
+                    }),
                 this.getPackageList()
-            ])        
+            ]);
         },
 
         // Get grant permissions
