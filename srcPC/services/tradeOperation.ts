@@ -148,7 +148,8 @@ export async function createOpenApiKey({ address, agentAddress }) {
             signature,
             pubKey: publicKey
         }
-    }).catch(err => {
+    })
+    .catch(err => {
         // openapi mock
         return {
             'agentAddress': 'vite_8942dbbe95adaa65b1603970cee2ed0c0867ae8ed958c4cac5',
@@ -165,7 +166,7 @@ export async function createOpenApiKey({ address, agentAddress }) {
             'createTime': 1585907461000,
             'expireTime': null
         };
-    });
+    })
 }
 
 // OpenApi: Get package List
