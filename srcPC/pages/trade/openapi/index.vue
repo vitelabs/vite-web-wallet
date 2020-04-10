@@ -67,15 +67,17 @@
 
 <script>
 import { getProxyRelation, getProxyGrantor, getAgentAddress, createOpenApiKey, getPackageList } from 'pcServices/tradeOperation';
-import { addDialog, keyConfirmDialog, stakingDialog } from './dialog';
-import PairItem from './dialog/pairItem';
-import PackageInfo from './package';
 import { doUntill } from 'utils/asyncFlow';
 import { execWithValid } from 'pcUtils/execWithValid';
 import openUrl from 'utils/openUrl';
 import secTitle from 'pcComponents/secTitle';
 import walletTable from 'pcComponents/table/index.vue';
 import tips from 'pcComponents/tips.vue';
+
+import { keyConfirmDialog, stakingDialog } from './dialog';
+import PackageInfo from './package';
+import { addDialog } from '../trust/dialog'
+import PairItem from '../trust/dialog/pairItem';
 
 
 export default {
@@ -87,7 +89,7 @@ export default {
         return {
             agentAddress: null,
             permissions: [],
-            pairList: {},
+            pairList: [],
             packageList: [],
             apiInfo: {
                 apiKey: null,
@@ -119,13 +121,15 @@ export default {
             openUrl('https://github.com/vitelabs/vite-wiki/blob/mainnet/docs/zh/dex/api/proxy.md');
         },
         updateData() {
-            this.getAgentAddress()
+            return Promise.all([
+                this.getAgentAddress()
                 .then(() => {
                     if (this.agentAddress) {
                         return this.getPermissions();
                     }
-                });
-            this.getPackageList();
+                }),
+                this.getPackageList()
+            ])        
         },
 
         // Get grant permissions
@@ -164,7 +168,7 @@ export default {
                 doUntill({
                     createPromise: () => this.updateData(),
                     interval: 1000,
-                    times: 3
+                    times: 5
                 }));
         },
         transUtil(pairs) {
@@ -237,6 +241,7 @@ export default {
         padding: 6px 25px 20px 30px;
         &.right {
             float: right;
+            font-size: 14px;
         }
 
         &.tips-wrapper {
@@ -255,6 +260,7 @@ export default {
             }
             .__form__input_content {
                 font-size: 14px;
+                @include default_font_color();
                 &.permissions {
                     display: flex;
                     .pair-item {

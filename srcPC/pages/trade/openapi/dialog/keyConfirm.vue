@@ -50,7 +50,7 @@ export default {
 
 <style lang="scss" scoped>
 @import "pcComponents/confirm/confirmRow.scss";
-@import "./confirm.scss";
+@import "../../trust/dialog/confirm.scss";
 
 .__row {
     .__input_row {
