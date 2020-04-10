@@ -30,17 +30,20 @@
                 <div class="row">
                     <div class="__form_input_title"> {{$t('trade.openapi.agentAddressStakingAmount')}} </div>
                     <div class="__form__input_content staking-amount">
-                        {{apiInfo.agentPledgeAmount | formatNum(18, 0)}} VITE
-                        <span class="__small_btn" @click="goStaking">{{$t('trade.openapi.staking')}}</span>
+                        {{(apiInfo.agentPledgeAmount || 0) | formatNum(18, 0)}} VITE
+                        <span class="__small_btn" @click="_goStaking">{{$t('trade.openapi.staking')}}</span>
                     </div>
                 </div>
                 <div class="row">
                     <div class="__form_input_title">{{$t('trade.openapi.package')}}</div>
                     <div class="__form__input_content package" v-if="packageInfo">
                         <package-info :data="packageInfo" :upgrade="true">
-                            <span class="__small_btn" @click="goUpgrade">{{$t('trade.openapi.upgrade')}}</span>
+                            <span v-if="canUpgrade" class="__small_btn" @click="_goUpgrade">{{$t('trade.openapi.upgrade')}}</span>
                         </package-info>
                     </div>
+                </div>
+                <div class="row">
+                    <div @click="_deleteApiKey" class="create-open-api __form_btn __pointer">{{ $t('trade.openapi.deleteKey') }}</div>
                 </div>
             </div>
             <div v-else class="item">
@@ -74,8 +77,9 @@ import secTitle from 'pcComponents/secTitle';
 import walletTable from 'pcComponents/table/index.vue';
 import tips from 'pcComponents/tips.vue';
 
-import { keyConfirmDialog, stakingDialog } from './dialog';
-import PackageInfo from './package';
+import { keyConfirmDialog, stakingDialog, upgradeDialog } from './dialog';
+import { baseDialog } from 'pcComponents/dialog';
+import PackageInfo from './packageInfo';
 import { addDialog } from '../trust/dialog';
 import PairItem from '../trust/dialog/pairItem';
 
@@ -109,10 +113,23 @@ export default {
         },
         packageInfo() {
             return this.packageList.find(item => item.type === this.apiInfo.type);
+        },
+        canUpgrade() {
+            return this.packageList.find(item => this.packageInfo.type < item.type);
         }
     },
     watch: {
         address() {
+            this.agentAddress = null;
+            this.permissions = [];
+            this.pairList = [];
+            this.apiInfo = {
+                apiKey: null,
+                apiSecret: null,
+                createTime: null,
+                agentPledgeAmount: null,
+                type: 1 // Open Api package type
+            };
             this.updateData();
         }
     },
@@ -130,6 +147,14 @@ export default {
                     }),
                 this.getPackageList()
             ]);
+        },
+
+        tryUpdateData() {
+            return doUntill({
+                createPromise: () => this.updateData(),
+                interval: 1000,
+                times: 5
+            });
         },
 
         // Get grant permissions
@@ -164,12 +189,7 @@ export default {
                 trustAddress,
                 existsPair: existsPair && existsPair.slice(0),
                 actionType
-            }).then(() =>
-                doUntill({
-                    createPromise: () => this.updateData(),
-                    interval: 1000,
-                    times: 5
-                }));
+            }).then(() => this.tryUpdateData());
         },
         transUtil(pairs) {
             if (!pairs || pairs.length === 0) return [];
@@ -204,15 +224,42 @@ export default {
                 this.$toast(err.message);
             });
         },
-        goStaking() {
-            stakingDialog({ agentAddress: this.agentAddress });
+        _deleteApiKey() {
+            baseDialog({
+                title: this.$t('trade.openapi.deleteKey'),
+                content: this.$t('trade.openapi.deleteAlert'),
+                rTxt: this.$t('trade.openapi.confirmDelete'),
+                lTxt: this.$t('trade.openapi.cancel')
+            }).then(({ status }) => {
+                if (status === 'CONFIRMED') {
+                    this.deleteApiKey();
+                }
+            });
         },
-        goUpgrade() {
+        deleteApiKey: execWithValid(function () {
 
+        }),
+        _goStaking: execWithValid(function () {
+            this.goStaking();
+        }),
+        goStaking() {
+            stakingDialog({ agentAddress: this.agentAddress }).then(() => this.tryUpdateData());
+        },
+        _goUpgrade: execWithValid(function () {
+            this.goUpgrade();
+        }),
+        goUpgrade() {
+            upgradeDialog({
+                currentPackage: this.packageInfo,
+                packageList: this.packageList.filter(item => item.type > this.packageInfo.type),
+                agentAddress: this.agentAddress
+            }).then(() => this.tryUpdateData());
         },
         getPackageList() {
             getPackageList().then(list => {
-                this.packageList = list || [];
+                list = list || [];
+                list.sort((a, b) => a.type - b.type);
+                this.packageList = list;
             });
         }
     }

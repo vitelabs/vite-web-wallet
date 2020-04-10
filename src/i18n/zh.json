@@ -1069,13 +1069,17 @@
             }
         },
         "openapi": {
-            "title": "创建 API Key",
+            "title": "Open API",
             "myKey": "我的 API Key",
             "createTime": "创建时间",
             "permissions": "API 权限",
             "permissionsContent": "交易权限",
             "enabledTadingPairs": "委托交易对",
             "createKey": "创建 API Key",
+            "deleteKey": "删除 API Key",
+            "deleteAlert": "删除 API Key之后，您将不能再使用该API Key，既有的套餐将保留，重新创建一个新的 Key 即可激活",
+            "confirmDelete": "确认删除",
+            "cancel": "取消",
             "agentAddressStakingAmount": "委托地址抵押金额",
             "staking": "抵押",
             "package": "套餐",
@@ -1112,6 +1116,14 @@
                     "1": "如您忘记了 Secret Key, 请回收该密钥对，并重新申请新的密钥对"
                 },
                 "warn": "密钥仅显示1次，遗失之后不可找回，请务必妥善保存"
+            },
+            "upgradeConfirm": {
+                "title": "升级 API 套餐",
+                "currentPackage": "当前套餐",
+                "selectPackage": "选择升级套餐类型",
+                "selectTime": "选择套餐时长",
+                "month": "月",
+                "payAmount": "支付套餐费用"
             }
         }
     },

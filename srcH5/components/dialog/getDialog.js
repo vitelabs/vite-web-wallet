@@ -6,7 +6,7 @@ import i18n from 'h5I18n';
 const STATUS = {
     'CLOSE': 'CLOSE',
     'CANCEL': 'CANCEL',
-    'CONFIRMED': 'CONFRIMED'
+    'CONFIRMED': 'CONFIRMED'
 };
 
 const getValue = function (key, defaultValue) {
