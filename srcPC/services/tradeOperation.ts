@@ -177,7 +177,7 @@ export async function getPackageList() {
     });
 }
 
-export async function upgradePackage({ address, agentAddress, type, packageTime }) {
+export async function upgradePackage({ address, agentAddress, type, packageTime, sendHash }) {
     return ViteXAPI.request({
         method: 'POST',
         path: 'agent/update',
@@ -185,7 +185,8 @@ export async function upgradePackage({ address, agentAddress, type, packageTime 
             address,
             agentAddress,
             type,
-            packageTime
+            packageTime,
+            sendHash
         }
     });
 }
