@@ -52,7 +52,7 @@ const viteConnect = {
     dev: '\'ws://139.155.7.172:5001\''
 };
 const dnsHostServer = {
-    production: '\'https://config.leanfaces.com\'',
+    production: '\'https://config.zaokaidian.com\'',
     test: '\'\'',
     dev: '\'\''
 };
