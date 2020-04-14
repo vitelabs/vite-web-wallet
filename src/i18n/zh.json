@@ -448,7 +448,7 @@
             "labelPlaceholder":"请输入 {labelName}",
             "addressPlaceholder": "请输入{token}转出地址",
             "successTips": "转出请求已发送",
-            "failTips":"网关节点出错，请检查网关设置"
+            "failTips":"网关服务出错，请检查网关设置"
         },
         "nodeErr": "网关节点无效，请检查网关设置"
     },
