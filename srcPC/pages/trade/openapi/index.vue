@@ -47,7 +47,10 @@
                 </div>
             </div>
             <div v-else class="item">
-                <div class="row">
+                <div class="row" v-if="balanceNotEnough">
+                    <tips type="warn">{{ $t('trade.openapi.balanceAlert', {balanceLimit: this.balanceLimit}) }}</tips>
+                </div>
+                <div class="row" v-else>
                     <div @click="createApiKey" class="create-open-api __form_btn __pointer">{{ $t('trade.openapi.createKey') }}</div>
                 </div>
             </div>
@@ -86,7 +89,7 @@ import PairItem from '../trust/dialog/pairItem';
 
 export default {
     components: { PairItem, secTitle, walletTable, tips, PackageInfo },
-    async beforeMount() {
+    beforeMount() {
         this.updateData();
     },
     data() {
@@ -101,7 +104,9 @@ export default {
                 createTime: null,
                 agentPledgeAmount: null,
                 type: 1 // Open Api package type
-            }
+            },
+            balanceNotEnough: false,
+            balanceLimit: null
         };
     },
     computed: {
@@ -200,6 +205,12 @@ export default {
             return getAgentAddress({ address: this.address }).then(result => {
                 this.agentAddress = result.agentAddress;
                 this.apiInfo = result;
+            }).catch(err => {
+                if (err.code === 2001) {
+                    this.balanceNotEnough = true;
+                    this.balanceLimit = err.data.balanceLimit;
+                }
+                throw (err);
             });
         },
         _createApiKey: execWithValid(function () {
@@ -302,6 +313,10 @@ export default {
 
         .row {
             position: relative;
+            .__tips_wrapper {
+                font-size: 14px;
+                margin-top: 20px;
+            }
             .__form_input_title {
                 margin-top: 12px;
             }
