@@ -1558,5 +1558,11 @@
         "1day": "近1天",
         "clear": "清空",
         "submit": "确定"
+    },
+    "defiMarket": {
+        "title": "市场"
+    },
+    "defiUsercenter": {
+        "title": "我的"
     }
 }

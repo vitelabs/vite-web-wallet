@@ -46,6 +46,8 @@ export default {
                 list = secondMenuList.trade;
             } else if (this.$route.name.indexOf('assets') === 0) {
                 list = secondMenuList.assets;
+            } else if (this.$route.name.indexOf('defi') === 0) {
+                list = secondMenuList.defi;
             }
 
             if (this.$route.name.indexOf('wallet') !== 0) {
@@ -54,6 +56,7 @@ export default {
 
             list = [].concat(secondMenuList.wallet);
             (this.isLogin && !getCurrHDAcc().isBifrost) && list.push('walletConversion');
+            console.log(list);
             return list;
         },
         autoLogoutTime() {
