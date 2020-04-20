@@ -174,6 +174,7 @@ export default {
         position: absolute;
         top: 40px;
         left: 15px;
+        text-align: center;
         @include font_color_to_white(#5e6875);
         span {
             word-break: break-all;

@@ -1560,7 +1560,20 @@
         "submit": "确定"
     },
     "defiMarket": {
-        "title": "市场"
+        "title": "市场",
+        "deposit": "存款概况",
+        "loan": "借款概况",
+        "totalAmount": "总额",
+        "userNums": "人数",
+        "depositAssetSpread": "存款资产比例",
+        "loanAssetsSpread": "借款资产比例",
+        "allAssets": "所有资产",
+        "asset": "资产",
+        "depositTotal": "存款总额",
+        "depositRate": "存款利率",
+        "loanTotal": "借款总额",
+        "loanRate": "借款利率",
+        "depositAndLoanRate": "存借比例"
     },
     "defiUsercenter": {
         "title": "我的"
