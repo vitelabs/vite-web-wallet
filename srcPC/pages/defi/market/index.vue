@@ -204,9 +204,9 @@ export default {
 
 <style lang="scss" scoped>
 .row {
-  display: flex;
-  flex-direction: columns;
-  @include bg_color_1();
+    display: flex;
+    flex-direction: columns;
+    @include bg_color_1();
 }
 .token-icon {
     width: 16px;
@@ -237,36 +237,36 @@ export default {
             color: #5E6875;
         }
         &:nth-child(2) {
-            color:rgba(94,104,117,0.58);
+            color: rgba(94,104,117,0.58);
         }
     }
 }
 .subtitle {
-    font-size:13px;
+    font-size: 13px;
     @include font-family-bold();
-    color:rgba(94,104,117,1);
-    line-height:18px;
+    color: rgba(94,104,117,1);
+    line-height: 18px;
     margin: 14px 0;
 }
 
 .col {
-  flex: 1;
-  background: rgba(255, 255, 255, 0.7);
-  box-shadow: 0px 2px 10px 1px rgba(176, 192, 237, 0.42);
-  border-radius: 2px;
-  margin-right: 10px;
-  &:last-child {
-    margin-right: 0;
-  }
-  .col__title {
-    font-size:12px;
-    font-family:PingFangSC-Semibold,PingFang SC;
-    font-weight:600;
-    line-height:16px;
-    padding: 20px 30px;
-    @include common_border_one(bottom);
-    @include font_color_to_white(rgba(29,32,36,1));
-  }
+    flex: 1;
+    background: rgba(255, 255, 255, 0.7);
+    box-shadow: 0px 2px 10px 1px rgba(176, 192, 237, 0.42);
+    border-radius: 2px;
+    margin-right: 10px;
+    &:last-child {
+        margin-right: 0;
+    }
+    .col__title {
+        font-size: 12px;
+        font-family: PingFangSC-Semibold,PingFang SC;
+        font-weight: 600;
+        line-height: 16px;
+        padding: 20px 30px;
+        @include common_border_one(bottom);
+        @include font_color_to_white(rgba(29,32,36,1));
+    }
 }
 .defi-content {
     padding: 20px 30px;
@@ -281,15 +281,15 @@ export default {
         justify-content: space-between;
     }
     .content__label {
-        font-size:12px;
-        line-height:16px;
+        font-size: 12px;
+        line-height: 16px;
         @include font-family-normal();
         @include font_color_to_white(rgba(84,95,117,1));
         margin-bottom: 6px;
     }
     .content__value {
-        font-size:12px;
-        line-height:16px;
+        font-size: 12px;
+        line-height: 16px;
         @include font-family-bold();
         @include font_color_to_white(rgba(29,32,36,1));
     }
