@@ -1,0 +1,15 @@
+.defi-assets-table {
+    overflow: auto;
+    width: 100%;
+    .__tb_content_row {
+        height: 52px;
+    }
+    @include rowWith {
+        min-width: 16.66%;
+        &:first-child {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+        }
+    }
+}
