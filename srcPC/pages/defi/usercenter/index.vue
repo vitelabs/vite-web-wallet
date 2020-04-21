@@ -4,7 +4,7 @@
             <div class="overview__col">
                 <img src="~assets/imgs/deposit-icon.svg" alt="">
                 <div>
-                    
+
                 </div>
                 <div>
 
@@ -37,9 +37,9 @@ export default {
     display: flex;
     flex-direction: row;
     padding: 15px 30px;
-    height:124px;
-    box-shadow:0px 2px 10px 1px rgba(176,192,237,0.42);
-    border-radius:2px;
+    height: 124px;
+    box-shadow: 0px 2px 10px 1px rgba(176,192,237,0.42);
+    border-radius: 2px;
     width: 100%;
     @include bg_color_1();
 }
