@@ -11,7 +11,7 @@
                         </div>
                         <div>
                             <div class="content__label">{{$t('defiMarket.userNums')}}</div>
-                            <div class="content__value">1234234</div>
+                            <div class="content__value">{{depositNumbers}}</div>
                         </div>
                     </div>
                     <div>
@@ -34,7 +34,7 @@
                         </div>
                         <div>
                             <div class="content__label">{{$t('defiMarket.userNums')}}</div>
-                            <div class="content__value">1234234</div>
+                            <div class="content__value">{{loanNumbers}}</div>
                         </div>
                     </div>
                     <div>
@@ -90,7 +90,7 @@
 <script>
 import Pie from 'pcComponents/pie';
 import AssetsTable from 'pcComponents/table/index';
-import { getGlobalAssets } from 'pcServices/defi';
+import { getGlobalAssets, getAssetMeta } from 'pcServices/defi';
 import bigNumber from 'utils/bigNumber';
 
 
@@ -99,6 +99,7 @@ export default {
     data() {
         return {
             globalAssets: [],
+            coinMeta: [],
             tableHeadList: [
                 {
                     text: this.$t('defiMarket.asset'),
@@ -112,7 +113,7 @@ export default {
                 },
                 {
                     text: this.$t('defiMarket.depositRate'),
-                    cell: 'depositRatio'
+                    cell: 'depositRate'
                 },
                 {
                     text: this.$t('defiMarket.loanTotal'),
@@ -121,7 +122,7 @@ export default {
                 },
                 {
                     text: this.$t('defiMarket.loanRate'),
-                    cell: 'lendRatio'
+                    cell: 'lendRate'
                 },
                 {
                     text: this.$t('defiMarket.depositAndLoanRate'),
@@ -147,14 +148,15 @@ export default {
         },
         list() {
             return this.globalAssets.map(item => {
-                const rate = this.rate[item.tokendId] && this.rate[item.tokendId][`${ this.currency }Rate`];
-                const token = this.tokenList.find(item => item.tokendId === item.tokendId);
+                const coin = this.coinMeta.find(coin => item.tokenId === coin.tokenId);
+                if (!coin) return item;
+                const rate = coin[`${ this.currency }Price`];
                 return {
                     ...item,
-                    loanAsset: rate ? bigNumber.multi(item.lendQty, rate) : 0,
-                    depositAsset: rate ? bigNumber.multi(item.depositQty, rate) : 0,
-                    icon: token.icon,
-                    tokenName: token.tokenName
+                    loanAsset: bigNumber.multi(bigNumber.toBasic(item.lendQty, coin.decimals), rate),
+                    depositAsset: bigNumber.multi(bigNumber.toBasic(item.depositQty, coin.decimals), rate),
+                    icon: coin.logo,
+                    tokenName: coin.name
                 };
             });
         },
@@ -164,24 +166,21 @@ export default {
         loanTotal() {
             return this.list.reduce((accumulator, cur) => bigNumber.plus(accumulator, cur.loanAsset), 0);
         },
+        loanNumbers() {
+            return this.list.reduce((accumulator, cur) => accumulator + cur.lendNumber, 0);
+        },
+        depositNumbers() {
+            return this.list.reduce((accumulator, cur) => accumulator + cur.depositNumber, 0);
+        },
         currencySymbol() {
             return this.$store.getters.currencySymbol;
         },
         currency() {
             return this.$store.state.env.currency;
-        },
-        rate() {
-            return this.$store.state.exchangeRate.rateMap;
-        },
-        tokenList() {
-            return [
-                ...this.$store.getters.officalGateTokenList,
-                ...this.$store.getters.defaultTokenList
-            ];
         }
-
     },
     beforeMount() {
+        this.getAssetMeta();
         this.getDefiOverview();
     },
     methods: {
@@ -196,6 +195,11 @@ export default {
         getDefiOverview() {
             getGlobalAssets().then(data => {
                 this.globalAssets = data;
+            });
+        },
+        getAssetMeta() {
+            getAssetMeta().then(data => {
+                this.coinMeta = data;
             });
         }
     }
