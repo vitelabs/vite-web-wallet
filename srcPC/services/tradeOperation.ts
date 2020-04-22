@@ -195,7 +195,7 @@ export async function upgradePackage({ address, agentAddress, type, packageTime,
 
 // 删除KEY信息
 export async function deleteKey({ address, agentAddress, timestamp, signature, pubKey }) {
-    let result = signText({});
+    const result = signText({});
 
     return ViteXAPI.request({
         method: 'POST',
