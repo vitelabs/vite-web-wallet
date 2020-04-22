@@ -1,8 +1,8 @@
 <template>
     <div class="progress-bar">
-        <div class="progress-bar__label-wrapper">
+        <div class="progress-bar__label-wrapper" ref="wrapper">
             <span>0%</span>
-            <span :style="activeStyle">{{activeValue}}%</span>
+            <span v-if="activeValue!== 'NaN'" :style="activeStyle">{{activeValue}}%</span>
             <span>{{currencySymbol + ' '}} {{assetValue | formatNum(2)}}</span>
         </div>
         <div class="progress-bar__line">
@@ -23,15 +23,47 @@ export default {
             default: '0'
         }
     },
+    data() {
+        return {
+            activeStyle: ''
+        };
+    },
     computed: {
         currencySymbol() {
             return this.$store.getters.currencySymbol;
         },
-        activeStyle() {
-            return `margin-left: ${ this.activeValue / 100 }%;`;
-        },
         progressActiveStyle() {
             return `width: ${ this.activeValue }%;`;
+        }
+    },
+    mounted() {
+        this.setStyle();
+    },
+    watch: {
+        activeValue: function () {
+            this.setStyle();
+            const dom = this.$refs.wrapper;
+            if (!dom) {
+                this.$nextTick(() => {
+                    this.setStyle();
+                });
+            }
+        }
+    },
+    methods: {
+        setStyle() {
+            let percent = this.activeValue;
+            if (percent > 100) {
+                percent = 100;
+            }
+            const dom = this.$refs.wrapper;
+            let marginLeft = (percent / 100) * dom.offsetWidth - 33;
+            if (marginLeft < 0) {
+                marginLeft = 3;
+            }
+            if (dom) {
+                this.activeStyle = `margin-left: ${ marginLeft }px;`;
+            }
         }
     }
 };
