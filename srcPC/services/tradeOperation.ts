@@ -1,4 +1,5 @@
-import sendTx, { signText } from 'pcUtils/sendTx';
+import sendTx from 'pcUtils/sendTx';
+import signText from 'pcUtils/signText';
 import { constant } from '@vite/vitejs';
 import i18n from 'pcI18n';
 import { ViteXAPI } from 'services/apiServer';
@@ -130,7 +131,7 @@ export function lockVxForDividend({ actionType, amount }) {
 export function getAgentAddress({ address }) {
     return ViteXAPI.request({
         method: 'GET',
-        path: 'agent/new',
+        path: 'agent/info',
         params: { address }
     });
 }
@@ -177,16 +178,34 @@ export async function getPackageList() {
     });
 }
 
+// 升级套餐
 export async function upgradePackage({ address, agentAddress, type, packageTime, sendHash }) {
     return ViteXAPI.request({
         method: 'POST',
-        path: 'agent/update',
+        path: 'agent/info',
         params: {
             address,
             agentAddress,
             type,
             packageTime,
             sendHash
+        }
+    });
+}
+
+// 删除KEY信息
+export async function deleteKey({ address, agentAddress, timestamp, signature, pubKey }) {
+    let result = signText({});
+
+    return ViteXAPI.request({
+        method: 'POST',
+        path: 'agent/removal',
+        params: {
+            address,
+            agentAddress,
+            timestamp,
+            signature,
+            pubKey
         }
     });
 }
