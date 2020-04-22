@@ -24,9 +24,7 @@ export default {
         }
     },
     data() {
-        return {
-            activeStyle: ''
-        };
+        return { activeStyle: '' };
     },
     computed: {
         currencySymbol() {
