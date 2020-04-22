@@ -126,6 +126,7 @@
 </template>
 
 <script>
+import Vue from 'vue';
 import Pie from 'pcComponents/pie';
 import Tabs from 'pcComponents/tabs';
 import Tab from 'pcComponents/tab';
@@ -142,6 +143,7 @@ export default {
         return {
             userAssetsData: [],
             coinMeta: [],
+            userInfo: {},
             depositTableHeaders: [
                 {
                     text: this.$t('defiUsercenter.asset'),
@@ -182,7 +184,8 @@ export default {
                 },
                 {
                     text: this.$t('defiUsercenter.loanRatio'),
-                    cell: 'lendDepositRatio'
+                    cell: 'lendDepositRatio',
+                    filter: val => Vue.filter('percentage')(val, 2)
                 }
             ]
 
@@ -216,7 +219,6 @@ export default {
                     ...item,
                     loanAsset: bigNumber.multi(bigNumber.toBasic(item.lendQty, coin.decimals), rate),
                     depositAsset: bigNumber.multi(bigNumber.toBasic(item.depositQty, coin.decimals), rate),
-                    maxLoanAsset: bigNumber.multi(bigNumber.toBasic(item.maxLendQty, coin.decimals), rate),
                     restDepositInterestAsset: bigNumber.multi(bigNumber.toBasic(item.restDepositInterest, coin.decimals), rate),
                     restLendInterestAsset: bigNumber.multi(bigNumber.toBasic(item.restLendInterest, coin.decimals), rate),
                     icon: coin.logo,
@@ -231,15 +233,19 @@ export default {
         currency() {
             return this.$store.state.env.currency;
         },
+        // 最大可借款
         maxLoanTotal() {
-            return this.list.reduce((acc, cur) => bigNumber.plus(acc, cur.maxLoanAsset), 0);
+            return this.userInfo[`limitLend${ this.currency[0].toUpperCase() + this.currency.substr(1) }Qty`];
         },
+        // 当前已借款数
         loanTotal() {
-            return this.list.reduce((acc, cur) => bigNumber.plus(acc, cur.loanAsset), 0);
+            return this.userInfo[`currentLend${ this.currency[0].toUpperCase() + this.currency.substr(1) }Qty`];
         },
+        // 当前存款总数
         depositTotal() {
             return this.list.reduce((acc, cur) => bigNumber.plus(acc, cur.depositAsset), 0);
         },
+        // 借款抵押率
         loanStakingRate() {
             // 剩余需还借款利息总和（用法币计算）, 借款抵押率： = （当前借款金额+待还款利息） / 借款最大金额
             const restLendInterest = this.list.reduce((acc, cur) => bigNumber.plus(acc, cur.restLendInterestAsset), 0);
@@ -254,7 +260,8 @@ export default {
         },
         getUserAssets() {
             getUserAssets().then(data => {
-                this.userAssetsData = data;
+                this.userAssetsData = data.assets;
+                this.userInfo = data;
             });
         },
         getAssetMeta() {

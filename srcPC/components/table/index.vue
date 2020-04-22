@@ -38,7 +38,7 @@
                             </template>
                             <template v-else>
                                 <slot :name="`${index}${headList[i].cell}Before`"></slot>
-                                {{ rowItem[ headList[i].cell ] }}
+                                {{ cellFilter(rowItem[ headList[i].cell ], rowItem, headItem) }}
                                 <slot :name="`${index}${headList[i].cell}After`"></slot>
                             </template>
                         </span>
@@ -100,6 +100,12 @@ export default {
     methods: {
         _clickRow(item, index) {
             this.clickRow && this.clickRow(item, index);
+        },
+        cellFilter(value, rowItem, headItem) {
+            if (headItem.filter && typeof headItem.filter === 'function') {
+                return headItem.filter(value, rowItem);
+            }
+            return value;
         }
     }
 };
