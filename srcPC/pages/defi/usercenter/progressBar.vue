@@ -41,19 +41,19 @@ export default {
 .progress-bar {
     width: 100%;
     &__line {
-        width:100%;
-        height:3px;
-        background:rgba(0,122,255,0.12);
-        border-radius:4px;
+        width: 100%;
+        height: 3px;
+        background: rgba(0,122,255,0.12);
+        border-radius: 4px;
         &--active {
-            height:3px;
-            background:linear-gradient(270deg,rgba(84,182,255,1) 0%,rgba(42,127,255,1) 100%);
-            border-radius:4px;
+            height: 3px;
+            background: linear-gradient(270deg,rgba(84,182,255,1) 0%,rgba(42,127,255,1) 100%);
+            border-radius: 4px;
         }
     }
     &__label-wrapper {
-        font-size:12px;
-        line-height:16px;
+        font-size: 12px;
+        line-height: 16px;
         @include font-family-bold();
         @include font_color_to_white(rgba(94,104,117,0.58));
         position: relative;

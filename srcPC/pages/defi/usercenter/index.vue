@@ -291,11 +291,11 @@ export default {
         &:first-child {
             width: 320px;
             padding-right: 30px;
-            flex:2;
+            flex: 2;
         }
         &:nth-child(2) {
             min-width: 548px;
-            flex:3;
+            flex: 3;
         }
         &:nth-child(3) {
             min-width: 391px;
@@ -304,7 +304,7 @@ export default {
             flex-direction: column;
             justify-content: center;
             align-items: flex-start;
-            flex:2;
+            flex: 2;
             .overview__label {
                 margin-bottom: 7px;
             }
@@ -324,21 +324,21 @@ export default {
         }
     }
     .overview__label {
-        font-size:13px;
-        line-height:17px;
+        font-size: 13px;
+        line-height: 17px;
         @include font-family-bold();
         @include font_color_to_white(rgba(94,104,117,1));
     }
     .overview__value {
-        font-size:16px;
-        line-height:20px;
+        font-size: 16px;
+        line-height: 20px;
         @include font-family-bold();
         @include font_color_to_white(rgba(29,32,36,1));
         margin-top: 4px;
     }
     .overview__line {
-        width:1px;
-        height:84px;
+        width: 1px;
+        height: 84px;
         background: rgba(198,203,212,0.3);
     }
 }

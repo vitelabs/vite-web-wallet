@@ -37,8 +37,8 @@ export default {
     @include box_shadow();
     &__header {
         width: 100%;
-        height:28px;
-        background:rgba(243,245,249,1);
+        height: 28px;
+        background: rgba(243,245,249,1);
         display: flex;
         flex-direction: row;
         justify-content: flex-start;
@@ -47,16 +47,16 @@ export default {
     &__header-item {
         border-radius: 4px 4px 0 0;
         &--active {
-            background-color:white;
+            background-color: white;
         }
         a {
-            height:100%;
+            height: 100%;
             width: 100%;
-            font-size:13px;
-            font-family:PingFangSC-Semibold,PingFang SC;
-            font-weight:600;
-            color:rgba(29,32,36,0.6);
-            line-height:17px;
+            font-size: 13px;
+            font-family: PingFangSC-Semibold,PingFang SC;
+            font-weight: 600;
+            color: rgba(29,32,36,0.6);
+            line-height: 17px;
             padding-left: 6px;
             padding-right: 6px;
         }
