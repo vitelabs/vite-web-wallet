@@ -32,7 +32,6 @@ const sendTx = execWithValid(function ({
     description
 }) {
     const activeAccount = getActiveAcc();
-    console.log(activeAccount);
 
 
     if (activeAccount.isBifrost) {
@@ -254,10 +253,5 @@ function formatConfig(config) {
     return { pow, powConfig, confirmConfig };
 }
 
-
-export async function signText({ text }) {
-    const { publicKey } = getCurrHDAcc();
-    return '';
-}
 
 export default sendTx;
