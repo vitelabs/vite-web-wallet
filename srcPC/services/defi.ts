@@ -75,32 +75,32 @@ export async function getUserAssets(address) {
         {
             tokenId: 'tti_5649544520544f4b454e6e40',
             symbol: 'VITE',
-            lendQty: 200,
-            maxLendQty: 1000,
-            depositQty: 11111,
-            depositRatio: '',
+            lendQty: '1234567891234567892',
+            maxLendQty: '12345678912345678912',
+            depositQty: '1234567891234567892',
+            depositRatio: 0.0334,
             lendRatio: '',
-            lendDepositRatio: '',
-            depositRate: '',
+            lendDepositRatio: 0.034,
+            depositRate: 0.1,
             lendRate: '',
-            staking: false,
-            restDepositInterest: 111,
-            restLendInterest: 120
+            staking: true,
+            restDepositInterest: '123456789123456789',
+            restLendInterest: '123456789123456789'
         },
         {
             tokenId: 'tti_06822f8d096ecdf9356b666c',
             symbol: 'ETH',
-            lendQty: 200,
-            maxLendQty: 1000,
-            depositQty: 11111,
-            depositRatio: '',
-            lendRatio: '',
-            lendDepositRatio: '',
-            depositRate: '',
+            lendQty: '1234567891234567892',
+            maxLendQty: '12345678912345678912',
+            depositQty: '1234567891234567891',
+            depositRatio: 0.3,
+            lendRatio: '0.2',
+            lendDepositRatio: 0.0224,
+            depositRate: 0.0234,
             lendRate: '',
             staking: false,
-            restDepositInterest: 111,
-            restLendInterest: 120
+            restDepositInterest: '123456789123456789',
+            restLendInterest: '123456789123456789'
         }
     ]);
 }

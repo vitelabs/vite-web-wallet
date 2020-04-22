@@ -1,6 +1,6 @@
 <template>
     <div class="pie">
-        <div class="graph-container">
+        <div class="graph-container" :class="{ 'graph-container__no-label': !showLabel }">
             <svg class="pie__graph">
                 <slot name="colorMap">
                     <defs>
@@ -71,7 +71,7 @@
             </div>
         </div>
 
-        <div class="legend__group">
+        <div v-if="showLabel" class="legend__group">
             <div class="legend" v-for="(v, i) in per" :key="i">
                 <svg class="tag">
                     <rect :fill="colorGen(v, i)" width="9px" height="9px"></rect>
@@ -124,6 +124,10 @@ export default {
         title: {
             type: String,
             default: ''
+        },
+        showLabel: {
+            type: Boolean,
+            default: true
         }
     },
     computed: {
@@ -157,6 +161,9 @@ export default {
         justify-content: center;
         margin-right: 30px;
         position: relative;
+        &.graph-container__no-label {
+            margin-right: 0;
+        }
     }
     &__graph {
         height: 94px;
