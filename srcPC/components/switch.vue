@@ -36,43 +36,43 @@ $switch-is-rounded: true;
 $switch-background-height: 6px;
 
 .switch-button {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  height: 18px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    height: 18px;
 
-  &__button {
-    height: $switch-background-height;
-    width: $switch-button-height * 2 + 2px;
-    border-radius: $switch-background-height;
-    transition: $switch-transition;
-    background-color: rgba(197,207,213,1);
-    cursor: pointer;
-
-    .button {
-        height: $switch-button-height;
-        width: $switch-button-height;
-        background: $switch-button-color;
-
+    &__button {
+        height: $switch-background-height;
+        width: $switch-button-height * 2 + 2px;
+        border-radius: $switch-background-height;
         transition: $switch-transition;
-        background: rgba(255, 255, 255, 1);
-        box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.15);
-        border-radius: $switch-button-height;
-        margin-top: -($switch-button-height - $switch-background-height) / 2;
-    }
-  }
-  &__button--enable {
-    background-color: $switch-button-color;
-    box-shadow: none;
+        background-color: rgba(197,207,213,1);
+        cursor: pointer;
 
-    .button {
-      background: white;
-      transform: translateX(calc(#{$switch-button-height} + 2px));
-    }
-  }
+        .button {
+            height: $switch-button-height;
+            width: $switch-button-height;
+            background: $switch-button-color;
 
-  &__label {
-    margin-left: 10px;
-  }
+            transition: $switch-transition;
+            background: rgba(255, 255, 255, 1);
+            box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.15);
+            border-radius: $switch-button-height;
+            margin-top: -($switch-button-height - $switch-background-height) / 2;
+        }
+    }
+    &__button--enable {
+        background-color: $switch-button-color;
+        box-shadow: none;
+
+        .button {
+            background: white;
+            transform: translateX(calc(#{$switch-button-height} + 2px));
+        }
+    }
+
+    &__label {
+        margin-left: 10px;
+    }
 }
 </style>
