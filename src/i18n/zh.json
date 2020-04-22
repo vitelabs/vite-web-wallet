@@ -1576,6 +1576,19 @@
         "depositAndLoanRate": "存借比例"
     },
     "defiUsercenter": {
-        "title": "我的"
+        "title": "我的",
+        "myDepositTotal": "我的存款总额",
+        "myLoanTotal": "我的借款总额",
+        "loanList": "借款列表",
+        "depositList": "存款列表",
+        "asset": "资产",
+        "depositRate": "存款利率",
+        "depositInterest": "存款利息",
+        "depositAmount": "存款金额",
+        "loanRate": "借款利率",
+        "loanAmount": "借款金额",
+        "loanInterest": "借款利息",
+        "loanRatio": "借款比例",
+        "isStaking": "用于抵押"
     }
 }

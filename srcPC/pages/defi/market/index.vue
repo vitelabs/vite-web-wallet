@@ -41,7 +41,6 @@
                         <Pie
                             class="pie-chart"
                             :pieData="pieData.deposit.data"
-                            :labelGen="labelGenDeposit"
                             :title="$t('defiMarket.loanAssetsSpread')"
                         ></Pie>
                     </div>
@@ -207,43 +206,12 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import "../defiAssetsTable.scss";
+
 .row {
     display: flex;
     flex-direction: columns;
     @include bg_color_1();
-}
-.token-icon {
-    width: 16px;
-    height: 16px;
-}
-.token-symbol {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    line-height: 18px;
-    margin-left: 15px;
-    & > div {
-        &:first-child {
-            @include font-family-bold();
-            color: #5E6875;
-        }
-    }
-}
-.assets-value {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    line-height: 18px;
-    height: 100%;
-    & > div {
-        &:first-child {
-            @include font-family-bold();
-            color: #5E6875;
-        }
-        &:nth-child(2) {
-            color: rgba(94,104,117,0.58);
-        }
-    }
 }
 .subtitle {
     font-size: 13px;

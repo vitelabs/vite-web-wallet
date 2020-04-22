@@ -13,3 +13,11 @@
         }
     }
 }
+.defi-assets-table--deposit {
+    @include rowWith {
+        &:last-child {
+            display: flex;
+            align-items: center;
+        }
+    }
+}
