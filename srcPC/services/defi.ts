@@ -107,6 +107,6 @@ export async function getUserAssets(address) {
                     restLendInterest: '123456789123456789'
                 }
             ]
-        }
+        };
     });
 }
