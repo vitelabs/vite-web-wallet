@@ -42,6 +42,10 @@
                         </package-info>
                     </div>
                 </div>
+                <div v-if="apiInfo.expireTime" class="row">
+                    <div class="__form_input_title"> {{$t('trade.openapi.expireTime')}} </div>
+                    <div class="__form__input_content permissions"> {{apiInfo.expireTime | date(this.$i18n.locale)}} </div>
+                </div>
                 <div class="row">
                     <div @click="_deleteApiKey" :class="{unuse: pending}" class="create-open-api __form_btn __pointer">{{ $t('trade.openapi.deleteKey') }}</div>
                 </div>
@@ -103,7 +107,8 @@ export default {
                 apiSecret: null,
                 createTime: null,
                 agentPledgeAmount: null,
-                type: 1 // Open Api package type
+                type: 1, // Open Api package type
+                expireTime: null
             },
             balanceNotEnough: false,
             balanceLimit: null,

@@ -1083,7 +1083,7 @@
             "agentAddressStakingAmount": "委托地址抵押金额",
             "staking": "抵押",
             "package": "套餐",
-            "expireTime": "到期时间",
+            "expireTime": "套餐到期时间",
             "callNum": "调用次数",
             "callNumInfo": "最高 {maxCount} 次/分钟",
             "price": "价格",
@@ -1125,7 +1125,8 @@
                 "selectPackage": "选择升级套餐类型",
                 "selectTime": "选择套餐时长",
                 "month": "月",
-                "payAmount": "支付套餐费用"
+                "payAmount": "支付套餐费用",
+                "balance": "钱包余额"
             }
         }
     },
