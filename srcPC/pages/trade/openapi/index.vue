@@ -360,9 +360,11 @@ export default {
                 @include default_font_color();
                 &.permissions {
                     display: flex;
+                    flex-wrap: wrap;
                     .pair-item {
-                        margin-right: 10px;
+                        margin: 10px 10px 0 0;
                     }
+                    margin-bottom: 15px;
                 }
                 &.staking-amount {
                     .__small_btn {
