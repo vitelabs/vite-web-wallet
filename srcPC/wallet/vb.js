@@ -54,7 +54,7 @@ export class VB extends Connector {
                 rej({ code: 11020, message: '链接断开' });
             });
 
-            this.sendCustomRequest({ method: 'vite_signAndSendTx', params: args }).then(r => res(r)).catch(e => {
+            this.sendCustomRequest({ method: 'vite_signMessage', params: args }).then(r => res(r)).catch(e => {
                 rej(e);
             });
         });

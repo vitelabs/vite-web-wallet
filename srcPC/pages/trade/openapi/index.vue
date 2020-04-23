@@ -43,7 +43,7 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div @click="_deleteApiKey" class="create-open-api __form_btn __pointer">{{ $t('trade.openapi.deleteKey') }}</div>
+                    <div @click="_deleteApiKey" :class="{unuse: pending}" class="create-open-api __form_btn __pointer">{{ $t('trade.openapi.deleteKey') }}</div>
                 </div>
             </div>
             <div v-else class="item">
@@ -51,7 +51,7 @@
                     <tips type="warn">{{ $t('trade.openapi.balanceAlert', {balanceLimit: this.balanceLimit}) }}</tips>
                 </div>
                 <div class="row" v-else>
-                    <div @click="createApiKey" class="create-open-api __form_btn __pointer">{{ $t('trade.openapi.createKey') }}</div>
+                    <div @click="createApiKey" :class="{ unuse: pending}" class="create-open-api __form_btn __pointer">{{ $t('trade.openapi.createKey') }}</div>
                 </div>
             </div>
             <div class="item right tips-wrapper">
@@ -72,7 +72,7 @@
 </template>
 
 <script>
-import { getProxyRelation, getProxyGrantor, getAgentAddress, createOpenApiKey, getPackageList } from 'pcServices/tradeOperation';
+import { deleteKey, getProxyGrantor, getAgentAddress, createOpenApiKey, getPackageList } from 'pcServices/tradeOperation';
 import { doUntill } from 'utils/asyncFlow';
 import { execWithValid } from 'pcUtils/execWithValid';
 import openUrl from 'utils/openUrl';
@@ -106,7 +106,8 @@ export default {
                 type: 1 // Open Api package type
             },
             balanceNotEnough: false,
-            balanceLimit: null
+            balanceLimit: null,
+            pending: false
         };
     },
     computed: {
@@ -121,6 +122,13 @@ export default {
         },
         canUpgrade() {
             return this.packageList.find(item => this.packageInfo.type < item.type);
+        },
+        currentHeight() {
+            return this.$store.state.ledger.currentHeight;
+        },
+        isHardware() {
+            const currAcc = this.$store.state.wallet.currHDAcc;
+            return currAcc && currAcc.isHardware;
         }
     },
     watch: {
@@ -139,9 +147,6 @@ export default {
         }
     },
     methods: {
-        gotoProxyInfo() {
-            openUrl('https://github.com/vitelabs/vite-wiki/blob/mainnet/docs/zh/dex/api/proxy.md');
-        },
         updateData() {
             return Promise.all([
                 this.getAgentAddress()
@@ -218,9 +223,15 @@ export default {
         }),
         createApiKey() {
             if (!this.agentAddress) return;
+            if (this.isHardware) {
+                return this.$t('trade.openapi.noSupportForHardware');
+            }
+            this.pending = true;
+
             createOpenApiKey({
                 address: this.address,
-                agentAddress: this.agentAddress
+                agentAddress: this.agentAddress,
+                latestSnapshotHeight: this.currentHeight
             }).then(apiInfo => {
                 this.apiInfo = apiInfo;
                 if (apiInfo.apiSecret) {
@@ -233,9 +244,15 @@ export default {
             }).catch(err => {
                 console.log(err);
                 this.$toast(err.message);
-            });
+            })
+                .finally(() => {
+                    this.pending = false;
+                });
         },
         _deleteApiKey() {
+            this.deleteApiKey();
+        },
+        deleteApiKey: execWithValid(function () {
             baseDialog({
                 title: this.$t('trade.openapi.deleteKey'),
                 content: this.$t('trade.openapi.deleteAlert'),
@@ -243,12 +260,25 @@ export default {
                 lTxt: this.$t('trade.openapi.cancel')
             }).then(({ status }) => {
                 if (status === 'CONFIRMED') {
-                    this.deleteApiKey();
+                    this.pending = true;
+                    deleteKey({
+                        address: this.address,
+                        agentAddress: this.agentAddress,
+                        latestSnapshotHeight: this.currentHeight
+                    }).then(() => {
+                        this.tryUpdateData();
+                    })
+                        .catch(err => {
+                            if (err.msg) {
+                                return this.$toast(err.msg);
+                            }
+                            return this.$toast(err.message);
+                        })
+                        .finally(() => {
+                            this.pending = false;
+                        });
                 }
             });
-        },
-        deleteApiKey: execWithValid(function () {
-
         }),
         _goStaking: execWithValid(function () {
             this.goStaking();
