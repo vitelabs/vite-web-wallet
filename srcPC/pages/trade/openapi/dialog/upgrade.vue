@@ -19,22 +19,33 @@ block content
         .__input_row
             select(v-model="selectTime")
                 option(:value="index + 1" v-for="item, index in new Array(12)" :key="index") {{ (index + 1)  + $t('trade.openapi.upgradeConfirm.month') }}
+    .__row.key-confirm-tips
+        .__row_t {{ $t('trade.openapi.upgradeConfirm.balance') }}
+        .__input_row {{ balance | toBasic(18)}}
     .__row.key-confirm-tips(v-if="selectPackage")
         .__row_t {{ $t('trade.openapi.upgradeConfirm.payAmount') }}
+            span.__err(v-show="amountErr") {{ amountErr }}
         .__input_row {{ payAmount }}
+
 
 </template>
 
 <script>
+import { constant } from '@vite/vitejs';
+
 import { execWithValid } from 'pcUtils/execWithValid';
 import sendTx from 'pcUtils/sendTx';
-import { constant } from '@vite/vitejs';
 import { upgradePackage } from 'pcServices/tradeOperation';
 import { doUntill } from 'utils/asyncFlow';
 import bigNumber from 'utils/bigNumber';
+import { VITE_TOKENID } from 'utils/constant';
+import { verifyAmount } from 'pcUtils/validations';
 
 import tips from 'pcComponents/tips.vue';
 import packageInfo from '../packageInfo';
+
+
+const Vite_Token_Info = constant.Vite_Token_Info;
 
 export default {
     components: { tips, packageInfo },
@@ -49,7 +60,8 @@ export default {
             dSTxt: this.$t('trade.proxy.dialog.confirm.ok'),
             selectTime: 1,
             selectPackage: null,
-            loading: false
+            loading: false,
+            amountErr: ''
         };
     },
     computed: {
@@ -60,16 +72,36 @@ export default {
             return this.$store.getters.activeAddr;
         },
         dBtnUnuse() {
-            return this.loading && this.selectPackage;
+            return this.loading || !this.selectPackage || this.amountErr;
         },
         payAmount() {
             if (this.selectPackage) {
                 return this.selectPackage.amount * this.selectTime;
             }
             return 0;
+        },
+        balance() {
+            const balance = this.$store.state.account.balance.balanceInfos[VITE_TOKENID];
+            return balance && balance.balance || 0;
+        }
+    },
+    watch: {
+        payAmount: function () {
+            this.testAmount();
         }
     },
     methods: {
+        testAmount() {
+            this.amountErr = verifyAmount({
+                formatDecimals: 8,
+                decimals: Vite_Token_Info.decimals,
+                balance: this.balance,
+                minAmount: 0,
+                errorMap: {}
+            })(this.payAmount);
+
+            return !this.amountErr;
+        },
         inspector() {
             return new Promise((resolve, reject) => {
                 this._sendTx(resolve, reject);
@@ -79,6 +111,13 @@ export default {
             this.selectPackage = item;
         },
         _sendTx: execWithValid(function (resolve, reject) {
+            if (this.dBtnUnuse) return;
+
+            this.testAmount();
+            if (this.amountErr) {
+                return;
+            }
+
             this.loading = true;
             sendTx({
                 methodName: 'send',
