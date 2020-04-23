@@ -19,6 +19,14 @@ import plugin from 'plugins/addPlugin';
 import directives from 'plugins/directives';
 import { resaveAccList, resaveLastAcc } from 'pcUtils/store/resave';
 
+// Add fortawesome
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { faExclamationCircle, faInfoCircle } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
+
+library.add(faExclamationCircle, faInfoCircle);
+Vue.component('font-awesome-icon', FontAwesomeIcon);
+
 resaveAccList();
 resaveLastAcc();
 

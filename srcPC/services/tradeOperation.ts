@@ -1,7 +1,9 @@
 import sendTx from 'pcUtils/sendTx';
+import signText from 'pcUtils/signText';
 import { constant } from '@vite/vitejs';
 import i18n from 'pcI18n';
-import { ViteXAPI } from 'services/apiServer';
+import { ViteXAPI, viteClient } from 'services/apiServer';
+
 
 export function bindCode(code: number) {
     return sendTx({
@@ -120,5 +122,81 @@ export function lockVxForDividend({ actionType, amount }) {
     return sendTx({
         methodName: 'dexLockVxForDividend',
         data: { actionType, amount }
+    });
+}
+
+
+// OpenApi: Get Agent Address
+export function getAgentAddress({ address }) {
+    return ViteXAPI.request({
+        method: 'GET',
+        path: 'agent/info',
+        params: { address }
+    });
+}
+
+// OpenApi: Create Open Api Key
+export async function createOpenApiKey({ address, agentAddress, latestSnapshotHeight }) {
+    if (!latestSnapshotHeight) {
+        latestSnapshotHeight = await viteClient.request('ledger_getSnapshotChainHeight');
+    }
+    const block = await viteClient.request('ledger_getSnapshotBlockByHeight', latestSnapshotHeight);
+
+    const result = await signText({ text: `${ agentAddress }_${ block.timestamp }` });
+
+    return ViteXAPI.request({
+        method: 'POST',
+        path: 'agent/key',
+        params: {
+            address,
+            agentAddress,
+            signature: result.signature,
+            pubKey: result.publicKey,
+            timestamp: block.timestamp
+        }
+    });
+}
+
+// OpenApi: Get package List
+export async function getPackageList() {
+    return ViteXAPI.request({
+        method: 'GET',
+        path: 'agent/package'
+    });
+}
+
+// 升级套餐
+export async function upgradePackage({ address, agentAddress, type, packageTime, sendHash }) {
+    return ViteXAPI.request({
+        method: 'POST',
+        path: 'agent/info',
+        params: {
+            address,
+            agentAddress,
+            type,
+            packageTime,
+            sendHash
+        }
+    });
+}
+
+// 删除KEY信息
+export async function deleteKey({ address, agentAddress, latestSnapshotHeight }) {
+    if (!latestSnapshotHeight) {
+        latestSnapshotHeight = await viteClient.request('ledger_getSnapshotChainHeight');
+    }
+
+    const block = await viteClient.request('ledger_getSnapshotBlockByHeight', latestSnapshotHeight);
+    const result = await signText({ text: `${ agentAddress }_${ block.timestamp }` });
+    return ViteXAPI.request({
+        method: 'POST',
+        path: 'agent/removal',
+        params: {
+            address,
+            agentAddress,
+            timestamp: block.timestamp,
+            signature: result.signature,
+            pubKey: result.publicKey
+        }
     });
 }
