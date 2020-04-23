@@ -2,8 +2,7 @@ import sendTx from 'pcUtils/sendTx';
 import signText from 'pcUtils/signText';
 import { constant } from '@vite/vitejs';
 import i18n from 'pcI18n';
-import { ViteXAPI } from 'services/apiServer';
-import { getCurrHDAcc } from 'wallet';
+import { ViteXAPI, viteClient } from 'services/apiServer';
 
 
 export function bindCode(code: number) {
@@ -137,37 +136,25 @@ export function getAgentAddress({ address }) {
 }
 
 // OpenApi: Create Open Api Key
-export async function createOpenApiKey({ address, agentAddress }) {
-    const signature = await signText({ text: 'signText' });
-    const { publicKey = '8Np6DQ78vi8A/QnuvbMWta8QGK7ZThBgxpRGR1QoWDo=' } = getCurrHDAcc();
+export async function createOpenApiKey({ address, agentAddress, latestSnapshotHeight }) {
+    if (!latestSnapshotHeight) {
+        latestSnapshotHeight = await viteClient.request('ledger_getSnapshotChainHeight');
+    }
+    const block = await viteClient.request('ledger_getSnapshotBlockByHeight', latestSnapshotHeight);
+
+    const result = await signText({ text: `${ agentAddress }_${ block.timestamp }` });
+
     return ViteXAPI.request({
-        method: 'GET',
+        method: 'POST',
         path: 'agent/key',
         params: {
             address,
             agentAddress,
-            signature,
-            pubKey: publicKey
+            signature: result.signature,
+            pubKey: result.publicKey,
+            timestamp: block.timestamp
         }
-    })
-        .catch(err => {
-        // openapi mock
-            return {
-                'agentAddress': 'vite_8942dbbe95adaa65b1603970cee2ed0c0867ae8ed958c4cac5',
-                'type': 1,
-                'apiKey': '01CA41B8DA499783B6AB7F1380B98B3F',
-                // 'apiSecret': '454AB3CD01475A627020A2C021DF8F22',
-                'isValid': null,
-                'invalidCode': null,
-                'balanceLimit': 1000,
-                'agentPledgeAmount': 1,
-                'rights': [
-                    1
-                ],
-                'createTime': 1585907461000,
-                'expireTime': null
-            };
-        });
+    });
 }
 
 // OpenApi: Get package List
@@ -194,18 +181,22 @@ export async function upgradePackage({ address, agentAddress, type, packageTime,
 }
 
 // 删除KEY信息
-export async function deleteKey({ address, agentAddress, timestamp, signature, pubKey }) {
-    const result = signText({});
+export async function deleteKey({ address, agentAddress, latestSnapshotHeight }) {
+    if (!latestSnapshotHeight) {
+        latestSnapshotHeight = await viteClient.request('ledger_getSnapshotChainHeight');
+    }
 
+    const block = await viteClient.request('ledger_getSnapshotBlockByHeight', latestSnapshotHeight);
+    const result = await signText({ text: `${ agentAddress }_${ block.timestamp }` });
     return ViteXAPI.request({
         method: 'POST',
         path: 'agent/removal',
         params: {
             address,
             agentAddress,
-            timestamp,
-            signature,
-            pubKey
+            timestamp: block.timestamp,
+            signature: result.signature,
+            pubKey: result.publicKey
         }
     });
 }

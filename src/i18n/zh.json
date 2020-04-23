@@ -1090,6 +1090,7 @@
             "priceInfo": "{price} VITE/月",
             "upgrade": "升级套餐",
             "balanceAlert": "地址 Vite 余额小于 {balanceLimit}，暂时不能创建API。",
+            "noSupportForHardware": "此功能暂不支持硬件钱包",
             "tips": {
                 "title": "提示",
                 "0": "ViteX 为您提供了API，您可以通过使用交易权限，创建API有如下两步：",

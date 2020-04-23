@@ -7,11 +7,12 @@ import { getVbInstance } from 'wallet/vb';
 import { execWithValid } from 'pcUtils/execWithValid';
 import { vbConfirmDialog } from 'pcComponents/dialog';
 
-const { ed25519, _Buffer } = utils;
+const { ed25519, _Buffer, blake2bHex } = utils;
+
+const TEXT_SIGN_PREFIX = 'Vite Signed Message:\n';
 
 const signText = execWithValid(function ({ text }) {
     const activeAccount = getActiveAcc();
-    console.log(activeAccount);
 
     // 是否通过 vite connect 登陆
     if (activeAccount.isBifrost) {
@@ -41,7 +42,7 @@ function vcSign({ text }) {
         });
 
         const vb = getVbInstance();
-        return vb.signVbText({ message: text }).then(data => {
+        vb.signVbText({ message: _Buffer.from(text).toString('base64') }).then(data => {
             res(data);
         }).catch(err => {
             rej(err);
@@ -56,10 +57,15 @@ function vcSign({ text }) {
 async function webSign({ text, privateKey }) {
     const publicKeyHex = ed25519.getPublicKey(_Buffer.from(privateKey, 'hex')).toString('hex');
 
-    const signature = ed25519.sign(_Buffer.from(text).toString('hex'), privateKey);
+    const message = _Buffer.concat([
+        _Buffer.from(TEXT_SIGN_PREFIX),
+        _Buffer.from(text)
+    ]).toString();
+
+    const signature = ed25519.sign(blake2bHex(message, null, 32), privateKey);
     return {
-        publicKey: publicKeyHex,
-        signature
+        publicKey: _Buffer.from(publicKeyHex, 'hex').toString('base64'),
+        signature: _Buffer.from(signature, 'hex').toString('base64')
     };
 }
 
