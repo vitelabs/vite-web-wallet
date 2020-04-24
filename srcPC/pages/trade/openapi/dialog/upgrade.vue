@@ -21,11 +21,11 @@ block content
                 option(:value="index + 1" v-for="item, index in new Array(12)" :key="index") {{ (index + 1)  + $t('trade.openapi.upgradeConfirm.month') }}
     .__row.key-confirm-tips
         .__row_t {{ $t('trade.openapi.upgradeConfirm.balance') }}
-        .__input_row {{ balance | toBasic(18)}}
+        .__input_row {{ balance | toBasic(18)}} VX
     .__row.key-confirm-tips(v-if="selectPackage")
         .__row_t {{ $t('trade.openapi.upgradeConfirm.payAmount') }}
             span.__err(v-show="amountErr") {{ amountErr }}
-        .__input_row {{ payAmount }}
+        .__input_row {{ payAmount }} VX
 
 
 </template>
@@ -38,14 +38,13 @@ import sendTx from 'pcUtils/sendTx';
 import { upgradePackage } from 'pcServices/tradeOperation';
 import { doUntill } from 'utils/asyncFlow';
 import bigNumber from 'utils/bigNumber';
-import { VITE_TOKENID } from 'utils/constant';
 import { verifyAmount } from 'pcUtils/validations';
 
 import tips from 'pcComponents/tips.vue';
 import packageInfo from '../packageInfo';
 
 
-const Vite_Token_Info = constant.Vite_Token_Info;
+const VX_Token_Info = constant.VX_Token_Info;
 
 export default {
     components: { tips, packageInfo },
@@ -81,7 +80,7 @@ export default {
             return 0;
         },
         balance() {
-            const balance = this.$store.state.account.balance.balanceInfos[VITE_TOKENID];
+            const balance = this.$store.state.account.balance.balanceInfos[VX_Token_Info.tokenId];
             return balance && balance.balance || 0;
         }
     },
@@ -94,7 +93,7 @@ export default {
         testAmount() {
             this.amountErr = verifyAmount({
                 formatDecimals: 8,
-                decimals: Vite_Token_Info.decimals,
+                decimals: VX_Token_Info.decimals,
                 balance: this.balance,
                 minAmount: 0,
                 errorMap: {}
@@ -123,8 +122,8 @@ export default {
                 methodName: 'send',
                 data: {
                     toAddress: this.agentAddress,
-                    tokenId: constant.Vite_TokenId,
-                    amount: bigNumber.toMin(this.payAmount, constant.Vite_Token_Info.decimals)
+                    tokenId: VX_Token_Info.tokenId,
+                    amount: bigNumber.toMin(this.payAmount, VX_Token_Info.decimals)
                 },
                 config: {
                     pow: true,
