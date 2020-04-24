@@ -6,20 +6,24 @@ block content
         .__input_row {{agentAddress}}
     .__row
         .__row_t {{ $t('trade.openapi.stakingForQuota.stakingAmount') }}
+            span.__err(v-show="amountErr") {{ amountErr }}
         .__input_row
             input(v-model="amount" type="number")
 </template>
 
 <script>
+import { constant } from '@vite/vitejs';
+
 import viteInput from 'components/viteInput';
 import { execWithValid } from 'pcUtils/execWithValid';
 import { initPwd } from 'pcComponents/password/index.js';
 import BigNumber from 'utils/bigNumber';
-import { wallet, constant } from '@vite/vitejs';
 import sendTx from 'pcUtils/sendTx';
 
+import { verifyAmount } from 'pcUtils/validations';
 
 const Vite_Token_Info = constant.Vite_Token_Info;
+const minNum = 134;
 
 export default {
     components: { viteInput },
@@ -29,7 +33,8 @@ export default {
             dWidth: 'wide',
             dSTxt: this.$t('trade.openapi.stakingForQuota.ok'),
             amount: null,
-            loading: false
+            loading: false,
+            amountErr: ''
         };
     },
     computed: {
@@ -37,10 +42,30 @@ export default {
             return this.$t('trade.openapi.stakingForQuota.title');
         },
         dBtnUnuse() {
-            return this.loading || !this.amount;
+            return this.loading || !this.amount || this.amountErr;
+        },
+        balance() {
+            const balance = this.$store.state.account.balance.balanceInfos[Vite_Token_Info.tokenId];
+            return balance && balance.balance || 0;
+        }
+    },
+    watch: {
+        amount: function () {
+            this.testAmount();
         }
     },
     methods: {
+        testAmount() {
+            this.amountErr = verifyAmount({
+                formatDecimals: 8,
+                decimals: Vite_Token_Info.decimals,
+                balance: this.balance,
+                minAmount: BigNumber.toMin(minNum, Vite_Token_Info.decimals),
+                errorMap: { lessMin: this.$t('walletQuota.limitAmt', { num: minNum }) }
+            })(this.amount);
+
+            return !this.amountErr;
+        },
         inspector() {
             return new Promise((resolve, reject) => {
                 this._sendPledgeTx(resolve, reject);
@@ -48,9 +73,9 @@ export default {
         },
 
         _sendPledgeTx: execWithValid(function (resolve, reject) {
-            if (this.btnUnuse) {
-                return;
-            }
+            if (this.btnUnuse) return;
+            this.testAmount();
+            if (this.amountErr) return;
 
             initPwd({
                 title: this.$t('submitStaking'),
