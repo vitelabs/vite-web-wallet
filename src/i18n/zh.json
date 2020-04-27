@@ -1069,7 +1069,7 @@
             }
         },
         "openapi": {
-            "title": "Open API",
+            "title": "API",
             "myKey": "我的 API Key",
             "createTime": "创建时间",
             "permissions": "API 权限",
@@ -1093,13 +1093,14 @@
             "noSupportForHardware": "此功能暂不支持硬件钱包",
             "tips": {
                 "title": "提示",
-                "0": "ViteX 为您提供了API，您可以通过使用交易权限，创建API有如下两步：",
+                "0": "ViteX为您提供了API服务，您可以通过API使用交易权限，正常使用API有如下三步：",
                 "0-step1": "1. 创建 API",
-                "0-step2": "2. 给委托地址抵押 VITE",
-                "0-step3": "通过API文档可以查看如何使用",
-                "1": "每个地址最多申请1个API",
+                "0-step2": "2. 委托部分交易对的交易权限",
+                "0-step3": "3. 给API地址抵押VITE获取配额",
+                "0-step4": "通过API文档查看如何使用，点击查看API文档",
+                "1": "每个地址只能创建一个API Key",
                 "2": "请不要泄漏您的API Key, 以免造成资产损失",
-                "3": "创建API后默认为免费套餐，可以点击升级至高级套餐"
+                "3": "创建API后默认为免费套餐，调用频次最大为10次/1分钟，您可以点击升级高级套餐"
             },
             "stakingForQuota": {
                 "title": "委托地址抵押",
