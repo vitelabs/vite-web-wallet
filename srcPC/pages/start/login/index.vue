@@ -14,7 +14,7 @@
                 <div class="star"></div>
                 {{ $t("assets.vb.title") }}
             </div>
-            <div
+            <!-- <div
                 class="btn-item __pointer"
                 :class="{ active: tabName === 'ledger' }"
                 @click="toggleTab('ledger')"
@@ -22,7 +22,7 @@
             >
                 <div class="star"></div>
                 {{ $t("assets.ledger.title") }}
-            </div>
+            </div> -->
             <div
                 v-show="isHaveList"
                 class="btn-item __pointer"
