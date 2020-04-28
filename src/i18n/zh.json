@@ -1097,7 +1097,7 @@
                 "0-step1": "1. 创建 API",
                 "0-step2": "2. 委托部分交易对的交易权限",
                 "0-step3": "3. 给API地址抵押VITE获取配额",
-                "0-step4": "通过API文档查看如何使用，点击查看API文档",
+                "0-step4": "通过API文档查看如何使用，<a href=\"https://vite.wiki/zh/dex/api/dex-apis.html\" target=\"_blank\">点击查看API文档</a>",
                 "1": "每个地址只能创建一个API Key",
                 "2": "请不要泄漏您的API Key, 以免造成资产损失",
                 "3": "创建API后默认为免费套餐，调用频次最大为10次/1分钟，您可以点击升级高级套餐"

@@ -1080,7 +1080,7 @@
                 "0-step1": "1. Create API",
                 "0-step2": "2. Authorize delegation of selected trading pairs",
                 "0-step3": "3. Stake quota for API delegation address",
-                "0-step4": "View API Documentation for further support",
+                "0-step4": "View <a href=\"https://vite.wiki/dex/api/dex-apis.html\" target=\"_blank\">API Documentation</a> for further support",
                 "1": "One set of API Key and Secret is allowed for the same address at any given time.",
                 "2": "To avoid asset loss, Do Not disclose your Access Key and Secret",
                 "3": "The API package is set with the free base package at 10 transactions per minute by default, upgrade options available."
