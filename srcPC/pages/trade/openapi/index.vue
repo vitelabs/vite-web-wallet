@@ -66,7 +66,7 @@
                     <div v-for="(item, index) in [0,1,2,3]" :key="index">
                         {{$t(`trade.openapi.tips.${index}`)}}
                         <ul v-if="index === 0">
-                            <li v-for="(_item, index) in [1,2,3,4]" :key="index">{{$t(`trade.openapi.tips.0-step${_item}`)}}</li>
+                            <li v-for="(_item, index) in [1,2,3,4]" :key="index" v-html="$t(`trade.openapi.tips.0-step${_item}`)"></li>
                         </ul>
                     </div>
                 </div>
