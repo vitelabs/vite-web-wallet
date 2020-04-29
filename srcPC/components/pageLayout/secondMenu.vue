@@ -35,7 +35,7 @@ import switchAddr from 'pcComponents/switchAddress';
 
 import statistics from 'utils/statistics';
 import SwitchComp from 'uiKit/switch.vue';
-import { inviteDialog, receiveInviteDialog } from 'pcComponents/dialog';
+import { inviteDialog, receiveInviteDialog, hwAddressSelectDialog } from 'pcComponents/dialog';
 import { execWithValid } from 'pcUtils/execWithValid';
 import openUrl from 'utils/openUrl';
 
@@ -59,6 +59,9 @@ export default {
             return [ {
                 name: this.$t('tradeOperator.title'),
                 value: 'operator'
+            }, {
+                name: this.$t('trade.openapi.title'),
+                value: 'openapi'
             }, {
                 name: this.$t('trade.proxy.title'),
                 value: 'proxy'
@@ -100,6 +103,7 @@ export default {
     methods: {
         operateAction(action) {
             action === 'operator' && this.goOperator();
+            action === 'openapi' && this.goOpenapi();
             action === 'proxy' && this.goProxy();
             action === 'tradeVip' && this.goTradeVip();
             action === 'help' && this.goHelp();
@@ -126,6 +130,10 @@ export default {
         goOperator() {
             statistics.event('secondMenu', `${ this.$route.name }-tradeOperator`, this.address || '');
             this.$router.push({ name: 'tradeOperator' });
+        },
+        goOpenapi() {
+            statistics.event('secondMenu', `${ this.$route.name }-tradeTrust`, this.address || '');
+            this.$router.push({ name: 'tradeOpenapi' });
         },
         goProxy() {
             statistics.event('secondMenu', `${ this.$route.name }-tradeTrust`, this.address || '');

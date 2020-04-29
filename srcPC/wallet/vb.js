@@ -12,12 +12,14 @@ export class VB extends Connector {
             if (!accounts || !accounts[0]) throw new Error('address is null');
             setCurrHDAcc({
                 activeAddr: accounts[0],
-                isBifrost: true
+                isBifrost: true,
+                isSeparateKey: true
             });
             getCurrHDAcc().unlock(this);
             store.commit('switchHDAcc', {
                 activeAddr: accounts[0],
-                isBifrost: true
+                isBifrost: true,
+                isSeparateKey: true
             });
             store.commit('setCurrHDAccStatus');
         });
@@ -41,6 +43,18 @@ export class VB extends Connector {
             });
 
             this.sendCustomRequest({ method: 'vite_signAndSendTx', params: args }).then(r => res(r)).catch(e => {
+                rej(e);
+            });
+        });
+    }
+
+    async signVbText(...args) {
+        return new Promise((res, rej) => {
+            this.on('disconnect', () => {
+                rej({ code: 11020, message: '链接断开' });
+            });
+
+            this.sendCustomRequest({ method: 'vite_signMessage', params: args }).then(r => res(r)).catch(e => {
                 rej(e);
             });
         });

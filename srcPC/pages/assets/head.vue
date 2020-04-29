@@ -1,6 +1,6 @@
 <template>
     <div class="account-head-wrapper">
-        <div class="head__item" v-if="!account.isBifrost">
+        <div class="head__item" v-if="!account.isSeparateKey">
             <img class="icon" :src="iconList.headAcc" />
             <div class="head-right">
                 <div class="head-title">
@@ -8,7 +8,7 @@
                     <span @click="startRename" class="edit __pointer"></span>
                 </div>
                 <div v-if="!isShowNameInput" class="name" @click="startRename">
-                    {{ account.isBifrost?$t('assets.vb.accountName'):account.name }}
+                    {{ account.isSeparateKey?$t('assets.vb.accountName'):account.name }}
                 </div>
                 <form autocomplete="off" v-else>
                     <input
@@ -34,6 +34,9 @@
                     </QrcodePopup>
                     <span class="address-content__operate copy click-able" @click="copy"></span>
                 </span>
+                <span v-if="isHardware && isLogin" class="address-content__verify">
+                    <span @click="verifyHwAddress">{{ $t('assets.ledger.verifyAddress') }}</span>
+                </span>
             </div>
         </div>
         <div class="worth head__item">
@@ -58,7 +61,8 @@
 <script>
 import Vue from 'vue';
 import { utils } from '@vite/vitejs';
-import { getCurrHDAcc } from 'wallet';
+import { getCurrHDAcc, StatusMap } from 'wallet';
+import { getLedgerInstance } from 'wallet/ledgerHW';
 import copy from 'components/copy';
 import QrcodePopup from 'components/qrcodePopup';
 import Pie from 'pcComponents/pie';
@@ -67,6 +71,8 @@ import bigNumber from 'utils/bigNumber';
 import statistics from 'utils/statistics';
 import { getTokenSymbolString } from 'utils/tokenParser';
 import AssetSwitch from './assetSwitch';
+import { hwVerifyAddressDialog, baseDialog } from 'pcComponents/dialog';
+
 
 import headAcc from 'assets/imgs/head_acc.png';
 import headAddr from 'assets/imgs/head_addr.svg';
@@ -133,7 +139,7 @@ export default {
             return {
                 name: this.$store.state.wallet.name,
                 addr: this.activeAddr,
-                isBifrost: getCurrHDAcc() && getCurrHDAcc().isBifrost
+                isSeparateKey: getCurrHDAcc() && getCurrHDAcc().isSeparateKey
             };
         },
         netStatus() {
@@ -203,6 +209,13 @@ export default {
         },
         activeAddr() {
             return this.$store.getters.activeAddr;
+        },
+        isHardware() {
+            const currAcc = this.$store.state.wallet.currHDAcc;
+            return currAcc && currAcc.isHardware;
+        },
+        isLogin() {
+            return this.$store.state.wallet.status === StatusMap.UNLOCK;
         }
     },
     methods: {
@@ -222,7 +235,7 @@ export default {
         startRename() {
             statistics.event(this.$route.name, 'changeName', this.activeAddr || '');
 
-            if (this.isShowNameInput || getCurrHDAcc().isBifrost) {
+            if (this.isShowNameInput || getCurrHDAcc().isSeparateKey) {
                 return;
             }
             this.isShowNameInput = true;
@@ -254,6 +267,34 @@ export default {
 
             this.$store.commit('renameCurrHDAcc', this.editName);
             this.clearEditName();
+        },
+        verifyHwAddress() {
+            const currentAccount = getCurrHDAcc();
+            if (!currentAccount || !currentAccount.hw) return;
+            const dialog = hwVerifyAddressDialog();
+
+            currentAccount.hw.connector
+                .getAddress(currentAccount.activeIdx, true)
+                .catch(err => {
+                    if (err && err.statusCode === 27013) {
+                        baseDialog({
+                            title: this.$t('assets.ledger.confirm.alert'),
+                            content: this.$t('assets.ledger.confirm.alertContent'),
+                            lTxt: this.$t('assets.ledger.confirm.alertLeftBtn'),
+                            rTxt: this.$t('assets.ledger.confirm.alertRightBtn'),
+                            width: 'wide'
+                        }).then(({ status }) => {
+                            if (status === 'CONFIRM') {
+                                window.open('https://vitex.zendesk.com/');
+                            }
+                        });
+                        return;
+                    }
+                    currentAccount.hw.emit('error', err);
+                })
+                .finally(() => {
+                    dialog.compInstance.close();
+                });
         }
     }
 };
@@ -375,6 +416,13 @@ export default {
             flex-direction: column;
             align-self: stretch;
             flex-grow: 1;
+            .address-content__verify {
+                @include gray_font_color_1();
+                font-size: 14px;
+                & > span {
+                    @include small_btn();
+                }
+            }
             .head-title {
                 display: flex;
                 align-items: center;

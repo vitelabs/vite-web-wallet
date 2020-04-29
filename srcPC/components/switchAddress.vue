@@ -1,9 +1,11 @@
 <template>
     <div v-click-outside="hideList" @click="toggleList" class="switch-address-wrapper __pointer">
-        <span class="list-title" :class="{
-            'down': !isShowList,
-            'up': isShowList,
-            'not-allowed': notAllowed
+        <span
+            class="list-title"
+            :class="{
+                'down': !isShowList || isHardware,
+                'up': isShowList,
+                'not-allowed': notAllowed && !isHardware
         }">{{ showStr }}</span>
 
         <ul class="list" v-show="isShowList">
@@ -22,6 +24,7 @@
 import statistics from 'utils/statistics';
 import ellipsisAddr from 'utils/ellipsisAddr.js';
 import { StatusMap, getCurrHDAcc } from 'wallet';
+import { hwAddressSelectDialog } from 'pcComponents/dialog';
 
 export default {
     props: {
@@ -54,6 +57,9 @@ export default {
             if (currAcc && currAcc.isBifrost) {
                 return this.$t('assets.vb.accountName');
             }
+            if (currAcc && currAcc.isHardware) {
+                return this.$t('assets.ledger.accountName');
+            }
             const i = this.addrList.findIndex(v => v.address === this.address);
             if (i < 0) {
                 return '';
@@ -64,7 +70,11 @@ export default {
             return this.$store.state.wallet.addrList;
         },
         notAllowed() {
-            return this.addrList.length <= 1 || getCurrHDAcc().isBifrost;
+            return this.addrList.length <= 1 || getCurrHDAcc().isSeparateKey;
+        },
+        isHardware() {
+            const currAcc = this.$store.state.wallet.currHDAcc;
+            return currAcc && currAcc.isHardware;
         }
     },
     methods: {
@@ -78,6 +88,10 @@ export default {
             this.toggleList();
         },
         toggleList() {
+            if (this.isHardware) {
+                return hwAddressSelectDialog();
+            }
+
             if (this.notAllowed) {
                 return;
             }

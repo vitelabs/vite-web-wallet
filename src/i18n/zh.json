@@ -486,6 +486,61 @@
             },
             "accountName":"ViteConnect 地址"
         },
+        "ledger": {
+            "title": "Ledger Device",
+            "accountName": "Ledger Wallet",
+            "verifyAddress": "验证该地址",
+            "closeAlert": "取消交易",
+            "start": {
+                "title": "支持 Ledger nano S 或 Ledger nano X",
+                "connectError": "连接错误",
+                "introduction": "安装说明 & 使用说明",
+                "introductionUrl": "https://support.ledger.com/hc/en-us/articles/115005165269-Connection-issues-with-Windows-or-Linux",
+                "connectErrorUrl": "https://support.ledger.com/hc/en-us/articles/115005165269-Connection-issues-with-Windows-or-Linux"
+            },
+            "connectWithUSB": "USB 连接",
+            "connectWithBlu": "蓝牙 连接",
+            "connectLedger": "连接 Ledger",
+            "connect": {
+                "title": "地址选择",
+                "tips": "请从以下地址中选择一个地址：",
+                "selectConnectType": "请选择 Ledger 硬件钱包的连接方式：（注意：仅 Ledger nano X 支持蓝牙连接）",
+                "cancelSelect": "请选择一个设备进行连接",
+                "connectError": "连接错误，请确保在Ledger上已打开Vite App软件！",
+                "interfaceNotAvailable": "连接失败，请尝试重新连接USB线，或者重启蓝牙再次尝试",
+                "receiveBlockSuccess": "成功签收{num}个 Response 块",
+                "introduction": {
+                    "1": {
+                        "title": "第一步: ",
+                        "content": "请连接 Ledger 设备并输入PIN"
+                    },
+                    "2": {
+                        "title": "第二步: ",
+                        "content": "请在 Ledger 设备里打开Vite App"
+                    }
+                }
+            },
+            "addressSelect": {
+                "index": "Index",
+                "address": "地址",
+                "balance": "余额",
+                "unreceived": "待接收余额",
+                "nextPage": "下一页",
+                "prePage": "上一页",
+                "confirm": "确认",
+                "unUsedAccount": "未使用"
+            },
+            "confirm": {
+                "tips": "请在 Ledger 钱包里确认该交易！",
+                "verifyAddress": "请在 Ledger 钱包里确认该地址！",
+                "alert": "注意",
+                "alertContent": "您刚才在 Ledger 设备上否认了该地址，请确认 Ledger 设备上显示的地址和页面上显示的地址是否一致，若是误操作，请忽略该消息。\n 若确实不一致，请勿向该地址发送任何资产，因为您访问的网页可能被黑客劫持。",
+                "alertLeftBtn": "误操作",
+                "alertRightBtn": "确实不一致",
+                "userCancel": "您在 Ledger 钱包里取消了交易",
+                "userCancelByWeb": "您取消了交易，即使在 Ledger 钱包里确认该交易，该交易也不会广播出去"
+            }
+        },
         "invite":{
             "inviteTitle":"邀请好友",
             "receiveInviteTitle":"接受邀请",
@@ -1011,6 +1066,68 @@
                     "cancel": "取消",
                     "ok": "确认"
               }
+            }
+        },
+        "openapi": {
+            "title": "API",
+            "myKey": "我的 API Key",
+            "createTime": "创建时间",
+            "permissions": "API 权限",
+            "permissionsContent": "交易权限",
+            "enabledTadingPairs": "委托交易对",
+            "createKey": "创建 API Key",
+            "deleteKey": "删除 API Key",
+            "deleteAlert": "删除 API Key之后，您将不能再使用该API Key，既有的套餐将保留，重新创建一个新的 Key 即可激活",
+            "confirmDelete": "确认删除",
+            "cancel": "取消",
+            "agentAddressStakingAmount": "委托地址抵押金额",
+            "staking": "抵押",
+            "package": "套餐",
+            "expireTime": "套餐到期时间",
+            "callNum": "调用次数",
+            "callNumInfo": "最高 {maxCount} 次/分钟",
+            "price": "价格",
+            "priceInfo": "{price} VX/月",
+            "upgrade": "升级套餐",
+            "balanceAlert": "地址 Vite 余额小于 {balanceLimit}，暂时不能创建API。",
+            "noSupportForHardware": "此功能暂不支持硬件钱包",
+            "tips": {
+                "title": "提示",
+                "0": "ViteX为您提供了API服务，您可以通过API使用交易权限，正常使用API有如下三步：",
+                "0-step1": "1. 创建 API",
+                "0-step2": "2. 委托部分交易对的交易权限",
+                "0-step3": "3. 给API地址抵押VITE获取配额",
+                "0-step4": "通过API文档查看如何使用，<a href=\"https://vite.wiki/zh/dex/api/dex-apis.html\" target=\"_blank\">点击查看API文档</a>",
+                "1": "每个地址只能创建一个API Key",
+                "2": "请不要泄漏您的API Key, 以免造成资产损失",
+                "3": "创建API后默认为免费套餐，调用频次最大为10次/1分钟，您可以点击升级高级套餐"
+            },
+            "stakingForQuota": {
+                "title": "委托地址抵押",
+                "agentAddress": "委托地址",
+                "stakingAmount": "抵押金额",
+                "ok": "确认"
+            },
+            "keyConfirm": {
+                "accessKey": "Access Key",
+                "secretKey": "Secret Key",
+                "agentAddress": "委托交易地址",
+                "title": "创建成功",
+                "tips": {
+                    "title": "温馨提示",
+                    "0": "请不要泄漏您的 Access Key 及 Secret Key, 以免造成资产损失",
+                    "1": "如您忘记了 Secret Key, 请回收该密钥对，并重新申请新的密钥对"
+                },
+                "warn": "密钥仅显示1次，遗失之后不可找回，请务必妥善保存"
+            },
+            "upgradeConfirm": {
+                "title": "升级 API 套餐",
+                "currentPackage": "当前套餐",
+                "selectPackage": "选择升级套餐类型",
+                "selectTime": "选择套餐时长",
+                "month": "月",
+                "payAmount": "支付套餐费用",
+                "balance": "钱包余额"
             }
         }
     },

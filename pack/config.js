@@ -5,6 +5,7 @@ const goViteServer = { // http-DNS
     production: '\'wss://api.vitewallet.com/ws\'',
     test: '\'wss://premainnet.vitewallet.com/test/ws\'',
     dev: '\'wss://premainnet.vitewallet.com/test/ws\''
+    // dev: '\'wss://api.vitewallet.com/ws\''
     // dev: '\'ws://148.70.30.139:41423\''
     // dev: '\'ws://111.231.218.73:41423\''
 };
@@ -49,7 +50,7 @@ const viteConnect = {
     production: '\'wss://biforst.vitewallet.com\'',
     test: '\'wss://biforst.vitewallet.com\'',
     // test: '\'ws://139.155.7.172:5001\'',
-    dev: '\'ws://139.155.7.172:5001\''
+    dev: '\'wss://biforst.vitewallet.com\''
 };
 const dnsHostServer = {
     production: '\'https://config.zaokaidian.com\'',

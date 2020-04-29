@@ -6,7 +6,7 @@ import i18n from 'pcI18n';
 const STATUS = {
     'CLOSE': 'CLOSE',
     'CANCEL': 'CANCEL',
-    'CONFIRMED': 'CONFRIMED'
+    'CONFIRMED': 'CONFIRMED'
 };
 const widthMap = {
     narrow: '380px',
@@ -228,7 +228,7 @@ const mixin = {
 };
 
 export default function (component, propsDefault = {}) {
-    return function dialog(props = {}) {
+    function dialog(props = {}) {
         let instance = null;
         const insert = function (props) {
             component.mixins = component.mixins || [];
@@ -256,5 +256,8 @@ export default function (component, propsDefault = {}) {
         });
         p.compInstance = instance;
         return p;
-    };
+    }
+
+    dialog.STATUS = STATUS;
+    return dialog;
 }

@@ -5,6 +5,8 @@ import { getOldAccList, setOldAccList } from 'pcUtils/store';
 
 import { WebAccount as HDAccount, StatusMap as _StatusMap } from './webAccount';
 import { VBAccount } from './vbAccount';
+import { HWAccount } from './hwAccount';
+
 import { getLastAcc, addHdAccount, setAcc, getAccList } from './store';
 
 const Default_Lang = 'english';
@@ -25,11 +27,22 @@ export function setCurrHDAcc(acc) {
         return;
     }
 
+    if (acc.isBifrost || acc.isHardware) {
+        acc.isSeparateKey = true;
+    }
+
     if (acc.isBifrost
         && currentHDAccount
         && currentHDAccount.isBifrost
         && currentHDAccount.activeAddr === acc.activeAddr
+        || acc.isHardware
+        && currentHDAccount
+        && currentHDAccount.isHardware
+        && currentHDAccount.activeAddr === acc.activeAddr
     ) {
+        if (acc.isHardware) {
+            currentHDAccount.publicKey = acc.publicKey;
+        }
         return currentHDAccount;
     }
 
@@ -48,7 +61,7 @@ export function getList() {
     const oldAccList = getOldAccList() || [];
     return accList
         .concat(oldAccList)
-        .filter(acc => acc.id && !acc.id.startsWith('VITEBIFROST_')); // filter vb accounts
+        .filter(acc => acc.id && (!acc.id.startsWith('VITEBIFROST_') && !acc.id.startsWith('VITEHARDWARE_'))); // filter vb and hardware accounts
 }
 
 export function deleteOldAcc(acc) {
@@ -116,8 +129,10 @@ function initCurrHDAccount() {
 }
 
 function constructAccount(acc) {
-    if (acc.isBifrost || acc.id.startsWith('VITEBIFROST_')) {
+    if (acc.isBifrost || acc.id && acc.id.startsWith('VITEBIFROST_')) {
         currentHDAccount = new VBAccount(acc);
+    } else if (acc.isHardware || acc.id && acc.id.startsWith('VITEHARDWARE_')) {
+        currentHDAccount = new HWAccount(acc);
     } else {
         currentHDAccount = new HDAccount(acc);
     }

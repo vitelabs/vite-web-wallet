@@ -1,10 +1,11 @@
 import { utils, accountBlock as accountBlockUtils } from '@vite/vitejs';
-import { getActiveAcc } from 'wallet';
+import { getActiveAcc, getCurrHDAcc } from 'wallet';
 import { powProcess } from 'pcComponents/pow/index';
 import { quotaConfirm } from 'pcComponents/quota/index';
 import { vbConfirmDialog } from 'pcComponents/dialog';
 import { execWithValid } from 'pcUtils/execWithValid';
 import { getVbInstance } from 'wallet/vb';
+import { getLedgerInstance } from 'wallet/ledgerHW';
 import { viteClient } from 'services/apiServer';
 
 const { createAccountBlock } = accountBlockUtils;
@@ -31,7 +32,7 @@ const sendTx = execWithValid(function ({
     description
 }) {
     const activeAccount = getActiveAcc();
-    console.log(activeAccount);
+
 
     if (activeAccount.isBifrost) {
         return vbSendTx({
@@ -46,6 +47,17 @@ const sendTx = execWithValid(function ({
         });
     }
 
+    if (activeAccount.isHardware) {
+        return hwSendTx({
+            methodName,
+            params: {
+                ...data,
+                address: activeAccount.address
+            },
+            config: formatConfig(config)
+        });
+    }
+
     return webSendTx({
         methodName,
         params: {
@@ -56,7 +68,6 @@ const sendTx = execWithValid(function ({
         privateKey: activeAccount.privateKey
     });
 });
-export default sendTx;
 
 
 async function webSendTx({ methodName, params, config, privateKey }) {
@@ -125,6 +136,80 @@ function vbSendTx({ methodName, params, vbExtends, abi, description }) {
     });
 }
 
+// 硬件钱包发送交易
+async function hwSendTx({ methodName, params, config }) {
+    const accountBlock = createAccountBlock(methodName, params).setProvider(viteClient);
+    await accountBlock.autoSetPreviousAccountBlock();
+
+    const difficulty = await accountBlock.getDifficulty();
+    console.log(difficulty);
+
+    const { publicKey, activeIdx } = getCurrHDAcc();
+    accountBlock.setPublicKey(publicKey);
+
+
+    if (!difficulty) {
+        return signHwTx(activeIdx, accountBlock);
+    }
+
+    if (!config.pow) {
+        quotaConfirm(config.confirmConfig);
+        throw {
+            code: '1000001',
+            message: 'Don\'t need pow, already show confirm.'
+        };
+    }
+
+    const powInstance = powProcess({ ...config.powConfig });
+
+    try {
+        await accountBlock.PoW(difficulty);
+        await powInstance.stopCount();
+    } catch (err) {
+        console.error('pow err', err);
+
+        if (!powInstance || !powInstance.isShow) {
+            return;
+        }
+        powInstance.stop();
+        throw err;
+    }
+
+    return signHwTx(activeIdx, accountBlock);
+}
+
+
+function signHwTx(activeIdx, accountBlock) {
+    return new Promise((resolve, reject) => {
+        const confirmPromise: any = vbConfirmDialog();
+        const { compInstance } = confirmPromise;
+        let isRejected = false;
+        confirmPromise.then(() => {
+            // 如果点击了关闭窗口，则不再提示
+            compInstance && compInstance.close();
+            isRejected = true;
+            getLedgerInstance().handleError({ name: 'CancelByWeb' });
+            reject({ code: '11021' });
+        });
+        getLedgerInstance().signHwTx(activeIdx, accountBlock).catch(err => {
+            !isRejected && getLedgerInstance().handleError(err);
+            throw err;
+        })
+            .finally(() => {
+                compInstance && compInstance.close();
+            })
+            .then(({ signature }) => accountBlock.setSignature(signature))
+            .then(() => {
+                if (isRejected) {
+                    throw new Error();
+                }
+                return accountBlock.send();
+            })
+            .then(data => resolve(data))
+            .catch(err => reject(err));
+    });
+}
+
 function formatConfig(config) {
     config = config || defaultConfig;
     // console.log(config);
@@ -167,3 +252,6 @@ function formatConfig(config) {
 
     return { pow, powConfig, confirmConfig };
 }
+
+
+export default sendTx;

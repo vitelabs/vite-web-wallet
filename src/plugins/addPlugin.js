@@ -1,6 +1,7 @@
 import toast from 'components/toast/index.js';
 import bigNumber from 'utils/bigNumber';
 import date from 'utils/date';
+import ellipsisAddr from 'utils/ellipsisAddr.js';
 
 document.addEventListener('drop', e => {
     e.preventDefault();
@@ -89,6 +90,12 @@ export default {
         });
         Vue.filter('toMin', function (num, decimal, fix) {
             return bigNumber.formatNum(num, decimal, fix);
+        });
+
+        // 短地址
+        Vue.filter('shotAddr', function (address, length = 5) {
+            if (!address || address.length < 11) return address;
+            return ellipsisAddr(address, length);
         });
     }
 };
