@@ -1,13 +1,9 @@
+#!/bin/bash
+set -e
 echo "Start building";
 
 handle=$1;
 isClear=$2;
-
-# Pull and clear and install
-git checkout revert
-
-echo "Pull ==============";
-git pull
 
 if [ "$isClear"X == "clear"X ]
 then
