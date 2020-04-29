@@ -4,7 +4,7 @@ handle=$1;
 isClear=$2;
 
 # Pull and clear and install
-git checkout master
+git checkout revert
 
 echo "Pull ==============";
 git pull
