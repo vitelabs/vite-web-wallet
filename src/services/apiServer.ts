@@ -10,7 +10,8 @@ function viteXAPIAfterRes(xhr) {
         return Promise.reject({
             code,
             subCode,
-            message: msg || error
+            message: msg || error,
+            data
         });
     }
 

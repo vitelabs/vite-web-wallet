@@ -14,6 +14,15 @@
                 <div class="star"></div>
                 {{ $t("assets.vb.title") }}
             </div>
+            <!-- <div
+                class="btn-item __pointer"
+                :class="{ active: tabName === 'ledger' }"
+                @click="toggleTab('ledger')"
+                :key="'ledger'"
+            >
+                <div class="star"></div>
+                {{ $t("assets.ledger.title") }}
+            </div> -->
             <div
                 v-show="isHaveList"
                 class="btn-item __pointer"
@@ -54,10 +63,28 @@
                     {{ $t("addAccount") }}
                 </div>
             </div>
+            <!-- Ledger wallet login panel -->
+            <div class="ledger" v-if="tabName === 'ledger'">
+                <div class="code_container">
+                    <div class="code_tips">
+                        {{ $t("assets.ledger.start.title") }}
+                    </div>
+                    <div class="img_wrapper">
+                        <img src="~assets/imgs/ledger_logo.svg" alt="">
+                    </div>
+                    <div class="code_tips_introduction">
+                        <a :href="$t('assets.ledger.start.introductionUrl')" target="_blank">{{ $t("assets.ledger.start.introduction") }}</a>
+                        <a :href="$t('assets.ledger.start.connectErrorUrl')" target="_blank">{{ $t("assets.ledger.start.connectError") }}</a>
+                    </div>
+                </div>
+                <div class="__btn __btn_all_in __pointer" @click="connectLedger()">
+                    {{ $t("assets.ledger.connectLedger") }}
+                </div>
+            </div>
             <div v-if="tabName === 'existingAcc'" class="existing-acc">
                 <div class="bottom __btn __pointer" v-click-outside.includeChildrens="hideAccountList">
                     <div @click="toggleAccountList">
-                        <div v-show="currAcc && !currAcc.activeAddr && !currAcc.isBifrost" class="__btn __btn_input">
+                        <div v-show="currAcc && !currAcc.activeAddr && !currAcc.isSeparateKey" class="__btn __btn_input">
                             <div class="name __ellipsis">
                                 {{ currAcc.name }}
                             </div>
@@ -130,9 +157,11 @@ import { getAppLink } from 'utils/getLink';
 import openUrl from 'utils/openUrl';
 import { getList, deleteOldAcc } from 'wallet';
 
+
 import accountItem from './accountItem.vue';
 import restore from './restore.vue';
 import accountList from './accountList.vue';
+import { hwAddressSelectDialog } from 'pcComponents/dialog';
 
 import qrcode from 'components/qrcode';
 import { initVB } from 'wallet/vb';
@@ -141,7 +170,8 @@ import icon from 'assets/imgs/start_qrcode_icon.svg';
 const TABNAME = {
     vb: 'vb',
     existingAcc: 'existingAcc',
-    restore: 'restore'
+    restore: 'restore',
+    ledger: 'ledger'
 };
 
 export default {
@@ -261,7 +291,7 @@ export default {
             }
 
             // Second: from current
-            if (this.currHDAcc && !this.currHDAcc.isBifrost) {
+            if (this.currHDAcc && !this.currHDAcc.isSeparateKey) {
                 return {
                     id: this.currHDAcc.id,
                     showAddr: this.currHDAcc.activeAddr
@@ -350,6 +380,14 @@ export default {
                     this.isLoading = false;
                     this.$toast(this.$t('hint.pwErr'));
                 });
+        },
+        connectLedger() {
+            hwAddressSelectDialog({ width: 'wide' }).then(({ status }) => {
+                if (status === 'CONFIRMED') {
+                    const name = this.$store.state.env.lastPage || 'tradeCenter';
+                    this.$router.push({ name });
+                }
+            });
         }
     }
 };
@@ -482,6 +520,42 @@ export default {
             }
             .vb_qrcode {
                 margin: 30px auto;
+            }
+        }
+    }
+    .ledger {
+        width: 100%;
+        .code_container {
+            width: 100%;
+            padding: 20px;
+            box-sizing: border-box;
+            background: #fff;
+            margin-bottom: 20px;
+            font-size: 14px;
+            .img_wrapper {
+                margin: 30px 0;
+            }
+            .code_tips {
+                text-align: left;
+                word-break: break-all;
+                color: #333333;
+                line-height: 18px;
+            }
+            .code_tips_introduction {
+                color: $blue-color-1;
+                font-size: 14px;
+                display: flex;
+                flex-direction: row;
+                a {
+                    color: $blue-color-1;
+                    flex: 1;
+                    &:first-child {
+                        text-align: left;
+                    }
+                    &:last-child {
+                        text-align: right;
+                    }
+                }
             }
         }
     }
