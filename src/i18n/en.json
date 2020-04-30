@@ -167,7 +167,7 @@
         "pwErr": "Incorrect password!",
         "pwEmpty": "Password cannot be empty!",
         "noData": "No Data",
-        "err": "Oops, error occurs",
+        "err": "Oops, something went wrong",
         "request": "{name} request has sent, please wait",
         "copy": "Successfully copied",
         "copyShare":"Copy share link successful!",
