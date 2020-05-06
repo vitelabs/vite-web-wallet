@@ -156,6 +156,7 @@ import ellipsisAddr from 'utils/ellipsisAddr.js';
 import { getAppLink } from 'utils/getLink';
 import openUrl from 'utils/openUrl';
 import { getList, deleteOldAcc } from 'wallet';
+import * as DnsHost from 'services/dnsHostIP';
 
 
 import accountItem from './accountItem.vue';
@@ -204,7 +205,7 @@ export default {
             return;
         }
         if (this.tabName === 'vb') {
-            this.initVB();
+            this._initVB();
         } else if (this.tabName === 'existingAcc') {
             this.init();
         }
@@ -241,6 +242,15 @@ export default {
         showExisting(id) {
             this.id = id;
             this.toggleTab('existingAcc');
+        },
+        _initVB() {
+            if (DnsHost.Server.isReady) {
+                this.initVB();
+            } else {
+                DnsHost.onReady(() => {
+                    this.initVB();
+                });
+            }
         },
         initVB() {
             this.vb = initVB();
