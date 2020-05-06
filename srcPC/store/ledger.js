@@ -5,7 +5,7 @@ import { tokenInfoFromGithub } from 'services/trade';
 import { getTokenInfoById, getSnapshotChainHeight, getTokenInfoList } from 'services/viteServer';
 
 const ViteId = constant.Vite_TokenId;
-const MAX_TOKEN_NUM = 100;
+const MAX_TOKEN_NUM = 300;
 
 let heightTimer = null;
 const state = {

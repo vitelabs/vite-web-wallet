@@ -6,7 +6,7 @@ import i18n from 'pcI18n';
 const STATUS = {
     'CLOSE': 'CLOSE',
     'CANCEL': 'CANCEL',
-    'CONFIRMED': 'CONFRIMED'
+    'CONFIRMED': 'CONFIRMED'
 };
 const widthMap = {
     narrow: '380px',

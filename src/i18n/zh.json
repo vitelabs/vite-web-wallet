@@ -448,7 +448,7 @@
             "labelPlaceholder":"请输入 {labelName}",
             "addressPlaceholder": "请输入{token}转出地址",
             "successTips": "转出请求已发送",
-            "failTips":"网关节点出错，请检查网关设置"
+            "failTips":"网关服务出错，请检查网关设置"
         },
         "nodeErr": "网关节点无效，请检查网关设置"
     },
@@ -1066,6 +1066,68 @@
                     "cancel": "取消",
                     "ok": "确认"
               }
+            }
+        },
+        "openapi": {
+            "title": "API",
+            "myKey": "我的 API Key",
+            "createTime": "创建时间",
+            "permissions": "API 权限",
+            "permissionsContent": "交易权限",
+            "enabledTadingPairs": "委托交易对",
+            "createKey": "创建 API Key",
+            "deleteKey": "删除 API Key",
+            "deleteAlert": "删除 API Key之后，您将不能再使用该API Key，既有的套餐将保留，重新创建一个新的 Key 即可激活",
+            "confirmDelete": "确认删除",
+            "cancel": "取消",
+            "agentAddressStakingAmount": "委托地址抵押金额",
+            "staking": "抵押",
+            "package": "套餐",
+            "expireTime": "套餐到期时间",
+            "callNum": "调用次数",
+            "callNumInfo": "最高 {maxCount} 次/分钟",
+            "price": "价格",
+            "priceInfo": "{price} VX/月",
+            "upgrade": "升级套餐",
+            "balanceAlert": "地址 Vite 余额小于 {balanceLimit}，暂时不能创建API。",
+            "noSupportForHardware": "此功能暂不支持硬件钱包",
+            "tips": {
+                "title": "提示",
+                "0": "ViteX为您提供了API服务，您可以通过API使用交易权限，正常使用API有如下三步：",
+                "0-step1": "1. 创建 API",
+                "0-step2": "2. 委托部分交易对的交易权限",
+                "0-step3": "3. 给API地址抵押VITE获取配额",
+                "0-step4": "通过API文档查看如何使用，<a href=\"https://vite.wiki/zh/dex/api/dex-apis.html\" target=\"_blank\">点击查看API文档</a>",
+                "1": "每个地址只能创建一个API Key",
+                "2": "请不要泄漏您的API Key, 以免造成资产损失",
+                "3": "创建API后默认为免费套餐，调用频次最大为10次/1分钟，您可以点击升级高级套餐"
+            },
+            "stakingForQuota": {
+                "title": "委托地址抵押",
+                "agentAddress": "委托地址",
+                "stakingAmount": "抵押金额",
+                "ok": "确认"
+            },
+            "keyConfirm": {
+                "accessKey": "Access Key",
+                "secretKey": "Secret Key",
+                "agentAddress": "委托交易地址",
+                "title": "创建成功",
+                "tips": {
+                    "title": "温馨提示",
+                    "0": "请不要泄漏您的 Access Key 及 Secret Key, 以免造成资产损失",
+                    "1": "如您忘记了 Secret Key, 请回收该密钥对，并重新申请新的密钥对"
+                },
+                "warn": "密钥仅显示1次，遗失之后不可找回，请务必妥善保存"
+            },
+            "upgradeConfirm": {
+                "title": "升级 API 套餐",
+                "currentPackage": "当前套餐",
+                "selectPackage": "选择升级套餐类型",
+                "selectTime": "选择套餐时长",
+                "month": "月",
+                "payAmount": "支付套餐费用",
+                "balance": "钱包余额"
             }
         }
     },

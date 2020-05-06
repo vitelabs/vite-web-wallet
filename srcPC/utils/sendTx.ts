@@ -32,7 +32,6 @@ const sendTx = execWithValid(function ({
     description
 }) {
     const activeAccount = getActiveAcc();
-    console.log(activeAccount);
 
 
     if (activeAccount.isBifrost) {
@@ -69,7 +68,6 @@ const sendTx = execWithValid(function ({
         privateKey: activeAccount.privateKey
     });
 });
-export default sendTx;
 
 
 async function webSendTx({ methodName, params, config, privateKey }) {
@@ -254,3 +252,6 @@ function formatConfig(config) {
 
     return { pow, powConfig, confirmConfig };
 }
+
+
+export default sendTx;
