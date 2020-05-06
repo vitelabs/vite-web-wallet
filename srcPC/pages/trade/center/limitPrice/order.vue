@@ -26,7 +26,7 @@
                 <span v-show="isShowSellMining" class="tips">
                     {{ $t('tradeCenter.sellMiningPrice', { price: sellMiningPrice }) }}
                 </span>
-                <vite-input v-model="price" @input="priceChanged" type="number"
+                <vite-input v-model="price" @input="priceChanged" type="number" :step="this.$store.getters.quoteTokenStepLimit"
                             @focus="showTips('price')" @blur="hideTips('price')">
                     <span class="real-price __ellipsis" slot="after">{{ realPrice }}</span>
                 </vite-input>
@@ -43,7 +43,7 @@
             </span>
             <div class="else-input-wrapper" :class="{'err': quantityErr}">
                 <span v-show="focusInput === 'quantity' && quantityErr" class="tips">{{ quantityErr }}</span>
-                <vite-input v-model="quantity" @input="quantityChanged" type="number"
+                <vite-input v-model="quantity" @input="quantityChanged" type="number" :step="this.$store.getters.tradeTokenStepLimit"
                             @focus="showTips('quantity')" @blur="hideTips('quantity')">
                 </vite-input>
             </div>
@@ -64,7 +64,7 @@
             </span>
             <div class="else-input-wrapper" :class="{'err': amountErr}">
                 <span v-show="focusInput === 'amount' && amountErr" class="tips">{{ amountErr }}</span>
-                <vite-input v-model="amount" @input="amountChanged" type="number"
+                <vite-input v-model="amount" @input="amountChanged" type="number" :step="this.$store.getters.quoteTokenStepLimit"
                             @focus="showTips('amount')" @blur="hideTips('amount')">
                 </vite-input>
             </div>
