@@ -77,6 +77,12 @@ const getters = {
 
         return getMinDecimals(tradeTokenDetail.tokenDecimals, activeTxPair.quantityPrecision);
     },
+    quoteTokenStepLimit(state, getters, rootState) {
+        return 1 / Math.pow(10, getters.quoteTokenDecimalsLimit);
+    },
+    tradeTokenStepLimit(state, getters, rootState) {
+        return 1 / Math.pow(10, getters.tradeTokenDecimalsLimit);
+    },
     activeTxPairBuyOnePrice(state, getters, rootState) {
         const buy = rootState.exchangeDepth.buy;
         if (!buy || !buy.length) {

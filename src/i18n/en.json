@@ -862,12 +862,10 @@
             "inviteRule":"Rules",
             "ruleItems":[
                 "The <span class='strong'>1,000 VITE</span> payment to generate an invitation code will be burned",
-                "Referee will be weighted with referral proceeds when calculating mining rewards <span class='strong'>5%</span> ",
-                "Referee will be weighted with referral proceeds when calculating mining rewards <span class='strong'>2.5%</span> "
+                "Referee will be rewarded with <span class='strong'>5%</span> of all invited users' trading as mining proceeds and <span class='strong'>2.5%</span> of all market-making as mining proceeds"
             ],
             "receiveRuleItems": [
-                "Mining rewards will be weighted with referral proceeds <span class='strong'>2.5%</span> ",
-                "Mining rewards will be weighted with referral proceeds <span class='strong'>1.25%</span> ",
+                "Invited users will receive an extra <span class='strong'>2.5%</span> of trading as mining rewards and <span class='strong'>1.25%</span> of market-making as mining rewards",
                 "Enjoy <span class='strong'>10%</span> off trading fees with an invitation code"
             ]
         }
