@@ -53,7 +53,7 @@ const viteConnect = {
     dev: '\'wss://biforst.vitewallet.com\''
 };
 const dnsHostServer = {
-    production: '\'https://config.leanfaces.com\'',
+    production: '\'https://config.zaokaidian.com\'',
     test: '\'\'',
     dev: '\'\''
 };

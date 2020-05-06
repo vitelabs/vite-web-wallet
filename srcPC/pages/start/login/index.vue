@@ -14,7 +14,7 @@
                 <div class="star"></div>
                 {{ $t("assets.vb.title") }}
             </div>
-            <div
+            <!-- <div
                 class="btn-item __pointer"
                 :class="{ active: tabName === 'ledger' }"
                 @click="toggleTab('ledger')"
@@ -22,7 +22,7 @@
             >
                 <div class="star"></div>
                 {{ $t("assets.ledger.title") }}
-            </div>
+            </div> -->
             <div
                 v-show="isHaveList"
                 class="btn-item __pointer"
@@ -383,7 +383,7 @@ export default {
         },
         connectLedger() {
             hwAddressSelectDialog({ width: 'wide' }).then(({ status }) => {
-                if (status === hwAddressSelectDialog['STATUS']['CONFIRMED']) {
+                if (status === 'CONFIRMED') {
                     const name = this.$store.state.env.lastPage || 'tradeCenter';
                     this.$router.push({ name });
                 }

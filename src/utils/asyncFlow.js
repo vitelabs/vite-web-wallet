@@ -71,11 +71,11 @@ export function doUntill({
         const tryAndTry = function () {
             t += 1;
             createPromise.call(that, ...args).then(result => {
-                if (test({ resolve: result })) {
+                if (test({ resolve: result, times: t })) {
                     return res(result);
                 }
             }).catch(e => {
-                if (test({ reject: e })) {
+                if (test({ reject: e, times: t })) {
                     return rej(e);
                 }
             })

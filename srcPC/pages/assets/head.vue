@@ -284,7 +284,7 @@ export default {
                             rTxt: this.$t('assets.ledger.confirm.alertRightBtn'),
                             width: 'wide'
                         }).then(({ status }) => {
-                            if (status === 'CONFRIMED') {
+                            if (status === 'CONFIRM') {
                                 window.open('https://vitex.zendesk.com/');
                             }
                         });

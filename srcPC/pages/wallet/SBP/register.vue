@@ -210,13 +210,14 @@ export default {
             this.loading = true;
             const nodeName = this.nodeName.trim();
             const producerAddr = this.producerAddr;
+            const quotaAddr = this.quotaAddr;
 
             sendTx({
                 methodName: 'registerSBP',
                 data: {
                     sbpName: nodeName,
                     blockProducingAddress: producerAddr,
-                    rewardWithdrawAddress: producerAddr,
+                    rewardWithdrawAddress: quotaAddr,
                     amount: BigNumber.toMin(amount, Vite_Token_Info.decimals)
                 },
                 config: {
