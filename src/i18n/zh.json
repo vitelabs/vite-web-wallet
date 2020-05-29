@@ -919,7 +919,7 @@
         "buyMiningPrice": "买入价大于{price}时满足挂单挖矿条件",
         "sellMiningPrice": "卖出价小于{price}时满足挂单挖矿条件",
         "operator": {
-            "noName": "匿名网关",
+            "noName": "匿名运营商",
             "overview": "介绍",
             "txPair": "交易对",
             "confirmTitle": "温馨提示",

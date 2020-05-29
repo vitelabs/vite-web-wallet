@@ -783,7 +783,7 @@
         "blocking": "Terjadi kemacetan jaringan, silakan coba lagi nanti",
         "supportMining": "Mineable Trading Pairs",
         "operator": {
-            "noName": "Anonymous Gateway",
+            "noName": "Anonymous Operator",
             "overview": "Pengantar",
             "txPair": "Pasangan Perdagangan",
             "confirmTitle": "Pengingat Risiko",
