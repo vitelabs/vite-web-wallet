@@ -901,7 +901,7 @@
         "buyMiningPrice": "Qualifies for mining when buy price is greater than {price}",
         "sellMiningPrice": "Qualifies for mining when sell price is less than {price}",
         "operator": {
-            "noName": "Anonymous Gateway",
+            "noName": "Anonymous Operator",
             "overview": "Introduction",
             "txPair": "Trading Pairs",
             "confirmTitle": "Risk Reminder",

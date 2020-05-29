@@ -781,7 +781,7 @@
         "blocking": "Network congestion occurs, please try again later",
         "supportMining": "Mineable Trading Pairs",
         "operator": {
-            "noName": "Anonymous Gateway",
+            "noName": "Anonymous Operator",
             "overview": "소개",
             "txPair": "Trading Pairs",
             "confirmTitle": "Risk Reminder",
