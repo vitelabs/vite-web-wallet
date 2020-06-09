@@ -22,6 +22,9 @@ export default {
     components: { changeLang, firstNotice },
     methods: {
         goVX() {
+            if (window.DESKTOP) {
+                return this.$router.push({ name: 'tradeCenter' });
+            }
             openUrl(`https://vitex.net/${ this.$i18n.locale === 'zh' ? 'zh' : '' }`);
         }
     }
