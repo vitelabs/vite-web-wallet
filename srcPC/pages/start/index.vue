@@ -61,6 +61,7 @@ export default {
         top: 0;
         left: 0;
         right: 0;
+        -webkit-app-region: drag;
         [data-theme="0"] & {
             padding: 40px;
         }

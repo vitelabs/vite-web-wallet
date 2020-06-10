@@ -134,6 +134,10 @@ export default {
 
     .sidebar {
         width: 70px;
+        -webkit-app-region: drag;
+    }
+    .second-menu {
+        -webkit-app-region: drag;
     }
 
     .page-content {
