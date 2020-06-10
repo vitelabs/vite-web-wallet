@@ -62,6 +62,9 @@ export default {
         left: 0;
         right: 0;
         -webkit-app-region: drag;
+        .__pointer {
+            -webkit-app-region: no-drag;
+        }
         [data-theme="0"] & {
             padding: 40px;
         }
