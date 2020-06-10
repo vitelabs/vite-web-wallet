@@ -44,3 +44,7 @@ new Vue({
     router,
     i18n
 });
+
+if (window.DESKTOP) {
+    window.document.body.style = '-webkit-app-region: drag;';
+}
