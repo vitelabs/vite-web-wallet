@@ -58,9 +58,9 @@ export const Server = {
     }
 };
 
-if (location.origin === 'https://x.leanfaces.com') {
-    Server.dexAPI.url = 'https://vitex.leanfaces.com';
-    Server.dexPush.url = 'wss://vitex.leanfaces.com/websocket';
+if (location.origin === 'https://x.zaokaidian.com') {
+    Server.dexAPI.url = 'https://vitex.zaokaidian.com';
+    Server.dexPush.url = 'wss://vitex.zaokaidian.com/websocket';
 }
 
 export class DNSClient extends Client {
