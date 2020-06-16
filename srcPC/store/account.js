@@ -33,6 +33,11 @@ const mutations = {
         state.onroad.balanceInfos = state.onroad && state.onroad.balanceInfoMap
             ? state.onroad.balanceInfoMap
             : {};
+
+        // Desktop wallt only
+        if (window.ipcRenderer) {
+            window.ipcRenderer.send('balanceInfo', JSON.stringify(getters.balanceInfo(state)));
+        }    
     },
     commitClearBalance(state) {
         state.balance = { balanceInfos: {} };

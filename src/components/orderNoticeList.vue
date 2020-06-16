@@ -41,15 +41,17 @@ export default {
         },
         addNotice(latestOrder) {
             const type = latestOrder.status === 2 ? 'notice' : 'error';
-
-            const orderNotice = {
-                type,
-                title: type === 'notice' ? this.$t('dealReminder.title') : this.$t('dealReminder.failTitle'),
-                describe: this.$t(`dealReminder.${ type }`, {
+            const title = type === 'notice' ? this.$t('dealReminder.title') : this.$t('dealReminder.failTitle');
+            const describe = this.$t(`dealReminder.${ type }`, {
                     time: date(latestOrder.createTime * 1000, 'zh'),
                     ftoken: latestOrder.tradeTokenSymbol,
                     ttoken: latestOrder.quoteTokenSymbol
-                }),
+                });
+
+            const orderNotice = {
+                type,
+                title,
+                describe,
                 close: data => {
                     let i;
                     for (i = 0; i < this.latestOrders.length; i++) {
@@ -69,6 +71,13 @@ export default {
                 }, 4000)
             };
             this.latestOrders.push(orderNotice);
+
+            // Desktop only
+            // if (window.Notification && window.DESKTOP) {
+            //     new Notification(title, {
+            //         body: describe
+            //     });
+            // }
         }
     }
 };
