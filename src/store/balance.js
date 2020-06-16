@@ -35,7 +35,7 @@ const actions = {
                 if (rootGetters.activeAddr !== address) {
                     return;
                 }
-                commit('setExchangeBalance', data);
+                data && commit('setExchangeBalance', data);
             }).catch(e => {
                 const code = e && e.error && e.error.code;
                 code === -32002 && commit('clearDexBalance');
