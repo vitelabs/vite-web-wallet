@@ -46,6 +46,9 @@ export default {
             this.addNotice(this.latestOrder);
         },
         addNotice(latestOrder) {
+            if (Number(latestOrder.executedAmount) === 0) {
+                return;
+            }
             const type = orderStatusMap[latestOrder.status];
             let title = '';
             let describe = '';
