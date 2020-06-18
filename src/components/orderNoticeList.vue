@@ -73,11 +73,11 @@ export default {
             this.latestOrders.push(orderNotice);
 
             // Desktop only
-            // if (window.Notification && window.DESKTOP) {
-            //     new Notification(title, {
-            //         body: describe
-            //     });
-            // }
+            if (window.Notification && window.DESKTOP) {
+                new Notification(title, {
+                    body: describe
+                });
+            }
         }
     }
 };
