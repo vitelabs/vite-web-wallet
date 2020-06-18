@@ -104,6 +104,7 @@ export default {
 
                 notice.onclick = () => {
                     window.ipcRenderer.send('notificationClick');
+                    notice.close();
                 };
             } else {
                 this.latestOrders.push(orderNotice);
