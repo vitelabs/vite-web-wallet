@@ -11,6 +11,12 @@
 import notice from 'components/notice';
 import date from 'utils/date';
 
+const orderStatusMap = {
+    1: 'notice-partial',
+    2: 'notice-all',
+    4: 'error'
+};
+
 export default {
     components: { notice },
     data() {
@@ -34,19 +40,37 @@ export default {
     },
     methods: {
         updateLatestOrder() {
-            if (!this.latestOrder || [ 2, 4 ].indexOf(this.latestOrder.status) === -1) {
+            if (!this.latestOrder || [ 1, 2, 4 ].indexOf(this.latestOrder.status) === -1) {
                 return;
             }
             this.addNotice(this.latestOrder);
         },
         addNotice(latestOrder) {
-            const type = latestOrder.status === 2 ? 'notice' : 'error';
-            const title = type === 'notice' ? this.$t('dealReminder.title') : this.$t('dealReminder.failTitle');
-            const describe = this.$t(`dealReminder.${ type }`, {
+            const type = orderStatusMap[latestOrder.status];
+            let title = '';
+            let describe = '';
+            if ([1, 2].indexOf(latestOrder.status) > -1) {
+                title = this.$t(`dealReminder.title.${latestOrder.side ? 'sell' : 'buy'}`, {
+                    ftoken: latestOrder.tradeTokenSymbol,
+                    ttoken: latestOrder.quoteTokenSymbol,
+                });
+                describe = this.$t(`dealReminder.${ type }.${ latestOrder.side ? 'sell' : 'buy' }`, {
                     time: date(latestOrder.createTime * 1000, 'zh'),
                     ftoken: latestOrder.tradeTokenSymbol,
-                    ttoken: latestOrder.quoteTokenSymbol
+                    ttoken: latestOrder.quoteTokenSymbol,
+                    executedPercent: (Number(latestOrder.executedPercent) * 100).toFixed(2),
+                    amount: latestOrder.amount,
+                    price: latestOrder.price
                 });
+            } else {
+                title = this.$t('dealReminder.failTitle');
+                describe = this.$('dealReminder.error', {
+                    time: date(latestOrder.createTime * 1000, 'zh'),
+                    ftoken: latestOrder.tradeTokenSymbol,
+                    ttoken: latestOrder.quoteTokenSymbol,
+                    amount: latestOrder.amount,
+                });
+            }
 
             const orderNotice = {
                 type,
@@ -70,13 +94,19 @@ export default {
                     orderNotice.close(orderNotice);
                 }, 4000)
             };
-            this.latestOrders.push(orderNotice);
 
             // Desktop only
-            if (window.Notification && window.DESKTOP) {
-                new Notification(title, {
-                    body: describe
+            if (window.Notification && window.DESKTOP && window.ipcRenderer) {
+                const notice =  new Notification(title, {
+                    body: describe,
+                    requireInteraction: true
                 });
+
+                notice.onclick = () => {
+                    window.ipcRenderer.send('notificationClick');
+                };
+            } else {
+                this.latestOrders.push(orderNotice);
             }
         }
     }
