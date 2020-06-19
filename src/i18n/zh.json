@@ -48,12 +48,12 @@
         },
         "failTitle": "提单失败",
         "notice-all": {
-            "buy": "价格：{price} {ttoken} \n挂单数量：{amount} {ttoken} 已完全成交，详细记录可在委托历史中查看。",
-            "sell": "价格：{price} {ttoken} \n挂单数量：{amount} {ttoken} 已完全成交，详细记录可在委托历史中查看。"
+            "buy": "价格：{price} {ttoken} \n委托数量：{amount} {ttoken}，已完全成交，详细记录可在委托历史中查看。",
+            "sell": "价格：{price} {ttoken} \n委托数量：{amount} {ttoken}，已完全成交，详细记录可在委托历史中查看。"
         },
         "notice-partial": {
-            "buy": "价格：{price} {ttoken} \n挂单数量：{amount} {ttoken} 已成交 {executedPercent}%",
-            "sell": "价格：{price} {ttoken} \n挂单数量：{amount} {ttoken} 已成交 {executedPercent}%"
+            "buy": "价格：{price} {ttoken} \n委托数量：{amount} {ttoken}，成交 {executedPercent}%",
+            "sell": "价格：{price} {ttoken} \n委托数量：{amount} {ttoken}，成交 {executedPercent}%"
         },
         "error": "你于{time} 委托的 {amount} {ftoken} ({ftoken}/{ttoken})提单失败，详细记录可在委托历史中查看。"
     },
