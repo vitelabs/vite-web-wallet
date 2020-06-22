@@ -43,10 +43,20 @@
         ]
     },
     "dealReminder": {
-        "title": "Trading Notice",
+        "title": {
+          "buy": "Buy Order Completed: {ftoken} / {ttoken}",
+          "sell": "Sell Order Completed: {ftoken} / {ttoken}"
+        },
         "failTitle": "Order Failed",
-        "notice": "Your order {amount} {ftoken} ({ftoken}/{ttoken}) at {time} is a complete deal, visit Order History to find out more.",
-        "error": "Your order {amount} {ftoken} ({ftoken}/{ttoken}) at {time} has failed, for more details, please view in Order History section."
+        "notice-all": {
+          "buy": "Price: {price} {ttoken} \nAmount: {amount} {ttoken}, was completed. View Order History page for details.",
+          "sell": "Price: {price} {ttoken} \nAmount: {amount} {ttoken}, was completed. View Order History page for details."
+        },
+        "notice-partial": {
+          "buy": "Price: {price} {ttoken} \nAmount: {amount} {ttoken}, is {executedPercent}% completed.",
+          "sell": "Price: {price} {ttoken} \nAmount: {amount} {ttoken}, is {executedPercent}% completed."
+        },
+        "error": "Your order {amount} {ftoken} ({ftoken}/{ttoken}) at {time} has failed. For more details, please view Order History page."
     },
     "pow": {
         "ing": "Running PoW to acquire quota",
