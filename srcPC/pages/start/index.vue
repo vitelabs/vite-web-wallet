@@ -53,7 +53,7 @@ export default {
         }
     }
     [data-theme="1"] & {
-        background: #F6F8F9;
+        background:#1E2745;
     }
 
     .header {
@@ -69,8 +69,8 @@ export default {
             padding: 40px;
         }
         [data-theme="1"] & {
-            background: #fff;
-            padding: 14px;
+            background: transparent;
+            padding: 40px;
         }
         .header-logo {
             display: inline-block;
@@ -81,9 +81,9 @@ export default {
                 background-size: 100% 100%;
             }
             [data-theme="1"] & {
-                width: 52px;
-                height: 52px;
-                background: url("~assets/imgs/logo.png");
+                height: 50px;
+                width: 152px;
+                background: url("~assets/imgs/ViteLogo1.svg");
                 background-size: 100% 100%;
             }
         }
