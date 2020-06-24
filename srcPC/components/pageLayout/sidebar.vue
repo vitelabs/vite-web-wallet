@@ -8,10 +8,12 @@
 
             <div class="_top">
                 <div v-for="(name, index) in menuTops" :key="index"
-                     class="__pointer icon" :class="{ 'active': $route.name.indexOf(name) >= 0 }"
+                     class="__pointer"
                      @click="_go(name)">
-                    <img v-show="$route.name.indexOf(name) < 0" :src="icon[name]" />
-                    <img v-show="$route.name.indexOf(name) >= 0" :src="icon[`${name}Active`]"  />
+                    <div class="icon" :class="{ 'active': $route.name.indexOf(name) >= 0 }">
+                        <img v-show="$route.name.indexOf(name) < 0" :src="icon[name]" />
+                        <img v-show="$route.name.indexOf(name) >= 0" :src="icon[`${name}Active`]"  />
+                    </div>
                 </div>
             </div>
 
@@ -181,7 +183,6 @@ export default {
         align-items: center;
         width: 100%;
         height: 24px;
-        margin-top: 30px;
 
         img {
             width: 24px;
@@ -203,6 +204,11 @@ export default {
 
     ._top {
         flex: 1;
+        margin-top: 30px;
+        & > .__pointer {
+            padding-top: 15px;
+            padding-bottom: 15px;
+        }
     }
 
     ._bottom {
