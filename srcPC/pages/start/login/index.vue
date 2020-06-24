@@ -419,7 +419,7 @@ export default {
             color: #fff;
         }
         [data-theme="1"] & {
-            color: #171C34;
+            color: #fff;
         }
     }
     .__btn {
@@ -514,6 +514,7 @@ export default {
             background: #fff;
             margin-bottom: 20px;
             font-size: 14px;
+            border-radius: 2px;
             .code_tips {
                 word-break: break-all;
                 text-align: left;
