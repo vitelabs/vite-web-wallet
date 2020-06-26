@@ -97,5 +97,10 @@ export default {
             if (!address || address.length < 11) return address;
             return ellipsisAddr(address, length);
         });
+
+        // 百分比
+        Vue.filter('percentage', function (num, decimal) {
+            return `${ bigNumber.formatNum(bigNumber.multi(num, 100), decimal) }%`;
+        });
     }
 };

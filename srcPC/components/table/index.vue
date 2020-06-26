@@ -33,9 +33,14 @@
                         <span v-for="(headItem, i) in headList" :key="i"
                               @click="clickCell(headList[i].cell, rowItem, index)"
                               :class="`${headItem.class || ''} ${headItem.cellClass || ''}`" class="__tb_cell">
-                            <slot :name="`${index}${headList[i].cell}Before`"></slot>
-                            {{ rowItem[ headList[i].cell ] }}
-                            <slot :name="`${index}${headList[i].cell}After`"></slot>
+                            <template v-if="headItem.slot">
+                                <slot :name="headItem.cell" v-bind:data="rowItem"></slot>
+                            </template>
+                            <template v-else>
+                                <slot :name="`${index}${headList[i].cell}Before`"></slot>
+                                {{ cellFilter(rowItem[ headList[i].cell ], rowItem, headItem) }}
+                                <slot :name="`${index}${headList[i].cell}After`"></slot>
+                            </template>
                         </span>
                     </div>
                     <slot :name="`${index}Row`"></slot>
@@ -95,6 +100,12 @@ export default {
     methods: {
         _clickRow(item, index) {
             this.clickRow && this.clickRow(item, index);
+        },
+        cellFilter(value, rowItem, headItem) {
+            if (headItem.filter && typeof headItem.filter === 'function') {
+                return headItem.filter(value, rowItem);
+            }
+            return value;
         }
     }
 };
@@ -116,4 +127,5 @@ export default {
 @import "./vipList.scss";
 @import "./smallStakingList.scss";
 @import "./proxyTb.scss";
+@import "./defi.scss";
 </style>
