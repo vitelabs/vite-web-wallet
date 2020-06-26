@@ -127,5 +127,4 @@ export default {
 @import "./vipList.scss";
 @import "./smallStakingList.scss";
 @import "./proxyTb.scss";
-@import "./defi.scss";
 </style>

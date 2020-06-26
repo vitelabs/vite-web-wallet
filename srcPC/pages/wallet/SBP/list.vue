@@ -3,15 +3,18 @@
         <wallet-table class="wallet-sbp-table" :headList="[{
             class: 'name __ellipsis',
             text: $t('walletSBP.section1.nodeName'),
-            cell: 'name'
+            cell: 'name',
+            slot: true
         },{
             class: 'block-addr',
             text: $t('walletSBP.section1.producerAddr'),
-            cell: 'blockProducingAddress'
+            cell: 'blockProducingAddress',
+            slot: true
         },{
             class: 'reward-addr',
             text: $t('walletSBP.section1.rewardWithdrawAddress'),
-            cell: 'rewardWithdrawAddress'
+            cell: 'rewardWithdrawAddress',
+            slot: true
         },{
             class: 'amount',
             text: $t('stakingAmount'),
@@ -25,6 +28,23 @@
             text: $t('action'),
             cell: 'operate'
         }]" :contentList="list">
+            <template #name="{ data }">
+                <a :href="`https://vitescan.io/address/${data.stakeAddress}`" target="_blank">{{ data.name }}</a>
+            </template>
+
+            <template #blockProducingAddress="{ data }">
+                <a :href="`https://vitescan.io/address/${data.blockProducingAddress}`" target="_blank">
+                    {{data.blockProducingAddress | shortAddr}}
+                </a>
+                <span v-if="data.blockProducingAddress === address" class="beneficial-img"></span>
+            </template>
+
+            <template #rewardWithdrawAddress="{ data }">
+                <a :href="`https://vitescan.io/address/${data.rewardWithdrawAddress}`" target="_blank">
+                    {{data.rewardWithdrawAddress | shortAddr}}
+                </a>
+                <span v-if="data.rewardWithdrawAddress === address" class="beneficial-img"></span>
+            </template>
 
             <span v-for="(item, i) in list" :key="i"
                   :slot="`${i}heightBefore`">
@@ -81,7 +101,6 @@
 import { constant as viteConstant } from '@vite/vitejs';
 import date from 'utils/date.js';
 import { getExplorerLink } from 'utils/getLink';
-import ellipsisAddr from 'utils/ellipsisAddr.js';
 import BigNumber from 'utils/bigNumber';
 import sendTx from 'pcUtils/sendTx';
 import { constant } from 'pcUtils/store';
@@ -161,14 +180,10 @@ export default {
                 const isReReg = isCancel
                     ? (new Date().getTime() - item.revokeTime * 1000) > 75000
                     : false;
-                const blockProducingAddress = ellipsisAddr(item.blockProducingAddress, 6);
-                const rewardWithdrawAddress = ellipsisAddr(item.rewardWithdrawAddress, 6);
 
                 const day = date(item.expirationTime * 1000, this.$i18n.locale);
                 list.push({
-                    name: item.name,
-                    blockProducingAddress,
-                    rewardWithdrawAddress,
+                    ...item,
                     amount: item.isCancel ? '--' : `${ BigNumber.toBasic(item.stakeAmount, decimals) } ${ Vite_Token_Info.tokenSymbol }`,
                     isMaturity,
                     isCancel,
@@ -371,6 +386,15 @@ export default {
     .link {
         color: #007AFF;
     }
+}
+.beneficial-img {
+    display: inline-block;
+    margin-left: 8px;
+    margin-bottom: -2px;
+    width: 12px;
+    height: 12px;
+    background: url('~assets/imgs/owner.png');
+    background-size: 100% 100%;
 }
 
 .tipsicon {

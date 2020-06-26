@@ -18,7 +18,7 @@ block content
                         checkbox(@input="onSelect(address, $event)" v-model="address.isChecked")
                     th {{address.index}}
                     th
-                        a(:href="'https://vitescan.io/address/' + address.address" target="_blank") {{address.address | shotAddr}}
+                        a(:href="'https://vitescan.io/address/' + address.address" target="_blank") {{address.address | shortAddr}}
                         span.code_small_btn(v-if="!address.blockCount && address.blockCount !== undefined ") {{ $t('assets.ledger.addressSelect.unUsedAccount') }}
 
                     th {{address.balance | toBasic(18)}}
