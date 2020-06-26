@@ -814,8 +814,11 @@
             "leftBtn": "暂不注册",
             "rightBtn": "确认注册",
             "edit": {
-                "title": "更换出块地址",
-                "placeholder": "请输入新的出块地址",
+                "title": "修改SBP信息",
+                "newBlockProducer": "请输入新的出块地址",
+                "newRewardAddress": "请输入新的奖励提取地址",
+                "changeBlockProducer": "出块地址",
+                "changeRewardAddress": "奖励提取地址",
                 "btn": "确认修改"
             }
         },
@@ -823,6 +826,7 @@
             "title": "提交注册",
             "nodeName": "节点名称",
             "producerAddr": "出块地址",
+            "rewardWithdrawAddress": "奖励提取地址",
             "quotaAddr": "抵押地址",
             "quotaTime": "抵押周期",
             "time": "7776000个快照块（约90天）",

@@ -5,9 +5,13 @@
             text: $t('walletSBP.section1.nodeName'),
             cell: 'name'
         },{
-            class: 'addr',
+            class: 'block-addr',
             text: $t('walletSBP.section1.producerAddr'),
-            cell: 'addr'
+            cell: 'blockProducingAddress'
+        },{
+            class: 'reward-addr',
+            text: $t('walletSBP.section1.rewardWithdrawAddress'),
+            cell: 'rewardWithdrawAddress'
         },{
             class: 'amount',
             text: $t('stakingAmount'),
@@ -33,16 +37,18 @@
 
             <span v-for="(item, i) in list" :key="i"
                   :slot="`${i}operateBefore`">
-                <span v-if="!item.isCancel" class="btn __pointer"
+                <template v-if="item.isStakingAddr">
+                    <span v-if="!item.isCancel" class="btn __pointer"
                       @click="edit(item)">{{ $t('btn.edit') }}</span>
-                <span v-if="item.isCancel" class="btn" :class="{
-                    '__pointer': item.isReReg,
-                    'unuse': !item.isReReg
-                }" @click="reg(item, true)">{{ $t('btn.reReg') }}</span>
-                <span v-if="!item.isCancel" class="btn" :class="{
-                    '__pointer': item.isMaturity,
-                    'unuse': !item.isMaturity
-                }" @click="cancel(item)">{{ $t('walletSBP.cancelBtn') }}</span>
+                    <span v-if="item.isCancel" class="btn" :class="{
+                        '__pointer': item.isReReg,
+                        'unuse': !item.isReReg
+                    }" @click="reg(item, true)">{{ $t('btn.reReg') }}</span>
+                    <span v-if="!item.isCancel" class="btn" :class="{
+                        '__pointer': item.isMaturity,
+                        'unuse': !item.isMaturity
+                    }" @click="cancel(item)">{{ $t('walletSBP.cancelBtn') }}</span>
+                </template>
                 <span class="btn __pointer"
                       @click="reward(item)">{{ $t('walletSBP.rewardBtn') }}</span>
             </span>
@@ -146,26 +152,31 @@ export default {
             const registrationList = this.$store.state.SBP.registrationList || [];
             const list = [];
 
+
             registrationList.forEach(item => {
+                const isStakingAddr = item.stakeAddress === this.address;
+
                 const isMaturity = BigNumber.compared(item.expirationHeight, this.currentHeight) <= 0;
                 const isCancel = item.revokeTime && !BigNumber.isEqual(item.revokeTime, 0);
                 const isReReg = isCancel
                     ? (new Date().getTime() - item.revokeTime * 1000) > 75000
                     : false;
-                const addr = ellipsisAddr(item.blockProducingAddress, 6);
+                const blockProducingAddress = ellipsisAddr(item.blockProducingAddress, 6);
+                const rewardWithdrawAddress = ellipsisAddr(item.rewardWithdrawAddress, 6);
 
                 const day = date(item.expirationTime * 1000, this.$i18n.locale);
                 list.push({
                     name: item.name,
-                    addr,
+                    blockProducingAddress,
+                    rewardWithdrawAddress,
                     amount: item.isCancel ? '--' : `${ BigNumber.toBasic(item.stakeAmount, decimals) } ${ Vite_Token_Info.tokenSymbol }`,
-
                     isMaturity,
                     isCancel,
                     isReReg,
                     withdrawHeight: item.expirationHeight,
                     time: day,
-                    rawData: item
+                    rawData: item,
+                    isStakingAddr
                 });
             });
 

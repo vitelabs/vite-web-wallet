@@ -4,23 +4,28 @@
     }
     
     .name {
-        width: 20%;
-        min-width: 330px;
+        width: 10%;
+        min-width: 80px;
     }
     
-    .addr {
+    .block-addr {
         min-width: 200px;
-        width: 20%;
+        width: 15%;
+    }
+
+    .reward-addr {
+        min-width: 200px;
+        width: 15%;
     }
     
     .amount {
-        width: 17%;
-        min-width: 180px;
+        width: 15%;
+        min-width: 100px;
     }
     
     .height {
-        min-width: 190px;
-        width: 20%;
+        min-width: 120px;
+        width: 15%;
     }
     
     .operate {

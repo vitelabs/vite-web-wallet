@@ -1517,15 +1517,15 @@
     bip32-path "^0.4.2"
     blakejs "^1.1.0"
 
-"@vite/vitejs-ws@^2.3.10":
-  version "2.3.10"
-  resolved "https://registry.npm.taobao.org/@vite/vitejs-ws/download/@vite/vitejs-ws-2.3.10.tgz#2a5ba93c5485ca2a86bc0f3b15b6261e5446e97e"
-  integrity sha1-KlupPFSFyiqGvA87FbYmHlRG6X4=
+"@vite/vitejs-ws@^2.3.11-0":
+  version "2.3.11-0"
+  resolved "https://registry.yarnpkg.com/@vite/vitejs-ws/-/vitejs-ws-2.3.11-0.tgz#0370837e11cfc1fe7edcce9bfd80496f48a48e88"
+  integrity sha512-YcCBgMG8FKQPA/an/pDUNIsKzn75ceLDptAIYTjUBlSHaAvzXeJc/7CyuJ/mE3o5ziponnVXV9afKZvvQ7hTEA==
 
-"@vite/vitejs@^2.3.10":
-  version "2.3.10"
-  resolved "https://registry.npm.taobao.org/@vite/vitejs/download/@vite/vitejs-2.3.10.tgz#74af8a767272a2f83b28c88ddadb2cd9a59f5c5c"
-  integrity sha1-dK+KdnJyovg7KMiN2tss2aWfXFw=
+"@vite/vitejs@^2.3.11-0":
+  version "2.3.11-0"
+  resolved "https://registry.yarnpkg.com/@vite/vitejs/-/vitejs-2.3.11-0.tgz#8df5699be67bdcc9f6a5938577be6eed3e08709f"
+  integrity sha512-ukDXjSHw+JufWml6O53VsKauPi7bXAp+8+LYUXhwq5hGAB4W4nmc27uMtBJQbZNoJ2mEGMsLYqb4ZQxc+T0N1g==
   dependencies:
     "@sisi/ed25519-blake2b-hd-key" "^1.0.2"
     "@sisi/tweetnacl-blake2b" "^1.0.0"
