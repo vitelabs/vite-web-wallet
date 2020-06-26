@@ -668,8 +668,11 @@
             "leftBtn": "Not register yet",
             "rightBtn": "Ready to Register",
             "edit": {
-                "title": "Change block creation address",
-                "placeholder": "please input new block creation address",
+                "title": "Edit SBP Infomation",
+                "newBlockProducer": "please input new block creation address",
+                "newRewardAddress": "please input new reward withdraw address",
+                "changeBlockProducer": "Block Creation Address",
+                "changeRewardAddress": "Reward Withdraw Address",
                 "btn": "Confirm to Change"
             }
         },
@@ -677,6 +680,7 @@
             "title": "Registration Form",
             "nodeName": "Node Name",
             "producerAddr": "Block Creation Address",
+            "rewardWithdrawAddress": "Reward Withdraw Address",
             "quotaAddr": "Staking Address",
             "quotaTime": "Staking Period",
             "time": "7776000 snapshot blocks（approximately 90 days）",
