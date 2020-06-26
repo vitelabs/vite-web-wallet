@@ -29,7 +29,7 @@ module.exports = {
         "viteWalletI18n": true,
         "DESKTOP": true,
         "ipcRenderer": true,
-        "promptTouchID": true
+        "touchID": true
     },
     "rules": {
         "eqeqeq": "error",
