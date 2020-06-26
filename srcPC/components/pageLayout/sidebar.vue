@@ -43,7 +43,6 @@ import setting from 'assets/imgs/settings_default.svg';
 import settingActive from 'assets/imgs/settings_pressed.svg';
 import trade from 'assets/imgs/trade_default.svg';
 import tradeActive from 'assets/imgs/trade_pressed.svg';
-import defi from 'assets/imgs/sidebar_defi.svg';
 import defiActive from 'assets/imgs/sidebar_defi_pressed.svg';
 
 import theme1viteLogo from 'assets/theme1_imgs/sidebar_logo.png';
@@ -91,7 +90,6 @@ export default {
                     settingActive,
                     index: theme1trade,
                     indexActive: tradeActive,
-                    defi,
                     defiActive
                 };
             }
@@ -106,7 +104,6 @@ export default {
                 settingActive,
                 index: trade,
                 indexActive: tradeActive,
-                defi,
                 defiActive
             };
         },

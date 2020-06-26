@@ -17,6 +17,12 @@
         min-width: 200px;
         width: 15%;
     }
+
+    .reward-addr, .block-addr, .name {
+        a {
+            color: $blue-color-3;
+        }
+    }
     
     .amount {
         width: 15%;

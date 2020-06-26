@@ -157,7 +157,8 @@
         "RefundByContractRequest": "Transfer",
         "GenesisResponse": "Genesis",
         "FullNodeStake": "Stake for Full Node",
-        "FullNodeCancelStake": "Retrieve Full Node Stakes"
+        "FullNodeCancelStake": "Retrieve Full Node Stakes",
+        "UpdateSBPRewardWithdrawAddress": "Edit SBP Reward Withdraw Address"
     },
     "btn": {
         "cancel": "Cancel",

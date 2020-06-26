@@ -93,7 +93,7 @@ export default {
         });
 
         // 短地址
-        Vue.filter('shotAddr', function (address, length = 5) {
+        Vue.filter('shortAddr', function (address, length = 5) {
             if (!address || address.length < 11) return address;
             return ellipsisAddr(address, length);
         });
