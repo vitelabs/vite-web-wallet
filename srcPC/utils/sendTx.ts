@@ -59,8 +59,8 @@ const sendTx = execWithValid(function ({
         });
     }
 
-    if (window.promptTouchID) {
-        return window.promptTouchID(i18n.t('desktop.unlock'))
+    if (window.touchID && window.touchID.isEnableTouchID()) {
+        return window.touchID.promptTouchID(i18n.t('desktop.unlock'))
             .then(() => {
                 return webSendTx({
                     methodName,
