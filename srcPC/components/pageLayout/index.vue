@@ -54,7 +54,6 @@ export default {
 
             list = [].concat(secondMenuList.wallet);
             (this.isLogin && !getCurrHDAcc().isBifrost) && list.push('walletConversion');
-            console.log(list);
             return list;
         },
         autoLogoutTime() {

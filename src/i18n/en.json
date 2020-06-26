@@ -1570,5 +1570,8 @@
         "1day": "1 day",
         "clear": "Clear",
         "submit": "Search"
+    },
+    "desktop": {
+        "unlock": "unlock"
     }
 }

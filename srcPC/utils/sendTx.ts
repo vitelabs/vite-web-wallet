@@ -7,6 +7,7 @@ import { execWithValid } from 'pcUtils/execWithValid';
 import { getVbInstance } from 'wallet/vb';
 import { getLedgerInstance } from 'wallet/ledgerHW';
 import { viteClient } from 'services/apiServer';
+import i18n from 'pcI18n';
 
 const { createAccountBlock } = accountBlockUtils;
 const { isObject } = utils;
@@ -56,6 +57,24 @@ const sendTx = execWithValid(function ({
             },
             config: formatConfig(config)
         });
+    }
+
+    if (window.promptTouchID) {
+        return window.promptTouchID(i18n.t('desktop.unlock'))
+            .then(() => {
+                return webSendTx({
+                    methodName,
+                    params: {
+                        ...data,
+                        address: activeAccount.address
+                    },
+                    config: formatConfig(config),
+                    privateKey: activeAccount.privateKey
+                });
+            })
+            .catch(err => {
+                throw err;
+            });
     }
 
     return webSendTx({
