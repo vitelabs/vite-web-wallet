@@ -1578,6 +1578,10 @@
         "submit": "确定"
     },
     "desktop": {
-        "unlock": "解锁"
+        "unlock": "解锁",
+        "unreceivedTx": {
+            "title": "您收到{num}笔新交易",
+            "body": "金额：{amount} {symbol} \n发送地址: {address}"
+        }
     }
 }
