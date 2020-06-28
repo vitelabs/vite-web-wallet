@@ -20,6 +20,7 @@ export default {
     beforeMount() {
         this.$store.commit('setLang', this.$i18n.locale);
         this.$store.dispatch('startLoopBalance');
+        this.$store.dispatch('subUnreceivedTx');
         this.$store.dispatch('startLoopExchangeBalance');
         this.$store.dispatch('exFetchLatestOrder');
         try {
@@ -58,6 +59,7 @@ export default {
     watch: {
         currHDAcc: function () {
             this.$store.dispatch('startLoopBalance');
+            this.$store.dispatch('subUnreceivedTx');
             this.$store.dispatch('startLoopExchangeBalance');
             this.$store.dispatch('getInvitedCode');
         },

@@ -1,5 +1,6 @@
 function refreshBalance(store) {
     store.dispatch('startLoopBalance');
+    store.dispatch('subUnreceivedTx');
     store.dispatch('startLoopExchangeBalance');
     store.dispatch('exFetchLatestOrder');
 }

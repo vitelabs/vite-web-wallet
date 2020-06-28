@@ -10,6 +10,7 @@
 <script>
 import notice from 'components/notice';
 import date from 'utils/date';
+import * as noticeUtils from 'pcUtils/noticeUtils';
 
 const orderStatusMap = {
     1: 'notice-partial',
@@ -98,18 +99,11 @@ export default {
                 }, 4000)
             };
 
-            // Desktop only
-            if (window.Notification && window.DESKTOP && window.ipcRenderer) {
-                const notice =  new Notification(title, {
-                    body: describe,
-                    requireInteraction: true
-                });
+            noticeUtils.notice(title, {
+                body: describe
+            });
 
-                notice.onclick = () => {
-                    window.ipcRenderer.send('notificationClick');
-                    notice.close();
-                };
-            } else {
+            if (!window.DESKTOP) {
                 this.latestOrders.push(orderNotice);
             }
         }
