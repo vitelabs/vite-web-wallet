@@ -73,6 +73,8 @@ const actions = {
     },
     subUnreceivedTx({ dispatch, rootState }) {
         const activeAcc = rootState.wallet.activeAcc;
+        if (!activeAcc || !activeAcc.address) return;
+        
         if (unreceivedTxEvent) {
             dispatch('unsubUnreceivedTx');
         }
