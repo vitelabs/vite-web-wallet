@@ -15,6 +15,7 @@ export const LangKey = 'lang';
 export const GateKey = 'gate';
 export const ThemeKey = 'theme';
 export const ShowHoldPWDNumKey = 'showHoldPWDNum';
+export const HideZeroAssets = 'hideZeroAssets';
 
 export const SettingKeys = [ FirstKey, LangKey, AutoLogoutKey, CurrencyKey, HoldPwdKey, ShowHoldPWDNumKey, GateKey, ThemeKey ];
 export const TradeKeys = [ 'favoriteTickers', 'beginnerGuide' ];

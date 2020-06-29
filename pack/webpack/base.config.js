@@ -84,7 +84,7 @@ module.exports = {
             {
                 test: /\.(j|t)s$/,
                 // exclude: /node_modules(?!(\/base-x)|(\/resize-detector)|(\/vue-echarts))|(\/@vite\/vitejs\/)/,
-                exclude: /node_modules(?!(\/base-x)|(\/resize-detector)|(\/vue-echarts)|(\/bip39))/,
+                exclude: /node_modules(?!(\/base-x)|(\/resize-detector)|(\/vue-echarts)|(\/bip39)|(\/bip32)|(\/@vite\/ledgerjs-hw-app-vite)|(\/@ledgerhq))/,
                 use: {
                     loader: 'babel-loader',
                     options: { presets: ['@babel/preset-env'] }

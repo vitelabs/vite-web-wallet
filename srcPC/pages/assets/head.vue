@@ -443,6 +443,10 @@ export default {
                         width: 30px;
                     }
                     @include background_common_img_suffix('edit_default', 'svg', 'png');
+                    [data-theme="1"] & {
+                        background-size: contain;
+                        background-repeat: no-repeat;
+                    }
                 }
             }
             .name {

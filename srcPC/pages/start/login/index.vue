@@ -14,7 +14,8 @@
                 <div class="star"></div>
                 {{ $t("assets.vb.title") }}
             </div>
-            <!-- <div
+            <div
+                v-if="!isDesktop"
                 class="btn-item __pointer"
                 :class="{ active: tabName === 'ledger' }"
                 @click="toggleTab('ledger')"
@@ -22,7 +23,7 @@
             >
                 <div class="star"></div>
                 {{ $t("assets.ledger.title") }}
-            </div> -->
+            </div>
             <div
                 v-show="isHaveList"
                 class="btn-item __pointer"
@@ -156,6 +157,7 @@ import ellipsisAddr from 'utils/ellipsisAddr.js';
 import { getAppLink } from 'utils/getLink';
 import openUrl from 'utils/openUrl';
 import { getList, deleteOldAcc } from 'wallet';
+import * as DnsHost from 'services/dnsHostIP';
 
 
 import accountItem from './accountItem.vue';
@@ -204,7 +206,7 @@ export default {
             return;
         }
         if (this.tabName === 'vb') {
-            this.initVB();
+            this._initVB();
         } else if (this.tabName === 'existingAcc') {
             this.init();
         }
@@ -218,6 +220,9 @@ export default {
         },
         isShowExisting() {
             return this.tabName === 'existingAcc';
+        },
+        isDesktop() {
+            return window.DESKTOP;
         }
     },
     methods: {
@@ -241,6 +246,15 @@ export default {
         showExisting(id) {
             this.id = id;
             this.toggleTab('existingAcc');
+        },
+        _initVB() {
+            if (DnsHost.Server.isReady) {
+                this.initVB();
+            } else {
+                DnsHost.onReady(() => {
+                    this.initVB();
+                });
+            }
         },
         initVB() {
             this.vb = initVB();
@@ -409,7 +423,7 @@ export default {
             color: #fff;
         }
         [data-theme="1"] & {
-            color: #171C34;
+            color: #fff;
         }
     }
     .__btn {
@@ -504,6 +518,7 @@ export default {
             background: #fff;
             margin-bottom: 20px;
             font-size: 14px;
+            border-radius: 2px;
             .code_tips {
                 word-break: break-all;
                 text-align: left;

@@ -781,7 +781,7 @@
         "blocking": "Сеть перегружена, пожалуйста, повторите попытку позже",
         "supportMining": "Mineable Trading Pairs",
         "operator": {
-            "noName": "Anonymous Gateway",
+            "noName": "Anonymous Operator",
             "overview": "Описание",
             "txPair": "Торговые Пары",
             "confirmTitle": "Напоминание о Риске",

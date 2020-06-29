@@ -42,9 +42,19 @@
         ]
     },
     "dealReminder": {
-        "title": "成交提醒",
+        "title": {
+            "buy": "买单成交提醒: {ftoken} / {ttoken}",
+            "sell": "卖单成交提醒: {ftoken} / {ttoken}"
+        },
         "failTitle": "提单失败",
-        "notice": "你于{time} 委托的 {amount} {ftoken} ({ftoken}/{ttoken})已完全成交，详细记录可在委托历史中查看。",
+        "notice-all": {
+            "buy": "价格：{price} {ttoken} \n委托数量：{amount} {ttoken}，已完全成交，详细记录可在委托历史中查看。",
+            "sell": "价格：{price} {ttoken} \n委托数量：{amount} {ttoken}，已完全成交，详细记录可在委托历史中查看。"
+        },
+        "notice-partial": {
+            "buy": "价格：{price} {ttoken} \n委托数量：{amount} {ttoken}，成交 {executedPercent}%",
+            "sell": "价格：{price} {ttoken} \n委托数量：{amount} {ttoken}，成交 {executedPercent}%"
+        },
         "error": "你于{time} 委托的 {amount} {ftoken} ({ftoken}/{ttoken})提单失败，详细记录可在委托历史中查看。"
     },
     "pow": {
@@ -155,7 +165,8 @@
         "RefundByContractRequest": "转账",
         "GenesisResponse": "Genesis",
         "FullNodeStake": "全节点抵押",
-        "FullNodeCancelStake": "取回全节点抵押"
+        "FullNodeCancelStake": "取回全节点抵押",
+        "UpdateSBPRewardWithdrawAddress": "修改SBP奖励提取地址"
     },
     "btn": {
         "cancel": "取消",
@@ -448,7 +459,7 @@
             "labelPlaceholder":"请输入 {labelName}",
             "addressPlaceholder": "请输入{token}转出地址",
             "successTips": "转出请求已发送",
-            "failTips":"网关节点出错，请检查网关设置"
+            "failTips":"网关服务出错，请检查网关设置"
         },
         "nodeErr": "网关节点无效，请检查网关设置"
     },
@@ -804,8 +815,11 @@
             "leftBtn": "暂不注册",
             "rightBtn": "确认注册",
             "edit": {
-                "title": "更换出块地址",
-                "placeholder": "请输入新的出块地址",
+                "title": "修改SBP信息",
+                "newBlockProducer": "请输入新的出块地址",
+                "newRewardAddress": "请输入新的奖励提取地址",
+                "changeBlockProducer": "出块地址",
+                "changeRewardAddress": "奖励提取地址",
                 "btn": "确认修改"
             }
         },
@@ -813,6 +827,7 @@
             "title": "提交注册",
             "nodeName": "节点名称",
             "producerAddr": "出块地址",
+            "rewardWithdrawAddress": "奖励提取地址",
             "quotaAddr": "抵押地址",
             "quotaTime": "抵押周期",
             "time": "7776000个快照块（约90天）",
@@ -919,7 +934,7 @@
         "buyMiningPrice": "买入价大于{price}时满足挂单挖矿条件",
         "sellMiningPrice": "卖出价小于{price}时满足挂单挖矿条件",
         "operator": {
-            "noName": "匿名网关",
+            "noName": "匿名运营商",
             "overview": "介绍",
             "txPair": "交易对",
             "confirmTitle": "温馨提示",
@@ -1561,5 +1576,12 @@
         "1day": "近1天",
         "clear": "清空",
         "submit": "确定"
+    },
+    "desktop": {
+        "unlock": "解锁",
+        "unreceivedTx": {
+            "title": "您收到{num}笔新交易",
+            "body": "金额：{amount} {symbol} \n发送地址: {address}"
+        }
     }
 }

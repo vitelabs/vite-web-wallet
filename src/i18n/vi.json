@@ -781,7 +781,7 @@
         "blocking": "Đã xảy ra lỗi mạng, vui lòng thử lại",
         "supportMining": "Mineable Trading Pairs",
         "operator": {
-            "noName": "Anonymous Gateway",
+            "noName": "Anonymous Operator",
             "overview": "Giới thiệu",
             "txPair": "Cặp Giao dịch",
             "confirmTitle": "Nhắc nhở rủi ro",

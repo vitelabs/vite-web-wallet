@@ -5,7 +5,7 @@
         <input fake_pass type="password" style="display: none"/>
         <!-- type = number :  can not test 1.....  not a good idea-->
         <input v-model="value" @input.prevent="update" :type="type" :disabled="disabled"
-               :placeholder="placeholder" autocomplete="false" step="0.00000001"
+               :placeholder="placeholder" autocomplete="false" :step="step"
                @blur="_blur" @focus="_focus"/>
         <slot name="after"></slot>
     </div>
@@ -25,6 +25,10 @@ export default {
         type: {
             type: String,
             default: 'text'
+        },
+        step: {
+            type: Number,
+            default: 0.00000001
         },
         disabled: {
             type: Boolean,

@@ -16,7 +16,7 @@ export const Server = {
     },
     h5Config: { // PC
         hostKey: 'WEBCONFIG',
-        url: '//web-wallet-1257137467.cos.ap-hongkong.myqcloud.com',
+        url: 'https://web-wallet-1257137467.cos.ap-hongkong.myqcloud.com',
         watchList: []
     },
     ethExplorer: { // PC

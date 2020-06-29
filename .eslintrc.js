@@ -24,7 +24,12 @@ module.exports = {
         "TradingView": true,
         "window": true,
         "_hmt": true,
-        "viteWalletStorage": true
+        "viteWalletStorage": true,
+        "viteWalletRequest": true,
+        "viteWalletI18n": true,
+        "DESKTOP": true,
+        "ipcRenderer": true,
+        "touchID": true
     },
     "rules": {
         "eqeqeq": "error",
