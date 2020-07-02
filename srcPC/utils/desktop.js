@@ -1,8 +1,11 @@
+import { refreshViteApi } from 'services/apiServer';
+
 function refreshBalance(store) {
     store.dispatch('startLoopBalance');
     store.dispatch('subUnreceivedTx');
     store.dispatch('startLoopExchangeBalance');
     store.dispatch('exFetchLatestOrder');
+    refreshViteApi();
 }
 
 function resetSettings(store) {
@@ -18,7 +21,7 @@ function resetSettings(store) {
 }
 
 
-export const init = (store) => {
+export const init = store => {
     if (!window.ipcRenderer) return;
 
     window.ipcRenderer.on('resume', () => {
@@ -29,4 +32,4 @@ export const init = (store) => {
     window.ipcRenderer.on('unlock-screen', () => {
         refreshBalance(store);
     });
-}
+};
