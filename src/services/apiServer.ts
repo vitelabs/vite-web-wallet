@@ -3,6 +3,8 @@ import { ViteAPI } from '@vite/vitejs';
 import { Client } from 'utils/request';
 import { DNSClient, setWatch } from './dnsHostIP';
 
+let currentViteApiUrl = null;
+
 function viteXAPIAfterRes(xhr) {
     const { code, msg, data, error, subCode } = JSON.parse(xhr.responseText);
 
@@ -34,12 +36,21 @@ export const RewardAPI = new Client(`${ process.env.rewardApiServer }/`, viteXAP
 
 const url = setWatch('gViteAPI', url => {
     WS_RPC.disconnect();
+    currentViteApiUrl = url;
     viteClient.setProvider(new provider(url), () => {
         console.log('reconnect cussess');
     }, false);
 });
 
-const WS_RPC = new provider(url);
+export const refreshViteApi = () => {
+    if (!currentViteApiUrl) return;
+    viteClient.setProvider(new provider(currentViteApiUrl), () => {
+        console.log('Call refreshViteApi cussess');
+    }, false);
+};
+
+const WS_RPC = new provider(url, 60000, { retryTimes: Infinity });
+
 export const viteClient = new ViteAPI(WS_RPC, () => {
     console.log('Connect success');
 });
