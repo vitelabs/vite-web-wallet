@@ -25,7 +25,6 @@ module.exports = {
         "window": true,
         "_hmt": true,
         "viteWalletStorage": true,
-        "viteWalletRequest": true,
         "viteWalletI18n": true,
         "DESKTOP": true,
         "ipcRenderer": true,
