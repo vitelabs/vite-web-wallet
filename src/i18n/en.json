@@ -1572,6 +1572,10 @@
         "submit": "Search"
     },
     "desktop": {
-        "unlock": "unlock"
+        "unlock": "unlock",
+        "unreceivedTx": {
+            "title": "You have received {num} transactions.",
+            "body": "Amount：{amount} {symbol} \nFrom Address: {address}"
+        }
     }
 }

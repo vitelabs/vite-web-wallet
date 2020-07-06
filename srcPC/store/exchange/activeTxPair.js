@@ -2,6 +2,8 @@ const state = { activeTxPair: null };
 
 const mutations = {
     exSetActiveTxPair(state, txPair) {
+        // For proto3, if int32 is 0, it will convert to null.
+        txPair.quantityPrecision = txPair.quantityPrecision || 0;
         const old = state.activeTxPair;
         let isChange = !old;
         for (const key in old) {
