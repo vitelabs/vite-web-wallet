@@ -44,6 +44,7 @@ const url = setWatch('gViteAPI', url => {
 
 export const refreshViteApi = () => {
     if (!currentViteApiUrl) return;
+    WS_RPC.disconnect();
     viteClient.setProvider(new provider(currentViteApiUrl), () => {
         console.log('Call refreshViteApi cussess');
     }, false);
