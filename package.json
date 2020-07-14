@@ -137,6 +137,7 @@
         "url": "~0.11.0",
         "vue-echarts": "~4.0.1",
         "vue-flatpickr-component": "~8.1.1",
+        "vue-select": "^3.10.7",
         "vuex": "~3.0.1",
         "web3": "1.0.0-beta.33"
     }
