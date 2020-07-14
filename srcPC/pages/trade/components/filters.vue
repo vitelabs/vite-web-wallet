@@ -17,35 +17,29 @@
                 :config="{dateFormat:'Y/m/d H:i',enableTime:true,time_24hr:true}"
             ></FlatPickr>
         </div>
-        <div class="filter">
+        <div class="filter" style="width:160px;">
             <div class="filter_label">{{ $t("tradeOrderHistory.filter.type") }}</div>
-            <select class="filter_content" v-model="ftoken">
-                <option :value="token.symbol" v-for="token in ftokenMap" :key="token.symbol">{{ token.symbol }}</option>
-            </select>
+            <v-select class="filter_content" v-model="ftoken" :options="ftokenSelectList" />
         </div>
         <div class="separator">-</div>
-        <div class="filter end">
-            <select class="filter_content" v-model="ttoken">
-                <option v-for="t in marketMap" :value="t.symbol" :key="t.symbol">{{ t.symbol }}</option>
-            </select>
+        <div class="filter end" style="width:160px;">
+            <v-select class="filter_content" v-model="ttoken" :options="marketSelectList" />
         </div>
 
         <div class="filter end">
             <div class="filter_label">{{ $t("tradeOrderHistory.filter.side") }}</div>
-            <select v-model="tradeType" class="filter_content">
-                <option value="0">{{ $t("tradeOrderHistory.filter.buy") }}</option>
-                <option value="1">{{ $t("tradeOrderHistory.filter.sell") }}</option>
-            </select>
+            <v-select class="filter_content"
+                      v-model="tradeType"
+                      :reduce="(item) => item.value"
+                      :options="tradeTypeList" />
         </div>
 
         <div v-show="isShowStatus" class="filter end">
             <div class="filter_label">{{ $t("tradeOrderHistory.filter.status") }}</div>
-            <select v-model="status" class="filter_content">
-                <option value="1">{{ $t("tradeOrderHistory.status.1") }}</option>
-                <option value="2">{{ $t("tradeOrderHistory.status.2") }}</option>
-                <option value="3">{{ $t("tradeOrderHistory.status.3") }}</option>
-                <option value="4">{{ $t("tradeOrderHistory.status.4") }}</option>
-            </select>
+            <v-select class="filter_content"
+                      v-model="status"
+                      :reduce="(item) => item.value"
+                      :options="statusList" />
         </div>
 
         <div @click="submit" class="search active">
@@ -59,13 +53,15 @@
 
 <script>
 import FlatPickr from 'vue-flatpickr-component';
+import vSelect from 'vue-select';
 import { tokenMap } from 'services/trade';
 import 'flatpickr/dist/flatpickr.css';
 import statistics from 'utils/statistics';
 import { VITE_TOKENID } from 'utils/constant';
+import 'vue-select/dist/vue-select.css';
 
 export default {
-    components: { FlatPickr },
+    components: { FlatPickr, vSelect },
     props: {
         isShowStatus: {
             type: Boolean,
@@ -81,11 +77,9 @@ export default {
             ftoken: '',
             ttoken: '',
             status: '',
-            ftokenMap: []
+            ftokenMap: [],
+            isInit: false
         };
-    },
-    beforeMount() {
-        this.ttoken = this.marketMap[0].symbol;
     },
     computed: {
         marketMap() {
@@ -93,9 +87,41 @@ export default {
         },
         activeAddr() {
             return this.$store.getters.activeAddr;
+        },
+        ftokenSelectList() {
+            return this.ftokenMap.map(item => item && item.symbol);
+        },
+        marketSelectList() {
+            return this.marketMap.map(item => item.symbol);
+        },
+        tradeTypeList() {
+            return [
+                {
+                    label: this.$t('tradeOrderHistory.filter.buy'),
+                    value: '0'
+                },
+                {
+                    label: this.$t('tradeOrderHistory.filter.sell'),
+                    value: '1'
+                }
+            ];
+        },
+        statusList() {
+            return [ '1', '2', '3', '4' ].map(item => {
+                return {
+                    label: this.$t(`tradeOrderHistory.status.${ item }`),
+                    value: item
+                };
+            });
         }
     },
     watch: {
+        marketMap(val) {
+            if (!this.isInit && val[0]) {
+                this.ttoken = val[0].symbol;
+                this.isInit = true;
+            }
+        },
         ttoken() {
             this.getFtoken();
         },
@@ -164,6 +190,24 @@ export default {
     }
 };
 </script>
+
+<style lang="scss">
+.vs__dropdown-menu {
+    border: none;
+    @include default_font_color();
+    @include bg_color_3();
+}
+.vs__dropdown-toggle {
+    border: none;
+}
+.vs__selected {
+    @include default_font_color();
+    @include bg_color_3();
+}
+.vs__search {
+    @include default_font_color();
+}
+</style>
 
 <style lang="scss" scoped>
 .filter-root {
