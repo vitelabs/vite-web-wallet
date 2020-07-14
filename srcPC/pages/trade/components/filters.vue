@@ -126,6 +126,10 @@ export default {
             this.getFtoken();
         },
         ftokenMap() {
+            if (this.ftoken && this.isInitFtoken && this.ftokenMap && this.ftokenMap.length) {
+                this.ftoken = this.ftokenMap.find(t => t.symbol === this.ftoken) ? this.ftoken : '';
+            }
+
             if (this.isInitFtoken || this.ftoken || !this.ftokenMap || !this.ftokenMap.length) {
                 return;
             }
