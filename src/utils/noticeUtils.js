@@ -1,4 +1,4 @@
-if (process.env.isH5 !== 'true') {
+if (window.Notification) {
     if (Notification.permission === 'granted') {
         console.info('Notification is granted.');
     } else if (Notification.permission !== 'denied') {
@@ -17,6 +17,7 @@ if (process.env.isH5 !== 'true') {
 }
 
 export const notice = (title, options) => {
+    if (!window.Notification) return;
     const notice = new Notification(title, {
         requireInteraction: true,
         ...options
