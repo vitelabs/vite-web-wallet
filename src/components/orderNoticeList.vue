@@ -10,7 +10,7 @@
 <script>
 import notice from 'components/notice';
 import date from 'utils/date';
-import * as noticeUtils from 'pcUtils/noticeUtils';
+import * as noticeUtils from 'utils/noticeUtils';
 
 const orderStatusMap = {
     1: 'notice-partial',
@@ -53,10 +53,10 @@ export default {
             const type = orderStatusMap[latestOrder.status];
             let title = '';
             let describe = '';
-            if ([1, 2].indexOf(latestOrder.status) > -1) {
-                title = this.$t(`dealReminder.title.${latestOrder.side ? 'sell' : 'buy'}`, {
+            if ([ 1, 2 ].indexOf(latestOrder.status) > -1) {
+                title = this.$t(`dealReminder.title.${ latestOrder.side ? 'sell' : 'buy' }`, {
                     ftoken: latestOrder.tradeTokenSymbol,
-                    ttoken: latestOrder.quoteTokenSymbol,
+                    ttoken: latestOrder.quoteTokenSymbol
                 });
                 describe = this.$t(`dealReminder.${ type }.${ latestOrder.side ? 'sell' : 'buy' }`, {
                     time: date(latestOrder.createTime * 1000, 'zh'),
@@ -72,7 +72,7 @@ export default {
                     time: date(latestOrder.createTime * 1000, 'zh'),
                     ftoken: latestOrder.tradeTokenSymbol,
                     ttoken: latestOrder.quoteTokenSymbol,
-                    amount: latestOrder.amount,
+                    amount: latestOrder.amount
                 });
             }
 
@@ -99,9 +99,7 @@ export default {
                 }, 4000)
             };
 
-            noticeUtils.notice(title, {
-                body: describe
-            });
+            noticeUtils.notice(title, { body: describe });
 
             if (!window.DESKTOP) {
                 this.latestOrders.push(orderNotice);

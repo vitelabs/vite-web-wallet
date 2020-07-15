@@ -5,7 +5,7 @@ import { defaultTokenMap } from 'utils/constant';
 import { getTokenIcon } from 'utils/tokenParser';
 import { getAccountBalance, subUnreceivedTx, unsubUnreceivedTx, getAccountBlockByHash } from 'services/viteServer';
 import { gateStorage } from 'pcServices/gate';
-import { notice } from 'pcUtils/noticeUtils';
+import { notice } from 'utils/noticeUtils';
 import i18n from 'pcI18n';
 
 let balanceInfoInst = null;
@@ -15,7 +15,7 @@ const state = {
     onroad: { balanceInfos: {} },
     balance: { balanceInfos: {} },
     accountBlockCount: 0,
-    unreceivedTx: [],
+    unreceivedTx: []
 };
 
 const mutations = {
@@ -41,7 +41,7 @@ const mutations = {
         // Desktop wallt only
         if (window.ipcRenderer) {
             window.ipcRenderer.send('balanceInfo', JSON.stringify(getters.balanceInfo(state)));
-        }    
+        }
     },
     commitClearBalance(state) {
         state.balance = { balanceInfos: {} };
@@ -74,19 +74,19 @@ const actions = {
     subUnreceivedTx({ dispatch, rootState }) {
         const activeAcc = rootState.wallet.activeAcc;
         if (!activeAcc || !activeAcc.address) return;
-        
+
         if (unreceivedTxEvent) {
             dispatch('unsubUnreceivedTx');
         }
         subUnreceivedTx(activeAcc.address).then(event => {
-            event.on((data) => {
+            event.on(data => {
                 if (!Array.isArray(data)) return;
-                let title = i18n.t('desktop.unreceivedTx.title', { num: data.length });
+                const title = i18n.t('desktop.unreceivedTx.title', { num: data.length });
                 if (data.length > 1) {
                     return notice(title);
                 } else if (data.length === 1) {
                     getAccountBlockByHash(data[0].hash).then(data => {
-                        let body = i18n.t('desktop.unreceivedTx.body', {
+                        const body = i18n.t('desktop.unreceivedTx.body', {
                             symbol: data.tokenInfo.tokenSymbol,
                             address: data.fromAddress,
                             amount: bigNumber.toBasic(data.amount, data.tokenInfo.decimals)
