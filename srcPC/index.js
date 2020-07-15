@@ -40,7 +40,7 @@ Vue.use(directives);
 
 // For desktop only
 if (window.DESKTOP) {
-    desktop.init(store);
+    desktop.init();
 }
 
 Vue.config.devtools = process.env.NODE_ENV !== 'production';
