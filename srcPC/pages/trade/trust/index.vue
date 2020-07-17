@@ -3,7 +3,7 @@
         <sec-title :isShowHelp="false" :title="$t('trade.proxy.title')"></sec-title>
 
         <div class="btn_group">
-            <div class="__trade-btn __pointer" @click="addProxy({ actionType: 'new' })">
+            <div class="__trade-btn __pointer" @click="_addProxy({ actionType: 'new' })">
                 {{ $t("trade.proxy.new") }}
             </div>
             <div class="__trade-btn __trade-btn__cancel __pointer" @click="gotoProxyInfo">
