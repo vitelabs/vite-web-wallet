@@ -33,7 +33,7 @@ const actions = {
     loopRegList({ state, dispatch, rootGetters }, { nodeName, operate, producer }) {
         const address = rootGetters.activeAddr;
 
-        // Operate ==> 0: cancel / 1: reg / 2: update
+        // Operate ==> 0: cancel / 1: reg / 2: Update blockProducingAddress / 3: Update rewardWithdrawAddress
         let isInList = false;
         state.registrationList.forEach(regItem => {
             if (regItem.name !== nodeName) {
@@ -66,9 +66,13 @@ const actions = {
                 case 1:
                     !isCancel && nodeNameList[nodeName].operate && delete nodeNameList[nodeName];
                     break;
-                // Update
+                // Update blockProducingAddress
                 case 2:
                     nodeNameList[nodeName].producer === item.blockProducingAddress && delete nodeNameList[nodeName];
+                    break;
+                // Update rewardWithdrawAddress
+                case 3:
+                    nodeNameList[nodeName].producer === item.rewardWithdrawAddress && delete nodeNameList[nodeName];
                     break;
                 default: break;
                 }

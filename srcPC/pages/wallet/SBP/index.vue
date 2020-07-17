@@ -14,15 +14,25 @@
             <list :showConfirm="showConfirm"></list>
         </div>
 
-        <confirm v-if="showConfirmType" :showMask="true" class="small"
+        <confirm v-if="showConfirmType" :showMask="true" class="middle"
                  :title="$t(`walletSBP.confirm.${showConfirmType}.title`)" :singleBtn="true"
                  :closeIcon="true" :close="closeConfirm"
                  :leftBtnTxt="$t(`walletSBP.confirm.${showConfirmType}.btn`)" :leftBtnClick="validTx"
                  :btnUnuse="!!btnUnuse">
             <div v-if="showConfirmType === 'edit'">
-                <div class="input-err" v-show="addrErr">{{ addrErr }}</div>
-                <vite-input v-model="addr" :valid="testAddr"
-                            :placeholder="$t(`walletSBP.confirm.${showConfirmType}.placeholder`)"></vite-input>
+                <tabs class="sbp-edit-tabs" @change="tabChange">
+                    <tab key="1" :name="$t('walletSBP.confirm.edit.changeBlockProducer')" :selected="true">
+                        <div class="input-err" v-show="addrErr">{{ addrErr }}</div>
+                        <vite-input v-model="blockProducerAddress" :valid="testAddr"
+                            :placeholder="$t(`walletSBP.confirm.${showConfirmType}.changeBlockProducer`)"></vite-input>
+                    </tab>
+                    <tab key="2" :name="$t('walletSBP.confirm.edit.changeRewardAddress')">
+                        <div class="input-err" v-show="addrErr">{{ addrErr }}</div>
+                        <vite-input v-model="rewardAddress" :valid="testAddr"
+                            :placeholder="$t(`walletSBP.confirm.${showConfirmType}.changeRewardAddress`)"></vite-input>
+                    </tab>
+                </tabs>
+                
             </div>
         </confirm>
     </div>
@@ -39,9 +49,11 @@ import { execWithValid } from 'pcUtils/execWithValid';
 import sendTx from 'pcUtils/sendTx';
 import register from './register';
 import list from './list';
+import tabs from 'pcComponents/tabs/tabs';
+import tab from 'pcComponents/tabs/tab';
 
 export default {
-    components: { secTitle, register, list, loading, confirm, viteInput },
+    components: { secTitle, register, list, loading, confirm, viteInput, tabs, tab },
     destroyed() {
         this.clearAll();
     },
@@ -52,20 +64,28 @@ export default {
             activeItem: {},
 
             loading: false,
-            addr: '',
+            blockProducerAddress: '',
+            rewardAddress: '',
+            selectTab: '1',
             addrErr: '',
             tips: false
         };
     },
     computed: {
         btnUnuse() {
-            return !this.addr || this.loading || this.addrErr;
+            if (this.selectTab === '1') {
+                return !this.blockProducerAddress || this.loading || this.addrErr;
+            }
+            return !this.rewardAddress || this.loading || this.addrErr;
         },
         regAddrList() {
             return this.$store.getters.regAddrList;
         },
         netStatus() {
             return this.$store.state.env.clientStatus;
+        },
+        addrEdited() {
+            return this.selectTab === '1' ? this.blockProducerAddress : this.rewardAddress;
         }
     },
     watch: {
@@ -93,14 +113,15 @@ export default {
                 return;
             }
 
-            if (!this.addr
-                || !wallet.isValidAddress(this.addr)) {
+            if (!this.addrEdited
+                || !wallet.isValidAddress(this.addrEdited)) {
                 this.addrErr = this.$t('walletSBP.section1.addrErr');
 
                 return;
             }
 
-            if (!this.canUseAddr(this.activeItem.name, this.addr)) {
+            // Only blockProducerAddress should check if anyother people have used this address.
+            if (this.selectTab === '1' && !this.canUseAddr(this.activeItem.name, this.blockProducerAddress)) {
                 this.addrErr = this.$t('walletSBP.section1.addrUsed');
 
                 return;
@@ -131,7 +152,8 @@ export default {
         },
         clearAll() {
             this.stopWatch = true;
-            this.addr = '';
+            this.blockProducerAddress = '';
+            this.rewardAddress = '';
             this.addrErr = '';
         },
 
@@ -154,11 +176,36 @@ export default {
                 }
             });
         }),
+        tabChange(selectTab) {
+            this.selectTab = selectTab;
+            this.clearAll();
+        },
         sendUpdateTx() {
             this.loading = true;
 
             const nodeName = this.activeItem.name;
-            const producer = this.addr;
+            let producer = null;
+            let data = null;
+
+            if (this.selectTab === '1') {
+                producer = this.blockProducerAddress;
+                data = {
+                    methodName: 'updateSBPBlockProducingAddress',
+                    data: {
+                        blockProducingAddress: this.blockProducerAddress,
+                        sbpName: this.activeItem.name
+                    }
+                }
+            } else {
+                producer = this.rewardAddress;
+                data = {
+                    methodName: 'updateSBPRewardWithdrawAddress',
+                    data: {
+                        rewardWithdrawAddress: this.rewardAddress,
+                        sbpName: this.activeItem.name
+                    }
+                }
+            }
 
             if (!this.netStatus) {
                 this.$toast(this.$t('hint.noNet'));
@@ -166,11 +213,7 @@ export default {
             }
 
             sendTx({
-                methodName: 'updateSBPBlockProducingAddress',
-                data: {
-                    blockProducingAddress: producer,
-                    sbpName: this.activeItem.name
-                },
+                ...data,
                 config: {
                     pow: false,
                     confirm: {
@@ -183,9 +226,9 @@ export default {
                 this.$toast(this.$t('hint.request', { name: this.$t('walletSBP.section2.update') }));
                 this.closeConfirm();
                 this.$store.dispatch('loopRegList', {
-                    nodeName,
-                    operate: 2,
-                    producer
+                        nodeName,
+                        operate: this.selectTab === '1' ? 2 : 3,
+                        producer
                 });
             }).catch(err => {
                 console.warn(err);

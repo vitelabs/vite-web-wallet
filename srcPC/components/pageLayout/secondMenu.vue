@@ -22,7 +22,7 @@
             <div v-show="!isLogin && isHaveUsers" class="tab __pointer"
                  @click="changeAcc">{{ $t('changeAcc') }}</div>
 
-            <SwitchComp @input="operateAction" v-show="isHaveUsers && $route.name.indexOf('trade') !== -1" class="more-switch tab __pointer" :title="$t('trade.more')" :optList="moreOptList" />
+            <SwitchComp @input="operateAction" v-show="$route.name.indexOf('trade') !== -1" class="more-switch tab __pointer" :title="$t('trade.more')" :optList="moreOptList" />
             <switch-addr class="switch-tab menu" v-show="$route.name !== 'assets'" ></switch-addr>
             <div class="tab __pointer" v-show="isLogin" @click="logout">{{ $t('saveLogout') }}</div>
         </ul>

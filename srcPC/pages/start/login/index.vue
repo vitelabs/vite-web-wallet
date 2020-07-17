@@ -14,7 +14,8 @@
                 <div class="star"></div>
                 {{ $t("assets.vb.title") }}
             </div>
-            <!-- <div
+            <div
+                v-if="!isDesktop"
                 class="btn-item __pointer"
                 :class="{ active: tabName === 'ledger' }"
                 @click="toggleTab('ledger')"
@@ -22,7 +23,7 @@
             >
                 <div class="star"></div>
                 {{ $t("assets.ledger.title") }}
-            </div> -->
+            </div>
             <div
                 v-show="isHaveList"
                 class="btn-item __pointer"
@@ -219,6 +220,9 @@ export default {
         },
         isShowExisting() {
             return this.tabName === 'existingAcc';
+        },
+        isDesktop() {
+            return window.DESKTOP;
         }
     },
     methods: {
@@ -419,7 +423,7 @@ export default {
             color: #fff;
         }
         [data-theme="1"] & {
-            color: #171C34;
+            color: #fff;
         }
     }
     .__btn {
@@ -514,6 +518,7 @@ export default {
             background: #fff;
             margin-bottom: 20px;
             font-size: 14px;
+            border-radius: 2px;
             .code_tips {
                 word-break: break-all;
                 text-align: left;
