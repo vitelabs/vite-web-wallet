@@ -41,6 +41,10 @@ Vue.use(directives);
 // For desktop only
 if (window.DESKTOP) {
     desktop.init();
+    window.addEventListener('contextmenu', e => {
+        e.preventDefault();
+        window.desktopUtils.popupMenu();
+    }, false);
 }
 
 Vue.config.devtools = process.env.NODE_ENV !== 'production';
