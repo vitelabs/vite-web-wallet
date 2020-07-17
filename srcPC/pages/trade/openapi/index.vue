@@ -55,7 +55,7 @@
                     <tips type="warn">{{ $t('trade.openapi.balanceAlert', {balanceLimit: this.balanceLimit}) }}</tips>
                 </div>
                 <div class="row" v-else>
-                    <div @click="createApiKey" :class="{ unuse: pending}" class="create-open-api __form_btn __pointer">{{ $t('trade.openapi.createKey') }}</div>
+                    <div @click="_createApiKey" :class="{ unuse: pending}" class="create-open-api __form_btn __pointer">{{ $t('trade.openapi.createKey') }}</div>
                 </div>
             </div>
             <div class="item right tips-wrapper">
@@ -94,6 +94,7 @@ import PairItem from '../trust/dialog/pairItem';
 export default {
     components: { PairItem, secTitle, walletTable, tips, PackageInfo },
     beforeMount() {
+        if (!this.address) return;
         this.updateData();
     },
     data() {
@@ -225,6 +226,8 @@ export default {
         },
         _createApiKey: execWithValid(function () {
             this.createApiKey();
+        }, function () {
+            this.$router.push({ name: 'startLogin' });
         }),
         createApiKey() {
             if (!this.agentAddress) return;
