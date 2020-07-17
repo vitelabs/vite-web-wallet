@@ -22,3 +22,4 @@ backup.sh
 rollback.sh
 yarn-error.log
 test_*.json
+release.sh

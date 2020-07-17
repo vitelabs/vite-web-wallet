@@ -12,7 +12,7 @@ module.exports = {
                         // collapse_vars: true,
                         // reduce_vars: true,
                         unused: true,
-                        drop_console: true,
+                        drop_console: false,
                         drop_debugger: true
                     },
                     output: { comments: false }

@@ -11,7 +11,7 @@
             <div>{{ $t("tokenCard.addToken.title") }}</div>
         </div>
         <div class="filter op">
-            <Checkbox v-model="hideZero" class="op__input" />
+            <Checkbox @input="hideZeroAssets" :value="hideZero" class="op__input" />
             {{ $t("tradeAssets.zero") }}
         </div>
         <div class="filter op click-able more __pointer" @click="more">
@@ -31,14 +31,22 @@ import statistics from 'utils/statistics';
 export default {
     data() {
         return {
-            hideZero: false,
             filterKey: ''
         };
     },
     computed: {
         activeAddr() {
             return this.$store.getters.activeAddr;
+        },
+        hideZero() {
+            return !!this.$store.state.env.hideZeroAssets;
         }
+    },
+    mounted() {
+        this.$emit('newFilter', {
+            hideZero: this.hideZero,
+            filterKey: this.filterKey
+        });
     },
     watch: {
         hideZero() {
@@ -68,6 +76,9 @@ export default {
         more() {
             statistics.event(this.$route.name, 'moreRecords', this.activeAddr || '');
             this.$router.push({ name: 'walletTransList' });
+        },
+        hideZeroAssets(isHideZero) {
+            this.$store.commit('setHideZeroAssets', isHideZero);
         }
     }
 };

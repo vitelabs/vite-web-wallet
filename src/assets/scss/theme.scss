@@ -36,6 +36,15 @@
     }
 }
 
+@mixin bg_color_custom($color-0, $color-1) {
+    [data-theme="0"] & {
+        background-color: $color-0;
+    }
+    [data-theme="1"] & {
+        background-color: $color-1;
+    }
+}
+
 @mixin hover_color() {
     [data-theme="0"] & {
         background-color: $hover-color-1;

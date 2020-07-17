@@ -22,7 +22,7 @@ export default {
     components: { changeLang, firstNotice },
     methods: {
         goVX() {
-            openUrl(`https://vitex.net/${ this.$i18n.locale === 'zh' ? 'zh' : '' }`);
+            return this.$router.push({ name: 'tradeCenter' });
         }
     }
 };
@@ -50,7 +50,7 @@ export default {
         }
     }
     [data-theme="1"] & {
-        background: #F6F8F9;
+        background:#1E2745;
     }
 
     .header {
@@ -58,12 +58,16 @@ export default {
         top: 0;
         left: 0;
         right: 0;
+        -webkit-app-region: drag;
+        .__pointer {
+            -webkit-app-region: no-drag;
+        }
         [data-theme="0"] & {
             padding: 40px;
         }
         [data-theme="1"] & {
-            background: #fff;
-            padding: 14px;
+            background: transparent;
+            padding: 40px;
         }
         .header-logo {
             display: inline-block;
@@ -74,9 +78,9 @@ export default {
                 background-size: 100% 100%;
             }
             [data-theme="1"] & {
-                width: 52px;
-                height: 52px;
-                background: url("~assets/imgs/logo.png");
+                height: 50px;
+                width: 152px;
+                background: url("~assets/imgs/ViteLogo1.svg");
                 background-size: 100% 100%;
             }
         }

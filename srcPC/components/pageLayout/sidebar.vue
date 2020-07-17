@@ -8,10 +8,12 @@
 
             <div class="_top">
                 <div v-for="(name, index) in menuTops" :key="index"
-                     class="__pointer icon" :class="{ 'active': $route.name.indexOf(name) >= 0 }"
+                     class="__pointer"
                      @click="_go(name)">
-                    <img v-show="$route.name.indexOf(name) < 0" :src="icon[name]" />
-                    <img v-show="$route.name.indexOf(name) >= 0" :src="icon[`${name}Active`]"  />
+                    <div class="icon" :class="{ 'active': $route.name.indexOf(name) >= 0 }">
+                        <img v-show="$route.name.indexOf(name) < 0" :src="icon[name]" />
+                        <img v-show="$route.name.indexOf(name) >= 0" :src="icon[`${name}Active`]"  />
+                    </div>
                 </div>
             </div>
 
@@ -41,6 +43,7 @@ import setting from 'assets/imgs/settings_default.svg';
 import settingActive from 'assets/imgs/settings_pressed.svg';
 import trade from 'assets/imgs/trade_default.svg';
 import tradeActive from 'assets/imgs/trade_pressed.svg';
+import defiActive from 'assets/imgs/sidebar_defi_pressed.svg';
 
 import theme1viteLogo from 'assets/theme1_imgs/sidebar_logo.png';
 import theme1wallet from 'assets/theme1_imgs/wallet_default.png';
@@ -86,7 +89,8 @@ export default {
                     setting: theme1setting,
                     settingActive,
                     index: theme1trade,
-                    indexActive: tradeActive
+                    indexActive: tradeActive,
+                    defiActive
                 };
             }
             return {
@@ -99,7 +103,8 @@ export default {
                 setting,
                 settingActive,
                 index: trade,
-                indexActive: tradeActive
+                indexActive: tradeActive,
+                defiActive
             };
         },
         settingIndex() {
@@ -181,7 +186,6 @@ export default {
         align-items: center;
         width: 100%;
         height: 24px;
-        margin-top: 30px;
 
         img {
             width: 24px;
@@ -203,6 +207,11 @@ export default {
 
     ._top {
         flex: 1;
+        margin-top: 30px;
+        & > .__pointer {
+            padding-top: 15px;
+            padding-bottom: 15px;
+        }
     }
 
     ._bottom {

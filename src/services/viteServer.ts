@@ -130,3 +130,15 @@ export function getTokenListByOwner(address) {
 export function getCancellingStakeList(address, pageIndex, pageCount) {
     return viteClient.request('dex_getCancelStakeList', address, pageIndex, pageCount);
 }
+
+export function subUnreceivedTx(address) {
+    return viteClient.subscribe('createUnreceivedBlockSubscriptionByAddress', address);
+}
+
+export function unsubUnreceivedTx(event) {
+    return viteClient.unsubscribe(event);
+}
+
+export function getAccountBlockByHash(hash) {
+    return viteClient.request('ledger_getAccountBlockByHash', hash);
+}

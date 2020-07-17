@@ -6,7 +6,7 @@ export function execWithValid(funcName, noActive) {
     return function (...args) {
         const currHDACC = getCurrHDAcc();
 
-        if (currHDACC.status === StatusMap.UNLOCK) {
+        if (currHDACC && currHDACC.status === StatusMap.UNLOCK) {
             return funcName.call(this, ...args);
         }
         const activeAccount = getActiveAcc();

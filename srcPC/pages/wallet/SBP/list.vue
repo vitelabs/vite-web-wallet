@@ -3,11 +3,18 @@
         <wallet-table class="wallet-sbp-table" :headList="[{
             class: 'name __ellipsis',
             text: $t('walletSBP.section1.nodeName'),
-            cell: 'name'
+            cell: 'name',
+            slot: true
         },{
-            class: 'addr',
+            class: 'block-addr',
             text: $t('walletSBP.section1.producerAddr'),
-            cell: 'addr'
+            cell: 'blockProducingAddress',
+            slot: true
+        },{
+            class: 'reward-addr',
+            text: $t('walletSBP.section1.rewardWithdrawAddress'),
+            cell: 'rewardWithdrawAddress',
+            slot: true
         },{
             class: 'amount',
             text: $t('stakingAmount'),
@@ -21,6 +28,23 @@
             text: $t('action'),
             cell: 'operate'
         }]" :contentList="list">
+            <template #name="{ data }">
+                <a :href="`https://vitescan.io/address/${data.stakeAddress}`" target="_blank">{{ data.name }}</a>
+            </template>
+
+            <template #blockProducingAddress="{ data }">
+                <a :href="`https://vitescan.io/address/${data.blockProducingAddress}`" target="_blank">
+                    {{data.blockProducingAddress | shortAddr}}
+                </a>
+                <span v-if="data.blockProducingAddress === address" class="beneficial-img"></span>
+            </template>
+
+            <template #rewardWithdrawAddress="{ data }">
+                <a :href="`https://vitescan.io/address/${data.rewardWithdrawAddress}`" target="_blank">
+                    {{data.rewardWithdrawAddress | shortAddr}}
+                </a>
+                <span v-if="data.rewardWithdrawAddress === address" class="beneficial-img"></span>
+            </template>
 
             <span v-for="(item, i) in list" :key="i"
                   :slot="`${i}heightBefore`">
@@ -33,16 +57,18 @@
 
             <span v-for="(item, i) in list" :key="i"
                   :slot="`${i}operateBefore`">
-                <span v-if="!item.isCancel" class="btn __pointer"
+                <template v-if="item.isStakingAddr">
+                    <span v-if="!item.isCancel" class="btn __pointer"
                       @click="edit(item)">{{ $t('btn.edit') }}</span>
-                <span v-if="item.isCancel" class="btn" :class="{
-                    '__pointer': item.isReReg,
-                    'unuse': !item.isReReg
-                }" @click="reg(item, true)">{{ $t('btn.reReg') }}</span>
-                <span v-if="!item.isCancel" class="btn" :class="{
-                    '__pointer': item.isMaturity,
-                    'unuse': !item.isMaturity
-                }" @click="cancel(item)">{{ $t('walletSBP.cancelBtn') }}</span>
+                    <span v-if="item.isCancel" class="btn" :class="{
+                        '__pointer': item.isReReg,
+                        'unuse': !item.isReReg
+                    }" @click="reg(item, true)">{{ $t('btn.reReg') }}</span>
+                    <span v-if="!item.isCancel" class="btn" :class="{
+                        '__pointer': item.isMaturity,
+                        'unuse': !item.isMaturity
+                    }" @click="cancel(item)">{{ $t('walletSBP.cancelBtn') }}</span>
+                </template>
                 <span class="btn __pointer"
                       @click="reward(item)">{{ $t('walletSBP.rewardBtn') }}</span>
             </span>
@@ -75,7 +101,6 @@
 import { constant as viteConstant } from '@vite/vitejs';
 import date from 'utils/date.js';
 import { getExplorerLink } from 'utils/getLink';
-import ellipsisAddr from 'utils/ellipsisAddr.js';
 import BigNumber from 'utils/bigNumber';
 import sendTx from 'pcUtils/sendTx';
 import { constant } from 'pcUtils/store';
@@ -146,26 +171,27 @@ export default {
             const registrationList = this.$store.state.SBP.registrationList || [];
             const list = [];
 
+
             registrationList.forEach(item => {
+                const isStakingAddr = item.stakeAddress === this.address;
+
                 const isMaturity = BigNumber.compared(item.expirationHeight, this.currentHeight) <= 0;
                 const isCancel = item.revokeTime && !BigNumber.isEqual(item.revokeTime, 0);
                 const isReReg = isCancel
                     ? (new Date().getTime() - item.revokeTime * 1000) > 75000
                     : false;
-                const addr = ellipsisAddr(item.blockProducingAddress, 6);
 
                 const day = date(item.expirationTime * 1000, this.$i18n.locale);
                 list.push({
-                    name: item.name,
-                    addr,
+                    ...item,
                     amount: item.isCancel ? '--' : `${ BigNumber.toBasic(item.stakeAmount, decimals) } ${ Vite_Token_Info.tokenSymbol }`,
-
                     isMaturity,
                     isCancel,
                     isReReg,
                     withdrawHeight: item.expirationHeight,
                     time: day,
-                    rawData: item
+                    rawData: item,
+                    isStakingAddr
                 });
             });
 
@@ -360,6 +386,15 @@ export default {
     .link {
         color: #007AFF;
     }
+}
+.beneficial-img {
+    display: inline-block;
+    margin-left: 8px;
+    margin-bottom: -2px;
+    width: 12px;
+    height: 12px;
+    background: url('~assets/imgs/owner.png');
+    background-size: 100% 100%;
 }
 
 .tipsicon {

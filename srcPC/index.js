@@ -24,6 +24,9 @@ import { library } from '@fortawesome/fontawesome-svg-core';
 import { faExclamationCircle, faInfoCircle } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 
+// Some init code for desktop app
+import * as desktop from './utils/desktop';
+
 library.add(faExclamationCircle, faInfoCircle);
 Vue.component('font-awesome-icon', FontAwesomeIcon);
 
@@ -34,6 +37,15 @@ resaveLastAcc();
 Vue.use(plugin);
 // V-click-outside
 Vue.use(directives);
+
+// For desktop only
+if (window.DESKTOP) {
+    desktop.init();
+    window.addEventListener('contextmenu', e => {
+        e.preventDefault();
+        window.desktopUtils.popupMenu();
+    }, false);
+}
 
 Vue.config.devtools = process.env.NODE_ENV !== 'production';
 new Vue({
