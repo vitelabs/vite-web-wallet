@@ -167,12 +167,12 @@ export default {
         display: inline-block;
         margin-top: 30px;
         width: 100%;
-        height: 52px;
+        height: 38px;
         text-align: center;
 
         img {
-            width: 52px;
-            height: 52px;
+            width: 38px;
+            height: 38px;
         }
 
         .notice {
@@ -194,11 +194,11 @@ export default {
         justify-content: center;
         align-items: center;
         width: 100%;
-        height: 24px;
+        height: 20px;
 
         img {
-            width: 24px;
-            height: 24px;
+            width: 20px;
+            height: 20px;
         }
         .theme-icon {
             @include second_title_font_color();
