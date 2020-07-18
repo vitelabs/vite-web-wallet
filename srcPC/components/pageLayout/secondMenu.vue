@@ -196,6 +196,7 @@ export default {
     flex-wrap: nowrap;
 
     .tab-list-wrapper {
+        -webkit-app-region: no-drag;
         display: flex;
         .tab {
             margin-right: 28px;
