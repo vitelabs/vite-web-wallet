@@ -24,6 +24,9 @@
                     <img class="default" v-show="$route.name !== name" :src="icon[name]" />
                     <img class="active" v-show="$route.name === name" :src="icon[`${name}Active`]"  />
                 </div>
+                <div class="icon __pointer" @click="changeTheme" key="theme">
+                    <font-awesome-icon :icon="themeIcon" class="theme-icon"/>
+                </div>
             </div>
         </div>
     </div>
@@ -70,6 +73,9 @@ export default {
     computed: {
         theme() {
             return +this.$store.state.env.theme;
+        },
+        themeIcon() {
+            return this.theme ? 'lightbulb' : 'moon';
         },
         viteLogo() {
             if (+this.theme === 0) {
@@ -133,6 +139,9 @@ export default {
         },
         leaveLogo() {
             this.isShowNotice = false;
+        },
+        changeTheme() {
+            this.$store.commit('setTheme', this.theme ? '0' : '1');
         }
     }
 };
@@ -190,6 +199,9 @@ export default {
         img {
             width: 24px;
             height: 24px;
+        }
+        .theme-icon {
+            @include second_title_font_color();
         }
 
         &.active::before {
