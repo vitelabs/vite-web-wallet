@@ -1,6 +1,6 @@
 {
     "name": "vite-wallet",
-    "version": "3.1.1",
+    "version": "3.2.4",
     "description": "",
     "scripts": {
         "clean": "rm -rf ./dist",
@@ -100,8 +100,8 @@
         "@vite/bridge": "^1.0.14",
         "@vite/connector": "^0.0.2-0",
         "@vite/ledgerjs-hw-app-vite": "^1.0.0",
-        "@vite/vitejs": "^2.3.8-2",
-        "@vite/vitejs-ws": "^2.3.8-2",
+        "@vite/vitejs": "^2.3.11-0",
+        "@vite/vitejs-ws": "^2.3.11-0",
         "babel-plugin-syntax-dynamic-import": "~6.18.0",
         "babel-preset-minify": "^0.5.0",
         "bignumber.js": "~7.2.1",
@@ -120,7 +120,7 @@
         "identicon.js": "~2.3.3",
         "jsonrpc-lite": "~2.0.2",
         "lib-flexible": "^0.3.2",
-        "lodash": "~4.17.11",
+        "lodash": "~4.17.19",
         "lottie-web": "^5.6.6",
         "postcss-cssnext": "^3.1.0",
         "postcss-import": "^12.0.1",
@@ -137,6 +137,7 @@
         "url": "~0.11.0",
         "vue-echarts": "~4.0.1",
         "vue-flatpickr-component": "~8.1.1",
+        "vue-select": "^3.10.7",
         "vuex": "~3.0.1",
         "web3": "1.0.0-beta.33"
     }

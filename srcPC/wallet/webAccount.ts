@@ -277,8 +277,6 @@ export class WebAccount {
         const list = myWallet.deriveAddressList(0, this.addrNum - 1);
         const addrList: any[] = [];
 
-        console.log(list);
-
         list.forEach((addrObj, i) => {
             const item = {
                 ...addrObj,

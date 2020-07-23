@@ -1,15 +1,18 @@
 <template>
     <div class="create-account-wrapper">
-        <div class="__title">{{ $t("regAcc") }}</div>
-        <div class="notice">{{ $t('startCreate.notice') }}</div>
-        <div class="__btn_list">
-            <span class="__btn __btn_all_in __pointer">
-                <img class="download" src="~assets/imgs/google.svg"/>Google Play
-            </span>
-            <div class="__btn __btn_all_in __pointer">
-                <img class="download" src="~assets/imgs/apple.svg"/>APP Store
+        <template v-if="!isDesktop">
+            <div class="__title">{{ $t("regAcc") }}</div>
+            <div class="notice">{{ $t('startCreate.notice') }}</div>
+            <div class="__btn_list">
+                <span class="__btn __btn_all_in __pointer">
+                    <img class="download" src="~assets/imgs/google.svg"/>Google Play
+                </span>
+                <div class="__btn __btn_all_in __pointer">
+                    <img class="download" src="~assets/imgs/apple.svg"/>APP Store
+                </div>
             </div>
-        </div>
+        </template>
+        <create-page v-else></create-page>
         <div class="go-list clearfix">
             <span class="__pointer" @click="go('startLogin')">
                 <img class="back" src="~assets/imgs/arrow-back.svg"/>{{ $t('startCreate.goLogin') }}
@@ -20,8 +23,15 @@
 </template>
 
 <script>
+import createPage from '../../create/index';
 
 export default {
+    components: { createPage },
+    computed: {
+        isDesktop() {
+            return window.DESKTOP;
+        }
+    },
     methods: {
         go(name) {
             this.$router.push({ name });

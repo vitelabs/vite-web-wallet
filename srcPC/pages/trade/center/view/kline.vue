@@ -43,9 +43,10 @@ export default {
             if (!this.netStatus) {
                 return;
             }
-            this.tvKline && this.tvKline.remove();
-            this.tvKline = null;
-            this.init();
+            this.reinit();
+        },
+        theme() {
+            this.reinit();
         }
     },
     data() {
@@ -69,6 +70,11 @@ export default {
             }, () => {
                 this.createDepthBtn();
             });
+        },
+        reinit() {
+            this.tvKline && this.tvKline.remove();
+            this.tvKline = null;
+            this.init();
         },
         createDepthBtn() {
             const button = this.tvKline.tvWidget.createButton({ align: 'right' })[0];

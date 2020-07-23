@@ -1,5 +1,8 @@
 import { Client } from 'utils/request';
 
+let dnsHostServer = process.env.dnsHostServer || [];
+dnsHostServer = Array.isArray(dnsHostServer) ? dnsHostServer : [];
+
 export const Server = {
     isReady: false,
     onReady: [],
@@ -16,7 +19,7 @@ export const Server = {
     },
     h5Config: { // PC
         hostKey: 'WEBCONFIG',
-        url: '//web-wallet-1257137467.cos.ap-hongkong.myqcloud.com',
+        url: 'https://web-wallet-1257137467.cos.ap-hongkong.myqcloud.com',
         watchList: []
     },
     ethExplorer: { // PC
@@ -111,51 +114,82 @@ export function onReady(cb: Function) {
 }
 
 if (process.env.NODE_ENV === 'production') {
-    new Client(`${ process.env.dnsHostServer }/dns`, function (xhr) {
-        const { code, msg, data, error, subCode } = JSON.parse(xhr.responseText);
-
-        if (code !== 0) {
-            return Promise.reject({
-                code,
-                subCode,
-                message: msg || error
-            });
-        }
-
-        return Promise.resolve(data || null);
-    }).request({ path: '/hostips', timeout: 3000 })
-        .then(data => {
-            if (!data) {
-                callReady();
-                return;
-            }
-
-            for (const key in Server) {
-                const { hostKey, url } = Server[key];
-
-                const hostConfig = data[hostKey];
-                if (!hostConfig || !hostConfig.hostNameList || !hostConfig.hostNameList.length) {
-                    continue;
-                }
-
-                const hostIp = hostConfig.hostNameList[0];
-                if (hostIp === url) {
-                    continue;
-                }
-
-                Server[key].url = hostIp;
-                Server[key].watchList.forEach(cb => {
-                    cb && cb(hostIp);
-                });
-            }
-            callReady();
-        })
-        .catch(err => {
-            callReady();
-            console.warn(err);
-        });
+    pingHost();
 } else {
     callReady();
+}
+
+function pingHost() {
+    let pingResults = 0;
+    const maxPingResults = dnsHostServer.length;
+
+    if (maxPingResults < 2) {
+        return callReady();
+    }
+
+    dnsHostServer.forEach(configServer => {
+        const startTime = new Date().getTime();
+        new Client(`${ configServer }/dns`, function (xhr) {
+            const { code, msg, data, error, subCode } = JSON.parse(xhr.responseText);
+
+            if (code !== 0) {
+                return Promise.reject({
+                    code,
+                    subCode,
+                    message: msg || error
+                });
+            }
+
+            return Promise.resolve(data || null);
+        }).request({ path: '/hostips', timeout: 3000 })
+            .then(data => {
+                // If pingResults >= maxPingResults, server is ok. Do nothing.
+                if (pingResults >= maxPingResults) return;
+
+                if (!data) {
+                    throw new Error('Config data is null');
+                }
+
+                for (const key in Server) {
+                    const { hostKey, url } = Server[key];
+
+                    const hostConfig = data[hostKey];
+                    if (!hostConfig || !hostConfig.hostNameList || !hostConfig.hostNameList.length) {
+                        continue;
+                    }
+
+                    const hostIp = hostConfig.hostNameList[0];
+                    if (hostIp === url) {
+                        continue;
+                    }
+
+                    Server[key].url = hostIp;
+                    Server[key].watchList.forEach(cb => {
+                        cb && cb(hostIp);
+                    });
+                }
+                // Server is ok, set pingResults to maxPingResults;
+                pingResults = maxPingResults;
+                callReady();
+                console.log(`Set dns host to: ${ configServer }`);
+            })
+            .catch(err => {
+                console.warn(err);
+
+                pingResults++;
+                // If server is ok, do nothing.
+                if (pingResults > maxPingResults) {
+                    return;
+                }
+                // If all servers are failed, init ready function.
+                if (pingResults === maxPingResults) {
+                    callReady();
+                }
+            })
+            .finally(() => {
+                console.log(`Get result from dns host [${ configServer }], cost time: ${ new Date().getTime() - startTime } ms`);
+            });
+    });
 }
 
 

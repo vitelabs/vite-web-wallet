@@ -8,10 +8,12 @@
 
             <div class="_top">
                 <div v-for="(name, index) in menuTops" :key="index"
-                     class="__pointer icon" :class="{ 'active': $route.name.indexOf(name) >= 0 }"
+                     class="__pointer"
                      @click="_go(name)">
-                    <img v-show="$route.name.indexOf(name) < 0" :src="icon[name]" />
-                    <img v-show="$route.name.indexOf(name) >= 0" :src="icon[`${name}Active`]"  />
+                    <div class="icon" :class="{ 'active': $route.name.indexOf(name) >= 0 }">
+                        <img v-show="$route.name.indexOf(name) < 0" :src="icon[name]" />
+                        <img v-show="$route.name.indexOf(name) >= 0" :src="icon[`${name}Active`]"  />
+                    </div>
                 </div>
             </div>
 
@@ -21,6 +23,9 @@
                      @click="_go(name)">
                     <img class="default" v-show="$route.name !== name" :src="icon[name]" />
                     <img class="active" v-show="$route.name === name" :src="icon[`${name}Active`]"  />
+                </div>
+                <div class="icon __pointer" @click="changeTheme" key="theme">
+                    <font-awesome-icon :icon="themeIcon" class="theme-icon"/>
                 </div>
             </div>
         </div>
@@ -41,6 +46,7 @@ import setting from 'assets/imgs/settings_default.svg';
 import settingActive from 'assets/imgs/settings_pressed.svg';
 import trade from 'assets/imgs/trade_default.svg';
 import tradeActive from 'assets/imgs/trade_pressed.svg';
+import defiActive from 'assets/imgs/sidebar_defi_pressed.svg';
 
 import theme1viteLogo from 'assets/theme1_imgs/sidebar_logo.png';
 import theme1wallet from 'assets/theme1_imgs/wallet_default.png';
@@ -68,6 +74,9 @@ export default {
         theme() {
             return +this.$store.state.env.theme;
         },
+        themeIcon() {
+            return this.theme ? 'lightbulb' : 'moon';
+        },
         viteLogo() {
             if (+this.theme === 0) {
                 return viteLogo;
@@ -86,7 +95,8 @@ export default {
                     setting: theme1setting,
                     settingActive,
                     index: theme1trade,
-                    indexActive: tradeActive
+                    indexActive: tradeActive,
+                    defiActive
                 };
             }
             return {
@@ -99,7 +109,8 @@ export default {
                 setting,
                 settingActive,
                 index: trade,
-                indexActive: tradeActive
+                indexActive: tradeActive,
+                defiActive
             };
         },
         settingIndex() {
@@ -128,6 +139,9 @@ export default {
         },
         leaveLogo() {
             this.isShowNotice = false;
+        },
+        changeTheme() {
+            this.$store.commit('setTheme', this.theme ? '0' : '1');
         }
     }
 };
@@ -153,12 +167,12 @@ export default {
         display: inline-block;
         margin-top: 30px;
         width: 100%;
-        height: 52px;
+        height: 38px;
         text-align: center;
 
         img {
-            width: 52px;
-            height: 52px;
+            width: 38px;
+            height: 38px;
         }
 
         .notice {
@@ -180,12 +194,14 @@ export default {
         justify-content: center;
         align-items: center;
         width: 100%;
-        height: 24px;
-        margin-top: 30px;
+        height: 20px;
 
         img {
-            width: 24px;
-            height: 24px;
+            width: 20px;
+            height: 20px;
+        }
+        .theme-icon {
+            @include second_title_font_color();
         }
 
         &.active::before {
@@ -203,6 +219,11 @@ export default {
 
     ._top {
         flex: 1;
+        margin-top: 30px;
+        & > .__pointer {
+            padding-top: 15px;
+            padding-bottom: 15px;
+        }
     }
 
     ._bottom {
