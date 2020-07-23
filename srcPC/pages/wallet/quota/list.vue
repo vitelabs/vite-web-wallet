@@ -5,7 +5,7 @@
         <wallet-table class="wallet-quota-table" :headList="headList" :contentList="pledgeList" :clickCell="clickCell">
             <div v-for="(item, i) in pledgeList" :key="i"
                  :slot="`${i}addrBefore`">
-                <span class="beneficial-addr">{{ item.showAddr }}</span>
+                <span class="beneficial-addr">{{ item.beneficialAddr | shortAddr(8) }}</span>
                 <span v-if="item.beneficialAddr === address" class="beneficial-img"></span>
             </div>
 
@@ -34,7 +34,6 @@ import { timer } from 'utils/asyncFlow';
 import BigNumber from 'utils/bigNumber';
 import statistics from 'utils/statistics';
 import { getExplorerLink } from 'utils/getLink';
-import ellipsisAddr from 'utils/ellipsisAddr.js';
 import { execWithValid } from 'pcUtils/execWithValid';
 import cancelQuotaStake from './cancelQuotaStake.vue';
 
@@ -111,7 +110,6 @@ export default {
                     withdrawHeight: pledge.expirationHeight,
                     amount: pledge.stakeAmount,
                     pledgeDate,
-                    showAddr: ellipsisAddr(pledge.beneficiary),
                     showAmount,
                     isMaturity,
                     rawData: pledge

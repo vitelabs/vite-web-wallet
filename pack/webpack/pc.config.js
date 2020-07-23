@@ -15,7 +15,7 @@ const { entry, htmlWebpackPlugins } = getEntry({
 
 module.exports = {
     entry,
-    output: { publicPath: '/' },
+    output: { publicPath: './' },
     plugins: htmlWebpackPlugins,
     resolve: {
         alias: {

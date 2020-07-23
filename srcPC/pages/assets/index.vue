@@ -21,15 +21,22 @@ import { addTokenDialog } from './dialog';
 import TokenFilter from './filter';
 import tokenListView from './tokenList/list';
 
-const filterFunc = filterObj => t => {
+const filterFunc = (filterObj, currency) => t => {
     if (!t.tokenName) {
         return false;
     }
     if (!filterObj) {
         return true;
     }
+
+    // Hiding asset if it's value <= $2
+    let hideLimit = 2;
+    if (currency === 'cny') {
+        hideLimit = hideLimit * 7;
+    }
+
     const NOTMatchNoZero
-        = filterObj.hideZero && +t.totalAmount === 0 && +t.totalExAmount === 0;
+        = filterObj.hideZero && +t.totalAsset <= hideLimit;
     const NOTMatchFilterKey
         = filterObj.filterKey
         && !t.tokenSymbol.match(new RegExp(filterObj.filterKey, 'i'));
@@ -66,7 +73,7 @@ export default {
                 ...this.officalGateTokenList,
                 ...this.userStorageTokenList,
                 ...this.otherWhithBalance
-            ].filter(filterFunc(this.filterObj));
+            ].filter(filterFunc(this.filterObj, this.currency));
         },
         defaultTokenList() {
             return this.$store.getters.defaultTokenList;
@@ -87,6 +94,9 @@ export default {
                 ...this.userStorageTokenList,
                 ...this.otherWhithBalance
             ].map(t => t.tokenId);
+        },
+        currency() {
+            return this.$store.state.env.currency;
         }
     },
     methods: {

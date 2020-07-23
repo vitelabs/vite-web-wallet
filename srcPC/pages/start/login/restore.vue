@@ -202,7 +202,7 @@ export default {
         color: #fff;
     }
     [data-theme="1"] & {
-        color: #333;
+        color: rgba(255,255,255, 0.8);
     }
     text-align: left;
     line-height: 20px;

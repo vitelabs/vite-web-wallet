@@ -115,6 +115,24 @@ export default {
 };
 </script>
 
+<style lang="scss">
+.page-layout-wrapper {
+    .sidebar {
+        -webkit-app-region: drag;
+        .__pointer {
+            -webkit-app-region: no-drag;
+        }
+    }
+    .second-menu {
+        -webkit-app-region: drag;
+        .__pointer {
+            -webkit-app-region: no-drag;
+        }
+    }
+}
+
+</style>
+
 <style lang="scss" scoped>
 .dex .page-layout-wrapper .page-content {
     .page-scroll-wrapper .page-wrapper {
@@ -133,7 +151,7 @@ export default {
     overflow: auto;
 
     .sidebar {
-        width: 70px;
+        width: 50px;
     }
 
     .page-content {

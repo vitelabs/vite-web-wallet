@@ -8,6 +8,7 @@ const autoLogoutKey = constant.AutoLogoutKey;
 const LangKey = constant.LangKey;
 const GateKey = constant.GateKey;
 const ThemeKey = constant.ThemeKey;
+const HideZeroAssets = constant.HideZeroAssets;
 
 const state = {
     clientStatus: -1,
@@ -17,7 +18,8 @@ const state = {
     gate: +localStorage.getItem(GateKey) || 0,
     theme: +localStorage.getItem(ThemeKey) || 0,
     lastPage: '',
-    isShowCompliance: false
+    isShowCompliance: false,
+    hideZeroAssets: +localStorage.getItem(HideZeroAssets) || 0
 };
 
 const mutations = {
@@ -57,6 +59,11 @@ const mutations = {
     },
     setLastPage(state, lastPage) {
         state.lastPage = lastPage;
+    },
+    setHideZeroAssets(state, isHide) {
+        const _isHide = +isHide || 0;
+        localStorage.setItem(HideZeroAssets, _isHide);
+        state.hideZeroAssets = _isHide;
     }
 };
 

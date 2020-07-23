@@ -8,7 +8,8 @@ module.exports = {
     ],
     output: {
         path: staticPath,
-        filename: '[name].[hash].js'
+        filename: '[name].[hash].js',
+        publicPath: '/'
     },
     devtool: 'source-map',
     devServer: {

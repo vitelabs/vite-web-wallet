@@ -3,15 +3,19 @@ import bigNumber from 'utils/bigNumber';
 import { timer } from 'utils/asyncFlow';
 import { defaultTokenMap } from 'utils/constant';
 import { getTokenIcon } from 'utils/tokenParser';
-import { getAccountBalance } from 'services/viteServer';
+import { getAccountBalance, subUnreceivedTx, unsubUnreceivedTx, getAccountBlockByHash } from 'services/viteServer';
 import { gateStorage } from 'pcServices/gate';
+import { notice } from 'utils/noticeUtils';
+import i18n from 'pcI18n';
 
 let balanceInfoInst = null;
+let unreceivedTxEvent = null;
 
 const state = {
     onroad: { balanceInfos: {} },
     balance: { balanceInfos: {} },
-    accountBlockCount: 0
+    accountBlockCount: 0,
+    unreceivedTx: []
 };
 
 const mutations = {
@@ -33,6 +37,11 @@ const mutations = {
         state.onroad.balanceInfos = state.onroad && state.onroad.balanceInfoMap
             ? state.onroad.balanceInfoMap
             : {};
+
+        // Desktop wallt only
+        if (window.ipcRenderer) {
+            window.ipcRenderer.send('balanceInfo', JSON.stringify(getters.balanceInfo(state)));
+        }
     },
     commitClearBalance(state) {
         state.balance = { balanceInfos: {} };
@@ -61,6 +70,42 @@ const actions = {
     stopLoopBalance() {
         balanceInfoInst && balanceInfoInst.stop();
         balanceInfoInst = null;
+    },
+    subUnreceivedTx({ dispatch, rootState }) {
+        const activeAcc = rootState.wallet.activeAcc;
+        if (!activeAcc || !activeAcc.address) return;
+
+        if (unreceivedTxEvent) {
+            dispatch('unsubUnreceivedTx');
+        }
+        subUnreceivedTx(activeAcc.address).then(event => {
+            event.on(data => {
+                if (!Array.isArray(data)) return;
+                const title = i18n.t('desktop.unreceivedTx.title', { num: data.length });
+                if (data.length > 1) {
+                    return notice(title);
+                } else if (data.length === 1) {
+                    getAccountBlockByHash(data[0].hash).then(data => {
+                        const body = i18n.t('desktop.unreceivedTx.body', {
+                            symbol: data.tokenInfo.tokenSymbol,
+                            address: data.fromAddress,
+                            amount: bigNumber.toBasic(data.amount, data.tokenInfo.decimals)
+                        });
+                        notice(title, {
+                            body,
+                            requireInteraction: false
+                        });
+                    });
+                }
+            });
+            unreceivedTxEvent = event;
+        }).catch(err => {
+            console.error(err);
+        });
+    },
+    unsubUnreceivedTx() {
+        unsubUnreceivedTx(unreceivedTxEvent);
+        unreceivedTxEvent = null;
     }
 };
 
