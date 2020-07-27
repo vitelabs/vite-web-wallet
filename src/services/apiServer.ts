@@ -40,7 +40,7 @@ currentViteApiUrl = setWatch('gViteAPI', url => {
     if (currentViteApiUrl === url) {
         return;
     }
-    WS_RPC.disconnect();
+    WS_RPC.destroy();
     currentViteApiUrl = url;
     WS_RPC = new provider(url, providerTimeout, providerOptions);
     viteClient.setProvider(WS_RPC, () => {
