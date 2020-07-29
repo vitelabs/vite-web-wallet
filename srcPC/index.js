@@ -21,13 +21,13 @@ import { resaveAccList, resaveLastAcc } from 'pcUtils/store/resave';
 
 // Add fortawesome
 import { library } from '@fortawesome/fontawesome-svg-core';
-import { faExclamationCircle, faInfoCircle } from '@fortawesome/free-solid-svg-icons';
+import { faExclamationCircle, faInfoCircle, faLightbulb, faMoon } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 
 // Some init code for desktop app
 import * as desktop from './utils/desktop';
 
-library.add(faExclamationCircle, faInfoCircle);
+library.add(faExclamationCircle, faInfoCircle, faLightbulb, faMoon);
 Vue.component('font-awesome-icon', FontAwesomeIcon);
 
 resaveAccList();
@@ -40,7 +40,11 @@ Vue.use(directives);
 
 // For desktop only
 if (window.DESKTOP) {
-    desktop.init(store);
+    desktop.init();
+    window.addEventListener('contextmenu', e => {
+        e.preventDefault();
+        window.desktopUtils.popupMenu();
+    }, false);
 }
 
 Vue.config.devtools = process.env.NODE_ENV !== 'production';

@@ -151,7 +151,7 @@ export default {
     overflow: auto;
 
     .sidebar {
-        width: 70px;
+        width: 50px;
     }
 
     .page-content {

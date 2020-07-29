@@ -913,6 +913,7 @@
         "cmcHelp": "View VITE on CoinMarketCap",
         "supportTradeMining": "Eligible for trading as mining",
         "supportOrderMining": "Eligible for market-making as mining",
+        "zeroFee": "Zero Fee",
         "buyMiningPrice": "Qualifies for mining when buy price is greater than {price}",
         "sellMiningPrice": "Qualifies for mining when sell price is less than {price}",
         "operator": {

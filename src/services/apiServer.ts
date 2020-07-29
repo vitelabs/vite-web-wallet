@@ -4,6 +4,8 @@ import { Client } from 'utils/request';
 import { DNSClient, setWatch } from './dnsHostIP';
 
 let currentViteApiUrl = null;
+const providerTimeout = 60000;
+const providerOptions = { retryTimes: Infinity, retryInterval: 5000 };
 
 function viteXAPIAfterRes(xhr) {
     const { code, msg, data, error, subCode } = JSON.parse(xhr.responseText);
@@ -34,26 +36,24 @@ export const ViteXAPIV2 = new DNSClient({
 
 export const RewardAPI = new Client(`${ process.env.rewardApiServer }/`, viteXAPIAfterRes);
 
-const url = setWatch('gViteAPI', url => {
-    WS_RPC.disconnect();
+currentViteApiUrl = setWatch('gViteAPI', url => {
+    if (currentViteApiUrl === url) {
+        return;
+    }
+    WS_RPC.destroy();
     currentViteApiUrl = url;
-    viteClient.setProvider(new provider(url), () => {
-        console.log('reconnect cussess');
+    WS_RPC = new provider(url, providerTimeout, providerOptions);
+    viteClient.setProvider(WS_RPC, () => {
+        console.log(`Successfully changed gVite API to ${ url }`);
     }, false);
 });
 
-export const refreshViteApi = () => {
-    if (!currentViteApiUrl) return;
-    viteClient.setProvider(new provider(currentViteApiUrl), () => {
-        console.log('Call refreshViteApi cussess');
-    }, false);
-};
-
-const WS_RPC = new provider(url, 60000, { retryTimes: Infinity });
+let WS_RPC = new provider(currentViteApiUrl, providerTimeout, providerOptions);
 
 export const viteClient = new ViteAPI(WS_RPC, () => {
-    console.log('Connect success');
+    console.log(`gViteAPI Connect to ${ WS_RPC.path }`);
 });
+export const getProvider = () => WS_RPC;
 
 const FullNodeContractAddress = 'vite_b3b6335ef23ef3826cff125b81efd158dac3c2209748e0601a';
 export const customContracts = {

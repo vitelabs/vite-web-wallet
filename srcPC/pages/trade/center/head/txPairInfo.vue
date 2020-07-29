@@ -15,6 +15,10 @@
             <span class="symbol ttoken" @click="_showDetail('token')">
                 {{ ttokenDetail ? ttokenDetail.symbol : '' }}
             </span>
+            <span class="zero-fee-icon">
+                <img v-show="isZeroFee" src="~assets/imgs/trade/zero_fee.svg">
+                <tooltips class="tips" :content="$t('tradeCenter.zeroFee')"></tooltips>
+            </span>
             <span class="mining" v-show="+isMining">
                 <img v-show="isMining === 1" src="~assets/imgs/trade_mining.svg"/>
                 <img v-show="isMining === 2" src="~assets/imgs/order_mining.svg"/>
@@ -62,6 +66,9 @@ export default {
         },
         isMining() {
             return this.$store.getters.activeTxPairIsMining;
+        },
+        isZeroFee() {
+            return this.$store.getters.activeTxPairIsZeroFee;
         },
         orderMiningMultiples() {
             return this.$store.getters.activeTxPairOrderMiningMultiples;
@@ -231,6 +238,23 @@ export default {
             width: 14px;
             height: 14px;
 
+        }
+    }
+    .zero-fee-icon {
+        .tips {
+            display: none;
+            @include font-family-normal();
+        }
+        &:hover {
+            .tips {
+                display: inline-block;
+                @include font_color_1();
+            }
+        }
+        img {
+            width: 18px;
+            height: 10px;
+            margin-bottom: 8px;
         }
     }
     .gate {
