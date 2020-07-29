@@ -49,6 +49,7 @@ const state = {
     currVxMineInfo: null,
 
     tradeMiningSymbols: [],
+    zeroFeePairs: [],
     orderMiningSymbols: [],
     orderMiningSettings: {},
     orderMiningMultiples: {}
@@ -78,6 +79,7 @@ const mutations = {
             return;
         }
         state.tradeMiningSymbols = data.tradeSymbols || [];
+        state.zeroFeePairs = data.zeroFeePairs || [];
         state.orderMiningSymbols = data.orderSymbols || [];
         state.orderMiningSettings = data.orderMiningSettings || {};
         state.orderMiningMultiples = data.orderMiningMultiples || {};
