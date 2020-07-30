@@ -8,7 +8,7 @@
                 <span>{{ $t('trade.limitPrice.fee') }}
                     <span class="fee">Taker({{ exTakerFee }}) / Maker({{ exMakerFee }})</span>
                 </span>
-                <span class="help __pointer" @mouseenter="showHelp" @mouseleave="hideHelp">
+                <span v-if="!isZeroFee" class="help __pointer" @mouseenter="showHelp" @mouseleave="hideHelp">
                     <span v-show="isShowHelp" class="help-tip">
                         <span v-if="isSVip">{{ $t('trade.limitPrice.svipFee')}}</span>
                         <span v-else style="color: red;">{{ $t('trade.limitPrice.adviseToSVip')}}</span>
@@ -85,6 +85,9 @@ export default {
         },
         isSVip() {
             return this.$store.state.exchangeFee.isSVip;
+        },
+        isZeroFee() {
+            return this.$store.getters.activeTxPairIsZeroFee;
         }
     },
     methods: {
