@@ -13,6 +13,7 @@ import noticeList from 'pcComponents/noticeList.vue';
 import { receiveInviteDialog } from 'pcComponents/dialog';
 import { emptySpace } from 'pcUtils/storageSpace';
 import { getValidSession, initVB } from 'wallet/vb';
+import * as DnsHost from 'services/dnsHostIP';
 
 const inviteCodeKey = 'INVITE_CODE';
 
@@ -24,7 +25,7 @@ export default {
         this.$store.dispatch('subUnreceivedTx');
         this.$store.dispatch('startLoopExchangeBalance');
         this.$store.dispatch('exFetchLatestOrder');
-        this.initVC();
+        this._initVC();
         try {
             if (Number(this.$route.query['ldfjacia']) > 0) {
                 emptySpace.setItem(inviteCodeKey, this.$route.query['ldfjacia']);
@@ -66,6 +67,15 @@ export default {
             const session = getValidSession();
             if (session && Array.isArray(session.accounts) && session.accounts.indexOf(address) > -1) {
                 initVB({ lastAccount: address });
+            }
+        },
+        _initVC() {
+            if (DnsHost.Server.isReady) {
+                this.initVC();
+            } else {
+                DnsHost.onReady(() => {
+                    this.initVC();
+                });
             }
         }
     },
