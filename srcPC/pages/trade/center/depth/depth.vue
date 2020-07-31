@@ -34,16 +34,20 @@
             <div v-show="showDepthTips" class="depth-tips" :style="`top: ${top}px`">
                 <span v-if="isInMiningRange" style="color: red;">{{ this.$t('tradeCenter.inMiningRange') }}</span>
                 <div>
-                    <div>{{$t('trade.depth.avgPrice')}}: </div>
+                    <div>{{$t('trade.depth.avgPrice')}}</div>
                     <div>≈ {{selectDepth.avgPrice}}</div>
                 </div>
                 <div>
-                    <div>{{$t('trade.depth.sum')}} {{tradeTokenDetail ? tradeTokenDetail.originalSymbol : ''}} : </div>
-                    <div>≈ {{selectDepth.sumInTrade}}</div>
+                    <div>{{$t('trade.depth.sum', {
+                        symbol: tradeTokenDetail ? tradeTokenDetail.originalSymbol : ''
+                    })}}</div>
+                    <div>{{selectDepth.sumInTrade}}</div>
                 </div>
                 <div>
-                    <div>{{$t('trade.depth.sum')}} {{quoteTokenDetail ? quoteTokenDetail.originalSymbol : ''}} : </div>
-                    <div>≈ {{selectDepth.sumInQuote}}</div>
+                    <div>{{$t('trade.depth.sum', {
+                        symbol: quoteTokenDetail ? quoteTokenDetail.originalSymbol : ''
+                    })}}</div>
+                    <div>{{selectDepth.sumInQuote}}</div>
                 </div>
             </div>
 

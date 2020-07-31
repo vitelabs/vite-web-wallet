@@ -1019,8 +1019,8 @@
             "buy": "买入",
             "sell": "卖出",
             "all": "全部",
-            "avgPrice": "均价",
-            "sum": "合计"
+            "avgPrice": "均价：",
+            "sum": "合计 {symbol}："
         },
         "noData": {
             "favorite": "您还未添加任何自选",
