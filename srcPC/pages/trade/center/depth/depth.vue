@@ -39,13 +39,13 @@
                 </div>
                 <div>
                     <div>{{$t('trade.depth.sum', {
-                        symbol: tradeTokenDetail ? tradeTokenDetail.originalSymbol: ''
+                        symbol: tradeTokenDetail ? tradeTokenDetail.originalSymbol : ''
                     })}}</div>
                     <div>{{selectDepth.sumInTrade}}</div>
                 </div>
                 <div>
                     <div>{{$t('trade.depth.sum', {
-                        symbol: quoteTokenDetail ? quoteTokenDetail.originalSymbol: ''
+                        symbol: quoteTokenDetail ? quoteTokenDetail.originalSymbol : ''
                     })}}</div>
                     <div>{{selectDepth.sumInQuote}}</div>
                 </div>
