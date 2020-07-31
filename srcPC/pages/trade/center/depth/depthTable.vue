@@ -11,7 +11,8 @@
                      'in_mining': miningSeparatorArr.indexOf(i) !== -1,
                      'border_b': (miningSeparator >= 0 && dataType === 'buy' && i === miningSeparator) || dataType === 'buy' && selectIndex === i,
                      'border_t': (miningSeparator >= 0 && dataType === 'sell' && i === miningSeparator) || dataType === 'sell' && selectIndex === i,
-                     'in_select_range': isInRange(i)
+                     'in_select_range': isInRange(i),
+                     'selected_row': i === selectIndex
                  }"
                  v-for="(item, i) in depthData" :key="i">
                 <span class="__center-tb-item depth price __ellipsis" :class="dataType">
@@ -232,6 +233,8 @@ export default {
 }
 
 .__center-tb-row {
+    border-top: 1px solid transparent;
+    border-bottom: 1px solid transparent;
     &.in_select_range {
         [data-theme="0"] & {
             background: rgba(75,116,255,0.05);
@@ -253,6 +256,9 @@ export default {
     }
     &.border_t {
         border-top: 1px dashed rgba(189,196,208,1);
+    }
+    &.selected_row {
+        font-weight: 600;
     }
 }
 
