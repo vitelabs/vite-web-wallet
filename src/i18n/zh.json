@@ -612,12 +612,12 @@
         "pend": "笔交易待接收",
         "inAddress": "接收账户地址",
         "sum": "金额",
-        "remarks": "备注",
+        "remarks": "备注（Memo）",
         "totalAsset": "总资产",
         "remarksLong": "剩余字节：{len}",
         "placeholder": {
             "amount": "请输入金额",
-            "remarks": "请输入备注",
+            "remarks": "请输入备注（Memo）",
             "addr": "请输入地址"
         },
         "hint": {

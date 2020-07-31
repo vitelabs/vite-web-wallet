@@ -468,12 +468,12 @@
         "pend": "Pending",
         "inAddress": "Recipient Address",
         "sum": "Amount",
-        "remarks": "Comment",
+        "remarks": "Memo",
         "remarksLong": "{len} bytes left",
         "totalAsset": "Total Assets",
         "placeholder": {
             "amount": "Please input amount",
-            "remarks": "Please input comments",
+            "remarks": "Please input memo",
             "addr": "Please input address"
         },
         "hint": {
