@@ -22,7 +22,7 @@ export const ConfigClient = new DNSClient({
             return Promise.reject(xhr.responseText);
         }
     },
-    baseUrl: process.env.NODE_ENV === 'production' ? '' : '/test'
+    baseUrl: process.env.API === 'production' ? '' : '/test'
 });
 
 export const CrosschainGate = new DNSClient({

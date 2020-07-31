@@ -931,7 +931,8 @@
             "operatorTab": "Operator Details"
         },
         "depthBuyMiningPrice": "Mining Range Above",
-        "depthSellMiningPrice": "Mining Range Below"
+        "depthSellMiningPrice": "Mining Range Below",
+        "inMiningRange": "Mining Range"
     },
     "trade": {
         "more":"More",
@@ -1001,7 +1002,9 @@
         "depth": {
             "buy": "Buy",
             "sell": "Sell",
-            "all": "All"
+            "all": "All",
+            "avgPrice": "Avg.Price",
+            "sum": "Sum"
         },
         "noData": {
             "favorite": "You have no favorite yet",
