@@ -5,13 +5,15 @@
             <price v-if="!isShowAll && dataType === 'buy'" class="border_b"></price>
             <div class="__center-tb-row __pointer" :ref="`depthRow${i}`"
                  @click="clickRow(item, i)"
-                 @mouseenter="showMiningPrice(item, i)"
-                 @mouseleave="hideMiningPrice(item)"
+                 @mouseenter="showTips(item, i)"
+                 @mouseleave="hideTips(item)"
                  :class="{
                      'in_mining': miningSeparatorArr.indexOf(i) !== -1,
-                     'border_b': miningSeparator >= 0 && dataType === 'buy' && i === miningSeparator,
-                     'border_t': miningSeparator >= 0 && dataType === 'sell' && i === miningSeparator,
-            }" v-for="(item, i) in depthData" :key="i">
+                     'border_b': (miningSeparator >= 0 && dataType === 'buy' && i === miningSeparator) || dataType === 'buy' && selectIndex === i,
+                     'border_t': (miningSeparator >= 0 && dataType === 'sell' && i === miningSeparator) || dataType === 'sell' && selectIndex === i,
+                     'in_select_range': isInRange(i)
+                 }"
+                 v-for="(item, i) in depthData" :key="i">
                 <span class="__center-tb-item depth price __ellipsis" :class="dataType">
                     {{ formatNum(item.price, quoteTokenDepthDigit) }}
                     <span class="owner" v-show="isInOpenOrders(item.price)"></span>
@@ -31,10 +33,11 @@
 <script>
 import BigNumber from 'utils/bigNumber';
 import loading from 'components/loading';
+import tooltips from 'components/tooltips';
 import price from './price';
 
 export default {
-    components: { loading, price },
+    components: { loading, price, tooltips },
     props: {
         dataType: {
             type: String,
@@ -48,6 +51,9 @@ export default {
             type: Boolean,
             default: true
         }
+    },
+    data() {
+        return { selectIndex: null };
     },
     destroyed() {
         this.$store.dispatch('exStopDepthTimer');
@@ -110,29 +116,29 @@ export default {
             return this.$store.state.exchangeDepth.depthStep;
         }
     },
-    watch: {
-        miningSeparator() {
-            if (this.miningSeparator < 0) {
-                this.hideMiningPrice();
-            }
-        }
-    },
     methods: {
-        showMiningPrice(item, i) {
-            if (i !== this.miningSeparator) {
-                return;
-            }
-
+        showTips(item, i) {
             const elTop = this.$refs[`depthRow${ i }`][0].getBoundingClientRect().top;
             const rowHeight = this.$refs[`depthRow${ i }`][0].clientHeight;
+            let isInMiningRange = this.miningSeparator >= 0 && this.miningSeparator - i <= 0;
 
+            this.selectIndex = i;
             if (this.dataType === 'buy') {
-                return this.$emit('showMiningPrice', elTop + rowHeight);
+                isInMiningRange = this.miningSeparator >= 0 && this.miningSeparator - i >= 0;
+                return this.$emit('showTips', elTop + rowHeight, isInMiningRange, i);
             }
-            this.$emit('showMiningPrice', elTop);
+            this.$emit('showTips', elTop, isInMiningRange, i);
         },
-        hideMiningPrice() {
-            this.$emit('hideMiningPrice');
+        isInRange(i) {
+            if (this.selectIndex === null) return false;
+            if (this.dataType === 'buy') {
+                return i <= this.selectIndex;
+            }
+            return i >= this.selectIndex;
+        },
+        hideTips() {
+            this.$emit('hideTips');
+            this.selectIndex = null;
         },
         isInOpenOrders(price) {
             if (!this.currentOpenOrders) {
@@ -226,6 +232,14 @@ export default {
 }
 
 .__center-tb-row {
+    &.in_select_range {
+        [data-theme="0"] & {
+            background: rgba(75,116,255,0.05);
+        }
+        [data-theme="1"] & {
+            background: rgba(75,116,255,0.1);
+        }
+    }
     &.in_mining {
         [data-theme="0"] & {
             background: rgba(75,116,255,0.05);
@@ -235,14 +249,10 @@ export default {
         }
     }
     &.border_b {
-        [data-theme="0"] & {
-            border-bottom: 1px dashed rgba(189,196,208,1);
-        }
+        border-bottom: 1px dashed rgba(189,196,208,1);
     }
     &.border_t {
-        [data-theme="0"] & {
-            border-top: 1px dashed rgba(189,196,208,1);
-        }
+        border-top: 1px dashed rgba(189,196,208,1);
     }
 }
 

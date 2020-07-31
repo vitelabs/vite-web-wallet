@@ -31,17 +31,31 @@
         </div>
 
         <div ref="depthContentWrapper" class="depth-content-wrapper">
-            <span v-show="miningPriceText" class="mining-price" :style="`top: ${top}px`">{{ miningPriceText }}</span>
+            <div v-show="showDepthTips" class="depth-tips" :style="`top: ${top}px`">
+                <span v-if="isInMiningRange" style="color: red;">{{ this.$t('tradeCenter.inMiningRange') }}</span>
+                <div>
+                    <div>{{$t('trade.depth.avgPrice')}}: </div>
+                    <div>≈ {{selectDepth.avgPrice}}</div>
+                </div>
+                <div>
+                    <div>{{$t('trade.depth.sum')}} {{tradeTokenDetail ? tradeTokenDetail.originalSymbol : ''}} : </div>
+                    <div>≈ {{selectDepth.sumInTrade}}</div>
+                </div>
+                <div>
+                    <div>{{$t('trade.depth.sum')}} {{quoteTokenDetail ? quoteTokenDetail.originalSymbol : ''}} : </div>
+                    <div>≈ {{selectDepth.sumInQuote}}</div>
+                </div>
+            </div>
 
             <depth-table v-show="isShowSell" :isShowAll="isShowBuy && isShowSell"
                          dataType="sell" :depthData="depthSell"
-                         @showMiningPrice="showSellMiningPrice"
-                         @hideMiningPrice="hideMiningPrice"></depth-table>
+                         @showTips="showSellTips"
+                         @hideTips="hideTips"></depth-table>
             <price v-if="isShowBuy && isShowSell" class="border_all"></price>
             <depth-table v-show="isShowBuy" :isShowAll="isShowBuy && isShowSell"
                          dataType="buy" :depthData="depthBuy"
-                         @showMiningPrice="showBuyMiningPrice"
-                         @hideMiningPrice="hideMiningPrice"></depth-table>
+                         @showTips="showBuyTips"
+                         @hideTips="hideTips"></depth-table>
         </div>
     </div>
 </template>
@@ -50,6 +64,7 @@
 import depthTable from './depthTable';
 import mergeDepth from './mergeDepth';
 import price from './price';
+import BigNumber from 'utils/bigNumber';
 
 export default {
     components: { depthTable, price, mergeDepth },
@@ -57,8 +72,14 @@ export default {
         return {
             isShowBuy: true,
             isShowSell: true,
-            miningPriceText: '',
-            top: 0
+            showDepthTips: false,
+            top: 0,
+            isInMiningRange: false,
+            selectDepth: {
+                avgPrice: 0,
+                sumInQuote: 0,
+                sumInTrade: 0
+            }
         };
     },
     computed: {
@@ -80,20 +101,37 @@ export default {
             this.isShowBuy = isShowBuy;
             this.isShowSell = isShowSell;
         },
-        showSellMiningPrice(top) {
-            this.miningPriceText = this.$t('tradeCenter.depthSellMiningPrice');
-            this.showMiningPrice(top);
+        showSellTips(top, isInMiningRange, index) {
+            this.isInMiningRange = isInMiningRange;
+            this.showTips(top);
+            this.calTotal(this.depthSell.slice(index));
         },
-        showBuyMiningPrice(top) {
-            this.miningPriceText = this.$t('tradeCenter.depthBuyMiningPrice');
-            this.showMiningPrice(top);
+        showBuyTips(top, isInMiningRange, index) {
+            this.isInMiningRange = isInMiningRange;
+            this.calTotal(this.depthBuy.slice(0, index + 1));
+            this.showTips(top);
         },
-        showMiningPrice(top) {
+        showTips(top) {
             const wrapperTop = this.$refs.depthContentWrapper.getBoundingClientRect().top;
             this.top = top - wrapperTop;
+            this.showDepthTips = true;
         },
-        hideMiningPrice() {
-            this.miningPriceText = '';
+        hideTips() {
+            this.showDepthTips = false;
+        },
+        calTotal(arr) {
+            let sumInQuote = 0;
+            let sumInTrade = 0;
+            arr.forEach(item => {
+                sumInQuote = BigNumber.plus(sumInQuote, item.amount);
+                sumInTrade = BigNumber.plus(sumInTrade, item.quantity);
+            });
+            const avgPrice = BigNumber.dividedToNumber(sumInQuote, sumInTrade, 8);
+            this.selectDepth = {
+                sumInQuote,
+                sumInTrade,
+                avgPrice
+            };
         }
     }
 };
@@ -130,7 +168,7 @@ export default {
     }
 }
 
-.mining-price {
+.depth-tips {
     position: absolute;
     left: -10px;
     transform: translateX(-100%) translateY(-50%);
@@ -138,10 +176,12 @@ export default {
     padding: 10px;
     font-size: 12px;
     @include font-family-normal();
+    box-shadow: 0px 5px 20px 0px rgba(0,0,0,0.1);
+    border-radius: 4px;
+
     [data-theme="0"] & {
         color: rgba(94,104,117,1);
         background: rgba(215,215,215,1);
-        box-shadow: 0px 5px 20px 0px rgba(0,0,0,0.1);
     }
     [data-theme="1"] & {
         color: $white-color;
@@ -162,6 +202,13 @@ export default {
         right: 0;
         margin-top: -5px;
         margin-right: -10px;
+    }
+    & > div {
+        width: 200px;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        margin-top: 10px;
     }
 }
 </style>

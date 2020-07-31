@@ -948,7 +948,8 @@
             "operatorTab": "运营商信息"
         },
         "depthBuyMiningPrice": "此线上方为挖矿区域",
-        "depthSellMiningPrice": "此线下方为挖矿区域"
+        "depthSellMiningPrice": "此线下方为挖矿区域",
+        "inMiningRange": "挖矿区域"
     },
     "trade": {
         "more":"更多",
@@ -1017,7 +1018,9 @@
         "depth": {
             "buy": "买入",
             "sell": "卖出",
-            "all": "全部"
+            "all": "全部",
+            "avgPrice": "均价",
+            "sum": "合计"
         },
         "noData": {
             "favorite": "您还未添加任何自选",
