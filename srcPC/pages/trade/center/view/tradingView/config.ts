@@ -1,7 +1,7 @@
 export const commonConfig = {
     fullscreen: false,
     autosize: true,
-    interval: '60',
+    interval: '360',
     allow_symbol_change: true,
     container_id: 'tv_chart_container',
     library_path: '/charting_library/',
