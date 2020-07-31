@@ -12,6 +12,7 @@
 import noticeList from 'pcComponents/noticeList.vue';
 import { receiveInviteDialog } from 'pcComponents/dialog';
 import { emptySpace } from 'pcUtils/storageSpace';
+import { getValidSession, initVB } from 'wallet/vb';
 
 const inviteCodeKey = 'INVITE_CODE';
 
@@ -23,6 +24,7 @@ export default {
         this.$store.dispatch('subUnreceivedTx');
         this.$store.dispatch('startLoopExchangeBalance');
         this.$store.dispatch('exFetchLatestOrder');
+        this.initVC();
         try {
             if (Number(this.$route.query['ldfjacia']) > 0) {
                 emptySpace.setItem(inviteCodeKey, this.$route.query['ldfjacia']);
@@ -44,6 +46,9 @@ export default {
         },
         address() {
             return this.$store.getters.activeAddr;
+        },
+        activeAcc() {
+            return this.$store.state.wallet.activeAcc;
         }
     },
     methods: {
@@ -53,6 +58,14 @@ export default {
                 if (this.$route.name === 'tradeCenter') {
                     receiveInviteDialog();
                 }
+            }
+        },
+        initVC() {
+            const { isBifrost, address } = this.activeAcc || {};
+            if (!isBifrost || !address) return;
+            const session = getValidSession();
+            if (session && Array.isArray(session.accounts) && session.accounts.indexOf(address) > -1) {
+                initVB({ lastAccount: address });
             }
         }
     },

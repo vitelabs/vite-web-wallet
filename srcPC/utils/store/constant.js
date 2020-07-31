@@ -22,6 +22,7 @@ export const TradeKeys = [ 'favoriteTickers', 'beginnerGuide' ];
 
 export const AccBaseKeys = [ 'name', 'addrNum', 'idx', 'addr' ];
 export const AddrBaseKeys = [ 'name', 'id', 'idx' ];
+export const VCSessionKey = 'vcSession';
 
 // setting, trade
 export const AccInfoKeys = [ ShowHoldPWDNumKey, HoldPwdKey ];
