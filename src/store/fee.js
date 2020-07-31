@@ -115,9 +115,15 @@ const getters = {
         return 0;
     },
     exMakerFee(state, getters) {
+        if (getters.activeTxPairIsZeroFee) {
+            return 0;
+        }
         return getFee(getters.baseMakerFee, getters.operatorMakerFee, getters.vipFee, getters.inviteFeeDiscount);
     },
     exTakerFee(state, getters) {
+        if (getters.activeTxPairIsZeroFee) {
+            return 0;
+        }
         return getFee(getters.baseTakerFee, getters.operatorTakerFee, getters.vipFee, getters.inviteFeeDiscount);
     },
     exBuyOrderFee(state, getters) {
