@@ -25,13 +25,13 @@ function viteXAPIAfterRes(xhr) {
 export const ViteXAPI = new DNSClient({
     serverKey: 'dexAPI',
     afterResponse: viteXAPIAfterRes,
-    baseUrl: `${ process.env.NODE_ENV === 'production' ? '' : '/test' }/api/v1`
+    baseUrl: `${ process.env.API === 'production' ? '' : '/test' }/api/v1`
 });
 
 export const ViteXAPIV2 = new DNSClient({
     serverKey: 'dexAPI',
     afterResponse: viteXAPIAfterRes,
-    baseUrl: `${ process.env.NODE_ENV === 'production' ? '' : '/test' }/api/v2`
+    baseUrl: `${ process.env.API === 'production' ? '' : '/test' }/api/v2`
 });
 
 export const RewardAPI = new Client(`${ process.env.rewardApiServer }/`, viteXAPIAfterRes);

@@ -14,13 +14,12 @@
         "build:testH5": "npm run clean:H5 && NODE_ENV=test isH5=true webpack && NODE_ENV=test isH5=true node ./pack/afterPack.js",
         "build:testAPP": "npm run clean:APP && NODE_ENV=test isAPP=true webpack",
         "dev": "NODE_ENV=dev webpack-dev-server",
+        "dev:prod": "API=production npm run dev",
         "production": "NODE_ENV=production webpack-dev-server",
         "analyzer": "NODE_ENV=production analyzer=true isPC=true webpack-dev-server",
         "lint:all": "eslint --ext ts,js,vue --fix .",
         "lint": "eslint --ext ts,js,vue --cache --fix .",
-        "stylelint": "stylelint **/*.vue --custom-syntax postcss-html --fix",
-        "deploy-prod": "",
-        "app": ""
+        "stylelint": "stylelint **/*.vue --custom-syntax postcss-html --fix"
     },
     "pre-commit": [
         "lint",

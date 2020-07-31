@@ -70,7 +70,11 @@ const contractAddress = {
 };
 
 const Node_Env = process.env.NODE_ENV;
+let API = process.env.API;
 
+if (!API) {
+    API = Node_Env;
+}
 
 module.exports = {
     srcPath: path.resolve(__dirname, '../src'),
@@ -80,17 +84,18 @@ module.exports = {
     envVars: {
         'process.env.version': `"${ packJson.version }"`,
         'process.env.NODE_ENV': `"${ Node_Env }"`,
-        'process.env.goViteServer': goViteServer[Node_Env],
-        'process.env.viteExplorer': viteExplorer[Node_Env],
-        'process.env.contractAddress': contractAddress[Node_Env],
-        'process.env.ethServer': ethServer[Node_Env],
-        'process.env.ethExplorer': ethExplorer[Node_Env],
-        'process.env.pushServer': pushServer[Node_Env],
-        'process.env.dexApiServer': dexApiServer[Node_Env],
-        'process.env.viteConnect': viteConnect[Node_Env],
-        'process.env.gatewayInfosServer': gatewayInfosServer[Node_Env],
-        'process.env.conversionGate': conversionGate[Node_Env],
-        'process.env.dnsHostServer': dnsHostServer[Node_Env],
-        'process.env.rewardApiServer': rewardApiServer[Node_Env]
+        'process.env.API': `"${ API }"`,
+        'process.env.goViteServer': goViteServer[API],
+        'process.env.viteExplorer': viteExplorer[API],
+        'process.env.contractAddress': contractAddress[API],
+        'process.env.ethServer': ethServer[API],
+        'process.env.ethExplorer': ethExplorer[API],
+        'process.env.pushServer': pushServer[API],
+        'process.env.dexApiServer': dexApiServer[API],
+        'process.env.viteConnect': viteConnect[API],
+        'process.env.gatewayInfosServer': gatewayInfosServer[API],
+        'process.env.conversionGate': conversionGate[API],
+        'process.env.dnsHostServer': dnsHostServer[API],
+        'process.env.rewardApiServer': rewardApiServer[API]
     }
 };
