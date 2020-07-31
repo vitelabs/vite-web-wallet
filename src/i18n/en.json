@@ -1003,8 +1003,8 @@
             "buy": "Buy",
             "sell": "Sell",
             "all": "All",
-            "avgPrice": "Avg.Price",
-            "sum": "Sum"
+            "avgPrice": "Avg.Price:",
+            "sum": "Sum {symbol}:"
         },
         "noData": {
             "favorite": "You have no favorite yet",
