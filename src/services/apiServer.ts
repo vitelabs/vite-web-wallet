@@ -5,7 +5,7 @@ import { DNSClient, setWatch } from './dnsHostIP';
 
 let currentViteApiUrl = null;
 const providerTimeout = 60000;
-const providerOptions = { retryTimes: Infinity, retryInterval: 5000 };
+const providerOptions = { retryTimes: 10, retryInterval: 5000 };
 
 function viteXAPIAfterRes(xhr) {
     const { code, msg, data, error, subCode } = JSON.parse(xhr.responseText);
