@@ -119,6 +119,14 @@ const getters = {
         const mul = orderMiningMultiples[activeTxPair.symbol];
         return mul ? `X${ mul }` : '';
     },
+    activeTxPairIsZeroFee(state, getters, rootState) {
+        const activeTxPair = rootState.exchangeActiveTxPair.activeTxPair;
+        if (!activeTxPair) {
+            return '';
+        }
+        const { zeroFeePairs } = rootState.exchangeMine;
+        return zeroFeePairs.indexOf(activeTxPair.symbol) > -1;
+    },
     activeTxPairBuyMiningPrice(state, getters, rootState) {
         // No activeTxPair
         const activeTxPair = rootState.exchangeActiveTxPair.activeTxPair;

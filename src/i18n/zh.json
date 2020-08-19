@@ -931,6 +931,7 @@
         "cmcHelp": "请在CoinMarketCap查看VITE详情",
         "supportTradeMining": "支持交易挖矿",
         "supportOrderMining": "支持挂单挖矿",
+        "zeroFee": "零手续费",
         "buyMiningPrice": "买入价大于{price}时满足挂单挖矿条件",
         "sellMiningPrice": "卖出价小于{price}时满足挂单挖矿条件",
         "operator": {

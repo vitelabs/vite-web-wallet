@@ -19,6 +19,7 @@
                             <img v-show="isMining(txPair) === 3" src="~assets/imgs/mining.svg"/>
                             {{ miningMultiples(txPair) }}
                         </span>
+                        <img v-show="isZeroFee(txPair)" class="zero-fee-icon" src="~assets/imgs/trade/zero_fee.svg">
                     </span>
                 </span>
                 <span class="__center-tb-item">
@@ -80,6 +81,9 @@ export default {
         tradeMiningSymbols() {
             return this.$store.state.exchangeMine.tradeMiningSymbols;
         },
+        zeroFeePairs() {
+            return this.$store.state.exchangeMine.zeroFeePairs;
+        },
         orderMiningSymbols() {
             return this.$store.state.exchangeMine.orderMiningSymbols;
         },
@@ -140,6 +144,9 @@ export default {
             const isTradeMining = this.isTradeMining(item) ? 1 : 0;
             const isOrderMining = this.isOrderMining(item) ? 2 : 0;
             return isTradeMining + isOrderMining;
+        },
+        isZeroFee(item) {
+            return this.zeroFeePairs.indexOf(item.symbol) > -1;
         },
         miningMultiples(item) {
             const mul = this.orderMiningMultiples[item.symbol];
@@ -336,6 +343,10 @@ export default {
             width: 12px;
             height: 12px;
             margin-bottom: -2px;
+        }
+        .zero-fee-icon {
+            width: 18px;
+            height: 10px;
         }
     }
     &.active {
