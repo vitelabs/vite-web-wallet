@@ -83,11 +83,19 @@
             <div class="content__item">
                 <div class="label">{{$t("tokenCard.tokenInfo.labels.media")}}:</div>
                 <img src="~assets/imgs/facebook.svg" class="media-icon"
-                     v-show="tokenDetail.facebookLink"  @click="openUrl(tokenDetail.facebookLink)"/>
+                     v-show="tokenDetail.facebookLink"  @click="openUrl(tokenDetail.facebookLink[0])"/>
                 <img src="~assets/imgs/twitter.svg" class="media-icon"
-                     v-show="tokenDetail.twitterLink"  @click="openUrl(tokenDetail.twitterLink)"/>
+                     v-show="tokenDetail.twitterLink"  @click="openUrl(tokenDetail.twitterLink[0])"/>
                 <img src="~assets/imgs/telegram.svg" class="media-icon"
-                     v-show="tokenDetail.telegramLink"  @click="openUrl(tokenDetail.telegramLink)"/>
+                     v-show="tokenDetail.telegramLink"  @click="openUrl(tokenDetail.telegramLink[0])"/>
+                <img src="~assets/imgs/medium.svg" class="media-icon"
+                     v-show="tokenDetail.mediumLink"  @click="openUrl(tokenDetail.mediumLink[0])"/>
+                <img src="~assets/imgs/discord.svg" class="media-icon"
+                     v-show="tokenDetail.discordLink"  @click="openUrl(tokenDetail.discordLink[0])"/>
+                <img src="~assets/imgs/reddit.svg" class="media-icon"
+                     v-show="tokenDetail.redditLink"  @click="openUrl(tokenDetail.redditLink[0])"/>
+                <img src="~assets/imgs/youtube.svg" class="media-icon"
+                     v-show="tokenDetail.youtubeLink"  @click="openUrl(tokenDetail.youtubeLink[0])"/>
             </div>
         </div>
         <div v-show="tab === 'operator'" class="tab-content">

@@ -51,9 +51,13 @@ block originContent
         .content__item
             .label {{$t("tokenCard.tokenInfo.labels.media")}}:
             div
-                img.media-icon(src="~assets/imgs/facebook.svg" v-show="tokenDetail.facebookLink" @click="openUrl(tokenDetail.facebookLink)")
-                img.media-icon(src="~assets/imgs/twitter.svg" v-show="tokenDetail.twitterLink" @click="openUrl(tokenDetail.twitterLink)")
-                img.media-icon(src="~assets/imgs/telegram.svg" v-show="tokenDetail.telegramLink" @click="openUrl(tokenDetail.telegramLink)")
+                img.media-icon(src="~assets/imgs/facebook.svg" v-show="tokenDetail.facebookLink" @click="openUrl(tokenDetail.facebookLink[0])")
+                img.media-icon(src="~assets/imgs/twitter.svg" v-show="tokenDetail.twitterLink" @click="openUrl(tokenDetail.twitterLink[0])")
+                img.media-icon(src="~assets/imgs/telegram.svg" v-show="tokenDetail.telegramLink" @click="openUrl(tokenDetail.telegramLink[0])")
+                img.media-icon(src="~assets/imgs/medium.svg" v-show="tokenDetail.mediumLink" @click="openUrl(tokenDetail.mediumLink[0])")
+                img.media-icon(src="~assets/imgs/discord.svg" v-show="tokenDetail.discordLink" @click="openUrl(tokenDetail.discordLink[0])")
+                img.media-icon(src="~assets/imgs/reddit.svg" v-show="tokenDetail.redditLink" @click="openUrl(tokenDetail.redditLink[0])")
+                img.media-icon(src="~assets/imgs/youtube.svg" v-show="tokenDetail.youtubeLink" @click="openUrl(tokenDetail.youtubeLink[0])")
 </template>
 
 <script>
