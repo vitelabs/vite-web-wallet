@@ -4,12 +4,18 @@
             <div class="__title">{{ $t("regAcc") }}</div>
             <div class="notice">{{ $t('startCreate.notice') }}</div>
             <div class="__btn_list">
-                <span class="__btn __btn_all_in __pointer">
-                    <img class="download" src="~assets/imgs/google.svg"/>Google Play
-                </span>
                 <div class="__btn __btn_all_in __pointer">
-                    <img class="download" src="~assets/imgs/apple.svg"/>APP Store
+                    <font-awesome-icon class="download" :icon="['fab', 'google-play']" />Google Play
                 </div>
+                <div class="__btn __btn_all_in __pointer">
+                    <font-awesome-icon class="download" :icon="['fab', 'app-store-ios']" />APP Store
+                </div>
+                <a class="__btn __btn_all_in __pointer" :href="downloadUrl('win')" target="_blank">
+                    <font-awesome-icon class="download" :icon="['fab', 'windows']" />Windows
+                </a>
+                <a class="__btn __btn_all_in __pointer" :href="downloadUrl('mac')" target="_blank">
+                    <font-awesome-icon class="download" :icon="['fab', 'apple']" />Mac
+                </a>
             </div>
         </template>
         <create-page v-else></create-page>
@@ -27,6 +33,9 @@ import createPage from '../../create/index';
 
 export default {
     components: { createPage },
+    data() {
+        return { desktopVersion: '1.3.27' };
+    },
     computed: {
         isDesktop() {
             return window.DESKTOP;
@@ -35,6 +44,14 @@ export default {
     methods: {
         go(name) {
             this.$router.push({ name });
+        },
+        downloadUrl(platform) {
+            return 'https://github.com/vitelabs/vite-wallet/releases/latest';
+            // let name = 'dmg';
+            // if (platform === 'win') {
+            //     name = 'exe';
+            // }
+            // return `https://github.com/vitelabs/vite-wallet/releases/download/v${ this.desktopVersion }/Vite-Desktop-Wallet-${ this.desktopVersion }-${ platform }.${ name }`;
         }
     }
 };
@@ -61,7 +78,6 @@ export default {
     .download {
         width: 28px;
         height: 28px;
-        margin-bottom: -8px;
         margin-right: 10px;
     }
     .go-list {
@@ -85,7 +101,20 @@ export default {
             }
         }
     }
-    .__btn:hover {
+    .__btn_list {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        .__btn {
+            margin-top: 10px;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+        }
+    }
+    div.__btn:hover {
         position: relative;
         &::before {
             position: absolute;
