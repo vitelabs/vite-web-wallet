@@ -202,10 +202,10 @@
     },
     "preview": {
         "t": "Version {version}",
-        "txt1": "x.vite.net is an web platform integrating wallet and exchange. It is officially launched by Vite Labs.",
-        "txt2": "Current version mainly contains functions of wallet, ViteX decentralised exchange, staking VITE for quota, SBP registration, voting and token issuance. Try our newly released function ViteConnect: you can use Vite App to login via scanning a QR code.",
-        "txt3": "ViteX is formally launched. Come and start trading now.",
-        "v": "Current Version: {version}"
+        "txt1": "x.vite.net is a platform integrating the Vite wallet and the ViteX exchange, launched by Vite Labs.",
+        "txt2": "You can manager and transfer assets, trade, get quota, register SBP and full node, vote, issue tokens, apply for ViteX API, authorize delegated trading, etc.",
+        "txt3": "x.vite.net supports mnemonic words, Ledger, and ViteConnect.",
+        "v": ""
     },
     "pwdConfirm": {
         "conf": "Open password-free mode to free you from entering password during every transaction process. ",
