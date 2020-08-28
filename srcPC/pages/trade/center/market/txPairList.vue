@@ -19,10 +19,10 @@
                             <img v-show="isMining(txPair) === 3" src="~assets/imgs/mining.svg"/>
                             {{ miningMultiples(txPair) }}
                         </span>
-                        <img v-show="isZeroFee(txPair)" class="zero-fee-icon" src="~assets/imgs/trade/zero_fee.svg">
                     </span>
                 </span>
                 <span class="__center-tb-item">
+                    <img v-show="isZeroFee(txPair)" class="zero-fee-icon" src="~assets/imgs/trade/zero_fee.svg">
                     {{ txPair.closePrice ? formatNum(txPair.closePrice, txPair.pricePrecision) : '--' }}
                 </span>
                 <span v-show="showCol === 'updown'" class="__center-tb-item percent" :class="{
@@ -344,10 +344,12 @@ export default {
             height: 12px;
             margin-bottom: -2px;
         }
-        .zero-fee-icon {
-            width: 18px;
-            height: 10px;
-        }
+    }
+    .zero-fee-icon {
+        width: 18px;
+        height: 10px;
+        position: absolute;
+        left: 0;
     }
     &.active {
         background: rgba(75, 116, 255, 0.1);
