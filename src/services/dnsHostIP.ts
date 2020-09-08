@@ -113,11 +113,13 @@ export function onReady(cb: Function) {
     list.push(cb);
 }
 
-if (process.env.NODE_ENV === 'production') {
-    pingHost();
-} else {
-    callReady();
-}
+// if (process.env.NODE_ENV === 'production') {
+//     pingHost();
+// } else {
+//     callReady();
+// }
+
+callReady();
 
 function pingHost() {
     let pingResults = 0;
