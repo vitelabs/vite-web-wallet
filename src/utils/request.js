@@ -26,6 +26,7 @@ export default function request({
     method = method.toUpperCase();
 
     const xhr = new XMLHttpRequest();
+    xhr.withCredentials = true;
     const qsStr = qs.stringify(params);
 
     method === 'GET'
