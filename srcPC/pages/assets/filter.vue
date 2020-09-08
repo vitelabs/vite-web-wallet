@@ -30,9 +30,7 @@ import statistics from 'utils/statistics';
 
 export default {
     data() {
-        return {
-            filterKey: ''
-        };
+        return { filterKey: '' };
     },
     computed: {
         activeAddr() {

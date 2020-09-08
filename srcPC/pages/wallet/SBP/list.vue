@@ -59,7 +59,7 @@
                   :slot="`${i}operateBefore`">
                 <template v-if="item.isStakingAddr">
                     <span v-if="!item.isCancel" class="btn __pointer"
-                      @click="edit(item)">{{ $t('btn.edit') }}</span>
+                          @click="edit(item)">{{ $t('btn.edit') }}</span>
                     <span v-if="item.isCancel" class="btn" :class="{
                         '__pointer': item.isReReg,
                         'unuse': !item.isReReg

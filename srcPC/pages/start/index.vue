@@ -50,7 +50,7 @@ export default {
         }
     }
     [data-theme="1"] & {
-        background:#1E2745;
+        background: #1E2745;
     }
 
     .header {
