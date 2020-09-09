@@ -42,7 +42,7 @@ const ethExplorer = { // http-DNS
     dev: '\'https://ropsten.etherscan.io\''
 };
 const conversionGate = { // http-DNS
-    production: '\'https://vite.wallet.net\'',
+    production: '\'https://wallet.vite.net\'',
     test: '\'\'',
     dev: '\'\''
 };
