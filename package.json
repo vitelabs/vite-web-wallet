@@ -6,6 +6,7 @@
         "clean": "rm -rf ./dist",
         "clean:H5": "rm -rf ./distH5",
         "clean:APP": "rm -rf ./distAPP",
+        "build:all": "npm run build && npm run build:H5 && mv distH5/ dist/mobiledex",
         "build": "npm run clean && NODE_ENV=production isPC=true webpack && NODE_ENV=production node ./pack/afterPack.js",
         "build:H5": "npm run clean:H5 && NODE_ENV=production isH5=true webpack && NODE_ENV=production isH5=true node ./pack/afterPack.js",
         "build:APP": "npm run clean:APP && NODE_ENV=production isAPP=true webpack",
@@ -19,7 +20,9 @@
         "analyzer": "NODE_ENV=production analyzer=true isPC=true webpack-dev-server",
         "lint:all": "eslint --ext ts,js,vue --fix .",
         "lint": "eslint --ext ts,js,vue --cache --fix .",
-        "stylelint": "stylelint **/*.vue --custom-syntax postcss-html --fix"
+        "stylelint": "stylelint **/*.vue --custom-syntax postcss-html --fix",
+        "publish:stage": "npm run build:all && wrangler publish --env stage",
+        "publish": "npm run build:all && wrangler publish --env production"
     },
     "pre-commit": [
         "lint",
