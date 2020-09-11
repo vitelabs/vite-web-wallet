@@ -1,4 +1,5 @@
 import { getAssetFromKV, mapRequestToAsset, serveSinglePageApp } from '@cloudflare/kv-asset-handler';
+import { request } from 'http';
 
 /**
  * The DEBUG flag will do two things that help during development:
@@ -31,6 +32,11 @@ async function handleEvent(event) {
     // options.mapRequestToAsset = handlePrefix(/^\/docs/)
 
     if (url.pathname.startsWith('/mobiledex')) {
+        // Redirect /mobiledex to /mobiledex/
+        if (url.pathname === '/mobiledex') {
+            url.pathname = '/mobiledex/';
+            return Response.redirect(url.toString(), 301);
+        }
         options.mapRequestToAsset = request => new Request(`${ url.origin }/mobiledex/mobileDex.html`, request);
     }
 
