@@ -1,5 +1,5 @@
 import { getAssetFromKV, mapRequestToAsset, serveSinglePageApp } from '@cloudflare/kv-asset-handler';
-import { request } from 'http';
+import { handleSeoBotRequest, isBotForPrerender } from './seo.js';
 
 /**
  * The DEBUG flag will do two things that help during development:
@@ -12,6 +12,9 @@ const DEBUG = false;
 
 addEventListener('fetch', event => {
     try {
+        if (isBotForPrerender(event.request)) {
+            return event.respondWith(handleSeoBotRequest(event.request));
+        }
         event.respondWith(handleEvent(event));
     } catch (e) {
         if (DEBUG) {
