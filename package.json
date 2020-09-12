@@ -16,7 +16,6 @@
         "build:testAPP": "npm run clean:APP && NODE_ENV=test isAPP=true webpack",
         "dev": "NODE_ENV=dev webpack-dev-server",
         "dev:prod": "API=production npm run dev",
-        "production": "NODE_ENV=production webpack-dev-server",
         "analyzer": "NODE_ENV=production analyzer=true isPC=true webpack-dev-server",
         "lint:all": "eslint --ext ts,js,vue --fix .",
         "lint": "eslint --ext ts,js,vue --cache --fix .",
