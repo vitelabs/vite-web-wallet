@@ -192,7 +192,7 @@ export default {
             isShowAccountList: false,
             tabName: TABNAME.vb,
             qrcodeOpt: {
-                size: 140,
+                size: 240,
                 image: icon,
                 mSize: 0.3
             },
