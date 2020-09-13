@@ -9,6 +9,7 @@ import { handleSeoBotRequest, isBotForPrerender } from './seo.js';
  *    than the default 404.html page.
  */
 const DEBUG = false;
+const browserCacheList = [ '.js', '.css', '.otf', '.ttf', '.ttc' ];
 
 addEventListener('fetch', event => {
     try {
@@ -24,9 +25,20 @@ addEventListener('fetch', event => {
     }
 });
 
+function mapRequestCacheControl(request) {
+    const url = new URL(request.url);
+    if (browserCacheList.some(item => url.pathname.endsWith(item))) {
+        return { browserTTL: 60 * 60 * 24 * 365, edgeTTL: 2 * 60 * 60 * 24 };
+    }
+    return { edgeTTL: 2 * 60 * 60 * 24 };
+}
+
 async function handleEvent(event) {
     const url = new URL(event.request.url);
-    const options = { mapRequestToAsset: serveSinglePageApp };
+    const options = {
+        mapRequestToAsset: serveSinglePageApp,
+        cacheControl: mapRequestCacheControl
+    };
 
     /**
    * You can add custom logic to how we fetch your assets
