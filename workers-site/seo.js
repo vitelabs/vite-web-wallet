@@ -10,7 +10,7 @@ export async function handleSeoBotRequest(request) {
     newHdrs.set('User-Agent', request.headers.get('user-agent'));
     // eslint-disable-next-line no-undef
     newHdrs.set('X-Prerender-Token', MY_PRERENDER_TOKEN);
-    const newRequest = new Request(newUrl, {
+    const newRequest = new Request(newUrl.toString(), {
         method: request.method,
         headers: newHdrs
     });
