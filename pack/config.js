@@ -2,9 +2,9 @@ const path = require('path');
 const packJson = require('../package.json');
 
 const goViteServer = { // http-DNS
-    production: '\'wss://api.vitewallet.com/ws\'',
-    test: '\'wss://api.vitewallet.com/test/ws\'',
-    dev: '\'wss://api.vitewallet.com/test/ws\''
+    production: '\'wss://node.vite.net/gvite/ws\'',
+    test: '\'wss://node.vite.net/test/gvite/ws\'',
+    dev: '\'wss://node.vite.net/test/gvite/ws\''
     // dev: '\'wss://api.vitewallet.com/ws\''
     // dev: '\'ws://148.70.30.139:41423\''
     // dev: '\'ws://111.231.218.73:41423\''
@@ -31,8 +31,7 @@ const viteExplorer = { // http-DNS
     dev: '\'http://132.232.134.168:8080\''
 };
 const ethServer = { // http-DNS
-    // production: '\'https://mainnet.infura.io/v3/caae2231051e46a1941f422df1fbcc94\'',
-    production: '\'https://api.vitewallet.com/eth/v3/caae2231051e46a1941f422df1fbcc94\'',
+    production: '\'https://node.vite.net/eth/v3/caae2231051e46a1941f422df1fbcc94\'',
     test: '\'https://ropsten.infura.io/http\'',
     dev: '\'https://ropsten.infura.io/http\''
 };
@@ -42,15 +41,15 @@ const ethExplorer = { // http-DNS
     dev: '\'https://ropsten.etherscan.io\''
 };
 const conversionGate = { // http-DNS
-    production: '\'https://wallet.vite.net\'',
+    production: '\'https://gateway.vite.net\'',
     test: '\'\'',
     dev: '\'\''
 };
 const viteConnect = {
-    production: '\'wss://biforst.vitewallet.com\'',
-    test: '\'wss://biforst.vitewallet.com\'',
+    production: '\'wss://biforst.vite.net\'',
+    test: '\'wss://biforst.vite.net\'',
     // test: '\'ws://139.155.7.172:5001\'',
-    dev: '\'wss://biforst.vitewallet.com\''
+    dev: '\'wss://biforst.vite.net\''
 };
 const dnsHostServer = {
     production: '[\'https://config.zaokaidian.com\', \'https://config.vitewallet.com\']',
