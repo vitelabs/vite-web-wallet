@@ -61,10 +61,6 @@ export const Server = {
     }
 };
 
-if (location.origin === 'https://x.zaokaidian.com') {
-    Server.dexAPI.url = 'https://vitex.zaokaidian.com';
-    Server.dexPush.url = 'wss://vitex.zaokaidian.com/websocket';
-}
 
 export class DNSClient extends Client {
     constructor({
@@ -113,11 +109,6 @@ export function onReady(cb: Function) {
     list.push(cb);
 }
 
-// if (process.env.NODE_ENV === 'production') {
-//     pingHost();
-// } else {
-//     callReady();
-// }
 
 callReady();
 
