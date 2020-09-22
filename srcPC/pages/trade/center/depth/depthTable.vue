@@ -107,7 +107,7 @@ export default {
             return this.$store.getters.tradeTokenDecimalsLimit;
         },
         quoteTokenDepthDigit() {
-            const quoteTokenDigit = this.$store.getters.quoteTokenDecimalsLimit;
+            const quoteTokenDigit = this.quoteTokenDigit;
             if ((this.depthStep || this.depthStep === 0) && quoteTokenDigit > this.depthStep) {
                 return this.depthStep;
             }
@@ -160,7 +160,7 @@ export default {
             return false;
         },
         formatNum(num, digit) {
-            return BigNumber.formatNum(num, digit);
+            return BigNumber.formatNum(num, digit, digit);
         },
         getWidth(item) {
             const width = BigNumber.dividedToNumber(item.quantity, this.maxQuantity, 2).toString() * 100;
