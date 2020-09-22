@@ -150,7 +150,7 @@ const getters = {
         if (!getters.activeTxPairBuyMiningPrice) {
             return '';
         }
-        return BigNumber.onlyFormat(getters.activeTxPairBuyMiningPrice);
+        return BigNumber.onlyFormat(getters.activeTxPairBuyMiningPrice, getters.quoteTokenDecimalsLimit);
     },
     activeTxPairSellMiningPrice(state, getters, rootState) {
         // No activeTxPair
@@ -185,7 +185,7 @@ const getters = {
         if (!getters.activeTxPairSellMiningPrice) {
             return '';
         }
-        return BigNumber.onlyFormat(getters.activeTxPairSellMiningPrice);
+        return BigNumber.onlyFormat(getters.activeTxPairSellMiningPrice, getters.quoteTokenDecimalsLimit);
     },
     activeTxPairIsCMC(state, getters, rootState) {
         const activeTxPair = rootState.exchangeActiveTxPair.activeTxPair;
