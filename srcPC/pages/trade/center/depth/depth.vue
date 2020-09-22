@@ -133,8 +133,8 @@ export default {
             let sumInQuote = 0;
             let sumInTrade = 0;
             arr.forEach(item => {
-                sumInQuote = BigNumber.plus(sumInQuote, item.amount);
-                sumInTrade = BigNumber.plus(sumInTrade, item.quantity);
+                sumInQuote = BigNumber.plus(sumInQuote, item.amount, this.quoteTokenDigit);
+                sumInTrade = BigNumber.plus(sumInTrade, item.quantity, this.tradeTokenDigit);
             });
             const avgPrice = BigNumber.dividedToNumber(sumInQuote, sumInTrade, this.quoteTokenDigit);
             this.selectDepth = {
