@@ -78,8 +78,8 @@
     }
 
     .right {
-        width: 270px;
-        min-width: 270px;
+        width: 300px;
+        min-width: 300px;
     }
 }
 </style>
