@@ -98,6 +98,12 @@ export default {
         },
         tradeTokenDetail() {
             return this.$store.state.exchangeTokens.ftoken;
+        },
+        quoteTokenDigit() {
+            return this.$store.getters.quoteTokenDecimalsLimit;
+        },
+        tradeTokenDigit() {
+            return this.$store.getters.tradeTokenDecimalsLimit;
         }
     },
     methods: {
@@ -130,10 +136,10 @@ export default {
                 sumInQuote = BigNumber.plus(sumInQuote, item.amount);
                 sumInTrade = BigNumber.plus(sumInTrade, item.quantity);
             });
-            const avgPrice = BigNumber.dividedToNumber(sumInQuote, sumInTrade, 8);
+            const avgPrice = BigNumber.dividedToNumber(sumInQuote, sumInTrade, this.quoteTokenDigit);
             this.selectDepth = {
-                sumInQuote,
-                sumInTrade,
+                sumInQuote: BigNumber.formatNum(sumInQuote, this.quoteTokenDigit, this.quoteTokenDigit),
+                sumInTrade: BigNumber.formatNum(sumInTrade, this.tradeTokenDigit, this.tradeTokenDigit),
                 avgPrice
             };
         }
