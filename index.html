@@ -213,11 +213,11 @@
         </style>
 
         <script>
-            let theme = 0;
+            let theme = 1;
             var _localStorage = window.viteWalletStorage || window.localStorage;
             try {
                 var pathname = location.pathname.toLocaleLowerCase();
-                var _theme = _localStorage.getItem('VITE_WEB_WALLET:theme') || 0;
+                var _theme = _localStorage.getItem('VITE_WEB_WALLET:theme') || 1;
                 theme = pathname.indexOf('mobiledex') === -1 ? _theme : 0;
             } catch(err) {}
             document.documentElement.setAttribute('data-theme', theme);
