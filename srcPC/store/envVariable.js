@@ -16,7 +16,7 @@ const state = {
     currency: localStorage.getItem(currencyKey) || '',
     autoLogoutTime: localStorage.getItem(autoLogoutKey) || 5,
     gate: +localStorage.getItem(GateKey) || 0,
-    theme: +localStorage.getItem(ThemeKey) || 0,
+    theme: +localStorage.getItem(ThemeKey) || 1,
     lastPage: '',
     isShowCompliance: false,
     hideZeroAssets: +localStorage.getItem(HideZeroAssets) || 0
