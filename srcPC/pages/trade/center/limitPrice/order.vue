@@ -153,7 +153,7 @@ export default {
             this.validAll();
         },
         activeTx: function () {
-            this.price = BigNumber.normalFormatNum(this.activeTx.price, this.ttokenDigit);
+            this.price = BigNumber.normalFormatNum(this.activeTx.price, this.ttokenDigit, this.ttokenDigit);
             this.priceChanged();
 
             if (
@@ -165,20 +165,20 @@ export default {
                 return;
             }
 
-            this.quantity = BigNumber.normalFormatNum(this.activeTx.num, this.ftokenDigit);
+            this.quantity = BigNumber.normalFormatNum(this.activeTx.num, this.ftokenDigit, this.ftokenDigit);
             this.quantityChanged();
         },
         ttokenDigit: function () {
             if (this.price) {
-                this.price = BigNumber.normalFormatNum(this.price, this.ttokenDigit);
+                this.price = BigNumber.normalFormatNum(this.price, this.ttokenDigit, this.ttokenDigit);
             }
             if (this.amount) {
-                this.amount = BigNumber.normalFormatNum(this.amount, this.ttokenDigit);
+                this.amount = BigNumber.normalFormatNum(this.amount, this.ttokenDigit, this.ttokenDigit);
             }
         },
         ftokenDigit: function () {
             if (this.quantity) {
-                this.quantity = BigNumber.normalFormatNum(this.quantity, this.ftokenDigit);
+                this.quantity = BigNumber.normalFormatNum(this.quantity, this.ftokenDigit, this.ftokenDigit);
             }
         }
     },
