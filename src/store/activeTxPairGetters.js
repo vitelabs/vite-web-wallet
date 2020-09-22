@@ -55,12 +55,7 @@ const getters = {
             return 0;
         }
 
-        if (!quoteTokenDetail) {
-            const pricePrecision = activeTxPair.pricePrecision;
-            return pricePrecision > maxDigit ? maxDigit : pricePrecision;
-        }
-
-        return getMinDecimals(quoteTokenDetail.tokenDecimals, activeTxPair.pricePrecision);
+        return activeTxPair.pricePrecision;
     },
     tradeTokenDecimalsLimit(state, getters, rootState) {
         const activeTxPair = rootState.exchangeActiveTxPair.activeTxPair;
@@ -70,12 +65,7 @@ const getters = {
             return 0;
         }
 
-        if (!tradeTokenDetail) {
-            const quantityPrecision = activeTxPair.quantityPrecision;
-            return quantityPrecision > maxDigit ? maxDigit : quantityPrecision;
-        }
-
-        return getMinDecimals(tradeTokenDetail.tokenDecimals, activeTxPair.quantityPrecision);
+        return activeTxPair.quantityPrecision;
     },
     quoteTokenStepLimit(state, getters, rootState) {
         return 1 / Math.pow(10, getters.quoteTokenDecimalsLimit);
@@ -217,8 +207,3 @@ const getters = {
 
 export default { getters };
 
-
-function getMinDecimals(tokenDecimals, pairDecimals) {
-    const digit = tokenDecimals > pairDecimals ? pairDecimals : tokenDecimals;
-    return digit > maxDigit ? maxDigit : digit;
-}
