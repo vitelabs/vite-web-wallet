@@ -18,10 +18,10 @@
                 <span class="__center-tb-item depth price __ellipsis" :class="dataType">
                     <span class="owner" v-if="isInOpenOrders(item.price)"></span>
                     <span class="not-owner" v-else></span>
-                    {{ formatNum(item.price, quoteTokenDepthDigit) }}
+                    {{ item.price | depthFormatNum(quoteTokenDepthDigit) }}
                 </span>
-                <span class="__center-tb-item left depth quantity">{{ formatNum(item.quantity, tradeTokenDigit) }}</span>
-                <span class="__center-tb-item depth amount">{{ formatNum(item.amount, quoteTokenDigit) }}</span>
+                <span class="__center-tb-item left depth quantity">{{ item.quantity | depthFormatNum(tradeTokenDigit)}}</span>
+                <span class="__center-tb-item depth amount">{{ item.amount | depthFormatNum(quoteTokenDigit) }}</span>
                 <span class="percent-wrapper" :class="dataType" :style="{ 'width': getWidth(item) + '%' }"></span>
             </div>
             <price v-if="!isShowAll && dataType === 'sell'" :class="{
