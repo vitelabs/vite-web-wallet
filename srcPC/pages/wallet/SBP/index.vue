@@ -24,15 +24,15 @@
                     <tab key="1" :name="$t('walletSBP.confirm.edit.changeBlockProducer')" :selected="true">
                         <div class="input-err" v-show="addrErr">{{ addrErr }}</div>
                         <vite-input v-model="blockProducerAddress" :valid="testAddr"
-                            :placeholder="$t(`walletSBP.confirm.${showConfirmType}.changeBlockProducer`)"></vite-input>
+                                    :placeholder="$t(`walletSBP.confirm.${showConfirmType}.changeBlockProducer`)"></vite-input>
                     </tab>
                     <tab key="2" :name="$t('walletSBP.confirm.edit.changeRewardAddress')">
                         <div class="input-err" v-show="addrErr">{{ addrErr }}</div>
                         <vite-input v-model="rewardAddress" :valid="testAddr"
-                            :placeholder="$t(`walletSBP.confirm.${showConfirmType}.changeRewardAddress`)"></vite-input>
+                                    :placeholder="$t(`walletSBP.confirm.${showConfirmType}.changeRewardAddress`)"></vite-input>
                     </tab>
                 </tabs>
-                
+
             </div>
         </confirm>
     </div>
@@ -195,7 +195,7 @@ export default {
                         blockProducingAddress: this.blockProducerAddress,
                         sbpName: this.activeItem.name
                     }
-                }
+                };
             } else {
                 producer = this.rewardAddress;
                 data = {
@@ -204,7 +204,7 @@ export default {
                         rewardWithdrawAddress: this.rewardAddress,
                         sbpName: this.activeItem.name
                     }
-                }
+                };
             }
 
             if (!this.netStatus) {
@@ -226,9 +226,9 @@ export default {
                 this.$toast(this.$t('hint.request', { name: this.$t('walletSBP.section2.update') }));
                 this.closeConfirm();
                 this.$store.dispatch('loopRegList', {
-                        nodeName,
-                        operate: this.selectTab === '1' ? 2 : 3,
-                        producer
+                    nodeName,
+                    operate: this.selectTab === '1' ? 2 : 3,
+                    producer
                 });
             }).catch(err => {
                 console.warn(err);

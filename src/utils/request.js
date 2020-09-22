@@ -1,4 +1,5 @@
 import qs from 'qs';
+import urlParser from './url';
 
 const reqTimeout = 30000;
 
@@ -26,6 +27,13 @@ export default function request({
     method = method.toUpperCase();
 
     const xhr = new XMLHttpRequest();
+
+    const url = urlParser(path);
+
+    if (url.hostname.indexOf('vite.net') > -1) {
+        xhr.withCredentials = true;
+    }
+
     const qsStr = qs.stringify(params);
 
     method === 'GET'

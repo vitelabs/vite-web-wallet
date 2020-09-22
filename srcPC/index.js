@@ -22,12 +22,13 @@ import { resaveAccList, resaveLastAcc } from 'pcUtils/store/resave';
 // Add fortawesome
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faExclamationCircle, faInfoCircle, faLightbulb, faMoon } from '@fortawesome/free-solid-svg-icons';
+import { faWindows, faApple, faAppStoreIos, faGooglePlay } from '@fortawesome/free-brands-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 
 // Some init code for desktop app
 import * as desktop from './utils/desktop';
 
-library.add(faExclamationCircle, faInfoCircle, faLightbulb, faMoon);
+library.add(faExclamationCircle, faInfoCircle, faLightbulb, faMoon, faWindows, faApple, faAppStoreIos, faGooglePlay);
 Vue.component('font-awesome-icon', FontAwesomeIcon);
 
 resaveAccList();

@@ -1,0 +1,14 @@
+name = "x-vite-net"
+type = "webpack"
+account_id = "55cb4036f82767a7f0f757a02a1ec8fd"
+workers_dev = true
+
+[site]
+bucket = "./dist"
+entry-point = "./workers-site"
+
+[env.production]
+zone_id = "28ae64582a3f7d13ee2e46afa8204ef5"
+
+[env.stage]
+zone_id = "28ae64582a3f7d13ee2e46afa8204ef5"

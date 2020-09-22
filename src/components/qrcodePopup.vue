@@ -7,7 +7,7 @@
             <div class="code">
                 <qrcode
                     :text="qrcodeString"
-                    :options="{ size: 146 }"
+                    :options="{ size: 246 }"
                     @genImage="getImage"
                 ></qrcode>
             </div>
@@ -70,7 +70,7 @@ export default {
             box-shadow: 0 2px 48px 1px rgba(176, 192, 237, 0.42);
         }
         @include bg_color_4();
-        width: 166px;
+        width: 266px;
         padding: 10px;
         position: absolute;
         right: 100%;

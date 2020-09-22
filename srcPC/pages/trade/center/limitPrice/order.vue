@@ -338,9 +338,11 @@ export default {
             return this.$store.state.exchangeActiveTx.activeTx;
         },
         ttokenDigit() {
+            // console.log(`tttokenDigit: ${this.$store.getters.quoteTokenDecimalsLimit}`);
             return this.$store.getters.quoteTokenDecimalsLimit;
         },
         ftokenDigit() {
+            // console.log(`ftokenDigit: ${this.$store.getters.tradeTokenDecimalsLimit}`);
             return this.$store.getters.tradeTokenDecimalsLimit;
         },
         closeMarket() {

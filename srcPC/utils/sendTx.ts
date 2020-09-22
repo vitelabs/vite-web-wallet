@@ -61,17 +61,15 @@ const sendTx = execWithValid(function ({
 
     if (window.touchID && window.touchID.isEnableTouchID()) {
         return window.touchID.promptTouchID(i18n.t('desktop.unlock'))
-            .then(() => {
-                return webSendTx({
-                    methodName,
-                    params: {
-                        ...data,
-                        address: activeAccount.address
-                    },
-                    config: formatConfig(config),
-                    privateKey: activeAccount.privateKey
-                });
-            })
+            .then(() => webSendTx({
+                methodName,
+                params: {
+                    ...data,
+                    address: activeAccount.address
+                },
+                config: formatConfig(config),
+                privateKey: activeAccount.privateKey
+            }))
             .catch(err => {
                 throw err;
             });
