@@ -83,7 +83,7 @@ export default {
     },
     methods: {
         formatNum(num, fix) {
-            return BigNumber.formatNum(num, fix);
+            return BigNumber.formatNum(num, fix, fix);
         },
         showTxPair() {
             this.isShowTxPair = true;
