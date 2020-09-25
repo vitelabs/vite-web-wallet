@@ -66,7 +66,7 @@ export default {
     methods: {
         formatNum(num, type) {
             const tokenDigit = type === 'price' ? 'quoteTokenDigit' : 'tradeTokenDigit';
-            return BigNumber.normalFormatNum(num, this[tokenDigit]);
+            return BigNumber.normalFormatNum(num, this[tokenDigit], this[tokenDigit]);
         },
         getDate(timestamp) {
             return date(timestamp, 'zh', true);

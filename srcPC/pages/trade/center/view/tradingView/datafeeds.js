@@ -65,7 +65,7 @@ export default class dataFeeds {
                 timezone: 'UTC',
                 ticker: symbolName,
                 minmov: 1,
-                pricescale: 100000000,
+                pricescale: Math.pow(10, this.activeTxPair.pricePrecision),
                 has_intraday: true,
                 intraday_multipliers: [ '1', '60' ],
                 supported_resolution: [ '1', '30', '60', '360', '720', '1D', '1W' ],
