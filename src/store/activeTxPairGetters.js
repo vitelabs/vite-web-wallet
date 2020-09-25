@@ -144,13 +144,13 @@ const getters = {
         }
 
         const percent = BigNumber.minus(1, orderMiningSettings[symbol].buyRangeMax);
-        return BigNumber.multi(sellOne, percent);
+        return BigNumber.multi(sellOne, percent, getters.quoteTokenDecimalsLimit);
     },
     showActiveTxPairBuyMiningPrice(state, getters) {
         if (!getters.activeTxPairBuyMiningPrice) {
             return '';
         }
-        return BigNumber.onlyFormat(getters.activeTxPairBuyMiningPrice, getters.quoteTokenDecimalsLimit);
+        return BigNumber.onlyFormat(getters.activeTxPairBuyMiningPrice, getters.quoteTokenDecimalsLimit, getters.quoteTokenDecimalsLimit);
     },
     activeTxPairSellMiningPrice(state, getters, rootState) {
         // No activeTxPair
@@ -179,13 +179,13 @@ const getters = {
         }
 
         const percent = BigNumber.plus(1, orderMiningSettings[symbol].sellRangeMax);
-        return BigNumber.multi(buyOne, percent);
+        return BigNumber.multi(buyOne, percent, getters.quoteTokenDecimalsLimit);
     },
     showActiveTxPairSellMiningPrice(state, getters) {
         if (!getters.activeTxPairSellMiningPrice) {
             return '';
         }
-        return BigNumber.onlyFormat(getters.activeTxPairSellMiningPrice, getters.quoteTokenDecimalsLimit);
+        return BigNumber.onlyFormat(getters.activeTxPairSellMiningPrice, getters.quoteTokenDecimalsLimit, getters.quoteTokenDecimalsLimit);
     },
     activeTxPairIsCMC(state, getters, rootState) {
         const activeTxPair = rootState.exchangeActiveTxPair.activeTxPair;
