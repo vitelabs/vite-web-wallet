@@ -16,11 +16,12 @@
                  }"
                  v-for="(item, i) in depthData" :key="i">
                 <span class="__center-tb-item depth price __ellipsis" :class="dataType">
-                    {{ formatNum(item.price, quoteTokenDepthDigit) }}
-                    <span class="owner" v-show="isInOpenOrders(item.price)"></span>
+                    <span class="owner" v-if="isInOpenOrders(item.price)"></span>
+                    <span class="not-owner" v-else></span>
+                    {{ item.price | depthFormatNum(quoteTokenDepthDigit) }}
                 </span>
-                <span class="__center-tb-item left depth quantity">{{ formatNum(item.quantity, tradeTokenDigit) }}</span>
-                <span class="__center-tb-item depth amount">{{ formatNum(item.amount, quoteTokenDigit) }}</span>
+                <span class="__center-tb-item left depth quantity">{{ item.quantity | depthFormatNum(tradeTokenDigit)}}</span>
+                <span class="__center-tb-item depth amount">{{ item.amount | depthFormatNum(quoteTokenDigit) }}</span>
                 <span class="percent-wrapper" :class="dataType" :style="{ 'width': getWidth(item) + '%' }"></span>
             </div>
             <price v-if="!isShowAll && dataType === 'sell'" :class="{
@@ -107,7 +108,7 @@ export default {
             return this.$store.getters.tradeTokenDecimalsLimit;
         },
         quoteTokenDepthDigit() {
-            const quoteTokenDigit = this.$store.getters.quoteTokenDecimalsLimit;
+            const quoteTokenDigit = this.quoteTokenDigit;
             if ((this.depthStep || this.depthStep === 0) && quoteTokenDigit > this.depthStep) {
                 return this.depthStep;
             }
@@ -160,7 +161,7 @@ export default {
             return false;
         },
         formatNum(num, digit) {
-            return BigNumber.formatNum(num, digit);
+            return BigNumber.formatNum(num, digit, digit);
         },
         getWidth(item) {
             const width = BigNumber.dividedToNumber(item.quantity, this.maxQuantity, 2).toString() * 100;
@@ -235,6 +236,7 @@ export default {
 .__center-tb-row {
     border-top: 1px solid transparent;
     border-bottom: 1px solid transparent;
+    padding-left: 0;
     &.in_select_range {
         [data-theme="0"] & {
             background: rgba(75,116,255,0.05);
@@ -268,6 +270,14 @@ export default {
     height: 8px;
     background: url('~assets/imgs/owner.png');
     background-size: 100% 100%;
+}
+
+.__center-tb-item {
+    .not-owner {
+        display: inline-block;
+        width: 8px;
+        height: 8px;
+    }
 }
 
 .percent-wrapper {

@@ -167,7 +167,7 @@ export default {
             return `${ BigNumber.multi(num, 100, 2) }%`;
         },
         formatNum(num, fix) {
-            return BigNumber.formatNum(num, fix);
+            return BigNumber.formatNum(num, fix, fix);
         },
         showRealPrice(txPair, i) {
             const elTop = this.$refs[`txPair${ i }`][0].getBoundingClientRect().top;

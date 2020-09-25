@@ -2,7 +2,7 @@ import { constant } from '@vite/vitejs';
 import BigNumber from 'utils/bigNumber';
 
 const Vite_Token_Info = constant.Vite_Token_Info;
-const MaxDecimals = 8;
+const MaxDecimals = 20;
 const MinStakingAmount = 134;
 const minStakingUnit = BigNumber.toMin(MinStakingAmount, Vite_Token_Info.decimals);
 

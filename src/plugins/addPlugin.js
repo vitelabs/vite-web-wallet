@@ -102,5 +102,20 @@ export default {
         Vue.filter('percentage', function (num, decimal) {
             return `${ bigNumber.formatNum(bigNumber.multi(num, 100), decimal) }%`;
         });
+
+        // Filters for depth
+
+        /*
+            This used for format num in depth, some value bigger than 1e7 should set fix to 0
+            if stay the original fix, there will be some layout bugs.
+        */
+        Vue.filter('depthFormatNum', function (value, decimal) {
+            let number = decimal;
+            // If value > 1e7，set fix number to 0.
+            if (bigNumber.compared(value, Math.pow(10, 7)) === 1) {
+                number = 0;
+            }
+            return bigNumber.formatNum(value, decimal, number);
+        });
     }
 };
