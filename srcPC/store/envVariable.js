@@ -10,13 +10,15 @@ const GateKey = constant.GateKey;
 const ThemeKey = constant.ThemeKey;
 const HideZeroAssets = constant.HideZeroAssets;
 
+const theme = localStorage.getItem(ThemeKey);
+
 const state = {
     clientStatus: -1,
     lang: '',
     currency: localStorage.getItem(currencyKey) || '',
     autoLogoutTime: localStorage.getItem(autoLogoutKey) || 5,
     gate: +localStorage.getItem(GateKey) || 0,
-    theme: +localStorage.getItem(ThemeKey) || 1,
+    theme: theme === null ? 1 : +theme,
     lastPage: '',
     isShowCompliance: false,
     hideZeroAssets: +localStorage.getItem(HideZeroAssets) || 0
