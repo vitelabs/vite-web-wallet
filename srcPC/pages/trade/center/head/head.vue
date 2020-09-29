@@ -87,7 +87,7 @@ export default {
     watch: {
         // Update meta-description and meta-keywords for better seo.
         ftokenDetail(val = {}) {
-            const { originalSymbol, overview, name, gateway } = val;
+            const { originalSymbol, overview = {}, name, gateway } = val;
             let keywords = [ 'Vite', 'VX', 'ViteX', 'ViteX Exchange', originalSymbol, name, gateway && gateway.name ];
             let description = '';
             keywords = keywords.filter(item => item);
