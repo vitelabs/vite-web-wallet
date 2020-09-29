@@ -34,12 +34,13 @@ const filterFunc = (filterObj, currency) => t => {
     if (currency === 'cny') {
         hideLimit = hideLimit * 7;
     }
+    const tokenName = `${ t.tokenSymbol }|${ t.tokenName }`;
 
     const NOTMatchNoZero
         = filterObj.hideZero && +t.totalAsset <= hideLimit;
     const NOTMatchFilterKey
         = filterObj.filterKey
-        && !t.tokenSymbol.match(new RegExp(filterObj.filterKey, 'i'));
+        && !tokenName.match(new RegExp(filterObj.filterKey, 'i'));
 
     return !(NOTMatchNoZero || NOTMatchFilterKey);
 };

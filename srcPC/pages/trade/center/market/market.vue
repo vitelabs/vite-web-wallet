@@ -161,6 +161,9 @@ export default {
         },
         address() {
             return this.$store.getters.activeAddr;
+        },
+        officalGateTokenList() {
+            return this.$store.getters.officalGateTokenList;
         }
     },
     watch: {
@@ -193,7 +196,12 @@ export default {
             const list = [];
             const searchText = this.$trim(this.searchText).toLowerCase();
             this.txPairList.forEach(tx => {
-                const ftokenShow = tx.tradeTokenSymbol.toLowerCase();
+                let ftokenShow = tx.tradeTokenSymbol;
+                const tokenDetail = this.officalGateTokenList.find(item => item.tokenId === tx.tradeToken);
+                if (tokenDetail) {
+                    ftokenShow = `${ ftokenShow }|${ tokenDetail.tokenName }`;
+                }
+                ftokenShow = ftokenShow.toLowerCase();
                 if (ftokenShow.indexOf(searchText) !== -1) {
                     list.push(tx);
                 }
