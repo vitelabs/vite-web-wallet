@@ -79,6 +79,27 @@ export default {
         },
         realPrice() {
             return this.$store.getters.activeTxPairRealClosePrice;
+        },
+        ftokenDetail() {
+            return this.$store.state.exchangeTokens.ftoken;
+        }
+    },
+    watch: {
+        // Update meta-description and meta-keywords for better seo.
+        ftokenDetail(val = {}) {
+            const { originalSymbol, overview, name, gateway } = val;
+            let keywords = [ 'Vite', 'VX', 'ViteX', 'ViteX Exchange', originalSymbol, name, gateway && gateway.name ];
+            let description = '';
+            keywords = keywords.filter(item => item);
+
+            if (overview[this.$i18n.locale]) {
+                description = overview[this.$i18n.locale];
+            } else if (overview.en) {
+                description = overview.en;
+            }
+
+            overview && document.querySelector('meta[name="description"]').setAttribute('content', description);
+            document.querySelector('meta[name="keywords"]').setAttribute('content', keywords.join(','));
         }
     },
     methods: {
