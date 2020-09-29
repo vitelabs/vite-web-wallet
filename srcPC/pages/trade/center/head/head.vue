@@ -92,13 +92,15 @@ export default {
             let description = '';
             keywords = keywords.filter(item => item);
 
-            if (overview[this.$i18n.locale]) {
-                description = overview[this.$i18n.locale];
-            } else if (overview.en) {
-                description = overview.en;
+            if (overview) {
+                if (overview[this.$i18n.locale]) {
+                    description = overview[this.$i18n.locale];
+                } else if (overview.en) {
+                    description = overview.en;
+                }
+                document.querySelector('meta[name="description"]').setAttribute('content', description);
             }
 
-            overview && document.querySelector('meta[name="description"]').setAttribute('content', description);
             document.querySelector('meta[name="keywords"]').setAttribute('content', keywords.join(','));
         }
     },
