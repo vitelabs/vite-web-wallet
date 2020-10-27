@@ -40,6 +40,15 @@ async function handleEvent(event) {
         cacheControl: mapRequestCacheControl
     };
 
+    // proxy /api/config/
+    if (url.pathname.startsWith('/api/config/')) {
+        const proxyUrl = new URL(event.request.url);
+        proxyUrl.pathname = proxyUrl.pathname.replace('/api/config', '');
+        proxyUrl.hostname = 'web-wallet-1257137467.cos.ap-hongkong.myqcloud.com';
+        return fetch(proxyUrl.toString());
+    }
+
+
     /**
    * You can add custom logic to how we fetch your assets
    * by configuring the function `mapRequestToAsset`
