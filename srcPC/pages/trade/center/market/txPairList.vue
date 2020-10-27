@@ -119,7 +119,9 @@ export default {
                 if (this.DefaultSymbol && _t.symbol === this.DefaultSymbol) {
                     activeTxPair = _t;
                 }
-                _l.push(_t);
+                if (this.hiddenSymbols.indexOf(_t.symbol) === -1) {
+                    _l.push(_t);
+                }
             });
 
             if (activeTxPair) {
@@ -137,6 +139,9 @@ export default {
         },
         address() {
             return this.$store.getters.activeAddr;
+        },
+        hiddenSymbols() {
+            return this.$store.state.uiConfig.hiddenSymbols;
         }
     },
     methods: {
