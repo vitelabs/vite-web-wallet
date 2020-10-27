@@ -19,7 +19,7 @@ export const Server = {
     },
     h5Config: { // PC
         hostKey: 'WEBCONFIG',
-        url: 'https://web-wallet-1257137467.cos.ap-hongkong.myqcloud.com',
+        url: 'https://x.vite.net/api/config',
         watchList: []
     },
     ethExplorer: { // PC
