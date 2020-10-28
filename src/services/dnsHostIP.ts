@@ -19,7 +19,7 @@ export const Server = {
     },
     h5Config: { // PC
         hostKey: 'WEBCONFIG',
-        url: 'https://x.vite.net/api/config',
+        url: 'https://static.vite.net/web-wallet-1257137467',
         watchList: []
     },
     ethExplorer: { // PC
