@@ -1,6 +1,6 @@
 <template>
     <div class="order-wrapper __wrapper">
-        <select-tab class="order-select" :tabList="tabList"
+        <select-tab v-if="!hideSelectTab" class="order-select" :tabList="tabList"
                     defaultTab="openOrders" v-model="activeTab"></select-tab>
         <div class="content-wrapper">
             <open-order v-show="activeTab === 'openOrders'"></open-order>
@@ -13,16 +13,24 @@
 import selectTab from 'h5Components/selectTab';
 import openOrder from './openOrders';
 import orderHistory from './orderHistory';
+import getQuery from 'utils/query';
+
+const query = getQuery() || {};
 
 export default {
     components: { selectTab, openOrder, orderHistory },
+    beforeMount() {
+        this.activeTab = query.activeTab === 'historyOrders' ? query.activeTab : 'openOrders';
+        this.hideSelectTab = query.hideSelectTab === 'true';
+    },
     data() {
         return {
             tabList: {
                 'openOrders': 'tradeOpenOrders.title',
                 'historyOrders': 'tradeOrderHistory.title'
             },
-            activeTab: 'openOrders'
+            activeTab: 'openOrders',
+            hideSelectTab: false
         };
     }
 };
