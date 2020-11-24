@@ -4,7 +4,7 @@
             <router-view></router-view>
         </div>
         <loading v-if="isLoading" loadingType="dot" class="ex-center-loading"></loading>
-        <bottom-bar class="bottom-bar"></bottom-bar>
+        <!-- <bottom-bar class="bottom-bar"></bottom-bar> -->
         <order-notice-list class="notice-list"></order-notice-list>
     </div>
 </template>
@@ -66,14 +66,14 @@ export default {
     top: 0;
     left: 0;
     right: 0;
-    bottom: 0;
+    bottom: 1px;
     overflow: hidden;
     .router-wrapper {
         position: fixed;
         top: 0;
         left: 0;
         right: 0;
-        bottom: 50px;
+        bottom: 1px;
         overflow: hidden;
     }
     .bottom-bar {
