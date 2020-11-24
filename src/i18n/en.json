@@ -1409,6 +1409,7 @@
         "lockedAmount": "Staking Amount",
         "lockAmountTips": "Receive Dividends on 10 VX or Above",
         "unlockAmount": "Retrieving Amount",
+        "autoLock": "Automatic Staking",
         "openAutoLock": {
             "title": "Enable Automatic Staking",
             "text": "Mined VX will be automatically staked once enabled"

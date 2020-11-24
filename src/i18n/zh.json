@@ -1415,6 +1415,7 @@
         "lockedAmount": "锁仓金额",
         "lockAmountTips": "少于10VX无法参与分红",
         "unlockAmount": "解锁中金额",
+        "autoLock": "自动锁仓",
         "openAutoLock": {
             "title": "开启自动锁仓",
             "text": "开启后，挖矿获得的VX将自动锁仓（主动购买的VX不自动锁仓）"

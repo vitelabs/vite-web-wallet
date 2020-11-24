@@ -14,7 +14,7 @@
                 </div>
                 <div v-if="isInitAutoLock" @click="tooggleAutoLock" class="check">
                     <Checkbox v-model="isAutoLock" :canClick="false" class="check-box"></Checkbox>
-                    {{ isAutoLock ? $t("tradeDividend.closeAutoLock.title") : $t("tradeDividend.openAutoLock.title") }}
+                    {{ $t("tradeDividend.autoLock") }}
                 </div>
                 <div class="item btn add" @click="showVXConfirm(true)">
                     {{ $t("tradeDividend.lock") }}
