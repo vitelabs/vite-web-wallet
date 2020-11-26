@@ -21,7 +21,7 @@ export default {
     components: { selectTab, openOrder, orderHistory },
     beforeMount() {
         this.activeTab = query.activeTab === 'historyOrders' ? query.activeTab : 'openOrders';
-        this.hideSelectTab = query.hideSelectTab === 'true';
+        // this.hideSelectTab = query.hideSelectTab === 'true';
     },
     data() {
         return {
