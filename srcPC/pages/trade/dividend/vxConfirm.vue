@@ -26,7 +26,14 @@
             </vite-input>
         </div>
 
-        <div v-if="!isLockVX" class="__hint distance"><span>{{ $t('tradeDividend.unlockVXConfirm.hint') }}</span></div>
+        <div v-if="isLockVX">
+            <div class="__hint distance"><span>{{ $t('tradeDividend.addHint1') }}</span></div>
+            <div class="__hint"><span>{{ $t('tradeDividend.addHint2') }}</span></div>
+            <div class="__hint"><span>{{ $t('tradeDividend.addHint3') }}</span></div>
+        </div>
+        <div v-else>
+            <div class="__hint distance"><span>{{ $t('tradeDividend.unlockVXConfirm.hint') }}</span></div>
+        </div>
     </confirm>
 </template>
 
@@ -144,6 +151,12 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.__hint {
+    &.distance {
+        margin-top: 20px;
+    }
+    margin-top: 6px;
+}
 .all-wrapper {
     color: #007AFF;
     font-size: 12px;

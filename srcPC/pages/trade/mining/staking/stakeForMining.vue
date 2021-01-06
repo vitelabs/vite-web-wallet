@@ -17,10 +17,14 @@
                 {{ $t('wallet.sum') }}
                 <span v-show="amountErr" class="__err">{{ amountErr }}</span>
             </div>
-            <vite-input v-model="amount" :valid="testAmount" :placeholder="$t('tradeMining.addPlaceHolder')"></vite-input>
+            <vite-input v-model="amount" :valid="testAmount" :placeholder="$t('tradeMining.addPlaceHolder')" @input="noAll">
+                <span slot="after" @click="all" class="all-wrapper">
+                    <span class="all">{{ $t('tradeAssets.all') }}</span>
+                </span>
+            </vite-input>
         </div>
 
-        <!-- <div class="__hint distance"><span>{{ $t('tradeMining.addHint1') }}</span></div> -->
+        <div class="__hint distance"><span>{{ $t('tradeMining.addHint1') }}</span></div>
         <div class="__hint"><span>{{ $t('tradeMining.addHint2') }}</span></div>
         <div class="__hint"><span>{{ $t('tradeMining.addHint3') }}</span></div>
     </confirm>
@@ -95,7 +99,16 @@ export default {
 
             return !this.amountErr;
         },
-
+        noAll() {
+            this.isAll = false;
+        },
+        all() {
+            if (!+this.exViteBalance) {
+                return;
+            }
+            this.isAll = true;
+            this.amount = bigNumber.toBasic(this.exViteBalance, this.vxTokenDecimals);
+        },
         staking() {
             statistics.event(router.currentRoute.name, 'addQuota-submit', this.accountAddr || '');
 
@@ -124,6 +137,18 @@ export default {
     &.distance {
         margin-top: 20px;
     }
+    span {
+        display: inline;
+    }
     margin-top: 6px;
+}
+.all-wrapper {
+    color: #007AFF;
+    font-size: 12px;
+    margin: 0 15px;
+    cursor: pointer;
+    .all {
+        border-bottom: 1px dashed #007AFF;
+    }
 }
 </style>
