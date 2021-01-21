@@ -157,7 +157,7 @@
         "RefundByContractRequest": "Transfer",
         "GenesisResponse": "Genesis",
         "FullNodeStake": "Stake for Full Node",
-        "FullNodeCancelStake": "Retrieve Full Node Stakes",
+        "FullNodeCancelStake": "Withdraw Full Node Stakes",
         "UpdateSBPRewardWithdrawAddress": "Edit SBP Reward Withdraw Address"
     },
     "btn": {
@@ -595,8 +595,8 @@
             "withdrawTime": "Expected Due Date",
             "unexpired": "Temporarily cannot make withdrawal of staked token until due date",
             "vip": "This staking action is for default opening VIP on ViteX exchange, please go to ViteX exchange page to cancel VIP",
-            "mining": "This staking is your staking as mining amount on ViteX, please go to ViteX mining page to retrieve",
-            "other": "This staking is staked via other ways and it is not supported retrieving here"
+            "mining": "This staking is your staking as mining amount on ViteX, please go to ViteX mining page to unstake",
+            "other": "This staking is staked via other ways and unstake is not supported here"
         }
     },
     "walletTransList": {
@@ -626,7 +626,7 @@
             "t2": "Multiple Full nodes can be registered with the same address, but must be staked individually at least 10,000 VITE each; When calculating Active Node Reward, if staking amount / 10000 yields a whole number that is greater than or equal to the number of active nodes, all active nodes will be rewarded; If staking amount / 10000 yields a whole number that is less than the number of active nodes, the number of nodes being rewarded equals to the whole number.",
             "t3": "Calculation of voting rewards does not depend on the number of nodes, but the staking amount."
         },               
-        "confirmText": "Confirm to stake {amount} VITE for quota, staking can be retrieved after {days} days",     
+        "confirmText": "Confirm to stake {amount} VITE for quota, staking can be cancelled after {days} days",
         "addQuota": {
             "address": "Staking Address",
             "stakeDays": "Staking Period",
@@ -1118,7 +1118,7 @@
                     "0": "To avoid asset loss, Do Not disclose your Access Key and Secret Key.",
                     "1": "In cases of lost secret key, Delete the current API and Re-Apply for a new API key."
                 },
-                "warn": "The Secret key is displayed only once and cannot be retrieved if lost, please keep it properly."
+                "warn": "The Secret key is displayed only once and cannot be found back if lost, please keep it properly."
             },
             "upgradeConfirm": {
                 "title": "Upgrade Package",
@@ -1292,7 +1292,7 @@
         "title": "Mining",
         "addQuota": "Create a new staking",
         "add": "Add",
-        "withdraw": "Retrieve",
+        "withdraw": "Unstake",
         "withdrawList": "Withdrawal List",
         "tbHead": {
             "date": "Date",
@@ -1303,17 +1303,17 @@
         "txTitle": "Trading as Mining Total Income",
         "quotaTitle": "Staking as Mining Total Income",
         "addHint1": "Single stake should be at least 134 VITE",
-        "addHint2": "VITE staking will be effective immediately after submission. Staking can be retrieved after 3 days",
+        "addHint2": "VITE staking will be effective immediately after submission. Staking can be canceled after 3 days",
         "addHint3": "Staked amount will be released after the 7-day waiting period",
-        "withdrawHint1": "You will no longer be able to mining VX after retrieving",
-        "withdrawHint2": "It takes about 7 days to retrieve",
-        "addTitle": "Staking VITE for Mining",
-        "withdrawTitle": "Retrieving Staked VITE",
+        "withdrawHint1": "You will no longer be able to mining VX after the staking is canceled",
+        "withdrawHint2": "It takes 7 days to return unstaked VITE coins to exchange balance",
+        "addTitle": "Stake VITE for Mining",
+        "withdrawTitle": "Unstake VITE",
         "addPlaceHolder": "Please enter staking amount",
-        "withdrawPlaceHolder": "Please input retrieving amount, at least 134 VITE",
-        "addBtn": "Confirm to stake ",
-        "withdrawBtn": "Confirm to retrieve",
-        "stakingBalance": "Retrievable Stake",
+        "withdrawPlaceHolder": "Please input unstaking amount, at least 134 VITE",
+        "addBtn": "Confirm to Stake",
+        "withdrawBtn": "Confirm to Unstake",
+        "stakingBalance": "Available Stake Balance",
         "hintTitle": "Important Notice",
         "comingHint": "VX mining function is coming soon, stay tuned. You can get VX in five ways: 1. Trading as Mining, 2. Listing as Mining, 3. Referring as Mining, 4. Staking as Mining, 5. Market-making as Mining. Users who hold VX enjoy payouts from a shared dividend pool.",
         "more": "Learn more about VX mining rules",
@@ -1325,29 +1325,29 @@
         "help": "Current trading fees displayed on this page contains only the 0.2% ViteX base transaction fees, please note that operator fees shall be taken into consideration when calculating mining cost"
     },
     "tradeVip": {
-        "title": "Manage VIP",    
+        "title": "VIP Status",
         "open": "Become a VIP",      
         "cancel": "Cancel {type}", 
         "help": {
-            "title": "About VIP"
+            "title": "About ViteX VIP"
         },
         "helpConfirm": {
             "t1": "VIP",
-            "txt1": "Stake 10,000 VITE to acquire VIP status and receive 50% off trading fees. Staking can be retrieved after 30 days.",
+            "txt1": "Stake 10,000 VITE to acquire VIP status and receive 50% off trading fees. Staking can be canceled after 30 days.",
             "t2": "SVIP",
-            "txt2": "Stake 1 million VITE to become a SVIP and enjoy 0 basic trading fees. Staking can be retrieved after 30 days.",
-            "txt3": "SVIP supports Stake Delegation, stake for others to acquire SVIP status. Staking can be revoked and retrieved manually after 30 days."
+            "txt2": "Stake 1M VITE to become a SVIP and enjoy 0 base trading fees. Staking can be canceled after 30 days.",
+            "txt3": "SVIP supports staking for any valid account address. Stake for them to get SVIP status!"
         },       
         "vipConfirm": {
-            "cancelVip": "Cancel VIP",
+            "cancelVip": "Cancel VIP Status",
             "openVip": "Become a VIP",
             "openStakingAmount": "Staking Amount for Becoming a VIP",
-            "cancelStakingAmount": "Retrievable Stake",
+            "cancelStakingAmount": "Available Stake Balance",
             "noBalance": "Insufficient Balance",
-            "openHint": "You will enjoy the privilege of 0.1% trading fee discount after becoming a VIP. The staking amount of 10,000 VITE can be manually retrieved after 30 days.",
-            "cancelHint": "VIP privileges will be discontinued once staking is revoked.",
-            "openSuccess": "Applied Successful! VIP status will come into effect later.",
-            "openFail": "Failed to apply VIP",
+            "openHint": "You will receive 0.1% trading fee deduction as a VIP. The staking of 10,000 VITE can be withdrawn after 30 days.",
+            "cancelHint": "VIP status will be canceled immediately.",
+            "openSuccess": "Your VIP status is activated! It will take effect in a few seconds.",
+            "openFail": "VIP Registration Failed",
             "cancelSuccess": "Cancel VIP Successful",
             "cancelFail": "Cancel Failed",
             "adviseToCancel":"There will be no base transaction fees with your current status as our SVIP, we therefore recommend you to revoke the staked VITE，which is required for general VIP members.",
@@ -1360,9 +1360,9 @@
             "cancelVip": "Cancel SVIP",
             "openVip": "Become a SVIP",
             "openStakingAmount": "Staking Amount for Becoming a SVIP",
-            "cancelStakingAmount": "Retrievable Stake",
+            "cancelStakingAmount": "Available Stake Balance",
             "noBalance": "Insufficient Balance",
-            "openHint": "You will enjoy 0% base transaction fee when upgrading to SVIP. The stake of 1,000,000 VITE can be manually retrieved after 30 days.",
+            "openHint": "You will enjoy 0% base transaction fee when upgrading to SVIP. The stake of 1,000,000 VITE can be withdrawn after 30 days.",
             "cancelHint": "SVIP privileges will be discontinued once staking is revoked",
             "openSuccess": "Applied Successful! SVIP status will come into effect later.",
             "openFail": "Failed to apply SVIP",
@@ -1408,7 +1408,7 @@
         "help": "Reward Rules: 1. A minimum of 10 VX must be staked to receive dividends. 2. Submission of staking request allows for dividends starting the nearest distribution. 3. Staked amount will be released after the 7-day waiting period",
         "lockedAmount": "Staking Amount",
         "lockAmountTips": "Receive Dividends on 10 VX or Above",
-        "unlockAmount": "Retrieving Amount",
+        "unlockAmount": "Unlocking Amount",
         "addHint1": "A minimum of 10 VX must be staked to receive dividends",
         "addHint2": "Submission of staking request allows for dividends starting the nearest distribution",
         "addHint3": "Staked amount will be released after the 7-day waiting period",
@@ -1422,23 +1422,23 @@
             "text": "Mined VX will not be automatically staked when turned off"
         },
         "lock": "Stake",
-        "unlock": "Retrieve",
+        "unlock": "Unstake",
         "lessMin": "Minimum 1 VX",
         "lockVXConfirm": {
-            "title": "Staking Earnings",
+            "title": "Stake VX",
             "available": "Exchange Available Balance",
             "amountPlaceholder": "Please input staking amount, minimum 1 VX",
             "notEnough": "Insufficient Exchange Balance",
-            "submit": "Submit Staking",
-            "amountText": "Staking Amount"
+            "submit": "Confirm to Stake",
+            "amountText": "Amount"
         },
         "unlockVXConfirm": {
-            "title": "Retrieve VX",
-            "available": "Retrievable Amount",
+            "title": "Unstake VX",
+            "available": "Available Stake Balance",
             "amountPlaceholder": "Please input amount, minimum 1 VX",
             "notEnough": "Insufficient Amount",
-            "submit": "Confirm Retrieval",
-            "amountText": "Retrieving Amount",
+            "submit": "Confirm to Unstake",
+            "amountText": "Amount",
             "hint": "It takes about 7 days to unlock."
         },
         "unlockList": {
@@ -1543,7 +1543,7 @@
         "myDividendTitle": "Total Estimated Value of Dividends ({token})",
         "listTitle": "Dividend Details",
         "lockingTitle": "My Staking",
-        "viewLink": "Staking Details"
+        "viewLink": "Unstaking Status"
     },
     "mobileMining": {
         "title": "Mining",
