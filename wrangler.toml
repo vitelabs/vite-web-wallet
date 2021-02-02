@@ -10,5 +10,8 @@ entry-point = "./workers-site"
 [env.production]
 zone_id = "28ae64582a3f7d13ee2e46afa8204ef5"
 
+[env.test]
+zone_id = "28ae64582a3f7d13ee2e46afa8204ef5"
+
 [env.stage]
 zone_id = "28ae64582a3f7d13ee2e46afa8204ef5"
