@@ -10,6 +10,10 @@ on:
         description: 'Choose an environment to deploy to: <test|stage|production>'
         required: true
         default: 'test'
+      branch:
+        description: 'Choose an branch to deploy'
+        required: true
+        default: 'master' 
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -24,6 +28,8 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
+        with:
+          ref: ${{ github.event.inputs.branch }}
 
       - name: Setup Node
         uses: actions/setup-node@v2.1.2

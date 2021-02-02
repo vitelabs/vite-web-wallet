@@ -8,7 +8,7 @@
         "clean:APP": "rm -rf ./distAPP",
         "build:production": "npm run build:all",
         "build:stage": "npm run build:all",
-        "build:test": "npm run build:testPC && npm run build:testH5 && mv distH5/ dist/mobiledex",
+        "build:test": "npm run clean && NODE_ENV=test webpack && NODE_ENV=test node ./pack/afterPack.js",
         "build:all": "npm run build && npm run build:H5 && mv distH5/ dist/mobiledex",
         "build": "npm run clean && NODE_ENV=production isPC=true webpack && NODE_ENV=production node ./pack/afterPack.js",
         "build:H5": "npm run clean:H5 && NODE_ENV=production isH5=true webpack && NODE_ENV=production isH5=true node ./pack/afterPack.js",
