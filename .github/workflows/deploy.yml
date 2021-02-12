@@ -44,7 +44,9 @@ jobs:
 
       # Runs a set of commands using the runners shell
       - name: Build
-        run: yarn run build:${{ github.event.inputs.environment }}
+        run: |
+          export DESKTOP_WALLET_VERSION=`curl -sL https://api.github.com/repos/vitelabs/vite-wallet/releases/latest | grep '"tag_name":' | cut -d'"' -f4`
+          yarn run build:${{ github.event.inputs.environment }}
           
       - name: Deploy
         uses: cloudflare/wrangler-action@1.2.0

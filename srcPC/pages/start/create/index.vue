@@ -34,7 +34,7 @@ import createPage from '../../create/index';
 export default {
     components: { createPage },
     data() {
-        return { desktopVersion: '1.3.27' };
+        return { desktopVersion: process.env.desktopWalletVersion };
     },
     computed: {
         isDesktop() {
@@ -46,12 +46,16 @@ export default {
             this.$router.push({ name });
         },
         downloadUrl(platform) {
+            if (this.desktopVersion) {
+                const desktopVersion = this.desktopVersion.replace('v', '');
+                let name = 'dmg';
+                if (platform === 'win') {
+                    name = 'exe';
+                }
+
+                return `https://github.com/vitelabs/vite-wallet/releases/download/${ this.desktopVersion }/Vite-Desktop-Wallet-${ desktopVersion }-${ platform }.${ name }`;
+            }
             return 'https://github.com/vitelabs/vite-wallet/releases/latest';
-            // let name = 'dmg';
-            // if (platform === 'win') {
-            //     name = 'exe';
-            // }
-            // return `https://github.com/vitelabs/vite-wallet/releases/download/v${ this.desktopVersion }/Vite-Desktop-Wallet-${ this.desktopVersion }-${ platform }.${ name }`;
         }
     }
 };

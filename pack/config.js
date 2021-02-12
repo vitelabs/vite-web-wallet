@@ -95,6 +95,7 @@ module.exports = {
         'process.env.gatewayInfosServer': gatewayInfosServer[API],
         'process.env.conversionGate': conversionGate[API],
         'process.env.dnsHostServer': dnsHostServer[API],
-        'process.env.rewardApiServer': rewardApiServer[API]
+        'process.env.rewardApiServer': rewardApiServer[API],
+        'process.env.desktopWalletVersion': `"${ process.env.DESKTOP_WALLET_VERSION || '' }"`
     }
 };
