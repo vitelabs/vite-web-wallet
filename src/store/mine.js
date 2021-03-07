@@ -190,7 +190,7 @@ const getters = {
         if (!state.currVxMineInfo) {
             return '0';
         }
-        return state.currVxMineInfo.pledgeMine || '0';
+        return state.currVxMineInfo.stakingMine || '0';
     },
     tradeDividends(state, getters) {
         if (!state.currentFees || !getters.tradeTotalDividend || !state.currUserFees || !state.currUserFees.length) {
@@ -226,12 +226,12 @@ const getters = {
         return dividends;
     },
     stakingDividends(state, getters) {
-        if (!state.userPledgeInfo || !+state.userPledgeInfo.amount) {
+        if (!state.userPledgeInfo || !+state.userPledgeInfo.totalStakeAmount) {
             return '0';
         }
 
         const percent = +state.currPledge
-            ? bigNumber.dividedToNumber(state.userPledgeInfo.amount, state.currPledge, 8)
+            ? bigNumber.dividedToNumber(state.userPledgeInfo.totalStakeAmount, state.currPledge, 8)
             : 0;
         const dividends = bigNumber.multi(getters.pledgeTotalDividend, percent, 8);
         return bigNumber.toBasic(dividends, Vite_Token_Info.decimals, 8);
