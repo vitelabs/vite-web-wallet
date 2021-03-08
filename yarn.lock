@@ -1134,6 +1134,20 @@
     lodash "^4.17.13"
     to-fast-properties "^2.0.0"
 
+"@cloudflare/kv-asset-handler@^0.1.0":
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/@cloudflare/kv-asset-handler/-/kv-asset-handler-0.1.0.tgz#0febbf4ac6dd04d2c069405cffdcc7cf64b95494"
+  integrity sha512-sXZRw/Z5JJfi/nGh66SECSm5L2zomyf6f9O3nc5QOI11/R3W/4N+BPOecp/Dc8eL/q/Rwgb7lwhhjnqy8O5CYA==
+  dependencies:
+    "@cloudflare/workers-types" "^2.0.0"
+    "@types/mime" "^2.0.2"
+    mime "^2.4.6"
+
+"@cloudflare/workers-types@^2.0.0":
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/@cloudflare/workers-types/-/workers-types-2.1.0.tgz#6e4f07567f4c914ad811c2d7a6172d0ae834c7f6"
+  integrity sha512-VmXaHTq0lt6Xre4aK1hUK25hjZjuEUkHtdUEt0FJamv+NzQO54Gwp6Zr5Cfu6SP5EQ/tTmTMP/tK9npA8zhcCg==
+
 "@ethersproject/bignumber@>=5.0.0-beta.130":
   version "5.0.0-beta.135"
   resolved "https://registry.npm.taobao.org/@ethersproject/bignumber/download/@ethersproject/bignumber-5.0.0-beta.135.tgz#9d464df8967f5d314d109497e4f25ab82314c098"
@@ -1424,6 +1438,11 @@
   version "4.0.0"
   resolved "https://registry.npm.taobao.org/@types/long/download/@types/long-4.0.0.tgz#719551d2352d301ac8b81db732acb6bdc28dbdef"
   integrity sha1-cZVR0jUtMBrIuB23Mqy2vcKNve8=
+
+"@types/mime@^2.0.2":
+  version "2.0.3"
+  resolved "https://registry.yarnpkg.com/@types/mime/-/mime-2.0.3.tgz#c893b73721db73699943bfc3653b1deb7faa4a3a"
+  integrity sha512-Jus9s4CDbqwocc5pOAnh8ShfrnMcPHuJYzVcSUU7lrh8Ni5HuIqX3oilL86p3dlTrk0LzHRCgA/GQ7uNCw6l2Q==
 
 "@types/minimatch@*":
   version "3.0.3"
@@ -7733,6 +7752,11 @@ mime@^2.0.3, mime@^2.4.4:
   version "2.4.4"
   resolved "https://registry.npm.taobao.org/mime/download/mime-2.4.4.tgz#bd7b91135fc6b01cde3e9bae33d659b63d8857e5"
   integrity sha1-vXuRE1/GsBzePpuuM9ZZtj2IV+U=
+
+mime@^2.4.6:
+  version "2.5.2"
+  resolved "https://registry.yarnpkg.com/mime/-/mime-2.5.2.tgz#6e3dc6cc2b9510643830e5f19d5cb753da5eeabe"
+  integrity sha512-tqkh47FzKeCPD2PUiPB6pkbMzsCasjxAfC62/Wap5qrUWcb+sFasXUC5I3gYM5iBM8v/Qpn4UK0x+j0iHyFPDg==
 
 mimic-fn@^1.0.0:
   version "1.2.0"
