@@ -49,7 +49,7 @@ jobs:
           yarn run build:${{ github.event.inputs.environment }}
           
       - name: Deploy
-        uses: cloudflare/wrangler-action@1.2.0
+        uses: cloudflare/wrangler-action@1.3.0
         with:
           apiToken: ${{ secrets.CF_API_TOKEN }}
           environment: ${{ github.event.inputs.environment }}
