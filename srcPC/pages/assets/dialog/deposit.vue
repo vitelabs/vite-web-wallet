@@ -4,14 +4,16 @@ block head
     .head
         .__hint.no_top
             i18n(path='tokenCard.charge.tips.0' tag="span")
-                span.strong(place="tokenSymbol") {{ getTokenSymbol(token) }}
+                span.strong(place="tokenSymbol") {{ tokenSymbol }}
         .__hint
             i18n(path='tokenCard.charge.tips.1' tag="span")
-                span.strong(place="tokenSymbol") {{ getTokenSymbol(token) }}
+                span.strong(place="tokenSymbol") {{ tokenSymbol }}
                 span.strong(place="min") {{ minimumDepositAmount }}
         .__hint
             i18n(path='tokenCard.charge.tips.2' tag="span")
                 span.strong(place="confirmationCount") {{ confirmationCount }}
+        div(v-if="multiNetwork && multiNetwork.length")
+            select-network(v-model="selectedNetwork" :list="multiNetwork" @change="onChangeNetwork")
 block content
     .__row
         span.__row_t {{$t('tokenCard.charge.addressTitle')}}
@@ -20,7 +22,7 @@ block content
         loading(loadingType="dot")
     div(v-show="!isLoading")
         .__input_row.__unuse_input.top.more {{ addrErr || address }}
-        .qrcode-container {{ $t('tokenCard.charge.codeTips',{tokenSymbol:getTokenSymbol(token)}) }}
+        .qrcode-container {{ $t('tokenCard.charge.codeTips',{tokenSymbol}) }}
             qrcode(:text="addressQrcode" :options="qrOptions" class="qrcode-container__content")
         .__row(v-if="showLabel")
             span.__row_t {{labelName}}
@@ -35,12 +37,13 @@ block content
 import loading from 'components/loading';
 import qrcode from 'components/qrcode';
 import copy from 'utils/copy';
+import selectNetwork from './selectNetwork';
 import { modes } from 'qrcode.es';
 import { getDepositInfo, getMetaInfo } from 'pcServices/gate';
 import bigNumber from 'utils/bigNumber';
 
 export default {
-    components: { qrcode, loading },
+    components: { qrcode, loading, selectNetwork },
     props: {
         token: {
             type: Object,
@@ -48,22 +51,7 @@ export default {
         }
     },
     beforeMount() {
-        this.isLoading = true;
-        Promise.all([
-            getMetaInfo({ tokenId: this.token.tokenId }, this.token.gateInfo.url).then(res => {
-                this.type = res.type;
-            }),
-            getDepositInfo({ addr: this.defaultAddr, tokenId: this.token.tokenId },
-                this.token.gateInfo.url)
-                .then(res => {
-                    this.address = res.depositAddress;
-                    this.minimumDepositAmountMin = res.minimumDepositAmount;
-                    this.labelName = res.labelName;
-                    this.labelValue = res.label;
-                    this.confirmationCount = res.confirmationCount;
-                }) ]).catch(() => (this.addrErr = this.$t('tokenCard.charge.addrErr'))).finally(() => {
-            this.isLoading = false;
-        });
+        this.getDepositInfo();
     },
     data() {
         return {
@@ -77,7 +65,8 @@ export default {
             type: -1,
             addrErr: '',
             labelName: '',
-            labelValue: ''
+            labelValue: '',
+            selectedNetwork: 0
         };
     },
     computed: {
@@ -93,15 +82,24 @@ export default {
         },
         defaultAddr() {
             return this.$store.getters.activeAddr;
+        },
+        multiNetwork() {
+            return this.token.gateInfo.multiNetwork;
+        },
+        gateInfo() {
+            if (this.multiNetwork && this.multiNetwork.length) {
+                return this.multiNetwork[this.selectedNetwork];
+            }
+            return this.token.gateInfo;
+        },
+        tokenSymbol() {
+            if (this.multiNetwork && this.multiNetwork.length) {
+                return `${ this.token.tokenSymbol } (${ this.gateInfo.standard }) `;
+            }
+            return this.token.tokenSymbol;
         }
     },
     methods: {
-        getTokenSymbol(token) {
-            if (token.tokenSymbol === 'USDT' && token.index === 0) {
-                return 'USDT(ERC20)';
-            }
-            return token.tokenSymbol;
-        },
         copy() {
             copy(this.address);
             this.$toast(this.$t('hint.copy'));
@@ -109,6 +107,35 @@ export default {
         copyLabel() {
             copy(this.labelValue);
             this.$toast(this.$t('hint.copy'));
+        },
+        getDepositInfo() {
+            this.isLoading = true;
+            this.clearData();
+            Promise.all([
+                getMetaInfo({ tokenId: this.token.tokenId }, this.gateInfo.url).then(res => {
+                    this.type = res.type;
+                }),
+                getDepositInfo({ addr: this.defaultAddr, tokenId: this.token.tokenId },
+                    this.gateInfo.url)
+                    .then(res => {
+                        this.address = res.depositAddress;
+                        this.minimumDepositAmountMin = res.minimumDepositAmount;
+                        this.labelName = res.labelName;
+                        this.labelValue = res.label;
+                        this.confirmationCount = res.confirmationCount;
+                    }) ]).catch(() => (this.addrErr = this.$t('tokenCard.charge.addrErr'))).finally(() => {
+                this.isLoading = false;
+            });
+        },
+        onChangeNetwork() {
+            this.getDepositInfo();
+        },
+        clearData() {
+            this.address = '';
+            this.minimumDepositAmountMin = '';
+            this.labelName = '';
+            this.labelValue = '';
+            this.confirmationCount = 0;
         }
     }
 };

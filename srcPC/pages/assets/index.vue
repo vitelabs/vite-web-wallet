@@ -17,7 +17,6 @@ import { getExplorerLink } from 'utils/getLink';
 import { gateStorage } from 'pcServices/gate';
 import pageLayout from 'pcComponents/pageLayout/index';
 import accountHead from './head';
-import { addTokenDialog } from './dialog';
 import TokenFilter from './filter';
 import tokenListView from './tokenList/list';
 
@@ -74,7 +73,12 @@ export default {
                 ...this.officalGateTokenList,
                 ...this.userStorageTokenList,
                 ...this.otherWhithBalance
-            ].filter(filterFunc(this.filterObj, this.currency));
+            ].filter(filterFunc(this.filterObj, this.currency)).map(item => {
+                if (this.tokenMapFromGithub[item.tokenId] && item.gateInfo) {
+                    item.multiNetwork = this.tokenMapFromGithub[item.tokenId].multiNetwork;
+                }
+                return item;
+            });
         },
         defaultTokenList() {
             return this.$store.getters.defaultTokenList;
@@ -87,6 +91,9 @@ export default {
         },
         otherWhithBalance() {
             return this.$store.getters.otherWhithBalance;
+        },
+        tokenMapFromGithub() {
+            return this.$store.state.ledger.tokenMapFromGithub;
         },
         showTokenIds() {
             return [
@@ -101,9 +108,6 @@ export default {
         }
     },
     methods: {
-        addToken() {
-            addTokenDialog();
-        },
         goDetail() {
             openUrl(`${ getExplorerLink(this.$i18n.locale) }account/${ this.account.addr }`);
         }
