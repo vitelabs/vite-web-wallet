@@ -33,7 +33,7 @@
                 {{ gateName }}
             </div>
             <div class="op_group" v-if="token.gateInfo.url">
-                <div class="op" @click="charge">
+                <div class="op" @click="deposit">
                     {{ $t("tokenCard.actionType.CHARGE") }}
                 </div>
                 <div class="op" @click="_withdraw">
@@ -85,7 +85,7 @@
 
 <script>
 import {
-    chargeDialog,
+    depositDialog,
     withdrawDialog,
     tokenInfoDialog
 } from '../dialog';
@@ -192,10 +192,10 @@ export default {
         unbind() {
             gateStorage.unbindToken(this.token.tokenId);
         },
-        charge() {
+        deposit() {
             statistics.event(this.$route.name, 'Cross-Chain-receive', this.address || '');
             this.$refs.importantHintDom.showConfirm(() => {
-                chargeDialog({ token: this.token }).catch(e => {
+                depositDialog({ token: this.token }).catch(e => {
                     console.error(e);
                 });
             });
