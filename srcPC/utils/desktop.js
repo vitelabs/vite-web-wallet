@@ -30,9 +30,6 @@ const actions = {
         if (!store.getters.viteTokenInfo || !store.getters.vxTokenInfo) {
             store.dispatch('getDefaultTokenList');
         }
-        if (!store.getters.tokenMapFromGithub) {
-            store.dispatch('fetchTokenInfoFromGithub');
-        }
     }
 };
 

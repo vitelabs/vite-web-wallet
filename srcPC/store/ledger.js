@@ -12,8 +12,7 @@ const state = {
     currentHeight: '',
     defaultTokenIds: defaultTokenMap,
     tokenInfoMaps: {},
-    allTokens: [],
-    tokenMapFromGithub: {}
+    allTokens: []
 };
 
 const mutations = {
@@ -37,15 +36,6 @@ const mutations = {
     },
     setAllTokens(state, payload = []) {
         state.allTokens = payload;
-    },
-    setTokenInfoFromGithub(state, payload = []) {
-        payload.forEach(t => {
-            state.tokenMapFromGithub[t.tokenId]
-        = state.tokenMapFromGithub[t.tokenId] || {};
-            state.tokenMapFromGithub[t.tokenId].icon = t.icon || undefined;// 只保存icon信息
-            const res = state.allTokens.find(t1 => t1.tokenId === t.tokenId);
-            if (res)res.icon = t.icon;
-        });
     }
 };
 
@@ -112,9 +102,7 @@ const getters = {
         const map = {};
         const { idenGateTokenListMap } = rootGetters;
         state.allTokens.forEach(t => {
-            map[t.tokenId] = Object.assign({},
-                t,
-                state.tokenMapFromGithub[t.tokenId] || {});
+            map[t.tokenId] = Object.assign({}, t);
             map[t.tokenId].icon = map[t.tokenId].icon || idenGateTokenListMap[t.tokenId] && idenGateTokenListMap[t.tokenId].icon;
         });
         return map;
