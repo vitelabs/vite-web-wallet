@@ -73,12 +73,7 @@ export default {
                 ...this.officalGateTokenList,
                 ...this.userStorageTokenList,
                 ...this.otherWhithBalance
-            ].filter(filterFunc(this.filterObj, this.currency)).map(item => {
-                if (this.tokenMapFromGithub[item.tokenId] && item.gateInfo) {
-                    item.multiNetwork = this.tokenMapFromGithub[item.tokenId].multiNetwork;
-                }
-                return item;
-            });
+            ].filter(filterFunc(this.filterObj, this.currency));
         },
         defaultTokenList() {
             return this.$store.getters.defaultTokenList;
@@ -91,9 +86,6 @@ export default {
         },
         otherWhithBalance() {
             return this.$store.getters.otherWhithBalance;
-        },
-        tokenMapFromGithub() {
-            return this.$store.state.ledger.tokenMapFromGithub;
         },
         showTokenIds() {
             return [
