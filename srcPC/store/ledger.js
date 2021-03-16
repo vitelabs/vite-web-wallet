@@ -108,13 +108,14 @@ const actions = {
 };
 
 const getters = {
-    allTokensMap(state) {
+    allTokensMap(state, rootGetters) {
         const map = {};
+        const { idenGateTokenListMap } = rootGetters;
         state.allTokens.forEach(t => {
             map[t.tokenId] = Object.assign({},
                 t,
                 state.tokenMapFromGithub[t.tokenId] || {});
-            map[t.tokenId].icon = map[t.tokenId].icon;
+            map[t.tokenId].icon = map[t.tokenId].icon || idenGateTokenListMap[t.tokenId] && idenGateTokenListMap[t.tokenId].icon;
         });
         return map;
     },
