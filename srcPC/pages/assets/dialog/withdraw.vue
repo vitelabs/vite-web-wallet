@@ -5,32 +5,35 @@ block head
         div
             select-network(v-model="selectedNetwork" :list="multiNetwork" @change="onChangeNetwork")
 block content
-    .__row
-        .__row_t {{$t("tokenCard.withdraw.labels.balance")}}
-        .__input_row.__unuse_input.__bold
-            img.__icon(:src="token.icon||getIcon(token.tokenId)")
-            span.__right {{token.balance||'0'}}
-    .__row
-        .__row_t {{$t("tokenCard.withdraw.labels.address")}}
-            .__err {{isAddrCorrect?'':$t("tokenCard.withdraw.addressErr")}}
-        vite-input(v-model="withdrawAddr" :placeholder="$t('tokenCard.withdraw.addressPlaceholder', {token: tokenSymbol})")
-    .__row(v-if="showLabel")
-        .__row_t {{info.labelName}}
-        vite-input(v-model="labelValue" :placeholder="$t('tokenCard.withdraw.labelPlaceholder',{labelName:info.labelName})")
-    .__row
-        .__row_t {{$t("tokenCard.withdraw.labels.amount")}}
-            .__err {{ammountErr}}
-        vite-input(v-model="withdrawAmount" :placeholder="$t('tokenCard.withdraw.amountPlaceholder',{min})")
-            span.__all_wrapper.__pointer(slot="after" @click="withdrawAll")
-                span.__all {{$t("tokenCard.withdraw.labels.all")}}
-    .__row
-        .__row_t {{$t("tokenCard.withdraw.labels.fee")}}
-            i(class="tipsicon hoveraction" @click.self.stop="toggleTips")
-                tooltips(v-show="isFeeTipsShow" v-click-outside="hideTips" :content="$t('tokenCard.withdraw.feeTips')" class="fee-tips")
-        .__input_row.__unuse_input.__bold  {{ $t("tokenCard.withdraw.labels.fee") }}
-            .__right {{( fee||'--') }} <span class="light">{{token.tokenSymbol}}</span>
-    .__hint.__err(v-if="failTips")
-        span {{ failTips }}
+    div.ex-center-loading(v-show="loading")
+        loading(loadingType="dot")
+    div(v-show="!loading")
+        .__row
+            .__row_t {{$t("tokenCard.withdraw.labels.balance")}}
+            .__input_row.__unuse_input.__bold
+                img.__icon(:src="token.icon||getIcon(token.tokenId)")
+                span.__right {{token.balance||'0'}}
+        .__row
+            .__row_t {{$t("tokenCard.withdraw.labels.address")}}
+                .__err {{isAddrCorrect?'':$t("tokenCard.withdraw.addressErr")}}
+            vite-input(v-model="withdrawAddr" :placeholder="$t('tokenCard.withdraw.addressPlaceholder', {token: tokenSymbol})")
+        .__row(v-if="showLabel")
+            .__row_t {{info.labelName}}
+            vite-input(v-model="labelValue" :placeholder="$t('tokenCard.withdraw.labelPlaceholder',{labelName:info.labelName})")
+        .__row
+            .__row_t {{$t("tokenCard.withdraw.labels.amount")}}
+                .__err {{ammountErr}}
+            vite-input(v-model="withdrawAmount" :placeholder="$t('tokenCard.withdraw.amountPlaceholder',{min})")
+                span.__all_wrapper.__pointer(slot="after" @click="withdrawAll")
+                    span.__all {{$t("tokenCard.withdraw.labels.all")}}
+        .__row
+            .__row_t {{$t("tokenCard.withdraw.labels.fee")}}
+                i(class="tipsicon hoveraction" @click.self.stop="toggleTips")
+                    tooltips(v-show="isFeeTipsShow" v-click-outside="hideTips" :content="$t('tokenCard.withdraw.feeTips')" class="fee-tips")
+            .__input_row.__unuse_input.__bold  {{ $t("tokenCard.withdraw.labels.fee") }}
+                .__right {{( fee||'--') }} <span class="light">{{token.tokenSymbol}}</span>
+        .__hint.__err(v-if="failTips")
+            span {{ failTips }}
 </template>
 
 <script>
@@ -43,9 +46,10 @@ import { getTokenIcon } from 'utils/tokenParser';
 import { execWithValid } from 'pcUtils/execWithValid';
 import viteInput from 'components/viteInput';
 import selectNetwork from './selectNetwork';
+import loading from 'components/loading';
 
 export default {
-    components: { tooltips, viteInput, selectNetwork },
+    components: { tooltips, viteInput, selectNetwork, loading },
     props: {
         token: {
             type: Object,
@@ -286,6 +290,10 @@ export default {
             left: 30px;
         }
     }
+}
+
+.ex-center-loading {
+    text-align: center;
 }
 
 .head {

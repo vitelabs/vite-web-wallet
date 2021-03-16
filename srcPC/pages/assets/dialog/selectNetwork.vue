@@ -38,7 +38,7 @@ export default {
     @include font-family-bold();
     font-size: 12px;
     margin-top: 20px;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
 }
 
 .__flag {
