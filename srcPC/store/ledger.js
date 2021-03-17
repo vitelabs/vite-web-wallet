@@ -1,7 +1,6 @@
 import { constant } from '@vite/vitejs';
 import { timer } from 'utils/asyncFlow';
 import { defaultTokenMap, VX_TOKENID } from 'utils/constant';
-import { tokenInfoFromGithub } from 'services/trade';
 import { getTokenInfoById, getSnapshotChainHeight, getTokenInfoList } from 'services/viteServer';
 
 const ViteId = constant.Vite_TokenId;
@@ -91,9 +90,6 @@ const actions = {
             commit('setTokenInfo', { tokenInfo: result, tokenId });
             return result;
         });
-    },
-    fetchTokenInfoFromGithub({ commit }) {
-        tokenInfoFromGithub().then(data => commit('setTokenInfoFromGithub', data.map(t => Object.assign({}, t, { tokenId: t.tokenAddress }))));
     }
 };
 
