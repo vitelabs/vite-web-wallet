@@ -86,11 +86,26 @@ export default {
         multiNetwork() {
             return this.token.gateInfo.multiNetwork;
         },
+
+        /*
+            gateInfoExample:
+            {
+                decimal: 18
+                icon: ""
+                name: "Ether"
+                platform: "ETH"
+                symbol: "ETH"
+                tokenAddress: null
+                tokenCode: "1"
+                tokenIndex: null,
+                url: ''
+            }
+        */
         gateInfo() {
             if (this.multiNetwork && this.multiNetwork.length) {
                 return this.multiNetwork[this.selectedNetwork];
             }
-            return this.token.gateInfo;
+            return this.token.gateInfo && this.token.gateInfo.mappedToken;
         },
         tokenSymbol() {
             if (this.multiNetwork && this.multiNetwork.length) {
