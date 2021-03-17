@@ -87,6 +87,11 @@ export default {
             default: () => {
                 return {};
             }
+        },
+        gateInfo: {
+            type: Object,
+            required: true,
+            default: () => {}
         }
     },
     data() {
@@ -115,9 +120,7 @@ export default {
             return this.$store.getters.activeAddr;
         },
         outChain() {
-            const tokenToGate = this.$store.getters.mapToken2Gate;
-            const token = this.token;
-            return tokenToGate[token.tokenId] ? tokenToGate[token.tokenId].mappedNet : token.tokenSymbol;
+            return this.gateInfo.platform || this.gateInfo.standard;
         }
     },
     methods: {
@@ -151,7 +154,7 @@ export default {
                     pageNum,
                     pageSize
                 },
-                this.token.gateInfo.url)
+                this.gateInfo.url)
                     .then(data => {
                         this.totalPage = Math.ceil(data.totalCount / pageSize);
                         this.inTxExplorerFormat = data.inTxExplorerFormat;
@@ -167,7 +170,7 @@ export default {
                     pageNum,
                     pageSize
                 },
-                this.token.gateInfo.url)
+                this.gateInfo.url)
                     .then(data => {
                         this.totalPage = Math.ceil(data.totalCount / pageSize);
                         this.inTxExplorerFormat = data.inTxExplorerFormat;

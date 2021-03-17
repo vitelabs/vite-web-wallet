@@ -33,9 +33,10 @@ const mutations = {
             // }
             // // for mock test
 
+            const { gatewayInfo = {} } = item;
             let multiNetwork = [];
-            if (item.gatewayInfo && item.gatewayInfo.mappedTokenExtras) {
-                multiNetwork = [item.gatewayInfo.mappedToken].concat(item.gatewayInfo.mappedTokenExtras);
+            if (gatewayInfo.mappedToken && gatewayInfo.mappedToken.mappedTokenExtras) {
+                multiNetwork = [gatewayInfo.mappedToken].concat(gatewayInfo.mappedToken.mappedTokenExtras);
             }
             return {
                 ...item,
