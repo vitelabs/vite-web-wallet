@@ -22,7 +22,6 @@ const actions = {
         store.dispatch('getDefaultTokenList');
         store.dispatch('getAllTokens');
         store.dispatch('updateGateInfos');
-        store.dispatch('fetchTokenInfoFromGithub');
         store.dispatch('exFetchLimitAmounts');
         store.dispatch('fetchUiConfig');
     },

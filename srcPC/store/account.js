@@ -171,7 +171,7 @@ const getters = {
             } = Object.assign({},
                 defaultTokenMap[i],
                 balanceInfo[i] || {},
-                allToken[i] || {}, { gateInfo: { url: mapToken2Gate[i] && mapToken2Gate[i].url } },
+                allToken[i] || {}, { gateInfo: mapToken2Gate[i] && mapToken2Gate[i].gateInfo || { url: null } },
                 exBalance[i]);
             const rate = rootState.exchangeRate.rateMap[i] && rootState.exchangeRate.rateMap[i][`${ rootState.env.currency }Rate`];
             const totalExAsset = rate ? bigNumber.multi(bigNumber.toBasic(totalExAmount || 0, decimals), rate) : 0;
