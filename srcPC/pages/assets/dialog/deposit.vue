@@ -4,14 +4,15 @@ block head
     .head
         .__hint.no_top
             i18n(path='tokenCard.charge.tips.0' tag="span")
-                span.strong(place="tokenSymbol") {{ tokenSymbol }}
+                strong.strong(place="tokenSymbol") {{ tokenSymbol }}
+                strong.strong(place="min") {{ minimumDepositAmount }}
         .__hint
             i18n(path='tokenCard.charge.tips.1' tag="span")
-                span.strong(place="tokenSymbol") {{ tokenSymbol }}
-                span.strong(place="min") {{ minimumDepositAmount }}
+                strong.strong(place="tokenSymbol") {{ tokenSymbol }}
+                strong.strong(place="min") {{ minimumDepositAmount }}
+                strong.strong(place="confirmationCount") {{ confirmationCount }}
         .__hint
             i18n(path='tokenCard.charge.tips.2' tag="span")
-                span.strong(place="confirmationCount") {{ confirmationCount }}
         tips(v-if="noticeMsg" class="tips") {{noticeMsg}}
         div(v-if="multiNetwork && multiNetwork.length")
             select-network(v-model="selectedNetwork" :list="multiNetwork" @change="onChangeNetwork")
@@ -111,7 +112,7 @@ export default {
             return this.token.gateInfo && this.token.gateInfo.mappedToken;
         },
         tokenSymbol() {
-            if (this.multiNetwork && this.multiNetwork.length) {
+            if (this.gateInfo.standard) {
                 return `${ this.token.tokenSymbol } (${ this.gateInfo.standard }) `;
             }
             return this.token.tokenSymbol;
