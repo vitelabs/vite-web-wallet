@@ -20,9 +20,9 @@ block content
         img.copy.__pointer(v-show="!isLoading" src="~assets/imgs/copy_default.svg" @click="copy")
     div.ex-center-loading(v-show="isLoading")
         loading(loadingType="dot")
-    div(v-show="!isLoading")
+    div(v-if="!isLoading" :key="selectedNetwork")
         .__input_row.__unuse_input.top.more {{ addrErr || address }}
-        .qrcode-container {{ $t('tokenCard.charge.codeTips',{tokenSymbol}) }}
+        .qrcode-container(v-if="address") {{ $t('tokenCard.charge.codeTips',{tokenSymbol}) }}
             qrcode(:text="addressQrcode" :options="qrOptions" class="qrcode-container__content")
         .__row(v-if="showLabel")
             span.__row_t {{labelName}}
@@ -151,6 +151,7 @@ export default {
             this.labelName = '';
             this.labelValue = '';
             this.confirmationCount = 0;
+            this.addrErr = '';
         }
     }
 };

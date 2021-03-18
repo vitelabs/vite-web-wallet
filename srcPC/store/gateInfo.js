@@ -18,32 +18,26 @@ const mutations = {
         state.idenGateTokenList = payload.map(item => {
             item.tokenId = item.tokenAddress;
 
-            // // for mock test
-            // if (item.tokenId === 'tti_80f3751485e4e83456059473') {
-            //     item.gatewayInfo.mappedToken = {
-            //         ...item.gatewayInfo.mappedToken,
-            //         url: item.gatewayInfo.url,
-            //         standard: 'ERC20'
-            //     };
-            //     item.gatewayInfo.mappedTokenExtras = [{
-            //         ...item.gatewayInfo.mappedToken,
-            //         url: item.gatewayInfo.url,
-            //         standard: 'TRC20'
-            //     }];
-            // }
-            // // for mock test
-
             const { gatewayInfo = {} } = item;
+            // eslint-disable-next-line prefer-const
             let multiNetwork = [];
-            if (gatewayInfo.mappedToken && gatewayInfo.mappedToken.mappedTokenExtras) {
-                multiNetwork = [gatewayInfo.mappedToken].concat(gatewayInfo.mappedToken.mappedTokenExtras);
-            }
+
+
+            // ----- Comment this code for: disable multi-network withdraw and deposit -----
+
+            // if (gatewayInfo.mappedToken && gatewayInfo.mappedToken.mappedTokenExtras) {
+            //     multiNetwork = [gatewayInfo.mappedToken].concat(gatewayInfo.mappedToken.mappedTokenExtras);
+            // }
+
+            // ----- Comment this code for: disable multi-network withdraw and deposit -----
+
+
             return {
                 ...item,
                 gateInfo: {
-                    ...item.gatewayInfo,
+                    ...gatewayInfo,
                     multiNetwork,
-                    gateway: item.gatewayInfo.name // Compatible with old code
+                    gateway: gatewayInfo.name // Compatible with old code
                 }
             };
         });
