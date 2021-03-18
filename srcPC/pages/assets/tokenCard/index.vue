@@ -139,7 +139,7 @@ export default {
             return !!this.$store.state.env.gate;
         },
         gateName() {
-            if (this.token.type === 'NATIVE') return '--';
+            // if (this.token.type === 'NATIVE') return '--';
             if (this.token.gateInfo.gateway) return this.token.gateInfo.gateway;
             if (this.token.gateInfo.url) return this.$t('tokenCard.gateInfo.selfdefined');
             return this.canEditGateURL ? this.$t('tokenCard.gateInfo.gateSetting') : '--';

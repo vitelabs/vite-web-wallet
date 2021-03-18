@@ -434,10 +434,11 @@
             "codeTips": "请扫描二维码充值,请使用支持{tokenSymbol}的钱包转账",
             "labelCodeTips":"请扫描 {labelName} 二维码",
             "tips": [
-                "跨链转入操作是将{tokenSymbol}跨链映射至VITE网络，转入后您依然可以转出",
-                "通过该存款地址只能发送{tokenSymbol},且金额不能低于{min}",
-                "{confirmationCount}个网络确认之后到账，请耐心等待"
-            ]
+                "通过下方地址只能充值 {tokenSymbol}，且单笔金额不低于 {min}",
+                "{confirmationCount} 个网络确认之后到账，请耐心等待",
+                "请选择正确的主网，否则代币丢失将无法找回"
+            ],
+            "selectNetwork": "选择主网"
         },
         "withdraw": {
             "title": "跨链转出",

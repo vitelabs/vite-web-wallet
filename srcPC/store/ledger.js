@@ -1,7 +1,6 @@
 import { constant } from '@vite/vitejs';
 import { timer } from 'utils/asyncFlow';
 import { defaultTokenMap, VX_TOKENID } from 'utils/constant';
-import { tokenInfoFromGithub } from 'services/trade';
 import { getTokenInfoById, getSnapshotChainHeight, getTokenInfoList } from 'services/viteServer';
 
 const ViteId = constant.Vite_TokenId;
@@ -12,8 +11,7 @@ const state = {
     currentHeight: '',
     defaultTokenIds: defaultTokenMap,
     tokenInfoMaps: {},
-    allTokens: [],
-    tokenMapFromGithub: {}
+    allTokens: []
 };
 
 const mutations = {
@@ -37,15 +35,6 @@ const mutations = {
     },
     setAllTokens(state, payload = []) {
         state.allTokens = payload;
-    },
-    setTokenInfoFromGithub(state, payload = []) {
-        payload.forEach(t => {
-            state.tokenMapFromGithub[t.tokenId]
-        = state.tokenMapFromGithub[t.tokenId] || {};
-            state.tokenMapFromGithub[t.tokenId].icon = t.icon || undefined;// 只保存icon信息
-            const res = state.allTokens.find(t1 => t1.tokenId === t.tokenId);
-            if (res)res.icon = t.icon;
-        });
     }
 };
 
@@ -101,20 +90,16 @@ const actions = {
             commit('setTokenInfo', { tokenInfo: result, tokenId });
             return result;
         });
-    },
-    fetchTokenInfoFromGithub({ commit }) {
-        tokenInfoFromGithub().then(data => commit('setTokenInfoFromGithub', data.map(t => Object.assign({}, t, { tokenId: t.tokenAddress }))));
     }
 };
 
 const getters = {
-    allTokensMap(state) {
+    allTokensMap(state, rootGetters) {
         const map = {};
+        const { idenGateTokenListMap } = rootGetters;
         state.allTokens.forEach(t => {
-            map[t.tokenId] = Object.assign({},
-                t,
-                state.tokenMapFromGithub[t.tokenId] || {});
-            map[t.tokenId].icon = map[t.tokenId].icon;
+            map[t.tokenId] = Object.assign({}, t);
+            map[t.tokenId].icon = map[t.tokenId].icon || idenGateTokenListMap[t.tokenId] && idenGateTokenListMap[t.tokenId].icon;
         });
         return map;
     },
