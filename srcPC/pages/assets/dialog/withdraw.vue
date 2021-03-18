@@ -9,6 +9,8 @@ block content
         loading(loadingType="dot")
     div(v-show="!loading")
         .__row
+            tips(v-if="info.noticeMsg" class="tips") {{info.noticeMsg}}
+        .__row
             .__row_t {{$t("tokenCard.withdraw.labels.balance")}}
             .__input_row.__unuse_input.__bold
                 img.__icon(:src="token.icon||getIcon(token.tokenId)")
@@ -38,6 +40,7 @@ block content
 
 <script>
 import { verifyAddr, getWithdrawInfo, getWithdrawFee, withdraw, getMetaInfo } from 'pcServices/gate';
+import tips from 'pcComponents/tips';
 import debounce from 'lodash/debounce';
 import { getValidBalance } from 'pcUtils/validations';
 import bigNumber from 'utils/bigNumber';
@@ -49,7 +52,7 @@ import selectNetwork from './selectNetwork';
 import loading from 'components/loading';
 
 export default {
-    components: { tooltips, viteInput, selectNetwork, loading },
+    components: { tooltips, viteInput, selectNetwork, loading, tips },
     props: {
         token: {
             type: Object,
@@ -61,7 +64,8 @@ export default {
             info: {
                 'minimumWithdrawAmount': '',
                 'maximumWithdrawAmount': '',
-                'gatewayAddress': ''
+                'gatewayAddress': '',
+                'noticeMsg': ''
             },
             type: -1,
             labelValue: '',
@@ -253,7 +257,8 @@ export default {
             this.info = {
                 'minimumWithdrawAmount': '',
                 'maximumWithdrawAmount': '',
-                'gatewayAddress': ''
+                'gatewayAddress': '',
+                'noticeMsg': ''
             };
         }
     }
