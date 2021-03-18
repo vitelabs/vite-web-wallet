@@ -10,9 +10,9 @@ block head
         .gate_info(v-if="gateName") {{gateName}}
     .tab
         .tab__item(@click="tabClick('tokenInfo')" :class="{active:tabName==='tokenInfo'}") {{$t("tokenCard.tokenInfo.tabName")}}
-        .tab__item(v-if="token.type!=='NATIVE'" @click="tabClick('gate')" :class="{active:tabName==='gate'}") {{$t("tokenCard.gateInfo.tabName")}}
-        .tab__item(v-if="token.type!=='NATIVE'" @click="tabClick('deposit')" :class="{active:tabName==='deposit'}") {{$t("tokenCard.depositRecord.tabName")}}
-        .tab__item(v-if="token.type!=='NATIVE'" @click="tabClick('withdraw')" :class="{active:tabName==='withdraw'}") {{$t("tokenCard.withdrawRecord.tabName")}}
+        .tab__item(v-if="gateInfoNew.url" @click="tabClick('gate')" :class="{active:tabName==='gate'}") {{$t("tokenCard.gateInfo.tabName")}}
+        .tab__item(v-if="gateInfoNew.url" @click="tabClick('deposit')" :class="{active:tabName==='deposit'}") {{$t("tokenCard.depositRecord.tabName")}}
+        .tab__item(v-if="gateInfoNew.url" @click="tabClick('withdraw')" :class="{active:tabName==='withdraw'}") {{$t("tokenCard.withdrawRecord.tabName")}}
 
 block originContent
     .tab-content(v-if="tabName==='tokenInfo'")
@@ -88,9 +88,11 @@ block originContent
             viteInput.gate-url(:placeholder="$t('tokenCard.gateInfo.settingPlaceholder')" :disabled="!canEditGateURL" v-model="url")
             .btn( @click="save" v-if="canEditGateURL") {{$t('tokenCard.tokenInfo.saveGate')}}
     .tab-content.no-padding(v-if="tabName==='deposit'")
-        Tb(:type="'deposit'" :token="token" :key="`deposit_${token.tokenId}`")
+        select-network(v-model="selectedNetwork" :list="multiNetwork" v-if="multiNetwork && multiNetwork.length" class="select-network")
+        Tb(:type="'deposit'" :token="token" :key="`deposit_${token.tokenId}_${selectedNetwork}`" :gateInfo="gateInfoNew")
     .tab-content.no-padding(v-if="tabName==='withdraw'")
-        Tb(:type="'withdraw'" :token="token" :key="`withdraw_${token.tokenId}`")
+        select-network(v-model="selectedNetwork" :list="multiNetwork" v-if="multiNetwork && multiNetwork.length" class="select-network")
+        Tb(:type="'withdraw'" :token="token" :key="`withdraw_${token.tokenId}_${selectedNetwork}`" :gateInfo="gateInfoNew")
 </template>
 
 <script>
@@ -103,9 +105,11 @@ import BigNumber from 'utils/bigNumber';
 import Tb from './tb';
 import viteInput from 'components/viteInput';
 import throttle from 'lodash/throttle';
+import selectNetwork from '../selectNetwork';
+
 
 export default {
-    components: { Tb, viteInput },
+    components: { Tb, viteInput, selectNetwork },
     props: {
         token: {
             type: Object,
@@ -123,7 +127,8 @@ export default {
             urlCache: this.token.gateInfo.url,
             dTitle: this.$t('tokenCard.tokenInfo.title', { tokenSymbol: this.token.tokenSymbol }),
             dWidth: 'wide',
-            saveLoading: false
+            saveLoading: false,
+            selectedNetwork: 0
         };
     },
     computed: {
@@ -148,6 +153,31 @@ export default {
                 }
             }
             return gateway;
+        },
+        /*
+            Get gateInfo from props token.gateInfo, change gateInfo by this.selectedNetwork.
+            The gateInfoNew is from parent component, the origin data is from account state.
+            To make litte change for code, I decided to get gateInfo from prarent data. All multiNetwork logic is on state.account.
+            We have only used one data of gateInfoNew, that is gatewayUrl. Other Info can got from gateInfo above.
+
+            gateInfoExample:
+            {
+                decimal: 18
+                icon: ""
+                name: "Ether"
+                platform: "ETH"
+                symbol: "ETH"
+                tokenAddress: null
+                tokenCode: "1"
+                tokenIndex: null,
+                url: ''
+            }
+         */
+        gateInfoNew() {
+            if (this.multiNetwork && this.multiNetwork.length) {
+                return this.multiNetwork[this.selectedNetwork];
+            }
+            return this.token.gateInfo && this.token.gateInfo.mappedToken || {};
         },
         gateIntroduction() {
             if (!this.gateInfo.overview) {
@@ -192,6 +222,9 @@ export default {
         },
         defaultAddr() {
             return this.$store.getters.activeAddr;
+        },
+        multiNetwork() {
+            return this.token.gateInfo.multiNetwork;
         }
     },
     methods: {
@@ -274,5 +307,9 @@ export default {
 
 .click-able {
     margin-right: 10px;
+}
+
+.select-network {
+    padding: 0 20px 20px 20px;
 }
 </style>

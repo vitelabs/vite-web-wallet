@@ -17,32 +17,37 @@ import { getExplorerLink } from 'utils/getLink';
 import { gateStorage } from 'pcServices/gate';
 import pageLayout from 'pcComponents/pageLayout/index';
 import accountHead from './head';
-import { addTokenDialog } from './dialog';
 import TokenFilter from './filter';
 import tokenListView from './tokenList/list';
 
-const filterFunc = (filterObj, currency) => t => {
-    if (!t.tokenName) {
-        return false;
-    }
-    if (!filterObj) {
-        return true;
-    }
+const filterFunc = (filterObj, currency) => {
+    const ob = {};
+    return t => {
+        if (!t.tokenName) {
+            return false;
+        }
+        if (!filterObj) {
+            return true;
+        }
+        // filter duplicaty token.
+        if (ob[t.tokenId]) return false;
+        ob[t.tokenId] = 1;
 
-    // Hiding asset if it's value <= $2
-    let hideLimit = 2;
-    if (currency === 'cny') {
-        hideLimit = hideLimit * 7;
-    }
-    const tokenName = `${ t.tokenSymbol }|${ t.tokenName }`;
+        // Hiding asset if it's value <= $2
+        let hideLimit = 2;
+        if (currency === 'cny') {
+            hideLimit = hideLimit * 7;
+        }
+        const tokenName = `${ t.tokenSymbol }|${ t.tokenName }`;
 
-    const NOTMatchNoZero
+        const NOTMatchNoZero
         = filterObj.hideZero && +t.totalAsset <= hideLimit;
-    const NOTMatchFilterKey
+        const NOTMatchFilterKey
         = filterObj.filterKey
         && !tokenName.match(new RegExp(filterObj.filterKey, 'i'));
 
-    return !(NOTMatchNoZero || NOTMatchFilterKey);
+        return !(NOTMatchNoZero || NOTMatchFilterKey);
+    };
 };
 export default {
     components: { pageLayout, accountHead, TokenFilter, tokenListView },
@@ -101,9 +106,6 @@ export default {
         }
     },
     methods: {
-        addToken() {
-            addTokenDialog();
-        },
         goDetail() {
             openUrl(`${ getExplorerLink(this.$i18n.locale) }account/${ this.account.addr }`);
         }

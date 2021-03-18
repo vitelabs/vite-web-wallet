@@ -154,6 +154,15 @@ export function tokenInfoFromGithub({ tokenSymbol, platformSymbol = 'VITE', toke
     });
 }
 
+export function getTokenInfoBatch({ tokenAddresses, platformSymbol = 'VITE' }) {
+    return ViteXAPI.request({
+        path: '/cryptocurrency/info/platform/query',
+        method: 'POST',
+        params: { platformSymbol, tokenAddresses }
+    });
+}
+
+
 export function tokenRateFromCMC({ tokenSymbol, platformSymbol = 'VITE', tokenAddress }:{tokenSymbol?:string, platformSymbol:string, tokenAddress?:string} = { platformSymbol: 'VITE' }) {
     return ViteXAPI.request({
         path: '/cryptocurrency/rate/query',

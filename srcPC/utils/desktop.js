@@ -22,16 +22,12 @@ const actions = {
         store.dispatch('getDefaultTokenList');
         store.dispatch('getAllTokens');
         store.dispatch('updateGateInfos');
-        store.dispatch('fetchTokenInfoFromGithub');
         store.dispatch('exFetchLimitAmounts');
         store.dispatch('fetchUiConfig');
     },
     getTokenInfo() {
         if (!store.getters.viteTokenInfo || !store.getters.vxTokenInfo) {
             store.dispatch('getDefaultTokenList');
-        }
-        if (!store.getters.tokenMapFromGithub) {
-            store.dispatch('fetchTokenInfoFromGithub');
         }
     }
 };
