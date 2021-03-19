@@ -1,6 +1,7 @@
 {
     "lang": "Indonesia",
     "help": "Bantuan",
+    "announcements": "Announcements",
     "start": "Mulai",
     "login": "Masuk",
     "regAcc": "Daftar",
@@ -42,9 +43,19 @@
         ]
     },
     "dealReminder": {
-        "title": "Pemberitahuan Perdagangan",
+        "title": {
+            "buy": "Buy Order Completed: {ftoken} / {ttoken}",
+            "sell": "Sell Order Completed: {ftoken} / {ttoken}"
+        },
         "failTitle": "Pemesanan Gagal",
-        "notice": "Pesanan Anda {amount} {ftoken} ({ftoken}/{ttoken}) pada {time} adalah transaksi yang lengkap, kunjungi Riwayat Pesanan untuk mengetahui lebih lanjut.",
+        "notice-all": {
+            "buy": "Price: {price} {ttoken} \nAmount: {amount} {ttoken}, was completed. View Order History page for details.",
+            "sell": "Price: {price} {ttoken} \nAmount: {amount} {ttoken}, was completed. View Order History page for details."
+        },
+        "notice-partial": {
+            "buy": "Price: {price} {ttoken} \nAmount: {amount} {ttoken}, is {executedPercent}% completed.",
+            "sell": "Price: {price} {ttoken} \nAmount: {amount} {ttoken}, is {executedPercent}% completed."
+        },
         "error": "Pesanan Anda {amount} {ftoken} ({ftoken}/{ttoken}) pada {time} telah gagal, untuk lebih jelasnya, silakan lihat di bagian Riwayat Pesanan."
     },
     "pow": {
@@ -61,6 +72,15 @@
     "compliance": {
         "text": "ViteX tidak melayani pelanggan di negara / wilayah / sebagai berikut: Hong Kong, Kuba, Iran, Korea Utara, Krimea, Sudan, Malaysia, Suriah, AS [termasuk semua wilayah AS seperti Puerto Riko, Samoa Amerika, Guam, Pulau Mariana Utara, dan Kepulauan Virgin AS (St. Croix, St. John dan St. Thomas)], Bangladesh, Bolivia, Ekuador, dan Kirgistan. Untuk informasi lebih lanjut, silakan baca Ketentuan Layanan dan Kebijakan Privasi kami",
         "title": "Pemberitahuan Penting"
+    },
+    "bnbConf": {
+        "title": "Pemberitahuan Penting",
+        "t1": "VITE Binance Listing Coming! Please vote to have VITE listed on Binance.",
+        "t2": "Voting Period: 12:00 pm Dec 12 to 12:00 pm Dec 13 (HKT)",
+        "t3": "Voting Method: Holding 50 BNB allows for 1 vote (10 votes max)",
+        "t4": "Voting Rewards: All voted users will be rewarded with an airdrop totaling 21,000,000 VITE based on executed votes.",
+        "btn": "Vote Now!!!",
+        "notice": "[Attention]: You must have 50-500 BNBs in your Binance Account starting Dec 5 and last through Dec 13 to Qualify for Voting!"
     },
     "errCode": {
         "35003": "{name} Terjadi konflik ID, silakan kirim kembali nanti",
@@ -85,40 +105,60 @@
         "37010": "Status pesanan ini tidak dapat dicabut"
     },
     "txType": {
-        "SBPreg": "Pendaftaran SBP",
-        "UpdateReg": "Perbarui Pendaftaran",
-        "RevokeReg": "Cabut Registrasi",
-        "RetrieveReward": "Ambil Hadiah",
-        "Voting": "Pemungutan suara",
-        "RevokeVoting": "Cabut Voting",
-        "GetQuota": "Dapatkan Kuota",
-        "WithdrawalOfQuota": "Penarikan Kuota Taruhan",
-        "Mintage": "Penerbitan Token",
-        "MintageIssue": "Penerbitan Token Tambahan",
-        "MintageBurn": "Hancurkan Token",
-        "MintageTransferOwner": "Transfer kepemilikan",
-        "MintageChangeTokenType": "Edit jenis token",
-        "MintageCancelPledge": "Ambil Token Stak",
-        "DexFundUserDeposit": "Setoran ViteX",
-        "DexFundUserWithdraw": "Penarikan ViteX",
-        "DexFundNewOrder": "Membuat Pesanan ViteX",
-        "DexTradeCancelOrder": "Cabut Pesanan ViteX",
-        "DexFundNewMarket": "Daftar Token ViteX",
-        "CreateContractReq": "Buat Kontrak",
-        "DexFundPledgeForVx": "Taruhan ViteX",
-        "DexFundPledgeForVip": "ViteX VIP",
-        "DexFundPledgeForSuperVip": "ViteX SVIP",
-        "DexFundConfigMarketsAgent": "Configure Delegations",
-        "TxReq": "Transfer",
-        "RewardReq": "Transfer",
-        "TxRes": "Transfer",
-        "TxResFail": "Transfer",
-        "SendRefund": "Transfer",
-        "GenesisReceive": "Asal",
-        "DexFundTransferTokenOwner": "Transfer kepemilikan utama operator",
-        "DexFundMarketOwnerConfig": "Konfigurasi pasangan perdagangan operator",
-        "DexFundBindInviteCode": "Gunakan Kode Rujukan",
-        "DexFundNewInviter": "Buat Kode Rujukan"
+        "RegisterSBP": "Pendaftaran SBP",
+        "RegisterSBP_V1": "Pendaftaran SBP",
+        "UpdateSBPBlockProducingAddress": "Perbarui Pendaftaran",
+        "UpdateSBPBlockProducingAddress_V1": "Perbarui Pendaftaran",
+        "RevokeSBP": "Cabut Registrasi",
+        "RevokeSBP_V1": "Cabut Registrasi",
+        "WithdrawSBPReward": "Claim Reward",
+        "WithdrawSBPReward_V1": "Claim Reward",
+        "VoteForSBP": "Pemungutan suara",
+        "VoteForSBP_V1": "Pemungutan suara",
+        "CancelSBPVoting": "Cabut Voting",
+        "CancelSBPVoting_V1": "Cabut Voting",
+        "StakeForQuota": "Dapatkan Kuota",
+        "StakeForQuota_V1": "Dapatkan Kuota",
+        "CancelQuotaStake": "Withdrawal of Stake",
+        "CancelQuotaStake_V1": "Withdrawal of Stake",
+        "IssueToken": "Penerbitan Token",
+        "IssueToken_V1": "Penerbitan Token",
+        "ReIssueToken": "Penerbitan Token Tambahan",
+        "ReIssueToken_V1": "Penerbitan Token Tambahan",
+        "BurnToken": "Hancurkan Token",
+        "BurnToken_V1": "Hancurkan Token",
+        "TransferTokenOwnership": "Transfer kepemilikan",
+        "TransferTokenOwnership_V1": "Transfer kepemilikan",
+        "DisableReIssue": "Edit jenis token",
+        "DisableReIssue_V1": "Edit jenis token",
+        "DexDeposit": "Setoran ViteX",
+        "DexDeposit_V1": "Setoran ViteX",
+        "DexWithdraw": "Penarikan ViteX",
+        "DexWithdraw_V1": "Penarikan ViteX",
+        "DexPlaceOrder": "Membuat Pesanan ViteX",
+        "DexPlaceOrder_V1": "Membuat Pesanan ViteX",
+        "DexCancelOrder": "Cabut Pesanan ViteX",
+        "DexCancelOrder_V1": "Cabut Pesanan ViteX",
+        "DexStakeForSuperVIP": "ViteX SVIP",
+        "DexStakeForSuperVIP_V1": "ViteX SVIP",
+        "DexConfigMarketAgents": "Configure Delegations",
+        "DexConfigMarketAgents_V1": "Configure Delegations",
+        "DexOpenNewMarket": "Daftar Token ViteX",
+        "DexOpenNewMarket_V1": "Daftar Token ViteX",
+        "DexStakeForVIP": "ViteX VIP",
+        "DexStakeForVIP_V1": "ViteX VIP",
+        "DexStakeForMining": "Taruhan ViteX",
+        "DexStakeForMining_V1": "Taruhan ViteX",
+        "CreateContractRequest": "Buat Kontrak",
+        "TransferRequest": "Transfer",
+        "ReIssueRequest": "Transfer",
+        "Response": "Transfer",
+        "ResponseFail": "Transfer",
+        "RefundByContractRequest": "Transfer",
+        "GenesisResponse": "Asal",
+        "FullNodeStake": "Stake for Full Node",
+        "FullNodeCancelStake": "Withdraw Full Node Stakes",
+        "UpdateSBPRewardWithdrawAddress": "Edit SBP Reward Withdraw Address"
     },
     "btn": {
         "cancel": "Batal",
@@ -152,11 +192,11 @@
         "operateSuccess": "Operasi sukses",
         "operateFail": "Operasi gagal",
         "unreceived": "Buka kunci dompet Anda sebelum digunakan",
-        "unLogin": "Please login before using referral code"
+        "unreceivedNum": "Please sign in to collect unreceived funds, currently you have {number} unreceived transaction(s)"
     },
     "beforeUse": {
         "title": "Baca Sebelum Digunakan",
-        "text1": "For your funds' safety, account creation function is not currently supported on web wallet. Please download Vite App to create an account. Vite platform would like to warn you that if you visit a phishing website or lose you backup, our company cannot recover your funds.",
+        "text1": "Demi keamanan dana Anda, membuat fungsi akun tidak didukung sementara di dompet web. Silakan unduh Aplikasi Vite untuk membuat akun. Platform Vite ingin memperingatkan Anda bahwa jika Anda mengunjungi situs web phishing atau kehilangan cadangan Anda, perusahaan kami tidak dapat memulihkan dana Anda.",
         "text2": "Harap perhatikan bahwa situs web kami tidak menyimpan kunci pribadi atau frasa unggulan Anda. Oleh karena itu, Anda perlu mengembalikan akun Anda melalui frase seed jika Anda memutuskan untuk mengubah browser, menghapus cookie lokal, atau mengubah PC.",
         "text3": "Harap berhati-hati dalam memastikan bahwa Anda merekam dan menyimpan frase benih Anda dengan akurat. Bahkan kesalahan sekecil apa pun akan menyebabkan Anda tidak berhasil mengembalikan alamat Anda."
     },
@@ -165,7 +205,7 @@
         "txt1": "x.vite.net adalah platform web yang mengintegrasikan dompet dan pertukaran. Secara resmi diluncurkan oleh Vite Labs.",
         "txt2": "Versi saat ini terutama berisi fungsi dompet, pertukaran desentralisasi ViteX, mempertaruhkan VITE untuk kuota, pendaftaran SBP, pemungutan suara dan penerbitan token. Coba fungsi kami yang baru dirilis ViteConnect: Anda dapat menggunakan Aplikasi Vite untuk masuk melalui pemindaian kode QR.",
         "txt3": "ViteX diluncurkan secara resmi. Datang dan mulai berdagang sekarang.",
-        "v": "Versi Saat Ini: {version}"
+        "v": ""
     },
     "pwdConfirm": {
         "conf": "Buka mode bebas kata sandi untuk membebaskan Anda dari memasukkan kata sandi selama setiap proses transaksi. ",
@@ -184,9 +224,9 @@
         "restore": "Pulihkan Akun dengan Seed Phrase",
         "record": "Hasilkan Seed Phrase",
         "prompt": "Seed Phrase mnemonic adalah satu-satunya cara untuk mengembalikan dompet Anda. Anda sangat disarankan untuk menuliskan frasa dan menyimpannya di tempat yang aman di mana hanya Anda yang dapat mengaksesnya.",
-        "placeholder": "Please enter your mnemonic seed phrase. Example: apple banana peach mango pear ...",
-        "empty": "Seed phrase cannot be empty",
-        "error": "Wrong seed phrase. Try again",
+        "placeholder": "Silakan masukkan frase seed mnemonic Anda",
+        "empty": "Masukan dari frase seed tidak boleh kosong",
+        "error": "Seed Phrase salah. Coba lagi",
         "hint": "Contoh: apel pisang peach mangga ...",
         "change": "Beralih ke {len} kata-kata Mnemonic"
     },
@@ -195,6 +235,12 @@
         "config": "Umum",
         "currency": "Mata Uang Default",
         "secure": "Keamanan",
+        "gate": "Custom Gateway",
+        "triggerGate": [
+            "Tutup",
+            "Buka"
+        ],
+        "gateHelp": "You can customize your gateway configuration when activating this feature. Currently this feature is mainly for developers.",
         "lang": "Bahasa",
         "block": "Current height",
         "version": "Versi",
@@ -216,7 +262,12 @@
             "30": "30 menit",
             "60": "1 jam",
             "720": "12 jam"
-        }
+        },
+        "theme": "Theme color",
+        "themeList": [
+            "Light",
+            "Dark"
+        ]
     },
     "create": {
         "input": "Silakan masukkan kata sandi Anda",
@@ -235,7 +286,7 @@
         }
     },
     "startCreate": {
-        "notice": "For your funds' safety, account creation function is not currently supported on web wallet. Please download Vite App to create an account.",
+        "notice": "Demi keamanan dana Anda, membuat fungsi akun tidak didukung sementara di dompet web. Silakan unduh Aplikasi Vite untuk membuat akun.",
         "goLogin": "Masuk",
         "goDex": "Pergi ke ViteX"
     },
@@ -256,24 +307,33 @@
         "saveSuccess": "Berhasil disimpan",
         "heads": {
             "name": "Nama",
-            "balance": "Saldo",
+            "balance": "Saldo Dompet",
             "onroad": "Jumlah Dompet yang Tidak Dapat Diterima",
             "gate": "Gateway Lintas Rantai Dompet",
             "totalExAmount": "Total Saldo Pertukaran",
             "availableExAmount": "Saldo Tersedia Pertukaran",
             "balanceTips": "You can transfer your assets to other addresses via clicking 'Send' button",
             "gateTips": "In this cross-chain section, you can map other tokens into Vite network. Click 'Receive' button to deposit assets to your Vite Wallet. Click 'Send' button to transfer your assets to other platforms. * Cross-chain receive/send process may charge fees, it also has its transfer limitation.",
-            "availableExAmountTips": "You can transfer your assets from Vite Wallet to ViteX Exchange via clicking 'Deposit' button. Click 'Withdraw' button to transfer assets from ViteX Exchange to Vite Wallet. No transaction fees caused during these processes."
+            "availableExAmountTips": "You can transfer your assets from Vite Wallet to ViteX Exchange via clicking 'Deposit' button. Click 'Withdraw' button to transfer assets from ViteX Exchange to Vite Wallet. No transaction fees caused during these processes.",
+            "unreceivedTips": "Unreceived funds will be received automatically after signing in"
         },
         "actionType": {
             "SEND": "Kirim",
-            "RECEIVE": "Menerima",
-            "CHARGE": "Menerima",
-            "WITHDRAW": "Kirim",
-            "EXCHARGE": "Deposito",
-            "EXWITHDRAW": "Penarikan",
+            "RECEIVE": "Deposito",
+            "CHARGE": "Deposito",
+            "WITHDRAW": "Penarikan",
+            "EXTRANSFER": "Transfer",
             "EXRECRODS": "Riwayat",
-            "RECRODS": "Riwayat"
+            "RECRODS": "Riwayat",
+            "EXCHARGE": "Deposito",
+            "EXWITHDRAW": "Penarikan"
+        },
+        "transferConfirm": {
+            "from": "Dari",
+            "to": "Untuk",
+            "wallet": "Wallet Account",
+            "dex": "Exchange Account",
+            "avaliableAmount": "Saldo"
         },
         "addToken": {
             "title": "Tambahkan Token",
@@ -371,13 +431,6 @@
                 "WRONG_WITHDRAW_ADDRESS": "Alamat transfer salah"
             }
         },
-        "receive": {
-            "title": "Terima",
-            "codeTips": "Pindai kode QR dan transfer {tokenSymbol} kepada saya",
-            "addressTitle": "Alamat penerima",
-            "amountTitle": "Jumlah menerima",
-            "amountPlaceholder": "Silakan masukkan jumlah terima"
-        },
         "charge": {
             "title": "Cross-Chain Receive Funds",
             "addrErr": "Ada yang salah dengan node gateway, harap periksa pengaturan jaringan Anda",
@@ -393,6 +446,7 @@
         },
         "withdraw": {
             "title": "Cross-Chain Send Funds",
+            "btn": "Penarikan",
             "balanceErrMap": {
                 "notEnough": "Saldo tidak mencukupi",
                 "overMax": "Send amount should be less than {max}",
@@ -417,6 +471,9 @@
     },
     "viteExplorer": {
         "title": "Block Explorer"
+    },
+    "viteScanExplorer": {
+        "title": "ViteScan"
     },
     "wallet": {
         "title": "Manajemen Kuota",
@@ -530,7 +587,7 @@
         "maxAmt": "Jumlah penarikan harus dalam [{minAmount}, {maxAmount}]",
         "cancelLimitAmt": "Jumlah taruhan tidak boleh kurang dari {num}",
         "withdrawalStaking": "Penarikan Token Staked",
-        "myAddr": "Current Address",
+        "myAddr": "Saya",
         "confirm": {
             "help": {
                 "t1": "Apa itu Kuota?",
@@ -578,11 +635,39 @@
         "tAddress": "Alamat",
         "sum": "Jumlah"
     },
+    "walletFullNode": {
+        "title": "Full Nodes",
+        "help": {
+            "title": "About",
+            "t1": "Glossary",
+            "txt1": "[Number of Registered Nodes]  The number of full nodes registered with the current address",
+            "txt2": "[Number of Active Nodes]  The number of active full nodes registered with the current address",
+            "txt3": "[Number of Rewarding nodes]  Number of nodes being rewarded",
+            "t2": "Multiple Full nodes can be registered with the same address, but must be staked individually at least 10,000 VITE each; When calculating Active Node Reward, if staking amount / 10000 yields a whole number that is greater than or equal to the number of active nodes, all active nodes will be rewarded; If staking amount / 10000 yields a whole number that is less than the number of active nodes, the number of nodes being rewarded equals to the whole number.",
+            "t3": "Calculation of voting rewards does not depend on the number of nodes, but the staking amount."
+        },
+        "confirmText": "Confirm to stake {amount} VITE for quota, staking can be cancelled after {days} days",
+        "addQuota": {
+            "address": "Staking Address",
+            "stakeDays": "Staking Periode",
+            "placeholder": "Minimum Stake {min} VITE"
+        },
+        "quotaContent": {
+            "onlineReward": "Active Node Reward",
+            "voteReward": "Voting Reward",
+            "yesterday": "yesterday",
+            "all": "Accumulated VITE: {num}",
+            "nodeInfo": "Node Information",
+            "onlineNodes": "Active Nodes",
+            "rewardNodes": "Rewarding Nodes",
+            "stakeAmount": "Node Staking"
+        }
+    },
     "walletSBP": {
         "title": "SBP",
         "help": {
             "title": "Tentang SBP",
-            "text": "SBP（Snapshot Block Producer）is a node that has right to create blocks, you can register to become a SBP candidate by staking a certain amount of VITE, each round (about 75 seconds) will elect 25 SBPs, the SBPs will be elected from random 23 out of top 25 candidate nodes, plus random 2 out of the candidate nodes ranking 26th-100th on the list. The 50% of total SBP rewards will be allocated to the block creation node, the other 50% will be allocated to nodes that are ranked on top 100 as voting rewards. One registration address (staking address) can register multiple block creation nodes (node names), a node name cannot be used if the node name has been registered by a registration address. A node name can switch block creation address, however, block creation address cannot be reused by other node names."
+            "text": "SBP （Snapshot Block Producer） adalah simpul yang memiliki hak untuk membuat blok, Anda dapat mendaftar untuk menjadi kandidat SBP dengan mempertaruhkan sejumlah VITE, setiap putaran (sekitar 75 detik) akan memilih 25 SBP, SBP akan dipilih dari 23 dari 25 kandidat node acak, ditambah 2 random dari node kandidat peringkat 26-100 di daftar. 50% dari hadiah blok ciptaan akan dialokasikan ke node blok ciptaan, 50% lainnya akan dialokasikan ke node yang peringkat di atas 100 sebagai hadiah voting. Satu alamat registrasi (staking address) dapat mendaftarkan beberapa node pembuatan blok (nama simpul), nama simpul tidak dapat digunakan jika nama simpul telah didaftarkan oleh alamat pendaftaran. Nama simpul dapat mengganti alamat pembuatan blok, namun, alamat pembuatan blok tidak dapat digunakan kembali oleh nama simpul lainnya."
         },
         "register": "Pendaftaran SBP",
         "cancel": "Pembatalan SBP",
@@ -605,7 +690,10 @@
             "rightBtn": "Siap Mendaftar",
             "edit": {
                 "title": "Ubah alamat pembuatan block",
-                "placeholder": "silakan masukkan alamat pembuatan block baru",
+                "newBlockProducer": "silakan masukkan alamat pembuatan block baru",
+                "newRewardAddress": "please input new reward withdraw address",
+                "changeBlockProducer": "Alamat Pembuatan Block",
+                "changeRewardAddress": "Reward Withdraw Address",
                 "btn": "Konfirmasikan perubahan"
             }
         },
@@ -613,6 +701,7 @@
             "title": "Formulir pendaftaran",
             "nodeName": "Nama Simpul",
             "producerAddr": "Alamat Pembuatan Block",
+            "rewardWithdrawAddress": "Reward Withdraw Address",
             "quotaAddr": "Staking Address",
             "quotaTime": "Staking Periode",
             "time": "7776000 snapshot blocks（approximately 90 days）",
@@ -720,6 +809,7 @@
         },
         "vb": {
             "title": "ViteConnect",
+            "closeAlert": "close",
             "connect": {
                 "tips": "Memindai kode QR melalui Aplikasi Vite Wallet"
             },
@@ -732,6 +822,61 @@
                 "download": "Download Vite Wallet"
             },
             "accountName": "Alamat ViteConnect"
+        },
+        "ledger": {
+            "title": "Ledger Device",
+            "accountName": "Ledger Wallet",
+            "verifyAddress": "Verify address",
+            "closeAlert": "Batal",
+            "start": {
+                "title": "Support Hardware Wallets: Ledger Nano S / Ledger Nano X",
+                "connectError": "Having Connection Issues?",
+                "introduction": "App Installation & Usage Instructions",
+                "introductionUrl": "https://support.ledger.com/hc/en-us/articles/115005165269-Connection-issues-with-Windows-or-Linux",
+                "connectErrorUrl": "https://support.ledger.com/hc/en-us/articles/115005165269-Connection-issues-with-Windows-or-Linux"
+            },
+            "connectWithUSB": "Use USB",
+            "connectWithBlu": "Use Bluetooth",
+            "connectLedger": "Connect to Ledger",
+            "connect": {
+                "title": "Address Select",
+                "tips": "Select an address to use:",
+                "selectConnectType": "Choose connection type: (Bluetooth is only supported on Ledger Nano X)",
+                "cancelSelect": "Select a device to connect",
+                "connectError": "Connect failed. Please confirm Vite app is opened on device",
+                "interfaceNotAvailable": "Connect failed. Please check USB cable is connected. If you connect through Bluetooth, switch off Bluetooth and switch on again",
+                "receiveBlockSuccess": "Successfully received {num} transaction",
+                "introduction": {
+                    "1": {
+                        "title": "Step 1: ",
+                        "content": "Connect Ledger device and enter PIN code"
+                    },
+                    "2": {
+                        "title": "Step 2: ",
+                        "content": "Open Vite app on Ledger"
+                    }
+                }
+            },
+            "addressSelect": {
+                "index": "Index",
+                "address": "Alamat",
+                "balance": "Saldo",
+                "unreceived": "Tidak diterima",
+                "nextPage": "Next page",
+                "prePage": "Last page",
+                "confirm": "Memastikan",
+                "unUsedAccount": "New"
+            },
+            "confirm": {
+                "tips": "Please confirm the transaction on your Ledger device",
+                "verifyAddress": "Please verify the address on your Ledger device",
+                "alert": "Warning",
+                "alertContent": "Address has been denied on Ledger device. Please double verify if this address matches the address displayed on your Ledger device. If yes, ignore this message and go ahead to confirm the transaction, otherwise DO NOT send asset to the address and quit immediately.",
+                "alertLeftBtn": "I confirm the addresses are matched",
+                "alertRightBtn": "Addresses mismatch. Get me out of here!",
+                "userCancel": "Transaction is cancelled on Ledger",
+                "userCancelByWeb": "You cancelled the transaction in Vite wallet. In this case, the transaction will be abandoned and never go through to blockchain even if it is confirmed on your Ledger device."
+            }
         },
         "invite": {
             "inviteTitle": "Mengundang teman-teman",
@@ -752,8 +897,11 @@
             "inviteRule": "Aturan",
             "ruleItems": [
                 "Anda dapat menghabiskan <span class = 'strong'> 1000 VITE </span> untuk membuat kode referensi. Dana ini akan dimasukkan ke dalam kumpulan dividen dan didistribusikan kepada pemegang VX",
-                " <span class='strong'>5%</span> biaya perdagangan yang dihasilkan oleh pengguna yang menggunakan kode rujukan akan diperlakukan sebagai biaya perdagangan yang dapat menambang VX.",
-                "Trader yang menggunakan kode referensi dapat menikmati <span class = 'strong'> 10% </span> selama perdagangan"
+                " <span class='strong'>5%</span> biaya perdagangan yang dihasilkan oleh pengguna yang menggunakan kode rujukan akan diperlakukan sebagai biaya perdagangan yang dapat menambang VX."
+            ],
+            "receiveRuleItems": [
+                "Invited users will receive an extra <span class='strong'>2.5%</span> of trading as mining rewards and <span class='strong'>1.25%</span> of market-making as mining rewards",
+                "Enjoy <span class='strong'>10%</span> off trading fees with an invitation code"
             ]
         }
     },
@@ -761,7 +909,7 @@
         "title": "VITE Konversi",
         "help": {
             "title": "Pemahaman Cepat tentang Konversi VITE",
-            "text": "You can convert ERC20 VITE into VITE at Vite Pre-Mainnet through VITE conversion. During conversion, your ERC20 VITE will be transferred to Ethereum black hole address: 0x1111111111111111111111111111111111111111, and you will receive the same amount of VITE in your Vite address after the transaction to Ethereum black hole address has completed. During the conversion, fee of transaction to the Ethereum black hole address come from your current ETH address. After submitting the conversion, please wait at least 30 confirmations in Ethereum network, you can find the transaction history in conversion history."
+            "text": "Anda dapat memigrasikan token ERC20 ke VITE ke dalam fungsi konversi TestNet oleh VITE kami. Di TestNet, memberikan suara Anda untuk SBP resmi untuk mengumpulkan hadiah, tarif tahunan dapat mencapai 20%. Token VITE ERC20 Anda akan ditransfer ke alamat black hole Ethereum: {blackAddr}, Anda akan menerima jumlah VITE yang sama di alamat Vite Anda ketika alamat black hole Ethereum telah menerima transaksi dan dikonfirmasi. Setelah Anda dalam proses konversi, konfirmasikan bahwa ada cukup VITE dan ETH (sebagai gas) di alamat Ethereum dompet Vite Anda."
         },
         "gas": "Biaya Penambangan",
         "record": "Sejarah Konversi",
@@ -782,6 +930,12 @@
         "depthStep": "{step} digit",
         "blocking": "Terjadi kemacetan jaringan, silakan coba lagi nanti",
         "supportMining": "Mineable Trading Pairs",
+        "cmcHelp": "View VITE on CoinMarketCap",
+        "supportTradeMining": "Eligible for trading as mining",
+        "supportOrderMining": "Eligible for market-making as mining",
+        "zeroFee": "Zero Fee",
+        "buyMiningPrice": "Qualifies for mining when buy price is greater than {price}",
+        "sellMiningPrice": "Qualifies for mining when sell price is less than {price}",
         "operator": {
             "noName": "Anonymous Operator",
             "overview": "Pengantar",
@@ -795,10 +949,13 @@
             "title": "Trading Pair Details",
             "tokenTab": "Token Details",
             "operatorTab": "Detail Operator"
-        }
+        },
+        "depthBuyMiningPrice": "Mining Range Above",
+        "depthSellMiningPrice": "Mining Range Below",
+        "inMiningRange": "Mining Range"
     },
     "trade": {
-        "more":"more",
+        "more": "more",
         "search": "Pencarian",
         "txPair": "Pasangan",
         "price": "Harga",
@@ -865,7 +1022,9 @@
         "depth": {
             "buy": "Beli",
             "sell": "Jual",
-            "all": "Semua"
+            "all": "Semua",
+            "avgPrice": "Avg.Price:",
+            "sum": "Sum {symbol}:"
         },
         "noData": {
             "favorite": "Anda belum punya favorit",
@@ -874,8 +1033,8 @@
         "limitPrice": {
             "title": "Batas",
             "fee": "Biaya",
-            "adviseToSVip":"成为超级VIP可免交易所基础费率",
-            "feeRuleWithSVip":"Zone Fees * Referral Discount. ATTENTION: The adjustment and discount of fees will only affect new orders, the former orders' charge remains the same.",
+            "adviseToSVip": "成为超级VIP可免交易所基础费率",
+            "feeRuleWithSVip": "Zone Fees * Referral Discount. ATTENTION: The adjustment and discount of fees will only affect new orders, the former orders' charge remains the same.",
             "text": "Halaman ini adalah halaman pratinjau data transaksi. Silakan masuk untuk berdagang.",
             "validAmount": "Volume harus lebih besar dari {amount}{token}",
             "priceNotNull": "Jumlah tidak boleh kosong",
@@ -887,77 +1046,118 @@
             "operatorFee": "Biaya Zona (Dibebankan oleh Operator): {fee}",
             "vipFee": "Diskon VIP: {fee}",
             "inviteFeeDiscount": "Diskon Referral: {fee} off",
+            "svipFee": "SVIP: 0% base transaction fee",
             "feeRule": "(Biaya Transaksi Dasar - diskon VIP + Biaya Zona) * Diskon Referensi. PERHATIAN: Penyesuaian dan diskon biaya hanya akan mempengaruhi pesanan baru, biaya pesanan sebelumnya tetap sama."
         },
-        "vipConfirm": {
-            "cancelVip": "Batalkan VIP",
-            "openVip": "Menjadi VIP",
-            "openStakingAmount": "Jumlah Taruhan untuk Menjadi VIP",
-            "cancelStakingAmount": "Jumlah Taruhan yang Dapat Dipulihkan",
-            "noBalance": "Saldo tidak mencukupi",
-            "openHint": "Anda akan menikmati hak istimewa dari diskon biaya perdagangan 0,1% setelah menjadi VIP. Jumlah taruhan 10.000 VITE dapat diambil secara manual setelah 30 hari.",
-            "cancelHint": "Anda dapat mengambil jumlah taruhan Anda kira-kira {time}. Anda akan kehilangan hak istimewa VIP Anda setelah mengambil.",
-            "openSuccess": "Berhasil Diterapkan! Status VIP akan mulai berlaku nanti.",
-            "openFail": "Gagal menerapkan VIP",
-            "cancelSuccess": "Batalkan VIP Berhasil",
-            "cancelFail": "Batalkan Gagal",
-            "adviseToCancel":"由于您已成为超级VIP，平台手续费已为0，建议您取回普通VIP的抵押金额。"
-
-        },
-        "svipConfirm": {
-            "open":"开通",
-            "cancel":"取消",
-            "cancelVip": "Cancel SVIP",
-            "openVip": "Become a SVIP",
-            "openStakingAmount": "Staking Amount for Becoming a SVIP",
-            "cancelStakingAmount": "Retrievable Staking Amount",
-            "noBalance": "Insufficient Balance",
-            "openHint": "SVIP开通后，可免除基础手续费，开通SVIP需抵押 1,000,000VITE，30天后可手动取回",
-            "cancelHint": "You can retrieve your staking amount at approximately {time}. You will lose your SVIP privilege after retrieving.",
-            "openSuccess": "Applied Successful! SVIP status will come into effect later.",
-            "openFail": "Failed to apply SVIP",
-            "cancelSuccess": "Cancel SVIP Successful",
-            "cancelFail": "Cancel Failed"
-        },
-        "proxy":{
-            "title":"委托代理",
-            "subTitle":"交易委托",              
-            "successProxy":"委托成功",
-            "failProxy":"委托失败",
-            "successCancelProxy":"撤销委托成功",
-            "failCancelProxy":"撤销委托失败",
-            "info":"了解委托",
-            "new":"新建委托",
-            "active":{
-                "title":"委托记录",
-                "head":["委托地址","委托交易对","操作"],
-                "operate":["增加交易对","减少交易对","撤销委托"]
+        "proxy": {
+            "title": "委托代理",
+            "subTitle": "交易委托",
+            "successProxy": "委托成功",
+            "failProxy": "委托失败",
+            "successCancelProxy": "撤销委托成功",
+            "failCancelProxy": "撤销委托失败",
+            "info": "了解委托",
+            "new": "新建委托",
+            "active": {
+                "title": "委托记录",
+                "head": [
+                    "委托地址",
+                    "Pasangan Perdagangan",
+                    "Beraksi"
+                ],
+                "operate": [
+                    "增加交易对",
+                    "减少交易对",
+                    "撤销委托"
+                ]
             },
-            "passive":{
-                "title":"接受委托记录",
-                "head":["委托地址","委托交易对"]
+            "passive": {
+                "title": "接受委托记录",
+                "head": [
+                    "委托地址",
+                    "Pasangan Perdagangan"
+                ]
             },
-
             "dialog": {
-              "cancel": "取消",
-              "cancelAllTips":"确认撤销对{trustAddress}所有的交易委托?",
-              "rTxtMap": {
-                "new": "添加",
-                "add": "添加",
-                "delete": "确认修改",
-                "deleteAll": "确认"
-              },
-              "titleMap": {
-                "new": "新增委托",
-                "add": "增加委托交易对",
-                "delete": "减少委托交易对",
-                "deleteAll": "确认撤销委托"
-              },
-              "confirm":{
+                "cancel": "Batal",
+                "cancelAllTips": "确认撤销对{trustAddress}所有的交易委托?",
+                "rTxtMap": {
+                    "new": "Tambah",
+                    "add": "Tambah",
+                    "delete": "Memastikan",
+                    "deleteAll": "Memastikan"
+                },
+                "confirm": {
                     "title": "确认委托交易对",
-                    "cancel": "取消",
-                    "ok": "确认"
-              }
+                    "cancel": "Batal",
+                    "ok": "Memastikan"
+                },
+                "titleMap": {
+                    "new": "新增委托",
+                    "add": "增加委托交易对",
+                    "delete": "减少委托交易对",
+                    "deleteAll": "确认撤销委托"
+                }
+            }
+        },
+        "openapi": {
+            "title": "API",
+            "myKey": "My API Key",
+            "createTime": "Created Time",
+            "permissions": "Applied Trading Pairs",
+            "createKey": "Create API Key",
+            "deleteKey": "Delete API",
+            "deleteAlert": "The current API will no longer be accessible if confirm to proceed. Existing package will be retained and re-activated upon creation of a new API Key.",
+            "confirmDelete": "Confirm and Delete",
+            "cancel": "Batal",
+            "agentAddressStakingAmount": "Delegation Staked Quota",
+            "staking": "Stake",
+            "package": "Package",
+            "expireTime": "Expiration Date",
+            "callNum": "Triggers/min",
+            "callNumInfo": "{maxCount} transactions/min",
+            "price": "Biaya",
+            "priceInfo": "{price} VX/mth",
+            "upgrade": "Upgrade",
+            "balanceAlert": "Cannot create if VITE balance is less than {balanceLimit}.",
+            "noSupportForHardware": "Hardware Wallet is not supported at the moment",
+            "tips": {
+                "title": "Notice",
+                "0": "ViteX is releasing official API to provide access to markets and real-time trading services. Follow the instructions below to properly acquire an API private key.",
+                "0-step1": "1. Create API",
+                "0-step2": "2. Authorize delegation of selected trading pairs",
+                "0-step3": "3. Stake quota for API delegation address",
+                "0-step4": "View <a href=\"https://vite.wiki/dex/api/dex-apis.html\" target=\"_blank\">API Documentation</a> for further support",
+                "1": "One set of API Key and Secret is allowed for the same address at any given time.",
+                "2": "To avoid asset loss, Do Not disclose your Access Key and Secret",
+                "3": "The API package is set with the free base package at 10 transactions per minute by default, upgrade options available."
+            },
+            "stakingForQuota": {
+                "title": "Delegation Quota",
+                "agentAddress": "Delegation Address",
+                "stakingAmount": "Stake Amount",
+                "ok": "Memastikan"
+            },
+            "keyConfirm": {
+                "accessKey": "Access Key",
+                "secretKey": "Secret Key",
+                "agentAddress": "Delegation Address",
+                "title": "API Created Successfully",
+                "tips": {
+                    "title": "Pemberitahuan Penting",
+                    "0": "To avoid asset loss, Do Not disclose your Access Key and Secret Key.",
+                    "1": "In cases of lost secret key, Delete the current API and Re-Apply for a new API key."
+                },
+                "warn": "The Secret key is displayed only once and cannot be found back if lost, please keep it properly."
+            },
+            "upgradeConfirm": {
+                "title": "Upgrade Package",
+                "currentPackage": "Current",
+                "selectPackage": "Select New",
+                "selectTime": "Valid For",
+                "month": " Mth",
+                "payAmount": "Total",
+                "balance": "VX Balance"
             }
         }
     },
@@ -1048,7 +1248,8 @@
                 "Jumlah",
                 "Terisi",
                 "Terisi%",
-                "Rata-rata"
+                "Rata-rata",
+                "Total"
             ],
             "rowMap": {
                 "cancel": "Batal"
@@ -1090,9 +1291,9 @@
                 "Harga",
                 "Jumlah",
                 "Terisi",
-                "Terisi%",
                 "Rata-rata",
                 "Biaya",
+                "Total",
                 "Status"
             ],
             "rowMap": {
@@ -1122,6 +1323,7 @@
         "addQuota": "Buat staking baru",
         "add": "Tambah",
         "withdraw": "Ambil kembali",
+        "withdrawList": "Withdrawal List",
         "tbHead": {
             "date": "Tanggal",
             "fee": "Biaya Perdagangan",
@@ -1130,8 +1332,11 @@
         },
         "txTitle": "Perdagangan sebagai Total Pendapatan Penambangan",
         "quotaTitle": "Staking sebagai Pendapatan Total Penambangan",
-        "addHint": "Penghasilan staking sebagai Pertambangan akan dihitung pada 13:00 (UTC + 8) setiap hari. Anda dapat secara manual mengambil jumlah stake Anda setelah stake menjadi efektif",
-        "withdrawHint": "Anda tidak lagi dapat menambang VX setelah mengambil",
+        "addHint1": "Single stake should be at least 134 VITE",
+        "addHint2": "VITE staking will be effective immediately after submission. Staking can be canceled after 3 days",
+        "addHint3": "Staked amount will be released after the 7-day waiting period",
+        "withdrawHint1": "You will no longer be able to mine VX after staking is canceled",
+        "withdrawHint2": "It takes 7 days to return unstaked VITE coins to exchange balance",
         "addTitle": "Staking VITE untuk Penambangan",
         "withdrawTitle": "Mengambil VITE Staked",
         "addPlaceHolder": "Silakan masukkan jumlah taruhan, setidaknya 134 VITE",
@@ -1141,23 +1346,87 @@
         "stakingBalance": "Jumlah Taruhan yang Dapat Dipulihkan",
         "hintTitle": "Pemberitahuan Penting",
         "comingHint": "Fungsi penambangan VX akan segera hadir, nantikan. Anda bisa mendapatkan VX dalam lima cara: 1. Trading sebagai Penambangan, 2. Listing sebagai Penambangan, 3. Merujuk sebagai Penambangan, 4. Staking sebagai Penambangan, 5. Pembuatan pasar sebagai Penambangan. Pengguna yang memegang VX menikmati pembayaran dari kumpulan dividen bersama.",
-        "more": "Pelajari lebih lanjut tentang aturan penambangan VX"
+        "more": "Pelajari lebih lanjut tentang aturan penambangan VX",
+        "fee": "Biaya Perdagangan",
+        "todayTrade": "Mining Details",
+        "dividends": "24H Expected Mined Volume",
+        "view": "View Live Mining Dashboard",
+        "inviteCount": "Referrals",
+        "help": "Current trading fees displayed on this page contains only the 0.2% ViteX base transaction fees, please note that operator fees shall be taken into consideration when calculating mining cost"
+    },
+    "tradeVip": {
+        "title": "VIP Status",
+        "open": "Menjadi VIP",
+        "cancel": "Cancel {type}",
+        "help": {
+            "title": "About ViteX VIP"
+        },
+        "helpConfirm": {
+            "t1": "VIP",
+            "txt1": "Stake 10,000 VITE to acquire VIP status and receive 50% off trading fees. Staking can be canceled after 30 days.",
+            "t2": "SVIP",
+            "txt2": "Stake 1M VITE to become a SVIP and enjoy 0 base trading fees. Staking can be canceled after 30 days.",
+            "txt3": "SVIP supports staking for any valid account address. Stake for them to get SVIP status!"
+        },
+        "vipConfirm": {
+            "cancelVip": "Cancel VIP Status",
+            "openVip": "Menjadi VIP",
+            "openStakingAmount": "Jumlah Taruhan untuk Menjadi VIP",
+            "cancelStakingAmount": "Available Stake Balance",
+            "noBalance": "Saldo tidak mencukupi",
+            "openHint": "You will receive 0.1% trading fee deduction as a VIP. The staking of 10,000 VITE can be withdrawn after 30 days.",
+            "cancelHint": "VIP status will be canceled immediately.",
+            "openSuccess": "Your VIP status is activated! It will take effect in a few seconds.",
+            "openFail": "VIP Registration Failed",
+            "cancelSuccess": "Batalkan VIP Berhasil",
+            "cancelFail": "Batalkan Gagal",
+            "adviseToCancel": "There will be no base transaction fees with your current status as our SVIP, we therefore recommend you to revoke the staked VITE，which is required for general VIP members.",
+            "address": "Enable VIP Status",
+            "addressPlaceholder": "Current address is the default address, address cannot be modified later"
+        },
+        "svipConfirm": {
+            "open": "Upgrade",
+            "cancel": "Batal",
+            "cancelVip": "Cancel SVIP",
+            "openVip": "Become a SVIP",
+            "openStakingAmount": "Staking Amount for Becoming a SVIP",
+            "cancelStakingAmount": "Available Stake Balance",
+            "noBalance": "Saldo tidak mencukupi",
+            "openHint": "You will enjoy 0% base transaction fee when upgrading to SVIP. The stake of 1,000,000 VITE can be withdrawn after 30 days.",
+            "cancelHint": "SVIP privileges will be discontinued once staking is revoked",
+            "openSuccess": "Applied Successful! SVIP status will come into effect later.",
+            "openFail": "Failed to apply SVIP",
+            "cancelSuccess": "Cancel SVIP Successful",
+            "cancelFail": "Batalkan Gagal",
+            "address": "Enable SVIP Status",
+            "addressPlaceholder": "Address to be Enabled with SVIP Status",
+            "cancelAddress": "SVIP Address"
+        },
+        "vipListTitle": "VIP Records",
+        "openAddress": "Enabled Address",
+        "type": "VIP Type"
     },
     "inviteMining": {
-        "title": "邀请挖矿总收益"
+        "title": "Mengacu pada Total Pendapatan Penambangan",
+        "myInviteIncome": "Referral Proceeds",
+        "inviteTradeIncome": "Referred Trading Proceeds",
+        "inviteOrderIncome": "Referred Market-Making Proceeds"
     },
     "orderMining": {
         "title": "挂单挖矿总收益",
         "tbHead": {
-            "date": "日前",
+            "date": "Tanggal",
             "ratio": "占比",
-            "mining": "挖矿金额"
-        }
+            "mining": "Jumlah"
+        },
+        "market": "{name} Market",
+        "estimate": "{name} Today's Minable Amount"
     },
     "tradeDividend": {
         "title": "Dividen",
         "poolTitle": "Kelompok Dividen Biaya Perdagangan",
         "listTitle": "Dividen Saya",
+        "allPrice": "Total Nilai Taksiran",
         "date": "Tanggal",
         "VX": "Holding VX",
         "coin": "Tipe",
@@ -1165,7 +1434,48 @@
         "price": "Total Nilai Taksiran",
         "hintTitle": "Pemberitahuan Penting",
         "comingHint": "Fungsi penambangan dan dividen VX akan segera hadir, tunggu saja. Sistem akan mendistribusikan 1% dari BTC, ETH, VITE, USDT dari total kumpulan ke semua pengguna VX sebanding dengan jumlah VX yang mereka pegang. Kumpulan dividen awal akan mulai dari 0 dan akan tumbuh sesuai dengan jumlah biaya yang dikumpulkan oleh ViteX. Trader harus memiliki minimal 10 VX untuk dapat menerima dividen dari kumpulan dividen bersama yang terdiri dari transaksi dasar, daftar, dan biaya pembuatan kode rujukan. ",
-        "more": "Pelajari lebih lanjut tentang aturan dividen VX"
+        "more": "Pelajari lebih lanjut tentang aturan dividen VX",
+        "help": "Reward Rules: 1. A minimum of 10 VX must be staked to receive dividends. 2. Submission of staking request allows for dividends starting the nearest distribution. 3. Staked amount will be released after the 7-day waiting period",
+        "lockedAmount": "Jumlah Stake",
+        "lockAmountTips": "Receive Dividends on 10 VX or Above",
+        "unlockAmount": "Unlocking Amount",
+        "addHint1": "A minimum of 10 VX must be staked to receive dividends",
+        "addHint2": "Submission of staking request allows for dividends starting the nearest distribution",
+        "addHint3": "Staked amount will be released after the 7-day waiting period",
+        "autoLock": "Automatic Staking",
+        "openAutoLock": {
+            "title": "Enable Automatic Staking",
+            "text": "Mined VX will be automatically staked once enabled"
+        },
+        "closeAutoLock": {
+            "title": "Disable Automatic Staking",
+            "text": "Mined VX will not be automatically staked when turned off"
+        },
+        "lock": "Stake",
+        "unlock": "Unstake",
+        "lessMin": "Minimum 1 VX",
+        "lockVXConfirm": {
+            "title": "Stake VX",
+            "available": "Saldo Tersedia Pertukaran",
+            "amountPlaceholder": "Please input staking amount, minimum 1 VX",
+            "notEnough": "Insufficient Exchange Balance",
+            "submit": "Confirm to Stake",
+            "amountText": "Jumlah"
+        },
+        "unlockVXConfirm": {
+            "title": "Unstake VX",
+            "available": "Available Stake Balance",
+            "amountPlaceholder": "Please input amount, minimum 1 VX",
+            "notEnough": "Insufficient Amount",
+            "submit": "Confirm to Unstake",
+            "amountText": "Jumlah",
+            "hint": "It takes about 7 days to unlock."
+        },
+        "unlockList": {
+            "title": "Retrieving",
+            "amount": "Jumlah",
+            "time": "Available Date"
+        }
     },
     "tradeOperator": {
         "title": "Operator",
@@ -1217,6 +1527,9 @@
         "stopFail": "Penangguhan Gagal",
         "openSuccess": "Pemulihan Berhasil",
         "openFail": "Pemulihan Gagal",
+        "changeOwnerSuccess": "Transfer Successful",
+        "changeOwnerFaill": "Transfer Failed",
+        "submitChange": "Confirm to transfer",
         "changeOwnerHint": "PEMBERITAHUAN: Anda tidak akan dapat mengumpulkan atau menyesuaikan biaya setelah kepemilikan ditransfer serta Anda tidak dapat membatalkan tindakan transfer ini",
         "currentMaker": "Pembuat",
         "confirmFee": "Biaya",
@@ -1230,6 +1543,82 @@
             "txNum": "Volume",
             "feeRate": "Nilai",
             "feeIncome": "Pendapatan"
+        }
+    },
+    "mobileAssets": {
+        "allAssets": "Estimated Assets Value ({token})",
+        "tokenInfoTitle": "Token Details",
+        "transfer": "Transfer",
+        "trade": "Trade",
+        "chooseTxPair": "Choose Trading Pair"
+    },
+    "mobileTradeCenter": {
+        "highPrice": "High",
+        "lowPrice": "Low",
+        "quantity": "24H Vol",
+        "buyTitle": "Beli",
+        "sellTitle": "Jual",
+        "price": "Price ({token})",
+        "buy": {
+            "price": "Harga",
+            "quantity": "Jumlah"
+        },
+        "sell": {
+            "price": "Harga",
+            "quantity": "Jumlah"
+        },
+        "orderQuantity": "Jumlah",
+        "orderPrice": "Harga",
+        "executedQuantity": "Terisi",
+        "avgPrice": "Avg"
+    },
+    "mobileDividend": {
+        "title": "Dividen",
+        "poolTitle": "Dividend Pool ({token})",
+        "myDividendTitle": "Total Estimated Value of Dividends ({token})",
+        "listTitle": "Dividend Details",
+        "lockingTitle": "My Staking",
+        "viewLink": "Unstaking Status"
+    },
+    "mobileMining": {
+        "title": "Pertambangan",
+        "miningTrade": "Perdagangan",
+        "miningStaking": "Staking",
+        "miningInvite": "Referral",
+        "miningOrder": "Market-Making",
+        "tradeTotalIncome": "Total Income ({token})",
+        "stakingTotalIncome": "Total Income ({token})",
+        "inviteTotalIncome": "Total Income ({token})",
+        "orderTotalIncome": "Total Income ({token})",
+        "fee": "Biaya",
+        "listTitle": "Mining History",
+        "viewLink": "Live Mining Dashboard",
+        "inviteTradeIncome": "Referred Trading Details",
+        "inviteOrderIncome": "Referred Market-Making Details",
+        "myStaking": "My Staking"
+    },
+    "mobileBottomBar": {
+        "center": "Trade",
+        "assets": "Aset",
+        "mining": "Pertambangan",
+        "order": "Order"
+    },
+    "mobileOrder": {
+        "filterDate": "Tanggal",
+        "filterToken": "Tipe",
+        "all": "Semua",
+        "3month": "3 months",
+        "1month": "1 month",
+        "1week": "1 week",
+        "1day": "1 day",
+        "clear": "Clear",
+        "submit": "Pencarian"
+    },
+    "desktop": {
+        "unlock": "unlock",
+        "unreceivedTx": {
+            "title": "You have received {num} transactions.",
+            "body": "Amount：{amount} {symbol} \nFrom Address: {address}"
         }
     }
 }
