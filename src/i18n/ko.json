@@ -196,7 +196,7 @@
     },
     "beforeUse": {
         "title": "사용하기 전에 읽어주세요",
-        "text1": "자산 안전을 위해 계정 생성은 웹 지갑에서 잠정적으로 지원하지 않습니다. Vite 앱을 다운로드해 계정을 생성하세요. Vite 플랫폼은 피싱 웹 사이트를 방문하거나 백업을 분실할 경우 회사에서 자금을 복구할 수 없음을 경고합니다.",
+        "text1": "For your funds' safety, account creation function is not currently supported on web wallet. Please download Vite App to create an account. Vite platform would like to warn you that if you visit a phishing website or lose you backup, our company cannot recover your funds.",
         "text2": "당사 웹 사이트는 개인 키 또는 시드 문구(니모닉 코드) 를 저장하지 않습니다. 따라서 브라우저를 변경하거나 로컬 쿠키를 지우거나 PC를 변경하기로 결정한 경우 시드 문구를 통해 계정을 복원해야합니다.",
         "text3": "시드 문구를 정확하게 기록하고 안전하게 보관할 수 있도록 적절한 조치를 취하십시오. 아주 작은 오류가 있을 경우 주소를 성공적으로 복원할 수 없습니다."
     },
@@ -224,9 +224,9 @@
         "restore": "시드 문구(Seed Phrase)로 계정 복구하기",
         "record": "시드 문구 생성하기",
         "prompt": "니모닉 시드 문구는 지갑을 복원하는 유일한 방법입니다. 시드 문구를 백업하고 본인만 접근할 수 있는 안전한 장소에 보관하세요",
-        "placeholder": "니모닉 시드 문구를 입력하세요",
-        "empty": "시드 문구는 반드시 입력해야 합니다.",
-        "error": "시드 문구가 잘못되었습니다. 다시 시도하세요",
+        "placeholder": "Please enter your mnemonic seed phrase. Example: apple banana peach mango pear ...",
+        "empty": "Seed phrase cannot be empty",
+        "error": "Wrong seed phrase. Try again",
         "hint": "예 : 사과 바나나 복숭아 망고 배 ...",
         "change": "{len} 니모닉 단어로 전환하기"
     },
@@ -286,7 +286,7 @@
         }
     },
     "startCreate": {
-        "notice": "자산 안전을 위해 계정 생성은 웹 지갑에서 잠정적으로 지원하지 않습니다. Vite 앱을 다운로드해 계정을 생성하세요.",
+        "notice": "For your funds' safety, account creation function is not currently supported on web wallet. Please download Vite App to create an account.",
         "goLogin": "로그인",
         "goDex": "ViteX로 이동하기"
     },
@@ -307,7 +307,7 @@
         "saveSuccess": "성공적으로 저장되었습니다",
         "heads": {
             "name": "토큰명",
-            "balance": "지갑 자산",
+            "balance": "보유자산",
             "onroad": "지갑 수령 예정 금액",
             "gate": "지갑 크로스체인 게이트웨이",
             "totalExAmount": "거래소 총 보유자산",
@@ -319,9 +319,9 @@
         },
         "actionType": {
             "SEND": "전송",
-            "RECEIVE": "입금하기",
-            "CHARGE": "입금하기",
-            "WITHDRAW": "출금하기",
+            "RECEIVE": "수령하기",
+            "CHARGE": "수령하기",
+            "WITHDRAW": "전송",
             "EXTRANSFER": "전송하기",
             "EXRECRODS": "내역",
             "RECRODS": "내역",
@@ -587,7 +587,7 @@
         "maxAmt": "출금 금액은 [{minAmount}, {maxAmount}] 범위여만 합니다",
         "cancelLimitAmt": "스테이킹 금액은 {num}보다 작아서는 안됩니다",
         "withdrawalStaking": "스테이킹 토큰 출금",
-        "myAddr": "Me",
+        "myAddr": "Current Address",
         "confirm": {
             "help": {
                 "t1": "할당량이란?",
@@ -667,7 +667,7 @@
         "title": "SBP",
         "help": {
             "title": "SBP 소개",
-            "text": "SBP （Snapshot Block Producer）는 블록을 생성할 수 있는 노드이며, 일정량의 VITE를 스테이킹하여 SBP 후보가 되도록 등록 할 수 있습니다. 각 라운드 (약 75초)는 25개의 SBP를 선택하고 SBP는 상위 25개 후보 노드 중 23개, 목록에서 26위 ~ 100위의 후보 노드 중 임의 2개. 블록 생성 보상의 50%는 블록 생성 노드에 할당되고 다른 50%는 투표 보상으로 상위 100위에 랭크 된 노드에 할당됩니다. 하나의 등록 주소 (스테이킹 주소)는 여러 블록 생성 노드 (노드 이름)를 등록 할 수 있으며, 노드 이름이 등록 주소로 등록된 경우 노드 이름을 사용할 수 없습니다. 노드 이름은 블록 생성 주소를 전환 할 수 있지만, 블록 생성 주소는 다른 노드 이름으로 재사용할 수 없습니다."
+            "text": "SBP（Snapshot Block Producer）is a node that has right to create blocks, you can register to become a SBP candidate by staking a certain amount of VITE, each round (about 75 seconds) will elect 25 SBPs, the SBPs will be elected from random 23 out of top 25 candidate nodes, plus random 2 out of the candidate nodes ranking 26th-100th on the list. The 50% of total SBP rewards will be allocated to the block creation node, the other 50% will be allocated to nodes that are ranked on top 100 as voting rewards. One registration address (staking address) can register multiple block creation nodes (node names), a node name cannot be used if the node name has been registered by a registration address. A node name can switch block creation address, however, block creation address cannot be reused by other node names."
         },
         "register": "SBP 등록",
         "cancel": "SBP 취소",
@@ -909,7 +909,7 @@
         "title": "VITE 전환",
         "help": {
             "title": "VITE 전환 빠르게 이해하기",
-            "text": "VITE 전환 기능을 통해 ERC20 토큰을 VITE로 마이그레이션 할 수 있습니다. TestNet에서 공식 SBP에 대한 투표를 통해 보상을 받으면 연간 요금이 20 %에 이를 수 있습니다. ERC20 VITE 토큰은 이더리움 블랙홀 주소 : {blackAddr}로 전송되며, 이더 리움 블랙홀 주소가 거래를 수신하고 확인하면 Vite 주소에서 동일한 양의 VITE를 받게됩니다. 전환 과정에 들어가면 Vite 지갑의 이더리움 주소에 VITE 및 ETH (가스)가 충분한지 확인하십시오."
+            "text": "You can convert ERC20 VITE into VITE at Vite Pre-Mainnet through VITE conversion. During conversion, your ERC20 VITE will be transferred to Ethereum black hole address: 0x1111111111111111111111111111111111111111, and you will receive the same amount of VITE in your Vite address after the transaction to Ethereum black hole address has completed. During the conversion, fee of transaction to the Ethereum black hole address come from your current ETH address. After submitting the conversion, please wait at least 30 confirmations in Ethereum network, you can find the transaction history in conversion history."
         },
         "gas": "채굴 수수료",
         "record": "전환 내역",
@@ -1291,9 +1291,9 @@
                 "가격",
                 "수량",
                 "완료됨",
-                "평균",
-                "수수료",
-                "총합계",
+                "Filled%",
+                "Average",
+                "Fees",
                 "상태"
             ],
             "rowMap": {
@@ -1407,7 +1407,7 @@
         "type": "VIP Type"
     },
     "inviteMining": {
-        "title": "Referring as Mining Total Income",
+        "title": "邀请挖矿总收益",
         "myInviteIncome": "Referral Proceeds",
         "inviteTradeIncome": "Referred Trading Proceeds",
         "inviteOrderIncome": "Referred Market-Making Proceeds"
@@ -1415,9 +1415,9 @@
     "orderMining": {
         "title": "挂单挖矿总收益",
         "tbHead": {
-            "date": "날짜",
+            "date": "日前",
             "ratio": "占比",
-            "mining": "수량"
+            "mining": "挖矿金额"
         },
         "market": "{name} Market",
         "estimate": "{name} Today's Minable Amount"
