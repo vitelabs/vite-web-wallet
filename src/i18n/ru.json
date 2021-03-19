@@ -196,7 +196,7 @@
     },
     "beforeUse": {
         "title": "Прочитайте перед использованием",
-        "text1": "В целях безопасности ваших средств, функция создания учетной записи временно не поддерживается в веб-кошельке. Пожалуйста, скачайте Vite Приложение, чтобы создать аккаунт. Платформа Vite предупреждает вас, что если вы посетите фишинговый веб-сайт или потеряете резервную копию, наша компания не сможет вернуть ваши средства.",
+        "text1": "For your funds' safety, account creation function is not currently supported on web wallet. Please download Vite App to create an account. Vite platform would like to warn you that if you visit a phishing website or lose you backup, our company cannot recover your funds.",
         "text2": "Обратите внимание, что на наших веб-сайтах не хранятся ваши личные ключи или сид фразы. Поэтому вам нужно будет восстановить свою учетную запись с помощью с фразы, если вы решите сменить браузер, очистить локальные файлы cookie или сменить ПК.",
         "text3": "Пожалуйста, примите надлежащие меры предосторожности, чтобы точно записать и безопасно сохранить сид фразу. Даже малейшая ошибка приведет к тому, что вы не сможете успешно восстановить свой адрес."
     },
@@ -224,9 +224,9 @@
         "restore": "Восстановить аккаунт по Сид Фразе",
         "record": "Сгенерировать Сид Фразу",
         "prompt": "Мнемоническая сид фраза - единственный способ восстановить ваш кошелек. Настоятельно рекомендуем записать фразу и хранить ее в безопасном месте, где только вы сможете получить к ней доступ.",
-        "placeholder": "Пожалуйста, введите вашу мнемоническую сид фразу",
-        "empty": "Ввод сид фразы не может быть пустым",
-        "error": "Неверная сид фраза. Попробуйте снова",
+        "placeholder": "Please enter your mnemonic seed phrase. Example: apple banana peach mango pear ...",
+        "empty": "Seed phrase cannot be empty",
+        "error": "Wrong seed phrase. Try again",
         "hint": "Пример: яблоко банан персик манго груша ...",
         "change": "Переключиться на {len} Мнемонические Слова"
     },
@@ -286,7 +286,7 @@
         }
     },
     "startCreate": {
-        "notice": "В целях безопасности ваших средств функция создания учетной записи временно не поддерживается в веб-кошельке. Пожалуйста, скачайте Vite App, чтобы создать учётную запись.",
+        "notice": "For your funds' safety, account creation function is not currently supported on web wallet. Please download Vite App to create an account.",
         "goLogin": "Войти",
         "goDex": "Перейти к ViteX"
     },
@@ -307,7 +307,7 @@
         "saveSuccess": "Успешно сохраненo",
         "heads": {
             "name": "Название",
-            "balance": "Баланс Кошелька",
+            "balance": "Баланс",
             "onroad": "Неполученная Сумма Кошелька",
             "gate": "Кросс-чейн Шлюз Кошелька",
             "totalExAmount": "Общий Баланс на Бирже",
@@ -319,9 +319,9 @@
         },
         "actionType": {
             "SEND": "Отправить",
-            "RECEIVE": "Пополнить",
-            "CHARGE": "Пополнить",
-            "WITHDRAW": "Вывести Средства",
+            "RECEIVE": "Получить",
+            "CHARGE": "Получить",
+            "WITHDRAW": "Отправить",
             "EXTRANSFER": "Перевод",
             "EXRECRODS": "История",
             "RECRODS": "История",
@@ -587,7 +587,7 @@
         "maxAmt": "Сумма снятия должна быть в [{minAmount}, {maxAmount}]",
         "cancelLimitAmt": "Сумма стейка не может быть меньше {num}",
         "withdrawalStaking": "Снятие Стейкинга Квоты",
-        "myAddr": "Мне",
+        "myAddr": "Current Address",
         "confirm": {
             "help": {
                 "t1": "Что такое Квота?",
@@ -667,7 +667,7 @@
         "title": "SBP",
         "help": {
             "title": "О SBP",
-            "text": "SBP (Snapshot Block Producer) - это нода, которая имеет право создавать блоки, вы можете зарегистрироваться, чтобы стать кандидатом в SBP, стейкая определенное количество VITE, каждый раунд (около 75 секунд) будут выбрано 25 SBP, SBP будут избраны из 23 случайных топ 25 нод-кандидатов, плюс 2 случайных из нод кандидатов, занимающих 26-100-е место в списке. 50% вознаграждений будут выделены ноде создавшей блок, остальные 50% будут выделены нодам, которые находятся в топ-100 в качестве вознаграждений за голоса. Один регистрационный адрес (адрес стейкинга) может зарегистрировать несколько нод создания блоков (имя ноды), имя ноды нельзя использовать, если имя ноды зарегистрировано в регистрационном адресе. Имя ноды может переключать адрес создания блока, однако, адрес создания блока не может быть повторно использован другими именами ноды."
+            "text": "SBP（Snapshot Block Producer）is a node that has right to create blocks, you can register to become a SBP candidate by staking a certain amount of VITE, each round (about 75 seconds) will elect 25 SBPs, the SBPs will be elected from random 23 out of top 25 candidate nodes, plus random 2 out of the candidate nodes ranking 26th-100th on the list. The 50% of total SBP rewards will be allocated to the block creation node, the other 50% will be allocated to nodes that are ranked on top 100 as voting rewards. One registration address (staking address) can register multiple block creation nodes (node names), a node name cannot be used if the node name has been registered by a registration address. A node name can switch block creation address, however, block creation address cannot be reused by other node names."
         },
         "register": "Регистрация SBP",
         "cancel": "Отмена SBP",
@@ -909,7 +909,7 @@
         "title": "Конвертация VITE",
         "help": {
             "title": "Быстрое понимание конвертации VITE",
-            "text": "You can migrate ERC20 tokens into VITE into our TestNet by VITE conversion function. In TestNet, casting your vote for official SBPs to collect rewards, the annualized rate can reach 20%. Your ERC20 VITE tokens will be transferred to Ethereum black hole address: {blackAddr}, you will receive the same amount of VITE at your Vite address when Ethereum black hole address has received the transaction and confirmed. Once you are in the conversion process, confirm that there are enough VITE and ETH (as gas) in your Ethereum address of Vite wallet."
+            "text": "You can convert ERC20 VITE into VITE at Vite Pre-Mainnet through VITE conversion. During conversion, your ERC20 VITE will be transferred to Ethereum black hole address: 0x1111111111111111111111111111111111111111, and you will receive the same amount of VITE in your Vite address after the transaction to Ethereum black hole address has completed. During the conversion, fee of transaction to the Ethereum black hole address come from your current ETH address. After submitting the conversion, please wait at least 30 confirmations in Ethereum network, you can find the transaction history in conversion history."
         },
         "gas": "Майнинг Плата",
         "record": "История Конвертации",
@@ -1291,9 +1291,9 @@
                 "Цена",
                 "Сумма",
                 "Заполнено",
+                "Заполнено%",
                 "В среднем",
-                "Комиссия",
-                "Всего",
+                "Комиссии",
                 "Статус"
             ],
             "rowMap": {
@@ -1407,7 +1407,7 @@
         "type": "VIP Type"
     },
     "inviteMining": {
-        "title": "Привлечение как Майнинг Общий Доход",
+        "title": "邀请挖矿总收益",
         "myInviteIncome": "Referral Proceeds",
         "inviteTradeIncome": "Referred Trading Proceeds",
         "inviteOrderIncome": "Referred Market-Making Proceeds"
@@ -1415,9 +1415,9 @@
     "orderMining": {
         "title": "挂单挖矿总收益",
         "tbHead": {
-            "date": "Дата",
+            "date": "日前",
             "ratio": "占比",
-            "mining": "Сумма"
+            "mining": "挖矿金额"
         },
         "market": "{name} Market",
         "estimate": "{name} Today's Minable Amount"
