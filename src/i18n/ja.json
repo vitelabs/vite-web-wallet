@@ -196,7 +196,7 @@
     },
     "beforeUse": {
         "title": "利用前に読んで下さい",
-        "text1": "資金の安全確保の為、アカウント作成機能は一時的にサポートされていません。 Viteアプリをダウンロードしてアカウントを作成してください。 Viteプラットフォームは、フィッシングサイトにアクセスした場合、バックアップを失った場合に、資金を回収できないことを警告致します。",
+        "text1": "For your funds' safety, account creation function is not currently supported on web wallet. Please download Vite App to create an account. Vite platform would like to warn you that if you visit a phishing website or lose you backup, our company cannot recover your funds.",
         "text2": "私たちのWebサイトはあなたの秘密鍵やシードフレーズを保存しません。ブラウザの変更、ローカルCookieのクリア、PCの変更をする場合は、シードフレーズを使用してアカウントを復元する必要があります。",
         "text3": "シードフレーズを正確に記録して安全に保存するように、適切な予防措置を講じてください。 わずかなエラーでも、アドレスを正常に復元できなくなります。"
     },
@@ -224,9 +224,9 @@
         "restore": "シードフレーズによるアカウントの復元",
         "record": "シードフレーズの生成",
         "prompt": "ニーモニックシードフレーズは、ウォレットを復元する唯一の方法です。 フレーズを書き留めて、自分だけがアクセスできる安全な場所に保管することを強くお勧めします。",
-        "placeholder": "ニーモニックシードフレーズを入力してください",
-        "empty": "シードフレーズの入力が空欄です",
-        "error": "シードフレーズが間違っています 再入力してください",
+        "placeholder": "Please enter your mnemonic seed phrase. Example: apple banana peach mango pear ...",
+        "empty": "Seed phrase cannot be empty",
+        "error": "Wrong seed phrase. Try again",
         "hint": "例：apple banana peach mango pear ...",
         "change": "{len}ニーモニックワードに切り替え"
     },
@@ -286,7 +286,7 @@
         }
     },
     "startCreate": {
-        "notice": "資金の安全のため、アカウント作成機能はWebウォレットで一時的にサポートされていません。 Viteアプリをダウンロードしてアカウントを作成してください。",
+        "notice": "For your funds' safety, account creation function is not currently supported on web wallet. Please download Vite App to create an account.",
         "goLogin": "ログイン",
         "goDex": "ViteXへ行く"
     },
@@ -307,7 +307,7 @@
         "saveSuccess": "正常に保存されました",
         "heads": {
             "name": "名前",
-            "balance": "Wallet残高",
+            "balance": "残高",
             "onroad": "ウォレット未受取額",
             "gate": "ウォレット クロスチェ－ンゲートウェイ",
             "totalExAmount": "取引所合計残高",
@@ -319,9 +319,9 @@
         },
         "actionType": {
             "SEND": "送信",
-            "RECEIVE": "入金",
-            "CHARGE": "入金",
-            "WITHDRAW": "引き出し",
+            "RECEIVE": "受信",
+            "CHARGE": "受信",
+            "WITHDRAW": "送信",
             "EXTRANSFER": "転送",
             "EXRECRODS": "履歴",
             "RECRODS": "履歴",
@@ -587,7 +587,7 @@
         "maxAmt": "引き出し金額は[{minAmount}、{maxAmount}]である必要があります",
         "cancelLimitAmt": "ステーキング額は{num}未満にはできません",
         "withdrawalStaking": "ステークトークンの引き出し",
-        "myAddr": "私",
+        "myAddr": "Current Address",
         "confirm": {
             "help": {
                 "t1": "クオータとは？",
@@ -667,7 +667,7 @@
         "title": "SBP",
         "help": {
             "title": "SBPについて",
-            "text": "SBP（スナップショットブロックプロデューサー）はブロック作成権限を持つノードです。一定量のVITEをステーキングすることでSBP候補として登録できます。各ラウンド（約75秒）で25のSBPが選択されます 上位25の候補ノードからランダムに23、さらにリストの26番目から100番目にランク付けされた候補ノードからランダムに2つ選択されます。ブロック作成報酬の50％はブロック作成ノードに割り当てられ、残りの50％は投票報酬として上位100位にランク付けされたノードに割り当てられます。 1つの登録アドレス（ステーキングアドレス）は、複数のブロック作成ノード（ノード名）を登録できます。ノード名が登録アドレスによって登録されている場合、ノード名は使用できません。 ノード名はブロック作成アドレスを切り替えることができますが、ブロック作成アドレスを他のノード名で再利用することはできません。"
+            "text": "SBP（Snapshot Block Producer）is a node that has right to create blocks, you can register to become a SBP candidate by staking a certain amount of VITE, each round (about 75 seconds) will elect 25 SBPs, the SBPs will be elected from random 23 out of top 25 candidate nodes, plus random 2 out of the candidate nodes ranking 26th-100th on the list. The 50% of total SBP rewards will be allocated to the block creation node, the other 50% will be allocated to nodes that are ranked on top 100 as voting rewards. One registration address (staking address) can register multiple block creation nodes (node names), a node name cannot be used if the node name has been registered by a registration address. A node name can switch block creation address, however, block creation address cannot be reused by other node names."
         },
         "register": "SBP登録",
         "cancel": "SBPの取消",
@@ -909,7 +909,7 @@
         "title": "Vite変換",
         "help": {
             "title": "VITE変換の簡単な説明",
-            "text": "VITE変換機能により、ERC20トークンをVITEのTestNetに移行できます。TestNetでは、公式SBPに投票して報酬を受け取ると、年率が20％に達する可能性があります。ERC20VITEトークンは、Ethereumブラックホールアドレスに転送されます：{ blackAddr}、Ethereumブラックホールアドレスがトランザクションを受信して確認すると、Viteアドレスで同量のVITEを受け取ります。変換プロセスに入ったら、Viteウォレットのアドレスに十分なVITEとETH（ガスとして）があることを確認します Viteウォレットのアドレス。"
+            "text": "You can convert ERC20 VITE into VITE at Vite Pre-Mainnet through VITE conversion. During conversion, your ERC20 VITE will be transferred to Ethereum black hole address: 0x1111111111111111111111111111111111111111, and you will receive the same amount of VITE in your Vite address after the transaction to Ethereum black hole address has completed. During the conversion, fee of transaction to the Ethereum black hole address come from your current ETH address. After submitting the conversion, please wait at least 30 confirmations in Ethereum network, you can find the transaction history in conversion history."
         },
         "gas": "マイニング手数料",
         "record": "変換履歴",
@@ -1291,9 +1291,9 @@
                 "価格",
                 "量",
                 "Filled",
+                "Filled%",
                 "平均",
                 "手数料",
-                "合計",
                 "ステータス"
             ],
             "rowMap": {
@@ -1407,7 +1407,7 @@
         "type": "VIP Type"
     },
     "inviteMining": {
-        "title": "リファラルマイニング総収入",
+        "title": "邀请挖矿总收益",
         "myInviteIncome": "Referral Proceeds",
         "inviteTradeIncome": "Referred Trading Proceeds",
         "inviteOrderIncome": "Referred Market-Making Proceeds"
@@ -1415,9 +1415,9 @@
     "orderMining": {
         "title": "挂单挖矿总收益",
         "tbHead": {
-            "date": "日付",
+            "date": "日前",
             "ratio": "占比",
-            "mining": "量"
+            "mining": "挖矿金额"
         },
         "market": "{name} Market",
         "estimate": "{name} Today's Minable Amount"
