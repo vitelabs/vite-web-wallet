@@ -1305,7 +1305,7 @@
         "addHint1": "Single stake should be at least 134 VITE",
         "addHint2": "VITE staking will be effective immediately after submission. Staking can be canceled after 3 days",
         "addHint3": "Staked amount will be released after the 7-day waiting period",
-        "withdrawHint1": "You will no longer be able to mining VX after the staking is canceled",
+        "withdrawHint1": "You will no longer be able to mine VX after staking is canceled",
         "withdrawHint2": "It takes 7 days to return unstaked VITE coins to exchange balance",
         "addTitle": "Stake VITE for Mining",
         "withdrawTitle": "Unstake VITE",
