@@ -43,10 +43,20 @@
         ]
     },
     "dealReminder": {
-        "title": "Trading Notice",
+        "title": {
+            "buy": "Buy Order Completed: {ftoken} / {ttoken}",
+            "sell": "Sell Order Completed: {ftoken} / {ttoken}"
+        },
         "failTitle": "Order Failed",
-        "notice": "Your order {amount} {ftoken} ({ftoken}/{ttoken}) at {time} is a complete deal, visit Order History to find out more.",
-        "error": "Your order {amount} {ftoken} ({ftoken}/{ttoken}) at {time} has failed, for more details, please view in Order History section."
+        "notice-all": {
+            "buy": "Price: {price} {ttoken} \nAmount: {amount} {ttoken}, was completed. View Order History page for details.",
+            "sell": "Price: {price} {ttoken} \nAmount: {amount} {ttoken}, was completed. View Order History page for details."
+        },
+        "notice-partial": {
+            "buy": "Price: {price} {ttoken} \nAmount: {amount} {ttoken}, is {executedPercent}% completed.",
+            "sell": "Price: {price} {ttoken} \nAmount: {amount} {ttoken}, is {executedPercent}% completed."
+        },
+        "error": "Your order {amount} {ftoken} ({ftoken}/{ttoken}) at {time} has failed. For more details, please view Order History page."
     },
     "pow": {
         "ing": "Running PoW to acquire quota",
@@ -147,7 +157,8 @@
         "RefundByContractRequest": "Transfer",
         "GenesisResponse": "Genesis",
         "FullNodeStake": "Stake for Full Node",
-        "FullNodeCancelStake": "Retrieve Full Node Stakes"
+        "FullNodeCancelStake": "Withdraw Full Node Stakes",
+        "UpdateSBPRewardWithdrawAddress": "Edit SBP Reward Withdraw Address"
     },
     "btn": {
         "cancel": "Cancel",
@@ -167,10 +178,10 @@
         "pwErr": "Incorrect password!",
         "pwEmpty": "Password cannot be empty!",
         "noData": "No Data",
-        "err": "Oops, error occurs",
+        "err": "Oops, something went wrong",
         "request": "{name} request has sent, please wait",
         "copy": "Successfully copied",
-        "copyShare":"Copy share link successful!",
+        "copyShare": "Copy share link successful!",
         "addrFormat": "Incorrect address format",
         "amtFormat": "Incorrect amount format",
         "transSucc": "Transaction successful!",
@@ -191,10 +202,10 @@
     },
     "preview": {
         "t": "Version {version}",
-        "txt1": "x.vite.net is an web platform integrating wallet and exchange. It is officially launched by Vite Labs.",
-        "txt2": "Current version mainly contains functions of wallet, ViteX decentralised exchange, staking VITE for quota, SBP registration, voting and token issuance. Try our newly released function ViteConnect: you can use Vite App to login via scanning a QR code.",
-        "txt3": "ViteX is formally launched. Come and start trading now.",
-        "v": "Current Version: {version}"
+        "txt1": "x.vite.net is a platform integrating the Vite wallet and the ViteX exchange, launched by Vite Labs.",
+        "txt2": "You can manager and transfer assets, trade, get quota, register SBP and full node, vote, issue tokens, apply for ViteX API, authorize delegated trading, etc.",
+        "txt3": "x.vite.net supports mnemonic words, Ledger, and ViteConnect.",
+        "v": ""
     },
     "pwdConfirm": {
         "conf": "Open password-free mode to free you from entering password during every transaction process. ",
@@ -225,7 +236,10 @@
         "currency": "Default Currency",
         "secure": "Security",
         "gate": "Custom Gateway",
-        "triggerGate": ["Close", "Open"],
+        "triggerGate": [
+            "Close",
+            "Open"
+        ],
         "gateHelp": "You can customize your gateway configuration when activating this feature. Currently this feature is mainly for developers.",
         "lang": "Language",
         "block": "Current Height",
@@ -237,7 +251,7 @@
         "addAddr": "Add Address",
         "addrList": "Address Management",
         "setDefault": "Select Default Address",
-        "autoLogout": "Auto Logout Time",    
+        "autoLogout": "Auto Logout Time",
         "noPass": "Turn on password-free mode",
         "explorer": "Block Explorer",
         "netInfo": "Network Information",
@@ -250,7 +264,10 @@
             "720": "12 Hours"
         },
         "theme": "Theme color",
-        "themeList": ["Light", "Dark"]
+        "themeList": [
+            "Light",
+            "Dark"
+        ]
     },
     "create": {
         "input": "Please enter your password",
@@ -284,17 +301,17 @@
         }
     },
     "tokenCard": {
-        "moreRecords":"View History",
-        "others":"Others",
-        "assetSpread":"Portfolio",
-        "saveSuccess":"Successfully saved",
-        "heads":{
-            "name":"Name",
-            "balance":"Wallet Balance",
-            "onroad":"Wallet Unreceived Funds",
-            "gate":"Wallet Cross-Chain Gateway",
-            "totalExAmount":"Exchange Total Balance",
-            "availableExAmount":"Exchange Available Balance",
+        "moreRecords": "View History",
+        "others": "Others",
+        "assetSpread": "Portfolio",
+        "saveSuccess": "Successfully saved",
+        "heads": {
+            "name": "Name",
+            "balance": "Wallet Balance",
+            "onroad": "Wallet Unreceived Funds",
+            "gate": "Wallet Cross-Chain Gateway",
+            "totalExAmount": "Exchange Total Balance",
+            "availableExAmount": "Exchange Available Balance",
             "balanceTips": "On-chain send is available for users who would like to send transactions from your Vite wallet to other Vite addresses",
             "gateTips": "In this cross-chain section, you can map other coins/tokens into Vite network. Click 'Deposit' button to deposit assets to your Vite Wallet. Click 'Withdraw' button to transfer your assets to other platforms. * Cross-chain deposit/withdrawal process may cause fees, it also has its transfer limit.",
             "availableExAmountTips": "You can transfer your assets between Vite Wallet and ViteX Exchange via clicking 'Transfer' button. No transaction fees caused during these processes.",
@@ -307,7 +324,7 @@
             "WITHDRAW": "Withdraw",
             "EXTRANSFER": "Transfer",
             "EXRECRODS": "History",
-            "RECRODS":"History",
+            "RECRODS": "History",
             "EXCHARGE": "Deposit",
             "EXWITHDRAW": "Withdraw"
         },
@@ -328,10 +345,10 @@
             "native": "Native Tokens",
             "crossGate": "Cross-Chain Coins"
         },
-        "assetType":{
-            "TOTAL":"All Assets",
-            "EX":"Exchange Assets",
-            "WALLET":"Wallet Assets"
+        "assetType": {
+            "TOTAL": "All Assets",
+            "EX": "Exchange Assets",
+            "WALLET": "Wallet Assets"
         },
         "tokenInfo": {
             "tabName": "Details",
@@ -365,7 +382,7 @@
             "customer": "Customer Service",
             "privacy": "Terms of Services",
             "clickPrivacy": "{gate}'s official gateway Terms of Services",
-            "gateSetting":"Configure Gateway",
+            "gateSetting": "Configure Gateway",
             "tabName": "Gateway Details",
             "selfdefined": "Customize Gateway",
             "officalNet": "Website",
@@ -378,10 +395,17 @@
         },
         "depositRecord": {
             "tabName": "Receive History",
-            "heads": ["Time", "Amount", "Status", "{outChain} Hash","vite Hash","Fees"],
+            "heads": [
+                "Time",
+                "Amount",
+                "Status",
+                "{outChain} Hash",
+                "vite Hash",
+                "Fees"
+            ],
             "statusMap": {
                 "OPPOSITE_PROCESSING": "{outChain} awaits to confirm{confirms}",
-                "OPPOSITE_CONFIRMED_FAIL":"{outChain} processing failed",
+                "OPPOSITE_CONFIRMED_FAIL": "{outChain} processing failed",
                 "OPPOSITE_CONFIRMED": "Gateway Received",
                 "TOT_CONFIRMED": "Completed",
                 "BELOW_MINIMUM": "Topup Failed",
@@ -390,27 +414,34 @@
         },
         "withdrawRecord": {
             "tabName": "Transfer History",
-            "heads": ["Time", "Amount", "Status", "vite Hash", "{outChain} Hash","Fees"],
-            "statusMap":{
+            "heads": [
+                "Time",
+                "Amount",
+                "Status",
+                "vite Hash",
+                "{outChain} Hash",
+                "Fees"
+            ],
+            "statusMap": {
                 "TOT_PROCESSING": "VITE Chain Unconfirmed{confirms}",
                 "TOT_CONFIRMED": "VITE Confirmed",
-                "TOT_EXCEED_THE_LIMIT":"Transfer amount exceeds the limit",
+                "TOT_EXCEED_THE_LIMIT": "Transfer amount exceeds the limit",
                 "OPPOSITE_PROCESSING": "{outChain} awaits to confirm",
                 "OPPOSITE_CONFIRMED": "Completed",
-                "WRONG_WITHDRAW_ADDRESS":"Transfer address is incorrect"
+                "WRONG_WITHDRAW_ADDRESS": "Transfer address is incorrect"
             }
         },
         "charge": {
             "title": "Cross-Chain Deposit",
             "addrErr": "Something went wrong with gateway node, please check your network settings",
             "addressTitle": "Recipient Address",
-            "labelTips":"(Please use this '{labelName}' with your recipient address, otherwise your assets will lose",
-            "labelCodeTips":"Please Scan the QR code from {labelName}",
+            "labelTips": "(Please use this '{labelName}' with your recipient address, otherwise your assets will lose",
+            "labelCodeTips": "Please Scan the QR code from {labelName}",
             "codeTips": "Scan QR code to deposit. Please send funds with the wallet that supports {tokenSymbol}",
             "tips": [
-                "Cross-Chain Deposit operation will do {tokenSymbol} Cross-Chain mapping to VITE network, you can still transfer the assets to other platform after receiving them",
-                "You can only send {tokenSymbol} through this address and the amount cannot be less than {min}",
-                "You will receive your assets after {confirmationCount} confirmations, kindly wait in patient"
+                "You can only deposit {tokenSymbol} through the address provided below. No less than {min} {tokenSymbol} will be accepted.",
+                "The account will update after {confirmationCount} network confirmations. Please wait.",
+                "Please select the correct mainnet or you will be unable to retrieve any lost tokens."
             ]
         },
         "withdraw": {
@@ -430,7 +461,7 @@
                 "fee": "Fee",
                 "all": "All"
             },
-            "labelPlaceholder":"Please input {labelName}",
+            "labelPlaceholder": "Please input {labelName}",
             "amountPlaceholder": "Please input send amount which should not be less than {min}",
             "addressPlaceholder": "Please enter {token} recipient address",
             "successTips": "Transaction request has been sent",
@@ -457,12 +488,12 @@
         "pend": "Pending",
         "inAddress": "Recipient Address",
         "sum": "Amount",
-        "remarks": "Comment",
+        "remarks": "Memo",
         "remarksLong": "{len} bytes left",
         "totalAsset": "Total Assets",
         "placeholder": {
             "amount": "Please input amount",
-            "remarks": "Please input comments",
+            "remarks": "Please input memo",
             "addr": "Please input address"
         },
         "hint": {
@@ -584,8 +615,8 @@
             "withdrawTime": "Expected Due Date",
             "unexpired": "Temporarily cannot make withdrawal of staked token until due date",
             "vip": "This staking action is for default opening VIP on ViteX exchange, please go to ViteX exchange page to cancel VIP",
-            "mining": "This staking is your staking as mining amount on ViteX, please go to ViteX mining page to retrieve",
-            "other": "This staking is staked via other ways and it is not supported retrieving here"
+            "mining": "This staking is your staking as mining amount on ViteX, please go to ViteX mining page to unstake",
+            "other": "This staking is staked via other ways and unstake is not supported here"
         }
     },
     "walletTransList": {
@@ -614,8 +645,8 @@
             "txt3": "[Number of Rewarding nodes]  Number of nodes being rewarded",
             "t2": "Multiple Full nodes can be registered with the same address, but must be staked individually at least 10,000 VITE each; When calculating Active Node Reward, if staking amount / 10000 yields a whole number that is greater than or equal to the number of active nodes, all active nodes will be rewarded; If staking amount / 10000 yields a whole number that is less than the number of active nodes, the number of nodes being rewarded equals to the whole number.",
             "t3": "Calculation of voting rewards does not depend on the number of nodes, but the staking amount."
-        },               
-        "confirmText": "Confirm to stake {amount} VITE for quota, staking can be retrieved after {days} days",     
+        },
+        "confirmText": "Confirm to stake {amount} VITE for quota, staking can be cancelled after {days} days",
         "addQuota": {
             "address": "Staking Address",
             "stakeDays": "Staking Period",
@@ -658,8 +689,11 @@
             "leftBtn": "Not register yet",
             "rightBtn": "Ready to Register",
             "edit": {
-                "title": "Change block creation address",
-                "placeholder": "please input new block creation address",
+                "title": "Edit SBP Infomation",
+                "newBlockProducer": "please input new block creation address",
+                "newRewardAddress": "please input new reward withdraw address",
+                "changeBlockProducer": "Block Creation Address",
+                "changeRewardAddress": "Reward Withdraw Address",
                 "btn": "Confirm to Change"
             }
         },
@@ -667,6 +701,7 @@
             "title": "Registration Form",
             "nodeName": "Node Name",
             "producerAddr": "Block Creation Address",
+            "rewardWithdrawAddress": "Reward Withdraw Address",
             "quotaAddr": "Staking Address",
             "quotaTime": "Staking Period",
             "time": "7776000 snapshot blocks（approximately 90 days）",
@@ -772,47 +807,100 @@
             "hint": "Contact customer service team of {gate} if you encounter any problems during payment process.",
             "next": "Confirm and Proceed"
         },
-        "vb":{
-            "title":"ViteConnect",
-            "closeAlert":"close",
-            "connect":{
-                "tips":"Scan the QR code via Vite Wallet App"
+        "vb": {
+            "title": "ViteConnect",
+            "closeAlert": "close",
+            "connect": {
+                "tips": "Scan the QR code via Vite Wallet App"
             },
-            "confirm":{
-                "tips":"Please confirm transaction on VITE Wallet App"
+            "confirm": {
+                "tips": "Please confirm transaction on VITE Wallet App"
             },
-            "start":{
-                "scan":"Scan the QR code via Vite Wallet App",
-                "downloadTips":"Don’t have Vite Wallet App yet? ",
-                "download":"Download Vite Wallet"
+            "start": {
+                "scan": "Scan the QR code via Vite Wallet App",
+                "downloadTips": "Don’t have Vite Wallet App yet? ",
+                "download": "Download Vite Wallet"
             },
-            "accountName":"ViteConnect Address"
+            "accountName": "ViteConnect Address"
         },
-        "invite":{
-            "inviteTitle":"Invite Friends",
-            "receiveInviteTitle":"Use Referral Code",
-            "myCode":"My Referral Code: ",
-            "codeLable":"Referral Code",
-            "invited":"You have already accepted an invitation, referral code is: ",
-            "genCode":"Create a Referral Code",
-            "cost":"Cost",
-            "formatErr":"Incorrect referral code format",
-            "noResult":"Oops...No result found, please try again later",
-            "successToast":"Request has sent",
-            "failToast":"Failed to send request",
-            "notEnough":"Insufficient exchange balance",
-            "avaliable":"Balance",
-            "inviteNum":"Invited",
-            "inviteBenifit":"Referral Mining Income",
-            "inviteRule":"Rules",
-            "ruleItems":[
+        "ledger": {
+            "title": "Ledger Device",
+            "accountName": "Ledger Wallet",
+            "verifyAddress": "Verify address",
+            "closeAlert": "Cancel",
+            "start": {
+                "title": "Support Hardware Wallets: Ledger Nano S / Ledger Nano X",
+                "connectError": "Having Connection Issues?",
+                "introduction": "App Installation & Usage Instructions",
+                "introductionUrl": "https://support.ledger.com/hc/en-us/articles/115005165269-Connection-issues-with-Windows-or-Linux",
+                "connectErrorUrl": "https://support.ledger.com/hc/en-us/articles/115005165269-Connection-issues-with-Windows-or-Linux"
+            },
+            "connectWithUSB": "Use USB",
+            "connectWithBlu": "Use Bluetooth",
+            "connectLedger": "Connect to Ledger",
+            "connect": {
+                "title": "Address Select",
+                "tips": "Select an address to use:",
+                "selectConnectType": "Choose connection type: (Bluetooth is only supported on Ledger Nano X)",
+                "cancelSelect": "Select a device to connect",
+                "connectError": "Connect failed. Please confirm Vite app is opened on device",
+                "interfaceNotAvailable": "Connect failed. Please check USB cable is connected. If you connect through Bluetooth, switch off Bluetooth and switch on again",
+                "receiveBlockSuccess": "Successfully received {num} transaction",
+                "introduction": {
+                    "1": {
+                        "title": "Step 1: ",
+                        "content": "Connect Ledger device and enter PIN code"
+                    },
+                    "2": {
+                        "title": "Step 2: ",
+                        "content": "Open Vite app on Ledger"
+                    }
+                }
+            },
+            "addressSelect": {
+                "index": "Index",
+                "address": "Address",
+                "balance": "Balance",
+                "unreceived": "Unreceived",
+                "nextPage": "Next page",
+                "prePage": "Last page",
+                "confirm": "Confirm",
+                "unUsedAccount": "New"
+            },
+            "confirm": {
+                "tips": "Please confirm the transaction on your Ledger device",
+                "verifyAddress": "Please verify the address on your Ledger device",
+                "alert": "Warning",
+                "alertContent": "Address has been denied on Ledger device. Please double verify if this address matches the address displayed on your Ledger device. If yes, ignore this message and go ahead to confirm the transaction, otherwise DO NOT send asset to the address and quit immediately.",
+                "alertLeftBtn": "I confirm the addresses are matched",
+                "alertRightBtn": "Addresses mismatch. Get me out of here!",
+                "userCancel": "Transaction is cancelled on Ledger",
+                "userCancelByWeb": "You cancelled the transaction in Vite wallet. In this case, the transaction will be abandoned and never go through to blockchain even if it is confirmed on your Ledger device."
+            }
+        },
+        "invite": {
+            "inviteTitle": "Invite Friends",
+            "receiveInviteTitle": "Use Referral Code",
+            "myCode": "My Referral Code: ",
+            "codeLable": "Referral Code",
+            "invited": "You have already accepted an invitation, referral code is: ",
+            "genCode": "Create a Referral Code",
+            "cost": "Cost",
+            "formatErr": "Incorrect referral code format",
+            "noResult": "Oops...No result found, please try again later",
+            "successToast": "Request has sent",
+            "failToast": "Failed to send request",
+            "notEnough": "Insufficient exchange balance",
+            "avaliable": "Balance",
+            "inviteNum": "Invited",
+            "inviteBenifit": "Referral Mining Income",
+            "inviteRule": "Rules",
+            "ruleItems": [
                 "The <span class='strong'>1,000 VITE</span> payment to generate an invitation code will be burned",
-                "Referee will be weighted with referral proceeds when calculating mining rewards <span class='strong'>5%</span> ",
-                "Referee will be weighted with referral proceeds when calculating mining rewards <span class='strong'>2.5%</span> "
+                "Referee will be rewarded with <span class='strong'>5%</span> of all invited users' trading as mining proceeds and <span class='strong'>2.5%</span> of all market-making as mining proceeds"
             ],
             "receiveRuleItems": [
-                "Mining rewards will be weighted with referral proceeds <span class='strong'>2.5%</span> ",
-                "Mining rewards will be weighted with referral proceeds <span class='strong'>1.25%</span> ",
+                "Invited users will receive an extra <span class='strong'>2.5%</span> of trading as mining rewards and <span class='strong'>1.25%</span> of market-making as mining rewards",
                 "Enjoy <span class='strong'>10%</span> off trading fees with an invitation code"
             ]
         }
@@ -845,10 +933,11 @@
         "cmcHelp": "View VITE on CoinMarketCap",
         "supportTradeMining": "Eligible for trading as mining",
         "supportOrderMining": "Eligible for market-making as mining",
+        "zeroFee": "Zero Fee",
         "buyMiningPrice": "Qualifies for mining when buy price is greater than {price}",
         "sellMiningPrice": "Qualifies for mining when sell price is less than {price}",
         "operator": {
-            "noName": "Anonymous Gateway",
+            "noName": "Anonymous Operator",
             "overview": "Introduction",
             "txPair": "Trading Pairs",
             "confirmTitle": "Risk Reminder",
@@ -862,10 +951,11 @@
             "operatorTab": "Operator Details"
         },
         "depthBuyMiningPrice": "Mining Range Above",
-        "depthSellMiningPrice": "Mining Range Below"
+        "depthSellMiningPrice": "Mining Range Below",
+        "inMiningRange": "Mining Range"
     },
     "trade": {
-        "more":"More",
+        "more": "More",
         "search": "Search",
         "txPair": "Pair",
         "price": "Price",
@@ -932,7 +1022,9 @@
         "depth": {
             "buy": "Buy",
             "sell": "Sell",
-            "all": "All"
+            "all": "All",
+            "avgPrice": "Avg.Price:",
+            "sum": "Sum {symbol}:"
         },
         "noData": {
             "favorite": "You have no favorite yet",
@@ -941,8 +1033,8 @@
         "limitPrice": {
             "title": "Limit",
             "fee": "Fees",
-            "adviseToSVip":"Upgrade to SVIP, enjoy zero base transaction fee",
-            "feeRuleWithSVip":"Operator Fees * Referral Discount. ATTENTION: The adjustment and discount of fees will only affect new orders, the former orders' charge remains the same.",
+            "adviseToSVip": "Upgrade to SVIP, enjoy zero base transaction fee",
+            "feeRuleWithSVip": "Operator Fees * Referral Discount. ATTENTION: The adjustment and discount of fees will only affect new orders, the former orders' charge remains the same.",
             "text": "This page is a preview page of transaction data. Please login to trade.",
             "validAmount": "Volume must be greater than {amount}{token}",
             "priceNotNull": "Amount cannot be empty",
@@ -953,49 +1045,119 @@
             "dexFee": "Base Transaction Fees: {fee}",
             "operatorFee": "Operator Fees: {fee}",
             "vipFee": "VIP Discount: {fee}",
-            "inviteFeeDiscount":"Referral Discount: {fee} off",
-            "svipFee":"SVIP: 0% base transaction fee",
-            "feeRule":"(Base Transaction Fee - VIP discount + Operator Fees) * Referral Discount. ATTENTION: The adjustment and discount of fees will only affect new orders, the former orders' charge remains the same."
+            "inviteFeeDiscount": "Referral Discount: {fee} off",
+            "svipFee": "SVIP: 0% base transaction fee",
+            "feeRule": "(Base Transaction Fee - VIP discount + Operator Fees) * Referral Discount. ATTENTION: The adjustment and discount of fees will only affect new orders, the former orders' charge remains the same."
         },
-        "proxy":{
-            "title":"Trade Delegation",
-            "subTitle":"Trade Delegation",              
-            "successProxy":"Delegation Success",
-            "failProxy":"Delegation Failed",
-            "successCancelProxy":"Remove Delegation Success",
-            "failCancelProxy":"Failed to remove delegations",
-            "info":"What is Trade Delegation?",
-            "new":"Initiate Delegation",
-            "active":{
-                "title":"Delegation History",
-                "head":["Delegatee Address","Trading Pairs","Action"],
-                "operate":["Add Delegations","Remove Delegations","Remove All Delegations"]
+        "proxy": {
+            "title": "Trade Delegation",
+            "subTitle": "Trade Delegation",
+            "successProxy": "Delegation Success",
+            "failProxy": "Delegation Failed",
+            "successCancelProxy": "Remove Delegation Success",
+            "failCancelProxy": "Failed to remove delegations",
+            "info": "What is Trade Delegation?",
+            "new": "Initiate Delegation",
+            "active": {
+                "title": "Delegation History",
+                "head": [
+                    "Delegatee Address",
+                    "Trading Pairs",
+                    "Action"
+                ],
+                "operate": [
+                    "Add Trading Pairs",
+                    "Remove Trading Pairs",
+                    "Remove All Delegations"
+                ]
             },
-            "passive":{
-                "title":"Accepted Delegation History",
-                "head":["Delegator Address","Trading Pairs"]
+            "passive": {
+                "title": "Accepted Delegation History",
+                "head": [
+                    "Delegation Address",
+                    "Trading Pairs"
+                ]
             },
-
             "dialog": {
-              "cancel": "Cancel",
-              "cancelAllTips":"Are you sure you'd like to remove all delegations on {trustAddress}?",
-              "rTxtMap": {
-                "new": "Add",
-                "add": "Add",
-                "delete": "Confirm",
-                "deleteAll": "Confirm"
-              },
-              "confirm":{
+                "cancel": "Cancel",
+                "cancelAllTips": "Are you sure you'd like to remove all delegations on {trustAddress}?",
+                "rTxtMap": {
+                    "new": "Add",
+                    "add": "Add",
+                    "delete": "Confirm",
+                    "deleteAll": "Confirm"
+                },
+                "confirm": {
                     "title": "Confirm Delegations",
                     "cancel": "Cancel",
                     "ok": "Confirm"
-              },
-              "titleMap": {
-                "new": "Initiate Delegation",
-                "add": "Add Delegations",
-                "delete": "Remove Delegations",
-                "deleteAll": "Confirm to remove delegations"
-              }
+                },
+                "titleMap": {
+                    "new": "Initiate Delegation",
+                    "add": "Add Delegations",
+                    "delete": "Remove Delegations",
+                    "deleteAll": "Confirm to remove delegations"
+                }
+            }
+        },
+        "openapi": {
+            "title": "API",
+            "myKey": "My API Key",
+            "createTime": "Created Time",
+            "permissions": "Applied Trading Pairs",
+            "createKey": "Create API Key",
+            "deleteKey": "Delete API",
+            "deleteAlert": "The current API will no longer be accessible if confirm to proceed. Existing package will be retained and re-activated upon creation of a new API Key.",
+            "confirmDelete": "Confirm and Delete",
+            "cancel": "Cancel",
+            "agentAddressStakingAmount": "Delegation Staked Quota",
+            "staking": "Stake",
+            "package": "Package",
+            "expireTime": "Expiration Date",
+            "callNum": "Triggers/min",
+            "callNumInfo": "{maxCount} transactions/min",
+            "price": "Cost",
+            "priceInfo": "{price} VX/mth",
+            "upgrade": "Upgrade",
+            "balanceAlert": "Cannot create if VITE balance is less than {balanceLimit}.",
+            "noSupportForHardware": "Hardware Wallet is not supported at the moment",
+            "tips": {
+                "title": "Notice",
+                "0": "ViteX is releasing official API to provide access to markets and real-time trading services. Follow the instructions below to properly acquire an API private key.",
+                "0-step1": "1. Create API",
+                "0-step2": "2. Authorize delegation of selected trading pairs",
+                "0-step3": "3. Stake quota for API delegation address",
+                "0-step4": "View <a href=\"https://vite.wiki/dex/api/dex-apis.html\" target=\"_blank\">API Documentation</a> for further support",
+                "1": "One set of API Key and Secret is allowed for the same address at any given time.",
+                "2": "To avoid asset loss, Do Not disclose your Access Key and Secret",
+                "3": "The API package is set with the free base package at 10 transactions per minute by default, upgrade options available."
+            },
+            "stakingForQuota": {
+                "title": "Delegation Quota",
+                "agentAddress": "Delegation Address",
+                "stakingAmount": "Stake Amount",
+                "ok": "Confirm"
+            },
+            "keyConfirm": {
+                "accessKey": "Access Key",
+                "secretKey": "Secret Key",
+                "agentAddress": "Delegation Address",
+                "title": "API Created Successfully",
+                "tips": {
+                    "title": "Important Notice",
+                    "0": "To avoid asset loss, Do Not disclose your Access Key and Secret Key.",
+                    "1": "In cases of lost secret key, Delete the current API and Re-Apply for a new API key."
+                },
+                "warn": "The Secret key is displayed only once and cannot be found back if lost, please keep it properly."
+            },
+            "upgradeConfirm": {
+                "title": "Upgrade Package",
+                "currentPackage": "Current",
+                "selectPackage": "Select New",
+                "selectTime": "Valid For",
+                "month": " Mth",
+                "payAmount": "Total",
+                "balance": "VX Balance"
             }
         }
     },
@@ -1003,9 +1165,9 @@
         "title": "Funds",
         "search": "Please enter token name",
         "operate": "Action",
-        "all":"All",
+        "all": "All",
         "confirmTable": {
-            "title":"Detailed Record",
+            "title": "Detailed Record",
             "heads": [
                 "Date",
                 "Token",
@@ -1028,15 +1190,15 @@
                 "recharge": "Deposit to Exchange",
                 "withdraw": "Withdraw to Wallet",
                 "detail": "Details",
-                "sideMap":{
-                    "1":"Deposit",
-                    "2":"Withdraw"
+                "sideMap": {
+                    "1": "Deposit",
+                    "2": "Withdraw"
                 }
             }
         },
         "confirmrecharge": {
-            "successToast":"Deposit successful",
-            "failToast":"Failed to deposit",
+            "successToast": "Deposit successful",
+            "failToast": "Failed to deposit",
             "title": "Deposit to Exchange",
             "lable1": "Wallet Balance",
             "lable2": "Deposit Amount",
@@ -1045,8 +1207,8 @@
             "btn": "Deposit"
         },
         "confirmwithdraw": {
-            "successToast":"Withdrawal Successful",
-            "failToast":"Withdrawal Failed",
+            "successToast": "Withdrawal Successful",
+            "failToast": "Withdrawal Failed",
             "title": "Withdraw to Wallet",
             "lable1": "Available Balance",
             "lable2": "Withdrawal Amount",
@@ -1058,11 +1220,11 @@
     },
     "tradeOpenOrders": {
         "cancelErr": "You are trying too ofter, please try again later.",
-        "confirm":{
-            "successToast":"Revoking Order Successful",
-            "failToast":"Revoking Order Failed",
-            "submitTxt":"Confirm to revoke",
-            "cancelTxt":"Cancel",
+        "confirm": {
+            "successToast": "Revoking Order Successful",
+            "failToast": "Revoking Order Failed",
+            "submitTxt": "Confirm to revoke",
+            "cancelTxt": "Cancel",
             "title": "Revoke Order",
             "content": "Are you sure you want to revoke current order?"
         },
@@ -1112,7 +1274,7 @@
             "4": "Failed"
         },
         "confirmTable": {
-            "title":"Order Book",
+            "title": "Order Book",
             "heads": [
                 "Time",
                 "Price",
@@ -1160,7 +1322,7 @@
         "title": "Mining",
         "addQuota": "Create a new staking",
         "add": "Add",
-        "withdraw": "Retrieve",
+        "withdraw": "Unstake",
         "withdrawList": "Withdrawal List",
         "tbHead": {
             "date": "Date",
@@ -1170,18 +1332,18 @@
         },
         "txTitle": "Trading as Mining Total Income",
         "quotaTitle": "Staking as Mining Total Income",
-        "addHint1": "A minimum of 10 VX must be staked to receive dividends",
-        "addHint2": "VITE Staking will be effective immediately after submission. Staking can be retrieved after 3 days",
+        "addHint1": "Single stake should be at least 134 VITE",
+        "addHint2": "VITE staking will be effective immediately after submission. Staking can be canceled after 3 days",
         "addHint3": "Staked amount will be released after the 7-day waiting period",
-        "withdrawHint1": "You will no longer be able to mining VX after retrieving",
-        "withdrawHint2": "It takes about 7 days to retrieve",
-        "addTitle": "Staking VITE for Mining",
-        "withdrawTitle": "Retrieving Staked VITE",
-        "addPlaceHolder": "Please enter staking amount, at least 134 VITE",
-        "withdrawPlaceHolder": "Please input retrieving amount, at least 134 VITE",
-        "addBtn": "Confirm to stake ",
-        "withdrawBtn": "Confirm to retrieve",
-        "stakingBalance": "Retrievable Stake",
+        "withdrawHint1": "You will no longer be able to mine VX after staking is canceled",
+        "withdrawHint2": "It takes 7 days to return unstaked VITE coins to exchange balance",
+        "addTitle": "Stake VITE for Mining",
+        "withdrawTitle": "Unstake VITE",
+        "addPlaceHolder": "Please enter staking amount",
+        "withdrawPlaceHolder": "Please input unstaking amount, at least 134 VITE",
+        "addBtn": "Confirm to Stake",
+        "withdrawBtn": "Confirm to Unstake",
+        "stakingBalance": "Available Stake Balance",
         "hintTitle": "Important Notice",
         "comingHint": "VX mining function is coming soon, stay tuned. You can get VX in five ways: 1. Trading as Mining, 2. Listing as Mining, 3. Referring as Mining, 4. Staking as Mining, 5. Market-making as Mining. Users who hold VX enjoy payouts from a shared dividend pool.",
         "more": "Learn more about VX mining rules",
@@ -1193,44 +1355,44 @@
         "help": "Current trading fees displayed on this page contains only the 0.2% ViteX base transaction fees, please note that operator fees shall be taken into consideration when calculating mining cost"
     },
     "tradeVip": {
-        "title": "Manage VIP",    
-        "open": "Become a VIP",      
-        "cancel": "Cancel {type}", 
+        "title": "VIP Status",
+        "open": "Become a VIP",
+        "cancel": "Cancel {type}",
         "help": {
-            "title": "About VIP"
+            "title": "About ViteX VIP"
         },
         "helpConfirm": {
             "t1": "VIP",
-            "txt1": "Stake 10,000 VITE to acquire VIP status and receive 50% off trading fees. Staking can be retrieved after 30 days.",
+            "txt1": "Stake 10,000 VITE to acquire VIP status and receive 50% off trading fees. Staking can be canceled after 30 days.",
             "t2": "SVIP",
-            "txt2": "Stake 1 million VITE to become a SVIP and enjoy 0 basic trading fees. Staking can be retrieved after 30 days.",
-            "txt3": "SVIP supports Stake Delegation, stake for others to acquire SVIP status. Staking can be revoked and retrieved manually after 30 days."
-        },       
+            "txt2": "Stake 1M VITE to become a SVIP and enjoy 0 base trading fees. Staking can be canceled after 30 days.",
+            "txt3": "SVIP supports staking for any valid account address. Stake for them to get SVIP status!"
+        },
         "vipConfirm": {
-            "cancelVip": "Cancel VIP",
+            "cancelVip": "Cancel VIP Status",
             "openVip": "Become a VIP",
             "openStakingAmount": "Staking Amount for Becoming a VIP",
-            "cancelStakingAmount": "Retrievable Stake",
+            "cancelStakingAmount": "Available Stake Balance",
             "noBalance": "Insufficient Balance",
-            "openHint": "You will enjoy the privilege of 0.1% trading fee discount after becoming a VIP. The staking amount of 10,000 VITE can be manually retrieved after 30 days.",
-            "cancelHint": "VIP privileges will be discontinued once staking is revoked.",
-            "openSuccess": "Applied Successful! VIP status will come into effect later.",
-            "openFail": "Failed to apply VIP",
+            "openHint": "You will receive 0.1% trading fee deduction as a VIP. The staking of 10,000 VITE can be withdrawn after 30 days.",
+            "cancelHint": "VIP status will be canceled immediately.",
+            "openSuccess": "Your VIP status is activated! It will take effect in a few seconds.",
+            "openFail": "VIP Registration Failed",
             "cancelSuccess": "Cancel VIP Successful",
             "cancelFail": "Cancel Failed",
-            "adviseToCancel":"There will be no base transaction fees with your current status as our SVIP, we therefore recommend you to revoke the staked VITE，which is required for general VIP members.",
+            "adviseToCancel": "There will be no base transaction fees with your current status as our SVIP, we therefore recommend you to revoke the staked VITE，which is required for general VIP members.",
             "address": "Enable VIP Status",
             "addressPlaceholder": "Current address is the default address, address cannot be modified later"
         },
         "svipConfirm": {
-            "open":"Upgrade",
-            "cancel":"Cancel",
+            "open": "Upgrade",
+            "cancel": "Cancel",
             "cancelVip": "Cancel SVIP",
             "openVip": "Become a SVIP",
             "openStakingAmount": "Staking Amount for Becoming a SVIP",
-            "cancelStakingAmount": "Retrievable Stake",
+            "cancelStakingAmount": "Available Stake Balance",
             "noBalance": "Insufficient Balance",
-            "openHint": "You will enjoy 0% base transaction fee when upgrading to SVIP. The stake of 1,000,000 VITE can be manually retrieved after 30 days.",
+            "openHint": "You will enjoy 0% base transaction fee when upgrading to SVIP. The stake of 1,000,000 VITE can be withdrawn after 30 days.",
             "cancelHint": "SVIP privileges will be discontinued once staking is revoked",
             "openSuccess": "Applied Successful! SVIP status will come into effect later.",
             "openFail": "Failed to apply SVIP",
@@ -1244,14 +1406,14 @@
         "openAddress": "Enabled Address",
         "type": "VIP Type"
     },
-    "inviteMining":{
+    "inviteMining": {
         "title": "Referring as Mining Total Income",
         "myInviteIncome": "Referral Proceeds",
         "inviteTradeIncome": "Referred Trading Proceeds",
         "inviteOrderIncome": "Referred Market-Making Proceeds"
     },
-    "orderMining":{
-        "title":"Market-Making as Mining Total Income",
+    "orderMining": {
+        "title": "Market-Making as Mining Total Income",
         "tbHead": {
             "date": "Date",
             "ratio": "Ratio",
@@ -1276,7 +1438,11 @@
         "help": "Reward Rules: 1. A minimum of 10 VX must be staked to receive dividends. 2. Submission of staking request allows for dividends starting the nearest distribution. 3. Staked amount will be released after the 7-day waiting period",
         "lockedAmount": "Staking Amount",
         "lockAmountTips": "Receive Dividends on 10 VX or Above",
-        "unlockAmount": "Retrieving Amount",
+        "unlockAmount": "Unlocking Amount",
+        "addHint1": "A minimum of 10 VX must be staked to receive dividends",
+        "addHint2": "Submission of staking request allows for dividends starting the nearest distribution",
+        "addHint3": "Staked amount will be released after the 7-day waiting period",
+        "autoLock": "Automatic Staking",
         "openAutoLock": {
             "title": "Enable Automatic Staking",
             "text": "Mined VX will be automatically staked once enabled"
@@ -1286,23 +1452,23 @@
             "text": "Mined VX will not be automatically staked when turned off"
         },
         "lock": "Stake",
-        "unlock": "Retrieve",
+        "unlock": "Unstake",
         "lessMin": "Minimum 1 VX",
         "lockVXConfirm": {
-            "title": "Staking Earnings",
+            "title": "Stake VX",
             "available": "Exchange Available Balance",
             "amountPlaceholder": "Please input staking amount, minimum 1 VX",
             "notEnough": "Insufficient Exchange Balance",
-            "submit": "Submit Staking",
-            "amountText": "Staking Amount"
+            "submit": "Confirm to Stake",
+            "amountText": "Amount"
         },
         "unlockVXConfirm": {
-            "title": "Retrieve VX",
-            "available": "Retrievable Amount",
+            "title": "Unstake VX",
+            "available": "Available Stake Balance",
             "amountPlaceholder": "Please input amount, minimum 1 VX",
             "notEnough": "Insufficient Amount",
-            "submit": "Confirm Retrieval",
-            "amountText": "Retrieving Amount",
+            "submit": "Confirm to Unstake",
+            "amountText": "Amount",
             "hint": "It takes about 7 days to unlock."
         },
         "unlockList": {
@@ -1341,7 +1507,12 @@
         "incomeList": "Income Details",
         "historyIncome": "Income History",
         "openTxPair": "Open Trading Pairs",
-        "statusList": ["Ownership Transferred", "Trading", "Suspension", "Trade Not Open"],
+        "statusList": [
+            "Ownership Transferred",
+            "Trading",
+            "Suspension",
+            "Trade Not Open"
+        ],
         "openTxPairConfirm": {
             "title": "Open {symbol} to trade",
             "fee": "Listing Fee",
@@ -1356,6 +1527,9 @@
         "stopFail": "Suspension Failed",
         "openSuccess": "Recovery Successful",
         "openFail": "Recovery Failed",
+        "changeOwnerSuccess": "Transfer Successful",
+        "changeOwnerFaill": "Transfer Failed",
+        "submitChange": "Confirm to transfer",
         "changeOwnerHint": "NOTICE: You will not be able to collect or adjust fees after ownership transferred as well as you cannot undo this transfer action",
         "currentMaker": "Maker",
         "confirmFee": "Fee",
@@ -1404,7 +1578,7 @@
         "myDividendTitle": "Total Estimated Value of Dividends ({token})",
         "listTitle": "Dividend Details",
         "lockingTitle": "My Staking",
-        "viewLink": "Staking Details"
+        "viewLink": "Unstaking Status"
     },
     "mobileMining": {
         "title": "Mining",
@@ -1439,5 +1613,12 @@
         "1day": "1 day",
         "clear": "Clear",
         "submit": "Search"
+    },
+    "desktop": {
+        "unlock": "unlock",
+        "unreceivedTx": {
+            "title": "You have received {num} transactions.",
+            "body": "Amount：{amount} {symbol} \nFrom Address: {address}"
+        }
     }
 }
