@@ -1,6 +1,7 @@
 {
     "lang": "日本語",
     "help": "ヘルプ",
+    "announcements": "Announcements",
     "start": "開始",
     "login": "ログイン",
     "regAcc": "登録",
@@ -42,9 +43,19 @@
         ]
     },
     "dealReminder": {
-        "title": "取引通知",
+        "title": {
+            "buy": "Buy Order Completed: {ftoken} / {ttoken}",
+            "sell": "Sell Order Completed: {ftoken} / {ttoken}"
+        },
         "failTitle": "注文失敗",
-        "notice": "あなたの{time}の注文{amount} {token}（{token} / {token})は取引完了しました。詳細は注文履歴をご覧ください。",
+        "notice-all": {
+            "buy": "Price: {price} {ttoken} \nAmount: {amount} {ttoken}, was completed. View Order History page for details.",
+            "sell": "Price: {price} {ttoken} \nAmount: {amount} {ttoken}, was completed. View Order History page for details."
+        },
+        "notice-partial": {
+            "buy": "Price: {price} {ttoken} \nAmount: {amount} {ttoken}, is {executedPercent}% completed.",
+            "sell": "Price: {price} {ttoken} \nAmount: {amount} {ttoken}, is {executedPercent}% completed."
+        },
         "error": "あなたの{time}の注文{amount} {token}（{token} / {token})は取引に失敗しました。詳細は注文履歴をご覧ください。"
     },
     "pow": {
@@ -61,6 +72,15 @@
     "compliance": {
         "text": "ViteXは、香港、キューバ、イラン、北朝鮮、クリミア、スーダン、マレーシア、シリア、アメリカ[プエルトリコ、アメリカ領サモア、グアム、北マリアナ島などのアメリカのすべての地域を含む] 、米国領バージン諸島（セントクロア島、セントジョン島、セントトーマス島）、バングラデシュ、ボリビア、エクアドル、キルギスタン。以上の国/地域のお客様にはサービスを提供していません。 詳細については、利用規約とプライバシーポリシーをご覧ください。",
         "title": "重要なお知らせ"
+    },
+    "bnbConf": {
+        "title": "重要なお知らせ",
+        "t1": "VITE Binance Listing Coming! Please vote to have VITE listed on Binance.",
+        "t2": "Voting Period: 12:00 pm Dec 12 to 12:00 pm Dec 13 (HKT)",
+        "t3": "Voting Method: Holding 50 BNB allows for 1 vote (10 votes max)",
+        "t4": "Voting Rewards: All voted users will be rewarded with an airdrop totaling 21,000,000 VITE based on executed votes.",
+        "btn": "Vote Now!!!",
+        "notice": "[Attention]: You must have 50-500 BNBs in your Binance Account starting Dec 5 and last through Dec 13 to Qualify for Voting!"
     },
     "errCode": {
         "35003": "{name} ID が重複しています。再申請してください。",
@@ -85,38 +105,60 @@
         "37010": "このオーダーステータスは取り消すことができません"
     },
     "txType": {
-        "SBPreg": "SBP登録",
-        "UpdateReg": "アップデート登録",
-        "RevokeReg": "取り消し登録",
-        "RetrieveReward": "報酬を取得",
-        "Voting": "投票",
-        "RevokeVoting": "投票の取り消し",
-        "GetQuota": "クオータを獲得",
-        "WithdrawalOfQuota": "ステーキングクォータの送信",
-        "Mintage": "トークン発行",
-        "MintageIssue": "追加のトークン発行",
-        "MintageBurn": "トークンの破壊",
-        "MintageTransferOwner": "所有権の譲渡",
-        "MintageChangeTokenType": "トークンタイプの編集",
-        "MintageCancelPledge": "ステークトークンの取得",
-        "DexFundUserDeposit": "ViteX 預け入れ",
-        "DexFundUserWithdraw": "ViteX 引き出し",
-        "DexFundNewOrder": "ViteX オーダー作成",
-        "DexTradeCancelOrder": "ViteX オーダー取り消し",
-        "DexFundNewMarket": "ViteX トークンリスティング",
-        "CreateContractReq": "コントラクトの作成",
-        "DexFundPledgeForVx": "ViteX ステーキング",
-        "DexFundPledgeForVip": "ViteX VIP",
-        "TxReq": "転送",
-        "RewardReq": "転送",
-        "TxRes": "転送",
-        "TxResFail": "転送",
-        "SendRefund": "転送",
-        "GenesisReceive": "ジェネシス",
-        "DexFundTransferTokenOwner": "オペレーターキー所有権の譲渡",
-        "DexFundMarketOwnerConfig": "オペレーターの取引ペア構成",
-        "DexFundBindInviteCode": "リファラルコードの使用",
-        "DexFundNewInviter": "リファラルコードの生成"
+        "RegisterSBP": "SBP登録",
+        "RegisterSBP_V1": "SBP登録",
+        "UpdateSBPBlockProducingAddress": "アップデート登録",
+        "UpdateSBPBlockProducingAddress_V1": "アップデート登録",
+        "RevokeSBP": "取り消し登録",
+        "RevokeSBP_V1": "取り消し登録",
+        "WithdrawSBPReward": "Claim Reward",
+        "WithdrawSBPReward_V1": "Claim Reward",
+        "VoteForSBP": "投票",
+        "VoteForSBP_V1": "投票",
+        "CancelSBPVoting": "投票の取り消し",
+        "CancelSBPVoting_V1": "投票の取り消し",
+        "StakeForQuota": "クオータを獲得",
+        "StakeForQuota_V1": "クオータを獲得",
+        "CancelQuotaStake": "Withdrawal of Stake",
+        "CancelQuotaStake_V1": "Withdrawal of Stake",
+        "IssueToken": "トークン発行",
+        "IssueToken_V1": "トークン発行",
+        "ReIssueToken": "追加のトークン発行",
+        "ReIssueToken_V1": "追加のトークン発行",
+        "BurnToken": "トークンの破壊",
+        "BurnToken_V1": "トークンの破壊",
+        "TransferTokenOwnership": "所有権の譲渡",
+        "TransferTokenOwnership_V1": "所有権の譲渡",
+        "DisableReIssue": "トークンタイプの編集",
+        "DisableReIssue_V1": "トークンタイプの編集",
+        "DexDeposit": "ViteX 預け入れ",
+        "DexDeposit_V1": "ViteX 預け入れ",
+        "DexWithdraw": "ViteX 引き出し",
+        "DexWithdraw_V1": "ViteX 引き出し",
+        "DexPlaceOrder": "ViteX オーダー作成",
+        "DexPlaceOrder_V1": "ViteX オーダー作成",
+        "DexCancelOrder": "ViteX オーダー取り消し",
+        "DexCancelOrder_V1": "ViteX オーダー取り消し",
+        "DexStakeForSuperVIP": "ViteX SVIP",
+        "DexStakeForSuperVIP_V1": "ViteX SVIP",
+        "DexConfigMarketAgents": "Configure Delegations",
+        "DexConfigMarketAgents_V1": "Configure Delegations",
+        "DexOpenNewMarket": "ViteX トークンリスティング",
+        "DexOpenNewMarket_V1": "ViteX トークンリスティング",
+        "DexStakeForVIP": "ViteX VIP",
+        "DexStakeForVIP_V1": "ViteX VIP",
+        "DexStakeForMining": "ViteX ステーキング",
+        "DexStakeForMining_V1": "ViteX ステーキング",
+        "CreateContractRequest": "コントラクトの作成",
+        "TransferRequest": "転送",
+        "ReIssueRequest": "転送",
+        "Response": "転送",
+        "ResponseFail": "転送",
+        "RefundByContractRequest": "転送",
+        "GenesisResponse": "ジェネシス",
+        "FullNodeStake": "Stake for Full Node",
+        "FullNodeCancelStake": "Withdraw Full Node Stakes",
+        "UpdateSBPRewardWithdrawAddress": "Edit SBP Reward Withdraw Address"
     },
     "btn": {
         "cancel": "キャンセル",
@@ -150,11 +192,11 @@
         "operateSuccess": "オペレーション成功",
         "operateFail": "操作に失敗しました。",
         "unreceived": "使用前にウォレットをアンロックしてください",
-        "unLogin": "Please login before using referral code"
+        "unreceivedNum": "Please sign in to collect unreceived funds, currently you have {number} unreceived transaction(s)"
     },
     "beforeUse": {
         "title": "利用前に読んで下さい",
-        "text1": "For your funds' safety, account creation function is not currently supported on web wallet. Please download Vite App to create an account. Vite platform would like to warn you that if you visit a phishing website or lose you backup, our company cannot recover your funds.",
+        "text1": "資金の安全確保の為、アカウント作成機能は一時的にサポートされていません。 Viteアプリをダウンロードしてアカウントを作成してください。 Viteプラットフォームは、フィッシングサイトにアクセスした場合、バックアップを失った場合に、資金を回収できないことを警告致します。",
         "text2": "私たちのWebサイトはあなたの秘密鍵やシードフレーズを保存しません。ブラウザの変更、ローカルCookieのクリア、PCの変更をする場合は、シードフレーズを使用してアカウントを復元する必要があります。",
         "text3": "シードフレーズを正確に記録して安全に保存するように、適切な予防措置を講じてください。 わずかなエラーでも、アドレスを正常に復元できなくなります。"
     },
@@ -163,7 +205,7 @@
         "txt1": "x.vite.netは、ウォレットと取引所を統合するWebプラットフォームです。 Vite Labsにより公式に開始されました。",
         "txt2": "現在のバージョンには、ウォレット、ViteX、クォータ用ステーキング、SBP登録、投票、トークン発行の機能が含まれています。 新しくリリースされたViteConnect機能をお試しください。Viteアプリを使用して、QRコードをスキャンしてログインできます。",
         "txt3": "ViteXが正式にローンチしました。取引を始めましょう。",
-        "v": "現在のバージョン: {version}"
+        "v": ""
     },
     "pwdConfirm": {
         "conf": "パスワードフリーモードを開き、全てのトランザクションプロセス中にパスワードを入力しないようにします。",
@@ -182,9 +224,9 @@
         "restore": "シードフレーズによるアカウントの復元",
         "record": "シードフレーズの生成",
         "prompt": "ニーモニックシードフレーズは、ウォレットを復元する唯一の方法です。 フレーズを書き留めて、自分だけがアクセスできる安全な場所に保管することを強くお勧めします。",
-        "placeholder": "Please enter your mnemonic seed phrase. Example: apple banana peach mango pear ...",
-        "empty": "Seed phrase cannot be empty",
-        "error": "Wrong seed phrase. Try again",
+        "placeholder": "ニーモニックシードフレーズを入力してください",
+        "empty": "シードフレーズの入力が空欄です",
+        "error": "シードフレーズが間違っています 再入力してください",
         "hint": "例：apple banana peach mango pear ...",
         "change": "{len}ニーモニックワードに切り替え"
     },
@@ -193,6 +235,12 @@
         "config": "基本設定",
         "currency": "デフォルト通貨",
         "secure": "セキュリティ",
+        "gate": "Custom Gateway",
+        "triggerGate": [
+            "閉じる",
+            "公開"
+        ],
+        "gateHelp": "You can customize your gateway configuration when activating this feature. Currently this feature is mainly for developers.",
         "lang": "言語",
         "block": "現在のブロックハイト",
         "version": "バージョン",
@@ -214,7 +262,12 @@
             "30": "30分",
             "60": "1時間",
             "720": "12時間"
-        }
+        },
+        "theme": "Theme color",
+        "themeList": [
+            "Light",
+            "Dark"
+        ]
     },
     "create": {
         "input": "パスワードを入力して下さい",
@@ -233,7 +286,7 @@
         }
     },
     "startCreate": {
-        "notice": "For your funds' safety, account creation function is not currently supported on web wallet. Please download Vite App to create an account.",
+        "notice": "資金の安全のため、アカウント作成機能はWebウォレットで一時的にサポートされていません。 Viteアプリをダウンロードしてアカウントを作成してください。",
         "goLogin": "ログイン",
         "goDex": "ViteXへ行く"
     },
@@ -254,24 +307,33 @@
         "saveSuccess": "正常に保存されました",
         "heads": {
             "name": "名前",
-            "balance": "残高",
+            "balance": "Wallet残高",
             "onroad": "ウォレット未受取額",
             "gate": "ウォレット クロスチェ－ンゲートウェイ",
             "totalExAmount": "取引所合計残高",
             "availableExAmount": "取引可能残高",
             "balanceTips": "You can transfer your assets to other addresses via clicking 'Send' button",
             "gateTips": "In this cross-chain section, you can map other tokens into Vite network. Click 'Receive' button to deposit assets to your Vite Wallet. Click 'Send' button to transfer your assets to other platforms. * Cross-chain receive/send process may charge fees, it also has its transfer limitation.",
-            "availableExAmountTips": "You can transfer your assets from Vite Wallet to ViteX Exchange via clicking 'Deposit' button. Click 'Withdraw' button to transfer assets from ViteX Exchange to Vite Wallet. No transaction fees caused during these processes."
+            "availableExAmountTips": "You can transfer your assets from Vite Wallet to ViteX Exchange via clicking 'Deposit' button. Click 'Withdraw' button to transfer assets from ViteX Exchange to Vite Wallet. No transaction fees caused during these processes.",
+            "unreceivedTips": "Unreceived funds will be received automatically after signing in"
         },
         "actionType": {
             "SEND": "送信",
-            "RECEIVE": "受信",
-            "CHARGE": "受信",
-            "WITHDRAW": "送信",
-            "EXCHARGE": "入金",
-            "EXWITHDRAW": "引き出し",
+            "RECEIVE": "入金",
+            "CHARGE": "入金",
+            "WITHDRAW": "引き出し",
+            "EXTRANSFER": "転送",
             "EXRECRODS": "履歴",
-            "RECRODS": "履歴"
+            "RECRODS": "履歴",
+            "EXCHARGE": "入金",
+            "EXWITHDRAW": "引き出し"
+        },
+        "transferConfirm": {
+            "from": "From",
+            "to": "To",
+            "wallet": "Wallet Account",
+            "dex": "Exchange Account",
+            "avaliableAmount": "残高"
         },
         "addToken": {
             "title": "トークンを追加",
@@ -369,13 +431,6 @@
                 "WRONG_WITHDRAW_ADDRESS": "転送アドレスが正しくありません。"
             }
         },
-        "receive": {
-            "title": "受信",
-            "codeTips": "QRコードをスキャンして{tokenSymbol}を転送してください",
-            "addressTitle": "受取アドレス",
-            "amountTitle": "受信量",
-            "amountPlaceholder": "受信量を入力して下さい"
-        },
         "charge": {
             "title": "Cross-Chain Receive Funds",
             "addrErr": "ゲートウェイノードに問題が発生しました ネットワーク設定を確認してください",
@@ -391,6 +446,7 @@
         },
         "withdraw": {
             "title": "Cross-Chain Send Funds",
+            "btn": "引き出し",
             "balanceErrMap": {
                 "notEnough": "残高不足",
                 "overMax": "Send amount should be less than {max}",
@@ -415,6 +471,9 @@
     },
     "viteExplorer": {
         "title": "ブロックエクスプローラー"
+    },
+    "viteScanExplorer": {
+        "title": "ViteScan"
     },
     "wallet": {
         "title": "クオータ管理",
@@ -528,7 +587,7 @@
         "maxAmt": "引き出し金額は[{minAmount}、{maxAmount}]である必要があります",
         "cancelLimitAmt": "ステーキング額は{num}未満にはできません",
         "withdrawalStaking": "ステークトークンの引き出し",
-        "myAddr": "Current Address",
+        "myAddr": "私",
         "confirm": {
             "help": {
                 "t1": "クオータとは？",
@@ -576,11 +635,39 @@
         "tAddress": "アドレス",
         "sum": "量"
     },
+    "walletFullNode": {
+        "title": "Full Nodes",
+        "help": {
+            "title": "About",
+            "t1": "Glossary",
+            "txt1": "[Number of Registered Nodes]  The number of full nodes registered with the current address",
+            "txt2": "[Number of Active Nodes]  The number of active full nodes registered with the current address",
+            "txt3": "[Number of Rewarding nodes]  Number of nodes being rewarded",
+            "t2": "Multiple Full nodes can be registered with the same address, but must be staked individually at least 10,000 VITE each; When calculating Active Node Reward, if staking amount / 10000 yields a whole number that is greater than or equal to the number of active nodes, all active nodes will be rewarded; If staking amount / 10000 yields a whole number that is less than the number of active nodes, the number of nodes being rewarded equals to the whole number.",
+            "t3": "Calculation of voting rewards does not depend on the number of nodes, but the staking amount."
+        },
+        "confirmText": "Confirm to stake {amount} VITE for quota, staking can be cancelled after {days} days",
+        "addQuota": {
+            "address": "ステーキングアドレス",
+            "stakeDays": "ステーキング期間",
+            "placeholder": "Minimum Stake {min} VITE"
+        },
+        "quotaContent": {
+            "onlineReward": "Active Node Reward",
+            "voteReward": "Voting Reward",
+            "yesterday": "yesterday",
+            "all": "Accumulated VITE: {num}",
+            "nodeInfo": "Node Information",
+            "onlineNodes": "Active Nodes",
+            "rewardNodes": "Rewarding Nodes",
+            "stakeAmount": "Node Staking"
+        }
+    },
     "walletSBP": {
         "title": "SBP",
         "help": {
             "title": "SBPについて",
-            "text": "SBP（Snapshot Block Producer）is a node that has right to create blocks, you can register to become a SBP candidate by staking a certain amount of VITE, each round (about 75 seconds) will elect 25 SBPs, the SBPs will be elected from random 23 out of top 25 candidate nodes, plus random 2 out of the candidate nodes ranking 26th-100th on the list. The 50% of total SBP rewards will be allocated to the block creation node, the other 50% will be allocated to nodes that are ranked on top 100 as voting rewards. One registration address (staking address) can register multiple block creation nodes (node names), a node name cannot be used if the node name has been registered by a registration address. A node name can switch block creation address, however, block creation address cannot be reused by other node names."
+            "text": "SBP（スナップショットブロックプロデューサー）はブロック作成権限を持つノードです。一定量のVITEをステーキングすることでSBP候補として登録できます。各ラウンド（約75秒）で25のSBPが選択されます 上位25の候補ノードからランダムに23、さらにリストの26番目から100番目にランク付けされた候補ノードからランダムに2つ選択されます。ブロック作成報酬の50％はブロック作成ノードに割り当てられ、残りの50％は投票報酬として上位100位にランク付けされたノードに割り当てられます。 1つの登録アドレス（ステーキングアドレス）は、複数のブロック作成ノード（ノード名）を登録できます。ノード名が登録アドレスによって登録されている場合、ノード名は使用できません。 ノード名はブロック作成アドレスを切り替えることができますが、ブロック作成アドレスを他のノード名で再利用することはできません。"
         },
         "register": "SBP登録",
         "cancel": "SBPの取消",
@@ -603,7 +690,10 @@
             "rightBtn": "登録準備ができました",
             "edit": {
                 "title": "ブロック作成アドレスを変更",
-                "placeholder": "新しいブロック作成アドレスを入力してください",
+                "newBlockProducer": "新しいブロック作成アドレスを入力してください",
+                "newRewardAddress": "please input new reward withdraw address",
+                "changeBlockProducer": "ブロック作成アドレス",
+                "changeRewardAddress": "Reward Withdraw Address",
                 "btn": "変更を確認"
             }
         },
@@ -611,6 +701,7 @@
             "title": "登録申請",
             "nodeName": "ノード名",
             "producerAddr": "ブロック作成アドレス",
+            "rewardWithdrawAddress": "Reward Withdraw Address",
             "quotaAddr": "ステーキングアドレス",
             "quotaTime": "ステーキング期間",
             "time": "7776000スナップショットブロック（約90日）",
@@ -718,6 +809,7 @@
         },
         "vb": {
             "title": "ViteConnect",
+            "closeAlert": "close",
             "connect": {
                 "tips": "Vite WalletアプリでQRコードをスキャンする"
             },
@@ -730,6 +822,61 @@
                 "download": "Vite Walletをダウンロード"
             },
             "accountName": "ViteConnect アドレス"
+        },
+        "ledger": {
+            "title": "Ledger Device",
+            "accountName": "Ledger Wallet",
+            "verifyAddress": "Verify address",
+            "closeAlert": "キャンセル",
+            "start": {
+                "title": "Support Hardware Wallets: Ledger Nano S / Ledger Nano X",
+                "connectError": "Having Connection Issues?",
+                "introduction": "App Installation & Usage Instructions",
+                "introductionUrl": "https://support.ledger.com/hc/en-us/articles/115005165269-Connection-issues-with-Windows-or-Linux",
+                "connectErrorUrl": "https://support.ledger.com/hc/en-us/articles/115005165269-Connection-issues-with-Windows-or-Linux"
+            },
+            "connectWithUSB": "Use USB",
+            "connectWithBlu": "Use Bluetooth",
+            "connectLedger": "Connect to Ledger",
+            "connect": {
+                "title": "Address Select",
+                "tips": "Select an address to use:",
+                "selectConnectType": "Choose connection type: (Bluetooth is only supported on Ledger Nano X)",
+                "cancelSelect": "Select a device to connect",
+                "connectError": "Connect failed. Please confirm Vite app is opened on device",
+                "interfaceNotAvailable": "Connect failed. Please check USB cable is connected. If you connect through Bluetooth, switch off Bluetooth and switch on again",
+                "receiveBlockSuccess": "Successfully received {num} transaction",
+                "introduction": {
+                    "1": {
+                        "title": "Step 1: ",
+                        "content": "Connect Ledger device and enter PIN code"
+                    },
+                    "2": {
+                        "title": "Step 2: ",
+                        "content": "Open Vite app on Ledger"
+                    }
+                }
+            },
+            "addressSelect": {
+                "index": "Index",
+                "address": "アドレス",
+                "balance": "残高",
+                "unreceived": "未受信",
+                "nextPage": "Next page",
+                "prePage": "Last page",
+                "confirm": "確認",
+                "unUsedAccount": "New"
+            },
+            "confirm": {
+                "tips": "Please confirm the transaction on your Ledger device",
+                "verifyAddress": "Please verify the address on your Ledger device",
+                "alert": "Warning",
+                "alertContent": "Address has been denied on Ledger device. Please double verify if this address matches the address displayed on your Ledger device. If yes, ignore this message and go ahead to confirm the transaction, otherwise DO NOT send asset to the address and quit immediately.",
+                "alertLeftBtn": "I confirm the addresses are matched",
+                "alertRightBtn": "Addresses mismatch. Get me out of here!",
+                "userCancel": "Transaction is cancelled on Ledger",
+                "userCancelByWeb": "You cancelled the transaction in Vite wallet. In this case, the transaction will be abandoned and never go through to blockchain even if it is confirmed on your Ledger device."
+            }
         },
         "invite": {
             "inviteTitle": "友達を招待",
@@ -750,8 +897,11 @@
             "inviteRule": "ルール",
             "ruleItems": [
                 "あなたは<span class = 'strong'> 1000 VITE </ span>を使って紹介コードを作成できます。このファンドは配当プールに入れられ、VX保有者に分配されます",
-                "紹介コードを使用するユーザーによって生成された取引手数料の<span class = 'strong'> 5％</ span>は、VXをマイニングできる取引手数料として扱われます。",
-                "リファラルコードを使用するトレーダーは、取引中に<span class = 'strong'> 10％</ span>割引を受けることができます"
+                "紹介コードを使用するユーザーによって生成された取引手数料の<span class = 'strong'> 5％</ span>は、VXをマイニングできる取引手数料として扱われます。"
+            ],
+            "receiveRuleItems": [
+                "Invited users will receive an extra <span class='strong'>2.5%</span> of trading as mining rewards and <span class='strong'>1.25%</span> of market-making as mining rewards",
+                "Enjoy <span class='strong'>10%</span> off trading fees with an invitation code"
             ]
         }
     },
@@ -759,7 +909,7 @@
         "title": "Vite変換",
         "help": {
             "title": "VITE変換の簡単な説明",
-            "text": "You can convert ERC20 VITE into VITE at Vite Pre-Mainnet through VITE conversion. During conversion, your ERC20 VITE will be transferred to Ethereum black hole address: 0x1111111111111111111111111111111111111111, and you will receive the same amount of VITE in your Vite address after the transaction to Ethereum black hole address has completed. During the conversion, fee of transaction to the Ethereum black hole address come from your current ETH address. After submitting the conversion, please wait at least 30 confirmations in Ethereum network, you can find the transaction history in conversion history."
+            "text": "VITE変換機能により、ERC20トークンをVITEのTestNetに移行できます。TestNetでは、公式SBPに投票して報酬を受け取ると、年率が20％に達する可能性があります。ERC20VITEトークンは、Ethereumブラックホールアドレスに転送されます：{ blackAddr}、Ethereumブラックホールアドレスがトランザクションを受信して確認すると、Viteアドレスで同量のVITEを受け取ります。変換プロセスに入ったら、Viteウォレットのアドレスに十分なVITEとETH（ガスとして）があることを確認します Viteウォレットのアドレス。"
         },
         "gas": "マイニング手数料",
         "record": "変換履歴",
@@ -780,6 +930,12 @@
         "depthStep": "{step}桁",
         "blocking": "ネットワークの混雑が発生しています しばらくしてからもう一度お試しください",
         "supportMining": "Mineable Trading Pairs",
+        "cmcHelp": "View VITE on CoinMarketCap",
+        "supportTradeMining": "Eligible for trading as mining",
+        "supportOrderMining": "Eligible for market-making as mining",
+        "zeroFee": "Zero Fee",
+        "buyMiningPrice": "Qualifies for mining when buy price is greater than {price}",
+        "sellMiningPrice": "Qualifies for mining when sell price is less than {price}",
         "operator": {
             "noName": "Anonymous Operator",
             "overview": "はじめに",
@@ -793,9 +949,13 @@
             "title": "Trading Pair Details",
             "tokenTab": "Token Details",
             "operatorTab": "オペレータ詳細"
-        }
+        },
+        "depthBuyMiningPrice": "Mining Range Above",
+        "depthSellMiningPrice": "Mining Range Below",
+        "inMiningRange": "Mining Range"
     },
     "trade": {
+        "more": "More",
         "search": "検索",
         "txPair": "ペア",
         "price": "価格",
@@ -862,7 +1022,9 @@
         "depth": {
             "buy": "購入",
             "sell": "売却",
-            "all": "すべて"
+            "all": "すべて",
+            "avgPrice": "Avg.Price:",
+            "sum": "Sum {symbol}:"
         },
         "noData": {
             "favorite": "お気に入りのがありません",
@@ -871,6 +1033,8 @@
         "limitPrice": {
             "title": "限度",
             "fee": "手数料",
+            "adviseToSVip": "Upgrade to SVIP, enjoy zero base transaction fee",
+            "feeRuleWithSVip": "Operator Fees * Referral Discount. ATTENTION: The adjustment and discount of fees will only affect new orders, the former orders' charge remains the same.",
             "text": "このページは、トランザクションデータのプレビューページです 取引するにはログインしてください。",
             "validAmount": "ボリュームは{amount} {token}より大きくなければなりません",
             "priceNotNull": "量を空にすることはできません",
@@ -882,20 +1046,119 @@
             "operatorFee": "Zone 手数料 (オペレーターによって変わります): {fee}",
             "vipFee": "VIP ディスカウント: {fee}",
             "inviteFeeDiscount": "リファラルディスカウント: {fee} off",
+            "svipFee": "SVIP: 0% base transaction fee",
             "feeRule": "（基本取引手数料-VIP割引+ゾーン手数料）*紹介割引。 注意：料金の調整と割引は新しい注文にのみ影響し、以前の注文の料金は変わりません。"
         },
-        "vipConfirm": {
-            "cancelVip": "VIPをキャンセル",
-            "openVip": "VIPになる",
-            "openStakingAmount": "VIPになるためのステーキング量",
-            "cancelStakingAmount": "回収可能なステーキング量",
-            "noBalance": "残高不足",
-            "openHint": "VIPになると0.1％の取引手数料割引の特典をお楽しみいただけます。 10,000 VITEのステーキング量は、30日後に手動で取得できます。",
-            "cancelHint": "約{time}でステーキング総量を取得できます。 取得するとVIP特権が失われます。",
-            "openSuccess": "成功しました！ VIPステータスは後で有効になります。",
-            "openFail": "VIPを適用できませんでした",
-            "cancelSuccess": "VIPをキャンセルしました",
-            "cancelFail": "キャンセルできませんでした"
+        "proxy": {
+            "title": "Trade Delegation",
+            "subTitle": "Trade Delegation",
+            "successProxy": "Delegation Success",
+            "failProxy": "Delegation Failed",
+            "successCancelProxy": "Remove Delegation Success",
+            "failCancelProxy": "Failed to remove delegations",
+            "info": "What is Trade Delegation?",
+            "new": "Initiate Delegation",
+            "active": {
+                "title": "Delegation History",
+                "head": [
+                    "Delegatee Address",
+                    "トレーディングペア",
+                    "アクション"
+                ],
+                "operate": [
+                    "Add Trading Pairs",
+                    "Remove Trading Pairs",
+                    "Remove All Delegations"
+                ]
+            },
+            "passive": {
+                "title": "Accepted Delegation History",
+                "head": [
+                    "Delegation Address",
+                    "トレーディングペア"
+                ]
+            },
+            "dialog": {
+                "cancel": "キャンセル",
+                "cancelAllTips": "Are you sure you'd like to remove all delegations on {trustAddress}?",
+                "rTxtMap": {
+                    "new": "追加",
+                    "add": "追加",
+                    "delete": "確認",
+                    "deleteAll": "確認"
+                },
+                "confirm": {
+                    "title": "Confirm Delegations",
+                    "cancel": "キャンセル",
+                    "ok": "確認"
+                },
+                "titleMap": {
+                    "new": "Initiate Delegation",
+                    "add": "Add Delegations",
+                    "delete": "Remove Delegations",
+                    "deleteAll": "Confirm to remove delegations"
+                }
+            }
+        },
+        "openapi": {
+            "title": "API",
+            "myKey": "My API Key",
+            "createTime": "Created Time",
+            "permissions": "Applied Trading Pairs",
+            "createKey": "Create API Key",
+            "deleteKey": "Delete API",
+            "deleteAlert": "The current API will no longer be accessible if confirm to proceed. Existing package will be retained and re-activated upon creation of a new API Key.",
+            "confirmDelete": "Confirm and Delete",
+            "cancel": "キャンセル",
+            "agentAddressStakingAmount": "Delegation Staked Quota",
+            "staking": "Stake",
+            "package": "Package",
+            "expireTime": "Expiration Date",
+            "callNum": "Triggers/min",
+            "callNumInfo": "{maxCount} transactions/min",
+            "price": "費用",
+            "priceInfo": "{price} VX/mth",
+            "upgrade": "Upgrade",
+            "balanceAlert": "Cannot create if VITE balance is less than {balanceLimit}.",
+            "noSupportForHardware": "Hardware Wallet is not supported at the moment",
+            "tips": {
+                "title": "Notice",
+                "0": "ViteX is releasing official API to provide access to markets and real-time trading services. Follow the instructions below to properly acquire an API private key.",
+                "0-step1": "1. Create API",
+                "0-step2": "2. Authorize delegation of selected trading pairs",
+                "0-step3": "3. Stake quota for API delegation address",
+                "0-step4": "View <a href=\"https://vite.wiki/dex/api/dex-apis.html\" target=\"_blank\">API Documentation</a> for further support",
+                "1": "One set of API Key and Secret is allowed for the same address at any given time.",
+                "2": "To avoid asset loss, Do Not disclose your Access Key and Secret",
+                "3": "The API package is set with the free base package at 10 transactions per minute by default, upgrade options available."
+            },
+            "stakingForQuota": {
+                "title": "Delegation Quota",
+                "agentAddress": "Delegation Address",
+                "stakingAmount": "Stake Amount",
+                "ok": "確認"
+            },
+            "keyConfirm": {
+                "accessKey": "Access Key",
+                "secretKey": "Secret Key",
+                "agentAddress": "Delegation Address",
+                "title": "API Created Successfully",
+                "tips": {
+                    "title": "重要なお知らせ",
+                    "0": "To avoid asset loss, Do Not disclose your Access Key and Secret Key.",
+                    "1": "In cases of lost secret key, Delete the current API and Re-Apply for a new API key."
+                },
+                "warn": "The Secret key is displayed only once and cannot be found back if lost, please keep it properly."
+            },
+            "upgradeConfirm": {
+                "title": "Upgrade Package",
+                "currentPackage": "Current",
+                "selectPackage": "Select New",
+                "selectTime": "Valid For",
+                "month": " Mth",
+                "payAmount": "合計",
+                "balance": "VX Balance"
+            }
         }
     },
     "tradeAssets": {
@@ -985,7 +1248,8 @@
                 "量",
                 "Filled",
                 "Filled%",
-                "平均"
+                "平均",
+                "合計"
             ],
             "rowMap": {
                 "cancel": "キャンセル"
@@ -1027,9 +1291,9 @@
                 "価格",
                 "量",
                 "Filled",
-                "Filled%",
                 "平均",
                 "手数料",
+                "合計",
                 "ステータス"
             ],
             "rowMap": {
@@ -1059,6 +1323,7 @@
         "addQuota": "新しいステーキングを作成する",
         "add": "追加",
         "withdraw": "復元",
+        "withdrawList": "Withdrawal List",
         "tbHead": {
             "date": "日付",
             "fee": "取引手数料",
@@ -1067,8 +1332,11 @@
         },
         "txTitle": "トレードマイニング総収入",
         "quotaTitle": "ステーキングマイニング総収入",
-        "addHint": "ステーキングマイニングの収入は毎日13:00（UTC + 8）に計算されます。 ステーキングが有効になった後、手動でステーキング収入を取得できます",
-        "withdrawHint": "取得後にVXをマイニングできなくなります",
+        "addHint1": "Single stake should be at least 134 VITE",
+        "addHint2": "VITE staking will be effective immediately after submission. Staking can be canceled after 3 days",
+        "addHint3": "Staked amount will be released after the 7-day waiting period",
+        "withdrawHint1": "You will no longer be able to mine VX after staking is canceled",
+        "withdrawHint2": "It takes 7 days to return unstaked VITE coins to exchange balance",
         "addTitle": "マイニングのためのVITEステーキング",
         "withdrawTitle": "ステークVITEの取得",
         "addPlaceHolder": "最小134VITE以上のステーキング量を入力して下さい",
@@ -1078,23 +1346,87 @@
         "stakingBalance": "回収可能ステーキング量",
         "hintTitle": "重要なお知らせ",
         "comingHint": "VXマイニング機能は近日公開予定です。ご期待ください。 VXは5つの方法で入手できます。1.トレードマイニング、2.リスティングマイニング、3.リファラルマイニング、4.ステーキングマイニング、5.マーケットメイキングマイニング。 VX保有するユーザーは、共有プールからの配当を享受できます。",
-        "more": "VXマイニングルールの詳細"
+        "more": "VXマイニングルールの詳細",
+        "fee": "取引手数料",
+        "todayTrade": "Mining Details",
+        "dividends": "24H Expected Mined Volume",
+        "view": "View Live Mining Dashboard",
+        "inviteCount": "Referrals",
+        "help": "Current trading fees displayed on this page contains only the 0.2% ViteX base transaction fees, please note that operator fees shall be taken into consideration when calculating mining cost"
+    },
+    "tradeVip": {
+        "title": "VIP Status",
+        "open": "VIPになる",
+        "cancel": "Cancel {type}",
+        "help": {
+            "title": "About ViteX VIP"
+        },
+        "helpConfirm": {
+            "t1": "VIP",
+            "txt1": "Stake 10,000 VITE to acquire VIP status and receive 50% off trading fees. Staking can be canceled after 30 days.",
+            "t2": "SVIP",
+            "txt2": "Stake 1M VITE to become a SVIP and enjoy 0 base trading fees. Staking can be canceled after 30 days.",
+            "txt3": "SVIP supports staking for any valid account address. Stake for them to get SVIP status!"
+        },
+        "vipConfirm": {
+            "cancelVip": "Cancel VIP Status",
+            "openVip": "VIPになる",
+            "openStakingAmount": "VIPになるためのステーキング量",
+            "cancelStakingAmount": "Available Stake Balance",
+            "noBalance": "残高不足",
+            "openHint": "You will receive 0.1% trading fee deduction as a VIP. The staking of 10,000 VITE can be withdrawn after 30 days.",
+            "cancelHint": "VIP status will be canceled immediately.",
+            "openSuccess": "Your VIP status is activated! It will take effect in a few seconds.",
+            "openFail": "VIP Registration Failed",
+            "cancelSuccess": "VIPをキャンセルしました",
+            "cancelFail": "キャンセルできませんでした",
+            "adviseToCancel": "There will be no base transaction fees with your current status as our SVIP, we therefore recommend you to revoke the staked VITE，which is required for general VIP members.",
+            "address": "Enable VIP Status",
+            "addressPlaceholder": "Current address is the default address, address cannot be modified later"
+        },
+        "svipConfirm": {
+            "open": "Upgrade",
+            "cancel": "キャンセル",
+            "cancelVip": "Cancel SVIP",
+            "openVip": "Become a SVIP",
+            "openStakingAmount": "Staking Amount for Becoming a SVIP",
+            "cancelStakingAmount": "Available Stake Balance",
+            "noBalance": "残高不足",
+            "openHint": "You will enjoy 0% base transaction fee when upgrading to SVIP. The stake of 1,000,000 VITE can be withdrawn after 30 days.",
+            "cancelHint": "SVIP privileges will be discontinued once staking is revoked",
+            "openSuccess": "Applied Successful! SVIP status will come into effect later.",
+            "openFail": "Failed to apply SVIP",
+            "cancelSuccess": "Cancel SVIP Successful",
+            "cancelFail": "キャンセルできませんでした",
+            "address": "Enable SVIP Status",
+            "addressPlaceholder": "Address to be Enabled with SVIP Status",
+            "cancelAddress": "SVIP Address"
+        },
+        "vipListTitle": "VIP Records",
+        "openAddress": "Enabled Address",
+        "type": "VIP Type"
     },
     "inviteMining": {
-        "title": "邀请挖矿总收益"
+        "title": "リファラルマイニング総収入",
+        "myInviteIncome": "Referral Proceeds",
+        "inviteTradeIncome": "Referred Trading Proceeds",
+        "inviteOrderIncome": "Referred Market-Making Proceeds"
     },
     "orderMining": {
         "title": "挂单挖矿总收益",
         "tbHead": {
-            "date": "日前",
+            "date": "日付",
             "ratio": "占比",
-            "mining": "挖矿金额"
-        }
+            "mining": "量"
+        },
+        "market": "{name} Market",
+        "estimate": "{name} Today's Minable Amount"
     },
     "tradeDividend": {
         "title": "配当金",
         "poolTitle": "取引手数料配当プール",
         "listTitle": "配当",
+        "allPrice": "合計推定値",
         "date": "日付",
         "VX": "保有VX",
         "coin": "タイプ",
@@ -1102,7 +1434,48 @@
         "price": "合計推定値",
         "hintTitle": "重要なお知らせ",
         "comingHint": "VXマイニングおよび配当詳細は近日公開予定です。ご期待ください。 システムは、保有するVXの量に比例して、BTC、ETH、VITE、USDTの合計プールの1％をすべてのVXユーザーに配布します。 最初の配当プールは0から始まり、ViteX徴収手数料量に応じて増加します。 トレーダーは、トレード、リスティング、リファラルコード、マーケットメイキングによりVXを獲得できますが、共有配当プールから配当を受け取るためには最低10 VXが必要です。",
-        "more": "VX配当ルールの詳細"
+        "more": "VX配当ルールの詳細",
+        "help": "Reward Rules: 1. A minimum of 10 VX must be staked to receive dividends. 2. Submission of staking request allows for dividends starting the nearest distribution. 3. Staked amount will be released after the 7-day waiting period",
+        "lockedAmount": "ステーキング量",
+        "lockAmountTips": "Receive Dividends on 10 VX or Above",
+        "unlockAmount": "Unlocking Amount",
+        "addHint1": "A minimum of 10 VX must be staked to receive dividends",
+        "addHint2": "Submission of staking request allows for dividends starting the nearest distribution",
+        "addHint3": "Staked amount will be released after the 7-day waiting period",
+        "autoLock": "Automatic Staking",
+        "openAutoLock": {
+            "title": "Enable Automatic Staking",
+            "text": "Mined VX will be automatically staked once enabled"
+        },
+        "closeAutoLock": {
+            "title": "Disable Automatic Staking",
+            "text": "Mined VX will not be automatically staked when turned off"
+        },
+        "lock": "Stake",
+        "unlock": "Unstake",
+        "lessMin": "Minimum 1 VX",
+        "lockVXConfirm": {
+            "title": "Stake VX",
+            "available": "取引可能残高",
+            "amountPlaceholder": "Please input staking amount, minimum 1 VX",
+            "notEnough": "Insufficient Exchange Balance",
+            "submit": "Confirm to Stake",
+            "amountText": "量"
+        },
+        "unlockVXConfirm": {
+            "title": "Unstake VX",
+            "available": "Available Stake Balance",
+            "amountPlaceholder": "Please input amount, minimum 1 VX",
+            "notEnough": "Insufficient Amount",
+            "submit": "Confirm to Unstake",
+            "amountText": "量",
+            "hint": "It takes about 7 days to unlock."
+        },
+        "unlockList": {
+            "title": "Retrieving",
+            "amount": "量",
+            "time": "Available Date"
+        }
     },
     "tradeOperator": {
         "title": "オペレーター",
@@ -1154,6 +1527,9 @@
         "stopFail": "サスペンション失敗",
         "openSuccess": "復元完了",
         "openFail": "復元失敗",
+        "changeOwnerSuccess": "Transfer Successful",
+        "changeOwnerFaill": "Transfer Failed",
+        "submitChange": "Confirm to transfer",
         "changeOwnerHint": "注意：所有権の譲渡後に料金を徴収または調整することはできません。また、この譲渡アクションを取り消すことはできません。",
         "currentMaker": "メイカー",
         "confirmFee": "手数料",
@@ -1167,6 +1543,82 @@
             "txNum": "ボリューム",
             "feeRate": "レート",
             "feeIncome": "収入"
+        }
+    },
+    "mobileAssets": {
+        "allAssets": "Estimated Assets Value ({token})",
+        "tokenInfoTitle": "Token Details",
+        "transfer": "転送",
+        "trade": "Trade",
+        "chooseTxPair": "Choose Trading Pair"
+    },
+    "mobileTradeCenter": {
+        "highPrice": "High",
+        "lowPrice": "Low",
+        "quantity": "24H Vol",
+        "buyTitle": "購入",
+        "sellTitle": "売却",
+        "price": "Price ({token})",
+        "buy": {
+            "price": "価格",
+            "quantity": "量"
+        },
+        "sell": {
+            "price": "価格",
+            "quantity": "量"
+        },
+        "orderQuantity": "量",
+        "orderPrice": "価格",
+        "executedQuantity": "Filled",
+        "avgPrice": "Avg"
+    },
+    "mobileDividend": {
+        "title": "配当金",
+        "poolTitle": "Dividend Pool ({token})",
+        "myDividendTitle": "Total Estimated Value of Dividends ({token})",
+        "listTitle": "Dividend Details",
+        "lockingTitle": "My Staking",
+        "viewLink": "Unstaking Status"
+    },
+    "mobileMining": {
+        "title": "マイニング",
+        "miningTrade": "取引",
+        "miningStaking": "Staking",
+        "miningInvite": "Referral",
+        "miningOrder": "Market-Making",
+        "tradeTotalIncome": "Total Income ({token})",
+        "stakingTotalIncome": "Total Income ({token})",
+        "inviteTotalIncome": "Total Income ({token})",
+        "orderTotalIncome": "Total Income ({token})",
+        "fee": "手数料",
+        "listTitle": "Mining History",
+        "viewLink": "Live Mining Dashboard",
+        "inviteTradeIncome": "Referred Trading Details",
+        "inviteOrderIncome": "Referred Market-Making Details",
+        "myStaking": "My Staking"
+    },
+    "mobileBottomBar": {
+        "center": "Trade",
+        "assets": "資産",
+        "mining": "マイニング",
+        "order": "Order"
+    },
+    "mobileOrder": {
+        "filterDate": "日付",
+        "filterToken": "タイプ",
+        "all": "すべて",
+        "3month": "3 months",
+        "1month": "1 month",
+        "1week": "1 week",
+        "1day": "1 day",
+        "clear": "Clear",
+        "submit": "検索"
+    },
+    "desktop": {
+        "unlock": "unlock",
+        "unreceivedTx": {
+            "title": "You have received {num} transactions.",
+            "body": "Amount：{amount} {symbol} \nFrom Address: {address}"
         }
     }
 }
