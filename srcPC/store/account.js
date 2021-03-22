@@ -272,9 +272,7 @@ const getters = {
                 type: (tokenSymbol === 'VCP' && !index) ? 'NATIVE' : type,
                 gateInfo
             };
-        }).filter(item => {
-            return !defaultTokenMap[item.tokenId];
-        });
+        }).filter(item => !defaultTokenMap[item.tokenId]);
     },
     userStorageTokenList(state, getters, rootState, rootGetters) {
         const balanceInfo = getters.balanceInfo;
