@@ -142,6 +142,11 @@ export default {
                         this.labelName = res.labelName;
                         this.labelValue = res.label;
                         this.confirmationCount = res.confirmationCount;
+
+                        // Custom for vite new erc20 tips
+                        if (this.token.tokenSymbol === 'VITE') {
+                            this.noticeMsg = this.$t('tokenCard.viteTips');
+                        }
                     }) ]).catch(() => (this.addrErr = this.$t('tokenCard.charge.addrErr'))).finally(() => {
                 this.isLoading = false;
             });
@@ -156,6 +161,7 @@ export default {
             this.labelValue = '';
             this.confirmationCount = 0;
             this.addrErr = '';
+            this.noticeMsg = '';
         }
     }
 };
