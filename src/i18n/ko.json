@@ -444,6 +444,7 @@
                 "{confirmationCount} 확인 후 자산이 입금됩니다.  조금만 기다려주세요"
             ]
         },
+        "viteTips": "VITE only supports cross-chain functionality between the new ERC20 VITE token and Native VITE Coin.",
         "withdraw": {
             "title": "Cross-Chain Send Funds",
             "btn": "출금하기",
