@@ -248,7 +248,14 @@ export default {
                 getWithdrawInfo({ walletAddress: this.defaultAddr, tokenId: this.token.tokenId },
                     this.gateInfo.url)
                     .then(data => (this.info = data)) ])
-                .then(() => (this.loading = false));
+                .then(() => {
+                    this.loading = false;
+
+                    // Custom for vite new erc20 tips
+                    if (this.token.tokenSymbol === 'VITE') {
+                        this.info.noticeMsg = this.$t('tokenCard.viteTips');
+                    }
+                });
         },
         onChangeNetwork() {
             this.getWithdrawInfo();

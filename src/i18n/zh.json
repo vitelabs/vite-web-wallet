@@ -440,6 +440,7 @@
             ],
             "selectNetwork": "选择主网"
         },
+        "viteTips": "VITE 仅支持新ERC20 VITE与Native VITE之间跨链。",
         "withdraw": {
             "title": "跨链转出",
             "balanceErrMap": {
