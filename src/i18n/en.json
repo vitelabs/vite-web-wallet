@@ -444,6 +444,7 @@
                 "Please select the correct mainnet or you will be unable to retrieve any lost tokens."
             ]
         },
+        "viteTips": "VITE only supports cross-chain functionality between the new ERC20 VITE token and Native VITE Coin.",
         "withdraw": {
             "title": "Cross-Chain Withdrawal",
             "btn": "Withdraw",
