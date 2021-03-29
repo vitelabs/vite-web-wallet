@@ -444,6 +444,7 @@
                 "Вы получите свои активы после {confirmationCount} подтверждений, пожалуйста подождите"
             ]
         },
+        "viteTips": "VITE only supports cross-chain functionality between the new ERC20 VITE token and Native VITE Coin.",
         "withdraw": {
             "title": "Cross-Chain Send Funds",
             "btn": "Вывести Средства",
