@@ -444,6 +444,7 @@
                 "{confirmationCount}の確認後にアセットを受け取ります しばらくお待ちください"
             ]
         },
+        "viteTips": "VITE only supports cross-chain functionality between the new ERC20 VITE token and Native VITE Coin.",
         "withdraw": {
             "title": "Cross-Chain Send Funds",
             "btn": "引き出し",
