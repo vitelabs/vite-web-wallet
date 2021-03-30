@@ -49,3 +49,8 @@ jobs:
         with:
           apiToken: ${{ secrets.CF_API_TOKEN }}
           environment: ${{ github.event.inputs.environment }}
+
+      - uses: Ilshidur/action-slack@2.0.2
+        env:
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+          SLACK_AVATAR: repository
