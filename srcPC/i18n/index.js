@@ -5,11 +5,16 @@ import localStorage from 'pcUtils/store';
 import en from 'i18n/en';
 import zh from 'i18n/zh';
 import id from 'i18n/id';
-import zh_TW from 'i18n/zh_TW';
+// Import de from 'i18n/de';
+// import fr from 'i18n/fr';
+// import ja from 'i18n/ja';
+// import ru from 'i18n/ru';
 
+// let appLocale = window.viteWalletI18n ? window.viteWalletI18n.locale : '';
+// if (appLocale) {
+//     appLocale = appLocale.indexOf('zh') === 0 ? 'zh' : 'en';
+// }
 const locale = localStorage.getItem('lang') || getDefaultLang() || 'en';
-
-const enabledLangs = [ 'en', 'zh', 'zh_TW', 'id_ID' ];
 
 // De,
 // fr,
@@ -19,7 +24,7 @@ const i18nConf = {
     locale,
     fallbackLocale: 'en',
     silentFallbackWarn: true,
-    messages: { en, zh_TW, zh, id_ID: id }
+    messages: { en, zh, id_ID: id }
 };
 
 Vue.use(VueI18n);
@@ -31,14 +36,14 @@ function getDefaultLang() {
         const type = navigator.appName;
 
         // type == 'Netscape' ? !IE : IE5+ == navigator.systemLanguage
-        const lang = type === 'Netscape' ? navigator.language : navigator.userLanguage;
+        let lang = type === 'Netscape' ? navigator.language : navigator.userLanguage;
+        lang = lang.substr(0, 2);
 
-        if (enabledLangs.indexOf(lang) > -1) {
-            return lang;
-        }
-        const shortLang = lang.substr(0, 2);
-        if (enabledLangs.indexOf(shortLang) > -1) {
-            return lang;
+        // navigator.languages
+        const languages = [ 'en', 'zh', 'id' ];
+        const nameMap = { 'id': 'id_ID' };
+        if (languages.indexOf(lang) !== -1) {
+            return nameMap[lang] || lang;
         }
         return 'en';
     } catch (err) {
