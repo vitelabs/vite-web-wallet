@@ -28,6 +28,9 @@ const mutations = {
             if (gatewayInfo.mappedToken && gatewayInfo.mappedToken.mappedTokenExtras) {
                 multiNetwork = [gatewayInfo.mappedToken].concat(gatewayInfo.mappedToken.mappedTokenExtras);
             } else {
+                if (!gatewayInfo.mappedToken.standard) {
+                    gatewayInfo.mappedToken.standard = 'Native';
+                }
                 multiNetwork = [gatewayInfo.mappedToken];
             }
 
