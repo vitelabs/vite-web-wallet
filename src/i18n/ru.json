@@ -651,7 +651,8 @@
         "addQuota": {
             "address": "Адрес Стейкинга",
             "stakeDays": "Период Стейкинга",
-            "placeholder": "Minimum Stake {min} VITE"
+            "placeholder": "Minimum Stake {min} VITE",
+            "stakingSuspend": "Staking Temporarily Suspended"
         },
         "quotaContent": {
             "onlineReward": "Active Node Reward",
