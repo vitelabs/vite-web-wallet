@@ -651,8 +651,7 @@
         "addQuota": {
             "address": "Staking Address",
             "stakeDays": "Staking Period",
-            "placeholder": "Minimum Stake {min} VITE",
-            "stakingSuspend": "Staking Temporarily Suspended"
+            "placeholder": "Minimum Stake {min} VITE"
         },
         "quotaContent": {
             "onlineReward": "Active Node Reward",

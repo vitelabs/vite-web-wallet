@@ -778,8 +778,7 @@
         "addQuota": {
             "address": "抵押地址",
             "stakeDays": "抵押周期",
-            "placeholder": "最少抵押{min}VITE",
-            "stakingSuspend": "暂停接受新抵押"
+            "placeholder": "最少抵押{min}VITE"
         },
         "quotaContent": {
             "onlineReward": "节点在线奖励",
