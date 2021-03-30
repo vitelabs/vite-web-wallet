@@ -54,3 +54,5 @@ jobs:
         env:
           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
           SLACK_AVATAR: repository
+        with:
+          args: 'Action called: {{ GITHUB_ACTION }} as {{ EVENT_PAYLOAD.pull_request.id }}'
