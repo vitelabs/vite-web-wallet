@@ -651,7 +651,8 @@
         "addQuota": {
             "address": "Địa chỉ Đặt cược",
             "stakeDays": "Thời gian Đặt cược",
-            "placeholder": "Minimum Stake {min} VITE"
+            "placeholder": "Minimum Stake {min} VITE",
+            "stakingSuspend": "Staking Temporarily Suspended"
         },
         "quotaContent": {
             "onlineReward": "Active Node Reward",
