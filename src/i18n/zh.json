@@ -1,1598 +1,1594 @@
 {
-    "lang": "中文",
-    "help": "帮助中心",
+    "lang": "繁体中文",
+    "help": "幫助中心",
     "announcements": "公告中心",
-    "start": "开始",
-    "login": "登录",
-    "regAcc": "注册账户",
-    "unlockAcc": "解锁账户",
-    "changeAcc": "切换账户",
-    "existingAcc": "本地已有账户",
-    "restore": "助记词导入",
-    "register": "注册",
-    "createAcc": "新建账户",
-    "settingAcc": "设置账户",
-    "resetAcc": "重新设置账号",
-    "logout": "退出登录",
+    "start": "開始",
+    "login": "登錄",
+    "regAcc": "註冊賬戶",
+    "unlockAcc": "解鎖賬戶",
+    "changeAcc": "切換賬戶",
+    "existingAcc": "本地已有賬戶",
+    "restore": "助記詞導入",
+    "register": "註冊",
+    "createAcc": "新建賬戶",
+    "settingAcc": "設置賬戶",
+    "resetAcc": "重新設置賬號",
+    "logout": "退出登錄",
     "saveLogout": "安全退出",
-    "blockHeight": "快照块高度",
-    "accountName": "账户昵称",
+    "blockHeight": "快照塊高度",
+    "accountName": "賬戶暱稱",
     "action": "操作",
-    "stakingAmount": "抵押金额",
+    "stakingAmount": "抵押金額",
     "withdrawHeight": "到期快照高度",
-    "balance": "账户余额",
-    "dexBalance": "交易所账户余额",
+    "balance": "賬戶餘額",
+    "dexBalance": "交易所賬戶餘額",
     "addrName": "地址{index}",
     "true": "是",
     "false": "否",
     "guide": {
-        "close": "关闭",
+        "close": "關閉",
         "next": "下一步",
-        "closeTips": "点击关闭新手引导 (不推荐)",
+        "closeTips": "點擊關閉新手引導 (不推薦)",
         "trade": [
-            "在这里管理您的钱包资产和交易所资产",
-            "查看当前委托和历史委托记录，掌握交易细节",
-            "参与挖矿，获取VX和交易所手续费分红 （挖矿分红）",
-            "体验钱包更多功能：抵押配额、超级节点、投票、一键置换、交易详情"
+            "在這裡管理您的錢包資產和交易所資產",
+            "查看當前委託和歷史委託記錄，掌握交易細節",
+            "參與挖礦，獲取VX和交易所手續費分紅 （挖礦分紅）",
+            "體驗錢包更多功能：抵押配額、超級節點、投票、一鍵置換、交易詳情"
         ],
         "assets": [
-            "充币至交易所",
-            "提现至钱包",
-            "跨链充值提现"
+            "充幣至交易所",
+            "提現至錢包",
+            "跨鏈充值提現"
         ]
     },
     "dealReminder": {
         "title": {
-            "buy": "买单成交提醒: {ftoken} / {ttoken}",
-            "sell": "卖单成交提醒: {ftoken} / {ttoken}"
+            "buy": "買單成交提醒: {ftoken} / {ttoken}",
+            "sell": "賣單成交提醒: {ftoken} / {ttoken}"
         },
-        "failTitle": "提单失败",
+        "failTitle": "提單失敗",
         "notice-all": {
-            "buy": "价格：{price} {ttoken} \n委托数量：{amount} {ttoken}，已完全成交，详细记录可在委托历史中查看。",
-            "sell": "价格：{price} {ttoken} \n委托数量：{amount} {ttoken}，已完全成交，详细记录可在委托历史中查看。"
+            "buy": "價格：{price} {ttoken} \n委託數量：{amount} {ttoken}，已完全成交，詳細記錄可在委託歷史中查看。",
+            "sell": "價格：{price} {ttoken} \n委託數量：{amount} {ttoken}，已完全成交，詳細記錄可在委託歷史中查看。"
         },
         "notice-partial": {
-            "buy": "价格：{price} {ttoken} \n委托数量：{amount} {ttoken}，成交 {executedPercent}%",
-            "sell": "价格：{price} {ttoken} \n委托数量：{amount} {ttoken}，成交 {executedPercent}%"
+            "buy": "價格：{price} {ttoken} \n委託數量：{amount} {ttoken}，成交 {executedPercent}%",
+            "sell": "價格：{price} {ttoken} \n委託數量：{amount} {ttoken}，成交 {executedPercent}%"
         },
-        "error": "你于{time} 委托的 {amount} {ftoken} ({ftoken}/{ttoken})提单失败，详细记录可在委托历史中查看。"
+        "error": "你於{time} 委託的 {amount} {ftoken} ({ftoken}/{ttoken})提單失敗，詳細記錄可在委託歷史中查看。"
     },
     "pow": {
-        "ing": "正在运行PoW获取配额",
-        "no": "如果您不想运行PoW，您可抵押VITE跳过此步骤"
+        "ing": "正在運行PoW獲取配額",
+        "no": "如果您不想運行PoW，您可抵押VITE跳過此步驟"
     },
-    "addAccount": "新建账户",
-    "saveQrcode": "保存二维码图片",
-    "unlockSuccess": "解锁成功",
+    "addAccount": "新建賬戶",
+    "saveQrcode": "保存二維碼圖片",
+    "unlockSuccess": "解鎖成功",
     "submitStaking": "提交抵押",
     "sendTrans": {
-        "send": "发送交易",
-        "symbol": "发送交易"
+        "send": "發送交易",
+        "symbol": "發送交易"
     },
     "compliance": {
-        "text": "ViteX 目前不支持来自下列国家或地区的客户：中国大陆、中国香港、古巴、伊朗、朝鲜、克里米亚、苏丹、马来西亚、叙利亚、美国【包括所有美国领土，如波多黎各、美属萨摩亚、关岛、北马里亚纳群岛邦、美属维尔京群岛（圣克罗伊岛，圣约翰岛和圣托马斯岛）】、孟加拉国、玻利维亚、厄瓜多尔和吉尔吉斯斯坦。如欲了解更多详情，请参阅我们的服务条款及隐私政策。",
+        "text": "ViteX 目前不支持來自下列國家或地區的客戶：中國大陸、中國香港、古巴、伊朗、朝鮮、克里米亞、蘇丹、馬來西亞、敘利亞、美國【包括所有美國領土，如波多黎各、美屬薩摩亞、關島、北馬里亞納群島邦、美屬維爾京群島（聖克羅伊島，聖約翰島和聖托馬斯島）】、孟加拉國、玻利維亞、厄瓜多爾和吉爾吉斯斯坦。如欲了解更多詳情，請參閱我們的服務條款及隱私政策。",
         "title": "重要提示"
     },
     "bnbConf": {
         "title": "重要提示",
-        "t1": "VITE要上币安啦，记得动动手指给VITE投票啊",
-        "t2": "投票时间：12月12日12:00~13日12:00",
-        "t3": "投票资格：12月5日起，在币安账户存入50-500 BNB，平均每日持仓50BNB可以投一票",
-        "t4": "投票奖励：所有投票给VITE的用户将根据票数获21,000,000 VITE 的空投福利。",
+        "t1": "VITE要上幣安啦，記得動動手指給VITE投票啊",
+        "t2": "投票時間：12月12日12:00~13日12:00",
+        "t3": "投票資格：12月5日起，在幣安賬戶存入50-500 BNB，平均每日持倉50BNB可以投一票",
+        "t4": "投票獎勵：所有投票給VITE的用戶將根據票數獲21,000,000 VITE 的空投福利。",
         "btn": "去投票",
-        "notice": "提示：从12月6日早8点起，币安账户中需持有50-500BNB才可参与投票"
+        "notice": "提示：從12月6日早8點起，幣安賬戶中需持有50-500BNB才可參與投票"
     },
     "errCode": {
-        "35003": "{name}ID发生冲突，请您稍后重新提交",
-        "35004": "参数错误",
-        "35005": "交易发送频繁，请您稍后再次尝试",
-        "35006": "合约方法不存在",
-        "35011": "全网拥堵",
-        "36001": "您需要接收一笔交易之后才可发起转账",
-        "36002": "系统校验不通过，请稍后重试",
-        "36003": "系统校验不通过，请稍后重试",
-        "36004": "系统校验不通过，请稍后重试",
-        "36005": "快照块高度不合法，请您稍后再试",
-        "37001": "订单号格式错误",
-        "37002": "订单类型错误",
-        "37003": "订单价格格式错误",
-        "37004": "订单交易数量异常",
-        "37005": "订单交易金额过小",
-        "37006": "该交易市场已经存在",
-        "37007": "订单指定交易市场不存在",
-        "37008": "查询订单信息异常",
-        "37009": "撤销订单不属于当前地址",
-        "37010": "该订单状态不可以撤销"
+        "35003": "{name}ID發生衝突，請您稍後重新提交",
+        "35004": "參數錯誤",
+        "35005": "交易發送頻繁，請您稍後再次嘗試",
+        "35006": "合約方法不存在",
+        "35011": "全網擁堵",
+        "36001": "您需要接收一筆交易之後才可發起轉賬",
+        "36002": "系統校驗不通過，請稍後重試",
+        "36003": "系統校驗不通過，請稍後重試",
+        "36004": "系統校驗不通過，請稍後重試",
+        "36005": "快照塊高度不合法，請您稍後再試",
+        "37001": "訂單號格式錯誤",
+        "37002": "訂單類型錯誤",
+        "37003": "訂單價格格式錯誤",
+        "37004": "訂單交易數量異常",
+        "37005": "訂單交易金額過小",
+        "37006": "該交易市場已經存在",
+        "37007": "訂單指定交易市場不存在",
+        "37008": "查詢訂單信息異常",
+        "37009": "撤銷訂單不屬於當前地址",
+        "37010": "該訂單狀態不可以撤銷"
     },
     "txType": {
-        "RegisterSBP": "注册SBP",
-        "RegisterSBP_V1": "注册SBP",
-        "UpdateSBPBlockProducingAddress": "更新注册",
-        "UpdateSBPBlockProducingAddress_V1": "更新注册",
-        "RevokeSBP": "撤销注册",
-        "RevokeSBP_V1":  "撤销注册",
-        "WithdrawSBPReward": "提取奖励",
-        "WithdrawSBPReward_V1": "提取奖励",
+        "RegisterSBP": "註冊SBP",
+        "RegisterSBP_V1": "註冊SBP",
+        "UpdateSBPBlockProducingAddress": "更新註冊",
+        "UpdateSBPBlockProducingAddress_V1": "更新註冊",
+        "RevokeSBP": "撤銷註冊",
+        "RevokeSBP_V1": "撤銷註冊",
+        "WithdrawSBPReward": "提取獎勵",
+        "WithdrawSBPReward_V1": "提取獎勵",
         "VoteForSBP": "投票",
         "VoteForSBP_V1": "投票",
-        "CancelSBPVoting": "撤销投票",
-        "CancelSBPVoting_V1": "撤销投票",
-        "StakeForQuota": "获取配额",
-        "StakeForQuota_V1": "获取配额",
-        "CancelQuotaStake": "取回配额抵押",
-        "CancelQuotaStake_V1": "取回配额抵押",
-        "IssueToken": "铸币",
-        "IssueToken_V1": "铸币",
-        "ReIssueToken": "代币增发",
-        "ReIssueToken_V1": "代币增发",
-        "BurnToken": "代币销毁",
-        "BurnToken_V1": "代币销毁",
-        "TransferTokenOwnership": "转移所有权",
-        "TransferTokenOwnership_V1": "转移所有权",
-        "DisableReIssue": "修改代币类型",
-        "DisableReIssue_V1": "修改代币类型",
+        "CancelSBPVoting": "撤銷投票",
+        "CancelSBPVoting_V1": "撤銷投票",
+        "StakeForQuota": "獲取配額",
+        "StakeForQuota_V1": "獲取配額",
+        "CancelQuotaStake": "取回配額抵押",
+        "CancelQuotaStake_V1": "取回配額抵押",
+        "IssueToken": "鑄幣",
+        "IssueToken_V1": "鑄幣",
+        "ReIssueToken": "代幣增發",
+        "ReIssueToken_V1": "代幣增發",
+        "BurnToken": "代幣銷毀",
+        "BurnToken_V1": "代幣銷毀",
+        "TransferTokenOwnership": "轉移所有權",
+        "TransferTokenOwnership_V1": "轉移所有權",
+        "DisableReIssue": "修改代幣類型",
+        "DisableReIssue_V1": "修改代幣類型",
         "DexDeposit": "ViteX充值",
         "DexDeposit_V1": "ViteX充值",
-        "DexWithdraw": "ViteX提现",
-        "DexWithdraw_V1": "ViteX提现",
-        "DexPlaceOrder": "ViteX挂单",
-        "DexPlaceOrder_V1": "ViteX挂单",
-        "DexCancelOrder": "ViteX撤单",
-        "DexCancelOrder_V1": "ViteX撤单",
+        "DexWithdraw": "ViteX提現",
+        "DexWithdraw_V1": "ViteX提現",
+        "DexPlaceOrder": "ViteX掛單",
+        "DexPlaceOrder_V1": "ViteX掛單",
+        "DexCancelOrder": "ViteX撤單",
+        "DexCancelOrder_V1": "ViteX撤單",
         "DexStakeForSuperVIP": "ViteX SVIP",
         "DexStakeForSuperVIP_V1": "ViteX SVIP",
-        "DexConfigMarketAgents": "配置委托",
-        "DexConfigMarketAgents_V1": "配置委托",
-        "DexOpenNewMarket": "ViteX上币",
-        "DexOpenNewMarket_V1": "ViteX上币",
+        "DexConfigMarketAgents": "配置委託",
+        "DexConfigMarketAgents_V1": "配置委託",
+        "DexOpenNewMarket": "ViteX上幣",
+        "DexOpenNewMarket_V1": "ViteX上幣",
         "DexStakeForMining": "ViteX抵押",
         "DexStakeForMining_V1": "ViteX抵押",
         "DexStakeForVIP": "ViteX VIP",
         "DexStakeForVIP_V1": "ViteX VIP",
-        "DexTransferTokenOwnership": "运营商中心权限转让",
-        "DexTransferTokenOwnership_V1": "运营商中心权限转让",
-        "DexMarketAdminConfig": "运营商交易对配置",
-        "DexMarketAdminConfig_V1": "运营商交易对配置",
-        "DexBindInviteCode": "绑定邀请码",
-        "DexBindInviteCode_V1": "绑定邀请码",
-        "DexCreateNewInviter": "生成邀请码",
-        "DexCreateNewInviter_V1": "生成邀请码",
-        "CreateContractRequest": "创建合约",
-        "TransferRequest": "转账",
-        "ReIssueRequest": "转账",
-        "Response": "转账",
-        "ResponseFail": "转账",
-        "RefundByContractRequest": "转账",
+        "DexTransferTokenOwnership": "運營商中心權限轉讓",
+        "DexTransferTokenOwnership_V1": "運營商中心權限轉讓",
+        "DexMarketAdminConfig": "運營商交易對配置",
+        "DexMarketAdminConfig_V1": "運營商交易對配置",
+        "DexBindInviteCode": "綁定邀請碼",
+        "DexBindInviteCode_V1": "綁定邀請碼",
+        "DexCreateNewInviter": "生成邀請碼",
+        "DexCreateNewInviter_V1": "生成邀請碼",
+        "CreateContractRequest": "創建合約",
+        "TransferRequest": "轉賬",
+        "ReIssueRequest": "轉賬",
+        "Response": "轉賬",
+        "ResponseFail": "轉賬",
+        "RefundByContractRequest": "轉賬",
         "GenesisResponse": "Genesis",
-        "FullNodeStake": "全节点抵押",
-        "FullNodeCancelStake": "取回全节点抵押",
-        "UpdateSBPRewardWithdrawAddress": "修改SBP奖励提取地址"
+        "FullNodeStake": "全節點抵押",
+        "FullNodeCancelStake": "取回全節點抵押",
+        "UpdateSBPRewardWithdrawAddress": "修改SBP獎勵提取地址"
     },
     "btn": {
         "cancel": "取消",
-        "login": "登录",
-        "imported": "导入账户",
+        "login": "登錄",
+        "imported": "導入賬戶",
         "back": "返回",
-        "submit": "确定",
+        "submit": "確定",
         "next": "下一步",
         "understand": "我已了解",
-        "edit": "编辑",
-        "reReg": "重新注册",
-        "otherProd": "使用 Vite 其他产品",
+        "edit": "編輯",
+        "reReg": "重新註冊",
+        "otherProd": "使用 Vite 其他產品",
         "known": "我知道了"
     },
     "hint": {
-        "noNet": "网络无法连接",
-        "pwErr": "密码错误",
-        "pwEmpty": "密码不能为空",
-        "noData": "暂无数据",
-        "err": "发生错误",
-        "request": "{name}请求已发送，请耐心等待",
-        "copy": "复制成功",
-        "copyShare":"分享链接复制成功",
-        "addrFormat": "账户地址格式错误",
-        "amtFormat": "金额格式错误",
-        "transSucc": "转账成功",
-        "insufficientBalance": "余额不足",
-        "validMaxDigit": "最多{digit}位小数",
-        "bigger0": "金额必须大于0",
-        "nodeErr": "节点异常，请您稍后重试",
+        "noNet": "網絡無法連接",
+        "pwErr": "密碼錯誤",
+        "pwEmpty": "密碼不能為空",
+        "noData": "暫無數據",
+        "err": "發生錯誤",
+        "request": "{name}請求已發送，請耐心等待",
+        "copy": "複製成功",
+        "copyShare":"分享鏈接複製成功",
+        "addrFormat": "賬戶地址格式錯誤",
+        "amtFormat": "金額格式錯誤",
+        "transSucc": "轉賬成功",
+        "insufficientBalance": "餘額不足",
+        "validMaxDigit": "最多{digit}位小數",
+        "bigger0": "金額必須大於0",
+        "nodeErr": "節點異常，請您稍後重試",
         "operateSuccess": "操作成功",
-        "operateFail": "操作失败",
-        "unreceived": "请登录后接收在途金额",
-        "unreceivedNum": "请登录后接收在途金额，当前共有{number}笔待接收交易"
+        "operateFail": "操作失敗",
+        "unreceived": "請登錄後接收在途金額",
+        "unreceivedNum": "請登錄後接收在途金額，當前共有{number}筆待接收交易"
     },
     "beforeUse": {
-        "title": "使用前必读",
-        "text1": "为保障用户资金安全，web端暂不支持创建账户，请下载Vite App创建账户，如果您访问了一个钓鱼网站或者丢失了您的备份，本站无法为您恢复资金。",
-        "text2": "由于本站不存储你的私钥或助记词，如果您更换浏览器、电脑或者清除浏览器缓存，需要通过备份助记词恢复账号。",
-        "text3": "如果使用了从助记词恢复地址的方式，请保证助记词绝对正确，如果有细微的不同都可能无法恢复您的地址。"
+        "title": "使用前必讀",
+        "text1": "為保障用戶資金安全，web端暫不支持創建賬戶，請下載Vite App創建賬戶，如果您訪問了一個釣魚網站或者丟失了您的備份，本站無法為您恢復資金。",
+        "text2": "由於本站不存儲你的私鑰或助記詞，如果您更換瀏覽器、電腦或者清除瀏覽器緩存，需要通過備份助記詞恢復賬號。",
+        "text3": "如果使用了從助記詞恢復地址的方式，請保證助記詞絕對正確，如果有細微的不同都可能無法恢復您的地址。"
     },
     "preview": {
         "t": "版本 {version}",
-        "txt1": "x.vite.net是由Vite Labs官方发布的，集钱包，交易所于一体的产品。",
-        "txt2": "主要功能包括钱包、ViteX交易所、抵押获取配额、注册SBP和全节点、投票、铸币、申请ViteX API、代理下单、查看挖矿和分红明细等功能。",
-        "txt3": "目前支持通过助记词、Ledger硬件钱包、ViteConnect等方式登陆。",
+        "txt1": "x.vite.net是由Vite Labs官方發布的，集錢包，交易所於一體的產品。",
+        "txt2": "主要功能包括錢包、ViteX交易所、抵押獲取配額、註冊SBP和全節點、投票、鑄幣、申請ViteX API、代理下單、查看挖礦和分紅明細等功能。",
+        "txt3": "目前支持通過助記詞、Ledger硬件錢包、ViteConnect等方式登陸。",
         "v": ""
     },
     "pwdConfirm": {
-        "conf": "开启免密设置，您只需要登录时输入密码，交易过程无需再输入密码",
-        "title": "输入钱包密码",
-        "placeholder": "请输入钱包密码",
-        "unlockAcc": "请解锁 {name} 账户"
+        "conf": "開啟免密設置，您只需要登錄時輸入密碼，交易過程無需再輸入密碼",
+        "title": "輸入錢包密碼",
+        "placeholder": "請輸入錢包密碼",
+        "unlockAcc": "請解鎖 {name} 賬戶"
     },
     "quotaConfirm": {
-        "title": "配额不足",
-        "cancelContent": "当前配额不足，无法进行{operate}，您需要抵押VITE获取配额才可以{operate}",
+        "title": "配額不足",
+        "cancelContent": "當前配額不足，無法進行{operate}，您需要抵押VITE獲取配額才可以{operate}",
         "goQuota": "抵押VITE",
-        "noOperate": "暂不{operate}"
+        "noOperate": "暫不{operate}"
     },
     "mnemonic": {
-        "title": "助记词",
-        "restore": "助记词恢复账户",
-        "record": "记录助记词",
-        "prompt": "助记词是您恢复账户的重要手段，如给予他人，您的资产会被他人获取。请谨慎记录，以防丢失。",
-        "placeholder": "请输入您的助记词",
-        "empty": "助记词输入为空",
-        "error": "助记词错误",
-        "hint": "助记词格式：单词、空格、单词...空格、单词",
-        "change": "切换{len}个助记词"
+        "title": "助記詞",
+        "restore": "助記詞恢復賬戶",
+        "record": "記錄助記詞",
+        "prompt": "助記詞是您恢復賬戶的重要手段，如給予他人，您的資產會被他人獲取。請謹慎記錄，以防丟失。",
+        "placeholder": "請輸入您的助記詞",
+        "empty": "助記詞輸入為空",
+        "error": "助記詞錯誤",
+        "hint": "助記詞格式：單詞、空格、單詞...空格、單詞",
+        "change": "切換{len}個助記詞"
     },
     "setting": {
-        "title": "设置",
-        "config": "常规设置",
-        "currency": "计价币种",
-        "secure": "安全设置",
-        "gate": "自定义网关",
-        "triggerGate": ["关闭", "开启"],
-        "gateHelp": "开启自定义网关，可以在钱包页面自己设置网关，设置后可以进行跨链转入代币。目前主要针对开发者使用。",
-        "lang": "语言",
-        "block": "当前区块高度",
+        "title": "設置",
+        "config": "常規設置",
+        "currency": "計價幣種",
+        "secure": "安全設置",
+        "gate": "自定義網關",
+        "triggerGate": ["關閉", "開啟"],
+        "gateHelp": "開啟自定義網關，可以在錢包頁面自己設置網關，設置後可以進行跨鏈轉入代幣。目前主要針對開發者使用。",
+        "lang": "語言",
+        "block": "當前區塊高度",
         "version": "版本",
-        "service": "客户服务",
-        "site": "Vite官方网站",
-        "sys": "系统门户网站",
-        "open": "Vite项目开源代码",
+        "service": "客戶服務",
+        "site": "Vite官方網站",
+        "sys": "系統門戶網站",
+        "open": "Vite項目開源代碼",
         "addAddr": "添加地址",
         "addrList": "地址管理",
-        "setDefault": "选择默认地址",
-        "autoLogout": "自动退出登录时间",
-        "logoutDescribe": "当您离开交易所页面，账户会自动退出",
-        "noPass": "是否开启免密",
-        "explorer": "区块浏览器",
-        "netInfo": "网络信息",
+        "setDefault": "選擇默認地址",
+        "autoLogout": "自動退出登錄時間",
+        "logoutDescribe": "當您離開交易所頁面，賬戶會自動退出",
+        "noPass": "是否開啟免密",
+        "explorer": "區塊瀏覽器",
+        "netInfo": "網絡信息",
         "timeList": {
-            "5": "5分钟",
-            "10": "10分钟",
-            "30": "30分钟",
-            "60": "1小时",
-            "720": "12小时"
+            "5": "5分鐘",
+            "10": "10分鐘",
+            "30": "30分鐘",
+            "60": "1小時",
+            "720": "12小時"
         },
-        "theme": "主题颜色",
-        "themeList": ["白天主题", "暗黑主题"]
+        "theme": "主題顏色",
+        "themeList": ["白天主題", "暗黑主題"]
     },
     "create": {
-        "input": "请输入密码",
-        "again": "请再次输入密码",
-        "choose": "选择账户",
+        "input": "請輸入密碼",
+        "again": "請再次輸入密碼",
+        "choose": "選擇賬戶",
         "finish": "完成",
-        "agreementPre": "同意Vite钱包和ViteX",
-        "agreement": "隐私政策与服务协议",
+        "agreementPre": "同意Vite錢包和ViteX",
+        "agreement": "隱私政策與服務協議",
         "hint": {
-            "nameInput": "请输入账户名称",
-            "nameLong": "名称不得超出{long}个字符",
-            "long": "密码不能大于32个字符",
-            "name": "账户名称仅支持中英文、数字和下划线",
-            "consistency": "请输入相同的密码",
-            "pwFormat": "密码格式错误，密码仅支持英文、半角符号、数字"
+            "nameInput": "請輸入賬戶名稱",
+            "nameLong": "名稱不得超出{long}個字符",
+            "long": "密碼不能大於32個字符",
+            "name": "賬戶名稱僅支持中英文、數字和下劃線",
+            "consistency": "請輸入相同的密碼",
+            "pwFormat": "密碼格式錯誤，密碼僅支持英文、半角符號、數字"
         }
     },
     "startCreate": {
-        "notice": "为提高账户安全性，Web端将不再支持新建助记词，推荐您下载Vite App新建助记词，并使用Vite App扫码登录web钱包",
-        "goLogin": "去登录",
+        "notice": "為提高賬戶安全性，Web端將不再支持新建助記詞，推薦您下載Vite App新建助記詞，並使用Vite App掃碼登錄web錢包",
+        "goLogin": "去登錄",
         "goDex": "去交易所"
     },
     "startRecord": {
         "agreeList": [
-            "我理解如果我丢失了助记词，我将永远无法找回我的资产",
-            "我理解如果我忘记或丢失了助记词，将没有任何人能够帮助我恢复",
-            "我已经写下了或者用其它方式保存了我的助记词"
+            "我理解如果我丟失了助記詞，我將永遠無法找回我的資產",
+            "我理解如果我忘記或丟失了助記詞，將沒有任何人能夠幫助我恢復",
+            "我已經寫下了或者用其它方式保存了我的助記詞"
         ]
     },
     "keystore": {
         "title": "Keystore",
         "dragDrop": {
-            "text": "拖拽账户文件进入文本区域",
-            "err1": "导入的文件错误",
-            "err2": "只能导入一个文件",
-            "guide": "打开文件夹导入",
-            "hint": "注：导入加密文件的方式仅支持单地址，不支持派生地址。推荐通过助记词进行跨平台操作。"
+            "text": "拖拽賬戶文件進入文本區域",
+            "err1": "導入的文件錯誤",
+            "err2": "只能導入一個文件",
+            "guide": "打開文件夾導入",
+            "hint": "注：導入加密文件的方式僅支持單地址，不支持派生地址。推薦通過助記詞進行跨平台操作。"
         }
     },
     "tokenCard": {
-        "moreRecords":"更多记录",
+        "moreRecords":"更多記錄",
         "others":"其它",
-        "assetSpread":"资产分布",
+        "assetSpread":"資產分佈",
         "saveSuccess":"保存成功",
         "heads":{
-            "name":"代币名称",
-            "balance":"钱包余额",
-            "onroad":"钱包待接收金额",
-            "gate":"钱包跨链网关",
-            "totalExAmount":"交易所总余额",
-            "availableExAmount":"交易所可用余额",
-            "balanceTips": "点击链内转账，可以从Vite钱包给其他地址进行Vite链内转账",
-            "gateTips": "点击跨链充值，可以将其他币种跨链映射到Vite网络，转入Vite钱包；点击跨链提现仍可以将资产转至其他平台。*转入转出过程可能会产生手续费，且有金额限制",
-            "availableExAmountTips": "点击资金划转，可以自由划转钱包账户和交易所账户的资产。以上划转过程不需要手续费",
-            "unreceivedTips": "登录状态下可自动接收在途金额"
+            "name":"代幣名稱",
+            "balance":"錢包餘額",
+            "onroad":"錢包待接收金額",
+            "gate":"錢包跨鍊網關",
+            "totalExAmount":"交易所總餘額",
+            "availableExAmount":"交易所可用餘額",
+            "balanceTips": "點擊鏈內轉賬，可以從Vite錢包給其他地址進行Vite鏈內轉賬",
+            "gateTips": "點擊跨鏈充值，可以將其他幣種跨鏈映射到Vite網絡，轉入Vite錢包；點擊跨鏈提現仍可以將資產轉至其他平台。*轉入轉出過程可能會產生手續費，且有金額限制",
+            "availableExAmountTips": "點擊資金劃轉，可以自由劃轉錢包賬戶和交易所賬戶的資產。以上劃轉過程不需要手續費",
+            "unreceivedTips": "登錄狀態下可自動接收在途金額"
         },
         "actionType": {
-            "SEND": "链内转账",
+            "SEND": "鏈內轉賬",
             "RECEIVE": "接收",
-            "CHARGE": "跨链充值",
-            "WITHDRAW": "跨链提现",
-            "EXTRANSFER": "资金划转",
-            "EXRECRODS": "交易所充提记录",
-            "RECRODS":"跨链充提记录",
+            "CHARGE": "跨鏈充值",
+            "WITHDRAW": "跨鏈提現",
+            "EXTRANSFER": "資金劃轉",
+            "EXRECRODS": "交易所充提記錄",
+            "RECRODS":"跨鏈充提記錄",
             "EXCHARGE": "充值至交易所",
-            "EXWITHDRAW": "提币至钱包"
+            "EXWITHDRAW": "提幣至錢包"
         },
         "transferConfirm": {
-            "from": "从",
+            "from": "從",
             "to": "到",
-            "wallet": "钱包账户",
-            "dex": "交易所账户",
-            "avaliableAmount": "可用余额"
+            "wallet": "錢包賬戶",
+            "dex": "交易所賬戶",
+            "avaliableAmount": "可用餘額"
         },
         "type": {
-            "native": "原生代币",
-            "crossGate": "跨链代币"
+            "native": "原生代幣",
+            "crossGate": "跨鏈代幣"
         },
         "assetType":{
-            "TOTAL":"全部资产估值",
-            "EX":"交易所资产估值",
-            "WALLET":"钱包资产估值"
+            "TOTAL":"全部資產估值",
+            "EX":"交易所資產估值",
+            "WALLET":"錢包資產估值"
         },
         "addToken": {
-            "title": "添加代币",
-            "placeholder": "请输入代币名称或TokenID",
+            "title": "添加代幣",
+            "placeholder": "請輸入代幣名稱或TokenID",
             "lTxt": "取消",
             "rTxt": "添加"
         },
         "tokenInfo": {
-            "tabName": "详情",
-            "title": "{tokenSymbol}代币信息",
+            "tabName": "詳情",
+            "title": "{tokenSymbol}代幣信息",
             "saveGate": "保存修改",
             "labels": {
-                "tokenName": "代币名称",
+                "tokenName": "代幣名稱",
                 "tokenId": "TokenID",
-                "overview": "代币简介",
-                "totalSupply": "发行总量",
-                "total": "流通总量",
-                "type": "代币类型",
-                "gate": "跨链网关",
-                "website": "官网",
-                "whitePaper": "白皮书",
-                "explorer": "浏览器",
+                "overview": "代幣簡介",
+                "totalSupply": "發行總量",
+                "total": "流通總量",
+                "type": "代幣類型",
+                "gate": "跨鍊網關",
+                "website": "官網",
+                "whitePaper": "白皮書",
+                "explorer": "瀏覽器",
                 "github": "Github",
-                "media": "社交媒体",
-                "crossType": "跨链代币",
-                "originType": "原生代币",
+                "media": "社交媒體",
+                "crossType": "跨鏈代幣",
+                "originType": "原生代幣",
                 "viewmore": "查看更多"
             },
             "reIssuable": {
-                "true": "可增发",
-                "false": "不可增发"
+                "true": "可增發",
+                "false": "不可增發"
             }
         },
         "gateInfo": {
-            "gateSetting":"点击设置网关",
-            "tabName": "网关详情",
-            "name": "网关名称",
-            "selfdefined": "自定义网关",
-            "officalNet": "网关官网",
-            "introduction": "网关介绍",
-            "token": "网关发行代币",
-            "setting": "网关设置",
-            "customer": "客服链接",
-            "clickCustomer": "点击提交工单",
-            "privacy": "服务协议",
-            "clickPrivacy": "{gate}官方网关服务协议",
-            "settingPlaceholder": "请输入网关链接地址",
-            "nodeDesc":"网关节点使用说明",
-            "nodeDescStr": "当前功能仅针对跨链代币使用，非跨链代币请勿使用，同时请勿轻信他人的网关链接，造成的资产损失本站概不负责。如需使用则将正确的网关链接填写在下方，保存后即可在当前地址生效。"
+            "gateSetting":"點擊設置網關",
+            "tabName": "網關詳情",
+            "name": "網關名稱",
+            "selfdefined": "自定義網關",
+            "officalNet": "網關官網",
+            "introduction": "網關介紹",
+            "token": "網關發行代幣",
+            "setting": "網關設置",
+            "customer": "客服鏈接",
+            "clickCustomer": "點擊提交工單",
+            "privacy": "服務協議",
+            "clickPrivacy": "{gate}官方網關服務協議",
+            "settingPlaceholder": "請輸入網關鏈接地址",
+            "nodeDesc":"網關節點使用說明",
+            "nodeDescStr": "當前功能僅針對跨鏈代幣使用，非跨鏈代幣請勿使用，同時請勿輕信他人的網關鏈接，造成的資產損失本站概不負責。如需使用則將正確的網關鏈接填寫在下方，保存後即可在當前地址生效。"
         },
         "depositRecord": {
-            "tabName": "转入记录",
-            "heads": ["时间", "金额", "状态", "{outChain}链Hash","vite链Hash","手续费"],
+            "tabName": "轉入記錄",
+            "heads": ["時間", "金額", "狀態", "{outChain}鏈Hash","vite鏈Hash","手續費"],
             "statusMap": {
-                "OPPOSITE_PROCESSING": "{outChain}链待确认{confirms}",
-                "OPPOSITE_CONFIRMED_FAIL":"{outChain}链失败",
-                "OPPOSITE_CONFIRMED": "网关已接收",
+                "OPPOSITE_PROCESSING": "{outChain}鏈待確認{confirms}",
+                "OPPOSITE_CONFIRMED_FAIL":"{outChain}鏈失敗",
+                "OPPOSITE_CONFIRMED": "網關已接收",
                 "TOT_CONFIRMED": "已完成",
-                "BELOW_MINIMUM": "充值失败",
-                "TOT_PROCESSING": "VITE链待确认"
+                "BELOW_MINIMUM": "充值失敗",
+                "TOT_PROCESSING": "VITE鏈待確認"
             }
         },
         "withdrawRecord": {
-            "tabName": "转出记录",
-            "heads": ["时间", "金额", "状态", "vite链Hash", "{outChain}链Hash","手续费"],
+            "tabName": "轉出記錄",
+            "heads": ["時間", "金額", "狀態", "vite鏈Hash", "{outChain}鏈Hash","手續費"],
             "statusMap": {
-                "TOT_PROCESSING": "VITE链待确认{confirms}",
-                "TOT_CONFIRMED": "网关已接收",
-                "TOT_EXCEED_THE_LIMIT":"转出金额超过限额",
-                "OPPOSITE_PROCESSING": "{outChain}链待确认",
+                "TOT_PROCESSING": "VITE鏈待確認{confirms}",
+                "TOT_CONFIRMED": "網關已接收",
+                "TOT_EXCEED_THE_LIMIT":"轉出金額超過限額",
+                "OPPOSITE_PROCESSING": "{outChain}鏈待確認",
                 "OPPOSITE_CONFIRMED": "已完成",
-                "WRONG_WITHDRAW_ADDRESS":"转出地址填写错误"            
+                "WRONG_WITHDRAW_ADDRESS":"轉出地址填寫錯誤"
             }
         },
         "charge": {
-            "title": "跨链转入",
-            "addrErr":"网关节点出错，请检查网关设置",
-            "addressTitle": "转入地址",
-            "labelTips":"(请将此 {labelName} 与充值地址同时使用，否则币会丢失)",
-            "codeTips": "请扫描二维码充值,请使用支持{tokenSymbol}的钱包转账",
-            "labelCodeTips":"请扫描 {labelName} 二维码",
+            "title": "跨鏈轉入",
+            "addrErr":"網關節點出錯，請檢查網關設置",
+            "addressTitle": "轉入地址",
+            "labelTips":"(請將此 {labelName} 與充值地址同時使用，否則幣會丟失)",
+            "codeTips": "請掃描二維碼充值,請使用支持{tokenSymbol}的錢包轉賬",
+            "labelCodeTips":"請掃描 {labelName} 二維碼",
             "tips": [
-                "通过下方地址只能充值 {tokenSymbol}，且单笔金额不低于 {min}",
-                "{confirmationCount} 个网络确认之后到账，请耐心等待",
-                "请选择正确的主网，否则代币丢失将无法找回"
+                "通過下方地址只能充值 {tokenSymbol}，且單筆金額不低於 {min}",
+                "{confirmationCount} 個網絡確認之後到賬，請耐心等待",
+                "請選擇正確的主網，否則代幣丟失將無法找回"
             ],
-            "selectNetwork": "选择主网"
+            "selectNetwork": "選擇主網"
         },
-        "viteTips": "VITE 仅支持新ERC20 VITE与Native VITE之间跨链。",
+        "viteTips": "VITE 僅支持新ERC20 VITE與Native VITE之間跨鏈。",
         "withdraw": {
-            "title": "跨链转出",
+            "title": "跨鏈轉出",
             "balanceErrMap": {
-                "notEnough": "余额不足",
-                "overMax": "转出金额需小于 {max}",
-                "lessMin": "转出金额需大于 {min}"
+                "notEnough": "餘額不足",
+                "overMax": "轉出金額需小於 {max}",
+                "lessMin": "轉出金額需大於 {min}"
             },
-            "feeTips": "手续费收取金额由网关设置",
-            "addressErr": "地址格式错误",
+            "feeTips": "手續費收取金額由網關設置",
+            "addressErr": "地址格式錯誤",
             "labels": {
-                "balance": "账户余额",
-                "address": "转出地址",
-                "amount": "转出金额",
-                "fee": "转出手续费",
+                "balance": "賬戶餘額",
+                "address": "轉出地址",
+                "amount": "轉出金額",
+                "fee": "轉出手續費",
                 "all": "全部"
             },
-            "amountPlaceholder": "请输入转出金额，最小不少于{min}",
-            "labelPlaceholder":"请输入 {labelName}",
-            "addressPlaceholder": "请输入{token}转出地址",
-            "successTips": "转出请求已发送",
-            "failTips":"网关服务出错，请检查网关设置"
+            "amountPlaceholder": "請輸入轉出金額，最小不少於{min}","labelPlaceholder":"請輸入 {labelName}",
+            "addressPlaceholder": "請輸入{token}轉出地址",
+            "successTips": "轉出請求已發送",
+            "failTips":"網關服務出錯，請檢查網關設置"
         },
-        "nodeErr": "网关节点无效，请检查网关设置"
+        "nodeErr": "網關節點無效，請檢查網關設置"
     },
     "viteExplorer": {
-        "title": "Vite区块浏览器"
+        "title": "Vite區塊瀏覽器"
     },
     "viteScanExplorer": {
         "title": "ViteScan"
     },
     "assets": {
-        "title": "资产",
+        "title": "資產",
         "notice": {
             "title": "重要提示",
-            "contentProvider": "本服务由{gate}提供。",
-            "contentOther": "Vite平台对{gate}的业务没有任何责任，Vite平台不参与{gate}与Vite平台用户之间的任何活动。",
-            "contentAgree": "使用{gate}提供的服务，表明您同意{gate}",
-            "agreement": "服务条款，交易条件，限制及隐私政策",
-            "contentUngree": "若您不同意这些条款，请勿使用{gate}服务。",
-            "hint": "若您对支付流程有问题，请联系{gate}客服团队",
-            "next": "同意并继续"
+            "contentProvider": "本服務由{gate}提供。",
+            "contentOther": "Vite平台對{gate}的業務沒有任何責任，Vite平台不參與{gate}與Vite平台用戶之間的任何活動。",
+            "contentAgree": "使用{gate}提供的服務，表明您同意{gate}",
+            "agreement": "服務條款，交易條件，限制及隱私政策",
+            "contentUngree": "若您不同意這些條款，請勿使用{gate}服務。",
+            "hint": "若您對支付流程有問題，請聯繫{gate}客服團隊",
+            "next": "同意並繼續"
         },
         "vb":{
             "title":"ViteConnect",
-            "closeAlert":"关闭弹窗",
+            "closeAlert":"關閉彈窗",
             "connect":{
-                "tips":"请使用Vite Wallet App扫码登录."
+                "tips":"請使用Vite Wallet App掃碼登錄."
             },
             "confirm":{
-                "tips":"请在VITE Wallet App上确认交易"
+                "tips":"請在VITE Wallet App上確認交易"
             },
             "start":{
-                "scan":"请使用Vite Wallet App扫码登录.",
-                "downloadTips":"还没有Vite Wallet App？",
-                "download":"下载Vite手机钱包"
+                "scan":"請使用Vite Wallet App掃碼登錄.",
+                "downloadTips":"還沒有Vite Wallet App？",
+                "download":"下載Vite手機錢包"
             },
             "accountName":"ViteConnect 地址"
         },
         "ledger": {
             "title": "Ledger Device",
             "accountName": "Ledger Wallet",
-            "verifyAddress": "验证该地址",
+            "verifyAddress": "驗證該地址",
             "closeAlert": "取消交易",
             "start": {
                 "title": "支持 Ledger nano S 或 Ledger nano X",
-                "connectError": "连接错误",
-                "introduction": "安装说明 & 使用说明",
+                "connectError": "連接錯誤",
+                "introduction": "安裝說明 & 使用說明",
                 "introductionUrl": "https://support.ledger.com/hc/en-us/articles/115005165269-Connection-issues-with-Windows-or-Linux",
                 "connectErrorUrl": "https://support.ledger.com/hc/en-us/articles/115005165269-Connection-issues-with-Windows-or-Linux"
             },
-            "connectWithUSB": "USB 连接",
-            "connectWithBlu": "蓝牙 连接",
-            "connectLedger": "连接 Ledger",
+            "connectWithUSB": "USB 連接",
+            "connectWithBlu": "藍牙 連接",
+            "connectLedger": "連接 Ledger",
             "connect": {
-                "title": "地址选择",
-                "tips": "请从以下地址中选择一个地址：",
-                "selectConnectType": "请选择 Ledger 硬件钱包的连接方式：（注意：仅 Ledger nano X 支持蓝牙连接）",
-                "cancelSelect": "请选择一个设备进行连接",
-                "connectError": "连接错误，请确保在Ledger上已打开Vite App软件！",
-                "interfaceNotAvailable": "连接失败，请尝试重新连接USB线，或者重启蓝牙再次尝试",
-                "receiveBlockSuccess": "成功签收{num}个 Response 块",
+                "title": "地址選擇",
+                "tips": "請從以下地址中選擇一個地址：",
+                "selectConnectType": "請選擇 Ledger 硬件錢包的連接方式：（注意：僅 Ledger nano X 支持藍牙連接）",
+                "cancelSelect": "請選擇一個設備進行連接",
+                "connectError": "連接錯誤，請確保在Ledger上已打開Vite App軟件！",
+                "interfaceNotAvailable": "連接失敗，請嘗試重新連接USB線，或者重啟藍牙再次嘗試",
+                "receiveBlockSuccess": "成功簽收{num}個 Response 塊",
                 "introduction": {
                     "1": {
                         "title": "第一步: ",
-                        "content": "请连接 Ledger 设备并输入PIN"
+                        "content": "請連接 Ledger 設備並輸入PIN"
                     },
                     "2": {
                         "title": "第二步: ",
-                        "content": "请在 Ledger 设备里打开Vite App"
+                        "content": "請在 Ledger 設備裡打開Vite App"
                     }
                 }
             },
             "addressSelect": {
                 "index": "Index",
                 "address": "地址",
-                "balance": "余额",
-                "unreceived": "待接收余额",
-                "nextPage": "下一页",
-                "prePage": "上一页",
-                "confirm": "确认",
+                "balance": "餘額",
+                "unreceived": "待接收餘額",
+                "nextPage": "下一頁",
+                "prePage": "上一頁",
+                "confirm": "確認",
                 "unUsedAccount": "未使用"
             },
             "confirm": {
-                "tips": "请在 Ledger 钱包里确认该交易！",
-                "verifyAddress": "请在 Ledger 钱包里确认该地址！",
+                "tips": "請在 Ledger 錢包裡確認該交易！",
+                "verifyAddress": "請在 Ledger 錢包裡確認該地址！",
                 "alert": "注意",
-                "alertContent": "您刚才在 Ledger 设备上否认了该地址，请确认 Ledger 设备上显示的地址和页面上显示的地址是否一致，若是误操作，请忽略该消息。\n 若确实不一致，请勿向该地址发送任何资产，因为您访问的网页可能被黑客劫持。",
-                "alertLeftBtn": "误操作",
-                "alertRightBtn": "确实不一致",
-                "userCancel": "您在 Ledger 钱包里取消了交易",
-                "userCancelByWeb": "您取消了交易，即使在 Ledger 钱包里确认该交易，该交易也不会广播出去"
+                "alertContent": "您剛才在Ledger 設備上否認了該地址，請確認Ledger 設備上顯示的地址和頁面上顯示的地址是否一致，若是誤操作，請忽略該消息。\n 若確實不一致，請勿向該地址發送任何資產，因為您訪問的網頁可能被黑客劫持。",
+                "alertLeftBtn": "誤操作",
+                "alertRightBtn": "確實不一致",
+                "userCancel": "您在 Ledger 錢包裡取消了交易",
+                "userCancelByWeb": "您取消了交易，即使在 Ledger 錢包裡確認該交易，該交易也不會廣播出去"
             }
         },
         "invite":{
-            "inviteTitle":"邀请好友",
-            "receiveInviteTitle":"接受邀请",
-            "myCode":"我的邀请码为：",
-            "notEnough":"交易所可用余额不足",
-            "codeLable":"邀请码",
-            "noResult":"未查询到结果，稍后重试",
-            "formatErr":"邀请码格式错误",
-            "successToast":"请求发送成功",
-            "failToast":"请求发送失败",
-            "invited":"你已接受过邀请，邀请码为：",
-            "genCode":"生成邀请码",
-            "cost":"所需金额",
-            "avaliable":"可用余额",
-            "inviteNum":"邀请人数",
-            "inviteBenifit":"邀请挖矿收益",
-            "inviteRule":"邀请规则",
+            "inviteTitle":"邀請好友",
+            "receiveInviteTitle":"接受邀請",
+            "myCode":"我的邀請碼為：",
+            "notEnough":"交易所可用餘額不足",
+            "codeLable":"邀請碼",
+            "noResult":"未查詢到結果，稍後重試",
+            "formatErr":"邀請碼格式錯誤",
+            "successToast":"請求發送成功",
+            "failToast":"請求發送失敗",
+            "invited":"你已接受過邀請，邀請碼為：",
+            "genCode":"生成邀請碼",
+            "cost":"所需金額",
+            "avaliable":"可用餘額",
+            "inviteNum":"邀請人數",
+            "inviteBenifit":"邀請挖礦收益",
+            "inviteRule":"邀請規則",
             "ruleItems":[
-                "花费 <span class='strong'>1000 VITE</span> 生成邀请码，<span class='strong'>1000 VITE</span> 被销毁",
-                "计算交易挖矿时，邀请人增加被邀请人的交易手续费权重 <span class='strong'>5%</span> ",
-                "计算挂单挖矿时，邀请人增加被邀请人的挂单挖矿权重 <span class='strong'>2.5%</span> "
+                "花費 <span class='strong'>1000 VITE</span> 生成邀請碼，<span class='strong'>1000 VITE</span> 被銷毀",
+                "計算交易挖礦時，邀請人增加被邀請人的交易手續費權重 <span class='strong'>5%</span> ",
+                "計算掛單挖礦時，邀請人增加被邀請人的掛單挖礦權重 <span class='strong'>2.5%</span> "
             ],
             "receiveRuleItems": [
-                "计算交易挖矿时，交易手续费权重增加 <span class='strong'>2.5%</span> ",
-                "计算挂单挖矿时，挂单挖矿权重增加 <span class='strong'>1.25%</span> ",
-                "使用邀请码的用户，在交易过程中手续费可 <span class='strong'>9折</span> "
+                "計算交易挖礦時，交易手續費權重增加 <span class='strong'>2.5%</span> ",
+                "計算掛單挖礦時，掛單挖礦權重增加 <span class='strong'>1.25%</span> ",
+                "使用邀請碼的用戶，在交易過程中手續費可 <span class='strong'>9折</span> "
             ]
         }
     },
     "walletConversion": {
-        "title": "置换VITE",
+        "title": "置換VITE",
         "help": {
-            "title": "快速理解置换VITE",
-            "text": "通过VITE置换功能，可以将以太网络上的ERC20 VITE代币置换到VITE网络中，在VITE网络中可以投票官方超级节点赚取奖励，年化收益达20%。在置换过程中，你的ERC20 VITE将被转入黑洞地址：{blackAddr}，当黑洞地址收到交易并被确认后，置换系统将为您发放等值的VITE至您的VITE地址中。在置换过程中，您需要将ERC20的VITE 与 少量ETH（用于置换消耗gas）转入至VITE钱包的ETH地址中。"
+            "title": "快速理解置換VITE","text": "通過VITE置換功能，可以將以太網絡上的ERC20 VITE代幣置換到VITE網絡中，在VITE網絡中可以投票官方超級節點賺取獎勵，年化收益達20%。在置換過程中，你的ERC20 VITE將被轉入黑洞地址：{blackAddr}，當黑洞地址收到交易並被確認後，置換系統將為您發放等值的VITE至您的VITE地址中。在置換過程中，您需要將ERC20的VITE 與少量ETH（用於置換消耗gas）轉入至VITE錢包的ETH地址中。"
         },
-        "gas": "矿工费用",
-        "record": "置换记录",
-        "aboutPrice": "约 {amount} ETH",
-        "note": "官方提示：提交置换后请您耐心等待，置换VITE到账需要等以太交易被确认30个块，以太交易可以在置换记录中查看",
+        "gas": "礦工費用",
+        "record": "置換記錄",
+        "aboutPrice": "約 {amount} ETH",
+        "note": "官方提示：提交置換後請您耐心等待，置換VITE到賬需要等以太交易被確認30個塊，以太交易可以在置換記錄中查看",
         "exchange": {
-            "vite": "置换VITE",
+            "vite": "置換VITE",
             "viteAddr": "接收VITE地址",
-            "viteAmount": "置换VITE金额",
-            "btn": "确认置换",
-            "success": "置换请求成功，预计以太网交易被确认后20分钟到账"
+            "viteAmount": "置換VITE金額",
+            "btn": "確認置換",
+            "success": "置換請求成功，預計以太網交易被確認後20分鐘到賬"
         }
     },
     "wallet": {
-        "title": "配额管理",
+        "title": "配額管理",
         "help": {
-            "title": "快速理解配额"
+            "title": "快速理解配額"
         },
-        "transfer": "转账",
-        "getTestToken": "获取测试代币",
-        "transDetail": "查看账户更多交易详情",
+        "transfer": "轉賬",
+        "getTestToken": "獲取測試代幣",
+        "transDetail": "查看賬戶更多交易詳情",
         "address": "我的地址",
         "fundFloat": "待接收",
-        "pend": "笔交易待接收",
-        "inAddress": "接收账户地址",
-        "sum": "金额",
-        "remarks": "备注（Memo）",
-        "totalAsset": "总资产",
-        "remarksLong": "剩余字节：{len}",
+        "pend": "筆交易待接收",
+        "inAddress": "接收賬戶地址",
+        "sum": "金額",
+        "remarks": "備註（Memo）",
+        "totalAsset": "總資產",
+        "remarksLong": "剩餘字節：{len}",
         "placeholder": {
-            "amount": "请输入金额",
-            "remarks": "请输入备注（Memo）",
-            "addr": "请输入地址"
+            "amount": "請輸入金額",
+            "remarks": "請輸入備註（Memo）",
+            "addr": "請輸入地址"
         },
         "hint": {
-            "token": "系统已向您转入一笔VITE测试代币，请注意接收",
-            "tErr": "获取测试代币失败！",
-            "amount": "金额必须大于0"
+            "token": "系統已向您轉入一筆VITE測試代幣，請注意接收",
+            "tErr": "獲取測試代幣失敗！",
+            "amount": "金額必須大於0"
         },
         "trans": {
-            "powErr": "运行PoW错误，请重新发起转账",
-            "powTransErr": "PoW获取的配额不足，建议您进行抵押VITE获取配额"
+            "powErr": "運行PoW錯誤，請重新發起轉賬",
+            "powTransErr": "PoW獲取的配額不足，建議您進行抵押VITE獲取配額"
         }
     },
     "walletMintage": {
-        "title": "铸币",
-        "address": "铸币地址",
-        "tokenName": "代币全称",
-        "tokenSymbol": "代币简称",
-        "totalSupply": "总发行量",
-        "decimals": "价格精度",
-        "isReIssuable": "是否可增发",
-        "maxSupply": "最大发行量",
-        "ownerBurnOnly": "仅支持所有者销毁",
-        "isOwnerBurnOnly": "是否仅支持所有者销毁",
-        "mint": "确认铸币",
-        "tokenList": "已铸代币",
-        "submit": "确认",
+        "title": "鑄幣",
+        "address": "鑄幣地址",
+        "tokenName": "代幣全稱",
+        "tokenSymbol": "代幣簡稱",
+        "totalSupply": "總發行量",
+        "decimals": "價格精度",
+        "isReIssuable": "是否可增發",
+        "maxSupply": "最大發行量",
+        "ownerBurnOnly": "僅支持所有者銷毀",
+        "isOwnerBurnOnly": "是否僅支持所有者銷毀",
+        "mint": "確認鑄幣",
+        "tokenList": "已鑄代幣",
+        "submit": "確認",
         "cancel": "取消",
         "success": "操作成功",
-        "fail": "操作失败",
-        "getListFail": "获取列表失败",
+        "fail": "操作失敗",
+        "getListFail": "獲取列表失敗",
         "mintageConfirm": {
-            "title": "确认铸币信息",
-            "balance": "当前地址余额",
-            "fee": "铸币费",
-            "btn": "确认铸币"
+            "title": "確認鑄幣信息",
+            "balance": "當前地址餘額",
+            "fee": "鑄幣費",
+            "btn": "確認鑄幣"
         },
         "reIssuableConfirm": {
-            "title": "改为不可增发",
-            "text": "确认将 {tokenName} 改为不可增发状态吗?"
+            "title": "改為不可增發",
+            "text": "確認將 {tokenName} 改為不可增發狀態嗎?"
         },
         "issueConfirm": {
-            "title": "增发代币",
-            "amount": "增发数量",
+            "title": "增發代幣",
+            "amount": "增發數量",
             "address": "受益地址",
-            "overAmount": "增发数量超出上限"
+            "overAmount": "增發數量超出上限"
         },
         "changeOwnerConfirm": {
-            "title": "转让所有权",
-            "address": "接受权限地址"
+            "title": "轉讓所有權",
+            "address": "接受權限地址"
         },
         "hint": {
-            "tokenName": "代币全称长度为1-40 个字符，包含大小写字母、空格和下划线，不能有连续空格，不能包含数字。",
-            "tokenSymbol": "简称长度为1-10 个字符，只可包含大写字母、数字。",
-            "success": "铸币成功",
-            "fail": "铸币失败"
+            "tokenName": "代幣全稱長度為1-40 個字符，包含大小寫字母、空格和下劃線，不能有連續空格，不能包含數字。",
+            "tokenSymbol": "簡稱長度為1-10 個字符，只可包含大寫字母、數字。",
+            "success": "鑄幣成功",
+            "fail": "鑄幣失敗"
         },
         "err": {
-            "tokenNameFormat": "名称不合法",
-            "tokenNameNull": "名称不可为空",
-            "tokenSymbolFormat": "简称不合法",
-            "tokenSymbolNull": "简称不可为空",
-            "supplyMax": "发行量过大",
-            "totalSupplyFormat": "总发行量不合法",
-            "totalSupplyNull": "总发行量不可为空",
-            "decimalsNull": "价格精度不可为空",
-            "decimalsFormat": "价格精度不合法",
-            "decimalsMax": "价格精度过大",
-            "maxSupplyNull": "最大发行量不可为空",
-            "maxSupplyFormat": "最大发行量不合法",
-            "maxSupplyMin": "最大发行量不能小于总发行量"
+            "tokenNameFormat": "名稱不合法",
+            "tokenNameNull": "名稱不可為空",
+            "tokenSymbolFormat": "簡稱不合法",
+            "tokenSymbolNull": "簡稱不可為空",
+            "supplyMax": "發行量過大",
+            "totalSupplyFormat": "總發行量不合法",
+            "totalSupplyNull": "總發行量不可為空",
+            "decimalsNull": "價格精度不可為空",
+            "decimalsFormat": "價格精度不合法",
+            "decimalsMax": "價格精度過大",
+            "maxSupplyNull": "最大發行量不可為空",
+            "maxSupplyFormat": "最大發行量不合法",
+            "maxSupplyMin": "最大發行量不能小於總發行量"
         }
     },
     "walletQuota": {
-        "title": "配额管理",
+        "title": "配額管理",
         "help": {
-            "title": "快速理解配额"
+            "title": "快速理解配額"
         },
-        "myQuota": "我的当前配额",
-        "maxTxNum": "最大交易笔数",
-        "beneficialAddr": "配额受益地址",
-        "fromAddr": "抵押金额扣除地址",
-        "time": "抵押锁定时长",
-        "aboutDays": "约{day}天",
-        "amountPlaceholder": "请输入抵押金额，最小{num}vite",
-        "limitAmt": "抵押金额需填写大于等于{num}的数字",
-        "addrPlaceholder": "请输入获取配额地址",
-        "inputWithdrawAmount": "请输入取回金额",
-        "pledgeFail": "提交失败",
-        "canclePledgeFail": "操作失败",
+        "myQuota": "我的當前配額",
+        "maxTxNum": "最大交易筆數",
+        "beneficialAddr": "配額受益地址",
+        "fromAddr": "抵押金額扣除地址",
+        "time": "抵押鎖定時長",
+        "aboutDays": "約{day}天",
+        "amountPlaceholder": "請輸入抵押金額，最小{num}vite",
+        "limitAmt": "抵押金額需填寫大於等於{num}的數字",
+        "addrPlaceholder": "請輸入獲取配額地址",
+        "inputWithdrawAmount": "請輸入取回金額",
+        "pledgeFail": "提交失敗",
+        "canclePledgeFail": "操作失敗",
         "maturity": "抵押已到期",
-        "minAmt": "最小取回金额为 {num} VITE",
-        "gotoStake": "请先抵押足够VITE",
-        "maxAmt": "取回金额应在 [{minAmount}, {maxAmount}] 之内",
-        "cancelLimitAmt": "抵押金额不能小于{num}",
+        "minAmt": "最小取回金額為 {num} VITE",
+        "gotoStake": "請先抵押足夠VITE",
+        "maxAmt": "取回金額應在 [{minAmount}, {maxAmount}] 之內",
+        "cancelLimitAmt": "抵押金額不能小於{num}",
         "withdrawalStaking": "取回抵押",
         "myAddr": "我的",
         "confirm": {
             "help": {
-                "t1": "什么是配额",
-                "txt1": "在Vite系统中，用户不是通过支付手续费的方式来购买一次交易所需的燃料，而是通过一种基于配额的模型来获取计算资源，发送交易所需配额=基础配额(请求)+配额(附带的文本资料)，接受交易所需配额=基础配额(响应)。这个基于配额的资源配置协议允许用户通过两种方式来获取更高的资源配额：抵押Vite获取配额、运行PoW",
-                "t2": "什么是抵押",
-                "txt2": "在Vite系统中，用户可以抵押vite获取一定数量的配额，抵押最小值为134vite，没有最大抵押上限；同时支持A地址抵押一部分vite并将获得的配额分配给B地址；用户申请抵押后，会将这笔vite发送到智能合约地址而不是某一个用户，且只有申请抵押用户有权限支配抵押的金额",
-                "t3": "什么是PoW",
-                "txt3": "工作量证明(Proof of Work，简称PoW)，简单理解就是一份证明，用来确认你做过一定量的工作，同样也是应对拒绝服务攻击和其他服务滥用的经济对策。它要求发起者进行一定量的运算，也就意味着需要消耗计算机一定的时间；在VITE系统中，用户可以通过运行PoW获得免费的配额，用户可以通过获得的配额进行一次不带任何备注信息的交易"
+                "t1": "什麼是配額",
+                "txt1": "在Vite系統中，用戶不是通過支付手續費的方式來購買一次交易所需的燃料，而是通過一種基於配額的模型來獲取計算資源，發送交易所需配額=基礎配額(請求)+配額(附帶的文本資料)，接受交易所需配額=基礎配額(響應)。這個基於配額的資源配置協議允許用戶通過兩種方式來獲取更高的資源配額：抵押Vite獲取配額、運行PoW",
+                "t2": "什麼是抵押",
+                "txt2": "在Vite系統中，用戶可以抵押vite獲取一定數量的配額，抵押最小值為134vite，沒有最大抵押上限；同時支持A地址抵押一部分vite並將獲得的配額分配給B地址；用戶申請抵押後，會將這筆vite發送到智能合約地址而不是某一個用戶，且只有申請抵押用戶有權限支配抵押的金額",
+                "t3": "什麼是PoW",
+                "txt3": "工作量證明(Proof of Work，簡稱PoW)，簡單理解就是一份證明，用來確認你做過一定量的工作，同樣也是應對拒絕服務攻擊和其他服務濫用的經濟對策。它要求發起者進行一定量的運算，也就意味著需要消耗計算機一定的時間；在VITE系統中，用戶可以通過運行PoW獲得免費的配額，用戶可以通過獲得的配額進行一次不帶任何備註信息的交易"
             },
             "cancel": {
-                "describe": "目前抵押金额为 {amount} VITE，请确认取回金额",
-                "rightBtn": "确认取回",
-                "leftBtn": "暂不取回"
+                "describe": "目前抵押金額為 {amount} VITE，請確認取回金額",
+                "rightBtn": "確認取回",
+                "leftBtn": "暫不取回"
             },
-            "submit": {
-                "describe": "确认是否抵押 {amount} VITE 获取配额，抵押生效约3天之后才可取回",
-                "rightBtn": "确认抵押",
-                "leftBtn": "再等会儿"
+            "submit": {"describe": "確認是否抵押 {amount} VITE 獲取配額，抵押生效約3天之後才可取回",
+                "rightBtn": "確認抵押",
+                "leftBtn": "再等會兒"
             }
         },
         "list": {
             "title": "我的抵押列表",
-            "total": "总计抵押 {amount} VITE",
-            "amount": "抵押金额",
-            "withdrawTime": "预计到期时间",
-            "unexpired": "还未到达取回时间，暂时无法取回抵押",
-            "vip": "此抵押为您开通交易所VIP金额，请前往交易所撤销VIP",
-            "mining": "此抵押为您交易所抵押挖矿金额，请前往交易所挖矿页面取回",
-            "other": "此抵押为您通过其他方式抵押，不支持在此处取回"
+            "total": "總計抵押 {amount} VITE",
+            "amount": "抵押金額",
+            "withdrawTime": "預計到期時間",
+            "unexpired": "還未到達取回時間，暫時無法取回抵押",
+            "vip": "此抵押為您開通交易所VIP金額，請前往交易所撤銷VIP",
+            "mining": "此抵押為您交易所抵押挖礦金額，請前往交易所挖礦頁面取回",
+            "other": "此抵押為您通過其他方式抵押，不支持在此處取回"
         }
     },
     "walletTransList": {
-        "title": "交易记录",
+        "title": "交易記錄",
         "tType": {
-            "title": "交易类型",
-            "symbol": "类型"
+            "title": "交易類型",
+            "symbol": "類型"
         },
         "status": {
-            "title": "状态",
-            "unconfirmed": "待确认",
-            "confirms": "确认数",
-            "confirmed": "已确认"
+            "title": "狀態",
+            "unconfirmed": "待確認",
+            "confirms": "確認數",
+            "confirmed": "已確認"
         },
-        "timestamp": "时间戳",
+        "timestamp": "時間戳",
         "tAddress": "交易方地址",
-        "sum": "金额"
+        "sum": "金額"
     },
     "walletFullNode": {
-        "title": "全节点",
+        "title": "全節點",
         "help": {
-            "title": "关于全节点",
-            "t1": "名词解释",
-            "txt1": "[注册节点数]  使用当前VITE地址注册的节点数量",
-            "txt2": "[在线节点数]  使用当前地址注册，且目前有效在线的节点数量",
-            "txt3": "[有效奖励节点数]  发送节点奖励的节点数量",
-            "t2": "注册全节点时候，多个全节点可使用同一个地址，但需要保证每个节点最少抵押10000vite，如果抵押金额/10000的整数大于等于在线节点数，则在线节点数全部有效，如果抵押金额/10000的整数小于在线节点数，则视有效节点数为（抵押金额/10000的整数部分），最终都将按照有效节点数发送节点奖励。",
-            "t3": "全节点投票奖励不收节点数影响，按照抵押金额发送投票奖励。"
+            "title": "關於全節點",
+            "t1": "名詞解釋",
+            "txt1": "[註冊節點數] 使用當前VITE地址註冊的節點數量",
+            "txt2": "[在線節點數] 使用當前地址註冊，且目前有效在線的節點數量",
+            "txt3": "[有效獎勵節點數] 發送節點獎勵的節點數量",
+            "t2": "註冊全節點時候，多個全節點可使用同一個地址，但需要保證每個節點最少抵押10000vite，如果抵押金額/10000的整數大於等於在線節點數，則在線節點數全部有效，如果抵押金額/10000的整數小於在線節點數，則視有效節點數為（抵押金額/10000的整數部分），最終都將按照有效節點數發送節點獎勵。",
+            "t3": "全節點投票獎勵不收節點數影響，按照抵押金額發送投票獎勵。"
         },
-        "confirmText": "确认是否抵押 {amount} VITE 获取配额，抵押生效约{days}天之后才可取回",
+        "confirmText": "確認是否抵押 {amount} VITE 獲取配額，抵押生效約{days}天之後才可取回",
         "addQuota": {
             "address": "抵押地址",
-            "stakeDays": "抵押周期",
+            "stakeDays": "抵押週期",
             "placeholder": "最少抵押{min}VITE",
-            "stakingSuspend": "暂停接受新抵押"
+            "stakingSuspend": "暫停接受新抵押"
         },
         "quotaContent": {
-            "onlineReward": "节点在线奖励",
-            "voteReward": "节点投票奖励",
+            "onlineReward": "節點在線獎勵",
+            "voteReward": "節點投票獎勵",
             "yesterday": "昨日",
-            "all": "累计 {num} VITE",
-            "nodeInfo": "当前地址节点信息",
-            "onlineNodes": "在线节点数",
-            "rewardNodes": "发放奖励节点数",
-            "stakeAmount": "抵押节点金额"
+            "all": "累計 {num} VITE",
+            "nodeInfo": "當前地址節點信息",
+            "onlineNodes": "在線節點數",
+            "rewardNodes": "發放獎勵節點數",
+            "stakeAmount": "抵押節點金額"
         }
     },
     "walletSBP": {
         "title": "SBP",
         "help": {
-            "title": "关于SBP",
-            "text": "SBP（Snapshot Block Producer）为具有出块权利的节点，您可以通过抵押一定数量的VITE注册成为SBP候选节点；每轮（时长75秒）会选举出25个SBP，每轮得票数前25名中随机选出23个作为SBP，得票数26-100名中随机选出2个作为SBP；出块奖励的50%将作为按块奖励分配给该块的出块节点，另外50%将作为按票奖励分配给该轮次得票数排名前100的节点。一个注册地址（抵押地址）可以注册多个出块节点（节点名称），节点名称被一个注册地址使用后不能再被其他注册地址使用；节点名称可以更换出块地址，出块地址被一个节点名称使用后不能再被其他节点名称使用。"
+            "title": "關於SBP",
+            "text": "SBP（Snapshot Block Producer）為具有出塊權利的節點，您可以通過抵押一定數量的VITE註冊成為SBP候選節點；每輪（時長75秒）會選舉出25個SBP，每輪得票數前25名中隨機選出23個作為SBP，得票數26-100名中隨機選出2個作為SBP；出塊獎勵的50%將作為按塊獎勵分配給該塊的出塊節點，另外50 %將作為按票獎勵分配給該輪次得票數排名前100的節點。一個註冊地址（抵押地址）可以註冊多個出塊節點（節點名稱），節點名稱被一個註冊地址使用後不能再被其他註冊地址使用；節點名稱可以更換出塊地址，出塊地址被一個節點名稱使用後不能再被其他節點名稱使用。"
         },
-        "register": "注册SBP",
-        "cancel": "撤销注册SBP",
-        "cancelBtn": "撤销",
-        "rewardBtn": "提取奖励",
-        "noReward": "暂无奖励",
+        "register": "註冊SBP",
+        "cancel": "撤銷註冊SBP",
+        "cancelBtn": "撤銷",
+        "rewardBtn": "提取獎勵",
+        "noReward": "暫無獎勵",
         "rewardConfirm": {
-            "title": "提取奖励",
-            "describe1": "每天 13:00:00 (UTC+8)更新可提取奖励金额，截止到{time} 您可提取奖励金额为",
-            "describe2": "挖矿奖励明细查询可",
-            "describe3": "点击此处",
-            "describe4": "提交提取奖励后，奖励金额将发送至您当前Vite Web钱包地址，请在钱包首页查看，请勿重复提取.",
-            "leftBtn": "暂不提取",
+            "title": "提取獎勵",
+            "describe1": "每天 13:00:00 (UTC+8)更新可提取獎勵金額，截止到{time} 您可提取獎勵金額為",
+            "describe2": "挖礦獎勵明細查詢可",
+            "describe3": "點擊此處",
+            "describe4": "提交提取獎勵後，獎勵金額將發送至您當前Vite Web錢包地址，請在錢包首頁查看，請勿重複提取.",
+            "leftBtn": "暫不提取",
             "rightBtn": "全部提取"
         },
         "confirm": {
-            "title": "注册SBP候选节点",
-            "describe": "提交注册后，当前地址的{amount}VITE将被锁定约90天，解锁后可以撤销注册，抵押金额将退回抵押地址",
-            "leftBtn": "暂不注册",
-            "rightBtn": "确认注册",
+            "title": "註冊SBP候選節點",
+            "describe": "提交註冊後，當前地址的{amount}VITE將被鎖定約90天，解鎖後可以撤銷註冊，抵押金額將退回抵押地址",
+            "leftBtn": "暫不註冊",
+            "rightBtn": "確認註冊",
             "edit": {
                 "title": "修改SBP信息",
-                "newBlockProducer": "请输入新的出块地址",
-                "newRewardAddress": "请输入新的奖励提取地址",
-                "changeBlockProducer": "出块地址",
-                "changeRewardAddress": "奖励提取地址",
-                "btn": "确认修改"
+                "newBlockProducer": "請輸入新的出塊地址",
+                "newRewardAddress": "請輸入新的獎勵提取地址",
+                "changeBlockProducer": "出塊地址",
+                "changeRewardAddress": "獎勵提取地址",
+                "btn": "確認修改"
             }
         },
         "section1": {
-            "title": "提交注册",
-            "nodeName": "节点名称",
-            "producerAddr": "出块地址",
-            "rewardWithdrawAddress": "奖励提取地址",
+            "title": "提交註冊",
+            "nodeName": "節點名稱",
+            "producerAddr": "出塊地址",
+            "rewardWithdrawAddress": "獎勵提取地址",
             "quotaAddr": "抵押地址",
-            "quotaTime": "抵押周期",
-            "time": "7776000个快照块（约90天）",
-            "confirmBtn": "提交注册",
-            "namePlaceholder": "请输入节点名称",
-            "nameHint": "40个字符以内, 支持大小写英文字母、数字、'_'、'.'",
-            "nameErr": "节点名称不合法",
-            "nameUsed": "此节点名称已被注册",
-            "addrPlaceholder": "请输入快照块出块地址",
-            "addrHint": "出块地址必须是全节点地址且保持运行状态",
-            "addrErr": "出块地址不合法",
-            "addrUsed": "此出块地址已被使用",
-            "registerSuccess": "注册请求已发出",
-            "registerFail": "注册请求失败"
+            "quotaTime": "抵押週期",
+            "time": "7776000個快照塊（約90天）",
+            "confirmBtn": "提交註冊",
+            "namePlaceholder": "請輸入節點名稱",
+            "nameHint": "40個字符以內, 支持大小寫英文字母、數字、'_'、'.'",
+            "nameErr": "節點名稱不合法",
+            "nameUsed": "此節點名稱已被註冊",
+            "addrPlaceholder": "請輸入快照塊出塊地址",
+            "addrHint": "出塊地址必須是全節點地址且保持運行狀態",
+            "addrErr": "出塊地址不合法",
+            "addrUsed": "此出塊地址已被使用",
+            "registerSuccess": "註冊請求已發出",
+            "registerFail": "註冊請求失敗"
         },
         "section2": {
-            "title": "注册信息",
+            "title": "註冊信息",
             "update": "修改",
-            "updateFail": "修改请求发送失败",
-            "cancel": "撤销",
-            "cancelFail": "撤销请求发送失败",
-            "expireDate": "预计到期时间: {time}",
+            "updateFail": "修改請求發送失敗",
+            "cancel": "撤銷",
+            "cancelFail": "撤銷請求發送失敗",
+            "expireDate": "預計到期時間: {time}",
             "cancelConfirm": {
-                "title": "撤销注册SBP",
-                "describe": "撤销后您的抵押金额将退回抵押地址；若想成为SBP，您需重新提交注册申请"
+                "title": "撤銷註冊SBP",
+                "describe": "撤銷後您的抵押金額將退回抵押地址；若想成為SBP，您需重新提交註冊申請"
             }
         }
     },
     "walletVote": {
         "title": "投票",
         "help": {
-            "title": "关于投票",
-            "text": "您可以参与投票选出共25个SBP（Snapshot Block Producer），每轮投票时间共75秒，您的投票数为投票地址所拥有的VITE数量，默认为您保持上一轮的投票意向；每轮得票量排名前25名的候选节点中随机23个及排名26-100名的候选节点中随机2个共25个节点将当选SBP。"
+            "title": "關於投票",
+            "text": "您可以參與投票選出共25個SBP（Snapshot Block Producer），每輪投票時間共75秒，您的投票數為投票地址所擁有的VITE數量，默認為您保持上一輪的投票意向；每輪得票量排名前25名的候選節點中隨機23個及排名26-100名的候選節點中隨機2個共25個節點將當選SBP。"
         },
-        "toReward": "查看我的奖励",
+        "toReward": "查看我的獎勵",
         "voting": "投票",
-        "search": "请输入候选节点名称或者出块地址",
-        "addrNoExistErr": "您的地址未发生过交易，暂不能投票",
-        "revokeVoting": "撤销投票",
+        "search": "請輸入候選節點名稱或者出塊地址",
+        "addrNoExistErr": "您的地址未發生過交易，暫不能投票",
+        "revokeVoting": "撤銷投票",
         "section1": {
             "title": "我的投票",
             "head": [
-                "节点名称",
-                "节点状态",
+                "節點名稱",
+                "節點狀態",
                 "我的投票",
-                "投票状态",
+                "投票狀態",
                 "操作"
             ],
             "nodeStatusMap": {
-                "1": "正在候选",
-                "2": "停止候选"
+                "1": "正在候選",
+                "2": "停止候選"
             },
             "voteStatusMap": {
                 "voted": "投票成功",
                 "voting": "正在投票中",
-                "canceling": "正在撤销中",
-                "voteNotWork": "投票作废"
+                "canceling": "正在撤銷中",
+                "voteNotWork": "投票作廢"
             },
-            "hoverHelp": "您投票的{nodeName}已经取消注册，您可以直接重新投票、或者撤销投票；如果您不重新投票或撤销投票，{nodeName}重新注册后，您原来的投票将恢复生效。",
+            "hoverHelp": "您投票的{nodeName}已經取消註冊，您可以直接重新投票、或者撤銷投票；如果您不重新投票或撤銷投票，{nodeName}重新註冊後，您原來的投票將恢復生效。" ,
             "confirm": {
-                "cancelText": "暂不撤销",
-                "submitText": "确认撤销"
+                "cancelText": "暫不撤銷",
+                "submitText": "確認撤銷"
             },
-            "revoke": "撤销投票",
-            "operateBtn": "撤销",
-            "cancelVoteErr": "撤销投票失败，请重试"
+            "revoke": "撤銷投票",
+            "operateBtn": "撤銷",
+            "cancelVoteErr": "撤銷投票失敗，請重試"
         },
         "section2": {
-            "title": "候选节点列表",
+            "title": "候選節點列表",
             "head": [
                 "排名",
-                "节点名称",
-                "出块地址",
-                "当前票数",
+                "節點名稱",
+                "出塊地址",
+                "當前票數",
                 "操作"
             ],
             "confirm": {
                 "normal": {
-                    "cancelText": "暂不投票",
-                    "submitText": "确认投票",
-                    "content": "您只能给一个节点投票，确认投票给{name}吗？"
+                    "cancelText": "暫不投票",
+                    "submitText": "確認投票",
+                    "content": "您只能給一個節點投票，確認投票給{name}嗎？"
                 },
                 "cover": {
-                    "content": "您已经投票给{nodeName}，请确认是否覆盖当前投票",
-                    "cancelText": "确认",
+                    "content": "您已經投票給{nodeName}，請確認是否覆蓋當前投票",
+                    "cancelText": "確認",
                     "submitText": "取消"
                 }
             },
-            "noSearchData": "无结果，换个输入试试",
+            "noSearchData": "無結果，換個輸入試試",
             "operateBtn": "投票",
-            "voteErr": "投票失败，请重试"
+            "voteErr": "投票失敗，請重試"
         }
     },
     "tradeCenter": {
         "title": "交易中心",
-        "marketClosed": "{symbol} 已暂停交易。",
-        "mergeDepth": "深度合并",
-        "depthStep": "{step}位小数",
-        "blocking": "网络拥堵, 请稍候重试",
-        "supportMining": "支持交易挖矿&挂单挖矿",
-        "cmcHelp": "请在CoinMarketCap查看VITE详情",
-        "supportTradeMining": "支持交易挖矿",
-        "supportOrderMining": "支持挂单挖矿",
-        "zeroFee": "零手续费",
-        "buyMiningPrice": "买入价大于{price}时满足挂单挖矿条件",
-        "sellMiningPrice": "卖出价小于{price}时满足挂单挖矿条件",
+        "marketClosed": "{symbol} 已暫停交易。",
+        "mergeDepth": "深度合併",
+        "depthStep": "{step}位小數",
+        "blocking": "網絡擁堵, 請稍候重試",
+        "supportMining": "支持交易挖礦&掛單挖礦",
+        "cmcHelp": "請在CoinMarketCap查看VITE詳情",
+        "supportTradeMining": "支持交易挖礦",
+        "supportOrderMining": "支持掛單挖礦",
+        "zeroFee": "零手續費",
+        "buyMiningPrice": "買入價大於{price}時滿足掛單挖礦條件",
+        "sellMiningPrice": "賣出價小於{price}時滿足掛單挖礦條件",
         "operator": {
-            "noName": "匿名运营商",
-            "overview": "介绍",
-            "txPair": "交易对",
-            "confirmTitle": "温馨提示",
-            "confirmText": "当前交易对为 {symbol}，请谨慎交易。数字资产交易存在风险，需用户自行谨慎判断确定相关数字资产的真实性、合法性和有效性，并自行承担因此产生的责任与损失。",
-            "address": "运营商地址",
-            "name": "运营商名称"
+            "noName": "匿名運營商",
+            "overview": "介紹",
+            "txPair": "交易對",
+            "confirmTitle": "溫馨提示",
+            "confirmText": "當前交易對為{symbol}，請謹慎交易。數字資產交易存在風險，需用戶自行謹慎判斷確定相關數字資產的真實性、合法性和有效性，並自行承擔因此產生的責任與損失。",
+            "address": "運營商地址",
+            "name": "運營商名稱"
         },
         "operatorTxPair": {
-            "title": "交易对信息",
-            "tokenTab": "代币详情",
-            "operatorTab": "运营商信息"
+            "title": "交易對信息",
+            "tokenTab": "代幣詳情",
+            "operatorTab": "運營商信息"
         },
-        "depthBuyMiningPrice": "此线上方为挖矿区域",
-        "depthSellMiningPrice": "此线下方为挖矿区域",
-        "inMiningRange": "挖矿区域"
+        "depthBuyMiningPrice": "此線上方為挖礦區域",
+        "depthSellMiningPrice": "此線下方為挖礦區域",
+        "inMiningRange": "挖礦區域"
     },
     "trade": {
         "more":"更多",
-        "search": "查询",
-        "txPair": "交易对",
-        "price": "价格",
-        "upDown": "涨跌幅",
+        "search": "查詢",
+        "txPair": "交易對",
+        "price": "價格",
+        "upDown": "漲跌幅",
         "txNum": "交易量",
-        "quantityTitle": "成交额({quantity})",
-        "priceTitle": "价格({price})",
-        "amountTitle": "数量({amount})",
-        "quantityTable": "累积数量",
-        "amountTable": "累积成交额",
-        "amount": "成交额",
-        "newOrderSuccess": "提单请求已发送",
-        "newOrderFail": "提单失败",
-        "depthView": "深度图",
-        "klineView": "k线图",
+        "quantityTitle": "成交額({quantity})",
+        "priceTitle": "價格({price})",
+        "amountTitle": "數量({amount})",
+        "quantityTable": "累積數量",
+        "amountTable": "累積成交額",
+        "amount": "成交額",
+        "newOrderSuccess": "提單請求已發送",
+        "newOrderFail": "提單失敗",
+        "depthView": "深度圖",
+        "klineView": "k線圖",
         "txPairDetail": {
-            "title": "交易对详情",
-            "24h": "24小时数据",
-            "openPrice": "开盘价",
-            "quantity": "市场币交易量",
-            "amount": "基准币交易量",
-            "status": "当前状态",
-            "latest": "最新价",
-            "buy": "买一价",
-            "sell": "卖一价",
-            "diff": "买卖价差"
+            "title": "交易對詳情",
+            "24h": "24小時數據",
+            "openPrice": "開盤價",
+            "quantity": "市場幣交易量",
+            "amount": "基準幣交易量",
+            "status": "當前狀態",
+            "latest": "最新價",
+            "buy": "買一價",
+            "sell": "賣一價",
+            "diff": "買賣價差"
         },
         "buy": {
-            "title": "买入{token}",
-            "price": "买入价({token})",
-            "quantity": "买入量({token})"
+            "title": "買入{token}",
+            "price": "買入價({token})",
+            "quantity": "買入量({token})"
         },
         "sell": {
-            "title": "卖出{token}",
-            "price": "卖出价({token})",
-            "quantity": "卖出量({token})"
+            "title": "賣出{token}",
+            "price": "賣出價({token})",
+            "quantity": "賣出量({token})"
         },
         "head": {
-            "latestPrice": "最新价",
-            "updown": "24h涨跌",
-            "highPrice": "24h最高价",
-            "lowPrice": "24h最低价",
+            "latestPrice": "最新價",
+            "updown": "24h漲跌",
+            "highPrice": "24h最高價",
+            "lowPrice": "24h最低價",
             "quantity": "24h成交量",
-            "tokenName": "代币名称",
-            "originalSymbol": "代币简称",
-            "gateway": "发行网关",
-            "website": "官网",
-            "explorer": "区块浏览器",
-            "overview": "代币描述",
+            "tokenName": "代幣名稱",
+            "originalSymbol": "代幣簡稱",
+            "gateway": "發行網關",
+            "website": "官網",
+            "explorer": "區塊瀏覽器",
+            "overview": "代幣描述",
             "tokenId": "TokenID",
-            "publisher": "发行者",
-            "total": "总金额",
-            "tokenDigit": "小数位数",
-            "publisherDate": "发行日期",
-            "type": "类型",
-            "tokenType0": "可增发",
-            "tokenType1": "永不增发"
+            "publisher": "發行者",
+            "total": "總金額",
+            "tokenDigit": "小數位數",
+            "publisherDate": "發行日期",
+            "type": "類型",
+            "tokenType0": "可增發",
+            "tokenType1": "永不增發"
         },
         "latestTx": {
             "title": "最新交易",
-            "time": "时间"
+            "time": "時間"
         },
         "depth": {
-            "buy": "买入",
-            "sell": "卖出",
+            "buy": "買入",
+            "sell": "賣出",
             "all": "全部",
-            "avgPrice": "均价：",
-            "sum": "合计 {symbol}："
+            "avgPrice": "均價：",
+            "sum": "合計 {symbol}："
         },
         "noData": {
-            "favorite": "您还未添加任何自选",
-            "search": "暂无搜索结果"
+            "favorite": "您還未添加任何自選",
+            "search": "暫無搜索結果"
         },
         "limitPrice": {
-            "title": "限价",
-            "fee": "手续费",
-            "adviseToSVip":"成为超级VIP可免交易所基础费率",
-            "feeRuleWithSVip":"运营商费率*邀请折扣。（费率折扣及费率调整只影响新订单，此前挂单依旧执行旧费率）",
-            "text": "此页面为交易预览信息，请登录后进行交易",
-            "validAmount": "成交额需大于{amount}{token}",
-            "priceNotNull": "金额不能为空",
-            "amountNotNull": "成交额不能为空",
-            "quantityNotNull": "数量不能为空",
+            "title": "限價",
+            "fee": "手續費",
+            "adviseToSVip":"成為超級VIP可免交易所基礎費率",
+            "feeRuleWithSVip":"運營商費率*邀請折扣。（費率折扣及費率調整隻影響新訂單，此前掛單依舊執行舊費率）",
+            "text": "此頁面為交易預覽信息，請登錄後進行交易",
+            "validAmount": "成交額需大於{amount}{token}",
+            "priceNotNull": "金額不能為空",
+            "amountNotNull": "成交額不能為空",
+            "quantityNotNull": "數量不能為空",
             "cancelVip": "取消",
-            "openVip": "开通",
-            "dexFee": "交易所基础费率：{fee}",
-            "operatorFee": "运营商收取费率：{fee}",
-            "vipFee": "VIP特权抵扣：{fee}",
-            "svipFee":"超级VIP：交易所基础费率为0",
-            "inviteFeeDiscount":"邀请码折扣：{fee} off",
-            "feeRule":"手续费 = (基础费率-VIP抵扣+运营商费率)*邀请折扣。（费率折扣及费率调整只影响新订单，此前挂单依旧执行旧费率）"
+            "openVip": "開通",
+            "dexFee": "交易所基礎費率：{fee}",
+            "operatorFee": "運營商收取費率：{fee}",
+            "vipFee": "VIP特權抵扣：{fee}",
+            "svipFee":"超級VIP：交易所基礎費率為0",
+            "inviteFeeDiscount":"邀請碼折扣：{fee} off",
+            "feeRule":"手續費 = (基礎費率-VIP抵扣+運營商費率)*邀請折扣。（費率折扣及費率調整隻影響新訂單，此前掛單依舊執行舊費率）"
         },
         "proxy":{
-            "title":"委托代理",
-            "subTitle":"交易委托",              
-            "successProxy":"委托成功",
-            "failProxy":"委托失败",
-            "successCancelProxy":"撤销委托成功",
-            "failCancelProxy":"撤销委托失败",
-            "info":"了解委托",
-            "new":"新建委托",
+            "title":"委託代理",
+            "subTitle":"交易委託",
+            "successProxy":"委託成功",
+            "failProxy":"委託失敗",
+            "successCancelProxy":"撤銷委託成功",
+            "failCancelProxy":"撤銷委託失敗",
+            "info":"了解委託",
+            "new":"新建委託",
             "active":{
-                "title":"委托记录",
-                "head":["委托地址","委托交易对","操作"],
-                "operate":["增加交易对","减少交易对","撤销委托"]
+                "title":"委託記錄",
+                "head":["委託地址","委託交易對","操作"],
+                "operate":["增加交易對","減少交易對","撤銷委託"]
             },
             "passive":{
-                "title":"接受委托记录",
-                "head":["委托地址","委托交易对"]
+                "title":"接受委託記錄",
+                "head":["委託地址","委託交易對"]
             },
 
             "dialog": {
               "cancel": "取消",
-              "cancelAllTips":"确认撤销对{trustAddress}所有的交易委托?",
+              "cancelAllTips":"確認撤銷對{trustAddress}所有的交易委託?",
               "rTxtMap": {
                 "new": "添加",
                 "add": "添加",
-                "delete": "确认修改",
-                "deleteAll": "确认"
+                "delete": "確認修改",
+                "deleteAll": "確認"
               },
               "titleMap": {
-                "new": "新增委托",
-                "add": "增加委托交易对",
-                "delete": "减少委托交易对",
-                "deleteAll": "确认撤销委托"
+                "new": "新增委託",
+                "add": "增加委託交易對",
+                "delete": "減少委託交易對",
+                "deleteAll": "確認撤銷委託"
               },
               "confirm":{
-                    "title": "确认委托交易对",
+                    "title": "確認委託交易對",
                     "cancel": "取消",
-                    "ok": "确认"
+                    "ok": "確認"
               }
             }
         },
         "openapi": {
             "title": "API",
             "myKey": "我的 API Key",
-            "createTime": "创建时间",
-            "permissions": "API 权限",
-            "permissionsContent": "交易权限",
-            "enabledTadingPairs": "委托交易对",
-            "createKey": "创建 API Key",
-            "deleteKey": "删除 API Key",
-            "deleteAlert": "删除 API Key之后，您将不能再使用该API Key，既有的套餐将保留，重新创建一个新的 Key 即可激活",
-            "confirmDelete": "确认删除",
+            "createTime": "創建時間",
+            "permissions": "API 權限",
+            "permissionsContent": "交易權限",
+            "enabledTadingPairs": "委託交易對",
+            "createKey": "創建 API Key",
+            "deleteKey": "刪除 API Key",
+            "deleteAlert": "刪除 API Key之後，您將不能再使用該API Key，既有的套餐將保留，重新創建一個新的 Key 即可激活",
+            "confirmDelete": "確認刪除",
             "cancel": "取消",
-            "agentAddressStakingAmount": "委托地址抵押金额",
+            "agentAddressStakingAmount": "委託地址抵押金額",
             "staking": "抵押",
             "package": "套餐",
-            "expireTime": "套餐到期时间",
-            "callNum": "调用次数",
-            "callNumInfo": "最高 {maxCount} 次/分钟",
-            "price": "价格",
+            "expireTime": "套餐到期時間",
+            "callNum": "調用次數",
+            "callNumInfo": "最高 {maxCount} 次/分鐘",
+            "price": "價格",
             "priceInfo": "{price} VX/月",
-            "upgrade": "升级套餐",
-            "balanceAlert": "地址 Vite 余额小于 {balanceLimit}，暂时不能创建API。",
-            "noSupportForHardware": "此功能暂不支持硬件钱包",
+            "upgrade": "升級套餐",
+            "balanceAlert": "地址 Vite 餘額小於 {balanceLimit}，暫時不能創建API。",
+            "noSupportForHardware": "此功能暫不支持硬件錢包",
             "tips": {
                 "title": "提示",
-                "0": "ViteX为您提供了API服务，您可以通过API使用交易权限，正常使用API有如下三步：",
-                "0-step1": "1. 创建 API",
-                "0-step2": "2. 委托部分交易对的交易权限",
-                "0-step3": "3. 给API地址抵押VITE获取配额",
-                "0-step4": "通过API文档查看如何使用，<a href=\"https://vite.wiki/zh/dex/api/dex-apis.html\" target=\"_blank\">点击查看API文档</a>",
-                "1": "每个地址只能创建一个API Key",
-                "2": "请不要泄漏您的API Key, 以免造成资产损失",
-                "3": "创建API后默认为免费套餐，调用频次最大为10次/1分钟，您可以点击升级高级套餐"
+                "0": "ViteX為您提供了API服務，您可以通過API使用交易權限，正常使用API​​有如下三步：",
+                "0-step1": "1. 創建 API",
+                "0-step2": "2. 委託部分交易對的交易權限",
+                "0-step3": "3. 給API地址抵押VITE獲取配額",
+                "0-step4": "通過API文檔查看如何使用，<a href=\"https://vite.wiki/zh/dex/api/dex-apis.html\" target=\"_blank\">點擊查看API文檔</a>",
+                "1": "每個地址只能創建一個API Key",
+                "2": "請不要洩漏您的API Key, 以免造成資產損失",
+                "3": "創建API後默認為免費套餐，調用頻次最大為10次/1分鐘，您可以點擊升級高級套餐"
             },
             "stakingForQuota": {
-                "title": "委托地址抵押",
-                "agentAddress": "委托地址",
-                "stakingAmount": "抵押金额",
-                "ok": "确认"
+                "title": "委託地址抵押",
+                "agentAddress": "委託地址",
+                "stakingAmount": "抵押金額",
+                "ok": "確認"
             },
             "keyConfirm": {
                 "accessKey": "Access Key",
                 "secretKey": "Secret Key",
-                "agentAddress": "委托交易地址",
-                "title": "创建成功",
+                "agentAddress": "委託交易地址",
+                "title": "創建成功",
                 "tips": {
-                    "title": "温馨提示",
-                    "0": "请不要泄漏您的 Access Key 及 Secret Key, 以免造成资产损失",
-                    "1": "如您忘记了 Secret Key, 请回收该密钥对，并重新申请新的密钥对"
+                    "title": "溫馨提示",
+                    "0": "請不要洩漏您的 Access Key 及 Secret Key, 以免造成資產損失",
+                    "1": "如您忘記了 Secret Key, 請回收該密鑰對，並重新申請新的密鑰對"
                 },
-                "warn": "密钥仅显示1次，遗失之后不可找回，请务必妥善保存"
+                "warn": "密鑰僅顯示1次，遺失之後不可找回，請務必妥善保存"
             },
             "upgradeConfirm": {
-                "title": "升级 API 套餐",
-                "currentPackage": "当前套餐",
-                "selectPackage": "选择升级套餐类型",
-                "selectTime": "选择套餐时长",
+                "title": "升級 API 套餐",
+                "currentPackage": "當前套餐",
+                "selectPackage": "選擇升級套餐類型",
+                "selectTime": "選擇套餐時長",
                 "month": "月",
-                "payAmount": "支付套餐费用",
-                "balance": "钱包余额"
+                "payAmount": "支付套餐費用",
+                "balance": "錢包餘額"
             }
         }
     },
     "tradeAssets": {
-        "title": "资产管理",
-        "search": "请输入代币名称",
+        "title": "資產管理",
+        "search": "請輸入代幣名稱",
         "operate": "操作",
         "all": "全部",
         "confirmTable": {
-            "title": "充提记录",
-            "heads": ["日期", "代币名称", "交易类型", "交易金额"]
+            "title": "充提記錄",
+            "heads": ["日期", "代幣名稱", "交易類型", "交易金額"]
         },
         "pwdConfirm": {
             "cancelTxt": "取消"
         },
         "table": {
             "heads": [
-                "代币名称",
-                "交易所总余额",
-                "交易所可用余额",
-                "交易所冻结余额",
-                "价值"
+                "代幣名稱",
+                "交易所總餘額",
+                "交易所可用餘額",
+                "交易所凍結餘額",
+                "價值"
             ],
             "rowMap": {
                 "recharge": "充值至交易所",
-                "withdraw": "提现至钱包",
-                "detail": "充提记录",
+                "withdraw": "提現至錢包",
+                "detail": "充提記錄",
                 "sideMap":{
                     "1":"充值",
-                    "2":"提现"
+                    "2":"提現"
                 }
             }
         },
         "confirmrecharge": {
             "successToast":"充值成功",
-            "failToast":"充值失败",
+            "failToast":"充值失敗",
             "title": "充值至交易所",
-            "lable1": "钱包余额",
-            "lable2": "充币金额",
-            "tips": "钱包账户余额不足",
-            "placeholder": "请输入充币金额",
+            "lable1": "錢包餘額",
+            "lable2": "充幣金額",
+            "tips": "錢包賬戶餘額不足",
+            "placeholder": "請輸入充幣金額",
             "btn": "充值至交易所"
         },
         "confirmwithdraw": {
-            "successToast":"提币成功",
-            "failToast":"提币失败",
-            "title": "提现至钱包",
-            "lable1": "可提币余额",
-            "lable2": "提币金额",
-            "tips": "钱包账户余额不足",
-            "placeholder": "请输入提币金额",
-            "btn": "提现至钱包"
+            "successToast":"提幣成功",
+            "failToast":"提幣失敗",
+            "title": "提現至錢包",
+            "lable1": "可提幣餘額",
+            "lable2": "提幣金額",
+            "tips": "錢包賬戶餘額不足",
+            "placeholder": "請輸入提幣金額",
+            "btn": "提現至錢包"
         },
-        "zero": "隐藏小额代币"
+        "zero": "隱藏小額代幣"
     },
     "tradeOpenOrders": {
-        "cancelErr": "您操作太快了, 请稍候重试",
+        "cancelErr": "您操作太快了, 請稍候重試",
         "confirm":{
-            "successToast":"撤销交易发送成功",
-            "failToast":"撤销交易发送失败",
-            "submitTxt":"确认撤销",
+            "successToast":"撤銷交易發送成功",
+            "failToast":"撤銷交易發送失敗",
+            "submitTxt":"確認撤銷",
             "cancelTxt":"取消",
-            "title": "撤销委托",
-            "content": "请确认是否撤销当前委托"
+            "title": "撤銷委託",
+            "content": "請確認是否撤銷當前委託"
         },
-        "title": "当前委托",
+        "title": "當前委託",
         "side": {
-            "1": "卖",
-            "0": "买"
+            "1": "賣",
+            "0": "買"
         },
         "table": {
             "heads": [
-                "委托时间",
-                "市场",
+                "委託時間",
+                "市場",
                 "方向",
-                "委托价格",
-                "委托数量",
+                "委託價格",
+                "委託數量",
                 "已成交",
                 "成交率",
-                "成交均价",
-                "金额"
+                "成交均價",
+                "金額"
             ],
             "rowMap": {
-                "cancel": "撤销"
+                "cancel": "撤銷"
             }
         }
     },
     "tradeOrderHistory": {
-        "title": "历史委托",
+        "title": "歷史委託",
         "hint": {
-            "fdate": "请选择起始日期",
-            "tdate": "请选择终止日期",
-            "dateErr": "终止日期必须晚于起始日期"
+            "fdate": "請選擇起始日期",
+            "tdate": "請選擇終止日期",
+            "dateErr": "終止日期必須晚於起始日期"
         },
         "side": {
-            "1": "卖",
-            "0": "买"
+            "1": "賣",
+            "0": "買"
         },
         "status": {
-            "1": "委托中",
+            "1": "委託中",
             "2": "已完成",
-            "3": "已撤销",
-            "4": "下单失败"
+            "3": "已撤銷",
+            "4": "下單失敗"
         },
         "confirmTable": {
-            "title":"成交记录",
+            "title":"成交記錄",
             "heads": [
-                "成交时间",
-                "成交价",
+                "成交時間",
+                "成交價",
                 "成交量",
-                "手续费",
-                "成交额"
+                "手續費",
+                "成交額"
             ]
         },
         "table": {
             "heads": [
-                "委托时间",
-                "市场",
+                "委託時間",
+                "市場",
                 "方向",
-                "委托价格",
-                "委托数量",
+                "委託價格",
+                "委託數量",
                 "已成交",
-                "成交均价",
-                "手续费",
-                "成交额",
-                "状态"
+                "成交均價",
+                "手續費",
+                "成交額",
+                "狀態"
             ],
             "rowMap": {
                 "statusMap": {
-                    "1": "委托中",
+                    "1": "委託中",
                     "2": "已完成",
-                    "3": "已撤销",
-                    "4": "提单失败"
+                    "3": "已撤銷",
+                    "4": "提單失敗"
                 },
-                "detail": "查看明细"
+                "detail": "查看明細"
             }
         },
         "filter": {
             "start": "起始日期",
-            "end": "终止日期",
-            "type": "币种",
+            "end": "終止日期",
+            "type": "幣種",
             "side": "方向",
-            "buy": "买",
-            "sell": "卖",
-            "status": "状态",
+            "buy": "買",
+            "sell": "賣",
+            "status": "狀態",
             "search": "搜索",
             "reset": "重置"
         }
     },
     "tradeMining": {
-        "title": "挖矿",
-        "addQuota": "新增抵押挖矿",
+        "title": "挖礦",
+        "addQuota": "新增抵押挖礦",
         "add": "增加",
         "withdraw": "取回",
         "withdrawList": "取回列表",
         "tbHead": {
             "date": "日期",
-            "fee": "交易手续费金额",
-            "mining": "挖矿金额",
-            "pledge": "抵押金额"
+            "fee": "交易手續費金額",
+            "mining": "挖礦金額",
+            "pledge": "抵押金額"
         },
-        "txTitle": "交易挖矿总收益",
-        "quotaTitle": "抵押挖矿总收益",
-        "addHint1": "单次最小抵押金额 134 VITE",
-        "addHint2": "提交锁仓VITE后立即生效，三天后可取回",
-        "addHint3": "解锁需要经过完整的7个周期（7天）后释放",
-        "withdrawHint1": "取回后，您将无法再挖矿VX",
-        "withdrawHint2": "取回需约7天时间到账",
-        "addTitle": "抵押VITE挖矿",
+        "txTitle": "交易挖礦總收益",
+        "quotaTitle": "抵押挖礦總收益",
+        "addHint1": "單次最小抵押金額 134 VITE",
+        "addHint2": "提交鎖倉VITE後立即生效，三天后可取回",
+        "addHint3": "解鎖需要經過完整的7個週期（7天）後釋放",
+        "withdrawHint1": "取回後，您將無法再挖礦VX",
+        "withdrawHint2": "取回需約7天時間到賬",
+        "addTitle": "抵押VITE挖礦",
         "withdrawTitle": "取回抵押VITE",
-        "addPlaceHolder": "请输入抵押金额",
-        "withdrawPlaceHolder": "请输入取回金额，最少134VITE",
+        "addPlaceHolder": "請輸入抵押金額",
+        "withdrawPlaceHolder": "請輸入取回金額，最少134VITE",
         "addBtn": "提交抵押",
-        "withdrawBtn": "确认取回",
-        "stakingBalance": "可取回抵押余额",
+        "withdrawBtn": "確認取回",
+        "stakingBalance": "可取回抵押餘額",
         "hintTitle": "重要通知",
-        "comingHint": "VX挖矿功能即将开启，敬请期待。VX挖矿分为5类：交易挖矿、上币挖矿、邀请挖矿、抵押挖矿和挂单挖矿。您可以通过以上5种方式获取VX，持有VX可持续获得手续费分红。",
-        "more": "了解更多VX挖矿规则",
-        "todayTrade": "我的挖矿详情",
-        "fee": "手续费",
-        "dividends": "预计今日可挖",
-        "view": "查看市场实时挖矿数据",
-        "inviteCount": "邀请人数",
-        "help": "当前页面展示的手续费花销仅为平台基础手续费0.2%，实际估算成本时请注意不同交易对的运营商手续费"
+        "comingHint": "VX挖礦功能即將開啟，敬請期待。VX挖礦分為5類：交易挖礦、上幣挖礦、邀請挖礦、抵押挖礦和掛單挖礦。您可以通過以上5種方式獲取VX，持有VX可持續獲得手續費分紅。",
+        "more": "了解更多VX挖礦規則",
+        "todayTrade": "我的挖礦詳情",
+        "fee": "手續費",
+        "dividends": "預計今日可挖",
+        "view": "查看市場實時挖礦數據",
+        "inviteCount": "邀請人數",
+        "help": "當前頁面展示的手續費花銷僅為平台基礎手續費0.2%，實際估算成本時請注意不同交易對的運營商手續費"
     },
     "tradeVip": {
         "title": "管理VIP",
-        "open": "开通VIP",      
-        "cancel": "撤销 {type}", 
+        "open": "開通VIP",
+        "cancel": "撤銷 {type}",
         "help": {
-            "title": "关于VIP"
+            "title": "關於VIP"
         },
         "helpConfirm": {
             "t1": "VIP",
-            "txt1": "开通VIP，可享有降低0.1%手续费特权，开通VIP需抵押10000VITE，30天后可手动取回",
+            "txt1": "開通VIP，可享有降低0.1%手續費特權，開通VIP需抵押10000VITE，30天后可手動取回",
             "t2": "SVIP",
-            "txt2": "SVIP开通后，可免除基础手续费，开通SVIP需抵押 1,000,000VITE，30天后可手动取回",
-            "txt3": "SVIP支持代理抵押，帮他人抵押并开通SVIP，抵押到期后，抵押用户可随时取回，撤销代理抵押"
-        },        
+            "txt2": "SVIP開通後，可免除基礎手續費，開通SVIP需抵押 1,000,000VITE，30天后可手動取回",
+            "txt3": "SVIP支持代理抵押，幫他人抵押並開通SVIP，抵押到期後，抵押用戶可隨時取回，撤銷代理抵押"
+        },
         "vipConfirm": {
             "cancelVip": "取消VIP",
-            "openVip": "开通VIP",
-            "openStakingAmount": "开通VIP抵押金额",
-            "cancelStakingAmount": "可取回抵押金额",
-            "noBalance": "交易所可用余额不足",
-            "openHint": "VIP开通后，可享有降低0.1%手续费特权，开通VIP需抵押10000VITE，30天后可手动取回",
-            "cancelHint": "取回抵押后，您将无法再使用VIP特权",
-            "openSuccess": "申请开通VIP成功，稍后生效",
-            "openFail": "开通失败",
-            "cancelSuccess": "申请取消VIP成功",
-            "cancelFail": "取消失败",
-            "adviseToCancel":"由于您已成为超级VIP，平台手续费已为0，建议您取回普通VIP的抵押金额。",
-            "address": "开通VIP地址",
-            "addressPlaceholder": "地址不可修改，默认为当前登录地址"
+            "openVip": "開通VIP",
+            "openStakingAmount": "開通VIP抵押金額",
+            "cancelStakingAmount": "可取回抵押金額",
+            "noBalance": "交易所可用餘額不足",
+            "openHint": "VIP開通後，可享有降低0.1%手續費特權，開通VIP需抵押10000VITE，30天后可手動取回",
+            "cancelHint": "取回抵押後，您將無法再使用VIP特權",
+            "openSuccess": "申請開通VIP成功，稍後生效",
+            "openFail": "開通失敗",
+            "cancelSuccess": "申請取消VIP成功",
+            "cancelFail": "取消失敗",
+            "adviseToCancel":"由於您已成為超級VIP，平台手續費已為0，建議您取回普通VIP的抵押金額。",
+            "address": "開通VIP地址",
+            "addressPlaceholder": "地址不可修改，默認為當前登錄地址"
         },
         "svipConfirm": {
             "cancelVip": "取消SVIP",
-            "openVip": "开通SVIP",
-            "openStakingAmount": "开通SVIP抵押金额",
-            "cancelStakingAmount": "可取回抵押金额",
-            "noBalance": "交易所可用余额不足",
-            "openHint": "SVIP开通后，可免除基础手续费，开通SVIP需抵押 1,000,000VITE，30天后可手动取回",
-            "cancelHint": "取回抵押后，将无法再使用SVIP特权",
-            "openSuccess": "申请开通SVIP成功，稍后生效",
-            "openFail": "开通失败",
-            "cancelSuccess": "申请取消SVIP成功",
-            "cancelFail": "取消失败",
-            "address": "开通SVIP地址",
-            "addressPlaceholder": "请输入开通SVIP地址",
+            "openVip": "開通SVIP",
+            "openStakingAmount": "開通SVIP抵押金額",
+            "cancelStakingAmount": "可取回抵押金額",
+            "noBalance": "交易所可用餘額不足",
+            "openHint": "SVIP開通後，可免除基礎手續費，開通SVIP需抵押 1,000,000VITE，30天后可手動取回",
+            "cancelHint": "取回抵押後，將無法再使用SVIP特權",
+            "openSuccess": "申請開通SVIP成功，稍後生效",
+            "openFail": "開通失敗",
+            "cancelSuccess": "申請取消SVIP成功",
+            "cancelFail": "取消失敗",
+            "address": "開通SVIP地址",
+            "addressPlaceholder": "請輸入開通SVIP地址",
             "cancelAddress": "SVIP 地址"
         },
-        "vipListTitle": "VIP 记录",
-        "openAddress": "开通地址",
-        "type": "VIP类型"
+        "vipListTitle": "VIP 記錄",
+        "openAddress": "開通地址",
+        "type": "VIP類型"
     },
     "inviteMining":{
-        "title": "邀请挖矿总收益",
-        "myInviteIncome": "我的邀请收益",
-        "inviteTradeIncome": "邀请交易挖矿收益",
-        "inviteOrderIncome": "邀请挂单挖矿收益"
+        "title": "邀請挖礦總收益",
+        "myInviteIncome": "我的邀請收益",
+        "inviteTradeIncome": "邀請交易挖礦收益",
+        "inviteOrderIncome": "邀請掛單挖礦收益"
     },
     "orderMining":{
-        "title":"挂单挖矿总收益",
+        "title":"掛單挖礦總收益",
         "tbHead": {
             "date": "日期",
-            "ratio": "占比",
-            "mining": "挖矿金额"
+            "ratio": "佔比",
+            "mining": "挖礦金額"
         },
-        "market": "{name}市场",
-        "estimate": "{name}市场预计今日可挖"
+        "market": "{name}市場",
+        "estimate": "{name}市場預計今日可挖"
     },
     "tradeDividend": {
-        "title": "分红",
-        "poolTitle": "手续费分红池",
-        "listTitle": "我的分红",
-        "allPrice": "总估值",
+        "title": "分紅",
+        "poolTitle": "手續費分紅池",
+        "listTitle": "我的分紅",
+        "allPrice": "總估值",
         "date": "日期",
-        "VX": "锁仓VX",
-        "coin": "分红币种",
-        "amount": "分红金额",
-        "price": "分红总估值",
+        "VX": "鎖倉VX",
+        "coin": "分紅幣種",
+        "amount": "分紅金額",
+        "price": "分紅總估值",
         "hintTitle": "重要通知",
-        "comingHint": "VX挖矿分红功能即将开启，敬请期待。系统每天自动将分红池1%的VITE、BTC、ETH、USDT等分红给VX持有者。初始分红池的资金为0。分红池中包含交易所基础手续费，5000VITE上币费以及生成邀请码的1000VITE。持有VX的数量大于等于10VX可持续获得手续费分红。",
-        "more": "了解更多VX分红规则",
-        "help": "分红规则：1. 分红需VX锁仓在交易所内，且锁仓金额大于10 2. 提交锁仓VX后立即生效，可参与最近一次分红 3. 解锁需要经过完整的7个周期后释放",
-        "lockedAmount": "锁仓金额",
-        "lockAmountTips": "少于10VX无法参与分红",
-        "unlockAmount": "解锁中金额",
-        "addHint1": "分红需VITE锁仓在交易所内，且锁仓金额大于10",
-        "addHint2": "提交锁仓VX后立即生效，可参与最近一次分红",
-        "addHint3": "解锁需要经过完整的7个周期（7天）后释放",
-        "autoLock": "自动锁仓",
+        "comingHint": "VX挖礦分紅功能即將開啟，敬請期待。系統每天自動將分紅池1%的VITE、BTC、ETH、USDT等分紅給VX持有者。初始分紅池的資金為0。分紅池中包含交易所基礎手續費，5000VITE上幣費以及生成邀請碼的1000VITE。持有VX的數量大於等於10VX可持續獲得手續費分紅。",
+        "more": "了解更多VX分紅規則",
+        "help": "分紅規則：1. 分紅需VX鎖倉在交易所內，且鎖倉金額大於10 2. 提交鎖倉VX後立即生效，可參與最近一次分紅3. 解鎖需要經過完整的7個週期後釋放",
+        "lockedAmount": "鎖倉金額",
+        "lockAmountTips": "少於10VX無法參與分紅",
+        "unlockAmount": "解鎖中金額",
+        "addHint1": "分紅需VITE鎖倉在交易所內，且鎖倉金額大於10",
+        "addHint2": "提交鎖倉VX後立即生效，可參與最近一次分紅",
+        "addHint3": "解鎖需要經過完整的7個週期（7天）後釋放",
+        "autoLock": "自動鎖倉",
         "openAutoLock": {
-            "title": "开启自动锁仓",
-            "text": "开启后，挖矿获得的VX将自动锁仓（主动购买的VX不自动锁仓）"
+            "title": "開啟自動鎖倉",
+            "text": "開啟後，挖礦獲得的VX將自動鎖倉（主動購買的VX不自動鎖倉）"
         },
         "closeAutoLock": {
-            "title": "关闭自动锁仓",
-            "text": "关闭后，挖矿发放的所有VX都不锁仓"
+            "title": "關閉自動鎖倉",
+            "text": "關閉後，挖礦發放的所有VX都不鎖倉"
         },
-        "lock": "锁仓",
-        "unlock": "解锁",
+        "lock": "鎖倉",
+        "unlock": "解鎖",
         "lessMin": "最少1VX",
         "lockVXConfirm": {
-            "title": "锁仓VX分红",
-            "available": "交易所可用余额",
-            "amountPlaceholder": "请输入锁仓金额，最少1VX",
-            "notEnough": "交易所可用余额不足",
-            "submit": "提交锁仓",
-            "amountText": "锁仓金额"
+            "title": "鎖倉VX分紅",
+            "available": "交易所可用餘額",
+            "amountPlaceholder": "請輸入鎖倉金額，最少1VX",
+            "notEnough": "交易所可用餘額不足",
+            "submit": "提交鎖倉",
+            "amountText": "鎖倉金額"
         },
         "unlockVXConfirm": {
-            "title": "解锁 VX",
-            "available": "可解锁金额",
-            "amountPlaceholder": "请输入解锁金额，最少1VX",
-            "notEnough": "可解锁金额不足",
-            "submit": "确认解锁",
-            "amountText": "解锁金额",
-            "hint": "解锁需约7天时间到账"
+            "title": "解鎖 VX",
+            "available": "可解鎖金額",
+            "amountPlaceholder": "請輸入解鎖金額，最少1VX",
+            "notEnough": "可解鎖金額不足",
+            "submit": "確認解鎖",
+            "amountText": "解鎖金額",
+            "hint": "解鎖需約7天時間到賬"
         },
         "unlockList": {
-            "title": "解锁中",
-            "amount": "金额",
-            "time": "到期时间"
+            "title": "解鎖中",
+            "amount": "金額",
+            "time": "到期時間"
         }
     },
     "tradeOperator": {
-        "title": "运营商中心",
-        "tokenList": "运营代币",
-        "totalIncome": "历史总收益",
-        "permission": "权限转让",
-        "txPairManage": "交易对管理",
-        "noOperator": "该地址下暂无交易对，想成为运营商",
+        "title": "運營商中心",
+        "tokenList": "運營代幣",
+        "totalIncome": "歷史總收益",
+        "permission": "權限轉讓",
+        "txPairManage": "交易對管理",
+        "noOperator": "該地址下暫無交易對，想成為運營商",
         "learnMore": "了解更多",
         "permissionConfirm": {
-            "title": "转让所有权",
-            "submit": "确认转入",
-            "tokenName": "币种名称",
-            "address": "接受所有权地址",
-            "notice": "请知悉：币种所有权转让后尚未开通的交易对权限将归新的所有者拥有。已开通暂停交易的交易对所有权仍归您所有。"
+            "title": "轉讓所有權",
+            "submit": "確認轉入",
+            "tokenName": "幣種名稱",
+            "address": "接受所有權地址",
+            "notice": "請知悉：幣種所有權轉讓後尚未開通的交易對權限將歸新的所有者擁有。已開通暫停交易的交易對所有權仍歸您所有。"
         }
     },
     "tradeTxPairManage": {
-        "title": "{tokenSymbol}交易对管理",
-        "symbol": "交易对名称",
-        "income": "累计收益",
-        "fee": "当前费率",
-        "status": "状态",
+        "title": "{tokenSymbol}交易對管理",
+        "symbol": "交易對名稱",
+        "income": "累計收益",
+        "fee": "當前費率",
+        "status": "狀態",
         "operate": "操作",
-        "stopTrans": "暂停交易",
-        "resetTrans": "恢复交易",
-        "changeOwner": "转让所有权",
-        "changeFee": "调整费率",
-        "incomeList": "收益明细",
-        "historyIncome": "历史收益",
-        "openTxPair": "开通交易对",
-        "statusList": ["权限已转让", "交易中", "暂停交易", "交易未开通"],
+        "stopTrans": "暫停交易",
+        "resetTrans": "恢復交易",
+        "changeOwner": "轉讓所有權",
+        "changeFee": "調整費率",
+        "incomeList": "收益明細",
+        "historyIncome": "歷史收益",
+        "openTxPair": "開通交易對",
+        "statusList": ["權限已轉讓", "交易中", "暫停交易", "交易未開通"],
         "openTxPairConfirm": {
-            "title": "开通 {symbol} 交易对",
-            "fee": "上币费",
-            "hint": "交易对开通成功后，如果想要添加运营商标识，请在我们的Telegram群组联系我们：https://t.me/vite_zh",
-            "btn": "提交申请",
-            "reqSuccess": "提交申请成功，请稍后在市场中查看",
-            "reqError": "上币失败，请稍后重试"
+            "title": "開通 {symbol} 交易對",
+            "fee": "上幣費",
+            "hint": "交易對開通成功後，如果想要添加運營商標識，請在我們的Telegram群組聯繫我們：https://t.me/vite_zh",
+            "btn": "提交申請",
+            "reqSuccess": "提交申請成功，請稍後在市場中查看",
+            "reqError": "上幣失敗，請稍後重試"
         },
-        "stopTransHint": "确定要暂停 {symbol} 交易吗？",
-        "resetTransHint": "确定要恢复 {symbol} 交易吗？",
-        "stopSuccess": "暂停成功",
-        "stopFail": "暂停失败",
-        "openSuccess": "恢复成功",
-        "openFail": "恢复失败",
-        "changeOwnerSuccess": "转让成功",
-        "changeOwnerFaill": "转让失败",
-        "submitChange": "确认转让",
-        "changeOwnerHint": "请知悉：交易对权限转让后，您将不能享有赚取手续费、调整手续费等权限，权限一经转让不得撤回",
-        "currentMaker": "当前Maker费率",
-        "confirmFee": "手续费",
-        "currentTaker": "当前Taker费率",
-        "txPairName": "交易对名称",
-        "changeFeeHint": "{symbol} 的 {type} 手续费调整为 {fee}",
-        "changeFeeSubmit": "确认将 {changeFeeHint}",
-        "historyAllIncome": "历史总收益",
-        "incomeListHead": {
-            "date": "日期",
+        "stopTransHint": "確定要暫停 {symbol} 交易嗎？",
+        "resetTransHint": "確定要恢復 {symbol} 交易嗎？",
+        "stopSuccess": "暫停成功",
+        "stopFail": "暫停失敗",
+        "openSuccess": "恢復成功",
+        "openFail": "恢復失敗",
+        "changeOwnerSuccess": "轉讓成功",
+        "changeOwnerFaill": "轉讓失敗",
+        "submitChange": "確認轉讓",
+        "changeOwnerHint": "請知悉：交易對權限轉讓後，您將不能享有賺取手續費、調整手續費等權限，權限一經轉讓不得撤回",
+        "currentMaker": "當前Maker費率",
+        "confirmFee": "手續費",
+        "currentTaker": "當前Taker費率",
+        "txPairName": "交易對名稱",
+        "changeFeeHint": "{symbol} 的 {type} 手續費調整為 {fee}",
+        "changeFeeSubmit": "確認將 {changeFeeHint}",
+        "historyAllIncome": "歷史總收益",
+        "incomeListHead": {"date": "日期",
             "txNum": "交易量",
-            "feeRate": "手续费率",
-            "feeIncome": "手续费收益"
+            "feeRate": "手續費率",
+            "feeIncome": "手續費收益"
         }
     },
     "mobileAssets": {
-        "allAssets": "总资产折合({token})",
-        "tokenInfoTitle": "代币详情",
-        "transfer": "资产划转",
+        "allAssets": "總資產折合({token})",
+        "tokenInfoTitle": "代幣詳情",
+        "transfer": "資產劃轉",
         "trade": "去交易",
-        "chooseTxPair": "选择交易对"
+        "chooseTxPair": "選擇交易對"
     },
     "mobileTradeCenter": {
         "highPrice": "高",
         "lowPrice": "低",
         "quantity": "24H",
-        "buyTitle": "买入",
-        "sellTitle": "卖出",
-        "price": "价格({token})",
+        "buyTitle": "買入",
+        "sellTitle": "賣出",
+        "price": "價格({token})",
         "buy": {
-            "price": "买入价",
-            "quantity": "买入量"
+            "price": "買入價",
+            "quantity": "買入量"
         },
         "sell": {
-            "price": "卖出价",
-            "quantity": "卖出量"
+            "price": "賣出價",
+            "quantity": "賣出量"
         },
-        "orderQuantity": "数量",
-        "orderPrice": "价格",
+        "orderQuantity": "數量",
+        "orderPrice": "價格",
         "executedQuantity": "成交",
-        "avgPrice": "均价"
+        "avgPrice": "均價"
     },
     "mobileDividend": {
-        "title": "分红",
-        "poolTitle": "手续费分红池({token})",
-        "myDividendTitle": "我的分红收益总估值({token})",
-        "listTitle": "分红明细",
-        "lockingTitle": "我的锁仓",
-        "viewLink": "查看解锁明细"
+        "title": "分紅",
+        "poolTitle": "手續費分紅池({token})",
+        "myDividendTitle": "我的分紅收益總估值({token})",
+        "listTitle": "分紅明細",
+        "lockingTitle": "我的鎖倉",
+        "viewLink": "查看解鎖明細"
     },
     "mobileMining": {
-        "title": "挖矿",
-        "miningTrade": "交易挖矿",
-        "miningStaking": "抵押挖矿",
-        "miningInvite": "邀请挖矿",
-        "miningOrder": "挂单挖矿",
-        "tradeTotalIncome": "交易挖矿总收益({token})",
-        "stakingTotalIncome": "抵押挖矿总收益({token})",
-        "inviteTotalIncome": "邀请挖矿总收益({token})",
-        "orderTotalIncome": "挂单挖矿总收益({token})",
-        "fee": "手续费金额",
-        "listTitle": "挖矿明细",
-        "viewLink": "实时挖矿数据",
-        "inviteTradeIncome": "邀请交易挖矿明细",
-        "inviteOrderIncome": "邀请挂单挖矿明细",
+        "title": "挖礦",
+        "miningTrade": "交易挖礦",
+        "miningStaking": "抵押挖礦",
+        "miningInvite": "邀請挖礦",
+        "miningOrder": "掛單挖礦",
+        "tradeTotalIncome": "交易挖礦總收益({token})",
+        "stakingTotalIncome": "抵押挖礦總收益({token})",
+        "inviteTotalIncome": "邀請挖礦總收益({token})",
+        "orderTotalIncome": "掛單挖礦總收益({token})",
+        "fee": "手續費金額",
+        "listTitle": "挖礦明細",
+        "viewLink": "實時挖礦數據",
+        "inviteTradeIncome": "邀請交易挖礦明細",
+        "inviteOrderIncome": "邀請掛單挖礦明細",
         "myStaking": "我的抵押"
     },
     "mobileBottomBar": {
         "center": "交易",
-        "assets": "资产",
-        "mining": "挖矿",
-        "order": "订单"
+        "assets": "資產",
+        "mining": "挖礦",
+        "order": "訂單"
     },
     "mobileOrder": {
         "filterDate": "日期",
-        "filterToken": "币种",
+        "filterToken": "幣種",
         "all": "全部",
-        "3month": "近3个月",
-        "1month": "近1个月",
-        "1week": "近1周",
+        "3month": "近3個月",
+        "1month": "近1個月",
+        "1week": "近1週",
         "1day": "近1天",
         "clear": "清空",
-        "submit": "确定"
+        "submit": "確定"
     },
     "desktop": {
-        "unlock": "解锁",
+        "unlock": "解鎖",
         "unreceivedTx": {
-            "title": "您收到{num}笔新交易",
-            "body": "金额：{amount} {symbol} \n发送地址: {address}"
+            "title": "您收到{num}筆新交易",
+            "body": "金額：{amount} {symbol} \n發送地址: {address}"
         }
     }
 }
