@@ -33,11 +33,7 @@ Vue.config.devtools = process.env.NODE_ENV !== 'production';
 
 bridge['app.language']().then(lang => {
     console.log('get lang', lang);
-    if (i18n.messages[lang]) {
-        i18n.locale = lang;
-    } else {
-        i18n.locale = lang.startsWith('zh') ? 'zh' : 'en';
-    }
+    i18n.locale = lang.startsWith('zh') ? 'zh' : 'en';
 });
 
 statistics.event('H5-Start');
