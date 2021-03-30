@@ -25,9 +25,11 @@ const mutations = {
 
             // ----- Comment this code for: disable multi-network withdraw and deposit -----
 
-            // if (gatewayInfo.mappedToken && gatewayInfo.mappedToken.mappedTokenExtras) {
-            //     multiNetwork = [gatewayInfo.mappedToken].concat(gatewayInfo.mappedToken.mappedTokenExtras);
-            // }
+            if (gatewayInfo.mappedToken && gatewayInfo.mappedToken.mappedTokenExtras) {
+                multiNetwork = [gatewayInfo.mappedToken].concat(gatewayInfo.mappedToken.mappedTokenExtras);
+            } else {
+                multiNetwork = [gatewayInfo.mappedToken];
+            }
 
             // ----- Comment this code for: disable multi-network withdraw and deposit -----
 
