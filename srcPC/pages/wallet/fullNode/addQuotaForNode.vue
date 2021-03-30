@@ -24,7 +24,10 @@
                 </vite-input>
             </div>
             <div class="item">
+                <!--
                 <div v-show="!btnUnuse" class="__form_btn __pointer" @click="validTx">{{ $t('submitStaking') }}</div>
+-->
+                <div v-show="!btnUnuse" class="__form_btn unuse">{{ $t('walletFullNode.addQuota.stakingSuspend') }}</div>
                 <div v-show="btnUnuse"  class="__form_btn unuse">{{ $t('submitStaking') }}</div>
             </div>
         </div>
