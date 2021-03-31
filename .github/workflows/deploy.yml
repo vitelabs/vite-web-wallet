@@ -55,4 +55,4 @@ jobs:
           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
           SLACK_AVATAR: repository
         with:
-          args: 'Action called, Environment: ${{ github.event.inputs.environment }} Branch: ${{ github.event.inputs.branch }} Repository: {{ GITHUB_REPOSITORY }}'
+          args: 'Action called, Environment: ${{ github.event.inputs.environment }}, Branch: ${{ github.event.inputs.branch }}, Repository: {{ GITHUB_REPOSITORY }}'

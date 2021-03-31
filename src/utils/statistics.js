@@ -9,13 +9,13 @@ const statisticsNull = {
 
 const statistics = {
     pageView(path) {
-        _hmt.push([ '_trackPageview', path ]);
+        // _hmt.push([ '_trackPageview', path ]);
     },
     event(...args) {
         if (args.length < 2) {
             return;
         }
-        _hmt.push(['_trackEvent'].concat(args));
+        // _hmt.push(['_trackEvent'].concat(args));
     }
 };
 
