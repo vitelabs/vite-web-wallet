@@ -9,14 +9,14 @@
                     num: info.totalFullReward || '--'
                 }) }}</div>
             </div>
-            <div class="row-item add-padding">
+        <!--<div class="row-item add-padding">
                 <div class="title">{{ $t('walletFullNode.quotaContent.voteReward') }}</div>
                 <div class="light">{{ $t('walletFullNode.quotaContent.yesterday') }}</div>
-                <div class="text">{{ info.totalYesterdayVoteReward || '--' }} VITE</div>
+                <div class="text">{{ info.totalYesterdayVoteReward || '&#45;&#45;' }} VITE</div>
                 <div class="light">{{ $t('walletFullNode.quotaContent.all', {
-                    num: info.totalVoteReward || '--'
+                    num: info.totalVoteReward || '&#45;&#45;'
                 }) }}</div>
-            </div>
+            </div>-->
         </div>
         <div class="row add-padding">
             <div class="title add-margin">{{ $t('walletFullNode.quotaContent.nodeInfo') }}</div>
