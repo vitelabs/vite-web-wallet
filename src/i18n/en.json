@@ -236,6 +236,18 @@
         "currency": "Default Currency",
         "secure": "Security",
         "gate": "Custom Gateway",
+        "rpcUrl": "RPC Url",
+        "changeRpcUrl": "Change",
+        "changeRpcUrlDialog": {
+            "title": "Change RPC Url",
+            "addCustomNode": "Add Custom Node",
+            "officialNode": "Official Node",
+            "addNode": "Add Node",
+            "customNode": "Custom Node",
+            "deleteCustomNode": "Delete",
+            "wrongNode": "Please enter the correct URL!",
+            "changeNodeSuccess": "Have connected to new node."
+        },
         "triggerGate": [
             "Close",
             "Open"
