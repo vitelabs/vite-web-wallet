@@ -1,6 +1,12 @@
 <template>
     <div class="net-info-wrapper">
         <div class="row">
+            <span class="title">{{ $t('setting.rpcUrl') }}</span>
+            <code v-html="currentApiUrl"></code>
+            <span class="small-btn" @click="openNodeChangeDialog">{{ $t('setting.changeRpcUrl') }}</span>
+        </div>
+
+        <div class="row">
             <span class="title">{{ $t('setting.block') }}</span>{{ height || '----' }}
         </div>
         <div class="row">
@@ -31,10 +37,13 @@
 <script>
 import openUrl from 'utils/openUrl';
 import { getExplorerLink } from 'utils/getLink';
+import { getProvider } from 'services/apiServer';
+import { changeRpcUrlDialog } from 'pcComponents/dialog';
 
 export default {
     mounted() {
         this.$store.dispatch('startLoopHeight', 3000);
+        this.openNodeChangeDialog();
     },
     destroyed() {
         this.$store.dispatch('stopLoopHeight');
@@ -48,6 +57,9 @@ export default {
     computed: {
         height() {
             return this.$store.state.ledger.currentHeight;
+        },
+        currentApiUrl() {
+            return getProvider().path;
         }
     },
     methods: {
@@ -59,6 +71,9 @@ export default {
         },
         go(url) {
             openUrl(url);
+        },
+        openNodeChangeDialog() {
+            changeRpcUrlDialog();
         }
     }
 };
@@ -66,6 +81,10 @@ export default {
 
 <style lang="scss" scoped>
 @import "./setting.scss";
+
+.small-btn {
+    @include small-btn();
+}
 
 .net-info-wrapper {
     opacity: 0.8;
