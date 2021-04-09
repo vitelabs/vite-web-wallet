@@ -3,6 +3,7 @@ require('es6-promise').polyfill();
 
 import 'assets/scss/mixins.scss';
 import 'utils/performance';
+import 'pcUtils/nodeApi';
 import 'services/dnsHostIP';
 import 'services/apiServer';
 import './wallet';

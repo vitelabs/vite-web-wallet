@@ -2,15 +2,15 @@ import {
     storage as localStorage,
     constant
 } from 'pcUtils/store';
+import { getApiConfig } from 'services/dnsHostIP';
 
-const currencyKey = constant.CurrencyKey;
-const autoLogoutKey = constant.AutoLogoutKey;
-const LangKey = constant.LangKey;
-const GateKey = constant.GateKey;
-const ThemeKey = constant.ThemeKey;
+const { LangKey, GateKey, ThemeKey, autoLogoutKey, currencyKey, CustomNodes, CurrentNode } = constant;
 const HideZeroAssets = constant.HideZeroAssets;
 
 const theme = localStorage.getItem(ThemeKey);
+let customNodes = localStorage.getItem(CustomNodes);
+customNodes = Array.isArray(customNodes) ? customNodes : [];
+const defaultNode = process.env.goViteServer;
 
 const state = {
     clientStatus: -1,
@@ -21,7 +21,10 @@ const state = {
     theme: theme === null ? 1 : +theme,
     lastPage: '',
     isShowCompliance: false,
-    hideZeroAssets: +localStorage.getItem(HideZeroAssets) || 0
+    hideZeroAssets: +localStorage.getItem(HideZeroAssets) || 0,
+    customNodes,
+    officialNodes: [],
+    currentNode: ''
 };
 
 const mutations = {
@@ -66,6 +69,18 @@ const mutations = {
         const _isHide = +isHide || 0;
         localStorage.setItem(HideZeroAssets, _isHide);
         state.hideZeroAssets = _isHide;
+    },
+    setOfficialNodes(state, nodes) {
+        if (nodes.indexOf(defaultNode) === -1) {
+            nodes.push(defaultNode);
+        }
+        state.officialNodes = nodes;
+    },
+    setCustomNodes(state, nodes) {
+        state.customNodes = nodes;
+    },
+    setCurrentNode(state, node) {
+        state.currentNode = node;
     }
 };
 
@@ -77,6 +92,27 @@ const actions = {
         window.addEventListener('offline', () => {
             commit('setClientNetStatus', navigator.onLine);
         });
+    },
+    getApiConfig({ commit }) {
+        getApiConfig().then(data => {
+            const officialNodes = data['WALLETWSAPI'].hostNameList;
+            commit('setOfficialNodes', officialNodes);
+        });
+    },
+    addCustomNode({ commit, state }, newNode) {
+        if (!newNode) return;
+        const customNodes = state.customNodes.concat([newNode]).filter(item => item);
+        commit('setCustomNodes', customNodes);
+        localStorage.setItem(CustomNodes, customNodes);
+    },
+    deleteCustomNode({ commit }, node) {
+        const customNodes = state.customNodes.filter(item => item !== node);
+        commit('setCustomNodes', customNodes);
+        localStorage.setItem(CustomNodes, customNodes);
+    },
+    changeNode({ commit }, node) {
+        localStorage.setItem(CurrentNode, node);
+        commit('setCurrentNode', node);
     }
 };
 
@@ -87,6 +123,10 @@ const getters = {
             usd: '$'
         };
         return symbolMap[state.currency];
+    },
+    allRpcNodes(state) {
+        const all = state.officialNodes.concat(state.customNodes);
+        return Array.from(new Set(all));
     }
 };
 
