@@ -51,8 +51,8 @@ const viteConnect = {
     // test: '\'ws://139.155.7.172:5001\'',
     dev: '\'wss://biforst.vite.net\''
 };
-const dnsHostServer = {
-    production: '[\'https://config.zaokaidian.com\', \'https://config.vitewallet.com\']',
+const apiConfig = {
+    production: '"https://config.vite.net"',
     test: '\'\'',
     dev: '\'\''
 };
@@ -94,7 +94,7 @@ module.exports = {
         'process.env.viteConnect': viteConnect[API],
         'process.env.gatewayInfosServer': gatewayInfosServer[API],
         'process.env.conversionGate': conversionGate[API],
-        'process.env.dnsHostServer': dnsHostServer[API],
+        'process.env.apiConfig': apiConfig[API],
         'process.env.rewardApiServer': rewardApiServer[API],
         'process.env.desktopWalletVersion': `"${ process.env.DESKTOP_WALLET_VERSION || '' }"`
     }

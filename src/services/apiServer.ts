@@ -37,15 +37,7 @@ export const ViteXAPIV2 = new DNSClient({
 export const RewardAPI = new Client(`${ process.env.rewardApiServer }/`, viteXAPIAfterRes);
 
 currentViteApiUrl = setWatch('gViteAPI', url => {
-    if (currentViteApiUrl === url) {
-        return;
-    }
-    WS_RPC.destroy();
-    currentViteApiUrl = url;
-    WS_RPC = new provider(url, providerTimeout, providerOptions);
-    viteClient.setProvider(WS_RPC, () => {
-        console.log(`Successfully changed gVite API to ${ url }`);
-    }, false);
+    setProvider(url);
 });
 
 let WS_RPC = new provider(currentViteApiUrl, providerTimeout, providerOptions);
@@ -54,6 +46,21 @@ export const viteClient = new ViteAPI(WS_RPC, () => {
     console.log(`gViteAPI Connect to ${ WS_RPC.path }`);
 });
 export const getProvider = () => WS_RPC;
+export const setProvider = url => new Promise((resolve, reject) => {
+    if (currentViteApiUrl === url) {
+        return;
+    }
+    WS_RPC.destroy();
+    currentViteApiUrl = url;
+    WS_RPC = new provider(url, providerTimeout, providerOptions);
+    WS_RPC.on('error', err => {
+        console.log(err);
+    });
+    viteClient.setProvider(WS_RPC, () => {
+        console.log(`Successfully changed gVite API to ${ url }`);
+        resolve(url);
+    }, false);
+});
 
 const FullNodeContractAddressOld = 'vite_b3b6335ef23ef3826cff125b81efd158dac3c2209748e0601a';
 const FullNodeContractAddress = 'vite_8cf2663cc949442db2d3f78f372621733292d1fb0b846f1651';

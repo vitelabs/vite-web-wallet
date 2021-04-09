@@ -21,6 +21,7 @@ export default {
     components: { noticeList },
     beforeMount() {
         this.$store.commit('setLang', this.$i18n.locale);
+        this.$store.dispatch('getApiConfig');
         this.$store.dispatch('startLoopBalance');
         this.$store.dispatch('subUnreceivedTx');
         this.$store.dispatch('startLoopExchangeBalance');

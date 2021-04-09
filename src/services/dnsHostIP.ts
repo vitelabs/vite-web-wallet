@@ -1,5 +1,7 @@
 import { Client } from 'utils/request';
 
+const apiConfigUrl = process.env.apiConfig;
+
 export const Server = {
     isReady: false,
     onReady: [],
@@ -42,7 +44,7 @@ export const Server = {
     },
     gViteAPI: { // BOTH
         hostKey: 'WALLETWSAPI',
-        url: process.env.goViteServer,
+        url: window.VITE_NODE_API || process.env.goViteServer,
         watchList: []
     },
 
@@ -57,6 +59,29 @@ export const Server = {
         watchList: []
     }
 };
+
+export function getApiConfig() {
+    return new Client(`${ apiConfigUrl }/dns`, function (xhr) {
+        const { code, msg, data, error, subCode } = JSON.parse(xhr.responseText);
+
+        if (code !== 0) {
+            return Promise.reject({
+                code,
+                subCode,
+                message: msg || error
+            });
+        }
+
+        return Promise.resolve(data || null);
+    })
+        .request({ path: '/hostips', timeout: 3000 })
+        .then(data => {
+            if (!data) {
+                throw new Error('Config data is null');
+            }
+            return data;
+        });
+}
 
 
 export class DNSClient extends Client {
