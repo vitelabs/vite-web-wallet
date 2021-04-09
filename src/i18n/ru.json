@@ -236,6 +236,19 @@
         "currency": "Валюта По Умолчанию",
         "secure": "Безопасность",
         "gate": "Custom Gateway",
+        "rpcUrl": "Node",
+        "changeRpcUrl": "Change",
+        "changeRpcUrlDialog": {
+            "title": "Change Node",
+            "addCustomNode": "Add Custom Node",
+            "officialNode": "Official Node",
+            "addNode": "Add Node",
+            "customNode": "Custom Node",
+            "deleteCustomNode": "Delete",
+            "wrongNode": "Please enter the correct URL!",
+            "changeNodeSuccess": "Have connected to new node.",
+            "inputPlaceholder": "Please enter the node url prefix with wss."
+        },
         "triggerGate": [
             "Закрыть",
             "Открыть"
