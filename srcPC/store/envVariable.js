@@ -23,7 +23,8 @@ const state = {
     isShowCompliance: false,
     hideZeroAssets: +localStorage.getItem(HideZeroAssets) || 0,
     customNodes,
-    officialNodes: []
+    officialNodes: [],
+    currentNode: ''
 };
 
 const mutations = {
@@ -77,6 +78,9 @@ const mutations = {
     },
     setCustomNodes(state, nodes) {
         state.customNodes = nodes;
+    },
+    setCurrentNode(state, node) {
+        state.currentNode = node;
     }
 };
 
@@ -108,6 +112,7 @@ const actions = {
     },
     changeNode({ commit }, node) {
         localStorage.setItem(CurrentNode, node);
+        commit('setCurrentNode', node);
     }
 };
 

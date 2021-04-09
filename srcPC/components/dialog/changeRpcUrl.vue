@@ -6,11 +6,11 @@ block content
             input(type="radio" v-model="selectedNode" :value="node" :id="`radio_changeRpcUrl_${index}`" @change="onChangeNode")
             label(:for="`radio_changeRpcUrl_${index}`")
                 span(class="__sm_btn") {{ isOfficial(node) ? $t('setting.changeRpcUrlDialog.officialNode') : $t('setting.changeRpcUrlDialog.customNode')}}
-                code {{node}}
+                code.__pointer {{node}}
             span(class="__sm_btn delete-node-btn" v-if="!isOfficial(node)" @click="deleteNode(node)") {{$t('setting.changeRpcUrlDialog.deleteCustomNode')}}
         div.__row
             .__row_t {{$t('setting.changeRpcUrlDialog.addCustomNode')}}
-            input.__input_row(type="text" v-model="newNode")
+            input.__input_row(type="text" v-model="newNode" :placeholder="$t('setting.changeRpcUrlDialog.inputPlaceholder')")
             span(class="__sm_btn add-node-btn" @click="addNode") {{$t('setting.changeRpcUrlDialog.addNode')}}
 </template>
 
@@ -31,10 +31,7 @@ export default {
     },
     computed: {
         ...mapState(['env']),
-        ...mapGetters(['allRpcNodes']),
-        currentNode() {
-            return getProvider().path || process.env.goViteServer;
-        }
+        ...mapGetters(['allRpcNodes'])
     },
     methods: {
         inspector() {
@@ -94,18 +91,30 @@ export default {
     @include background_common_img('vb_confirm.png');
 }
 
-.add-node-btn, .delete-node-btn{
-    margin-left: 15px;
-}
-
 .__sm_btn {
     @include small_btn();
 }
+
+.delete-node-btn{
+    margin-left: 15px;
+}
+
+.add-node-btn {
+    padding: 4px 10px;
+    display: inline-block;
+    font-size: 13px;
+    margin-top: 15px;
+}
 .__input_row {
-    height: 20px;
+    height: 25px;
+    display: block;
+    width: 100%;
 }
 .__radio_item {
     margin-top: 10px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
     input {
         line-height: 18px;
     }
