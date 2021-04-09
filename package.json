@@ -23,10 +23,6 @@
         "publish:stage": "npm run build:all && wrangler publish --env stage",
         "publish": "npm run build:all && wrangler publish --env production"
     },
-    "pre-commit": [
-        "lint",
-        "stylelint"
-    ],
     "browserslist": [
         "defaults",
         "not ie < 11",
@@ -71,7 +67,6 @@
         "image-webpack-loader": "^5.0.0",
         "imagemin-svgo": "^7.0.0",
         "node-sass": "^4.13.1",
-        "pre-commit": "^1.2.2",
         "pug": "^2.0.3",
         "pug-plain-loader": "^1.0.0",
         "sass-loader": "^7.0.3",
