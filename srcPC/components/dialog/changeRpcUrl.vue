@@ -7,6 +7,7 @@ block content
             label(:for="`radio_changeRpcUrl_${index}`")
                 span(class="__sm_btn") {{ isOfficial(node) ? $t('setting.changeRpcUrlDialog.officialNode') : $t('setting.changeRpcUrlDialog.customNode')}}
                 code.__pointer {{node}}
+                span(class="__sm_btn ping-tag") {{nodeStatusMap[node] ? `${nodeStatusMap[node].ping}ms` : 'Ping' }}
             span(class="__sm_btn delete-node-btn" v-if="!isOfficial(node)" @click="deleteNode(node)") {{$t('setting.changeRpcUrlDialog.deleteCustomNode')}}
         div.__row
             .__row_t {{$t('setting.changeRpcUrlDialog.addCustomNode')}}
@@ -17,21 +18,29 @@ block content
 <script>
 import { mapGetters, mapState } from 'vuex';
 import { getProvider, setProvider } from 'services/apiServer';
+import { checkApi } from 'pcUtils/nodeApi';
 
 export default {
     data() {
         return {
             dShowClose: true,
             selectedNode: getProvider().path || process.env.goViteServer,
-            newNode: ''
+            newNode: '',
+            nodeStatusMap: {}
         };
     },
     beforeMount() {
         this.dTitle = this.$t('setting.changeRpcUrlDialog.title');
+        this.checkNodeStatus();
     },
     computed: {
         ...mapState(['env']),
         ...mapGetters(['allRpcNodes'])
+    },
+    watch: {
+       allRpcNodes()  {
+           this.checkNodeStatus();
+       }
     },
     methods: {
         inspector() {
@@ -60,6 +69,24 @@ export default {
             setProvider(this.selectedNode).then(() => {
                 this.$toast(this.$t('setting.changeRpcUrlDialog.changeNodeSuccess'));
                 this.$store.dispatch('changeNode', this.selectedNode);
+            });
+        },
+        checkNodeStatus() {
+            this.allRpcNodes.forEach(node => {
+                checkApi(node).then(data => {
+                    this.nodeStatusMap = {
+                        ...this.nodeStatusMap,
+                        [node]: data
+                    };
+                })
+                .catch(err => {
+                    // this.nodeStatusMap = {
+                    //     ...this.nodeStatusMap,
+                    //     [node]: {
+                    //         error: 'error'
+                    //     }
+                    // };
+                });
             });
         }
     }
@@ -95,7 +122,7 @@ export default {
     @include small_btn();
 }
 
-.delete-node-btn{
+.delete-node-btn, .ping-tag{
     margin-left: 15px;
 }
 
