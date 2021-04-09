@@ -7,7 +7,7 @@ block content
             label(:for="`radio_changeRpcUrl_${index}`")
                 span(class="__sm_btn") {{ isOfficial(node) ? $t('setting.changeRpcUrlDialog.officialNode') : $t('setting.changeRpcUrlDialog.customNode')}}
                 code.__pointer {{node}}
-                span(class="__sm_btn ping-tag") {{nodeStatusMap[node] ? `${nodeStatusMap[node].ping}ms` : 'Ping' }}
+                span(class="__sm_btn ping-tag") {{nodeStatusMap[node] ? `${nodeStatusMap[node].ping} ms` : 'Ping...' }}
             span(class="__sm_btn delete-node-btn" v-if="!isOfficial(node)" @click="deleteNode(node)") {{$t('setting.changeRpcUrlDialog.deleteCustomNode')}}
         div.__row
             .__row_t {{$t('setting.changeRpcUrlDialog.addCustomNode')}}
