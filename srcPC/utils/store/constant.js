@@ -16,8 +16,8 @@ export const GateKey = 'gate';
 export const ThemeKey = 'theme';
 export const ShowHoldPWDNumKey = 'showHoldPWDNum';
 export const HideZeroAssets = 'hideZeroAssets';
-export const CustomNodes = 'CustomNodes';
-export const CurrentNode = 'CurrentNode';
+export const CustomNodes = 'customNodes';
+export const CurrentNode = 'currentNode';
 
 
 export const SettingKeys = [ FirstKey, LangKey, AutoLogoutKey, CurrencyKey, HoldPwdKey, ShowHoldPWDNumKey, GateKey, ThemeKey ];
