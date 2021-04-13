@@ -1,18 +1,7 @@
 import { Client } from 'utils/request';
-import {
-    storage as localStorage,
-    constant
-} from 'pcUtils/store';
-
-const { CurrentNode } = constant;
-
 
 const apiConfigUrl = process.env.apiConfig;
 
-const defaultNode = process.env.goViteServer;
-const currentNode = localStorage.getItem(CurrentNode) || defaultNode;
-
-console.log(currentNode);
 export const Server = {
     isReady: false,
     onReady: [],
@@ -55,7 +44,7 @@ export const Server = {
     },
     gViteAPI: { // BOTH
         hostKey: 'WALLETWSAPI',
-        url: currentNode,
+        url: window.VITE_NODE_API || process.env.goViteServer,
         watchList: []
     },
 

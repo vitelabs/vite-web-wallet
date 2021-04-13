@@ -2,7 +2,7 @@
     <div class="net-info-wrapper">
         <div class="row">
             <span class="title">{{ $t('setting.rpcUrl') }}</span>
-            <code v-html="currentApiUrl"></code>
+            <code v-html="env.currentNode"></code>
             <span class="small-btn" @click="openNodeChangeDialog">{{ $t('setting.changeRpcUrl') }}</span>
         </div>
 
@@ -35,6 +35,7 @@
 </template>
 
 <script>
+import { mapState } from 'vuex';
 import openUrl from 'utils/openUrl';
 import { getExplorerLink } from 'utils/getLink';
 import { getProvider } from 'services/apiServer';
@@ -43,7 +44,12 @@ import { changeRpcUrlDialog } from 'pcComponents/dialog';
 export default {
     mounted() {
         this.$store.dispatch('startLoopHeight', 3000);
-        this.openNodeChangeDialog();
+    },
+    beforeMount() {
+        const currentNode = getProvider().path;
+        if (currentNode) {
+            this.$store.commit('setCurrentNode', currentNode);
+        }
     },
     destroyed() {
         this.$store.dispatch('stopLoopHeight');
@@ -55,11 +61,9 @@ export default {
         };
     },
     computed: {
+        ...mapState(['env']),
         height() {
             return this.$store.state.ledger.currentHeight;
-        },
-        currentApiUrl() {
-            return getProvider().path;
         }
     },
     methods: {

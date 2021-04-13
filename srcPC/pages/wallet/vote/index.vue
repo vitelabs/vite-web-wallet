@@ -18,7 +18,6 @@
                 <span v-for="(v, i) in voteList" :key="i"
                       :slot="`${i}operateKeyBefore`" :class="cache ? 'unclickable' : 'clickable'">
                     <span class="operate-btn" @click="_cancelVote(v)">{{ v.operate }}</span>
-                    <span class="operate-btn" @click="openReward(v)">{{ $t('walletVote.toReward') }}</span>
                 </span>
             </wallet-table>
         </section>
@@ -275,13 +274,6 @@ export default {
         },
         goToDetail(addr) {
             return openUrl(`${ getExplorerLink(this.$i18n.locale) }account/${ addr }`);
-        },
-        openReward() {
-            if (this.cache) {
-                return;
-            }
-            const locale = this.$i18n.locale === 'zh' ? 'zh' : 'en';
-            openUrl(`https://reward.vite.net?language=${ locale }&address=${ this.activeAddr || '' }`);
         },
 
         _cancelVote(v) {
