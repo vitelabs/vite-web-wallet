@@ -53,8 +53,11 @@ export const setProvider = url => new Promise((resolve, reject) => {
     WS_RPC.destroy();
     currentViteApiUrl = url;
     WS_RPC = new provider(url, providerTimeout, providerOptions);
+    let rejectedTimes = 0;
     WS_RPC.on('error', err => {
-        console.log(err);
+        if (rejectedTimes > 0) return;
+        reject(err);
+        rejectedTimes++;
     });
     viteClient.setProvider(WS_RPC, () => {
         console.log(`Successfully changed gVite API to ${ url }`);

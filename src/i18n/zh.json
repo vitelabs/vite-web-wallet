@@ -255,6 +255,7 @@
             "deleteCustomNode": "刪除",
             "wrongNode": "請輸入正確的 URL!",
             "changeNodeSuccess": "已成功連接到新節點.",
+            "failedConnected": "節點連接錯誤",
             "inputPlaceholder": "請輸入以 wss 開頭的節點 URL."
         },
         "triggerGate": ["關閉", "開啟"],
