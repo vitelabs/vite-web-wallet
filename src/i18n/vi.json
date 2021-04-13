@@ -247,6 +247,7 @@
             "deleteCustomNode": "Delete",
             "wrongNode": "Please enter the correct URL!",
             "changeNodeSuccess": "Have connected to new node.",
+            "failedConnected": "Node connection error",
             "inputPlaceholder": "Please enter the node url prefix with wss."
         },
         "triggerGate": [
