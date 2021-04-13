@@ -3,7 +3,7 @@ extends /components/dialog/base.pug
 block content
     div
         div(v-for="(node, index) in allRpcNodes" :key="node" class="__radio_item")
-            input(type="radio" v-model="selectedNode" :value="node" :id="`radio_changeRpcUrl_${index}`" @change="onChangeNode")
+            input(type="radio" v-model="selectedNode" :value="node" :id="`radio_changeRpcUrl_${index}`" @change="onChangeNode" :disabled="!nodeStatusMap[node]")
             label(:for="`radio_changeRpcUrl_${index}`")
                 span(class="__sm_btn") {{ isOfficial(node) ? $t('setting.changeRpcUrlDialog.officialNode') : $t('setting.changeRpcUrlDialog.customNode')}}
                 code.__pointer {{node}}
@@ -38,9 +38,9 @@ export default {
         ...mapGetters(['allRpcNodes'])
     },
     watch: {
-       allRpcNodes()  {
-           this.checkNodeStatus();
-       }
+        allRpcNodes() {
+            this.checkNodeStatus();
+        }
     },
     methods: {
         inspector() {
@@ -66,9 +66,13 @@ export default {
             this.selectedNode = this.allRpcNodes[0];
         },
         onChangeNode() {
+            const currentNode = getProvider().path;
+            if (currentNode === this.selectedNode) return;
             setProvider(this.selectedNode).then(() => {
                 this.$toast(this.$t('setting.changeRpcUrlDialog.changeNodeSuccess'));
                 this.$store.dispatch('changeNode', this.selectedNode);
+            }).catch(err => {
+                this.$toast(this.$t('setting.changeRpcUrlDialog.failedConnected'));
             });
         },
         checkNodeStatus() {
@@ -79,14 +83,8 @@ export default {
                         [node]: data
                     };
                 })
-                .catch(err => {
-                    // this.nodeStatusMap = {
-                    //     ...this.nodeStatusMap,
-                    //     [node]: {
-                    //         error: 'error'
-                    //     }
-                    // };
-                });
+                    .catch(err => {
+                    });
             });
         }
     }
