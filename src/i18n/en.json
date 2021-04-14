@@ -63,8 +63,10 @@
         "no": "You can stake VITE for quota in case you would not like to run PoW",
         "insuffQuota": "Insufficient quota",
         "insuffQuotaMsg": "Insufficient quota. Please go to the quota page and stake your VITE to increase quota. Staked VITE can be redeemed after 3 days. ",
+        "insuffQuotaMsg2": "VITE Only {powMaxTimes} transactions can be made per day per address without staking VITE. Your address has exhausted all {powMaxTimes} transactions. Please go to the quota page and stake your VITE to perform more transactions.",
         "getQuota": "Get quota now",
-        "skip": "Skip"
+        "skip": "Skip",
+        "cancel": "Cancel"
     },
     "addAccount": "Create an Account",
     "saveQrcode": "Save QR code image",
