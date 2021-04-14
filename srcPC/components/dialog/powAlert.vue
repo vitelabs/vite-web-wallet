@@ -1,24 +1,26 @@
 <template lang="pug">
 extends /components/dialog/base.pug
 block content
-    div {{$t('pow.insuffQuotaMsg')}}
+    div {{ this.powTimesLeft > 0 ? $t('pow.insuffQuotaMsg') : $t('pow.insuffQuotaMsg2', {powMaxTimes: env.powMaxTimes})}}
 </template>
 
 <script>
-import { getCurrHDAcc } from 'wallet';
+import { mapGetters, mapState } from 'vuex';
 import router from 'pcRouter/index.js';
 
 
 export default {
-    data() {
-        return {};
-    },
     computed: {
+        ...mapState(['env']),
+        ...mapGetters(['powTimesLeft']),
+        address() {
+            return this.$store.getters.activeAddr;
+        },
         dTitle() {
             return this.$t('pow.insuffQuota');
         },
         dLTxt() {
-            return this.$t('pow.skip');
+            return this.powTimesLeft > 0 ? this.$t('pow.skip') : this.$t('pow.cancel');
         },
         dRTxt() {
             return this.$t('pow.getQuota');
@@ -31,7 +33,12 @@ export default {
             router.push({ name: 'walletQuota' });
         },
         lClick() {
-            this.promise.resolve({ status: 'CONFIRMED', data: 'skip' });
+            if (this.powTimesLeft > 0) {
+                this.promise.resolve({ status: 'CONFIRMED', data: 'skip' });
+                this.$store.dispatch('updatePowLimit', { address: this.address });
+            } else {
+                this.promise.reject({ status: 'CLOSE' });
+            }
             this.__close();
         }
     }
@@ -40,17 +47,6 @@ export default {
 
 <style lang="scss" scoped>
 @import "~assets/scss/vars.scss";
-.head {
-    box-sizing: border-box;
-    padding: 20px;
-    display: flex;
-    font-size: 14px;
-    font-family: $font-bold;
-    @include font_color_to_white(#333);
-}
-.code_container {
-    margin: 0 auto;
-    justify-content: center;
-}
+
 </style>
 
