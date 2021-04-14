@@ -2,7 +2,7 @@ import { utils, accountBlock as accountBlockUtils } from '@vite/vitejs';
 import { getActiveAcc, getCurrHDAcc } from 'wallet';
 import { powProcess } from 'pcComponents/pow/index';
 import { quotaConfirm } from 'pcComponents/quota/index';
-import { vbConfirmDialog } from 'pcComponents/dialog';
+import { vbConfirmDialog, powAlertDialog } from 'pcComponents/dialog';
 import { execWithValid } from 'pcUtils/execWithValid';
 import { getVbInstance } from 'wallet/vb';
 import { getLedgerInstance } from 'wallet/ledgerHW';
@@ -106,8 +106,19 @@ async function webSendTx({ methodName, params, config, privateKey }) {
         };
     }
 
-    const powInstance = powProcess({ ...config.powConfig });
+    try {
+        const powAlert = await powAlertDialog();
+        if (powAlert.data === 'getQuota') {
+            return Promise.reject();
+        }
+    } catch (err) {
+        if (err && err.status === 'CLOSE') {
+            return Promise.reject(err);
+        }
+        return;
+    }
 
+    const powInstance = powProcess({ ...config.powConfig });
     try {
         await accountBlock.PoW(difficulty);
         await powInstance.stopCount();
