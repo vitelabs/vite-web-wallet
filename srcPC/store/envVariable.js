@@ -24,7 +24,8 @@ const state = {
     hideZeroAssets: +localStorage.getItem(HideZeroAssets) || 0,
     customNodes,
     officialNodes: [],
-    currentNode: ''
+    currentNode: '',
+    powLimit: 100
 };
 
 const mutations = {
