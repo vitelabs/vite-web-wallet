@@ -187,7 +187,8 @@ export default {
                         cancel: () => {
                             this.loading = false;
                         }
-                    }
+                    },
+                    powLimit: false
                 }
             }).then(() => {
                 this.loading = false;

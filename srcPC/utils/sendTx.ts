@@ -2,7 +2,7 @@ import { utils, accountBlock as accountBlockUtils } from '@vite/vitejs';
 import { getActiveAcc, getCurrHDAcc } from 'wallet';
 import { powProcess } from 'pcComponents/pow/index';
 import { quotaConfirm } from 'pcComponents/quota/index';
-import { vbConfirmDialog, powAlertDialog } from 'pcComponents/dialog';
+import { vbConfirmDialog, powLimitDialog } from 'pcComponents/dialog';
 import { execWithValid } from 'pcUtils/execWithValid';
 import { getVbInstance } from 'wallet/vb';
 import { getLedgerInstance } from 'wallet/ledgerHW';
@@ -21,7 +21,8 @@ const defaultConfig = {
     confirm: {
         showMask: true,
         operate: ''
-    }
+    },
+    powLimit: true
 };
 
 const sendTx = execWithValid(function ({
@@ -106,17 +107,20 @@ async function webSendTx({ methodName, params, config, privateKey }) {
         };
     }
 
-    try {
-        const powAlert = await powAlertDialog();
-        if (powAlert.data === 'getQuota') {
-            return Promise.reject();
+    if (config.powLimit) {
+        try {
+            const powLimitRes = await powLimitDialog();
+            if (powLimitRes.data === 'getQuota') {
+                return Promise.reject();
+            }
+        } catch (err) {
+            if (err && err.status === 'CLOSE') {
+                return Promise.reject(err);
+            }
+            return;
         }
-    } catch (err) {
-        if (err && err.status === 'CLOSE') {
-            return Promise.reject(err);
-        }
-        return;
     }
+
 
     const powInstance = powProcess({ ...config.powConfig });
     try {
@@ -246,6 +250,7 @@ function formatConfig(config) {
     const powConfig = config.powConfig
         ? config.powConfig
         : defaultConfig.powConfig;
+    const powLimit = typeof config.powLimit === 'boolean' ? config.powLimit : defaultConfig.powLimit;
 
     if (!isObject(powConfig)) {
         throw new Error('[Error] utils/sendTx: config.powConfig should be an Object.');
@@ -266,7 +271,7 @@ function formatConfig(config) {
     }
 
     if (pow) {
-        return { pow, powConfig, confirmConfig: null };
+        return { pow, powConfig, confirmConfig: null, powLimit };
     }
 
     const confirmConfig = config.confirm ? config.confirm : defaultConfig.confirm;
@@ -278,7 +283,7 @@ function formatConfig(config) {
         throw new Error('[Error] utils/sendTx: config.confirm.operate is required and should be a string, while pow is off.');
     }
 
-    return { pow, powConfig, confirmConfig };
+    return { pow, powConfig, confirmConfig, powLimit };
 }
 
 

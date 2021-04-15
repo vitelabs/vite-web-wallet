@@ -88,7 +88,6 @@ const mutations = {
     },
     setPowLimit(state, powLimit) {
         localStorage.setItem(PowLimit, powLimit);
-        console.log(powLimit);
         state.powLimit = powLimit;
     }
 };
