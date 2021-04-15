@@ -77,7 +77,8 @@ export default {
                     // beneficiaryAddress: this.address,
                     beneficiaryAddress: this.activeItem.beneficialAddr,
                     amount: this.activeItem.amount
-                }
+                },
+                config: { powLimit: false }
             }).then(() => {
                 this.handleFinish(true);
             }).catch(err => {
@@ -87,7 +88,8 @@ export default {
         cancelQuotaStake() {
             sendTx({
                 methodName: 'cancelQuotaStake',
-                data: { id: this.activeItem.rawData.id }
+                data: { id: this.activeItem.rawData.id },
+                config: { powLimit: false }
             }).then(() => {
                 this.handleFinish(true);
             }).catch(err => {
