@@ -661,7 +661,7 @@
             "t2": "Multiple Full nodes can be registered with the same address, but must be staked individually at least 10,000 VITE each; When calculating Active Node Reward, if staking amount / 10000 yields a whole number that is greater than or equal to the number of active nodes, all active nodes will be rewarded; If staking amount / 10000 yields a whole number that is less than the number of active nodes, the number of nodes being rewarded equals to the whole number.",
             "t3": "Calculation of voting rewards does not depend on the number of nodes, but the staking amount."
         },
-        "confirmText": "Confirm to stake {amount} VITE for quota, staking can be cancelled after {days} days",
+        "confirmText": "Confirm to stake {amount} VITE, staking can be cancelled after {days} days",
         "addQuota": {
             "address": "ステーキングアドレス",
             "stakeDays": "ステーキング期間",
