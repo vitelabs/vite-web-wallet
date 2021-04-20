@@ -13,8 +13,8 @@
             <span class="title">{{ $t('setting.version') }}</span>{{ version }}
         </div>
         <div class="row">
-            <span class="a-link __pointer" @click="openEmail">
-                <span class="title">{{ $t('setting.service') }}</span><span class="link">info@vite.org</span>
+            <span class="a-link __pointer" @click="go('https://vitex.zendesk.com/')">
+                <span class="title">{{ $t('setting.service') }}</span><span class="link">https://vitex.zendesk.com/</span>
             </span>
             <span class="a-link __pointer" @click="go('https://vite.org/')">
                 <span class="title">{{ $t('setting.site') }}</span><span class="link">vite.org</span>
