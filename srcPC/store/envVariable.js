@@ -13,6 +13,7 @@ let customNodes = localStorage.getItem(CustomNodes);
 customNodes = Array.isArray(customNodes) ? customNodes : [];
 const defaultNode = process.env.goViteServer;
 const defaultPowLimit = localStorage.getItem(PowLimit) || {};
+const defaultPowMaxTimes = process.env.NODE_ENV === 'production' ? 100 : 5;
 
 const state = {
     clientStatus: -1,
@@ -27,7 +28,7 @@ const state = {
     customNodes,
     officialNodes: [],
     currentNode: '',
-    powMaxTimes: 5,
+    powMaxTimes: defaultPowMaxTimes,
     powLimit: defaultPowLimit
 };
 
