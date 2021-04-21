@@ -137,7 +137,10 @@ const mixin = {
                     'margin-bottom': '30px',
                     'font-size': '14px'
                 },
-                lBtn: { 'margin-right': '20px' },
+                lBtn: {
+                    'margin-right': '20px',
+                    'background': 'transparent'
+                },
                 btn: {
                     cursor: 'pointer',
                     'flex-grow': 1,
