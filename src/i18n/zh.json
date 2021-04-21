@@ -59,7 +59,13 @@
     },
     "pow": {
         "ing": "正在運行PoW獲取配額",
-        "no": "如果您不想運行PoW，您可抵押VITE跳過此步驟"
+        "no": "如果您不想運行PoW，您可抵押VITE跳過此步驟",
+        "insuffQuota": "配額不足",
+        "insuffQuotaMsg": "配額不足，請前往配額頁面抵押VITE獲取配額，抵押的VITE三天后可取回",
+        "insuffQuotaMsg2": "每個地址每天有{powMaxTimes}筆交易不需要抵押，您當前地址{powMaxTimes}次已用盡，請前往配額頁面抵押",
+        "getQuota": "去抵押",
+        "skip": "跳过抵押",
+        "cancel": "取消"
     },
     "addAccount": "新建賬戶",
     "saveQrcode": "保存二維碼圖片",

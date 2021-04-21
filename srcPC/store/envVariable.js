@@ -3,14 +3,17 @@ import {
     constant
 } from 'pcUtils/store';
 import { getApiConfig } from 'services/dnsHostIP';
+import d from 'dayjs';
 
-const { LangKey, GateKey, ThemeKey, autoLogoutKey, currencyKey, CustomNodes, CurrentNode } = constant;
+const { LangKey, GateKey, ThemeKey, autoLogoutKey, currencyKey, CustomNodes, CurrentNode, PowLimit } = constant;
 const HideZeroAssets = constant.HideZeroAssets;
 
 const theme = localStorage.getItem(ThemeKey);
 let customNodes = localStorage.getItem(CustomNodes);
 customNodes = Array.isArray(customNodes) ? customNodes : [];
 const defaultNode = process.env.goViteServer;
+const defaultPowLimit = localStorage.getItem(PowLimit) || {};
+const defaultPowMaxTimes = process.env.NODE_ENV === 'production' ? 100 : 5;
 
 const state = {
     clientStatus: -1,
@@ -24,7 +27,9 @@ const state = {
     hideZeroAssets: +localStorage.getItem(HideZeroAssets) || 0,
     customNodes,
     officialNodes: [],
-    currentNode: ''
+    currentNode: '',
+    powMaxTimes: defaultPowMaxTimes,
+    powLimit: defaultPowLimit
 };
 
 const mutations = {
@@ -81,6 +86,10 @@ const mutations = {
     },
     setCurrentNode(state, node) {
         state.currentNode = node;
+    },
+    setPowLimit(state, powLimit) {
+        localStorage.setItem(PowLimit, powLimit);
+        state.powLimit = powLimit;
     }
 };
 
@@ -113,6 +122,26 @@ const actions = {
     changeNode({ commit }, node) {
         localStorage.setItem(CurrentNode, node);
         commit('setCurrentNode', node);
+    },
+    updatePowLimit({ commit, state }, { address, time = 1 }) {
+        const { powLimit } = state;
+        const today = d().format('DD-MM-YYYY');
+        let addrPowLimit = { ...powLimit[address] };
+        if (addrPowLimit && addrPowLimit.lastUpdate === today) {
+            addrPowLimit = {
+                time: addrPowLimit.time + time,
+                lastUpdate: today
+            };
+        } else {
+            addrPowLimit = {
+                time,
+                lastUpdate: today
+            };
+        }
+        commit('setPowLimit', {
+            ...powLimit,
+            [address]: addrPowLimit
+        });
     }
 };
 
@@ -127,6 +156,16 @@ const getters = {
     allRpcNodes(state) {
         const all = state.officialNodes.concat(state.customNodes);
         return Array.from(new Set(all));
+    },
+    powTimesLeft(state, getters) {
+        const addr = getters.activeAddr;
+        const tmp = state.powLimit[addr];
+        const today = d().format('DD-MM-YYYY');
+
+        if (tmp && tmp.lastUpdate === today) {
+            return state.powMaxTimes - tmp.time;
+        }
+        return state.powMaxTimes;
     }
 };
 
