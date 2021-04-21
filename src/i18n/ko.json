@@ -60,7 +60,13 @@
     },
     "pow": {
         "ing": "PoW를 실행해 할당량을 얻으세요",
-        "no": "PoW를 실행하지 않는 경우 할당량에 대해 VITE를 스테이킹 할 수 있습니다."
+        "no": "PoW를 실행하지 않는 경우 할당량에 대해 VITE를 스테이킹 할 수 있습니다.",
+        "insuffQuota": "Get Quota",
+        "insuffQuotaMsg": "We notice you have no VITE locked for Quota. Please lock VITE or if you prefer, you can run POW to get Quota.",
+        "insuffQuotaMsg2": "VITE Only {powMaxTimes} transactions can be made per day per address without staking VITE. Your address has exhausted all {powMaxTimes} transactions. Please go to the quota page and stake your VITE to perform more transactions.",
+        "getQuota": "Lock VITE",
+        "skip": "Run POW",
+        "cancel": "Cancel"
     },
     "addAccount": "계정 생성하기",
     "saveQrcode": "QR코드 이미지 저장하기",
