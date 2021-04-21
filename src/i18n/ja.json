@@ -60,7 +60,13 @@
     },
     "pow": {
         "ing": "PoWを実行してクォータを取得",
-        "no": "クオータ取得のためにPoWを実行したくない場合は、VITEをステークすることができます"
+        "no": "クオータ取得のためにPoWを実行したくない場合は、VITEをステークすることができます",
+        "insuffQuota": "Get Quota",
+        "insuffQuotaMsg": "We notice you have no VITE locked for Quota. Please lock VITE or if you prefer, you can run POW to get Quota.",
+        "insuffQuotaMsg2": "VITE Only {powMaxTimes} transactions can be made per day per address without staking VITE. Your address has exhausted all {powMaxTimes} transactions. Please go to the quota page and stake your VITE to perform more transactions.",
+        "getQuota": "Lock VITE",
+        "skip": "Run POW",
+        "cancel": "Cancel"
     },
     "addAccount": "アカウントの作成",
     "saveQrcode": "QRコードを保存する",
