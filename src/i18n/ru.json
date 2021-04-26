@@ -254,13 +254,13 @@
             "wrongNode": "Введите корректный URL узла!",
             "changeNodeSuccess": "Успешное подключение к узлу.",
             "failedConnected": "Ошибка подключения к узлу",
-            "inputPlaceholder": "Please enter the node url prefix with wss."
+            "inputPlaceholder": "Пожалуйста, введите префикс URL узла с wss."
         },
         "triggerGate": [
             "Закрыть",
             "Открыть"
         ],
-        "gateHelp": "You can customize your gateway configuration when activating this feature. Currently this feature is mainly for developers.",
+        "gateHelp": "Вы можете настроить конфигурацию шлюза при активации этой функции. В настоящее время эта функция предназначена главным образом для разработчиков.",
         "lang": "Язык",
         "block": "Текущая Высота",
         "version": "Version",
@@ -283,10 +283,10 @@
             "60": "1 Час",
             "720": "12 Часов"
         },
-        "theme": "Theme color",
+        "theme": "Цвет темы",
         "themeList": [
-            "Light",
-            "Dark"
+            "Светлая",
+            "Темный"
         ]
     },
     "create": {
@@ -302,7 +302,7 @@
             "long": "Пароль не может превышать 32 символа",
             "name": "Имя учетной записи поддерживает только Английские и Китайские символы, цифры и подчеркивание",
             "consistency": "Пожалуйста, введите тот же пароль",
-            "pwFormat": "Wrong password format. The password should only contain digits, letters and symbols."
+            "pwFormat": "Неверный формат пароля. Пароль должен содержать только цифры, буквы и символы."
         }
     },
     "startCreate": {
@@ -335,7 +335,7 @@
             "balanceTips": "You can transfer your assets to other addresses via clicking 'Send' button",
             "gateTips": "In this cross-chain section, you can map other tokens into Vite network. Click 'Receive' button to deposit assets to your Vite Wallet. Click 'Send' button to transfer your assets to other platforms. * Cross-chain receive/send process may charge fees, it also has its transfer limitation.",
             "availableExAmountTips": "You can transfer your assets from Vite Wallet to ViteX Exchange via clicking 'Deposit' button. Click 'Withdraw' button to transfer assets from ViteX Exchange to Vite Wallet. No transaction fees caused during these processes.",
-            "unreceivedTips": "Unreceived funds will be received automatically after signing in"
+            "unreceivedTips": "Неполученные средства будут получены автоматически после входа в систему"
         },
         "actionType": {
             "SEND": "Отправить",
@@ -351,7 +351,7 @@
         "transferConfirm": {
             "from": "От",
             "to": "До",
-            "wallet": "Wallet Account",
+            "wallet": "Аккаунт кошелька",
             "dex": "Exchange Account",
             "avaliableAmount": "Баланс"
         },
@@ -713,9 +713,9 @@
             "edit": {
                 "title": "Изменить адрес создания блока",
                 "newBlockProducer": "пожалуйста, введите новый адрес создания блока",
-                "newRewardAddress": "please input new reward withdraw address",
+                "newRewardAddress": "Пожалуйста, введите новый адрес получения вознаграждения",
                 "changeBlockProducer": "Адрес Создания Блока",
-                "changeRewardAddress": "Reward Withdraw Address",
+                "changeRewardAddress": "Редактировать адрес вывода наград SBP",
                 "btn": "Подтвердить изменения"
             }
         },
@@ -723,7 +723,7 @@
             "title": "Регистрационная Форма",
             "nodeName": "Имя Ноды",
             "producerAddr": "Адрес Создания Блока",
-            "rewardWithdrawAddress": "Reward Withdraw Address",
+            "rewardWithdrawAddress": "Редактировать адрес вывода наград SBP",
             "quotaAddr": "Адрес Стейкинга",
             "quotaTime": "Период Стейкинга",
             "time": "7776000 снимков блоков (примерно 90 дней)",
@@ -831,7 +831,7 @@
         },
         "vb": {
             "title": "ViteConnect",
-            "closeAlert": "close",
+            "closeAlert": "Закрыть",
             "connect": {
                 "tips": "Сканируйте QR-код через приложение Vite Wallet"
             },
@@ -846,58 +846,58 @@
             "accountName": "Адрес ViteConnect"
         },
         "ledger": {
-            "title": "Ledger Device",
-            "accountName": "Ledger Wallet",
-            "verifyAddress": "Verify address",
+            "title": "Устройство",
+            "accountName": "Кошелек Ledger",
+            "verifyAddress": "Подтвердить адрес",
             "closeAlert": "Отменить",
             "start": {
-                "title": "Support Hardware Wallets: Ledger Nano S / Ledger Nano X",
-                "connectError": "Having Connection Issues?",
-                "introduction": "App Installation & Usage Instructions",
-                "introductionUrl": "https://support.ledger.com/hc/en-us/articles/115005165269-Connection-issues-with-Windows-or-Linux",
-                "connectErrorUrl": "https://support.ledger.com/hc/en-us/articles/115005165269-Connection-issues-with-Windows-or-Linux"
+                "title": "Поддержка аппаратных кошельков: Ledger Nano S / Ledger Nano X",
+                "connectError": "Проблемы с подключением?",
+                "introduction": "Инструкции по установке и использованию приложения",
+                "introductionUrl": "https://support.ledger.com/hc/ru/articles/115005165269-Connection-issues-with-Windows-or-Linux",
+                "connectErrorUrl": "https://support.ledger.com/hc/ru/articles/115005165269-Connection-issues-with-Windows-or-Linux"
             },
-            "connectWithUSB": "Use USB",
-            "connectWithBlu": "Use Bluetooth",
-            "connectLedger": "Connect to Ledger",
+            "connectWithUSB": "Использовать USB",
+            "connectWithBlu": "Использовать Bluetooth",
+            "connectLedger": "Подключиться к Ledger",
             "connect": {
-                "title": "Address Select",
-                "tips": "Select an address to use:",
-                "selectConnectType": "Choose connection type: (Bluetooth is only supported on Ledger Nano X)",
-                "cancelSelect": "Select a device to connect",
-                "connectError": "Connect failed. Please confirm Vite app is opened on device",
-                "interfaceNotAvailable": "Connect failed. Please check USB cable is connected. If you connect through Bluetooth, switch off Bluetooth and switch on again",
-                "receiveBlockSuccess": "Successfully received {num} transaction",
+                "title": "Выбор адреса",
+                "tips": "Выберите адрес для использования:",
+                "selectConnectType": "Выберите тип подключения: (Bluetooth поддерживается только на Ledger Nano X)",
+                "cancelSelect": "Выберите устройство для подключения",
+                "connectError": "Подключение не удалось. Пожалуйста, удостоверьтесь, что приложение VITE запущено на устройстве",
+                "interfaceNotAvailable": "Подключение не удалось. Пожалуйста, проверьте подключение к USB кабелю. Если вы подключитесь через Bluetooth, выключите Bluetooth и снова включите",
+                "receiveBlockSuccess": "Успешно получена транзакция {num}",
                 "introduction": {
                     "1": {
-                        "title": "Step 1: ",
-                        "content": "Connect Ledger device and enter PIN code"
+                        "title": "Шаг 1: ",
+                        "content": "Подключите Ledger и введите PIN-код"
                     },
                     "2": {
-                        "title": "Step 2: ",
-                        "content": "Open Vite app on Ledger"
+                        "title": "Шаг 2: ",
+                        "content": "Откройте приложение VITE на Ledger"
                     }
                 }
             },
             "addressSelect": {
-                "index": "Index",
+                "index": "Индекс",
                 "address": "Адрес",
                 "balance": "Баланс",
                 "unreceived": "Не получено",
-                "nextPage": "Next page",
-                "prePage": "Last page",
+                "nextPage": "Следующая страница",
+                "prePage": "Последняя страница",
                 "confirm": "Подтвердить",
-                "unUsedAccount": "New"
+                "unUsedAccount": "Новый"
             },
             "confirm": {
-                "tips": "Please confirm the transaction on your Ledger device",
-                "verifyAddress": "Please verify the address on your Ledger device",
-                "alert": "Warning",
-                "alertContent": "Address has been denied on Ledger device. Please double verify if this address matches the address displayed on your Ledger device. If yes, ignore this message and go ahead to confirm the transaction, otherwise DO NOT send asset to the address and quit immediately.",
-                "alertLeftBtn": "I confirm the addresses are matched",
-                "alertRightBtn": "Addresses mismatch. Get me out of here!",
-                "userCancel": "Transaction is cancelled on Ledger",
-                "userCancelByWeb": "You cancelled the transaction in Vite wallet. In this case, the transaction will be abandoned and never go through to blockchain even if it is confirmed on your Ledger device."
+                "tips": "Пожалуйста, подтвердите транзакцию на вашем Ledger",
+                "verifyAddress": "Пожалуйста, проверьте адрес на вашем Ledger",
+                "alert": "Предупреждение",
+                "alertContent": "Адрес был отклонен на Ledger. Пожалуйста, убедитесь, что этот адрес соответствует адресу, отображаемому на вашем Ledger. Если да, проигнорируйте это сообщение и подтвердите транзакцию, в противном случае НЕ отправляйте актив на адрес.",
+                "alertLeftBtn": "Подтверждаю соответствие адресов",
+                "alertRightBtn": "Несоответствие адресов. Отменить действие!",
+                "userCancel": "Транзакция отменена на Ledger",
+                "userCancelByWeb": "Вы отменили транзакцию в VITE кошельке. В этом случае транзакция не будет проходить в блокчейн, даже если она подтверждена на вашем устройстве Ledger."
             }
         },
         "invite": {
@@ -922,8 +922,8 @@
                 " <span class='strong'>5%</span> от торговых сборов, сгенерированых пользователями, использующими реферальный код, будет рассматриваться как торговые сборы, которые могут майнить VX."
             ],
             "receiveRuleItems": [
-                "Invited users will receive an extra <span class='strong'>2.5%</span> of trading as mining rewards and <span class='strong'>1.25%</span> of market-making as mining rewards",
-                "Enjoy <span class='strong'>10%</span> off trading fees with an invitation code"
+                "Приглашенные пользователи получат дополнительные <span class='strong'>2.5%</span> наград за торговлю и <span class='strong'>1.25%</span> за маркет-мейкинг",
+                "Наслаждайтесь <span class='strong'>10%</span> скидкой на торговые комиссии с кодом приглашения"
             ]
         }
     },
@@ -952,10 +952,10 @@
         "depthStep": "{step} цифр",
         "blocking": "Сеть перегружена, пожалуйста, повторите попытку позже",
         "supportMining": "Mineable Trading Pairs",
-        "cmcHelp": "View VITE on CoinMarketCap",
-        "supportTradeMining": "Eligible for trading as mining",
-        "supportOrderMining": "Eligible for market-making as mining",
-        "zeroFee": "Zero Fee",
+        "cmcHelp": "Посмотреть VITE на CoinMarketCap",
+        "supportTradeMining": "Поддерживает награду за торговые операции",
+        "supportOrderMining": "Поддерживает награды за маркет-мейкинг",
+        "zeroFee": "Без комиссий",
         "buyMiningPrice": "Qualifies for mining when buy price is greater than {price}",
         "sellMiningPrice": "Qualifies for mining when sell price is less than {price}",
         "operator": {
