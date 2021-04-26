@@ -81,12 +81,12 @@
     },
     "bnbConf": {
         "title": "Важное Замечание",
-        "t1": "VITE Binance Listing Coming! Please vote to have VITE listed on Binance.",
-        "t2": "Voting Period: 12:00 pm Dec 12 to 12:00 pm Dec 13 (HKT)",
-        "t3": "Voting Method: Holding 50 BNB allows for 1 vote (10 votes max)",
-        "t4": "Voting Rewards: All voted users will be rewarded with an airdrop totaling 21,000,000 VITE based on executed votes.",
-        "btn": "Vote Now!!!",
-        "notice": "[Attention]: You must have 50-500 BNBs in your Binance Account starting Dec 5 and last through Dec 13 to Qualify for Voting!"
+        "t1": "Голосуйте за листинг VITE на Binance!",
+        "t2": "Период голосования: 12:00 дек с 12:00 до 12:00 дек 13 (HKT)",
+        "t3": "Метод голосования: Holding 50 BNB позволяет за 1 голос (10 голосов макс)",
+        "t4": "Награды за голосование: Все проголосовавшие пользователи будут награждаться раздачей в сумме 21 000 000 000 VITE на основании выполненных голосов.",
+        "btn": "Голосуй сейчас!",
+        "notice": "[Attention]: Вы должны иметь 50-500 BNB на Вашем аккаунте Binance начиная с 5 декабря и продлите через 13 Дек для оценки голосования!"
     },
     "errCode": {
         "35003": "{name} Конфликт ID, пожалуйста, повторите попытку позже",
@@ -352,12 +352,12 @@
             "from": "От",
             "to": "До",
             "wallet": "Аккаунт кошелька",
-            "dex": "Exchange Account",
+            "dex": "Баланс биржи",
             "avaliableAmount": "Баланс"
         },
         "addToken": {
             "title": "Добавить Токен",
-            "placeholder": "Please enter token name or TokenID",
+            "placeholder": "Пожалуйста, введите имя токена или TokenID",
             "lTxt": "Отменить",
             "rTxt": "Добавить"
         },
