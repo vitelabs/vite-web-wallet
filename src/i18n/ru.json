@@ -1149,26 +1149,26 @@
                 "0-step1": "1. Создайте API",
                 "0-step2": "2. Авторизация делегирования выбранных торговых пар",
                 "0-step3": "3. Получение квоты и делегация для работы API",
-                "0-step4": "View <a href=\"https://vite.wiki/dex/api/dex-apis.html\" target=\"_blank\">API Documentation</a> for further support",
-                "1": "One set of API Key and Secret is allowed for the same address at any given time.",
-                "2": "To avoid asset loss, Do Not disclose your Access Key and Secret",
-                "3": "The API package is set with the free base package at 10 transactions per minute by default, upgrade options available."
+                "0-step4": "Смотрите <a href=\"https://vite.wiki/dex/api/dex-apis.html\" target=\"_blank\">API-документацию</a> для дальнейшей поддержки",
+                "1": "Одновременно только один набор публичного и секретного ключей API разрешён для одного адреса VITE.",
+                "2": "Чтобы избежать потери активов, не раскрывайте ключи API третьим лицам.",
+                "3": "API устанавливается с базовым пакетом, по умолчанию - 10 транзакций в минуту. Параметры доступны для конфигурации."
             },
             "stakingForQuota": {
-                "title": "Delegation Quota",
-                "agentAddress": "Delegation Address",
-                "stakingAmount": "Stake Amount",
+                "title": "Делегировать квоту",
+                "agentAddress": "Адрес делегации",
+                "stakingAmount": "Сумма заморозки",
                 "ok": "Подтвердить"
             },
             "keyConfirm": {
-                "accessKey": "Access Key",
-                "secretKey": "Secret Key",
-                "agentAddress": "Delegation Address",
-                "title": "API Created Successfully",
+                "accessKey": "Публичный ключ доступа",
+                "secretKey": "Секретный ключ доступа",
+                "agentAddress": "Адрес делегирования",
+                "title": "Ключ API создан успешно!",
                 "tips": {
                     "title": "Важное Замечание",
-                    "0": "To avoid asset loss, Do Not disclose your Access Key and Secret Key.",
-                    "1": "In cases of lost secret key, Delete the current API and Re-Apply for a new API key."
+                    "0": "Чтобы избежать потери активов, не раскрывайте ключи API третьим лицам.",
+                    "1": "В случае компрометации секретного ключа, удалите текущий API и создайте новый."
                 },
                 "warn": "The Secret key is displayed only once and cannot be found back if lost, please keep it properly."
             },
