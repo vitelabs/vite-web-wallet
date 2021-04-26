@@ -49,24 +49,24 @@
         },
         "failTitle": "Ордер не Выполнен",
         "notice-all": {
-            "buy": "Price: {price} {ttoken} \nAmount: {amount} {ttoken}, was completed. View Order History page for details.",
-            "sell": "Price: {price} {ttoken} \nAmount: {amount} {ttoken}, was completed. View Order History page for details."
+            "buy": "Цена: {price} {ttoken}\nСумма: {amount} {ttoken}, исполнено. Подробнее на странице истории сделок.",
+            "sell": "Цена: {price} {ttoken}\nСумма: {amount} {ttoken}, исполнено. Подробнее на странице истории сделок."
         },
         "notice-partial": {
-            "buy": "Price: {price} {ttoken} \nAmount: {amount} {ttoken}, is {executedPercent}% completed.",
-            "sell": "Price: {price} {ttoken} \nAmount: {amount} {ttoken}, is {executedPercent}% completed."
+            "buy": "Цена: {price} {ttoken}\nСумма: {amount} {ttoken}, на {executedPercent}% исполнено.",
+            "sell": "Цена: {price} {ttoken}\nСумма: {amount} {ttoken}, на {executedPercent}% исполнено."
         },
         "error": "Ваш ордер {amount} {ftoken} ({ftoken}/{ttoken}) в {time} не удался, для получения более подробной информации, пожалуйста, посмотрите в разделе История Ордеров."
     },
     "pow": {
         "ing": "Запуск PoW для получения квоты",
         "no": "Вы можете стейкать VITE для квоты, если не хотите запускать PoW",
-        "insuffQuota": "Get Quota",
-        "insuffQuotaMsg": "We notice you have no VITE locked for Quota. Please lock VITE or if you prefer, you can run POW to get Quota.",
+        "insuffQuota": "Получить квоту",
+        "insuffQuotaMsg": "Уведомляем, что у вас нет VITE замороженных для получения Квоты. Заблокируйте VITE или, если хотите, можете запустить POW для получения Квоты.",
         "insuffQuotaMsg2": "VITE Only {powMaxTimes} transactions can be made per day per address without staking VITE. Your address has exhausted all {powMaxTimes} transactions. Please go to the quota page and stake your VITE to perform more transactions.",
-        "getQuota": "Lock VITE",
-        "skip": "Run POW",
-        "cancel": "Cancel"
+        "getQuota": "Заморозить VITE",
+        "skip": "Запустить POW",
+        "cancel": "Отмена"
     },
     "addAccount": "Создать Аккаунт",
     "saveQrcode": "Сохранить изображение QR-кода",
@@ -117,16 +117,16 @@
         "UpdateSBPBlockProducingAddress_V1": "Обновить Регистрацию",
         "RevokeSBP": "Отменить Регистрацию",
         "RevokeSBP_V1": "Отменить Регистрацию",
-        "WithdrawSBPReward": "Claim Reward",
-        "WithdrawSBPReward_V1": "Claim Reward",
+        "WithdrawSBPReward": "Получить вознаграждение",
+        "WithdrawSBPReward_V1": "Получить вознаграждение",
         "VoteForSBP": "Голосование",
         "VoteForSBP_V1": "Голосование",
         "CancelSBPVoting": "Отменить Голосование",
         "CancelSBPVoting_V1": "Отменить Голосование",
         "StakeForQuota": "Получить Квоту",
         "StakeForQuota_V1": "Получить Квоту",
-        "CancelQuotaStake": "Withdrawal of Stake",
-        "CancelQuotaStake_V1": "Withdrawal of Stake",
+        "CancelQuotaStake": "Разморозить стейк",
+        "CancelQuotaStake_V1": "Разморозить стейк",
         "IssueToken": "Выпуск Токена",
         "IssueToken_V1": "Выпуск Токена",
         "ReIssueToken": "Дополнительный Выпуск Токена",
@@ -147,8 +147,8 @@
         "DexCancelOrder_V1": "ViteX Отзыв Ордеров",
         "DexStakeForSuperVIP": "ViteX SVIP",
         "DexStakeForSuperVIP_V1": "ViteX SVIP",
-        "DexConfigMarketAgents": "Configure Delegations",
-        "DexConfigMarketAgents_V1": "Configure Delegations",
+        "DexConfigMarketAgents": "Настроить Делегации",
+        "DexConfigMarketAgents_V1": "Настроить Делегации",
         "DexOpenNewMarket": "ViteX Размещение Токена",
         "DexOpenNewMarket_V1": "ViteX Размещение Токена",
         "DexStakeForVIP": "ViteX VIP",
@@ -162,9 +162,9 @@
         "ResponseFail": "Перевод",
         "RefundByContractRequest": "Перевод",
         "GenesisResponse": "Генезис",
-        "FullNodeStake": "Stake for Full Node",
-        "FullNodeCancelStake": "Withdraw Full Node Stakes",
-        "UpdateSBPRewardWithdrawAddress": "Edit SBP Reward Withdraw Address"
+        "FullNodeStake": "Заморозить для запуска ноды",
+        "FullNodeCancelStake": "Разморозить стейк ноды",
+        "UpdateSBPRewardWithdrawAddress": "Редактировать адрес вывода наград SBP"
     },
     "btn": {
         "cancel": "Отменить",
@@ -187,7 +187,7 @@
         "err": "Произошла ошибка",
         "request": "{name} запрос отправлен, пожалуйста, подождите",
         "copy": "Успешно скопировано",
-        "copyShare": "Copy share link successful!",
+        "copyShare": "Ссылка успешно скопирована!",
         "addrFormat": "Некорректный формат адреса",
         "amtFormat": "Некорректный формат суммы",
         "transSucc": "Транзакция выполнена успешно!",
@@ -198,7 +198,7 @@
         "operateSuccess": "Операция Выполнена Успешно",
         "operateFail": "Операция Не Выполнена",
         "unreceived": "Разблокируйте свой кошелек перед использованием",
-        "unreceivedNum": "Please sign in to collect unreceived funds, currently you have {number} unreceived transaction(s)"
+        "unreceivedNum": "Пожалуйста, войдите, чтобы получить неполученные средства, в настоящее время у вас {number} неполученных транзакций"
     },
     "beforeUse": {
         "title": "Прочитайте перед использованием",
@@ -241,19 +241,19 @@
         "config": "Общие",
         "currency": "Валюта По Умолчанию",
         "secure": "Безопасность",
-        "gate": "Custom Gateway",
-        "rpcUrl": "Node",
-        "changeRpcUrl": "Change",
+        "gate": "Настроить Шлюз",
+        "rpcUrl": "Адрес узла",
+        "changeRpcUrl": "Изменить",
         "changeRpcUrlDialog": {
-            "title": "Change Node",
-            "addCustomNode": "Add Custom Node",
-            "officialNode": "Official Node",
-            "addNode": "Add Node",
-            "customNode": "Custom Node",
-            "deleteCustomNode": "Delete",
-            "wrongNode": "Please enter the correct URL!",
-            "changeNodeSuccess": "Have connected to new node.",
-            "failedConnected": "Node connection error",
+            "title": "Изменить узел",
+            "addCustomNode": "Добавить пользовательский узел",
+            "officialNode": "Официальный узел",
+            "addNode": "Добавить узел",
+            "customNode": "Пользовательский узел",
+            "deleteCustomNode": "Удалить пользовательский узел",
+            "wrongNode": "Введите корректный URL узла!",
+            "changeNodeSuccess": "Успешное подключение к узлу.",
+            "failedConnected": "Ошибка подключения к узлу",
             "inputPlaceholder": "Please enter the node url prefix with wss."
         },
         "triggerGate": [
