@@ -45,7 +45,7 @@
     "dealReminder": {
         "title": {
             "buy": "Исполнена заявка на покупку: {ftoken} / {ttoken}",
-            "sell": "Sell Order Completed: {ftoken} / {ttoken}"
+            "sell": "Исполнена заявка продажи: {ftoken} / {ttoken}"
         },
         "failTitle": "Ордер не Выполнен",
         "notice-all": {
