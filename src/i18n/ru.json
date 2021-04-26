@@ -1,7 +1,7 @@
 {
     "lang": "RU",
     "help": "Помощь",
-    "announcements": "Announcements",
+    "announcements": "Анонсы",
     "start": "Начать",
     "login": "Войти",
     "regAcc": "Зарегистрироваться",
@@ -44,7 +44,7 @@
     },
     "dealReminder": {
         "title": {
-            "buy": "Buy Order Completed: {ftoken} / {ttoken}",
+            "buy": "Исполнена заявка на покупку: {ftoken} / {ttoken}",
             "sell": "Sell Order Completed: {ftoken} / {ttoken}"
         },
         "failTitle": "Ордер не Выполнен",
