@@ -956,19 +956,19 @@
         "supportTradeMining": "Поддерживает награду за торговые операции",
         "supportOrderMining": "Поддерживает награды за маркет-мейкинг",
         "zeroFee": "Без комиссий",
-        "buyMiningPrice": "Qualifies for mining when buy price is greater than {price}",
-        "sellMiningPrice": "Qualifies for mining when sell price is less than {price}",
+        "buyMiningPrice": "Цена, выше чем {price}, доступна для наград за торговлю.",
+        "sellMiningPrice": "Цена, ниже чем {price}, доступна для наград за торговлю.",
         "operator": {
-            "noName": "Anonymous Operator",
+            "noName": "Анонимный оператор",
             "overview": "Описание",
             "txPair": "Торговые Пары",
             "confirmTitle": "Напоминание о Риске",
             "confirmText": "Текущая торговая пара - {symbol}. Пожалуйста, будьте осторожны при торговле. Инвестиции в цифровые активы сопряжены с высокими рисками. Прежде чем инвестировать, пожалуйста, имейте полное представление обо всех рисках инвестирования в цифровые активы и оценивайте подлинность, законность и действительность цифровых активов самостоятельно. Пожалуйста, будьте осторожны с вашими собственными инвестиционными решениями и возьмите на себя ответственность за потерю ваших активов.",
-            "address": "Operator Address",
-            "name": "Operator Name"
+            "address": "Адрес оператора",
+            "name": "Имя оператора"
         },
         "operatorTxPair": {
-            "title": "Trading Pair Details",
+            "title": "Детали торговой пары",
             "tokenTab": "Token Details",
             "operatorTab": "Детали Оператора"
         },
@@ -1145,10 +1145,10 @@
             "noSupportForHardware": "Hardware Wallet is not supported at the moment",
             "tips": {
                 "title": "Notice",
-                "0": "ViteX is releasing official API to provide access to markets and real-time trading services. Follow the instructions below to properly acquire an API private key.",
-                "0-step1": "1. Create API",
-                "0-step2": "2. Authorize delegation of selected trading pairs",
-                "0-step3": "3. Stake quota for API delegation address",
+                "0": "ViteX предоставляет официальный API для доступа к рынку и торговым услугам в режиме реального времени. Следуйте инструкциям ниже, чтобы получить приватный ключ API.",
+                "0-step1": "1. Создайте API",
+                "0-step2": "2. Авторизация делегирования выбранных торговых пар",
+                "0-step3": "3. Получение квоты и делегация для работы API",
                 "0-step4": "View <a href=\"https://vite.wiki/dex/api/dex-apis.html\" target=\"_blank\">API Documentation</a> for further support",
                 "1": "One set of API Key and Secret is allowed for the same address at any given time.",
                 "2": "To avoid asset loss, Do Not disclose your Access Key and Secret",
