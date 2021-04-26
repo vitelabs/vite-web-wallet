@@ -1170,16 +1170,16 @@
                     "0": "Чтобы избежать потери активов, не раскрывайте ключи API третьим лицам.",
                     "1": "В случае компрометации секретного ключа, удалите текущий API и создайте новый."
                 },
-                "warn": "The Secret key is displayed only once and cannot be found back if lost, please keep it properly."
+                "warn": "Секретный ключ отображается только один раз и не может быть восстановлен в случае его утраты. Пожалуйста, сохраните его."
             },
             "upgradeConfirm": {
-                "title": "Upgrade Package",
-                "currentPackage": "Current",
-                "selectPackage": "Select New",
-                "selectTime": "Valid For",
-                "month": " Mth",
+                "title": "Обновить пакет",
+                "currentPackage": "Текущее",
+                "selectPackage": "Выбрать новый",
+                "selectTime": "Действителен для",
+                "month": "Месяц",
                 "payAmount": "Всего",
-                "balance": "VX Balance"
+                "balance": "Баланс VX"
             }
         }
     },
@@ -1290,9 +1290,9 @@
             "0": "Купить"
         },
         "status": {
-            "1": "Ongoing",
+            "1": "В настоящее время",
             "2": "Завершено",
-            "3": "Cancelled",
+            "3": "Отменено",
             "4": "Ошибка"
         },
         "confirmTable": {
@@ -1320,7 +1320,7 @@
             ],
             "rowMap": {
                 "statusMap": {
-                    "1": "In Order",
+                    "1": "В заказе",
                     "2": "Выполнено",
                     "3": "Отменено",
                     "4": "Ошибка"
@@ -1345,7 +1345,7 @@
         "addQuota": "Создать новый стейкинг",
         "add": "Добавить",
         "withdraw": "Получить",
-        "withdrawList": "Withdrawal List",
+        "withdrawList": "Список снятий",
         "tbHead": {
             "date": "Дата",
             "fee": "Торговые Комиссии",
@@ -1354,9 +1354,9 @@
         },
         "txTitle": "Торговля как Майнинг Общий Доход",
         "quotaTitle": "Стейкинг как Майнинг Общий Доход",
-        "addHint1": "Single stake should be at least 134 VITE",
-        "addHint2": "VITE staking will be effective immediately after submission. Staking can be canceled after 3 days",
-        "addHint3": "Staked amount will be released after the 7-day waiting period",
+        "addHint1": " Стейк должен быть не менее 134 VITE",
+        "addHint2": "Заморозка VITE будет действовать сразу. Разморозка будет доступна через 3 дня.",
+        "addHint3": "Размещённая сумма будет доступна к разморозке после 7-дневного периода ожидания",
         "withdrawHint1": "You will no longer be able to mine VX after staking is canceled",
         "withdrawHint2": "It takes 7 days to return unstaked VITE coins to exchange balance",
         "addTitle": "Стейкинг VITE для Майнинга",
