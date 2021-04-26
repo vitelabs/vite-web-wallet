@@ -664,15 +664,15 @@
             "txt1": "[Число зарегистрированных узлов] Количество полных узлов, зарегистрированных с текущим адресом",
             "txt2": "[Число активных узлов] Количество активных полных узлов, зарегистрированных с текущего адреса",
             "txt3": "[Количество вознаграждаемых узлов] Количество узлов",
-            "t2": "Multiple Full nodes can be registered with the same address, but must be staked individually at least 10,000 VITE each; When calculating Active Node Reward, if staking amount / 10000 yields a whole number that is greater than or equal to the number of active nodes, all active nodes will be rewarded; If staking amount / 10000 yields a whole number that is less than the number of active nodes, the number of nodes being rewarded equals to the whole number.",
-            "t3": "Calculation of voting rewards does not depend on the number of nodes, but the staking amount."
+            "t2": "Несколько полных узлов могут быть зарегистрированы с одним и тем же адресом, но в заморозке должно быть по меньшей мере 10 000 VITE на каждый; При вычислении награды, если сумма в заморозке / 10000 дает целое число, которое больше или равно количеству активных узлов, все активные узлы будут вознаграждены; Если количество VITE в заморозке / 10000 дает целое число, которое меньше числа активных узлов, количество вознаграждаемых узлов равно целому числу.",
+            "t3": "Расчет вознаграждения за голосование зависит не от количества узлов, а от количества монет в заморозке."
         },
-        "confirmText": "Confirm to stake {amount} VITE, staking can be cancelled after {days} days",
+        "confirmText": "Подтвердите, что {amount} VITE будут заморожены, будет доступно к разморозке через {days} дней",
         "addQuota": {
             "address": "Адрес Стейкинга",
             "stakeDays": "Период Стейкинга",
-            "placeholder": "Minimum Stake {min} VITE",
-            "stakingSuspend": "Staking Temporarily Suspended"
+            "placeholder": "Минимальная сумма для заморозки {min} VITE",
+            "stakingSuspend": "Заморозка временно приостановлена"
         },
         "quotaContent": {
             "onlineReward": "Active Node Reward",
