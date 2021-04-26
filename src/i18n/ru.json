@@ -363,7 +363,7 @@
         },
         "type": {
             "native": "Нативные Токены",
-            "crossGate": "Cross-Chain Coins"
+            "crossGate": "Cross-chain монеты"
         },
         "assetType": {
             "TOTAL": "Все Активы",
@@ -378,18 +378,18 @@
                 "tokenId": "ID Токена",
                 "tokenName": "Название",
                 "totalSupply": "Общее Предложение",
-                "total": "Circulating Supply",
+                "total": "В обороте",
                 "overview": "Описание",
                 "type": "Тип",
-                "gate": "Cross-Chain Gateway",
+                "gate": "Cross-chain шлюз",
                 "website": "Веб-сайт",
-                "whitePaper": "White Paper",
-                "explorer": "Explorer",
-                "github": "Github",
-                "media": "Social Media",
-                "crossType": "Cross-Chain",
-                "originType": "Native",
-                "viewmore": "View More"
+                "whitePaper": "Белая бумага",
+                "explorer": "Обозреватель блоков",
+                "github": "GitHub",
+                "media": "Социальные сети",
+                "crossType": "Cross-chain",
+                "originType": "Нативный",
+                "viewmore": "Подробнее"
             },
             "reIssuable": {
                 "true": "Перевыпуск",
@@ -411,10 +411,10 @@
             "setting": "Интерфейс Шлюза",
             "nodeDesc": "Руководство Пользователя",
             "settingPlaceholder": "Пожалуйста, введите адрес шлюза",
-            "nodeDescStr": "This function only works for cross-chain coins, do not use this on built-in tokens. Meanwhile, please be careful about unfamiliar gateway links. By continuing to use our platform, you agree and acknowledge that Vite Labs would not be responsible for the loss of your fund and other negative consequences caused. Fill out the gateway link below if you need to use gateway, the link will come into effect after you hit save."
+            "nodeDescStr": "Эта функция работает только для cross-chain транзакций, не используйте ее для встроенных токенов. При этом, пожалуйста, будьте осторожны с незнакомыми ссылками на шлюз. Продолжая использовать нашу платформу, вы соглашаетесь и подтверждаете, что Vite Labs не будет нести ответственность за потерю ваших средств и другие негативные последствия. Заполните ссылку на шлюз ниже, если вам нужно использовать шлюз, ссылка вступит в силу после нажатия кнопки «Сохранить»."
         },
         "depositRecord": {
-            "tabName": "Receive History",
+            "tabName": "История входящих транзакций",
             "heads": [
                 "Время",
                 "Сумма",
@@ -455,16 +455,16 @@
             "title": "Cross-Chain Receive Funds",
             "addrErr": "Что-то пошло не так с нодой шлюза, проверьте настройки сети",
             "addressTitle": "Адрес Получателя",
-            "labelTips": "(Please use this '{labelName}' with your recipient address, otherwise your assets will lose",
-            "labelCodeTips": "Please Scan the QR code from {labelName}",
-            "codeTips": "Scan QR code to deposit. Please send funds with the wallet that supports {tokenSymbol}",
+            "labelTips": "(Пожалуйста, используйте это '{labelName}' ' с адресом получателя, иначе ваши активы будут потеряны",
+            "labelCodeTips": "Пожалуйста, отсканируйте QR-код от {labelName}",
+            "codeTips": "Сканируйте QR-код для пополнения. Пожалуйста, отправьте средства с кошельком, который поддерживает {tokenSymbol}",
             "tips": [
                 "Cross-Chain Receive operation will do {tokenSymbol} Cross-Chain mapping to VITE network, you can still transfer the assets to other platform after receiving them",
                 "Вы можете отправить только {tokenSymbol} через этот адрес, и сумма не может быть меньше {min}",
                 "Вы получите свои активы после {confirmationCount} подтверждений, пожалуйста подождите"
             ]
         },
-        "viteTips": "VITE only supports cross-chain functionality between the new ERC20 VITE token and Native VITE Coin.",
+        "viteTips": "VITE поддерживает только cross-chain функциональность между новым токеном ERC20 VITE и Native VITE Coin.",
         "withdraw": {
             "title": "Cross-Chain Send Funds",
             "btn": "Вывести Средства",
@@ -482,10 +482,10 @@
                 "fee": "Комиссия",
                 "all": "Все"
             },
-            "labelPlaceholder": "Please input {labelName}",
-            "amountPlaceholder": "Please input send amount which should not be less than {min}",
-            "addressPlaceholder": "Please enter {token} recipient address",
-            "successTips": "Transaction request has been sent",
+            "labelPlaceholder": "Пожалуйста, введите {labelName}",
+            "amountPlaceholder": "Пожалуйста, введите сумму которая должна быть не меньше {min}",
+            "addressPlaceholder": "Пожалуйста, введите адрес получателя {token}",
+            "successTips": "Запрос на транзакцию был отправлен",
             "failTips": "Произошла ошибка в ноде шлюза, проверьте настройки сети"
         },
         "nodeErr": "Нода шлюза недействительна, пожалуйста, проверьте настройки шлюза"
@@ -501,7 +501,7 @@
         "help": {
             "title": "Быстрое Понимание Квоты"
         },
-        "transfer": "Send Funds",
+        "transfer": "Отправить средства",
         "getTestToken": "Получить Тестовые Токены",
         "transDetail": "Больше Деталей Транзакции",
         "address": "Мой Адрес",
@@ -657,13 +657,13 @@
         "sum": "Сумма"
     },
     "walletFullNode": {
-        "title": "Full Nodes",
+        "title": "Полный узел",
         "help": {
             "title": "About",
             "t1": "Glossary",
-            "txt1": "[Number of Registered Nodes]  The number of full nodes registered with the current address",
-            "txt2": "[Number of Active Nodes]  The number of active full nodes registered with the current address",
-            "txt3": "[Number of Rewarding nodes]  Number of nodes being rewarded",
+            "txt1": "[Число зарегистрированных узлов] Количество полных узлов, зарегистрированных с текущим адресом",
+            "txt2": "[Число активных узлов] Количество активных полных узлов, зарегистрированных с текущего адреса",
+            "txt3": "[Количество вознаграждаемых узлов] Количество узлов",
             "t2": "Multiple Full nodes can be registered with the same address, but must be staked individually at least 10,000 VITE each; When calculating Active Node Reward, if staking amount / 10000 yields a whole number that is greater than or equal to the number of active nodes, all active nodes will be rewarded; If staking amount / 10000 yields a whole number that is less than the number of active nodes, the number of nodes being rewarded equals to the whole number.",
             "t3": "Calculation of voting rewards does not depend on the number of nodes, but the staking amount."
         },
