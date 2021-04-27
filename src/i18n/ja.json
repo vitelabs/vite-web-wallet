@@ -840,8 +840,8 @@
             },
             "start": {
                 "scan": "Vite WalletアプリでQRコードをスキャンしてください",
-                "downloadTips": "Vite Walletアプリをまだ持っていませんか？",
-                "download": "Vite Walletをダウンロード"
+                "downloadTips": "Don’t have the Vite Wallet App? ",
+                "download": "Download here"
             },
             "accountName": "ViteConnect アドレス"
         },
@@ -851,10 +851,10 @@
             "verifyAddress": "Verify address",
             "closeAlert": "キャンセル",
             "start": {
-                "title": "Support Hardware Wallets: Ledger Nano S / Ledger Nano X",
-                "connectError": "Having Connection Issues?",
-                "introduction": "App Installation & Usage Instructions",
-                "introductionUrl": "https://support.ledger.com/hc/en-us/articles/115005165269-Connection-issues-with-Windows-or-Linux",
+                "title": "Supported Wallets: Ledger Nano S / Ledger Nano X",
+                "connectError": "Connection Issues?",
+                "introduction": "App Installation & User Instructions",
+                "introductionUrl": "https://docs.vite.org/go-vite/tutorial/ledger-install.html",
                 "connectErrorUrl": "https://support.ledger.com/hc/en-us/articles/115005165269-Connection-issues-with-Windows-or-Linux"
             },
             "connectWithUSB": "Use USB",
