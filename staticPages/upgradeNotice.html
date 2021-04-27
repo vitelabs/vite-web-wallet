@@ -48,24 +48,20 @@
         </div>
 
         <script>
-            function getDefaultLang() {
-                try {
-                    const type = navigator.appName;
-                    let lang = type === 'Netscape' ? navigator.language : navigator.userLanguage;
-                    lang = lang.substr(0, 2);
-                    return lang === 'zh' ? 'zh' : 'en';
-                } catch (err) {
-                    console.warn(err);
-                    return 'en';
-                }
-            }
+            // function getDefaultLang() {
+            //     try {
+            //         const type = navigator.appName;
+            //         let lang = type === 'Netscape' ? navigator.language : navigator.userLanguage;
+            //         lang = lang.substr(0, 2);
+            //         return lang === 'zh' ? 'zh' : 'en';
+            //     } catch (err) {
+            //         console.warn(err);
+            //         return 'en';
+            //     }
+            // }
 
-            let lang = getDefaultLang();
-            if (lang === 'zh') {
-                document.getElementById('notice').innerHTML = '<h2></h2><div>ViteX正在升级中，预计7月12日 12:00（UTC+8）升级完成，新版本将支持交易挖矿、持有VX分红等功能，敬请期待。</div></br><div></div>';
-            } else {
-                document.getElementById('notice').innerHTML = '<h2></h2><div>ViteX is upgrading right now, this upgrade will be finished till 12nd July 12:00 (UTC+8). </div></br><div>Functions of trading as mining, VX holding dividends will be supported in this upcoming version, stay tuned.</div>';
-            }
+            // let lang = getDefaultLang();
+            document.getElementById('notice').innerHTML = '<h2></h2><div>ViteX is upgrading right now, stay tuned.</div>';
         </script>
 
         <style>
