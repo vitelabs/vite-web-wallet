@@ -840,8 +840,8 @@
             },
             "start": {
                 "scan": "Scan the QR code via Vite Wallet App",
-                "downloadTips": "Don’t have Vite Wallet App yet? ",
-                "download": "Download Vite Wallet"
+                "downloadTips": "Don’t have the Vite Wallet App? ",
+                "download": "Download here"
             },
             "accountName": "ViteConnect Address"
         },
@@ -851,10 +851,10 @@
             "verifyAddress": "Verify address",
             "closeAlert": "Cancel",
             "start": {
-                "title": "Support Hardware Wallets: Ledger Nano S / Ledger Nano X",
-                "connectError": "Having Connection Issues?",
-                "introduction": "App Installation & Usage Instructions",
-                "introductionUrl": "https://support.ledger.com/hc/en-us/articles/115005165269-Connection-issues-with-Windows-or-Linux",
+                "title": "Supported Wallets: Ledger Nano S / Ledger Nano X",
+                "connectError": "Connection Issues?",
+                "introduction": "App Installation & User Instructions",
+                "introductionUrl": "https://docs.vite.org/go-vite/tutorial/ledger-install.html",
                 "connectErrorUrl": "https://support.ledger.com/hc/en-us/articles/115005165269-Connection-issues-with-Windows-or-Linux"
             },
             "connectWithUSB": "Use USB",
