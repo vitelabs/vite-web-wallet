@@ -104,25 +104,25 @@
         "37003": "Wrong order price format",
         "37004": "Exception occurs in order transaction volume",
         "37005": "Order transaction amount too small",
-        "37006": "Existed trading market",
+        "37006": "Mevcut alım satım marketi",
         "37007": "Order trading market not exist",
         "37008": "Exception occurs in searching order information",
         "37009": "Revoked order doesn't belong to current address",
         "37010": "This order status cannot be revoked"
     },
     "txType": {
-        "RegisterSBP": "SBP Registration",
-        "RegisterSBP_V1": "SBP Registration",
-        "UpdateSBPBlockProducingAddress": "Update Registration",
-        "UpdateSBPBlockProducingAddress_V1": "Update Registration",
-        "RevokeSBP": "Revoke Registration",
-        "RevokeSBP_V1": "Revoke Registration",
-        "WithdrawSBPReward": "Claim Reward",
-        "WithdrawSBPReward_V1": "Claim Reward",
-        "VoteForSBP": "Voting",
-        "VoteForSBP_V1": "Voting",
-        "CancelSBPVoting": "Revoke Voting",
-        "CancelSBPVoting_V1": "Revoke Voting",
+        "RegisterSBP": "SBP Kaydı",
+        "RegisterSBP_V1": "SBP Kaydı",
+        "UpdateSBPBlockProducingAddress": "Kaydı Güncelle",
+        "UpdateSBPBlockProducingAddress_V1": "Kaydı Güncelle",
+        "RevokeSBP": "Kaydı İptal Et",
+        "RevokeSBP_V1": "Kaydı İptal Et",
+        "WithdrawSBPReward": "Ödülü Topla",
+        "WithdrawSBPReward_V1": "Ödülü Topla",
+        "VoteForSBP": "Oylama",
+        "VoteForSBP_V1": "Oylama",
+        "CancelSBPVoting": "Oylamayı İptal Et",
+        "CancelSBPVoting_V1": "Oylamayı İptal Et",
         "StakeForQuota": "Get Quota",
         "StakeForQuota_V1": "Get Quota",
         "CancelQuotaStake": "Withdrawal of Stake",
@@ -176,38 +176,38 @@
         "understand": "Anladım",
         "edit": "Düzenle",
         "reReg": "Yeniden Kaydol",
-        "otherProd": "Use Other Products of Vite",
+        "otherProd": "Vite'in Diğer Ürünlerini Kullan",
         "known": "Biliyorum"
     },
     "hint": {
         "noNet": "No network detected",
-        "pwErr": "Incorrect password!",
-        "pwEmpty": "Password cannot be empty!",
-        "noData": "No Data",
-        "err": "Oops, something went wrong",
-        "request": "{name} request has sent, please wait",
-        "copy": "Successfully copied",
+        "pwErr": "Hatalı parola!",
+        "pwEmpty": "Parola boş bırakılamaz!",
+        "noData": "Veri Yok",
+        "err": "Oops, bir hata oluştu",
+        "request": "{name} talebi gönderildi, lütfen bekleyin",
+        "copy": "Kopyalama başarılı",
         "copyShare": "Copy share link successful!",
-        "addrFormat": "Incorrect address format",
-        "amtFormat": "Incorrect amount format",
-        "transSucc": "Transaction successful!",
-        "insufficientBalance": "Insufficient balance",
-        "validMaxDigit": "At most {digit} decimals",
-        "nodeErr": "The full node is abnormal, please try again later.",
-        "bigger0": "Value must be greater than 0",
-        "operateSuccess": "Operation Successful",
-        "operateFail": "Operation Failed",
-        "unreceived": "Please sign in to collect unreceived funds",
+        "addrFormat": "Hatalı adres formatı",
+        "amtFormat": "Hatalı miktar formatı",
+        "transSucc": "İşlem başarılı!",
+        "insufficientBalance": "Yetersiz bakiye",
+        "validMaxDigit": "En çok {digit} ondalık sayı",
+        "nodeErr": "Tam düğüm anormal, lütfen daha sonra tekrar deneyin.",
+        "bigger0": "Değer 0'dan büyük olmalıdır",
+        "operateSuccess": "İşlem Başarılı",
+        "operateFail": "İşlem Başarısız",
+        "unreceived": "Alınmamış varlıkları toplamak için lütfen oturum açın",
         "unreceivedNum": "Please sign in to collect unreceived funds, currently you have {number} unreceived transaction(s)"
     },
     "beforeUse": {
-        "title": "Read Before Use",
+        "title": "Kullanmadan Önce Okuyun",
         "text1": "For your funds' safety, create account function is not supported provisionally on web wallet. Please download Vite App to create account. Vite platform would like to warn you that if you visit a phishing website or lose you backup, our company cannot recover your funds.",
         "text2": "Please note that our websites do not store your private keys or seed phrase. Therefore, you will need to restore your account via seed phrase if you decide to change browsers, clear local cookies, or change PCs.",
         "text3": "Please take proper precautions in ensuring that you accurately record and safely store your seed phrase. Even the slightest error will result in you not being able to successfully restore your address."
     },
     "preview": {
-        "t": "Version {version}",
+        "t": "Sürüm {version}",
         "txt1": "x.vite.net is a platform integrating the Vite wallet and the ViteX exchange, launched by Vite Labs.",
         "txt2": "You can manager and transfer assets, trade, get quota, register SBP and full node, vote, issue tokens, apply for ViteX API, authorize delegated trading, etc.",
         "txt3": "x.vite.net supports mnemonic words, Ledger, and ViteConnect.",
@@ -215,14 +215,14 @@
     },
     "pwdConfirm": {
         "conf": "Open password-free mode to free you from entering password during every transaction process. ",
-        "title": "Password",
-        "placeholder": "Please input wallet password",
+        "title": "Parola",
+        "placeholder": "Lütfen cüzdan parolasını girin",
         "unlockAcc": "Please unlock {name} first"
     },
     "quotaConfirm": {
-        "title": "Insufficient Quota",
+        "title": "Yetersiz Kota",
         "cancelContent": "You cannot {operate} due to insufficient TPS quota. You need to stake VITE for quota to {operate}",
-        "goQuota": "Stake VITE",
+        "goQuota": "VITE Stake et",
         "noOperate": "Not {operate} yet"
     },
     "mnemonic": {
@@ -234,7 +234,7 @@
         "empty": "Kurtarma Kelimeleri girişi boş bırakılamaz",
         "error": "Hatalı kurtarma kelimeleri. Tekrar deneyin",
         "hint": "Örneğin: elma muz şeftali mango armut ...",
-        "change": "Switch to {len} Mnemonic Words"
+        "change": "{len} Anımsatıcı Kelimelere Geç"
     },
     "setting": {
         "title": "Hesap Ayarları",
@@ -283,14 +283,14 @@
             "60": "1 Saat",
             "720": "12 Saat"
         },
-        "theme": "Theme color",
+        "theme": "Tema rengi",
         "themeList": [
-            "Light",
-            "Dark"
+            "Işık",
+            "Karanlık"
         ]
     },
     "create": {
-        "input": "Please enter your password",
+        "input": "Lütfen parolanızı girin",
         "again": "Please confirm your password",
         "choose": "Choose an account",
         "finish": "Done",
@@ -330,17 +330,17 @@
             "balance": "Wallet Balance",
             "onroad": "Wallet Unreceived Funds",
             "gate": "Wallet Cross-Chain Gateway",
-            "totalExAmount": "Exchange Total Balance",
-            "availableExAmount": "Exchange Available Balance",
+            "totalExAmount": "Toplam Exchange Bakiyesi",
+            "availableExAmount": "Kullanılabilir Exchange Bakiyesi",
             "balanceTips": "On-chain send is available for users who would like to send transactions from your Vite wallet to other Vite addresses",
             "gateTips": "In this cross-chain section, you can map other coins/tokens into Vite network. Click 'Deposit' button to deposit assets to your Vite Wallet. Click 'Withdraw' button to transfer your assets to other platforms. * Cross-chain deposit/withdrawal process may cause fees, it also has its transfer limit.",
             "availableExAmountTips": "You can transfer your assets between Vite Wallet and ViteX Exchange via clicking 'Transfer' button. No transaction fees caused during these processes.",
-            "unreceivedTips": "Unreceived funds will be received automatically after signing in"
+            "unreceivedTips": "Alınmamış varlıklar, oturum açtıktan sonra otomatik olarak alınacaktır"
         },
         "actionType": {
             "SEND": "On-Chain Send",
-            "RECEIVE": "Deposit",
-            "CHARGE": "Deposit",
+            "RECEIVE": "Yatırma",
+            "CHARGE": "Yatırma",
             "WITHDRAW": "Çekme",
             "EXTRANSFER": "Transfer",
             "EXRECRODS": "Geçmiş",
@@ -383,13 +383,13 @@
                 "type": "Tür",
                 "gate": "Cross-Chain Gateway",
                 "website": "Web Sitesi",
-                "whitePaper": "White Paper",
+                "whitePaper": "Teknik İnceleme",
                 "explorer": "Explorer",
-                "github": "Github",
-                "media": "Social Media",
+                "github": "GitHub",
+                "media": "Sosyal Medya",
                 "crossType": "Cross-Chain",
-                "originType": "Native",
-                "viewmore": "View More"
+                "originType": "Yerel",
+                "viewmore": "Daha Fazlasını Görüntüle"
             },
             "reIssuable": {
                 "true": "Re-issuable",
@@ -397,37 +397,37 @@
             }
         },
         "gateInfo": {
-            "clickCustomer": "Submit a request",
-            "name": "Gateway Name",
-            "customer": "Customer Service",
-            "privacy": "Terms of Services",
+            "clickCustomer": "Bir talep gönderin",
+            "name": "Ağ Geçidi Adı",
+            "customer": "Müşteri Hizmetleri",
+            "privacy": "Hizmet Şartları",
             "clickPrivacy": "{gate}'s official gateway Terms of Services",
-            "gateSetting": "Configure Gateway",
-            "tabName": "Gateway Details",
+            "gateSetting": "Ağ Geçidini Yapılandır",
+            "tabName": "Ağ Geçidi Ayrıntıları",
             "selfdefined": "Customize Gateway",
             "officalNet": "Web Sitesi",
-            "introduction": "Description",
+            "introduction": "Açıklama",
             "token": "Issued Token",
             "setting": "Gateway Interface",
-            "nodeDesc": "User Guide",
-            "settingPlaceholder": "Please input gateway link address",
+            "nodeDesc": "Kullanım Kılavuzu",
+            "settingPlaceholder": "Lütfen ağ geçidi link adresini girin",
             "nodeDescStr": "This function only works for cross-chain coins, do not use this on built-in tokens. Meanwhile, please be careful about unfamiliar gateway links. By continuing to use our platform, you agree and acknowledge that Vite Labs would not be responsible for the loss of your fund and other negative consequences caused. Fill out the gateway link below if you need to use gateway, the link will come into effect after you hit save."
         },
         "depositRecord": {
             "tabName": "Receive History",
             "heads": [
-                "Time",
-                "Amount",
-                "Status",
+                "Zaman",
+                "Miktar",
+                "Durumlar",
                 "{outChain} Hash",
                 "vite Hash",
-                "Fees"
+                "Komisyonlar"
             ],
             "statusMap": {
                 "OPPOSITE_PROCESSING": "{outChain} awaits to confirm{confirms}",
                 "OPPOSITE_CONFIRMED_FAIL": "{outChain} processing failed",
                 "OPPOSITE_CONFIRMED": "Gateway Received",
-                "TOT_CONFIRMED": "Completed",
+                "TOT_CONFIRMED": "Tamamlandı",
                 "BELOW_MINIMUM": "Topup Failed",
                 "TOT_PROCESSING": "VITE chain await to confirm"
             }
@@ -467,28 +467,28 @@
         "viteTips": "VITE only supports cross-chain functionality between the new ERC20 VITE token and Native VITE Coin.",
         "withdraw": {
             "title": "Cross-Chain Withdrawal",
-            "btn": "Withdraw",
+            "btn": "Çekme",
             "balanceErrMap": {
-                "notEnough": "Insufficient Balance",
-                "overMax": "Withdrawal amount should be less than {max}",
-                "lessMin": "Withdrawal amount should not be less than {min}"
+                "notEnough": "Yetersiz Bakiye",
+                "overMax": "Çekim miktarı en az {max} olmalıdır",
+                "lessMin": "Çekim miktarı {min}'den az olmamalıdır"
             },
-            "feeTips": "Transaction fee is set by gateway operator",
-            "addressErr": "Address format is incorrect",
+            "feeTips": "İşlem komisyonu ağ geçidi operatörü tarafından belirlenir",
+            "addressErr": "Adres formatı hatalı",
             "labels": {
-                "balance": "Balance",
-                "address": "Recipient Address",
-                "amount": "Amount",
-                "fee": "Fee",
-                "all": "All"
+                "balance": "Bakiye",
+                "address": "Alıcı Adresi",
+                "amount": "Miktar",
+                "fee": "Komisyon",
+                "all": "Tümü"
             },
-            "labelPlaceholder": "Please input {labelName}",
-            "amountPlaceholder": "Please input send amount which should not be less than {min}",
-            "addressPlaceholder": "Please enter {token} recipient address",
-            "successTips": "Transaction request has been sent",
+            "labelPlaceholder": "Lütfen {labelName} girin",
+            "amountPlaceholder": "Lütfen {min} 'den az olmaması gereken gönderme miktarını girin",
+            "addressPlaceholder": "Lütfen {token} alıcı adresini girin",
+            "successTips": "İşlem talebi gönderildi",
             "failTips": "An error occurred in gateway node, please check the network settings"
         },
-        "nodeErr": "Gateway node is invalid, please check the gateway settings"
+        "nodeErr": "Ağ geçidi düğümü geçersiz, lütfen ağ geçidi ayarlarını kontrol edin"
     },
     "viteExplorer": {
         "title": "Vite Block Explorer"
@@ -497,24 +497,24 @@
         "title": "ViteScan"
     },
     "wallet": {
-        "title": "Quota Management",
+        "title": "Kota Yönetimi",
         "help": {
             "title": "Quick Understanding of Quota"
         },
-        "transfer": "Send Funds",
-        "getTestToken": "Get Test Tokens",
-        "transDetail": "More Transaction Details",
-        "address": "My Address",
-        "fundFloat": "Unreceived",
-        "pend": "Pending",
-        "inAddress": "Recipient Address",
-        "sum": "Amount",
+        "transfer": "Varlıkları Gönder",
+        "getTestToken": "Test Tokenlarını Al",
+        "transDetail": "Daha Fazla İşlem Ayrıntıları",
+        "address": "Adresim",
+        "fundFloat": "Alınmadı",
+        "pend": "Bekliyor",
+        "inAddress": "Alıcı Adresi",
+        "sum": "Miktar",
         "remarks": "Memo",
-        "remarksLong": "{len} bytes left",
-        "totalAsset": "Total Assets",
+        "remarksLong": "{len} bayt kaldı",
+        "totalAsset": "Toplam Varlıklar",
         "placeholder": {
-            "amount": "Please input amount",
-            "remarks": "Please input memo",
+            "amount": "Lütfen miktarı girin",
+            "remarks": "Lütfen memo girin",
             "addr": "Lütfen adres girin"
         },
         "hint": {
@@ -613,13 +613,13 @@
             "help": {
                 "t1": "What is Quota?",
                 "txt1": "In the Vite system, users do not purchase the gas required for a transaction by paying a fee, but acquire the computing resource through a quota-based model. Required quota for sending a transaction = the basic quota (request) + quota (the attached text data), quota required to accept a transaction = the basic quota (response). This quota-based resource configuration protocol allows users to obtain higher resource quotas in two ways: Staking VITE to obtain quota and running PoW.",
-                "t2": "What is Staking?",
+                "t2": "Stake Nedir?",
                 "txt2": "In the Vite system, the user can stake VITE to obtain a certain amount of quota. The minimum value for staking is 134 VITE, and there is no maximum limit; meanwhile, Vite system also supports that the A-address stakes a part of the VITE and allocates the obtained quota to the B address. When users apply to stake, VITE will be sent to the smart contract address instead of another user, and only the user who applies for staking has access to manage the staking amount.",
-                "t3": "What is PoW?",
+                "t3": "PoW Nedir?",
                 "txt3": "Proof of Work (PoW), is a protocol to confirm that you have done a certain amount of work, and is also an economic measure to deter DDoS attacks and other service abuse. It requires the initiator to conduct a certain amount of computing, which means that it may take some time for the computer. In the Vite system, users can obtain a free quota by running the PoW, and also can send a transaction without any annotated information through obtained quota."
             },
             "cancel": {
-                "describe": "Your current staked amount is {amount} VITE, please confirm to withdraw.",
+                "describe": "Mevcut stake miktarınız {amount} VITE, lütfen çekmeyi onaylayın.",
                 "rightBtn": "Başlamaya Hazır",
                 "leftBtn": "Çekimi İptal Et"
             },
@@ -631,7 +631,7 @@
         },
         "list": {
             "title": "Stake Listem",
-            "total": "Staking {amount} VITE in total",
+            "total": "Toplamda {amount} VITE Stake ettiniz",
             "amount": "Miktar",
             "withdrawTime": "Expected Due Date",
             "unexpired": "Temporarily cannot make withdrawal of staked token until due date",
@@ -652,7 +652,7 @@
             "confirms": "Onaylanıyor",
             "confirmed": "Onaylandı"
         },
-        "timestamp": "Timestamp",
+        "timestamp": "Zaman damgası",
         "tAddress": "Adres",
         "sum": "Miktar"
     },
@@ -671,14 +671,14 @@
         "addQuota": {
             "address": "Stake Adresi",
             "stakeDays": "Stake Süresi",
-            "placeholder": "Minimum Stake {min} VITE",
-            "stakingSuspend": "Staking Temporarily Suspended"
+            "placeholder": "Minimum {min} VITE Stake Edin",
+            "stakingSuspend": "Stake Etme Geçici Olarak Askıya Alındı"
         },
         "quotaContent": {
             "onlineReward": "Etkin Düğüm Ödülü",
             "voteReward": "Oylama Ödülü",
             "yesterday": "dün",
-            "all": "Accumulated VITE: {num}",
+            "all": "Birikmiş VITE: {num}",
             "nodeInfo": "Düğüm Bilgisi",
             "onlineNodes": "Etkin Düğümler",
             "rewardNodes": "Rewarding Nodes",
@@ -693,35 +693,35 @@
         },
         "register": "SBP Kaydı",
         "cancel": "SBP Cancellation",
-        "cancelBtn": "Cancel",
-        "rewardBtn": "Claim Rewards",
-        "noReward": "No Rewards",
+        "cancelBtn": "İptal",
+        "rewardBtn": "Ödülleri Topla",
+        "noReward": "Ödül Yok",
         "rewardConfirm": {
-            "title": "Claim Rewards",
+            "title": "Ödülleri Topla",
             "describe1": "Rewards that are available for claiming update at 13:00:00 (UTC+8) every day, till {time} you can claim",
             "describe2": "Query mining rewards details, you can",
-            "describe3": "click here",
+            "describe3": "buraya tıklayın",
             "describe4": "Rewards will send to your Vite Web Wallet address after submitting claim request, please check it in Wallet Home Page. Note: Don't repeat claim actions.",
-            "leftBtn": "Not Now",
-            "rightBtn": "Claim All"
+            "leftBtn": "Şimdi Değil",
+            "rightBtn": "Tümünü Topla"
         },
         "confirm": {
             "title": "Registration of SBP candidates",
             "describe": "The {amount} VITE of current address will be locked about 90 days when you submit the registration,  the amount will be returned to staking address after being unlocked",
-            "leftBtn": "Not register yet",
-            "rightBtn": "Ready to Register",
+            "leftBtn": "Henüz kaydolmadınız mı",
+            "rightBtn": "Kaydolmaya Hazır",
             "edit": {
-                "title": "Edit SBP Infomation",
+                "title": "SBP Bilgisini Düzenle",
                 "newBlockProducer": "please input new block creation address",
                 "newRewardAddress": "please input new reward withdraw address",
                 "changeBlockProducer": "Block Creation Address",
                 "changeRewardAddress": "Reward Withdraw Address",
-                "btn": "Confirm to Change"
+                "btn": "Değişikliği Onaylayın"
             }
         },
         "section1": {
-            "title": "Registration Form",
-            "nodeName": "Node Name",
+            "title": "Kayıt Formu",
+            "nodeName": "Düğüm Adı",
             "producerAddr": "Block Creation Address",
             "rewardWithdrawAddress": "Reward Withdraw Address",
             "quotaAddr": "Staking Address",
@@ -753,78 +753,78 @@
         }
     },
     "walletVote": {
-        "title": "Voting",
+        "title": "Oylama",
         "help": {
-            "title": "About Voting",
+            "title": "Oylama Hakkında",
             "text": "You can join and vote for 25 SBPs （Snapshot Block Producer), each round of voting lasts 75s, the polls you can use for voting are equivalent to the amount of VITE tokens owned by voting address, the default selection is the choice of previous round, the SBPs will be chosen from random 23 out of top 25 candidate nodes, plus random 2 out of the candidate nodes ranking 26th-100th on the list, 25 SBPs in total."
         },
-        "toReward": "View my rewards",
-        "voting": "Voting",
+        "toReward": "Ödüllerimi göster",
+        "voting": "Oylama",
         "search": "Please input node name or block creation address",
         "addrNoExistErr": "You aren't able to vote for now as your address has no transaction record before",
-        "revokeVoting": "Revoke voting",
+        "revokeVoting": "Oylamayı İptal Et",
         "section1": {
-            "title": "My Voting",
+            "title": "Oylamam",
             "head": [
-                "Name",
-                "Status",
-                "My Voting",
-                "Status of Voting",
-                "Action"
+                "Ad",
+                "Durumlar",
+                "Oylamam",
+                "Oylama Durumu",
+                "Eylem"
             ],
             "nodeStatusMap": {
-                "1": "Active",
-                "2": "Inactive"
+                "1": "Etkin",
+                "2": "Etkin değil"
             },
             "voteStatusMap": {
-                "voted": "Voting Successful",
-                "voting": "Voting",
+                "voted": "Oylama Başarılı",
+                "voting": "Oylama",
                 "canceling": "Revoking in Process",
-                "voteNotWork": "Revoked Voting"
+                "voteNotWork": "Oylama İptal Edildi"
             },
             "hoverHelp": "The node {nodeName} you are voted for has been revoked, you may vote again directly or revoke your voting, If you do not do so, your original voting result will be recovered after the {nodeName} re-registering",
             "confirm": {
-                "cancelText": "Not yet",
-                "submitText": "Confirm"
+                "cancelText": "Henüz değil",
+                "submitText": "Onayla"
             },
-            "revoke": "Revoking",
-            "operateBtn": "Revoke",
-            "cancelVoteErr": "Failed to revoke voting, please try again"
+            "revoke": "İptal ediliyor",
+            "operateBtn": "İptal et",
+            "cancelVoteErr": "Oylama iptal edilemedi, lütfen tekrar deneyin"
         },
         "section2": {
-            "title": "SBP candidates",
+            "title": "SBP adayları",
             "head": [
                 "Rank",
-                "Node Name",
-                "Address",
-                "Votes",
-                "Action"
+                "Düğüm Adı",
+                "Adres",
+                "Oylar",
+                "Eylem"
             ],
             "confirm": {
                 "normal": {
-                    "content": "You can vote for only one SBP, are you sure you want to vote for {name}?",
-                    "cancelText": "Not yet",
-                    "submitText": "Ready to vote"
+                    "content": "Sadece bir SBP'ye oy verebilirsiniz, {name} adına oy vermek istediğinizden emin misiniz?",
+                    "cancelText": "Henüz değil",
+                    "submitText": "Oy için hazır"
                 },
                 "cover": {
                     "content": "You've already voted for {nodeName}, are you sure to overwrite current voting record?",
-                    "cancelText": "Confirm",
-                    "submitText": "Cancel"
+                    "cancelText": "Onayla",
+                    "submitText": "İptal"
                 }
             },
-            "noSearchData": "No content found, please try another input",
-            "operateBtn": "Vote",
-            "voteErr": "Failed to vote, please try again"
+            "noSearchData": "İçerik bulunamadı, lütfen başka bir giriş deneyin",
+            "operateBtn": "Oy",
+            "voteErr": "Oy verilemedi, lütfen tekrar deneyin"
         }
     },
     "assets": {
-        "title": "Assets",
+        "title": "Varlıklar",
         "notice": {
-            "title": "Important Notice",
-            "contentProvider": "This service is provided by {gate}.",
+            "title": "Önemli Uyarı",
+            "contentProvider": "Bu hizmet {gate} tarafından sağlanmaktadır.",
             "contentOther": "You agree and acknowledge that Vite Labs would not be responsible for any negative consequences caused by {gate}. Vite platform does not take any part in the relationship that may arise between {gate} and users of Vite platform",
             "contentAgree": "By continuing to use {gate}'s service, you agree and acknowledge {gate}'s",
-            "agreement": "Terms of Services, Trading Conditions and Privacy Policy",
+            "agreement": "Hizmet Şartları, Alım Satım Koşulları ve Gizlilik Politikası",
             "contentUngree": "Please agree to this terms before using {gate}'s service",
             "hint": "Contact customer service team of {gate} if you encounter any problems during payment process.",
             "next": "Confirm and Proceed"
