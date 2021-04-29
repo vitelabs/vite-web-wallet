@@ -11,52 +11,52 @@
     "restore": "Anımsatıcı Kelimeleri İçe Aktar",
     "register": "Kaydol",
     "createAcc": "Oluştur",
-    "settingAcc": "Setting Account",
-    "resetAcc": "Reset Your Account",
-    "logout": "Logout",
-    "saveLogout": "Logout",
+    "settingAcc": "Hesap Ayarları",
+    "resetAcc": "Hesabınızı Sıfırlayın",
+    "logout": "Çıkış",
+    "saveLogout": "Çıkış",
     "blockHeight": "Snapshot Block Height",
-    "accountName": "Account Name",
-    "action": "Action",
-    "stakingAmount": "Staking Amount",
+    "accountName": "Hesap Adı",
+    "action": "Eylem",
+    "stakingAmount": "Stake Miktarı",
     "submitStaking": "Submit Staking",
     "withdrawHeight": "Expected Snapshot Height",
-    "balance": "Balance",
-    "dexBalance": "ViteX Balance",
-    "addrName": "Address{index}",
-    "true": "true",
-    "false": "false",
+    "balance": "Bakiye",
+    "dexBalance": "ViteX Bakiyesi",
+    "addrName": "Adres{index}",
+    "true": "doğru",
+    "false": "yanlış",
     "guide": {
-        "close": "Close",
-        "next": "Next",
-        "closeTips": "Skip user guide (Not recommended)",
+        "close": "Kapat",
+        "next": "İleri",
+        "closeTips": "Kullanım kılavuzunu atla (Önerilmez)",
         "trade": [
             "Manage your assets (both Web Wallet and ViteX exchange) here",
-            "Check out Open Orders and Order History, know trading details",
+            "Açık Emirlere ve Emir Geçmişine göz atın, alım satım detaylarını öğrenin",
             "Participate in mining, acquire VX and trading fee dividends (Mining Dividends)",
             "Experience more features: Staking for Quota, becoming a SBP (Snapshot Block Producer) runner, Voting for SBPs, ERC20 conversion, Transaction Details, etc."
         ],
         "assets": [
-            "Deposit to Exchange",
-            "Withdraw to Wallet",
+            "Exchange'e Yatırma",
+            "Cüzdana Çekme",
             "Cross-Chain Deposit & Withdrawal"
         ]
     },
     "dealReminder": {
         "title": {
-            "buy": "Buy Order Completed: {ftoken} / {ttoken}",
-            "sell": "Sell Order Completed: {ftoken} / {ttoken}"
+            "buy": "Alım Emri Tamamlandı: {ftoken} / {ttoken}",
+            "sell": "Satım Emri Tamamlandı: {ftoken} / {ttoken}"
         },
-        "failTitle": "Order Failed",
+        "failTitle": "Emir Başarısız",
         "notice-all": {
-            "buy": "Price: {price} {ttoken} \nAmount: {amount} {ttoken}, was completed. View Order History page for details.",
-            "sell": "Price: {price} {ttoken} \nAmount: {amount} {ttoken}, was completed. View Order History page for details."
+            "buy": "Fiyat: {price} {ttoken}\nMiktar: {amount} {ttoken}, tamamlandı. Ayrıntılar için Emir Geçmişi sayfasını görüntüleyin.",
+            "sell": "Fiyat: {price} {ttoken}\nMiktar: {amount} {ttoken}, tamamlandı. Ayrıntılar için Emir Geçmişi sayfasını görüntüleyin."
         },
         "notice-partial": {
-            "buy": "Price: {price} {ttoken} \nAmount: {amount} {ttoken}, is {executedPercent}% completed.",
-            "sell": "Price: {price} {ttoken} \nAmount: {amount} {ttoken}, is {executedPercent}% completed."
+            "buy": "Fiyat: {price} {ttoken}\nMiktar: {amount} {ttoken}, % {executedPercent}'i tamamlandı.",
+            "sell": "Fiyat: {price} {ttoken}\nMiktar: {amount} {ttoken}, % {executedPercent}'i tamamlandı."
         },
-        "error": "Your order {amount} {ftoken} ({ftoken}/{ttoken}) at {time} has failed. For more details, please view Order History page."
+        "error": "{time} tarihindeki {amount} {ftoken} ({ftoken} / {ttoken}) emriniz başarısız oldu. Daha fazla ayrıntı için lütfen Emir Geçmişi sayfasını görüntüleyin."
     },
     "pow": {
         "ing": "Running PoW to acquire quota",
@@ -64,33 +64,33 @@
         "insuffQuota": "Get Quota",
         "insuffQuotaMsg": "We notice you have no VITE locked for Quota. Please lock VITE or if you prefer, you can run POW to get Quota.",
         "insuffQuotaMsg2": "VITE Only {powMaxTimes} transactions can be made per day per address without staking VITE. Your address has exhausted all {powMaxTimes} transactions. Please go to the quota page and stake your VITE to perform more transactions.",
-        "getQuota": "Lock VITE",
+        "getQuota": "VITE Kilitle",
         "skip": "Run POW",
-        "cancel": "Cancel"
+        "cancel": "İptal"
     },
-    "addAccount": "Create an Account",
-    "saveQrcode": "Save QR code image",
-    "unlockSuccess": "Unlock Success",
+    "addAccount": "Bir Hesap Oluştur",
+    "saveQrcode": "QR kodu resmini kaydet",
+    "unlockSuccess": "Kilit Açma Başarılı",
     "sendTrans": {
-        "send": "Send Transaction",
-        "symbol": "Send"
+        "send": "İşlem Gönder",
+        "symbol": "Gönder"
     },
     "compliance": {
         "text": "ViteX does not serve customers in the following countries/regions/territories: Mainland China, Hong Kong, Cuba, Iran, North Korea, Crimea, Sudan, Malaysia, Syria, USA [including all USA territories like Puerto Rico, American Samoa, Guam, Northern Mariana Island, and the US Virgin Islands (St. Croix, St. John and St. Thomas)], Bangladesh, Bolivia, Ecuador, and Kyrgyzstan. For more information, please read our Terms of Service and Privacy Policy",
-        "title": "Important Notice"
+        "title": "Önemli Uyarı"
     },
     "bnbConf": {
-        "title": "Important Notice",
-        "t1": "VITE Binance Listing Coming! Please vote to have VITE listed on Binance.",
-        "t2": "Voting Period: 12:00 pm Dec 12 to 12:00 pm Dec 13 (HKT)",
-        "t3": "Voting Method: Holding 50 BNB allows for 1 vote (10 votes max)",
+        "title": "Önemli Uyarı",
+        "t1": "VITE Binance Listelemesi Geliyor! Lütfen VITE'in Binance'de listelenmesi için oy kullanın.",
+        "t2": "Oylama Süresi: 12 Aralık 00.00'dan 13 Aralık 00.00'ye kadar (HKT)",
+        "t3": "Oylama Yöntemi: 50 BNB'ye sahip olmak 1 oy hakkı verir (Maks. 10 oy)",
         "t4": "Voting Rewards: All voted users will be rewarded with an airdrop totaling 21,000,000 VITE based on executed votes.",
-        "btn": "Vote Now!!!",
+        "btn": "Şimdi Oyla!!!",
         "notice": "[Attention]: You must have 50-500 BNBs in your Binance Account starting Dec 5 and last through Dec 13 to Qualify for Voting!"
     },
     "errCode": {
         "35003": "{name} ID conflict occurs, please re-submit later",
-        "35004": "Invalid parameters",
+        "35004": "Geçersiz parametreler",
         "35005": "Transactions are sent too frequent, please try again later",
         "35006": "Contract method not exist",
         "35011": "Network Congestion",
@@ -131,31 +131,31 @@
         "IssueToken_V1": "Token Issuance",
         "ReIssueToken": "Additional Token Issuance",
         "ReIssueToken_V1": "Additional Token Issuance",
-        "BurnToken": "Destroy Tokens",
-        "BurnToken_V1": "Destroy Tokens",
+        "BurnToken": "Tokenları Yok Et",
+        "BurnToken_V1": "Tokenları Yok Et",
         "TransferTokenOwnership": "Transfer of ownership",
         "TransferTokenOwnership_V1": "Transfer of ownership",
-        "DisableReIssue": "Edit token type",
-        "DisableReIssue_V1": "Edit token type",
-        "DexDeposit": "ViteX Deposit",
-        "DexDeposit_V1": "ViteX Deposit",
-        "DexWithdraw": "ViteX Withdrawal",
-        "DexWithdraw_V1": "ViteX Withdrawal",
-        "DexPlaceOrder": "ViteX Creating Orders",
-        "DexPlaceOrder_V1": "ViteX Creating Orders",
-        "DexCancelOrder": "ViteX Revoking Orders",
-        "DexCancelOrder_V1": "ViteX Revoking Orders",
+        "DisableReIssue": "Token türünü düzenle",
+        "DisableReIssue_V1": "Token türünü düzenle",
+        "DexDeposit": "ViteX Yatırımı",
+        "DexDeposit_V1": "ViteX Yatırımı",
+        "DexWithdraw": "ViteX Çekimi",
+        "DexWithdraw_V1": "ViteX Çekimi",
+        "DexPlaceOrder": "ViteX Emir Oluşturma",
+        "DexPlaceOrder_V1": "ViteX Emir Oluşturma",
+        "DexCancelOrder": "ViteX Emir İptali",
+        "DexCancelOrder_V1": "ViteX Emir İptali",
         "DexStakeForSuperVIP": "ViteX SVIP",
         "DexStakeForSuperVIP_V1": "ViteX SVIP",
-        "DexConfigMarketAgents": "Configure Delegations",
-        "DexConfigMarketAgents_V1": "Configure Delegations",
-        "DexOpenNewMarket": "ViteX Token Listing",
-        "DexOpenNewMarket_V1": "ViteX Token Listing",
+        "DexConfigMarketAgents": "Temsilcileri Yapılandır",
+        "DexConfigMarketAgents_V1": "Temsilcileri Yapılandır",
+        "DexOpenNewMarket": "ViteX Token Listeleme",
+        "DexOpenNewMarket_V1": "ViteX Token Listeleme",
         "DexStakeForVIP": "ViteX VIP",
         "DexStakeForVIP_V1": "ViteX VIP",
         "DexStakeForMining": "ViteX Staking",
         "DexStakeForMining_V1": "ViteX Staking",
-        "CreateContractRequest": "Create Contract",
+        "CreateContractRequest": "Sözleşme Oluştur",
         "TransferRequest": "Transfer",
         "ReIssueRequest": "Transfer",
         "Response": "Transfer",
@@ -167,17 +167,17 @@
         "UpdateSBPRewardWithdrawAddress": "Edit SBP Reward Withdraw Address"
     },
     "btn": {
-        "cancel": "Cancel",
-        "login": "Login",
-        "imported": "Import Account",
-        "back": "Back",
-        "submit": "Submit",
-        "next": "Next Step",
-        "understand": "I understand",
-        "edit": "Edit",
-        "reReg": "Re-register",
+        "cancel": "İptal",
+        "login": "Giriş Yap",
+        "imported": "Hesabı İçe Aktar",
+        "back": "Geri",
+        "submit": "Gönder",
+        "next": "Sonraki Adım",
+        "understand": "Anladım",
+        "edit": "Düzenle",
+        "reReg": "Yeniden Kaydol",
         "otherProd": "Use Other Products of Vite",
-        "known": "I know"
+        "known": "Biliyorum"
     },
     "hint": {
         "noNet": "No network detected",
@@ -226,62 +226,62 @@
         "noOperate": "Not {operate} yet"
     },
     "mnemonic": {
-        "title": "Mnemonic",
-        "restore": "Restore Account by Seed Phrase",
-        "record": "Generate Seed Phrase",
+        "title": "Anımsatıcı",
+        "restore": "Hesabı Kurtarma Kelimelerine Göre Geri Yükle",
+        "record": "Kurtarma Kelimeleri Oluştur",
         "prompt": "Mnemonic seed phrase is the only way to restore your wallet. You are strongly advised to write down the phrase and keep it in a safe place where only you can access.",
-        "placeholder": "Please input your mnemonic seed phrase",
-        "empty": "The input of seed phrase cannot be empty",
-        "error": "Incorrect seed phrase. Try again",
-        "hint": "Example: apple banana peach mango pear ...",
+        "placeholder": "Lütfen anımsatıcı kurtarma kelimelerinizi girin",
+        "empty": "Kurtarma Kelimeleri girişi boş bırakılamaz",
+        "error": "Hatalı kurtarma kelimeleri. Tekrar deneyin",
+        "hint": "Örneğin: elma muz şeftali mango armut ...",
         "change": "Switch to {len} Mnemonic Words"
     },
     "setting": {
-        "title": "Account Settings",
-        "config": "General",
-        "currency": "Default Currency",
-        "secure": "Security",
-        "gate": "Custom Gateway",
-        "rpcUrl": "Node",
-        "changeRpcUrl": "Change",
+        "title": "Hesap Ayarları",
+        "config": "Genel",
+        "currency": "Varsayılan Para Birimi",
+        "secure": "Güvenlik",
+        "gate": "Özel Ağ Geçidi",
+        "rpcUrl": "Düğüm",
+        "changeRpcUrl": "Değiştir",
         "changeRpcUrlDialog": {
-            "title": "Change Node",
-            "addCustomNode": "Add Custom Node",
-            "officialNode": "Official Node",
-            "addNode": "Add Node",
-            "customNode": "Custom Node",
-            "deleteCustomNode": "Delete",
-            "wrongNode": "Please enter the correct URL!",
+            "title": "Düğümü Değiştir",
+            "addCustomNode": "Özel Düğüm Ekle",
+            "officialNode": "Resmi Düğüm",
+            "addNode": "Düğüm Ekle",
+            "customNode": "Özel Düğüm",
+            "deleteCustomNode": "Sil",
+            "wrongNode": "Lütfen doğru URL'yi girin!",
             "changeNodeSuccess": "Have connected to new node.",
-            "failedConnected": "Node connection error",
+            "failedConnected": "Düğüm bağlantı hatası",
             "inputPlaceholder": "Please enter the node url prefix with wss."
         },
         "triggerGate": [
-            "Close",
-            "Open"
+            "Kapat",
+            "Aç"
         ],
         "gateHelp": "You can customize your gateway configuration when activating this feature. Currently this feature is mainly for developers.",
-        "lang": "Language",
-        "block": "Current Height",
-        "version": "Version",
-        "service": "Customer Service",
-        "site": "Official Website of Vite",
-        "sys": "System Portal",
+        "lang": "Dil",
+        "block": "Mevcut Yükseklik",
+        "version": "Sürüm",
+        "service": "Müşteri Hizmetleri",
+        "site": "Vite Resmi Web Sitesi",
+        "sys": "Sistem Portalı",
         "open": "Vite Github",
-        "addAddr": "Add Address",
-        "addrList": "Address Management",
-        "setDefault": "Select Default Address",
-        "autoLogout": "Auto Logout Time",
+        "addAddr": "Adres Ekle",
+        "addrList": "Adres Yönetimi",
+        "setDefault": "Varsayılan Adresi Seçin",
+        "autoLogout": "Otomatik Çıkış Süresi",
         "noPass": "Turn on password-free mode",
         "explorer": "Block Explorer",
-        "netInfo": "Network Information",
-        "logoutDescribe": "Your account will logout automatically when you leave this page",
+        "netInfo": "Ağ Bilgisi",
+        "logoutDescribe": "Bu sayfadan ayrıldığınızda, hesabınızdan otomatik olarak çıkış yapılacaktır",
         "timeList": {
-            "5": "5 Minutes",
-            "10": "10 Minutes",
-            "30": "30 Minutes",
-            "60": "1 Hour",
-            "720": "12 Hours"
+            "5": "5 Dakika",
+            "10": "10 Dakika",
+            "30": "30 Dakika",
+            "60": "1 Saat",
+            "720": "12 Saat"
         },
         "theme": "Theme color",
         "themeList": [
@@ -341,48 +341,48 @@
             "SEND": "On-Chain Send",
             "RECEIVE": "Deposit",
             "CHARGE": "Deposit",
-            "WITHDRAW": "Withdraw",
+            "WITHDRAW": "Çekme",
             "EXTRANSFER": "Transfer",
-            "EXRECRODS": "History",
-            "RECRODS": "History",
-            "EXCHARGE": "Deposit",
-            "EXWITHDRAW": "Withdraw"
+            "EXRECRODS": "Geçmiş",
+            "RECRODS": "Geçmiş",
+            "EXCHARGE": "Yatırma",
+            "EXWITHDRAW": "Çekme"
         },
         "transferConfirm": {
             "from": "From",
             "to": "To",
-            "wallet": "Wallet Account",
-            "dex": "Exchange Account",
-            "avaliableAmount": "Balance"
+            "wallet": "Cüzdan Hesabı",
+            "dex": "Exchange Hesabı",
+            "avaliableAmount": "Bakiye"
         },
         "addToken": {
-            "title": "Add Token",
+            "title": "Token Ekle",
             "placeholder": "Please enter token name or TokenID",
-            "lTxt": "Cancel",
-            "rTxt": "Add"
+            "lTxt": "İptal",
+            "rTxt": "Ekle"
         },
         "type": {
-            "native": "Native Tokens",
+            "native": "Yerel Tokenlar",
             "crossGate": "Cross-Chain Coins"
         },
         "assetType": {
-            "TOTAL": "All Assets",
-            "EX": "Exchange Assets",
-            "WALLET": "Wallet Assets"
+            "TOTAL": "Tüm Varlıklar",
+            "EX": "Exchange Varlıkları",
+            "WALLET": "Cüzdan Varlıkları"
         },
         "tokenInfo": {
-            "tabName": "Details",
-            "title": "{tokenSymbol} Information",
-            "saveGate": "Save",
+            "tabName": "Ayrıntılar",
+            "title": "{tokenSymbol} Bilgi",
+            "saveGate": "Kaydet",
             "labels": {
                 "tokenId": "TokenID",
-                "tokenName": "Name",
-                "totalSupply": "Total Supply",
-                "total": "Circulating Supply",
-                "overview": "Introduction",
-                "type": "Type",
+                "tokenName": "Ad",
+                "totalSupply": "Toplam Arz",
+                "total": "Dolaşımdaki Arz",
+                "overview": "Giriş",
+                "type": "Tür",
                 "gate": "Cross-Chain Gateway",
-                "website": "Website",
+                "website": "Web Sitesi",
                 "whitePaper": "White Paper",
                 "explorer": "Explorer",
                 "github": "Github",
@@ -405,7 +405,7 @@
             "gateSetting": "Configure Gateway",
             "tabName": "Gateway Details",
             "selfdefined": "Customize Gateway",
-            "officalNet": "Website",
+            "officalNet": "Web Sitesi",
             "introduction": "Description",
             "token": "Issued Token",
             "setting": "Gateway Interface",
@@ -515,12 +515,12 @@
         "placeholder": {
             "amount": "Please input amount",
             "remarks": "Please input memo",
-            "addr": "Please input address"
+            "addr": "Lütfen adres girin"
         },
         "hint": {
-            "token": "VITE test tokens have be sent to your account, please check your account!",
-            "tErr": "Get test token failed!",
-            "amount": "Amount must be greater than 0"
+            "token": "VITE test tokenları hesabınıza gönderildi, lütfen hesabınızı kontrol edin!",
+            "tErr": "Test token alınamadı!",
+            "amount": "Miktar 0'dan yüksek olmalı"
         },
         "trans": {
             "powErr": "Error occurs when running PoW, please try again",
@@ -530,24 +530,24 @@
     "walletMintage": {
         "title": "Token Issuance",
         "address": "Issuance Address",
-        "tokenName": "Token Name",
-        "tokenSymbol": "Token Symbol",
-        "totalSupply": "Total Supply",
-        "decimals": "Decimals",
+        "tokenName": "Token Adı",
+        "tokenSymbol": "Token Sembolü",
+        "totalSupply": "Toplam Arz",
+        "decimals": "Ondalık sayılar",
         "isReIssuable": "ReIssuable",
-        "maxSupply": "Max Supply",
+        "maxSupply": "Maks. Arz",
         "ownerBurnOnly": "Burn out by Owner Only",
         "isOwnerBurnOnly": "Burn out by Owner Only",
-        "mint": "Confirm",
+        "mint": "Onayla",
         "tokenList": "Issued Token",
-        "submit": "Submit",
-        "cancel": "Cancel",
-        "getListFail": "You are unable to get token list, try again later",
+        "submit": "Gönder",
+        "cancel": "İptal",
+        "getListFail": "Token listesi alamıyorsunuz, daha sonra tekrar deneyin",
         "mintageConfirm": {
             "title": "Check your Token Issuance Information",
-            "balance": "Balance",
+            "balance": "Bakiye",
             "fee": "Issuance Fee",
-            "btn": "Confirm"
+            "btn": "Onayla"
         },
         "reIssuableConfirm": {
             "title": "Change to Non-issuable",
@@ -555,31 +555,31 @@
         },
         "changeOwnerConfirm": {
             "title": "Transfer Ownership",
-            "address": "Recipient Address"
+            "address": "Alıcı Adresi"
         },
         "issueConfirm": {
             "title": "Re-issue",
-            "amount": "Amount",
-            "address": "Beneficiary Address",
+            "amount": "Miktar",
+            "address": "Yararlanıcı Adresi",
             "overAmount": "Reissued tokens exceed the upper limit"
         },
         "hint": {
             "tokenName": "Token name should have 1-40 characters including capitals and lowercase letters, spaces and underlines. Continuous spaces and numbers are not supported.",
-            "tokenSymbol": "Token symbol should have 1-10 characters, only capitals and numbers are supported.",
+            "tokenSymbol": "Token sembolü 1-10 karakter içermelidir, yalnızca büyük harfler ve sayılar desteklenir.",
             "success": "Token Issuance Successful",
             "fail": "Token Issuance failed"
         },
         "err": {
-            "tokenNameFormat": "Token Name's format is incorrect",
-            "tokenNameNull": "Token Name is required",
-            "tokenSymbolFormat": "Token Symbol's format is incorrect",
-            "tokenSymbolNull": "Token Symbol is required",
+            "tokenNameFormat": "Token Adının formatı hatalı",
+            "tokenNameNull": "Token Adı gerekli",
+            "tokenSymbolFormat": "Token Sembolünün formatı hatalı",
+            "tokenSymbolNull": "Token Sembolü gerekli",
             "supplyMax": "Excessive amount of token issuance",
             "totalSupplyFormat": "Wrong format of Total Supply",
             "totalSupplyNull": "Total Supply is required",
-            "maxSupplyNull": "Max Supply is required",
-            "maxSupplyMin": "Must be greater than total supply",
-            "decimalsNull": "Decimals field is required",
+            "maxSupplyNull": "Maks. Arz gerekli",
+            "maxSupplyMin": "Toplam arzdan daha büyük olmalıdır",
+            "decimalsNull": "Ondalık sayılar alanı gerekli",
             "decimalsFormat": "Wrong format of decimals",
             "decimalsMax": "Decimals are out of range",
             "maxSupplyFormat": "Wrong format of Max Supply"
@@ -620,19 +620,19 @@
             },
             "cancel": {
                 "describe": "Your current staked amount is {amount} VITE, please confirm to withdraw.",
-                "rightBtn": "Ready to Go",
-                "leftBtn": "Cancel Withdraw"
+                "rightBtn": "Başlamaya Hazır",
+                "leftBtn": "Çekimi İptal Et"
             },
             "submit": {
                 "describe": "Make sure to stake {amount} VITE to obtain quota, you cannot withdraw until about 3 days after staking comes into effect.",
-                "rightBtn": "Confirm",
-                "leftBtn": "Cancel"
+                "rightBtn": "Onayla",
+                "leftBtn": "İptal"
             }
         },
         "list": {
-            "title": "My Staking List",
+            "title": "Stake Listem",
             "total": "Staking {amount} VITE in total",
-            "amount": "Amount",
+            "amount": "Miktar",
             "withdrawTime": "Expected Due Date",
             "unexpired": "Temporarily cannot make withdrawal of staked token until due date",
             "vip": "This staking action is for default opening VIP on ViteX exchange, please go to ViteX exchange page to cancel VIP",
@@ -641,26 +641,26 @@
         }
     },
     "walletTransList": {
-        "title": "Transactions",
+        "title": "İşlemler",
         "tType": {
-            "title": "Type",
-            "symbol": "Type"
+            "title": "Tür",
+            "symbol": "Tür"
         },
         "status": {
-            "title": "Status",
-            "unconfirmed": "Unconfirmed",
-            "confirms": "Confirming",
-            "confirmed": "Confirmed"
+            "title": "Durumlar",
+            "unconfirmed": "Onaylanmamış",
+            "confirms": "Onaylanıyor",
+            "confirmed": "Onaylandı"
         },
         "timestamp": "Timestamp",
-        "tAddress": "Address",
-        "sum": "Amount"
+        "tAddress": "Adres",
+        "sum": "Miktar"
     },
     "walletFullNode": {
-        "title": "Full Nodes",
+        "title": "Tam Düğümler",
         "help": {
-            "title": "About",
-            "t1": "Glossary",
+            "title": "Hakkında",
+            "t1": "Sözlük",
             "txt1": "[Number of Registered Nodes]  The number of full nodes registered with the current address",
             "txt2": "[Number of Active Nodes]  The number of active full nodes registered with the current address",
             "txt3": "[Number of Rewarding nodes]  Number of nodes being rewarded",
@@ -669,18 +669,18 @@
         },
         "confirmText": "Confirm to stake {amount} VITE, staking can be cancelled after {days} days",
         "addQuota": {
-            "address": "Staking Address",
-            "stakeDays": "Staking Period",
+            "address": "Stake Adresi",
+            "stakeDays": "Stake Süresi",
             "placeholder": "Minimum Stake {min} VITE",
             "stakingSuspend": "Staking Temporarily Suspended"
         },
         "quotaContent": {
-            "onlineReward": "Active Node Reward",
-            "voteReward": "Voting Reward",
-            "yesterday": "yesterday",
+            "onlineReward": "Etkin Düğüm Ödülü",
+            "voteReward": "Oylama Ödülü",
+            "yesterday": "dün",
             "all": "Accumulated VITE: {num}",
-            "nodeInfo": "Node Information",
-            "onlineNodes": "Active Nodes",
+            "nodeInfo": "Düğüm Bilgisi",
+            "onlineNodes": "Etkin Düğümler",
             "rewardNodes": "Rewarding Nodes",
             "stakeAmount": "Node Staking"
         }
@@ -688,10 +688,10 @@
     "walletSBP": {
         "title": "SBP",
         "help": {
-            "title": "About SBP",
+            "title": "SBP Hakkında",
             "text": "SBP（Snapshot Block Producer）is a node that has right to create blocks, you can register to become a SBP candidate by staking a certain amount of VITE, each round (about 75 seconds) will elect 25 SBPs, the SBPs will be elected from random 23 out of top 25 candidate nodes, plus random 2 out of the candidate nodes ranking 26th-100th on the list. The 50% of block creation rewards will be allocated to the block creation node, the other 50% will be allocated to nodes that are ranked on top 100 as voting rewards. One registration address (staking address) can register multiple block creation nodes (node names), a node name cannot be used if the node name has been registered by a registration address. A node name can switch block creation address, however, block creation address cannot be reused by other node names."
         },
-        "register": "SBP Registration",
+        "register": "SBP Kaydı",
         "cancel": "SBP Cancellation",
         "cancelBtn": "Cancel",
         "rewardBtn": "Claim Rewards",
@@ -1024,7 +1024,7 @@
             "tokenName": "Token",
             "originalSymbol": "Symbol",
             "gateway": "Gateway",
-            "website": "Official Website",
+            "website": "Resmi Web Site",
             "explorer": "Block Explorer",
             "overview": "Description",
             "tokenShow": "Abbr",
