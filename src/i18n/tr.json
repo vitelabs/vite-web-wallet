@@ -825,7 +825,7 @@
             "contentOther": "You agree and acknowledge that Vite Labs would not be responsible for any negative consequences caused by {gate}. Vite platform does not take any part in the relationship that may arise between {gate} and users of Vite platform",
             "contentAgree": "By continuing to use {gate}'s service, you agree and acknowledge {gate}'s",
             "agreement": "Hizmet Şartları, Alım Satım Koşulları ve Gizlilik Politikası",
-            "contentUngree": "Please agree to this terms before using {gate}'s service",
+            "contentUngree": "Lütfen {gate} hizmetini kullanmadan önce bu koşulları kabul edin",
             "hint": "Contact customer service team of {gate} if you encounter any problems during payment process.",
             "next": "Confirm and Proceed"
         },
@@ -887,36 +887,36 @@
                 "nextPage": "Next page",
                 "prePage": "Last page",
                 "confirm": "Confirm",
-                "unUsedAccount": "New"
+                "unUsedAccount": "Yeni"
             },
             "confirm": {
-                "tips": "Please confirm the transaction on your Ledger device",
-                "verifyAddress": "Please verify the address on your Ledger device",
-                "alert": "Warning",
+                "tips": "Lütfen işlemi Ledger cihazınızda onaylayın",
+                "verifyAddress": "Lütfen adresi Ledger cihazınızda doğrulayın",
+                "alert": "Uyarı",
                 "alertContent": "Address has been denied on Ledger device. Please double verify if this address matches the address displayed on your Ledger device. If yes, ignore this message and go ahead to confirm the transaction, otherwise DO NOT send asset to the address and quit immediately.",
-                "alertLeftBtn": "I confirm the addresses are matched",
+                "alertLeftBtn": "Adreslerin eşleştiğini onaylıyorum",
                 "alertRightBtn": "Addresses mismatch. Get me out of here!",
-                "userCancel": "Transaction is cancelled on Ledger",
+                "userCancel": "İşlem Ledger'da iptal edildi",
                 "userCancelByWeb": "You cancelled the transaction in Vite wallet. In this case, the transaction will be abandoned and never go through to blockchain even if it is confirmed on your Ledger device."
             }
         },
         "invite": {
-            "inviteTitle": "Invite Friends",
-            "receiveInviteTitle": "Use Referral Code",
-            "myCode": "My Referral Code: ",
-            "codeLable": "Referral Code",
-            "invited": "You have already accepted an invitation, referral code is: ",
-            "genCode": "Create a Referral Code",
+            "inviteTitle": "Arkadaşlarını Davet Et",
+            "receiveInviteTitle": "Referans Kodu Kullan",
+            "myCode": "Referans Kodum: ",
+            "codeLable": "Referans Kodu",
+            "invited": "Zaten bir daveti kabul ettiniz, referans kodu: ",
+            "genCode": "Referans Kodu Oluştur",
             "cost": "Cost",
-            "formatErr": "Incorrect referral code format",
-            "noResult": "Oops...No result found, please try again later",
-            "successToast": "Request has sent",
-            "failToast": "Failed to send request",
-            "notEnough": "Insufficient exchange balance",
-            "avaliable": "Balance",
-            "inviteNum": "Invited",
+            "formatErr": "Hatalı referans kodu formatı",
+            "noResult": "Oops...Sonuç bulunamadı, lütfen daha sonra tekrar deneyin",
+            "successToast": "Talep gönderildi",
+            "failToast": "Talep gönderilemedi",
+            "notEnough": "Yetersiz exchange bakiyesi",
+            "avaliable": "Bakiye",
+            "inviteNum": "Davet Edildi",
             "inviteBenifit": "Referral Mining Income",
-            "inviteRule": "Rules",
+            "inviteRule": "Kurallar",
             "ruleItems": [
                 "The <span class='strong'>1,000 VITE</span> payment to generate an invitation code will be burned",
                 "Referee will be rewarded with <span class='strong'>5%</span> of all invited users' trading as mining proceeds and <span class='strong'>2.5%</span> of all market-making as mining proceeds"
@@ -928,31 +928,31 @@
         }
     },
     "walletConversion": {
-        "title": "VITE Conversion",
+        "title": "VITE Dönüşümü",
         "help": {
             "title": "Quick Understanding of VITE Conversion",
             "text": "You can migrate ERC20 tokens into VITE into our TestNet by VITE conversion function. In TestNet, casting your vote for official SBPs to collect rewards, the annualized rate can reach 20%. Your ERC20 VITE tokens will be transferred to Ethereum black hole address: {blackAddr}, you will receive the same amount of VITE at your Vite address when Ethereum black hole address has received the transaction and confirmed. Once you are in the conversion process, confirm that there are enough VITE and ETH (as gas) in your Ethereum address of Vite wallet."
         },
-        "gas": "Mining Fees",
-        "record": "Conversion History",
+        "gas": "Madencilik Komisyonu",
+        "record": "Dönüşüm Geçmişi",
         "aboutPrice": "Approx {amount} ETH",
         "note": "Please wait in patient after submitting the conversion. You cannot receive the converted VITE until you have got 30 Ethereum transaction confirmations. Ehtereum transaction records can be viewed in Conversion History section.",
         "exchange": {
-            "vite": "Convert",
-            "viteAddr": "Receiving Address",
-            "viteAmount": "Conversion Amount",
-            "btn": "Ready to Convert",
+            "vite": "Dönüştür",
+            "viteAddr": "Alıcı Adresi",
+            "viteAmount": "Dönüşüm Miktarı",
+            "btn": "Dönüştürmeye Hazır",
             "success": "Conversion Successful. It may take approx 20 minutes to get VITE into your account after the Ethereum transaction is confirmed."
         }
     },
     "tradeCenter": {
         "title": "Exchange",
-        "marketClosed": "{symbol} market has been suspended",
-        "mergeDepth": "Group",
-        "depthStep": "{step} digits",
-        "blocking": "Network congestion occurs, please try again later",
+        "marketClosed": "{symbol} marketi askıya alındı",
+        "mergeDepth": "Grup",
+        "depthStep": "{step} haneli",
+        "blocking": "Ağ tıkanıklığı meydana geliyor, lütfen daha sonra tekrar deneyin",
         "supportMining": "Eligible for trading and market-making as mining",
-        "cmcHelp": "View VITE on CoinMarketCap",
+        "cmcHelp": "CoinMarketCap'te VITE'i Görüntüle",
         "supportTradeMining": "Eligible for trading as mining",
         "supportOrderMining": "Eligible for market-making as mining",
         "zeroFee": "Zero Fee",
@@ -995,71 +995,71 @@
         "klineView": "TradingView",
         "txPairDetail": {
             "title": "Trading pair details",
-            "24h": "24h",
-            "openPrice": "Open",
-            "quantity": "Market Volume",
+            "24h": "24saat",
+            "openPrice": "Aç",
+            "quantity": "Market Hacmi",
             "amount": "Base volume",
-            "status": "Status",
-            "latest": "Latest",
-            "buy": "Buy price",
-            "sell": "Sell price",
+            "status": "Durumlar",
+            "latest": "En Son",
+            "buy": "Alış fiyatı",
+            "sell": "Satış fiyatı",
             "diff": "Spread"
         },
         "buy": {
-            "title": "Buy {token}",
-            "price": "Price({token})",
-            "quantity": "Amount({token})"
+            "title": "{token} Al",
+            "price": "Fiyat({token})",
+            "quantity": "Miktar({token})"
         },
         "sell": {
-            "title": "Sell {token}",
-            "price": "Price({token})",
-            "quantity": "Amount({token})"
+            "title": "{token} Sat",
+            "price": "Fiyat({token})",
+            "quantity": "Miktar({token})"
         },
         "head": {
-            "latestPrice": "Last Price",
-            "updown": "24h Change",
+            "latestPrice": "Son Fiyat",
+            "updown": "24saatlik Değişim",
             "highPrice": "24h High",
             "lowPrice": "24h Low",
             "quantity": "24h Volume",
             "tokenName": "Token",
-            "originalSymbol": "Symbol",
-            "gateway": "Gateway",
+            "originalSymbol": "Sembol",
+            "gateway": "Ağ geçidi",
             "website": "Resmi Web Site",
             "explorer": "Block Explorer",
-            "overview": "Description",
+            "overview": "Açıklama",
             "tokenShow": "Abbr",
             "tokenId": "Token ID",
             "publisher": "Issuer",
-            "total": "Total",
-            "tokenDigit": "Decimals",
+            "total": "Toplam",
+            "tokenDigit": "Ondalık sayılar",
             "publisherDate": "Issuance Date",
-            "type": "Status",
+            "type": "Durumlar",
             "tokenType0": "Issuance Available",
             "tokenType1": "Never Issued"
         },
         "latestTx": {
-            "title": "Last Orders",
-            "time": "Time"
+            "title": "Son Emirler",
+            "time": "Zaman"
         },
         "depth": {
-            "buy": "Buy",
-            "sell": "Sell",
-            "all": "All",
+            "buy": "Al",
+            "sell": "Sat",
+            "all": "Tümü",
             "avgPrice": "Avg.Price:",
             "sum": "Sum {symbol}:"
         },
         "noData": {
-            "favorite": "You have no favorite yet",
-            "search": "No result found"
+            "favorite": "Henüz favoriniz yok",
+            "search": "Sonuç bulunamadı"
         },
         "limitPrice": {
             "title": "Limit",
-            "fee": "Fees",
+            "fee": "Komisyonlar",
             "adviseToSVip": "Upgrade to SVIP, enjoy zero base transaction fee",
             "feeRuleWithSVip": "Operator Fees * Referral Discount. ATTENTION: The adjustment and discount of fees will only affect new orders, the former orders' charge remains the same.",
             "text": "This page is a preview page of transaction data. Please login to trade.",
             "validAmount": "Volume must be greater than {amount}{token}",
-            "priceNotNull": "Amount cannot be empty",
+            "priceNotNull": "Miktar boş bırakılamaz",
             "amountNotNull": "Volume cannot be empty",
             "quantityNotNull": "Quantity cannot be empty",
             "cancelVip": "Cancel",
@@ -1106,17 +1106,17 @@
                 "rTxtMap": {
                     "new": "Add",
                     "add": "Add",
-                    "delete": "Confirm",
-                    "deleteAll": "Confirm"
+                    "delete": "Onayla",
+                    "deleteAll": "Onayla"
                 },
                 "confirm": {
-                    "title": "Confirm Delegations",
-                    "cancel": "Cancel",
-                    "ok": "Confirm"
+                    "title": "Temsilcileri Onayla",
+                    "cancel": "İptal",
+                    "ok": "Onayla"
                 },
                 "titleMap": {
                     "new": "Initiate Delegation",
-                    "add": "Add Delegations",
+                    "add": "Temsilciler Ekle",
                     "delete": "Remove Delegations",
                     "deleteAll": "Confirm to remove delegations"
                 }
@@ -1124,29 +1124,29 @@
         },
         "openapi": {
             "title": "API",
-            "myKey": "My API Key",
-            "createTime": "Created Time",
+            "myKey": "API Anahtarım",
+            "createTime": "Oluşturulma Zamanı",
             "permissions": "Applied Trading Pairs",
-            "createKey": "Create API Key",
-            "deleteKey": "Delete API",
+            "createKey": "API Anahtarı oluşturun",
+            "deleteKey": "API'yi sil",
             "deleteAlert": "The current API will no longer be accessible if confirm to proceed. Existing package will be retained and re-activated upon creation of a new API Key.",
-            "confirmDelete": "Confirm and Delete",
-            "cancel": "Cancel",
+            "confirmDelete": "Onayla ve Sil",
+            "cancel": "İptal",
             "agentAddressStakingAmount": "Delegation Staked Quota",
-            "staking": "Stake",
-            "package": "Package",
+            "staking": "Stake Et",
+            "package": "Paket",
             "expireTime": "Expiration Date",
             "callNum": "Triggers/min",
             "callNumInfo": "{maxCount} transactions/min",
             "price": "Cost",
             "priceInfo": "{price} VX/mth",
-            "upgrade": "Upgrade",
+            "upgrade": "Yükselt",
             "balanceAlert": "Cannot create if VITE balance is less than {balanceLimit}.",
             "noSupportForHardware": "Hardware Wallet is not supported at the moment",
             "tips": {
-                "title": "Notice",
+                "title": "Uyarı",
                 "0": "ViteX is releasing official API to provide access to markets and real-time trading services. Follow the instructions below to properly acquire an API private key.",
-                "0-step1": "1. Create API",
+                "0-step1": "1. API Oluştur",
                 "0-step2": "2. Authorize delegation of selected trading pairs",
                 "0-step3": "3. Stake quota for API delegation address",
                 "0-step4": "View <a href=\"https://vite.wiki/dex/api/dex-apis.html\" target=\"_blank\">API Documentation</a> for further support",
@@ -1157,16 +1157,16 @@
             "stakingForQuota": {
                 "title": "Delegation Quota",
                 "agentAddress": "Delegation Address",
-                "stakingAmount": "Stake Amount",
-                "ok": "Confirm"
+                "stakingAmount": "Stake Miktarı",
+                "ok": "Onayla"
             },
             "keyConfirm": {
-                "accessKey": "Access Key",
-                "secretKey": "Secret Key",
+                "accessKey": "Erişim Anahtarı",
+                "secretKey": "Gizli Anahtar",
                 "agentAddress": "Delegation Address",
-                "title": "API Created Successfully",
+                "title": "API Başarıyla Oluşturuldu",
                 "tips": {
-                    "title": "Important Notice",
+                    "title": "Önemli Uyarı",
                     "0": "To avoid asset loss, Do Not disclose your Access Key and Secret Key.",
                     "1": "In cases of lost secret key, Delete the current API and Re-Apply for a new API key."
                 },
