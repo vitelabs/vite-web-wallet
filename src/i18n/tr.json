@@ -724,17 +724,17 @@
             "nodeName": "Düğüm Adı",
             "producerAddr": "Block Creation Address",
             "rewardWithdrawAddress": "Reward Withdraw Address",
-            "quotaAddr": "Staking Address",
-            "quotaTime": "Staking Period",
+            "quotaAddr": "Stake Adresi",
+            "quotaTime": "Stake Süresi",
             "time": "7776000 snapshot blocks（approximately 90 days）",
-            "confirmBtn": "Submit",
-            "namePlaceholder": "Please input node name",
+            "confirmBtn": "Gönder",
+            "namePlaceholder": "Lütfen düğüm adı girin",
             "nameHint": "Within 40 characters, support English letters (both upper and lower cases), numbers, '_'、'.'",
-            "nameErr": "This node name is illegal",
+            "nameErr": "Bu düğüm adı yasadışı",
             "nameUsed": "This node name is occupied",
             "addrPlaceholder": "Please input snapshot block creation address",
             "addrHint": "The block creation address must be a full node and keep up running",
-            "addrErr": "Illegal address",
+            "addrErr": "Yasadışı adres",
             "addrUsed": "This address has been occupied",
             "registerSuccess": "Registration request has sent",
             "registerFail": "Registration request failed"
@@ -831,25 +831,25 @@
         },
         "vb": {
             "title": "ViteConnect",
-            "closeAlert": "close",
+            "closeAlert": "kapat",
             "connect": {
-                "tips": "Scan the QR code via Vite Wallet App"
+                "tips": "Vite Cüzdan Uygulaması aracılığıyla QR kodu tara"
             },
             "confirm": {
-                "tips": "Please confirm transaction on VITE Wallet App"
+                "tips": "Lütfen işlemi VITE Cüzdan Uygulamasında onaylayın"
             },
             "start": {
-                "scan": "Scan the QR code via Vite Wallet App",
+                "scan": "Vite Cüzdan Uygulaması aracılığıyla QR kodu tara",
                 "downloadTips": "Don’t have the Vite Wallet App? ",
-                "download": "Download here"
+                "download": "Buradan indirin"
             },
-            "accountName": "ViteConnect Address"
+            "accountName": "ViteConnect Adresi"
         },
         "ledger": {
-            "title": "Ledger Device",
-            "accountName": "Ledger Wallet",
-            "verifyAddress": "Verify address",
-            "closeAlert": "Cancel",
+            "title": "Ledger Cihazı",
+            "accountName": "Ledger Cüzdanı",
+            "verifyAddress": "Adres Doğrula",
+            "closeAlert": "İptal",
             "start": {
                 "title": "Supported Wallets: Ledger Nano S / Ledger Nano X",
                 "connectError": "Connection Issues?",
@@ -857,36 +857,36 @@
                 "introductionUrl": "https://docs.vite.org/go-vite/tutorial/ledger-install.html",
                 "connectErrorUrl": "https://support.ledger.com/hc/en-us/articles/115005165269-Connection-issues-with-Windows-or-Linux"
             },
-            "connectWithUSB": "Use USB",
-            "connectWithBlu": "Use Bluetooth",
-            "connectLedger": "Connect to Ledger",
+            "connectWithUSB": "USB kullan",
+            "connectWithBlu": "Bluetooth kullan",
+            "connectLedger": "Ledger'a bağlan",
             "connect": {
-                "title": "Address Select",
-                "tips": "Select an address to use:",
+                "title": "Adres Seçin",
+                "tips": "Kullanmak için bir adres seçin:",
                 "selectConnectType": "Choose connection type: (Bluetooth is only supported on Ledger Nano X)",
-                "cancelSelect": "Select a device to connect",
+                "cancelSelect": "Bağlanmak için bir cihaz seçin",
                 "connectError": "Connect failed. Please confirm Vite app is opened on device",
                 "interfaceNotAvailable": "Connect failed. Please check USB cable is connected. If you connect through Bluetooth, switch off Bluetooth and switch on again",
                 "receiveBlockSuccess": "Successfully received {num} transaction",
                 "introduction": {
                     "1": {
-                        "title": "Step 1: ",
+                        "title": "1. Adım: ",
                         "content": "Connect Ledger device and enter PIN code"
                     },
                     "2": {
-                        "title": "Step 2: ",
-                        "content": "Open Vite app on Ledger"
+                        "title": "2. Adım: ",
+                        "content": "Vite uygulamasını Ledger'da aç"
                     }
                 }
             },
             "addressSelect": {
-                "index": "Index",
-                "address": "Address",
-                "balance": "Balance",
+                "index": "Dizin",
+                "address": "Adres",
+                "balance": "Bakiye",
                 "unreceived": "Unreceived",
-                "nextPage": "Next page",
-                "prePage": "Last page",
-                "confirm": "Confirm",
+                "nextPage": "Sonraki sayfa",
+                "prePage": "Son sayfa",
+                "confirm": "Onayla",
                 "unUsedAccount": "Yeni"
             },
             "confirm": {
@@ -955,46 +955,46 @@
         "cmcHelp": "CoinMarketCap'te VITE'i Görüntüle",
         "supportTradeMining": "Eligible for trading as mining",
         "supportOrderMining": "Eligible for market-making as mining",
-        "zeroFee": "Zero Fee",
+        "zeroFee": "Sıfır Komisyon",
         "buyMiningPrice": "Qualifies for mining when buy price is greater than {price}",
         "sellMiningPrice": "Qualifies for mining when sell price is less than {price}",
         "operator": {
             "noName": "Anonymous Operator",
-            "overview": "Introduction",
-            "txPair": "Trading Pairs",
-            "confirmTitle": "Risk Reminder",
+            "overview": "Giriş",
+            "txPair": "Alım Satım Paritesi",
+            "confirmTitle": "Risk Hatırlatıcısı",
             "confirmText": "The current trading pair is {symbol}. Please be careful when trading. Investing in digital assets comes with high risks. Before investing, please have a full understanding of all the risks of investing in digital assets and judge the authenticity, legality and validity of digital assets on your own. Please be prudent of your own investment decisions and undertake responsibility for the loss of your assets.",
-            "address": "Operator Address",
-            "name": "Operator Name"
+            "address": "Operatör Adresi",
+            "name": "Operatör Adı"
         },
         "operatorTxPair": {
-            "title": "Trading Pair Details",
-            "tokenTab": "Token Details",
-            "operatorTab": "Operator Details"
+            "title": "Alım Satım Paritesi Ayrıntıları",
+            "tokenTab": "Token Ayrıntıları",
+            "operatorTab": "Operatör Ayrıntıları"
         },
         "depthBuyMiningPrice": "Mining Range Above",
         "depthSellMiningPrice": "Mining Range Below",
         "inMiningRange": "Mining Range"
     },
     "trade": {
-        "more": "More",
-        "search": "Search",
-        "txPair": "Pair",
-        "price": "Price",
+        "more": "Daha fazla",
+        "search": "Arama",
+        "txPair": "Parite",
+        "price": "Fiyat",
         "upDown": "Change%",
-        "txNum": "Volume",
-        "quantityTitle": "Total({quantity})",
-        "priceTitle": "Price({price})",
+        "txNum": "Hacim",
+        "quantityTitle": "Toplam({quantity})",
+        "priceTitle": "Fiyat({price})",
         "amountTitle": "Miktar({amount})",
         "quantityTable": "Qty",
         "amountTable": "Hacim",
         "amount": "Toplam",
-        "newOrderSuccess": "Order request has sent",
-        "newOrderFail": "Order Failed",
+        "newOrderSuccess": "Emir talebi gönderildi",
+        "newOrderFail": "Emir Başarısız",
         "depthView": "Depth",
         "klineView": "TradingView",
         "txPairDetail": {
-            "title": "Trading pair details",
+            "title": "Alım satım paritesi ayrıntıları",
             "24h": "24saat",
             "openPrice": "Aç",
             "quantity": "Market Hacmi",
@@ -1061,9 +1061,9 @@
             "validAmount": "Hacim {amount}{token}'den büyük olmalıdır",
             "priceNotNull": "Miktar boş bırakılamaz",
             "amountNotNull": "Hacim boş bırakılamaz",
-            "quantityNotNull": "Quantity cannot be empty",
-            "cancelVip": "Cancel",
-            "openVip": "Become a VIP",
+            "quantityNotNull": "Miktar boş bırakılamaz",
+            "cancelVip": "İptal",
+            "openVip": "VIP olun",
             "dexFee": "Base Transaction Fees: {fee}",
             "operatorFee": "Operator Fees: {fee}",
             "vipFee": "VIP Discount: {fee}",
@@ -1085,11 +1085,11 @@
                 "head": [
                     "Delegatee Address",
                     "Alım Satım Paritesi",
-                    "Action"
+                    "Eylem"
                 ],
                 "operate": [
-                    "Add Trading Pairs",
-                    "Remove Trading Pairs",
+                    "Alım Satım Paritesi Ekle",
+                    "Alım Satım Paritesini Kurtar",
                     "Remove All Delegations"
                 ]
             },
@@ -1097,15 +1097,15 @@
                 "title": "Accepted Delegation History",
                 "head": [
                     "Delegation Address",
-                    "Trading Pairs"
+                    "Alım Satım Paritesi"
                 ]
             },
             "dialog": {
-                "cancel": "Cancel",
+                "cancel": "İptal",
                 "cancelAllTips": "Are you sure you'd like to remove all delegations on {trustAddress}?",
                 "rTxtMap": {
-                    "new": "Add",
-                    "add": "Add",
+                    "new": "Ekle",
+                    "add": "Ekle",
                     "delete": "Onayla",
                     "deleteAll": "Onayla"
                 },
