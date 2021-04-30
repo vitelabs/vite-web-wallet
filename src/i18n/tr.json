@@ -1268,8 +1268,8 @@
                 "Side",
                 "Price",
                 "Amount",
-                "Filled",
-                "Filled%",
+                "Tamamlanan",
+                "Tamamlanan%",
                 "Average",
                 "Total"
             ],
@@ -1312,7 +1312,7 @@
                 "Side",
                 "Price",
                 "Amount",
-                "Filled",
+                "Tamamlanan",
                 "Average",
                 "Fees",
                 "Total",
@@ -1547,51 +1547,51 @@
         "resetTransHint": "Make sure to recover {symbol} ?",
         "stopSuccess": "Suspension Successful",
         "stopFail": "Suspension Failed",
-        "openSuccess": "Recovery Successful",
-        "openFail": "Recovery Failed",
-        "changeOwnerSuccess": "Transfer Successful",
-        "changeOwnerFaill": "Transfer Failed",
-        "submitChange": "Confirm to transfer",
+        "openSuccess": "Kurtarma Başarılı",
+        "openFail": "Kurtarma Başarısız",
+        "changeOwnerSuccess": "Transfer Başarılı",
+        "changeOwnerFaill": "Transfer Başarısız",
+        "submitChange": "Transferi onayla",
         "changeOwnerHint": "NOTICE: You will not be able to collect or adjust fees after ownership transferred as well as you cannot undo this transfer action",
-        "currentMaker": "Maker",
-        "confirmFee": "Fee",
-        "currentTaker": "Taker",
-        "txPairName": "Name",
+        "currentMaker": "Yapıcı",
+        "confirmFee": "Komisyon",
+        "currentTaker": "Alıcı",
+        "txPairName": "Ad",
         "changeFeeHint": "{symbol}'s fee into {fee}",
-        "changeFeeSubmit": "Make sure to change {changeFeeHint}",
-        "historyAllIncome": "Total Income",
+        "changeFeeSubmit": "{changeFeeHint} değiştirdiğinizden emin olun",
+        "historyAllIncome": "Toplam Gelir",
         "incomeListHead": {
-            "date": "Date",
-            "txNum": "Volume",
-            "feeRate": "Rate",
-            "feeIncome": "Income"
+            "date": "Tarih",
+            "txNum": "Hacim",
+            "feeRate": "Oran",
+            "feeIncome": "Gelir"
         }
     },
     "mobileAssets": {
-        "allAssets": "Estimated Assets Value ({token})",
-        "tokenInfoTitle": "Token Details",
+        "allAssets": "Tahmini Varlık Değeri ({token})",
+        "tokenInfoTitle": "Token Ayrıntıları",
         "transfer": "Transfer",
-        "trade": "Trade",
-        "chooseTxPair": "Choose Trading Pair"
+        "trade": "Alım Satım",
+        "chooseTxPair": "Alım Satım Paritesi Seç"
     },
     "mobileTradeCenter": {
-        "highPrice": "High",
-        "lowPrice": "Low",
-        "quantity": "24H Vol",
-        "buyTitle": "Buy",
-        "sellTitle": "Sell",
-        "price": "Price ({token})",
+        "highPrice": "Yüksek",
+        "lowPrice": "Düşük",
+        "quantity": "24S Hacim",
+        "buyTitle": "Al",
+        "sellTitle": "Sat",
+        "price": "Fiyat ({token})",
         "buy": {
-            "price": "Price",
-            "quantity": "Amount"
+            "price": "Fiyat",
+            "quantity": "Miktar"
         },
         "sell": {
-            "price": "Price",
-            "quantity": "Amount"
+            "price": "Fiyat",
+            "quantity": "Miktar"
         },
-        "orderQuantity": "Amount",
-        "orderPrice": "Price",
-        "executedQuantity": "Filled",
+        "orderQuantity": "Miktar",
+        "orderPrice": "Fiyat",
+        "executedQuantity": "Tamamlanan",
         "avgPrice": "Avg"
     },
     "mobileDividend": {
@@ -1605,42 +1605,42 @@
     "mobileMining": {
         "title": "Mining",
         "miningTrade": "Trading",
-        "miningStaking": "Staking",
+        "miningStaking": "Alım Satım",
         "miningInvite": "Referral",
         "miningOrder": "Market-Making",
         "tradeTotalIncome": "Total Income ({token})",
         "stakingTotalIncome": "Total Income ({token})",
         "inviteTotalIncome": "Total Income ({token})",
-        "orderTotalIncome": "Total Income ({token})",
-        "fee": "Fees",
-        "listTitle": "Mining History",
-        "viewLink": "Live Mining Dashboard",
-        "inviteTradeIncome": "Referred Trading Details",
+        "orderTotalIncome": "Toplam Gelir ({token})",
+        "fee": "Komisyonlar",
+        "listTitle": "Madencilik Geçmişi",
+        "viewLink": "Anlık Madencilik Paneli",
+        "inviteTradeIncome": "Referans Alım Satım Ayrıntıları",
         "inviteOrderIncome": "Referred Market-Making Details",
-        "myStaking": "My Staking"
+        "myStaking": "Stakelerim"
     },
     "mobileBottomBar": {
-        "center": "Trade",
-        "assets": "Assets",
-        "mining": "Mining",
-        "order": "Order"
+        "center": "Alım Satım",
+        "assets": "Varlıklar",
+        "mining": "Madencilik",
+        "order": "Emir"
     },
     "mobileOrder": {
-        "filterDate": "Date",
-        "filterToken": "Type",
-        "all": "All",
-        "3month": "3 months",
-        "1month": "1 month",
-        "1week": "1 week",
-        "1day": "1 day",
-        "clear": "Clear",
-        "submit": "Search"
+        "filterDate": "Tarih",
+        "filterToken": "Tür",
+        "all": "Tümü",
+        "3month": "3 ay",
+        "1month": "1 ay",
+        "1week": "1 hafta",
+        "1day": "1 gün",
+        "clear": "Temizle",
+        "submit": "Arama"
     },
     "desktop": {
-        "unlock": "unlock",
+        "unlock": "kilidi aç",
         "unreceivedTx": {
-            "title": "You have received {num} transactions.",
-            "body": "Amount：{amount} {symbol} \nFrom Address: {address}"
+            "title": "{num} işlem aldınız.",
+            "body": "Miktar：{amount} {symbol}\nGönderen: {address}"
         }
     }
 }
