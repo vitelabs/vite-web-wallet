@@ -103,12 +103,12 @@
         "37002": "Wrong order type",
         "37003": "Wrong order price format",
         "37004": "Exception occurs in order transaction volume",
-        "37005": "Order transaction amount too small",
+        "37005": "Emir işlem miktarı çok küçük",
         "37006": "Mevcut alım satım marketi",
         "37007": "Order trading market not exist",
         "37008": "Exception occurs in searching order information",
         "37009": "Revoked order doesn't belong to current address",
-        "37010": "This order status cannot be revoked"
+        "37010": "Bu emir durumu iptal edilemez"
     },
     "txType": {
         "RegisterSBP": "SBP Kaydı",
@@ -418,7 +418,7 @@
             "heads": [
                 "Zaman",
                 "Miktar",
-                "Durumlar",
+                "Durum",
                 "{outChain} Hash",
                 "vite Hash",
                 "Komisyonlar"
@@ -435,20 +435,20 @@
         "withdrawRecord": {
             "tabName": "Transfer History",
             "heads": [
-                "Time",
-                "Amount",
-                "Status",
+                "Zaman",
+                "Miktar",
+                "Durum",
                 "vite Hash",
                 "{outChain} Hash",
                 "Fees"
             ],
             "statusMap": {
                 "TOT_PROCESSING": "VITE Chain Unconfirmed{confirms}",
-                "TOT_CONFIRMED": "VITE Confirmed",
-                "TOT_EXCEED_THE_LIMIT": "Transfer amount exceeds the limit",
+                "TOT_CONFIRMED": "VITE Onaylandı",
+                "TOT_EXCEED_THE_LIMIT": "Transfer miktarı limiti aşıyor",
                 "OPPOSITE_PROCESSING": "{outChain} awaits to confirm",
-                "OPPOSITE_CONFIRMED": "Completed",
-                "WRONG_WITHDRAW_ADDRESS": "Transfer address is incorrect"
+                "OPPOSITE_CONFIRMED": "Tamamlandı",
+                "WRONG_WITHDRAW_ADDRESS": "Transfer adresi hatalı"
             }
         },
         "charge": {
@@ -596,18 +596,18 @@
         "fromAddr": "Deduction Address",
         "time": "Staking Freeze Duration",
         "aboutDays": "Approx {day} days",
-        "amountPlaceholder": "Please enter staking amount, minimum {num} VITE",
-        "limitAmt": "Staking amount should not be less than {num}.",
+        "amountPlaceholder": "Lütfen stake miktarını girin, minimum {num} VITE",
+        "limitAmt": "Stake miktarı {num}'den az olmamalıdır.",
         "addrPlaceholder": "Please input quota recipient address",
-        "inputWithdrawAmount": "Please input withdraw amount",
+        "inputWithdrawAmount": "Lütfen çekim miktarını girin",
         "pledgeFail": "Failed to Submit",
         "canclePledgeFail": "Failed",
         "maturity": "Staking has expired!",
-        "minAmt": "Withdraw amount cannot be less than {num} VITE",
-        "gotoStake": "Please Staking enough VITE first",
+        "minAmt": "Çekim miktarı {num} VITE'den az olmamalıdır",
+        "gotoStake": "Lütfen önce yeterince VITE stake edin",
         "maxAmt": "Withdraw amount should be in [{minAmount}, {maxAmount}]",
-        "cancelLimitAmt": "Staking amount cannot be less than {num}",
-        "withdrawalStaking": "Withdraw Staked Token",
+        "cancelLimitAmt": "Stake miktarı {num}'den az olmamalıdır",
+        "withdrawalStaking": "Stake Edilmiş Tokenları Çek",
         "myAddr": "Me",
         "confirm": {
             "help": {
@@ -647,7 +647,7 @@
             "symbol": "Tür"
         },
         "status": {
-            "title": "Durumlar",
+            "title": "Durum",
             "unconfirmed": "Onaylanmamış",
             "confirms": "Onaylanıyor",
             "confirmed": "Onaylandı"
@@ -667,12 +667,12 @@
             "t2": "Multiple Full nodes can be registered with the same address, but must be staked individually at least 10,000 VITE each; When calculating Active Node Reward, if staking amount / 10000 yields a whole number that is greater than or equal to the number of active nodes, all active nodes will be rewarded; If staking amount / 10000 yields a whole number that is less than the number of active nodes, the number of nodes being rewarded equals to the whole number.",
             "t3": "Calculation of voting rewards does not depend on the number of nodes, but the staking amount."
         },
-        "confirmText": "Confirm to stake {amount} VITE, staking can be cancelled after {days} days",
+        "confirmText": "{amount} VITE stake'ini onaylayın, stakeler {days} gün sonra iptal edilebilir",
         "addQuota": {
             "address": "Stake Adresi",
             "stakeDays": "Stake Süresi",
             "placeholder": "Minimum {min} VITE Stake Edin",
-            "stakingSuspend": "Stake Etme Geçici Olarak Askıya Alındı"
+            "stakingSuspend": "Stake Geçici Olarak Askıya Alındı"
         },
         "quotaContent": {
             "onlineReward": "Etkin Düğüm Ödülü",
@@ -767,7 +767,7 @@
             "title": "Oylamam",
             "head": [
                 "Ad",
-                "Durumlar",
+                "Durum",
                 "Oylamam",
                 "Oylama Durumu",
                 "Eylem"
@@ -985,10 +985,10 @@
         "txNum": "Volume",
         "quantityTitle": "Total({quantity})",
         "priceTitle": "Price({price})",
-        "amountTitle": "Amount({amount})",
+        "amountTitle": "Miktar({amount})",
         "quantityTable": "Qty",
-        "amountTable": "Volume",
-        "amount": "Total",
+        "amountTable": "Hacim",
+        "amount": "Toplam",
         "newOrderSuccess": "Order request has sent",
         "newOrderFail": "Order Failed",
         "depthView": "Depth",
@@ -999,7 +999,7 @@
             "openPrice": "Aç",
             "quantity": "Market Hacmi",
             "amount": "Base volume",
-            "status": "Durumlar",
+            "status": "Durum",
             "latest": "En Son",
             "buy": "Alış fiyatı",
             "sell": "Satış fiyatı",
@@ -1033,7 +1033,7 @@
             "total": "Toplam",
             "tokenDigit": "Ondalık sayılar",
             "publisherDate": "Issuance Date",
-            "type": "Durumlar",
+            "type": "Durum",
             "tokenType0": "Issuance Available",
             "tokenType1": "Never Issued"
         },
@@ -1058,9 +1058,9 @@
             "adviseToSVip": "Upgrade to SVIP, enjoy zero base transaction fee",
             "feeRuleWithSVip": "Operator Fees * Referral Discount. ATTENTION: The adjustment and discount of fees will only affect new orders, the former orders' charge remains the same.",
             "text": "This page is a preview page of transaction data. Please login to trade.",
-            "validAmount": "Volume must be greater than {amount}{token}",
+            "validAmount": "Hacim {amount}{token}'den büyük olmalıdır",
             "priceNotNull": "Miktar boş bırakılamaz",
-            "amountNotNull": "Volume cannot be empty",
+            "amountNotNull": "Hacim boş bırakılamaz",
             "quantityNotNull": "Quantity cannot be empty",
             "cancelVip": "Cancel",
             "openVip": "Become a VIP",
@@ -1084,7 +1084,7 @@
                 "title": "Delegation History",
                 "head": [
                     "Delegatee Address",
-                    "Trading Pairs",
+                    "Alım Satım Paritesi",
                     "Action"
                 ],
                 "operate": [
@@ -1175,70 +1175,70 @@
             "upgradeConfirm": {
                 "title": "Upgrade Package",
                 "currentPackage": "Current",
-                "selectPackage": "Select New",
+                "selectPackage": "Yeni Seç",
                 "selectTime": "Valid For",
                 "month": " Mth",
-                "payAmount": "Total",
-                "balance": "VX Balance"
+                "payAmount": "Toplam",
+                "balance": "VX Bakiyesi"
             }
         }
     },
     "tradeAssets": {
         "title": "Funds",
-        "search": "Please enter token name",
-        "operate": "Action",
-        "all": "All",
+        "search": "Lütfen token adı girin",
+        "operate": "Eylem",
+        "all": "Tümü",
         "confirmTable": {
             "title": "Detailed Record",
             "heads": [
-                "Date",
+                "Tarih",
                 "Token",
-                "Type",
-                "Amount"
+                "Tür",
+                "Miktar"
             ]
         },
         "pwdConfirm": {
-            "cancelTxt": "Cancel"
+            "cancelTxt": "İptal"
         },
         "table": {
             "heads": [
                 "Token",
-                "Total Balance",
-                "Exchange Balance",
+                "Toplam Bakiye",
+                "Exchange Bakiyesi",
                 "In Order",
-                "Value"
+                "Değer"
             ],
             "rowMap": {
                 "recharge": "Deposit to Exchange",
                 "withdraw": "Withdraw to Wallet",
-                "detail": "Details",
+                "detail": "Ayrıntılar",
                 "sideMap": {
-                    "1": "Deposit",
-                    "2": "Withdraw"
+                    "1": "Yatırma",
+                    "2": "Çekme"
                 }
             }
         },
         "confirmrecharge": {
-            "successToast": "Deposit successful",
-            "failToast": "Failed to deposit",
+            "successToast": "Yatırım başarılı",
+            "failToast": "Yatırım başarısız",
             "title": "Deposit to Exchange",
-            "lable1": "Wallet Balance",
-            "lable2": "Deposit Amount",
-            "tips": "Insufficient Wallet Balance",
-            "placeholder": "Please input deposit amount",
-            "btn": "Deposit"
+            "lable1": "Cüzdan Bakiyesi",
+            "lable2": "Yatırma Miktarı",
+            "tips": "Yetersiz Cüzdan Bakiyesi",
+            "placeholder": "Lütfen yatırma miktarını girin",
+            "btn": "Yatırma"
         },
         "confirmwithdraw": {
-            "successToast": "Withdrawal Successful",
-            "failToast": "Withdrawal Failed",
+            "successToast": "Çekim Başarılı",
+            "failToast": "Çekim Başarısız",
             "title": "Withdraw to Wallet",
-            "lable1": "Available Balance",
-            "lable2": "Withdrawal Amount",
-            "tips": "Insufficient Wallet Balance",
-            "placeholder": "Please input withdrawal amount",
-            "btn": "Withdraw"
+            "lable1": "Kullanılabilir Bakiye",
+            "lable2": "Çekim Miktarı",
+            "tips": "Yetersiz Cüzdan Bakiyesi",
+            "placeholder": "Lütfen çekim miktarını girin",
+            "btn": "Çekme"
         },
-        "zero": "Hide Low Balances"
+        "zero": "Düşük Bakiyeleri Gizle"
     },
     "tradeOpenOrders": {
         "cancelErr": "You are trying too ofter, please try again later.",
@@ -1246,142 +1246,142 @@
             "successToast": "Revoking Order Successful",
             "failToast": "Revoking Order Failed",
             "submitTxt": "Confirm to revoke",
-            "cancelTxt": "Cancel",
+            "cancelTxt": "İptal",
             "title": "Revoke Order",
             "content": "Are you sure you want to revoke current order?"
         },
-        "title": "Open Orders",
+        "title": "Açık Emirler",
         "hint": {
-            "fdate": "Please select start date",
-            "tdate": "Please select end date",
-            "dateErr": "The end date must be later than the start date",
-            "ftoken": "Please select ftoken"
+            "fdate": "Lütfen başlangıç tarihini seçin",
+            "tdate": "Lütfen bitiş tarihini seçin",
+            "dateErr": "Bitiş tarihi, başlangıç tarihinden sonra olmalıdır",
+            "ftoken": "Lütfen ftoken seçin"
         },
         "side": {
-            "1": "Sell",
-            "0": "Buy"
+            "1": "Sat",
+            "0": "Al"
         },
         "table": {
             "heads": [
-                "Date",
-                "Pair",
-                "Side",
-                "Price",
-                "Amount",
+                "Tarih",
+                "Parite",
+                "Taraf",
+                "Fiyat",
+                "Miktar",
                 "Tamamlanan",
                 "Tamamlanan%",
-                "Average",
-                "Total"
+                "Ortalama",
+                "Toplam"
             ],
             "rowMap": {
-                "cancel": "Cancel"
+                "cancel": "İptal"
             }
         }
     },
     "tradeOrderHistory": {
-        "title": "Order History",
+        "title": "Emir geçmişi",
         "hint": {
-            "fdate": "Please choose start date",
-            "tdate": "Please choose end date",
-            "dateErr": "End date must be after start date"
+            "fdate": "Lütfen başlangıç tarihini seçin",
+            "tdate": "Lütfen bitiş tarihini seçin",
+            "dateErr": "Bitiş tarihi, başlangıç tarihinden sonra olmalıdır"
         },
         "side": {
-            "1": "Sell",
-            "0": "Buy"
+            "1": "Sat",
+            "0": "Al"
         },
         "status": {
-            "1": "Ongoing",
-            "2": "Completed",
-            "3": "Cancelled",
-            "4": "Failed"
+            "1": "Devam ediyor",
+            "2": "Tamamlandı",
+            "3": "İptal edildi",
+            "4": "Başarısız"
         },
         "confirmTable": {
-            "title": "Order Book",
+            "title": "Emir Defteri",
             "heads": [
-                "Time",
-                "Price",
-                "Amount",
-                "Fees",
-                "Total"
+                "Zaman",
+                "Fiyat",
+                "Miktar",
+                "Komisyonlar",
+                "Toplam"
             ]
         },
         "table": {
             "heads": [
-                "Date",
-                "Pair",
-                "Side",
-                "Price",
-                "Amount",
+                "Tarih",
+                "Parite",
+                "Taraf",
+                "Fiyat",
+                "Miktar",
                 "Tamamlanan",
-                "Average",
-                "Fees",
-                "Total",
-                "Status"
+                "Ortalama",
+                "Komisyonlar",
+                "Toplam",
+                "Durum"
             ],
             "rowMap": {
                 "statusMap": {
                     "1": "In Order",
-                    "2": "Completed",
-                    "3": "Canceled",
-                    "4": "Failed"
+                    "2": "Tamamlandı",
+                    "3": "İptal edildi",
+                    "4": "Başarısız"
                 },
-                "detail": "Details"
+                "detail": "Ayrıntılar"
             }
         },
         "filter": {
             "start": "From",
             "end": "To",
-            "type": "Type",
-            "side": "Side",
-            "buy": "Buy",
-            "sell": "Sell",
-            "status": "Status",
-            "search": "Search",
-            "reset": "Reset"
+            "type": "Tür",
+            "side": "Taraf",
+            "buy": "Al",
+            "sell": "Sat",
+            "status": "Durum",
+            "search": "Arama",
+            "reset": "Sıfırla"
         }
     },
     "tradeMining": {
-        "title": "Mining",
-        "addQuota": "Create a new staking",
-        "add": "Add",
+        "title": "Madencilik",
+        "addQuota": "Yeni stake oluştur",
+        "add": "Ekle",
         "withdraw": "Unstake",
         "withdrawList": "Withdrawal List",
         "tbHead": {
-            "date": "Date",
-            "fee": "Trading Fees",
-            "mining": "Mining Amount",
+            "date": "Tarih",
+            "fee": "Alım Satım Komisyonları",
+            "mining": "Madencilik Miktarı",
             "pledge": "Stake"
         },
         "txTitle": "Trading as Mining Total Income",
         "quotaTitle": "Staking as Mining Total Income",
-        "addHint1": "Single stake should be at least 134 VITE",
+        "addHint1": "Tek stake miktarı en az 134 VITE olmalıdır",
         "addHint2": "VITE staking will be effective immediately after submission. Staking can be canceled after 3 days",
-        "addHint3": "Staked amount will be released after the 7-day waiting period",
+        "addHint3": "Stake edilmiş miktar 7 günlük bekleme süresinden sonra serbest bırakılacaktır",
         "withdrawHint1": "You will no longer be able to mine VX after staking is canceled",
         "withdrawHint2": "It takes 7 days to return unstaked VITE coins to exchange balance",
-        "addTitle": "Stake VITE for Mining",
+        "addTitle": "Madencilik için VITE Stake et",
         "withdrawTitle": "Unstake VITE",
-        "addPlaceHolder": "Please enter staking amount",
-        "withdrawPlaceHolder": "Please input unstaking amount, at least 134 VITE",
-        "addBtn": "Confirm to Stake",
+        "addPlaceHolder": "Lütfen stake miktarını girin",
+        "withdrawPlaceHolder": "Lütfen stake miktarını girin, en az 134 VITE",
+        "addBtn": "Stake'i Onayla",
         "withdrawBtn": "Confirm to Unstake",
-        "stakingBalance": "Available Stake Balance",
-        "hintTitle": "Important Notice",
+        "stakingBalance": "Kullanılabilir Stake Bakiyesi",
+        "hintTitle": "Önemli Uyarı",
         "comingHint": "VX mining function is coming soon, stay tuned. You can get VX in five ways: 1. Trading as Mining, 2. Listing as Mining, 3. Referring as Mining, 4. Staking as Mining, 5. Market-making as Mining. Users who hold VX enjoy payouts from a shared dividend pool.",
-        "more": "Learn more about VX mining rules",
-        "fee": "Trading Fees",
-        "todayTrade": "Mining Details",
+        "more": "VX madencilik kuralları hakkında daha fazla bilgi edinin",
+        "fee": "Alım Satım Komisyonları",
+        "todayTrade": "Madencilik Ayrıntıları",
         "dividends": "24H Expected Mined Volume",
         "view": "View Live Mining Dashboard",
-        "inviteCount": "Referrals",
+        "inviteCount": "Referanslar",
         "help": "Current trading fees displayed on this page contains only the 0.2% ViteX base transaction fees, please note that operator fees shall be taken into consideration when calculating mining cost"
     },
     "tradeVip": {
-        "title": "VIP Status",
-        "open": "Become a VIP",
-        "cancel": "Cancel {type}",
+        "title": "VIP Durumu",
+        "open": "VIP olun",
+        "cancel": "İptal {type}",
         "help": {
-            "title": "About ViteX VIP"
+            "title": "ViteX VIP Hakkında"
         },
         "helpConfirm": {
             "t1": "VIP",
@@ -1391,42 +1391,42 @@
             "txt3": "SVIP supports staking for any valid account address. Stake for them to get SVIP status!"
         },
         "vipConfirm": {
-            "cancelVip": "Cancel VIP Status",
-            "openVip": "Become a VIP",
-            "openStakingAmount": "Staking Amount for Becoming a VIP",
-            "cancelStakingAmount": "Available Stake Balance",
-            "noBalance": "Insufficient Balance",
+            "cancelVip": "VIP Durumunu İptal Et",
+            "openVip": "VIP olun",
+            "openStakingAmount": "VIP Olmak İçin Gereken Stake Miktarı",
+            "cancelStakingAmount": "Kullanılabilir Stake Bakiyesi",
+            "noBalance": "Yetersiz Bakiye",
             "openHint": "You will receive 0.1% trading fee deduction as a VIP. The staking of 10,000 VITE can be withdrawn after 30 days.",
-            "cancelHint": "VIP status will be canceled immediately.",
-            "openSuccess": "Your VIP status is activated! It will take effect in a few seconds.",
-            "openFail": "VIP Registration Failed",
-            "cancelSuccess": "Cancel VIP Successful",
-            "cancelFail": "Cancel Failed",
+            "cancelHint": "VIP durumu hemen iptal edilecektir.",
+            "openSuccess": "VIP durumunuz aktifleştirildi! Birkaç saniye içinde yürürlüğe girecek.",
+            "openFail": "VIP Kaydı Başarısız",
+            "cancelSuccess": "VIP Başarıyla İptal Edildi",
+            "cancelFail": "İptal Başarısız",
             "adviseToCancel": "There will be no base transaction fees with your current status as our SVIP, we therefore recommend you to revoke the staked VITE，which is required for general VIP members.",
-            "address": "Enable VIP Status",
-            "addressPlaceholder": "Current address is the default address, address cannot be modified later"
+            "address": "VIP Durumunu Etkinleştir",
+            "addressPlaceholder": "Mevcut adres varsayılan adrestir, adres daha sonra değiştirilemez"
         },
         "svipConfirm": {
-            "open": "Upgrade",
-            "cancel": "Cancel",
-            "cancelVip": "Cancel SVIP",
-            "openVip": "Become a SVIP",
-            "openStakingAmount": "Staking Amount for Becoming a SVIP",
-            "cancelStakingAmount": "Available Stake Balance",
-            "noBalance": "Insufficient Balance",
+            "open": "Yükselt",
+            "cancel": "İptal",
+            "cancelVip": "SVIP'i iptal et",
+            "openVip": "SVIP olun",
+            "openStakingAmount": "SVIP Olmak İçin Gereken Stake Miktarı",
+            "cancelStakingAmount": "Kullanılabilir Stake Bakiyesi",
+            "noBalance": "Yetersiz Bakiye",
             "openHint": "You will enjoy 0% base transaction fee when upgrading to SVIP. The stake of 1,000,000 VITE can be withdrawn after 30 days.",
             "cancelHint": "SVIP privileges will be discontinued once staking is revoked",
-            "openSuccess": "Applied Successful! SVIP status will come into effect later.",
+            "openSuccess": "Başvuru Başarılı! SVIP durumu daha sonra yürürlüğe girecektir.",
             "openFail": "Failed to apply SVIP",
-            "cancelSuccess": "Cancel SVIP Successful",
-            "cancelFail": "Cancel Failed",
-            "address": "Enable SVIP Status",
+            "cancelSuccess": "SVIP Başarıyla İptal Edildi",
+            "cancelFail": "İptal Başarısız",
+            "address": "SVIP Durumunu Etkinleştir",
             "addressPlaceholder": "Address to be Enabled with SVIP Status",
-            "cancelAddress": "SVIP Address"
+            "cancelAddress": "SVIP Adresi"
         },
-        "vipListTitle": "VIP Records",
-        "openAddress": "Enabled Address",
-        "type": "VIP Type"
+        "vipListTitle": "VIP Kayıtları",
+        "openAddress": "Etkin Adres",
+        "type": "VIP Türü"
     },
     "inviteMining": {
         "title": "Referring as Mining Total Income",
@@ -1437,34 +1437,34 @@
     "orderMining": {
         "title": "Market-Making as Mining Total Income",
         "tbHead": {
-            "date": "Date",
-            "ratio": "Ratio",
-            "mining": "Amount"
+            "date": "Tarih",
+            "ratio": "Oran",
+            "mining": "Miktar"
         },
-        "market": "{name} Market",
+        "market": "{name} Marketi",
         "estimate": "{name} Today's Minable Amount"
     },
     "tradeDividend": {
         "title": "Dividends",
         "poolTitle": "Trading Fee Dividend Pool",
         "listTitle": "My Dividends",
-        "allPrice": "Total Estimated Value",
-        "date": "Date",
-        "VX": "Stake VX",
-        "coin": "Type",
-        "amount": "Amount",
-        "price": "Total Estimated Value",
-        "hintTitle": "Important Notice",
+        "allPrice": "Toplam Tahmini Değer",
+        "date": "Tarih",
+        "VX": "VX Stake et",
+        "coin": "Tür",
+        "amount": "Miktar",
+        "price": "Toplam Tahmini Değer",
+        "hintTitle": "Önemli Uyarı",
         "comingHint": "VX mining and dividend functions are coming soon, stay tuned. The system will distribute 1% of BTC, ETH, VITE, USDT of the total pool to all VX users proportional to the amount of VX they hold. The initial dividend pool will start at 0 and will grow according to the amount of fees collected by ViteX. Traders must have a minimum of 10 VX in order to receive dividends from a shared dividend pool comprised of base transaction, listing and referral code generating fees. ",
         "more": "Learn more about VX dividend rules",
         "help": "Reward Rules: 1. A minimum of 10 VX must be staked to receive dividends. 2. Submission of staking request allows for dividends starting the nearest distribution. 3. Staked amount will be released after the 7-day waiting period",
-        "lockedAmount": "Staking Amount",
+        "lockedAmount": "Stake Miktarı",
         "lockAmountTips": "Receive Dividends on 10 VX or Above",
         "unlockAmount": "Unlocking Amount",
         "addHint1": "A minimum of 10 VX must be staked to receive dividends",
         "addHint2": "Submission of staking request allows for dividends starting the nearest distribution",
-        "addHint3": "Staked amount will be released after the 7-day waiting period",
-        "autoLock": "Automatic Staking",
+        "addHint3": "Stake edilmiş miktar 7 günlük bekleme süresinden sonra serbest bırakılacaktır",
+        "autoLock": "Otomatik Stake Et",
         "openAutoLock": {
             "title": "Enable Automatic Staking",
             "text": "Mined VX will be automatically staked once enabled"
@@ -1477,76 +1477,76 @@
         "unlock": "Unstake",
         "lessMin": "Minimum 1 VX",
         "lockVXConfirm": {
-            "title": "Stake VX",
-            "available": "Exchange Available Balance",
-            "amountPlaceholder": "Please input staking amount, minimum 1 VX",
-            "notEnough": "Insufficient Exchange Balance",
-            "submit": "Confirm to Stake",
-            "amountText": "Amount"
+            "title": "VX Stake et",
+            "available": "Kullanılabilir Exchange Bakiyesi",
+            "amountPlaceholder": "Lütfen stake miktarını girin, minimum 1 VX",
+            "notEnough": "Yetersiz Exchange Bakiyesi",
+            "submit": "Stake'i Onayla",
+            "amountText": "Miktar"
         },
         "unlockVXConfirm": {
             "title": "Unstake VX",
-            "available": "Available Stake Balance",
-            "amountPlaceholder": "Please input amount, minimum 1 VX",
-            "notEnough": "Insufficient Amount",
+            "available": "Kullanılabilir Stake Bakiyesi",
+            "amountPlaceholder": "Lütfen miktarı girin, minimum 1 VX",
+            "notEnough": "Yetersiz Miktar",
             "submit": "Confirm to Unstake",
-            "amountText": "Amount",
-            "hint": "It takes about 7 days to unlock."
+            "amountText": "Miktar",
+            "hint": "Kilidi açmak 7 gün sürer."
         },
         "unlockList": {
             "title": "Retrieving",
-            "amount": "Amount",
+            "amount": "Miktar",
             "time": "Available Date"
         }
     },
     "tradeOperator": {
-        "title": "Operator",
-        "tokenList": "Tokens",
-        "totalIncome": "Total Income",
+        "title": "Operatör",
+        "tokenList": "Tokenler",
+        "totalIncome": "Toplam Gelir",
         "permission": "Transfer Token's Ownership",
-        "txPairManage": "Manage Trading Pairs",
+        "txPairManage": "Alım Satım Paritelerini Yönet",
         "noOperator": "You have no tokens or trading pairs yet, wanna become an operator?",
-        "learnMore": "Learn More",
+        "learnMore": "Daha Fazla Bilgi Edinin",
         "permissionConfirm": {
             "title": "Transfer Ownership",
-            "submit": "Confirm",
-            "tokenName": "Token Name",
-            "address": "Recipient Address",
+            "submit": "Onayla",
+            "tokenName": "Token Adı",
+            "address": "Alıcı Adresi",
             "notice": "NOTICE: When the ownership transferred to someone else, trading pairs that not be opened will belong to the new owner. Trading/suspension trading pairs still belong to you"
         }
     },
     "tradeTxPairManage": {
-        "title": "{tokenSymbol} Trading Pairs Management",
-        "symbol": "Name",
-        "income": "Income",
-        "fee": "Fee Rate",
-        "status": "Status",
-        "operate": "Action",
-        "stopTrans": "Suspend",
-        "resetTrans": "Recover",
+        "title": "{tokenSymbol} Alım Satım Pariteleri Yönetimi",
+        "symbol": "Ad",
+        "income": "Gelir",
+        "fee": "Komisyon Oranı",
+        "status": "Durum",
+        "operate": "Eylem",
+        "stopTrans": "Askıya Al",
+        "resetTrans": "Kurtar",
         "changeOwner": "Transfer Ownership",
         "changeFee": "Adjust Fee Rate",
-        "incomeList": "Income Details",
-        "historyIncome": "Income History",
-        "openTxPair": "Open Trading Pairs",
+        "incomeList": "Gelir Ayrıntıları",
+        "historyIncome": "Gelir Geçmişi",
+        "openTxPair": "Alım Satım Paritelerini Aç",
         "statusList": [
             "Ownership Transferred",
-            "Trading",
-            "Suspension",
-            "Trade Not Open"
+            "Alım Satım",
+            "Askıya Alma",
+            "Alım Satım Açık Değil"
         ],
         "openTxPairConfirm": {
-            "title": "Open {symbol} to trade",
-            "fee": "Listing Fee",
+            "title": "Alım satım için {symbol} aç",
+            "fee": "Listeleme Komisyonu",
             "hint": "If you want to add unique operator symbol after opening a trading pair, please contact us at our Telegram group: https://t.me/vite_en",
-            "btn": "Submit",
-            "reqSuccess": "Submit Successful! Check it on market board later.",
-            "reqError": "Listing failed, please try again"
+            "btn": "Gönder",
+            "reqSuccess": "Gönderim Başarılı! Daha sonra market tahtasında kontrol edin.",
+            "reqError": "Listeleme başarısız, lütfen tekrar deneyin"
         },
-        "stopTransHint": "Make sure to suspend {symbol} ?",
-        "resetTransHint": "Make sure to recover {symbol} ?",
-        "stopSuccess": "Suspension Successful",
-        "stopFail": "Suspension Failed",
+        "stopTransHint": "{symbol}'i askıya almak istediğinizden emin misiniz?",
+        "resetTransHint": "{symbol}'i kurtarmak istediğinizden emin misiniz?",
+        "stopSuccess": "Askıya Alma Başarılı",
+        "stopFail": "Askıya Alma Başarısız",
         "openSuccess": "Kurtarma Başarılı",
         "openFail": "Kurtarma Başarısız",
         "changeOwnerSuccess": "Transfer Başarılı",
@@ -1599,18 +1599,18 @@
         "poolTitle": "Dividend Pool ({token})",
         "myDividendTitle": "Total Estimated Value of Dividends ({token})",
         "listTitle": "Dividend Details",
-        "lockingTitle": "My Staking",
+        "lockingTitle": "Stakelerim",
         "viewLink": "Unstaking Status"
     },
     "mobileMining": {
-        "title": "Mining",
-        "miningTrade": "Trading",
+        "title": "Madencilik",
+        "miningTrade": "Alım Satım",
         "miningStaking": "Alım Satım",
-        "miningInvite": "Referral",
+        "miningInvite": "Referans",
         "miningOrder": "Market-Making",
-        "tradeTotalIncome": "Total Income ({token})",
-        "stakingTotalIncome": "Total Income ({token})",
-        "inviteTotalIncome": "Total Income ({token})",
+        "tradeTotalIncome": "Toplam Gelir ({token})",
+        "stakingTotalIncome": "Toplam Gelir ({token})",
+        "inviteTotalIncome": "Toplam Gelir ({token})",
         "orderTotalIncome": "Toplam Gelir ({token})",
         "fee": "Komisyonlar",
         "listTitle": "Madencilik Geçmişi",
