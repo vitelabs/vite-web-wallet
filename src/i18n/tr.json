@@ -221,7 +221,7 @@
     },
     "quotaConfirm": {
         "title": "Yetersiz Quota",
-        "cancelContent": "You cannot {operate} due to insufficient TPS quota. You need to stake VITE for quota to {operate}",
+        "cancelContent": "Yetersiz TPS quota nedeniyle {operate} yapamazsınız. {operate} quota için VITE stake etmeniz gerekmektedir",
         "goQuota": "VITE Stake et",
         "noOperate": "Not {operate} yet"
     },
@@ -633,8 +633,8 @@
             "title": "Stake Listem",
             "total": "Toplamda {amount} VITE Stake ettiniz",
             "amount": "Miktar",
-            "withdrawTime": "Expected Due Date",
-            "unexpired": "Temporarily cannot make withdrawal of staked token until due date",
+            "withdrawTime": "Beklenen Bitiş Tarihi",
+            "unexpired": "Stake edilmiş token, bitiş tarihine kadar çekilemez",
             "vip": "This staking action is for default opening VIP on ViteX exchange, please go to ViteX exchange page to cancel VIP",
             "mining": "This staking is your staking as mining amount on ViteX, please go to ViteX mining page to unstake",
             "other": "This staking is staked via other ways and unstake is not supported here"
