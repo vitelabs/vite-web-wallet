@@ -18,6 +18,7 @@ import sendTx from 'pcUtils/sendTx';
 import confirm from 'pcComponents/confirm/confirm.vue';
 import { initPwd } from 'pcComponents/password/index.js';
 import { customContracts } from 'services/apiServer';
+import { getAccountBlockByHash } from 'services/viteServer';
 
 export default {
     components: { confirm },
@@ -55,20 +56,27 @@ export default {
                 return;
             }
 
-            sendTx({
-                methodName: 'callContract',
-                data: {
-                    toAddress: customContracts.FullNodeCancelStake.contractAddress,
-                    abi: customContracts.FullNodeCancelStake.abi,
-                    params: [this.activeItem.rawData.sendHash]
+            const sendHash = this.activeItem.rawData.sendHash;
+            let contractAddress = customContracts.FullNodeCancelStake.contractAddress;
+            getAccountBlockByHash(sendHash).then(data => {
+                if (data.toAddress && data.toAddress !== contractAddress) {
+                    contractAddress = data.toAddress;
                 }
-            }).then(() => {
-                this.close();
-                this.$toast(this.$t('hint.request', { name: this.$t('walletQuota.withdrawalStaking') }));
-            }).catch(err => {
-                console.warn(err);
-                this.close();
-                this.$toast(this.$t('walletQuota.canclePledgeFail'), err);
+                sendTx({
+                    methodName: 'callContract',
+                    data: {
+                        toAddress: contractAddress,
+                        abi: customContracts.FullNodeCancelStake.abi,
+                        params: [this.activeItem.rawData.sendHash]
+                    }
+                }).then(() => {
+                    this.close();
+                    this.$toast(this.$t('hint.request', { name: this.$t('walletQuota.withdrawalStaking') }));
+                }).catch(err => {
+                    console.warn(err);
+                    this.close();
+                    this.$toast(this.$t('walletQuota.canclePledgeFail'), err);
+                });
             });
         }
     }
