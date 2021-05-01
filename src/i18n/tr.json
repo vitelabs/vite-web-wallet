@@ -329,7 +329,7 @@
             "name": "Name",
             "balance": "Wallet Balance",
             "onroad": "Wallet Unreceived Funds",
-            "gate": "Wallet Cross-Chain Gateway",
+            "gate": "Cüzdan Cross-Chain Ağ Geçidi",
             "totalExAmount": "Toplam Exchange Bakiyesi",
             "availableExAmount": "Kullanılabilir Exchange Bakiyesi",
             "balanceTips": "On-chain send is available for users who would like to send transactions from your Vite wallet to other Vite addresses",
@@ -464,7 +464,7 @@
                 "Please select the correct mainnet or you will be unable to retrieve any lost tokens."
             ]
         },
-        "viteTips": "VITE only supports cross-chain functionality between the new ERC20 VITE token and Native VITE Coin.",
+        "viteTips": "VITE, yalnızca yeni ERC20 VITE tokenı ile Native VITE Coin arasındaki cross-chain işlevselliğini destekler.",
         "withdraw": {
             "title": "Cross-Chain Çekme",
             "btn": "Çekme",
