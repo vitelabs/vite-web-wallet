@@ -39,7 +39,7 @@
         "assets": [
             "Exchange'e Yatırma",
             "Cüzdana Çekme",
-            "Cross-Chain Deposit & Withdrawal"
+            "Cross-Chain Yatırma ve Çekimi"
         ]
     },
     "dealReminder": {
@@ -363,7 +363,7 @@
         },
         "type": {
             "native": "Yerel Tokenlar",
-            "crossGate": "Cross-Chain Coins"
+            "crossGate": "Cross-Chain Koinleri"
         },
         "assetType": {
             "TOTAL": "Tüm Varlıklar",
@@ -381,7 +381,7 @@
                 "total": "Dolaşımdaki Arz",
                 "overview": "Giriş",
                 "type": "Tür",
-                "gate": "Cross-Chain Gateway",
+                "gate": "Cross-Chain Ağ Geçidi",
                 "website": "Web Sitesi",
                 "whitePaper": "Teknik İnceleme",
                 "explorer": "Explorer",
@@ -452,7 +452,7 @@
             }
         },
         "charge": {
-            "title": "Cross-Chain Deposit",
+            "title": "Cross-Chain Yatırma",
             "addrErr": "Something went wrong with gateway node, please check your network settings",
             "addressTitle": "Recipient Address",
             "labelTips": "(Please use this '{labelName}' with your recipient address, otherwise your assets will lose",
@@ -466,7 +466,7 @@
         },
         "viteTips": "VITE only supports cross-chain functionality between the new ERC20 VITE token and Native VITE Coin.",
         "withdraw": {
-            "title": "Cross-Chain Withdrawal",
+            "title": "Cross-Chain Çekme",
             "btn": "Çekme",
             "balanceErrMap": {
                 "notEnough": "Yetersiz Bakiye",
