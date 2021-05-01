@@ -61,7 +61,7 @@
     "pow": {
         "ing": "Running PoW to acquire quota",
         "no": "You can stake VITE for quota in case you would not like to run PoW",
-        "insuffQuota": "Get Quota",
+        "insuffQuota": "Quota Al",
         "insuffQuotaMsg": "We notice you have no VITE locked for Quota. Please lock VITE or if you prefer, you can run POW to get Quota.",
         "insuffQuotaMsg2": "VITE Only {powMaxTimes} transactions can be made per day per address without staking VITE. Your address has exhausted all {powMaxTimes} transactions. Please go to the quota page and stake your VITE to perform more transactions.",
         "getQuota": "VITE Kilitle",
@@ -123,8 +123,8 @@
         "VoteForSBP_V1": "Oylama",
         "CancelSBPVoting": "Oylamayı İptal Et",
         "CancelSBPVoting_V1": "Oylamayı İptal Et",
-        "StakeForQuota": "Get Quota",
-        "StakeForQuota_V1": "Get Quota",
+        "StakeForQuota": "Quota Al",
+        "StakeForQuota_V1": "Quota Al",
         "CancelQuotaStake": "Withdrawal of Stake",
         "CancelQuotaStake_V1": "Withdrawal of Stake",
         "IssueToken": "Token Issuance",
@@ -220,7 +220,7 @@
         "unlockAcc": "Please unlock {name} first"
     },
     "quotaConfirm": {
-        "title": "Yetersiz Kota",
+        "title": "Yetersiz Quota",
         "cancelContent": "You cannot {operate} due to insufficient TPS quota. You need to stake VITE for quota to {operate}",
         "goQuota": "VITE Stake et",
         "noOperate": "Not {operate} yet"
@@ -497,7 +497,7 @@
         "title": "ViteScan"
     },
     "wallet": {
-        "title": "Kota Yönetimi",
+        "title": "Quota Yönetimi",
         "help": {
             "title": "Quick Understanding of Quota"
         },
@@ -586,32 +586,32 @@
         }
     },
     "walletQuota": {
-        "title": "Quota Management",
+        "title": "Quota Yönetimi",
         "help": {
             "title": "Quick Understanding of Quota"
         },
-        "myQuota": "My Quota",
-        "maxTxNum": "Maximum Number of Txs",
-        "beneficialAddr": "Quota Recipient Address",
-        "fromAddr": "Deduction Address",
+        "myQuota": "Quota'larım",
+        "maxTxNum": "Maksimum Txs Sayısı",
+        "beneficialAddr": "Quota Alıcı Adresi",
+        "fromAddr": "Kesinti Adresi",
         "time": "Staking Freeze Duration",
         "aboutDays": "Approx {day} days",
         "amountPlaceholder": "Lütfen stake miktarını girin, minimum {num} VITE",
         "limitAmt": "Stake miktarı {num}'den az olmamalıdır.",
-        "addrPlaceholder": "Please input quota recipient address",
+        "addrPlaceholder": "Lütfen quota alıcı adresini girin",
         "inputWithdrawAmount": "Lütfen çekim miktarını girin",
-        "pledgeFail": "Failed to Submit",
-        "canclePledgeFail": "Failed",
+        "pledgeFail": "Gönderme başarısız",
+        "canclePledgeFail": "Başarısız",
         "maturity": "Staking has expired!",
         "minAmt": "Çekim miktarı {num} VITE'den az olmamalıdır",
         "gotoStake": "Lütfen önce yeterince VITE stake edin",
         "maxAmt": "Withdraw amount should be in [{minAmount}, {maxAmount}]",
         "cancelLimitAmt": "Stake miktarı {num}'den az olmamalıdır",
         "withdrawalStaking": "Stake Edilmiş Tokenları Çek",
-        "myAddr": "Me",
+        "myAddr": "Ben",
         "confirm": {
             "help": {
-                "t1": "What is Quota?",
+                "t1": "Quota Nedir?",
                 "txt1": "In the Vite system, users do not purchase the gas required for a transaction by paying a fee, but acquire the computing resource through a quota-based model. Required quota for sending a transaction = the basic quota (request) + quota (the attached text data), quota required to accept a transaction = the basic quota (response). This quota-based resource configuration protocol allows users to obtain higher resource quotas in two ways: Staking VITE to obtain quota and running PoW.",
                 "t2": "Stake Nedir?",
                 "txt2": "In the Vite system, the user can stake VITE to obtain a certain amount of quota. The minimum value for staking is 134 VITE, and there is no maximum limit; meanwhile, Vite system also supports that the A-address stakes a part of the VITE and allocates the obtained quota to the B address. When users apply to stake, VITE will be sent to the smart contract address instead of another user, and only the user who applies for staking has access to manage the staking amount.",
@@ -681,7 +681,7 @@
             "all": "Birikmiş VITE: {num}",
             "nodeInfo": "Düğüm Bilgisi",
             "onlineNodes": "Etkin Düğümler",
-            "rewardNodes": "Rewarding Nodes",
+            "rewardNodes": "Ödüllendirme Düğümleri",
             "stakeAmount": "Node Staking"
         }
     },
