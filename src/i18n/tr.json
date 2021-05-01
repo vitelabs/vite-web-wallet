@@ -19,7 +19,7 @@
     "accountName": "Hesap Adı",
     "action": "Eylem",
     "stakingAmount": "Stake Miktarı",
-    "submitStaking": "Submit Staking",
+    "submitStaking": "Stake'i Gönder",
     "withdrawHeight": "Expected Snapshot Height",
     "balance": "Bakiye",
     "dexBalance": "ViteX Bakiyesi",
@@ -31,7 +31,7 @@
         "next": "İleri",
         "closeTips": "Kullanım kılavuzunu atla (Önerilmez)",
         "trade": [
-            "Manage your assets (both Web Wallet and ViteX exchange) here",
+            "Varlıklarınızı (hem Web Cüzdanı hem de ViteX exchange) buradan yönetin",
             "Açık Emirlere ve Emir Geçmişine göz atın, alım satım detaylarını öğrenin",
             "Participate in mining, acquire VX and trading fee dividends (Mining Dividends)",
             "Experience more features: Staking for Quota, becoming a SBP (Snapshot Block Producer) runner, Voting for SBPs, ERC20 conversion, Transaction Details, etc."
@@ -94,14 +94,14 @@
         "35005": "Transactions are sent too frequent, please try again later",
         "35006": "Contract method not exist",
         "35011": "Network Congestion",
-        "36001": "You cannot make any transfer until you receive a transaction",
-        "36002": "System verify failed, please try again later",
-        "36003": "System verify failed, please try again later",
-        "36004": "System verify failed, please try again later",
+        "36001": "Bir işlem gerçekleşmeden başka transfer yapamazsınız",
+        "36002": "Sistem doğrulaması başarısız oldu, lütfen daha sonra tekrar deneyiniz",
+        "36003": "Sistem doğrulaması başarısız oldu, lütfen daha sonra tekrar deneyiniz",
+        "36004": "Sistem doğrulaması başarısız oldu, lütfen daha sonra tekrar deneyiniz",
         "36005": "Snapshot block height is illegal, please try again later",
-        "37001": "Wrong order number format",
-        "37002": "Wrong order type",
-        "37003": "Wrong order price format",
+        "37001": "Yanlış emir sayısı formatı",
+        "37002": "Yanlış emir türü",
+        "37003": "Yanlış emir fiyatı formatı",
         "37004": "Exception occurs in order transaction volume",
         "37005": "Emir işlem miktarı çok küçük",
         "37006": "Mevcut alım satım marketi",
@@ -153,8 +153,8 @@
         "DexOpenNewMarket_V1": "ViteX Token Listeleme",
         "DexStakeForVIP": "ViteX VIP",
         "DexStakeForVIP_V1": "ViteX VIP",
-        "DexStakeForMining": "ViteX Staking",
-        "DexStakeForMining_V1": "ViteX Staking",
+        "DexStakeForMining": "ViteX Stake'i",
+        "DexStakeForMining_V1": "ViteX Stake'i",
         "CreateContractRequest": "Sözleşme Oluştur",
         "TransferRequest": "Transfer",
         "ReIssueRequest": "Transfer",
@@ -162,9 +162,9 @@
         "ResponseFail": "Transfer",
         "RefundByContractRequest": "Transfer",
         "GenesisResponse": "Genesis",
-        "FullNodeStake": "Stake for Full Node",
-        "FullNodeCancelStake": "Withdraw Full Node Stakes",
-        "UpdateSBPRewardWithdrawAddress": "Edit SBP Reward Withdraw Address"
+        "FullNodeStake": "Tam Düğüm için Stake",
+        "FullNodeCancelStake": "Tam Düğüm Stakelerini Çek",
+        "UpdateSBPRewardWithdrawAddress": "SBP Ödül Çekme Adresini Düzenle"
     },
     "btn": {
         "cancel": "İptal",
@@ -180,14 +180,14 @@
         "known": "Biliyorum"
     },
     "hint": {
-        "noNet": "No network detected",
+        "noNet": "Ağ algılanmadı",
         "pwErr": "Hatalı parola!",
         "pwEmpty": "Parola boş bırakılamaz!",
         "noData": "Veri Yok",
         "err": "Oops, bir hata oluştu",
         "request": "{name} talebi gönderildi, lütfen bekleyin",
         "copy": "Kopyalama başarılı",
-        "copyShare": "Copy share link successful!",
+        "copyShare": "Paylaşım linki başarıyla kopyalandı!",
         "addrFormat": "Hatalı adres formatı",
         "amtFormat": "Hatalı miktar formatı",
         "transSucc": "İşlem başarılı!",
@@ -198,7 +198,7 @@
         "operateSuccess": "İşlem Başarılı",
         "operateFail": "İşlem Başarısız",
         "unreceived": "Alınmamış varlıkları toplamak için lütfen oturum açın",
-        "unreceivedNum": "Please sign in to collect unreceived funds, currently you have {number} unreceived transaction(s)"
+        "unreceivedNum": "Lütfen alınmamış varlıkları toplamak için oturum açın, şu anda alınmamış {number} işlem(ler)iniz var"
     },
     "beforeUse": {
         "title": "Kullanmadan Önce Okuyun",
@@ -349,7 +349,7 @@
             "EXWITHDRAW": "Çekme"
         },
         "transferConfirm": {
-            "from": "From",
+            "from": "Gönderici",
             "to": "To",
             "wallet": "Cüzdan Hesabı",
             "dex": "Exchange Hesabı",
@@ -1329,7 +1329,7 @@
             }
         },
         "filter": {
-            "start": "From",
+            "start": "Gönderici",
             "end": "To",
             "type": "Tür",
             "side": "Taraf",
