@@ -202,7 +202,7 @@
     },
     "beforeUse": {
         "title": "Kullanmadan Önce Okuyun",
-        "text1": "For your funds' safety, create account function is not supported provisionally on web wallet. Please download Vite App to create account. Vite platform would like to warn you that if you visit a phishing website or lose you backup, our company cannot recover your funds.",
+        "text1": "Varlıklarınızın güvenliği için, hesap oluşturma özelliği web cüzdanında geçici olarak desteklenmemektedir. Hesap oluşturmak için lütfen Vite Uygulamasını indirin. Bir oltalama web sitesini ziyaret ederseniz veya kurtarma kelimelerinizin yedeğini kaybederseniz Vite Platformu, varlıklarınızı geri kurtaramaz.",
         "text2": "Please note that our websites do not store your private keys or seed phrase. Therefore, you will need to restore your account via seed phrase if you decide to change browsers, clear local cookies, or change PCs.",
         "text3": "Please take proper precautions in ensuring that you accurately record and safely store your seed phrase. Even the slightest error will result in you not being able to successfully restore your address."
     },
@@ -217,19 +217,19 @@
         "conf": "Open password-free mode to free you from entering password during every transaction process. ",
         "title": "Parola",
         "placeholder": "Lütfen cüzdan parolasını girin",
-        "unlockAcc": "Please unlock {name} first"
+        "unlockAcc": "Lütfen ilk önce {name} kilidini açın"
     },
     "quotaConfirm": {
         "title": "Yetersiz Quota",
         "cancelContent": "Yetersiz TPS quota nedeniyle {operate} yapamazsınız. {operate} quota için VITE stake etmeniz gerekmektedir",
         "goQuota": "VITE Stake et",
-        "noOperate": "Not {operate} yet"
+        "noOperate": "Henüz {operate} yapılmadı"
     },
     "mnemonic": {
         "title": "Anımsatıcı",
         "restore": "Hesabı Kurtarma Kelimelerine Göre Geri Yükle",
         "record": "Kurtarma Kelimeleri Oluştur",
-        "prompt": "Mnemonic seed phrase is the only way to restore your wallet. You are strongly advised to write down the phrase and keep it in a safe place where only you can access.",
+        "prompt": "Anımsatıcı kurtarma kelimeleri, cüzdanınızı geri yüklemenin tek yoludur. Kelimeleri bir yere yazmanız ve yalnızca sizin erişebileceğiniz güvenli bir yerde saklamanız şiddetle tavsiye edilir.",
         "placeholder": "Lütfen anımsatıcı kurtarma kelimelerinizi girin",
         "empty": "Kurtarma Kelimeleri girişi boş bırakılamaz",
         "error": "Hatalı kurtarma kelimeleri. Tekrar deneyin",
@@ -252,7 +252,7 @@
             "customNode": "Özel Düğüm",
             "deleteCustomNode": "Sil",
             "wrongNode": "Lütfen doğru URL'yi girin!",
-            "changeNodeSuccess": "Have connected to new node.",
+            "changeNodeSuccess": "Yeni düğüme bağlandı.",
             "failedConnected": "Düğüm bağlantı hatası",
             "inputPlaceholder": "Please enter the node url prefix with wss."
         },
@@ -272,7 +272,7 @@
         "addrList": "Adres Yönetimi",
         "setDefault": "Varsayılan Adresi Seçin",
         "autoLogout": "Otomatik Çıkış Süresi",
-        "noPass": "Turn on password-free mode",
+        "noPass": "Şifresiz modu açın",
         "explorer": "Block Explorer",
         "netInfo": "Ağ Bilgisi",
         "logoutDescribe": "Bu sayfadan ayrıldığınızda, hesabınızdan otomatik olarak çıkış yapılacaktır",
@@ -291,16 +291,16 @@
     },
     "create": {
         "input": "Lütfen parolanızı girin",
-        "again": "Please confirm your password",
-        "choose": "Choose an account",
-        "finish": "Done",
-        "agreementPre": "I have read and agree with Vite Wallet and ViteX's",
-        "agreement": "Terms of Services and Privacy Policy",
+        "again": "Lütfen parolanızı onaylayın",
+        "choose": "Bir hesap seçin",
+        "finish": "Tamam",
+        "agreementPre": "Vite Wallet ve ViteX'leri okudum ve kabul ediyorum",
+        "agreement": "Hizmet Şartları ve Gizlilik Politikası",
         "hint": {
-            "nameInput": "Please input account name",
-            "nameLong": "Name cannot exceed {long} characters",
-            "long": "Password cannot exceed 32 characters",
-            "name": "Account name only supports English and Chinese characters, digits and underline",
+            "nameInput": "Lütfen hesap adı girin",
+            "nameLong": "Ad {long} karakteri aşamaz",
+            "long": "Parola 32 karakteri aşamaz",
+            "name": "Hesap adı yalnızca İngilizce ve Çince karakterleri, rakamları ve alt çizgiyi destekler",
             "consistency": "Please enter the same password",
             "pwFormat": "Wrong password format. The password should only contain digits, letters and symbols."
         }
@@ -327,8 +327,8 @@
         "saveSuccess": "Successfully saved",
         "heads": {
             "name": "Name",
-            "balance": "Wallet Balance",
-            "onroad": "Wallet Unreceived Funds",
+            "balance": "Cüzdan Bakiyesi",
+            "onroad": "Alınmamış Cüzdan Varlıkları",
             "gate": "Cüzdan Cross-Chain Ağ Geçidi",
             "totalExAmount": "Toplam Exchange Bakiyesi",
             "availableExAmount": "Kullanılabilir Exchange Bakiyesi",
@@ -350,14 +350,14 @@
         },
         "transferConfirm": {
             "from": "Gönderici",
-            "to": "To",
+            "to": "Alıcı",
             "wallet": "Cüzdan Hesabı",
             "dex": "Exchange Hesabı",
             "avaliableAmount": "Bakiye"
         },
         "addToken": {
             "title": "Token Ekle",
-            "placeholder": "Please enter token name or TokenID",
+            "placeholder": "Lütfen token adı veya TokenID girin",
             "lTxt": "İptal",
             "rTxt": "Ekle"
         },
@@ -401,31 +401,31 @@
             "name": "Ağ Geçidi Adı",
             "customer": "Müşteri Hizmetleri",
             "privacy": "Hizmet Şartları",
-            "clickPrivacy": "{gate}'s official gateway Terms of Services",
+            "clickPrivacy": "{gate} resmi ağ geçidi Hizmet Şartları",
             "gateSetting": "Ağ Geçidini Yapılandır",
             "tabName": "Ağ Geçidi Ayrıntıları",
-            "selfdefined": "Customize Gateway",
+            "selfdefined": "Özel Ağ Geçidi",
             "officalNet": "Web Sitesi",
             "introduction": "Açıklama",
             "token": "Issued Token",
-            "setting": "Gateway Interface",
+            "setting": "Ağ Geçidi Arayüzü",
             "nodeDesc": "Kullanım Kılavuzu",
             "settingPlaceholder": "Lütfen ağ geçidi link adresini girin",
             "nodeDescStr": "This function only works for cross-chain coins, do not use this on built-in tokens. Meanwhile, please be careful about unfamiliar gateway links. By continuing to use our platform, you agree and acknowledge that Vite Labs would not be responsible for the loss of your fund and other negative consequences caused. Fill out the gateway link below if you need to use gateway, the link will come into effect after you hit save."
         },
         "depositRecord": {
-            "tabName": "Receive History",
+            "tabName": "Alma Geçmişi",
             "heads": [
                 "Zaman",
                 "Miktar",
                 "Durum",
-                "{outChain} Hash",
-                "vite Hash",
+                "{outChain} Hash'i",
+                "vite Hash'i",
                 "Komisyonlar"
             ],
             "statusMap": {
                 "OPPOSITE_PROCESSING": "{outChain} awaits to confirm{confirms}",
-                "OPPOSITE_CONFIRMED_FAIL": "{outChain} processing failed",
+                "OPPOSITE_CONFIRMED_FAIL": "{outChain} işlenemedi",
                 "OPPOSITE_CONFIRMED": "Gateway Received",
                 "TOT_CONFIRMED": "Tamamlandı",
                 "BELOW_MINIMUM": "Topup Failed",
@@ -433,14 +433,14 @@
             }
         },
         "withdrawRecord": {
-            "tabName": "Transfer History",
+            "tabName": "Transfer Geçmişi",
             "heads": [
                 "Zaman",
                 "Miktar",
                 "Durum",
-                "vite Hash",
-                "{outChain} Hash",
-                "Fees"
+                "vite Hash'i",
+                "{outChain} Hash'i",
+                "Komisyonlar"
             ],
             "statusMap": {
                 "TOT_PROCESSING": "VITE Chain Unconfirmed{confirms}",
@@ -453,14 +453,14 @@
         },
         "charge": {
             "title": "Cross-Chain Yatırma",
-            "addrErr": "Something went wrong with gateway node, please check your network settings",
-            "addressTitle": "Recipient Address",
-            "labelTips": "(Please use this '{labelName}' with your recipient address, otherwise your assets will lose",
+            "addrErr": "Ağ geçidi düğümünde bir sorun oluştu, lütfen ağ ayarlarınızı kontrol edin",
+            "addressTitle": "Alıcı Adresi",
+            "labelTips": "(Lütfen alıcı adresinizle birlikte bu '{labelName}' kullanın, aksi takdirde varlıklarınız kaybolur",
             "labelCodeTips": "Please Scan the QR code from {labelName}",
-            "codeTips": "Scan QR code to deposit. Please send funds with the wallet that supports {tokenSymbol}",
+            "codeTips": "Yatırma için QR kodu tarayın. Lütfen {tokenSymbol} destekleyen cüzdan ile varlık gönderin",
             "tips": [
                 "You can only deposit {tokenSymbol} through the address provided below. No less than {min} {tokenSymbol} will be accepted.",
-                "The account will update after {confirmationCount} network confirmations. Please wait.",
+                "Hesap {confirmationCount} ağ onayından sonra güncellenecektir. Lütfen bekleyin.",
                 "Please select the correct mainnet or you will be unable to retrieve any lost tokens."
             ]
         },
@@ -523,8 +523,8 @@
             "amount": "Miktar 0'dan yüksek olmalı"
         },
         "trans": {
-            "powErr": "Error occurs when running PoW, please try again",
-            "powTransErr": "Insufficient quota of PoW, we'd recommend that you stake VITE to obtain quota."
+            "powErr": "PoW çalıştırılırken hata oluştu, lütfen tekrar deneyin",
+            "powTransErr": "Yetersiz PoW quotası, quota elde etmek için VITE stake etmenizi tavsiye ederiz."
         }
     },
     "walletMintage": {
@@ -661,8 +661,8 @@
         "help": {
             "title": "Hakkında",
             "t1": "Sözlük",
-            "txt1": "[Number of Registered Nodes]  The number of full nodes registered with the current address",
-            "txt2": "[Number of Active Nodes]  The number of active full nodes registered with the current address",
+            "txt1": "[Kayıtlı Düğüm Sayısı] Mevcut adresle kaydedilen tam düğüm sayısı",
+            "txt2": "[Etkin Düğüm Sayısı] Mevcut adresle kaydedilen etkin tam düğüm sayısı",
             "txt3": "[Number of Rewarding nodes]  Number of nodes being rewarded",
             "t2": "Multiple Full nodes can be registered with the same address, but must be staked individually at least 10,000 VITE each; When calculating Active Node Reward, if staking amount / 10000 yields a whole number that is greater than or equal to the number of active nodes, all active nodes will be rewarded; If staking amount / 10000 yields a whole number that is less than the number of active nodes, the number of nodes being rewarded equals to the whole number.",
             "t3": "Calculation of voting rewards does not depend on the number of nodes, but the staking amount."
@@ -692,7 +692,7 @@
             "text": "SBP（Snapshot Block Producer）is a node that has right to create blocks, you can register to become a SBP candidate by staking a certain amount of VITE, each round (about 75 seconds) will elect 25 SBPs, the SBPs will be elected from random 23 out of top 25 candidate nodes, plus random 2 out of the candidate nodes ranking 26th-100th on the list. The 50% of block creation rewards will be allocated to the block creation node, the other 50% will be allocated to nodes that are ranked on top 100 as voting rewards. One registration address (staking address) can register multiple block creation nodes (node names), a node name cannot be used if the node name has been registered by a registration address. A node name can switch block creation address, however, block creation address cannot be reused by other node names."
         },
         "register": "SBP Kaydı",
-        "cancel": "SBP Cancellation",
+        "cancel": "SBP İptali",
         "cancelBtn": "İptal",
         "rewardBtn": "Ödülleri Topla",
         "noReward": "Ödül Yok",
@@ -731,7 +731,7 @@
             "namePlaceholder": "Lütfen düğüm adı girin",
             "nameHint": "Within 40 characters, support English letters (both upper and lower cases), numbers, '_'、'.'",
             "nameErr": "Bu düğüm adı yasadışı",
-            "nameUsed": "This node name is occupied",
+            "nameUsed": "Bu düğüm adı kullanılıyor",
             "addrPlaceholder": "Please input snapshot block creation address",
             "addrHint": "The block creation address must be a full node and keep up running",
             "addrErr": "Yasadışı adres",
@@ -883,7 +883,7 @@
                 "index": "Dizin",
                 "address": "Adres",
                 "balance": "Bakiye",
-                "unreceived": "Unreceived",
+                "unreceived": "Alınmadı",
                 "nextPage": "Sonraki sayfa",
                 "prePage": "Son sayfa",
                 "confirm": "Onayla",
