@@ -84,12 +84,12 @@
         "t1": "VITE Binance Listelemesi Geliyor! Lütfen VITE'in Binance'de listelenmesi için oy kullanın.",
         "t2": "Oylama Süresi: 12 Aralık 00.00'dan 13 Aralık 00.00'ye kadar (HKT)",
         "t3": "Oylama Yöntemi: 50 BNB'ye sahip olmak 1 oy hakkı verir (Maks. 10 oy)",
-        "t4": "Voting Rewards: All voted users will be rewarded with an airdrop totaling 21,000,000 VITE based on executed votes.",
+        "t4": "Oylama Ödülleri: Oylanan tüm kullanıcılar, kullanılan oylara göre toplam 21.000.000 VITE airdrop ile ödüllendirilecek.",
         "btn": "Şimdi Oyla!!!",
-        "notice": "[Attention]: You must have 50-500 BNBs in your Binance Account starting Dec 5 and last through Dec 13 to Qualify for Voting!"
+        "notice": "[Attention]: Oylamaya Hak kazanmak için 5 Aralık ve 13 Aralık tarihleri arasında Binance Hesabınızda 50-500 BNB olması gerekmektedir!"
     },
     "errCode": {
-        "35003": "{name} ID conflict occurs, please re-submit later",
+        "35003": "{name} Kimlik karmaşası meydana geldi, lütfen daha sonra yeniden gönderin",
         "35004": "Geçersiz parametreler",
         "35005": "Transactions are sent too frequent, please try again later",
         "35006": "Contract method not exist",
