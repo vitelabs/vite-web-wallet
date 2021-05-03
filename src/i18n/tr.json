@@ -91,7 +91,7 @@
     "errCode": {
         "35003": "{name} Kimlik karmaşası meydana geldi, lütfen daha sonra yeniden gönderin",
         "35004": "Geçersiz parametreler",
-        "35005": "Transactions are sent too frequent, please try again later",
+        "35005": "İşlemler çok sık gönderiliyor, lütfen daha sonra tekrar deneyin",
         "35006": "Contract method not exist",
         "35011": "Network Congestion",
         "36001": "Bir işlem gerçekleşmeden başka transfer yapamazsınız",
@@ -105,7 +105,7 @@
         "37004": "Exception occurs in order transaction volume",
         "37005": "Emir işlem miktarı çok küçük",
         "37006": "Mevcut alım satım marketi",
-        "37007": "Order trading market not exist",
+        "37007": "Alım satım emri verilen market bulunamadı",
         "37008": "Exception occurs in searching order information",
         "37009": "Revoked order doesn't belong to current address",
         "37010": "Bu emir durumu iptal edilemez"
@@ -1072,16 +1072,16 @@
             "feeRule": "(Base Transaction Fee - VIP discount + Operator Fees) * Referral Discount. ATTENTION: The adjustment and discount of fees will only affect new orders, the former orders' charge remains the same."
         },
         "proxy": {
-            "title": "Trade Delegation",
-            "subTitle": "Trade Delegation",
-            "successProxy": "Delegation Success",
-            "failProxy": "Delegation Failed",
-            "successCancelProxy": "Remove Delegation Success",
-            "failCancelProxy": "Failed to remove delegations",
-            "info": "What is Trade Delegation?",
-            "new": "Initiate Delegation",
+            "title": "Alım Satım Delegasyonu",
+            "subTitle": "Alım Satım Delegasyonu",
+            "successProxy": "Delegasyon Başarılı",
+            "failProxy": "Delegasyon Başarısız",
+            "successCancelProxy": "Delegasyonu Kaldırma Başarılı",
+            "failCancelProxy": "Delegasyonlar kaldırılamadı",
+            "info": "Alım Satım Delegasyonu Nedir?",
+            "new": "Delegasyonu Başlat",
             "active": {
-                "title": "Delegation History",
+                "title": "Delegasyon Geçmişi",
                 "head": [
                     "Delegatee Address",
                     "Alım Satım Paritesi",
@@ -1090,19 +1090,19 @@
                 "operate": [
                     "Alım Satım Paritesi Ekle",
                     "Alım Satım Paritesini Kurtar",
-                    "Remove All Delegations"
+                    "Tüm Delegasyonları Kaldır"
                 ]
             },
             "passive": {
-                "title": "Accepted Delegation History",
+                "title": "Kabul Edilen Delegasyon Geçmişi",
                 "head": [
-                    "Delegation Address",
+                    "Delegasyon Adresi",
                     "Alım Satım Paritesi"
                 ]
             },
             "dialog": {
                 "cancel": "İptal",
-                "cancelAllTips": "Are you sure you'd like to remove all delegations on {trustAddress}?",
+                "cancelAllTips": "{trustAddress}'deki tüm delegasyonları kaldırmak istediğinizden emin misiniz?",
                 "rTxtMap": {
                     "new": "Ekle",
                     "add": "Ekle",
@@ -1115,10 +1115,10 @@
                     "ok": "Onayla"
                 },
                 "titleMap": {
-                    "new": "Initiate Delegation",
+                    "new": "Delegasyonu Başlat",
                     "add": "Temsilciler Ekle",
-                    "delete": "Remove Delegations",
-                    "deleteAll": "Confirm to remove delegations"
+                    "delete": "Delegasyonları Kaldır",
+                    "deleteAll": "Delegasyonları kaldırmayı onaylayın"
                 }
             }
         },
@@ -1135,11 +1135,11 @@
             "agentAddressStakingAmount": "Delegation Staked Quota",
             "staking": "Stake Et",
             "package": "Paket",
-            "expireTime": "Expiration Date",
+            "expireTime": "Bitiş Tarihi",
             "callNum": "Triggers/min",
-            "callNumInfo": "{maxCount} transactions/min",
+            "callNumInfo": "{maxCount} işlem/dk",
             "price": "Cost",
-            "priceInfo": "{price} VX/mth",
+            "priceInfo": "{price} VX/ay",
             "upgrade": "Yükselt",
             "balanceAlert": "Cannot create if VITE balance is less than {balanceLimit}.",
             "noSupportForHardware": "Hardware Wallet is not supported at the moment",
@@ -1147,23 +1147,23 @@
                 "title": "Uyarı",
                 "0": "ViteX is releasing official API to provide access to markets and real-time trading services. Follow the instructions below to properly acquire an API private key.",
                 "0-step1": "1. API Oluştur",
-                "0-step2": "2. Authorize delegation of selected trading pairs",
-                "0-step3": "3. Stake quota for API delegation address",
+                "0-step2": "2. Seçilen alım satım paritelerinin delegasyonuna izin verin",
+                "0-step3": "3. API delegasyon adresi için quota stake edin",
                 "0-step4": "View <a href=\"https://vite.wiki/dex/api/dex-apis.html\" target=\"_blank\">API Documentation</a> for further support",
                 "1": "One set of API Key and Secret is allowed for the same address at any given time.",
                 "2": "To avoid asset loss, Do Not disclose your Access Key and Secret",
                 "3": "The API package is set with the free base package at 10 transactions per minute by default, upgrade options available."
             },
             "stakingForQuota": {
-                "title": "Delegation Quota",
-                "agentAddress": "Delegation Address",
+                "title": "Delegasyon Quotası",
+                "agentAddress": "Delegasyon Adresi",
                 "stakingAmount": "Stake Miktarı",
                 "ok": "Onayla"
             },
             "keyConfirm": {
                 "accessKey": "Erişim Anahtarı",
                 "secretKey": "Gizli Anahtar",
-                "agentAddress": "Delegation Address",
+                "agentAddress": "Delegasyon Adresi",
                 "title": "API Başarıyla Oluşturuldu",
                 "tips": {
                     "title": "Önemli Uyarı",
@@ -1330,7 +1330,7 @@
         },
         "filter": {
             "start": "Gönderici",
-            "end": "To",
+            "end": "Alıcı",
             "type": "Tür",
             "side": "Taraf",
             "buy": "Al",
@@ -1344,8 +1344,8 @@
         "title": "Madencilik",
         "addQuota": "Yeni stake oluştur",
         "add": "Ekle",
-        "withdraw": "Unstake",
-        "withdrawList": "Withdrawal List",
+        "withdraw": "Stake İptali",
+        "withdrawList": "Çekim Listesi",
         "tbHead": {
             "date": "Tarih",
             "fee": "Alım Satım Komisyonları",
@@ -1360,11 +1360,11 @@
         "withdrawHint1": "You will no longer be able to mine VX after staking is canceled",
         "withdrawHint2": "It takes 7 days to return unstaked VITE coins to exchange balance",
         "addTitle": "Madencilik için VITE Stake et",
-        "withdrawTitle": "Unstake VITE",
+        "withdrawTitle": "VITE Stake İptali",
         "addPlaceHolder": "Lütfen stake miktarını girin",
         "withdrawPlaceHolder": "Lütfen stake miktarını girin, en az 134 VITE",
         "addBtn": "Stake'i Onayla",
-        "withdrawBtn": "Confirm to Unstake",
+        "withdrawBtn": "Stake İptalini Onayla",
         "stakingBalance": "Kullanılabilir Stake Bakiyesi",
         "hintTitle": "Önemli Uyarı",
         "comingHint": "VX mining function is coming soon, stay tuned. You can get VX in five ways: 1. Trading as Mining, 2. Listing as Mining, 3. Referring as Mining, 4. Staking as Mining, 5. Market-making as Mining. Users who hold VX enjoy payouts from a shared dividend pool.",
@@ -1385,10 +1385,10 @@
         },
         "helpConfirm": {
             "t1": "VIP",
-            "txt1": "Stake 10,000 VITE to acquire VIP status and receive 50% off trading fees. Staking can be canceled after 30 days.",
+            "txt1": "VIP statüsü kazanmak ve alım satım komisyonlarında % 50 indirim almak için 10.000 VITE stake edin. Stake 30 gün sonra iptal edilebilir.",
             "t2": "SVIP",
-            "txt2": "Stake 1M VITE to become a SVIP and enjoy 0 base trading fees. Staking can be canceled after 30 days.",
-            "txt3": "SVIP supports staking for any valid account address. Stake for them to get SVIP status!"
+            "txt2": "SVIP olmak için 1M VITE stake edin ve 0 temel işlem komisyonundan yararlanın. Stake 30 gün sonra iptal edilebilir.",
+            "txt3": "SVIP, herhangi bir geçerli hesap adresi için stake etmeyi destekler. SVIP statüsünü kazanmak için stake edin!"
         },
         "vipConfirm": {
             "cancelVip": "VIP Durumunu İptal Et",
@@ -1396,7 +1396,7 @@
             "openStakingAmount": "VIP Olmak İçin Gereken Stake Miktarı",
             "cancelStakingAmount": "Kullanılabilir Stake Bakiyesi",
             "noBalance": "Yetersiz Bakiye",
-            "openHint": "You will receive 0.1% trading fee deduction as a VIP. The staking of 10,000 VITE can be withdrawn after 30 days.",
+            "openHint": "VIP olarak % 0.1 alım satım komisyon indirimi alacaksınız. Stake edilen 10.000 VITE 30 gün sonra çekilebilir.",
             "cancelHint": "VIP durumu hemen iptal edilecektir.",
             "openSuccess": "VIP durumunuz aktifleştirildi! Birkaç saniye içinde yürürlüğe girecek.",
             "openFail": "VIP Kaydı Başarısız",
