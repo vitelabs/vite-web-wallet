@@ -107,7 +107,7 @@
         "37006": "Mevcut alım satım marketi",
         "37007": "Alım satım emri verilen market bulunamadı",
         "37008": "Exception occurs in searching order information",
-        "37009": "Revoked order doesn't belong to current address",
+        "37009": "İptal edilen emir mevcut adrese ait değildir",
         "37010": "Bu emir durumu iptal edilemez"
     },
     "txType": {
@@ -125,8 +125,8 @@
         "CancelSBPVoting_V1": "Oylamayı İptal Et",
         "StakeForQuota": "Quota Al",
         "StakeForQuota_V1": "Quota Al",
-        "CancelQuotaStake": "Withdrawal of Stake",
-        "CancelQuotaStake_V1": "Withdrawal of Stake",
+        "CancelQuotaStake": "Stake Çekimi",
+        "CancelQuotaStake_V1": "Stake Çekimi",
         "IssueToken": "Token Issuance",
         "IssueToken_V1": "Token Issuance",
         "ReIssueToken": "Additional Token Issuance",
