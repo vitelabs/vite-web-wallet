@@ -321,12 +321,12 @@
         }
     },
     "tokenCard": {
-        "moreRecords": "View History",
-        "others": "Others",
-        "assetSpread": "Portfolio",
-        "saveSuccess": "Successfully saved",
+        "moreRecords": "Geçmişi Göster",
+        "others": "Diğerleri",
+        "assetSpread": "Portföy",
+        "saveSuccess": "Başarıyla kaydedildi",
         "heads": {
-            "name": "Name",
+            "name": "Ad",
             "balance": "Cüzdan Bakiyesi",
             "onroad": "Alınmamış Cüzdan Varlıkları",
             "gate": "Cüzdan Cross-Chain Ağ Geçidi",
@@ -564,7 +564,7 @@
             "overAmount": "Reissued tokens exceed the upper limit"
         },
         "hint": {
-            "tokenName": "Token name should have 1-40 characters including capitals and lowercase letters, spaces and underlines. Continuous spaces and numbers are not supported.",
+            "tokenName": "Token adı; büyük ve küçük harfler, boşluklar ve alt çizgiler dahil olmak üzere 1-40 karakterden oluşmalıdır. Sürekli boşluklar ve sayılar desteklenmez.",
             "tokenSymbol": "Token sembolü 1-10 karakter içermelidir, yalnızca büyük harfler ve sayılar desteklenir.",
             "success": "Token Issuance Successful",
             "fail": "Token Issuance failed"
@@ -624,7 +624,7 @@
                 "leftBtn": "Çekimi İptal Et"
             },
             "submit": {
-                "describe": "Make sure to stake {amount} VITE to obtain quota, you cannot withdraw until about 3 days after staking comes into effect.",
+                "describe": "Quota almak için {amount} VITE stake ettiğinizden emin olun, stakelerin yürürlüğe girmesinden yaklaşık 3 gün sonrasına kadar çekim yapamazsınız.",
                 "rightBtn": "Onayla",
                 "leftBtn": "İptal"
             }
@@ -715,7 +715,7 @@
                 "newBlockProducer": "please input new block creation address",
                 "newRewardAddress": "please input new reward withdraw address",
                 "changeBlockProducer": "Block Creation Address",
-                "changeRewardAddress": "Reward Withdraw Address",
+                "changeRewardAddress": "Ödül Çekme Adresi",
                 "btn": "Değişikliği Onaylayın"
             }
         },
@@ -723,7 +723,7 @@
             "title": "Kayıt Formu",
             "nodeName": "Düğüm Adı",
             "producerAddr": "Block Creation Address",
-            "rewardWithdrawAddress": "Reward Withdraw Address",
+            "rewardWithdrawAddress": "Ödül Çekme Adresi",
             "quotaAddr": "Stake Adresi",
             "quotaTime": "Stake Süresi",
             "time": "7776000 snapshot blocks（approximately 90 days）",
@@ -736,16 +736,16 @@
             "addrHint": "The block creation address must be a full node and keep up running",
             "addrErr": "Yasadışı adres",
             "addrUsed": "This address has been occupied",
-            "registerSuccess": "Registration request has sent",
-            "registerFail": "Registration request failed"
+            "registerSuccess": "Kayıt talebi gönderildi",
+            "registerFail": "Kayıt talebi başarısız"
         },
         "section2": {
-            "title": "Registration Information",
+            "title": "Kayıt Bilgisi",
             "update": "Modify",
             "updateFail": "Failed to send modify request",
             "cancel": "Revoking",
             "cancelFail": "Failed to send revoking request",
-            "expireDate": "Expire Date: {time}",
+            "expireDate": "Bitiş Tarihi: {time}",
             "cancelConfirm": {
                 "title": "Revoke registration of SBP",
                 "describe": "The staking amount will be returned back to your staking address after revoking, you have to re-submit the registration to become a SBP"
@@ -827,7 +827,7 @@
             "agreement": "Hizmet Şartları, Alım Satım Koşulları ve Gizlilik Politikası",
             "contentUngree": "Lütfen {gate} hizmetini kullanmadan önce bu koşulları kabul edin",
             "hint": "Contact customer service team of {gate} if you encounter any problems during payment process.",
-            "next": "Confirm and Proceed"
+            "next": "Onayla ve Devam Et"
         },
         "vb": {
             "title": "ViteConnect",
@@ -840,7 +840,7 @@
             },
             "start": {
                 "scan": "Vite Cüzdan Uygulaması aracılığıyla QR kodu tara",
-                "downloadTips": "Don’t have the Vite Wallet App? ",
+                "downloadTips": "Vite Wallet Uygulamasınız hala yok mu? ",
                 "download": "Buradan indirin"
             },
             "accountName": "ViteConnect Adresi"
@@ -851,8 +851,8 @@
             "verifyAddress": "Adres Doğrula",
             "closeAlert": "İptal",
             "start": {
-                "title": "Supported Wallets: Ledger Nano S / Ledger Nano X",
-                "connectError": "Connection Issues?",
+                "title": "Desteklenen Cüzdanlar: Ledger Nano S / Ledger Nano X",
+                "connectError": "Bağlantı Sorunları?",
                 "introduction": "App Installation & User Instructions",
                 "introductionUrl": "https://docs.vite.org/go-vite/tutorial/ledger-install.html",
                 "connectErrorUrl": "https://support.ledger.com/hc/en-us/articles/115005165269-Connection-issues-with-Windows-or-Linux"
@@ -863,15 +863,15 @@
             "connect": {
                 "title": "Adres Seçin",
                 "tips": "Kullanmak için bir adres seçin:",
-                "selectConnectType": "Choose connection type: (Bluetooth is only supported on Ledger Nano X)",
+                "selectConnectType": "Bağlantı türünü seçin: (Bluetooth yalnızca Ledger Nano X'te desteklenmektedir)",
                 "cancelSelect": "Bağlanmak için bir cihaz seçin",
-                "connectError": "Connect failed. Please confirm Vite app is opened on device",
-                "interfaceNotAvailable": "Connect failed. Please check USB cable is connected. If you connect through Bluetooth, switch off Bluetooth and switch on again",
-                "receiveBlockSuccess": "Successfully received {num} transaction",
+                "connectError": "Bağlantı başarısız. Lütfen Vite uygulamasının cihazda açıldığını onaylayın",
+                "interfaceNotAvailable": "Bağlantı başarısız. Lütfen USB kablosunun bağlı olduğunu kontrol edin. Bluetooth üzerinden bağlanıyorsanız, Bluetooth'u kapatın ve tekrar açın",
+                "receiveBlockSuccess": "{num} işlemi başarıyla alındı",
                 "introduction": {
                     "1": {
                         "title": "1. Adım: ",
-                        "content": "Connect Ledger device and enter PIN code"
+                        "content": "Ledger cihazınızı bağlayın ve PIN kodunu girin"
                     },
                     "2": {
                         "title": "2. Adım: ",
@@ -895,9 +895,9 @@
                 "alert": "Uyarı",
                 "alertContent": "Address has been denied on Ledger device. Please double verify if this address matches the address displayed on your Ledger device. If yes, ignore this message and go ahead to confirm the transaction, otherwise DO NOT send asset to the address and quit immediately.",
                 "alertLeftBtn": "Adreslerin eşleştiğini onaylıyorum",
-                "alertRightBtn": "Addresses mismatch. Get me out of here!",
+                "alertRightBtn": "Adresler eşleşmiyor. Ayrıl!",
                 "userCancel": "İşlem Ledger'da iptal edildi",
-                "userCancelByWeb": "You cancelled the transaction in Vite wallet. In this case, the transaction will be abandoned and never go through to blockchain even if it is confirmed on your Ledger device."
+                "userCancelByWeb": "Vite cüzdanındaki işlemi iptal ettiniz. Bu durumda, işlem iptal edilecek ve Ledger cihazınızda onaylansa bile asla blok zincirine geçmeyecektir."
             }
         },
         "invite": {
@@ -991,7 +991,7 @@
         "amount": "Toplam",
         "newOrderSuccess": "Emir talebi gönderildi",
         "newOrderFail": "Emir Başarısız",
-        "depthView": "Depth",
+        "depthView": "Derinlik",
         "klineView": "TradingView",
         "txPairDetail": {
             "title": "Alım satım paritesi ayrıntıları",
@@ -1028,7 +1028,7 @@
             "explorer": "Block Explorer",
             "overview": "Açıklama",
             "tokenShow": "Abbr",
-            "tokenId": "Token ID",
+            "tokenId": "Token Kimliği",
             "publisher": "Issuer",
             "total": "Toplam",
             "tokenDigit": "Ondalık sayılar",
@@ -1045,8 +1045,8 @@
             "buy": "Al",
             "sell": "Sat",
             "all": "Tümü",
-            "avgPrice": "Avg.Price:",
-            "sum": "Sum {symbol}:"
+            "avgPrice": "Ort.Fiyat:",
+            "sum": "Toplam {symbol}:"
         },
         "noData": {
             "favorite": "Henüz favoriniz yok",
@@ -1057,7 +1057,7 @@
             "fee": "Komisyonlar",
             "adviseToSVip": "Upgrade to SVIP, enjoy zero base transaction fee",
             "feeRuleWithSVip": "Operator Fees * Referral Discount. ATTENTION: The adjustment and discount of fees will only affect new orders, the former orders' charge remains the same.",
-            "text": "This page is a preview page of transaction data. Please login to trade.",
+            "text": "Bu sayfa, işlem verilerinin ön izleme sayfasıdır. Alım satım yapmak için lütfen giriş yapınız.",
             "validAmount": "Hacim {amount}{token}'den büyük olmalıdır",
             "priceNotNull": "Miktar boş bırakılamaz",
             "amountNotNull": "Hacim boş bırakılamaz",
@@ -1065,9 +1065,9 @@
             "cancelVip": "İptal",
             "openVip": "VIP olun",
             "dexFee": "Base Transaction Fees: {fee}",
-            "operatorFee": "Operator Fees: {fee}",
-            "vipFee": "VIP Discount: {fee}",
-            "inviteFeeDiscount": "Referral Discount: {fee} off",
+            "operatorFee": "Operatör Komisyonları: {fee}",
+            "vipFee": "VIP İndirimi: {fee}",
+            "inviteFeeDiscount": "Referans İndirimi: {fee} indirimli",
             "svipFee": "SVIP: 0% base transaction fee",
             "feeRule": "(Base Transaction Fee - VIP discount + Operator Fees) * Referral Discount. ATTENTION: The adjustment and discount of fees will only affect new orders, the former orders' charge remains the same."
         },
