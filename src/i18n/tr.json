@@ -307,13 +307,13 @@
     },
     "startCreate": {
         "notice": "For your funds' safety, create account function is not supported provisionally on web wallet. Please download Vite App to create account.",
-        "goLogin": "Log In",
-        "goDex": "Go to ViteX"
+        "goLogin": "Giriş Yap",
+        "goDex": "ViteX'e git"
     },
     "keystore": {
-        "title": "Keystore",
+        "title": "Anahtar deposu",
         "dragDrop": {
-            "text": "Drag and drop files there",
+            "text": "Dosyaları buraya sürükleyip bırakın",
             "err1": "Imported illegal file!",
             "err2": "Only one file can be imported!",
             "guide": "Open folder to import",
