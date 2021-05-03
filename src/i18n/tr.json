@@ -204,17 +204,17 @@
         "title": "Kullanmadan Önce Okuyun",
         "text1": "Varlıklarınızın güvenliği için, hesap oluşturma özelliği web cüzdanında geçici olarak desteklenmemektedir. Hesap oluşturmak için lütfen Vite Uygulamasını indirin. Bir oltalama web sitesini ziyaret ederseniz veya kurtarma kelimelerinizin yedeğini kaybederseniz Vite Platformu, varlıklarınızı geri kurtaramaz.",
         "text2": "Please note that our websites do not store your private keys or seed phrase. Therefore, you will need to restore your account via seed phrase if you decide to change browsers, clear local cookies, or change PCs.",
-        "text3": "Please take proper precautions in ensuring that you accurately record and safely store your seed phrase. Even the slightest error will result in you not being able to successfully restore your address."
+        "text3": "Lütfen kurtarma kelimelerinizi doğru bir şekilde kaydetmek ve güvenli bir şekilde saklamak için uygun önlemleri alın. En ufak bir hata bile adresinize başarılı bir şekilde erişememenize sebep olacaktır."
     },
     "preview": {
         "t": "Sürüm {version}",
-        "txt1": "x.vite.net is a platform integrating the Vite wallet and the ViteX exchange, launched by Vite Labs.",
+        "txt1": "x.vite.net; Vite Labs tarafından başlatılan, Vite cüzdanını ve ViteX exchange'ini entegre eden bir platformdur.",
         "txt2": "Varlıkları yönetebilir ve transfer edebilir, alım satım yapabilir, quota alabilir, SBP ve tam düğümü kaydedebilir, oy verebilir, token üretebilir, ViteX API için başvurabilir, alım satım delegasyonuna izin verebilir vb. işlemleri yapabilirsiniz.",
         "txt3": "x.vite.net anımsatıcı kelimeleri, Ledger ve ViteConnect'i destekler.",
         "v": ""
     },
     "pwdConfirm": {
-        "conf": "Open password-free mode to free you from entering password during every transaction process. ",
+        "conf": "Şifresiz modu açmak, sizi her işlem sürecinde şifre girmekten kurtarır. ",
         "title": "Parola",
         "placeholder": "Lütfen cüzdan parolasını girin",
         "unlockAcc": "Lütfen ilk önce {name} kilidini açın"
@@ -301,12 +301,12 @@
             "nameLong": "Ad {long} karakteri aşamaz",
             "long": "Parola 32 karakteri aşamaz",
             "name": "Hesap adı yalnızca İngilizce ve Çince karakterleri, rakamları ve alt çizgiyi destekler",
-            "consistency": "Please enter the same password",
-            "pwFormat": "Wrong password format. The password should only contain digits, letters and symbols."
+            "consistency": "Lütfen aynı parolayı girin",
+            "pwFormat": "Yanlış parola formatı. Parola yalnızca rakamlar, harfler ve simgeler içermelidir."
         }
     },
     "startCreate": {
-        "notice": "For your funds' safety, create account function is not supported provisionally on web wallet. Please download Vite App to create account.",
+        "notice": "Varlıklarınızın güvenliği için, hesap oluşturma özelliği web cüzdanında geçici olarak desteklenmemektedir. Hesap oluşturmak için lütfen Vite Uygulamasını indirin.",
         "goLogin": "Giriş Yap",
         "goDex": "ViteX'e git"
     },
@@ -314,9 +314,9 @@
         "title": "Anahtar deposu",
         "dragDrop": {
             "text": "Dosyaları buraya sürükleyip bırakın",
-            "err1": "Imported illegal file!",
-            "err2": "Only one file can be imported!",
-            "guide": "Open folder to import",
+            "err1": "İllegal dosya içe aktarıldı!",
+            "err2": "Yalnızca bir dosya içe aktarılabilir!",
+            "guide": "İçe aktarılacak klasörü açın",
             "hint": "Noted that login by importing keystore file cannot support creating multi addresses, using mnemonic seed phrase is recommended in cross-platform situations."
         }
     },
@@ -730,11 +730,11 @@
             "confirmBtn": "Gönder",
             "namePlaceholder": "Lütfen düğüm adı girin",
             "nameHint": "Within 40 characters, support English letters (both upper and lower cases), numbers, '_'、'.'",
-            "nameErr": "Bu düğüm adı yasadışı",
+            "nameErr": "Bu düğüm adı illegal",
             "nameUsed": "Bu düğüm adı kullanılıyor",
             "addrPlaceholder": "Please input snapshot block creation address",
             "addrHint": "The block creation address must be a full node and keep up running",
-            "addrErr": "Yasadışı adres",
+            "addrErr": "İllegal adres",
             "addrUsed": "This address has been occupied",
             "registerSuccess": "Kayıt talebi gönderildi",
             "registerFail": "Kayıt talebi başarısız"
@@ -1512,7 +1512,7 @@
             "submit": "Onayla",
             "tokenName": "Token Adı",
             "address": "Alıcı Adresi",
-            "notice": "NOTICE: When the ownership transferred to someone else, trading pairs that not be opened will belong to the new owner. Trading/suspension trading pairs still belong to you"
+            "notice": "UYARI: Sahiplik başkasına devredildiğinde, açılmayan alım satım pariteleri yeni sahibe ait olacaktır. Alım satım/askıya alma alım satım pariteleri hala size aittir"
         }
     },
     "tradeTxPairManage": {
