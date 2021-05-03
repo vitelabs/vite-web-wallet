@@ -63,7 +63,7 @@
         "no": "Вы можете стейкать VITE для квоты, если не хотите запускать PoW",
         "insuffQuota": "Получить квоту",
         "insuffQuotaMsg": "Уведомляем, что у вас нет VITE замороженных для получения Квоты. Заблокируйте VITE или, если хотите, можете запустить POW для получения Квоты.",
-        "insuffQuotaMsg2": "VITE Only {powMaxTimes} transactions can be made per day per address without staking VITE. Your address has exhausted all {powMaxTimes} transactions. Please go to the quota page and stake your VITE to perform more transactions.",
+        "insuffQuotaMsg2": "Только {powMaxTimes} транзакций могут быть сделаны в день без стейкинга VITE. Ваш адрес исчерпал весь лимит {powMaxTimes} . Пожалуйста, перейдите на страницу квот и заморозьте VITE для совершения дополнительных транзакций.",
         "getQuota": "Заморозить VITE",
         "skip": "Запустить POW",
         "cancel": "Отмена"
@@ -659,7 +659,7 @@
     "walletFullNode": {
         "title": "Полный узел",
         "help": {
-            "title": "About",
+            "title": "О приложении",
             "t1": "Glossary",
             "txt1": "[Число зарегистрированных узлов] Количество полных узлов, зарегистрированных с текущим адресом",
             "txt2": "[Число активных узлов] Количество активных полных узлов, зарегистрированных с текущего адреса",
@@ -675,14 +675,14 @@
             "stakingSuspend": "Заморозка временно приостановлена"
         },
         "quotaContent": {
-            "onlineReward": "Active Node Reward",
-            "voteReward": "Voting Reward",
-            "yesterday": "yesterday",
-            "all": "Accumulated VITE: {num}",
-            "nodeInfo": "Node Information",
-            "onlineNodes": "Active Nodes",
-            "rewardNodes": "Rewarding Nodes",
-            "stakeAmount": "Node Staking"
+            "onlineReward": "Награда за активный узел",
+            "voteReward": "Награды за голосование",
+            "yesterday": "вчера",
+            "all": "Накопленный VITE: {num}",
+            "nodeInfo": "Информация об узле",
+            "onlineNodes": "Активные узлы",
+            "rewardNodes": "Награждение узлов",
+            "stakeAmount": "Заморозка для узла"
         }
     },
     "walletSBP": {
@@ -840,7 +840,7 @@
             },
             "start": {
                 "scan": "Сканируйте QR-код через приложение Vite Wallet",
-                "downloadTips": "Don’t have the Vite Wallet App? ",
+                "downloadTips": "У вас еще нет приложения Vite Wallet? ",
                 "download": "Download here"
             },
             "accountName": "Адрес ViteConnect"
