@@ -76,7 +76,7 @@
         "symbol": "Gönder"
     },
     "compliance": {
-        "text": "ViteX does not serve customers in the following countries/regions/territories: Mainland China, Hong Kong, Cuba, Iran, North Korea, Crimea, Sudan, Malaysia, Syria, USA [including all USA territories like Puerto Rico, American Samoa, Guam, Northern Mariana Island, and the US Virgin Islands (St. Croix, St. John and St. Thomas)], Bangladesh, Bolivia, Ecuador, and Kyrgyzstan. For more information, please read our Terms of Service and Privacy Policy",
+        "text": "ViteX aşağıdaki ülkeler / bölgeler / arazilerdeki müşterilere hizmet vermemektedir: Çin Anakarası, Hong Kong, Küba, İran, Kuzey Kore, Kırım, Sudan, Malezya, Suriye, ABD [Porto Riko, Amerikan Samoası, Guam gibi tüm ABD bölgeleri dahil, Kuzey Mariana Adası ve ABD Virjin Adaları (St. Croix, St. John ve St. Thomas)], Bangladeş, Bolivya, Ekvador ve Kırgızistan. Daha fazla bilgi için lütfen Hizmet Şartlarımızı ve Gizlilik Politikamızı okuyun",
         "title": "Önemli Uyarı"
     },
     "bnbConf": {
@@ -93,7 +93,7 @@
         "35004": "Geçersiz parametreler",
         "35005": "İşlemler çok sık gönderiliyor, lütfen daha sonra tekrar deneyin",
         "35006": "Contract method not exist",
-        "35011": "Network Congestion",
+        "35011": "Ağ Tıkanıklığı",
         "36001": "Bir işlem gerçekleşmeden başka transfer yapamazsınız",
         "36002": "Sistem doğrulaması başarısız oldu, lütfen daha sonra tekrar deneyiniz",
         "36003": "Sistem doğrulaması başarısız oldu, lütfen daha sonra tekrar deneyiniz",
@@ -133,8 +133,8 @@
         "ReIssueToken_V1": "Additional Token Issuance",
         "BurnToken": "Tokenları Yok Et",
         "BurnToken_V1": "Tokenları Yok Et",
-        "TransferTokenOwnership": "Transfer of ownership",
-        "TransferTokenOwnership_V1": "Transfer of ownership",
+        "TransferTokenOwnership": "Sahiplik devri",
+        "TransferTokenOwnership_V1": "Sahiplik devri",
         "DisableReIssue": "Token türünü düzenle",
         "DisableReIssue_V1": "Token türünü düzenle",
         "DexDeposit": "ViteX Yatırımı",
@@ -209,8 +209,8 @@
     "preview": {
         "t": "Sürüm {version}",
         "txt1": "x.vite.net is a platform integrating the Vite wallet and the ViteX exchange, launched by Vite Labs.",
-        "txt2": "You can manager and transfer assets, trade, get quota, register SBP and full node, vote, issue tokens, apply for ViteX API, authorize delegated trading, etc.",
-        "txt3": "x.vite.net supports mnemonic words, Ledger, and ViteConnect.",
+        "txt2": "Varlıkları yönetebilir ve transfer edebilir, alım satım yapabilir, quota alabilir, SBP ve tam düğümü kaydedebilir, oy verebilir, token üretebilir, ViteX API için başvurabilir, alım satım delegasyonuna izin verebilir vb. işlemleri yapabilirsiniz.",
+        "txt3": "x.vite.net anımsatıcı kelimeleri, Ledger ve ViteConnect'i destekler.",
         "v": ""
     },
     "pwdConfirm": {
@@ -429,7 +429,7 @@
                 "OPPOSITE_CONFIRMED": "Gateway Received",
                 "TOT_CONFIRMED": "Tamamlandı",
                 "BELOW_MINIMUM": "Topup Failed",
-                "TOT_PROCESSING": "VITE chain await to confirm"
+                "TOT_PROCESSING": "VITE zinciri onayı bekliyor"
             }
         },
         "withdrawRecord": {
@@ -461,7 +461,7 @@
             "tips": [
                 "You can only deposit {tokenSymbol} through the address provided below. No less than {min} {tokenSymbol} will be accepted.",
                 "Hesap {confirmationCount} ağ onayından sonra güncellenecektir. Lütfen bekleyin.",
-                "Please select the correct mainnet or you will be unable to retrieve any lost tokens."
+                "Lütfen doğru mainneti seçin, yoksa kaybolan tokenları geri alamazsınız."
             ]
         },
         "viteTips": "VITE, yalnızca yeni ERC20 VITE tokenı ile Native VITE Coin arasındaki cross-chain işlevselliğini destekler.",
@@ -536,8 +536,8 @@
         "decimals": "Ondalık sayılar",
         "isReIssuable": "ReIssuable",
         "maxSupply": "Maks. Arz",
-        "ownerBurnOnly": "Burn out by Owner Only",
-        "isOwnerBurnOnly": "Burn out by Owner Only",
+        "ownerBurnOnly": "Yalnızca Sahibi Tarafından Yakılır",
+        "isOwnerBurnOnly": "Yalnızca Sahibi Tarafından Yakılır",
         "mint": "Onayla",
         "tokenList": "Issued Token",
         "submit": "Gönder",
@@ -554,7 +554,7 @@
             "text": "Make sure to change {tokenName} to Non-issuable status?"
         },
         "changeOwnerConfirm": {
-            "title": "Transfer Ownership",
+            "title": "Sahipliği Devret",
             "address": "Alıcı Adresi"
         },
         "issueConfirm": {
@@ -575,13 +575,13 @@
             "tokenSymbolFormat": "Token Sembolünün formatı hatalı",
             "tokenSymbolNull": "Token Sembolü gerekli",
             "supplyMax": "Excessive amount of token issuance",
-            "totalSupplyFormat": "Wrong format of Total Supply",
-            "totalSupplyNull": "Total Supply is required",
+            "totalSupplyFormat": "Toplam Arzın yanlış formatı",
+            "totalSupplyNull": "Toplam Arz gerekli",
             "maxSupplyNull": "Maks. Arz gerekli",
             "maxSupplyMin": "Toplam arzdan daha büyük olmalıdır",
             "decimalsNull": "Ondalık sayılar alanı gerekli",
-            "decimalsFormat": "Wrong format of decimals",
-            "decimalsMax": "Decimals are out of range",
+            "decimalsFormat": "Ondalık sayıların yanlış formatı",
+            "decimalsMax": "Ondalık sayılar aralık dışı",
             "maxSupplyFormat": "Wrong format of Max Supply"
         }
     },
@@ -748,7 +748,7 @@
             "expireDate": "Bitiş Tarihi: {time}",
             "cancelConfirm": {
                 "title": "Revoke registration of SBP",
-                "describe": "The staking amount will be returned back to your staking address after revoking, you have to re-submit the registration to become a SBP"
+                "describe": "Stake miktarı, iptal ettikten sonra stake adresinize iade edilecektir, SBP olmak için kaydı yeniden göndermelisiniz"
             }
         }
     },
@@ -761,7 +761,7 @@
         "toReward": "Ödüllerimi göster",
         "voting": "Oylama",
         "search": "Please input node name or block creation address",
-        "addrNoExistErr": "You aren't able to vote for now as your address has no transaction record before",
+        "addrNoExistErr": "Adresinizde daha önce işlem kaydı bulunmadığından şimdilik oy veremezsiniz",
         "revokeVoting": "Oylamayı İptal Et",
         "section1": {
             "title": "Oylamam",
@@ -826,7 +826,7 @@
             "contentAgree": "By continuing to use {gate}'s service, you agree and acknowledge {gate}'s",
             "agreement": "Hizmet Şartları, Alım Satım Koşulları ve Gizlilik Politikası",
             "contentUngree": "Lütfen {gate} hizmetini kullanmadan önce bu koşulları kabul edin",
-            "hint": "Contact customer service team of {gate} if you encounter any problems during payment process.",
+            "hint": "Ödeme işlemi sırasında herhangi bir sorunla karşılaşırsanız, {gate} müşteri hizmetleri ekibiyle iletişime geçin.",
             "next": "Onayla ve Devam Et"
         },
         "vb": {
@@ -853,7 +853,7 @@
             "start": {
                 "title": "Desteklenen Cüzdanlar: Ledger Nano S / Ledger Nano X",
                 "connectError": "Bağlantı Sorunları?",
-                "introduction": "App Installation & User Instructions",
+                "introduction": "Uygulama Kurulumu ve Kullanıcı Talimatları",
                 "introductionUrl": "https://docs.vite.org/go-vite/tutorial/ledger-install.html",
                 "connectErrorUrl": "https://support.ledger.com/hc/en-us/articles/115005165269-Connection-issues-with-Windows-or-Linux"
             },
@@ -935,14 +935,14 @@
         },
         "gas": "Madencilik Komisyonu",
         "record": "Dönüşüm Geçmişi",
-        "aboutPrice": "Approx {amount} ETH",
-        "note": "Please wait in patient after submitting the conversion. You cannot receive the converted VITE until you have got 30 Ethereum transaction confirmations. Ehtereum transaction records can be viewed in Conversion History section.",
+        "aboutPrice": "Yaklaşık {amount} ETH",
+        "note": "Dönüşümü gönderdikten sonra lütfen sabırlı olun. 30 Ethereum işlem onayı alana kadar dönüştürülen VITE'i alamazsınız. Ethereum işlem kayıtları, Dönüşüm Geçmişi bölümünde görüntülenebilir.",
         "exchange": {
             "vite": "Dönüştür",
             "viteAddr": "Alıcı Adresi",
             "viteAmount": "Dönüşüm Miktarı",
             "btn": "Dönüştürmeye Hazır",
-            "success": "Conversion Successful. It may take approx 20 minutes to get VITE into your account after the Ethereum transaction is confirmed."
+            "success": "Dönüşüm Başarılı. Ethereum işlemi onaylandıktan sonra hesabınıza VITE almanız yaklaşık 20 dakika sürebilir."
         }
     },
     "tradeCenter": {
@@ -959,7 +959,7 @@
         "buyMiningPrice": "Qualifies for mining when buy price is greater than {price}",
         "sellMiningPrice": "Qualifies for mining when sell price is less than {price}",
         "operator": {
-            "noName": "Anonymous Operator",
+            "noName": "Anonim Operatör",
             "overview": "Giriş",
             "txPair": "Alım Satım Paritesi",
             "confirmTitle": "Risk Hatırlatıcısı",
@@ -981,12 +981,12 @@
         "search": "Arama",
         "txPair": "Parite",
         "price": "Fiyat",
-        "upDown": "Change%",
+        "upDown": "Değiştir%",
         "txNum": "Hacim",
         "quantityTitle": "Toplam({quantity})",
         "priceTitle": "Fiyat({price})",
         "amountTitle": "Miktar({amount})",
-        "quantityTable": "Qty",
+        "quantityTable": "Miktar",
         "amountTable": "Hacim",
         "amount": "Toplam",
         "newOrderSuccess": "Emir talebi gönderildi",
@@ -998,7 +998,7 @@
             "24h": "24saat",
             "openPrice": "Aç",
             "quantity": "Market Hacmi",
-            "amount": "Base volume",
+            "amount": "Temel hacim",
             "status": "Durum",
             "latest": "En Son",
             "buy": "Alış fiyatı",
@@ -1055,7 +1055,7 @@
         "limitPrice": {
             "title": "Limit",
             "fee": "Komisyonlar",
-            "adviseToSVip": "Upgrade to SVIP, enjoy zero base transaction fee",
+            "adviseToSVip": "SVIP'e yükseltin, sıfır temel işlem komisyonundan yararlanın",
             "feeRuleWithSVip": "Operator Fees * Referral Discount. ATTENTION: The adjustment and discount of fees will only affect new orders, the former orders' charge remains the same.",
             "text": "Bu sayfa, işlem verilerinin ön izleme sayfasıdır. Alım satım yapmak için lütfen giriş yapınız.",
             "validAmount": "Hacim {amount}{token}'den büyük olmalıdır",
@@ -1064,11 +1064,11 @@
             "quantityNotNull": "Miktar boş bırakılamaz",
             "cancelVip": "İptal",
             "openVip": "VIP olun",
-            "dexFee": "Base Transaction Fees: {fee}",
+            "dexFee": "Temel İşlem Komisyonları: {fee}",
             "operatorFee": "Operatör Komisyonları: {fee}",
             "vipFee": "VIP İndirimi: {fee}",
             "inviteFeeDiscount": "Referans İndirimi: {fee} indirimli",
-            "svipFee": "SVIP: 0% base transaction fee",
+            "svipFee": "SVIP: %0 temel işlem komisyonu",
             "feeRule": "(Base Transaction Fee - VIP discount + Operator Fees) * Referral Discount. ATTENTION: The adjustment and discount of fees will only affect new orders, the former orders' charge remains the same."
         },
         "proxy": {
@@ -1173,23 +1173,23 @@
                 "warn": "The Secret key is displayed only once and cannot be found back if lost, please keep it properly."
             },
             "upgradeConfirm": {
-                "title": "Upgrade Package",
-                "currentPackage": "Current",
+                "title": "Paketi Yükselt",
+                "currentPackage": "Mevcut",
                 "selectPackage": "Yeni Seç",
-                "selectTime": "Valid For",
-                "month": " Mth",
+                "selectTime": "İçin geçerli",
+                "month": " Ay",
                 "payAmount": "Toplam",
                 "balance": "VX Bakiyesi"
             }
         }
     },
     "tradeAssets": {
-        "title": "Funds",
+        "title": "Varlıklar",
         "search": "Lütfen token adı girin",
         "operate": "Eylem",
         "all": "Tümü",
         "confirmTable": {
-            "title": "Detailed Record",
+            "title": "Ayrıntılı Kayıt",
             "heads": [
                 "Tarih",
                 "Token",
@@ -1209,8 +1209,8 @@
                 "Değer"
             ],
             "rowMap": {
-                "recharge": "Deposit to Exchange",
-                "withdraw": "Withdraw to Wallet",
+                "recharge": "Exchange'e Yatırma",
+                "withdraw": "Cüzdana Çekme",
                 "detail": "Ayrıntılar",
                 "sideMap": {
                     "1": "Yatırma",
@@ -1221,7 +1221,7 @@
         "confirmrecharge": {
             "successToast": "Yatırım başarılı",
             "failToast": "Yatırım başarısız",
-            "title": "Deposit to Exchange",
+            "title": "Exchange'e Yatırma",
             "lable1": "Cüzdan Bakiyesi",
             "lable2": "Yatırma Miktarı",
             "tips": "Yetersiz Cüzdan Bakiyesi",
@@ -1231,7 +1231,7 @@
         "confirmwithdraw": {
             "successToast": "Çekim Başarılı",
             "failToast": "Çekim Başarısız",
-            "title": "Withdraw to Wallet",
+            "title": "Cüzdana Çekme",
             "lable1": "Kullanılabilir Bakiye",
             "lable2": "Çekim Miktarı",
             "tips": "Yetersiz Cüzdan Bakiyesi",
@@ -1241,14 +1241,14 @@
         "zero": "Düşük Bakiyeleri Gizle"
     },
     "tradeOpenOrders": {
-        "cancelErr": "You are trying too ofter, please try again later.",
+        "cancelErr": "Çok sık deniyorsunuz, lütfen sonra tekrar deneyin.",
         "confirm": {
             "successToast": "Revoking Order Successful",
             "failToast": "Revoking Order Failed",
-            "submitTxt": "Confirm to revoke",
+            "submitTxt": "İptal etmeyi onaylayın",
             "cancelTxt": "İptal",
-            "title": "Revoke Order",
-            "content": "Are you sure you want to revoke current order?"
+            "title": "Emri İptal Et",
+            "content": "Mevcut emri iptal etmek istediğinizden emin misiniz?"
         },
         "title": "Açık Emirler",
         "hint": {
@@ -1355,9 +1355,9 @@
         "txTitle": "Trading as Mining Total Income",
         "quotaTitle": "Staking as Mining Total Income",
         "addHint1": "Tek stake miktarı en az 134 VITE olmalıdır",
-        "addHint2": "VITE staking will be effective immediately after submission. Staking can be canceled after 3 days",
+        "addHint2": "VITE stake'i, gönderildikten hemen sonra geçerli olacaktır. Stake 3 gün sonra iptal edilebilir",
         "addHint3": "Stake edilmiş miktar 7 günlük bekleme süresinden sonra serbest bırakılacaktır",
-        "withdrawHint1": "You will no longer be able to mine VX after staking is canceled",
+        "withdrawHint1": "Stake iptal edildikten sonra artık VX madenciliği yapamayacaksınız",
         "withdrawHint2": "It takes 7 days to return unstaked VITE coins to exchange balance",
         "addTitle": "Madencilik için VITE Stake et",
         "withdrawTitle": "VITE Stake İptali",
@@ -1377,7 +1377,7 @@
         "help": "Current trading fees displayed on this page contains only the 0.2% ViteX base transaction fees, please note that operator fees shall be taken into consideration when calculating mining cost"
     },
     "tradeVip": {
-        "title": "VIP Durumu",
+        "title": "VIP Statüsü",
         "open": "VIP olun",
         "cancel": "İptal {type}",
         "help": {
@@ -1391,19 +1391,19 @@
             "txt3": "SVIP, herhangi bir geçerli hesap adresi için stake etmeyi destekler. SVIP statüsünü kazanmak için stake edin!"
         },
         "vipConfirm": {
-            "cancelVip": "VIP Durumunu İptal Et",
+            "cancelVip": "VIP Statüsünü İptal Et",
             "openVip": "VIP olun",
             "openStakingAmount": "VIP Olmak İçin Gereken Stake Miktarı",
             "cancelStakingAmount": "Kullanılabilir Stake Bakiyesi",
             "noBalance": "Yetersiz Bakiye",
             "openHint": "VIP olarak % 0.1 alım satım komisyon indirimi alacaksınız. Stake edilen 10.000 VITE 30 gün sonra çekilebilir.",
-            "cancelHint": "VIP durumu hemen iptal edilecektir.",
-            "openSuccess": "VIP durumunuz aktifleştirildi! Birkaç saniye içinde yürürlüğe girecek.",
+            "cancelHint": "VIP statüsü hemen iptal edilecektir.",
+            "openSuccess": "VIP statünüz aktifleştirildi! Birkaç saniye içinde yürürlüğe girecek.",
             "openFail": "VIP Kaydı Başarısız",
             "cancelSuccess": "VIP Başarıyla İptal Edildi",
             "cancelFail": "İptal Başarısız",
-            "adviseToCancel": "There will be no base transaction fees with your current status as our SVIP, we therefore recommend you to revoke the staked VITE，which is required for general VIP members.",
-            "address": "VIP Durumunu Etkinleştir",
+            "adviseToCancel": "SVIP'imiz olarak mevcut statünüzle herhangi bir temel işlem komisyonu ödemeyeceksiniz, bu nedenle genel VIP üyeler için gerekli olan stake edilmiş VITE'i iptal etmenizi öneririz.",
+            "address": "VIP Statüsünü Etkinleştir",
             "addressPlaceholder": "Mevcut adres varsayılan adrestir, adres daha sonra değiştirilemez"
         },
         "svipConfirm": {
@@ -1414,14 +1414,14 @@
             "openStakingAmount": "SVIP Olmak İçin Gereken Stake Miktarı",
             "cancelStakingAmount": "Kullanılabilir Stake Bakiyesi",
             "noBalance": "Yetersiz Bakiye",
-            "openHint": "You will enjoy 0% base transaction fee when upgrading to SVIP. The stake of 1,000,000 VITE can be withdrawn after 30 days.",
-            "cancelHint": "SVIP privileges will be discontinued once staking is revoked",
-            "openSuccess": "Başvuru Başarılı! SVIP durumu daha sonra yürürlüğe girecektir.",
-            "openFail": "Failed to apply SVIP",
+            "openHint": "SVIP'e yükselttiğinizde %0 temel işlem komisyonundan yararlanacaksınız. 1.000.000 VITE stake'i 30 gün sonra çekilebilir.",
+            "cancelHint": "Stake iptal edildikten sonra SVIP ayrıcalıkları sona erecek",
+            "openSuccess": "Başvuru Başarılı! SVIP statüsü daha sonra yürürlüğe girecektir.",
+            "openFail": "SVIP'e başvurulamadı",
             "cancelSuccess": "SVIP Başarıyla İptal Edildi",
             "cancelFail": "İptal Başarısız",
-            "address": "SVIP Durumunu Etkinleştir",
-            "addressPlaceholder": "Address to be Enabled with SVIP Status",
+            "address": "SVIP Statüsünü Etkinleştir",
+            "addressPlaceholder": "SVIP Statüsüyle Etkinleştirilecek Adres",
             "cancelAddress": "SVIP Adresi"
         },
         "vipListTitle": "VIP Kayıtları",
@@ -1503,12 +1503,12 @@
         "title": "Operatör",
         "tokenList": "Tokenler",
         "totalIncome": "Toplam Gelir",
-        "permission": "Transfer Token's Ownership",
+        "permission": "Token Sahipliğini Devret",
         "txPairManage": "Alım Satım Paritelerini Yönet",
         "noOperator": "You have no tokens or trading pairs yet, wanna become an operator?",
         "learnMore": "Daha Fazla Bilgi Edinin",
         "permissionConfirm": {
-            "title": "Transfer Ownership",
+            "title": "Sahipliği Devret",
             "submit": "Onayla",
             "tokenName": "Token Adı",
             "address": "Alıcı Adresi",
@@ -1524,13 +1524,13 @@
         "operate": "Eylem",
         "stopTrans": "Askıya Al",
         "resetTrans": "Kurtar",
-        "changeOwner": "Transfer Ownership",
+        "changeOwner": "Sahipliği Devret",
         "changeFee": "Adjust Fee Rate",
         "incomeList": "Gelir Ayrıntıları",
         "historyIncome": "Gelir Geçmişi",
         "openTxPair": "Alım Satım Paritelerini Aç",
         "statusList": [
-            "Ownership Transferred",
+            "Sahiplik Devredildi",
             "Alım Satım",
             "Askıya Alma",
             "Alım Satım Açık Değil"
@@ -1552,7 +1552,7 @@
         "changeOwnerSuccess": "Transfer Başarılı",
         "changeOwnerFaill": "Transfer Başarısız",
         "submitChange": "Transferi onayla",
-        "changeOwnerHint": "NOTICE: You will not be able to collect or adjust fees after ownership transferred as well as you cannot undo this transfer action",
+        "changeOwnerHint": "UYARI: Sahiplik devredildikten sonra komisyonları tahsil edemez veya ayarlayamazsınız ve bu transfer işlemini geri alamazsınız",
         "currentMaker": "Yapıcı",
         "confirmFee": "Komisyon",
         "currentTaker": "Alıcı",
@@ -1592,7 +1592,7 @@
         "orderQuantity": "Miktar",
         "orderPrice": "Fiyat",
         "executedQuantity": "Tamamlanan",
-        "avgPrice": "Avg"
+        "avgPrice": "Ort"
     },
     "mobileDividend": {
         "title": "Dividends",
