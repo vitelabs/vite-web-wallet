@@ -1141,11 +1141,11 @@
             "price": "Maliyet",
             "priceInfo": "{price} VX/ay",
             "upgrade": "Yükselt",
-            "balanceAlert": "Cannot create if VITE balance is less than {balanceLimit}.",
-            "noSupportForHardware": "Hardware Wallet is not supported at the moment",
+            "balanceAlert": "VITE bakiyesi {balanceLimit} değerinden azsa oluşturulamaz.",
+            "noSupportForHardware": "Donanım Cüzdanı şu anda desteklenmiyor",
             "tips": {
                 "title": "Uyarı",
-                "0": "ViteX is releasing official API to provide access to markets and real-time trading services. Follow the instructions below to properly acquire an API private key.",
+                "0": "ViteX, marketlere ve gerçek zamanlı alım satım hizmetlerine erişim sağlamak için resmi API yayınlıyor. Bir API özel anahtarını doğru şekilde almak için aşağıdaki talimatları izleyin.",
                 "0-step1": "1. API Oluştur",
                 "0-step2": "2. Seçilen alım satım paritelerinin delegasyonuna izin verin",
                 "0-step3": "3. API delegasyon adresi için quota stake edin",
@@ -1474,7 +1474,7 @@
             "text": "Mined VX will not be automatically staked when turned off"
         },
         "lock": "Stake",
-        "unlock": "Unstake",
+        "unlock": "Stake İptali",
         "lessMin": "Minimum 1 VX",
         "lockVXConfirm": {
             "title": "VX Stake et",
@@ -1485,11 +1485,11 @@
             "amountText": "Miktar"
         },
         "unlockVXConfirm": {
-            "title": "Unstake VX",
+            "title": "VX Stake İptali",
             "available": "Kullanılabilir Stake Bakiyesi",
             "amountPlaceholder": "Lütfen miktarı girin, minimum 1 VX",
             "notEnough": "Yetersiz Miktar",
-            "submit": "Confirm to Unstake",
+            "submit": "Stake İptalini Onayla",
             "amountText": "Miktar",
             "hint": "Kilidi açmak 7 gün sürer."
         },
@@ -1505,7 +1505,7 @@
         "totalIncome": "Toplam Gelir",
         "permission": "Token Sahipliğini Devret",
         "txPairManage": "Alım Satım Paritelerini Yönet",
-        "noOperator": "You have no tokens or trading pairs yet, wanna become an operator?",
+        "noOperator": "Henüz tokenınız veya alım satım pariteniz bulunmamaktadır, operatör olmak ister misiniz?",
         "learnMore": "Daha Fazla Bilgi Edinin",
         "permissionConfirm": {
             "title": "Sahipliği Devret",
@@ -1538,7 +1538,7 @@
         "openTxPairConfirm": {
             "title": "Alım satım için {symbol} aç",
             "fee": "Listeleme Komisyonu",
-            "hint": "If you want to add unique operator symbol after opening a trading pair, please contact us at our Telegram group: https://t.me/vite_en",
+            "hint": "Bir alım satım paritesi açtıktan sonra benzersiz operatör sembolü eklemek istiyorsanız, lütfen Telegram grubumuzdan bizimle iletişime geçin: https://t.me/vite_en",
             "btn": "Gönder",
             "reqSuccess": "Gönderim Başarılı! Daha sonra market tahtasında kontrol edin.",
             "reqError": "Listeleme başarısız, lütfen tekrar deneyin"
