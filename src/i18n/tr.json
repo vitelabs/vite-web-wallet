@@ -62,7 +62,7 @@
         "ing": "Running PoW to acquire quota",
         "no": "PoW çalıştırmak istememeniz durumunda quota için VITE stake edebilirsiniz",
         "insuffQuota": "Quota Al",
-        "insuffQuotaMsg": "We notice you have no VITE locked for Quota. Please lock VITE or if you prefer, you can run POW to get Quota.",
+        "insuffQuotaMsg": "Quota için kilitli VITE olmadığınızı fark ettik. Lütfen VITE'i kilitleyin veya tercih ederseniz, Quota almak için POW'u çalıştırabilirsiniz.",
         "insuffQuotaMsg2": "VITE Only {powMaxTimes} transactions can be made per day per address without staking VITE. Your address has exhausted all {powMaxTimes} transactions. Please go to the quota page and stake your VITE to perform more transactions.",
         "getQuota": "VITE Kilitle",
         "skip": "Run POW",
