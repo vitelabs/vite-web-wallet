@@ -63,7 +63,7 @@
         "no": "PoW çalıştırmak istememeniz durumunda quota için VITE stake edebilirsiniz",
         "insuffQuota": "Quota Al",
         "insuffQuotaMsg": "Quota için kilitli VITE olmadığınızı fark ettik. Lütfen VITE'i kilitleyin veya tercih ederseniz, Quota almak için POW'u çalıştırabilirsiniz.",
-        "insuffQuotaMsg2": "VITE Only {powMaxTimes} transactions can be made per day per address without staking VITE. Your address has exhausted all {powMaxTimes} transactions. Please go to the quota page and stake your VITE to perform more transactions.",
+        "insuffQuotaMsg2": "VITE, VITE stake'i olmadan her adres başına günlük yalnızca {powMaxTimes} işlemleri yapılabilir. Adresiniz tüm {powMaxTimes} işlemlerini tüketti. Lütfen quota sayfasına gidin ve daha fazla işlem gerçekleştirmek için VITE'inizi stake edin.",
         "getQuota": "VITE Kilitle",
         "skip": "Run POW",
         "cancel": "İptal"
@@ -92,7 +92,7 @@
         "35003": "{name} Kimlik karmaşası meydana geldi, lütfen daha sonra yeniden gönderin",
         "35004": "Geçersiz parametreler",
         "35005": "İşlemler çok sık gönderiliyor, lütfen daha sonra tekrar deneyin",
-        "35006": "Contract method not exist",
+        "35006": "Sözleşme yöntemi bulunamadı",
         "35011": "Ağ Tıkanıklığı",
         "36001": "Bir işlem gerçekleşmeden başka transfer yapamazsınız",
         "36002": "Sistem doğrulaması başarısız oldu, lütfen daha sonra tekrar deneyiniz",
@@ -203,7 +203,7 @@
     "beforeUse": {
         "title": "Kullanmadan Önce Okuyun",
         "text1": "Varlıklarınızın güvenliği için, hesap oluşturma özelliği web cüzdanında geçici olarak desteklenmemektedir. Hesap oluşturmak için lütfen Vite Uygulamasını indirin. Bir oltalama web sitesini ziyaret ederseniz veya kurtarma kelimelerinizin yedeğini kaybederseniz Vite Platformu, varlıklarınızı geri kurtaramaz.",
-        "text2": "Please note that our websites do not store your private keys or seed phrase. Therefore, you will need to restore your account via seed phrase if you decide to change browsers, clear local cookies, or change PCs.",
+        "text2": "Lütfen web sitelerimizin özel anahtarlarınızı veya kurtarma kelimelerinizi saklamadığını unutmayın. Bu nedenle tarayıcıları değiştirmeye, yerel çerezleri temizlemeye veya bilgisayarınızı değiştirmeye karar verirseniz, hesabınızı kurtarma kelimeleri yoluyla geri yüklemeniz gerekecektir.",
         "text3": "Lütfen kurtarma kelimelerinizi doğru bir şekilde kaydetmek ve güvenli bir şekilde saklamak için uygun önlemleri alın. En ufak bir hata bile adresinize başarılı bir şekilde erişememenize sebep olacaktır."
     },
     "preview": {
@@ -260,7 +260,7 @@
             "Kapat",
             "Aç"
         ],
-        "gateHelp": "You can customize your gateway configuration when activating this feature. Currently this feature is mainly for developers.",
+        "gateHelp": "Bu özelliği etkinleştirirken ağ geçidi yapılandırmanızı özelleştirebilirsiniz. Şu anda bu özellik esas olarak geliştiriciler içindir.",
         "lang": "Dil",
         "block": "Mevcut Yükseklik",
         "version": "Sürüm",
@@ -317,7 +317,7 @@
             "err1": "İllegal dosya içe aktarıldı!",
             "err2": "Yalnızca bir dosya içe aktarılabilir!",
             "guide": "İçe aktarılacak klasörü açın",
-            "hint": "Noted that login by importing keystore file cannot support creating multi addresses, using mnemonic seed phrase is recommended in cross-platform situations."
+            "hint": "Anahtar deposu dosyasını içe aktararak oturum açmak çoklu adres oluşturmayı destekleyemez, platformlar arası durumlarda anımsatıcı kurtarma kelimelerinin kullanılması önerilir."
         }
     },
     "tokenCard": {
@@ -332,13 +332,13 @@
             "gate": "Cüzdan Cross-Chain Ağ Geçidi",
             "totalExAmount": "Toplam Exchange Bakiyesi",
             "availableExAmount": "Kullanılabilir Exchange Bakiyesi",
-            "balanceTips": "On-chain send is available for users who would like to send transactions from your Vite wallet to other Vite addresses",
-            "gateTips": "In this cross-chain section, you can map other coins/tokens into Vite network. Click 'Deposit' button to deposit assets to your Vite Wallet. Click 'Withdraw' button to transfer your assets to other platforms. * Cross-chain deposit/withdrawal process may cause fees, it also has its transfer limit.",
-            "availableExAmountTips": "You can transfer your assets between Vite Wallet and ViteX Exchange via clicking 'Transfer' button. No transaction fees caused during these processes.",
+            "balanceTips": "On-chain gönderimini, Vite cüzdanınızdan diğer Vite adreslerine işlem göndermek isteyen kullanıcılar kullanılabilir",
+            "gateTips": "Bu cross-chain bölümünde, diğer koinleri/tokenları Vite ağına eşleyebilirsiniz. Varlıkları Vite Cüzdanınıza yatırmak için 'Yatır' düğmesine tıklayın. Varlıklarınızı diğer platformlara transfer etmek için 'Çek' düğmesine tıklayın. * Cross-chain yatırma/çekme işlemi komisyona neden olabilir, ayrıca transfer limiti de bulunmaktadır.",
+            "availableExAmountTips": "Varlıklarınızı 'Transfer' butonuna tıklayarak Vite Wallet ile ViteX Exchange arasında transfer edebilirsiniz. Bu işlemler sırasında işlem komisyonu alınmaz.",
             "unreceivedTips": "Alınmamış varlıklar, oturum açtıktan sonra otomatik olarak alınacaktır"
         },
         "actionType": {
-            "SEND": "On-Chain Send",
+            "SEND": "On-Chain Gönderimi",
             "RECEIVE": "Yatırma",
             "CHARGE": "Yatırma",
             "WITHDRAW": "Çekme",
@@ -411,7 +411,7 @@
             "setting": "Ağ Geçidi Arayüzü",
             "nodeDesc": "Kullanım Kılavuzu",
             "settingPlaceholder": "Lütfen ağ geçidi link adresini girin",
-            "nodeDescStr": "This function only works for cross-chain coins, do not use this on built-in tokens. Meanwhile, please be careful about unfamiliar gateway links. By continuing to use our platform, you agree and acknowledge that Vite Labs would not be responsible for the loss of your fund and other negative consequences caused. Fill out the gateway link below if you need to use gateway, the link will come into effect after you hit save."
+            "nodeDescStr": "Bu özellik yalnızca cross-chain koinleri için çalışır, bunu yerleşik tokenlarda kullanmayın. Bu arada, lütfen bilmediğiniz ağ geçidi bağlantılarına dikkat edin. Platformumuzu kullanmaya devam ederek, fonunuzun kaybından ve bunun neden olduğu diğer olumsuz sonuçlardan Vite Labs'ın sorumlu olmayacağını kabul ediyorsunuz. Ağ geçidi kullanmanız gerekiyorsa aşağıdaki ağ geçidi bağlantısını doldurun, kaydet düğmesine bastıktan sonra bağlantı devreye girecektir."
         },
         "depositRecord": {
             "tabName": "Alma Geçmişi",
@@ -424,11 +424,11 @@
                 "Komisyonlar"
             ],
             "statusMap": {
-                "OPPOSITE_PROCESSING": "{outChain} awaits to confirm{confirms}",
+                "OPPOSITE_PROCESSING": "{outChain} onaylamayı bekliyor{confirms}",
                 "OPPOSITE_CONFIRMED_FAIL": "{outChain} işlenemedi",
-                "OPPOSITE_CONFIRMED": "Gateway Received",
+                "OPPOSITE_CONFIRMED": "Ağ Geçidi Alındı",
                 "TOT_CONFIRMED": "Tamamlandı",
-                "BELOW_MINIMUM": "Topup Failed",
+                "BELOW_MINIMUM": "Yükleme Başarısız",
                 "TOT_PROCESSING": "VITE zinciri onayı bekliyor"
             }
         },
@@ -446,7 +446,7 @@
                 "TOT_PROCESSING": "VITE Chain Unconfirmed{confirms}",
                 "TOT_CONFIRMED": "VITE Onaylandı",
                 "TOT_EXCEED_THE_LIMIT": "Transfer miktarı limiti aşıyor",
-                "OPPOSITE_PROCESSING": "{outChain} awaits to confirm",
+                "OPPOSITE_PROCESSING": "{outChain} onaylamayı bekliyor",
                 "OPPOSITE_CONFIRMED": "Tamamlandı",
                 "WRONG_WITHDRAW_ADDRESS": "Transfer adresi hatalı"
             }
@@ -459,7 +459,7 @@
             "labelCodeTips": "Please Scan the QR code from {labelName}",
             "codeTips": "Yatırma için QR kodu tarayın. Lütfen {tokenSymbol} destekleyen cüzdan ile varlık gönderin",
             "tips": [
-                "You can only deposit {tokenSymbol} through the address provided below. No less than {min} {tokenSymbol} will be accepted.",
+                "Yalnızca aşağıda verilen adresten {tokenSymbol} yatırabilirsiniz. En az {min} {tokenSymbol} kabul edilecektir.",
                 "Hesap {confirmationCount} ağ onayından sonra güncellenecektir. Lütfen bekleyin.",
                 "Lütfen doğru mainneti seçin, yoksa kaybolan tokenları geri alamazsınız."
             ]
@@ -486,7 +486,7 @@
             "amountPlaceholder": "Lütfen {min} 'den az olmaması gereken gönderme miktarını girin",
             "addressPlaceholder": "Lütfen {token} alıcı adresini girin",
             "successTips": "İşlem talebi gönderildi",
-            "failTips": "An error occurred in gateway node, please check the network settings"
+            "failTips": "Ağ geçidi düğümünde bir hata oluştu, lütfen ağ ayarlarını kontrol edin"
         },
         "nodeErr": "Ağ geçidi düğümü geçersiz, lütfen ağ geçidi ayarlarını kontrol edin"
     },
@@ -582,7 +582,7 @@
             "decimalsNull": "Ondalık sayılar alanı gerekli",
             "decimalsFormat": "Ondalık sayıların yanlış formatı",
             "decimalsMax": "Ondalık sayılar aralık dışı",
-            "maxSupplyFormat": "Wrong format of Max Supply"
+            "maxSupplyFormat": "Maksimum Arzın yanlış formatı"
         }
     },
     "walletQuota": {
@@ -701,19 +701,19 @@
             "describe1": "Rewards that are available for claiming update at 13:00:00 (UTC+8) every day, till {time} you can claim",
             "describe2": "Query mining rewards details, you can",
             "describe3": "buraya tıklayın",
-            "describe4": "Rewards will send to your Vite Web Wallet address after submitting claim request, please check it in Wallet Home Page. Note: Don't repeat claim actions.",
+            "describe4": "Ödüller, toplama talebinizi gönderdikten sonra Vite Web Cüzdan adresinize gönderilecektir, lütfen Cüzdan Ana Sayfasında kontrol edin. Not: Toplama işlemlerini tekrarlamayın.",
             "leftBtn": "Şimdi Değil",
             "rightBtn": "Tümünü Topla"
         },
         "confirm": {
             "title": "Registration of SBP candidates",
-            "describe": "The {amount} VITE of current address will be locked about 90 days when you submit the registration,  the amount will be returned to staking address after being unlocked",
+            "describe": "Kaydı gönderdiğinizde, mevcut adresin {amount} VITE'i yaklaşık 90 gün boyunca kilitlenecek, miktar kilidi açıldıktan sonra stake adresine iade edilecektir",
             "leftBtn": "Henüz kaydolmadınız mı",
             "rightBtn": "Kaydolmaya Hazır",
             "edit": {
                 "title": "SBP Bilgisini Düzenle",
                 "newBlockProducer": "please input new block creation address",
-                "newRewardAddress": "please input new reward withdraw address",
+                "newRewardAddress": "lütfen yeni ödül çekme adresini girin",
                 "changeBlockProducer": "Block Creation Address",
                 "changeRewardAddress": "Ödül Çekme Adresi",
                 "btn": "Değişikliği Onaylayın"
@@ -735,19 +735,19 @@
             "addrPlaceholder": "Please input snapshot block creation address",
             "addrHint": "The block creation address must be a full node and keep up running",
             "addrErr": "İllegal adres",
-            "addrUsed": "This address has been occupied",
+            "addrUsed": "Bu adres alınmış",
             "registerSuccess": "Kayıt talebi gönderildi",
             "registerFail": "Kayıt talebi başarısız"
         },
         "section2": {
             "title": "Kayıt Bilgisi",
-            "update": "Modify",
-            "updateFail": "Failed to send modify request",
-            "cancel": "Revoking",
-            "cancelFail": "Failed to send revoking request",
+            "update": "Değiştir",
+            "updateFail": "Değişiklik talebi gönderilemedi",
+            "cancel": "İptal ediliyor",
+            "cancelFail": "İptal talebi gönderilemedi",
             "expireDate": "Bitiş Tarihi: {time}",
             "cancelConfirm": {
-                "title": "Revoke registration of SBP",
+                "title": "SBP kaydını iptal et",
                 "describe": "Stake miktarı, iptal ettikten sonra stake adresinize iade edilecektir, SBP olmak için kaydı yeniden göndermelisiniz"
             }
         }
@@ -756,7 +756,7 @@
         "title": "Oylama",
         "help": {
             "title": "Oylama Hakkında",
-            "text": "You can join and vote for 25 SBPs （Snapshot Block Producer), each round of voting lasts 75s, the polls you can use for voting are equivalent to the amount of VITE tokens owned by voting address, the default selection is the choice of previous round, the SBPs will be chosen from random 23 out of top 25 candidate nodes, plus random 2 out of the candidate nodes ranking 26th-100th on the list, 25 SBPs in total."
+            "text": "25 SBP'ye katılabilir ve oy verebilirsiniz （Snapshot Block Producer), her bir oylama turu 75 saniye sürer, oylama için kullanabileceğiniz oy sayısı, oylama adresinin sahip olduğu VITE tokenlarının miktarına eşittir, varsayılan seçim önceki turun seçimidir. SBP'ler; ilk 25 aday düğümden rastgele 23'ü, artı listede 26.-100. sırada yer alan aday düğümlerden rastgele 2'si, toplamda 25 SBP arasından seçilecektir."
         },
         "toReward": "Ödüllerimi göster",
         "voting": "Oylama",
@@ -782,7 +782,7 @@
                 "canceling": "Revoking in Process",
                 "voteNotWork": "Oylama İptal Edildi"
             },
-            "hoverHelp": "The node {nodeName} you are voted for has been revoked, you may vote again directly or revoke your voting, If you do not do so, your original voting result will be recovered after the {nodeName} re-registering",
+            "hoverHelp": "Oy verdiğiniz {nodeName} düğümü iptal edildi, tekrar doğrudan oy verebilir veya oyunuzu iptal edebilirsiniz. Bunu yapmazsanız, orijinal oylama sonucunuz {nodeName} yeniden kaydolduktan sonra kurtarılacaktır",
             "confirm": {
                 "cancelText": "Henüz değil",
                 "submitText": "Onayla"
@@ -822,8 +822,8 @@
         "notice": {
             "title": "Önemli Uyarı",
             "contentProvider": "Bu hizmet {gate} tarafından sağlanmaktadır.",
-            "contentOther": "You agree and acknowledge that Vite Labs would not be responsible for any negative consequences caused by {gate}. Vite platform does not take any part in the relationship that may arise between {gate} and users of Vite platform",
-            "contentAgree": "By continuing to use {gate}'s service, you agree and acknowledge {gate}'s",
+            "contentOther": "{gate} 'ın neden olduğu olumsuz sonuçlardan Vite Labs'ın sorumlu olmayacağını kabul ediyor ve onaylıyorsunuz. Vite platformu, {gate} ile Vite platformu kullanıcıları arasında ortaya çıkabilecek ilişkide herhangi bir rol oynamaz",
+            "contentAgree": "{gate} hizmetini kullanmaya devam ederek, {gate} 'i kabul etmiş ve onaylamış olursunuz",
             "agreement": "Hizmet Şartları, Alım Satım Koşulları ve Gizlilik Politikası",
             "contentUngree": "Lütfen {gate} hizmetini kullanmadan önce bu koşulları kabul edin",
             "hint": "Ödeme işlemi sırasında herhangi bir sorunla karşılaşırsanız, {gate} müşteri hizmetleri ekibiyle iletişime geçin.",
@@ -893,7 +893,7 @@
                 "tips": "Lütfen işlemi Ledger cihazınızda onaylayın",
                 "verifyAddress": "Lütfen adresi Ledger cihazınızda doğrulayın",
                 "alert": "Uyarı",
-                "alertContent": "Address has been denied on Ledger device. Please double verify if this address matches the address displayed on your Ledger device. If yes, ignore this message and go ahead to confirm the transaction, otherwise DO NOT send asset to the address and quit immediately.",
+                "alertContent": "Adres Ledger cihazında reddedildi. Lütfen bu adresin Ledger cihazınızda görüntülenen adresle eşleşip eşleşmediğini iki kez doğrulayın. Cevabınız evet ise, bu mesajı yok sayın ve işlemi onaylamak için devam edin, aksi takdirde adrese varlık GÖNDERMEYİN ve hemen çıkın.",
                 "alertLeftBtn": "Adreslerin eşleştiğini onaylıyorum",
                 "alertRightBtn": "Adresler eşleşmiyor. Ayrıl!",
                 "userCancel": "İşlem Ledger'da iptal edildi",
@@ -907,7 +907,7 @@
             "codeLable": "Referans Kodu",
             "invited": "Zaten bir daveti kabul ettiniz, referans kodu: ",
             "genCode": "Referans Kodu Oluştur",
-            "cost": "Cost",
+            "cost": "Maliyet",
             "formatErr": "Hatalı referans kodu formatı",
             "noResult": "Oops...Sonuç bulunamadı, lütfen daha sonra tekrar deneyin",
             "successToast": "Talep gönderildi",
@@ -923,7 +923,7 @@
             ],
             "receiveRuleItems": [
                 "Invited users will receive an extra <span class='strong'>2.5%</span> of trading as mining rewards and <span class='strong'>1.25%</span> of market-making as mining rewards",
-                "Enjoy <span class='strong'>10%</span> off trading fees with an invitation code"
+                "Bir davetiye koduyla alım satım komisyonlarında <span class='strong'>%10 </span> indirimden yararlanın"
             ]
         }
     },
@@ -956,14 +956,14 @@
         "supportTradeMining": "Eligible for trading as mining",
         "supportOrderMining": "Eligible for market-making as mining",
         "zeroFee": "Sıfır Komisyon",
-        "buyMiningPrice": "Qualifies for mining when buy price is greater than {price}",
-        "sellMiningPrice": "Qualifies for mining when sell price is less than {price}",
+        "buyMiningPrice": "Alış fiyatı {price} 'dan yüksek olduğunda madencilik için uygundur",
+        "sellMiningPrice": "Satış fiyatı {price} altında olduğunda madencilik için uygundur",
         "operator": {
             "noName": "Anonim Operatör",
             "overview": "Giriş",
             "txPair": "Alım Satım Paritesi",
             "confirmTitle": "Risk Hatırlatıcısı",
-            "confirmText": "The current trading pair is {symbol}. Please be careful when trading. Investing in digital assets comes with high risks. Before investing, please have a full understanding of all the risks of investing in digital assets and judge the authenticity, legality and validity of digital assets on your own. Please be prudent of your own investment decisions and undertake responsibility for the loss of your assets.",
+            "confirmText": "Mevcut alım satım paritesi {symbol}. Alım satım yaparken lütfen dikkatli olun. Dijital varlıklara yatırım yapmak yüksek riskleri beraberinde gelir. Yatırım yapmadan önce, lütfen dijital varlıklara yatırım yapmanın tüm risklerini tam olarak anlayın ve dijital varlıkların gerçekliğini, yasallığını ve geçerliliğini kendi başınıza değerlendirin. Lütfen kendi yatırım kararlarınızda tedbirli olun ve varlıklarınızın kaybı için sorumluluk üstlenin.",
             "address": "Operatör Adresi",
             "name": "Operatör Adı"
         },
@@ -1027,7 +1027,7 @@
             "website": "Resmi Web Site",
             "explorer": "Block Explorer",
             "overview": "Açıklama",
-            "tokenShow": "Abbr",
+            "tokenShow": "Kısaltma",
             "tokenId": "Token Kimliği",
             "publisher": "Issuer",
             "total": "Toplam",
@@ -1126,7 +1126,7 @@
             "title": "API",
             "myKey": "API Anahtarım",
             "createTime": "Oluşturulma Zamanı",
-            "permissions": "Applied Trading Pairs",
+            "permissions": "Uygulanan Alım Satım Pariteleri",
             "createKey": "API Anahtarı oluşturun",
             "deleteKey": "API'yi sil",
             "deleteAlert": "The current API will no longer be accessible if confirm to proceed. Existing package will be retained and re-activated upon creation of a new API Key.",
@@ -1138,7 +1138,7 @@
             "expireTime": "Bitiş Tarihi",
             "callNum": "Triggers/min",
             "callNumInfo": "{maxCount} işlem/dk",
-            "price": "Cost",
+            "price": "Maliyet",
             "priceInfo": "{price} VX/ay",
             "upgrade": "Yükselt",
             "balanceAlert": "Cannot create if VITE balance is less than {balanceLimit}.",
@@ -1151,8 +1151,8 @@
                 "0-step3": "3. API delegasyon adresi için quota stake edin",
                 "0-step4": "View <a href=\"https://vite.wiki/dex/api/dex-apis.html\" target=\"_blank\">API Documentation</a> for further support",
                 "1": "One set of API Key and Secret is allowed for the same address at any given time.",
-                "2": "To avoid asset loss, Do Not disclose your Access Key and Secret",
-                "3": "The API package is set with the free base package at 10 transactions per minute by default, upgrade options available."
+                "2": "Varlık kaybını önlemek için Erişim Anahtarınızı ve Sırrınızı İfşa Etmeyin",
+                "3": "API paketi, varsayılan olarak dakikada 10 işlem yapan ücretsiz temel paketle ayarlanmıştır, yükseltme seçenekleri mevcuttur."
             },
             "stakingForQuota": {
                 "title": "Delegasyon Quotası",
@@ -1167,10 +1167,10 @@
                 "title": "API Başarıyla Oluşturuldu",
                 "tips": {
                     "title": "Önemli Uyarı",
-                    "0": "To avoid asset loss, Do Not disclose your Access Key and Secret Key.",
-                    "1": "In cases of lost secret key, Delete the current API and Re-Apply for a new API key."
+                    "0": "Varlık kaybını önlemek için Erişim Anahtarınızı ve Gizlilik Anahtarınızı ifşa etmeyin.",
+                    "1": "Gizlilik anahtarının kaybolması durumunda, mevcut API'yi silin ve yeni bir API anahtarı için Yeniden Başvurun."
                 },
-                "warn": "The Secret key is displayed only once and cannot be found back if lost, please keep it properly."
+                "warn": "Gizlilik anahtarı yalnızca bir kez görüntülenir ve kaybolursa geri bulunamaz, lütfen doğru şekilde saklayın."
             },
             "upgradeConfirm": {
                 "title": "Paketi Yükselt",
@@ -1372,9 +1372,9 @@
         "fee": "Alım Satım Komisyonları",
         "todayTrade": "Madencilik Ayrıntıları",
         "dividends": "24H Expected Mined Volume",
-        "view": "View Live Mining Dashboard",
+        "view": "Anlık Madencilik Panelini Görüntüle",
         "inviteCount": "Referanslar",
-        "help": "Current trading fees displayed on this page contains only the 0.2% ViteX base transaction fees, please note that operator fees shall be taken into consideration when calculating mining cost"
+        "help": "Bu sayfada görüntülenen mevcut işlem komisyonları yalnızca% 0,2 ViteX temel işlem komisyonlarını içerir, lütfen madencilik maliyetini hesaplarken operatör komisyonlarının dikkate alınacağını unutmayın"
     },
     "tradeVip": {
         "title": "VIP Statüsü",
