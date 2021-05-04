@@ -33,7 +33,7 @@
         "trade": [
             "Varlıklarınızı (hem Web Cüzdanı hem de ViteX exchange) buradan yönetin",
             "Açık Emirlere ve Emir Geçmişine göz atın, alım satım detaylarını öğrenin",
-            "Participate in mining, acquire VX and trading fee dividends (Mining Dividends)",
+            "Madenciliğe katılın, VX ve alım satım komisyonundan kar payı elde edin (Madencilik Kar Payı)",
             "Daha fazla özelliği deneyimleyin: Quota için Stake, SBP (Snapshot Block Producer) koşucusu olma, SBP'ler için Oylama, ERC20 dönüşümü, İşlem Ayrıntıları vb."
         ],
         "assets": [
@@ -59,13 +59,13 @@
         "error": "{time} tarihindeki {amount} {ftoken} ({ftoken} / {ttoken}) emriniz başarısız oldu. Daha fazla ayrıntı için lütfen Emir Geçmişi sayfasını görüntüleyin."
     },
     "pow": {
-        "ing": "Running PoW to acquire quota",
+        "ing": "Quota elde etmek için PoW'u çalıştırın",
         "no": "PoW çalıştırmak istememeniz durumunda quota için VITE stake edebilirsiniz",
         "insuffQuota": "Quota Al",
         "insuffQuotaMsg": "Quota için kilitli VITE olmadığınızı fark ettik. Lütfen VITE'i kilitleyin veya tercih ederseniz, Quota almak için POW'u çalıştırabilirsiniz.",
         "insuffQuotaMsg2": "VITE, VITE stake'i olmadan her adres başına günlük yalnızca {powMaxTimes} işlemleri yapılabilir. Adresiniz tüm {powMaxTimes} işlemlerini tüketti. Lütfen quota sayfasına gidin ve daha fazla işlem gerçekleştirmek için VITE'inizi stake edin.",
         "getQuota": "VITE Kilitle",
-        "skip": "Run POW",
+        "skip": "POW'u çalıştır",
         "cancel": "İptal"
     },
     "addAccount": "Bir Hesap Oluştur",
@@ -392,8 +392,8 @@
                 "viewmore": "Daha Fazlasını Görüntüle"
             },
             "reIssuable": {
-                "true": "Re-issuable",
-                "false": "Not re-issuable"
+                "true": "Yeniden Yayınlanabilir",
+                "false": "Yeniden Yayınlanamaz"
             }
         },
         "gateInfo": {
@@ -407,7 +407,7 @@
             "selfdefined": "Özel Ağ Geçidi",
             "officalNet": "Web Sitesi",
             "introduction": "Açıklama",
-            "token": "Issued Token",
+            "token": "Yayınlanan Token",
             "setting": "Ağ Geçidi Arayüzü",
             "nodeDesc": "Kullanım Kılavuzu",
             "settingPlaceholder": "Lütfen ağ geçidi link adresini girin",
@@ -534,12 +534,12 @@
         "tokenSymbol": "Token Sembolü",
         "totalSupply": "Toplam Arz",
         "decimals": "Ondalık sayılar",
-        "isReIssuable": "ReIssuable",
+        "isReIssuable": "YenidenYayınlanabilir",
         "maxSupply": "Maks. Arz",
         "ownerBurnOnly": "Yalnızca Sahibi Tarafından Yakılır",
         "isOwnerBurnOnly": "Yalnızca Sahibi Tarafından Yakılır",
         "mint": "Onayla",
-        "tokenList": "Issued Token",
+        "tokenList": "Yayınlanan Token",
         "submit": "Gönder",
         "cancel": "İptal",
         "getListFail": "Token listesi alamıyorsunuz, daha sonra tekrar deneyin",
@@ -550,18 +550,18 @@
             "btn": "Onayla"
         },
         "reIssuableConfirm": {
-            "title": "Change to Non-issuable",
-            "text": "Make sure to change {tokenName} to Non-issuable status?"
+            "title": "Yayınlanamaz Olarak Değiştir",
+            "text": "{tokenName} Yayınlanamaz olarak değiştirdiğinizden emin olun?"
         },
         "changeOwnerConfirm": {
             "title": "Sahipliği Devret",
             "address": "Alıcı Adresi"
         },
         "issueConfirm": {
-            "title": "Re-issue",
+            "title": "Yeniden yayınla",
             "amount": "Miktar",
             "address": "Yararlanıcı Adresi",
-            "overAmount": "Reissued tokens exceed the upper limit"
+            "overAmount": "Yeniden yayınlanan tokenlar üst sınırı aşıyor"
         },
         "hint": {
             "tokenName": "Token adı; büyük ve küçük harfler, boşluklar ve alt çizgiler dahil olmak üzere 1-40 karakterden oluşmalıdır. Sürekli boşluklar ve sayılar desteklenmez.",
@@ -635,9 +635,9 @@
             "amount": "Miktar",
             "withdrawTime": "Beklenen Bitiş Tarihi",
             "unexpired": "Stake edilmiş token, bitiş tarihine kadar çekilemez",
-            "vip": "This staking action is for default opening VIP on ViteX exchange, please go to ViteX exchange page to cancel VIP",
-            "mining": "This staking is your staking as mining amount on ViteX, please go to ViteX mining page to unstake",
-            "other": "This staking is staked via other ways and unstake is not supported here"
+            "vip": "Bu stake eylemi, ViteX borsasında varsayılan olarak VIP açmak içindir, lütfen VIP'i iptal etmek için ViteX exchange sayfasına gidin",
+            "mining": "Bu stake, ViteX'teki madencilik miktarı olarak sizin stake miktarınızdır, lütfen stake iptali için ViteX madencilik sayfasına gidin",
+            "other": "Bu stake, başka yollarla stake edilir ve burada stake iptali desteklenmez"
         }
     },
     "walletTransList": {
@@ -663,9 +663,9 @@
             "t1": "Sözlük",
             "txt1": "[Kayıtlı Düğüm Sayısı] Mevcut adresle kaydedilen tam düğüm sayısı",
             "txt2": "[Etkin Düğüm Sayısı] Mevcut adresle kaydedilen etkin tam düğüm sayısı",
-            "txt3": "[Number of Rewarding nodes]  Number of nodes being rewarded",
+            "txt3": "[Ödüllendirme düğümlerinin sayısı] Ödüllendirilen düğüm sayısı",
             "t2": "Multiple Full nodes can be registered with the same address, but must be staked individually at least 10,000 VITE each; When calculating Active Node Reward, if staking amount / 10000 yields a whole number that is greater than or equal to the number of active nodes, all active nodes will be rewarded; If staking amount / 10000 yields a whole number that is less than the number of active nodes, the number of nodes being rewarded equals to the whole number.",
-            "t3": "Calculation of voting rewards does not depend on the number of nodes, but the staking amount."
+            "t3": "Oylama ödüllerinin hesaplanması düğüm sayısına değil, stake miktarına bağlıdır."
         },
         "confirmText": "{amount} VITE stake'ini onaylayın, stakeler {days} gün sonra iptal edilebilir",
         "addQuota": {
@@ -682,7 +682,7 @@
             "nodeInfo": "Düğüm Bilgisi",
             "onlineNodes": "Etkin Düğümler",
             "rewardNodes": "Ödüllendirme Düğümleri",
-            "stakeAmount": "Node Staking"
+            "stakeAmount": "Düğüm Stake'i"
         }
     },
     "walletSBP": {
@@ -779,7 +779,7 @@
             "voteStatusMap": {
                 "voted": "Oylama Başarılı",
                 "voting": "Oylama",
-                "canceling": "Revoking in Process",
+                "canceling": "İşlem İptal Ediliyor",
                 "voteNotWork": "Oylama İptal Edildi"
             },
             "hoverHelp": "Oy verdiğiniz {nodeName} düğümü iptal edildi, tekrar doğrudan oy verebilir veya oyunuzu iptal edebilirsiniz. Bunu yapmazsanız, orijinal oylama sonucunuz {nodeName} yeniden kaydolduktan sonra kurtarılacaktır",
@@ -807,7 +807,7 @@
                     "submitText": "Oy için hazır"
                 },
                 "cover": {
-                    "content": "You've already voted for {nodeName}, are you sure to overwrite current voting record?",
+                    "content": "Zaten {nodeName} için oy verdiniz, mevcut oylama kaydının üzerine yazmak istediğinizden emin misiniz?",
                     "cancelText": "Onayla",
                     "submitText": "İptal"
                 }
@@ -1029,12 +1029,12 @@
             "overview": "Açıklama",
             "tokenShow": "Kısaltma",
             "tokenId": "Token Kimliği",
-            "publisher": "Issuer",
+            "publisher": "Yayınlayan",
             "total": "Toplam",
             "tokenDigit": "Ondalık sayılar",
             "publisherDate": "Yayınlama Tarihi",
             "type": "Durum",
-            "tokenType0": "Issuance Available",
+            "tokenType0": "Yayınlama Mevcut",
             "tokenType1": "Never Issued"
         },
         "latestTx": {
@@ -1205,7 +1205,7 @@
                 "Token",
                 "Toplam Bakiye",
                 "Exchange Bakiyesi",
-                "In Order",
+                "Emirde",
                 "Değer"
             ],
             "rowMap": {
@@ -1243,8 +1243,8 @@
     "tradeOpenOrders": {
         "cancelErr": "Çok sık deniyorsunuz, lütfen sonra tekrar deneyin.",
         "confirm": {
-            "successToast": "Revoking Order Successful",
-            "failToast": "Revoking Order Failed",
+            "successToast": "Emir İptali Başarılı",
+            "failToast": "Emir İptal Edilemedi",
             "submitTxt": "İptal etmeyi onaylayın",
             "cancelTxt": "İptal",
             "title": "Emri İptal Et",
@@ -1320,7 +1320,7 @@
             ],
             "rowMap": {
                 "statusMap": {
-                    "1": "In Order",
+                    "1": "Emirde",
                     "2": "Tamamlandı",
                     "3": "İptal edildi",
                     "4": "Başarısız"
@@ -1430,7 +1430,7 @@
     },
     "inviteMining": {
         "title": "Referring as Mining Total Income",
-        "myInviteIncome": "Referral Proceeds",
+        "myInviteIncome": "Referans Geliri",
         "inviteTradeIncome": "Referred Trading Proceeds",
         "inviteOrderIncome": "Referred Market-Making Proceeds"
     },
@@ -1445,9 +1445,9 @@
         "estimate": "{name} Today's Minable Amount"
     },
     "tradeDividend": {
-        "title": "Dividends",
-        "poolTitle": "Trading Fee Dividend Pool",
-        "listTitle": "My Dividends",
+        "title": "Kar payı",
+        "poolTitle": "Alım Satım Komisyonu Kar Payı Havuzu",
+        "listTitle": "Kar Paylarım",
         "allPrice": "Toplam Tahmini Değer",
         "date": "Tarih",
         "VX": "VX Stake et",
@@ -1456,12 +1456,12 @@
         "price": "Toplam Tahmini Değer",
         "hintTitle": "Önemli Uyarı",
         "comingHint": "VX mining and dividend functions are coming soon, stay tuned. The system will distribute 1% of BTC, ETH, VITE, USDT of the total pool to all VX users proportional to the amount of VX they hold. The initial dividend pool will start at 0 and will grow according to the amount of fees collected by ViteX. Traders must have a minimum of 10 VX in order to receive dividends from a shared dividend pool comprised of base transaction, listing and referral code generating fees. ",
-        "more": "Learn more about VX dividend rules",
+        "more": "VX kar payı kuralları hakkında daha fazla bilgi edinin",
         "help": "Reward Rules: 1. A minimum of 10 VX must be staked to receive dividends. 2. Submission of staking request allows for dividends starting the nearest distribution. 3. Staked amount will be released after the 7-day waiting period",
         "lockedAmount": "Stake Miktarı",
-        "lockAmountTips": "Receive Dividends on 10 VX or Above",
+        "lockAmountTips": "10 VX veya Üzeri Kar Payı Alın",
         "unlockAmount": "Unlocking Amount",
-        "addHint1": "A minimum of 10 VX must be staked to receive dividends",
+        "addHint1": "Kar payı alabilmek için minimum 10 VX stake edilmelidir",
         "addHint2": "Submission of staking request allows for dividends starting the nearest distribution",
         "addHint3": "Stake edilmiş miktar 7 günlük bekleme süresinden sonra serbest bırakılacaktır",
         "autoLock": "Otomatik Stake Et",
@@ -1494,7 +1494,7 @@
             "hint": "Kilidi açmak 7 gün sürer."
         },
         "unlockList": {
-            "title": "Retrieving",
+            "title": "Geri alınıyor",
             "amount": "Miktar",
             "time": "Available Date"
         }
@@ -1595,10 +1595,10 @@
         "avgPrice": "Ort"
     },
     "mobileDividend": {
-        "title": "Dividends",
-        "poolTitle": "Dividend Pool ({token})",
-        "myDividendTitle": "Total Estimated Value of Dividends ({token})",
-        "listTitle": "Dividend Details",
+        "title": "Kar payı",
+        "poolTitle": "Kar Payı Havuzu ({token})",
+        "myDividendTitle": "Kar Paylarının Toplam Tahmini Değeri ({token})",
+        "listTitle": "Kar Payı Ayrıntıları",
         "lockingTitle": "Stakelerim",
         "viewLink": "Unstaking Status"
     },
