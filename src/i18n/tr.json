@@ -15,12 +15,12 @@
     "resetAcc": "Hesabınızı Sıfırlayın",
     "logout": "Çıkış",
     "saveLogout": "Çıkış",
-    "blockHeight": "Snapshot Block Height",
+    "blockHeight": "Blok Kayıt Yüksekliği",
     "accountName": "Hesap Adı",
     "action": "Eylem",
     "stakingAmount": "Stake Miktarı",
     "submitStaking": "Stake'i Gönder",
-    "withdrawHeight": "Expected Snapshot Height",
+    "withdrawHeight": "Beklenen Kayıt Yüksekliği",
     "balance": "Bakiye",
     "dexBalance": "ViteX Bakiyesi",
     "addrName": "Adres{index}",
@@ -34,7 +34,7 @@
             "Varlıklarınızı (hem Web Cüzdanı hem de ViteX exchange) buradan yönetin",
             "Açık Emirlere ve Emir Geçmişine göz atın, alım satım detaylarını öğrenin",
             "Participate in mining, acquire VX and trading fee dividends (Mining Dividends)",
-            "Experience more features: Staking for Quota, becoming a SBP (Snapshot Block Producer) runner, Voting for SBPs, ERC20 conversion, Transaction Details, etc."
+            "Daha fazla özelliği deneyimleyin: Quota için Stake, SBP (Snapshot Block Producer) koşucusu olma, SBP'ler için Oylama, ERC20 dönüşümü, İşlem Ayrıntıları vb."
         ],
         "assets": [
             "Exchange'e Yatırma",
@@ -98,15 +98,15 @@
         "36002": "Sistem doğrulaması başarısız oldu, lütfen daha sonra tekrar deneyiniz",
         "36003": "Sistem doğrulaması başarısız oldu, lütfen daha sonra tekrar deneyiniz",
         "36004": "Sistem doğrulaması başarısız oldu, lütfen daha sonra tekrar deneyiniz",
-        "36005": "Snapshot block height is illegal, please try again later",
+        "36005": "Blok kayıt yüksekliği illegal, lütfen daha sonra tekrar deneyin",
         "37001": "Yanlış emir sayısı formatı",
         "37002": "Yanlış emir türü",
         "37003": "Yanlış emir fiyatı formatı",
-        "37004": "Exception occurs in order transaction volume",
+        "37004": "Emir işlem hacminde hata oluştu",
         "37005": "Emir işlem miktarı çok küçük",
         "37006": "Mevcut alım satım marketi",
         "37007": "Alım satım emri verilen market bulunamadı",
-        "37008": "Exception occurs in searching order information",
+        "37008": "Emir bilgilerinin aranmasında hata oluştu",
         "37009": "İptal edilen emir mevcut adrese ait değildir",
         "37010": "Bu emir durumu iptal edilemez"
     },
@@ -127,10 +127,10 @@
         "StakeForQuota_V1": "Quota Al",
         "CancelQuotaStake": "Stake Çekimi",
         "CancelQuotaStake_V1": "Stake Çekimi",
-        "IssueToken": "Token Issuance",
-        "IssueToken_V1": "Token Issuance",
-        "ReIssueToken": "Additional Token Issuance",
-        "ReIssueToken_V1": "Additional Token Issuance",
+        "IssueToken": "Token Yayınlama",
+        "IssueToken_V1": "Token Yayınlama",
+        "ReIssueToken": "İlave Token Yayınlama",
+        "ReIssueToken_V1": "İlave Token Yayınlama",
         "BurnToken": "Tokenları Yok Et",
         "BurnToken_V1": "Tokenları Yok Et",
         "TransferTokenOwnership": "Sahiplik devri",
@@ -273,7 +273,7 @@
         "setDefault": "Varsayılan Adresi Seçin",
         "autoLogout": "Otomatik Çıkış Süresi",
         "noPass": "Şifresiz modu açın",
-        "explorer": "Block Explorer",
+        "explorer": "Blok Explorer",
         "netInfo": "Ağ Bilgisi",
         "logoutDescribe": "Bu sayfadan ayrıldığınızda, hesabınızdan otomatik olarak çıkış yapılacaktır",
         "timeList": {
@@ -491,7 +491,7 @@
         "nodeErr": "Ağ geçidi düğümü geçersiz, lütfen ağ geçidi ayarlarını kontrol edin"
     },
     "viteExplorer": {
-        "title": "Vite Block Explorer"
+        "title": "Vite Blok Explorer"
     },
     "viteScanExplorer": {
         "title": "ViteScan"
@@ -528,8 +528,8 @@
         }
     },
     "walletMintage": {
-        "title": "Token Issuance",
-        "address": "Issuance Address",
+        "title": "Token Yayınlama",
+        "address": "Yayınlama Adresi",
         "tokenName": "Token Adı",
         "tokenSymbol": "Token Sembolü",
         "totalSupply": "Toplam Arz",
@@ -544,9 +544,9 @@
         "cancel": "İptal",
         "getListFail": "Token listesi alamıyorsunuz, daha sonra tekrar deneyin",
         "mintageConfirm": {
-            "title": "Check your Token Issuance Information",
+            "title": "Token Yayınlama Bilgilerinizi Kontrol Edin",
             "balance": "Bakiye",
-            "fee": "Issuance Fee",
+            "fee": "Yayınlama Komisyonu",
             "btn": "Onayla"
         },
         "reIssuableConfirm": {
@@ -566,15 +566,15 @@
         "hint": {
             "tokenName": "Token adı; büyük ve küçük harfler, boşluklar ve alt çizgiler dahil olmak üzere 1-40 karakterden oluşmalıdır. Sürekli boşluklar ve sayılar desteklenmez.",
             "tokenSymbol": "Token sembolü 1-10 karakter içermelidir, yalnızca büyük harfler ve sayılar desteklenir.",
-            "success": "Token Issuance Successful",
-            "fail": "Token Issuance failed"
+            "success": "Token Yayınlama Başarılı",
+            "fail": "Token Yayınlama başarısız"
         },
         "err": {
             "tokenNameFormat": "Token Adının formatı hatalı",
             "tokenNameNull": "Token Adı gerekli",
             "tokenSymbolFormat": "Token Sembolünün formatı hatalı",
             "tokenSymbolNull": "Token Sembolü gerekli",
-            "supplyMax": "Excessive amount of token issuance",
+            "supplyMax": "Aşırı miktarda token yayınlama",
             "totalSupplyFormat": "Toplam Arzın yanlış formatı",
             "totalSupplyNull": "Toplam Arz gerekli",
             "maxSupplyNull": "Maks. Arz gerekli",
@@ -712,9 +712,9 @@
             "rightBtn": "Kaydolmaya Hazır",
             "edit": {
                 "title": "SBP Bilgisini Düzenle",
-                "newBlockProducer": "please input new block creation address",
+                "newBlockProducer": "lütfen yeni blok oluşturma adresini girin",
                 "newRewardAddress": "lütfen yeni ödül çekme adresini girin",
-                "changeBlockProducer": "Block Creation Address",
+                "changeBlockProducer": "Blok Oluşturma Adresi",
                 "changeRewardAddress": "Ödül Çekme Adresi",
                 "btn": "Değişikliği Onaylayın"
             }
@@ -722,18 +722,18 @@
         "section1": {
             "title": "Kayıt Formu",
             "nodeName": "Düğüm Adı",
-            "producerAddr": "Block Creation Address",
+            "producerAddr": "Blok Oluşturma Adresi",
             "rewardWithdrawAddress": "Ödül Çekme Adresi",
             "quotaAddr": "Stake Adresi",
             "quotaTime": "Stake Süresi",
-            "time": "7776000 snapshot blocks（approximately 90 days）",
+            "time": "7776000 kayıt blokları （yaklaşık 90 gün)",
             "confirmBtn": "Gönder",
             "namePlaceholder": "Lütfen düğüm adı girin",
             "nameHint": "Within 40 characters, support English letters (both upper and lower cases), numbers, '_'、'.'",
             "nameErr": "Bu düğüm adı illegal",
             "nameUsed": "Bu düğüm adı kullanılıyor",
-            "addrPlaceholder": "Please input snapshot block creation address",
-            "addrHint": "The block creation address must be a full node and keep up running",
+            "addrPlaceholder": "Lütfen kayıt bloğu oluşturma adresini girin",
+            "addrHint": "Blok oluşturma adresi tam düğüm olmalı ve çalışmaya devam etmelidir",
             "addrErr": "İllegal adres",
             "addrUsed": "Bu adres alınmış",
             "registerSuccess": "Kayıt talebi gönderildi",
@@ -760,7 +760,7 @@
         },
         "toReward": "Ödüllerimi göster",
         "voting": "Oylama",
-        "search": "Please input node name or block creation address",
+        "search": "Lütfen düğüm adı veya blok oluşturma adresi girin",
         "addrNoExistErr": "Adresinizde daha önce işlem kaydı bulunmadığından şimdilik oy veremezsiniz",
         "revokeVoting": "Oylamayı İptal Et",
         "section1": {
@@ -1025,14 +1025,14 @@
             "originalSymbol": "Sembol",
             "gateway": "Ağ geçidi",
             "website": "Resmi Web Site",
-            "explorer": "Block Explorer",
+            "explorer": "Blok Explorer",
             "overview": "Açıklama",
             "tokenShow": "Kısaltma",
             "tokenId": "Token Kimliği",
             "publisher": "Issuer",
             "total": "Toplam",
             "tokenDigit": "Ondalık sayılar",
-            "publisherDate": "Issuance Date",
+            "publisherDate": "Yayınlama Tarihi",
             "type": "Durum",
             "tokenType0": "Issuance Available",
             "tokenType1": "Never Issued"
