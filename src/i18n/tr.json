@@ -254,7 +254,7 @@
             "wrongNode": "Lütfen doğru URL'yi girin!",
             "changeNodeSuccess": "Yeni düğüme bağlandı.",
             "failedConnected": "Düğüm bağlantı hatası",
-            "inputPlaceholder": "Please enter the node url prefix with wss."
+            "inputPlaceholder": "Lütfen düğüm url önekini wss ile girin."
         },
         "triggerGate": [
             "Kapat",
@@ -443,7 +443,7 @@
                 "Komisyonlar"
             ],
             "statusMap": {
-                "TOT_PROCESSING": "VITE Chain Unconfirmed{confirms}",
+                "TOT_PROCESSING": "VITE Chain Onaylanmadı{confirms}",
                 "TOT_CONFIRMED": "VITE Onaylandı",
                 "TOT_EXCEED_THE_LIMIT": "Transfer miktarı limiti aşıyor",
                 "OPPOSITE_PROCESSING": "{outChain} onaylamayı bekliyor",
