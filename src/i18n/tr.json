@@ -456,7 +456,7 @@
             "addrErr": "Ağ geçidi düğümünde bir sorun oluştu, lütfen ağ ayarlarınızı kontrol edin",
             "addressTitle": "Alıcı Adresi",
             "labelTips": "(Lütfen alıcı adresinizle birlikte bu '{labelName}' kullanın, aksi takdirde varlıklarınız kaybolur",
-            "labelCodeTips": "Please Scan the QR code from {labelName}",
+            "labelCodeTips": "Lütfen {labelName}'den QR kodu tarayın",
             "codeTips": "Yatırma için QR kodu tarayın. Lütfen {tokenSymbol} destekleyen cüzdan ile varlık gönderin",
             "tips": [
                 "Yalnızca aşağıda verilen adresten {tokenSymbol} yatırabilirsiniz. En az {min} {tokenSymbol} kabul edilecektir.",
@@ -499,7 +499,7 @@
     "wallet": {
         "title": "Quota Yönetimi",
         "help": {
-            "title": "Quick Understanding of Quota"
+            "title": "Quotayı Hızlı Anlama"
         },
         "transfer": "Varlıkları Gönder",
         "getTestToken": "Test Tokenlarını Al",
@@ -588,13 +588,13 @@
     "walletQuota": {
         "title": "Quota Yönetimi",
         "help": {
-            "title": "Quick Understanding of Quota"
+            "title": "Quotayı Hızlı Anlama"
         },
         "myQuota": "Quota'larım",
         "maxTxNum": "Maksimum Txs Sayısı",
         "beneficialAddr": "Quota Alıcı Adresi",
         "fromAddr": "Kesinti Adresi",
-        "time": "Staking Freeze Duration",
+        "time": "Stake Dondurma Süresi",
         "aboutDays": "Yaklaşık {day} gün",
         "amountPlaceholder": "Lütfen stake miktarını girin, minimum {num} VITE",
         "limitAmt": "Stake miktarı {num}'den az olmamalıdır.",
@@ -612,11 +612,11 @@
         "confirm": {
             "help": {
                 "t1": "Quota Nedir?",
-                "txt1": "In the Vite system, users do not purchase the gas required for a transaction by paying a fee, but acquire the computing resource through a quota-based model. Required quota for sending a transaction = the basic quota (request) + quota (the attached text data), quota required to accept a transaction = the basic quota (response). This quota-based resource configuration protocol allows users to obtain higher resource quotas in two ways: Staking VITE to obtain quota and running PoW.",
+                "txt1": "Vite sisteminde kullanıcılar, bir işlem için gerekli gas'i komisyon ödeyerek satın almazlar, ancak quota tabanlı bir model üzerinden bilgi işlem kaynağına sahip olurlar. Bir işlemi göndermek için gerekli quota = temel quota (talep) + quota (ekli metin verileri), bir işlemi kabul etmek için gereken quota = temel quota (yanıt). Bu quota tabanlı kaynak yapılandırma protokolü, kullanıcıların daha yüksek kaynak quotalarını iki şekilde elde etmelerine olanak tanır: Quota elde etmek için VITE Stake etme ve PoW'u çalıştırma.",
                 "t2": "Stake Nedir?",
-                "txt2": "In the Vite system, the user can stake VITE to obtain a certain amount of quota. The minimum value for staking is 134 VITE, and there is no maximum limit; meanwhile, Vite system also supports that the A-address stakes a part of the VITE and allocates the obtained quota to the B address. When users apply to stake, VITE will be sent to the smart contract address instead of another user, and only the user who applies for staking has access to manage the staking amount.",
+                "txt2": "Vite sisteminde, kullanıcı belirli bir miktarda quota elde etmek için VITE stake edebilir. Stake için minimum değer 134 VITE'dir ve maksimum sınır yoktur; Bu arada, Vite sistemi ayrıca A adresinin VITE'in bir parçası olduğunu destekler ve elde edilen quotayı B adresine tahsis eder. Kullanıcılar stake için başvurduklarında VITE, başka bir kullanıcı yerine akıllı sözleşme adresine gönderilecek ve sadece stake için başvuran kullanıcının stake miktarını yönetme erişimi olacaktır.",
                 "t3": "PoW Nedir?",
-                "txt3": "Proof of Work (PoW), is a protocol to confirm that you have done a certain amount of work, and is also an economic measure to deter DDoS attacks and other service abuse. It requires the initiator to conduct a certain amount of computing, which means that it may take some time for the computer. In the Vite system, users can obtain a free quota by running the PoW, and also can send a transaction without any annotated information through obtained quota."
+                "txt3": "Proof of Work (PoW), belirli miktarda iş yaptığınızı doğrulayan bir protokoldür ve aynı zamanda DDoS saldırılarını ve diğer hizmet suistimallerini caydırmak için ekonomik bir önlemdir. Başlayanın belirli bir miktarda hesaplama yapmasını gerektirir, bu da bilgisayar için biraz zaman alabileceği anlamına gelir. Vite sisteminde, kullanıcılar PoW çalıştırarak ücretsiz quota elde edebilir ve ayrıca elde edilen quota üzerinden herhangi bir açıklama olmadan işlem gönderebilir."
             },
             "cancel": {
                 "describe": "Mevcut stake miktarınız {amount} VITE, lütfen çekmeyi onaylayın.",
@@ -689,7 +689,7 @@
         "title": "SBP",
         "help": {
             "title": "SBP Hakkında",
-            "text": "SBP（Snapshot Block Producer）is a node that has right to create blocks, you can register to become a SBP candidate by staking a certain amount of VITE, each round (about 75 seconds) will elect 25 SBPs, the SBPs will be elected from random 23 out of top 25 candidate nodes, plus random 2 out of the candidate nodes ranking 26th-100th on the list. The 50% of block creation rewards will be allocated to the block creation node, the other 50% will be allocated to nodes that are ranked on top 100 as voting rewards. One registration address (staking address) can register multiple block creation nodes (node names), a node name cannot be used if the node name has been registered by a registration address. A node name can switch block creation address, however, block creation address cannot be reused by other node names."
+            "text": "SBP（Snapshot Block Producer）blok oluşturma hakkına sahip bir düğümdür, belirli bir VITE miktarına sahip olarak SBP adayı olmak için kaydolabilirsiniz, her turda (yaklaşık 75 saniye) 25 SBP seçilecek, SBP'ler ilk 25 aday düğümden rastgele 23'ü ve listede 26.-100. sırada yer alan aday düğümlerin rastgele 2'si arasından seçilecektir. Blok oluşturma ödüllerinin %50'si blok oluşturma düğümüne, diğer %50'si ise oylama ödülü olarak ilk 100'de yer alan düğümlere tahsis edilecektir. Bir kayıt adresi (staking adresi) birden fazla blok oluşturma düğümünü (düğüm adları) kaydedebilir, düğüm adı bir kayıt adresi tarafından kaydedilmişse bir düğüm adı kullanılamaz. Bir düğüm adı blok oluşturma adresini değiştirebilir ancak, blok oluşturma adresi diğer düğüm adları tarafından yeniden kullanılamaz."
         },
         "register": "SBP Kaydı",
         "cancel": "SBP İptali",
@@ -698,7 +698,7 @@
         "noReward": "Ödül Yok",
         "rewardConfirm": {
             "title": "Ödülleri Topla",
-            "describe1": "Rewards that are available for claiming update at 13:00:00 (UTC+8) every day, till {time} you can claim",
+            "describe1": "Her gün 13:00:00 (UTC + 8) itibarıyla güncelleme talep edilebilecek ödüller, {time} kadar toplayabilirsin",
             "describe2": "Query mining rewards details, you can",
             "describe3": "buraya tıklayın",
             "describe4": "Ödüller, toplama talebinizi gönderdikten sonra Vite Web Cüzdan adresinize gönderilecektir, lütfen Cüzdan Ana Sayfasında kontrol edin. Not: Toplama işlemlerini tekrarlamayın.",
@@ -706,7 +706,7 @@
             "rightBtn": "Tümünü Topla"
         },
         "confirm": {
-            "title": "Registration of SBP candidates",
+            "title": "SBP adaylarının kaydı",
             "describe": "Kaydı gönderdiğinizde, mevcut adresin {amount} VITE'i yaklaşık 90 gün boyunca kilitlenecek, miktar kilidi açıldıktan sonra stake adresine iade edilecektir",
             "leftBtn": "Henüz kaydolmadınız mı",
             "rightBtn": "Kaydolmaya Hazır",
@@ -918,7 +918,7 @@
             "inviteBenifit": "Referral Mining Income",
             "inviteRule": "Kurallar",
             "ruleItems": [
-                "The <span class='strong'>1,000 VITE</span> payment to generate an invitation code will be burned",
+                "Bir davetiye kodu oluşturmak için <span class='strong'>1.000 VITE</span> ödemesi yakılacak",
                 "Referee will be rewarded with <span class='strong'>5%</span> of all invited users' trading as mining proceeds and <span class='strong'>2.5%</span> of all market-making as mining proceeds"
             ],
             "receiveRuleItems": [
@@ -930,7 +930,7 @@
     "walletConversion": {
         "title": "VITE Dönüşümü",
         "help": {
-            "title": "Quick Understanding of VITE Conversion",
+            "title": "VITE Dönüşümünü Hızlı Anlama",
             "text": "You can migrate ERC20 tokens into VITE into our TestNet by VITE conversion function. In TestNet, casting your vote for official SBPs to collect rewards, the annualized rate can reach 20%. Your ERC20 VITE tokens will be transferred to Ethereum black hole address: {blackAddr}, you will receive the same amount of VITE at your Vite address when Ethereum black hole address has received the transaction and confirmed. Once you are in the conversion process, confirm that there are enough VITE and ETH (as gas) in your Ethereum address of Vite wallet."
         },
         "gas": "Madencilik Komisyonu",
@@ -1056,7 +1056,7 @@
             "title": "Limit",
             "fee": "Komisyonlar",
             "adviseToSVip": "SVIP'e yükseltin, sıfır temel işlem komisyonundan yararlanın",
-            "feeRuleWithSVip": "Operator Fees * Referral Discount. ATTENTION: The adjustment and discount of fees will only affect new orders, the former orders' charge remains the same.",
+            "feeRuleWithSVip": "Operatör Komisyonları * Referans İndirimi. UYARI: Komisyonların ayarlanması ve indirimi yalnızca yeni emirleri etkiler, önceki emirlerin ücreti aynı kalır.",
             "text": "Bu sayfa, işlem verilerinin ön izleme sayfasıdır. Alım satım yapmak için lütfen giriş yapınız.",
             "validAmount": "Hacim {amount}{token}'den büyük olmalıdır",
             "priceNotNull": "Miktar boş bırakılamaz",
@@ -1069,7 +1069,7 @@
             "vipFee": "VIP İndirimi: {fee}",
             "inviteFeeDiscount": "Referans İndirimi: {fee} indirimli",
             "svipFee": "SVIP: %0 temel işlem komisyonu",
-            "feeRule": "(Base Transaction Fee - VIP discount + Operator Fees) * Referral Discount. ATTENTION: The adjustment and discount of fees will only affect new orders, the former orders' charge remains the same."
+            "feeRule": "(Temel İşlem Ücreti - VIP indirimi + Operatör Komisyonları) * Referans İndirimi. UYARI: Komisyonların ayarlanması ve indirimi yalnızca yeni emirleri etkiler, önceki emirlerin ücreti aynı kalır."
         },
         "proxy": {
             "title": "Alım Satım Delegasyonu",
@@ -1083,7 +1083,7 @@
             "active": {
                 "title": "Delegasyon Geçmişi",
                 "head": [
-                    "Delegatee Address",
+                    "Delege Adresi",
                     "Alım Satım Paritesi",
                     "Eylem"
                 ],
@@ -1132,7 +1132,7 @@
             "deleteAlert": "The current API will no longer be accessible if confirm to proceed. Existing package will be retained and re-activated upon creation of a new API Key.",
             "confirmDelete": "Onayla ve Sil",
             "cancel": "İptal",
-            "agentAddressStakingAmount": "Delegation Staked Quota",
+            "agentAddressStakingAmount": "Delegasyon Stake Quotası",
             "staking": "Stake Et",
             "package": "Paket",
             "expireTime": "Bitiş Tarihi",
@@ -1149,7 +1149,7 @@
                 "0-step1": "1. API Oluştur",
                 "0-step2": "2. Seçilen alım satım paritelerinin delegasyonuna izin verin",
                 "0-step3": "3. API delegasyon adresi için quota stake edin",
-                "0-step4": "View <a href=\"https://vite.wiki/dex/api/dex-apis.html\" target=\"_blank\">API Documentation</a> for further support",
+                "0-step4": "Daha fazla destek için <a href=\"https://vite.wiki/dex/api/dex-apis.html\" target=\"_blank\">API Belgelerini</a> görüntüleyin",
                 "1": "One set of API Key and Secret is allowed for the same address at any given time.",
                 "2": "Varlık kaybını önlemek için Erişim Anahtarınızı ve Sırrınızı İfşa Etmeyin",
                 "3": "API paketi, varsayılan olarak dakikada 10 işlem yapan ücretsiz temel paketle ayarlanmıştır, yükseltme seçenekleri mevcuttur."
@@ -1431,7 +1431,7 @@
     "inviteMining": {
         "title": "Referring as Mining Total Income",
         "myInviteIncome": "Referans Geliri",
-        "inviteTradeIncome": "Referred Trading Proceeds",
+        "inviteTradeIncome": "Referans Alım Satım Gelirleri",
         "inviteOrderIncome": "Referred Market-Making Proceeds"
     },
     "orderMining": {
@@ -1455,9 +1455,9 @@
         "amount": "Miktar",
         "price": "Toplam Tahmini Değer",
         "hintTitle": "Önemli Uyarı",
-        "comingHint": "VX mining and dividend functions are coming soon, stay tuned. The system will distribute 1% of BTC, ETH, VITE, USDT of the total pool to all VX users proportional to the amount of VX they hold. The initial dividend pool will start at 0 and will grow according to the amount of fees collected by ViteX. Traders must have a minimum of 10 VX in order to receive dividends from a shared dividend pool comprised of base transaction, listing and referral code generating fees. ",
+        "comingHint": "VX madenciliği ve kar payı fonksiyonları yakında geliyor, bizi izlemeye devam edin. Sistem, sahip oldukları VX miktarıyla orantılı olarak tüm VX kullanıcılarına toplam havuzun BTC, ETH, VITE, USDT'nin %1'ini dağıtacaktır. İlk kar payı havuzu 0'dan başlayacak ve ViteX tarafından toplanan komisyon miktarına göre büyüyecektir. Alım satım yapan kullanıcıların; temel işlem, listeleme ve referans kodu oluşturma komisyonlarından oluşan ortak havuzdan kar payı alabilmeleri için en az 10 VX'e sahip olması gerekir. ",
         "more": "VX kar payı kuralları hakkında daha fazla bilgi edinin",
-        "help": "Reward Rules: 1. A minimum of 10 VX must be staked to receive dividends. 2. Submission of staking request allows for dividends starting the nearest distribution. 3. Staked amount will be released after the 7-day waiting period",
+        "help": "Ödül Kuralları: 1. Kar payı alabilmek için en az 10 VX stake edilmelidir. 2. Stake talebinin sunulması, kar payının en yakın zamanda dağıtıma başlamasına izin verir. 3. Stake miktarı, 7 günlük bekleme süresinden sonra serbest bırakılacaktır",
         "lockedAmount": "Stake Miktarı",
         "lockAmountTips": "10 VX veya Üzeri Kar Payı Alın",
         "unlockAmount": "Unlocking Amount",
@@ -1466,11 +1466,11 @@
         "addHint3": "Stake edilmiş miktar 7 günlük bekleme süresinden sonra serbest bırakılacaktır",
         "autoLock": "Otomatik Stake Et",
         "openAutoLock": {
-            "title": "Enable Automatic Staking",
+            "title": "Otomatik Stake'i Etkinleştir",
             "text": "Mined VX will be automatically staked once enabled"
         },
         "closeAutoLock": {
-            "title": "Disable Automatic Staking",
+            "title": "Otomatik Stake'i Devre Dışı Bırak",
             "text": "Mined VX will not be automatically staked when turned off"
         },
         "lock": "Stake",
