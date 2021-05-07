@@ -1,7 +1,7 @@
 {
     "lang": "Tiếng Việt",
     "help": "Trợ giúp",
-    "announcements": "Announcements",
+    "announcements": "Thông báo",
     "start": "Bắt đầu",
     "login": "Đăng nhập",
     "regAcc": "Đăng ký",
@@ -44,8 +44,8 @@
     },
     "dealReminder": {
         "title": {
-            "buy": "Buy Order Completed: {ftoken} / {ttoken}",
-            "sell": "Sell Order Completed: {ftoken} / {ttoken}"
+            "buy": "Lệnh mua đã hoàn thành: {ftoken} / {ttoken}",
+            "sell": "Lệnh bán đã hoàn thanh: {ftoken} / {ttoken}"
         },
         "failTitle": "Đơn đặt hàng Thất bại",
         "notice-all": {
@@ -61,12 +61,12 @@
     "pow": {
         "ing": "Bấm Run PoW để nhận hạn ngạch",
         "no": "Bạn có thể thế chấp VITE để nhận hạn ngạch thay vì bấm run PoW",
-        "insuffQuota": "Get Quota",
+        "insuffQuota": "Nhận Quota",
         "insuffQuotaMsg": "We notice you have no VITE locked for Quota. Please lock VITE or if you prefer, you can run POW to get Quota.",
         "insuffQuotaMsg2": "VITE Only {powMaxTimes} transactions can be made per day per address without staking VITE. Your address has exhausted all {powMaxTimes} transactions. Please go to the quota page and stake your VITE to perform more transactions.",
-        "getQuota": "Lock VITE",
-        "skip": "Run POW",
-        "cancel": "Cancel"
+        "getQuota": "Khoá VITE",
+        "skip": "Chạy POW",
+        "cancel": "Huỷ"
     },
     "addAccount": "Tạo Tài khoản",
     "saveQrcode": "Lưu mã QR",
@@ -117,16 +117,16 @@
         "UpdateSBPBlockProducingAddress_V1": "Cập nhật Đăng ký",
         "RevokeSBP": "Thu hồi Đăng ký",
         "RevokeSBP_V1": "Thu hồi Đăng ký",
-        "WithdrawSBPReward": "Claim Reward",
-        "WithdrawSBPReward_V1": "Claim Reward",
+        "WithdrawSBPReward": "Nhận Phần thưởng",
+        "WithdrawSBPReward_V1": "Nhận Phần thưởng",
         "VoteForSBP": "Bỏ phiếu",
         "VoteForSBP_V1": "Bỏ phiếu",
         "CancelSBPVoting": "Hủy bỏ Bỏ phiếu",
         "CancelSBPVoting_V1": "Hủy bỏ Bỏ phiếu",
         "StakeForQuota": "Nhận Hạn ngạch",
         "StakeForQuota_V1": "Nhận Hạn ngạch",
-        "CancelQuotaStake": "Withdrawal of Stake",
-        "CancelQuotaStake_V1": "Withdrawal of Stake",
+        "CancelQuotaStake": "Rút token đã stake",
+        "CancelQuotaStake_V1": "Rút token đã stake",
         "IssueToken": "Phát hành token",
         "IssueToken_V1": "Phát hành token",
         "ReIssueToken": "Phát hành Token bổ sung",
@@ -145,10 +145,10 @@
         "DexPlaceOrder_V1": "Tạo Lệnh giao dịch ViteX",
         "DexCancelOrder": "Thu hồi Lệnh giao dịch ViteX",
         "DexCancelOrder_V1": "Thu hồi Lệnh giao dịch ViteX",
-        "DexStakeForSuperVIP": "ViteX SVIP",
-        "DexStakeForSuperVIP_V1": "ViteX SVIP",
-        "DexConfigMarketAgents": "Configure Delegations",
-        "DexConfigMarketAgents_V1": "Configure Delegations",
+        "DexStakeForSuperVIP": "SVIP ViteX",
+        "DexStakeForSuperVIP_V1": "VIP ViteX",
+        "DexConfigMarketAgents": "Xác nhận Ủy thác",
+        "DexConfigMarketAgents_V1": "Xác nhận Ủy thác",
         "DexOpenNewMarket": "Niêm yết Token ViteX",
         "DexOpenNewMarket_V1": "Niêm yết Token ViteX",
         "DexStakeForVIP": "VIP ViteX",
@@ -162,9 +162,9 @@
         "ResponseFail": "Chuyển",
         "RefundByContractRequest": "Chuyển",
         "GenesisResponse": "Khởi nguyên",
-        "FullNodeStake": "Stake for Full Node",
-        "FullNodeCancelStake": "Withdraw Full Node Stakes",
-        "UpdateSBPRewardWithdrawAddress": "Edit SBP Reward Withdraw Address"
+        "FullNodeStake": "Stake cho Full Node",
+        "FullNodeCancelStake": "Rút Stake Full Node",
+        "UpdateSBPRewardWithdrawAddress": "Sửa Địa chỉ rút thưởng SBP"
     },
     "btn": {
         "cancel": "Hủy",
@@ -187,7 +187,7 @@
         "err": "Đã xảy ra lỗi",
         "request": "{name} đã gửi yêu cầu, vui lòng đợi",
         "copy": "Sao chép thành công",
-        "copyShare": "Copy share link successful!",
+        "copyShare": "Sao chép chia sẻ link thành công!",
         "addrFormat": "Sai định dạng địa chỉ",
         "amtFormat": "Sai định dạng số lượng",
         "transSucc": "Giao dịch thành công!",
@@ -241,19 +241,19 @@
         "config": "Chung",
         "currency": "Tiền tệ mặc định",
         "secure": "Bảo mật",
-        "gate": "Custom Gateway",
+        "gate": "Gateway Tuỷ chỉnh",
         "rpcUrl": "Node",
-        "changeRpcUrl": "Change",
+        "changeRpcUrl": "Thay đổi",
         "changeRpcUrlDialog": {
-            "title": "Change Node",
-            "addCustomNode": "Add Custom Node",
-            "officialNode": "Official Node",
-            "addNode": "Add Node",
-            "customNode": "Custom Node",
-            "deleteCustomNode": "Delete",
-            "wrongNode": "Please enter the correct URL!",
-            "changeNodeSuccess": "Have connected to new node.",
-            "failedConnected": "Node connection error",
+            "title": "Thay đổi Node",
+            "addCustomNode": "Thêm Node Tuỷ chỉnh",
+            "officialNode": "Node Chính thức",
+            "addNode": "Thêm Node",
+            "customNode": "Node Tuỳ chỉnh",
+            "deleteCustomNode": "Xóa",
+            "wrongNode": "Vui lòng nhập URL chính xác!",
+            "changeNodeSuccess": "Đã kết nối với node mới.",
+            "failedConnected": "Lỗi kết nối node",
             "inputPlaceholder": "Please enter the node url prefix with wss."
         },
         "triggerGate": [
@@ -283,10 +283,10 @@
             "60": "1 giờ",
             "720": "12 giờ"
         },
-        "theme": "Theme color",
+        "theme": "Màu chủ đề",
         "themeList": [
-            "Light",
-            "Dark"
+            "Sáng",
+            "Tối"
         ]
     },
     "create": {
@@ -351,8 +351,8 @@
         "transferConfirm": {
             "from": "Từ",
             "to": "Đến",
-            "wallet": "Wallet Account",
-            "dex": "Exchange Account",
+            "wallet": "Tài khoản Ví",
+            "dex": "Tài khoản Sàn",
             "avaliableAmount": "Số dư"
         },
         "addToken": {
@@ -363,7 +363,7 @@
         },
         "type": {
             "native": "Token Native",
-            "crossGate": "Cross-Chain Coins"
+            "crossGate": "Coin cross-chain"
         },
         "assetType": {
             "TOTAL": "Tất cả tài sản",
@@ -378,10 +378,10 @@
                 "tokenId": "TokenID",
                 "tokenName": "Tên",
                 "totalSupply": "Tổng cung",
-                "total": "Circulating Supply",
+                "total": "Tổng lưu thông",
                 "overview": "Giới thiệu",
                 "type": "Loại",
-                "gate": "Cross-Chain Gateway",
+                "gate": "Cổng Cross-chain",
                 "website": "Trang web",
                 "whitePaper": "White Paper",
                 "explorer": "Explorer",
@@ -677,12 +677,12 @@
         "quotaContent": {
             "onlineReward": "Active Node Reward",
             "voteReward": "Voting Reward",
-            "yesterday": "yesterday",
-            "all": "Accumulated VITE: {num}",
-            "nodeInfo": "Node Information",
-            "onlineNodes": "Active Nodes",
-            "rewardNodes": "Rewarding Nodes",
-            "stakeAmount": "Node Staking"
+            "yesterday": "hôm qua",
+            "all": "VITE tích luỹ: {num}",
+            "nodeInfo": "Thông tin node",
+            "onlineNodes": "Node Đang hoạt động",
+            "rewardNodes": "Phần thưởng Node",
+            "stakeAmount": "Node Stake"
         }
     },
     "walletSBP": {
@@ -831,7 +831,7 @@
         },
         "vb": {
             "title": "ViteConnect",
-            "closeAlert": "close",
+            "closeAlert": "đóng",
             "connect": {
                 "tips": "Quét mã QR bằng Ứng dụng ví Vite"
             },
@@ -840,28 +840,28 @@
             },
             "start": {
                 "scan": "Quét mã QR bằng Ứng dụng ví Vite",
-                "downloadTips": "Don’t have the Vite Wallet App? ",
-                "download": "Download here"
+                "downloadTips": "Bạn chưa có ứng dụng ví Vite? ",
+                "download": "Tải xuống tại đây"
             },
             "accountName": "Địa chỉ ViteConnect"
         },
         "ledger": {
-            "title": "Ledger Device",
-            "accountName": "Ledger Wallet",
-            "verifyAddress": "Verify address",
+            "title": "Thiết bị Ledger",
+            "accountName": "Ví Ledger",
+            "verifyAddress": "Xác thực địa chỉ",
             "closeAlert": "Hủy",
             "start": {
-                "title": "Supported Wallets: Ledger Nano S / Ledger Nano X",
-                "connectError": "Connection Issues?",
-                "introduction": "App Installation & User Instructions",
+                "title": "Ví được hỗ trợ: Ledger Nano S / Ledger Nano X",
+                "connectError": "Lỗi kết nối?",
+                "introduction": "Hướng dẫn Sử dụng & Cài đặt Ứng dụng",
                 "introductionUrl": "https://docs.vite.org/go-vite/tutorial/ledger-install.html",
                 "connectErrorUrl": "https://support.ledger.com/hc/en-us/articles/115005165269-Connection-issues-with-Windows-or-Linux"
             },
-            "connectWithUSB": "Use USB",
-            "connectWithBlu": "Use Bluetooth",
-            "connectLedger": "Connect to Ledger",
+            "connectWithUSB": "Sử dụng USB",
+            "connectWithBlu": "Sử dụng Bluetooth",
+            "connectLedger": "Kết nối Ledger",
             "connect": {
-                "title": "Address Select",
+                "title": "Địa chỉ được chọn",
                 "tips": "Select an address to use:",
                 "selectConnectType": "Choose connection type: (Bluetooth is only supported on Ledger Nano X)",
                 "cancelSelect": "Select a device to connect",
