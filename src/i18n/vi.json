@@ -49,7 +49,7 @@
         },
         "failTitle": "Đơn đặt hàng Thất bại",
         "notice-all": {
-            "buy": "Price: {price} {ttoken} \nAmount: {amount} {ttoken}, was completed. View Order History page for details.",
+            "buy": "Giá: {price} {ttoken} \nSố lượng: {amount} {ttoken} đã hoàn thành. Kiểm tra Lịch sử Đặt lệnh để biết thêm chi tiết.",
             "sell": "Price: {price} {ttoken} \nAmount: {amount} {ttoken}, was completed. View Order History page for details."
         },
         "notice-partial": {
