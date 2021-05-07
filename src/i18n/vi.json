@@ -54,7 +54,7 @@
         },
         "notice-partial": {
             "buy": "Giá: {price} {ttoken} \nSố lượng: {amount} {ttoken}, {executedPercent}% đã hoàn thành.",
-            "sell": "Price: {price} {ttoken} \nAmount: {amount} {ttoken}, is {executedPercent}% completed."
+            "sell": "Giá: {price}{ttoken} \nSố lượng: {amount} {ttoken} đã {executedPercent}% hoàn thành."
         },
         "error": "Đặt hàng thất bại {amount} {ftoken} ({ftoken}/{ttoken}) lúc {time}, hãy truy cập Lịch sử Đặt hàng để tìm hiểu thêm."
     },
@@ -62,8 +62,8 @@
         "ing": "Bấm Run PoW để nhận hạn ngạch",
         "no": "Bạn có thể thế chấp VITE để nhận hạn ngạch thay vì bấm run PoW",
         "insuffQuota": "Nhận Quota",
-        "insuffQuotaMsg": "We notice you have no VITE locked for Quota. Please lock VITE or if you prefer, you can run POW to get Quota.",
-        "insuffQuotaMsg2": "VITE Only {powMaxTimes} transactions can be made per day per address without staking VITE. Your address has exhausted all {powMaxTimes} transactions. Please go to the quota page and stake your VITE to perform more transactions.",
+        "insuffQuotaMsg": "Chúng tôi nhận thấy bạn không có VITE nào bị khóa cho Quota. Vui lòng stake VITE hoặc nếu muốn, bạn có thể chạy POW để nhận Quota.",
+        "insuffQuotaMsg2": "VITE chỉ có thể thực hiện {powMaxTimes} giao dịch mỗi ngày cho mỗi địa chỉ mà không cần đặt stake VITE. Địa chỉ của bạn đã dùng hết {powMaxTimes} giao dịch. Vui lòng truy cập trang Quota và\b stake VITE của bạn để thực hiện nhiều giao dịch hơn.",
         "getQuota": "Khoá VITE",
         "skip": "Chạy POW",
         "cancel": "Huỷ"
@@ -86,7 +86,7 @@
         "t3": "Voting Method: Holding 50 BNB allows for 1 vote (10 votes max)",
         "t4": "Voting Rewards: All voted users will be rewarded with an airdrop totaling 21,000,000 VITE based on executed votes.",
         "btn": "Bình chọn Ngay!!!",
-        "notice": "[Attention]: You must have 50-500 BNBs in your Binance Account starting Dec 5 and last through Dec 13 to Qualify for Voting!"
+        "notice": "[Attention]: Bạn phải có 50-500 BNB trong Tài khoản Binance của mình bắt đầu từ ngày 5 tháng 12 và kéo dài đến hết ngày 13 tháng 12 để Đủ điều kiện bỏ phiếu!"
     },
     "errCode": {
         "35003": "{name} xung đột ID, vui lòng thử lại sau",
@@ -260,7 +260,7 @@
             "Kết thúc",
             "Mở"
         ],
-        "gateHelp": "You can customize your gateway configuration when activating this feature. Currently this feature is mainly for developers.",
+        "gateHelp": "Bạn có thể tùy chỉnh cấu hình gateway của mình khi kích hoạt tính năng này. Hiện tại tính năng này chủ yếu dành cho các nhà phát triển.",
         "lang": "Ngôn ngữ",
         "block": "Chiều cao hiện tại",
         "version": "Phiên bản",
@@ -384,12 +384,12 @@
                 "gate": "Cổng Cross-chain",
                 "website": "Trang web",
                 "whitePaper": "White Paper",
-                "explorer": "Explorer",
+                "explorer": "Trình duyệt",
                 "github": "Github",
-                "media": "Social Media",
+                "media": "Mạng Xã hội",
                 "crossType": "Cross-Chain",
                 "originType": "Native",
-                "viewmore": "View More"
+                "viewmore": "Xem thêm"
             },
             "reIssuable": {
                 "true": "Có thể cấp lại",
@@ -411,10 +411,10 @@
             "setting": "Giao diện Cổng",
             "nodeDesc": "Hướng dẫn sử dụng",
             "settingPlaceholder": "Vui lòng nhập địa chỉ liên kết cổng",
-            "nodeDescStr": "This function only works for cross-chain coins, do not use this on built-in tokens. Meanwhile, please be careful about unfamiliar gateway links. By continuing to use our platform, you agree and acknowledge that Vite Labs would not be responsible for the loss of your fund and other negative consequences caused. Fill out the gateway link below if you need to use gateway, the link will come into effect after you hit save."
+            "nodeDescStr": "Chức năng này chỉ hoạt động đối với các coin cross-chain, không sử dụng chức năng này trên các token tích hợp. Trong khi đó, hãy cẩn thận với các liên kết gateway không quen thuộc. Bằng cách tiếp tục sử dụng nền tảng của chúng tôi, bạn đồng ý và thừa nhận rằng Vite Labs sẽ không chịu trách nhiệm về việc mất mát quỹ của bạn và các hậu quả tiêu cực khác. Điền vào liên kết gateway bên dưới nếu bạn cần sử dụng, liên kết sẽ có hiệu lực sau khi bạn nhấn lưu."
         },
         "depositRecord": {
-            "tabName": "Receive History",
+            "tabName": "Lịch sử Nhận",
             "heads": [
                 "Thời gian",
                 "Số lượng",
@@ -455,16 +455,16 @@
             "title": "Cross-Chain Receive Funds",
             "addrErr": "Đã xảy ra lỗi với node cổng, vui lòng kiểm tra cài đặt mạng của bạn",
             "addressTitle": "Địa chỉ Người nhận",
-            "labelTips": "(Please use this '{labelName}' with your recipient address, otherwise your assets will lose",
-            "labelCodeTips": "Please Scan the QR code from {labelName}",
-            "codeTips": "Scan QR code to deposit. Please send funds with the wallet that supports {tokenSymbol}",
+            "labelTips": "(Vui lòng sử dụng '{labelName}' này với địa chỉ nhận của bạn, nếu không tài sản của bạn sẽ mất",
+            "labelCodeTips": "Vui lòng quét mã QR từ {labelName}",
+            "codeTips": "Quét mã QR để nạp. Vui lòng gửi tài sản bằng ví hỗ trợ {tokenSymbol}",
             "tips": [
                 "Cross-Chain Receive operation will do {tokenSymbol} Cross-Chain mapping to VITE network, you can still transfer the assets to other platform after receiving them",
                 "Bạn chỉ có thể gửi {tokenSymbol} qua địa chỉ này và số lượng không thể ít hơn {min}",
                 "Bạn sẽ nhận được tài sản của mình sau {confirmationCount} xác nhận, vui lòng đợi"
             ]
         },
-        "viteTips": "VITE only supports cross-chain functionality between the new ERC20 VITE token and Native VITE Coin.",
+        "viteTips": "VITE chỉ hỗ trợ chức năng cross-chain giữa ERC20 VITE mới và Native VITE Coin.",
         "withdraw": {
             "title": "Cross-Chain Send Funds",
             "btn": "Rút",
@@ -482,10 +482,10 @@
                 "fee": "Phí",
                 "all": "Tất cả"
             },
-            "labelPlaceholder": "Please input {labelName}",
-            "amountPlaceholder": "Please input send amount which should not be less than {min}",
-            "addressPlaceholder": "Please enter {token} recipient address",
-            "successTips": "Transaction request has been sent",
+            "labelPlaceholder": "Hãy nhập {labelName}",
+            "amountPlaceholder": "Vui lòng nhập số lượng gửi không được nhỏ hơn {min}",
+            "addressPlaceholder": "Vui lòng nhập địa chỉ nhận {token}",
+            "successTips": "Yêu cầu giao dịch đã được gửi",
             "failTips": "Đã xảy ra lỗi trong node cổng, vui lòng kiểm tra thiết lập mạng"
         },
         "nodeErr": "Node cổng không hợp lệ, vui lòng kiểm tra thiết lập cổng"
@@ -501,7 +501,7 @@
         "help": {
             "title": "Hiểu thêm về Hạn ngạch"
         },
-        "transfer": "Send Funds",
+        "transfer": "Gửi Tài sản",
         "getTestToken": "Nhận Test Token",
         "transDetail": "Chi tiết giao dịch",
         "address": "Địa chỉ của tôi",
@@ -657,14 +657,14 @@
         "sum": "Số lượng"
     },
     "walletFullNode": {
-        "title": "Full Nodes",
+        "title": "Full Node",
         "help": {
-            "title": "About",
-            "t1": "Glossary",
-            "txt1": "[Number of Registered Nodes]  The number of full nodes registered with the current address",
-            "txt2": "[Number of Active Nodes]  The number of active full nodes registered with the current address",
-            "txt3": "[Number of Rewarding nodes]  Number of nodes being rewarded",
-            "t2": "Multiple Full nodes can be registered with the same address, but must be staked individually at least 10,000 VITE each; When calculating Active Node Reward, if staking amount / 10000 yields a whole number that is greater than or equal to the number of active nodes, all active nodes will be rewarded; If staking amount / 10000 yields a whole number that is less than the number of active nodes, the number of nodes being rewarded equals to the whole number.",
+            "title": "Giới thiệu",
+            "t1": "Danh mục",
+            "txt1": "[Số node đã đăng ký] Số lượng các full node được đăng ký với địa chỉ hiện tại",
+            "txt2": "[Số node đang hoạt động] Số lượng các full node đang hoạt động đã được đăng ký với địa chỉ hiện tại",
+            "txt3": "[Số node đang nhận thưởng] Số node đang nhận thưởng",
+            "t2": "Nhiều Full Node có thể được đăng ký với cùng một địa chỉ, nhưng mỗi node phải được stake riêng ít nhất 10.000 VITE; Khi tính Phần thưởng cho node hoạt động, nếu số tiền stake/10000 là số lớn hơn hoặc bằng số node đang hoạt động, tất cả các node đang hoạt động sẽ được thưởng; Nếu số\b token /10000 là số nguyên nhỏ hơn số node đang hoạt động, thì số node được thưởng bằng tổng số nguyên đó.",
             "t3": "Calculation of voting rewards does not depend on the number of nodes, but the staking amount."
         },
         "confirmText": "Confirm to stake {amount} VITE, staking can be cancelled after {days} days",
@@ -870,34 +870,34 @@
                 "receiveBlockSuccess": "Successfully received {num} transaction",
                 "introduction": {
                     "1": {
-                        "title": "Step 1: ",
+                        "title": "Bước 1: ",
                         "content": "Connect Ledger device and enter PIN code"
                     },
                     "2": {
-                        "title": "Step 2: ",
-                        "content": "Open Vite app on Ledger"
+                        "title": "Bước 2: ",
+                        "content": "Mở Vite app trên Ledger"
                     }
                 }
             },
             "addressSelect": {
-                "index": "Index",
+                "index": "Chỉ số",
                 "address": "Địa chỉ",
                 "balance": "Số dư",
                 "unreceived": "Đang chuyển giao",
-                "nextPage": "Next page",
-                "prePage": "Last page",
+                "nextPage": "Trang tiếp theo",
+                "prePage": "Trang cuối",
                 "confirm": "Xác nhận",
-                "unUsedAccount": "New"
+                "unUsedAccount": "Mới"
             },
             "confirm": {
-                "tips": "Please confirm the transaction on your Ledger device",
-                "verifyAddress": "Please verify the address on your Ledger device",
-                "alert": "Warning",
+                "tips": "Hãy xác nhận giao dịch trên thiết bị Ledger",
+                "verifyAddress": "Hãy xác nhận địa chỉ trên thiết bị Ledger của bạn",
+                "alert": "Cảnh báo",
                 "alertContent": "Address has been denied on Ledger device. Please double verify if this address matches the address displayed on your Ledger device. If yes, ignore this message and go ahead to confirm the transaction, otherwise DO NOT send asset to the address and quit immediately.",
-                "alertLeftBtn": "I confirm the addresses are matched",
-                "alertRightBtn": "Addresses mismatch. Get me out of here!",
-                "userCancel": "Transaction is cancelled on Ledger",
-                "userCancelByWeb": "You cancelled the transaction in Vite wallet. In this case, the transaction will be abandoned and never go through to blockchain even if it is confirmed on your Ledger device."
+                "alertLeftBtn": "Tôi xác nhận địa chỉ đã trùng khớp",
+                "alertRightBtn": "Địa chỉ không khớp. Thoát ra!",
+                "userCancel": "Giao dịch đã bị hủy trên Ledger",
+                "userCancelByWeb": "Bạn đã hủy giao dịch trong ví Vite. Trong trường hợp này, giao dịch sẽ bị hủy bỏ và không bao giờ được chuyển sang blockchain ngay cả khi nó được xác nhận trên thiết bị Ledger của bạn."
             }
         },
         "invite": {
@@ -922,8 +922,8 @@
                 " <span class='strong'> 5% </span> phí giao dịch được tạo bởi người dùng sử dụng mã giới thiệu sẽ là phí giao dịch có thể khai thác VX."
             ],
             "receiveRuleItems": [
-                "Invited users will receive an extra <span class='strong'>2.5%</span> of trading as mining rewards and <span class='strong'>1.25%</span> of market-making as mining rewards",
-                "Enjoy <span class='strong'>10%</span> off trading fees with an invitation code"
+                "Người dùng được mời sẽ nhận thêm <span class='strong'> 2,5% </span> phần thưởng khai thác bằng giao dịch và <span class='strong'>1,25% </span> phần thưởng khai thác bằng tạo thanh khoản",
+                "Được giảm <span class='strong'>10% </span> phí giao dịch với mã giới thiệu"
             ]
         }
     },
@@ -952,32 +952,32 @@
         "depthStep": "{step} chữ số",
         "blocking": "Đã xảy ra lỗi mạng, vui lòng thử lại",
         "supportMining": "Mineable Trading Pairs",
-        "cmcHelp": "View VITE on CoinMarketCap",
-        "supportTradeMining": "Eligible for trading as mining",
-        "supportOrderMining": "Eligible for market-making as mining",
-        "zeroFee": "Zero Fee",
-        "buyMiningPrice": "Qualifies for mining when buy price is greater than {price}",
-        "sellMiningPrice": "Qualifies for mining when sell price is less than {price}",
+        "cmcHelp": "Xem VITE trên CoinMarketCap",
+        "supportTradeMining": "Đủ điều kiện để Khai thác bằng giao dịch",
+        "supportOrderMining": "Đủ điều kiện để Khai thác bằng tạo thanh khoản",
+        "zeroFee": "Không mất phí",
+        "buyMiningPrice": "Đủ điều kiện khai thác khi giá mua lớn hơn {price}",
+        "sellMiningPrice": "Đủ điều kiện khai thác khi giá bán nhỏ hơn {price}",
         "operator": {
-            "noName": "Anonymous Operator",
+            "noName": "Nhà vận hành Ẩn danh",
             "overview": "Giới thiệu",
             "txPair": "Cặp Giao dịch",
             "confirmTitle": "Nhắc nhở rủi ro",
             "confirmText": "Cặp giao dịch hiện tại là {symbol}. Hãy cẩn thận khi giao dịch. Đầu tư vào tài sản kỹ thuật số đi kèm với rủi ro cao. Trước khi đầu tư, vui lòng hiểu rõ tất cả các rủi ro khi đầu tư vào tài sản kỹ thuật số và tự mình đánh giá tính xác thực, tính hợp pháp và tính hợp lệ của tài sản kỹ thuật số. Hãy thận trọng với các quyết định đầu tư và chịu trách nhiệm về sản của chính mình.",
-            "address": "Operator Address",
-            "name": "Operator Name"
+            "address": "Địa chỉ Nhà vận hành",
+            "name": "Tên Nhà vận hành"
         },
         "operatorTxPair": {
-            "title": "Trading Pair Details",
-            "tokenTab": "Token Details",
+            "title": "Chi tiết Cặp giao dịch",
+            "tokenTab": "Chi tiết Token",
             "operatorTab": "Chi tiết về Nhà vận hành"
         },
-        "depthBuyMiningPrice": "Mining Range Above",
-        "depthSellMiningPrice": "Mining Range Below",
-        "inMiningRange": "Mining Range"
+        "depthBuyMiningPrice": "Vùng khai thác trên",
+        "depthSellMiningPrice": "Vùng khai thác dưới",
+        "inMiningRange": "Vùng khai thác"
     },
     "trade": {
-        "more": "More",
+        "more": "Thêm",
         "search": "Tìm kiếm",
         "txPair": "Cặp",
         "price": "Giá",
@@ -1045,8 +1045,8 @@
             "buy": "Mua",
             "sell": "Bán",
             "all": "Tất cả",
-            "avgPrice": "Avg.Price:",
-            "sum": "Sum {symbol}:"
+            "avgPrice": "Giá Tb:",
+            "sum": "Tổng {symbol}:"
         },
         "noData": {
             "favorite": "Bạn chưa có token yêu thích",
@@ -1055,7 +1055,7 @@
         "limitPrice": {
             "title": "Giới hạn",
             "fee": "Phí",
-            "adviseToSVip": "Upgrade to SVIP, enjoy zero base transaction fee",
+            "adviseToSVip": "Nâng cấp lên SVIP, tận hưởng phí giao dịch cơ bản bằng 0",
             "feeRuleWithSVip": "Operator Fees * Referral Discount. ATTENTION: The adjustment and discount of fees will only affect new orders, the former orders' charge remains the same.",
             "text": "Trang này là trang xem trước của dữ liệu giao dịch. Vui lòng đăng nhập để giao dịch.",
             "validAmount": "Khối lượng phải lớn hơn {amount} token}",
@@ -1068,14 +1068,14 @@
             "operatorFee": "Phí khu vực (Được tính bởi nhà khai thác): {fee}",
             "vipFee": "Chiết khấu VIP: {fee}",
             "inviteFeeDiscount": "Chiết khấu Mã giới thiệu: giảm {fee}",
-            "svipFee": "SVIP: 0% base transaction fee",
+            "svipFee": "SVIP: 0% phí giao dịch cơ bản",
             "feeRule": "(Phí giao dịch cơ sở - Chiết khấu VIP + Phí khu vực) * Chiết khấu Mã giới thiệu. CHÚ Ý: Việc điều chỉnh và chiết khấu phí sẽ chỉ ảnh hưởng đến các đơn hàng mới, các đơn hàng cũ vẫn giữ nguyên."
         },
         "proxy": {
-            "title": "Trade Delegation",
-            "subTitle": "Trade Delegation",
-            "successProxy": "Delegation Success",
-            "failProxy": "Delegation Failed",
+            "title": "Uỷ quyền Giao dịch",
+            "subTitle": "Uỷ quyền Giao dịch",
+            "successProxy": "Thao tác thành công",
+            "failProxy": "Thao tác thất bại",
             "successCancelProxy": "Remove Delegation Success",
             "failCancelProxy": "Failed to remove delegations",
             "info": "What is Trade Delegation?",
@@ -1096,13 +1096,13 @@
             "passive": {
                 "title": "Accepted Delegation History",
                 "head": [
-                    "Delegation Address",
+                    "Địa chỉ Uỷ quyền",
                     "Cặp Giao dịch"
                 ]
             },
             "dialog": {
                 "cancel": "Hủy",
-                "cancelAllTips": "Are you sure you'd like to remove all delegations on {trustAddress}?",
+                "cancelAllTips": "Bạn có chắc chắn muốn xóa tất cả các ủy quyền trên {trustAddress} không?",
                 "rTxtMap": {
                     "new": "Thêm",
                     "add": "Thêm",
@@ -1110,43 +1110,43 @@
                     "deleteAll": "Xác nhận"
                 },
                 "confirm": {
-                    "title": "Confirm Delegations",
+                    "title": "Xác nhận Ủy quyền",
                     "cancel": "Hủy",
                     "ok": "Xác nhận"
                 },
                 "titleMap": {
-                    "new": "Initiate Delegation",
-                    "add": "Add Delegations",
-                    "delete": "Remove Delegations",
-                    "deleteAll": "Confirm to remove delegations"
+                    "new": "Bắt đầu Ủy quyền",
+                    "add": "Thêm Uỷ quyền",
+                    "delete": "Xoá Uỷ quyền",
+                    "deleteAll": "Xác nhận xoá uỷ quyền"
                 }
             }
         },
         "openapi": {
             "title": "API",
-            "myKey": "My API Key",
-            "createTime": "Created Time",
-            "permissions": "Applied Trading Pairs",
-            "createKey": "Create API Key",
-            "deleteKey": "Delete API",
-            "deleteAlert": "The current API will no longer be accessible if confirm to proceed. Existing package will be retained and re-activated upon creation of a new API Key.",
-            "confirmDelete": "Confirm and Delete",
+            "myKey": "Khoá API của tôi",
+            "createTime": "Thời gian tạo",
+            "permissions": "Cặp giao dịch áp dụng",
+            "createKey": "Tạo Khoá API",
+            "deleteKey": "Xoá API",
+            "deleteAlert": "API hiện tại sẽ không thể truy cập được nữa nếu xác nhận để tiếp tục. Gói hiện tại sẽ được giữ lại và kích hoạt lại khi tạo Khóa API mới.",
+            "confirmDelete": "Xác nhận và Xoá",
             "cancel": "Hủy",
-            "agentAddressStakingAmount": "Delegation Staked Quota",
+            "agentAddressStakingAmount": "Hạn ngạch Uỷ quyền",
             "staking": "Stake",
-            "package": "Package",
-            "expireTime": "Expiration Date",
-            "callNum": "Triggers/min",
-            "callNumInfo": "{maxCount} transactions/min",
+            "package": "Gói",
+            "expireTime": "Ngày hết hạn",
+            "callNum": "Kích hoạt/phút",
+            "callNumInfo": "{maxCount} giao dịch/phút",
             "price": "Chi phí",
-            "priceInfo": "{price} VX/mth",
-            "upgrade": "Upgrade",
-            "balanceAlert": "Cannot create if VITE balance is less than {balanceLimit}.",
-            "noSupportForHardware": "Hardware Wallet is not supported at the moment",
+            "priceInfo": "{price} VX/tháng",
+            "upgrade": "Nâng cấp",
+            "balanceAlert": "Không thể tạo vì số dư VITE nhỏ hơn {balanceLimit}.",
+            "noSupportForHardware": "Ví Cứng hiện không được hỗ trợ",
             "tips": {
-                "title": "Notice",
+                "title": "Chú ý",
                 "0": "ViteX is releasing official API to provide access to markets and real-time trading services. Follow the instructions below to properly acquire an API private key.",
-                "0-step1": "1. Create API",
+                "0-step1": "1. Tạo API",
                 "0-step2": "2. Authorize delegation of selected trading pairs",
                 "0-step3": "3. Stake quota for API delegation address",
                 "0-step4": "View <a href=\"https://vite.wiki/dex/api/dex-apis.html\" target=\"_blank\">API Documentation</a> for further support",
@@ -1155,31 +1155,31 @@
                 "3": "The API package is set with the free base package at 10 transactions per minute by default, upgrade options available."
             },
             "stakingForQuota": {
-                "title": "Delegation Quota",
-                "agentAddress": "Delegation Address",
-                "stakingAmount": "Stake Amount",
+                "title": "Quota Uỷ quyền",
+                "agentAddress": "Địa chỉ Uỷ quyền",
+                "stakingAmount": "Số lượng Stake",
                 "ok": "Xác nhận"
             },
             "keyConfirm": {
-                "accessKey": "Access Key",
-                "secretKey": "Secret Key",
-                "agentAddress": "Delegation Address",
-                "title": "API Created Successfully",
+                "accessKey": "Khoá truy cập",
+                "secretKey": "Khoá Bí mật",
+                "agentAddress": "Địa chỉ Uỷ quyền",
+                "title": "Tạo API thành công",
                 "tips": {
                     "title": "Thông báo Quan trọng",
-                    "0": "To avoid asset loss, Do Not disclose your Access Key and Secret Key.",
-                    "1": "In cases of lost secret key, Delete the current API and Re-Apply for a new API key."
+                    "0": "Để tránh mất mát tài sản, Không tiết lộ Khóa truy cập và Khóa bí mật của bạn.",
+                    "1": "Trong trường hợp mất khóa bí mật, hãy xóa API hiện tại và đăng ký khóa API mới."
                 },
-                "warn": "The Secret key is displayed only once and cannot be found back if lost, please keep it properly."
+                "warn": "Khóa Bí mật chỉ hiển thị một lần và không thể tìm lại được nếu bị mất, vui lòng giữ nó cẩn thận."
             },
             "upgradeConfirm": {
-                "title": "Upgrade Package",
-                "currentPackage": "Current",
-                "selectPackage": "Select New",
+                "title": "Nâng cấp Gói",
+                "currentPackage": "Hiện tại",
+                "selectPackage": "Chọn mới",
                 "selectTime": "Valid For",
-                "month": " Mth",
+                "month": " Tháng",
                 "payAmount": "Tổng",
-                "balance": "VX Balance"
+                "balance": "Số dư VX"
             }
         }
     },
@@ -1290,9 +1290,9 @@
             "0": "Mua"
         },
         "status": {
-            "1": "Ongoing",
+            "1": "Đang diễn ra",
             "2": "Đã hoàn thành",
-            "3": "Cancelled",
+            "3": "Đã hủy",
             "4": "Thất bại"
         },
         "confirmTable": {
@@ -1417,16 +1417,16 @@
             "openHint": "You will enjoy 0% base transaction fee when upgrading to SVIP. The stake of 1,000,000 VITE can be withdrawn after 30 days.",
             "cancelHint": "SVIP privileges will be discontinued once staking is revoked",
             "openSuccess": "Applied Successful! SVIP status will come into effect later.",
-            "openFail": "Failed to apply SVIP",
-            "cancelSuccess": "Cancel SVIP Successful",
+            "openFail": "Đăng ký SVIP không thành công",
+            "cancelSuccess": "Hủy SVIP thành công",
             "cancelFail": "Hủy không thành công",
-            "address": "Enable SVIP Status",
+            "address": "Kích hoạt SVIP",
             "addressPlaceholder": "Address to be Enabled with SVIP Status",
-            "cancelAddress": "SVIP Address"
+            "cancelAddress": "Địa chỉ SVIP"
         },
-        "vipListTitle": "VIP Records",
+        "vipListTitle": "Lịch sử VIP",
         "openAddress": "Enabled Address",
-        "type": "VIP Type"
+        "type": "Loại VIP"
     },
     "inviteMining": {
         "title": "邀请挖矿总收益",
@@ -1441,8 +1441,8 @@
             "ratio": "占比",
             "mining": "挖矿金额"
         },
-        "market": "{name} Market",
-        "estimate": "{name} Today's Minable Amount"
+        "market": "Thị trường {name}",
+        "estimate": "{name} Tổng khai thác hôm nay"
     },
     "tradeDividend": {
         "title": "Cổ tức",
