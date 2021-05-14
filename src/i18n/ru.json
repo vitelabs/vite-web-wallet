@@ -1396,7 +1396,7 @@
             "openStakingAmount": "Сумма Стейка для того, чтобы стать VIP",
             "cancelStakingAmount": "Доступный баланс",
             "noBalance": "Недостаточно Средств",
-            "openHint": "You will receive 0.1% trading fee deduction as a VIP. The staking of 10,000 VITE can be withdrawn after 30 days.",
+            "openHint": "Станьте VIP и получите скидку 0.1% на торговые комиссии. Заморозьте 10000 VITE, чтобы стать VIP (минимальная длительность статуса: 30 дней)",
             "cancelHint": "VIP статус будет отменен немедленно.",
             "openSuccess": "Ваш VIP статус активирован! Эффект подействует через несколько секунд.",
             "openFail": "Ошибка регистрации VIP",
