@@ -313,10 +313,10 @@
     "keystore": {
         "title": "Keystore",
         "dragDrop": {
-            "text": "Drag and drop files there",
-            "err1": "Imported illegal file!",
-            "err2": "Only one file can be imported!",
-            "guide": "Open folder to import",
+            "text": "I-drag at i-drop ang mga file doon",
+            "err1": "Na-import na iligal na file!",
+            "err2": "Isang file lamang ang maaaring mai-import!",
+            "guide": "Buksan ang folder upang mai-import",
             "hint": "Noted that login by importing keystore file cannot support creating multi addresses, using mnemonic seed phrase is recommended in cross-platform situations."
         }
     },
@@ -388,71 +388,71 @@
                 "github": "Github",
                 "media": "Social Media",
                 "crossType": "Cross-Chain",
-                "originType": "Native",
-                "viewmore": "View More"
+                "originType": "Katutubo",
+                "viewmore": "Tignan pa ang iba"
             },
             "reIssuable": {
-                "true": "Re-issuable",
-                "false": "Not re-issuable"
+                "true": "Maibibigay muli",
+                "false": "Hindi maibibigay muli"
             }
         },
         "gateInfo": {
-            "clickCustomer": "Submit a request",
-            "name": "Gateway Name",
-            "customer": "Customer Service",
-            "privacy": "Terms of Services",
-            "clickPrivacy": "{gate}'s official gateway Terms of Services",
-            "gateSetting": "Configure Gateway",
-            "tabName": "Gateway Details",
-            "selfdefined": "Customize Gateway",
+            "clickCustomer": "Magsumite ng kahilingan",
+            "name": "Pangalan ng Gateway",
+            "customer": "Serbisyo para sa kustomer",
+            "privacy": "Mga Termino ng Serbisyo",
+            "clickPrivacy": "{gate}'s opisyal na Mga Tuntunin ng Serbisyo ng gateway",
+            "gateSetting": "I-configure ang Gateway",
+            "tabName": "Mga Detalye ng Gateway",
+            "selfdefined": "Pasadyang Gateway",
             "officalNet": "Website",
-            "introduction": "Description",
-            "token": "Issued Token",
+            "introduction": "Deskripsyon",
+            "token": "Inisyung Token",
             "setting": "Gateway Interface",
-            "nodeDesc": "User Guide",
-            "settingPlaceholder": "Please input gateway link address",
-            "nodeDescStr": "This function only works for cross-chain coins, do not use this on built-in tokens. Meanwhile, please be careful about unfamiliar gateway links. By continuing to use our platform, you agree and acknowledge that Vite Labs would not be responsible for the loss of your fund and other negative consequences caused. Fill out the gateway link below if you need to use gateway, the link will come into effect after you hit save."
+            "nodeDesc": "Mga Gabay sa User",
+            "settingPlaceholder": "Mangyaring maglagay ng address ng link ng gateway",
+            "nodeDescStr": "Gumagana lamang ang pagpapaandar na ito para sa mga cross-chain coin, huwag gamitin ito sa mga built-in na token. Samantala, mangyaring mag-ingat tungkol sa hindi pamilyar na mga link sa gateway. Sa pamamagitan ng patuloy na paggamit ng aming platform, sumasang-ayon ka at kinikilala mo na ang Vite Labs ay hindi magiging responsable para sa pagkawala ng iyong pondo at iba pang mga negatibong kahihinatnan na dulot. Punan ang link ng gateway sa ibaba kung kailangan mong gumamit ng gateway, ang link ay magkakabisa pagkatapos mong mag-save."
         },
         "depositRecord": {
-            "tabName": "Receive History",
+            "tabName": "Nakatanggap ng Kasaysayan",
             "heads": [
-                "Time",
-                "Amount",
-                "Status",
+                "Oras",
+                "Halaga",
+                "Kalagayan",
                 "{outChain} Hash",
                 "vite Hash",
-                "Fees"
+                "Mga Bayarin"
             ],
             "statusMap": {
-                "OPPOSITE_PROCESSING": "{outChain} awaits to confirm{confirms}",
-                "OPPOSITE_CONFIRMED_FAIL": "{outChain} processing failed",
-                "OPPOSITE_CONFIRMED": "Gateway Received",
-                "TOT_CONFIRMED": "Completed",
-                "BELOW_MINIMUM": "Topup Failed",
-                "TOT_PROCESSING": "VITE chain await to confirm"
+                "OPPOSITE_PROCESSING": "{outChain} naghihintay na kumpirmahin {confirms}",
+                "OPPOSITE_CONFIRMED_FAIL": "{outChain} bigo ang pagproseso",
+                "OPPOSITE_CONFIRMED": "Natanggap ang Gateway",
+                "TOT_CONFIRMED": "Nakompleto",
+                "BELOW_MINIMUM": "Nabigo ang Topup",
+                "TOT_PROCESSING": "Ang kumpirmasyon ng VITE upang kumpirmahin ay naghihintay"
             }
         },
         "withdrawRecord": {
-            "tabName": "Transfer History",
+            "tabName": "History ng Paglipat",
             "heads": [
-                "Time",
-                "Amount",
-                "Status",
+                "Oras",
+                "Halaga",
+                "Kalagayan",
                 "vite Hash",
                 "{outChain} Hash",
-                "Fees"
+                "Mga Bayarin"
             ],
             "statusMap": {
-                "TOT_PROCESSING": "VITE Chain Unconfirmed{confirms}",
-                "TOT_CONFIRMED": "VITE Confirmed",
-                "TOT_EXCEED_THE_LIMIT": "Transfer amount exceeds the limit",
-                "OPPOSITE_PROCESSING": "{outChain} awaits to confirm",
-                "OPPOSITE_CONFIRMED": "Completed",
-                "WRONG_WITHDRAW_ADDRESS": "Transfer address is incorrect"
+                "TOT_PROCESSING": "Hindi Nakumpirma ng VITE Chain{confirms}",
+                "TOT_CONFIRMED": "Nakumpirma ang VITE",
+                "TOT_EXCEED_THE_LIMIT": "Ang halaga ng paglipat ay lumampas sa limitasyon",
+                "OPPOSITE_PROCESSING": "{outChain} naghihintay na kumpirmahin",
+                "OPPOSITE_CONFIRMED": "Nakompleto",
+                "WRONG_WITHDRAW_ADDRESS": "Ang transfer address ay hindi tama"
             }
         },
         "charge": {
-            "title": "Cross-Chain Deposit",
+            "title": "Deposito sa Cross-Chain",
             "addrErr": "Something went wrong with gateway node, please check your network settings",
             "addressTitle": "Recipient Address",
             "labelTips": "(Please use this '{labelName}' with your recipient address, otherwise your assets will lose",
@@ -528,72 +528,72 @@
         }
     },
     "walletMintage": {
-        "title": "Token Issuance",
-        "address": "Issuance Address",
-        "tokenName": "Token Name",
-        "tokenSymbol": "Token Symbol",
-        "totalSupply": "Total Supply",
-        "decimals": "Decimals",
-        "isReIssuable": "ReIssuable",
-        "maxSupply": "Max Supply",
-        "ownerBurnOnly": "Burn out by Owner Only",
-        "isOwnerBurnOnly": "Burn out by Owner Only",
-        "mint": "Confirm",
-        "tokenList": "Issued Token",
-        "submit": "Submit",
-        "cancel": "Cancel",
-        "getListFail": "You are unable to get token list, try again later",
+        "title": "Pagbibigay ng Token",
+        "address": "Address ng Paglabas",
+        "tokenName": "Pangalan ng Token",
+        "tokenSymbol": "Simbolo ng Token",
+        "totalSupply": "Kabuuang Supply",
+        "decimals": "Mga decimal",
+        "isReIssuable": "Mapapalitan",
+        "maxSupply": "Pinakamataas na Supply",
+        "ownerBurnOnly": "Sinunog ng May-ari Lamang",
+        "isOwnerBurnOnly": "Sinunog ng May-ari Lamang",
+        "mint": "Kumpirmahin",
+        "tokenList": "Inisyung Token",
+        "submit": "Isumite",
+        "cancel": "Kanselahin",
+        "getListFail": "Hindi ka makakakuha ng listahan ng token, subukang muli sa ibang pagkakataon",
         "mintageConfirm": {
-            "title": "Check your Token Issuance Information",
-            "balance": "Balance",
-            "fee": "Issuance Fee",
-            "btn": "Confirm"
+            "title": "Suriin ang iyong Impormasyon sa Paglabas ng Token",
+            "balance": "Balanse",
+            "fee": "Bayad sa Pagbibigay",
+            "btn": "Kumpirmahin"
         },
         "reIssuableConfirm": {
-            "title": "Change to Non-issuable",
-            "text": "Make sure to change {tokenName} to Non-issuable status?"
+            "title": "Pagbabago sa Hindi maibibigay",
+            "text": "Tiyaking palitan ang status ng {tokenName} sa Hindi mabibigyan ng katayuan?"
         },
         "changeOwnerConfirm": {
-            "title": "Transfer Ownership",
-            "address": "Recipient Address"
+            "title": "Paglipat ng pagmamay-ari",
+            "address": "Address ng tatanggap"
         },
         "issueConfirm": {
-            "title": "Re-issue",
-            "amount": "Amount",
-            "address": "Beneficiary Address",
-            "overAmount": "Reissued tokens exceed the upper limit"
+            "title": "Muling isyu",
+            "amount": "Halaga",
+            "address": "Address ng pagbibigyan",
+            "overAmount": "Ang mga pinalabas na token ay lumampas sa itaas na limitasyon"
         },
         "hint": {
-            "tokenName": "Token name should have 1-40 characters including capitals and lowercase letters, spaces and underlines. Continuous spaces and numbers are not supported.",
-            "tokenSymbol": "Token symbol should have 1-10 characters, only capitals and numbers are supported.",
-            "success": "Token Issuance Successful",
-            "fail": "Token Issuance failed"
+            "tokenName": "Ang pangalan ng token ay dapat na may 1-40 character kasama ang mga capital at maliit na titik, puwang at salungguhit. Ang mga tuloy-tuloy na puwang at numero ay hindi suportado.",
+            "tokenSymbol": "Ang simbolo ng token ay dapat magkaroon ng 1-10 mga character, ang mga capital at numero lamang ang sinusuportahan.",
+            "success": "Matagumpay na Paglabas ng Token",
+            "fail": "Nabigo ang Paglabas ng Token"
         },
         "err": {
-            "tokenNameFormat": "Token Name's format is incorrect",
-            "tokenNameNull": "Token Name is required",
-            "tokenSymbolFormat": "Token Symbol's format is incorrect",
-            "tokenSymbolNull": "Token Symbol is required",
-            "supplyMax": "Excessive amount of token issuance",
-            "totalSupplyFormat": "Wrong format of Total Supply",
-            "totalSupplyNull": "Total Supply is required",
-            "maxSupplyNull": "Max Supply is required",
-            "maxSupplyMin": "Must be greater than total supply",
-            "decimalsNull": "Decimals field is required",
-            "decimalsFormat": "Wrong format of decimals",
-            "decimalsMax": "Decimals are out of range",
-            "maxSupplyFormat": "Wrong format of Max Supply"
+            "tokenNameFormat": "Ang format ng Token Name ay hindi tama",
+            "tokenNameNull": "Kinakailangan ang Pangalan ng Token",
+            "tokenSymbolFormat": "Ang format ng Token Symbol ay hindi wasto",
+            "tokenSymbolNull": "Kinakailangan ang Simbolo ng Token",
+            "supplyMax": "Labis na halaga ng paglabas ng token",
+            "totalSupplyFormat": "Maling format ng Kabuuang Supply",
+            "totalSupplyNull": "Kinakailangan ang Kabuuang Supply",
+            "maxSupplyNull": "Kinakailangan ang Kabuuang Supply",
+            "maxSupplyMin": "Kinakailangan ang Kabuuang Supply",
+            "decimalsNull": "Kinakailangan ang patlang ng mga Decimal",
+            "decimalsFormat": "Maling format ng mga decimal",
+            "decimalsMax": "Ang mga decimal ay wala sa saklaw",
+            "maxSupplyFormat": "Maling format ng Kabuuang Supply"
         }
     },
     "walletQuota": {
-        "title": "Quota Management",
+        "title": "Pamamahala sa Quota",
         "help": {
-            "title": "Quick Understanding of Quota"
+            "title": "Mabilis na Pag-unawa sa Quota"
         },
-        "myQuota": "My Quota",
-        "maxTxNum": "Maximum Number of Txs",
-        "beneficialAddr": "Quota Recipient Address",
-        "fromAddr": "Deduction Address",
+        "myQuota": "Ang aking Quota",
+        "maxTxNum": "Maximum na Bilang ng Txs",
+        "beneficialAddr": "Address ng Tatanggap ng Quota",
+        "fromAddr": "Address ng Pagbawas",
         "time": "Staking Freeze Duration",
         "aboutDays": "Approx {day} days",
         "amountPlaceholder": "Please enter staking amount, minimum {num} VITE",
@@ -663,11 +663,11 @@
             "t1": "Glossary",
             "txt1": "[Number of Registered Nodes]  The number of full nodes registered with the current address",
             "txt2": "[Number of Active Nodes]  The number of active full nodes registered with the current address",
-            "txt3": "[Number of Rewarding nodes]  Number of nodes being rewarded",
-            "t2": "Multiple Full nodes can be registered with the same address, but must be staked individually at least 10,000 VITE each; When calculating Active Node Reward, if staking amount / 10000 yields a whole number that is greater than or equal to the number of active nodes, all active nodes will be rewarded; If staking amount / 10000 yields a whole number that is less than the number of active nodes, the number of nodes being rewarded equals to the whole number.",
-            "t3": "Calculation of voting rewards does not depend on the number of nodes, but the staking amount."
+            "txt3": "[Bilang ng mga Rewarding node] Bilang ng mga node na ginagantimpalaan",
+            "t2": "Ang maramihang Full node ay maaaring nakarehistro na may parehong address, ngunit dapat na isa-isahin ang bawat isa na hindi bababa sa 10,000 VITE bawat isa; Kapag kinakalkula ang gantimpala ng Aktibong Node, kung ang halaga ng staking / 10000 ay magbubunga ng isang buong numero na mas malaki sa o katumbas ng bilang ng mga aktibong node, ang lahat ng mga aktibong node ay gagantimpalaan; Kung ang halaga ng staking / 10000 ay magbubunga ng isang buong numero na mas mababa sa bilang ng mga aktibong node, ang bilang ng mga node na ginantimpalaan ay katumbas ng buong numero.",
+            "t3": "Ang pagkalkula ng mga gantimpala sa pagboto ay hindi nakasalalay sa bilang ng mga node, ngunit sa halaga ng staking."
         },
-        "confirmText": "Confirm to stake {amount} VITE, staking can be cancelled after {days} days",
+        "confirmText": "Kumpirmahin ang pusta {amount} VITE, maaaring kanselahin ang staking pagkatapos {days} araw",
         "addQuota": {
             "address": "Staking Address",
             "stakeDays": "Staking Period",
