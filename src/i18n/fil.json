@@ -836,30 +836,30 @@
                 "tips": "I-scan ang QR code sa pamamagitan ng Vite Wallet App"
             },
             "confirm": {
-                "tips": "Please confirm transaction on VITE Wallet App"
+                "tips": "Mangyaring kumpirmahin ang transaksyon sa VITE Wallet App"
             },
             "start": {
-                "scan": "Scan the QR code via Vite Wallet App",
-                "downloadTips": "Don’t have the Vite Wallet App? ",
-                "download": "Download here"
+                "scan": "I-scan ang QR code sa pamamagitan ng Vite Wallet App",
+                "downloadTips": "Wala kang Vite Wallet App? ",
+                "download": "I-download dito"
             },
-            "accountName": "ViteConnect Address"
+            "accountName": "Address ng ViteConnect"
         },
         "ledger": {
-            "title": "Ledger Device",
-            "accountName": "Ledger Wallet",
-            "verifyAddress": "Verify address",
-            "closeAlert": "Cancel",
+            "title": "Device ng Ledger",
+            "accountName": "Wallet ng Ledger",
+            "verifyAddress": "Patunayan ang address",
+            "closeAlert": "Kanselahin",
             "start": {
-                "title": "Supported Wallets: Ledger Nano S / Ledger Nano X",
-                "connectError": "Connection Issues?",
-                "introduction": "App Installation & User Instructions",
+                "title": "Mga suportadong Wallet: Ledger Nano S / Ledger Nano X",
+                "connectError": "Mga Isyu sa Koneksyon?",
+                "introduction": "Pag-install ng App at Mga Tagubilin sa Gumagamit",
                 "introductionUrl": "https://docs.vite.org/go-vite/tutorial/ledger-install.html",
                 "connectErrorUrl": "https://support.ledger.com/hc/en-us/articles/115005165269-Connection-issues-with-Windows-or-Linux"
             },
-            "connectWithUSB": "Use USB",
-            "connectWithBlu": "Use Bluetooth",
-            "connectLedger": "Connect to Ledger",
+            "connectWithUSB": "Gumamit ng USB",
+            "connectWithBlu": "Gumamit ng Bluetooth",
+            "connectLedger": "Kumonekta sa Ledger",
             "connect": {
                 "title": "Address Select",
                 "tips": "Select an address to use:",
