@@ -670,65 +670,65 @@
         "confirmText": "Kumpirmahin ang pusta {amount} VITE, maaaring kanselahin ang staking pagkatapos {days} araw",
         "addQuota": {
             "address": "Staking Address",
-            "stakeDays": "Staking Period",
-            "placeholder": "Minimum Stake {min} VITE",
-            "stakingSuspend": "Staking Temporarily Suspended"
+            "stakeDays": "Panahon ng Staking",
+            "placeholder": "Minimum na Stake {min} VITE",
+            "stakingSuspend": "Pansamantalang Sinuspinde ang Staking"
         },
         "quotaContent": {
-            "onlineReward": "Active Node Reward",
-            "voteReward": "Voting Reward",
-            "yesterday": "yesterday",
-            "all": "Accumulated VITE: {num}",
-            "nodeInfo": "Node Information",
-            "onlineNodes": "Active Nodes",
-            "rewardNodes": "Rewarding Nodes",
+            "onlineReward": "Gantimpala ng Aktibong Node",
+            "voteReward": "Gantimpala sa Pagboto",
+            "yesterday": "kahapon",
+            "all": "Naipon na VITE: {num}",
+            "nodeInfo": "Impormasyon sa Node",
+            "onlineNodes": "Mga Aktibong Node",
+            "rewardNodes": "Mga Gantimpala sa Node",
             "stakeAmount": "Node Staking"
         }
     },
     "walletSBP": {
         "title": "SBP",
         "help": {
-            "title": "About SBP",
-            "text": "SBP（Snapshot Block Producer）is a node that has right to create blocks, you can register to become a SBP candidate by staking a certain amount of VITE, each round (about 75 seconds) will elect 25 SBPs, the SBPs will be elected from random 23 out of top 25 candidate nodes, plus random 2 out of the candidate nodes ranking 26th-100th on the list. The 50% of block creation rewards will be allocated to the block creation node, the other 50% will be allocated to nodes that are ranked on top 100 as voting rewards. One registration address (staking address) can register multiple block creation nodes (node names), a node name cannot be used if the node name has been registered by a registration address. A node name can switch block creation address, however, block creation address cannot be reused by other node names."
+            "title": "Tungkol sa SBP",
+            "text": "Ang SBP （Snapshot Block Producer） ay isang node na may karapatang lumikha ng mga block, maaari kang magparehistro upang maging isang kandidato sa SBP sa pamamagitan ng pag-stake ng isang tiyak na halaga ng VITE, ang bawat pag-ikot (mga 75 segundo) ay pipili ng 25 SBP, ang SBP ay ihahalal mula sa random 23 mula sa nangungunang 25 mga node ng kandidato, kasama ang random 2 mula sa mga node ng kandidato na niraranggo sa ika-26 hanggang ika-100 sa listahan. Ang 50% ng mga gantimpala sa paglikha ng block ay ilalaan sa blockode node, ang iba pang 50% ay ilalaan sa mga node na niraranggo sa nangungunang 100 bilang mga gantimpala sa pagboto. Ang isang address sa pagpaparehistro (staking address) ay maaaring magrehistro ng maraming mga block node ng paglikha (mga pangalan ng node), isang pangalan ng node ay hindi maaaring magamit kung ang pangalan ng node ay nakarehistro ng isang address sa pagpaparehistro. Ang isang pangalan ng node ay maaaring lumipat sa address ng paglikha ng block, subalit, ang address ng paglikha ng block ay hindi maaaring magamit muli ng iba pang mga pangalan ng node."
         },
-        "register": "SBP Registration",
-        "cancel": "SBP Cancellation",
-        "cancelBtn": "Cancel",
-        "rewardBtn": "Claim Rewards",
-        "noReward": "No Rewards",
+        "register": "Magparehistro sa SBP",
+        "cancel": "Pagkansela ng SBP",
+        "cancelBtn": "Kanselahin",
+        "rewardBtn": "Kunin ang Gantimpala",
+        "noReward": "Walang Gantimpala",
         "rewardConfirm": {
-            "title": "Claim Rewards",
-            "describe1": "Rewards that are available for claiming update at 13:00:00 (UTC+8) every day, till {time} you can claim",
-            "describe2": "Query mining rewards details, you can",
-            "describe3": "click here",
-            "describe4": "Rewards will send to your Vite Web Wallet address after submitting claim request, please check it in Wallet Home Page. Note: Don't repeat claim actions.",
-            "leftBtn": "Not Now",
-            "rightBtn": "Claim All"
+            "title": "Kunin ang Gantimpala",
+            "describe1": "Mga gantimpala na magagamit para sa pag-claim ng pag-update sa 13:00:00 (UTC + 8) araw-araw, hanggang sa {time} maaari kang mag-claim",
+            "describe2": "Ang mga detalye ng gantimpala sa pagmimina ng query, maaari mo",
+            "describe3": "i-klik dito",
+            "describe4": "Ipapadala ang mga gantimpala sa iyong Vite Web Wallet address pagkatapos magsumite ng kahilingan sa paghahabol, mangyaring suriin ito sa Home Page ng Wallet. Tandaan: Huwag ulitin ang mga pagkilos na inaangkin.",
+            "leftBtn": "Hindi ngayon",
+            "rightBtn": "I-claim ang Lahat"
         },
         "confirm": {
-            "title": "Registration of SBP candidates",
-            "describe": "The {amount} VITE of current address will be locked about 90 days when you submit the registration,  the amount will be returned to staking address after being unlocked",
-            "leftBtn": "Not register yet",
-            "rightBtn": "Ready to Register",
+            "title": "Pagrehistro ng mga kandidato sa SBP",
+            "describe": "Ang  {amount} VITE ng kasalukuyang address ay mai-lock mga 90 araw kapag isumite mo ang pagpaparehistro, ibabalik ang halaga sa staking address pagkatapos ma-unlock",
+            "leftBtn": "Hindi pa nagrerehistro",
+            "rightBtn": "Handa na Magparehistro",
             "edit": {
-                "title": "Edit SBP Infomation",
-                "newBlockProducer": "please input new block creation address",
-                "newRewardAddress": "please input new reward withdraw address",
-                "changeBlockProducer": "Block Creation Address",
-                "changeRewardAddress": "Reward Withdraw Address",
-                "btn": "Confirm to Change"
+                "title": "I-edit ang impormasyon ng SBP",
+                "newBlockProducer": "mangyaring maglagay ng bagong address ng paglikha ng block",
+                "newRewardAddress": "mangyaring maglagay ng bagong address sa pag-withdraw ng gantimpala",
+                "changeBlockProducer": "I-block ang ng Paglikha ng Address",
+                "changeRewardAddress": "Gantimpala sa Pag-Withdraw ng Address",
+                "btn": "Kumpirmahin ang mga Pagbabago"
             }
         },
         "section1": {
-            "title": "Registration Form",
-            "nodeName": "Node Name",
-            "producerAddr": "Block Creation Address",
-            "rewardWithdrawAddress": "Reward Withdraw Address",
+            "title": "Form ng pagpaparehistro",
+            "nodeName": "Pangalan ng Node",
+            "producerAddr": "I-block ang ng Paglikha ng Address",
+            "rewardWithdrawAddress": "Gantimpala sa Pag-Withdraw ng Address",
             "quotaAddr": "Staking Address",
-            "quotaTime": "Staking Period",
-            "time": "7776000 snapshot blocks（approximately 90 days）",
-            "confirmBtn": "Submit",
-            "namePlaceholder": "Please input node name",
+            "quotaTime": "Panahon ng Staking",
+            "time": "7776000 snapshot blocks （tinatayang 90 araw）",
+            "confirmBtn": "Isumite",
+            "namePlaceholder": "Mangyaring i-input ang pangalan ng account",
             "nameHint": "Within 40 characters, support English letters (both upper and lower cases), numbers, '_'、'.'",
             "nameErr": "This node name is illegal",
             "nameUsed": "This node name is occupied",
@@ -803,37 +803,37 @@
             "confirm": {
                 "normal": {
                     "content": "You can vote for only one SBP, are you sure you want to vote for {name}?",
-                    "cancelText": "Not yet",
-                    "submitText": "Ready to vote"
+                    "cancelText": "Hindi pa",
+                    "submitText": "Handa nang bumoto"
                 },
                 "cover": {
-                    "content": "You've already voted for {nodeName}, are you sure to overwrite current voting record?",
-                    "cancelText": "Confirm",
-                    "submitText": "Cancel"
+                    "content": "Bumoto ka na para sa {nodeName}, Sigurado ka bang patungan ang kasalukuyang tala ng pagboto?",
+                    "cancelText": "Kumpirmahin",
+                    "submitText": "Kanselahin"
                 }
             },
-            "noSearchData": "No content found, please try another input",
-            "operateBtn": "Vote",
-            "voteErr": "Failed to vote, please try again"
+            "noSearchData": "Walang nahanap na nilalaman, mangyaring subukan ang ibang input",
+            "operateBtn": "Bumoto",
+            "voteErr": "Nabigong bumoto, pakisubukang muli"
         }
     },
     "assets": {
-        "title": "Assets",
+        "title": "Mga Asset",
         "notice": {
-            "title": "Important Notice",
-            "contentProvider": "This service is provided by {gate}.",
-            "contentOther": "You agree and acknowledge that Vite Labs would not be responsible for any negative consequences caused by {gate}. Vite platform does not take any part in the relationship that may arise between {gate} and users of Vite platform",
-            "contentAgree": "By continuing to use {gate}'s service, you agree and acknowledge {gate}'s",
-            "agreement": "Terms of Services, Trading Conditions and Privacy Policy",
-            "contentUngree": "Please agree to this terms before using {gate}'s service",
-            "hint": "Contact customer service team of {gate} if you encounter any problems during payment process.",
-            "next": "Confirm and Proceed"
+            "title": "Mahalagang Paunawa",
+            "contentProvider": "Ang serbisyong ito ay ibinibigay ng {gate}.",
+            "contentOther": "Sumasang-ayon ka at kinikilala mo na ang Vite Labs ay hindi magiging responsable para sa anumang mga negatibong kahihinatnan na dulot ng {gate}. Ang platform ng Vite ay hindi lumahok sa anumang ugnayan sa maaaring lumabas dahil sa pagitan ng {gate} at mga gumagamit ng Vite platform",
+            "contentAgree": "Sa pamamagitan ng pagpapatuloy na paggamit ng serbisyo ng {gate}, sumasang-ayon ka at kinikilala mo ang {gate}",
+            "agreement": "Mga Tuntunin ng Serbisyo, Mga Kundisyon sa Trading at Patakaran sa Privacy",
+            "contentUngree": "Mangyaring sumang-ayon sa mga tuntunin na ito bago gamitin ang serbisyo ng {gate}",
+            "hint": "Makipag-ugnay sa koponan sa serbisyo sa customer ng {gate} kung nakakaranas ka ng anumang mga problema sa proseso ng pagbabayad.",
+            "next": "Kumpirmahin at Magpatuloy"
         },
         "vb": {
             "title": "ViteConnect",
-            "closeAlert": "close",
+            "closeAlert": "isara",
             "connect": {
-                "tips": "Scan the QR code via Vite Wallet App"
+                "tips": "I-scan ang QR code sa pamamagitan ng Vite Wallet App"
             },
             "confirm": {
                 "tips": "Please confirm transaction on VITE Wallet App"
