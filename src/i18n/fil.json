@@ -317,17 +317,17 @@
             "err1": "Na-import na iligal na file!",
             "err2": "Isang file lamang ang maaaring mai-import!",
             "guide": "Buksan ang folder upang mai-import",
-            "hint": "Noted that login by importing keystore file cannot support creating multi addresses, using mnemonic seed phrase is recommended in cross-platform situations."
+            "hint": "Napansin na ang pag-login sa pamamagitan ng pag-import ng keystore file ay hindi maaaring suportahan ang paglikha ng maraming mga address, ang paggamit ng mnemonic seed na parirala ay inirerekomenda sa mga sitwasyong cross-platform."
         }
     },
     "tokenCard": {
-        "moreRecords": "View History",
-        "others": "Others",
+        "moreRecords": "Tingnan ang Kasaysayan",
+        "others": "Iba pa",
         "assetSpread": "Portfolio",
-        "saveSuccess": "Successfully saved",
+        "saveSuccess": "Matagumpay na nai-save",
         "heads": {
-            "name": "Name",
-            "balance": "Wallet Balance",
+            "name": "Pangalan",
+            "balance": "Balanse sa Wallet",
             "onroad": "Wallet Unreceived Funds",
             "gate": "Wallet Cross-Chain Gateway",
             "totalExAmount": "Exchange Total Balance",
