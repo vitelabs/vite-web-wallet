@@ -328,10 +328,10 @@
         "heads": {
             "name": "Pangalan",
             "balance": "Balanse sa Wallet",
-            "onroad": "Wallet Unreceived Funds",
+            "onroad": "Mga Pondo na Hindi Natanggap",
             "gate": "Wallet Cross-Chain Gateway",
-            "totalExAmount": "Exchange Total Balance",
-            "availableExAmount": "Exchange Available Balance",
+            "totalExAmount": "Kabuuang Balanse ng Palitan",
+            "availableExAmount": "Magagamit na Balanse sa Palitan",
             "balanceTips": "On-chain send is available for users who would like to send transactions from your Vite wallet to other Vite addresses",
             "gateTips": "In this cross-chain section, you can map other coins/tokens into Vite network. Click 'Deposit' button to deposit assets to your Vite Wallet. Click 'Withdraw' button to transfer your assets to other platforms. * Cross-chain deposit/withdrawal process may cause fees, it also has its transfer limit.",
             "availableExAmountTips": "You can transfer your assets between Vite Wallet and ViteX Exchange via clicking 'Transfer' button. No transaction fees caused during these processes.",
