@@ -332,55 +332,55 @@
             "gate": "Wallet Cross-Chain Gateway",
             "totalExAmount": "Kabuuang Balanse ng Palitan",
             "availableExAmount": "Magagamit na Balanse sa Palitan",
-            "balanceTips": "On-chain send is available for users who would like to send transactions from your Vite wallet to other Vite addresses",
-            "gateTips": "In this cross-chain section, you can map other coins/tokens into Vite network. Click 'Deposit' button to deposit assets to your Vite Wallet. Click 'Withdraw' button to transfer your assets to other platforms. * Cross-chain deposit/withdrawal process may cause fees, it also has its transfer limit.",
-            "availableExAmountTips": "You can transfer your assets between Vite Wallet and ViteX Exchange via clicking 'Transfer' button. No transaction fees caused during these processes.",
-            "unreceivedTips": "Unreceived funds will be received automatically after signing in"
+            "balanceTips": "Magagamit ang on-chain na pagpapadala para sa mga gumagamit na nais magpadala ng mga transaksyon mula sa iyong Vite wallet sa iba pang mga Vite address",
+            "gateTips": "Sa seksyong cross-chain na ito, maaari kang mag-mapa ng iba pang mga barya / token sa Vite network. I-click ang pindutang 'Deposit' upang magdeposito ng mga assets sa iyong Vite Wallet. I-click ang pindutan na 'Bawiin' upang ilipat ang iyong mga assets sa iba pang mga platform. * Ang proseso ng deposito ng cross-chain / withdrawal ay maaaring maging sanhi ng bayarin, mayroon din itong limitasyon sa paglipat.",
+            "availableExAmountTips": "Maaari mong ilipat ang iyong mga assets sa pagitan ng Vite Wallet at ViteX Exchange sa pamamagitan ng pag-click sa pindutang 'Transfer'. Walang ng mga bayarin sa transaksyon sa mga proseso na ito.",
+            "unreceivedTips": "Ang mga hindi natanggap na pondo ay awtomatikong matatanggap pagkatapos ng pag-sign in"
         },
         "actionType": {
-            "SEND": "On-Chain Send",
-            "RECEIVE": "Deposit",
-            "CHARGE": "Deposit",
-            "WITHDRAW": "Withdraw",
-            "EXTRANSFER": "Transfer",
-            "EXRECRODS": "History",
-            "RECRODS": "History",
-            "EXCHARGE": "Deposit",
-            "EXWITHDRAW": "Withdraw"
+            "SEND": "Pagpapadala sa Chain",
+            "RECEIVE": "Pagdedeposito",
+            "CHARGE": "Pagdedeposito",
+            "WITHDRAW": "Pag-withdraw",
+            "EXTRANSFER": "Ilipat",
+            "EXRECRODS": "Kasaysayan",
+            "RECRODS": "Kasaysayan",
+            "EXCHARGE": "Pagdedeposito",
+            "EXWITHDRAW": "Pag-withdraw"
         },
         "transferConfirm": {
-            "from": "From",
-            "to": "To",
-            "wallet": "Wallet Account",
+            "from": "Mula sa",
+            "to": "Para kay",
+            "wallet": "Account sa Wallet",
             "dex": "Exchange Account",
-            "avaliableAmount": "Balance"
+            "avaliableAmount": "Balanse"
         },
         "addToken": {
-            "title": "Add Token",
-            "placeholder": "Please enter token name or TokenID",
-            "lTxt": "Cancel",
-            "rTxt": "Add"
+            "title": "Idagdag ang Token",
+            "placeholder": "Mangyaring ipasok ang pangalan ng token o TokenID",
+            "lTxt": "Kanselahin",
+            "rTxt": "Magdagdag"
         },
         "type": {
-            "native": "Native Tokens",
-            "crossGate": "Cross-Chain Coins"
+            "native": "Mga Native na Token",
+            "crossGate": "Mga Barya ng Cross-Chain"
         },
         "assetType": {
-            "TOTAL": "All Assets",
-            "EX": "Exchange Assets",
-            "WALLET": "Wallet Assets"
+            "TOTAL": "Ang Lahat ng mga Assets",
+            "EX": "Mga Exchange Asset",
+            "WALLET": "Mga Asset sa Wallet"
         },
         "tokenInfo": {
-            "tabName": "Details",
-            "title": "{tokenSymbol} Information",
-            "saveGate": "Save",
+            "tabName": "Mga Detalye",
+            "title": "{tokenSymbol} Impormasyon",
+            "saveGate": "I-save",
             "labels": {
                 "tokenId": "TokenID",
-                "tokenName": "Name",
-                "totalSupply": "Total Supply",
-                "total": "Circulating Supply",
-                "overview": "Introduction",
-                "type": "Type",
+                "tokenName": "Pangalan",
+                "totalSupply": "Kabuuang Supply",
+                "total": "Supply na naikot",
+                "overview": "Panimula",
+                "type": "Uri",
                 "gate": "Cross-Chain Gateway",
                 "website": "Website",
                 "whitePaper": "White Paper",
@@ -453,21 +453,21 @@
         },
         "charge": {
             "title": "Deposito sa Cross-Chain",
-            "addrErr": "Something went wrong with gateway node, please check your network settings",
-            "addressTitle": "Recipient Address",
-            "labelTips": "(Please use this '{labelName}' with your recipient address, otherwise your assets will lose",
-            "labelCodeTips": "Please Scan the QR code from {labelName}",
-            "codeTips": "Scan QR code to deposit. Please send funds with the wallet that supports {tokenSymbol}",
+            "addrErr": "Nagkaproblema sa gateway node, mangyaring suriin ang iyong mga setting ng network",
+            "addressTitle": "Address ng tatanggap",
+            "labelTips": "(Mangyaring gamitin ang '{labelName}' na ito sa tatanggap na address, upang hindi mawawala ang iyong mga assets",
+            "labelCodeTips": "Mangyaring I-scan ang QR code mula sa {labelName}",
+            "codeTips": "I-scan ang QR code upang magdeposito. Mangyaring magpadala ng mga pondo gamit ang wallet na sumusuporta sa {tokenSymbol}",
             "tips": [
-                "You can only deposit {tokenSymbol} through the address provided below. No less than {min} {tokenSymbol} will be accepted.",
-                "The account will update after {confirmationCount} network confirmations. Please wait.",
-                "Please select the correct mainnet or you will be unable to retrieve any lost tokens."
+                "Maaari mo lamang ideposito ang {tokenSymbol} sa pamamagitan ng address na ibinigay sa ibaba. Hindi hihigit sa {min} {tokenSymbol} ang tatanggapin.",
+                "Mag-a-update ang account pagkatapos ng kumpirmasyon ng network ng {confirmationCount}. Mangyaring pakihintay lang po.",
+                "Mangyaring piliin ang tamang mainnet o hindi mo makukuha ang anumang mga nawalang token."
             ]
         },
-        "viteTips": "VITE only supports cross-chain functionality between the new ERC20 VITE token and Native VITE Coin.",
+        "viteTips": "Sinusuportahan lamang ng VITE ang pag-andar ng cross-chain sa pagitan ng bagong token ng ERC20 VITE at Native VITE Coin.",
         "withdraw": {
-            "title": "Cross-Chain Withdrawal",
-            "btn": "Withdraw",
+            "title": "Pag-Withdraw sa Cross-Chain",
+            "btn": "Pag-withdraw",
             "balanceErrMap": {
                 "notEnough": "Insufficient Balance",
                 "overMax": "Withdrawal amount should be less than {max}",
@@ -605,45 +605,45 @@
         "maturity": "Staking has expired!",
         "minAmt": "Withdraw amount cannot be less than {num} VITE",
         "gotoStake": "Please Staking enough VITE first",
-        "maxAmt": "Withdraw amount should be in [{minAmount}, {maxAmount}]",
-        "cancelLimitAmt": "Staking amount cannot be less than {num}",
-        "withdrawalStaking": "Withdraw Staked Token",
-        "myAddr": "Me",
+        "maxAmt": "Ang halaga ng pag-withdraw ay dapat nasa [{minAmount}, {maxAmount}]",
+        "cancelLimitAmt": "Ang halaga ng staking ay hindi maaaring mas mababa sa {num}",
+        "withdrawalStaking": "Mag-withdraw ng Staked Token",
+        "myAddr": "Ako",
         "confirm": {
             "help": {
-                "t1": "What is Quota?",
-                "txt1": "In the Vite system, users do not purchase the gas required for a transaction by paying a fee, but acquire the computing resource through a quota-based model. Required quota for sending a transaction = the basic quota (request) + quota (the attached text data), quota required to accept a transaction = the basic quota (response). This quota-based resource configuration protocol allows users to obtain higher resource quotas in two ways: Staking VITE to obtain quota and running PoW.",
-                "t2": "What is Staking?",
-                "txt2": "In the Vite system, the user can stake VITE to obtain a certain amount of quota. The minimum value for staking is 134 VITE, and there is no maximum limit; meanwhile, Vite system also supports that the A-address stakes a part of the VITE and allocates the obtained quota to the B address. When users apply to stake, VITE will be sent to the smart contract address instead of another user, and only the user who applies for staking has access to manage the staking amount.",
-                "t3": "What is PoW?",
-                "txt3": "Proof of Work (PoW), is a protocol to confirm that you have done a certain amount of work, and is also an economic measure to deter DDoS attacks and other service abuse. It requires the initiator to conduct a certain amount of computing, which means that it may take some time for the computer. In the Vite system, users can obtain a free quota by running the PoW, and also can send a transaction without any annotated information through obtained quota."
+                "t1": "Ano ang Quota?",
+                "txt1": "Sa sistema ng Vite, ang mga gumagamit ay hindi bumibili ng kinakailangang gas para sa isang transaksyon sa pamamagitan ng pagbabayad ng bayad, ngunit kumuha ng mapagkukunan ng computing sa pamamagitan ng isang modelo na batay sa quota. Kinakailangan na quota para sa pagpapadala ng isang transaksyon = ang pangunahing quota (kahilingan) + quota (ang kalakip na data ng teksto), kinakailangang quota upang tanggapin ang isang transaksyon = ang pangunahing quota (tugon). Pinapayagan ng protokol na pagsasaayos ng mapagkukunang batay sa quota ang mga gumagamit na makakuha ng mas mataas na mga quota ng mapagkukunan sa dalawang paraan: Staking VITE upang makakuha ng quota at pagpapatakbo ng PoW.",
+                "t2": "Ano Ang Staking?",
+                "txt2": "Sa sistema ng Vite, maaaring mai-stake ng gumagamit ang VITE upang makakuha ng isang tiyak na halaga ng quota. Ang minimum na halaga para sa staking ay 134 VITE, at walang maximum na limitasyon; samantala, sinusuportahan din ng Vite system na ang A-address ay Stake sa isang bahagi ng VITE at inilalaan ang nakuha na quota sa B address. Kapag nag-apply ang mga gumagamit sa stake, ipapadala ang VITE sa matalinong address ng kontrata sa halip na isa pang gumagamit, at ang gumagamit lamang na nag-apply para sa staking ang may access upang pamahalaan ang halagang naka-stake.",
+                "t3": "Ano ang PoW?",
+                "txt3": "Ang Proof of Work (PoW), ay isang protokol upang kumpirmahing nagawa mo ang isang tiyak na halaga ng trabaho, at isang hakbang din sa ekonomiya upang mapigilan ang mga pag-atake ng DDoS at iba pang pang-aabuso sa serbisyo. Kinakailangan nito ang nagpasimula na magsagawa ng isang tiyak na halaga ng computing, na nangangahulugang maaaring tumagal ng ilang oras para sa computer. Sa sistema ng Vite, ang mga gumagamit ay maaaring makakuha ng isang libreng quota sa pamamagitan ng pagpapatakbo ng PoW, at maaari ring magpadala ng isang transaksyon nang walang anumang anotadong impormasyon sa pamamagitan ng nakuha na quota."
             },
             "cancel": {
-                "describe": "Your current staked amount is {amount} VITE, please confirm to withdraw.",
-                "rightBtn": "Ready to Go",
-                "leftBtn": "Cancel Withdraw"
+                "describe": "Ang iyong kasalukuyang natipong halaga ay {amount} VITE, mangyaring kumpirmahing mag-withdraw.",
+                "rightBtn": "Nakahanda nang umalis",
+                "leftBtn": "Kanselahin ang Pag-withdraw"
             },
             "submit": {
-                "describe": "Make sure to stake {amount} VITE to obtain quota, you cannot withdraw until about 3 days after staking comes into effect.",
-                "rightBtn": "Confirm",
-                "leftBtn": "Cancel"
+                "describe": "Siguraduhing magtaya ng {amount} VITE upang makakuha ng quota, hindi ka maaaring mag-withdraw hanggang sa halos 3 araw pagkatapos magkabisa.",
+                "rightBtn": "Kumpirmahin",
+                "leftBtn": "Kanselahin"
             }
         },
         "list": {
-            "title": "My Staking List",
-            "total": "Staking {amount} VITE in total",
-            "amount": "Amount",
-            "withdrawTime": "Expected Due Date",
-            "unexpired": "Temporarily cannot make withdrawal of staked token until due date",
-            "vip": "This staking action is for default opening VIP on ViteX exchange, please go to ViteX exchange page to cancel VIP",
-            "mining": "This staking is your staking as mining amount on ViteX, please go to ViteX mining page to unstake",
-            "other": "This staking is staked via other ways and unstake is not supported here"
+            "title": "Ang Staking List ko",
+            "total": "Kabuuang {amount} sa Pag-Stake ng VITE",
+            "amount": "Halaga",
+            "withdrawTime": "Inaasahang Takdang Petsa",
+            "unexpired": "Pansamantalang hindi maaaring mag-withdrawal ng staked token hanggang sa takdang araw",
+            "vip": "Ang staking action na ito ay para sa default na pagbubukas ng VIP sa ViteX exchange, mangyaring pumunta sa pahina ng palitan ng ViteX upang kanselahin ang VIP",
+            "mining": "Ang staking na ito ay ang iyong staking bilang halaga ng pagmimina sa ViteX, mangyaring pumunta sa pahina ng pagmimina ng ViteX upang mag-unstake",
+            "other": "Ang staking na ito ay na-staked sa pamamagitan ng iba pang mga paraan at ang unstake ay hindi suportado dito"
         }
     },
     "walletTransList": {
-        "title": "Transactions",
+        "title": "Mga Transaksyon",
         "tType": {
-            "title": "Type",
+            "title": "Uri",
             "symbol": "Type"
         },
         "status": {
