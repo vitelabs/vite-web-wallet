@@ -896,42 +896,42 @@
                 "alertContent": "Tinanggihan ang address sa Ledger device. Mangyaring i-double verify kung ang address na ito ay tumutugma sa address na ipinakita sa iyong Ledger device. Kung oo, huwag pansinin ang mensaheng ito at magpatuloy upang kumpirmahin ang transaksyon, kung hindi HUWAG magpadala ng asset sa address at umalis kaagad.",
                 "alertLeftBtn": "Kinukumpirma ko na ang mga address ay naitugma",
                 "alertRightBtn": "Hindi tumutugma ang mga address. Alisin ako dito!",
-                "userCancel": "Transaction is cancelled on Ledger",
-                "userCancelByWeb": "You cancelled the transaction in Vite wallet. In this case, the transaction will be abandoned and never go through to blockchain even if it is confirmed on your Ledger device."
+                "userCancel": "Nakansela ang transaksyon sa Ledger",
+                "userCancelByWeb": "Kinansela mo ang transaksyon sa Vite wallet. Sa kasong ito, ang transaksyon ay naiwan at hindi dumaan sa blockchain kahit na nakumpirma ito sa iyong Ledger device."
             }
         },
         "invite": {
-            "inviteTitle": "Invite Friends",
-            "receiveInviteTitle": "Use Referral Code",
-            "myCode": "My Referral Code: ",
+            "inviteTitle": "Mag-imbita ng mga kaibigan",
+            "receiveInviteTitle": "Gumamit ng Referral Code",
+            "myCode": "Ang Aking Referral Code: ",
             "codeLable": "Referral Code",
-            "invited": "You have already accepted an invitation, referral code is: ",
-            "genCode": "Create a Referral Code",
-            "cost": "Cost",
-            "formatErr": "Incorrect referral code format",
-            "noResult": "Oops...No result found, please try again later",
-            "successToast": "Request has sent",
-            "failToast": "Failed to send request",
-            "notEnough": "Insufficient exchange balance",
-            "avaliable": "Balance",
-            "inviteNum": "Invited",
-            "inviteBenifit": "Referral Mining Income",
-            "inviteRule": "Rules",
+            "invited": "Nakatanggap ka na ng isang paanyaya, ang referral code ay: ",
+            "genCode": "Lumikha ng isang Referral Code",
+            "cost": "Gastos",
+            "formatErr": "Maling format ng referral code",
+            "noResult": "Oops... Walang nahanap na resulta, pakisubukan ulit sa ibang pagkakataon",
+            "successToast": "Naipadala na ang kahilingan",
+            "failToast": "Nabigong maipadala ang kahilingan",
+            "notEnough": "Hindi sapat na balanse ng palitan",
+            "avaliable": "Balanse",
+            "inviteNum": "Inanyayahan",
+            "inviteBenifit": "Kita ng Referral Mining",
+            "inviteRule": "Mga Patakaran",
             "ruleItems": [
-                "The <span class='strong'>1,000 VITE</span> payment to generate an invitation code will be burned",
-                "Referee will be rewarded with <span class='strong'>5%</span> of all invited users' trading as mining proceeds and <span class='strong'>2.5%</span> of all market-making as mining proceeds"
+                "Ang <span class = 'strong'> 1,000 VITE </span> na pagbabayad upang makabuo ng isang code ng paanyaya na ibu-burned",
+                "Gagantimpalaan ang referee ng <span class = 'strong'> 5% </span> ng lahat ng mga inimbitahang negosyante ng kalakalan bilang kita sa pagmimina at <span class = 'strong'> 2.5% </span> ng lahat ng paggawa ng merkado bilang pagmimina na nalikom"
             ],
             "receiveRuleItems": [
-                "Invited users will receive an extra <span class='strong'>2.5%</span> of trading as mining rewards and <span class='strong'>1.25%</span> of market-making as mining rewards",
-                "Enjoy <span class='strong'>10%</span> off trading fees with an invitation code"
+                "Ang mga inimbitahang gumagamit ay makakatanggap ng dagdag <span class='strong'>2.5%</span> ng pangangalakal bilang mga gantimpala sa pagmimina at <span class='strong'>1.25%</span> ng paggawa ng merkado bilang mga gantimpala sa pagmimina",
+                "Tangkilikin ang <span class='strong'>10%</span> off ang mga bayarin sa pangangalakal na may isang code ng paanyaya"
             ]
         }
     },
     "walletConversion": {
-        "title": "VITE Conversion",
+        "title": "Palitan sa VITE",
         "help": {
-            "title": "Quick Understanding of VITE Conversion",
-            "text": "You can migrate ERC20 tokens into VITE into our TestNet by VITE conversion function. In TestNet, casting your vote for official SBPs to collect rewards, the annualized rate can reach 20%. Your ERC20 VITE tokens will be transferred to Ethereum black hole address: {blackAddr}, you will receive the same amount of VITE at your Vite address when Ethereum black hole address has received the transaction and confirmed. Once you are in the conversion process, confirm that there are enough VITE and ETH (as gas) in your Ethereum address of Vite wallet."
+            "title": "Mabilis na Pag-unawa sa Palitan ng VITE",
+            "text": "Maaari mong ilipat ang mga token ng ERC20 sa VITE sa aming TestNet sa pamamagitan ng pagpapaandar ng VITE conversion. Sa TestNet, ang pagboto ng iyong mga boto para sa mga opisyal na SBP upang mangolekta ng mga gantimpala, ang na-average na rate ay maaaring umabot sa 20%. Ang iyong mga token ng ERC20 VITE ay ililipat sa black hole address ng Ethereum: {blackAddr}, makakatanggap ka ng parehong halaga ng VITE sa iyong Vite address kapag natanggap ng transaksyon sa black black hole ang transaksyon at nakumpirma. Kapag nasa proseso ka ng pag-convert, kumpirmahing may sapat na VITE at ETH (bilang gas) sa iyong Ethereum address ng Vite wallet."
         },
         "gas": "Mining Fees",
         "record": "Conversion History",
@@ -994,70 +994,70 @@
         "depthView": "Depth",
         "klineView": "TradingView",
         "txPairDetail": {
-            "title": "Trading pair details",
+            "title": "Mga detalye sa Trading pair",
             "24h": "24h",
-            "openPrice": "Open",
-            "quantity": "Market Volume",
+            "openPrice": "Buksan",
+            "quantity": "Dami ng Market",
             "amount": "Base volume",
-            "status": "Status",
-            "latest": "Latest",
-            "buy": "Buy price",
-            "sell": "Sell price",
-            "diff": "Spread"
+            "status": "Kalagayan",
+            "latest": "Pinakabago",
+            "buy": "Presyo ng pagbili",
+            "sell": "Presyo ng Pagbenta",
+            "diff": "Ikalat"
         },
         "buy": {
-            "title": "Buy {token}",
-            "price": "Price({token})",
-            "quantity": "Amount({token})"
+            "title": "Pagbili {token}",
+            "price": "Presyo ({token})",
+            "quantity": "Halaga ({token})"
         },
         "sell": {
-            "title": "Sell {token}",
-            "price": "Price({token})",
-            "quantity": "Amount({token})"
+            "title": "Pagbenta {token}",
+            "price": "Presyo ({token})",
+            "quantity": "Halaga ({token})"
         },
         "head": {
-            "latestPrice": "Last Price",
-            "updown": "24h Change",
-            "highPrice": "24h High",
-            "lowPrice": "24h Low",
-            "quantity": "24h Volume",
+            "latestPrice": "Huling presyo",
+            "updown": "Pagbabago 24h",
+            "highPrice": "24h mataas",
+            "lowPrice": "24h mababa",
+            "quantity": "Dami 24h",
             "tokenName": "Token",
-            "originalSymbol": "Symbol",
+            "originalSymbol": "Simbolo",
             "gateway": "Gateway",
-            "website": "Official Website",
+            "website": "Opisyal na Website",
             "explorer": "Block Explorer",
-            "overview": "Description",
+            "overview": "Deskripsyon",
             "tokenShow": "Abbr",
             "tokenId": "Token ID",
-            "publisher": "Issuer",
-            "total": "Total",
-            "tokenDigit": "Decimals",
-            "publisherDate": "Issuance Date",
-            "type": "Status",
+            "publisher": "Tagapag-isyu",
+            "total": "Kabuuan",
+            "tokenDigit": "Mga decimal",
+            "publisherDate": "Petsa ng pagpapalabas",
+            "type": "Kalagayan",
             "tokenType0": "Issuance Available",
-            "tokenType1": "Never Issued"
+            "tokenType1": "Hindi Naisyu"
         },
         "latestTx": {
-            "title": "Last Orders",
-            "time": "Time"
+            "title": "Mga Huling Order",
+            "time": "Oras"
         },
         "depth": {
-            "buy": "Buy",
-            "sell": "Sell",
-            "all": "All",
-            "avgPrice": "Avg.Price:",
+            "buy": "Pagbili",
+            "sell": "Pagbenta",
+            "all": "Lahat",
+            "avgPrice": "Avg.Presyo:",
             "sum": "Sum {symbol}:"
         },
         "noData": {
-            "favorite": "You have no favorite yet",
-            "search": "No result found"
+            "favorite": "Wala ka pang paborito",
+            "search": "Walang resulta na natagpuan"
         },
         "limitPrice": {
-            "title": "Limit",
-            "fee": "Fees",
-            "adviseToSVip": "Upgrade to SVIP, enjoy zero base transaction fee",
-            "feeRuleWithSVip": "Operator Fees * Referral Discount. ATTENTION: The adjustment and discount of fees will only affect new orders, the former orders' charge remains the same.",
-            "text": "This page is a preview page of transaction data. Please login to trade.",
+            "title": "Limitasyon",
+            "fee": "Mga Bayarin",
+            "adviseToSVip": "Mag-upgrade sa SVIP, tangkilikin ang zero base fee sa transaksyon",
+            "feeRuleWithSVip": "Bayad sa Operator * Discount ng Referral. PANSININ: Ang pagsasaayos at diskwento ng mga bayarin ay makakaapekto lamang sa mga bagong order, mananatiling pareho ang singil ng dating mga order.",
+            "text": "Ang pahinang ito ay isang pahina ng preview ng data ng transaksyon. Mangyaring mag-login sa trade.",
             "validAmount": "Volume must be greater than {amount}{token}",
             "priceNotNull": "Amount cannot be empty",
             "amountNotNull": "Volume cannot be empty",
