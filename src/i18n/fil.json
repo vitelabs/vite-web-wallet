@@ -778,31 +778,31 @@
             },
             "voteStatusMap": {
                 "voted": "Matagumpay ang Pagboto",
-                "voting": "Voting",
-                "canceling": "Revoking in Process",
-                "voteNotWork": "Revoked Voting"
+                "voting": "Pagboto",
+                "canceling": "Nakaproseso ang pagbawi",
+                "voteNotWork": "Pinawalang-bisa ang Pagboto"
             },
-            "hoverHelp": "The node {nodeName} you are voted for has been revoked, you may vote again directly or revoke your voting, If you do not do so, your original voting result will be recovered after the {nodeName} re-registering",
+            "hoverHelp": "Ang node na {nodeName} na binoto para sa iyo ay binawi, maaari kang bumoto muli nang direkta o bawiin ang iyong pagboto, Kung hindi mo ito gagawin, mababawi ang iyong orihinal na resulta sa pagboto pagkatapos muling magrehistro ang {nodeName}",
             "confirm": {
-                "cancelText": "Not yet",
-                "submitText": "Confirm"
+                "cancelText": "Hindi pa",
+                "submitText": "Kumpirmahin"
             },
-            "revoke": "Revoking",
-            "operateBtn": "Revoke",
-            "cancelVoteErr": "Failed to revoke voting, please try again"
+            "revoke": "Pagpapawalang-bisa",
+            "operateBtn": "Bawiin",
+            "cancelVoteErr": "Nabigong bawiin ang pagboto, pakisubukang muli"
         },
         "section2": {
-            "title": "SBP candidates",
+            "title": "Mga kandidato sa SBP",
             "head": [
-                "Rank",
-                "Node Name",
+                "Ranggo",
+                "Pangalan ng Node",
                 "Address",
-                "Votes",
-                "Action"
+                "Mga boto",
+                "Kilos"
             ],
             "confirm": {
                 "normal": {
-                    "content": "You can vote for only one SBP, are you sure you want to vote for {name}?",
+                    "content": "Maaari kang bumoto para sa isang SBP lamang, sigurado ka bang nais mong bumoto para sa {name}?",
                     "cancelText": "Hindi pa",
                     "submitText": "Handa nang bumoto"
                 },
@@ -861,41 +861,41 @@
             "connectWithBlu": "Gumamit ng Bluetooth",
             "connectLedger": "Kumonekta sa Ledger",
             "connect": {
-                "title": "Address Select",
-                "tips": "Select an address to use:",
-                "selectConnectType": "Choose connection type: (Bluetooth is only supported on Ledger Nano X)",
-                "cancelSelect": "Select a device to connect",
-                "connectError": "Connect failed. Please confirm Vite app is opened on device",
-                "interfaceNotAvailable": "Connect failed. Please check USB cable is connected. If you connect through Bluetooth, switch off Bluetooth and switch on again",
-                "receiveBlockSuccess": "Successfully received {num} transaction",
+                "title": "Piliin ang Address",
+                "tips": "Pumili ng isang address na gagamitin:",
+                "selectConnectType": "Piliin ang uri ng koneksyon: (Sinusuportahan lamang ng Bluetooth sa Ledger Nano X)",
+                "cancelSelect": "Pumili ng isang aparato upang kumonekta",
+                "connectError": "Nabigo ang pag-konekta. Mangyaring kumpirmahin sa Vite app ang binuksan sa aparato",
+                "interfaceNotAvailable": "Nabigo ang pag-konekta. Mangyaring suriin na konektado ang USB cable. Kung kumonekta ka sa pamamagitan ng Bluetooth, patayin ang Bluetooth at muling buksan",
+                "receiveBlockSuccess": "Matagumpay na natanggap ang {num} transaksyon",
                 "introduction": {
                     "1": {
-                        "title": "Step 1: ",
-                        "content": "Connect Ledger device and enter PIN code"
+                        "title": "Hakbang 1: ",
+                        "content": "Ikonekta ang Ledger device at ipasok ang PIN code"
                     },
                     "2": {
-                        "title": "Step 2: ",
-                        "content": "Open Vite app on Ledger"
+                        "title": "Hakbang 2: ",
+                        "content": "Buksan ang Vite app sa Ledger"
                     }
                 }
             },
             "addressSelect": {
                 "index": "Indeks",
                 "address": "Address",
-                "balance": "Balance",
-                "unreceived": "Unreceived",
-                "nextPage": "Next page",
-                "prePage": "Last page",
-                "confirm": "Confirm",
-                "unUsedAccount": "New"
+                "balance": "Balanse",
+                "unreceived": "Hindi natanggap",
+                "nextPage": "Susunod na pahina",
+                "prePage": "Huling pahina",
+                "confirm": "Kumpirmahin",
+                "unUsedAccount": "Bago"
             },
             "confirm": {
-                "tips": "Please confirm the transaction on your Ledger device",
-                "verifyAddress": "Please verify the address on your Ledger device",
-                "alert": "Warning",
-                "alertContent": "Address has been denied on Ledger device. Please double verify if this address matches the address displayed on your Ledger device. If yes, ignore this message and go ahead to confirm the transaction, otherwise DO NOT send asset to the address and quit immediately.",
-                "alertLeftBtn": "I confirm the addresses are matched",
-                "alertRightBtn": "Addresses mismatch. Get me out of here!",
+                "tips": "Mangyaring kumpirmahin ang transaksyon sa iyong Ledger device",
+                "verifyAddress": "Mangyaring i-verify ang address sa iyong Ledger device",
+                "alert": "Babala",
+                "alertContent": "Tinanggihan ang address sa Ledger device. Mangyaring i-double verify kung ang address na ito ay tumutugma sa address na ipinakita sa iyong Ledger device. Kung oo, huwag pansinin ang mensaheng ito at magpatuloy upang kumpirmahin ang transaksyon, kung hindi HUWAG magpadala ng asset sa address at umalis kaagad.",
+                "alertLeftBtn": "Kinukumpirma ko na ang mga address ay naitugma",
+                "alertRightBtn": "Hindi tumutugma ang mga address. Alisin ako dito!",
                 "userCancel": "Transaction is cancelled on Ledger",
                 "userCancelByWeb": "You cancelled the transaction in Vite wallet. In this case, the transaction will be abandoned and never go through to blockchain even if it is confirmed on your Ledger device."
             }
@@ -1603,32 +1603,32 @@
         "viewLink": "Unstaking Status"
     },
     "mobileMining": {
-        "title": "Mining",
-        "miningTrade": "Trading",
+        "title": "Pagmimina",
+        "miningTrade": "Nakikipagkalakalan",
         "miningStaking": "Staking",
         "miningInvite": "Referral",
         "miningOrder": "Market-Making",
-        "tradeTotalIncome": "Total Income ({token})",
-        "stakingTotalIncome": "Total Income ({token})",
-        "inviteTotalIncome": "Total Income ({token})",
-        "orderTotalIncome": "Total Income ({token})",
-        "fee": "Fees",
-        "listTitle": "Mining History",
+        "tradeTotalIncome": "Kabuuang Kita ({token})",
+        "stakingTotalIncome": "Kabuuang Kita ({token})",
+        "inviteTotalIncome": "Kabuuang Kita ({token})",
+        "orderTotalIncome": "Kabuuang Kita ({token})",
+        "fee": "Mga Bayarin",
+        "listTitle": "Kasaysayan ng Pagmimina",
         "viewLink": "Live Mining Dashboard",
-        "inviteTradeIncome": "Referred Trading Details",
-        "inviteOrderIncome": "Referred Market-Making Details",
-        "myStaking": "My Staking"
+        "inviteTradeIncome": "Mga Detalyadong Detalye ng Trading",
+        "inviteOrderIncome": "Mga Detalye sa pag-refer sa Market-Making",
+        "myStaking": "Ang Staking ko"
     },
     "mobileBottomBar": {
         "center": "Trade",
-        "assets": "Assets",
-        "mining": "Mining",
-        "order": "Order"
+        "assets": "Mga Asset",
+        "mining": "Pagmimina",
+        "order": "Umorder"
     },
     "mobileOrder": {
-        "filterDate": "Date",
-        "filterToken": "Type",
-        "all": "All",
+        "filterDate": "Petsa",
+        "filterToken": "Uri",
+        "all": "Lahat",
         "3month": "3 buwan",
         "1month": "1 buwan",
         "1week": "1 linggo",
