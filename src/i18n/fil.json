@@ -1,5 +1,5 @@
 {
-    "lang": "TL",
+    "lang": "FIL",
     "help": "Sentro ng Tulong",
     "announcements": "Mga Anunsyo",
     "start": "Simula",
@@ -469,26 +469,26 @@
             "title": "Pag-Withdraw sa Cross-Chain",
             "btn": "Pag-withdraw",
             "balanceErrMap": {
-                "notEnough": "Insufficient Balance",
-                "overMax": "Withdrawal amount should be less than {max}",
-                "lessMin": "Withdrawal amount should not be less than {min}"
+                "notEnough": "Hindi sapat ang balanse",
+                "overMax": "Ang halaga ng pag-withdraw ay dapat mas mababa sa {max}",
+                "lessMin": "Ang halaga ng pag-withdraw ay hindi dapat mas mababa sa {min}"
             },
-            "feeTips": "Transaction fee is set by gateway operator",
-            "addressErr": "Address format is incorrect",
+            "feeTips": "Ang bayarin sa transaksyon ay itinakda ng operator ng gateway",
+            "addressErr": "Ang format ng address ay hindi tama",
             "labels": {
-                "balance": "Balance",
-                "address": "Recipient Address",
-                "amount": "Amount",
-                "fee": "Fee",
-                "all": "All"
+                "balance": "Balanse",
+                "address": "Address ng tatanggap",
+                "amount": "Halaga",
+                "fee": "Mga Bayarin",
+                "all": "Lahat"
             },
-            "labelPlaceholder": "Please input {labelName}",
-            "amountPlaceholder": "Please input send amount which should not be less than {min}",
-            "addressPlaceholder": "Please enter {token} recipient address",
-            "successTips": "Transaction request has been sent",
-            "failTips": "An error occurred in gateway node, please check the network settings"
+            "labelPlaceholder": "Mangyaring maglagay ng {labelName}",
+            "amountPlaceholder": "Mangyaring i-input ang halagang ipapadala na dapat hindi mas mababa sa {min}",
+            "addressPlaceholder": "Mangyaring ipasok ang {token} address ng tatanggap",
+            "successTips": "Naipadala ang kahilingan sa transaksyon",
+            "failTips": "May naganap na error sa gateway node, mangyaring suriin ang mga setting ng network"
         },
-        "nodeErr": "Gateway node is invalid, please check the gateway settings"
+        "nodeErr": "Ang gateway node ay hindi wasto, mangyaring suriin ang mga setting ng gateway"
     },
     "viteExplorer": {
         "title": "Vite Block Explorer"
@@ -497,34 +497,34 @@
         "title": "ViteScan"
     },
     "wallet": {
-        "title": "Quota Management",
+        "title": "Pamamahala sa Quota",
         "help": {
-            "title": "Quick Understanding of Quota"
+            "title": "Mabilis na Pag-unawa sa Quota"
         },
-        "transfer": "Send Funds",
-        "getTestToken": "Get Test Tokens",
-        "transDetail": "More Transaction Details",
-        "address": "My Address",
-        "fundFloat": "Unreceived",
-        "pend": "Pending",
-        "inAddress": "Recipient Address",
-        "sum": "Amount",
-        "remarks": "Memo",
+        "transfer": "Magpadala ng mga pondo",
+        "getTestToken": "Kumuha ng Mga Token para I-test",
+        "transDetail": "Higit pang Mga Detalye ng Transaksyon",
+        "address": "Ang aking address",
+        "fundFloat": "Hindi Natanggap",
+        "pend": "Nakabinbin",
+        "inAddress": "Address ng tatanggap",
+        "sum": "Halaga",
+        "remarks": "Mga puna",
         "remarksLong": "{len} bytes left",
-        "totalAsset": "Total Assets",
+        "totalAsset": "Ang kabuuang mga asset",
         "placeholder": {
-            "amount": "Please input amount",
-            "remarks": "Please input memo",
-            "addr": "Please input address"
+            "amount": "Mangyaring ilagay ang halaga",
+            "remarks": "Mangyaring maglagay ng Puna",
+            "addr": "Mangyaring mag-input ng address"
         },
         "hint": {
-            "token": "VITE test tokens have be sent to your account, please check your account!",
-            "tErr": "Get test token failed!",
-            "amount": "Amount must be greater than 0"
+            "token": "Ang mga token na I-tetest ng VITE ay naipadala na sa iyong account, mangyaring suriin ang iyong account!",
+            "tErr": "Bigo ang Pag-test sa token!",
+            "amount": "Ang halaga ay dapat na mas malaki sa 0"
         },
         "trans": {
-            "powErr": "Error occurs when running PoW, please try again",
-            "powTransErr": "Insufficient quota of PoW, we'd recommend that you stake VITE to obtain quota."
+            "powErr": "Nagaganap ang error kapag nagpapatakbo ng PoW, mangyaring subukang muli",
+            "powTransErr": "Hindi sapat ang quota ng PoW, inirerekumenda namin na magtustos ka ng VITE upang makakuha ng quota."
         }
     },
     "walletMintage": {
@@ -594,17 +594,17 @@
         "maxTxNum": "Maximum na Bilang ng Txs",
         "beneficialAddr": "Address ng Tatanggap ng Quota",
         "fromAddr": "Address ng Pagbawas",
-        "time": "Staking Freeze Duration",
-        "aboutDays": "Approx {day} days",
-        "amountPlaceholder": "Please enter staking amount, minimum {num} VITE",
-        "limitAmt": "Staking amount should not be less than {num}.",
-        "addrPlaceholder": "Please input quota recipient address",
-        "inputWithdrawAmount": "Please input withdraw amount",
-        "pledgeFail": "Failed to Submit",
-        "canclePledgeFail": "Failed",
-        "maturity": "Staking has expired!",
-        "minAmt": "Withdraw amount cannot be less than {num} VITE",
-        "gotoStake": "Please Staking enough VITE first",
+        "time": "Tagal ng Staking Freeze",
+        "aboutDays": "Tinatayang {day} araw",
+        "amountPlaceholder": "Mangyaring ipasok ang halaga ng staking, minimum na {num} VITE",
+        "limitAmt": "Ang halaga ng staking ay hindi dapat mas mababa sa {num}.",
+        "addrPlaceholder": "Mangyaring maglagay ng address ng tatanggap ng quota",
+        "inputWithdrawAmount": "Mangyaring i-input ang halagang pag-withdraw",
+        "pledgeFail": "Nabigong Isumite",
+        "canclePledgeFail": "Nabigo",
+        "maturity": "Nag-expire na ang Staking!",
+        "minAmt": "Ang halaga ng Withdraw ay hindi maaaring mas mababa sa {num} VITE",
+        "gotoStake": "Mangyaring maglagay muna ng sapat na VITE",
         "maxAmt": "Ang halaga ng pag-withdraw ay dapat nasa [{minAmount}, {maxAmount}]",
         "cancelLimitAmt": "Ang halaga ng staking ay hindi maaaring mas mababa sa {num}",
         "withdrawalStaking": "Mag-withdraw ng Staked Token",
@@ -644,25 +644,25 @@
         "title": "Mga Transaksyon",
         "tType": {
             "title": "Uri",
-            "symbol": "Type"
+            "symbol": "Uri"
         },
         "status": {
-            "title": "Status",
-            "unconfirmed": "Unconfirmed",
-            "confirms": "Confirming",
-            "confirmed": "Confirmed"
+            "title": "Kalagayan",
+            "unconfirmed": "Hindi kumpirmado",
+            "confirms": "Kinukumpirma",
+            "confirmed": "Kumpirmahin"
         },
         "timestamp": "Timestamp",
         "tAddress": "Address",
-        "sum": "Amount"
+        "sum": "Halaga"
     },
     "walletFullNode": {
-        "title": "Full Nodes",
+        "title": "Full nodes",
         "help": {
-            "title": "About",
-            "t1": "Glossary",
-            "txt1": "[Number of Registered Nodes]  The number of full nodes registered with the current address",
-            "txt2": "[Number of Active Nodes]  The number of active full nodes registered with the current address",
+            "title": "Tungkol",
+            "t1": "Talahuluganan",
+            "txt1": "Bilang ng Mga Rehistradong Node] Ang bilang ng mga buong node na nakarehistro sa kasalukuyang address",
+            "txt2": "[Bilang ng mga Aktibong Node] Ang bilang ng mga aktibong buong node na nakarehistro sa kasalukuyang address",
             "txt3": "[Bilang ng mga Rewarding node] Bilang ng mga node na ginagantimpalaan",
             "t2": "Ang maramihang Full node ay maaaring nakarehistro na may parehong address, ngunit dapat na isa-isahin ang bawat isa na hindi bababa sa 10,000 VITE bawat isa; Kapag kinakalkula ang gantimpala ng Aktibong Node, kung ang halaga ng staking / 10000 ay magbubunga ng isang buong numero na mas malaki sa o katumbas ng bilang ng mga aktibong node, ang lahat ng mga aktibong node ay gagantimpalaan; Kung ang halaga ng staking / 10000 ay magbubunga ng isang buong numero na mas mababa sa bilang ng mga aktibong node, ang bilang ng mga node na ginantimpalaan ay katumbas ng buong numero.",
             "t3": "Ang pagkalkula ng mga gantimpala sa pagboto ay hindi nakasalalay sa bilang ng mga node, ngunit sa halaga ng staking."
@@ -729,55 +729,55 @@
             "time": "7776000 snapshot blocks （tinatayang 90 araw）",
             "confirmBtn": "Isumite",
             "namePlaceholder": "Mangyaring i-input ang pangalan ng account",
-            "nameHint": "Within 40 characters, support English letters (both upper and lower cases), numbers, '_'、'.'",
-            "nameErr": "This node name is illegal",
-            "nameUsed": "This node name is occupied",
-            "addrPlaceholder": "Please input snapshot block creation address",
-            "addrHint": "The block creation address must be a full node and keep up running",
-            "addrErr": "Illegal address",
-            "addrUsed": "This address has been occupied",
-            "registerSuccess": "Registration request has sent",
-            "registerFail": "Registration request failed"
+            "nameHint": "Sa loob ng 40 character, suportahan ang mga titik sa Ingles (kapwa nasa itaas at mas mababang pagkakasulat), mga numero, '_' 、 '.'",
+            "nameErr": "Ang pangalan ng node na ito ay di naaayon",
+            "nameUsed": "Ang pangalan ng node na ito ay sakop",
+            "addrPlaceholder": "Mangyaring maglagay ng address sa paglikha ng snapshot block",
+            "addrHint": "Ang address ng paglikha ng block ay dapat nasa isang buong node at patuloy na tumatakbo",
+            "addrErr": "Ilegal na address",
+            "addrUsed": "Ang address na ito ay nasakop na",
+            "registerSuccess": "Naipadala ang kahilingan sa pagpaparehistro",
+            "registerFail": "Nabigo ang kahilingan sa pagpaparehistro"
         },
         "section2": {
-            "title": "Registration Information",
-            "update": "Modify",
-            "updateFail": "Failed to send modify request",
-            "cancel": "Revoking",
-            "cancelFail": "Failed to send revoking request",
-            "expireDate": "Expire Date: {time}",
+            "title": "Impormasyon sa pagrehistro",
+            "update": "Baguhin",
+            "updateFail": "Nabigong maipadala ang kahilingan sa pagbabago",
+            "cancel": "Pagpapawalang-bisa",
+            "cancelFail": "Nabigong magpadala ng kahilingan sa pagbawi",
+            "expireDate": "Petsa ng Pagka-expire: {time}",
             "cancelConfirm": {
-                "title": "Revoke registration of SBP",
-                "describe": "The staking amount will be returned back to your staking address after revoking, you have to re-submit the registration to become a SBP"
+                "title": "Bawiin ang pagpaparehistro ng SBP",
+                "describe": "Ang halaga ng staking ay ibabalik sa iyong staking address pagkatapos ng pagbawi, kailangan mong isumite muli ang pagpaparehistro upang maging isang SBP"
             }
         }
     },
     "walletVote": {
-        "title": "Voting",
+        "title": "Pagboto",
         "help": {
-            "title": "About Voting",
-            "text": "You can join and vote for 25 SBPs （Snapshot Block Producer), each round of voting lasts 75s, the polls you can use for voting are equivalent to the amount of VITE tokens owned by voting address, the default selection is the choice of previous round, the SBPs will be chosen from random 23 out of top 25 candidate nodes, plus random 2 out of the candidate nodes ranking 26th-100th on the list, 25 SBPs in total."
+            "title": "Tungkol sa Pagboto",
+            "text": "Maaari kang sumali at bumoto para sa 25 SBPs （Snapshot Block Producer), bawat pag-ikot ng botohan ay tumatagal ng 75s, ang mga botohan na maaari mong gamitin para sa pagboto ay katumbas ng halaga ng mga token ng VITE na pagmamay-ari ng voting address, ang default na pagpipilian ay ang pagpipilian ng nakaraang pag-ikot, ang SBPs ay pipiliin mula sa random 23 mula sa nangungunang 25 mga node na kandidato, kasama ang random 2 mula sa mga node na kandidato na nasa ika-26 hanggang 100 sa listahan, 25 SBP sa kabuuan."
         },
-        "toReward": "View my rewards",
-        "voting": "Voting",
-        "search": "Please input node name or block creation address",
-        "addrNoExistErr": "You aren't able to vote for now as your address has no transaction record before",
-        "revokeVoting": "Revoke voting",
+        "toReward": "Tingnan ang aking mga gantimpala",
+        "voting": "Pagboto",
+        "search": "Mangyaring i-input ang pangalan ng node o i-block ang paglikha ng address",
+        "addrNoExistErr": "Hindi ka maaaring bumoto sa ngayon dahil ang iyong address ay walang tala ng transaksyon dati",
+        "revokeVoting": "Bawiin ang Pagboto",
         "section1": {
-            "title": "My Voting",
+            "title": "Ang Aking Pagboto",
             "head": [
-                "Name",
-                "Status",
-                "My Voting",
-                "Status of Voting",
-                "Action"
+                "Pangalan",
+                "Kalagayan",
+                "Ang Aking Pagboto",
+                "Katayuan ng Pagboto",
+                "Kilos"
             ],
             "nodeStatusMap": {
-                "1": "Active",
-                "2": "Inactive"
+                "1": "Aktibo",
+                "2": "Hindi aktibo"
             },
             "voteStatusMap": {
-                "voted": "Voting Successful",
+                "voted": "Matagumpay ang Pagboto",
                 "voting": "Voting",
                 "canceling": "Revoking in Process",
                 "voteNotWork": "Revoked Voting"
@@ -880,7 +880,7 @@
                 }
             },
             "addressSelect": {
-                "index": "Index",
+                "index": "Indeks",
                 "address": "Address",
                 "balance": "Balance",
                 "unreceived": "Unreceived",
@@ -1629,18 +1629,18 @@
         "filterDate": "Date",
         "filterToken": "Type",
         "all": "All",
-        "3month": "3 months",
-        "1month": "1 month",
-        "1week": "1 week",
-        "1day": "1 day",
-        "clear": "Clear",
-        "submit": "Search"
+        "3month": "3 buwan",
+        "1month": "1 buwan",
+        "1week": "1 linggo",
+        "1day": "1 araw",
+        "clear": "Malinaw",
+        "submit": "Maghanap"
     },
     "desktop": {
-        "unlock": "unlock",
+        "unlock": "i-unlock",
         "unreceivedTx": {
-            "title": "You have received {num} transactions.",
-            "body": "Amount：{amount} {symbol} \nFrom Address: {address}"
+            "title": "Nakatanggap ka ng mga transaksyon sa {num}.",
+            "body": "Halaga ：{amount} {symbol} \nMula sa Address: {address}"
         }
     }
 }
