@@ -1058,77 +1058,77 @@
             "adviseToSVip": "Mag-upgrade sa SVIP, tangkilikin ang zero base fee sa transaksyon",
             "feeRuleWithSVip": "Bayad sa Operator * Discount ng Referral. PANSININ: Ang pagsasaayos at diskwento ng mga bayarin ay makakaapekto lamang sa mga bagong order, mananatiling pareho ang singil ng dating mga order.",
             "text": "Ang pahinang ito ay isang pahina ng preview ng data ng transaksyon. Mangyaring mag-login sa trade.",
-            "validAmount": "Volume must be greater than {amount}{token}",
-            "priceNotNull": "Amount cannot be empty",
-            "amountNotNull": "Volume cannot be empty",
-            "quantityNotNull": "Quantity cannot be empty",
-            "cancelVip": "Cancel",
-            "openVip": "Become a VIP",
-            "dexFee": "Base Transaction Fees: {fee}",
-            "operatorFee": "Operator Fees: {fee}",
-            "vipFee": "VIP Discount: {fee}",
-            "inviteFeeDiscount": "Referral Discount: {fee} off",
-            "svipFee": "SVIP: 0% base transaction fee",
-            "feeRule": "(Base Transaction Fee - VIP discount + Operator Fees) * Referral Discount. ATTENTION: The adjustment and discount of fees will only affect new orders, the former orders' charge remains the same."
+            "validAmount": "Ang dami ay dapat na mas malaki sa {amount}{token}",
+            "priceNotNull": "Hindi maaaring walang laman ang halaga",
+            "amountNotNull": "Hindi maaaring walang laman ang dami",
+            "quantityNotNull": "Ang dami ay hindi maaaring walang laman",
+            "cancelVip": "Kanselahin",
+            "openVip": "Maging VIP",
+            "dexFee": "Batayan ng mga Bayarin sa Transaksyon: {fee}",
+            "operatorFee": "Bayad sa Operator: {fee}",
+            "vipFee": "Diskwento sa VIP: {fee}",
+            "inviteFeeDiscount": "Discount ng Referral: {fee} off",
+            "svipFee": "SVIP: 0% batayang bayarin sa transaksyon",
+            "feeRule": "(Bayad sa Transaksyon sa Base - Diskwento sa VIP + Bayad sa Operator) * Diskwento sa Referral. Pansin: Ang pagsasaayos at diskwento ng mga bayarin ay makakaapekto lamang sa mga bagong order, ang singil ng dating mga order ay mananatiling pareho."
         },
         "proxy": {
-            "title": "Trade Delegation",
-            "subTitle": "Trade Delegation",
-            "successProxy": "Delegation Success",
-            "failProxy": "Delegation Failed",
-            "successCancelProxy": "Remove Delegation Success",
-            "failCancelProxy": "Failed to remove delegations",
-            "info": "What is Trade Delegation?",
-            "new": "Initiate Delegation",
+            "title": "Delegasyon sa pag-trade",
+            "subTitle": "Delegasyon sa pag-trade",
+            "successProxy": "Tagumpay ng Delegasyon",
+            "failProxy": "Nabigo ang Delegasyon",
+            "successCancelProxy": "Alisin ang Tagumpay ng Pagdelegasyon",
+            "failCancelProxy": "Nabigong alisin ang mga delegasyon",
+            "info": "Ano ang Delegasyon sa Pag-trade?",
+            "new": "Magsimula sa Delegasyon",
             "active": {
-                "title": "Delegation History",
+                "title": "Kasaysayan ng Delegasyon",
                 "head": [
-                    "Delegatee Address",
-                    "Trading Pairs",
-                    "Action"
+                    "Address ng Delegado",
+                    "Mga Trading Pair",
+                    "Kilos"
                 ],
                 "operate": [
-                    "Add Trading Pairs",
-                    "Remove Trading Pairs",
-                    "Remove All Delegations"
+                    "Magdagdag ng Trading Pairs",
+                    "Alisin ang Trading Pairs",
+                    "Tanggalin ang delegasyon"
                 ]
             },
             "passive": {
-                "title": "Accepted Delegation History",
+                "title": "Tinanggap ang Kasaysayan ng Delegasyon",
                 "head": [
-                    "Delegation Address",
-                    "Trading Pairs"
+                    "Address ng Delegasyon",
+                    "Mga Trading Pair"
                 ]
             },
             "dialog": {
-                "cancel": "Cancel",
-                "cancelAllTips": "Are you sure you'd like to remove all delegations on {trustAddress}?",
+                "cancel": "Kanselahin",
+                "cancelAllTips": "Sigurado ka bang nais mong alisin ang lahat ng mga delegasyon sa {trustAddress}?",
                 "rTxtMap": {
-                    "new": "Add",
-                    "add": "Add",
-                    "delete": "Confirm",
-                    "deleteAll": "Confirm"
+                    "new": "Magdagdag",
+                    "add": "Magdagdag",
+                    "delete": "Kumpirmahin",
+                    "deleteAll": "Kumpirmahin"
                 },
                 "confirm": {
-                    "title": "Confirm Delegations",
-                    "cancel": "Cancel",
-                    "ok": "Confirm"
+                    "title": "Kumpirmahin ang Mga Delegasyon",
+                    "cancel": "Kanselahin",
+                    "ok": "Kumpirmahin"
                 },
                 "titleMap": {
-                    "new": "Initiate Delegation",
-                    "add": "Add Delegations",
-                    "delete": "Remove Delegations",
-                    "deleteAll": "Confirm to remove delegations"
+                    "new": "Magsimula sa Delegasyon",
+                    "add": "Magdagdag ng mga Delegasyon",
+                    "delete": "Tanggalin ang delegasyon",
+                    "deleteAll": "Kumpirmahing alisin ang mga delegasyon"
                 }
             }
         },
         "openapi": {
             "title": "API",
-            "myKey": "My API Key",
-            "createTime": "Created Time",
-            "permissions": "Applied Trading Pairs",
-            "createKey": "Create API Key",
-            "deleteKey": "Delete API",
+            "myKey": "Ang aking API Key",
+            "createTime": "Oras ng paggawa",
+            "permissions": "Inilapat na mga Trading Pair",
+            "createKey": "Lumikha ng API Key",
+            "deleteKey": "Tanggalin ang API",
             "deleteAlert": "The current API will no longer be accessible if confirm to proceed. Existing package will be retained and re-activated upon creation of a new API Key.",
             "confirmDelete": "Confirm and Delete",
             "cancel": "Cancel",
@@ -1537,21 +1537,21 @@
         ],
         "openTxPairConfirm": {
             "title": "Open {symbol} to trade",
-            "fee": "Listing Fee",
-            "hint": "If you want to add unique operator symbol after opening a trading pair, please contact us at our Telegram group: https://t.me/vite_en",
-            "btn": "Submit",
-            "reqSuccess": "Submit Successful! Check it on market board later.",
-            "reqError": "Listing failed, please try again"
+            "fee": "Bayarin sa Listing",
+            "hint": "Kung nais mong magdagdag ng natatanging simbolo ng operator pagkatapos ng pagbubukas ng isang pares ng kalakalan, mangyaring makipag-ugnay sa amin sa aming Telegram group: https://t.me/vite_en",
+            "btn": "Isumite",
+            "reqSuccess": "Matagumpay na naisumite! Tingnan ito sa market board mamaya.",
+            "reqError": "Nabigo ang pag-listing, pakisubukang muli"
         },
-        "stopTransHint": "Make sure to suspend {symbol} ?",
-        "resetTransHint": "Make sure to recover {symbol} ?",
-        "stopSuccess": "Suspension Successful",
-        "stopFail": "Suspension Failed",
-        "openSuccess": "Recovery Successful",
-        "openFail": "Recovery Failed",
-        "changeOwnerSuccess": "Transfer Successful",
-        "changeOwnerFaill": "Transfer Failed",
-        "submitChange": "Confirm to transfer",
+        "stopTransHint": "Tiyaking suspindihin ang {symbol} ?",
+        "resetTransHint": "Tiyaking mababawi ang {symbol} ?",
+        "stopSuccess": "Matagumpay ang suspensyon",
+        "stopFail": "Nabigo ang suspensyon",
+        "openSuccess": "Matagumpay sa Pag-recover",
+        "openFail": "Nabigo ang Pag-recover",
+        "changeOwnerSuccess": "Matagumpay ang paglipat",
+        "changeOwnerFaill": "Nabigo ang Paglipat",
+        "submitChange": "Kumpirmahing ilipat",
         "changeOwnerHint": "NOTICE: You will not be able to collect or adjust fees after ownership transferred as well as you cannot undo this transfer action",
         "currentMaker": "Maker",
         "confirmFee": "Fee",
@@ -1600,7 +1600,7 @@
         "myDividendTitle": "Total Estimated Value of Dividends ({token})",
         "listTitle": "Dividend Details",
         "lockingTitle": "My Staking",
-        "viewLink": "Unstaking Status"
+        "viewLink": "Katayuan na pag-Unstaking"
     },
     "mobileMining": {
         "title": "Pagmimina",
