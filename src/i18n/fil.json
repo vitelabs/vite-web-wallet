@@ -1248,107 +1248,107 @@
             "submitTxt": "Kumpirmahing bawiin",
             "cancelTxt": "Kanselahin",
             "title": "Bawiin ang pag-order",
-            "content": "Are you sure you want to revoke current order?"
+            "content": "Sigurado ka bang nais mong bawiin ang kasalukuyang order?"
         },
-        "title": "Open Orders",
+        "title": "Buksan ang mga Order",
         "hint": {
-            "fdate": "Please select start date",
-            "tdate": "Please select end date",
-            "dateErr": "The end date must be later than the start date",
-            "ftoken": "Please select ftoken"
+            "fdate": "Mangyaring piliin ang petsa ng pagsisimula",
+            "tdate": "Mangyaring piliin ang petsa ng pagtatapos",
+            "dateErr": "Ang petsa ng pagtatapos ay dapat na mas huli kaysa sa petsa ng pagsisimula",
+            "ftoken": "Mangyaring piliin ang ftoken"
         },
         "side": {
-            "1": "Sell",
-            "0": "Buy"
+            "1": "Pagbenta",
+            "0": "Pagbili"
         },
         "table": {
             "heads": [
-                "Date",
-                "Pair",
-                "Side",
-                "Price",
-                "Amount",
-                "Filled",
-                "Filled%",
-                "Average",
-                "Total"
+                "Petsa",
+                "Pares",
+                "Parte",
+                "Presyo",
+                "Halaga",
+                "Punan",
+                "Punan%",
+                "Pangkaraniwan",
+                "Kabuuan"
             ],
             "rowMap": {
-                "cancel": "Cancel"
+                "cancel": "Kanselahin"
             }
         }
     },
     "tradeOrderHistory": {
-        "title": "Order History",
+        "title": "Kasaysayan ng Order",
         "hint": {
-            "fdate": "Please choose start date",
-            "tdate": "Please choose end date",
-            "dateErr": "End date must be after start date"
+            "fdate": "Mangyaring piliin ang petsa ng pagsisimula",
+            "tdate": "Mangyaring piliin ang petsa ng pagtatapos",
+            "dateErr": "Ang huling petsa ay mas dapat kailangan pagkatapos ng simula ng petsa"
         },
         "side": {
-            "1": "Sell",
-            "0": "Buy"
+            "1": "Pagbenta",
+            "0": "Pagbili"
         },
         "status": {
-            "1": "Ongoing",
-            "2": "Completed",
-            "3": "Cancelled",
-            "4": "Failed"
+            "1": "Patuloy",
+            "2": "Nakompleto",
+            "3": "Kinansela",
+            "4": "Nabigo"
         },
         "confirmTable": {
             "title": "Order Book",
             "heads": [
-                "Time",
-                "Price",
-                "Amount",
-                "Fees",
-                "Total"
+                "Oras",
+                "Presyo",
+                "Halaga",
+                "Mga Bayarin",
+                "Kabuuan"
             ]
         },
         "table": {
             "heads": [
-                "Date",
-                "Pair",
-                "Side",
-                "Price",
-                "Amount",
-                "Filled",
-                "Average",
-                "Fees",
-                "Total",
-                "Status"
+                "Petsa",
+                "Pares",
+                "Parte",
+                "Presyo",
+                "Halaga",
+                "Punan",
+                "Pangkaraniwan",
+                "Mga Bayarin",
+                "Kabuuan",
+                "Kalagayan"
             ],
             "rowMap": {
                 "statusMap": {
-                    "1": "In Order",
-                    "2": "Completed",
-                    "3": "Canceled",
-                    "4": "Failed"
+                    "1": "Sa Order",
+                    "2": "Nakompleto",
+                    "3": "Kinansela",
+                    "4": "Nabigo"
                 },
-                "detail": "Details"
+                "detail": "Mga Detalye"
             }
         },
         "filter": {
-            "start": "From",
-            "end": "To",
-            "type": "Type",
-            "side": "Side",
-            "buy": "Buy",
-            "sell": "Sell",
-            "status": "Status",
-            "search": "Search",
-            "reset": "Reset"
+            "start": "Mula sa",
+            "end": "Para kay",
+            "type": "Uri",
+            "side": "Parte",
+            "buy": "Bumili",
+            "sell": "Pagbenta",
+            "status": "Kalagayan",
+            "search": "Maghanap",
+            "reset": "I-reset"
         }
     },
     "tradeMining": {
-        "title": "Mining",
-        "addQuota": "Create a new staking",
-        "add": "Add",
+        "title": "Pagmimina",
+        "addQuota": "Lumikha ng isang bagong staking",
+        "add": "Magdagdag",
         "withdraw": "Unstake",
-        "withdrawList": "Withdrawal List",
+        "withdrawList": "Listahan ng Pag-withdraw",
         "tbHead": {
-            "date": "Date",
-            "fee": "Trading Fees",
+            "date": "Petsa",
+            "fee": "Bayad sa pag trade",
             "mining": "Mining Amount",
             "pledge": "Stake"
         },
