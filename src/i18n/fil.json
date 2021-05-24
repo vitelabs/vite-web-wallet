@@ -1145,109 +1145,109 @@
             "noSupportForHardware": "Ang Hardware Wallet ay hindi suportado sa ngayon",
             "tips": {
                 "title": "Abiso",
-                "0": "ViteX is releasing official API to provide access to markets and real-time trading services. Follow the instructions below to properly acquire an API private key.",
-                "0-step1": "1. Create API",
-                "0-step2": "2. Authorize delegation of selected trading pairs",
-                "0-step3": "3. Stake quota for API delegation address",
-                "0-step4": "View <a href=\"https://vite.wiki/dex/api/dex-apis.html\" target=\"_blank\">API Documentation</a> for further support",
-                "1": "One set of API Key and Secret is allowed for the same address at any given time.",
-                "2": "To avoid asset loss, Do Not disclose your Access Key and Secret",
-                "3": "The API package is set with the free base package at 10 transactions per minute by default, upgrade options available."
+                "0": "Ang ViteX ay naglalabas ng opisyal na API upang magbigay ng pag-access sa mga merkado at mga serbisyo sa real-time na pangangalakal. Sundin ang mga tagubilin sa ibaba upang maayos na makakuha ng isang pribadong key ng API.",
+                "0-step1": "1. Lumikha ng API",
+                "0-step2": "2. Pahintulutan ang delegasyon ng mga napiling trading pair",
+                "0-step3": "3. Quota sa Pag-stake para sa address ng delegasyon ng API",
+                "0-step4": "Tingnan ang <a href=\"https://vite.wiki/dex/api/dex-apis.html\" target=\"_blank\"> Dokumentasyon ng API </a> para sa karagdagang suporta",
+                "1": "Pinapayagan ang isang hanay ng API Key at Lihim para sa parehong address sa anumang naibigay na oras.",
+                "2": "Upang maiwasan ang pagkawala ng assets, Huwag ibunyag ang iyong Access Key at Lihim",
+                "3": "Ang package ng API ay itinakda kasama ang libreng base package sa 10 mga transaksyon bawat minuto bilang default, magagamit ang mga pagpipilian sa pag-upgrade."
             },
             "stakingForQuota": {
-                "title": "Delegation Quota",
-                "agentAddress": "Delegation Address",
-                "stakingAmount": "Stake Amount",
-                "ok": "Confirm"
+                "title": "Quota ng Delegasyon",
+                "agentAddress": "Address ng Delegasyon",
+                "stakingAmount": "Halaga ng Stake",
+                "ok": "Kumpirmahin"
             },
             "keyConfirm": {
-                "accessKey": "Access Key",
-                "secretKey": "Secret Key",
-                "agentAddress": "Delegation Address",
-                "title": "API Created Successfully",
+                "accessKey": "Key ng Pag-access",
+                "secretKey": "Lihim na Susi",
+                "agentAddress": "Address ng Delegasyon",
+                "title": "Matagumpay na Nalikha ang API",
                 "tips": {
-                    "title": "Important Notice",
-                    "0": "To avoid asset loss, Do Not disclose your Access Key and Secret Key.",
-                    "1": "In cases of lost secret key, Delete the current API and Re-Apply for a new API key."
+                    "title": "Mahalagang Paunawa",
+                    "0": "Upang maiwasan ang pagkawala ng assets, Huwag ibunyag ang iyong Access Key at Lihim.",
+                    "1": "Sa mga kaso ng nawalang lihim na key, Tanggalin ang kasalukuyang API at Muling Mag-apply para sa isang bagong key ng API."
                 },
-                "warn": "The Secret key is displayed only once and cannot be found back if lost, please keep it properly."
+                "warn": "Ang Lihim na susi ay ipinapakita nang isang beses lamang at hindi mahahanap muli kung nawala, mangyaring panatilihin itong nakatago."
             },
             "upgradeConfirm": {
-                "title": "Upgrade Package",
-                "currentPackage": "Current",
-                "selectPackage": "Select New",
-                "selectTime": "Valid For",
+                "title": "I-upgrade ang Package",
+                "currentPackage": "Kasalukuyan",
+                "selectPackage": "Pumili ng bago",
+                "selectTime": "May bisa Para sa",
                 "month": " Mth",
-                "payAmount": "Total",
-                "balance": "VX Balance"
+                "payAmount": "Kabuuan",
+                "balance": "Balanse ng VX"
             }
         }
     },
     "tradeAssets": {
-        "title": "Funds",
-        "search": "Please enter token name",
-        "operate": "Action",
-        "all": "All",
+        "title": "Mga Pondo",
+        "search": "Mangyaring ipasok ang pangalan ng token",
+        "operate": "Kilos",
+        "all": "Lahat",
         "confirmTable": {
-            "title": "Detailed Record",
+            "title": "Detalyadong Record",
             "heads": [
-                "Date",
+                "Petsa",
                 "Token",
-                "Type",
-                "Amount"
+                "Uri",
+                "Halaga"
             ]
         },
         "pwdConfirm": {
-            "cancelTxt": "Cancel"
+            "cancelTxt": "Kanselahin"
         },
         "table": {
             "heads": [
                 "Token",
-                "Total Balance",
-                "Exchange Balance",
-                "In Order",
-                "Value"
+                "Kabuuang Balanse",
+                "Balanse ng Palitan",
+                "Sa Order",
+                "Halaga"
             ],
             "rowMap": {
-                "recharge": "Deposit to Exchange",
-                "withdraw": "Withdraw to Wallet",
-                "detail": "Details",
+                "recharge": "Deposit para sa Palitan",
+                "withdraw": "Bawiin sa Wallet",
+                "detail": "Mga Detalye",
                 "sideMap": {
-                    "1": "Deposit",
-                    "2": "Withdraw"
+                    "1": "Deposito",
+                    "2": "Pag-withdraw"
                 }
             }
         },
         "confirmrecharge": {
-            "successToast": "Deposit successful",
-            "failToast": "Failed to deposit",
-            "title": "Deposit to Exchange",
-            "lable1": "Wallet Balance",
-            "lable2": "Deposit Amount",
-            "tips": "Insufficient Wallet Balance",
-            "placeholder": "Please input deposit amount",
-            "btn": "Deposit"
+            "successToast": "Matagumpay ang pagdeposito",
+            "failToast": "Nabigong magdeposito",
+            "title": "Deposit para sa Palitan",
+            "lable1": "Balanse sa Wallet",
+            "lable2": "Halaga ng Deposito",
+            "tips": "Hindi sapat na Balanse sa Wallet",
+            "placeholder": "Mangyaring mag-input ng halaga ng deposito",
+            "btn": "Deposito"
         },
         "confirmwithdraw": {
-            "successToast": "Withdrawal Successful",
-            "failToast": "Withdrawal Failed",
-            "title": "Withdraw to Wallet",
-            "lable1": "Available Balance",
-            "lable2": "Withdrawal Amount",
-            "tips": "Insufficient Wallet Balance",
-            "placeholder": "Please input withdrawal amount",
-            "btn": "Withdraw"
+            "successToast": "Matagumpay na pag-Withdraw",
+            "failToast": "Nabigo ang pag-Withdraw",
+            "title": "Mag-withdraw sa wallet",
+            "lable1": "Magagamit na Balance",
+            "lable2": "Halaga ng Pag-withdraw",
+            "tips": "Hindi sapat na Balanse sa Wallet",
+            "placeholder": "Mangyaring i-input ang halagang iwi-withdraw",
+            "btn": "I-withdraw"
         },
-        "zero": "Hide Low Balances"
+        "zero": "Itago ang Mababang Balanse"
     },
     "tradeOpenOrders": {
-        "cancelErr": "You are trying too ofter, please try again later.",
+        "cancelErr": "Madaming beses na sinubukan, mangyaring subukang muli sa ibang pagkakataon.",
         "confirm": {
-            "successToast": "Revoking Order Successful",
-            "failToast": "Revoking Order Failed",
-            "submitTxt": "Confirm to revoke",
-            "cancelTxt": "Cancel",
-            "title": "Revoke Order",
+            "successToast": "Matagumpay na Binabawi ang Order",
+            "failToast": "Nabigo ang Pagbawi ng Order",
+            "submitTxt": "Kumpirmahing bawiin",
+            "cancelTxt": "Kanselahin",
+            "title": "Bawiin ang pag-order",
             "content": "Are you sure you want to revoke current order?"
         },
         "title": "Open Orders",
