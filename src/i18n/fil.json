@@ -1552,54 +1552,54 @@
         "changeOwnerSuccess": "Matagumpay ang paglipat",
         "changeOwnerFaill": "Nabigo ang Paglipat",
         "submitChange": "Kumpirmahing ilipat",
-        "changeOwnerHint": "NOTICE: You will not be able to collect or adjust fees after ownership transferred as well as you cannot undo this transfer action",
-        "currentMaker": "Maker",
-        "confirmFee": "Fee",
-        "currentTaker": "Taker",
-        "txPairName": "Name",
-        "changeFeeHint": "{symbol}'s fee into {fee}",
-        "changeFeeSubmit": "Make sure to change {changeFeeHint}",
-        "historyAllIncome": "Total Income",
+        "changeOwnerHint": "PAUNAWA: Hindi ka makakolekta o makakapag-ayos ng mga bayarin matapos mailipat ang pagmamay-ari pati na rin hindi mo maa-undo ang paglipat na ito",
+        "currentMaker": "Tagagawa",
+        "confirmFee": "Mga Bayarin",
+        "currentTaker": "Tagakuha",
+        "txPairName": "Pangalan",
+        "changeFeeHint": "{symbol}'s bayad sa {fee}",
+        "changeFeeSubmit": "Tiyaking baguhin ang {changeFeeHint}",
+        "historyAllIncome": "Kabuuang kita",
         "incomeListHead": {
-            "date": "Date",
-            "txNum": "Volume",
+            "date": "Petsa",
+            "txNum": "Dami",
             "feeRate": "Rate",
-            "feeIncome": "Income"
+            "feeIncome": "Kita"
         }
     },
     "mobileAssets": {
-        "allAssets": "Estimated Assets Value ({token})",
-        "tokenInfoTitle": "Token Details",
-        "transfer": "Transfer",
+        "allAssets": "Tinantyang Halaga ng Mga Asset ({token})",
+        "tokenInfoTitle": "Mga Detalye ng Token",
+        "transfer": "Ilipat",
         "trade": "Trade",
-        "chooseTxPair": "Choose Trading Pair"
+        "chooseTxPair": "Piliin ang Trading Pair"
     },
     "mobileTradeCenter": {
-        "highPrice": "High",
-        "lowPrice": "Low",
-        "quantity": "24H Vol",
-        "buyTitle": "Buy",
-        "sellTitle": "Sell",
-        "price": "Price ({token})",
+        "highPrice": "Mataas",
+        "lowPrice": "Mababa",
+        "quantity": "24h Vol",
+        "buyTitle": "Bumili",
+        "sellTitle": "Pagbenta",
+        "price": "Presyo ({token})",
         "buy": {
-            "price": "Price",
-            "quantity": "Amount"
+            "price": "Presyo",
+            "quantity": "Halaga"
         },
         "sell": {
-            "price": "Price",
-            "quantity": "Amount"
+            "price": "Presyo",
+            "quantity": "Halaga"
         },
-        "orderQuantity": "Amount",
-        "orderPrice": "Price",
-        "executedQuantity": "Filled",
+        "orderQuantity": "Halaga",
+        "orderPrice": "Presyo",
+        "executedQuantity": "Punan",
         "avgPrice": "Avg"
     },
     "mobileDividend": {
-        "title": "Dividends",
+        "title": "Mga Dividend",
         "poolTitle": "Dividend Pool ({token})",
-        "myDividendTitle": "Total Estimated Value of Dividends ({token})",
-        "listTitle": "Dividend Details",
-        "lockingTitle": "My Staking",
+        "myDividendTitle": "Kabuuang Tinantyang Halaga ng mga Dividend ({token})",
+        "listTitle": "Mga Detalye ng Dividend",
+        "lockingTitle": "Ang Staking ko",
         "viewLink": "Katayuan na pag-Unstaking"
     },
     "mobileMining": {
