@@ -1349,10 +1349,10 @@
         "tbHead": {
             "date": "Petsa",
             "fee": "Bayad sa pag trade",
-            "mining": "Mining Amount",
+            "mining": "Halaga ng Pagmimina",
             "pledge": "Stake"
         },
-        "txTitle": "Trading as Mining Total Income",
+        "txTitle": "Trading bilang Kabuuang Kita sa Pagmimina",
         "quotaTitle": "Staking as Mining Total Income",
         "addHint1": "Single stake should be at least 134 VITE",
         "addHint2": "VITE staking will be effective immediately after submission. Staking can be canceled after 3 days",
