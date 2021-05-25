@@ -1,11 +1,11 @@
 {
-    "lang": "영어",
+    "lang": "EN",
     "help": "도움말",
-    "announcements": "Announcements",
+    "announcements": "공지",
     "start": "시작하기",
     "login": "로그인",
     "regAcc": "계정생성",
-    "unlockAcc": "현재 계정 잠금 해제하기",
+    "unlockAcc": "잠금해제",
     "changeAcc": "다른 계정으로 전환하기",
     "existingAcc": "이미 존재하는 계정입니다",
     "restore": "니모닉 코드 가져오기",
@@ -34,7 +34,7 @@
             "나의 자산(웹 지갑 및 Vitex 거래소) 을 여기서 관리하세요",
             "주문 및 주문 내역을 확인하고, 거래 세부 정보를 확인하세요",
             "채굴에 참여하고 VX 및 거래 수수료 배당금을 얻으세요 (채굴 배당금)",
-            "더 많은 기능을 체험하세요: 할당량 스테이킹, SBP(스냅샷 블록 프로듀서, Snapshot Block Producer) 러너 되기, SBP 투표, ERC20 전환, 거래 세부 사항 등"
+            "더 많은 기능을 체험하세요: 쿼타 스테이킹, SBP(스냅샷 블록 프로듀서, Snapshot Block Producer) 러너 되기, SBP 투표, ERC20 전환, 거래 세부 사항 등"
         ],
         "assets": [
             "거래소에 입금하기",
@@ -44,29 +44,29 @@
     },
     "dealReminder": {
         "title": {
-            "buy": "Buy Order Completed: {ftoken} / {ttoken}",
-            "sell": "Sell Order Completed: {ftoken} / {ttoken}"
+            "buy": "매수 주문 완료: {ftoken} / {ttoken}",
+            "sell": "매도 주문 완료: {ftoken} / {ttoken}"
         },
         "failTitle": "주문이 실패했습니다",
         "notice-all": {
-            "buy": "Price: {price} {ttoken} \nAmount: {amount} {ttoken}, was completed. View Order History page for details.",
-            "sell": "Price: {price} {ttoken} \nAmount: {amount} {ttoken}, was completed. View Order History page for details."
+            "buy": "가격: {price} {ttoken}\n수량: {amount} {ttoken} 완료. 자세한 거래 내역 보기",
+            "sell": "가격: {price} {ttoken}\n수량: {amount} {ttoken} 완료. 자세한 거래 내역 보기"
         },
         "notice-partial": {
-            "buy": "Price: {price} {ttoken} \nAmount: {amount} {ttoken}, is {executedPercent}% completed.",
-            "sell": "Price: {price} {ttoken} \nAmount: {amount} {ttoken}, is {executedPercent}% completed."
+            "buy": "가격: {price} {ttoken}\n수량: {amount} {ttoken} {executedPercent}% 완료.",
+            "sell": "가격: {price} {ttoken}\n수량: {amount} {ttoken} {executedPercent}% 완료."
         },
         "error": "{time} 에 진행한 {amount} {ftoken} ({ftoken}/{ttoken}) 의 주문이 실패했습니다. 주문 내역에서 자세한 내용을 확인하세요"
     },
     "pow": {
-        "ing": "PoW를 실행해 할당량을 얻으세요",
-        "no": "PoW를 실행하지 않는 경우 할당량에 대해 VITE를 스테이킹 할 수 있습니다.",
-        "insuffQuota": "Get Quota",
-        "insuffQuotaMsg": "We notice you have no VITE locked for Quota. Please lock VITE or if you prefer, you can run POW to get Quota.",
-        "insuffQuotaMsg2": "VITE Only {powMaxTimes} transactions can be made per day per address without staking VITE. Your address has exhausted all {powMaxTimes} transactions. Please go to the quota page and stake your VITE to perform more transactions.",
-        "getQuota": "Lock VITE",
-        "skip": "Run POW",
-        "cancel": "Cancel"
+        "ing": "PoW를 실행해 쿼타를 얻으세요",
+        "no": "PoW를 실행하지 않는 경우 쿼타에 대해 VITE를 스테이킹 할 수 있습니다.",
+        "insuffQuota": "쿼타 얻기",
+        "insuffQuotaMsg": "락업된 쿼타가 없습니다. VITE를 락업해주세요, 혹은 원하는 경우 POW를 실행하여 쿼타를 얻을 수 있습니다.",
+        "insuffQuotaMsg2": "스테이킹한 VITE가 없으면 주소 당 하루에 {powMaxTimes} 만 거래 할 수 있습니다. 귀하의 주소는 모든 {powMaxTimes} 거래를 소진했습니다. 더 많은 거래를 수행하려면 쿼타 페이지로 이동하여 VITE를 스테이킹 해주세요.",
+        "getQuota": "VITE 락업하기",
+        "skip": "PoW 운영하기",
+        "cancel": "취소하기"
     },
     "addAccount": "계정 생성하기",
     "saveQrcode": "QR코드 이미지 저장하기",
@@ -81,12 +81,12 @@
     },
     "bnbConf": {
         "title": "중요 공지",
-        "t1": "VITE Binance Listing Coming! Please vote to have VITE listed on Binance.",
-        "t2": "Voting Period: 12:00 pm Dec 12 to 12:00 pm Dec 13 (HKT)",
-        "t3": "Voting Method: Holding 50 BNB allows for 1 vote (10 votes max)",
-        "t4": "Voting Rewards: All voted users will be rewarded with an airdrop totaling 21,000,000 VITE based on executed votes.",
-        "btn": "Vote Now!!!",
-        "notice": "[Attention]: You must have 50-500 BNBs in your Binance Account starting Dec 5 and last through Dec 13 to Qualify for Voting!"
+        "t1": "VITE 바이낸스 상장 예정! 바이낸스 상장을 위해 VITE에 투표해주세요.",
+        "t2": "투표 기간: 12월 12일 오후 12시~ 12월 13일 오후 12시 (HKT)",
+        "t3": "투표 방법: 50BNB를 홀딩할 시, 1개의 투표권 획득(최대 10투표 가능)",
+        "t4": "투표 리워드: 투표에 참여한 모든 사용자는 실행된 투표에 따라 총 21,000,000 VITE의 에어드랍을 받게됩니다.",
+        "btn": "지금 투표하세요!",
+        "notice": "[Attention]: 투표 자격을 얻으려면 12월 5일부터 12월 13일까지 바이낸스 계정에 50-500 BNB가 있어야합니다!"
     },
     "errCode": {
         "35003": "{name} ID 충돌이 발생했습니다. 다시 시도해주세요",
@@ -117,16 +117,16 @@
         "UpdateSBPBlockProducingAddress_V1": "등록 업데이트",
         "RevokeSBP": "등록 철회",
         "RevokeSBP_V1": "등록 철회",
-        "WithdrawSBPReward": "Claim Reward",
-        "WithdrawSBPReward_V1": "Claim Reward",
+        "WithdrawSBPReward": "보상 받기",
+        "WithdrawSBPReward_V1": "보상 받기",
         "VoteForSBP": "투표",
         "VoteForSBP_V1": "투표",
         "CancelSBPVoting": "투표 철회",
         "CancelSBPVoting_V1": "투표 철회",
-        "StakeForQuota": "할당량 가져오기",
-        "StakeForQuota_V1": "할당량 가져오기",
-        "CancelQuotaStake": "Withdrawal of Stake",
-        "CancelQuotaStake_V1": "Withdrawal of Stake",
+        "StakeForQuota": "쿼타 가져오기",
+        "StakeForQuota_V1": "쿼타 가져오기",
+        "CancelQuotaStake": "스테이킹 출금",
+        "CancelQuotaStake_V1": "스테이킹 출금",
         "IssueToken": "토큰 발행",
         "IssueToken_V1": "토큰 발행",
         "ReIssueToken": "추가 토큰 발행",
@@ -147,8 +147,8 @@
         "DexCancelOrder_V1": "ViteX 주문 철회",
         "DexStakeForSuperVIP": "ViteX SVIP",
         "DexStakeForSuperVIP_V1": "ViteX SVIP",
-        "DexConfigMarketAgents": "Configure Delegations",
-        "DexConfigMarketAgents_V1": "Configure Delegations",
+        "DexConfigMarketAgents": "대표 설정",
+        "DexConfigMarketAgents_V1": "대표 설정",
         "DexOpenNewMarket": "ViteX 토큰 상장",
         "DexOpenNewMarket_V1": "ViteX 토큰 상장",
         "DexStakeForVIP": "ViteX VIP",
@@ -162,9 +162,9 @@
         "ResponseFail": "전송하기",
         "RefundByContractRequest": "전송하기",
         "GenesisResponse": "제네시스",
-        "FullNodeStake": "Stake for Full Node",
-        "FullNodeCancelStake": "Withdraw Full Node Stakes",
-        "UpdateSBPRewardWithdrawAddress": "Edit SBP Reward Withdraw Address"
+        "FullNodeStake": "풀노드를 위해 스테이킹 됨",
+        "FullNodeCancelStake": "풀노드 스테이킹 출금하기",
+        "UpdateSBPRewardWithdrawAddress": "SBP 보상 출금 추소 수정하기"
     },
     "btn": {
         "cancel": "취소",
@@ -187,7 +187,7 @@
         "err": "오류가 발생했습니다.",
         "request": "{name} 요청을 보냈습니다. 잠시만 기다려주세요.",
         "copy": "성공적으로 복사되었습니다.",
-        "copyShare": "Copy share link successful!",
+        "copyShare": "링크를 복사하였습니다",
         "addrFormat": "잘못된 주소 형식",
         "amtFormat": "잘못된 금액 형식",
         "transSucc": "트랜잭션 성공!",
@@ -198,7 +198,7 @@
         "operateSuccess": "작업에 성공했습니다",
         "operateFail": "작업에 실패하였습니다",
         "unreceived": "사용하기 전에 지갑을 잠금 해제하세요",
-        "unreceivedNum": "Please sign in to collect unreceived funds, currently you have {number} unreceived transaction(s)"
+        "unreceivedNum": "미수신된 거래를 받으려면 로그인하세요. 현재 미수신 거래가 {number} 개 있습니다."
     },
     "beforeUse": {
         "title": "사용하기 전에 읽어주세요",
@@ -209,7 +209,7 @@
     "preview": {
         "t": "버전{version}",
         "txt1": "x.vite.net은 지갑과 거래소를 통합한 웹 플랫폼입니다. Vite Labs가 공식적으로 출시했습니다.",
-        "txt2": "현재 버전은 지갑, ViteX 탈중앙화 거래소, VITE 할당량 스테이킹, SBP 등록, 투표 및 토큰 발행 기능을 포함합니다. 새로 출시 된 ViteConnect 기능을 사용해보세요! QR코드를 스캔해 Vite앱에 로그인할 수 있습니다!",
+        "txt2": "현재 버전은 지갑, ViteX 탈중앙화 거래소, VITE 쿼타 스테이킹, SBP 등록, 투표 및 토큰 발행 기능을 포함합니다. 새로 출시 된 ViteConnect 기능을 사용해보세요! QR코드를 스캔해 Vite앱에 로그인할 수 있습니다!",
         "txt3": "ViteX가 공식적으로 출시되었습니다. 거래를 시작하세요!",
         "v": ""
     },
@@ -220,8 +220,8 @@
         "unlockAcc": "먼저 {name} 을 잠금 해제하십시오"
     },
     "quotaConfirm": {
-        "title": "할당량 부족",
-        "cancelContent": "TPS 할당량이 부족하여 {operate}을 (를) 수행할 수 없습니다. {operate} 할당량을 위해 VITE를 스테이킹해야합니다.",
+        "title": "쿼타 부족",
+        "cancelContent": "TPS 쿼타가 부족하여 {operate}을 (를) 수행할 수 없습니다. {operate} 쿼타를 위해 VITE를 스테이킹해야합니다.",
         "goQuota": "VITE 스테이킹하기",
         "noOperate": "아직 {operate}되지 않았습니다"
     },
@@ -241,26 +241,26 @@
         "config": "일반",
         "currency": "기본 통화",
         "secure": "보안",
-        "gate": "Custom Gateway",
-        "rpcUrl": "Node",
-        "changeRpcUrl": "Change",
+        "gate": "게이트웨이 사용자 설정",
+        "rpcUrl": "노드",
+        "changeRpcUrl": "변경하기",
         "changeRpcUrlDialog": {
-            "title": "Change Node",
-            "addCustomNode": "Add Custom Node",
-            "officialNode": "Official Node",
-            "addNode": "Add Node",
-            "customNode": "Custom Node",
-            "deleteCustomNode": "Delete",
-            "wrongNode": "Please enter the correct URL!",
-            "changeNodeSuccess": "Have connected to new node.",
-            "failedConnected": "Node connection error",
-            "inputPlaceholder": "Please enter the node url prefix with wss."
+            "title": "노드 변경",
+            "addCustomNode": "커스텀 노드 추가",
+            "officialNode": "공식 노드",
+            "addNode": "노드 추가하기",
+            "customNode": "커스텀 노드",
+            "deleteCustomNode": "삭제하기",
+            "wrongNode": "정확한 URL을 입력하세요.",
+            "changeNodeSuccess": "새로운 코드에 연결되었습니다.",
+            "failedConnected": "노드 연결 오류",
+            "inputPlaceholder": "wss로 노드 URL prefix 를 입력하세요."
         },
         "triggerGate": [
             "닫기",
-            "Open"
+            "열기"
         ],
-        "gateHelp": "You can customize your gateway configuration when activating this feature. Currently this feature is mainly for developers.",
+        "gateHelp": "이 기능을 활성화하면 게이트웨이 설정을 조정할 수 있습니다. 현재 이 기능은 개발자를위한 것입니다.",
         "lang": "언어",
         "block": "현재 높이",
         "version": "버전",
@@ -283,10 +283,10 @@
             "60": "1시간",
             "720": "12시간"
         },
-        "theme": "Theme color",
+        "theme": "테마 색상 지정",
         "themeList": [
-            "Light",
-            "Dark"
+            "라이트모드",
+            "다크모드"
         ]
     },
     "create": {
@@ -302,7 +302,7 @@
             "long": "비밀번호는 32자를 초과할 수 없습니다",
             "name": "계정 이름은 영어 및 중국어, 숫자 및 밑줄만 지원합니다",
             "consistency": "동일한 비밀번호를 입력하세요",
-            "pwFormat": "Wrong password format. The password should only contain digits, letters and symbols."
+            "pwFormat": "비밀번호 형식이 잘못되었습니다. 비밀번호는 숫자, 문자 및 기호만 포함할 수 있습니다."
         }
     },
     "startCreate": {
@@ -335,7 +335,7 @@
             "balanceTips": "You can transfer your assets to other addresses via clicking 'Send' button",
             "gateTips": "In this cross-chain section, you can map other tokens into Vite network. Click 'Receive' button to deposit assets to your Vite Wallet. Click 'Send' button to transfer your assets to other platforms. * Cross-chain receive/send process may charge fees, it also has its transfer limitation.",
             "availableExAmountTips": "You can transfer your assets from Vite Wallet to ViteX Exchange via clicking 'Deposit' button. Click 'Withdraw' button to transfer assets from ViteX Exchange to Vite Wallet. No transaction fees caused during these processes.",
-            "unreceivedTips": "Unreceived funds will be received automatically after signing in"
+            "unreceivedTips": "미수신된 자금은 로그인 후 자동으로 지급됩니다."
         },
         "actionType": {
             "SEND": "전송",
@@ -351,19 +351,19 @@
         "transferConfirm": {
             "from": "발신자",
             "to": "수신자",
-            "wallet": "Wallet Account",
-            "dex": "Exchange Account",
+            "wallet": "지갑 계정",
+            "dex": "거래소 계정",
             "avaliableAmount": "보유자산"
         },
         "addToken": {
             "title": "토큰 추가",
-            "placeholder": "Please enter token name or TokenID",
+            "placeholder": "토큰명 혹은 토큰ID를 입력해주세요.",
             "lTxt": "취소하기",
             "rTxt": "추가하기"
         },
         "type": {
             "native": "네이티브 토큰",
-            "crossGate": "Cross-Chain Coins"
+            "crossGate": "크로스체인 토큰"
         },
         "assetType": {
             "TOTAL": "전체 자산",
@@ -378,22 +378,22 @@
                 "tokenId": "토큰ID",
                 "tokenName": "토큰명",
                 "totalSupply": "총 발행량",
-                "total": "Circulating Supply",
+                "total": "유통량",
                 "overview": "소개",
                 "type": "유형",
-                "gate": "Cross-Chain Gateway",
+                "gate": "크로스체인 게이트웨이",
                 "website": "웹사이트",
-                "whitePaper": "White Paper",
-                "explorer": "Explorer",
+                "whitePaper": "백서",
+                "explorer": "둘러보기",
                 "github": "Github",
-                "media": "Social Media",
-                "crossType": "Cross-Chain",
-                "originType": "Native",
-                "viewmore": "View More"
+                "media": "SNS",
+                "crossType": "크로스체인",
+                "originType": "네이티브",
+                "viewmore": "더 보기"
             },
             "reIssuable": {
-                "true": "Re-issuable",
-                "false": "Not re-issuable"
+                "true": "재발행 가능",
+                "false": "재발행불가능"
             }
         },
         "gateInfo": {
@@ -411,10 +411,10 @@
             "setting": "게이트웨이 인터페이스",
             "nodeDesc": "사용자 가이드",
             "settingPlaceholder": "게이트웨이 링크 주소를 입력하세요",
-            "nodeDescStr": "This function only works for cross-chain coins, do not use this on built-in tokens. Meanwhile, please be careful about unfamiliar gateway links. By continuing to use our platform, you agree and acknowledge that Vite Labs would not be responsible for the loss of your fund and other negative consequences caused. Fill out the gateway link below if you need to use gateway, the link will come into effect after you hit save."
+            "nodeDescStr": "이 기능은 크로스체인 토큰에서만 작동하며, 일반 토큰에서는 사용하지 마십시오. 또한 게이트웨이 링크 사용에 주의하십시오. 저희 플랫폼을 계속 사용함으로써 사용자는 Vite Labs가 사용자의 자금 손실 및 기타 부정적인 결과에 대해 책임을지지 않음에 동의하고 인정합니다. 게이트웨이를 사용해야하는 경우 아래의 게이트웨이 링크를 작성하십시오. 저장을 누르면 링크가 적용됩니다."
         },
         "depositRecord": {
-            "tabName": "Receive History",
+            "tabName": "수신 기록",
             "heads": [
                 "시간",
                 "수량",
@@ -455,9 +455,9 @@
             "title": "Cross-Chain Receive Funds",
             "addrErr": "게이트웨이 노드에 문제가 있습니다. 네트워크 설정을 확인하십시오",
             "addressTitle": "입금 주소",
-            "labelTips": "(Please use this '{labelName}' with your recipient address, otherwise your assets will lose",
-            "labelCodeTips": "Please Scan the QR code from {labelName}",
-            "codeTips": "Scan QR code to deposit. Please send funds with the wallet that supports {tokenSymbol}",
+            "labelTips": "(입금 주소와 함께 '{labelName}'을 (를) 사용하십시오. 그렇지 않으면 자산을 잃어버릴 수 있습니다.",
+            "labelCodeTips": "{labelName}에서 QRcode를 스캔하세요",
+            "codeTips": "QR 코드를 스캔해 입금하세요. {tokenSymbol}을 지원하는 지갑으로 전송하세요",
             "tips": [
                 "Cross-Chain Receive operation will do {tokenSymbol} Cross-Chain mapping to VITE network, you can still transfer the assets to other platform after receiving them",
                 "이 주소를 통해서만 {tokenSymbol}을 보낼 수 있으며 금액은 {min}보다 작을 수 없습니다",
@@ -497,9 +497,9 @@
         "title": "ViteScan"
     },
     "wallet": {
-        "title": "할당량 관리",
+        "title": "쿼타 관리",
         "help": {
-            "title": "할당량에 대해 빠르게 이해하기"
+            "title": "쿼타에 대해 빠르게 이해하기"
         },
         "transfer": "Send Funds",
         "getTestToken": "테스트 토큰 가져오기",
@@ -524,7 +524,7 @@
         },
         "trans": {
             "powErr": "PoW 실행 오류가 발생했습니다. 다시 시도하십시오",
-            "powTransErr": "PoW 할당량이 충분하지 않습니다. VITE를 스테이킹해 할당량을 얻으세요!"
+            "powTransErr": "PoW 쿼타가 충분하지 않습니다. VITE를 스테이킹해 쿼타를 얻으세요!"
         }
     },
     "walletMintage": {
@@ -586,19 +586,19 @@
         }
     },
     "walletQuota": {
-        "title": "할당량 관리",
+        "title": "쿼타 관리",
         "help": {
-            "title": "할당량에 대해 빠르게 이해하기"
+            "title": "쿼타에 대해 빠르게 이해하기"
         },
-        "myQuota": "나의 할당량",
+        "myQuota": "나의 쿼타",
         "maxTxNum": "최대 Tx 수",
-        "beneficialAddr": "할댱량 입금 주소",
+        "beneficialAddr": "쿼타 입금 주소",
         "fromAddr": "공제 주소",
         "time": "스테이킹 중지 기간",
         "aboutDays": "약 {day}일",
         "amountPlaceholder": "Please input staking amount, minimum {num} VITE",
         "limitAmt": "스테이킹 금액은 {num}보다 작아서는 안됩니다.",
-        "addrPlaceholder": "할당량 입금 주소를 입력하십시오",
+        "addrPlaceholder": "쿼타 입금 주소를 입력하십시오",
         "inputWithdrawAmount": "출금 금액을 입력하세요",
         "pledgeFail": "제출에 실패했습니다",
         "canclePledgeFail": "실패했습니다",
@@ -611,12 +611,12 @@
         "myAddr": "Current Address",
         "confirm": {
             "help": {
-                "t1": "할당량이란?",
-                "txt1": "Vite 시스템에서 사용자는 수수료를 지불하여 거래에 필요한 가스를 구매하는 대신 할당량 기반 모델을 통해 컴퓨팅 리소스를 얻습니다. 거래를 보내는 데 필요한 할당량 = 기본 할당량 (요청) + 할당량 (첨부된 텍스트 데이터), 거래를 수락하는 데 필요한 할당량 = 기본 할당량 (응답). 이 할당량 기반 리소스 구성 프로토콜을 통해 사용자는 두 가지 방법으로 더 높은 리소스 할당량을 얻을 수 있습니다. VITE를 스테이킹해 할당량을 얻고 PoW를 실행합니다.",
+                "t1": "쿼타란?",
+                "txt1": "Vite 시스템에서 사용자는 수수료를 지불하여 거래에 필요한 가스를 구매하는 대신 할당량 기반 모델을 통해 컴퓨팅 리소스를 얻습니다. 거래를 보내는 데 필요한 쿼타 = 기본 쿼타 (요청) + 쿼타 (첨부된 텍스트 데이터), 거래를 수락하는 데 필요한 쿼타 = 기본 쿼타 (응답). 이 쿼타 기반 리소스 구성 프로토콜을 통해 사용자는 두 가지 방법으로 더 높은 리소스 쿼타를 얻을 수 있습니다. VITE를 스테이킹해 쿼타를 얻고 PoW를 실행합니다.",
                 "t2": "스테이킹이란?",
-                "txt2": "Vite 시스템에서 사용자는 VITE를 스테이킹해 특정 양의 할당량을 얻을 수 있습니다. 스테이킹의 최솟값은 134 VITE이며 최대 제한은 없습니다. Vite 시스템은 A 주소가 VITE의 일부를 스테이킹하고 획득한 할당량을 B 주소에 할당하도록 지원합니다. 사용자가 스테이킹에 신청하면 VITE는 다른 사용자 대신 스마트 컨트랙트 주소로 전송되며, 스테이킹을 신청한 사용자만 스테이킹 금액을 관리 할 수 있습니다.",
+                "txt2": "Vite 시스템에서 사용자는 VITE를 스테이킹해 특정 양의 쿼타를 얻을 수 있습니다. 스테이킹의 최솟값은 134 VITE이며 최대 제한은 없습니다. Vite 시스템은 A 주소가 VITE의 일부를 스테이킹하고 획득한 쿼타를 B 주소에 할당하도록 지원합니다. 사용자가 스테이킹에 신청하면 VITE는 다른 사용자 대신 스마트 컨트랙트 주소로 전송되며, 스테이킹을 신청한 사용자만 스테이킹 금액을 관리 할 수 있습니다.",
                 "t3": "PoW란?",
-                "txt3": "작업 증명(PoW)은 일정량의 작업을 수행했음을 확인하는 프로토콜이며 DDoS 공격 및 기타 서비스 남용을 방지하기 위한 경제적인 수단입니다. 초기자가 특정 양의 컴퓨팅을 수행해야 하므로 다소 시간이 걸릴 수 있습니다. Vite 시스템에서 사용자는 PoW를 실행하여 무료 할당량을 얻을 수 있으며 얻은 할당량을 통해 주석 정보 없이 트랜잭션을 보낼 수도 있습니다."
+                "txt3": "작업 증명(PoW)은 일정량의 작업을 수행했음을 확인하는 프로토콜이며 DDoS 공격 및 기타 서비스 남용을 방지하기 위한 경제적인 수단입니다. 초기자가 특정 양의 컴퓨팅을 수행해야 하므로 다소 시간이 걸릴 수 있습니다. Vite 시스템에서 사용자는 PoW를 실행하여 무료 쿼타를 얻을 수 있으며 얻은 쿼타를 통해 주석 정보 없이 트랜잭션을 보낼 수도 있습니다."
             },
             "cancel": {
                 "describe": "사용자의 현재 스테이킹 금액은 {amount} VITE입니다. 출금을 확인해주세요",
@@ -624,7 +624,7 @@
                 "leftBtn": "출금 취소"
             },
             "submit": {
-                "describe": "할당량을 얻기 위해 {amount} VITE를 스테이킹해야합니다. 스테이킹이 시작된 후 약 3일이 지나야 출금할 수 있습니다",
+                "describe": "쿼타를 얻기 위해 {amount} VITE를 스테이킹해야합니다. 스테이킹이 시작된 후 약 3일이 지나야 출금할 수 있습니다",
                 "rightBtn": "확인",
                 "leftBtn": "취소"
             }
