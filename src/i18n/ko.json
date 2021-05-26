@@ -1139,7 +1139,7 @@
             "callNum": "트리거/분",
             "callNumInfo": "{maxCount} 거래/분",
             "price": "비용",
-            "priceInfo": "{price} VX/mth",
+            "priceInfo": "{price} VX/달",
             "upgrade": "업그레이드",
             "balanceAlert": "{balanceLimit} 보다 VITE 잔액이 적을 경우 생성할 수 없습니다.",
             "noSupportForHardware": "하드웨어 월렛은 지원되지 않습니다.",
@@ -1150,43 +1150,43 @@
                 "0-step2": "2. 선택한 거래쌍의 위임 권한 부여하기",
                 "0-step3": "3. API 위임 주소에 대한 쿼타 스테이킹하기",
                 "0-step4": "보기<a href=\"https://vite.wiki/dex/api/dex-apis.html\" target=\"_blank\">API 문서</a>고객지원을 위해서",
-                "1": "One set of API Key and Secret is allowed for the same address at any given time.",
-                "2": "To avoid asset loss, Do Not disclose your Access Key and Secret",
-                "3": "The API package is set with the free base package at 10 transactions per minute by default, upgrade options available."
+                "1": "주어진 시간에 동일한 주소에 대해 하나의 API 키 및 시크릿 키가 허용됩니다.",
+                "2": "자산 손실을 방지하기 위해서는 엑세스 키와 시크릿 키를 공개하지 마세요.",
+                "3": "API 패키지는 기본적으로 분당 10개의 거래를 무료 기본 패키지로 하며, 업그레이드 옵션을 사용할 수 있습니다."
             },
             "stakingForQuota": {
-                "title": "Delegation Quota",
-                "agentAddress": "Delegation Address",
-                "stakingAmount": "Stake Amount",
+                "title": "위임 쿼타",
+                "agentAddress": "위임 주소",
+                "stakingAmount": "스테이킹 수량",
                 "ok": "확인"
             },
             "keyConfirm": {
-                "accessKey": "Access Key",
-                "secretKey": "Secret Key",
-                "agentAddress": "Delegation Address",
-                "title": "API Created Successfully",
+                "accessKey": "액세스 키",
+                "secretKey": "시크릿 키",
+                "agentAddress": "위임 주소",
+                "title": "API 키가 생성되었습니다.",
                 "tips": {
                     "title": "중요 공지",
-                    "0": "To avoid asset loss, Do Not disclose your Access Key and Secret Key.",
-                    "1": "In cases of lost secret key, Delete the current API and Re-Apply for a new API key."
+                    "0": "자산 손실을 방지하기 위해서는 엑세스 키와 시크릿 키를 공개하지 마세요.",
+                    "1": "시크릿 키를 분실 한 경우 현재 API를 삭제하고 새 API 키를 다시 신청하세요."
                 },
-                "warn": "The Secret key is displayed only once and cannot be found back if lost, please keep it properly."
+                "warn": "시크릿 키는 한 번만 표시되며 분실 시 다시 찾을 수 없으므로 올바르게 보관하세요."
             },
             "upgradeConfirm": {
-                "title": "Upgrade Package",
-                "currentPackage": "Current",
-                "selectPackage": "Select New",
-                "selectTime": "Valid For",
-                "month": " Mth",
+                "title": "패키지 업그레이드하기",
+                "currentPackage": "현재",
+                "selectPackage": "지금 선택하기",
+                "selectTime": "동안 유효함",
+                "month": " 달",
                 "payAmount": "총합계",
-                "balance": "VX Balance"
+                "balance": "VX 자산"
             }
         }
     },
     "tradeAssets": {
-        "title": "Funds",
+        "title": "자금",
         "search": "토큰명을 입력하세요",
-        "operate": "Action",
+        "operate": "실행",
         "all": "전체",
         "confirmTable": {
             "title": "상세 기록",
@@ -1205,7 +1205,7 @@
                 "토큰",
                 "총 자산",
                 "거래소 자산",
-                "In Order",
+                "주문중",
                 "값"
             ],
             "rowMap": {
@@ -1255,7 +1255,7 @@
             "fdate": "시작 날짜를 선택하세요",
             "tdate": "종료 날짜를 선택하세요",
             "dateErr": "종료일은 반드시 시작일 이후여야 합니다.",
-            "ftoken": "Please select ftoken"
+            "ftoken": "토큰을 선택해주세요"
         },
         "side": {
             "1": "매도",
@@ -1265,7 +1265,7 @@
             "heads": [
                 "날짜",
                 "페어",
-                "Side",
+                "사이드",
                 "가격",
                 "수량",
                 "완료됨",
@@ -1290,9 +1290,9 @@
             "0": "매수"
         },
         "status": {
-            "1": "Ongoing",
+            "1": "진행 중",
             "2": "완료되었습니다",
-            "3": "Cancelled",
+            "3": "취소됨",
             "4": "실패했습니다"
         },
         "confirmTable": {
@@ -1309,7 +1309,7 @@
             "heads": [
                 "날짜",
                 "페어",
-                "Side",
+                "사이드",
                 "가격",
                 "수량",
                 "완료됨",
@@ -1320,7 +1320,7 @@
             ],
             "rowMap": {
                 "statusMap": {
-                    "1": "In Order",
+                    "1": "주문중",
                     "2": "완료되었습니다",
                     "3": "취소되었습니다",
                     "4": "실패했습니다"
@@ -1332,7 +1332,7 @@
             "start": "발신자",
             "end": "수신자",
             "type": "유형",
-            "side": "Side",
+            "side": "사이드",
             "buy": "매수",
             "sell": "매도",
             "status": "상태",
@@ -1345,7 +1345,7 @@
         "addQuota": "새로운 스테이킹 생성하기",
         "add": "추가하기",
         "withdraw": "Retrieve",
-        "withdrawList": "Withdrawal List",
+        "withdrawList": "출금 내역",
         "tbHead": {
             "date": "날짜",
             "fee": "거래 수수료",
@@ -1354,11 +1354,11 @@
         },
         "txTitle": "채굴 총 수입으로 트레이딩하기",
         "quotaTitle": "채굴 총 수입으로 스테이킹하기",
-        "addHint1": "Single stake should be at least 134 VITE",
-        "addHint2": "VITE staking will be effective immediately after submission. Staking can be canceled after 3 days",
-        "addHint3": "Staked amount will be released after the 7-day waiting period",
-        "withdrawHint1": "You will no longer be able to mine VX after staking is canceled",
-        "withdrawHint2": "It takes 7 days to return unstaked VITE coins to exchange balance",
+        "addHint1": "최소 134 VITE를 스테이킹해야 합니다.",
+        "addHint2": "VITE 스테이킹은 제출 후 즉시 적용됩니다. 스테이킹은 3 일 후에 취소 할 수 있습니다.",
+        "addHint3": "7일 후, 스테이킹 금액이 해제됩니다.",
+        "withdrawHint1": "스테이킹이 취소 된 후에는 더 이상 VX를 채굴 할 수 없습니다.",
+        "withdrawHint2": "스테이킹이 되지 않은 VITE를 거래소로 돌려받는데 7일이 걸립니다.",
         "addTitle": "Staking VITE for Mining",
         "withdrawTitle": "Retrieving Staked VITE",
         "addPlaceHolder": "Please input staking amount, at least 134 VITE",
@@ -1370,69 +1370,69 @@
         "comingHint": "VX 채굴 기능은 곧 제공됩니다. VX는 5 가지 방법으로 얻을 수 있습니다: 1. 채굴 트레이딩 2. 채굴 상장 3. 추천인 채굴 4. 채굴 스테이킹, 5. 마켓 메이킹 채굴. VX를 보유한 사용자는 공유 배당풀에서 배당금을받습니다.",
         "more": "VX 채굴 규칙 자세히 알기",
         "fee": "거래 수수료",
-        "todayTrade": "Mining Details",
-        "dividends": "24H Expected Mined Volume",
-        "view": "View Live Mining Dashboard",
-        "inviteCount": "Referrals",
-        "help": "Current trading fees displayed on this page contains only the 0.2% ViteX base transaction fees, please note that operator fees shall be taken into consideration when calculating mining cost"
+        "todayTrade": "채굴 상세설명",
+        "dividends": "24시간 예상되는 채굴량",
+        "view": "실시간 채굴 대쉬보드 보기",
+        "inviteCount": "추천인",
+        "help": "이 페이지에 표시된 현재 거래 수수료에는 ViteX 기본 거래 수수료 0.2% 만 포함되어 있습니다. 채굴 비용을 계산할 때 오퍼레이터 수수료를 고려해야 합니다."
     },
     "tradeVip": {
-        "title": "VIP Status",
+        "title": "VIP 상태",
         "open": "VIP되기",
-        "cancel": "Cancel {type}",
+        "cancel": "취소하기 {type}",
         "help": {
-            "title": "About ViteX VIP"
+            "title": "ViteX VIP에 대하여"
         },
         "helpConfirm": {
             "t1": "VIP",
-            "txt1": "Stake 10,000 VITE to acquire VIP status and receive 50% off trading fees. Staking can be canceled after 30 days.",
+            "txt1": "10,000 VITE를 스테이킹하여 VIP가 되어 거래 수수료를 50% 할인 받으세요. 단, 스테이킹은 30 일 후에 취소할 수 있습니다.",
             "t2": "SVIP",
-            "txt2": "Stake 1M VITE to become a SVIP and enjoy 0 base trading fees. Staking can be canceled after 30 days.",
-            "txt3": "SVIP supports staking for any valid account address. Stake for them to get SVIP status!"
+            "txt2": "1,000,000 VITE를 스테이킹하여 SVIP가 되rh 거래 수수료를 50% 할인 받으세요. 단, 스테이킹은 30 일 후에 취소할 수 있습니다.",
+            "txt3": "SVIP는 유효한 계정 주소에 대한 스테이킹을 지원합니다. 유효한 계정 주소가 SVIP가 될 수 있게 스테이킹 하기!"
         },
         "vipConfirm": {
-            "cancelVip": "Cancel VIP Status",
+            "cancelVip": "VIP 취소하기",
             "openVip": "VIP되기",
             "openStakingAmount": "VIP가 되기 위한 스테이킹 수량",
-            "cancelStakingAmount": "Available Stake Balance",
+            "cancelStakingAmount": "스테이킹 가능한 잔액",
             "noBalance": "자산이 부족합니다",
-            "openHint": "You will receive 0.1% trading fee deduction as a VIP. The staking of 10,000 VITE can be withdrawn after 30 days.",
-            "cancelHint": "VIP status will be canceled immediately.",
-            "openSuccess": "Your VIP status is activated! It will take effect in a few seconds.",
-            "openFail": "VIP Registration Failed",
+            "openHint": "VIP로서 0.1 % 거래 수수료 할인을 받게됩니다. 10,000 VITE의 스테이킹은 30일 후에 출금할 수 있습니다.",
+            "cancelHint": "VIP 상태는 즉시 취소됩니다.",
+            "openSuccess": "VIP 상태가 활성화되었습니다! 몇 초 안에 적용됩니다.",
+            "openFail": "VIP 등록 실패",
             "cancelSuccess": "VIP를 취소했습니다",
             "cancelFail": "취소에 실패했습니다",
-            "adviseToCancel": "There will be no base transaction fees with your current status as our SVIP, we therefore recommend you to revoke the staked VITE，which is required for general VIP members.",
-            "address": "Enable VIP Status",
-            "addressPlaceholder": "Current address is the default address, address cannot be modified later"
+            "adviseToCancel": "현재 SVIP 상태에 대해서는 기본 거래 수수료가 없으므로 일반 VIP 회원에게 필요한 스테이킹 된 VITE 를 해제하는 것이 좋습니다.",
+            "address": "VIP 활성화",
+            "addressPlaceholder": "현재 주소는 기본 주소이며 나중에 수정할 수 없습니다."
         },
         "svipConfirm": {
-            "open": "Upgrade",
+            "open": "업그레이드",
             "cancel": "취소",
-            "cancelVip": "Cancel SVIP",
-            "openVip": "Become a SVIP",
-            "openStakingAmount": "Staking Amount for Becoming a SVIP",
-            "cancelStakingAmount": "Available Stake Balance",
+            "cancelVip": "SVIP 취소",
+            "openVip": "SVIP 되기",
+            "openStakingAmount": "SVIP가 되기 위한 스테이킹 수량",
+            "cancelStakingAmount": "스테이킹 가능한 잔액",
             "noBalance": "자산이 부족합니다",
-            "openHint": "You will enjoy 0% base transaction fee when upgrading to SVIP. The stake of 1,000,000 VITE can be withdrawn after 30 days.",
-            "cancelHint": "SVIP privileges will be discontinued once staking is revoked",
-            "openSuccess": "Applied Successful! SVIP status will come into effect later.",
-            "openFail": "Failed to apply SVIP",
-            "cancelSuccess": "Cancel SVIP Successful",
+            "openHint": "SVIP로 업그레이드하면 기본 거래 수수료가 0%입니다. 스테이킹 된 1,000,000 VITE는 30일 후에 출금 가능합니다.",
+            "cancelHint": "SVIP 권한은 스테이킹이 취소되면 중단됩니다.",
+            "openSuccess": "신청에 성공했습니다! SVIP 상태는 곧 적용됩니다.",
+            "openFail": "SVIP 신청에 실패했습니다.",
+            "cancelSuccess": "SVIP 취소하기",
             "cancelFail": "취소에 실패했습니다",
-            "address": "Enable SVIP Status",
-            "addressPlaceholder": "Address to be Enabled with SVIP Status",
-            "cancelAddress": "SVIP Address"
+            "address": "SVIP 활성화",
+            "addressPlaceholder": "SVIP 상태로 활성화 할 주소",
+            "cancelAddress": "SVIP 주소"
         },
-        "vipListTitle": "VIP Records",
-        "openAddress": "Enabled Address",
-        "type": "VIP Type"
+        "vipListTitle": "VIP 기록",
+        "openAddress": "활성화된 주소",
+        "type": "VIP 유형"
     },
     "inviteMining": {
         "title": "邀请挖矿总收益",
-        "myInviteIncome": "Referral Proceeds",
-        "inviteTradeIncome": "Referred Trading Proceeds",
-        "inviteOrderIncome": "Referred Market-Making Proceeds"
+        "myInviteIncome": "추천인 수익금",
+        "inviteTradeIncome": "추천된 거래 수익금",
+        "inviteOrderIncome": "추천된 마켓메이킹 수익금"
     },
     "orderMining": {
         "title": "挂单挖矿总收益",
@@ -1441,8 +1441,8 @@
             "ratio": "占比",
             "mining": "挖矿金额"
         },
-        "market": "{name} Market",
-        "estimate": "{name} Today's Minable Amount"
+        "market": "{name} 마켓",
+        "estimate": "{name} 오늘의 채굴가능한 수량"
     },
     "tradeDividend": {
         "title": "배당",
@@ -1457,21 +1457,21 @@
         "hintTitle": "중요 공지",
         "comingHint": "VX 채굴 및 배당 기능은 곧 제공됩니다. 이 시스템은 보유한 VX의 양에 비례하여 모든 VX 사용자에게 전체 풀의 BTC, ETH, VITE, USDT의 1 %를 분배합니다. 초기 배당금은 0에서 시작하며 ViteX가 징수한 수수료 금액에 따라 증가합니다. 거래는 기본 거래, 상장 및 추천 코드 생성 수수료로 구성된 공유 배당풀에서 배당을 받으려면 최소 10 VX가 있어야합니다. ",
         "more": "VX 배당 규칙 자세히 알기",
-        "help": "Reward Rules: 1. A minimum of 10 VX must be staked to receive dividends. 2. Submission of staking request allows for dividends starting the nearest distribution. 3. Staked amount will be released after the 7-day waiting period",
+        "help": "보상 규칙 : 1. 배당금을 받으려면 최소 10 VX를 스테이킹해야 합니다. 2. 스테이킹 요청을 제출하면 가장 가까운 날짜의 배당금을 받을 수 있습니다. 3. 7일간의 대기 기간이 지나면 스태이킹 된 금액이 해제됩니다.",
         "lockedAmount": "스테이킹 수량",
-        "lockAmountTips": "Receive Dividends on 10 VX or Above",
-        "unlockAmount": "Unlocking Amount",
-        "addHint1": "A minimum of 10 VX must be staked to receive dividends",
-        "addHint2": "Submission of staking request allows for dividends starting the nearest distribution",
-        "addHint3": "Staked amount will be released after the 7-day waiting period",
-        "autoLock": "Automatic Staking",
+        "lockAmountTips": "10 VX 혹은 그 이상에 대한 배당금 받기",
+        "unlockAmount": "잠겨있지 않은 수량",
+        "addHint1": "배당금을 받으려면 최소 10 VX를 스테이킹 해야 합니다.",
+        "addHint2": "스테이킹 요청을 제출하면 가장 가까운 날짜의 배당금을 받을 수 있습니다.",
+        "addHint3": "7일 후, 스테이킹 금액이 해제됩니다.",
+        "autoLock": "자동 스테이킹",
         "openAutoLock": {
-            "title": "Enable Automatic Staking",
-            "text": "Mined VX will be automatically staked once enabled"
+            "title": "자동 스테이킹 활성화하기",
+            "text": "채굴된 VX는 활성화되면 자동으로 스테이킹됩니다."
         },
         "closeAutoLock": {
-            "title": "Disable Automatic Staking",
-            "text": "Mined VX will not be automatically staked when turned off"
+            "title": "자동 스테이킹 비활성화하기",
+            "text": "채굴된 VX는 비활성화되면 자동으로 스테이킹 되지 않습니다."
         },
         "lock": "스테이킹하기",
         "unlock": "스테이킹 해제하기",
@@ -1479,24 +1479,24 @@
         "lockVXConfirm": {
             "title": "VX 스테이킹하기",
             "available": "거래소 거래 가능 자산",
-            "amountPlaceholder": "Please input staking amount, minimum 1 VX",
-            "notEnough": "Insufficient Exchange Balance",
-            "submit": "Confirm to Stake",
+            "amountPlaceholder": "최소 1 VX 이상의 스테이킹 금액을 입력하세요",
+            "notEnough": "거래소 잔액 부족",
+            "submit": "스테이킹 확인하기",
             "amountText": "수량"
         },
         "unlockVXConfirm": {
-            "title": "Unstake VX",
-            "available": "Available Stake Balance",
-            "amountPlaceholder": "Please input amount, minimum 1 VX",
-            "notEnough": "Insufficient Amount",
-            "submit": "Confirm to Unstake",
+            "title": "VX 스태이킹 해제하기",
+            "available": "스테이킹 가능한 잔액",
+            "amountPlaceholder": "최소 1 VX 이상의 수량을 입력하세요.",
+            "notEnough": "수량 부족",
+            "submit": "스태이킹 해제 확인하기",
             "amountText": "수량",
-            "hint": "It takes about 7 days to unlock."
+            "hint": "스태이킹 해제를 위해선 약 7일이 소요됩니다."
         },
         "unlockList": {
-            "title": "Retrieving",
+            "title": "회수 중",
             "amount": "수량",
-            "time": "Available Date"
+            "time": "가능한 날짜"
         }
     },
     "tradeOperator": {
@@ -1521,22 +1521,22 @@
         "income": "수입",
         "fee": "수수료율",
         "status": "상태",
-        "operate": "Action",
+        "operate": "실행",
         "stopTrans": "중지",
         "resetTrans": "복원",
         "changeOwner": "소유권 이전",
         "changeFee": "수수료 조정",
         "incomeList": "수입 상세",
         "historyIncome": "수입 내역",
-        "openTxPair": "Open Trading Pairs",
+        "openTxPair": "거래쌍 열기",
         "statusList": [
             "소유권이 이전되었습니다",
             "트레이딩",
             "중지",
-            "Trade Not Open"
+            "거래가 열려있지 않음"
         ],
         "openTxPairConfirm": {
-            "title": "Open {symbol} to trade",
+            "title": "{symbol} 거래하기 위해 열기",
             "fee": "상장 수수료",
             "hint": "트레이딩 페어를 열고 고유 오퍼레이터 심볼을 추가하려면, 텔레그램으로 문의해주세요. (https://t.me/vite_en)",
             "btn": "제출하기",
@@ -1549,9 +1549,9 @@
         "stopFail": "중지에 실패했습니다",
         "openSuccess": "복원에 성공했습니다",
         "openFail": "복원에 실패했습니다",
-        "changeOwnerSuccess": "Transfer Successful",
-        "changeOwnerFaill": "Transfer Failed",
-        "submitChange": "Confirm to transfer",
+        "changeOwnerSuccess": "전송 성공",
+        "changeOwnerFaill": "전송 실패",
+        "submitChange": "전송을 확인하세요.",
         "changeOwnerHint": "주의 사항: 소유권 이전 후 수수료를 청구하거나 조정할 수 없으며 이전 조치를 취소할 수 없습니다",
         "currentMaker": "메이커",
         "confirmFee": "수수료",
@@ -1568,19 +1568,19 @@
         }
     },
     "mobileAssets": {
-        "allAssets": "Estimated Assets Value ({token})",
-        "tokenInfoTitle": "Token Details",
+        "allAssets": "예상 자산 가치 ({token})",
+        "tokenInfoTitle": "토큰 상세정보",
         "transfer": "전송하기",
-        "trade": "Trade",
-        "chooseTxPair": "Choose Trading Pair"
+        "trade": "거래하기",
+        "chooseTxPair": "거래쌍 선택하기"
     },
     "mobileTradeCenter": {
-        "highPrice": "High",
-        "lowPrice": "Low",
-        "quantity": "24H Vol",
+        "highPrice": "고가",
+        "lowPrice": "저가",
+        "quantity": "24시간 거래량",
         "buyTitle": "매수",
         "sellTitle": "매도",
-        "price": "Price ({token})",
+        "price": "가격 ({token})",
         "buy": {
             "price": "가격",
             "quantity": "수량"
@@ -1592,31 +1592,31 @@
         "orderQuantity": "수량",
         "orderPrice": "가격",
         "executedQuantity": "완료됨",
-        "avgPrice": "Avg"
+        "avgPrice": "평균"
     },
     "mobileDividend": {
         "title": "배당",
-        "poolTitle": "Dividend Pool ({token})",
-        "myDividendTitle": "Total Estimated Value of Dividends ({token})",
-        "listTitle": "Dividend Details",
-        "lockingTitle": "My Staking",
-        "viewLink": "Unstaking Status"
+        "poolTitle": "배당 풀 ({token})",
+        "myDividendTitle": "배당금의 총 예상 가치 ({token})",
+        "listTitle": "배당 상세정보",
+        "lockingTitle": "나의 스테이킹",
+        "viewLink": "스테이킹 해제 상태"
     },
     "mobileMining": {
         "title": "채굴",
         "miningTrade": "트레이딩",
-        "miningStaking": "Staking",
-        "miningInvite": "Referral",
-        "miningOrder": "Market-Making",
-        "tradeTotalIncome": "Total Income ({token})",
-        "stakingTotalIncome": "Total Income ({token})",
-        "inviteTotalIncome": "Total Income ({token})",
-        "orderTotalIncome": "Total Income ({token})",
+        "miningStaking": "스테이킹",
+        "miningInvite": "추천인",
+        "miningOrder": "마켓메이킹",
+        "tradeTotalIncome": "전체 소득 ({token})",
+        "stakingTotalIncome": "전체 소득 ({token})",
+        "inviteTotalIncome": "전체 소득 ({token})",
+        "orderTotalIncome": "전체 소득 ({token})",
         "fee": "수수료",
-        "listTitle": "Mining History",
-        "viewLink": "Live Mining Dashboard",
-        "inviteTradeIncome": "Referred Trading Details",
-        "inviteOrderIncome": "Referred Market-Making Details",
+        "listTitle": "채굴 내역",
+        "viewLink": "실시간 채굴 대쉬보드",
+        "inviteTradeIncome": "추천된 거래 상세설명",
+        "inviteOrderIncome": "추천된 마켓메이킹 상세설명",
         "myStaking": "내 스테이킹"
     },
     "mobileBottomBar": {
@@ -1639,8 +1639,8 @@
     "desktop": {
         "unlock": "잠금 해제하기",
         "unreceivedTx": {
-            "title": "You have received {num} transactions.",
-            "body": "Amount：{amount} {symbol} \nFrom Address: {address}"
+            "title": "{num} 거래를 수신 받았습니다.",
+            "body": "수량：{amount} {symbol} \n다음 주소로 부터: {address}"
         }
     }
 }
