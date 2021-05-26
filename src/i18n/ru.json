@@ -1,26 +1,26 @@
 {
-    "lang": "RU",
-    "help": "Помощь",
-    "announcements": "Announcements",
+    "lang": "Английский",
+    "help": "Центр поддержки",
+    "announcements": "Анонсы",
     "start": "Начать",
     "login": "Войти",
-    "regAcc": "Зарегистрироваться",
-    "unlockAcc": "Разблокировать Текущий Аккаунт",
-    "changeAcc": "Переключиться на Другой Аккаунт",
-    "existingAcc": "Существующие Аккаунты",
-    "restore": "Импорт Мнемонических Слов",
-    "register": "Зарегистрироваться",
-    "createAcc": "Создать",
-    "settingAcc": "Настройка Аккаунта",
-    "resetAcc": "Сбросить Ваш Аккаунт",
+    "regAcc": "Регистрация",
+    "unlockAcc": "Разблокировать",
+    "changeAcc": "Сменить аккаунт",
+    "existingAcc": "Существующие аккаунты",
+    "restore": "Импорт мнемонических слов",
+    "register": "Регистрация",
+    "createAcc": "Создать аккаунт",
+    "settingAcc": "Настройки аккаунта",
+    "resetAcc": "Сброс аккаунта",
     "logout": "Выйти",
     "saveLogout": "Выйти",
-    "blockHeight": "Высота Снепшот Блока",
-    "accountName": "Имя Пользователя",
+    "blockHeight": "Высота блока снимка",
+    "accountName": "Имя аккаунта",
     "action": "Действие",
-    "stakingAmount": "Сумма Стейкинга",
-    "submitStaking": "Отправить в Стейкинг",
-    "withdrawHeight": "Ожидаемая Высота Снепшота",
+    "stakingAmount": "Сумма заморозки",
+    "submitStaking": "Подтвердить заморозку",
+    "withdrawHeight": "Ожидаемая высота снимка",
     "balance": "Баланс",
     "dexBalance": "Баланс ViteX",
     "addrName": "Адрес{index}",
@@ -32,35 +32,41 @@
         "closeTips": "Пропустить руководство пользователя (Не рекомендуется)",
         "trade": [
             "Управляйте вашими активами (как Веб-Кошелека, так и биржи ViteX) здесь",
-            "Проверьте Открытые Ордера и Историю Ордеров, узнайте детали торговли",
-            "Участвуйте в майнинге, получайте VX и дивиденды от торговых сборов (Mining Dividends)",
+            "Проверьте открытые заявки и Историю заявок, узнайте детали торговли",
+            "Участвуйте в получении наград, получайте VX и дивиденды от торговых комиссий (Награды и дивиденды)",
             "Попробуйте больше возможностей: сделайте Стейк на Квоту, станьте держателем SBP (Snapshot Block Producer), Голосуйте за SBP, конвертрируйте ERC20, Детали Транзакции и.т.д."
         ],
         "assets": [
             "Депозит на Биржу",
             "Вывод на Кошелек",
-            "Cross-Chain Receive & Send"
+            "Меж-цепочные депозиты и выводы"
         ]
     },
     "dealReminder": {
         "title": {
-            "buy": "Buy Order Completed: {ftoken} / {ttoken}",
-            "sell": "Sell Order Completed: {ftoken} / {ttoken}"
+            "buy": "Исполнена заявка на покупку: {ftoken} / {ttoken}",
+            "sell": "Исполнена заявка продажи: {ftoken} / {ttoken}"
         },
         "failTitle": "Ордер не Выполнен",
         "notice-all": {
-            "buy": "Price: {price} {ttoken} \nAmount: {amount} {ttoken}, was completed. View Order History page for details.",
-            "sell": "Price: {price} {ttoken} \nAmount: {amount} {ttoken}, was completed. View Order History page for details."
+            "buy": "Цена: {price} {ttoken}\nСумма: {amount} {ttoken}, исполнено. Подробнее на странице истории сделок.",
+            "sell": "Цена: {price} {ttoken}\nСумма: {amount} {ttoken}, исполнено. Подробнее на странице истории сделок."
         },
         "notice-partial": {
-            "buy": "Price: {price} {ttoken} \nAmount: {amount} {ttoken}, is {executedPercent}% completed.",
-            "sell": "Price: {price} {ttoken} \nAmount: {amount} {ttoken}, is {executedPercent}% completed."
+            "buy": "Цена: {price} {ttoken}\nСумма: {amount} {ttoken}, на {executedPercent}% исполнено.",
+            "sell": "Цена: {price} {ttoken}\nСумма: {amount} {ttoken}, на {executedPercent}% исполнено."
         },
         "error": "Ваш ордер {amount} {ftoken} ({ftoken}/{ttoken}) в {time} не удался, для получения более подробной информации, пожалуйста, посмотрите в разделе История Ордеров."
     },
     "pow": {
         "ing": "Запуск PoW для получения квоты",
-        "no": "Вы можете стейкать VITE для квоты, если не хотите запускать PoW"
+        "no": "Вы можете стейкать VITE для квоты, если не хотите запускать PoW",
+        "insuffQuota": "Получить квоту",
+        "insuffQuotaMsg": "Уведомляем, что у вас нет VITE замороженных для получения Квоты. Заблокируйте VITE или, если хотите, можете запустить POW для получения Квоты.",
+        "insuffQuotaMsg2": "Только {powMaxTimes} транзакций могут быть сделаны в день без стейкинга VITE. Ваш адрес исчерпал весь лимит {powMaxTimes} . Пожалуйста, перейдите на страницу квот и заморозьте VITE для совершения дополнительных транзакций.",
+        "getQuota": "Заморозить VITE",
+        "skip": "Запустить POW",
+        "cancel": "Отмена"
     },
     "addAccount": "Создать Аккаунт",
     "saveQrcode": "Сохранить изображение QR-кода",
@@ -75,12 +81,12 @@
     },
     "bnbConf": {
         "title": "Важное Замечание",
-        "t1": "VITE Binance Listing Coming! Please vote to have VITE listed on Binance.",
-        "t2": "Voting Period: 12:00 pm Dec 12 to 12:00 pm Dec 13 (HKT)",
-        "t3": "Voting Method: Holding 50 BNB allows for 1 vote (10 votes max)",
-        "t4": "Voting Rewards: All voted users will be rewarded with an airdrop totaling 21,000,000 VITE based on executed votes.",
-        "btn": "Vote Now!!!",
-        "notice": "[Attention]: You must have 50-500 BNBs in your Binance Account starting Dec 5 and last through Dec 13 to Qualify for Voting!"
+        "t1": "Голосуйте за листинг VITE на Binance!",
+        "t2": "Период голосования: 12:00 дек с 12:00 до 12:00 дек 13 (HKT)",
+        "t3": "Метод голосования: Holding 50 BNB позволяет за 1 голос (10 голосов макс)",
+        "t4": "Награды за голосование: Все проголосовавшие пользователи будут награждаться раздачей в сумме 21 000 000 000 VITE на основании выполненных голосов.",
+        "btn": "Голосуй сейчас!",
+        "notice": "[Attention]: Вы должны иметь 50-500 BNB на Вашем аккаунте Binance начиная с 5 декабря и продлите через 13 Дек для оценки голосования!"
     },
     "errCode": {
         "35003": "{name} Конфликт ID, пожалуйста, повторите попытку позже",
@@ -111,16 +117,16 @@
         "UpdateSBPBlockProducingAddress_V1": "Обновить Регистрацию",
         "RevokeSBP": "Отменить Регистрацию",
         "RevokeSBP_V1": "Отменить Регистрацию",
-        "WithdrawSBPReward": "Claim Reward",
-        "WithdrawSBPReward_V1": "Claim Reward",
+        "WithdrawSBPReward": "Получить вознаграждение",
+        "WithdrawSBPReward_V1": "Получить вознаграждение",
         "VoteForSBP": "Голосование",
         "VoteForSBP_V1": "Голосование",
         "CancelSBPVoting": "Отменить Голосование",
         "CancelSBPVoting_V1": "Отменить Голосование",
         "StakeForQuota": "Получить Квоту",
         "StakeForQuota_V1": "Получить Квоту",
-        "CancelQuotaStake": "Withdrawal of Stake",
-        "CancelQuotaStake_V1": "Withdrawal of Stake",
+        "CancelQuotaStake": "Разморозить стейк",
+        "CancelQuotaStake_V1": "Разморозить стейк",
         "IssueToken": "Выпуск Токена",
         "IssueToken_V1": "Выпуск Токена",
         "ReIssueToken": "Дополнительный Выпуск Токена",
@@ -141,8 +147,8 @@
         "DexCancelOrder_V1": "ViteX Отзыв Ордеров",
         "DexStakeForSuperVIP": "ViteX SVIP",
         "DexStakeForSuperVIP_V1": "ViteX SVIP",
-        "DexConfigMarketAgents": "Configure Delegations",
-        "DexConfigMarketAgents_V1": "Configure Delegations",
+        "DexConfigMarketAgents": "Настроить Делегации",
+        "DexConfigMarketAgents_V1": "Настроить Делегации",
         "DexOpenNewMarket": "ViteX Размещение Токена",
         "DexOpenNewMarket_V1": "ViteX Размещение Токена",
         "DexStakeForVIP": "ViteX VIP",
@@ -156,9 +162,9 @@
         "ResponseFail": "Перевод",
         "RefundByContractRequest": "Перевод",
         "GenesisResponse": "Генезис",
-        "FullNodeStake": "Stake for Full Node",
-        "FullNodeCancelStake": "Withdraw Full Node Stakes",
-        "UpdateSBPRewardWithdrawAddress": "Edit SBP Reward Withdraw Address"
+        "FullNodeStake": "Заморозить для запуска ноды",
+        "FullNodeCancelStake": "Разморозить стейк ноды",
+        "UpdateSBPRewardWithdrawAddress": "Редактировать адрес вывода наград SBP"
     },
     "btn": {
         "cancel": "Отменить",
@@ -181,7 +187,7 @@
         "err": "Произошла ошибка",
         "request": "{name} запрос отправлен, пожалуйста, подождите",
         "copy": "Успешно скопировано",
-        "copyShare": "Copy share link successful!",
+        "copyShare": "Ссылка успешно скопирована!",
         "addrFormat": "Некорректный формат адреса",
         "amtFormat": "Некорректный формат суммы",
         "transSucc": "Транзакция выполнена успешно!",
@@ -192,7 +198,7 @@
         "operateSuccess": "Операция Выполнена Успешно",
         "operateFail": "Операция Не Выполнена",
         "unreceived": "Разблокируйте свой кошелек перед использованием",
-        "unreceivedNum": "Please sign in to collect unreceived funds, currently you have {number} unreceived transaction(s)"
+        "unreceivedNum": "Пожалуйста, войдите, чтобы получить неполученные средства, в настоящее время у вас {number} неполученных транзакций"
     },
     "beforeUse": {
         "title": "Прочитайте перед использованием",
@@ -235,12 +241,26 @@
         "config": "Общие",
         "currency": "Валюта По Умолчанию",
         "secure": "Безопасность",
-        "gate": "Custom Gateway",
+        "gate": "Настроить Шлюз",
+        "rpcUrl": "Адрес узла",
+        "changeRpcUrl": "Изменить",
+        "changeRpcUrlDialog": {
+            "title": "Изменить узел",
+            "addCustomNode": "Добавить пользовательский узел",
+            "officialNode": "Официальный узел",
+            "addNode": "Добавить узел",
+            "customNode": "Пользовательский узел",
+            "deleteCustomNode": "Удалить пользовательский узел",
+            "wrongNode": "Введите корректный URL узла!",
+            "changeNodeSuccess": "Успешное подключение к узлу.",
+            "failedConnected": "Ошибка подключения к узлу",
+            "inputPlaceholder": "Пожалуйста, введите префикс URL узла с wss."
+        },
         "triggerGate": [
             "Закрыть",
             "Открыть"
         ],
-        "gateHelp": "You can customize your gateway configuration when activating this feature. Currently this feature is mainly for developers.",
+        "gateHelp": "Вы можете настроить конфигурацию шлюза при активации этой функции. В настоящее время эта функция предназначена главным образом для разработчиков.",
         "lang": "Язык",
         "block": "Текущая Высота",
         "version": "Version",
@@ -263,10 +283,10 @@
             "60": "1 Час",
             "720": "12 Часов"
         },
-        "theme": "Theme color",
+        "theme": "Цвет темы",
         "themeList": [
-            "Light",
-            "Dark"
+            "Светлая",
+            "Темный"
         ]
     },
     "create": {
@@ -282,7 +302,7 @@
             "long": "Пароль не может превышать 32 символа",
             "name": "Имя учетной записи поддерживает только Английские и Китайские символы, цифры и подчеркивание",
             "consistency": "Пожалуйста, введите тот же пароль",
-            "pwFormat": "Wrong password format. The password should only contain digits, letters and symbols."
+            "pwFormat": "Неверный формат пароля. Пароль должен содержать только цифры, буквы и символы."
         }
     },
     "startCreate": {
@@ -315,7 +335,7 @@
             "balanceTips": "You can transfer your assets to other addresses via clicking 'Send' button",
             "gateTips": "In this cross-chain section, you can map other tokens into Vite network. Click 'Receive' button to deposit assets to your Vite Wallet. Click 'Send' button to transfer your assets to other platforms. * Cross-chain receive/send process may charge fees, it also has its transfer limitation.",
             "availableExAmountTips": "You can transfer your assets from Vite Wallet to ViteX Exchange via clicking 'Deposit' button. Click 'Withdraw' button to transfer assets from ViteX Exchange to Vite Wallet. No transaction fees caused during these processes.",
-            "unreceivedTips": "Unreceived funds will be received automatically after signing in"
+            "unreceivedTips": "Неполученные средства будут получены автоматически после входа в систему"
         },
         "actionType": {
             "SEND": "Отправить",
@@ -331,19 +351,19 @@
         "transferConfirm": {
             "from": "От",
             "to": "До",
-            "wallet": "Wallet Account",
-            "dex": "Exchange Account",
+            "wallet": "Аккаунт кошелька",
+            "dex": "Баланс биржи",
             "avaliableAmount": "Баланс"
         },
         "addToken": {
             "title": "Добавить Токен",
-            "placeholder": "Please enter token name or TokenID",
+            "placeholder": "Пожалуйста, введите имя токена или TokenID",
             "lTxt": "Отменить",
             "rTxt": "Добавить"
         },
         "type": {
             "native": "Нативные Токены",
-            "crossGate": "Cross-Chain Coins"
+            "crossGate": "Cross-chain монеты"
         },
         "assetType": {
             "TOTAL": "Все Активы",
@@ -358,18 +378,18 @@
                 "tokenId": "ID Токена",
                 "tokenName": "Название",
                 "totalSupply": "Общее Предложение",
-                "total": "Circulating Supply",
+                "total": "В обороте",
                 "overview": "Описание",
                 "type": "Тип",
-                "gate": "Cross-Chain Gateway",
+                "gate": "Cross-chain шлюз",
                 "website": "Веб-сайт",
-                "whitePaper": "White Paper",
-                "explorer": "Explorer",
-                "github": "Github",
-                "media": "Social Media",
-                "crossType": "Cross-Chain",
-                "originType": "Native",
-                "viewmore": "View More"
+                "whitePaper": "Белая бумага",
+                "explorer": "Обозреватель блоков",
+                "github": "GitHub",
+                "media": "Социальные сети",
+                "crossType": "Cross-chain",
+                "originType": "Нативный",
+                "viewmore": "Подробнее"
             },
             "reIssuable": {
                 "true": "Перевыпуск",
@@ -391,10 +411,10 @@
             "setting": "Интерфейс Шлюза",
             "nodeDesc": "Руководство Пользователя",
             "settingPlaceholder": "Пожалуйста, введите адрес шлюза",
-            "nodeDescStr": "This function only works for cross-chain coins, do not use this on built-in tokens. Meanwhile, please be careful about unfamiliar gateway links. By continuing to use our platform, you agree and acknowledge that Vite Labs would not be responsible for the loss of your fund and other negative consequences caused. Fill out the gateway link below if you need to use gateway, the link will come into effect after you hit save."
+            "nodeDescStr": "Эта функция работает только для cross-chain транзакций, не используйте ее для встроенных токенов. При этом, пожалуйста, будьте осторожны с незнакомыми ссылками на шлюз. Продолжая использовать нашу платформу, вы соглашаетесь и подтверждаете, что Vite Labs не будет нести ответственность за потерю ваших средств и другие негативные последствия. Заполните ссылку на шлюз ниже, если вам нужно использовать шлюз, ссылка вступит в силу после нажатия кнопки «Сохранить»."
         },
         "depositRecord": {
-            "tabName": "Receive History",
+            "tabName": "История входящих транзакций",
             "heads": [
                 "Время",
                 "Сумма",
@@ -435,15 +455,16 @@
             "title": "Cross-Chain Receive Funds",
             "addrErr": "Что-то пошло не так с нодой шлюза, проверьте настройки сети",
             "addressTitle": "Адрес Получателя",
-            "labelTips": "(Please use this '{labelName}' with your recipient address, otherwise your assets will lose",
-            "labelCodeTips": "Please Scan the QR code from {labelName}",
-            "codeTips": "Scan QR code to deposit. Please send funds with the wallet that supports {tokenSymbol}",
+            "labelTips": "(Пожалуйста, используйте это '{labelName}' ' с адресом получателя, иначе ваши активы будут потеряны",
+            "labelCodeTips": "Пожалуйста, отсканируйте QR-код от {labelName}",
+            "codeTips": "Сканируйте QR-код для пополнения. Пожалуйста, отправьте средства с кошельком, который поддерживает {tokenSymbol}",
             "tips": [
                 "Cross-Chain Receive operation will do {tokenSymbol} Cross-Chain mapping to VITE network, you can still transfer the assets to other platform after receiving them",
                 "Вы можете отправить только {tokenSymbol} через этот адрес, и сумма не может быть меньше {min}",
                 "Вы получите свои активы после {confirmationCount} подтверждений, пожалуйста подождите"
             ]
         },
+        "viteTips": "VITE поддерживает только cross-chain функциональность между новым токеном ERC20 VITE и Native VITE Coin.",
         "withdraw": {
             "title": "Cross-Chain Send Funds",
             "btn": "Вывести Средства",
@@ -461,10 +482,10 @@
                 "fee": "Комиссия",
                 "all": "Все"
             },
-            "labelPlaceholder": "Please input {labelName}",
-            "amountPlaceholder": "Please input send amount which should not be less than {min}",
-            "addressPlaceholder": "Please enter {token} recipient address",
-            "successTips": "Transaction request has been sent",
+            "labelPlaceholder": "Пожалуйста, введите {labelName}",
+            "amountPlaceholder": "Пожалуйста, введите сумму которая должна быть не меньше {min}",
+            "addressPlaceholder": "Пожалуйста, введите адрес получателя {token}",
+            "successTips": "Запрос на транзакцию был отправлен",
             "failTips": "Произошла ошибка в ноде шлюза, проверьте настройки сети"
         },
         "nodeErr": "Нода шлюза недействительна, пожалуйста, проверьте настройки шлюза"
@@ -480,7 +501,7 @@
         "help": {
             "title": "Быстрое Понимание Квоты"
         },
-        "transfer": "Send Funds",
+        "transfer": "Отправить средства",
         "getTestToken": "Получить Тестовые Токены",
         "transDetail": "Больше Деталей Транзакции",
         "address": "Мой Адрес",
@@ -636,31 +657,32 @@
         "sum": "Сумма"
     },
     "walletFullNode": {
-        "title": "Full Nodes",
+        "title": "Полный узел",
         "help": {
-            "title": "About",
+            "title": "О приложении",
             "t1": "Glossary",
-            "txt1": "[Number of Registered Nodes]  The number of full nodes registered with the current address",
-            "txt2": "[Number of Active Nodes]  The number of active full nodes registered with the current address",
-            "txt3": "[Number of Rewarding nodes]  Number of nodes being rewarded",
-            "t2": "Multiple Full nodes can be registered with the same address, but must be staked individually at least 10,000 VITE each; When calculating Active Node Reward, if staking amount / 10000 yields a whole number that is greater than or equal to the number of active nodes, all active nodes will be rewarded; If staking amount / 10000 yields a whole number that is less than the number of active nodes, the number of nodes being rewarded equals to the whole number.",
-            "t3": "Calculation of voting rewards does not depend on the number of nodes, but the staking amount."
+            "txt1": "[Число зарегистрированных узлов] Количество полных узлов, зарегистрированных с текущим адресом",
+            "txt2": "[Число активных узлов] Количество активных полных узлов, зарегистрированных с текущего адреса",
+            "txt3": "[Количество вознаграждаемых узлов] Количество узлов",
+            "t2": "Несколько полных узлов могут быть зарегистрированы с одним и тем же адресом, но в заморозке должно быть по меньшей мере 10 000 VITE на каждый; При вычислении награды, если сумма в заморозке / 10000 дает целое число, которое больше или равно количеству активных узлов, все активные узлы будут вознаграждены; Если количество VITE в заморозке / 10000 дает целое число, которое меньше числа активных узлов, количество вознаграждаемых узлов равно целому числу.",
+            "t3": "Расчет вознаграждения за голосование зависит не от количества узлов, а от количества монет в заморозке."
         },
-        "confirmText": "Confirm to stake {amount} VITE for quota, staking can be cancelled after {days} days",
+        "confirmText": "Подтвердите, что {amount} VITE будут заморожены, будет доступно к разморозке через {days} дней",
         "addQuota": {
             "address": "Адрес Стейкинга",
             "stakeDays": "Период Стейкинга",
-            "placeholder": "Minimum Stake {min} VITE"
+            "placeholder": "Минимальная сумма для заморозки {min} VITE",
+            "stakingSuspend": "Заморозка временно приостановлена"
         },
         "quotaContent": {
-            "onlineReward": "Active Node Reward",
-            "voteReward": "Voting Reward",
-            "yesterday": "yesterday",
-            "all": "Accumulated VITE: {num}",
-            "nodeInfo": "Node Information",
-            "onlineNodes": "Active Nodes",
-            "rewardNodes": "Rewarding Nodes",
-            "stakeAmount": "Node Staking"
+            "onlineReward": "Награда за активный узел",
+            "voteReward": "Награды за голосование",
+            "yesterday": "вчера",
+            "all": "Накопленный VITE: {num}",
+            "nodeInfo": "Информация об узле",
+            "onlineNodes": "Активные узлы",
+            "rewardNodes": "Награждение узлов",
+            "stakeAmount": "Заморозка для узла"
         }
     },
     "walletSBP": {
@@ -691,9 +713,9 @@
             "edit": {
                 "title": "Изменить адрес создания блока",
                 "newBlockProducer": "пожалуйста, введите новый адрес создания блока",
-                "newRewardAddress": "please input new reward withdraw address",
+                "newRewardAddress": "Пожалуйста, введите новый адрес получения вознаграждения",
                 "changeBlockProducer": "Адрес Создания Блока",
-                "changeRewardAddress": "Reward Withdraw Address",
+                "changeRewardAddress": "Редактировать адрес вывода наград SBP",
                 "btn": "Подтвердить изменения"
             }
         },
@@ -701,7 +723,7 @@
             "title": "Регистрационная Форма",
             "nodeName": "Имя Ноды",
             "producerAddr": "Адрес Создания Блока",
-            "rewardWithdrawAddress": "Reward Withdraw Address",
+            "rewardWithdrawAddress": "Редактировать адрес вывода наград SBP",
             "quotaAddr": "Адрес Стейкинга",
             "quotaTime": "Период Стейкинга",
             "time": "7776000 снимков блоков (примерно 90 дней)",
@@ -809,7 +831,7 @@
         },
         "vb": {
             "title": "ViteConnect",
-            "closeAlert": "close",
+            "closeAlert": "Закрыть",
             "connect": {
                 "tips": "Сканируйте QR-код через приложение Vite Wallet"
             },
@@ -819,63 +841,63 @@
             "start": {
                 "scan": "Сканируйте QR-код через приложение Vite Wallet",
                 "downloadTips": "У вас еще нет приложения Vite Wallet? ",
-                "download": "Загрузить Vite Wallet"
+                "download": "Скачать здесь"
             },
             "accountName": "Адрес ViteConnect"
         },
         "ledger": {
-            "title": "Ledger Device",
-            "accountName": "Ledger Wallet",
-            "verifyAddress": "Verify address",
+            "title": "Устройство",
+            "accountName": "Кошелек Ledger",
+            "verifyAddress": "Подтвердить адрес",
             "closeAlert": "Отменить",
             "start": {
-                "title": "Support Hardware Wallets: Ledger Nano S / Ledger Nano X",
-                "connectError": "Having Connection Issues?",
-                "introduction": "App Installation & Usage Instructions",
-                "introductionUrl": "https://support.ledger.com/hc/en-us/articles/115005165269-Connection-issues-with-Windows-or-Linux",
-                "connectErrorUrl": "https://support.ledger.com/hc/en-us/articles/115005165269-Connection-issues-with-Windows-or-Linux"
+                "title": "Поддерживаемые кошельки: Ledger Nano S / Ledger Nano X",
+                "connectError": "Проблемы с подключением?",
+                "introduction": "Инструкции по установке и использованию приложения",
+                "introductionUrl": "https://docs.vite.org/go-vite/tutorial/ledger-install.html",
+                "connectErrorUrl": "https://support.ledger.com/hc/ru/articles/115005165269-Connection-issues-with-Windows-or-Linux"
             },
-            "connectWithUSB": "Use USB",
-            "connectWithBlu": "Use Bluetooth",
-            "connectLedger": "Connect to Ledger",
+            "connectWithUSB": "Использовать USB",
+            "connectWithBlu": "Использовать Bluetooth",
+            "connectLedger": "Подключиться к Ledger",
             "connect": {
-                "title": "Address Select",
-                "tips": "Select an address to use:",
-                "selectConnectType": "Choose connection type: (Bluetooth is only supported on Ledger Nano X)",
-                "cancelSelect": "Select a device to connect",
-                "connectError": "Connect failed. Please confirm Vite app is opened on device",
-                "interfaceNotAvailable": "Connect failed. Please check USB cable is connected. If you connect through Bluetooth, switch off Bluetooth and switch on again",
-                "receiveBlockSuccess": "Successfully received {num} transaction",
+                "title": "Выбор адреса",
+                "tips": "Выберите адрес для использования:",
+                "selectConnectType": "Выберите тип подключения: (Bluetooth поддерживается только на Ledger Nano X)",
+                "cancelSelect": "Выберите устройство для подключения",
+                "connectError": "Подключение не удалось. Пожалуйста, удостоверьтесь, что приложение VITE запущено на устройстве",
+                "interfaceNotAvailable": "Подключение не удалось. Пожалуйста, проверьте подключение к USB кабелю. Если вы подключитесь через Bluetooth, выключите Bluetooth и снова включите",
+                "receiveBlockSuccess": "Успешно получена транзакция {num}",
                 "introduction": {
                     "1": {
-                        "title": "Step 1: ",
-                        "content": "Connect Ledger device and enter PIN code"
+                        "title": "Шаг 1: ",
+                        "content": "Подключите Ledger и введите PIN-код"
                     },
                     "2": {
-                        "title": "Step 2: ",
-                        "content": "Open Vite app on Ledger"
+                        "title": "Шаг 2: ",
+                        "content": "Откройте приложение VITE на Ledger"
                     }
                 }
             },
             "addressSelect": {
-                "index": "Index",
+                "index": "Индекс",
                 "address": "Адрес",
                 "balance": "Баланс",
                 "unreceived": "Не получено",
-                "nextPage": "Next page",
-                "prePage": "Last page",
+                "nextPage": "Следующая страница",
+                "prePage": "Последняя страница",
                 "confirm": "Подтвердить",
-                "unUsedAccount": "New"
+                "unUsedAccount": "Новый"
             },
             "confirm": {
-                "tips": "Please confirm the transaction on your Ledger device",
-                "verifyAddress": "Please verify the address on your Ledger device",
-                "alert": "Warning",
-                "alertContent": "Address has been denied on Ledger device. Please double verify if this address matches the address displayed on your Ledger device. If yes, ignore this message and go ahead to confirm the transaction, otherwise DO NOT send asset to the address and quit immediately.",
-                "alertLeftBtn": "I confirm the addresses are matched",
-                "alertRightBtn": "Addresses mismatch. Get me out of here!",
-                "userCancel": "Transaction is cancelled on Ledger",
-                "userCancelByWeb": "You cancelled the transaction in Vite wallet. In this case, the transaction will be abandoned and never go through to blockchain even if it is confirmed on your Ledger device."
+                "tips": "Пожалуйста, подтвердите транзакцию на вашем Ledger",
+                "verifyAddress": "Пожалуйста, проверьте адрес на вашем Ledger",
+                "alert": "Предупреждение",
+                "alertContent": "Адрес был отклонен на Ledger. Пожалуйста, убедитесь, что этот адрес соответствует адресу, отображаемому на вашем Ledger. Если да, проигнорируйте это сообщение и подтвердите транзакцию, в противном случае НЕ отправляйте актив на адрес.",
+                "alertLeftBtn": "Подтверждаю соответствие адресов",
+                "alertRightBtn": "Несоответствие адресов. Отменить действие!",
+                "userCancel": "Транзакция отменена на Ledger",
+                "userCancelByWeb": "Вы отменили транзакцию в VITE кошельке. В этом случае транзакция не будет проходить в блокчейн, даже если она подтверждена на вашем устройстве Ledger."
             }
         },
         "invite": {
@@ -900,8 +922,8 @@
                 " <span class='strong'>5%</span> от торговых сборов, сгенерированых пользователями, использующими реферальный код, будет рассматриваться как торговые сборы, которые могут майнить VX."
             ],
             "receiveRuleItems": [
-                "Invited users will receive an extra <span class='strong'>2.5%</span> of trading as mining rewards and <span class='strong'>1.25%</span> of market-making as mining rewards",
-                "Enjoy <span class='strong'>10%</span> off trading fees with an invitation code"
+                "Приглашенные пользователи получат дополнительные <span class='strong'>2.5%</span> наград за торговлю и <span class='strong'>1.25%</span> за маркет-мейкинг",
+                "Наслаждайтесь <span class='strong'>10%</span> скидкой на торговые комиссии с кодом приглашения"
             ]
         }
     },
@@ -930,32 +952,32 @@
         "depthStep": "{step} цифр",
         "blocking": "Сеть перегружена, пожалуйста, повторите попытку позже",
         "supportMining": "Mineable Trading Pairs",
-        "cmcHelp": "View VITE on CoinMarketCap",
-        "supportTradeMining": "Eligible for trading as mining",
-        "supportOrderMining": "Eligible for market-making as mining",
-        "zeroFee": "Zero Fee",
-        "buyMiningPrice": "Qualifies for mining when buy price is greater than {price}",
-        "sellMiningPrice": "Qualifies for mining when sell price is less than {price}",
+        "cmcHelp": "Посмотреть VITE на CoinMarketCap",
+        "supportTradeMining": "Поддерживает награду за торговые операции",
+        "supportOrderMining": "Поддерживает награды за маркет-мейкинг",
+        "zeroFee": "Без комиссий",
+        "buyMiningPrice": "Цена, выше чем {price}, доступна для наград за торговлю.",
+        "sellMiningPrice": "Цена, ниже чем {price}, доступна для наград за торговлю.",
         "operator": {
-            "noName": "Anonymous Operator",
+            "noName": "Анонимный оператор",
             "overview": "Описание",
             "txPair": "Торговые Пары",
             "confirmTitle": "Напоминание о Риске",
             "confirmText": "Текущая торговая пара - {symbol}. Пожалуйста, будьте осторожны при торговле. Инвестиции в цифровые активы сопряжены с высокими рисками. Прежде чем инвестировать, пожалуйста, имейте полное представление обо всех рисках инвестирования в цифровые активы и оценивайте подлинность, законность и действительность цифровых активов самостоятельно. Пожалуйста, будьте осторожны с вашими собственными инвестиционными решениями и возьмите на себя ответственность за потерю ваших активов.",
-            "address": "Operator Address",
-            "name": "Operator Name"
+            "address": "Адрес оператора",
+            "name": "Имя оператора"
         },
         "operatorTxPair": {
-            "title": "Trading Pair Details",
-            "tokenTab": "Token Details",
+            "title": "Детали торговой пары",
+            "tokenTab": "Параметры токена",
             "operatorTab": "Детали Оператора"
         },
-        "depthBuyMiningPrice": "Mining Range Above",
-        "depthSellMiningPrice": "Mining Range Below",
-        "inMiningRange": "Mining Range"
+        "depthBuyMiningPrice": "Диапазон наград выше",
+        "depthSellMiningPrice": "Диапазон наград ниже",
+        "inMiningRange": "Диапазон наград"
     },
     "trade": {
-        "more": "More",
+        "more": "Ещё",
         "search": "Поиск",
         "txPair": "Пара",
         "price": "Цена",
@@ -1023,8 +1045,8 @@
             "buy": "Купить",
             "sell": "Продать",
             "all": "Все",
-            "avgPrice": "Avg.Price:",
-            "sum": "Sum {symbol}:"
+            "avgPrice": "Средняя цена:",
+            "sum": "Сумма {symbol}:"
         },
         "noData": {
             "favorite": "У вас еще нет избранных",
@@ -1033,8 +1055,8 @@
         "limitPrice": {
             "title": "Лимит",
             "fee": "Комиссия",
-            "adviseToSVip": "Upgrade to SVIP, enjoy zero base transaction fee",
-            "feeRuleWithSVip": "Operator Fees * Referral Discount. ATTENTION: The adjustment and discount of fees will only affect new orders, the former orders' charge remains the same.",
+            "adviseToSVip": "Подключите SVIP и наслаждайтесь нулевой базовой комиссией",
+            "feeRuleWithSVip": "Комиссия оператора * реферальная скидка. Внимание: Регулировка и скидка на комиссию повлияют только на новые ордера, стоимость предыдущих ордеров остается прежней.",
             "text": "Эта страница является страницей предварительного просмотра данных транзакции. Пожалуйста, войдите, чтобы торговать.",
             "validAmount": "Объем должен быть больше чем {amount}{token}",
             "priceNotNull": "Сумма не может быть пустой",
@@ -1046,41 +1068,41 @@
             "operatorFee": "Сборы Зоны (взимается Оператором): {fee}",
             "vipFee": "VIP Скидка: {fee}",
             "inviteFeeDiscount": "Реферальная скидка: {fee} выкл",
-            "svipFee": "SVIP: 0% base transaction fee",
+            "svipFee": "SVIP: 0% базовая комиссия",
             "feeRule": "(Базовая Плата за Транзакцию - VIP скидка + Сборы Зоны) * Реферальная Скидка. Внимание: Регулировка и скидка на комиссию повлияют только на новые ордера, стоимость предыдущих ордеров остается одинаковой."
         },
         "proxy": {
-            "title": "Trade Delegation",
-            "subTitle": "Trade Delegation",
-            "successProxy": "Delegation Success",
-            "failProxy": "Delegation Failed",
-            "successCancelProxy": "Remove Delegation Success",
-            "failCancelProxy": "Failed to remove delegations",
-            "info": "What is Trade Delegation?",
-            "new": "Initiate Delegation",
+            "title": "Торговая делегация",
+            "subTitle": "Торговая делегация",
+            "successProxy": "Успешное делегирование",
+            "failProxy": "Делегирование не удалось",
+            "successCancelProxy": "Делегация успешно отменена",
+            "failCancelProxy": "Неудачная попытка отмены делегации",
+            "info": "Что такое торговая делегация?",
+            "new": "Инициировать делегацию",
             "active": {
-                "title": "Delegation History",
+                "title": "История делегаций",
                 "head": [
-                    "Delegatee Address",
+                    "Адрес делегата",
                     "Торговые Пары",
                     "Действие"
                 ],
                 "operate": [
-                    "Add Trading Pairs",
-                    "Remove Trading Pairs",
-                    "Remove All Delegations"
+                    "Добавить торговые пары",
+                    "Удаление торговых пар",
+                    "Удалить все делегации"
                 ]
             },
             "passive": {
-                "title": "Accepted Delegation History",
+                "title": "История принятой делегации",
                 "head": [
-                    "Delegation Address",
+                    "Адрес делегации",
                     "Торговые Пары"
                 ]
             },
             "dialog": {
                 "cancel": "Отменить",
-                "cancelAllTips": "Are you sure you'd like to remove all delegations on {trustAddress}?",
+                "cancelAllTips": "Вы уверены, что хотите удалить все делегации на {trustAddress}?",
                 "rTxtMap": {
                     "new": "Добавить",
                     "add": "Добавить",
@@ -1088,76 +1110,76 @@
                     "deleteAll": "Подтвердить"
                 },
                 "confirm": {
-                    "title": "Confirm Delegations",
+                    "title": "Подтвердить делегации",
                     "cancel": "Отменить",
                     "ok": "Подтвердить"
                 },
                 "titleMap": {
-                    "new": "Initiate Delegation",
-                    "add": "Add Delegations",
-                    "delete": "Remove Delegations",
-                    "deleteAll": "Confirm to remove delegations"
+                    "new": "Инициировать делегацию",
+                    "add": "Добавить Делегации",
+                    "delete": "Удалить Делегации",
+                    "deleteAll": "Подтвердите удаление делегаций"
                 }
             }
         },
         "openapi": {
             "title": "API",
-            "myKey": "My API Key",
-            "createTime": "Created Time",
-            "permissions": "Applied Trading Pairs",
-            "createKey": "Create API Key",
-            "deleteKey": "Delete API",
-            "deleteAlert": "The current API will no longer be accessible if confirm to proceed. Existing package will be retained and re-activated upon creation of a new API Key.",
-            "confirmDelete": "Confirm and Delete",
+            "myKey": "Мой ключ API",
+            "createTime": "Время создания",
+            "permissions": "Разрешенные торговые пары",
+            "createKey": "Создать ключ API",
+            "deleteKey": "Удалить API",
+            "deleteAlert": "Текущий API больше не будет доступен. Существующий пакет будет сохранен и вновь активирован при создании нового ключа API.",
+            "confirmDelete": "Подтвердить удаление",
             "cancel": "Отменить",
-            "agentAddressStakingAmount": "Delegation Staked Quota",
-            "staking": "Stake",
-            "package": "Package",
-            "expireTime": "Expiration Date",
-            "callNum": "Triggers/min",
-            "callNumInfo": "{maxCount} transactions/min",
+            "agentAddressStakingAmount": "Делегирование Квоты",
+            "staking": "Заморозка",
+            "package": "Тарифный план",
+            "expireTime": "Срок действия",
+            "callNum": "Запросов/мин",
+            "callNumInfo": "{maxCount} транзакций/мин",
             "price": "Стоимость",
-            "priceInfo": "{price} VX/mth",
-            "upgrade": "Upgrade",
-            "balanceAlert": "Cannot create if VITE balance is less than {balanceLimit}.",
-            "noSupportForHardware": "Hardware Wallet is not supported at the moment",
+            "priceInfo": "{price} VX/месяц",
+            "upgrade": "Модернизировать",
+            "balanceAlert": "Невозможно создать, если баланс VITE меньше, чем {balanceLimit}.",
+            "noSupportForHardware": "Аппаратный кошелек на данный момент не поддерживается",
             "tips": {
-                "title": "Notice",
-                "0": "ViteX is releasing official API to provide access to markets and real-time trading services. Follow the instructions below to properly acquire an API private key.",
-                "0-step1": "1. Create API",
-                "0-step2": "2. Authorize delegation of selected trading pairs",
-                "0-step3": "3. Stake quota for API delegation address",
-                "0-step4": "View <a href=\"https://vite.wiki/dex/api/dex-apis.html\" target=\"_blank\">API Documentation</a> for further support",
-                "1": "One set of API Key and Secret is allowed for the same address at any given time.",
-                "2": "To avoid asset loss, Do Not disclose your Access Key and Secret",
-                "3": "The API package is set with the free base package at 10 transactions per minute by default, upgrade options available."
+                "title": "Уведомление",
+                "0": "ViteX предоставляет официальный API для доступа к рынку и торговым услугам в режиме реального времени. Следуйте инструкциям ниже, чтобы получить приватный ключ API.",
+                "0-step1": "1. Создайте API",
+                "0-step2": "2. Авторизация делегирования выбранных торговых пар",
+                "0-step3": "3. Получение квоты и делегация для работы API",
+                "0-step4": "Смотрите <a href=\"https://vite.wiki/dex/api/dex-apis.html\" target=\"_blank\">API-документацию</a> для дальнейшей поддержки",
+                "1": "Одновременно только один набор публичного и секретного ключей API разрешён для одного адреса VITE.",
+                "2": "Чтобы избежать потери активов, не раскрывайте ключи API третьим лицам.",
+                "3": "API устанавливается с базовым пакетом, по умолчанию - 10 транзакций в минуту. Параметры доступны для конфигурации."
             },
             "stakingForQuota": {
-                "title": "Delegation Quota",
-                "agentAddress": "Delegation Address",
-                "stakingAmount": "Stake Amount",
+                "title": "Делегировать квоту",
+                "agentAddress": "Адрес делегации",
+                "stakingAmount": "Сумма заморозки",
                 "ok": "Подтвердить"
             },
             "keyConfirm": {
-                "accessKey": "Access Key",
-                "secretKey": "Secret Key",
-                "agentAddress": "Delegation Address",
-                "title": "API Created Successfully",
+                "accessKey": "Публичный ключ доступа",
+                "secretKey": "Секретный ключ доступа",
+                "agentAddress": "Адрес делегирования",
+                "title": "Ключ API создан успешно!",
                 "tips": {
                     "title": "Важное Замечание",
-                    "0": "To avoid asset loss, Do Not disclose your Access Key and Secret Key.",
-                    "1": "In cases of lost secret key, Delete the current API and Re-Apply for a new API key."
+                    "0": "Чтобы избежать потери активов, не раскрывайте ключи API третьим лицам.",
+                    "1": "В случае компрометации секретного ключа, удалите текущий API и создайте новый."
                 },
-                "warn": "The Secret key is displayed only once and cannot be found back if lost, please keep it properly."
+                "warn": "Секретный ключ отображается только один раз и не может быть восстановлен в случае его утраты. Пожалуйста, сохраните его."
             },
             "upgradeConfirm": {
-                "title": "Upgrade Package",
-                "currentPackage": "Current",
-                "selectPackage": "Select New",
-                "selectTime": "Valid For",
-                "month": " Mth",
+                "title": "Обновить пакет",
+                "currentPackage": "Текущее",
+                "selectPackage": "Выбрать новый",
+                "selectTime": "Действителен для",
+                "month": "Месяц",
                 "payAmount": "Всего",
-                "balance": "VX Balance"
+                "balance": "Баланс VX"
             }
         }
     },
@@ -1268,9 +1290,9 @@
             "0": "Купить"
         },
         "status": {
-            "1": "Ongoing",
+            "1": "В настоящее время",
             "2": "Завершено",
-            "3": "Cancelled",
+            "3": "Отменено",
             "4": "Ошибка"
         },
         "confirmTable": {
@@ -1298,7 +1320,7 @@
             ],
             "rowMap": {
                 "statusMap": {
-                    "1": "In Order",
+                    "1": "В заказе",
                     "2": "Выполнено",
                     "3": "Отменено",
                     "4": "Ошибка"
@@ -1323,7 +1345,7 @@
         "addQuota": "Создать новый стейкинг",
         "add": "Добавить",
         "withdraw": "Получить",
-        "withdrawList": "Withdrawal List",
+        "withdrawList": "Список снятий",
         "tbHead": {
             "date": "Дата",
             "fee": "Торговые Комиссии",
@@ -1332,11 +1354,11 @@
         },
         "txTitle": "Торговля как Майнинг Общий Доход",
         "quotaTitle": "Стейкинг как Майнинг Общий Доход",
-        "addHint1": "Single stake should be at least 134 VITE",
-        "addHint2": "VITE staking will be effective immediately after submission. Staking can be canceled after 3 days",
-        "addHint3": "Staked amount will be released after the 7-day waiting period",
-        "withdrawHint1": "You will no longer be able to mine VX after staking is canceled",
-        "withdrawHint2": "It takes 7 days to return unstaked VITE coins to exchange balance",
+        "addHint1": " Стейк должен быть не менее 134 VITE",
+        "addHint2": "Заморозка VITE будет действовать сразу. Разморозка будет доступна через 3 дня.",
+        "addHint3": "Размещённая сумма будет доступна к разморозке после 7-дневного периода ожидания",
+        "withdrawHint1": "С момента начала периода разморозки вы прекратите получать награды VX",
+        "withdrawHint2": "Период от начала разморозки до поступления VITE на биржевой баланс - 7 дней",
         "addTitle": "Стейкинг VITE для Майнинга",
         "withdrawTitle": "Возврат VITE в Стейкинге",
         "addPlaceHolder": "Пожалуйста, введите сумму стейка, как минимум 134 VITE",
@@ -1348,69 +1370,69 @@
         "comingHint": "Функция майнинга VX скоро появится, следите за обновлениями. Вы можете получить VX пятью способами: 1. Торговля как Майнинг, 2. Листинг как Майнинг, 3. Привлечение как Майнинг, 4. Стейкинг как Майнинг, 5. Маркет-Мейкинг как Майнинг. Пользователи, владеющие VX, пользуются выплатами из общего пула дивидендов.",
         "more": "Узнайте больше о правилах майнинга VX",
         "fee": "Торговые Комиссии",
-        "todayTrade": "Mining Details",
-        "dividends": "24H Expected Mined Volume",
-        "view": "View Live Mining Dashboard",
-        "inviteCount": "Referrals",
-        "help": "Current trading fees displayed on this page contains only the 0.2% ViteX base transaction fees, please note that operator fees shall be taken into consideration when calculating mining cost"
+        "todayTrade": "Детализация наград",
+        "dividends": "Ожидаемая награда",
+        "view": "Посмотреть в реальном времени",
+        "inviteCount": "Приглашенные",
+        "help": "Текущая комиссия за торговлю, указанная на этой странице, содержит только 0.2% базовой комиссии ViteX, пожалуйста, обратите внимание, что при расчете стоимости наград будут учитываться сборы оператора"
     },
     "tradeVip": {
-        "title": "VIP Status",
+        "title": "Статус VIP",
         "open": "Стать VIP",
-        "cancel": "Cancel {type}",
+        "cancel": "Отменить {type}",
         "help": {
-            "title": "About ViteX VIP"
+            "title": "Подробнее о ViteX VIP"
         },
         "helpConfirm": {
             "t1": "VIP",
-            "txt1": "Stake 10,000 VITE to acquire VIP status and receive 50% off trading fees. Staking can be canceled after 30 days.",
+            "txt1": "Заморозьте 10000 VITE и вы получите VIP. Статус даст 50% скидку на торговые комиссии. Разморозка (отмена статуса) может быть выполнена через 30 дней.",
             "t2": "SVIP",
-            "txt2": "Stake 1M VITE to become a SVIP and enjoy 0 base trading fees. Staking can be canceled after 30 days.",
-            "txt3": "SVIP supports staking for any valid account address. Stake for them to get SVIP status!"
+            "txt2": "Заморозьте 1М VITE и вы получите SVIP. Статус даст нулевую базовую ставку торговыехкомиссий. Разморозка (отмена статуса) может быть выполнена через 30 дней.",
+            "txt3": "SVIP поддерживает заморозку для любого адреса в аккаунте. Заморозьте и получите SVIP статус!"
         },
         "vipConfirm": {
-            "cancelVip": "Cancel VIP Status",
+            "cancelVip": "Отменить VIP статус",
             "openVip": "Стать VIP",
             "openStakingAmount": "Сумма Стейка для того, чтобы стать VIP",
-            "cancelStakingAmount": "Available Stake Balance",
+            "cancelStakingAmount": "Доступный баланс",
             "noBalance": "Недостаточно Средств",
-            "openHint": "You will receive 0.1% trading fee deduction as a VIP. The staking of 10,000 VITE can be withdrawn after 30 days.",
-            "cancelHint": "VIP status will be canceled immediately.",
-            "openSuccess": "Your VIP status is activated! It will take effect in a few seconds.",
-            "openFail": "VIP Registration Failed",
+            "openHint": "Станьте VIP и получите скидку 0.1% на торговые комиссии. Заморозьте 10000 VITE, чтобы стать VIP (минимальная длительность статуса: 30 дней)",
+            "cancelHint": "VIP статус будет отменен немедленно.",
+            "openSuccess": "Ваш VIP статус активирован! Эффект подействует через несколько секунд.",
+            "openFail": "Ошибка регистрации VIP",
             "cancelSuccess": "Отмена VIP Успешна",
             "cancelFail": "Отмена не удалась",
-            "adviseToCancel": "There will be no base transaction fees with your current status as our SVIP, we therefore recommend you to revoke the staked VITE，which is required for general VIP members.",
-            "address": "Enable VIP Status",
-            "addressPlaceholder": "Current address is the default address, address cannot be modified later"
+            "adviseToCancel": "С вашим статусом в качестве SVIP базовая ставка комиссий будет 0, поэтому мы рекомендуем разморозить VITE, который необходим для VIP участников.",
+            "address": "Включить статус VIP",
+            "addressPlaceholder": "Текущий адрес является адресом по умолчанию, адрес не может быть изменен позже"
         },
         "svipConfirm": {
-            "open": "Upgrade",
+            "open": "Модернизировать",
             "cancel": "Отменить",
-            "cancelVip": "Cancel SVIP",
-            "openVip": "Become a SVIP",
-            "openStakingAmount": "Staking Amount for Becoming a SVIP",
-            "cancelStakingAmount": "Available Stake Balance",
+            "cancelVip": "Отменить SVIP",
+            "openVip": "Стать SVIP",
+            "openStakingAmount": "Сумма заморозки для статуса SVIP",
+            "cancelStakingAmount": "Доступный баланс",
             "noBalance": "Недостаточно Средств",
-            "openHint": "You will enjoy 0% base transaction fee when upgrading to SVIP. The stake of 1,000,000 VITE can be withdrawn after 30 days.",
-            "cancelHint": "SVIP privileges will be discontinued once staking is revoked",
-            "openSuccess": "Applied Successful! SVIP status will come into effect later.",
-            "openFail": "Failed to apply SVIP",
-            "cancelSuccess": "Cancel SVIP Successful",
+            "openHint": "Вы будете пользоваться 0% базовой комиссией при модернизации до SVIP. Заморозка 1,000,000 VITE может быть отменена через 30 дней.",
+            "cancelHint": "Привилегии SVIP будут отменены после начала разморозки",
+            "openSuccess": "Успешно, статус SVIP вступит в силу немного позднее.",
+            "openFail": "Не удалось применить SVIP",
+            "cancelSuccess": "Статус SVIP отменен.",
             "cancelFail": "Отмена не удалась",
-            "address": "Enable SVIP Status",
-            "addressPlaceholder": "Address to be Enabled with SVIP Status",
-            "cancelAddress": "SVIP Address"
+            "address": "Включить SVIP статус",
+            "addressPlaceholder": "Адрес для включения с SVIP",
+            "cancelAddress": "SVIP адрес"
         },
-        "vipListTitle": "VIP Records",
-        "openAddress": "Enabled Address",
-        "type": "VIP Type"
+        "vipListTitle": "VIP записи",
+        "openAddress": "Включенный адрес",
+        "type": "VIP тип"
     },
     "inviteMining": {
         "title": "邀请挖矿总收益",
-        "myInviteIncome": "Referral Proceeds",
-        "inviteTradeIncome": "Referred Trading Proceeds",
-        "inviteOrderIncome": "Referred Market-Making Proceeds"
+        "myInviteIncome": "Награда за приглашенных",
+        "inviteTradeIncome": "Награды за торговлю приглашенных",
+        "inviteOrderIncome": "Награды за маркет-мейкинг приглашенных"
     },
     "orderMining": {
         "title": "挂单挖矿总收益",
@@ -1419,8 +1441,8 @@
             "ratio": "占比",
             "mining": "挖矿金额"
         },
-        "market": "{name} Market",
-        "estimate": "{name} Today's Minable Amount"
+        "market": "Рынок {name}",
+        "estimate": "{name} Сумма добытого сегодня "
     },
     "tradeDividend": {
         "title": "Дивиденды",
@@ -1435,46 +1457,46 @@
         "hintTitle": "Важное Замечание",
         "comingHint": "Функции майнинга и дивидендов VX скоро появятся, следите за обновлениями. Система будет распределять 1% BTC, ETH, VITE, USDT от общего пула всем пользователям VX пропорционально количеству VX, которое они имеют. Начальный дивидендный пул начнется с 0 и будет расти в зависимости от суммы сборов, взимаемых ViteX. Трейдеры должны иметь как минимум 10 VX, чтобы получать дивиденды из пула дивидендов, состоящего из базовой транзакции, листинга и комиссионных за генерацию реферального кода. ",
         "more": "Узнайте больше о правилах дивидендов VX",
-        "help": "Reward Rules: 1. A minimum of 10 VX must be staked to receive dividends. 2. Submission of staking request allows for dividends starting the nearest distribution. 3. Staked amount will be released after the 7-day waiting period",
+        "help": "Правила: 1. Для получения дивидендов нужно заморозить не менее 10 VX. 2. Первые дивиденды вы получите в ближайшее распределение после заморозки. 3. Разморозка длится семь (7) дней.",
         "lockedAmount": "Сумма Стейкинга",
-        "lockAmountTips": "Receive Dividends on 10 VX or Above",
-        "unlockAmount": "Unlocking Amount",
-        "addHint1": "A minimum of 10 VX must be staked to receive dividends",
-        "addHint2": "Submission of staking request allows for dividends starting the nearest distribution",
-        "addHint3": "Staked amount will be released after the 7-day waiting period",
-        "autoLock": "Automatic Staking",
+        "lockAmountTips": "Получение дивидендов от 10 VX (минимум)  или больше",
+        "unlockAmount": "Сумма разморозки",
+        "addHint1": "Для получения дивидендов необходимо заморозить минимум 10 VX",
+        "addHint2": "Заморозка позволит получить дивиденды в ближайшее распределение",
+        "addHint3": "Разморозка средств длится семь (7) дней",
+        "autoLock": "Автоматическая заморозка",
         "openAutoLock": {
-            "title": "Enable Automatic Staking",
-            "text": "Mined VX will be automatically staked once enabled"
+            "title": "Включить автоматическую заморозку",
+            "text": "Полученные в виде наград VX будут автоматически добавляться к числу уже замороженных на получение дивидендов."
         },
         "closeAutoLock": {
-            "title": "Disable Automatic Staking",
-            "text": "Mined VX will not be automatically staked when turned off"
+            "title": "Выключить автоматическую заморозку",
+            "text": "Полученные в виде наград VX не будут автоматически добавляться к замороженным на получение дивидендов."
         },
-        "lock": "Stake",
-        "unlock": "Unstake",
-        "lessMin": "Minimum 1 VX",
+        "lock": "Заморозка",
+        "unlock": "Разморозка",
+        "lessMin": "Минимум 1 VX",
         "lockVXConfirm": {
-            "title": "Stake VX",
+            "title": "Заморозить VX",
             "available": "Доступный Баланс на Бирже",
-            "amountPlaceholder": "Please input staking amount, minimum 1 VX",
-            "notEnough": "Insufficient Exchange Balance",
-            "submit": "Confirm to Stake",
+            "amountPlaceholder": "Пожалуйста, введите сумму заморозки, минимум 1 VX",
+            "notEnough": "Недостаточный биржевой баланс ",
+            "submit": "Подтвердить",
             "amountText": "Сумма"
         },
         "unlockVXConfirm": {
-            "title": "Unstake VX",
-            "available": "Available Stake Balance",
-            "amountPlaceholder": "Please input amount, minimum 1 VX",
-            "notEnough": "Insufficient Amount",
-            "submit": "Confirm to Unstake",
+            "title": "Разморозить VX",
+            "available": "Доступный баланс",
+            "amountPlaceholder": "Пожалуйста, введите сумму разморозки, минимум 1 VX",
+            "notEnough": "Недостаточный баланс",
+            "submit": "Подтвердить",
             "amountText": "Сумма",
-            "hint": "It takes about 7 days to unlock."
+            "hint": "Разморозка займет семь дней."
         },
         "unlockList": {
-            "title": "Retrieving",
+            "title": "Ожидает разморозки",
             "amount": "Сумма",
-            "time": "Available Date"
+            "time": "Дата разморозки"
         }
     },
     "tradeOperator": {
@@ -1527,9 +1549,9 @@
         "stopFail": "Приостановка Неуспешна",
         "openSuccess": "Успешное Восстановление",
         "openFail": "Ошибка Восстановления",
-        "changeOwnerSuccess": "Transfer Successful",
-        "changeOwnerFaill": "Transfer Failed",
-        "submitChange": "Confirm to transfer",
+        "changeOwnerSuccess": "Перевод совершен",
+        "changeOwnerFaill": "Ошибка перевода",
+        "submitChange": "Подтвердите перевод",
         "changeOwnerHint": "ВНИМАНИЕ. Вы не сможете собирать или корректировать комиссии после передачи права собственности, а также не сможете отменить это действие",
         "currentMaker": "Mейкер",
         "confirmFee": "Комиссия",
@@ -1546,19 +1568,19 @@
         }
     },
     "mobileAssets": {
-        "allAssets": "Estimated Assets Value ({token})",
-        "tokenInfoTitle": "Token Details",
+        "allAssets": "Общая стоимость активов ({token})",
+        "tokenInfoTitle": "Параметры токена",
         "transfer": "Перевод",
-        "trade": "Trade",
-        "chooseTxPair": "Choose Trading Pair"
+        "trade": "Торговля",
+        "chooseTxPair": "Выберите торговую пару"
     },
     "mobileTradeCenter": {
-        "highPrice": "High",
-        "lowPrice": "Low",
-        "quantity": "24H Vol",
+        "highPrice": "Макс.",
+        "lowPrice": "Мин.",
+        "quantity": "Суточный объем",
         "buyTitle": "Купить",
         "sellTitle": "Продать",
-        "price": "Price ({token})",
+        "price": "Цена ({token})",
         "buy": {
             "price": "Цена",
             "quantity": "Сумма"
@@ -1570,55 +1592,55 @@
         "orderQuantity": "Сумма",
         "orderPrice": "Цена",
         "executedQuantity": "Заполнено",
-        "avgPrice": "Avg"
+        "avgPrice": "Сред."
     },
     "mobileDividend": {
         "title": "Дивиденды",
-        "poolTitle": "Dividend Pool ({token})",
-        "myDividendTitle": "Total Estimated Value of Dividends ({token})",
-        "listTitle": "Dividend Details",
-        "lockingTitle": "My Staking",
-        "viewLink": "Unstaking Status"
+        "poolTitle": "Пул дивидендов ({token})",
+        "myDividendTitle": "Сумма полученных дивидендов ({token})",
+        "listTitle": "Детализация дивидендов",
+        "lockingTitle": "Заморожено",
+        "viewLink": "Статус разморозки"
     },
     "mobileMining": {
         "title": "Майнинг",
         "miningTrade": "Торговля",
-        "miningStaking": "Staking",
-        "miningInvite": "Referral",
-        "miningOrder": "Market-Making",
-        "tradeTotalIncome": "Total Income ({token})",
-        "stakingTotalIncome": "Total Income ({token})",
-        "inviteTotalIncome": "Total Income ({token})",
-        "orderTotalIncome": "Total Income ({token})",
+        "miningStaking": "Заморозка",
+        "miningInvite": "Приглашенные",
+        "miningOrder": "Маркет-мейкинг",
+        "tradeTotalIncome": "Общий доход ({token})",
+        "stakingTotalIncome": "Общий доход ({token})",
+        "inviteTotalIncome": "Общий доход ({token})",
+        "orderTotalIncome": "Общий доход ({token})",
         "fee": "Комиссия",
-        "listTitle": "Mining History",
-        "viewLink": "Live Mining Dashboard",
-        "inviteTradeIncome": "Referred Trading Details",
-        "inviteOrderIncome": "Referred Market-Making Details",
-        "myStaking": "My Staking"
+        "listTitle": "История наград",
+        "viewLink": "Посмотреть в реальном времени",
+        "inviteTradeIncome": "Детализация наград за торги",
+        "inviteOrderIncome": "Детализация наград за маркет-мейкинг",
+        "myStaking": "Заморожено"
     },
     "mobileBottomBar": {
-        "center": "Trade",
+        "center": "Рынок",
         "assets": "Активы",
         "mining": "Майнинг",
-        "order": "Order"
+        "order": "Заявка"
     },
     "mobileOrder": {
         "filterDate": "Дата",
         "filterToken": "Тип",
         "all": "Все",
-        "3month": "3 months",
-        "1month": "1 month",
-        "1week": "1 week",
-        "1day": "1 day",
-        "clear": "Clear",
+        "3month": "3 месяца",
+        "1month": "1 месяц",
+        "1week": "1 неделя",
+        "1day": "1 день",
+        "clear": "Очистить",
         "submit": "Поиск"
     },
     "desktop": {
-        "unlock": "unlock",
+        "unlock": "Разблокировать",
         "unreceivedTx": {
-            "title": "You have received {num} transactions.",
-            "body": "Amount：{amount} {symbol} \nFrom Address: {address}"
+            "title": "Вы получили {num} транзакций.",
+            "body": "Сумма：{amount} {symbol} \nОтправитель: {address}"
         }
     }
 }
