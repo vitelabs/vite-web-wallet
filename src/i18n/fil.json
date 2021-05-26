@@ -1,0 +1,1646 @@
+{
+    "lang": "FIL",
+    "help": "Sentro ng Tulong",
+    "announcements": "Mga Anunsyo",
+    "start": "Simula",
+    "login": "Mag-log in",
+    "regAcc": "Magparehistro",
+    "unlockAcc": "I-unlock",
+    "changeAcc": "Lumipat ng Account",
+    "existingAcc": "Mga Umiiral nang Account",
+    "restore": "Mag-import ng Mga Mnemonic Word",
+    "register": "Mag-sign Up",
+    "createAcc": "Lumikha",
+    "settingAcc": "Pagtatakda ng Account",
+    "resetAcc": "I-reset ang Iyong Account",
+    "logout": "Mag-logout",
+    "saveLogout": "Mag-logout",
+    "blockHeight": "Taas ng Block ng Snapshot",
+    "accountName": "Pangalan ng account",
+    "action": "Kilos",
+    "stakingAmount": "Halaga ng Staking",
+    "submitStaking": "Magsumite ng Staking",
+    "withdrawHeight": "Inaasahang Taas ng Snapshot",
+    "balance": "Balanse",
+    "dexBalance": "Balanse ng ViteX",
+    "addrName": "Address{index}",
+    "true": "totoo",
+    "false": "hindi totoo",
+    "guide": {
+        "close": "Isara",
+        "next": "Susunod",
+        "closeTips": "Laktawan ang gabay ng gumagamit (Hindi inirerekumenda)",
+        "trade": [
+            "Pamahalaan ang iyong mga assets (parehong Web Wallet at ViteX exchange) dito",
+            "Suriin ang Mga Open Order at Kasaysayan ng Order, alamin ang mga detalye sa pangangalakal",
+            "Sumali sa pagmimina, kumuha ng mga dividend ng VX at trading fee (Mining Dividends)",
+            "Makaranas ng higit pang mga tampok: Staking for Quota, pagiging isang runner ng SBP (Snapshot Block Producer), Pagboto para sa SBPs, conversion ng ERC20, Mga Detalye ng Transaksyon, atbp."
+        ],
+        "assets": [
+            "Deposit para sa Palitan",
+            "Bawiin sa Wallet",
+            "Pagpasok at Paglabas sa Cross-Chain"
+        ]
+    },
+    "dealReminder": {
+        "title": {
+            "buy": "Nakumpleto ang Buy Order: {ftoken} / {ttoken}",
+            "sell": "Nakumpleto ang Order ng Pagbebenta: {ftoken} / {ttoken}"
+        },
+        "failTitle": "Nabigo ang Order",
+        "notice-all": {
+            "buy": "Presyo: {price} {ttoken}\nHalaga: {amount} {ttoken}, nakumpleto. Tingnan ang pahina ng Kasaysayan ng Order para sa mga detalye.",
+            "sell": "Presyo: {price} {ttoken}\nHalaga: {amount} {ttoken}, nakumpleto. Tingnan ang pahina ng Kasaysayan ng Order para sa mga detalye."
+        },
+        "notice-partial": {
+            "buy": "Presyo: {price} {ttoken}\nHalaga: {amount} {ttoken}, ay {executedPercent}% nakumpleto.",
+            "sell": "Presyo: {price} {ttoken}\nHalaga: {amount} {ttoken}, ay {executedPercent}% nakumpleto."
+        },
+        "error": "Ang iyong order {amount} {ftoken} ({ftoken}/{ttoken}) sa {time} ay pumalya. Para sa higit pang mga detalye, mangyaring tingnan ang pahina ng Kasaysayan ng Order."
+    },
+    "pow": {
+        "ing": "Pagpapatakbo ng PoW upang makakuha ng quota",
+        "no": "Maaari kang mag-stake ng VITE para sa quota kung sakaling hindi mo nais na patakbuhin ang PoW",
+        "insuffQuota": "Kumuha ng Quota",
+        "insuffQuotaMsg": "Napansin naming wala kang VITE na naka-lock para sa Quota. Mangyaring i-lock ang VITE o kung nais mo, maaari kang magpatakbo ng POW upang makakuha ng Quota.",
+        "insuffQuotaMsg2": "VITE Lamang {powMaxTimes} ang mga transaksyon ay maaaring gawin bawat araw bawat address nang hindi tumatakbo ang VITE. Naubos lahat ng iyong address {powMaxTimes} mga transaksyon. Mangyaring pumunta sa pahina ng quota at taya ang iyong VITE upang maisagawa ang higit pang mga transaksyon.",
+        "getQuota": "Patakbuhin ang POW",
+        "skip": "Patakbuhin ang POW",
+        "cancel": "Kanselahin"
+    },
+    "addAccount": "Gumawa ng Account",
+    "saveQrcode": "I-save ang imahe ng QR code",
+    "unlockSuccess": "Tagumpay sa Pag- unlock",
+    "sendTrans": {
+        "send": "Magpadala ng Transaksyon",
+        "symbol": "Ipadala"
+    },
+    "compliance": {
+        "text": "Hindi naglilingkod ang ViteX sa mga customer sa mga sumusunod na bansa / rehiyon / teritoryo: Mainland China, Hong Kong, Cuba, Iran, North Korea, Crimea, Sudan, Malaysia, Syria, USA [kasama ang lahat ng mga teritoryo ng USA tulad ng Puerto Rico, American Samoa, Guam, Ang Hilagang Pulo ng Mariana, at ang US Virgin Islands (St. Croix, St. John at St. Thomas)], Bangladesh, Bolivia, Ecuador, at Kyrgyzstan. Para sa karagdagang impormasyon, mangyaring basahin ang aming Mga Tuntunin ng Serbisyo at Patakaran sa Privacy",
+        "title": "Mahalagang Paunawa"
+    },
+    "bnbConf": {
+        "title": "Mahalagang Paunawa",
+        "t1": "VITE Listahan ng Binance Paparating na! Mangyaring iboto na nakalista ang VITE sa Binance.",
+        "t2": "Panahon ng Pagboto: 12:00 pm Dis 12 hanggang 12:00 pm Dis 13 (HKT)",
+        "t3": "Pamamaraan sa Pagboto: Ang paghawak ng 50 BNB ay nagbibigay-daan para sa 1 boto (10 boto pinakamataas)",
+        "t4": "Mga Gantimpala sa Pagboto: Ang lahat ng mga gumagamit na bumoto ay gagantimpalaan ng isang airdrop na may kabuuan na 21,000,000 VITE batay sa mga naipatupad na boto.",
+        "btn": "Bumoto Ngayon!!!",
+        "notice": "[Attention]: Dapat ay mayroon kang 50-500 BNBs sa iyong Binance Account simula sa Disyembre 5 at tatagal hanggang Disyembre 13 upang maging Kwalipikado para sa Pagboto!"
+    },
+    "errCode": {
+        "35003": "{name} nagaganap ang salungatan sa ID, mangyaring muling isumite sa ibang pagkakataon",
+        "35004": "Hindi tama ang parametro",
+        "35005": "Napadalas na ipinadala ang mga transaksyon, mangyaring subukang muli sa ibang pagkakataon",
+        "35006": "Ang ginamit na pamamaraan sa kontrata ay wala",
+        "35011": "Kasikipan sa Network",
+        "36001": "Hindi ka makakagawa ng anumang paglilipat hanggang sa makatanggap ka ng isang transaksyon",
+        "36002": "Nabigo ang pag-verify ng system, mangyaring subukang muli sa ibang pagkakataon",
+        "36003": "Nabigo ang pag-verify ng system, mangyaring subukang muli sa ibang pagkakataon",
+        "36004": "Nabigo ang pag-verify ng system, mangyaring subukang muli sa ibang pagkakataon",
+        "36005": "Ang taas ng snapshot block ay iligal, mangyaring subukang muli sa ibang pagkakataon",
+        "37001": "Maling format ng numero ng order",
+        "37002": "Maling uri ng order",
+        "37003": "Maling format ng presyo ng order",
+        "37004": "Ang pagbubukod ay nangyayari sa dami ng pagkakasunud-sunod ng transaksyon",
+        "37005": "Napakaliit ng halaga ng order sa transaksyon",
+        "37006": "Umiiral na merkado ng kalakalan",
+        "37007": "Wala ang market ng trading sa order",
+        "37008": "Ang pagbubukod ay nangyayari sa paghahanap ng impormasyon sa pagkakasunud-sunod",
+        "37009": "Ang binawi na order ay hindi kabilang sa kasalukuyang address",
+        "37010": "Ang status ng order na ito ay hindi maaaring bawiin"
+    },
+    "txType": {
+        "RegisterSBP": "Magparehistro sa SBP",
+        "RegisterSBP_V1": "Magparehistro sa SBP",
+        "UpdateSBPBlockProducingAddress": "I-update ang Rehistro",
+        "UpdateSBPBlockProducingAddress_V1": "I-update ang Rehistro",
+        "RevokeSBP": "Bawiin ang Pagrehistro",
+        "RevokeSBP_V1": "Bawiin ang Pagrehistro",
+        "WithdrawSBPReward": "Kunin ang Gantimpala",
+        "WithdrawSBPReward_V1": "Kunin ang Gantimpala",
+        "VoteForSBP": "Pagboto",
+        "VoteForSBP_V1": "Pagboto",
+        "CancelSBPVoting": "Bawiin ang Pagboto",
+        "CancelSBPVoting_V1": "Bawiin ang Pagboto",
+        "StakeForQuota": "Kumuha ng Quota",
+        "StakeForQuota_V1": "Kumuha ng Quota",
+        "CancelQuotaStake": "Pagkuha ng Stake",
+        "CancelQuotaStake_V1": "Pagkuha ng Stake",
+        "IssueToken": "Pagbibigay ng Token",
+        "IssueToken_V1": "Pagbibigay ng Token",
+        "ReIssueToken": "Karagdagang Pagbibigay ng Token",
+        "ReIssueToken_V1": "Karagdagang Pagbibigay ng Token",
+        "BurnToken": "Sirang Token",
+        "BurnToken_V1": "Sirang Token",
+        "TransferTokenOwnership": "Paglipat ng pagmamay-ari",
+        "TransferTokenOwnership_V1": "Paglipat ng pagmamay-ari",
+        "DisableReIssue": "I-edit ang uri ng token",
+        "DisableReIssue_V1": "I-edit ang uri ng token",
+        "DexDeposit": "Deposito sa ViteX",
+        "DexDeposit_V1": "Deposito sa ViteX",
+        "DexWithdraw": "Pag-Withdraw ng ViteX",
+        "DexWithdraw_V1": "Pag-Withdraw ng ViteX",
+        "DexPlaceOrder": "Paglikha ng Mga Order sa ViteX",
+        "DexPlaceOrder_V1": "Paglikha ng Mga Order sa ViteX",
+        "DexCancelOrder": "Pagpapawalang-bisa ng mga Order sa ViteX",
+        "DexCancelOrder_V1": "Pagpapawalang-bisa ng mga Order sa ViteX",
+        "DexStakeForSuperVIP": "ViteX SVIP",
+        "DexStakeForSuperVIP_V1": "ViteX VIP",
+        "DexConfigMarketAgents": "I-configure ang mga Delegasyon",
+        "DexConfigMarketAgents_V1": "I-configure ang mga Delegasyon",
+        "DexOpenNewMarket": "Listahan ng ViteX Token",
+        "DexOpenNewMarket_V1": "Listahan ng ViteX Token",
+        "DexStakeForVIP": "ViteX VIP",
+        "DexStakeForVIP_V1": "ViteX VIP",
+        "DexStakeForMining": "ViteX Staking",
+        "DexStakeForMining_V1": "ViteX Staking",
+        "CreateContractRequest": "Lumikha ng Kontrata",
+        "TransferRequest": "Ilipat",
+        "ReIssueRequest": "Ilipat",
+        "Response": "Ilipat",
+        "ResponseFail": "Ilipat",
+        "RefundByContractRequest": "Ilipat",
+        "GenesisResponse": "Simula",
+        "FullNodeStake": "Pusta para sa Buong Node",
+        "FullNodeCancelStake": "Bawiin ang Buong Pusta ng Node",
+        "UpdateSBPRewardWithdrawAddress": "I-edit ang Gantimpala sa SBP Withdraw Address"
+    },
+    "btn": {
+        "cancel": "Kanselahin",
+        "login": "Mag-login",
+        "imported": "Mag-import ng Account",
+        "back": "Bumalik",
+        "submit": "Isumite",
+        "next": "Susunod na Hakbang",
+        "understand": "Naiintindihan ko",
+        "edit": "Edit",
+        "reReg": "Muling magparehistro",
+        "otherProd": "Gumamit ng Iba Pang Mga Produkto ng Vite",
+        "known": "Alam Ko"
+    },
+    "hint": {
+        "noNet": "Walang napansin na network",
+        "pwErr": "Hindi wasto ang password!",
+        "pwEmpty": "Hindi maaaring blangko ang password!",
+        "noData": "Walang Datos",
+        "err": "Oops! May nangyaring mali",
+        "request": "{name} naipadala ang kahilingan, mangyaring maghintay",
+        "copy": "Matagumpay na nakopya",
+        "copyShare": "Matagumpay ang pagkopya ng link sa pagbabahagi!",
+        "addrFormat": "Maling format ng address",
+        "amtFormat": "Maling format ng halaga",
+        "transSucc": "Matagumpay ang transaksyon!",
+        "insufficientBalance": "Hindi sapat na balanse",
+        "validMaxDigit": "Hindi hihigit sa {digit} mga decimal",
+        "nodeErr": "Abnormal ang buong node, mangyaring subukang muli sa ibang pagkakataon.",
+        "bigger0": "Ang halaga ay dapat mas malaki kaysa sa '0'",
+        "operateSuccess": "Matagumpay ang operasyon",
+        "operateFail": "Ang operasyon ay bigo",
+        "unreceived": "Mangyaring mag-sign in upang mangolekta ng hindi natanggap na mga pondo",
+        "unreceivedNum": "Mangyaring mag-sign in upang mangolekta ng mga hindi natanggap na pondo, sa kasalukuyan mayroon kang {number} na hindi natanggap sa transaksyon"
+    },
+    "beforeUse": {
+        "title": "Basahin Bago Gamitin",
+        "text1": "Para sa kaligtasan ng iyong mga pondo, lumikha ng pag-andar ng account ay hindi suportado ng pansamantala sa web wallet. Mangyaring i-download ang Vite App upang lumikha ng account. Ang platform ng Vite ay nais na bigyan ka ng babala na kung bibisita ka sa isang website ng phishing o mawala ka ng backup, hindi mababawi ng aming kumpanya ang iyong mga pondo.",
+        "text2": "Mangyaring tandaan na ang aming mga website ay hindi nag-iimbak ng iyong mga pribadong key o pariralang binhi. Samakatuwid, kakailanganin mong ibalik ang iyong account sa pamamagitan ng pariralang binhi kung magpasya kang baguhin ang mga browser, burahin ang mga lokal na cookies, o baguhin ang mga PC.",
+        "text3": "Mangyaring gumawa ng wastong pag-iingat sa pagtiyak na tumpak mong naitala at ligtas na naimbak ang iyong pariralang binhi. Kahit na ang kaunting error ay magreresulta sa hindi mo matagumpay na ibalik ang iyong address."
+    },
+    "preview": {
+        "t": "Bersyon: {version}",
+        "txt1": "ang x.vite.net ay isang platform na pagsasama ng Vite wallet at ng ViteX exchange, na inilunsad ng Vite Labs.",
+        "txt2": "Maaari kang mamahala at maglipat ng mga assets, makipagkalakalan, makakuha ng quota, magrehistro ng SBP at buong node, bumoto, mag-isyu ng mga token, mag-apply para sa ViteX API, pahintulutan ang delegadong kalakalan, atbp.",
+        "txt3": "sinusuportahan ng x.vite.net ang mga mnemonic na salita, Ledger, at ViteConnect.",
+        "v": ""
+    },
+    "pwdConfirm": {
+        "conf": "Buksan ang mode na walang password upang malaya ka mula sa pagpasok ng password sa bawat proseso ng transaksyon. ",
+        "title": "Password",
+        "placeholder": "Mangyaring ilagay ang password sa wallet",
+        "unlockAcc": "Mangyaring i-unlock muna ang {name}"
+    },
+    "quotaConfirm": {
+        "title": "Hindi sapat ang Quota",
+        "cancelContent": "Hindi ka maaaring {operate} dahil sa hindi sapat na quota ng TPS. Kailangan mong i-stake ang VITE para sa quota na {operate}",
+        "goQuota": "Stake VITE",
+        "noOperate": "Hindi pa {operate}"
+    },
+    "mnemonic": {
+        "title": "Mnemonic",
+        "restore": "Ibalik ang Account ayon sa Pariralang Binhi",
+        "record": "Bumuo ng Pariralang Binhi",
+        "prompt": "Ang pariralang mnemonic seed ay ang tanging paraan upang maibalik ang iyong pitaka. Masidhing pinapayuhan kang isulat ang parirala at itago ito sa isang ligtas na lugar kung saan ikaw lamang ang maaaring mag-access.",
+        "placeholder": "Mangyaring i-input ang iyong mnemonic seed na parirala",
+        "empty": "Ang pag-input ng binhi na parirala ay hindi maaaring walang laman",
+        "error": "Maling pariralang binhi. Subukang muli",
+        "hint": "Mansanas saging peach mangga peras ...",
+        "change": "Lumipat sa {len} Mga Mnemonic Word"
+    },
+    "setting": {
+        "title": "Mga Setting ng Account",
+        "config": "Pangkalahatan",
+        "currency": "Ang Default na Currency",
+        "secure": "Seguridad",
+        "gate": "Pasadyang Gateway",
+        "rpcUrl": "Node",
+        "changeRpcUrl": "Baguhin",
+        "changeRpcUrlDialog": {
+            "title": "Baguhin ang Node",
+            "addCustomNode": "Magdagdag ng Pasadyang Node",
+            "officialNode": "Opisyal na Node",
+            "addNode": "Magdagdag ng node",
+            "customNode": "Pasadyang Node",
+            "deleteCustomNode": "Burahin",
+            "wrongNode": "Mangyaring ipasok ang tamang URL!",
+            "changeNodeSuccess": "Nakakonekta sa bagong node.",
+            "failedConnected": "Error sa koneksyon sa Node",
+            "inputPlaceholder": "Mangyaring ipasok ang prefix node url na may wss."
+        },
+        "triggerGate": [
+            "Isara",
+            "Buksan"
+        ],
+        "gateHelp": "Maaari mong ipasadya ang iyong pagsasaayos ng gateway kapag pinapagana ang feature na ito. Sa kasalukuyan ang feature na ito ay pangunahin para sa mga developer.",
+        "lang": "Wika",
+        "block": "Kasalukuyang Taas",
+        "version": "Bersyon",
+        "service": "Serbisyo para sa kustomer",
+        "site": "Opisyal na Website ng Vite",
+        "sys": "Portal ng System",
+        "open": "Vite Github",
+        "addAddr": "Magdagdag ng Address",
+        "addrList": "Pamamahala sa Address",
+        "setDefault": "Piliin ang Default na Address",
+        "autoLogout": "Kusang Oras ng Paglo-log out",
+        "noPass": "I-on ang mode na di na kailangan ng password",
+        "explorer": "I-block ang Explorer",
+        "netInfo": "Impormasyon sa Network",
+        "logoutDescribe": "Awtomatikong I-logout ang iyong account kapag umalis ka sa pahinang ito",
+        "timeList": {
+            "5": "5 minuto",
+            "10": "10 minuto",
+            "30": "30 minuto",
+            "60": "1 oras",
+            "720": "12 oras"
+        },
+        "theme": "Kulay ng tema",
+        "themeList": [
+            "Maliwanag",
+            "Madilim"
+        ]
+    },
+    "create": {
+        "input": "Mangyaring ilagay ang iyong password",
+        "again": "Kumpirmahin ang iyong password",
+        "choose": "Pumili ng account",
+        "finish": "Tapos na",
+        "agreementPre": "Nabasa ko at sumasang-ayon ako sa Vite Wallet at ViteX's",
+        "agreement": "Mga Tuntunin ng Serbisyo at Patakaran sa Pagkapribado",
+        "hint": {
+            "nameInput": "Mangyaring i-input ang pangalan ng account",
+            "nameLong": "Ang pangalan ay hindi maaaring sumobra sa {long} mga character",
+            "long": "Ang password ay hindi maaaring lumagpas sa 32 mga character",
+            "name": "Sinusuportahan lamang ng pangalan ng account ang mga character na Ingles at Tsino, mga digit at salungguhit",
+            "consistency": "Mangyaring paki-type ulit ang parehong password",
+            "pwFormat": "Maling format ng password. Ang password ay dapat maglaman lamang ng mga digit, titik at simbolo."
+        }
+    },
+    "startCreate": {
+        "notice": "Para sa kaligtasan ng iyong mga pondo, lumikha ng function ng account ay hindi suportado ng pansamantala sa web wallet. Mangyaring i-download ang Vite App upang lumikha ng account.",
+        "goLogin": "Mag-log in",
+        "goDex": "Pumunta sa ViteX"
+    },
+    "keystore": {
+        "title": "Keystore",
+        "dragDrop": {
+            "text": "I-drag at i-drop ang mga file doon",
+            "err1": "Na-import na iligal na file!",
+            "err2": "Isang file lamang ang maaaring mai-import!",
+            "guide": "Buksan ang folder upang mai-import",
+            "hint": "Napansin na ang pag-login sa pamamagitan ng pag-import ng keystore file ay hindi maaaring suportahan ang paglikha ng maraming mga address, ang paggamit ng mnemonic seed na parirala ay inirerekomenda sa mga sitwasyong cross-platform."
+        }
+    },
+    "tokenCard": {
+        "moreRecords": "Tingnan ang Kasaysayan",
+        "others": "Iba pa",
+        "assetSpread": "Portfolio",
+        "saveSuccess": "Matagumpay na nai-save",
+        "heads": {
+            "name": "Pangalan",
+            "balance": "Balanse sa Wallet",
+            "onroad": "Mga Pondo na Hindi Natanggap",
+            "gate": "Wallet Cross-Chain Gateway",
+            "totalExAmount": "Kabuuang Balanse ng Palitan",
+            "availableExAmount": "Magagamit na Balanse sa Palitan",
+            "balanceTips": "Magagamit ang on-chain na pagpapadala para sa mga gumagamit na nais magpadala ng mga transaksyon mula sa iyong Vite wallet sa iba pang mga Vite address",
+            "gateTips": "Sa seksyong cross-chain na ito, maaari kang mag-mapa ng iba pang mga barya / token sa Vite network. I-click ang pindutang 'Deposit' upang magdeposito ng mga assets sa iyong Vite Wallet. I-click ang pindutan na 'Bawiin' upang ilipat ang iyong mga assets sa iba pang mga platform. * Ang proseso ng deposito ng cross-chain / withdrawal ay maaaring maging sanhi ng bayarin, mayroon din itong limitasyon sa paglipat.",
+            "availableExAmountTips": "Maaari mong ilipat ang iyong mga assets sa pagitan ng Vite Wallet at ViteX Exchange sa pamamagitan ng pag-click sa pindutang 'Transfer'. Walang ng mga bayarin sa transaksyon sa mga proseso na ito.",
+            "unreceivedTips": "Ang mga hindi natanggap na pondo ay awtomatikong matatanggap pagkatapos ng pag-sign in"
+        },
+        "actionType": {
+            "SEND": "Pagpapadala sa Chain",
+            "RECEIVE": "Pagdedeposito",
+            "CHARGE": "Pagdedeposito",
+            "WITHDRAW": "Pag-withdraw",
+            "EXTRANSFER": "Ilipat",
+            "EXRECRODS": "Kasaysayan",
+            "RECRODS": "Kasaysayan",
+            "EXCHARGE": "Pagdedeposito",
+            "EXWITHDRAW": "Pag-withdraw"
+        },
+        "transferConfirm": {
+            "from": "Mula sa",
+            "to": "Para kay",
+            "wallet": "Account sa Wallet",
+            "dex": "Exchange Account",
+            "avaliableAmount": "Balanse"
+        },
+        "addToken": {
+            "title": "Idagdag ang Token",
+            "placeholder": "Mangyaring ipasok ang pangalan ng token o TokenID",
+            "lTxt": "Kanselahin",
+            "rTxt": "Magdagdag"
+        },
+        "type": {
+            "native": "Mga Native na Token",
+            "crossGate": "Mga Barya ng Cross-Chain"
+        },
+        "assetType": {
+            "TOTAL": "Ang Lahat ng mga Assets",
+            "EX": "Mga Exchange Asset",
+            "WALLET": "Mga Asset sa Wallet"
+        },
+        "tokenInfo": {
+            "tabName": "Mga Detalye",
+            "title": "{tokenSymbol} Impormasyon",
+            "saveGate": "I-save",
+            "labels": {
+                "tokenId": "TokenID",
+                "tokenName": "Pangalan",
+                "totalSupply": "Kabuuang Supply",
+                "total": "Supply na naikot",
+                "overview": "Panimula",
+                "type": "Uri",
+                "gate": "Cross-Chain Gateway",
+                "website": "Website",
+                "whitePaper": "White Paper",
+                "explorer": "Explorer",
+                "github": "Github",
+                "media": "Social Media",
+                "crossType": "Cross-Chain",
+                "originType": "Katutubo",
+                "viewmore": "Tignan pa ang iba"
+            },
+            "reIssuable": {
+                "true": "Maibibigay muli",
+                "false": "Hindi maibibigay muli"
+            }
+        },
+        "gateInfo": {
+            "clickCustomer": "Magsumite ng kahilingan",
+            "name": "Pangalan ng Gateway",
+            "customer": "Serbisyo para sa kustomer",
+            "privacy": "Mga Termino ng Serbisyo",
+            "clickPrivacy": "{gate}'s opisyal na Mga Tuntunin ng Serbisyo ng gateway",
+            "gateSetting": "I-configure ang Gateway",
+            "tabName": "Mga Detalye ng Gateway",
+            "selfdefined": "Pasadyang Gateway",
+            "officalNet": "Website",
+            "introduction": "Deskripsyon",
+            "token": "Inisyung Token",
+            "setting": "Gateway Interface",
+            "nodeDesc": "Mga Gabay sa User",
+            "settingPlaceholder": "Mangyaring maglagay ng address ng link ng gateway",
+            "nodeDescStr": "Gumagana lamang ang pagpapaandar na ito para sa mga cross-chain coin, huwag gamitin ito sa mga built-in na token. Samantala, mangyaring mag-ingat tungkol sa hindi pamilyar na mga link sa gateway. Sa pamamagitan ng patuloy na paggamit ng aming platform, sumasang-ayon ka at kinikilala mo na ang Vite Labs ay hindi magiging responsable para sa pagkawala ng iyong pondo at iba pang mga negatibong kahihinatnan na dulot. Punan ang link ng gateway sa ibaba kung kailangan mong gumamit ng gateway, ang link ay magkakabisa pagkatapos mong mag-save."
+        },
+        "depositRecord": {
+            "tabName": "Nakatanggap ng Kasaysayan",
+            "heads": [
+                "Oras",
+                "Halaga",
+                "Kalagayan",
+                "{outChain} Hash",
+                "vite Hash",
+                "Mga Bayarin"
+            ],
+            "statusMap": {
+                "OPPOSITE_PROCESSING": "{outChain} naghihintay na kumpirmahin {confirms}",
+                "OPPOSITE_CONFIRMED_FAIL": "{outChain} bigo ang pagproseso",
+                "OPPOSITE_CONFIRMED": "Natanggap ang Gateway",
+                "TOT_CONFIRMED": "Nakompleto",
+                "BELOW_MINIMUM": "Nabigo ang Topup",
+                "TOT_PROCESSING": "Ang kumpirmasyon ng VITE upang kumpirmahin ay naghihintay"
+            }
+        },
+        "withdrawRecord": {
+            "tabName": "History ng Paglipat",
+            "heads": [
+                "Oras",
+                "Halaga",
+                "Kalagayan",
+                "vite Hash",
+                "{outChain} Hash",
+                "Mga Bayarin"
+            ],
+            "statusMap": {
+                "TOT_PROCESSING": "Hindi Nakumpirma ng VITE Chain{confirms}",
+                "TOT_CONFIRMED": "Nakumpirma ang VITE",
+                "TOT_EXCEED_THE_LIMIT": "Ang halaga ng paglipat ay lumampas sa limitasyon",
+                "OPPOSITE_PROCESSING": "{outChain} naghihintay na kumpirmahin",
+                "OPPOSITE_CONFIRMED": "Nakompleto",
+                "WRONG_WITHDRAW_ADDRESS": "Ang transfer address ay hindi tama"
+            }
+        },
+        "charge": {
+            "title": "Deposito sa Cross-Chain",
+            "addrErr": "Nagkaproblema sa gateway node, mangyaring suriin ang iyong mga setting ng network",
+            "addressTitle": "Address ng tatanggap",
+            "labelTips": "(Mangyaring gamitin ang '{labelName}' na ito sa tatanggap na address, upang hindi mawawala ang iyong mga assets",
+            "labelCodeTips": "Mangyaring I-scan ang QR code mula sa {labelName}",
+            "codeTips": "I-scan ang QR code upang magdeposito. Mangyaring magpadala ng mga pondo gamit ang wallet na sumusuporta sa {tokenSymbol}",
+            "tips": [
+                "Maaari mo lamang ideposito ang {tokenSymbol} sa pamamagitan ng address na ibinigay sa ibaba. Hindi hihigit sa {min} {tokenSymbol} ang tatanggapin.",
+                "Mag-a-update ang account pagkatapos ng kumpirmasyon ng network ng {confirmationCount}. Mangyaring pakihintay lang po.",
+                "Mangyaring piliin ang tamang mainnet o hindi mo makukuha ang anumang mga nawalang token."
+            ]
+        },
+        "viteTips": "Sinusuportahan lamang ng VITE ang pag-andar ng cross-chain sa pagitan ng bagong token ng ERC20 VITE at Native VITE Coin.",
+        "withdraw": {
+            "title": "Pag-Withdraw sa Cross-Chain",
+            "btn": "Pag-withdraw",
+            "balanceErrMap": {
+                "notEnough": "Hindi sapat ang balanse",
+                "overMax": "Ang halaga ng pag-withdraw ay dapat mas mababa sa {max}",
+                "lessMin": "Ang halaga ng pag-withdraw ay hindi dapat mas mababa sa {min}"
+            },
+            "feeTips": "Ang bayarin sa transaksyon ay itinakda ng operator ng gateway",
+            "addressErr": "Ang format ng address ay hindi tama",
+            "labels": {
+                "balance": "Balanse",
+                "address": "Address ng tatanggap",
+                "amount": "Halaga",
+                "fee": "Mga Bayarin",
+                "all": "Lahat"
+            },
+            "labelPlaceholder": "Mangyaring maglagay ng {labelName}",
+            "amountPlaceholder": "Mangyaring i-input ang halagang ipapadala na dapat hindi mas mababa sa {min}",
+            "addressPlaceholder": "Mangyaring ipasok ang {token} address ng tatanggap",
+            "successTips": "Naipadala ang kahilingan sa transaksyon",
+            "failTips": "May naganap na error sa gateway node, mangyaring suriin ang mga setting ng network"
+        },
+        "nodeErr": "Ang gateway node ay hindi wasto, mangyaring suriin ang mga setting ng gateway"
+    },
+    "viteExplorer": {
+        "title": "Vite Block Explorer"
+    },
+    "viteScanExplorer": {
+        "title": "ViteScan"
+    },
+    "wallet": {
+        "title": "Pamamahala sa Quota",
+        "help": {
+            "title": "Mabilis na Pag-unawa sa Quota"
+        },
+        "transfer": "Magpadala ng mga pondo",
+        "getTestToken": "Kumuha ng Mga Token para I-test",
+        "transDetail": "Higit pang Mga Detalye ng Transaksyon",
+        "address": "Ang aking address",
+        "fundFloat": "Hindi Natanggap",
+        "pend": "Nakabinbin",
+        "inAddress": "Address ng tatanggap",
+        "sum": "Halaga",
+        "remarks": "Mga puna",
+        "remarksLong": "{len} bytes left",
+        "totalAsset": "Ang kabuuang mga asset",
+        "placeholder": {
+            "amount": "Mangyaring ilagay ang halaga",
+            "remarks": "Mangyaring maglagay ng Puna",
+            "addr": "Mangyaring mag-input ng address"
+        },
+        "hint": {
+            "token": "Ang mga token na I-tetest ng VITE ay naipadala na sa iyong account, mangyaring suriin ang iyong account!",
+            "tErr": "Bigo ang Pag-test sa token!",
+            "amount": "Ang halaga ay dapat na mas malaki sa 0"
+        },
+        "trans": {
+            "powErr": "Nagaganap ang error kapag nagpapatakbo ng PoW, mangyaring subukang muli",
+            "powTransErr": "Hindi sapat ang quota ng PoW, inirerekumenda namin na magtustos ka ng VITE upang makakuha ng quota."
+        }
+    },
+    "walletMintage": {
+        "title": "Pagbibigay ng Token",
+        "address": "Address ng Paglabas",
+        "tokenName": "Pangalan ng Token",
+        "tokenSymbol": "Simbolo ng Token",
+        "totalSupply": "Kabuuang Supply",
+        "decimals": "Mga decimal",
+        "isReIssuable": "Mapapalitan",
+        "maxSupply": "Pinakamataas na Supply",
+        "ownerBurnOnly": "Sinunog ng May-ari Lamang",
+        "isOwnerBurnOnly": "Sinunog ng May-ari Lamang",
+        "mint": "Kumpirmahin",
+        "tokenList": "Inisyung Token",
+        "submit": "Isumite",
+        "cancel": "Kanselahin",
+        "getListFail": "Hindi ka makakakuha ng listahan ng token, subukang muli sa ibang pagkakataon",
+        "mintageConfirm": {
+            "title": "Suriin ang iyong Impormasyon sa Paglabas ng Token",
+            "balance": "Balanse",
+            "fee": "Bayad sa Pagbibigay",
+            "btn": "Kumpirmahin"
+        },
+        "reIssuableConfirm": {
+            "title": "Pagbabago sa Hindi maibibigay",
+            "text": "Tiyaking palitan ang status ng {tokenName} sa Hindi mabibigyan ng katayuan?"
+        },
+        "changeOwnerConfirm": {
+            "title": "Paglipat ng pagmamay-ari",
+            "address": "Address ng tatanggap"
+        },
+        "issueConfirm": {
+            "title": "Muling isyu",
+            "amount": "Halaga",
+            "address": "Address ng pagbibigyan",
+            "overAmount": "Ang mga pinalabas na token ay lumampas sa itaas na limitasyon"
+        },
+        "hint": {
+            "tokenName": "Ang pangalan ng token ay dapat na may 1-40 character kasama ang mga capital at maliit na titik, puwang at salungguhit. Ang mga tuloy-tuloy na puwang at numero ay hindi suportado.",
+            "tokenSymbol": "Ang simbolo ng token ay dapat magkaroon ng 1-10 mga character, ang mga capital at numero lamang ang sinusuportahan.",
+            "success": "Matagumpay na Paglabas ng Token",
+            "fail": "Nabigo ang Paglabas ng Token"
+        },
+        "err": {
+            "tokenNameFormat": "Ang format ng Token Name ay hindi tama",
+            "tokenNameNull": "Kinakailangan ang Pangalan ng Token",
+            "tokenSymbolFormat": "Ang format ng Token Symbol ay hindi wasto",
+            "tokenSymbolNull": "Kinakailangan ang Simbolo ng Token",
+            "supplyMax": "Labis na halaga ng paglabas ng token",
+            "totalSupplyFormat": "Maling format ng Kabuuang Supply",
+            "totalSupplyNull": "Kinakailangan ang Kabuuang Supply",
+            "maxSupplyNull": "Kinakailangan ang Kabuuang Supply",
+            "maxSupplyMin": "Kinakailangan ang Kabuuang Supply",
+            "decimalsNull": "Kinakailangan ang patlang ng mga Decimal",
+            "decimalsFormat": "Maling format ng mga decimal",
+            "decimalsMax": "Ang mga decimal ay wala sa saklaw",
+            "maxSupplyFormat": "Maling format ng Kabuuang Supply"
+        }
+    },
+    "walletQuota": {
+        "title": "Pamamahala sa Quota",
+        "help": {
+            "title": "Mabilis na Pag-unawa sa Quota"
+        },
+        "myQuota": "Ang aking Quota",
+        "maxTxNum": "Maximum na Bilang ng Txs",
+        "beneficialAddr": "Address ng Tatanggap ng Quota",
+        "fromAddr": "Address ng Pagbawas",
+        "time": "Tagal ng Staking Freeze",
+        "aboutDays": "Tinatayang {day} araw",
+        "amountPlaceholder": "Mangyaring ipasok ang halaga ng staking, minimum na {num} VITE",
+        "limitAmt": "Ang halaga ng staking ay hindi dapat mas mababa sa {num}.",
+        "addrPlaceholder": "Mangyaring maglagay ng address ng tatanggap ng quota",
+        "inputWithdrawAmount": "Mangyaring i-input ang halagang pag-withdraw",
+        "pledgeFail": "Nabigong Isumite",
+        "canclePledgeFail": "Nabigo",
+        "maturity": "Nag-expire na ang Staking!",
+        "minAmt": "Ang halaga ng Withdraw ay hindi maaaring mas mababa sa {num} VITE",
+        "gotoStake": "Mangyaring maglagay muna ng sapat na VITE",
+        "maxAmt": "Ang halaga ng pag-withdraw ay dapat nasa [{minAmount}, {maxAmount}]",
+        "cancelLimitAmt": "Ang halaga ng staking ay hindi maaaring mas mababa sa {num}",
+        "withdrawalStaking": "Mag-withdraw ng Staked Token",
+        "myAddr": "Ako",
+        "confirm": {
+            "help": {
+                "t1": "Ano ang Quota?",
+                "txt1": "Sa sistema ng Vite, ang mga gumagamit ay hindi bumibili ng kinakailangang gas para sa isang transaksyon sa pamamagitan ng pagbabayad ng bayad, ngunit kumuha ng mapagkukunan ng computing sa pamamagitan ng isang modelo na batay sa quota. Kinakailangan na quota para sa pagpapadala ng isang transaksyon = ang pangunahing quota (kahilingan) + quota (ang kalakip na data ng teksto), kinakailangang quota upang tanggapin ang isang transaksyon = ang pangunahing quota (tugon). Pinapayagan ng protokol na pagsasaayos ng mapagkukunang batay sa quota ang mga gumagamit na makakuha ng mas mataas na mga quota ng mapagkukunan sa dalawang paraan: Staking VITE upang makakuha ng quota at pagpapatakbo ng PoW.",
+                "t2": "Ano Ang Staking?",
+                "txt2": "Sa sistema ng Vite, maaaring mai-stake ng gumagamit ang VITE upang makakuha ng isang tiyak na halaga ng quota. Ang minimum na halaga para sa staking ay 134 VITE, at walang maximum na limitasyon; samantala, sinusuportahan din ng Vite system na ang A-address ay Stake sa isang bahagi ng VITE at inilalaan ang nakuha na quota sa B address. Kapag nag-apply ang mga gumagamit sa stake, ipapadala ang VITE sa matalinong address ng kontrata sa halip na isa pang gumagamit, at ang gumagamit lamang na nag-apply para sa staking ang may access upang pamahalaan ang halagang naka-stake.",
+                "t3": "Ano ang PoW?",
+                "txt3": "Ang Proof of Work (PoW), ay isang protokol upang kumpirmahing nagawa mo ang isang tiyak na halaga ng trabaho, at isang hakbang din sa ekonomiya upang mapigilan ang mga pag-atake ng DDoS at iba pang pang-aabuso sa serbisyo. Kinakailangan nito ang nagpasimula na magsagawa ng isang tiyak na halaga ng computing, na nangangahulugang maaaring tumagal ng ilang oras para sa computer. Sa sistema ng Vite, ang mga gumagamit ay maaaring makakuha ng isang libreng quota sa pamamagitan ng pagpapatakbo ng PoW, at maaari ring magpadala ng isang transaksyon nang walang anumang anotadong impormasyon sa pamamagitan ng nakuha na quota."
+            },
+            "cancel": {
+                "describe": "Ang iyong kasalukuyang natipong halaga ay {amount} VITE, mangyaring kumpirmahing mag-withdraw.",
+                "rightBtn": "Nakahanda nang umalis",
+                "leftBtn": "Kanselahin ang Pag-withdraw"
+            },
+            "submit": {
+                "describe": "Siguraduhing magtaya ng {amount} VITE upang makakuha ng quota, hindi ka maaaring mag-withdraw hanggang sa halos 3 araw pagkatapos magkabisa.",
+                "rightBtn": "Kumpirmahin",
+                "leftBtn": "Kanselahin"
+            }
+        },
+        "list": {
+            "title": "Ang Staking List ko",
+            "total": "Kabuuang {amount} sa Pag-Stake ng VITE",
+            "amount": "Halaga",
+            "withdrawTime": "Inaasahang Takdang Petsa",
+            "unexpired": "Pansamantalang hindi maaaring mag-withdrawal ng staked token hanggang sa takdang araw",
+            "vip": "Ang staking action na ito ay para sa default na pagbubukas ng VIP sa ViteX exchange, mangyaring pumunta sa pahina ng palitan ng ViteX upang kanselahin ang VIP",
+            "mining": "Ang staking na ito ay ang iyong staking bilang halaga ng pagmimina sa ViteX, mangyaring pumunta sa pahina ng pagmimina ng ViteX upang mag-unstake",
+            "other": "Ang staking na ito ay na-staked sa pamamagitan ng iba pang mga paraan at ang unstake ay hindi suportado dito"
+        }
+    },
+    "walletTransList": {
+        "title": "Mga Transaksyon",
+        "tType": {
+            "title": "Uri",
+            "symbol": "Uri"
+        },
+        "status": {
+            "title": "Kalagayan",
+            "unconfirmed": "Hindi kumpirmado",
+            "confirms": "Kinukumpirma",
+            "confirmed": "Kumpirmahin"
+        },
+        "timestamp": "Timestamp",
+        "tAddress": "Address",
+        "sum": "Halaga"
+    },
+    "walletFullNode": {
+        "title": "Full nodes",
+        "help": {
+            "title": "Tungkol",
+            "t1": "Talahuluganan",
+            "txt1": "Bilang ng Mga Rehistradong Node] Ang bilang ng mga buong node na nakarehistro sa kasalukuyang address",
+            "txt2": "[Bilang ng mga Aktibong Node] Ang bilang ng mga aktibong buong node na nakarehistro sa kasalukuyang address",
+            "txt3": "[Bilang ng mga Rewarding node] Bilang ng mga node na ginagantimpalaan",
+            "t2": "Ang maramihang Full node ay maaaring nakarehistro na may parehong address, ngunit dapat na isa-isahin ang bawat isa na hindi bababa sa 10,000 VITE bawat isa; Kapag kinakalkula ang gantimpala ng Aktibong Node, kung ang halaga ng staking / 10000 ay magbubunga ng isang buong numero na mas malaki sa o katumbas ng bilang ng mga aktibong node, ang lahat ng mga aktibong node ay gagantimpalaan; Kung ang halaga ng staking / 10000 ay magbubunga ng isang buong numero na mas mababa sa bilang ng mga aktibong node, ang bilang ng mga node na ginantimpalaan ay katumbas ng buong numero.",
+            "t3": "Ang pagkalkula ng mga gantimpala sa pagboto ay hindi nakasalalay sa bilang ng mga node, ngunit sa halaga ng staking."
+        },
+        "confirmText": "Kumpirmahin ang pusta {amount} VITE, maaaring kanselahin ang staking pagkatapos {days} araw",
+        "addQuota": {
+            "address": "Staking Address",
+            "stakeDays": "Panahon ng Staking",
+            "placeholder": "Minimum na Stake {min} VITE",
+            "stakingSuspend": "Pansamantalang Sinuspinde ang Staking"
+        },
+        "quotaContent": {
+            "onlineReward": "Gantimpala ng Aktibong Node",
+            "voteReward": "Gantimpala sa Pagboto",
+            "yesterday": "kahapon",
+            "all": "Naipon na VITE: {num}",
+            "nodeInfo": "Impormasyon sa Node",
+            "onlineNodes": "Mga Aktibong Node",
+            "rewardNodes": "Mga Gantimpala sa Node",
+            "stakeAmount": "Node Staking"
+        }
+    },
+    "walletSBP": {
+        "title": "SBP",
+        "help": {
+            "title": "Tungkol sa SBP",
+            "text": "Ang SBP （Snapshot Block Producer） ay isang node na may karapatang lumikha ng mga block, maaari kang magparehistro upang maging isang kandidato sa SBP sa pamamagitan ng pag-stake ng isang tiyak na halaga ng VITE, ang bawat pag-ikot (mga 75 segundo) ay pipili ng 25 SBP, ang SBP ay ihahalal mula sa random 23 mula sa nangungunang 25 mga node ng kandidato, kasama ang random 2 mula sa mga node ng kandidato na niraranggo sa ika-26 hanggang ika-100 sa listahan. Ang 50% ng mga gantimpala sa paglikha ng block ay ilalaan sa blockode node, ang iba pang 50% ay ilalaan sa mga node na niraranggo sa nangungunang 100 bilang mga gantimpala sa pagboto. Ang isang address sa pagpaparehistro (staking address) ay maaaring magrehistro ng maraming mga block node ng paglikha (mga pangalan ng node), isang pangalan ng node ay hindi maaaring magamit kung ang pangalan ng node ay nakarehistro ng isang address sa pagpaparehistro. Ang isang pangalan ng node ay maaaring lumipat sa address ng paglikha ng block, subalit, ang address ng paglikha ng block ay hindi maaaring magamit muli ng iba pang mga pangalan ng node."
+        },
+        "register": "Magparehistro sa SBP",
+        "cancel": "Pagkansela ng SBP",
+        "cancelBtn": "Kanselahin",
+        "rewardBtn": "Kunin ang Gantimpala",
+        "noReward": "Walang Gantimpala",
+        "rewardConfirm": {
+            "title": "Kunin ang Gantimpala",
+            "describe1": "Mga gantimpala na magagamit para sa pag-claim ng pag-update sa 13:00:00 (UTC + 8) araw-araw, hanggang sa {time} maaari kang mag-claim",
+            "describe2": "Ang mga detalye ng gantimpala sa pagmimina ng query, maaari mo",
+            "describe3": "i-klik dito",
+            "describe4": "Ipapadala ang mga gantimpala sa iyong Vite Web Wallet address pagkatapos magsumite ng kahilingan sa paghahabol, mangyaring suriin ito sa Home Page ng Wallet. Tandaan: Huwag ulitin ang mga pagkilos na inaangkin.",
+            "leftBtn": "Hindi ngayon",
+            "rightBtn": "I-claim ang Lahat"
+        },
+        "confirm": {
+            "title": "Pagrehistro ng mga kandidato sa SBP",
+            "describe": "Ang  {amount} VITE ng kasalukuyang address ay mai-lock mga 90 araw kapag isumite mo ang pagpaparehistro, ibabalik ang halaga sa staking address pagkatapos ma-unlock",
+            "leftBtn": "Hindi pa nagrerehistro",
+            "rightBtn": "Handa na Magparehistro",
+            "edit": {
+                "title": "I-edit ang impormasyon ng SBP",
+                "newBlockProducer": "mangyaring maglagay ng bagong address ng paglikha ng block",
+                "newRewardAddress": "mangyaring maglagay ng bagong address sa pag-withdraw ng gantimpala",
+                "changeBlockProducer": "I-block ang ng Paglikha ng Address",
+                "changeRewardAddress": "Gantimpala sa Pag-Withdraw ng Address",
+                "btn": "Kumpirmahin ang mga Pagbabago"
+            }
+        },
+        "section1": {
+            "title": "Form ng pagpaparehistro",
+            "nodeName": "Pangalan ng Node",
+            "producerAddr": "I-block ang ng Paglikha ng Address",
+            "rewardWithdrawAddress": "Gantimpala sa Pag-Withdraw ng Address",
+            "quotaAddr": "Staking Address",
+            "quotaTime": "Panahon ng Staking",
+            "time": "7776000 snapshot blocks （tinatayang 90 araw）",
+            "confirmBtn": "Isumite",
+            "namePlaceholder": "Mangyaring i-input ang pangalan ng account",
+            "nameHint": "Sa loob ng 40 character, suportahan ang mga titik sa Ingles (kapwa nasa itaas at mas mababang pagkakasulat), mga numero, '_' 、 '.'",
+            "nameErr": "Ang pangalan ng node na ito ay di naaayon",
+            "nameUsed": "Ang pangalan ng node na ito ay sakop",
+            "addrPlaceholder": "Mangyaring maglagay ng address sa paglikha ng snapshot block",
+            "addrHint": "Ang address ng paglikha ng block ay dapat nasa isang buong node at patuloy na tumatakbo",
+            "addrErr": "Ilegal na address",
+            "addrUsed": "Ang address na ito ay nasakop na",
+            "registerSuccess": "Naipadala ang kahilingan sa pagpaparehistro",
+            "registerFail": "Nabigo ang kahilingan sa pagpaparehistro"
+        },
+        "section2": {
+            "title": "Impormasyon sa pagrehistro",
+            "update": "Baguhin",
+            "updateFail": "Nabigong maipadala ang kahilingan sa pagbabago",
+            "cancel": "Pagpapawalang-bisa",
+            "cancelFail": "Nabigong magpadala ng kahilingan sa pagbawi",
+            "expireDate": "Petsa ng Pagka-expire: {time}",
+            "cancelConfirm": {
+                "title": "Bawiin ang pagpaparehistro ng SBP",
+                "describe": "Ang halaga ng staking ay ibabalik sa iyong staking address pagkatapos ng pagbawi, kailangan mong isumite muli ang pagpaparehistro upang maging isang SBP"
+            }
+        }
+    },
+    "walletVote": {
+        "title": "Pagboto",
+        "help": {
+            "title": "Tungkol sa Pagboto",
+            "text": "Maaari kang sumali at bumoto para sa 25 SBPs （Snapshot Block Producer), bawat pag-ikot ng botohan ay tumatagal ng 75s, ang mga botohan na maaari mong gamitin para sa pagboto ay katumbas ng halaga ng mga token ng VITE na pagmamay-ari ng voting address, ang default na pagpipilian ay ang pagpipilian ng nakaraang pag-ikot, ang SBPs ay pipiliin mula sa random 23 mula sa nangungunang 25 mga node na kandidato, kasama ang random 2 mula sa mga node na kandidato na nasa ika-26 hanggang 100 sa listahan, 25 SBP sa kabuuan."
+        },
+        "toReward": "Tingnan ang aking mga gantimpala",
+        "voting": "Pagboto",
+        "search": "Mangyaring i-input ang pangalan ng node o i-block ang paglikha ng address",
+        "addrNoExistErr": "Hindi ka maaaring bumoto sa ngayon dahil ang iyong address ay walang tala ng transaksyon dati",
+        "revokeVoting": "Bawiin ang Pagboto",
+        "section1": {
+            "title": "Ang Aking Pagboto",
+            "head": [
+                "Pangalan",
+                "Kalagayan",
+                "Ang Aking Pagboto",
+                "Katayuan ng Pagboto",
+                "Kilos"
+            ],
+            "nodeStatusMap": {
+                "1": "Aktibo",
+                "2": "Hindi aktibo"
+            },
+            "voteStatusMap": {
+                "voted": "Matagumpay ang Pagboto",
+                "voting": "Pagboto",
+                "canceling": "Nakaproseso ang pagbawi",
+                "voteNotWork": "Pinawalang-bisa ang Pagboto"
+            },
+            "hoverHelp": "Ang node na {nodeName} na binoto para sa iyo ay binawi, maaari kang bumoto muli nang direkta o bawiin ang iyong pagboto, Kung hindi mo ito gagawin, mababawi ang iyong orihinal na resulta sa pagboto pagkatapos muling magrehistro ang {nodeName}",
+            "confirm": {
+                "cancelText": "Hindi pa",
+                "submitText": "Kumpirmahin"
+            },
+            "revoke": "Pagpapawalang-bisa",
+            "operateBtn": "Bawiin",
+            "cancelVoteErr": "Nabigong bawiin ang pagboto, pakisubukang muli"
+        },
+        "section2": {
+            "title": "Mga kandidato sa SBP",
+            "head": [
+                "Ranggo",
+                "Pangalan ng Node",
+                "Address",
+                "Mga boto",
+                "Kilos"
+            ],
+            "confirm": {
+                "normal": {
+                    "content": "Maaari kang bumoto para sa isang SBP lamang, sigurado ka bang nais mong bumoto para sa {name}?",
+                    "cancelText": "Hindi pa",
+                    "submitText": "Handa nang bumoto"
+                },
+                "cover": {
+                    "content": "Bumoto ka na para sa {nodeName}, Sigurado ka bang patungan ang kasalukuyang tala ng pagboto?",
+                    "cancelText": "Kumpirmahin",
+                    "submitText": "Kanselahin"
+                }
+            },
+            "noSearchData": "Walang nahanap na nilalaman, mangyaring subukan ang ibang input",
+            "operateBtn": "Bumoto",
+            "voteErr": "Nabigong bumoto, pakisubukang muli"
+        }
+    },
+    "assets": {
+        "title": "Mga Asset",
+        "notice": {
+            "title": "Mahalagang Paunawa",
+            "contentProvider": "Ang serbisyong ito ay ibinibigay ng {gate}.",
+            "contentOther": "Sumasang-ayon ka at kinikilala mo na ang Vite Labs ay hindi magiging responsable para sa anumang mga negatibong kahihinatnan na dulot ng {gate}. Ang platform ng Vite ay hindi lumahok sa anumang ugnayan sa maaaring lumabas dahil sa pagitan ng {gate} at mga gumagamit ng Vite platform",
+            "contentAgree": "Sa pamamagitan ng pagpapatuloy na paggamit ng serbisyo ng {gate}, sumasang-ayon ka at kinikilala mo ang {gate}",
+            "agreement": "Mga Tuntunin ng Serbisyo, Mga Kundisyon sa Trading at Patakaran sa Privacy",
+            "contentUngree": "Mangyaring sumang-ayon sa mga tuntunin na ito bago gamitin ang serbisyo ng {gate}",
+            "hint": "Makipag-ugnay sa koponan sa serbisyo sa customer ng {gate} kung nakakaranas ka ng anumang mga problema sa proseso ng pagbabayad.",
+            "next": "Kumpirmahin at Magpatuloy"
+        },
+        "vb": {
+            "title": "ViteConnect",
+            "closeAlert": "isara",
+            "connect": {
+                "tips": "I-scan ang QR code sa pamamagitan ng Vite Wallet App"
+            },
+            "confirm": {
+                "tips": "Mangyaring kumpirmahin ang transaksyon sa VITE Wallet App"
+            },
+            "start": {
+                "scan": "I-scan ang QR code sa pamamagitan ng Vite Wallet App",
+                "downloadTips": "Wala kang Vite Wallet App? ",
+                "download": "I-download dito"
+            },
+            "accountName": "Address ng ViteConnect"
+        },
+        "ledger": {
+            "title": "Device ng Ledger",
+            "accountName": "Wallet ng Ledger",
+            "verifyAddress": "Patunayan ang address",
+            "closeAlert": "Kanselahin",
+            "start": {
+                "title": "Mga suportadong Wallet: Ledger Nano S / Ledger Nano X",
+                "connectError": "Mga Isyu sa Koneksyon?",
+                "introduction": "Pag-install ng App at Mga Tagubilin sa Gumagamit",
+                "introductionUrl": "https://docs.vite.org/go-vite/tutorial/ledger-install.html",
+                "connectErrorUrl": "https://support.ledger.com/hc/en-us/articles/115005165269-Connection-issues-with-Windows-or-Linux"
+            },
+            "connectWithUSB": "Gumamit ng USB",
+            "connectWithBlu": "Gumamit ng Bluetooth",
+            "connectLedger": "Kumonekta sa Ledger",
+            "connect": {
+                "title": "Piliin ang Address",
+                "tips": "Pumili ng isang address na gagamitin:",
+                "selectConnectType": "Piliin ang uri ng koneksyon: (Sinusuportahan lamang ng Bluetooth sa Ledger Nano X)",
+                "cancelSelect": "Pumili ng isang aparato upang kumonekta",
+                "connectError": "Nabigo ang pag-konekta. Mangyaring kumpirmahin sa Vite app ang binuksan sa aparato",
+                "interfaceNotAvailable": "Nabigo ang pag-konekta. Mangyaring suriin na konektado ang USB cable. Kung kumonekta ka sa pamamagitan ng Bluetooth, patayin ang Bluetooth at muling buksan",
+                "receiveBlockSuccess": "Matagumpay na natanggap ang {num} transaksyon",
+                "introduction": {
+                    "1": {
+                        "title": "Hakbang 1: ",
+                        "content": "Ikonekta ang Ledger device at ipasok ang PIN code"
+                    },
+                    "2": {
+                        "title": "Hakbang 2: ",
+                        "content": "Buksan ang Vite app sa Ledger"
+                    }
+                }
+            },
+            "addressSelect": {
+                "index": "Indeks",
+                "address": "Address",
+                "balance": "Balanse",
+                "unreceived": "Hindi natanggap",
+                "nextPage": "Susunod na pahina",
+                "prePage": "Huling pahina",
+                "confirm": "Kumpirmahin",
+                "unUsedAccount": "Bago"
+            },
+            "confirm": {
+                "tips": "Mangyaring kumpirmahin ang transaksyon sa iyong Ledger device",
+                "verifyAddress": "Mangyaring i-verify ang address sa iyong Ledger device",
+                "alert": "Babala",
+                "alertContent": "Tinanggihan ang address sa Ledger device. Mangyaring i-double verify kung ang address na ito ay tumutugma sa address na ipinakita sa iyong Ledger device. Kung oo, huwag pansinin ang mensaheng ito at magpatuloy upang kumpirmahin ang transaksyon, kung hindi HUWAG magpadala ng asset sa address at umalis kaagad.",
+                "alertLeftBtn": "Kinukumpirma ko na ang mga address ay naitugma",
+                "alertRightBtn": "Hindi tumutugma ang mga address. Alisin ako dito!",
+                "userCancel": "Nakansela ang transaksyon sa Ledger",
+                "userCancelByWeb": "Kinansela mo ang transaksyon sa Vite wallet. Sa kasong ito, ang transaksyon ay naiwan at hindi dumaan sa blockchain kahit na nakumpirma ito sa iyong Ledger device."
+            }
+        },
+        "invite": {
+            "inviteTitle": "Mag-imbita ng mga kaibigan",
+            "receiveInviteTitle": "Gumamit ng Referral Code",
+            "myCode": "Ang Aking Referral Code: ",
+            "codeLable": "Referral Code",
+            "invited": "Nakatanggap ka na ng isang paanyaya, ang referral code ay: ",
+            "genCode": "Lumikha ng isang Referral Code",
+            "cost": "Gastos",
+            "formatErr": "Maling format ng referral code",
+            "noResult": "Oops... Walang nahanap na resulta, pakisubukan ulit sa ibang pagkakataon",
+            "successToast": "Naipadala na ang kahilingan",
+            "failToast": "Nabigong maipadala ang kahilingan",
+            "notEnough": "Hindi sapat na balanse ng palitan",
+            "avaliable": "Balanse",
+            "inviteNum": "Inanyayahan",
+            "inviteBenifit": "Kita ng Referral Mining",
+            "inviteRule": "Mga Patakaran",
+            "ruleItems": [
+                "Ang <span class = 'strong'> 1,000 VITE </span> na pagbabayad upang makabuo ng isang code ng paanyaya na ibu-burned",
+                "Gagantimpalaan ang referee ng <span class = 'strong'> 5% </span> ng lahat ng mga inimbitahang negosyante ng kalakalan bilang kita sa pagmimina at <span class = 'strong'> 2.5% </span> ng lahat ng paggawa ng merkado bilang pagmimina na nalikom"
+            ],
+            "receiveRuleItems": [
+                "Ang mga inimbitahang gumagamit ay makakatanggap ng dagdag <span class='strong'>2.5%</span> ng pangangalakal bilang mga gantimpala sa pagmimina at <span class='strong'>1.25%</span> ng paggawa ng merkado bilang mga gantimpala sa pagmimina",
+                "Tangkilikin ang <span class='strong'>10%</span> off ang mga bayarin sa pangangalakal na may isang code ng paanyaya"
+            ]
+        }
+    },
+    "walletConversion": {
+        "title": "Palitan sa VITE",
+        "help": {
+            "title": "Mabilis na Pag-unawa sa Palitan ng VITE",
+            "text": "Maaari mong ilipat ang mga token ng ERC20 sa VITE sa aming TestNet sa pamamagitan ng pagpapaandar ng VITE conversion. Sa TestNet, ang pagboto ng iyong mga boto para sa mga opisyal na SBP upang mangolekta ng mga gantimpala, ang na-average na rate ay maaaring umabot sa 20%. Ang iyong mga token ng ERC20 VITE ay ililipat sa black hole address ng Ethereum: {blackAddr}, makakatanggap ka ng parehong halaga ng VITE sa iyong Vite address kapag natanggap ng transaksyon sa black black hole ang transaksyon at nakumpirma. Kapag nasa proseso ka ng pag-convert, kumpirmahing may sapat na VITE at ETH (bilang gas) sa iyong Ethereum address ng Vite wallet."
+        },
+        "gas": "Bayad sa Pagmimina",
+        "record": "Kasaysayan ng Palitan",
+        "aboutPrice": "Tinatayang {amount} ETH",
+        "note": "Mangyaring maghintay na may pasensya pagkatapos isumite ang Palitan. Hindi mo matatanggap ang na-convert na VITE hanggang sa makakuha ka ng 30 kumpirmasyon sa transaksyon ng Ethereum. Ang mga tala ng transaksyon sa Ehtereum ay maaaring makita sa seksyon ng Kasaysayan ng Palitan.",
+        "exchange": {
+            "vite": "Palitan",
+            "viteAddr": "Address ng tatanggap",
+            "viteAmount": "Halaga ng Palitan",
+            "btn": "Handa nang Mag-convert",
+            "success": "Matagumpay ang Palitan. Maaari itong tumagal ng humigit-kumulang 20 minuto upang makuha ang VITE sa iyong account pagkatapos makumpirma ang transaksyon sa Ethereum."
+        }
+    },
+    "tradeCenter": {
+        "title": "Palitan",
+        "marketClosed": "{symbol} nasuspinde ang merkado",
+        "mergeDepth": "Grupo",
+        "depthStep": "{step} mga digit",
+        "blocking": "Ang kasikipan sa network ay nangyari, mangyaring subukang muli sa ibang pagkakataon",
+        "supportMining": "Karapat-dapat para sa pangangalakal at market-making bilang pagmimina",
+        "cmcHelp": "Tingnan ang VITE sa CoinMarketCap",
+        "supportTradeMining": "Karapat-dapat para sa trading bilang pagmimina",
+        "supportOrderMining": "Karapat-dapat para sa market-making bilang pagmimina",
+        "zeroFee": "Zero Fee",
+        "buyMiningPrice": "Kwalipikado para sa pagmimina kapag ang presyo ng pagbili ay mas malaki kaysa sa {price}",
+        "sellMiningPrice": "Kwalipikado para sa pagmimina kapag ang presyo ng pagbebenta ay mas mababa sa {price}",
+        "operator": {
+            "noName": "Anonymous na Operator",
+            "overview": "Panimula",
+            "txPair": "Mga Trading Pair",
+            "confirmTitle": "Paalala sa Panganib",
+            "confirmText": "Ang kasalukuyang trading ay {symbol}. Mangyaring maging maingat kapag nag-trading. Ang pamumuhunan sa mga digital na assets ay may mataas na peligro. Bago mamuhunan, mangyaring magkaroon ng buong pag-unawa sa lahat ng mga panganib ng pamumuhunan sa mga digital na assets at hatulan ang pagiging tunay, legalidad at bisa ng mga digital na assets sa iyong sarili. Mangyaring maging maingat sa iyong sariling mga desisyon sa pamumuhunan at isagawa ang responsibilidad para sa pagkawala ng iyong mga assets.",
+            "address": "Address ng Operator",
+            "name": "Pangalan ng Operator"
+        },
+        "operatorTxPair": {
+            "title": "Mga detalye sa Trading pair",
+            "tokenTab": "Mga Detalye ng Token",
+            "operatorTab": "Mga Detalye ng Operator"
+        },
+        "depthBuyMiningPrice": "Saklaw ng Pagmimina sa Itaas",
+        "depthSellMiningPrice": "Saklaw ng Pagmimina sa ibaba",
+        "inMiningRange": "Saklaw ng Pagmimina"
+    },
+    "trade": {
+        "more": "Higit pa",
+        "search": "Maghanap",
+        "txPair": "Pares",
+        "price": "Halaga",
+        "upDown": "Baguhin%",
+        "txNum": "Dami",
+        "quantityTitle": "Kabuuan({quantity})",
+        "priceTitle": "Presyo ({price})",
+        "amountTitle": "Halaga ({amount})",
+        "quantityTable": "Qty",
+        "amountTable": "Dami",
+        "amount": "Kabuuan",
+        "newOrderSuccess": "Ipinadala ang kahilingan sa order",
+        "newOrderFail": "Nabigo ang Order",
+        "depthView": "Lalim",
+        "klineView": "TradingView",
+        "txPairDetail": {
+            "title": "Mga detalye sa Trading pair",
+            "24h": "24h",
+            "openPrice": "Buksan",
+            "quantity": "Dami ng Market",
+            "amount": "Base volume",
+            "status": "Kalagayan",
+            "latest": "Pinakabago",
+            "buy": "Presyo ng pagbili",
+            "sell": "Presyo ng Pagbenta",
+            "diff": "Ikalat"
+        },
+        "buy": {
+            "title": "Pagbili {token}",
+            "price": "Presyo ({token})",
+            "quantity": "Halaga ({token})"
+        },
+        "sell": {
+            "title": "Pagbenta {token}",
+            "price": "Presyo ({token})",
+            "quantity": "Halaga ({token})"
+        },
+        "head": {
+            "latestPrice": "Huling presyo",
+            "updown": "Pagbabago 24h",
+            "highPrice": "24h mataas",
+            "lowPrice": "24h mababa",
+            "quantity": "Dami 24h",
+            "tokenName": "Token",
+            "originalSymbol": "Simbolo",
+            "gateway": "Gateway",
+            "website": "Opisyal na Website",
+            "explorer": "Block Explorer",
+            "overview": "Deskripsyon",
+            "tokenShow": "Abbr",
+            "tokenId": "Token ID",
+            "publisher": "Tagapag-isyu",
+            "total": "Kabuuan",
+            "tokenDigit": "Mga decimal",
+            "publisherDate": "Petsa ng pagpapalabas",
+            "type": "Kalagayan",
+            "tokenType0": "Issuance Available",
+            "tokenType1": "Hindi Naisyu"
+        },
+        "latestTx": {
+            "title": "Mga Huling Order",
+            "time": "Oras"
+        },
+        "depth": {
+            "buy": "Pagbili",
+            "sell": "Pagbenta",
+            "all": "Lahat",
+            "avgPrice": "Avg.Presyo:",
+            "sum": "Sum {symbol}:"
+        },
+        "noData": {
+            "favorite": "Wala ka pang paborito",
+            "search": "Walang resulta na natagpuan"
+        },
+        "limitPrice": {
+            "title": "Limitasyon",
+            "fee": "Mga Bayarin",
+            "adviseToSVip": "Mag-upgrade sa SVIP, tangkilikin ang zero base fee sa transaksyon",
+            "feeRuleWithSVip": "Bayad sa Operator * Discount ng Referral. PANSININ: Ang pagsasaayos at diskwento ng mga bayarin ay makakaapekto lamang sa mga bagong order, mananatiling pareho ang singil ng dating mga order.",
+            "text": "Ang pahinang ito ay isang pahina ng preview ng data ng transaksyon. Mangyaring mag-login sa trade.",
+            "validAmount": "Ang dami ay dapat na mas malaki sa {amount}{token}",
+            "priceNotNull": "Hindi maaaring walang laman ang halaga",
+            "amountNotNull": "Hindi maaaring walang laman ang dami",
+            "quantityNotNull": "Ang dami ay hindi maaaring walang laman",
+            "cancelVip": "Kanselahin",
+            "openVip": "Maging VIP",
+            "dexFee": "Batayan ng mga Bayarin sa Transaksyon: {fee}",
+            "operatorFee": "Bayad sa Operator: {fee}",
+            "vipFee": "Diskwento sa VIP: {fee}",
+            "inviteFeeDiscount": "Discount ng Referral: {fee} off",
+            "svipFee": "SVIP: 0% batayang bayarin sa transaksyon",
+            "feeRule": "(Bayad sa Transaksyon sa Base - Diskwento sa VIP + Bayad sa Operator) * Diskwento sa Referral. Pansin: Ang pagsasaayos at diskwento ng mga bayarin ay makakaapekto lamang sa mga bagong order, ang singil ng dating mga order ay mananatiling pareho."
+        },
+        "proxy": {
+            "title": "Delegasyon sa pag-trade",
+            "subTitle": "Delegasyon sa pag-trade",
+            "successProxy": "Tagumpay ng Delegasyon",
+            "failProxy": "Nabigo ang Delegasyon",
+            "successCancelProxy": "Alisin ang Tagumpay ng Pagdelegasyon",
+            "failCancelProxy": "Nabigong alisin ang mga delegasyon",
+            "info": "Ano ang Delegasyon sa Pag-trade?",
+            "new": "Magsimula sa Delegasyon",
+            "active": {
+                "title": "Kasaysayan ng Delegasyon",
+                "head": [
+                    "Address ng Delegado",
+                    "Mga Trading Pair",
+                    "Kilos"
+                ],
+                "operate": [
+                    "Magdagdag ng Trading Pairs",
+                    "Alisin ang Trading Pairs",
+                    "Tanggalin ang delegasyon"
+                ]
+            },
+            "passive": {
+                "title": "Tinanggap ang Kasaysayan ng Delegasyon",
+                "head": [
+                    "Address ng Delegasyon",
+                    "Mga Trading Pair"
+                ]
+            },
+            "dialog": {
+                "cancel": "Kanselahin",
+                "cancelAllTips": "Sigurado ka bang nais mong alisin ang lahat ng mga delegasyon sa {trustAddress}?",
+                "rTxtMap": {
+                    "new": "Magdagdag",
+                    "add": "Magdagdag",
+                    "delete": "Kumpirmahin",
+                    "deleteAll": "Kumpirmahin"
+                },
+                "confirm": {
+                    "title": "Kumpirmahin ang Mga Delegasyon",
+                    "cancel": "Kanselahin",
+                    "ok": "Kumpirmahin"
+                },
+                "titleMap": {
+                    "new": "Magsimula sa Delegasyon",
+                    "add": "Magdagdag ng mga Delegasyon",
+                    "delete": "Tanggalin ang delegasyon",
+                    "deleteAll": "Kumpirmahing alisin ang mga delegasyon"
+                }
+            }
+        },
+        "openapi": {
+            "title": "API",
+            "myKey": "Ang aking API Key",
+            "createTime": "Oras ng paggawa",
+            "permissions": "Inilapat na mga Trading Pair",
+            "createKey": "Lumikha ng API Key",
+            "deleteKey": "Tanggalin ang API",
+            "deleteAlert": "Ang kasalukuyang API ay hindi na maa-access kung kumpirmahing magpatuloy. Mananatili ang kasalukuyang package at muling mai-aktibo sa paglikha ng isang bagong API Key.",
+            "confirmDelete": "Kumpirmahin at Burahin",
+            "cancel": "Kanselahin",
+            "agentAddressStakingAmount": "Nagdeposito ng Quota ng Delegasyon",
+            "staking": "Stake",
+            "package": "Package",
+            "expireTime": "Petsa na Pagkawalang-bisa",
+            "callNum": "Mga Trigger / min",
+            "callNumInfo": "{maxCount} mga transaksyon / min",
+            "price": "Gastos",
+            "priceInfo": "{price} VX/mth",
+            "upgrade": "Mag-upgrade",
+            "balanceAlert": "Hindi makakagawa kung ang balanse ng VITE ay mas mababa sa {balanceLimit}.",
+            "noSupportForHardware": "Ang Hardware Wallet ay hindi suportado sa ngayon",
+            "tips": {
+                "title": "Abiso",
+                "0": "Ang ViteX ay naglalabas ng opisyal na API upang magbigay ng pag-access sa mga merkado at mga serbisyo sa real-time na pangangalakal. Sundin ang mga tagubilin sa ibaba upang maayos na makakuha ng isang pribadong key ng API.",
+                "0-step1": "1. Lumikha ng API",
+                "0-step2": "2. Pahintulutan ang delegasyon ng mga napiling trading pair",
+                "0-step3": "3. Quota sa Pag-stake para sa address ng delegasyon ng API",
+                "0-step4": "Tingnan ang <a href=\"https://vite.wiki/dex/api/dex-apis.html\" target=\"_blank\"> Dokumentasyon ng API </a> para sa karagdagang suporta",
+                "1": "Pinapayagan ang isang hanay ng API Key at Lihim para sa parehong address sa anumang naibigay na oras.",
+                "2": "Upang maiwasan ang pagkawala ng assets, Huwag ibunyag ang iyong Access Key at Lihim",
+                "3": "Ang package ng API ay itinakda kasama ang libreng base package sa 10 mga transaksyon bawat minuto bilang default, magagamit ang mga pagpipilian sa pag-upgrade."
+            },
+            "stakingForQuota": {
+                "title": "Quota ng Delegasyon",
+                "agentAddress": "Address ng Delegasyon",
+                "stakingAmount": "Halaga ng Stake",
+                "ok": "Kumpirmahin"
+            },
+            "keyConfirm": {
+                "accessKey": "Key ng Pag-access",
+                "secretKey": "Lihim na Susi",
+                "agentAddress": "Address ng Delegasyon",
+                "title": "Matagumpay na Nalikha ang API",
+                "tips": {
+                    "title": "Mahalagang Paunawa",
+                    "0": "Upang maiwasan ang pagkawala ng assets, Huwag ibunyag ang iyong Access Key at Lihim.",
+                    "1": "Sa mga kaso ng nawalang lihim na key, Tanggalin ang kasalukuyang API at Muling Mag-apply para sa isang bagong key ng API."
+                },
+                "warn": "Ang Lihim na susi ay ipinapakita nang isang beses lamang at hindi mahahanap muli kung nawala, mangyaring panatilihin itong nakatago."
+            },
+            "upgradeConfirm": {
+                "title": "I-upgrade ang Package",
+                "currentPackage": "Kasalukuyan",
+                "selectPackage": "Pumili ng bago",
+                "selectTime": "May bisa Para sa",
+                "month": " Mth",
+                "payAmount": "Kabuuan",
+                "balance": "Balanse ng VX"
+            }
+        }
+    },
+    "tradeAssets": {
+        "title": "Mga Pondo",
+        "search": "Mangyaring ipasok ang pangalan ng token",
+        "operate": "Kilos",
+        "all": "Lahat",
+        "confirmTable": {
+            "title": "Detalyadong Record",
+            "heads": [
+                "Petsa",
+                "Token",
+                "Uri",
+                "Halaga"
+            ]
+        },
+        "pwdConfirm": {
+            "cancelTxt": "Kanselahin"
+        },
+        "table": {
+            "heads": [
+                "Token",
+                "Kabuuang Balanse",
+                "Balanse ng Palitan",
+                "Sa Order",
+                "Halaga"
+            ],
+            "rowMap": {
+                "recharge": "Deposit para sa Palitan",
+                "withdraw": "Bawiin sa Wallet",
+                "detail": "Mga Detalye",
+                "sideMap": {
+                    "1": "Deposito",
+                    "2": "Pag-withdraw"
+                }
+            }
+        },
+        "confirmrecharge": {
+            "successToast": "Matagumpay ang pagdeposito",
+            "failToast": "Nabigong magdeposito",
+            "title": "Deposit para sa Palitan",
+            "lable1": "Balanse sa Wallet",
+            "lable2": "Halaga ng Deposito",
+            "tips": "Hindi sapat na Balanse sa Wallet",
+            "placeholder": "Mangyaring mag-input ng halaga ng deposito",
+            "btn": "Deposito"
+        },
+        "confirmwithdraw": {
+            "successToast": "Matagumpay na pag-Withdraw",
+            "failToast": "Nabigo ang pag-Withdraw",
+            "title": "Mag-withdraw sa wallet",
+            "lable1": "Magagamit na Balance",
+            "lable2": "Halaga ng Pag-withdraw",
+            "tips": "Hindi sapat na Balanse sa Wallet",
+            "placeholder": "Mangyaring i-input ang halagang iwi-withdraw",
+            "btn": "I-withdraw"
+        },
+        "zero": "Itago ang Mababang Balanse"
+    },
+    "tradeOpenOrders": {
+        "cancelErr": "Madaming beses na sinubukan, mangyaring subukang muli sa ibang pagkakataon.",
+        "confirm": {
+            "successToast": "Matagumpay na Binabawi ang Order",
+            "failToast": "Nabigo ang Pagbawi ng Order",
+            "submitTxt": "Kumpirmahing bawiin",
+            "cancelTxt": "Kanselahin",
+            "title": "Bawiin ang pag-order",
+            "content": "Sigurado ka bang nais mong bawiin ang kasalukuyang order?"
+        },
+        "title": "Buksan ang mga Order",
+        "hint": {
+            "fdate": "Mangyaring piliin ang petsa ng pagsisimula",
+            "tdate": "Mangyaring piliin ang petsa ng pagtatapos",
+            "dateErr": "Ang petsa ng pagtatapos ay dapat na mas huli kaysa sa petsa ng pagsisimula",
+            "ftoken": "Mangyaring piliin ang ftoken"
+        },
+        "side": {
+            "1": "Pagbenta",
+            "0": "Pagbili"
+        },
+        "table": {
+            "heads": [
+                "Petsa",
+                "Pares",
+                "Parte",
+                "Presyo",
+                "Halaga",
+                "Punan",
+                "Punan%",
+                "Pangkaraniwan",
+                "Kabuuan"
+            ],
+            "rowMap": {
+                "cancel": "Kanselahin"
+            }
+        }
+    },
+    "tradeOrderHistory": {
+        "title": "Kasaysayan ng Order",
+        "hint": {
+            "fdate": "Mangyaring piliin ang petsa ng pagsisimula",
+            "tdate": "Mangyaring piliin ang petsa ng pagtatapos",
+            "dateErr": "Ang huling petsa ay mas dapat kailangan pagkatapos ng simula ng petsa"
+        },
+        "side": {
+            "1": "Pagbenta",
+            "0": "Pagbili"
+        },
+        "status": {
+            "1": "Patuloy",
+            "2": "Nakompleto",
+            "3": "Kinansela",
+            "4": "Nabigo"
+        },
+        "confirmTable": {
+            "title": "Order Book",
+            "heads": [
+                "Oras",
+                "Presyo",
+                "Halaga",
+                "Mga Bayarin",
+                "Kabuuan"
+            ]
+        },
+        "table": {
+            "heads": [
+                "Petsa",
+                "Pares",
+                "Parte",
+                "Presyo",
+                "Halaga",
+                "Punan",
+                "Pangkaraniwan",
+                "Mga Bayarin",
+                "Kabuuan",
+                "Kalagayan"
+            ],
+            "rowMap": {
+                "statusMap": {
+                    "1": "Sa Order",
+                    "2": "Nakompleto",
+                    "3": "Kinansela",
+                    "4": "Nabigo"
+                },
+                "detail": "Mga Detalye"
+            }
+        },
+        "filter": {
+            "start": "Mula sa",
+            "end": "Para kay",
+            "type": "Uri",
+            "side": "Parte",
+            "buy": "Bumili",
+            "sell": "Pagbenta",
+            "status": "Kalagayan",
+            "search": "Maghanap",
+            "reset": "I-reset"
+        }
+    },
+    "tradeMining": {
+        "title": "Pagmimina",
+        "addQuota": "Lumikha ng isang bagong staking",
+        "add": "Magdagdag",
+        "withdraw": "Unstake",
+        "withdrawList": "Listahan ng Pag-withdraw",
+        "tbHead": {
+            "date": "Petsa",
+            "fee": "Bayad sa pag trade",
+            "mining": "Halaga ng Pagmimina",
+            "pledge": "Stake"
+        },
+        "txTitle": "Trading bilang Kabuuang Kita sa Pagmimina",
+        "quotaTitle": "Staking bilang Kabuuang Kita sa Pagmimina",
+        "addHint1": "Ang isang stake ay dapat na hindi bababa sa 134 VITE",
+        "addHint2": "Ang pag-stake sa VITE ay magiging epektibo kaagad pagkatapos isumite. Maaaring kanselahin ang Staking pagkatapos ng 3 araw",
+        "addHint3": "Ang halaga na na-staked ay ilalabas pagkatapos ng 7 araw na paghihintay",
+        "withdrawHint1": "Hindi ka na makakapag-mine ng VX matapos ang pagkansela ng staking",
+        "withdrawHint2": "Tatagal ng 7 araw upang maibalik ang hindi naitala na mga coins ng VITE upang palitan ang balanse",
+        "addTitle": "Pag-Stake ng VITE para sa Pagmimina",
+        "withdrawTitle": "I-Unstake VITE",
+        "addPlaceHolder": "Mangyaring ipasok ang halaga ng I-stake",
+        "withdrawPlaceHolder": "Mangyaring mag-input ng halaga ng i-uunstake, hindi bababa sa 134 VITE",
+        "addBtn": "Kumpirmahin ang pag-Stake",
+        "withdrawBtn": "Kumpirmahin ang pag- Unstake",
+        "stakingBalance": "Magagamit na Balanse ng Stake",
+        "hintTitle": "Mahalagang Paunawa",
+        "comingHint": "Malapit na ang pagpapa-andar ng VX mining, manatiling nakasubaybay. Maaari kang makakuha ng VX sa limang paraan: 1. Trading bilang Pagmimina, 2. Listing bilang Pagmimina, 3. Pag-rerefer bilang Pagmimina, 4. Staking bilang Pagmimina, 5. Market-making bilang Pagmimina. Ang mga gumagamit na humahawak ng VX ay nasisiyahan sa mga pagbabayad mula sa isang nakabahaging dividend pool.",
+        "more": "Matuto nang higit pa tungkol sa mga panuntunan sa pagmimina ng VX",
+        "fee": "Bayad sa pag trade",
+        "todayTrade": "Mga Detalye sa Pagmimina",
+        "dividends": "24H Inaasahang Dami ng Namina",
+        "view": "Tingnan ang Live Mining Dashboard",
+        "inviteCount": "Mga Referral",
+        "help": "Ang kasalukuyang mga bayarin sa pangangalakal na ipinapakita sa pahinang ito ay naglalaman lamang ng 0.2% na bayarin sa transaksyon sa ViteX, mangyaring tandaan na ang mga bayarin sa operator ay isasaalang-alang kapag kinakalkula ang gastos sa pagmimina"
+    },
+    "tradeVip": {
+        "title": "Kalagayan ng VIP",
+        "open": "Maging VIP",
+        "cancel": "Kanselahin {type}",
+        "help": {
+            "title": "Tungkol sa ViteX VIP"
+        },
+        "helpConfirm": {
+            "t1": "VIP",
+            "txt1": "Mag-Stake ng 10,000 VITE upang makakuha ng katayuan sa VIP at makatanggap ng 50% na diskwento sa kalakalan. Maaaring kanselahin ang Staking pagkatapos ng 30 araw.",
+            "t2": "SVIP",
+            "txt2": "Mag-Stake 1M VITE upang maging isang SVIP at masiyahan sa 0 mga bayarin sa pangkalakalan. Maaaring kanselahin ang Staking pagkatapos ng 30 araw.",
+            "txt3": "Sinusuportahan ng SVIP ang pagtutuon para sa anumang wastong address ng account. Mag-stake para sa kanila upang makakuha ng katayuan ng SVIP!"
+        },
+        "vipConfirm": {
+            "cancelVip": "Kanselahin ang Katayuan bilang VIP",
+            "openVip": "Maging VIP",
+            "openStakingAmount": "Halaga ng Staking para Maging isang VIP",
+            "cancelStakingAmount": "Magagamit na Balanse ng Stake",
+            "noBalance": "Hindi sapat ang balanse",
+            "openHint": "Makakatanggap ka ng 0.1% na bawas sa bayarin sa pag-trade bilang isang VIP. Ang pag-staking ng 10,000 VITE ay maaaring bawiin pagkatapos ng 30 araw.",
+            "cancelHint": "Kakansela kaagad ang katayuan bilang VIP.",
+            "openSuccess": "Ang iyong katayuan bilang VIP ay naaktibo! Ito ay magkakabisa sa loob ng ilang segundo.",
+            "openFail": "Nabigo ang Pagrehistro bilang VIP",
+            "cancelSuccess": "Matagumpay na nakansela ang pagiging VIP",
+            "cancelFail": "Nabigong Kanselahin",
+            "adviseToCancel": "Walang mga pangunahing bayarin sa transaksyon sa iyong kasalukuyang katayuan bilang aming SVIP, samakatuwid inirerekumenda namin na bawiin ang naitalang VITE, na kinakailangan para sa mga pangkalahatang kasapi ng VIP.",
+            "address": "Paganahin ang Katayuan bilang VIP",
+            "addressPlaceholder": "Ang kasalukuyang address ay ang default na address, ang address ay hindi maaaring mabago sa pagtagal"
+        },
+        "svipConfirm": {
+            "open": "I-upgrade",
+            "cancel": "Kanselahin",
+            "cancelVip": "Kanselahin ang SVIP",
+            "openVip": "Maging SVIP",
+            "openStakingAmount": "Halaga ng Staking para maging isang SVIP",
+            "cancelStakingAmount": "Magagamit na Balanse ng Stake",
+            "noBalance": "Hindi sapat ang balanse",
+            "openHint": "Masisiyahan ka sa 0% batayang bayarin sa transaksyon kapag nag-a-upgrade sa SVIP. Ang stake ng 1,000,000 VITE ay maaaring iurong makalipas ang 30 araw.",
+            "cancelHint": "Ang mga pribilehiyo ng SVIP ay hindi na ipagpapatuloy sa sandaling matanggal ang staking",
+            "openSuccess": "Nagamit ng Matagumpay! Ang katayuan ng SVIP ay magkakabisa mamaya.",
+            "openFail": "Nabigong mag-apply bilang SVIP",
+            "cancelSuccess": "Matagumpay na nakansela ang pagiging SVIP",
+            "cancelFail": "Nabigong Kanselahin",
+            "address": "Paganahin ang Katayuan bilang SVIP",
+            "addressPlaceholder": "Ang Address na Pinapagana ng Katayuan bilang SVIP",
+            "cancelAddress": "Address ng SVIP"
+        },
+        "vipListTitle": "VIP Records",
+        "openAddress": "Pinagana ang Address",
+        "type": "Uri ng VIP"
+    },
+    "inviteMining": {
+        "title": "Pag-rerefer bilang Kabuuang Kita ng Pagmimina",
+        "myInviteIncome": "Mga Kita sa Referral",
+        "inviteTradeIncome": "Mga Referred na Kinita sa Trading",
+        "inviteOrderIncome": "Na-refer na Mga Kita sa Market-Making"
+    },
+    "orderMining": {
+        "title": "Market-Making bilang Kabuuang Kita sa Pagmimina",
+        "tbHead": {
+            "date": "Petsa",
+            "ratio": "Ratio",
+            "mining": "Halaga"
+        },
+        "market": "{name} Market",
+        "estimate": "{name} Minimum na Halaga ngayon"
+    },
+    "tradeDividend": {
+        "title": "Mga Dividend",
+        "poolTitle": "Trading Fee Dividend Pool",
+        "listTitle": "Mga Dividend ko",
+        "allPrice": "Kabuuang Tinantyang Halaga",
+        "date": "Petsa",
+        "VX": "Mag-Stake ng VX",
+        "coin": "Uri",
+        "amount": "Halaga",
+        "price": "Kabuuang Tinantyang Halaga",
+        "hintTitle": "Mahalagang Paunawa",
+        "comingHint": "Malapit na dumating ang pagpapa-andar ng VX mining at dividend, manatiling nakatutok. Ipamamahagi ng system ang 1% ng BTC, ETH, VITE, USDT ng kabuuang pool sa lahat ng mga gumagamit ng VX na proporsyonal sa dami ng VX na hawak nila. Ang paunang dividend pool ay magsisimula sa 0 at lalago alinsunod sa halaga ng mga bayarin na nakolekta ng ViteX. Ang mga negosyante ay dapat magkaroon ng isang minimum na 10 VX upang makatanggap ng mga dividend mula sa isang nakabahaging dividend pool na binubuo ng base transaksyon, listing at referral code na bumubuo ng mga bayarin. ",
+        "more": "Matuto nang higit pa tungkol sa mga patakaran sa dividend ng VX",
+        "help": "Mga Panuntunan sa Gantimpala: 1. Ang isang minimum na 10 VX ay dapat mai-staked upang makatanggap ng mga dividend. 2. Ang pagsumite ng kahilingan sa staking ay nagbibigay-daan para sa mga dividend na nagsisimula sa pinakamalapit na pamamahagi. 3. Ang naitalang halaga ay ilalabas pagkatapos ng 7 araw na paghihintay",
+        "lockedAmount": "Halaga ng Staking",
+        "lockAmountTips": "Makatanggap ng Dividends sa 10 VX o Itaas",
+        "unlockAmount": "Halaga sa Pag-unlock",
+        "addHint1": "Ang minimum na 10 VX ay dapat na mai-staked upang makatanggap ng mga dividend",
+        "addHint2": "Ang pagsumite ng kahilingan sa staking ay nagbibigay-daan para sa mga dividend na nagsisimula sa pinakamalapit na pamamahagi",
+        "addHint3": "Ang halaga na na-staked ay ilalabas pagkatapos ng 7 araw na paghihintay",
+        "autoLock": "Awtomatikong Staking",
+        "openAutoLock": {
+            "title": "Paganahin ang Awtomatikong Staking",
+            "text": "Ang pag-Mined ng VX ay awtomatikong mai-istake sa sandaling pinagana"
+        },
+        "closeAutoLock": {
+            "title": "Huwag paganahin ang Awtomatikong Staking",
+            "text": "Ang Mined VX ay hindi awtomatikong mai-istaked kapag naka-off"
+        },
+        "lock": "Stake",
+        "unlock": "Unstake",
+        "lessMin": "Minimum na 1 VX",
+        "lockVXConfirm": {
+            "title": "Mag-Stake ng VX",
+            "available": "Magagamit na Balanse sa Palitan",
+            "amountPlaceholder": "Mangyaring mag-input ng halaga ng staking, minimum na 1 VX",
+            "notEnough": "Hindi sapat na Balanse sa Palitan",
+            "submit": "Kumpirmahin ang pag-Stake",
+            "amountText": "Halaga"
+        },
+        "unlockVXConfirm": {
+            "title": "I-Unstake ang VX",
+            "available": "Magagamit na Balanse ng Stake",
+            "amountPlaceholder": "Mangyaring mag-input ng halaga, minimum na 1 VX",
+            "notEnough": "Hindi sapat na Halaga",
+            "submit": "Kumpirmahin ang pag- Unstake",
+            "amountText": "Halaga",
+            "hint": "Tumatagal ng halos 7 araw upang ma-unlock."
+        },
+        "unlockList": {
+            "title": "Kinukuhang muli",
+            "amount": "Halaga",
+            "time": "Magagamit na Petsa"
+        }
+    },
+    "tradeOperator": {
+        "title": "Operator",
+        "tokenList": "Tokens",
+        "totalIncome": "Kabuuang kita",
+        "permission": "Paglipat ng Pag-aari ng Token",
+        "txPairManage": "Pamahalaan ang Trading Pairs",
+        "noOperator": "Wala ka pang mga token o pares sa pangangalakal, nais mo bang maging isang operator?",
+        "learnMore": "Matuto pa",
+        "permissionConfirm": {
+            "title": "Paglipat ng pagmamay-ari",
+            "submit": "Kumpirmahin",
+            "tokenName": "Pangalan ng Token",
+            "address": "Address ng tatanggap",
+            "notice": "PAUNAWA: Kapag ang pagmamay-ari ay inilipat sa ibang tao, ang mga trading pair na hindi bubuksan ay pagmamay-ari ng bagong may-ari. Ang mga trading pair / suspensyon na kalakalan ay pagmamay-ari mo pa rin"
+        }
+    },
+    "tradeTxPairManage": {
+        "title": "{tokenSymbol} Pamamahala ng Trading Pairs",
+        "symbol": "Pangalan",
+        "income": "Kita",
+        "fee": "Rate sa Pagbayad",
+        "status": "Kalagayan",
+        "operate": "Kilos",
+        "stopTrans": "Suspendido",
+        "resetTrans": "Bawiin",
+        "changeOwner": "Paglipat ng pagmamay-ari",
+        "changeFee": "I-adjust ang Rate sa Pagbabayad",
+        "incomeList": "Mga Detalye ng Kita",
+        "historyIncome": "Kasaysayan ng Kita",
+        "openTxPair": "Buksan ang Trading Pairs",
+        "statusList": [
+            "Inilipat ang Pagmamay-ari",
+            "Nakikipagkalakalan",
+            "Suspensyon",
+            "Hindi Bukas ang pag-trade"
+        ],
+        "openTxPairConfirm": {
+            "title": "Buksan ang {symbol} upang mag-trade",
+            "fee": "Bayarin sa Listing",
+            "hint": "Kung nais mong magdagdag ng natatanging simbolo ng operator pagkatapos ng pagbubukas ng isang pares ng kalakalan, mangyaring makipag-ugnay sa amin sa aming Telegram group: https://t.me/vite_en",
+            "btn": "Isumite",
+            "reqSuccess": "Matagumpay na naisumite! Tingnan ito sa market board mamaya.",
+            "reqError": "Nabigo ang pag-listing, pakisubukang muli"
+        },
+        "stopTransHint": "Tiyaking suspindihin ang {symbol} ?",
+        "resetTransHint": "Tiyaking mababawi ang {symbol} ?",
+        "stopSuccess": "Matagumpay ang suspensyon",
+        "stopFail": "Nabigo ang suspensyon",
+        "openSuccess": "Matagumpay sa Pag-recover",
+        "openFail": "Nabigo ang Pag-recover",
+        "changeOwnerSuccess": "Matagumpay ang paglipat",
+        "changeOwnerFaill": "Nabigo ang Paglipat",
+        "submitChange": "Kumpirmahing ilipat",
+        "changeOwnerHint": "PAUNAWA: Hindi ka makakolekta o makakapag-ayos ng mga bayarin matapos mailipat ang pagmamay-ari pati na rin hindi mo maa-undo ang paglipat na ito",
+        "currentMaker": "Tagagawa",
+        "confirmFee": "Mga Bayarin",
+        "currentTaker": "Tagakuha",
+        "txPairName": "Pangalan",
+        "changeFeeHint": "{symbol}'s bayad sa {fee}",
+        "changeFeeSubmit": "Tiyaking baguhin ang {changeFeeHint}",
+        "historyAllIncome": "Kabuuang kita",
+        "incomeListHead": {
+            "date": "Petsa",
+            "txNum": "Dami",
+            "feeRate": "Rate",
+            "feeIncome": "Kita"
+        }
+    },
+    "mobileAssets": {
+        "allAssets": "Tinantyang Halaga ng Mga Asset ({token})",
+        "tokenInfoTitle": "Mga Detalye ng Token",
+        "transfer": "Ilipat",
+        "trade": "Trade",
+        "chooseTxPair": "Piliin ang Trading Pair"
+    },
+    "mobileTradeCenter": {
+        "highPrice": "Mataas",
+        "lowPrice": "Mababa",
+        "quantity": "24h Vol",
+        "buyTitle": "Bumili",
+        "sellTitle": "Pagbenta",
+        "price": "Presyo ({token})",
+        "buy": {
+            "price": "Presyo",
+            "quantity": "Halaga"
+        },
+        "sell": {
+            "price": "Presyo",
+            "quantity": "Halaga"
+        },
+        "orderQuantity": "Halaga",
+        "orderPrice": "Presyo",
+        "executedQuantity": "Punan",
+        "avgPrice": "Avg"
+    },
+    "mobileDividend": {
+        "title": "Mga Dividend",
+        "poolTitle": "Dividend Pool ({token})",
+        "myDividendTitle": "Kabuuang Tinantyang Halaga ng mga Dividend ({token})",
+        "listTitle": "Mga Detalye ng Dividend",
+        "lockingTitle": "Ang Staking ko",
+        "viewLink": "Katayuan na pag-Unstaking"
+    },
+    "mobileMining": {
+        "title": "Pagmimina",
+        "miningTrade": "Nakikipagkalakalan",
+        "miningStaking": "Staking",
+        "miningInvite": "Referral",
+        "miningOrder": "Market-Making",
+        "tradeTotalIncome": "Kabuuang Kita ({token})",
+        "stakingTotalIncome": "Kabuuang Kita ({token})",
+        "inviteTotalIncome": "Kabuuang Kita ({token})",
+        "orderTotalIncome": "Kabuuang Kita ({token})",
+        "fee": "Mga Bayarin",
+        "listTitle": "Kasaysayan ng Pagmimina",
+        "viewLink": "Live Mining Dashboard",
+        "inviteTradeIncome": "Mga Detalyadong Detalye ng Trading",
+        "inviteOrderIncome": "Mga Detalye sa pag-refer sa Market-Making",
+        "myStaking": "Ang Staking ko"
+    },
+    "mobileBottomBar": {
+        "center": "Trade",
+        "assets": "Mga Asset",
+        "mining": "Pagmimina",
+        "order": "Umorder"
+    },
+    "mobileOrder": {
+        "filterDate": "Petsa",
+        "filterToken": "Uri",
+        "all": "Lahat",
+        "3month": "3 buwan",
+        "1month": "1 buwan",
+        "1week": "1 linggo",
+        "1day": "1 araw",
+        "clear": "Malinaw",
+        "submit": "Maghanap"
+    },
+    "desktop": {
+        "unlock": "i-unlock",
+        "unreceivedTx": {
+            "title": "Nakatanggap ka ng mga transaksyon sa {num}.",
+            "body": "Halaga ：{amount} {symbol} \nMula sa Address: {address}"
+        }
+    }
+}
