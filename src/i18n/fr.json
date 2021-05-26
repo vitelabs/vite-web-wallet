@@ -60,7 +60,13 @@
     },
     "pow": {
         "ing": "Running PoW to acquire quota",
-        "no": "You can stake VITE for quota in case you would not like to run PoW"
+        "no": "You can stake VITE for quota in case you would not like to run PoW",
+        "insuffQuota": "Get Quota",
+        "insuffQuotaMsg": "We notice you have no VITE locked for Quota. Please lock VITE or if you prefer, you can run POW to get Quota.",
+        "insuffQuotaMsg2": "VITE Only {powMaxTimes} transactions can be made per day per address without staking VITE. Your address has exhausted all {powMaxTimes} transactions. Please go to the quota page and stake your VITE to perform more transactions.",
+        "getQuota": "Lock VITE",
+        "skip": "Run POW",
+        "cancel": "Cancel"
     },
     "addAccount": "Create an Account",
     "saveQrcode": "Save QR code image",
@@ -236,6 +242,20 @@
         "currency": "Default Currency",
         "secure": "Security",
         "gate": "Custom Gateway",
+        "rpcUrl": "Node",
+        "changeRpcUrl": "Change",
+        "changeRpcUrlDialog": {
+            "title": "Change Node",
+            "addCustomNode": "Add Custom Node",
+            "officialNode": "Official Node",
+            "addNode": "Add Node",
+            "customNode": "Custom Node",
+            "deleteCustomNode": "Delete",
+            "wrongNode": "Please enter the correct URL!",
+            "changeNodeSuccess": "Have connected to new node.",
+            "failedConnected": "Node connection error",
+            "inputPlaceholder": "Please enter the node url prefix with wss."
+        },
         "triggerGate": [
             "Close",
             "Open"
@@ -444,6 +464,7 @@
                 "You will receive your assets after {confirmationCount} confirmations, kindly wait in patient"
             ]
         },
+        "viteTips": "VITE only supports cross-chain functionality between the new ERC20 VITE token and Native VITE Coin.",
         "withdraw": {
             "title": "Cross-Chain Send Funds",
             "btn": "Withdraw",
@@ -646,11 +667,12 @@
             "t2": "Multiple Full nodes can be registered with the same address, but must be staked individually at least 10,000 VITE each; When calculating Active Node Reward, if staking amount / 10000 yields a whole number that is greater than or equal to the number of active nodes, all active nodes will be rewarded; If staking amount / 10000 yields a whole number that is less than the number of active nodes, the number of nodes being rewarded equals to the whole number.",
             "t3": "Calculation of voting rewards does not depend on the number of nodes, but the staking amount."
         },
-        "confirmText": "Confirm to stake {amount} VITE for quota, staking can be cancelled after {days} days",
+        "confirmText": "Confirm to stake {amount} VITE, staking can be cancelled after {days} days",
         "addQuota": {
             "address": "Staking Address",
             "stakeDays": "Staking Period",
-            "placeholder": "Minimum Stake {min} VITE"
+            "placeholder": "Minimum Stake {min} VITE",
+            "stakingSuspend": "Staking Temporarily Suspended"
         },
         "quotaContent": {
             "onlineReward": "Active Node Reward",
@@ -818,8 +840,8 @@
             },
             "start": {
                 "scan": "Scan the QR code via Vite Wallet App",
-                "downloadTips": "Don’t have Vite Wallet App yet? ",
-                "download": "Download Vite Wallet"
+                "downloadTips": "Don’t have the Vite Wallet App? ",
+                "download": "Download here"
             },
             "accountName": "ViteConnect Address"
         },
@@ -829,10 +851,10 @@
             "verifyAddress": "Verify address",
             "closeAlert": "Cancel",
             "start": {
-                "title": "Support Hardware Wallets: Ledger Nano S / Ledger Nano X",
-                "connectError": "Having Connection Issues?",
-                "introduction": "App Installation & Usage Instructions",
-                "introductionUrl": "https://support.ledger.com/hc/en-us/articles/115005165269-Connection-issues-with-Windows-or-Linux",
+                "title": "Supported Wallets: Ledger Nano S / Ledger Nano X",
+                "connectError": "Connection Issues?",
+                "introduction": "App Installation & User Instructions",
+                "introductionUrl": "https://docs.vite.org/go-vite/tutorial/ledger-install.html",
                 "connectErrorUrl": "https://support.ledger.com/hc/en-us/articles/115005165269-Connection-issues-with-Windows-or-Linux"
             },
             "connectWithUSB": "Use USB",
@@ -1335,7 +1357,7 @@
         "addHint1": "Single stake should be at least 134 VITE",
         "addHint2": "VITE staking will be effective immediately after submission. Staking can be canceled after 3 days",
         "addHint3": "Staked amount will be released after the 7-day waiting period",
-        "withdrawHint1": "You will no longer be able to mine VX after staking is canceled",
+        "withdrawHint1": "Vous ne pourrez plus miner de VX après l'annulation du staking",
         "withdrawHint2": "It takes 7 days to return unstaked VITE coins to exchange balance",
         "addTitle": "Staking VITE for Mining",
         "withdrawTitle": "Retrieving Staked VITE",

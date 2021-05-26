@@ -1,0 +1,1646 @@
+{
+    "lang": "EN",
+    "help": "Yardım Merkezi",
+    "announcements": "Duyurular",
+    "start": "Başlat",
+    "login": "Giriş Yap",
+    "regAcc": "Kaydol",
+    "unlockAcc": "Kilidi Aç",
+    "changeAcc": "Hesap Değiştir",
+    "existingAcc": "Mevcut Hesaplar",
+    "restore": "Anımsatıcı Kelimeleri İçe Aktar",
+    "register": "Kaydol",
+    "createAcc": "Oluştur",
+    "settingAcc": "Hesap Ayarları",
+    "resetAcc": "Hesabınızı Sıfırlayın",
+    "logout": "Çıkış",
+    "saveLogout": "Çıkış",
+    "blockHeight": "Blok Kayıt Yüksekliği",
+    "accountName": "Hesap Adı",
+    "action": "Eylem",
+    "stakingAmount": "Stake Miktarı",
+    "submitStaking": "Stake'i Gönder",
+    "withdrawHeight": "Beklenen Kayıt Yüksekliği",
+    "balance": "Bakiye",
+    "dexBalance": "ViteX Bakiyesi",
+    "addrName": "Adres{index}",
+    "true": "doğru",
+    "false": "yanlış",
+    "guide": {
+        "close": "Kapat",
+        "next": "İleri",
+        "closeTips": "Kullanım kılavuzunu atla (Önerilmez)",
+        "trade": [
+            "Varlıklarınızı (hem Web Cüzdanı hem de ViteX exchange) buradan yönetin",
+            "Açık Emirlere ve Emir Geçmişine göz atın, alım satım detaylarını öğrenin",
+            "Madenciliğe katılın, VX ve alım satım komisyonundan kar payı elde edin (Madencilik Kar Payı)",
+            "Daha fazla özelliği deneyimleyin: Quota için Stake, SBP (Snapshot Block Producer) koşucusu olma, SBP'ler için Oylama, ERC20 dönüşümü, İşlem Ayrıntıları vb."
+        ],
+        "assets": [
+            "Exchange'e Yatırma",
+            "Cüzdana Çekme",
+            "Cross-Chain Yatırma ve Çekimi"
+        ]
+    },
+    "dealReminder": {
+        "title": {
+            "buy": "Alım Emri Tamamlandı: {ftoken} / {ttoken}",
+            "sell": "Satım Emri Tamamlandı: {ftoken} / {ttoken}"
+        },
+        "failTitle": "Emir Başarısız",
+        "notice-all": {
+            "buy": "Fiyat: {price} {ttoken}\nMiktar: {amount} {ttoken}, tamamlandı. Ayrıntılar için Emir Geçmişi sayfasını görüntüleyin.",
+            "sell": "Fiyat: {price} {ttoken}\nMiktar: {amount} {ttoken}, tamamlandı. Ayrıntılar için Emir Geçmişi sayfasını görüntüleyin."
+        },
+        "notice-partial": {
+            "buy": "Fiyat: {price} {ttoken}\nMiktar: {amount} {ttoken}, % {executedPercent}'i tamamlandı.",
+            "sell": "Fiyat: {price} {ttoken}\nMiktar: {amount} {ttoken}, % {executedPercent}'i tamamlandı."
+        },
+        "error": "{time} tarihindeki {amount} {ftoken} ({ftoken} / {ttoken}) emriniz başarısız oldu. Daha fazla ayrıntı için lütfen Emir Geçmişi sayfasını görüntüleyin."
+    },
+    "pow": {
+        "ing": "Quota elde etmek için PoW'u çalıştırın",
+        "no": "PoW çalıştırmak istememeniz durumunda quota için VITE stake edebilirsiniz",
+        "insuffQuota": "Quota Al",
+        "insuffQuotaMsg": "Quota için kilitli VITE olmadığınızı fark ettik. Lütfen VITE'i kilitleyin veya tercih ederseniz, Quota almak için POW'u çalıştırabilirsiniz.",
+        "insuffQuotaMsg2": "VITE, VITE stake'i olmadan her adres başına günlük yalnızca {powMaxTimes} işlemleri yapılabilir. Adresiniz tüm {powMaxTimes} işlemlerini tüketti. Lütfen quota sayfasına gidin ve daha fazla işlem gerçekleştirmek için VITE'inizi stake edin.",
+        "getQuota": "VITE Kilitle",
+        "skip": "POW'u çalıştır",
+        "cancel": "İptal"
+    },
+    "addAccount": "Bir Hesap Oluştur",
+    "saveQrcode": "QR kodu resmini kaydet",
+    "unlockSuccess": "Kilit Açma Başarılı",
+    "sendTrans": {
+        "send": "İşlem Gönder",
+        "symbol": "Gönder"
+    },
+    "compliance": {
+        "text": "ViteX aşağıdaki ülkeler / bölgeler / arazilerdeki müşterilere hizmet vermemektedir: Çin Anakarası, Hong Kong, Küba, İran, Kuzey Kore, Kırım, Sudan, Malezya, Suriye, ABD [Porto Riko, Amerikan Samoası, Guam gibi tüm ABD bölgeleri dahil, Kuzey Mariana Adası ve ABD Virjin Adaları (St. Croix, St. John ve St. Thomas)], Bangladeş, Bolivya, Ekvador ve Kırgızistan. Daha fazla bilgi için lütfen Hizmet Şartlarımızı ve Gizlilik Politikamızı okuyun",
+        "title": "Önemli Uyarı"
+    },
+    "bnbConf": {
+        "title": "Önemli Uyarı",
+        "t1": "VITE Binance Listelemesi Geliyor! Lütfen VITE'in Binance'de listelenmesi için oy kullanın.",
+        "t2": "Oylama Süresi: 12 Aralık 00.00'dan 13 Aralık 00.00'ye kadar (HKT)",
+        "t3": "Oylama Yöntemi: 50 BNB'ye sahip olmak 1 oy hakkı verir (Maks. 10 oy)",
+        "t4": "Oylama Ödülleri: Oylanan tüm kullanıcılar, kullanılan oylara göre toplam 21.000.000 VITE airdrop ile ödüllendirilecek.",
+        "btn": "Şimdi Oyla!!!",
+        "notice": "[Attention]: Oylamaya Hak kazanmak için 5 Aralık ve 13 Aralık tarihleri arasında Binance Hesabınızda 50-500 BNB olması gerekmektedir!"
+    },
+    "errCode": {
+        "35003": "{name} Kimlik karmaşası meydana geldi, lütfen daha sonra yeniden gönderin",
+        "35004": "Geçersiz parametreler",
+        "35005": "İşlemler çok sık gönderiliyor, lütfen daha sonra tekrar deneyin",
+        "35006": "Sözleşme yöntemi bulunamadı",
+        "35011": "Ağ Tıkanıklığı",
+        "36001": "Bir işlem gerçekleşmeden başka transfer yapamazsınız",
+        "36002": "Sistem doğrulaması başarısız oldu, lütfen daha sonra tekrar deneyiniz",
+        "36003": "Sistem doğrulaması başarısız oldu, lütfen daha sonra tekrar deneyiniz",
+        "36004": "Sistem doğrulaması başarısız oldu, lütfen daha sonra tekrar deneyiniz",
+        "36005": "Blok kayıt yüksekliği illegal, lütfen daha sonra tekrar deneyin",
+        "37001": "Yanlış emir sayısı formatı",
+        "37002": "Yanlış emir türü",
+        "37003": "Yanlış emir fiyatı formatı",
+        "37004": "Emir işlem hacminde hata oluştu",
+        "37005": "Emir işlem miktarı çok küçük",
+        "37006": "Mevcut alım satım marketi",
+        "37007": "Alım satım emri verilen market bulunamadı",
+        "37008": "Emir bilgilerinin aranmasında hata oluştu",
+        "37009": "İptal edilen emir mevcut adrese ait değildir",
+        "37010": "Bu emir durumu iptal edilemez"
+    },
+    "txType": {
+        "RegisterSBP": "SBP Kaydı",
+        "RegisterSBP_V1": "SBP Kaydı",
+        "UpdateSBPBlockProducingAddress": "Kaydı Güncelle",
+        "UpdateSBPBlockProducingAddress_V1": "Kaydı Güncelle",
+        "RevokeSBP": "Kaydı İptal Et",
+        "RevokeSBP_V1": "Kaydı İptal Et",
+        "WithdrawSBPReward": "Ödülü Topla",
+        "WithdrawSBPReward_V1": "Ödülü Topla",
+        "VoteForSBP": "Oylama",
+        "VoteForSBP_V1": "Oylama",
+        "CancelSBPVoting": "Oylamayı İptal Et",
+        "CancelSBPVoting_V1": "Oylamayı İptal Et",
+        "StakeForQuota": "Quota Al",
+        "StakeForQuota_V1": "Quota Al",
+        "CancelQuotaStake": "Stake Çekimi",
+        "CancelQuotaStake_V1": "Stake Çekimi",
+        "IssueToken": "Token Yayınlama",
+        "IssueToken_V1": "Token Yayınlama",
+        "ReIssueToken": "İlave Token Yayınlama",
+        "ReIssueToken_V1": "İlave Token Yayınlama",
+        "BurnToken": "Tokenları Yok Et",
+        "BurnToken_V1": "Tokenları Yok Et",
+        "TransferTokenOwnership": "Sahiplik devri",
+        "TransferTokenOwnership_V1": "Sahiplik devri",
+        "DisableReIssue": "Token türünü düzenle",
+        "DisableReIssue_V1": "Token türünü düzenle",
+        "DexDeposit": "ViteX Yatırımı",
+        "DexDeposit_V1": "ViteX Yatırımı",
+        "DexWithdraw": "ViteX Çekimi",
+        "DexWithdraw_V1": "ViteX Çekimi",
+        "DexPlaceOrder": "ViteX Emir Oluşturma",
+        "DexPlaceOrder_V1": "ViteX Emir Oluşturma",
+        "DexCancelOrder": "ViteX Emir İptali",
+        "DexCancelOrder_V1": "ViteX Emir İptali",
+        "DexStakeForSuperVIP": "ViteX SVIP",
+        "DexStakeForSuperVIP_V1": "ViteX SVIP",
+        "DexConfigMarketAgents": "Temsilcileri Yapılandır",
+        "DexConfigMarketAgents_V1": "Temsilcileri Yapılandır",
+        "DexOpenNewMarket": "ViteX Token Listeleme",
+        "DexOpenNewMarket_V1": "ViteX Token Listeleme",
+        "DexStakeForVIP": "ViteX VIP",
+        "DexStakeForVIP_V1": "ViteX VIP",
+        "DexStakeForMining": "ViteX Stake'i",
+        "DexStakeForMining_V1": "ViteX Stake'i",
+        "CreateContractRequest": "Sözleşme Oluştur",
+        "TransferRequest": "Transfer",
+        "ReIssueRequest": "Transfer",
+        "Response": "Transfer",
+        "ResponseFail": "Transfer",
+        "RefundByContractRequest": "Transfer",
+        "GenesisResponse": "Genesis",
+        "FullNodeStake": "Tam Düğüm için Stake",
+        "FullNodeCancelStake": "Tam Düğüm Stakelerini Çek",
+        "UpdateSBPRewardWithdrawAddress": "SBP Ödül Çekme Adresini Düzenle"
+    },
+    "btn": {
+        "cancel": "İptal",
+        "login": "Giriş Yap",
+        "imported": "Hesabı İçe Aktar",
+        "back": "Geri",
+        "submit": "Gönder",
+        "next": "Sonraki Adım",
+        "understand": "Anladım",
+        "edit": "Düzenle",
+        "reReg": "Yeniden Kaydol",
+        "otherProd": "Vite'in Diğer Ürünlerini Kullan",
+        "known": "Biliyorum"
+    },
+    "hint": {
+        "noNet": "Ağ algılanmadı",
+        "pwErr": "Hatalı parola!",
+        "pwEmpty": "Parola boş bırakılamaz!",
+        "noData": "Veri Yok",
+        "err": "Oops, bir hata oluştu",
+        "request": "{name} talebi gönderildi, lütfen bekleyin",
+        "copy": "Kopyalama başarılı",
+        "copyShare": "Paylaşım linki başarıyla kopyalandı!",
+        "addrFormat": "Hatalı adres formatı",
+        "amtFormat": "Hatalı miktar formatı",
+        "transSucc": "İşlem başarılı!",
+        "insufficientBalance": "Yetersiz bakiye",
+        "validMaxDigit": "En çok {digit} ondalık sayı",
+        "nodeErr": "Tam düğüm anormal, lütfen daha sonra tekrar deneyin.",
+        "bigger0": "Değer 0'dan büyük olmalıdır",
+        "operateSuccess": "İşlem Başarılı",
+        "operateFail": "İşlem Başarısız",
+        "unreceived": "Alınmamış varlıkları toplamak için lütfen oturum açın",
+        "unreceivedNum": "Lütfen alınmamış varlıkları toplamak için oturum açın, şu anda alınmamış {number} işlem(ler)iniz var"
+    },
+    "beforeUse": {
+        "title": "Kullanmadan Önce Okuyun",
+        "text1": "Varlıklarınızın güvenliği için, hesap oluşturma özelliği web cüzdanında geçici olarak desteklenmemektedir. Hesap oluşturmak için lütfen Vite Uygulamasını indirin. Bir oltalama web sitesini ziyaret ederseniz veya kurtarma kelimelerinizin yedeğini kaybederseniz Vite Platformu, varlıklarınızı geri kurtaramaz.",
+        "text2": "Lütfen web sitelerimizin özel anahtarlarınızı veya kurtarma kelimelerinizi saklamadığını unutmayın. Bu nedenle tarayıcıları değiştirmeye, yerel çerezleri temizlemeye veya bilgisayarınızı değiştirmeye karar verirseniz, hesabınızı kurtarma kelimeleri yoluyla geri yüklemeniz gerekecektir.",
+        "text3": "Lütfen kurtarma kelimelerinizi doğru bir şekilde kaydetmek ve güvenli bir şekilde saklamak için uygun önlemleri alın. En ufak bir hata bile adresinize başarılı bir şekilde erişememenize sebep olacaktır."
+    },
+    "preview": {
+        "t": "Sürüm {version}",
+        "txt1": "x.vite.net; Vite Labs tarafından başlatılan, Vite cüzdanını ve ViteX exchange'ini entegre eden bir platformdur.",
+        "txt2": "Varlıkları yönetebilir ve transfer edebilir, alım satım yapabilir, quota alabilir, SBP ve tam düğümü kaydedebilir, oy verebilir, token üretebilir, ViteX API için başvurabilir, alım satım delegasyonuna izin verebilir vb. işlemleri yapabilirsiniz.",
+        "txt3": "x.vite.net anımsatıcı kelimeleri, Ledger ve ViteConnect'i destekler.",
+        "v": ""
+    },
+    "pwdConfirm": {
+        "conf": "Şifresiz modu açmak, sizi her işlem sürecinde şifre girmekten kurtarır. ",
+        "title": "Parola",
+        "placeholder": "Lütfen cüzdan parolasını girin",
+        "unlockAcc": "Lütfen ilk önce {name} kilidini açın"
+    },
+    "quotaConfirm": {
+        "title": "Yetersiz Quota",
+        "cancelContent": "Yetersiz TPS quota nedeniyle {operate} yapamazsınız. {operate} quota için VITE stake etmeniz gerekmektedir",
+        "goQuota": "VITE Stake et",
+        "noOperate": "Henüz {operate} yapılmadı"
+    },
+    "mnemonic": {
+        "title": "Anımsatıcı",
+        "restore": "Hesabı Kurtarma Kelimelerine Göre Geri Yükle",
+        "record": "Kurtarma Kelimeleri Oluştur",
+        "prompt": "Anımsatıcı kurtarma kelimeleri, cüzdanınızı geri yüklemenin tek yoludur. Kelimeleri bir yere yazmanız ve yalnızca sizin erişebileceğiniz güvenli bir yerde saklamanız şiddetle tavsiye edilir.",
+        "placeholder": "Lütfen anımsatıcı kurtarma kelimelerinizi girin",
+        "empty": "Kurtarma Kelimeleri girişi boş bırakılamaz",
+        "error": "Hatalı kurtarma kelimeleri. Tekrar deneyin",
+        "hint": "Örneğin: elma muz şeftali mango armut ...",
+        "change": "{len} Anımsatıcı Kelimelere Geç"
+    },
+    "setting": {
+        "title": "Hesap Ayarları",
+        "config": "Genel",
+        "currency": "Varsayılan Para Birimi",
+        "secure": "Güvenlik",
+        "gate": "Özel Ağ Geçidi",
+        "rpcUrl": "Düğüm",
+        "changeRpcUrl": "Değiştir",
+        "changeRpcUrlDialog": {
+            "title": "Düğümü Değiştir",
+            "addCustomNode": "Özel Düğüm Ekle",
+            "officialNode": "Resmi Düğüm",
+            "addNode": "Düğüm Ekle",
+            "customNode": "Özel Düğüm",
+            "deleteCustomNode": "Sil",
+            "wrongNode": "Lütfen doğru URL'yi girin!",
+            "changeNodeSuccess": "Yeni düğüme bağlandı.",
+            "failedConnected": "Düğüm bağlantı hatası",
+            "inputPlaceholder": "Lütfen düğüm url önekini wss ile girin."
+        },
+        "triggerGate": [
+            "Kapat",
+            "Aç"
+        ],
+        "gateHelp": "Bu özelliği etkinleştirirken ağ geçidi yapılandırmanızı özelleştirebilirsiniz. Şu anda bu özellik esas olarak geliştiriciler içindir.",
+        "lang": "Dil",
+        "block": "Mevcut Yükseklik",
+        "version": "Sürüm",
+        "service": "Müşteri Hizmetleri",
+        "site": "Vite Resmi Web Sitesi",
+        "sys": "Sistem Portalı",
+        "open": "Vite Github",
+        "addAddr": "Adres Ekle",
+        "addrList": "Adres Yönetimi",
+        "setDefault": "Varsayılan Adresi Seçin",
+        "autoLogout": "Otomatik Çıkış Süresi",
+        "noPass": "Şifresiz modu açın",
+        "explorer": "Blok Explorer",
+        "netInfo": "Ağ Bilgisi",
+        "logoutDescribe": "Bu sayfadan ayrıldığınızda, hesabınızdan otomatik olarak çıkış yapılacaktır",
+        "timeList": {
+            "5": "5 Dakika",
+            "10": "10 Dakika",
+            "30": "30 Dakika",
+            "60": "1 Saat",
+            "720": "12 Saat"
+        },
+        "theme": "Tema rengi",
+        "themeList": [
+            "Işık",
+            "Karanlık"
+        ]
+    },
+    "create": {
+        "input": "Lütfen parolanızı girin",
+        "again": "Lütfen parolanızı onaylayın",
+        "choose": "Bir hesap seçin",
+        "finish": "Tamam",
+        "agreementPre": "Vite Wallet ve ViteX'leri okudum ve kabul ediyorum",
+        "agreement": "Hizmet Şartları ve Gizlilik Politikası",
+        "hint": {
+            "nameInput": "Lütfen hesap adı girin",
+            "nameLong": "Ad {long} karakteri aşamaz",
+            "long": "Parola 32 karakteri aşamaz",
+            "name": "Hesap adı yalnızca İngilizce ve Çince karakterleri, rakamları ve alt çizgiyi destekler",
+            "consistency": "Lütfen aynı parolayı girin",
+            "pwFormat": "Yanlış parola formatı. Parola yalnızca rakamlar, harfler ve simgeler içermelidir."
+        }
+    },
+    "startCreate": {
+        "notice": "Varlıklarınızın güvenliği için, hesap oluşturma özelliği web cüzdanında geçici olarak desteklenmemektedir. Hesap oluşturmak için lütfen Vite Uygulamasını indirin.",
+        "goLogin": "Giriş Yap",
+        "goDex": "ViteX'e git"
+    },
+    "keystore": {
+        "title": "Anahtar deposu",
+        "dragDrop": {
+            "text": "Dosyaları buraya sürükleyip bırakın",
+            "err1": "İllegal dosya içe aktarıldı!",
+            "err2": "Yalnızca bir dosya içe aktarılabilir!",
+            "guide": "İçe aktarılacak klasörü açın",
+            "hint": "Anahtar deposu dosyasını içe aktararak oturum açmak çoklu adres oluşturmayı destekleyemez, platformlar arası durumlarda anımsatıcı kurtarma kelimelerinin kullanılması önerilir."
+        }
+    },
+    "tokenCard": {
+        "moreRecords": "Geçmişi Göster",
+        "others": "Diğerleri",
+        "assetSpread": "Portföy",
+        "saveSuccess": "Başarıyla kaydedildi",
+        "heads": {
+            "name": "Ad",
+            "balance": "Cüzdan Bakiyesi",
+            "onroad": "Alınmamış Cüzdan Varlıkları",
+            "gate": "Cüzdan Cross-Chain Ağ Geçidi",
+            "totalExAmount": "Toplam Exchange Bakiyesi",
+            "availableExAmount": "Kullanılabilir Exchange Bakiyesi",
+            "balanceTips": "On-chain gönderimini, Vite cüzdanınızdan diğer Vite adreslerine işlem göndermek isteyen kullanıcılar kullanılabilir",
+            "gateTips": "Bu cross-chain bölümünde, diğer koinleri/tokenları Vite ağına eşleyebilirsiniz. Varlıkları Vite Cüzdanınıza yatırmak için 'Yatır' düğmesine tıklayın. Varlıklarınızı diğer platformlara transfer etmek için 'Çek' düğmesine tıklayın. * Cross-chain yatırma/çekme işlemi komisyona neden olabilir, ayrıca transfer limiti de bulunmaktadır.",
+            "availableExAmountTips": "Varlıklarınızı 'Transfer' butonuna tıklayarak Vite Wallet ile ViteX Exchange arasında transfer edebilirsiniz. Bu işlemler sırasında işlem komisyonu alınmaz.",
+            "unreceivedTips": "Alınmamış varlıklar, oturum açtıktan sonra otomatik olarak alınacaktır"
+        },
+        "actionType": {
+            "SEND": "On-Chain Gönderimi",
+            "RECEIVE": "Yatırma",
+            "CHARGE": "Yatırma",
+            "WITHDRAW": "Çekme",
+            "EXTRANSFER": "Transfer",
+            "EXRECRODS": "Geçmiş",
+            "RECRODS": "Geçmiş",
+            "EXCHARGE": "Yatırma",
+            "EXWITHDRAW": "Çekme"
+        },
+        "transferConfirm": {
+            "from": "Gönderici",
+            "to": "Alıcı",
+            "wallet": "Cüzdan Hesabı",
+            "dex": "Exchange Hesabı",
+            "avaliableAmount": "Bakiye"
+        },
+        "addToken": {
+            "title": "Token Ekle",
+            "placeholder": "Lütfen token adı veya TokenID girin",
+            "lTxt": "İptal",
+            "rTxt": "Ekle"
+        },
+        "type": {
+            "native": "Yerel Tokenlar",
+            "crossGate": "Cross-Chain Koinleri"
+        },
+        "assetType": {
+            "TOTAL": "Tüm Varlıklar",
+            "EX": "Exchange Varlıkları",
+            "WALLET": "Cüzdan Varlıkları"
+        },
+        "tokenInfo": {
+            "tabName": "Ayrıntılar",
+            "title": "{tokenSymbol} Bilgi",
+            "saveGate": "Kaydet",
+            "labels": {
+                "tokenId": "TokenID",
+                "tokenName": "Ad",
+                "totalSupply": "Toplam Arz",
+                "total": "Dolaşımdaki Arz",
+                "overview": "Giriş",
+                "type": "Tür",
+                "gate": "Cross-Chain Ağ Geçidi",
+                "website": "Web Sitesi",
+                "whitePaper": "Teknik İnceleme",
+                "explorer": "Explorer",
+                "github": "GitHub",
+                "media": "Sosyal Medya",
+                "crossType": "Cross-Chain",
+                "originType": "Yerel",
+                "viewmore": "Daha Fazlasını Görüntüle"
+            },
+            "reIssuable": {
+                "true": "Yeniden Yayınlanabilir",
+                "false": "Yeniden Yayınlanamaz"
+            }
+        },
+        "gateInfo": {
+            "clickCustomer": "Bir talep gönderin",
+            "name": "Ağ Geçidi Adı",
+            "customer": "Müşteri Hizmetleri",
+            "privacy": "Hizmet Şartları",
+            "clickPrivacy": "{gate} resmi ağ geçidi Hizmet Şartları",
+            "gateSetting": "Ağ Geçidini Yapılandır",
+            "tabName": "Ağ Geçidi Ayrıntıları",
+            "selfdefined": "Özel Ağ Geçidi",
+            "officalNet": "Web Sitesi",
+            "introduction": "Açıklama",
+            "token": "Yayınlanan Token",
+            "setting": "Ağ Geçidi Arayüzü",
+            "nodeDesc": "Kullanım Kılavuzu",
+            "settingPlaceholder": "Lütfen ağ geçidi link adresini girin",
+            "nodeDescStr": "Bu özellik yalnızca cross-chain koinleri için çalışır, bunu yerleşik tokenlarda kullanmayın. Bu arada, lütfen bilmediğiniz ağ geçidi bağlantılarına dikkat edin. Platformumuzu kullanmaya devam ederek, fonunuzun kaybından ve bunun neden olduğu diğer olumsuz sonuçlardan Vite Labs'ın sorumlu olmayacağını kabul ediyorsunuz. Ağ geçidi kullanmanız gerekiyorsa aşağıdaki ağ geçidi bağlantısını doldurun, kaydet düğmesine bastıktan sonra bağlantı devreye girecektir."
+        },
+        "depositRecord": {
+            "tabName": "Alma Geçmişi",
+            "heads": [
+                "Zaman",
+                "Miktar",
+                "Durum",
+                "{outChain} Hash'i",
+                "vite Hash'i",
+                "Komisyonlar"
+            ],
+            "statusMap": {
+                "OPPOSITE_PROCESSING": "{outChain} onaylamayı bekliyor{confirms}",
+                "OPPOSITE_CONFIRMED_FAIL": "{outChain} işlenemedi",
+                "OPPOSITE_CONFIRMED": "Ağ Geçidi Alındı",
+                "TOT_CONFIRMED": "Tamamlandı",
+                "BELOW_MINIMUM": "Yükleme Başarısız",
+                "TOT_PROCESSING": "VITE zinciri onayı bekliyor"
+            }
+        },
+        "withdrawRecord": {
+            "tabName": "Transfer Geçmişi",
+            "heads": [
+                "Zaman",
+                "Miktar",
+                "Durum",
+                "vite Hash'i",
+                "{outChain} Hash'i",
+                "Komisyonlar"
+            ],
+            "statusMap": {
+                "TOT_PROCESSING": "VITE Chain Onaylanmadı{confirms}",
+                "TOT_CONFIRMED": "VITE Onaylandı",
+                "TOT_EXCEED_THE_LIMIT": "Transfer miktarı limiti aşıyor",
+                "OPPOSITE_PROCESSING": "{outChain} onaylamayı bekliyor",
+                "OPPOSITE_CONFIRMED": "Tamamlandı",
+                "WRONG_WITHDRAW_ADDRESS": "Transfer adresi hatalı"
+            }
+        },
+        "charge": {
+            "title": "Cross-Chain Yatırma",
+            "addrErr": "Ağ geçidi düğümünde bir sorun oluştu, lütfen ağ ayarlarınızı kontrol edin",
+            "addressTitle": "Alıcı Adresi",
+            "labelTips": "(Lütfen alıcı adresinizle birlikte bu '{labelName}' kullanın, aksi takdirde varlıklarınız kaybolur",
+            "labelCodeTips": "Lütfen {labelName}'den QR kodu tarayın",
+            "codeTips": "Yatırma için QR kodu tarayın. Lütfen {tokenSymbol} destekleyen cüzdan ile varlık gönderin",
+            "tips": [
+                "Yalnızca aşağıda verilen adresten {tokenSymbol} yatırabilirsiniz. En az {min} {tokenSymbol} kabul edilecektir.",
+                "Hesap {confirmationCount} ağ onayından sonra güncellenecektir. Lütfen bekleyin.",
+                "Lütfen doğru mainneti seçin, yoksa kaybolan tokenları geri alamazsınız."
+            ]
+        },
+        "viteTips": "VITE, yalnızca yeni ERC20 VITE tokenı ile Native VITE Coin arasındaki cross-chain işlevselliğini destekler.",
+        "withdraw": {
+            "title": "Cross-Chain Çekme",
+            "btn": "Çekme",
+            "balanceErrMap": {
+                "notEnough": "Yetersiz Bakiye",
+                "overMax": "Çekim miktarı en az {max} olmalıdır",
+                "lessMin": "Çekim miktarı {min}'den az olmamalıdır"
+            },
+            "feeTips": "İşlem komisyonu ağ geçidi operatörü tarafından belirlenir",
+            "addressErr": "Adres formatı hatalı",
+            "labels": {
+                "balance": "Bakiye",
+                "address": "Alıcı Adresi",
+                "amount": "Miktar",
+                "fee": "Komisyon",
+                "all": "Tümü"
+            },
+            "labelPlaceholder": "Lütfen {labelName} girin",
+            "amountPlaceholder": "Lütfen {min} 'den az olmaması gereken gönderme miktarını girin",
+            "addressPlaceholder": "Lütfen {token} alıcı adresini girin",
+            "successTips": "İşlem talebi gönderildi",
+            "failTips": "Ağ geçidi düğümünde bir hata oluştu, lütfen ağ ayarlarını kontrol edin"
+        },
+        "nodeErr": "Ağ geçidi düğümü geçersiz, lütfen ağ geçidi ayarlarını kontrol edin"
+    },
+    "viteExplorer": {
+        "title": "Vite Blok Explorer"
+    },
+    "viteScanExplorer": {
+        "title": "ViteScan"
+    },
+    "wallet": {
+        "title": "Quota Yönetimi",
+        "help": {
+            "title": "Quotayı Hızlı Anlama"
+        },
+        "transfer": "Varlıkları Gönder",
+        "getTestToken": "Test Tokenlarını Al",
+        "transDetail": "Daha Fazla İşlem Ayrıntıları",
+        "address": "Adresim",
+        "fundFloat": "Alınmadı",
+        "pend": "Bekliyor",
+        "inAddress": "Alıcı Adresi",
+        "sum": "Miktar",
+        "remarks": "Memo",
+        "remarksLong": "{len} bayt kaldı",
+        "totalAsset": "Toplam Varlıklar",
+        "placeholder": {
+            "amount": "Lütfen miktarı girin",
+            "remarks": "Lütfen memo girin",
+            "addr": "Lütfen adres girin"
+        },
+        "hint": {
+            "token": "VITE test tokenları hesabınıza gönderildi, lütfen hesabınızı kontrol edin!",
+            "tErr": "Test token alınamadı!",
+            "amount": "Miktar 0'dan yüksek olmalı"
+        },
+        "trans": {
+            "powErr": "PoW çalıştırılırken hata oluştu, lütfen tekrar deneyin",
+            "powTransErr": "Yetersiz PoW quotası, quota elde etmek için VITE stake etmenizi tavsiye ederiz."
+        }
+    },
+    "walletMintage": {
+        "title": "Token Yayınlama",
+        "address": "Yayınlama Adresi",
+        "tokenName": "Token Adı",
+        "tokenSymbol": "Token Sembolü",
+        "totalSupply": "Toplam Arz",
+        "decimals": "Ondalık sayılar",
+        "isReIssuable": "YenidenYayınlanabilir",
+        "maxSupply": "Maks. Arz",
+        "ownerBurnOnly": "Yalnızca Sahibi Tarafından Yakılır",
+        "isOwnerBurnOnly": "Yalnızca Sahibi Tarafından Yakılır",
+        "mint": "Onayla",
+        "tokenList": "Yayınlanan Token",
+        "submit": "Gönder",
+        "cancel": "İptal",
+        "getListFail": "Token listesi alamıyorsunuz, daha sonra tekrar deneyin",
+        "mintageConfirm": {
+            "title": "Token Yayınlama Bilgilerinizi Kontrol Edin",
+            "balance": "Bakiye",
+            "fee": "Yayınlama Komisyonu",
+            "btn": "Onayla"
+        },
+        "reIssuableConfirm": {
+            "title": "Yayınlanamaz Olarak Değiştir",
+            "text": "{tokenName} Yayınlanamaz olarak değiştirdiğinizden emin olun?"
+        },
+        "changeOwnerConfirm": {
+            "title": "Sahipliği Devret",
+            "address": "Alıcı Adresi"
+        },
+        "issueConfirm": {
+            "title": "Yeniden yayınla",
+            "amount": "Miktar",
+            "address": "Yararlanıcı Adresi",
+            "overAmount": "Yeniden yayınlanan tokenlar üst sınırı aşıyor"
+        },
+        "hint": {
+            "tokenName": "Token adı; büyük ve küçük harfler, boşluklar ve alt çizgiler dahil olmak üzere 1-40 karakterden oluşmalıdır. Sürekli boşluklar ve sayılar desteklenmez.",
+            "tokenSymbol": "Token sembolü 1-10 karakter içermelidir, yalnızca büyük harfler ve sayılar desteklenir.",
+            "success": "Token Yayınlama Başarılı",
+            "fail": "Token Yayınlama başarısız"
+        },
+        "err": {
+            "tokenNameFormat": "Token Adının formatı hatalı",
+            "tokenNameNull": "Token Adı gerekli",
+            "tokenSymbolFormat": "Token Sembolünün formatı hatalı",
+            "tokenSymbolNull": "Token Sembolü gerekli",
+            "supplyMax": "Aşırı miktarda token yayınlama",
+            "totalSupplyFormat": "Toplam Arzın yanlış formatı",
+            "totalSupplyNull": "Toplam Arz gerekli",
+            "maxSupplyNull": "Maks. Arz gerekli",
+            "maxSupplyMin": "Toplam arzdan daha büyük olmalıdır",
+            "decimalsNull": "Ondalık sayılar alanı gerekli",
+            "decimalsFormat": "Ondalık sayıların yanlış formatı",
+            "decimalsMax": "Ondalık sayılar aralık dışı",
+            "maxSupplyFormat": "Maksimum Arzın yanlış formatı"
+        }
+    },
+    "walletQuota": {
+        "title": "Quota Yönetimi",
+        "help": {
+            "title": "Quotayı Hızlı Anlama"
+        },
+        "myQuota": "Quota'larım",
+        "maxTxNum": "Maksimum Txs Sayısı",
+        "beneficialAddr": "Quota Alıcı Adresi",
+        "fromAddr": "Kesinti Adresi",
+        "time": "Stake Dondurma Süresi",
+        "aboutDays": "Yaklaşık {day} gün",
+        "amountPlaceholder": "Lütfen stake miktarını girin, minimum {num} VITE",
+        "limitAmt": "Stake miktarı {num}'den az olmamalıdır.",
+        "addrPlaceholder": "Lütfen quota alıcı adresini girin",
+        "inputWithdrawAmount": "Lütfen çekim miktarını girin",
+        "pledgeFail": "Gönderme başarısız",
+        "canclePledgeFail": "Başarısız",
+        "maturity": "Stake süresi doldu!",
+        "minAmt": "Çekim miktarı {num} VITE'den az olmamalıdır",
+        "gotoStake": "Lütfen önce yeterince VITE stake edin",
+        "maxAmt": "Çekme miktarı {minAmount}, {maxAmount} içinde olmalıdır",
+        "cancelLimitAmt": "Stake miktarı {num}'den az olmamalıdır",
+        "withdrawalStaking": "Stake Edilmiş Tokenları Çek",
+        "myAddr": "Ben",
+        "confirm": {
+            "help": {
+                "t1": "Quota Nedir?",
+                "txt1": "Vite sisteminde kullanıcılar, bir işlem için gerekli gas'i komisyon ödeyerek satın almazlar, ancak quota tabanlı bir model üzerinden bilgi işlem kaynağına sahip olurlar. Bir işlemi göndermek için gerekli quota = temel quota (talep) + quota (ekli metin verileri), bir işlemi kabul etmek için gereken quota = temel quota (yanıt). Bu quota tabanlı kaynak yapılandırma protokolü, kullanıcıların daha yüksek kaynak quotalarını iki şekilde elde etmelerine olanak tanır: Quota elde etmek için VITE Stake etme ve PoW'u çalıştırma.",
+                "t2": "Stake Nedir?",
+                "txt2": "Vite sisteminde, kullanıcı belirli bir miktarda quota elde etmek için VITE stake edebilir. Stake için minimum değer 134 VITE'dir ve maksimum sınır yoktur; Bu arada, Vite sistemi ayrıca A adresinin VITE'in bir parçası olduğunu destekler ve elde edilen quotayı B adresine tahsis eder. Kullanıcılar stake için başvurduklarında VITE, başka bir kullanıcı yerine akıllı sözleşme adresine gönderilecek ve sadece stake için başvuran kullanıcının stake miktarını yönetme erişimi olacaktır.",
+                "t3": "PoW Nedir?",
+                "txt3": "Proof of Work (PoW), belirli miktarda iş yaptığınızı doğrulayan bir protokoldür ve aynı zamanda DDoS saldırılarını ve diğer hizmet suistimallerini caydırmak için ekonomik bir önlemdir. Başlayanın belirli bir miktarda hesaplama yapmasını gerektirir, bu da bilgisayar için biraz zaman alabileceği anlamına gelir. Vite sisteminde, kullanıcılar PoW çalıştırarak ücretsiz quota elde edebilir ve ayrıca elde edilen quota üzerinden herhangi bir açıklama olmadan işlem gönderebilir."
+            },
+            "cancel": {
+                "describe": "Mevcut stake miktarınız {amount} VITE, lütfen çekmeyi onaylayın.",
+                "rightBtn": "Başlamaya Hazır",
+                "leftBtn": "Çekimi İptal Et"
+            },
+            "submit": {
+                "describe": "Quota almak için {amount} VITE stake ettiğinizden emin olun, stakelerin yürürlüğe girmesinden yaklaşık 3 gün sonrasına kadar çekim yapamazsınız.",
+                "rightBtn": "Onayla",
+                "leftBtn": "İptal"
+            }
+        },
+        "list": {
+            "title": "Stake Listem",
+            "total": "Toplamda {amount} VITE Stake ettiniz",
+            "amount": "Miktar",
+            "withdrawTime": "Beklenen Bitiş Tarihi",
+            "unexpired": "Stake edilmiş token, bitiş tarihine kadar çekilemez",
+            "vip": "Bu stake eylemi, ViteX borsasında varsayılan olarak VIP açmak içindir, lütfen VIP'i iptal etmek için ViteX exchange sayfasına gidin",
+            "mining": "Bu stake, ViteX'teki madencilik miktarı olarak sizin stake miktarınızdır, lütfen stake iptali için ViteX madencilik sayfasına gidin",
+            "other": "Bu stake, başka yollarla stake edilir ve burada stake iptali desteklenmez"
+        }
+    },
+    "walletTransList": {
+        "title": "İşlemler",
+        "tType": {
+            "title": "Tür",
+            "symbol": "Tür"
+        },
+        "status": {
+            "title": "Durum",
+            "unconfirmed": "Onaylanmamış",
+            "confirms": "Onaylanıyor",
+            "confirmed": "Onaylandı"
+        },
+        "timestamp": "Zaman damgası",
+        "tAddress": "Adres",
+        "sum": "Miktar"
+    },
+    "walletFullNode": {
+        "title": "Tam Düğümler",
+        "help": {
+            "title": "Hakkında",
+            "t1": "Sözlük",
+            "txt1": "[Kayıtlı Düğüm Sayısı] Mevcut adresle kaydedilen tam düğüm sayısı",
+            "txt2": "[Etkin Düğüm Sayısı] Mevcut adresle kaydedilen etkin tam düğüm sayısı",
+            "txt3": "[Ödüllendirme düğümlerinin sayısı] Ödüllendirilen düğüm sayısı",
+            "t2": "Multiple Full nodes can be registered with the same address, but must be staked individually at least 10,000 VITE each; When calculating Active Node Reward, if staking amount / 10000 yields a whole number that is greater than or equal to the number of active nodes, all active nodes will be rewarded; If staking amount / 10000 yields a whole number that is less than the number of active nodes, the number of nodes being rewarded equals to the whole number.",
+            "t3": "Oylama ödüllerinin hesaplanması düğüm sayısına değil, stake miktarına bağlıdır."
+        },
+        "confirmText": "{amount} VITE stake'ini onaylayın, stakeler {days} gün sonra iptal edilebilir",
+        "addQuota": {
+            "address": "Stake Adresi",
+            "stakeDays": "Stake Süresi",
+            "placeholder": "Minimum {min} VITE Stake Edin",
+            "stakingSuspend": "Stake Geçici Olarak Askıya Alındı"
+        },
+        "quotaContent": {
+            "onlineReward": "Etkin Düğüm Ödülü",
+            "voteReward": "Oylama Ödülü",
+            "yesterday": "dün",
+            "all": "Birikmiş VITE: {num}",
+            "nodeInfo": "Düğüm Bilgisi",
+            "onlineNodes": "Etkin Düğümler",
+            "rewardNodes": "Ödüllendirme Düğümleri",
+            "stakeAmount": "Düğüm Stake'i"
+        }
+    },
+    "walletSBP": {
+        "title": "SBP",
+        "help": {
+            "title": "SBP Hakkında",
+            "text": "SBP（Snapshot Block Producer）blok oluşturma hakkına sahip bir düğümdür, belirli bir VITE miktarına sahip olarak SBP adayı olmak için kaydolabilirsiniz, her turda (yaklaşık 75 saniye) 25 SBP seçilecek, SBP'ler ilk 25 aday düğümden rastgele 23'ü ve listede 26.-100. sırada yer alan aday düğümlerin rastgele 2'si arasından seçilecektir. Blok oluşturma ödüllerinin %50'si blok oluşturma düğümüne, diğer %50'si ise oylama ödülü olarak ilk 100'de yer alan düğümlere tahsis edilecektir. Bir kayıt adresi (staking adresi) birden fazla blok oluşturma düğümünü (düğüm adları) kaydedebilir, düğüm adı bir kayıt adresi tarafından kaydedilmişse bir düğüm adı kullanılamaz. Bir düğüm adı blok oluşturma adresini değiştirebilir ancak, blok oluşturma adresi diğer düğüm adları tarafından yeniden kullanılamaz."
+        },
+        "register": "SBP Kaydı",
+        "cancel": "SBP İptali",
+        "cancelBtn": "İptal",
+        "rewardBtn": "Ödülleri Topla",
+        "noReward": "Ödül Yok",
+        "rewardConfirm": {
+            "title": "Ödülleri Topla",
+            "describe1": "Her gün 13:00:00 (UTC + 8) itibarıyla güncelleme talep edilebilecek ödüller, {time} kadar toplayabilirsin",
+            "describe2": "Query mining rewards details, you can",
+            "describe3": "buraya tıklayın",
+            "describe4": "Ödüller, toplama talebinizi gönderdikten sonra Vite Web Cüzdan adresinize gönderilecektir, lütfen Cüzdan Ana Sayfasında kontrol edin. Not: Toplama işlemlerini tekrarlamayın.",
+            "leftBtn": "Şimdi Değil",
+            "rightBtn": "Tümünü Topla"
+        },
+        "confirm": {
+            "title": "SBP adaylarının kaydı",
+            "describe": "Kaydı gönderdiğinizde, mevcut adresin {amount} VITE'i yaklaşık 90 gün boyunca kilitlenecek, miktar kilidi açıldıktan sonra stake adresine iade edilecektir",
+            "leftBtn": "Henüz kaydolmadınız mı",
+            "rightBtn": "Kaydolmaya Hazır",
+            "edit": {
+                "title": "SBP Bilgisini Düzenle",
+                "newBlockProducer": "lütfen yeni blok oluşturma adresini girin",
+                "newRewardAddress": "lütfen yeni ödül çekme adresini girin",
+                "changeBlockProducer": "Blok Oluşturma Adresi",
+                "changeRewardAddress": "Ödül Çekme Adresi",
+                "btn": "Değişikliği Onaylayın"
+            }
+        },
+        "section1": {
+            "title": "Kayıt Formu",
+            "nodeName": "Düğüm Adı",
+            "producerAddr": "Blok Oluşturma Adresi",
+            "rewardWithdrawAddress": "Ödül Çekme Adresi",
+            "quotaAddr": "Stake Adresi",
+            "quotaTime": "Stake Süresi",
+            "time": "7776000 kayıt blokları （yaklaşık 90 gün)",
+            "confirmBtn": "Gönder",
+            "namePlaceholder": "Lütfen düğüm adı girin",
+            "nameHint": "Within 40 characters, support English letters (both upper and lower cases), numbers, '_'、'.'",
+            "nameErr": "Bu düğüm adı illegal",
+            "nameUsed": "Bu düğüm adı kullanılıyor",
+            "addrPlaceholder": "Lütfen kayıt bloğu oluşturma adresini girin",
+            "addrHint": "Blok oluşturma adresi tam düğüm olmalı ve çalışmaya devam etmelidir",
+            "addrErr": "İllegal adres",
+            "addrUsed": "Bu adres alınmış",
+            "registerSuccess": "Kayıt talebi gönderildi",
+            "registerFail": "Kayıt talebi başarısız"
+        },
+        "section2": {
+            "title": "Kayıt Bilgisi",
+            "update": "Değiştir",
+            "updateFail": "Değişiklik talebi gönderilemedi",
+            "cancel": "İptal ediliyor",
+            "cancelFail": "İptal talebi gönderilemedi",
+            "expireDate": "Bitiş Tarihi: {time}",
+            "cancelConfirm": {
+                "title": "SBP kaydını iptal et",
+                "describe": "Stake miktarı, iptal ettikten sonra stake adresinize iade edilecektir, SBP olmak için kaydı yeniden göndermelisiniz"
+            }
+        }
+    },
+    "walletVote": {
+        "title": "Oylama",
+        "help": {
+            "title": "Oylama Hakkında",
+            "text": "25 SBP'ye katılabilir ve oy verebilirsiniz （Snapshot Block Producer), her bir oylama turu 75 saniye sürer, oylama için kullanabileceğiniz oy sayısı, oylama adresinin sahip olduğu VITE tokenlarının miktarına eşittir, varsayılan seçim önceki turun seçimidir. SBP'ler; ilk 25 aday düğümden rastgele 23'ü, artı listede 26.-100. sırada yer alan aday düğümlerden rastgele 2'si, toplamda 25 SBP arasından seçilecektir."
+        },
+        "toReward": "Ödüllerimi göster",
+        "voting": "Oylama",
+        "search": "Lütfen düğüm adı veya blok oluşturma adresi girin",
+        "addrNoExistErr": "Adresinizde daha önce işlem kaydı bulunmadığından şimdilik oy veremezsiniz",
+        "revokeVoting": "Oylamayı İptal Et",
+        "section1": {
+            "title": "Oylamam",
+            "head": [
+                "Ad",
+                "Durum",
+                "Oylamam",
+                "Oylama Durumu",
+                "Eylem"
+            ],
+            "nodeStatusMap": {
+                "1": "Etkin",
+                "2": "Etkin değil"
+            },
+            "voteStatusMap": {
+                "voted": "Oylama Başarılı",
+                "voting": "Oylama",
+                "canceling": "İşlem İptal Ediliyor",
+                "voteNotWork": "Oylama İptal Edildi"
+            },
+            "hoverHelp": "Oy verdiğiniz {nodeName} düğümü iptal edildi, tekrar doğrudan oy verebilir veya oyunuzu iptal edebilirsiniz. Bunu yapmazsanız, orijinal oylama sonucunuz {nodeName} yeniden kaydolduktan sonra kurtarılacaktır",
+            "confirm": {
+                "cancelText": "Henüz değil",
+                "submitText": "Onayla"
+            },
+            "revoke": "İptal ediliyor",
+            "operateBtn": "İptal et",
+            "cancelVoteErr": "Oylama iptal edilemedi, lütfen tekrar deneyin"
+        },
+        "section2": {
+            "title": "SBP adayları",
+            "head": [
+                "Rank",
+                "Düğüm Adı",
+                "Adres",
+                "Oylar",
+                "Eylem"
+            ],
+            "confirm": {
+                "normal": {
+                    "content": "Sadece bir SBP'ye oy verebilirsiniz, {name} adına oy vermek istediğinizden emin misiniz?",
+                    "cancelText": "Henüz değil",
+                    "submitText": "Oy için hazır"
+                },
+                "cover": {
+                    "content": "Zaten {nodeName} için oy verdiniz, mevcut oylama kaydının üzerine yazmak istediğinizden emin misiniz?",
+                    "cancelText": "Onayla",
+                    "submitText": "İptal"
+                }
+            },
+            "noSearchData": "İçerik bulunamadı, lütfen başka bir giriş deneyin",
+            "operateBtn": "Oy",
+            "voteErr": "Oy verilemedi, lütfen tekrar deneyin"
+        }
+    },
+    "assets": {
+        "title": "Varlıklar",
+        "notice": {
+            "title": "Önemli Uyarı",
+            "contentProvider": "Bu hizmet {gate} tarafından sağlanmaktadır.",
+            "contentOther": "{gate} 'ın neden olduğu olumsuz sonuçlardan Vite Labs'ın sorumlu olmayacağını kabul ediyor ve onaylıyorsunuz. Vite platformu, {gate} ile Vite platformu kullanıcıları arasında ortaya çıkabilecek ilişkide herhangi bir rol oynamaz",
+            "contentAgree": "{gate} hizmetini kullanmaya devam ederek, {gate} 'i kabul etmiş ve onaylamış olursunuz",
+            "agreement": "Hizmet Şartları, Alım Satım Koşulları ve Gizlilik Politikası",
+            "contentUngree": "Lütfen {gate} hizmetini kullanmadan önce bu koşulları kabul edin",
+            "hint": "Ödeme işlemi sırasında herhangi bir sorunla karşılaşırsanız, {gate} müşteri hizmetleri ekibiyle iletişime geçin.",
+            "next": "Onayla ve Devam Et"
+        },
+        "vb": {
+            "title": "ViteConnect",
+            "closeAlert": "kapat",
+            "connect": {
+                "tips": "Vite Cüzdan Uygulaması aracılığıyla QR kodu tara"
+            },
+            "confirm": {
+                "tips": "Lütfen işlemi VITE Cüzdan Uygulamasında onaylayın"
+            },
+            "start": {
+                "scan": "Vite Cüzdan Uygulaması aracılığıyla QR kodu tara",
+                "downloadTips": "Vite Wallet Uygulamasınız hala yok mu? ",
+                "download": "Buradan indirin"
+            },
+            "accountName": "ViteConnect Adresi"
+        },
+        "ledger": {
+            "title": "Ledger Cihazı",
+            "accountName": "Ledger Cüzdanı",
+            "verifyAddress": "Adres Doğrula",
+            "closeAlert": "İptal",
+            "start": {
+                "title": "Desteklenen Cüzdanlar: Ledger Nano S / Ledger Nano X",
+                "connectError": "Bağlantı Sorunları?",
+                "introduction": "Uygulama Kurulumu ve Kullanıcı Talimatları",
+                "introductionUrl": "https://docs.vite.org/go-vite/tutorial/ledger-install.html",
+                "connectErrorUrl": "https://support.ledger.com/hc/en-us/articles/115005165269-Connection-issues-with-Windows-or-Linux"
+            },
+            "connectWithUSB": "USB kullan",
+            "connectWithBlu": "Bluetooth kullan",
+            "connectLedger": "Ledger'a bağlan",
+            "connect": {
+                "title": "Adres Seçin",
+                "tips": "Kullanmak için bir adres seçin:",
+                "selectConnectType": "Bağlantı türünü seçin: (Bluetooth yalnızca Ledger Nano X'te desteklenmektedir)",
+                "cancelSelect": "Bağlanmak için bir cihaz seçin",
+                "connectError": "Bağlantı başarısız. Lütfen Vite uygulamasının cihazda açıldığını onaylayın",
+                "interfaceNotAvailable": "Bağlantı başarısız. Lütfen USB kablosunun bağlı olduğunu kontrol edin. Bluetooth üzerinden bağlanıyorsanız, Bluetooth'u kapatın ve tekrar açın",
+                "receiveBlockSuccess": "{num} işlemi başarıyla alındı",
+                "introduction": {
+                    "1": {
+                        "title": "1. Adım: ",
+                        "content": "Ledger cihazınızı bağlayın ve PIN kodunu girin"
+                    },
+                    "2": {
+                        "title": "2. Adım: ",
+                        "content": "Vite uygulamasını Ledger'da aç"
+                    }
+                }
+            },
+            "addressSelect": {
+                "index": "Dizin",
+                "address": "Adres",
+                "balance": "Bakiye",
+                "unreceived": "Alınmadı",
+                "nextPage": "Sonraki sayfa",
+                "prePage": "Son sayfa",
+                "confirm": "Onayla",
+                "unUsedAccount": "Yeni"
+            },
+            "confirm": {
+                "tips": "Lütfen işlemi Ledger cihazınızda onaylayın",
+                "verifyAddress": "Lütfen adresi Ledger cihazınızda doğrulayın",
+                "alert": "Uyarı",
+                "alertContent": "Adres Ledger cihazında reddedildi. Lütfen bu adresin Ledger cihazınızda görüntülenen adresle eşleşip eşleşmediğini iki kez doğrulayın. Cevabınız evet ise, bu mesajı yok sayın ve işlemi onaylamak için devam edin, aksi takdirde adrese varlık GÖNDERMEYİN ve hemen çıkın.",
+                "alertLeftBtn": "Adreslerin eşleştiğini onaylıyorum",
+                "alertRightBtn": "Adresler eşleşmiyor. Ayrıl!",
+                "userCancel": "İşlem Ledger'da iptal edildi",
+                "userCancelByWeb": "Vite cüzdanındaki işlemi iptal ettiniz. Bu durumda, işlem iptal edilecek ve Ledger cihazınızda onaylansa bile asla blok zincirine geçmeyecektir."
+            }
+        },
+        "invite": {
+            "inviteTitle": "Arkadaşlarını Davet Et",
+            "receiveInviteTitle": "Referans Kodu Kullan",
+            "myCode": "Referans Kodum: ",
+            "codeLable": "Referans Kodu",
+            "invited": "Zaten bir daveti kabul ettiniz, referans kodu: ",
+            "genCode": "Referans Kodu Oluştur",
+            "cost": "Maliyet",
+            "formatErr": "Hatalı referans kodu formatı",
+            "noResult": "Oops...Sonuç bulunamadı, lütfen daha sonra tekrar deneyin",
+            "successToast": "Talep gönderildi",
+            "failToast": "Talep gönderilemedi",
+            "notEnough": "Yetersiz exchange bakiyesi",
+            "avaliable": "Bakiye",
+            "inviteNum": "Davet Edildi",
+            "inviteBenifit": "Referral Mining Income",
+            "inviteRule": "Kurallar",
+            "ruleItems": [
+                "Bir davetiye kodu oluşturmak için <span class='strong'>1.000 VITE</span> ödemesi yakılacak",
+                "Referee will be rewarded with <span class='strong'>5%</span> of all invited users' trading as mining proceeds and <span class='strong'>2.5%</span> of all market-making as mining proceeds"
+            ],
+            "receiveRuleItems": [
+                "Invited users will receive an extra <span class='strong'>2.5%</span> of trading as mining rewards and <span class='strong'>1.25%</span> of market-making as mining rewards",
+                "Bir davetiye koduyla alım satım komisyonlarında <span class='strong'>%10 </span> indirimden yararlanın"
+            ]
+        }
+    },
+    "walletConversion": {
+        "title": "VITE Dönüşümü",
+        "help": {
+            "title": "VITE Dönüşümünü Hızlı Anlama",
+            "text": "You can migrate ERC20 tokens into VITE into our TestNet by VITE conversion function. In TestNet, casting your vote for official SBPs to collect rewards, the annualized rate can reach 20%. Your ERC20 VITE tokens will be transferred to Ethereum black hole address: {blackAddr}, you will receive the same amount of VITE at your Vite address when Ethereum black hole address has received the transaction and confirmed. Once you are in the conversion process, confirm that there are enough VITE and ETH (as gas) in your Ethereum address of Vite wallet."
+        },
+        "gas": "Madencilik Komisyonu",
+        "record": "Dönüşüm Geçmişi",
+        "aboutPrice": "Yaklaşık {amount} ETH",
+        "note": "Dönüşümü gönderdikten sonra lütfen sabırlı olun. 30 Ethereum işlem onayı alana kadar dönüştürülen VITE'i alamazsınız. Ethereum işlem kayıtları, Dönüşüm Geçmişi bölümünde görüntülenebilir.",
+        "exchange": {
+            "vite": "Dönüştür",
+            "viteAddr": "Alıcı Adresi",
+            "viteAmount": "Dönüşüm Miktarı",
+            "btn": "Dönüştürmeye Hazır",
+            "success": "Dönüşüm Başarılı. Ethereum işlemi onaylandıktan sonra hesabınıza VITE almanız yaklaşık 20 dakika sürebilir."
+        }
+    },
+    "tradeCenter": {
+        "title": "Exchange",
+        "marketClosed": "{symbol} marketi askıya alındı",
+        "mergeDepth": "Grup",
+        "depthStep": "{step} haneli",
+        "blocking": "Ağ tıkanıklığı meydana geliyor, lütfen daha sonra tekrar deneyin",
+        "supportMining": "Eligible for trading and market-making as mining",
+        "cmcHelp": "CoinMarketCap'te VITE'i Görüntüle",
+        "supportTradeMining": "Eligible for trading as mining",
+        "supportOrderMining": "Eligible for market-making as mining",
+        "zeroFee": "Sıfır Komisyon",
+        "buyMiningPrice": "Alış fiyatı {price} 'dan yüksek olduğunda madencilik için uygundur",
+        "sellMiningPrice": "Satış fiyatı {price} altında olduğunda madencilik için uygundur",
+        "operator": {
+            "noName": "Anonim Operatör",
+            "overview": "Giriş",
+            "txPair": "Alım Satım Paritesi",
+            "confirmTitle": "Risk Hatırlatıcısı",
+            "confirmText": "Mevcut alım satım paritesi {symbol}. Alım satım yaparken lütfen dikkatli olun. Dijital varlıklara yatırım yapmak yüksek riskleri beraberinde gelir. Yatırım yapmadan önce, lütfen dijital varlıklara yatırım yapmanın tüm risklerini tam olarak anlayın ve dijital varlıkların gerçekliğini, yasallığını ve geçerliliğini kendi başınıza değerlendirin. Lütfen kendi yatırım kararlarınızda tedbirli olun ve varlıklarınızın kaybı için sorumluluk üstlenin.",
+            "address": "Operatör Adresi",
+            "name": "Operatör Adı"
+        },
+        "operatorTxPair": {
+            "title": "Alım Satım Paritesi Ayrıntıları",
+            "tokenTab": "Token Ayrıntıları",
+            "operatorTab": "Operatör Ayrıntıları"
+        },
+        "depthBuyMiningPrice": "Mining Range Above",
+        "depthSellMiningPrice": "Mining Range Below",
+        "inMiningRange": "Mining Range"
+    },
+    "trade": {
+        "more": "Daha fazla",
+        "search": "Arama",
+        "txPair": "Parite",
+        "price": "Fiyat",
+        "upDown": "Değiştir%",
+        "txNum": "Hacim",
+        "quantityTitle": "Toplam({quantity})",
+        "priceTitle": "Fiyat({price})",
+        "amountTitle": "Miktar({amount})",
+        "quantityTable": "Miktar",
+        "amountTable": "Hacim",
+        "amount": "Toplam",
+        "newOrderSuccess": "Emir talebi gönderildi",
+        "newOrderFail": "Emir Başarısız",
+        "depthView": "Derinlik",
+        "klineView": "TradingView",
+        "txPairDetail": {
+            "title": "Alım satım paritesi ayrıntıları",
+            "24h": "24saat",
+            "openPrice": "Aç",
+            "quantity": "Market Hacmi",
+            "amount": "Temel hacim",
+            "status": "Durum",
+            "latest": "En Son",
+            "buy": "Alış fiyatı",
+            "sell": "Satış fiyatı",
+            "diff": "Spread"
+        },
+        "buy": {
+            "title": "{token} Al",
+            "price": "Fiyat({token})",
+            "quantity": "Miktar({token})"
+        },
+        "sell": {
+            "title": "{token} Sat",
+            "price": "Fiyat({token})",
+            "quantity": "Miktar({token})"
+        },
+        "head": {
+            "latestPrice": "Son Fiyat",
+            "updown": "24saatlik Değişim",
+            "highPrice": "24h High",
+            "lowPrice": "24h Low",
+            "quantity": "24h Volume",
+            "tokenName": "Token",
+            "originalSymbol": "Sembol",
+            "gateway": "Ağ geçidi",
+            "website": "Resmi Web Site",
+            "explorer": "Blok Explorer",
+            "overview": "Açıklama",
+            "tokenShow": "Kısaltma",
+            "tokenId": "Token Kimliği",
+            "publisher": "Yayınlayan",
+            "total": "Toplam",
+            "tokenDigit": "Ondalık sayılar",
+            "publisherDate": "Yayınlama Tarihi",
+            "type": "Durum",
+            "tokenType0": "Yayınlama Mevcut",
+            "tokenType1": "Never Issued"
+        },
+        "latestTx": {
+            "title": "Son Emirler",
+            "time": "Zaman"
+        },
+        "depth": {
+            "buy": "Al",
+            "sell": "Sat",
+            "all": "Tümü",
+            "avgPrice": "Ort.Fiyat:",
+            "sum": "Toplam {symbol}:"
+        },
+        "noData": {
+            "favorite": "Henüz favoriniz yok",
+            "search": "Sonuç bulunamadı"
+        },
+        "limitPrice": {
+            "title": "Limit",
+            "fee": "Komisyonlar",
+            "adviseToSVip": "SVIP'e yükseltin, sıfır temel işlem komisyonundan yararlanın",
+            "feeRuleWithSVip": "Operatör Komisyonları * Referans İndirimi. UYARI: Komisyonların ayarlanması ve indirimi yalnızca yeni emirleri etkiler, önceki emirlerin ücreti aynı kalır.",
+            "text": "Bu sayfa, işlem verilerinin ön izleme sayfasıdır. Alım satım yapmak için lütfen giriş yapınız.",
+            "validAmount": "Hacim {amount}{token}'den büyük olmalıdır",
+            "priceNotNull": "Miktar boş bırakılamaz",
+            "amountNotNull": "Hacim boş bırakılamaz",
+            "quantityNotNull": "Miktar boş bırakılamaz",
+            "cancelVip": "İptal",
+            "openVip": "VIP olun",
+            "dexFee": "Temel İşlem Komisyonları: {fee}",
+            "operatorFee": "Operatör Komisyonları: {fee}",
+            "vipFee": "VIP İndirimi: {fee}",
+            "inviteFeeDiscount": "Referans İndirimi: {fee} indirimli",
+            "svipFee": "SVIP: %0 temel işlem komisyonu",
+            "feeRule": "(Temel İşlem Ücreti - VIP indirimi + Operatör Komisyonları) * Referans İndirimi. UYARI: Komisyonların ayarlanması ve indirimi yalnızca yeni emirleri etkiler, önceki emirlerin ücreti aynı kalır."
+        },
+        "proxy": {
+            "title": "Alım Satım Delegasyonu",
+            "subTitle": "Alım Satım Delegasyonu",
+            "successProxy": "Delegasyon Başarılı",
+            "failProxy": "Delegasyon Başarısız",
+            "successCancelProxy": "Delegasyonu Kaldırma Başarılı",
+            "failCancelProxy": "Delegasyonlar kaldırılamadı",
+            "info": "Alım Satım Delegasyonu Nedir?",
+            "new": "Delegasyonu Başlat",
+            "active": {
+                "title": "Delegasyon Geçmişi",
+                "head": [
+                    "Delege Adresi",
+                    "Alım Satım Paritesi",
+                    "Eylem"
+                ],
+                "operate": [
+                    "Alım Satım Paritesi Ekle",
+                    "Alım Satım Paritesini Kurtar",
+                    "Tüm Delegasyonları Kaldır"
+                ]
+            },
+            "passive": {
+                "title": "Kabul Edilen Delegasyon Geçmişi",
+                "head": [
+                    "Delegasyon Adresi",
+                    "Alım Satım Paritesi"
+                ]
+            },
+            "dialog": {
+                "cancel": "İptal",
+                "cancelAllTips": "{trustAddress}'deki tüm delegasyonları kaldırmak istediğinizden emin misiniz?",
+                "rTxtMap": {
+                    "new": "Ekle",
+                    "add": "Ekle",
+                    "delete": "Onayla",
+                    "deleteAll": "Onayla"
+                },
+                "confirm": {
+                    "title": "Temsilcileri Onayla",
+                    "cancel": "İptal",
+                    "ok": "Onayla"
+                },
+                "titleMap": {
+                    "new": "Delegasyonu Başlat",
+                    "add": "Temsilciler Ekle",
+                    "delete": "Delegasyonları Kaldır",
+                    "deleteAll": "Delegasyonları kaldırmayı onaylayın"
+                }
+            }
+        },
+        "openapi": {
+            "title": "API",
+            "myKey": "API Anahtarım",
+            "createTime": "Oluşturulma Zamanı",
+            "permissions": "Uygulanan Alım Satım Pariteleri",
+            "createKey": "API Anahtarı oluşturun",
+            "deleteKey": "API'yi sil",
+            "deleteAlert": "The current API will no longer be accessible if confirm to proceed. Existing package will be retained and re-activated upon creation of a new API Key.",
+            "confirmDelete": "Onayla ve Sil",
+            "cancel": "İptal",
+            "agentAddressStakingAmount": "Delegasyon Stake Quotası",
+            "staking": "Stake Et",
+            "package": "Paket",
+            "expireTime": "Bitiş Tarihi",
+            "callNum": "Triggers/min",
+            "callNumInfo": "{maxCount} işlem/dk",
+            "price": "Maliyet",
+            "priceInfo": "{price} VX/ay",
+            "upgrade": "Yükselt",
+            "balanceAlert": "VITE bakiyesi {balanceLimit} değerinden azsa oluşturulamaz.",
+            "noSupportForHardware": "Donanım Cüzdanı şu anda desteklenmiyor",
+            "tips": {
+                "title": "Uyarı",
+                "0": "ViteX, marketlere ve gerçek zamanlı alım satım hizmetlerine erişim sağlamak için resmi API yayınlıyor. Bir API özel anahtarını doğru şekilde almak için aşağıdaki talimatları izleyin.",
+                "0-step1": "1. API Oluştur",
+                "0-step2": "2. Seçilen alım satım paritelerinin delegasyonuna izin verin",
+                "0-step3": "3. API delegasyon adresi için quota stake edin",
+                "0-step4": "Daha fazla destek için <a href=\"https://vite.wiki/dex/api/dex-apis.html\" target=\"_blank\">API Belgelerini</a> görüntüleyin",
+                "1": "One set of API Key and Secret is allowed for the same address at any given time.",
+                "2": "Varlık kaybını önlemek için Erişim Anahtarınızı ve Sırrınızı İfşa Etmeyin",
+                "3": "API paketi, varsayılan olarak dakikada 10 işlem yapan ücretsiz temel paketle ayarlanmıştır, yükseltme seçenekleri mevcuttur."
+            },
+            "stakingForQuota": {
+                "title": "Delegasyon Quotası",
+                "agentAddress": "Delegasyon Adresi",
+                "stakingAmount": "Stake Miktarı",
+                "ok": "Onayla"
+            },
+            "keyConfirm": {
+                "accessKey": "Erişim Anahtarı",
+                "secretKey": "Gizli Anahtar",
+                "agentAddress": "Delegasyon Adresi",
+                "title": "API Başarıyla Oluşturuldu",
+                "tips": {
+                    "title": "Önemli Uyarı",
+                    "0": "Varlık kaybını önlemek için Erişim Anahtarınızı ve Gizlilik Anahtarınızı ifşa etmeyin.",
+                    "1": "Gizlilik anahtarının kaybolması durumunda, mevcut API'yi silin ve yeni bir API anahtarı için Yeniden Başvurun."
+                },
+                "warn": "Gizlilik anahtarı yalnızca bir kez görüntülenir ve kaybolursa geri bulunamaz, lütfen doğru şekilde saklayın."
+            },
+            "upgradeConfirm": {
+                "title": "Paketi Yükselt",
+                "currentPackage": "Mevcut",
+                "selectPackage": "Yeni Seç",
+                "selectTime": "İçin geçerli",
+                "month": " Ay",
+                "payAmount": "Toplam",
+                "balance": "VX Bakiyesi"
+            }
+        }
+    },
+    "tradeAssets": {
+        "title": "Varlıklar",
+        "search": "Lütfen token adı girin",
+        "operate": "Eylem",
+        "all": "Tümü",
+        "confirmTable": {
+            "title": "Ayrıntılı Kayıt",
+            "heads": [
+                "Tarih",
+                "Token",
+                "Tür",
+                "Miktar"
+            ]
+        },
+        "pwdConfirm": {
+            "cancelTxt": "İptal"
+        },
+        "table": {
+            "heads": [
+                "Token",
+                "Toplam Bakiye",
+                "Exchange Bakiyesi",
+                "Emirde",
+                "Değer"
+            ],
+            "rowMap": {
+                "recharge": "Exchange'e Yatırma",
+                "withdraw": "Cüzdana Çekme",
+                "detail": "Ayrıntılar",
+                "sideMap": {
+                    "1": "Yatırma",
+                    "2": "Çekme"
+                }
+            }
+        },
+        "confirmrecharge": {
+            "successToast": "Yatırım başarılı",
+            "failToast": "Yatırım başarısız",
+            "title": "Exchange'e Yatırma",
+            "lable1": "Cüzdan Bakiyesi",
+            "lable2": "Yatırma Miktarı",
+            "tips": "Yetersiz Cüzdan Bakiyesi",
+            "placeholder": "Lütfen yatırma miktarını girin",
+            "btn": "Yatırma"
+        },
+        "confirmwithdraw": {
+            "successToast": "Çekim Başarılı",
+            "failToast": "Çekim Başarısız",
+            "title": "Cüzdana Çekme",
+            "lable1": "Kullanılabilir Bakiye",
+            "lable2": "Çekim Miktarı",
+            "tips": "Yetersiz Cüzdan Bakiyesi",
+            "placeholder": "Lütfen çekim miktarını girin",
+            "btn": "Çekme"
+        },
+        "zero": "Düşük Bakiyeleri Gizle"
+    },
+    "tradeOpenOrders": {
+        "cancelErr": "Çok sık deniyorsunuz, lütfen sonra tekrar deneyin.",
+        "confirm": {
+            "successToast": "Emir İptali Başarılı",
+            "failToast": "Emir İptal Edilemedi",
+            "submitTxt": "İptal etmeyi onaylayın",
+            "cancelTxt": "İptal",
+            "title": "Emri İptal Et",
+            "content": "Mevcut emri iptal etmek istediğinizden emin misiniz?"
+        },
+        "title": "Açık Emirler",
+        "hint": {
+            "fdate": "Lütfen başlangıç tarihini seçin",
+            "tdate": "Lütfen bitiş tarihini seçin",
+            "dateErr": "Bitiş tarihi, başlangıç tarihinden sonra olmalıdır",
+            "ftoken": "Lütfen ftoken seçin"
+        },
+        "side": {
+            "1": "Sat",
+            "0": "Al"
+        },
+        "table": {
+            "heads": [
+                "Tarih",
+                "Parite",
+                "Taraf",
+                "Fiyat",
+                "Miktar",
+                "Tamamlanan",
+                "Tamamlanan%",
+                "Ortalama",
+                "Toplam"
+            ],
+            "rowMap": {
+                "cancel": "İptal"
+            }
+        }
+    },
+    "tradeOrderHistory": {
+        "title": "Emir geçmişi",
+        "hint": {
+            "fdate": "Lütfen başlangıç tarihini seçin",
+            "tdate": "Lütfen bitiş tarihini seçin",
+            "dateErr": "Bitiş tarihi, başlangıç tarihinden sonra olmalıdır"
+        },
+        "side": {
+            "1": "Sat",
+            "0": "Al"
+        },
+        "status": {
+            "1": "Devam ediyor",
+            "2": "Tamamlandı",
+            "3": "İptal edildi",
+            "4": "Başarısız"
+        },
+        "confirmTable": {
+            "title": "Emir Defteri",
+            "heads": [
+                "Zaman",
+                "Fiyat",
+                "Miktar",
+                "Komisyonlar",
+                "Toplam"
+            ]
+        },
+        "table": {
+            "heads": [
+                "Tarih",
+                "Parite",
+                "Taraf",
+                "Fiyat",
+                "Miktar",
+                "Tamamlanan",
+                "Ortalama",
+                "Komisyonlar",
+                "Toplam",
+                "Durum"
+            ],
+            "rowMap": {
+                "statusMap": {
+                    "1": "Emirde",
+                    "2": "Tamamlandı",
+                    "3": "İptal edildi",
+                    "4": "Başarısız"
+                },
+                "detail": "Ayrıntılar"
+            }
+        },
+        "filter": {
+            "start": "Gönderici",
+            "end": "Alıcı",
+            "type": "Tür",
+            "side": "Taraf",
+            "buy": "Al",
+            "sell": "Sat",
+            "status": "Durum",
+            "search": "Arama",
+            "reset": "Sıfırla"
+        }
+    },
+    "tradeMining": {
+        "title": "Madencilik",
+        "addQuota": "Yeni stake oluştur",
+        "add": "Ekle",
+        "withdraw": "Stake İptali",
+        "withdrawList": "Çekim Listesi",
+        "tbHead": {
+            "date": "Tarih",
+            "fee": "Alım Satım Komisyonları",
+            "mining": "Madencilik Miktarı",
+            "pledge": "Stake"
+        },
+        "txTitle": "Trading as Mining Total Income",
+        "quotaTitle": "Staking as Mining Total Income",
+        "addHint1": "Tek stake miktarı en az 134 VITE olmalıdır",
+        "addHint2": "VITE stake'i, gönderildikten hemen sonra geçerli olacaktır. Stake 3 gün sonra iptal edilebilir",
+        "addHint3": "Stake edilmiş miktar 7 günlük bekleme süresinden sonra serbest bırakılacaktır",
+        "withdrawHint1": "Stake iptal edildikten sonra artık VX madenciliği yapamayacaksınız",
+        "withdrawHint2": "It takes 7 days to return unstaked VITE coins to exchange balance",
+        "addTitle": "Madencilik için VITE Stake et",
+        "withdrawTitle": "VITE Stake İptali",
+        "addPlaceHolder": "Lütfen stake miktarını girin",
+        "withdrawPlaceHolder": "Lütfen stake miktarını girin, en az 134 VITE",
+        "addBtn": "Stake'i Onayla",
+        "withdrawBtn": "Stake İptalini Onayla",
+        "stakingBalance": "Kullanılabilir Stake Bakiyesi",
+        "hintTitle": "Önemli Uyarı",
+        "comingHint": "VX mining function is coming soon, stay tuned. You can get VX in five ways: 1. Trading as Mining, 2. Listing as Mining, 3. Referring as Mining, 4. Staking as Mining, 5. Market-making as Mining. Users who hold VX enjoy payouts from a shared dividend pool.",
+        "more": "VX madencilik kuralları hakkında daha fazla bilgi edinin",
+        "fee": "Alım Satım Komisyonları",
+        "todayTrade": "Madencilik Ayrıntıları",
+        "dividends": "24H Expected Mined Volume",
+        "view": "Anlık Madencilik Panelini Görüntüle",
+        "inviteCount": "Referanslar",
+        "help": "Bu sayfada görüntülenen mevcut işlem komisyonları yalnızca% 0,2 ViteX temel işlem komisyonlarını içerir, lütfen madencilik maliyetini hesaplarken operatör komisyonlarının dikkate alınacağını unutmayın"
+    },
+    "tradeVip": {
+        "title": "VIP Statüsü",
+        "open": "VIP olun",
+        "cancel": "İptal {type}",
+        "help": {
+            "title": "ViteX VIP Hakkında"
+        },
+        "helpConfirm": {
+            "t1": "VIP",
+            "txt1": "VIP statüsü kazanmak ve alım satım komisyonlarında % 50 indirim almak için 10.000 VITE stake edin. Stake 30 gün sonra iptal edilebilir.",
+            "t2": "SVIP",
+            "txt2": "SVIP olmak için 1M VITE stake edin ve 0 temel işlem komisyonundan yararlanın. Stake 30 gün sonra iptal edilebilir.",
+            "txt3": "SVIP, herhangi bir geçerli hesap adresi için stake etmeyi destekler. SVIP statüsünü kazanmak için stake edin!"
+        },
+        "vipConfirm": {
+            "cancelVip": "VIP Statüsünü İptal Et",
+            "openVip": "VIP olun",
+            "openStakingAmount": "VIP Olmak İçin Gereken Stake Miktarı",
+            "cancelStakingAmount": "Kullanılabilir Stake Bakiyesi",
+            "noBalance": "Yetersiz Bakiye",
+            "openHint": "VIP olarak % 0.1 alım satım komisyon indirimi alacaksınız. Stake edilen 10.000 VITE 30 gün sonra çekilebilir.",
+            "cancelHint": "VIP statüsü hemen iptal edilecektir.",
+            "openSuccess": "VIP statünüz aktifleştirildi! Birkaç saniye içinde yürürlüğe girecek.",
+            "openFail": "VIP Kaydı Başarısız",
+            "cancelSuccess": "VIP Başarıyla İptal Edildi",
+            "cancelFail": "İptal Başarısız",
+            "adviseToCancel": "SVIP'imiz olarak mevcut statünüzle herhangi bir temel işlem komisyonu ödemeyeceksiniz, bu nedenle genel VIP üyeler için gerekli olan stake edilmiş VITE'i iptal etmenizi öneririz.",
+            "address": "VIP Statüsünü Etkinleştir",
+            "addressPlaceholder": "Mevcut adres varsayılan adrestir, adres daha sonra değiştirilemez"
+        },
+        "svipConfirm": {
+            "open": "Yükselt",
+            "cancel": "İptal",
+            "cancelVip": "SVIP'i iptal et",
+            "openVip": "SVIP olun",
+            "openStakingAmount": "SVIP Olmak İçin Gereken Stake Miktarı",
+            "cancelStakingAmount": "Kullanılabilir Stake Bakiyesi",
+            "noBalance": "Yetersiz Bakiye",
+            "openHint": "SVIP'e yükselttiğinizde %0 temel işlem komisyonundan yararlanacaksınız. 1.000.000 VITE stake'i 30 gün sonra çekilebilir.",
+            "cancelHint": "Stake iptal edildikten sonra SVIP ayrıcalıkları sona erecek",
+            "openSuccess": "Başvuru Başarılı! SVIP statüsü daha sonra yürürlüğe girecektir.",
+            "openFail": "SVIP'e başvurulamadı",
+            "cancelSuccess": "SVIP Başarıyla İptal Edildi",
+            "cancelFail": "İptal Başarısız",
+            "address": "SVIP Statüsünü Etkinleştir",
+            "addressPlaceholder": "SVIP Statüsüyle Etkinleştirilecek Adres",
+            "cancelAddress": "SVIP Adresi"
+        },
+        "vipListTitle": "VIP Kayıtları",
+        "openAddress": "Etkin Adres",
+        "type": "VIP Türü"
+    },
+    "inviteMining": {
+        "title": "Referring as Mining Total Income",
+        "myInviteIncome": "Referans Geliri",
+        "inviteTradeIncome": "Referans Alım Satım Gelirleri",
+        "inviteOrderIncome": "Referred Market-Making Proceeds"
+    },
+    "orderMining": {
+        "title": "Market-Making as Mining Total Income",
+        "tbHead": {
+            "date": "Tarih",
+            "ratio": "Oran",
+            "mining": "Miktar"
+        },
+        "market": "{name} Marketi",
+        "estimate": "{name} Today's Minable Amount"
+    },
+    "tradeDividend": {
+        "title": "Kar payı",
+        "poolTitle": "Alım Satım Komisyonu Kar Payı Havuzu",
+        "listTitle": "Kar Paylarım",
+        "allPrice": "Toplam Tahmini Değer",
+        "date": "Tarih",
+        "VX": "VX Stake et",
+        "coin": "Tür",
+        "amount": "Miktar",
+        "price": "Toplam Tahmini Değer",
+        "hintTitle": "Önemli Uyarı",
+        "comingHint": "VX madenciliği ve kar payı fonksiyonları yakında geliyor, bizi izlemeye devam edin. Sistem, sahip oldukları VX miktarıyla orantılı olarak tüm VX kullanıcılarına toplam havuzun BTC, ETH, VITE, USDT'nin %1'ini dağıtacaktır. İlk kar payı havuzu 0'dan başlayacak ve ViteX tarafından toplanan komisyon miktarına göre büyüyecektir. Alım satım yapan kullanıcıların; temel işlem, listeleme ve referans kodu oluşturma komisyonlarından oluşan ortak havuzdan kar payı alabilmeleri için en az 10 VX'e sahip olması gerekir. ",
+        "more": "VX kar payı kuralları hakkında daha fazla bilgi edinin",
+        "help": "Ödül Kuralları: 1. Kar payı alabilmek için en az 10 VX stake edilmelidir. 2. Stake talebinin sunulması, kar payının en yakın zamanda dağıtıma başlamasına izin verir. 3. Stake miktarı, 7 günlük bekleme süresinden sonra serbest bırakılacaktır",
+        "lockedAmount": "Stake Miktarı",
+        "lockAmountTips": "10 VX veya Üzeri Kar Payı Alın",
+        "unlockAmount": "Unlocking Amount",
+        "addHint1": "Kar payı alabilmek için minimum 10 VX stake edilmelidir",
+        "addHint2": "Submission of staking request allows for dividends starting the nearest distribution",
+        "addHint3": "Stake edilmiş miktar 7 günlük bekleme süresinden sonra serbest bırakılacaktır",
+        "autoLock": "Otomatik Stake Et",
+        "openAutoLock": {
+            "title": "Otomatik Stake'i Etkinleştir",
+            "text": "Mined VX will be automatically staked once enabled"
+        },
+        "closeAutoLock": {
+            "title": "Otomatik Stake'i Devre Dışı Bırak",
+            "text": "Mined VX will not be automatically staked when turned off"
+        },
+        "lock": "Stake",
+        "unlock": "Stake İptali",
+        "lessMin": "Minimum 1 VX",
+        "lockVXConfirm": {
+            "title": "VX Stake et",
+            "available": "Kullanılabilir Exchange Bakiyesi",
+            "amountPlaceholder": "Lütfen stake miktarını girin, minimum 1 VX",
+            "notEnough": "Yetersiz Exchange Bakiyesi",
+            "submit": "Stake'i Onayla",
+            "amountText": "Miktar"
+        },
+        "unlockVXConfirm": {
+            "title": "VX Stake İptali",
+            "available": "Kullanılabilir Stake Bakiyesi",
+            "amountPlaceholder": "Lütfen miktarı girin, minimum 1 VX",
+            "notEnough": "Yetersiz Miktar",
+            "submit": "Stake İptalini Onayla",
+            "amountText": "Miktar",
+            "hint": "Kilidi açmak 7 gün sürer."
+        },
+        "unlockList": {
+            "title": "Geri alınıyor",
+            "amount": "Miktar",
+            "time": "Available Date"
+        }
+    },
+    "tradeOperator": {
+        "title": "Operatör",
+        "tokenList": "Tokenler",
+        "totalIncome": "Toplam Gelir",
+        "permission": "Token Sahipliğini Devret",
+        "txPairManage": "Alım Satım Paritelerini Yönet",
+        "noOperator": "Henüz tokenınız veya alım satım pariteniz bulunmamaktadır, operatör olmak ister misiniz?",
+        "learnMore": "Daha Fazla Bilgi Edinin",
+        "permissionConfirm": {
+            "title": "Sahipliği Devret",
+            "submit": "Onayla",
+            "tokenName": "Token Adı",
+            "address": "Alıcı Adresi",
+            "notice": "UYARI: Sahiplik başkasına devredildiğinde, açılmayan alım satım pariteleri yeni sahibe ait olacaktır. Alım satım/askıya alma alım satım pariteleri hala size aittir"
+        }
+    },
+    "tradeTxPairManage": {
+        "title": "{tokenSymbol} Alım Satım Pariteleri Yönetimi",
+        "symbol": "Ad",
+        "income": "Gelir",
+        "fee": "Komisyon Oranı",
+        "status": "Durum",
+        "operate": "Eylem",
+        "stopTrans": "Askıya Al",
+        "resetTrans": "Kurtar",
+        "changeOwner": "Sahipliği Devret",
+        "changeFee": "Adjust Fee Rate",
+        "incomeList": "Gelir Ayrıntıları",
+        "historyIncome": "Gelir Geçmişi",
+        "openTxPair": "Alım Satım Paritelerini Aç",
+        "statusList": [
+            "Sahiplik Devredildi",
+            "Alım Satım",
+            "Askıya Alma",
+            "Alım Satım Açık Değil"
+        ],
+        "openTxPairConfirm": {
+            "title": "Alım satım için {symbol} aç",
+            "fee": "Listeleme Komisyonu",
+            "hint": "Bir alım satım paritesi açtıktan sonra benzersiz operatör sembolü eklemek istiyorsanız, lütfen Telegram grubumuzdan bizimle iletişime geçin: https://t.me/vite_en",
+            "btn": "Gönder",
+            "reqSuccess": "Gönderim Başarılı! Daha sonra market tahtasında kontrol edin.",
+            "reqError": "Listeleme başarısız, lütfen tekrar deneyin"
+        },
+        "stopTransHint": "{symbol}'i askıya almak istediğinizden emin misiniz?",
+        "resetTransHint": "{symbol}'i kurtarmak istediğinizden emin misiniz?",
+        "stopSuccess": "Askıya Alma Başarılı",
+        "stopFail": "Askıya Alma Başarısız",
+        "openSuccess": "Kurtarma Başarılı",
+        "openFail": "Kurtarma Başarısız",
+        "changeOwnerSuccess": "Transfer Başarılı",
+        "changeOwnerFaill": "Transfer Başarısız",
+        "submitChange": "Transferi onayla",
+        "changeOwnerHint": "UYARI: Sahiplik devredildikten sonra komisyonları tahsil edemez veya ayarlayamazsınız ve bu transfer işlemini geri alamazsınız",
+        "currentMaker": "Yapıcı",
+        "confirmFee": "Komisyon",
+        "currentTaker": "Alıcı",
+        "txPairName": "Ad",
+        "changeFeeHint": "{symbol}'s fee into {fee}",
+        "changeFeeSubmit": "{changeFeeHint} değiştirdiğinizden emin olun",
+        "historyAllIncome": "Toplam Gelir",
+        "incomeListHead": {
+            "date": "Tarih",
+            "txNum": "Hacim",
+            "feeRate": "Oran",
+            "feeIncome": "Gelir"
+        }
+    },
+    "mobileAssets": {
+        "allAssets": "Tahmini Varlık Değeri ({token})",
+        "tokenInfoTitle": "Token Ayrıntıları",
+        "transfer": "Transfer",
+        "trade": "Alım Satım",
+        "chooseTxPair": "Alım Satım Paritesi Seç"
+    },
+    "mobileTradeCenter": {
+        "highPrice": "Yüksek",
+        "lowPrice": "Düşük",
+        "quantity": "24S Hacim",
+        "buyTitle": "Al",
+        "sellTitle": "Sat",
+        "price": "Fiyat ({token})",
+        "buy": {
+            "price": "Fiyat",
+            "quantity": "Miktar"
+        },
+        "sell": {
+            "price": "Fiyat",
+            "quantity": "Miktar"
+        },
+        "orderQuantity": "Miktar",
+        "orderPrice": "Fiyat",
+        "executedQuantity": "Tamamlanan",
+        "avgPrice": "Ort"
+    },
+    "mobileDividend": {
+        "title": "Kar payı",
+        "poolTitle": "Kar Payı Havuzu ({token})",
+        "myDividendTitle": "Kar Paylarının Toplam Tahmini Değeri ({token})",
+        "listTitle": "Kar Payı Ayrıntıları",
+        "lockingTitle": "Stakelerim",
+        "viewLink": "Unstaking Status"
+    },
+    "mobileMining": {
+        "title": "Madencilik",
+        "miningTrade": "Alım Satım",
+        "miningStaking": "Alım Satım",
+        "miningInvite": "Referans",
+        "miningOrder": "Market-Making",
+        "tradeTotalIncome": "Toplam Gelir ({token})",
+        "stakingTotalIncome": "Toplam Gelir ({token})",
+        "inviteTotalIncome": "Toplam Gelir ({token})",
+        "orderTotalIncome": "Toplam Gelir ({token})",
+        "fee": "Komisyonlar",
+        "listTitle": "Madencilik Geçmişi",
+        "viewLink": "Anlık Madencilik Paneli",
+        "inviteTradeIncome": "Referans Alım Satım Ayrıntıları",
+        "inviteOrderIncome": "Referred Market-Making Details",
+        "myStaking": "Stakelerim"
+    },
+    "mobileBottomBar": {
+        "center": "Alım Satım",
+        "assets": "Varlıklar",
+        "mining": "Madencilik",
+        "order": "Emir"
+    },
+    "mobileOrder": {
+        "filterDate": "Tarih",
+        "filterToken": "Tür",
+        "all": "Tümü",
+        "3month": "3 ay",
+        "1month": "1 ay",
+        "1week": "1 hafta",
+        "1day": "1 gün",
+        "clear": "Temizle",
+        "submit": "Arama"
+    },
+    "desktop": {
+        "unlock": "kilidi aç",
+        "unreceivedTx": {
+            "title": "{num} işlem aldınız.",
+            "body": "Miktar：{amount} {symbol}\nGönderen: {address}"
+        }
+    }
+}
