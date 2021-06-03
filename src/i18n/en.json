@@ -462,7 +462,8 @@
                 "You can only deposit {tokenSymbol} through the address provided below. No less than {min} {tokenSymbol} will be accepted.",
                 "The account will update after {confirmationCount} network confirmations. Please wait.",
                 "Please select the correct mainnet or you will be unable to retrieve any lost tokens."
-            ]
+            ],
+            "selectNetwork": "Select Network"
         },
         "viteTips": "VITE only supports cross-chain functionality between the new ERC20 VITE token and Native VITE Coin.",
         "withdraw": {
