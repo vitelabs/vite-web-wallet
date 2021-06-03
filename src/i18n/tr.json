@@ -462,7 +462,8 @@
                 "Yalnızca aşağıda verilen adresten {tokenSymbol} yatırabilirsiniz. En az {min} {tokenSymbol} kabul edilecektir.",
                 "Hesap {confirmationCount} ağ onayından sonra güncellenecektir. Lütfen bekleyin.",
                 "Lütfen doğru mainneti seçin, yoksa kaybolan tokenları geri alamazsınız."
-            ]
+            ],
+            "selectNetwork": "Select Network"
         },
         "viteTips": "VITE, yalnızca yeni ERC20 VITE tokenı ile Native VITE Coin arasındaki cross-chain işlevselliğini destekler.",
         "withdraw": {
