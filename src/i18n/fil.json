@@ -462,7 +462,8 @@
                 "Maaari mo lamang ideposito ang {tokenSymbol} sa pamamagitan ng address na ibinigay sa ibaba. Hindi hihigit sa {min} {tokenSymbol} ang tatanggapin.",
                 "Mag-a-update ang account pagkatapos ng kumpirmasyon ng network ng {confirmationCount}. Mangyaring pakihintay lang po.",
                 "Mangyaring piliin ang tamang mainnet o hindi mo makukuha ang anumang mga nawalang token."
-            ]
+            ],
+            "selectNetwork": "Select Network"
         },
         "viteTips": "Sinusuportahan lamang ng VITE ang pag-andar ng cross-chain sa pagitan ng bagong token ng ERC20 VITE at Native VITE Coin.",
         "withdraw": {
