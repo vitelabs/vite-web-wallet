@@ -462,7 +462,8 @@
                 "Cross-Chain Receive operation will do {tokenSymbol} Cross-Chain mapping to VITE network, you can still transfer the assets to other platform after receiving them",
                 "You can only send {tokenSymbol} through this address and the amount cannot be less than {min}",
                 "You will receive your assets after {confirmationCount} confirmations, kindly wait in patient"
-            ]
+            ],
+            "selectNetwork": "Select Network"
         },
         "viteTips": "VITE only supports cross-chain functionality between the new ERC20 VITE token and Native VITE Coin.",
         "withdraw": {
