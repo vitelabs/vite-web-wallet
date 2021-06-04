@@ -1544,7 +1544,7 @@
             "reqSuccess": "Niêm yết thành công! Vui lòng kiểm tra tại bảng thị trường.",
             "reqError": "Niêm yết thất bại, vui lòng thử lại"
         },
-        "stopTransHint": "Chắc chắn tạm ngưng {symbol}?",
+        "stopTransHint": "Chắc chắn đình chỉ {symbol}?",
         "resetTransHint": "Chắc chắn khôi phục {symbol}?",
         "stopSuccess": "Đình chỉ thành công",
         "stopFail": "Đình chỉ thất bại",
@@ -1554,9 +1554,9 @@
         "changeOwnerFaill": "Chuyển thất bại",
         "submitChange": "Xác nhận chuyển",
         "changeOwnerHint": "THÔNG BÁO: Bạn sẽ không thể thu hoặc điều chỉnh phí sau khi chuyển quyền sở hữu và bạn không thể hoàn tác hành động chuyển nhượng này",
-        "currentMaker": "Nhà sản xuất",
+        "currentMaker": "Maker",
         "confirmFee": "Phí",
-        "currentTaker": "Người nhận",
+        "currentTaker": "Taker",
         "txPairName": "Tên",
         "changeFeeHint": "Phí của {symbol} trong {fee}",
         "changeFeeSubmit": "Chắc chắn thay đổi {changeFeeHint}",
@@ -1569,7 +1569,7 @@
         }
     },
     "mobileAssets": {
-        "allAssets": "Giá trị tài sản ước tính ({token})",
+        "allAssets": "Giá trị Tài sản Ước tính ({token})",
         "tokenInfoTitle": "Chi tiết Token",
         "transfer": "Chuyển",
         "trade": "Giao dịch",
@@ -1593,20 +1593,20 @@
         "orderQuantity": "Số lượng",
         "orderPrice": "Giá",
         "executedQuantity": "Đã hoàn thành",
-        "avgPrice": "Trb"
+        "avgPrice": "Avg"
     },
     "mobileDividend": {
         "title": "Cổ tức",
-        "poolTitle": "Dividend Pool ({token})",
+        "poolTitle": "Tổng Dividend ({token})",
         "myDividendTitle": "Tổng Giá trị Dividend Ước tính ({token})",
         "listTitle": "Chi tiết Dividend",
         "lockingTitle": "Stake của tôi",
-        "viewLink": "Lịch sử Unstake"
+        "viewLink": "Lịch sử Huỷ stake"
     },
     "mobileMining": {
         "title": "Khai thác",
         "miningTrade": "Giao dịch",
-        "miningStaking": "Đang stake",
+        "miningStaking": "Stake",
         "miningInvite": "Giới thiệu",
         "miningOrder": "Tạo thanh khoản",
         "tradeTotalIncome": "Tổng thu nhập ({token})",
