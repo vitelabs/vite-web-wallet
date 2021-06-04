@@ -1,11 +1,11 @@
 {
-    "lang": "English",
-    "help": "Trợ giúp",
+    "lang": "Tiếng Việt",
+    "help": "Trung tâm Trợ giúp",
     "announcements": "Thông báo",
     "start": "Bắt đầu",
     "login": "Đăng nhập",
     "regAcc": "Đăng ký",
-    "unlockAcc": "Mở khóa Tài khoản hiện tại",
+    "unlockAcc": "Mở khóa",
     "changeAcc": "Chuyển Tài khoản",
     "existingAcc": "Tài khoản hiện có",
     "restore": "Nhập từ Mnemonic",
@@ -18,8 +18,8 @@
     "blockHeight": "Chiều cao Block Snapshot",
     "accountName": "Tên Tài khoản",
     "action": "Hành động",
-    "stakingAmount": "Số lượng Đặt cược",
-    "submitStaking": "Tiến hành Đặt cược",
+    "stakingAmount": "Số lượng Stake",
+    "submitStaking": "Tiến hành Stake",
     "withdrawHeight": "Chiều cao Snapshot dự kiến",
     "balance": "Số dư",
     "dexBalance": "Số dư ViteX",
@@ -32,20 +32,20 @@
         "closeTips": "Bỏ qua Hướng dẫn sử dụng (Không được khuyến khích)",
         "trade": [
             "Quản lí tài sản tại đây (ví Web và sàn ViteX)",
-            "Kiểm tra Đơn đặt hàng và Lích sử đặt hàng, Chi tiết giao dịch",
-            "Tham gia Khai thác, Nhận cổ tức VX và Phí giao dịch (Cổ tức Khai thác)",
-            "Trải nghiệm nhiều tính năng hơn: Đặt cược để nhận Hạn ngạch, Trở thành người chạy SBP (Nhà sản xuất Khối Snapshot), Bỏ phiếu cho SBPs, Chuyển đổi ERC20, Chi tiết giao dịch, v. v."
+            "Kiểm tra Lệnh đang mở, Lịch sử đặt lệnh và Chi tiết giao dịch",
+            "Tham gia Khai thác, Nhận cổ tức VX và Cổ tức phí giao dịch (Cổ tức Khai thác)",
+            "Trải nghiệm nhiều tính năng hơn: Stake để nhận Quota, Trở thành SBP (Nhà sản xuất Khối Snapshot), Bỏ phiếu cho SBP, Chuyển đổi ERC20, Chi tiết giao dịch, v. v."
         ],
         "assets": [
-            "Ký thác vào Sàn",
+            "Nạp vào Sàn",
             "Rút về Ví",
-            "Cross-Chain Receive & Send"
+            "Nạp và Rút cross-chain"
         ]
     },
     "dealReminder": {
         "title": {
             "buy": "Lệnh mua đã hoàn thành: {ftoken} / {ttoken}",
-            "sell": "Lệnh bán đã hoàn thanh: {ftoken} / {ttoken}"
+            "sell": "Lệnh bán đã hoàn thành: {ftoken} / {ttoken}"
         },
         "failTitle": "Đơn đặt hàng Thất bại",
         "notice-all": {
@@ -56,11 +56,11 @@
             "buy": "Giá: {price} {ttoken} \nSố lượng: {amount} {ttoken}, {executedPercent}% đã hoàn thành.",
             "sell": "Giá: {price}{ttoken} \nSố lượng: {amount} {ttoken} đã {executedPercent}% hoàn thành."
         },
-        "error": "Đặt hàng thất bại {amount} {ftoken} ({ftoken}/{ttoken}) lúc {time}, hãy truy cập Lịch sử Đặt hàng để tìm hiểu thêm."
+        "error": "Đặt hàng thất bại {amount} {ftoken} ({ftoken}/{ttoken}) lúc {time}, hãy truy cập Lịch sử Lệnh để tìm hiểu thêm."
     },
     "pow": {
-        "ing": "Bấm Run PoW để nhận hạn ngạch",
-        "no": "Bạn có thể thế chấp VITE để nhận hạn ngạch thay vì bấm run PoW",
+        "ing": "Bấm Run PoW để nhận quota",
+        "no": "Bạn có thể stake VITE để nhận quota thay vì bấm run PoW",
         "insuffQuota": "Nhận Quota",
         "insuffQuotaMsg": "Chúng tôi nhận thấy bạn không có VITE nào bị khóa cho Quota. Vui lòng stake VITE hoặc nếu muốn, bạn có thể chạy POW để nhận Quota.",
         "insuffQuotaMsg2": "VITE chỉ có thể thực hiện {powMaxTimes} giao dịch mỗi ngày cho mỗi địa chỉ mà không cần đặt stake VITE. Địa chỉ của bạn đã dùng hết {powMaxTimes} giao dịch. Vui lòng truy cập trang Quota và\b stake VITE của bạn để thực hiện nhiều giao dịch hơn.",
@@ -124,7 +124,7 @@
         "CancelSBPVoting": "Hủy bỏ Bỏ phiếu",
         "CancelSBPVoting_V1": "Hủy bỏ Bỏ phiếu",
         "StakeForQuota": "Nhận Hạn ngạch",
-        "StakeForQuota_V1": "Nhận Hạn ngạch",
+        "StakeForQuota_V1": "Nhận Quota",
         "CancelQuotaStake": "Rút token đã stake",
         "CancelQuotaStake_V1": "Rút token đã stake",
         "IssueToken": "Phát hành token",
@@ -139,8 +139,8 @@
         "DisableReIssue_V1": "Chỉnh sửa kiểu token",
         "DexDeposit": "Nạp tiền vào ViteX",
         "DexDeposit_V1": "Nạp tiền vào ViteX",
-        "DexWithdraw": "Rút tiền",
-        "DexWithdraw_V1": "Rút tiền",
+        "DexWithdraw": "Rút tiền từ ViteX",
+        "DexWithdraw_V1": "Rút tiền từ ViteX",
         "DexPlaceOrder": "Tạo Lệnh giao dịch ViteX",
         "DexPlaceOrder_V1": "Tạo Lệnh giao dịch ViteX",
         "DexCancelOrder": "Thu hồi Lệnh giao dịch ViteX",
@@ -173,11 +173,11 @@
         "back": "Quay lại",
         "submit": "Gửi",
         "next": "Bước Tiếp theo",
-        "understand": "Tôi hiểu",
+        "understand": "Tôi đã hiểu",
         "edit": "Chỉnh sửa",
         "reReg": "Đăng ký lại",
         "otherProd": "Sử dụng các Sản phẩm khác của Vite",
-        "known": "Tôi đã rõ"
+        "known": "Tôi đã hiểu"
     },
     "hint": {
         "noNet": "Không tìm thấy hệ thống mạng",
@@ -192,7 +192,7 @@
         "amtFormat": "Sai định dạng số lượng",
         "transSucc": "Giao dịch thành công!",
         "insufficientBalance": "Không đủ số dư",
-        "validMaxDigit": "Tối đa {digit} số thập phân",
+        "validMaxDigit": "Tối đa {digit} decimal",
         "nodeErr": "Xảy ra lỗi fullnode, vui lòng thử lại sau.",
         "bigger0": "Số lượng phải lớn hơn 0",
         "operateSuccess": "Thao tác Thành công",
@@ -463,7 +463,7 @@
                 "Bạn chỉ có thể gửi {tokenSymbol} qua địa chỉ này và số lượng không thể ít hơn {min}",
                 "Bạn sẽ nhận được tài sản của mình sau {confirmationCount} xác nhận, vui lòng đợi"
             ],
-            "selectNetwork": "Select Network"
+            "selectNetwork": "Chọn mạng"
         },
         "viteTips": "VITE chỉ hỗ trợ chức năng cross-chain giữa ERC20 VITE mới và Native VITE Coin.",
         "withdraw": {
