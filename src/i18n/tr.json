@@ -1,5 +1,5 @@
 {
-    "lang": "English",
+    "lang": "İngilizce",
     "help": "Yardım Merkezi",
     "announcements": "Duyurular",
     "start": "Başlat",
@@ -463,7 +463,7 @@
                 "Hesap {confirmationCount} ağ onayından sonra güncellenecektir. Lütfen bekleyin.",
                 "Lütfen doğru mainneti seçin, yoksa kaybolan tokenları geri alamazsınız."
             ],
-            "selectNetwork": "Select Network"
+            "selectNetwork": "Ağ Seçin"
         },
         "viteTips": "VITE, yalnızca yeni ERC20 VITE tokenı ile Native VITE Coin arasındaki cross-chain işlevselliğini destekler.",
         "withdraw": {
