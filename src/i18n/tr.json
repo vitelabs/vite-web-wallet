@@ -665,7 +665,7 @@
             "txt1": "[Kayıtlı Düğüm Sayısı] Mevcut adresle kaydedilen tam düğüm sayısı",
             "txt2": "[Etkin Düğüm Sayısı] Mevcut adresle kaydedilen etkin tam düğüm sayısı",
             "txt3": "[Ödüllendirme düğümlerinin sayısı] Ödüllendirilen düğüm sayısı",
-            "t2": "Multiple Full nodes can be registered with the same address, but must be staked individually at least 10,000 VITE each; When calculating Active Node Reward, if staking amount / 10000 yields a whole number that is greater than or equal to the number of active nodes, all active nodes will be rewarded; If staking amount / 10000 yields a whole number that is less than the number of active nodes, the number of nodes being rewarded equals to the whole number.",
+            "t2": "Aynı adresle birden fazla Tam düğüm kaydedilebilir, ancak her biri en az 10.000 VITE stake etmiş olmalıdır; Aktif Düğüm Ödülü hesaplanırken, stake miktarı / 10000, aktif düğüm sayısından büyük veya ona eşit bir tam sayı verirse, tüm aktif düğümler ödüllendirilir; Stake miktarı / 10000, aktif düğüm sayısından daha az bir tam sayı veriyorsa, ödüllendirilen düğüm sayısı tam sayıya eşittir.",
             "t3": "Oylama ödüllerinin hesaplanması düğüm sayısına değil, stake miktarına bağlıdır."
         },
         "confirmText": "{amount} VITE stake'ini onaylayın, stakeler {days} gün sonra iptal edilebilir",
@@ -700,7 +700,7 @@
         "rewardConfirm": {
             "title": "Ödülleri Topla",
             "describe1": "Her gün 13:00:00 (UTC + 8) itibarıyla güncelleme talep edilebilecek ödüller, {time} kadar toplayabilirsin",
-            "describe2": "Query mining rewards details, you can",
+            "describe2": "Madencilik ödül ayrıntılarını sorgulayabilirsiniz",
             "describe3": "buraya tıklayın",
             "describe4": "Ödüller, toplama talebinizi gönderdikten sonra Vite Web Cüzdan adresinize gönderilecektir, lütfen Cüzdan Ana Sayfasında kontrol edin. Not: Toplama işlemlerini tekrarlamayın.",
             "leftBtn": "Şimdi Değil",
@@ -730,7 +730,7 @@
             "time": "7776000 kayıt blokları （yaklaşık 90 gün)",
             "confirmBtn": "Gönder",
             "namePlaceholder": "Lütfen düğüm adı girin",
-            "nameHint": "Within 40 characters, support English letters (both upper and lower cases), numbers, '_'、'.'",
+            "nameHint": "Maksimum 40 karakter, İngilizce harfler (büyük ve küçük harf dahil), numaralar, '_'、'.' desteklenmektedir",
             "nameErr": "Bu düğüm adı illegal",
             "nameUsed": "Bu düğüm adı kullanılıyor",
             "addrPlaceholder": "Lütfen kayıt bloğu oluşturma adresini girin",
@@ -795,7 +795,7 @@
         "section2": {
             "title": "SBP adayları",
             "head": [
-                "Rank",
+                "Seviye",
                 "Düğüm Adı",
                 "Adres",
                 "Oylar",
@@ -916,7 +916,7 @@
             "notEnough": "Yetersiz exchange bakiyesi",
             "avaliable": "Bakiye",
             "inviteNum": "Davet Edildi",
-            "inviteBenifit": "Referral Mining Income",
+            "inviteBenifit": "Referans Madencilik Geliri",
             "inviteRule": "Kurallar",
             "ruleItems": [
                 "Bir davetiye kodu oluşturmak için <span class='strong'>1.000 VITE</span> ödemesi yakılacak",
@@ -952,10 +952,10 @@
         "mergeDepth": "Grup",
         "depthStep": "{step} haneli",
         "blocking": "Ağ tıkanıklığı meydana geliyor, lütfen daha sonra tekrar deneyin",
-        "supportMining": "Eligible for trading and market-making as mining",
+        "supportMining": "Market yapıcı madencilik ve alım satım için uygundur",
         "cmcHelp": "CoinMarketCap'te VITE'i Görüntüle",
-        "supportTradeMining": "Eligible for trading as mining",
-        "supportOrderMining": "Eligible for market-making as mining",
+        "supportTradeMining": "Madencilik için alım satıma uygundur",
+        "supportOrderMining": "Market yapıcı madencilik için uygundur",
         "zeroFee": "Sıfır Komisyon",
         "buyMiningPrice": "Alış fiyatı {price} 'dan yüksek olduğunda madencilik için uygundur",
         "sellMiningPrice": "Satış fiyatı {price} altında olduğunda madencilik için uygundur",
@@ -973,9 +973,9 @@
             "tokenTab": "Token Ayrıntıları",
             "operatorTab": "Operatör Ayrıntıları"
         },
-        "depthBuyMiningPrice": "Mining Range Above",
-        "depthSellMiningPrice": "Mining Range Below",
-        "inMiningRange": "Mining Range"
+        "depthBuyMiningPrice": "Madencilik Aralığının Üstünde",
+        "depthSellMiningPrice": "Madencilik Aralığının Altında",
+        "inMiningRange": "Madencilik Aralığı"
     },
     "trade": {
         "more": "Daha fazla",
@@ -1019,9 +1019,9 @@
         "head": {
             "latestPrice": "Son Fiyat",
             "updown": "24saatlik Değişim",
-            "highPrice": "24h High",
-            "lowPrice": "24h Low",
-            "quantity": "24h Volume",
+            "highPrice": "24sa En Yüksek",
+            "lowPrice": "24sa En Düşük",
+            "quantity": "24sa Hacim",
             "tokenName": "Token",
             "originalSymbol": "Sembol",
             "gateway": "Ağ geçidi",
@@ -1036,7 +1036,7 @@
             "publisherDate": "Yayınlama Tarihi",
             "type": "Durum",
             "tokenType0": "Yayınlama Mevcut",
-            "tokenType1": "Never Issued"
+            "tokenType1": "Hiç Yayınlanmadı"
         },
         "latestTx": {
             "title": "Son Emirler",
@@ -1130,14 +1130,14 @@
             "permissions": "Uygulanan Alım Satım Pariteleri",
             "createKey": "API Anahtarı oluşturun",
             "deleteKey": "API'yi sil",
-            "deleteAlert": "The current API will no longer be accessible if confirm to proceed. Existing package will be retained and re-activated upon creation of a new API Key.",
+            "deleteAlert": "Devam etmeyi onaylarsanız mevcut API'a artık erişilemez. Mevcut paket korunacak ve yeni bir API Anahtarı oluşturulduktan sonra yeniden etkinleştirilecektir.",
             "confirmDelete": "Onayla ve Sil",
             "cancel": "İptal",
             "agentAddressStakingAmount": "Delegasyon Stake Quotası",
             "staking": "Stake Et",
             "package": "Paket",
             "expireTime": "Bitiş Tarihi",
-            "callNum": "Triggers/min",
+            "callNum": "Tetikleyici/dk",
             "callNumInfo": "{maxCount} işlem/dk",
             "price": "Maliyet",
             "priceInfo": "{price} VX/ay",
@@ -1151,7 +1151,7 @@
                 "0-step2": "2. Seçilen alım satım paritelerinin delegasyonuna izin verin",
                 "0-step3": "3. API delegasyon adresi için quota stake edin",
                 "0-step4": "Daha fazla destek için <a href=\"https://vite.wiki/dex/api/dex-apis.html\" target=\"_blank\">API Belgelerini</a> görüntüleyin",
-                "1": "One set of API Key and Secret is allowed for the same address at any given time.",
+                "1": "Herhangi bir zamanda aynı adres için bir API Anahtarı ve Şifresine izin verilir.",
                 "2": "Varlık kaybını önlemek için Erişim Anahtarınızı ve Sırrınızı İfşa Etmeyin",
                 "3": "API paketi, varsayılan olarak dakikada 10 işlem yapan ücretsiz temel paketle ayarlanmıştır, yükseltme seçenekleri mevcuttur."
             },
@@ -1353,13 +1353,13 @@
             "mining": "Madencilik Miktarı",
             "pledge": "Stake"
         },
-        "txTitle": "Trading as Mining Total Income",
-        "quotaTitle": "Staking as Mining Total Income",
+        "txTitle": "Madencilik için Toplam Alım Satım Geliri",
+        "quotaTitle": "Madencilik için Toplam Stake Geliri",
         "addHint1": "Tek stake miktarı en az 134 VITE olmalıdır",
         "addHint2": "VITE stake'i, gönderildikten hemen sonra geçerli olacaktır. Stake 3 gün sonra iptal edilebilir",
         "addHint3": "Stake edilmiş miktar 7 günlük bekleme süresinden sonra serbest bırakılacaktır",
         "withdrawHint1": "Stake iptal edildikten sonra artık VX madenciliği yapamayacaksınız",
-        "withdrawHint2": "It takes 7 days to return unstaked VITE coins to exchange balance",
+        "withdrawHint2": "Stake'i iptal edilen VITE koinlerinin exchange bakiyenize iadesi 7 gün süremektedir",
         "addTitle": "Madencilik için VITE Stake et",
         "withdrawTitle": "VITE Stake İptali",
         "addPlaceHolder": "Lütfen stake miktarını girin",
