@@ -920,10 +920,10 @@
             "inviteRule": "Kurallar",
             "ruleItems": [
                 "Bir davetiye kodu oluşturmak için <span class='strong'>1.000 VITE</span> ödemesi yakılacak",
-                "Referee will be rewarded with <span class='strong'>5%</span> of all invited users' trading as mining proceeds and <span class='strong'>2.5%</span> of all market-making as mining proceeds"
+                "Referans eden kullanıcı, davet ettiği tüm kullanıcıların madencilik için alım satım işlemlerinden <span class='strong'>%5</span> ve tüm madencilik için market yapıcılık işlemlerinden <span class='strong'>%2,5</span> ödül kazanır"
             ],
             "receiveRuleItems": [
-                "Invited users will receive an extra <span class='strong'>2.5%</span> of trading as mining rewards and <span class='strong'>1.25%</span> of market-making as mining rewards",
+                "Davet edilen kullanıcılar, madencilik için alım satım ödüllerine ek olarak <span class='strong'>%2,5</span> ve madencilik için market yapıcılık ödüllerinde ise ek <span class='strong'>%1,25</span> ödül kazanır",
                 "Bir davetiye koduyla alım satım komisyonlarında <span class='strong'>%10 </span> indirimden yararlanın"
             ]
         }
@@ -932,7 +932,7 @@
         "title": "VITE Dönüşümü",
         "help": {
             "title": "VITE Dönüşümünü Hızlı Anlama",
-            "text": "You can migrate ERC20 tokens into VITE into our TestNet by VITE conversion function. In TestNet, casting your vote for official SBPs to collect rewards, the annualized rate can reach 20%. Your ERC20 VITE tokens will be transferred to Ethereum black hole address: {blackAddr}, you will receive the same amount of VITE at your Vite address when Ethereum black hole address has received the transaction and confirmed. Once you are in the conversion process, confirm that there are enough VITE and ETH (as gas) in your Ethereum address of Vite wallet."
+            "text": "ERC20 tokenlerini VITE'e, VITE dönüştürme işleviyle TestNet'e geçirebilirsiniz. TestNet'te, ödül toplamak için resmi SBP'lere oy verirken, yıllık oran %20'ye ulaşabilir. ERC20 VITE tokenlarınız Ethereum ağında bulunan kara delik adresine aktarılacaktır: {blackAddr}, Ethereum kara delik adresine gönderiminiz onayladığında Vite adresinize aynı miktarda VITE gönderilecektir. Dönüştürme işlemine girdikten sonra, Vite cüzdanınızın Ethereum adresinizde yeterli VITE ve ETH (gas olarak) olduğundan emin olun."
         },
         "gas": "Madencilik Komisyonu",
         "record": "Dönüşüm Geçmişi",
@@ -1368,11 +1368,11 @@
         "withdrawBtn": "Stake İptalini Onayla",
         "stakingBalance": "Kullanılabilir Stake Bakiyesi",
         "hintTitle": "Önemli Uyarı",
-        "comingHint": "VX mining function is coming soon, stay tuned. You can get VX in five ways: 1. Trading as Mining, 2. Listing as Mining, 3. Referring as Mining, 4. Staking as Mining, 5. Market-making as Mining. Users who hold VX enjoy payouts from a shared dividend pool.",
+        "comingHint": "VX madencilik işlevi yakında geliyor, bizi izlemeye devam edin. Beş şekilde VX kazanabilirsiniz: 1. Madencilik için Alım Satım, 2. Madencilik için Listeleme, 3. Madencilik için Referans, 4. Madencilik için Stake, 5. Madencilik için Market Yapıcılık. VX sahibi kullanıcılar, paylaşılan bir kâr havuzundan ödeme almanın keyfini çıkarır.",
         "more": "VX madencilik kuralları hakkında daha fazla bilgi edinin",
         "fee": "Alım Satım Komisyonları",
         "todayTrade": "Madencilik Ayrıntıları",
-        "dividends": "24H Expected Mined Volume",
+        "dividends": "24SA Beklenen Madencilik Hacmi",
         "view": "Anlık Madencilik Panelini Görüntüle",
         "inviteCount": "Referanslar",
         "help": "Bu sayfada görüntülenen mevcut işlem komisyonları yalnızca% 0,2 ViteX temel işlem komisyonlarını içerir, lütfen madencilik maliyetini hesaplarken operatör komisyonlarının dikkate alınacağını unutmayın"
@@ -1430,20 +1430,20 @@
         "type": "VIP Türü"
     },
     "inviteMining": {
-        "title": "Referring as Mining Total Income",
+        "title": "Referans için Toplam Alım Satım Geliri",
         "myInviteIncome": "Referans Geliri",
         "inviteTradeIncome": "Referans Alım Satım Gelirleri",
-        "inviteOrderIncome": "Referred Market-Making Proceeds"
+        "inviteOrderIncome": "Referans Edilen Market Yapıcılık Gelirleri"
     },
     "orderMining": {
-        "title": "Market-Making as Mining Total Income",
+        "title": "Madencilik için Toplam Market Yapıcılık Geliri",
         "tbHead": {
             "date": "Tarih",
             "ratio": "Oran",
             "mining": "Miktar"
         },
         "market": "{name} Marketi",
-        "estimate": "{name} Today's Minable Amount"
+        "estimate": "{name} Bugünlük Kazılabilecek Miktar"
     },
     "tradeDividend": {
         "title": "Kar payı",
@@ -1461,18 +1461,18 @@
         "help": "Ödül Kuralları: 1. Kar payı alabilmek için en az 10 VX stake edilmelidir. 2. Stake talebinin sunulması, kar payının en yakın zamanda dağıtıma başlamasına izin verir. 3. Stake miktarı, 7 günlük bekleme süresinden sonra serbest bırakılacaktır",
         "lockedAmount": "Stake Miktarı",
         "lockAmountTips": "10 VX veya Üzeri Kar Payı Alın",
-        "unlockAmount": "Unlocking Amount",
+        "unlockAmount": "Kilidi Açılan Miktar",
         "addHint1": "Kar payı alabilmek için minimum 10 VX stake edilmelidir",
-        "addHint2": "Submission of staking request allows for dividends starting the nearest distribution",
+        "addHint2": "Stake başvuru talebi, en yakın dağıtımdan itibaren kar payı almanıza olanak sağlar",
         "addHint3": "Stake edilmiş miktar 7 günlük bekleme süresinden sonra serbest bırakılacaktır",
         "autoLock": "Otomatik Stake Et",
         "openAutoLock": {
             "title": "Otomatik Stake'i Etkinleştir",
-            "text": "Mined VX will be automatically staked once enabled"
+            "text": "Kazılan VX otomatik olarak stake edilecektir"
         },
         "closeAutoLock": {
             "title": "Otomatik Stake'i Devre Dışı Bırak",
-            "text": "Mined VX will not be automatically staked when turned off"
+            "text": "Kazım işlemi kapatıldığında, kazılan VX otomatik olarak stake edilmeyecektir"
         },
         "lock": "Stake",
         "unlock": "Stake İptali",
@@ -1497,7 +1497,7 @@
         "unlockList": {
             "title": "Geri alınıyor",
             "amount": "Miktar",
-            "time": "Available Date"
+            "time": "Geçerlilik Tarihi"
         }
     },
     "tradeOperator": {
@@ -1526,7 +1526,7 @@
         "stopTrans": "Askıya Al",
         "resetTrans": "Kurtar",
         "changeOwner": "Sahipliği Devret",
-        "changeFee": "Adjust Fee Rate",
+        "changeFee": "Düzenlenmiş Komisyon Oranı",
         "incomeList": "Gelir Ayrıntıları",
         "historyIncome": "Gelir Geçmişi",
         "openTxPair": "Alım Satım Paritelerini Aç",
@@ -1558,7 +1558,7 @@
         "confirmFee": "Komisyon",
         "currentTaker": "Alıcı",
         "txPairName": "Ad",
-        "changeFeeHint": "{symbol}'s fee into {fee}",
+        "changeFeeHint": "{symbol}'den {fee}'e komisyonu",
         "changeFeeSubmit": "{changeFeeHint} değiştirdiğinizden emin olun",
         "historyAllIncome": "Toplam Gelir",
         "incomeListHead": {
@@ -1601,14 +1601,14 @@
         "myDividendTitle": "Kar Paylarının Toplam Tahmini Değeri ({token})",
         "listTitle": "Kar Payı Ayrıntıları",
         "lockingTitle": "Stakelerim",
-        "viewLink": "Unstaking Status"
+        "viewLink": "Stake İptal Durumu"
     },
     "mobileMining": {
         "title": "Madencilik",
         "miningTrade": "Alım Satım",
         "miningStaking": "Alım Satım",
         "miningInvite": "Referans",
-        "miningOrder": "Market-Making",
+        "miningOrder": "Market Yapıcı",
         "tradeTotalIncome": "Toplam Gelir ({token})",
         "stakingTotalIncome": "Toplam Gelir ({token})",
         "inviteTotalIncome": "Toplam Gelir ({token})",
@@ -1617,7 +1617,7 @@
         "listTitle": "Madencilik Geçmişi",
         "viewLink": "Anlık Madencilik Paneli",
         "inviteTradeIncome": "Referans Alım Satım Ayrıntıları",
-        "inviteOrderIncome": "Referred Market-Making Details",
+        "inviteOrderIncome": "Referans Edilen Market Yapıcılık Ayrıntıları",
         "myStaking": "Stakelerim"
     },
     "mobileBottomBar": {
