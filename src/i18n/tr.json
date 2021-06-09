@@ -465,7 +465,7 @@
             ],
             "selectNetwork": "Ağ Seçin"
         },
-        "viteTips": "VITE, yalnızca yeni ERC20 VITE tokenı ile Native VITE Coin arasındaki cross-chain işlevselliğini destekler.",
+        "viteTips": "VITE only supports cross-chain functionality between the new ERC20 VITE (Contract Address: 0xadd5E881984783dD432F80381Fb52F45B53f3e70), BEP20 VITE and Native VITE Coin.",
         "withdraw": {
             "title": "Cross-Chain Çekme",
             "btn": "Çekme",
