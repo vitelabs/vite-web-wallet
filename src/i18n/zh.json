@@ -460,7 +460,7 @@
             ],
             "selectNetwork": "選擇主網"
         },
-        "viteTips": "VITE 僅支持新ERC20 VITE與Native VITE之間跨鏈。",
+        "viteTips": "VITE 僅支持新ERC20 VITE（合約地址：0xadd5E881984783dD432F80381Fb52F45B53f3e70），BEP20 VITE 與Native VITE之間跨鏈。",
         "withdraw": {
             "title": "跨鏈轉出",
             "balanceErrMap": {
