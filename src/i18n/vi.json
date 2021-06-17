@@ -334,7 +334,7 @@
             "availableExAmount": "Số dư khả dụng Sàn",
             "balanceTips": "Gửi on-chain khả dụng cho những người dùng muốn gửi giao dịch từ ví Vite của bạn đến các địa chỉ Vite khác",
             "gateTips": "Trong phần \bcross-chain này, bạn có thể đổi coin/token khác vào mạng Vite. Nhấp vào nút 'Gửi tiền' để gửi tài sản vào Ví Vite của bạn. Nhấp vào nút 'Rút tiền' để chuyển tài sản của bạn sang các nền tảng khác. *Quá trình rút/nạp cross-chain có thể mất phí, và có giới hạn khi chuyển tiền.",
-            "availableExAmountTips": "Bạn có thể chuyển tài sản của mình giữa Vite Wallet và ViteX Exchange bằng cách nhấp vào nút 'Chuyển'. Không có phí giao dịch nào gây ra trong quá trình này.",
+            "availableExAmountTips": "Bạn có thể chuyển tài sản của mình giữa Vite Wallet và ViteX Exchange bằng cách nhấp vào nút 'Chuyển'. Thao tác này không phát sinh phí.",
             "unreceivedTips": "Các khoản chưa nhận sẽ được tự động nhận sau khi đăng nhập"
         },
         "actionType": {
