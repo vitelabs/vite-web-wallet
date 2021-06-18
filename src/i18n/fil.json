@@ -1,5 +1,5 @@
 {
-    "lang": "FIL",
+    "lang": "Ingles",
     "help": "Sentro ng Tulong",
     "announcements": "Mga Anunsyo",
     "start": "Simula",
@@ -462,9 +462,10 @@
                 "Maaari mo lamang ideposito ang {tokenSymbol} sa pamamagitan ng address na ibinigay sa ibaba. Hindi hihigit sa {min} {tokenSymbol} ang tatanggapin.",
                 "Mag-a-update ang account pagkatapos ng kumpirmasyon ng network ng {confirmationCount}. Mangyaring pakihintay lang po.",
                 "Mangyaring piliin ang tamang mainnet o hindi mo makukuha ang anumang mga nawalang token."
-            ]
+            ],
+            "selectNetwork": "Select Network"
         },
-        "viteTips": "Sinusuportahan lamang ng VITE ang pag-andar ng cross-chain sa pagitan ng bagong token ng ERC20 VITE at Native VITE Coin.",
+        "viteTips": "VITE only supports cross-chain functionality between the new ERC20 VITE (Contract Address: 0xadd5E881984783dD432F80381Fb52F45B53f3e70), BEP20 VITE and Native VITE Coin.",
         "withdraw": {
             "title": "Pag-Withdraw sa Cross-Chain",
             "btn": "Pag-withdraw",
