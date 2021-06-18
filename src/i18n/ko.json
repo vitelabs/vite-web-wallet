@@ -1,5 +1,5 @@
 {
-    "lang": "한국어",
+    "lang": "English",
     "help": "도움말",
     "announcements": "공지",
     "start": "시작하기",
@@ -66,7 +66,7 @@
         "insuffQuotaMsg2": "스테이킹한 VITE가 없으면 주소 당 하루에 {powMaxTimes} 만 거래 할 수 있습니다. 귀하의 주소는 모든 {powMaxTimes} 거래를 소진했습니다. 더 많은 거래를 수행하려면 쿼타 페이지로 이동하여 VITE를 스테이킹 해주세요.",
         "getQuota": "VITE 락업하기",
         "skip": "PoW 운영하기",
-        "cancel": "취소하기"
+        "cancel": "취소"
     },
     "addAccount": "계정 생성하기",
     "saveQrcode": "QR코드 이미지 저장하기",
@@ -339,14 +339,14 @@
         },
         "actionType": {
             "SEND": "전송",
-            "RECEIVE": "수령하기",
-            "CHARGE": "수령하기",
-            "WITHDRAW": "전송",
+            "RECEIVE": "입금",
+            "CHARGE": "입금",
+            "WITHDRAW": "출금",
             "EXTRANSFER": "전송하기",
             "EXRECRODS": "내역",
             "RECRODS": "내역",
-            "EXCHARGE": "입금하기",
-            "EXWITHDRAW": "출금하기"
+            "EXCHARGE": "입금",
+            "EXWITHDRAW": "출금"
         },
         "transferConfirm": {
             "from": "발신자",
@@ -358,7 +358,7 @@
         "addToken": {
             "title": "토큰 추가",
             "placeholder": "토큰명 혹은 토큰ID를 입력해주세요.",
-            "lTxt": "취소하기",
+            "lTxt": "취소",
             "rTxt": "추가하기"
         },
         "type": {
@@ -462,12 +462,13 @@
                 "Cross-Chain Receive operation will do {tokenSymbol} Cross-Chain mapping to VITE network, you can still transfer the assets to other platform after receiving them",
                 "이 주소를 통해서만 {tokenSymbol}을 보낼 수 있으며 금액은 {min}보다 작을 수 없습니다",
                 "{confirmationCount} 확인 후 자산이 입금됩니다.  조금만 기다려주세요"
-            ]
+            ],
+            "selectNetwork": "Select Network"
         },
-        "viteTips": "VITE는 새로운 ERC20 VITE 토큰과 네이티브 VITE 코인 간의 크로스체인 기능만 지원합니다.",
+        "viteTips": "VITE only supports cross-chain functionality between the new ERC20 VITE (Contract Address: 0xadd5E881984783dD432F80381Fb52F45B53f3e70), BEP20 VITE and Native VITE Coin.",
         "withdraw": {
             "title": "Cross-Chain Send Funds",
-            "btn": "출금하기",
+            "btn": "출금",
             "balanceErrMap": {
                 "notEnough": "자산이 부족합니다",
                 "overMax": "Send amount should be less than {max}",
@@ -541,7 +542,7 @@
         "mint": "확인",
         "tokenList": "발행된 토큰",
         "submit": "제출하기",
-        "cancel": "취소하기",
+        "cancel": "취소",
         "getListFail": "토큰 목록을 얻을 수 없습니다. 나중에 다시 시도하십시오",
         "mintageConfirm": {
             "title": "토큰 발행 정보를 확인하세요",
@@ -1322,7 +1323,7 @@
                 "statusMap": {
                     "1": "주문중",
                     "2": "완료되었습니다",
-                    "3": "취소되었습니다",
+                    "3": "취소됨",
                     "4": "실패했습니다"
                 },
                 "detail": "상세정보"
@@ -1379,7 +1380,7 @@
     "tradeVip": {
         "title": "VIP 상태",
         "open": "VIP되기",
-        "cancel": "취소하기 {type}",
+        "cancel": "취소 {type}",
         "help": {
             "title": "ViteX VIP에 대하여"
         },
@@ -1391,7 +1392,7 @@
             "txt3": "SVIP는 유효한 계정 주소에 대한 스테이킹을 지원합니다. 유효한 계정 주소가 SVIP가 될 수 있게 스테이킹 하기!"
         },
         "vipConfirm": {
-            "cancelVip": "VIP 취소하기",
+            "cancelVip": "VIP 취소",
             "openVip": "VIP되기",
             "openStakingAmount": "VIP가 되기 위한 스테이킹 수량",
             "cancelStakingAmount": "스테이킹 가능한 잔액",
@@ -1418,7 +1419,7 @@
             "cancelHint": "SVIP 권한은 스테이킹이 취소되면 중단됩니다.",
             "openSuccess": "신청에 성공했습니다! SVIP 상태는 곧 적용됩니다.",
             "openFail": "SVIP 신청에 실패했습니다.",
-            "cancelSuccess": "SVIP 취소하기",
+            "cancelSuccess": "SVIP를 취소했습니다",
             "cancelFail": "취소에 실패했습니다",
             "address": "SVIP 활성화",
             "addressPlaceholder": "SVIP 상태로 활성화 할 주소",

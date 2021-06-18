@@ -1,5 +1,5 @@
 {
-    "lang": "日本語",
+    "lang": "English",
     "help": "ヘルプ",
     "announcements": "Announcements",
     "start": "開始",
@@ -462,9 +462,10 @@
                 "Cross-Chain Receive operation will do {tokenSymbol} Cross-Chain mapping to VITE network, you can still transfer the assets to other platform after receiving them",
                 "このアドレスから送信できるのは{tokenSymbol}のみで、金額は{min}未満にできません",
                 "{confirmationCount}の確認後にアセットを受け取ります しばらくお待ちください"
-            ]
+            ],
+            "selectNetwork": "Select Network"
         },
-        "viteTips": "VITE only supports cross-chain functionality between the new ERC20 VITE token and Native VITE Coin.",
+        "viteTips": "VITE only supports cross-chain functionality between the new ERC20 VITE (Contract Address: 0xadd5E881984783dD432F80381Fb52F45B53f3e70), BEP20 VITE and Native VITE Coin.",
         "withdraw": {
             "title": "Cross-Chain Send Funds",
             "btn": "引き出し",

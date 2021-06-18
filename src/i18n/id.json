@@ -1,5 +1,5 @@
 {
-    "lang": "Indonesia",
+    "lang": "English",
     "help": "Bantuan",
     "announcements": "Announcements",
     "start": "Mulai",
@@ -462,9 +462,10 @@
                 "Cross-Chain Receive operation will do {tokenSymbol} Cross-Chain mapping to VITE network, you can still transfer the assets to other platform after receiving them",
                 "Anda hanya dapat mengirim {tokenSymbol} melalui alamat ini dan jumlahnya tidak boleh kurang dari {min}",
                 "Anda akan menerima aset Anda setelah {confirmationCount} konfirmasi, silakan tunggu"
-            ]
+            ],
+            "selectNetwork": "Select Network"
         },
-        "viteTips": "VITE only supports cross-chain functionality between the new ERC20 VITE token and Native VITE Coin.",
+        "viteTips": "VITE only supports cross-chain functionality between the new ERC20 VITE (Contract Address: 0xadd5E881984783dD432F80381Fb52F45B53f3e70), BEP20 VITE and Native VITE Coin.",
         "withdraw": {
             "title": "Cross-Chain Send Funds",
             "btn": "Penarikan",

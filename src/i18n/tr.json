@@ -1,5 +1,5 @@
 {
-    "lang": "EN",
+    "lang": "İngilizce",
     "help": "Yardım Merkezi",
     "announcements": "Duyurular",
     "start": "Başlat",
@@ -462,9 +462,10 @@
                 "Yalnızca aşağıda verilen adresten {tokenSymbol} yatırabilirsiniz. En az {min} {tokenSymbol} kabul edilecektir.",
                 "Hesap {confirmationCount} ağ onayından sonra güncellenecektir. Lütfen bekleyin.",
                 "Lütfen doğru mainneti seçin, yoksa kaybolan tokenları geri alamazsınız."
-            ]
+            ],
+            "selectNetwork": "Ağ Seçin"
         },
-        "viteTips": "VITE, yalnızca yeni ERC20 VITE tokenı ile Native VITE Coin arasındaki cross-chain işlevselliğini destekler.",
+        "viteTips": "VITE only supports cross-chain functionality between the new ERC20 VITE (Contract Address: 0xadd5E881984783dD432F80381Fb52F45B53f3e70), BEP20 VITE and Native VITE Coin.",
         "withdraw": {
             "title": "Cross-Chain Çekme",
             "btn": "Çekme",
@@ -664,7 +665,7 @@
             "txt1": "[Kayıtlı Düğüm Sayısı] Mevcut adresle kaydedilen tam düğüm sayısı",
             "txt2": "[Etkin Düğüm Sayısı] Mevcut adresle kaydedilen etkin tam düğüm sayısı",
             "txt3": "[Ödüllendirme düğümlerinin sayısı] Ödüllendirilen düğüm sayısı",
-            "t2": "Multiple Full nodes can be registered with the same address, but must be staked individually at least 10,000 VITE each; When calculating Active Node Reward, if staking amount / 10000 yields a whole number that is greater than or equal to the number of active nodes, all active nodes will be rewarded; If staking amount / 10000 yields a whole number that is less than the number of active nodes, the number of nodes being rewarded equals to the whole number.",
+            "t2": "Aynı adresle birden fazla Tam düğüm kaydedilebilir, ancak her biri en az 10.000 VITE stake etmiş olmalıdır; Aktif Düğüm Ödülü hesaplanırken, stake miktarı / 10000, aktif düğüm sayısından büyük veya ona eşit bir tam sayı verirse, tüm aktif düğümler ödüllendirilir; Stake miktarı / 10000, aktif düğüm sayısından daha az bir tam sayı veriyorsa, ödüllendirilen düğüm sayısı tam sayıya eşittir.",
             "t3": "Oylama ödüllerinin hesaplanması düğüm sayısına değil, stake miktarına bağlıdır."
         },
         "confirmText": "{amount} VITE stake'ini onaylayın, stakeler {days} gün sonra iptal edilebilir",
@@ -699,7 +700,7 @@
         "rewardConfirm": {
             "title": "Ödülleri Topla",
             "describe1": "Her gün 13:00:00 (UTC + 8) itibarıyla güncelleme talep edilebilecek ödüller, {time} kadar toplayabilirsin",
-            "describe2": "Query mining rewards details, you can",
+            "describe2": "Madencilik ödül ayrıntılarını sorgulayabilirsiniz",
             "describe3": "buraya tıklayın",
             "describe4": "Ödüller, toplama talebinizi gönderdikten sonra Vite Web Cüzdan adresinize gönderilecektir, lütfen Cüzdan Ana Sayfasında kontrol edin. Not: Toplama işlemlerini tekrarlamayın.",
             "leftBtn": "Şimdi Değil",
@@ -729,7 +730,7 @@
             "time": "7776000 kayıt blokları （yaklaşık 90 gün)",
             "confirmBtn": "Gönder",
             "namePlaceholder": "Lütfen düğüm adı girin",
-            "nameHint": "Within 40 characters, support English letters (both upper and lower cases), numbers, '_'、'.'",
+            "nameHint": "Maksimum 40 karakter, İngilizce harfler (büyük ve küçük harf dahil), numaralar, '_'、'.' desteklenmektedir",
             "nameErr": "Bu düğüm adı illegal",
             "nameUsed": "Bu düğüm adı kullanılıyor",
             "addrPlaceholder": "Lütfen kayıt bloğu oluşturma adresini girin",
@@ -794,7 +795,7 @@
         "section2": {
             "title": "SBP adayları",
             "head": [
-                "Rank",
+                "Seviye",
                 "Düğüm Adı",
                 "Adres",
                 "Oylar",
@@ -915,14 +916,14 @@
             "notEnough": "Yetersiz exchange bakiyesi",
             "avaliable": "Bakiye",
             "inviteNum": "Davet Edildi",
-            "inviteBenifit": "Referral Mining Income",
+            "inviteBenifit": "Referans Madencilik Geliri",
             "inviteRule": "Kurallar",
             "ruleItems": [
                 "Bir davetiye kodu oluşturmak için <span class='strong'>1.000 VITE</span> ödemesi yakılacak",
-                "Referee will be rewarded with <span class='strong'>5%</span> of all invited users' trading as mining proceeds and <span class='strong'>2.5%</span> of all market-making as mining proceeds"
+                "Referans eden kullanıcı, davet ettiği tüm kullanıcıların madencilik için alım satım işlemlerinden <span class='strong'>%5</span> ve tüm madencilik için market yapıcılık işlemlerinden <span class='strong'>%2,5</span> ödül kazanır"
             ],
             "receiveRuleItems": [
-                "Invited users will receive an extra <span class='strong'>2.5%</span> of trading as mining rewards and <span class='strong'>1.25%</span> of market-making as mining rewards",
+                "Davet edilen kullanıcılar, madencilik için alım satım ödüllerine ek olarak <span class='strong'>%2,5</span> ve madencilik için market yapıcılık ödüllerinde ise ek <span class='strong'>%1,25</span> ödül kazanır",
                 "Bir davetiye koduyla alım satım komisyonlarında <span class='strong'>%10 </span> indirimden yararlanın"
             ]
         }
@@ -931,7 +932,7 @@
         "title": "VITE Dönüşümü",
         "help": {
             "title": "VITE Dönüşümünü Hızlı Anlama",
-            "text": "You can migrate ERC20 tokens into VITE into our TestNet by VITE conversion function. In TestNet, casting your vote for official SBPs to collect rewards, the annualized rate can reach 20%. Your ERC20 VITE tokens will be transferred to Ethereum black hole address: {blackAddr}, you will receive the same amount of VITE at your Vite address when Ethereum black hole address has received the transaction and confirmed. Once you are in the conversion process, confirm that there are enough VITE and ETH (as gas) in your Ethereum address of Vite wallet."
+            "text": "ERC20 tokenlerini VITE'e, VITE dönüştürme işleviyle TestNet'e geçirebilirsiniz. TestNet'te, ödül toplamak için resmi SBP'lere oy verirken, yıllık oran %20'ye ulaşabilir. ERC20 VITE tokenlarınız Ethereum ağında bulunan kara delik adresine aktarılacaktır: {blackAddr}, Ethereum kara delik adresine gönderiminiz onayladığında Vite adresinize aynı miktarda VITE gönderilecektir. Dönüştürme işlemine girdikten sonra, Vite cüzdanınızın Ethereum adresinizde yeterli VITE ve ETH (gas olarak) olduğundan emin olun."
         },
         "gas": "Madencilik Komisyonu",
         "record": "Dönüşüm Geçmişi",
@@ -951,10 +952,10 @@
         "mergeDepth": "Grup",
         "depthStep": "{step} haneli",
         "blocking": "Ağ tıkanıklığı meydana geliyor, lütfen daha sonra tekrar deneyin",
-        "supportMining": "Eligible for trading and market-making as mining",
+        "supportMining": "Market yapıcı madencilik ve alım satım için uygundur",
         "cmcHelp": "CoinMarketCap'te VITE'i Görüntüle",
-        "supportTradeMining": "Eligible for trading as mining",
-        "supportOrderMining": "Eligible for market-making as mining",
+        "supportTradeMining": "Madencilik için alım satıma uygundur",
+        "supportOrderMining": "Market yapıcı madencilik için uygundur",
         "zeroFee": "Sıfır Komisyon",
         "buyMiningPrice": "Alış fiyatı {price} 'dan yüksek olduğunda madencilik için uygundur",
         "sellMiningPrice": "Satış fiyatı {price} altında olduğunda madencilik için uygundur",
@@ -972,9 +973,9 @@
             "tokenTab": "Token Ayrıntıları",
             "operatorTab": "Operatör Ayrıntıları"
         },
-        "depthBuyMiningPrice": "Mining Range Above",
-        "depthSellMiningPrice": "Mining Range Below",
-        "inMiningRange": "Mining Range"
+        "depthBuyMiningPrice": "Madencilik Aralığının Üstünde",
+        "depthSellMiningPrice": "Madencilik Aralığının Altında",
+        "inMiningRange": "Madencilik Aralığı"
     },
     "trade": {
         "more": "Daha fazla",
@@ -1018,9 +1019,9 @@
         "head": {
             "latestPrice": "Son Fiyat",
             "updown": "24saatlik Değişim",
-            "highPrice": "24h High",
-            "lowPrice": "24h Low",
-            "quantity": "24h Volume",
+            "highPrice": "24sa En Yüksek",
+            "lowPrice": "24sa En Düşük",
+            "quantity": "24sa Hacim",
             "tokenName": "Token",
             "originalSymbol": "Sembol",
             "gateway": "Ağ geçidi",
@@ -1035,7 +1036,7 @@
             "publisherDate": "Yayınlama Tarihi",
             "type": "Durum",
             "tokenType0": "Yayınlama Mevcut",
-            "tokenType1": "Never Issued"
+            "tokenType1": "Hiç Yayınlanmadı"
         },
         "latestTx": {
             "title": "Son Emirler",
@@ -1129,14 +1130,14 @@
             "permissions": "Uygulanan Alım Satım Pariteleri",
             "createKey": "API Anahtarı oluşturun",
             "deleteKey": "API'yi sil",
-            "deleteAlert": "The current API will no longer be accessible if confirm to proceed. Existing package will be retained and re-activated upon creation of a new API Key.",
+            "deleteAlert": "Devam etmeyi onaylarsanız mevcut API'a artık erişilemez. Mevcut paket korunacak ve yeni bir API Anahtarı oluşturulduktan sonra yeniden etkinleştirilecektir.",
             "confirmDelete": "Onayla ve Sil",
             "cancel": "İptal",
             "agentAddressStakingAmount": "Delegasyon Stake Quotası",
             "staking": "Stake Et",
             "package": "Paket",
             "expireTime": "Bitiş Tarihi",
-            "callNum": "Triggers/min",
+            "callNum": "Tetikleyici/dk",
             "callNumInfo": "{maxCount} işlem/dk",
             "price": "Maliyet",
             "priceInfo": "{price} VX/ay",
@@ -1150,7 +1151,7 @@
                 "0-step2": "2. Seçilen alım satım paritelerinin delegasyonuna izin verin",
                 "0-step3": "3. API delegasyon adresi için quota stake edin",
                 "0-step4": "Daha fazla destek için <a href=\"https://vite.wiki/dex/api/dex-apis.html\" target=\"_blank\">API Belgelerini</a> görüntüleyin",
-                "1": "One set of API Key and Secret is allowed for the same address at any given time.",
+                "1": "Herhangi bir zamanda aynı adres için bir API Anahtarı ve Şifresine izin verilir.",
                 "2": "Varlık kaybını önlemek için Erişim Anahtarınızı ve Sırrınızı İfşa Etmeyin",
                 "3": "API paketi, varsayılan olarak dakikada 10 işlem yapan ücretsiz temel paketle ayarlanmıştır, yükseltme seçenekleri mevcuttur."
             },
@@ -1352,13 +1353,13 @@
             "mining": "Madencilik Miktarı",
             "pledge": "Stake"
         },
-        "txTitle": "Trading as Mining Total Income",
-        "quotaTitle": "Staking as Mining Total Income",
+        "txTitle": "Madencilik için Toplam Alım Satım Geliri",
+        "quotaTitle": "Madencilik için Toplam Stake Geliri",
         "addHint1": "Tek stake miktarı en az 134 VITE olmalıdır",
         "addHint2": "VITE stake'i, gönderildikten hemen sonra geçerli olacaktır. Stake 3 gün sonra iptal edilebilir",
         "addHint3": "Stake edilmiş miktar 7 günlük bekleme süresinden sonra serbest bırakılacaktır",
         "withdrawHint1": "Stake iptal edildikten sonra artık VX madenciliği yapamayacaksınız",
-        "withdrawHint2": "It takes 7 days to return unstaked VITE coins to exchange balance",
+        "withdrawHint2": "Stake'i iptal edilen VITE koinlerinin exchange bakiyenize iadesi 7 gün süremektedir",
         "addTitle": "Madencilik için VITE Stake et",
         "withdrawTitle": "VITE Stake İptali",
         "addPlaceHolder": "Lütfen stake miktarını girin",
@@ -1367,11 +1368,11 @@
         "withdrawBtn": "Stake İptalini Onayla",
         "stakingBalance": "Kullanılabilir Stake Bakiyesi",
         "hintTitle": "Önemli Uyarı",
-        "comingHint": "VX mining function is coming soon, stay tuned. You can get VX in five ways: 1. Trading as Mining, 2. Listing as Mining, 3. Referring as Mining, 4. Staking as Mining, 5. Market-making as Mining. Users who hold VX enjoy payouts from a shared dividend pool.",
+        "comingHint": "VX madencilik işlevi yakında geliyor, bizi izlemeye devam edin. Beş şekilde VX kazanabilirsiniz: 1. Madencilik için Alım Satım, 2. Madencilik için Listeleme, 3. Madencilik için Referans, 4. Madencilik için Stake, 5. Madencilik için Market Yapıcılık. VX sahibi kullanıcılar, paylaşılan bir kâr havuzundan ödeme almanın keyfini çıkarır.",
         "more": "VX madencilik kuralları hakkında daha fazla bilgi edinin",
         "fee": "Alım Satım Komisyonları",
         "todayTrade": "Madencilik Ayrıntıları",
-        "dividends": "24H Expected Mined Volume",
+        "dividends": "24SA Beklenen Madencilik Hacmi",
         "view": "Anlık Madencilik Panelini Görüntüle",
         "inviteCount": "Referanslar",
         "help": "Bu sayfada görüntülenen mevcut işlem komisyonları yalnızca% 0,2 ViteX temel işlem komisyonlarını içerir, lütfen madencilik maliyetini hesaplarken operatör komisyonlarının dikkate alınacağını unutmayın"
@@ -1429,20 +1430,20 @@
         "type": "VIP Türü"
     },
     "inviteMining": {
-        "title": "Referring as Mining Total Income",
+        "title": "Referans için Toplam Alım Satım Geliri",
         "myInviteIncome": "Referans Geliri",
         "inviteTradeIncome": "Referans Alım Satım Gelirleri",
-        "inviteOrderIncome": "Referred Market-Making Proceeds"
+        "inviteOrderIncome": "Referans Edilen Market Yapıcılık Gelirleri"
     },
     "orderMining": {
-        "title": "Market-Making as Mining Total Income",
+        "title": "Madencilik için Toplam Market Yapıcılık Geliri",
         "tbHead": {
             "date": "Tarih",
             "ratio": "Oran",
             "mining": "Miktar"
         },
         "market": "{name} Marketi",
-        "estimate": "{name} Today's Minable Amount"
+        "estimate": "{name} Bugünlük Kazılabilecek Miktar"
     },
     "tradeDividend": {
         "title": "Kar payı",
@@ -1460,18 +1461,18 @@
         "help": "Ödül Kuralları: 1. Kar payı alabilmek için en az 10 VX stake edilmelidir. 2. Stake talebinin sunulması, kar payının en yakın zamanda dağıtıma başlamasına izin verir. 3. Stake miktarı, 7 günlük bekleme süresinden sonra serbest bırakılacaktır",
         "lockedAmount": "Stake Miktarı",
         "lockAmountTips": "10 VX veya Üzeri Kar Payı Alın",
-        "unlockAmount": "Unlocking Amount",
+        "unlockAmount": "Kilidi Açılan Miktar",
         "addHint1": "Kar payı alabilmek için minimum 10 VX stake edilmelidir",
-        "addHint2": "Submission of staking request allows for dividends starting the nearest distribution",
+        "addHint2": "Stake başvuru talebi, en yakın dağıtımdan itibaren kar payı almanıza olanak sağlar",
         "addHint3": "Stake edilmiş miktar 7 günlük bekleme süresinden sonra serbest bırakılacaktır",
         "autoLock": "Otomatik Stake Et",
         "openAutoLock": {
             "title": "Otomatik Stake'i Etkinleştir",
-            "text": "Mined VX will be automatically staked once enabled"
+            "text": "Kazılan VX otomatik olarak stake edilecektir"
         },
         "closeAutoLock": {
             "title": "Otomatik Stake'i Devre Dışı Bırak",
-            "text": "Mined VX will not be automatically staked when turned off"
+            "text": "Kazım işlemi kapatıldığında, kazılan VX otomatik olarak stake edilmeyecektir"
         },
         "lock": "Stake",
         "unlock": "Stake İptali",
@@ -1496,7 +1497,7 @@
         "unlockList": {
             "title": "Geri alınıyor",
             "amount": "Miktar",
-            "time": "Available Date"
+            "time": "Geçerlilik Tarihi"
         }
     },
     "tradeOperator": {
@@ -1525,7 +1526,7 @@
         "stopTrans": "Askıya Al",
         "resetTrans": "Kurtar",
         "changeOwner": "Sahipliği Devret",
-        "changeFee": "Adjust Fee Rate",
+        "changeFee": "Düzenlenmiş Komisyon Oranı",
         "incomeList": "Gelir Ayrıntıları",
         "historyIncome": "Gelir Geçmişi",
         "openTxPair": "Alım Satım Paritelerini Aç",
@@ -1557,7 +1558,7 @@
         "confirmFee": "Komisyon",
         "currentTaker": "Alıcı",
         "txPairName": "Ad",
-        "changeFeeHint": "{symbol}'s fee into {fee}",
+        "changeFeeHint": "{symbol}'den {fee}'e komisyonu",
         "changeFeeSubmit": "{changeFeeHint} değiştirdiğinizden emin olun",
         "historyAllIncome": "Toplam Gelir",
         "incomeListHead": {
@@ -1600,14 +1601,14 @@
         "myDividendTitle": "Kar Paylarının Toplam Tahmini Değeri ({token})",
         "listTitle": "Kar Payı Ayrıntıları",
         "lockingTitle": "Stakelerim",
-        "viewLink": "Unstaking Status"
+        "viewLink": "Stake İptal Durumu"
     },
     "mobileMining": {
         "title": "Madencilik",
         "miningTrade": "Alım Satım",
         "miningStaking": "Alım Satım",
         "miningInvite": "Referans",
-        "miningOrder": "Market-Making",
+        "miningOrder": "Market Yapıcı",
         "tradeTotalIncome": "Toplam Gelir ({token})",
         "stakingTotalIncome": "Toplam Gelir ({token})",
         "inviteTotalIncome": "Toplam Gelir ({token})",
@@ -1616,7 +1617,7 @@
         "listTitle": "Madencilik Geçmişi",
         "viewLink": "Anlık Madencilik Paneli",
         "inviteTradeIncome": "Referans Alım Satım Ayrıntıları",
-        "inviteOrderIncome": "Referred Market-Making Details",
+        "inviteOrderIncome": "Referans Edilen Market Yapıcılık Ayrıntıları",
         "myStaking": "Stakelerim"
     },
     "mobileBottomBar": {
