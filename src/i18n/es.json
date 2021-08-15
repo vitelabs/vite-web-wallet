@@ -1,98 +1,98 @@
 {
     "lang": "English",
     "help": "Centro de ayuda",
-    "announcements": "Announcements",
-    "start": "Start",
-    "login": "Log In",
-    "regAcc": "Register",
-    "unlockAcc": "Unlock",
-    "changeAcc": "Switch Account",
-    "existingAcc": "Existing Accounts",
-    "restore": "Import Mnemonic Words",
-    "register": "Sign Up",
-    "createAcc": "Create",
-    "settingAcc": "Setting Account",
-    "resetAcc": "Reset Your Account",
-    "logout": "Logout",
-    "saveLogout": "Logout",
-    "blockHeight": "Snapshot Block Height",
-    "accountName": "Account Name",
-    "action": "Action",
-    "stakingAmount": "Staking Amount",
-    "submitStaking": "Submit Staking",
-    "withdrawHeight": "Expected Snapshot Height",
-    "balance": "Balance",
-    "dexBalance": "ViteX Balance",
-    "addrName": "Address{index}",
-    "true": "true",
-    "false": "false",
+    "announcements": "Anuncios",
+    "start": "Comenzar",
+    "login": "Inicia Sesión",
+    "regAcc": "Registrarse",
+    "unlockAcc": "Desbloquear",
+    "changeAcc": "Cambiar cuenta",
+    "existingAcc": "Cuentas Existentes",
+    "restore": "Importar palabras mnemónicas",
+    "register": "Registrarse",
+    "createAcc": "Crear",
+    "settingAcc": "Configurando cuenta",
+    "resetAcc": "Restablecer tu cuenta",
+    "logout": "Cerrar sesión",
+    "saveLogout": "Cerrar sesión",
+    "blockHeight": "Instantánea de altura de bloque",
+    "accountName": "Nombre de la cuenta",
+    "action": "Acción",
+    "stakingAmount": "Cantidad bloqueada",
+    "submitStaking": "Confirmar bloqueo",
+    "withdrawHeight": "Instantánea de altura esperada",
+    "balance": "Saldo",
+    "dexBalance": "Saldo ViteX",
+    "addrName": "Dirección{index}",
+    "true": "verdadero",
+    "false": "falso",
     "guide": {
-        "close": "Close",
-        "next": "Next",
-        "closeTips": "Skip user guide (Not recommended)",
+        "close": "Cerrar",
+        "next": "Siguiente",
+        "closeTips": "Saltar guía de usuario (No recomendado)",
         "trade": [
-            "Manage your assets (both Web Wallet and ViteX exchange) here",
-            "Check out Open Orders and Order History, know trading details",
-            "Participate in mining, acquire VX and trading fee dividends (Mining Dividends)",
-            "Experience more features: Staking for Quota, becoming a SBP (Snapshot Block Producer) runner, Voting for SBPs, ERC20 conversion, Transaction Details, etc."
+            "Administre sus activos (tanto en billetera Web como en Exchange ViteX) aquí",
+            "Revisa las órdenes abiertas e historial de ordenes, conoce los detalles de comercio",
+            "Participa en la minería, obtén VX como recompensa debida a las comisiones por comerciar (Minado a través del comercio)",
+            "Experiencia y características: bloquear para cuotas, bloquear para convertirse en SBP (Snapshot Block Producer), Votar por un SBPs, conversión a ERC20, Detalles de transacción, etc."
         ],
         "assets": [
-            "Deposit to Exchange",
-            "Withdraw to Wallet",
-            "Cross-Chain Deposit & Withdrawal"
+            "Depositar al Exchange",
+            "Retirar a billetera",
+            "Depósito y retiros cross-chain"
         ]
     },
     "dealReminder": {
         "title": {
-            "buy": "Buy Order Completed: {ftoken} / {ttoken}",
-            "sell": "Sell Order Completed: {ftoken} / {ttoken}"
+            "buy": "Orden de compra completada: {ftoken} / {ttoken}",
+            "sell": "Orden de venta completada: {ftoken} / {ttoken}"
         },
-        "failTitle": "Order Failed",
+        "failTitle": "Orden fallida",
         "notice-all": {
-            "buy": "Price: {price} {ttoken} \nAmount: {amount} {ttoken}, was completed. View Order History page for details.",
-            "sell": "Price: {price} {ttoken} \nAmount: {amount} {ttoken}, was completed. View Order History page for details."
+            "buy": "Precio: {price} {ttoken} \nMonto: {amount} {ttoken}, se ha completado. Ver el historial de pedidos para más detalles.",
+            "sell": "Precio: {price} {ttoken} \nMonto: {amount} {ttoken}, se ha completado. Ver el historial de pedidos para más detalles."
         },
         "notice-partial": {
-            "buy": "Price: {price} {ttoken} \nAmount: {amount} {ttoken}, is {executedPercent}% completed.",
-            "sell": "Price: {price} {ttoken} \nAmount: {amount} {ttoken}, is {executedPercent}% completed."
+            "buy": "Precio: {price} {ttoken} \nMonto: {amount} {ttoken}, {executedPercent}% completado.",
+            "sell": "Precio: {price} {ttoken} \nMonto: {amount} {ttoken}, {executedPercent}% completado."
         },
-        "error": "Your order {amount} {ftoken} ({ftoken}/{ttoken}) at {time} has failed. For more details, please view Order History page."
+        "error": "Su orden {amount} {ftoken} ({ftoken}/{ttoken}) en {time} ha fallado. Para más detalles, consulte la página Historial de órdenes."
     },
     "pow": {
-        "ing": "Running PoW to acquire quota",
-        "no": "You can stake VITE for quota in case you would not like to run PoW",
-        "insuffQuota": "Get Quota",
-        "insuffQuotaMsg": "We notice you have no VITE locked for Quota. Please lock VITE or if you prefer, you can run POW to get Quota.",
-        "insuffQuotaMsg2": "VITE Only {powMaxTimes} transactions can be made per day per address without staking VITE. Your address has exhausted all {powMaxTimes} transactions. Please go to the quota page and stake your VITE to perform more transactions.",
-        "getQuota": "Lock VITE",
-        "skip": "Run POW",
-        "cancel": "Cancel"
+        "ing": "Ejecutando PoW para adquirir cuota",
+        "no": "Puedes bloquear VITE por cuota en caso de que no quieras ejecutar PoW",
+        "insuffQuota": "Obtener Cuota",
+        "insuffQuotaMsg": "Notamos que no tienes bloqueado VITE para cuota. Por favor bloquee VITE o si lo prefiere, puede ejecutar el PoW para obtener cuota.",
+        "insuffQuotaMsg2": "Solo se pueden realizar {powMaxTimes} transacciones por día y por dirección sin bloquear VITE. Tu dirección ha agotado todas las {powMaxTimes} transacciones disponibles. Por favor, ve a la página de cuotas y deja bloqueado VITE para realizar más transacciones.",
+        "getQuota": "Bloquear VITE",
+        "skip": "Ejecutar el PoW",
+        "cancel": "Cancelar"
     },
-    "addAccount": "Create an Account",
-    "saveQrcode": "Save QR code image",
-    "unlockSuccess": "Unlock Success",
+    "addAccount": "Crear cuenta",
+    "saveQrcode": "Guardar imagen de código QR",
+    "unlockSuccess": "Desbloqueo correcto",
     "sendTrans": {
-        "send": "Send Transaction",
-        "symbol": "Send"
+        "send": "Enviar transacción",
+        "symbol": "Enviar"
     },
     "compliance": {
-        "text": "ViteX does not serve customers in the following countries/regions/territories: Mainland China, Hong Kong, Cuba, Iran, North Korea, Crimea, Sudan, Malaysia, Syria, USA [including all USA territories like Puerto Rico, American Samoa, Guam, Northern Mariana Island, and the US Virgin Islands (St. Croix, St. John and St. Thomas)], Bangladesh, Bolivia, Ecuador, and Kyrgyzstan. For more information, please read our Terms of Service and Privacy Policy",
-        "title": "Important Notice"
+        "text": "ViteX no atiende a clientes en los siguientes países/regiones/territorios: China continental, Hong Kong, Cuba, Irán, Corea del Norte, Crimea, Sudán, Malaysia, Syria, Estados Unidos [incluyendo todos los territorios de Estados Unidos como Puerto Rico, Samoa, Guam, Isla Mariana del Norte y las Islas Virgenes de Estados Unidos (St. Croix, St. John y St. Thomas)], Bangladesh, Bolivia, Ecuador y Kyrgyzstan. Para más información, por favor lea nuestros Términos de Servicio y Política de Privacidad",
+        "title": "Aviso importante"
     },
     "bnbConf": {
-        "title": "Important Notice",
-        "t1": "VITE Binance Listing Coming! Please vote to have VITE listed on Binance.",
-        "t2": "Voting Period: 12:00 pm Dec 12 to 12:00 pm Dec 13 (HKT)",
-        "t3": "Voting Method: Holding 50 BNB allows for 1 vote (10 votes max)",
-        "t4": "Voting Rewards: All voted users will be rewarded with an airdrop totaling 21,000,000 VITE based on executed votes.",
-        "btn": "Vote Now!!!",
-        "notice": "[Attention]: You must have 50-500 BNBs in your Binance Account starting Dec 5 and last through Dec 13 to Qualify for Voting!"
+        "title": "Aviso importante",
+        "t1": "¡Se viene el listado de VITE en Binance! Por favor, vota para que VITE aparezca en Binance.",
+        "t2": "Periodo de votación: 12:00 pm del 12/Dic al 12:00 pm del 13/Dic (HKT)",
+        "t3": "Método de votación: Tener 50 BNB permite 1 voto (10 votos máximo)",
+        "t4": "Recompensas de votación: Todos los usuarios votantes serán recompensados con un total de 21,000,000 VITE en base a sus votos ejecutados.",
+        "btn": "¡¡¡Vota ahora!!!",
+        "notice": "[Attention]: ¡Debes tener 50-500 BNBs en tu cuenta de Binance desde el 05/Dic y hasta el 13/Dic para calificar para votar!"
     },
     "errCode": {
-        "35003": "{name} ID conflict occurs, please re-submit later",
-        "35004": "Invalid parameters",
-        "35005": "Transactions are sent too frequent, please try again later",
-        "35006": "Contract method not exist",
+        "35003": "Ha ocurrido un conflicto de {name} ID, por favor vuelva a enviarlo más tarde",
+        "35004": "Parámetros no válidos",
+        "35005": "Las transacciones han sido enviadas con demasiada frecuencia, por favor inténtalo de nuevo más tarde",
+        "35006": "El método de contrato no existe",
         "35011": "Network Congestion",
         "36001": "You cannot make any transfer until you receive a transaction",
         "36002": "System verify failed, please try again later",
