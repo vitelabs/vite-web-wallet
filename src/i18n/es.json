@@ -190,27 +190,27 @@
         "copyShare": "Enlace copiado con éxito!",
         "addrFormat": "Formato de dirección incorrecto",
         "amtFormat": "Formato de cantidad incorrecto",
-        "transSucc": "Transaction successful!",
-        "insufficientBalance": "Insufficient balance",
-        "validMaxDigit": "At most {digit} decimals",
-        "nodeErr": "The full node is abnormal, please try again later.",
-        "bigger0": "Value must be greater than 0",
-        "operateSuccess": "Operation Successful",
-        "operateFail": "Operation Failed",
-        "unreceived": "Please sign in to collect unreceived funds",
-        "unreceivedNum": "Please sign in to collect unreceived funds, currently you have {number} unreceived transaction(s)"
+        "transSucc": "¡Transacción exitosa!",
+        "insufficientBalance": "Saldo insuficiente",
+        "validMaxDigit": "Como máximo {digit} decimales",
+        "nodeErr": "Full Nodo anormal, por favor inténtalo de nuevo más tarde.",
+        "bigger0": "El valor debe ser mayor que 0",
+        "operateSuccess": "Operación exitosa",
+        "operateFail": "Operación Fallida",
+        "unreceived": "Por favor, inicia sesión para recoger fondos no recibidos",
+        "unreceivedNum": "Por favor, inicia sesión para recoger fondos no recibidos, actualmente tienes {number} transacción(es) sin recibir"
     },
     "beforeUse": {
-        "title": "Read Before Use",
-        "text1": "For your funds' safety, create account function is not supported provisionally on web wallet. Please download Vite App to create account. Vite platform would like to warn you that if you visit a phishing website or lose you backup, our company cannot recover your funds.",
-        "text2": "Please note that our websites do not store your private keys or seed phrase. Therefore, you will need to restore your account via seed phrase if you decide to change browsers, clear local cookies, or change PCs.",
-        "text3": "Please take proper precautions in ensuring that you accurately record and safely store your seed phrase. Even the slightest error will result in you not being able to successfully restore your address."
+        "title": "Leer antes de usar",
+        "text1": "Por la seguridad de tus fondos, no está permitido la creación de una cuenta en la billetera web. Por favor, descarga la aplicación Vite para crear una cuenta en un dispositivo móvil. La plataforma Vite quiere advertirle que si visita un sitio web de suplantación de identidad o pierde una copia de seguridad, nuestra empresa no podrá recuperar sus fondos.",
+        "text2": "Tenga en cuenta que nuestros sitios web no almacenan sus claves privadas ni palabras de recuperación. Por lo tanto, si decide cambiar de navegador, borrar las cookies locales o cambiar su computadora, deberá restaurar su cuenta a través de palabras de recuperación.",
+        "text3": "Tome las precauciones necesarias para registrar con precisión y almacenar de forma segura sus palabras de recuperación. Incluso el más mínimo error hará que no pueda acceder a su dirección correctamente."
     },
     "preview": {
-        "t": "Version {version}",
-        "txt1": "x.vite.net is a platform integrating the Vite wallet and the ViteX exchange, launched by Vite Labs.",
-        "txt2": "You can manager and transfer assets, trade, get quota, register SBP and full node, vote, issue tokens, apply for ViteX API, authorize delegated trading, etc.",
-        "txt3": "x.vite.net supports mnemonic words, Ledger, and ViteConnect.",
+        "t": "Versión {version}",
+        "txt1": "x.vite.net es una plataforma lanzada por Vite Labs que integra la billetera Vite y el exchange ViteX.",
+        "txt2": "Puede administrar y transferir activos, comerciar, obtener cuotas, registrar SBP y un Full Nodo, votar, generar tokens, solicitar la API de ViteX, permitir la delegación para hacer transacciones, etc.",
+        "txt3": "x.vite.net soporta palabras mnemónicas, Ledger y ViteConnect.",
         "v": ""
     },
     "pwdConfirm": {
@@ -254,11 +254,11 @@
             "wrongNode": "Please enter the correct URL!",
             "changeNodeSuccess": "Have connected to new node.",
             "failedConnected": "Node connection error",
-            "inputPlaceholder": "Please enter the node url prefix with wss."
+            "inputPlaceholder": "Por favor, introduzca la url del nodo con el prefijo wss."
         },
         "triggerGate": [
-            "Close",
-            "Open"
+            "Cerrar",
+            "Apertura"
         ],
         "gateHelp": "You can customize your gateway configuration when activating this feature. Currently this feature is mainly for developers.",
         "lang": "Language",
