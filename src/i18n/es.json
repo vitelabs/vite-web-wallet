@@ -214,13 +214,13 @@
         "v": ""
     },
     "pwdConfirm": {
-        "conf": "Open password-free mode to free you from entering password during every transaction process. ",
-        "title": "Password",
-        "placeholder": "Please input wallet password",
-        "unlockAcc": "Please unlock {name} first"
+        "conf": "Habilite el modo contraseña-libre para evitar introducir la contraseña durante cada proceso de transacción. ",
+        "title": "Contraseña",
+        "placeholder": "Por favor ingrese la contraseña de la billetera",
+        "unlockAcc": "Por favor desbloquea {name} primero"
     },
     "quotaConfirm": {
-        "title": "Insufficient Quota",
+        "title": "Cuota insuficiente",
         "cancelContent": "You cannot {operate} due to insufficient TPS quota. You need to stake VITE for quota to {operate}",
         "goQuota": "Stake VITE",
         "noOperate": "Not {operate} yet"
