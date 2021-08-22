@@ -465,14 +465,14 @@
             ],
             "selectNetwork": "Seleccionar red"
         },
-        "viteTips": "VITE only supports cross-chain functionality between the new ERC20 VITE (Contract Address: 0xadd5E881984783dD432F80381Fb52F45B53f3e70), BEP20 VITE and Native VITE Coin.",
+        "viteTips": "El Cross-Chain de VITE sólo es soportado entre: el nuevo contrato ERC20 VITE (Dirección del Contrato: 0xadd5E881984783dD432F80381Fb52F45B53f3e70), BEP20 VITE y VITE nativo.",
         "withdraw": {
-            "title": "Cross-Chain Withdrawal",
-            "btn": "Withdraw",
+            "title": "Retiro Cross-Chain",
+            "btn": "Retirar",
             "balanceErrMap": {
-                "notEnough": "Insufficient Balance",
-                "overMax": "Withdrawal amount should be less than {max}",
-                "lessMin": "Withdrawal amount should not be less than {min}"
+                "notEnough": "Saldo insuficiente",
+                "overMax": "La cantidad de retiro debe ser menor que {max}",
+                "lessMin": "La cantidad de retiro no de debe ser menor que {min}"
             },
             "feeTips": "Transaction fee is set by gateway operator",
             "addressErr": "Address format is incorrect",
