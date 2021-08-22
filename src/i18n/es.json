@@ -307,27 +307,27 @@
     },
     "startCreate": {
         "notice": "For your funds' safety, create account function is not supported provisionally on web wallet. Please download Vite App to create account.",
-        "goLogin": "Log In",
-        "goDex": "Go to ViteX"
+        "goLogin": "Inicia Sesión",
+        "goDex": "Ir a ViteX"
     },
     "keystore": {
-        "title": "Keystore",
+        "title": "Almacén de claves",
         "dragDrop": {
-            "text": "Drag and drop files there",
-            "err1": "Imported illegal file!",
-            "err2": "Only one file can be imported!",
-            "guide": "Open folder to import",
+            "text": "Arrastrar y colocar archivos aquí",
+            "err1": "¡Archivo ilegal importado!",
+            "err2": "¡Solo se puede importar un archivo!",
+            "guide": "Abrir carpeta para importar",
             "hint": "Noted that login by importing keystore file cannot support creating multi addresses, using mnemonic seed phrase is recommended in cross-platform situations."
         }
     },
     "tokenCard": {
-        "moreRecords": "View History",
-        "others": "Others",
-        "assetSpread": "Portfolio",
-        "saveSuccess": "Successfully saved",
+        "moreRecords": "Ver historial",
+        "others": "Otros",
+        "assetSpread": "Portafolio",
+        "saveSuccess": "Guardado correctamente",
         "heads": {
-            "name": "Name",
-            "balance": "Wallet Balance",
+            "name": "Nombre",
+            "balance": "Balance de Billetera",
             "onroad": "Wallet Unreceived Funds",
             "gate": "Wallet Cross-Chain Gateway",
             "totalExAmount": "Exchange Total Balance",
