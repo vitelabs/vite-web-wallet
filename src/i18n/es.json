@@ -272,29 +272,29 @@
         "addrList": "Gestión de direcciones",
         "setDefault": "Seleccionar dirección por defecto",
         "autoLogout": "Tiempo de cierre de sesión automático",
-        "noPass": "Turn on password-free mode",
-        "explorer": "Block Explorer",
-        "netInfo": "Network Information",
-        "logoutDescribe": "Your account will logout automatically when you leave this page",
+        "noPass": "Activar el modo contraseña-libre",
+        "explorer": "Explorador de bloques",
+        "netInfo": "Información de Red",
+        "logoutDescribe": "Tu cuenta se cerrará automáticamente cuando salgas de esta página",
         "timeList": {
-            "5": "5 Minutes",
-            "10": "10 Minutes",
-            "30": "30 Minutes",
-            "60": "1 Hour",
-            "720": "12 Hours"
+            "5": "5 Minutos",
+            "10": "10 Minutos",
+            "30": "30 Minutos",
+            "60": "1 Hora",
+            "720": "12 Horas"
         },
-        "theme": "Theme color",
+        "theme": "Color del tema",
         "themeList": [
-            "Light",
-            "Dark"
+            "Claro",
+            "Oscuro"
         ]
     },
     "create": {
-        "input": "Please enter your password",
-        "again": "Please confirm your password",
-        "choose": "Choose an account",
-        "finish": "Done",
-        "agreementPre": "I have read and agree with Vite Wallet and ViteX's",
+        "input": "Por favor, introduce tu contraseña",
+        "again": "Por favor, confirma tu contraseña",
+        "choose": "Elija una cuenta",
+        "finish": "Hecho",
+        "agreementPre": "He leído y estoy de acuerdo con Vite Wallet y ViteX",
         "agreement": "Terms of Services and Privacy Policy",
         "hint": {
             "nameInput": "Please input account name",
