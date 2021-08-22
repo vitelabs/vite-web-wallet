@@ -271,7 +271,7 @@
         "addAddr": "Agregar dirección",
         "addrList": "Gestión de direcciones",
         "setDefault": "Seleccionar dirección por defecto",
-        "autoLogout": "Auto Logout Time",
+        "autoLogout": "Tiempo de cierre de sesión automático",
         "noPass": "Turn on password-free mode",
         "explorer": "Block Explorer",
         "netInfo": "Network Information",
