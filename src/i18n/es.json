@@ -306,7 +306,7 @@
         }
     },
     "startCreate": {
-        "notice": "For your funds' safety, create account function is not supported provisionally on web wallet. Please download Vite App to create account.",
+        "notice": "Para la seguridad de tus fondos, no se puede crear una cuenta nueva desde la versión web. Por favor, descarga la aplicación Vite para crear una cuenta.",
         "goLogin": "Inicia Sesión",
         "goDex": "Ir a ViteX"
     },
@@ -317,7 +317,7 @@
             "err1": "¡Archivo ilegal importado!",
             "err2": "¡Solo se puede importar un archivo!",
             "guide": "Abrir carpeta para importar",
-            "hint": "Noted that login by importing keystore file cannot support creating multi addresses, using mnemonic seed phrase is recommended in cross-platform situations."
+            "hint": "El inicio de sesión mediante la importación del archivo de almacén de claves no admite direcciones múltiples, se recomienda utilizar palabras de recuperación mnemotécnicas en situaciones multiplataforma."
         }
     },
     "tokenCard": {
@@ -328,12 +328,12 @@
         "heads": {
             "name": "Nombre",
             "balance": "Balance de Billetera",
-            "onroad": "Wallet Unreceived Funds",
-            "gate": "Wallet Cross-Chain Gateway",
-            "totalExAmount": "Exchange Total Balance",
-            "availableExAmount": "Exchange Available Balance",
-            "balanceTips": "On-chain send is available for users who would like to send transactions from your Vite wallet to other Vite addresses",
-            "gateTips": "In this cross-chain section, you can map other coins/tokens into Vite network. Click 'Deposit' button to deposit assets to your Vite Wallet. Click 'Withdraw' button to transfer your assets to other platforms. * Cross-chain deposit/withdrawal process may cause fees, it also has its transfer limit.",
+            "onroad": "Activos sin recibir",
+            "gate": "Gateway billetera Cross-Chain",
+            "totalExAmount": "Saldo total del Exchange",
+            "availableExAmount": "Saldo disponible en Exchange",
+            "balanceTips": "El envío sobre la cadena está disponible para los usuarios que desean enviar transacciones desde su billetera Vite a otras direcciones de Vite",
+            "gateTips": "En esta sección de cross-chain, puede asignar otras monedas/tokens a la red Vite. Haga clic en el botón 'Depositar' para depositar los activos en su billetera Vite. Haga clic en el botón 'Retirar' para transferir sus activos a otras plataformas. *El depósito/retiro entre cross-chain puede generar comisiones, también existe un límite de transferencias.",
             "availableExAmountTips": "You can transfer your assets between Vite Wallet and ViteX Exchange via clicking 'Transfer' button. No transaction fees caused during these processes.",
             "unreceivedTips": "Unreceived funds will be received automatically after signing in"
         },
