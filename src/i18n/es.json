@@ -295,14 +295,14 @@
         "choose": "Elija una cuenta",
         "finish": "Hecho",
         "agreementPre": "He leído y estoy de acuerdo con Vite Wallet y ViteX",
-        "agreement": "Terms of Services and Privacy Policy",
+        "agreement": "Términos de servicios y Política de privacidad",
         "hint": {
-            "nameInput": "Please input account name",
-            "nameLong": "Name cannot exceed {long} characters",
-            "long": "Password cannot exceed 32 characters",
-            "name": "Account name only supports English and Chinese characters, digits and underline",
-            "consistency": "Please enter the same password",
-            "pwFormat": "Wrong password format. The password should only contain digits, letters and symbols."
+            "nameInput": "Introduzca el nombre de la cuenta",
+            "nameLong": "El nombre no puede exceder los {long} caracteres",
+            "long": "La contraseña no puede exceder de 32 caracteres",
+            "name": "El nombre de la cuenta sólo admite caracteres del inglés y del chino, dígitos y guión bajo",
+            "consistency": "Introduce la misma contraseña",
+            "pwFormat": "Formato de contraseña incorrecto. La contraseña solo debe contener dígitos, letras y símbolos."
         }
     },
     "startCreate": {
