@@ -393,23 +393,23 @@
             },
             "reIssuable": {
                 "true": "Re-emisible",
-                "false": "Not re-issuable"
+                "false": "No es re-emisible"
             }
         },
         "gateInfo": {
-            "clickCustomer": "Submit a request",
-            "name": "Gateway Name",
-            "customer": "Customer Service",
-            "privacy": "Terms of Services",
-            "clickPrivacy": "{gate}'s official gateway Terms of Services",
-            "gateSetting": "Configure Gateway",
-            "tabName": "Gateway Details",
-            "selfdefined": "Customize Gateway",
-            "officalNet": "Website",
-            "introduction": "Description",
-            "token": "Issued Token",
-            "setting": "Gateway Interface",
-            "nodeDesc": "User Guide",
+            "clickCustomer": "Enviar una solicitud",
+            "name": "Nombre del Gateway",
+            "customer": "Servicio al cliente",
+            "privacy": "Términos del servicio",
+            "clickPrivacy": "Términos de servicios oficial del {gate} gateway",
+            "gateSetting": "Configuración del Gateway",
+            "tabName": "Detalles del Gateway",
+            "selfdefined": "Gateway personalizado",
+            "officalNet": "Sitio web",
+            "introduction": "Descripción",
+            "token": "Token emitido",
+            "setting": "Interfaz del Gateway",
+            "nodeDesc": "Manual de Usuario",
             "settingPlaceholder": "Please input gateway link address",
             "nodeDescStr": "This function only works for cross-chain coins, do not use this on built-in tokens. Meanwhile, please be careful about unfamiliar gateway links. By continuing to use our platform, you agree and acknowledge that Vite Labs would not be responsible for the loss of your fund and other negative consequences caused. Fill out the gateway link below if you need to use gateway, the link will come into effect after you hit save."
         },
