@@ -410,7 +410,7 @@
             "token": "Token emitido",
             "setting": "Interfaz del Gateway",
             "nodeDesc": "Manual de Usuario",
-            "settingPlaceholder": "Please input gateway link address",
+            "settingPlaceholder": "Por favor ingrese la dirección URL del gateway",
             "nodeDescStr": "This function only works for cross-chain coins, do not use this on built-in tokens. Meanwhile, please be careful about unfamiliar gateway links. By continuing to use our platform, you agree and acknowledge that Vite Labs would not be responsible for the loss of your fund and other negative consequences caused. Fill out the gateway link below if you need to use gateway, the link will come into effect after you hit save."
         },
         "depositRecord": {
