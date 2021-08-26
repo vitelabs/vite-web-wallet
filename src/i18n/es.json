@@ -411,20 +411,20 @@
             "setting": "Interfaz del Gateway",
             "nodeDesc": "Manual de Usuario",
             "settingPlaceholder": "Por favor ingrese la dirección URL del gateway",
-            "nodeDescStr": "This function only works for cross-chain coins, do not use this on built-in tokens. Meanwhile, please be careful about unfamiliar gateway links. By continuing to use our platform, you agree and acknowledge that Vite Labs would not be responsible for the loss of your fund and other negative consequences caused. Fill out the gateway link below if you need to use gateway, the link will come into effect after you hit save."
+            "nodeDescStr": "Esta característica solo funciona para monedas proveniente de cross-chain, no la use en tokens incrustados. Por cierto, tenga cuidado con las conexiones hacia gateways que no conoce. Al continuar utilizando nuestra plataforma, acepta que Vite Labs no será responsable de ninguna pérdida de fondos o cualquier otra consecuencia adversa causada. Si necesita utilizar un gateway, complete el enlace al gateway a continuación, el enlace se activará después de presionar el botón Guardar."
         },
         "depositRecord": {
-            "tabName": "Receive History",
+            "tabName": "Historial recibidos",
             "heads": [
-                "Time",
-                "Amount",
-                "Status",
+                "Tiempo",
+                "Cantidad",
+                "Estado",
                 "{outChain} Hash",
                 "vite Hash",
-                "Fees"
+                "Comisiones"
             ],
             "statusMap": {
-                "OPPOSITE_PROCESSING": "{outChain} awaits to confirm{confirms}",
+                "OPPOSITE_PROCESSING": "{outChain} espera para confirmar{confirms}",
                 "OPPOSITE_CONFIRMED_FAIL": "{outChain} processing failed",
                 "OPPOSITE_CONFIRMED": "Gateway Received",
                 "TOT_CONFIRMED": "Completed",
