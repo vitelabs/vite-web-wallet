@@ -443,9 +443,9 @@
                 "Comisiones"
             ],
             "statusMap": {
-                "TOT_PROCESSING": "VITE Chain Unconfirmed{confirms}",
-                "TOT_CONFIRMED": "VITE Confirmed",
-                "TOT_EXCEED_THE_LIMIT": "Transfer amount exceeds the limit",
+                "TOT_PROCESSING": "{confirms} de la cadena VITE sin confirmar",
+                "TOT_CONFIRMED": "VITE confirmado",
+                "TOT_EXCEED_THE_LIMIT": "La cantidad de la transferencia excede el límite",
                 "OPPOSITE_PROCESSING": "{outChain} awaits to confirm",
                 "OPPOSITE_CONFIRMED": "Completed",
                 "WRONG_WITHDRAW_ADDRESS": "Transfer address is incorrect"
