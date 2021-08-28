@@ -429,18 +429,18 @@
                 "OPPOSITE_CONFIRMED": "Recibido en Gateway",
                 "TOT_CONFIRMED": "Completado",
                 "BELOW_MINIMUM": "Instalación fallida",
-                "TOT_PROCESSING": "VITE chain await to confirm"
+                "TOT_PROCESSING": "Esperando confirmación de la cadena VITE"
             }
         },
         "withdrawRecord": {
-            "tabName": "Transfer History",
+            "tabName": "Historial de transferencias",
             "heads": [
-                "Time",
-                "Amount",
-                "Status",
+                "Tiempo",
+                "Cantidad",
+                "Estado",
                 "vite Hash",
                 "{outChain} Hash",
-                "Fees"
+                "Comisiones"
             ],
             "statusMap": {
                 "TOT_PROCESSING": "VITE Chain Unconfirmed{confirms}",
