@@ -484,35 +484,35 @@
                 "all": "Todo"
             },
             "labelPlaceholder": "Por favor ingrese {labelName}",
-            "amountPlaceholder": "Please input send amount which should not be less than {min}",
-            "addressPlaceholder": "Please enter {token} recipient address",
-            "successTips": "Transaction request has been sent",
-            "failTips": "An error occurred in gateway node, please check the network settings"
+            "amountPlaceholder": "Ingrese la cantidad a enviar, que no debe ser inferior a {min}",
+            "addressPlaceholder": "Introduzca la dirección del destinatario {token}",
+            "successTips": "La solicitud de transacción ha sido enviada",
+            "failTips": "Se ha producido un error en el nodo gateway, compruebe la configuración de red"
         },
-        "nodeErr": "Gateway node is invalid, please check the gateway settings"
+        "nodeErr": "El nodo gateway es inválido, por favor compruebe la configuración del gateway"
     },
     "viteExplorer": {
-        "title": "Vite Block Explorer"
+        "title": "Explorador de Bloques Vite"
     },
     "viteScanExplorer": {
         "title": "ViteScan"
     },
     "wallet": {
-        "title": "Quota Management",
+        "title": "Gestión de cuotas",
         "help": {
-            "title": "Quick Understanding of Quota"
+            "title": "Comprensión rápida de Cuotas"
         },
         "transfer": "Send Funds",
-        "getTestToken": "Get Test Tokens",
-        "transDetail": "More Transaction Details",
-        "address": "My Address",
-        "fundFloat": "Unreceived",
-        "pend": "Pending",
-        "inAddress": "Recipient Address",
-        "sum": "Amount",
-        "remarks": "Memo",
-        "remarksLong": "{len} bytes left",
-        "totalAsset": "Total Assets",
+        "getTestToken": "Obtener Tokens de Prueba",
+        "transDetail": "Más detalles de la transacción",
+        "address": "Mi Dirección",
+        "fundFloat": "Sin recibir",
+        "pend": "Pendiente",
+        "inAddress": "Dirección del destinatario",
+        "sum": "Cantidad",
+        "remarks": "Nota",
+        "remarksLong": "Quedan {len} bytes",
+        "totalAsset": "Activos Totales",
         "placeholder": {
             "amount": "Please input amount",
             "remarks": "Please input memo",
@@ -581,22 +581,22 @@
             "maxSupplyNull": "Max Supply is required",
             "maxSupplyMin": "Must be greater than total supply",
             "decimalsNull": "Decimals field is required",
-            "decimalsFormat": "Wrong format of decimals",
-            "decimalsMax": "Decimals are out of range",
-            "maxSupplyFormat": "Wrong format of Max Supply"
+            "decimalsFormat": "Formato incorrecto de decimales",
+            "decimalsMax": "Los decimales están fuera de rango",
+            "maxSupplyFormat": "Formato incorrecto del suministro máximo"
         }
     },
     "walletQuota": {
-        "title": "Quota Management",
+        "title": "Gestión de cuotas",
         "help": {
-            "title": "Quick Understanding of Quota"
+            "title": "Comprensión rápida de Cuotas"
         },
-        "myQuota": "My Quota",
-        "maxTxNum": "Maximum Number of Txs",
-        "beneficialAddr": "Quota Recipient Address",
-        "fromAddr": "Deduction Address",
-        "time": "Staking Freeze Duration",
-        "aboutDays": "Approx {day} days",
+        "myQuota": "Mi cuota",
+        "maxTxNum": "Número máximo de Txs",
+        "beneficialAddr": "Dirección del destinatario beneficiario",
+        "fromAddr": "Dirección de Deducción",
+        "time": "Duración del bloqueo",
+        "aboutDays": "Aproximadamente {day} días",
         "amountPlaceholder": "Please enter staking amount, minimum {num} VITE",
         "limitAmt": "Staking amount should not be less than {num}.",
         "addrPlaceholder": "Please input quota recipient address",
