@@ -460,7 +460,7 @@
             "codeTips": "Escanea el código QR para depositar. Por favor, envía fondos desde una billetera que soporte {tokenSymbol}",
             "tips": [
                 "Solo puedes depositar {tokenSymbol} a través de la dirección proporcionada a continuación. No se aceptarán menos de {min} {tokenSymbol}.",
-                "The account will update after {confirmationCount} network confirmations. Please wait.",
+                "La cuenta se actualizará después de {confirmationCount} confirmaciones de red. Por favor espere.",
                 "Por favor, seleccione la red principal correcta o no podrá recuperar ningún token perdido."
             ],
             "selectNetwork": "Seleccionar red"
@@ -474,16 +474,16 @@
                 "overMax": "La cantidad de retiro debe ser menor que {max}",
                 "lessMin": "La cantidad de retiro no de debe ser menor que {min}"
             },
-            "feeTips": "Transaction fee is set by gateway operator",
-            "addressErr": "Address format is incorrect",
+            "feeTips": "La comisión de transacción es establecida por el operador gateway",
+            "addressErr": "El formato de dirección es incorrecto",
             "labels": {
-                "balance": "Balance",
-                "address": "Recipient Address",
-                "amount": "Amount",
-                "fee": "Fee",
-                "all": "All"
+                "balance": "Saldo",
+                "address": "Dirección del destinatario",
+                "amount": "Cantidad",
+                "fee": "Comisión",
+                "all": "Todo"
             },
-            "labelPlaceholder": "Please input {labelName}",
+            "labelPlaceholder": "Por favor ingrese {labelName}",
             "amountPlaceholder": "Please input send amount which should not be less than {min}",
             "addressPlaceholder": "Please enter {token} recipient address",
             "successTips": "Transaction request has been sent",
