@@ -446,20 +446,20 @@
                 "TOT_PROCESSING": "{confirms} de la cadena VITE sin confirmar",
                 "TOT_CONFIRMED": "VITE confirmado",
                 "TOT_EXCEED_THE_LIMIT": "La cantidad de la transferencia excede el límite",
-                "OPPOSITE_PROCESSING": "{outChain} awaits to confirm",
-                "OPPOSITE_CONFIRMED": "Completed",
-                "WRONG_WITHDRAW_ADDRESS": "Transfer address is incorrect"
+                "OPPOSITE_PROCESSING": "{outChain} espera para confirmar",
+                "OPPOSITE_CONFIRMED": "Completado",
+                "WRONG_WITHDRAW_ADDRESS": "La dirección de transferencia es incorrecta"
             }
         },
         "charge": {
-            "title": "Cross-Chain Deposit",
-            "addrErr": "Something went wrong with gateway node, please check your network settings",
-            "addressTitle": "Recipient Address",
-            "labelTips": "(Please use this '{labelName}' with your recipient address, otherwise your assets will lose",
-            "labelCodeTips": "Please Scan the QR code from {labelName}",
-            "codeTips": "Scan QR code to deposit. Please send funds with the wallet that supports {tokenSymbol}",
+            "title": "Depósito Cross-Chain",
+            "addrErr": "Algo salió mal con el nodo gateway, por favor compruebe su configuración de red",
+            "addressTitle": "Dirección del destinatario",
+            "labelTips": "(Por favor, utilice esta '{labelName}' junto a la dirección de destinatario, de lo contrario puede perder sus activos",
+            "labelCodeTips": "Escanea el código QR desde {labelName}",
+            "codeTips": "Escanea el código QR para depositar. Por favor, envía fondos desde una billetera que soporte {tokenSymbol}",
             "tips": [
-                "You can only deposit {tokenSymbol} through the address provided below. No less than {min} {tokenSymbol} will be accepted.",
+                "Solo puedes depositar {tokenSymbol} a través de la dirección proporcionada a continuación. No se aceptarán menos de {min} {tokenSymbol}.",
                 "The account will update after {confirmationCount} network confirmations. Please wait.",
                 "Por favor, seleccione la red principal correcta o no podrá recuperar ningún token perdido."
             ],
