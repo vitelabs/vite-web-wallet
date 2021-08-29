@@ -129,7 +129,7 @@
         "CancelQuotaStake_V1": "Retiro de fondos bloqueados",
         "IssueToken": "Emisión de Token",
         "IssueToken_V1": "Emisión de Token",
-        "ReIssueToken": "Emisión de token adicional",
+        "ReIssueToken": "Emisión adicional de token",
         "ReIssueToken_V1": "Emisión adicional de token",
         "BurnToken": "Destruir tokens",
         "BurnToken_V1": "Destruir tokens",
@@ -536,51 +536,51 @@
         "totalSupply": "Suministro total",
         "decimals": "Decimales",
         "isReIssuable": "Re-emisible",
-        "maxSupply": "Max Supply",
-        "ownerBurnOnly": "Burn out by Owner Only",
-        "isOwnerBurnOnly": "Burn out by Owner Only",
-        "mint": "Confirm",
-        "tokenList": "Issued Token",
-        "submit": "Submit",
-        "cancel": "Cancel",
-        "getListFail": "You are unable to get token list, try again later",
+        "maxSupply": "Suministro máximo",
+        "ownerBurnOnly": "Solo el propietario puede quemar",
+        "isOwnerBurnOnly": "Solo el propietario puede quemar",
+        "mint": "Confirmar",
+        "tokenList": "Token emitido",
+        "submit": "Enviar",
+        "cancel": "Cancelar",
+        "getListFail": "No puedes obtener la lista de tokens, inténtalo de nuevo más tarde",
         "mintageConfirm": {
-            "title": "Check your Token Issuance Information",
-            "balance": "Balance",
-            "fee": "Issuance Fee",
-            "btn": "Confirm"
+            "title": "Comprueba tu información de emisión del token",
+            "balance": "Saldo",
+            "fee": "Comisión de emisión",
+            "btn": "Confirmar"
         },
         "reIssuableConfirm": {
             "title": "Cambiar a No-emisible",
             "text": "¿Estás seguro de cambiar el estado de {tokenName} a no emisible?"
         },
         "changeOwnerConfirm": {
-            "title": "Transfer Ownership",
-            "address": "Recipient Address"
+            "title": "Transferir propiedad",
+            "address": "Dirección del destinatario"
         },
         "issueConfirm": {
-            "title": "Re-issue",
-            "amount": "Amount",
-            "address": "Beneficiary Address",
-            "overAmount": "Reissued tokens exceed the upper limit"
+            "title": "Re-emitir",
+            "amount": "Cantidad",
+            "address": "Dirección del beneficiario",
+            "overAmount": "Laos tokens re-emitidos exceden el límite superior"
         },
         "hint": {
-            "tokenName": "Token name should have 1-40 characters including capitals and lowercase letters, spaces and underlines. Continuous spaces and numbers are not supported.",
-            "tokenSymbol": "Token symbol should have 1-10 characters, only capitals and numbers are supported.",
-            "success": "Token Issuance Successful",
-            "fail": "Token Issuance failed"
+            "tokenName": "El nombre del token debe tener 1-40 caracteres, incluyendo mayúsculas y minúsculas, espacios y guión bajo. No se admiten espacios ni números continuos.",
+            "tokenSymbol": "El símbolo del token debe tener 1-10 caracteres, sólo se admiten mayúsculas y números.",
+            "success": "Emisión de token exitosa",
+            "fail": "Emisión de token fallida"
         },
         "err": {
-            "tokenNameFormat": "Token Name's format is incorrect",
-            "tokenNameNull": "Token Name is required",
-            "tokenSymbolFormat": "Token Symbol's format is incorrect",
-            "tokenSymbolNull": "Token Symbol is required",
-            "supplyMax": "Excessive amount of token issuance",
-            "totalSupplyFormat": "Wrong format of Total Supply",
-            "totalSupplyNull": "Total Supply is required",
-            "maxSupplyNull": "Max Supply is required",
-            "maxSupplyMin": "Must be greater than total supply",
-            "decimalsNull": "Decimals field is required",
+            "tokenNameFormat": "El nombre del token es incorrecto",
+            "tokenNameNull": "El nombre del token es obligatorio",
+            "tokenSymbolFormat": "El símbolo del token es incorrecto",
+            "tokenSymbolNull": "El símbolo del token es obligatorio",
+            "supplyMax": "Cantidad máxima de emisión de token superada",
+            "totalSupplyFormat": "Formato incorrecto del suministro máximo",
+            "totalSupplyNull": "La cantidad total es obligatoria",
+            "maxSupplyNull": "La cantidad máxima es obligatoria",
+            "maxSupplyMin": "Debe ser mayor que el suministro total",
+            "decimalsNull": "Campo decimales es obligatorio",
             "decimalsFormat": "Formato incorrecto de decimales",
             "decimalsMax": "Los decimales están fuera de rango",
             "maxSupplyFormat": "Formato incorrecto del suministro máximo"
@@ -613,58 +613,58 @@
         "confirm": {
             "help": {
                 "t1": "¿Qué es la cuota?",
-                "txt1": "In the Vite system, users do not purchase the gas required for a transaction by paying a fee, but acquire the computing resource through a quota-based model. Required quota for sending a transaction = the basic quota (request) + quota (the attached text data), quota required to accept a transaction = the basic quota (response). This quota-based resource configuration protocol allows users to obtain higher resource quotas in two ways: Staking VITE to obtain quota and running PoW.",
-                "t2": "What is Staking?",
-                "txt2": "In the Vite system, the user can stake VITE to obtain a certain amount of quota. The minimum value for staking is 134 VITE, and there is no maximum limit; meanwhile, Vite system also supports that the A-address stakes a part of the VITE and allocates the obtained quota to the B address. When users apply to stake, VITE will be sent to the smart contract address instead of another user, and only the user who applies for staking has access to manage the staking amount.",
-                "t3": "What is PoW?",
-                "txt3": "Proof of Work (PoW), is a protocol to confirm that you have done a certain amount of work, and is also an economic measure to deter DDoS attacks and other service abuse. It requires the initiator to conduct a certain amount of computing, which means that it may take some time for the computer. In the Vite system, users can obtain a free quota by running the PoW, and also can send a transaction without any annotated information through obtained quota."
+                "txt1": "En Vite, los usuarios no compran el gas necesario para una transacción pagando una comisión, sino que adquieren el recurso informático a través de un modelo basado en cuotas. La cuota requerida para realizar una transacción = una cuota básica (solicitud) + cuota (por datos de texto adjuntos). La cuota requerida para aceptar una transacción = una cuota básica (respuesta). Este protocolo de configuración de recursos basado en quota, permite a los usuarios obtenerlos de dos maneras: Bloqueando VITE para obtener cuota o ejecutando una prueba de trabajo PoW.",
+                "t2": "¿Qué es el Staking?",
+                "txt2": "En Vite, el usuario puede bloquear VITE para obtener una cierta cantidad de cuotas. El valor mínimo para bloquear es 134 VITE, y no hay límite máximo. Además en Vite también se soporta compartir este beneficio, siendo que una dirección A bloquee una parte VITE y asigne la cuota obtenida a otra dirección B beneficiaría. Cuando los usuarios soliciten un bloqueo, su VITE será enviado a la dirección del contrato inteligente en lugar del otro usuario, y sólo el usuario que solicita el bloqueo tiene acceso a administrar la cantidad a desbloquear.",
+                "t3": "¿Qué es el PoW?",
+                "txt3": "Prueba de Trabajo (PoW, en sus siglas en inglés), es un protocolo para confirmar que has realizado una cierta cantidad de trabajo. Esta medida es una medida económica para disuadir ataques DDoS y otros tipos de abusos de servicios. Requiere que el solicitador realize una cierta cantidad de cómputo tomando cierto tiempo en el servidor. En Vite, los usuarios pueden obtener una cuota gratuita ejecutando este PoW, y pudiendo enviar transacciones sin tomar ninguna acción usando la cuota obtenida."
             },
             "cancel": {
-                "describe": "Your current staked amount is {amount} VITE, please confirm to withdraw.",
-                "rightBtn": "Ready to Go",
-                "leftBtn": "Cancel Withdraw"
+                "describe": "Tu actual cantidad bloqueada es {amount} VITE, por favor confirma el retiro.",
+                "rightBtn": "Listo para empezar",
+                "leftBtn": "Cancelar retiro"
             },
             "submit": {
-                "describe": "Make sure to stake {amount} VITE to obtain quota, you cannot withdraw until about 3 days after staking comes into effect.",
-                "rightBtn": "Confirm",
-                "leftBtn": "Cancel"
+                "describe": "Asegúrate de bloquear {amount} VITE para obtener cuota, no podrás retirarlo hasta en 3 días después que el bloqueo entre en rigor.",
+                "rightBtn": "Confirmar",
+                "leftBtn": "Cancelar"
             }
         },
         "list": {
-            "title": "My Staking List",
-            "total": "Staking {amount} VITE in total",
-            "amount": "Amount",
-            "withdrawTime": "Expected Due Date",
-            "unexpired": "Temporarily cannot make withdrawal of staked token until due date",
-            "vip": "This staking action is for default opening VIP on ViteX exchange, please go to ViteX exchange page to cancel VIP",
-            "mining": "This staking is your staking as mining amount on ViteX, please go to ViteX mining page to unstake",
-            "other": "This staking is staked via other ways and unstake is not supported here"
+            "title": "Lista de bloqueos",
+            "total": "Bloqueando {amount} VITE en total",
+            "amount": "Cantidad",
+            "withdrawTime": "Fecha de vencimiento prevista",
+            "unexpired": "No se puede retirar el token bloqueado hasta la fecha de vencimiento",
+            "vip": "Esta acción de bloqueo es para convertirse en trader VIP en el exchange ViteX, por favor ve a la página del exchange ViteX para cancelar este status VIP",
+            "mining": "Este bloqueo corresponde a tus staking para minado en ViteX, por favor ve a la página de minería en ViteX para unstake",
+            "other": "Este bloqueo corresponde a tus staking via otras formas y el unstake no está soportado aquí"
         }
     },
     "walletTransList": {
-        "title": "Transactions",
+        "title": "Transacciones",
         "tType": {
-            "title": "Type",
-            "symbol": "Type"
+            "title": "Tipo",
+            "symbol": "Tipo"
         },
         "status": {
-            "title": "Status",
-            "unconfirmed": "Unconfirmed",
-            "confirms": "Confirming",
-            "confirmed": "Confirmed"
+            "title": "Estado",
+            "unconfirmed": "Sin confirmar",
+            "confirms": "Confirmando",
+            "confirmed": "Confirmado"
         },
         "timestamp": "Timestamp",
-        "tAddress": "Address",
-        "sum": "Amount"
+        "tAddress": "Dirección",
+        "sum": "Cantidad"
     },
     "walletFullNode": {
-        "title": "Full Nodes",
+        "title": "Full nodes",
         "help": {
-            "title": "About",
-            "t1": "Glossary",
-            "txt1": "[Number of Registered Nodes]  The number of full nodes registered with the current address",
-            "txt2": "[Number of Active Nodes]  The number of active full nodes registered with the current address",
-            "txt3": "[Number of Rewarding nodes]  Number of nodes being rewarded",
+            "title": "Acerca de",
+            "t1": "Glosario",
+            "txt1": "[Número de nodos registrados] El número de full nodes registrados con la dirección actual",
+            "txt2": "[Número de nodos activos] El número de full nodes activos registrados con la dirección actual",
+            "txt3": "[Número de nodos de recompensa] Número de nodos siendo recompensados",
             "t2": "Multiple Full nodes can be registered with the same address, but must be staked individually at least 10,000 VITE each; When calculating Active Node Reward, if staking amount / 10000 yields a whole number that is greater than or equal to the number of active nodes, all active nodes will be rewarded; If staking amount / 10000 yields a whole number that is less than the number of active nodes, the number of nodes being rewarded equals to the whole number.",
             "t3": "Calculation of voting rewards does not depend on the number of nodes, but the staking amount."
         },
