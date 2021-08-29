@@ -665,25 +665,25 @@
             "txt1": "[Número de nodos registrados] El número de full nodes registrados con la dirección actual",
             "txt2": "[Número de nodos activos] El número de full nodes activos registrados con la dirección actual",
             "txt3": "[Número de nodos de recompensa] Número de nodos siendo recompensados",
-            "t2": "Multiple Full nodes can be registered with the same address, but must be staked individually at least 10,000 VITE each; When calculating Active Node Reward, if staking amount / 10000 yields a whole number that is greater than or equal to the number of active nodes, all active nodes will be rewarded; If staking amount / 10000 yields a whole number that is less than the number of active nodes, the number of nodes being rewarded equals to the whole number.",
-            "t3": "Calculation of voting rewards does not depend on the number of nodes, but the staking amount."
+            "t2": "Múltiples full nodes pueden ser registrados con la misma dirección, pero deben ser bloqueados individualmente al menos 10.000 VITE para cada uno; Al calcular la recompensa del nodo activo, si la cantidad en stake/10000 produce un número entero que es mayor o igual al número de nodos activos, todos los nodos activos serán recompensados; Si la cantidad den stake/10000 produce un número entero que es menor que el número de nodos activos, el número de nodos que son recompensados equivale al número entero.",
+            "t3": "El cálculo de las recompensas por votación no depende del número de nodos, sino de la cantidad en stake."
         },
-        "confirmText": "Confirm to stake {amount} VITE, staking can be cancelled after {days} days",
+        "confirmText": "Confirmación de bloquear {amount} VITE, esto se puede cancelar después de {days} días",
         "addQuota": {
-            "address": "Staking Address",
-            "stakeDays": "Staking Period",
-            "placeholder": "Minimum Stake {min} VITE",
-            "stakingSuspend": "Staking Temporarily Suspended"
+            "address": "Dirección de Stake",
+            "stakeDays": "Periodo de bloqueo",
+            "placeholder": "Bloqueo mínimo {min} VITE",
+            "stakingSuspend": "Bloqueo temporalmente suspendido"
         },
         "quotaContent": {
-            "onlineReward": "Active Node Reward",
-            "voteReward": "Voting Reward",
-            "yesterday": "yesterday",
-            "all": "Accumulated VITE: {num}",
-            "nodeInfo": "Node Information",
-            "onlineNodes": "Active Nodes",
-            "rewardNodes": "Rewarding Nodes",
-            "stakeAmount": "Node Staking"
+            "onlineReward": "Recompensa del nodo activo",
+            "voteReward": "Recompensa de votación",
+            "yesterday": "ayer",
+            "all": "VITE acumulado: {num}",
+            "nodeInfo": "Información del nodo",
+            "onlineNodes": "Nodos activos",
+            "rewardNodes": "Nodos de recompensa",
+            "stakeAmount": "Nodo staking"
         }
     },
     "walletSBP": {
