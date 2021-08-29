@@ -502,7 +502,7 @@
         "help": {
             "title": "Comprensión rápida de Cuotas"
         },
-        "transfer": "Send Funds",
+        "transfer": "Enviar activos",
         "getTestToken": "Obtener Tokens de Prueba",
         "transDetail": "Más detalles de la transacción",
         "address": "Mi Dirección",
@@ -514,28 +514,28 @@
         "remarksLong": "Quedan {len} bytes",
         "totalAsset": "Activos Totales",
         "placeholder": {
-            "amount": "Please input amount",
-            "remarks": "Please input memo",
-            "addr": "Please input address"
+            "amount": "Introduce la cantidad",
+            "remarks": "Porfavor ingresa una nota",
+            "addr": "Por favor ingrese dirección"
         },
         "hint": {
-            "token": "VITE test tokens have be sent to your account, please check your account!",
-            "tErr": "Get test token failed!",
-            "amount": "Amount must be greater than 0"
+            "token": "Los tokens de prueba VITE han sido enviados a tu cuenta, ¡por favor revisa tu cuenta!",
+            "tErr": "¡Error al obtener tokens de prueba!",
+            "amount": "Cantidad debe ser mayor que 0"
         },
         "trans": {
-            "powErr": "Error occurs when running PoW, please try again",
-            "powTransErr": "Insufficient quota of PoW, we'd recommend that you stake VITE to obtain quota."
+            "powErr": "Error al ejecutar PoW, inténtelo de nuevo",
+            "powTransErr": "Cuota insuficiente para realizar el PoW, te recomendamos que bloquees VITE para obtener cuota."
         }
     },
     "walletMintage": {
-        "title": "Token Issuance",
-        "address": "Issuance Address",
-        "tokenName": "Token Name",
-        "tokenSymbol": "Token Symbol",
-        "totalSupply": "Total Supply",
-        "decimals": "Decimals",
-        "isReIssuable": "ReIssuable",
+        "title": "Emisión de Token",
+        "address": "Dirección de emisión",
+        "tokenName": "Nombre del Token",
+        "tokenSymbol": "Símbolo del token",
+        "totalSupply": "Suministro total",
+        "decimals": "Decimales",
+        "isReIssuable": "Re-emisible",
         "maxSupply": "Max Supply",
         "ownerBurnOnly": "Burn out by Owner Only",
         "isOwnerBurnOnly": "Burn out by Owner Only",
@@ -551,8 +551,8 @@
             "btn": "Confirm"
         },
         "reIssuableConfirm": {
-            "title": "Change to Non-issuable",
-            "text": "Make sure to change {tokenName} to Non-issuable status?"
+            "title": "Cambiar a No-emisible",
+            "text": "¿Estás seguro de cambiar el estado de {tokenName} a no emisible?"
         },
         "changeOwnerConfirm": {
             "title": "Transfer Ownership",
