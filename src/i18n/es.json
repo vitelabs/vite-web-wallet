@@ -1169,18 +1169,18 @@
                 "tips": {
                     "title": "Aviso importante",
                     "0": "Para evitar la pérdida de activos, no revele a nadie su clave de acceso y clave secreta.",
-                    "1": "In cases of lost secret key, Delete the current API and Re-Apply for a new API key."
+                    "1": "En caso de pérdida de clave secreta, elimine la API actual y vuelva a solicitar una nueva clave API."
                 },
-                "warn": "The Secret key is displayed only once and cannot be found back if lost, please keep it properly."
+                "warn": "La clave secreta se muestra sólo una vez y no se puede encontrar de vuelta si se pierde, por favor manténgala correctamente."
             },
             "upgradeConfirm": {
-                "title": "Upgrade Package",
-                "currentPackage": "Current",
-                "selectPackage": "Select New",
-                "selectTime": "Valid For",
-                "month": " Mth",
+                "title": "Actualizar paquete",
+                "currentPackage": "Actual",
+                "selectPackage": "Seleccionar nuevo",
+                "selectTime": "Válido por",
+                "month": " Mes",
                 "payAmount": "Total",
-                "balance": "VX Balance"
+                "balance": "Saldo VX"
             }
         }
     },
@@ -1190,12 +1190,12 @@
         "operate": "Action",
         "all": "All",
         "confirmTable": {
-            "title": "Detailed Record",
+            "title": "Registro detallado",
             "heads": [
-                "Date",
+                "Fecha",
                 "Token",
-                "Type",
-                "Amount"
+                "Tipo",
+                "Cantidad"
             ]
         },
         "pwdConfirm": {
@@ -1220,12 +1220,12 @@
             }
         },
         "confirmrecharge": {
-            "successToast": "Deposit successful",
-            "failToast": "Failed to deposit",
-            "title": "Deposit to Exchange",
-            "lable1": "Wallet Balance",
-            "lable2": "Deposit Amount",
-            "tips": "Insufficient Wallet Balance",
+            "successToast": "Depósito satisfactorio",
+            "failToast": "Falló al depositar",
+            "title": "Depositar al Exchange",
+            "lable1": "Balance de Billetera",
+            "lable2": "Cantidad del depósito",
+            "tips": "Saldo de billetera insuficiente",
             "placeholder": "Please input deposit amount",
             "btn": "Deposit"
         },
