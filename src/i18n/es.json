@@ -702,75 +702,75 @@
             "describe1": "Las recompensas disponibles a reclamar se actualizan a las 13:00:00 (UTC+8) todos los días, hasta el {time} puedes reclamar",
             "describe2": "Consultar detalles de recompensas por minado, puedes",
             "describe3": "haga clic aquí",
-            "describe4": "Rewards will send to your Vite Web Wallet address after submitting claim request, please check it in Wallet Home Page. Note: Don't repeat claim actions.",
-            "leftBtn": "Not Now",
-            "rightBtn": "Claim All"
+            "describe4": "Las recompensas se enviarán a su dirección Vite después de realizar la solicitud de reclamación, por favor compruébalo en la página principal de tu billetera. Nota: No repita la acción de reclamación.",
+            "leftBtn": "Ahora no",
+            "rightBtn": "Reclamar todo"
         },
         "confirm": {
-            "title": "Registration of SBP candidates",
-            "describe": "The {amount} VITE of current address will be locked about 90 days when you submit the registration,  the amount will be returned to staking address after being unlocked",
-            "leftBtn": "Not register yet",
-            "rightBtn": "Ready to Register",
+            "title": "Registro de SBP candidatos",
+            "describe": "Los {amount} VITE de la dirección actual se bloquearán por 90 días cuando el registro sea enviado, el monto será devuelto a la dirección de staking después de ser desbloqueado",
+            "leftBtn": "Aún no se ha registrado",
+            "rightBtn": "Listo para registrarse",
             "edit": {
-                "title": "Edit SBP Infomation",
-                "newBlockProducer": "please input new block creation address",
-                "newRewardAddress": "please input new reward withdraw address",
-                "changeBlockProducer": "Block Creation Address",
-                "changeRewardAddress": "Reward Withdraw Address",
-                "btn": "Confirm to Change"
+                "title": "Editar información del SBP",
+                "newBlockProducer": "introduce una nueva dirección de creación de bloque",
+                "newRewardAddress": "introduce una nueva dirección de retiro de recompensa",
+                "changeBlockProducer": "Dirección de creación de bloques",
+                "changeRewardAddress": "Dirección de retiro de recompensa",
+                "btn": "Confirmar cambio"
             }
         },
         "section1": {
-            "title": "Registration Form",
-            "nodeName": "Node Name",
-            "producerAddr": "Block Creation Address",
-            "rewardWithdrawAddress": "Reward Withdraw Address",
-            "quotaAddr": "Staking Address",
-            "quotaTime": "Staking Period",
-            "time": "7776000 snapshot blocks（approximately 90 days）",
-            "confirmBtn": "Submit",
-            "namePlaceholder": "Please input node name",
-            "nameHint": "Within 40 characters, support English letters (both upper and lower cases), numbers, '_'、'.'",
-            "nameErr": "This node name is illegal",
-            "nameUsed": "This node name is occupied",
-            "addrPlaceholder": "Please input snapshot block creation address",
-            "addrHint": "The block creation address must be a full node and keep up running",
-            "addrErr": "Illegal address",
-            "addrUsed": "This address has been occupied",
-            "registerSuccess": "Registration request has sent",
-            "registerFail": "Registration request failed"
+            "title": "Formulario de Registro",
+            "nodeName": "Nombre del nodo",
+            "producerAddr": "Dirección de creación de bloques",
+            "rewardWithdrawAddress": "Dirección de retiro de recompensa",
+            "quotaAddr": "Dirección de Stake",
+            "quotaTime": "Periodo de bloqueo",
+            "time": "7776000 instantáneas de bloques (aproximadamente 90 días)",
+            "confirmBtn": "Enviar",
+            "namePlaceholder": "Por favor ingrese el nombre del nodo",
+            "nameHint": "Menor a 40 caracteres, soporta letras en inglés (mayúsculas y minúsculas), números, '_'，'.'",
+            "nameErr": "Este nombre de nodo es ilegal",
+            "nameUsed": "Este nombre ya está en uso",
+            "addrPlaceholder": "Por favor, introduzca la dirección del Nodo generador de instantánea de creación de bloques",
+            "addrHint": "La dirección de creación de bloque debe ser un Full nodo y debe estar en funcionamiento",
+            "addrErr": "Dirección ilegal",
+            "addrUsed": "Esta dirección ha sido ocupada",
+            "registerSuccess": "Solicitud de registro enviada",
+            "registerFail": "Solicitud de registro fallida"
         },
         "section2": {
-            "title": "Registration Information",
-            "update": "Modify",
-            "updateFail": "Failed to send modify request",
-            "cancel": "Revoking",
-            "cancelFail": "Failed to send revoking request",
-            "expireDate": "Expire Date: {time}",
+            "title": "Información de Registro",
+            "update": "Modificar",
+            "updateFail": "Error al enviar la solicitud de modificación",
+            "cancel": "Cancelando",
+            "cancelFail": "Error al enviar la solicitud de cancelación",
+            "expireDate": "Fecha de expiración: {time}",
             "cancelConfirm": {
-                "title": "Revoke registration of SBP",
-                "describe": "The staking amount will be returned back to your staking address after revoking, you have to re-submit the registration to become a SBP"
+                "title": "Cancelar el registro de SBP",
+                "describe": "La cantidad bloqueada será devuelta a su dirección de stake después de cancelar el registro, usted deberá volver a solicitar un registro para convertirse en un SBP"
             }
         }
     },
     "walletVote": {
-        "title": "Voting",
+        "title": "Votación",
         "help": {
-            "title": "About Voting",
-            "text": "You can join and vote for 25 SBPs （Snapshot Block Producer), each round of voting lasts 75s, the polls you can use for voting are equivalent to the amount of VITE tokens owned by voting address, the default selection is the choice of previous round, the SBPs will be chosen from random 23 out of top 25 candidate nodes, plus random 2 out of the candidate nodes ranking 26th-100th on the list, 25 SBPs in total."
+            "title": "Sobre la votación",
+            "text": "Puedes unirte y votar por cualquier SBP, un total de 25 SBPs (Productor de bloques de instantáneas) serán escogidos por cada ronda de votación, cada 75s. Sus votos equivalen al saldo disponible en la dirección que vota. Su voto se mantiene igual en las siguientes rondas a menos que retire su voto o lo cambie para otro nodo. Serán escogidos aleatoriamente 23 SBP de los 25 mejores candidatos, más 2 SBP de los candidatos entre el puesto 26º y 100º. Siendo elegidos como SBPs 25 nodos en total."
         },
-        "toReward": "View my rewards",
-        "voting": "Voting",
-        "search": "Please input node name or block creation address",
-        "addrNoExistErr": "You aren't able to vote for now as your address has no transaction record before",
-        "revokeVoting": "Revoke voting",
+        "toReward": "Ver mis recompensas",
+        "voting": "Votación",
+        "search": "Por favor, introduzca el nombre del nodo o la dirección de creación de bloque",
+        "addrNoExistErr": "No puedes votar por ahora ya que tu dirección no tiene ningún registro de transacción previamente",
+        "revokeVoting": "Cancelar voto",
         "section1": {
-            "title": "My Voting",
+            "title": "Mi voto",
             "head": [
-                "Name",
-                "Status",
-                "My Voting",
-                "Status of Voting",
+                "Nombre",
+                "Estado",
+                "Mi voto",
+                "Estado del voto",
                 "Action"
             ],
             "nodeStatusMap": {
