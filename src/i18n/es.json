@@ -1107,8 +1107,8 @@
                 "rTxtMap": {
                     "new": "Add",
                     "add": "Add",
-                    "delete": "Confirm",
-                    "deleteAll": "Confirm"
+                    "delete": "Confirmar",
+                    "deleteAll": "Confirmar"
                 },
                 "confirm": {
                     "title": "Confirmar la delegación",
