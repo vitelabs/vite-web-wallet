@@ -690,18 +690,18 @@
         "title": "SBP",
         "help": {
             "title": "Acerca del SBP",
-            "text": "SBP（Snapshot Block Producer）is a node that has right to create blocks, you can register to become a SBP candidate by staking a certain amount of VITE, each round (about 75 seconds) will elect 25 SBPs, the SBPs will be elected from random 23 out of top 25 candidate nodes, plus random 2 out of the candidate nodes ranking 26th-100th on the list. The 50% of block creation rewards will be allocated to the block creation node, the other 50% will be allocated to nodes that are ranked on top 100 as voting rewards. One registration address (staking address) can register multiple block creation nodes (node names), a node name cannot be used if the node name has been registered by a registration address. A node name can switch block creation address, however, block creation address cannot be reused by other node names."
+            "text": "SBP (Snapshot Block Producer) es un nodo que tiene derecho a crear bloques, puedes registrarte para convertirte en candidato SBP bloqueando una ciertas cantidad de VITE, cada ronda (cada 75 segundos aproximadamente) se escogerán al azar un total de 25 SBPs, de los cuales 23 nodos serán elegidos entre las posiciones 1-25, y 2 nodos entre las posiciones 26-100 de la lista. El 50% de las recompensas de un SBP se distribuirá en función del número de bloques creados por cada SBP. El otro 50% se distribuirá en función de la cantidad en stake y la cantidad de votos recibidos. Una dirección de registro (dirección que ejecuta el staking) puede registrar múltiples nodos para la creación de bloques (asignándoles nombres a cada nodo), un nombre de nodo no se puede utilizar si el nombre del nodo ya ha sido registrado por una dirección previamente. Un nombre de nodo puede cambiar la dirección de creación de bloques, sin embargo, la dirección de creación de bloques no puede ser reutilizada por otros nombres de nodo."
         },
-        "register": "SBP Registration",
-        "cancel": "SBP Cancellation",
-        "cancelBtn": "Cancel",
-        "rewardBtn": "Claim Rewards",
-        "noReward": "No Rewards",
+        "register": "Registro SBP",
+        "cancel": "Cancelación de SBP",
+        "cancelBtn": "Cancelar",
+        "rewardBtn": "Reclamar recompensas",
+        "noReward": "Sin recompensa",
         "rewardConfirm": {
-            "title": "Claim Rewards",
-            "describe1": "Rewards that are available for claiming update at 13:00:00 (UTC+8) every day, till {time} you can claim",
-            "describe2": "Query mining rewards details, you can",
-            "describe3": "click here",
+            "title": "Reclamar recompensas",
+            "describe1": "Las recompensas disponibles a reclamar se actualizan a las 13:00:00 (UTC+8) todos los días, hasta el {time} puedes reclamar",
+            "describe2": "Consultar detalles de recompensas por minado, puedes",
+            "describe3": "haga clic aquí",
             "describe4": "Rewards will send to your Vite Web Wallet address after submitting claim request, please check it in Wallet Home Page. Note: Don't repeat claim actions.",
             "leftBtn": "Not Now",
             "rightBtn": "Claim All"
