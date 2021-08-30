@@ -771,46 +771,46 @@
                 "Estado",
                 "Mi voto",
                 "Estado del voto",
-                "Action"
+                "Acción"
             ],
             "nodeStatusMap": {
-                "1": "Active",
-                "2": "Inactive"
+                "1": "Activo",
+                "2": "Inactivo"
             },
             "voteStatusMap": {
-                "voted": "Voting Successful",
-                "voting": "Voting",
-                "canceling": "Revoking in Process",
-                "voteNotWork": "Revoked Voting"
+                "voted": "Votación exitosa",
+                "voting": "Votación",
+                "canceling": "Cancelación en proceso",
+                "voteNotWork": "Votación cancelada"
             },
-            "hoverHelp": "The node {nodeName} you are voted for has been revoked, you may vote again directly or revoke your voting, If you do not do so, your original voting result will be recovered after the {nodeName} re-registering",
+            "hoverHelp": "El nodo {nodeName} por el que has votado ha sido revocado, puedes votar de nuevo directamente o cancelar tu voto. Si no lo haces, tu votación original se recuperará después de que el nodo {nodeName} vuela a generar un nuevo registro",
             "confirm": {
-                "cancelText": "Not yet",
-                "submitText": "Confirm"
+                "cancelText": "Todavía no",
+                "submitText": "Confirmar"
             },
-            "revoke": "Revoking",
-            "operateBtn": "Revoke",
-            "cancelVoteErr": "Failed to revoke voting, please try again"
+            "revoke": "Cancelando",
+            "operateBtn": "Cancelar",
+            "cancelVoteErr": "Error al cancelar la votación, por favor inténtalo de nuevo"
         },
         "section2": {
-            "title": "SBP candidates",
+            "title": "Candidatos SBP",
             "head": [
-                "Rank",
-                "Node Name",
-                "Address",
-                "Votes",
-                "Action"
+                "Clasificación",
+                "Nombre del nodo",
+                "Dirección",
+                "Votos",
+                "Acción"
             ],
             "confirm": {
                 "normal": {
-                    "content": "You can vote for only one SBP, are you sure you want to vote for {name}?",
-                    "cancelText": "Not yet",
-                    "submitText": "Ready to vote"
+                    "content": "Puedes votar por solo un SBP, ¿estás seguro de que quieres votar por {name}?",
+                    "cancelText": "Todavía no",
+                    "submitText": "Listo para votar"
                 },
                 "cover": {
-                    "content": "You've already voted for {nodeName}, are you sure to overwrite current voting record?",
-                    "cancelText": "Confirm",
-                    "submitText": "Cancel"
+                    "content": "Ya has votado por {nodeName}, ¿estás seguro de sobrescribir el registro de votación actual?",
+                    "cancelText": "Confirmar",
+                    "submitText": "Cancelar"
                 }
             },
             "noSearchData": "No content found, please try another input",
@@ -828,7 +828,7 @@
             "agreement": "Terms of Services, Trading Conditions and Privacy Policy",
             "contentUngree": "Please agree to this terms before using {gate}'s service",
             "hint": "Contact customer service team of {gate} if you encounter any problems during payment process.",
-            "next": "Confirm and Proceed"
+            "next": "Confirmar y continuar"
         },
         "vb": {
             "title": "ViteConnect",
@@ -837,7 +837,7 @@
                 "tips": "Scan the QR code via Vite Wallet App"
             },
             "confirm": {
-                "tips": "Please confirm transaction on VITE Wallet App"
+                "tips": "Por favor, confirme la transacción en la aplicación de su billetera VITE"
             },
             "start": {
                 "scan": "Scan the QR code via Vite Wallet App",
@@ -850,7 +850,7 @@
             "title": "Ledger Device",
             "accountName": "Ledger Wallet",
             "verifyAddress": "Verify address",
-            "closeAlert": "Cancel",
+            "closeAlert": "Cancelar",
             "start": {
                 "title": "Supported Wallets: Ledger Nano S / Ledger Nano X",
                 "connectError": "Connection Issues?",
@@ -865,8 +865,8 @@
                 "title": "Address Select",
                 "tips": "Select an address to use:",
                 "selectConnectType": "Choose connection type: (Bluetooth is only supported on Ledger Nano X)",
-                "cancelSelect": "Select a device to connect",
-                "connectError": "Connect failed. Please confirm Vite app is opened on device",
+                "cancelSelect": "Seleccione un dispositivo para conectar",
+                "connectError": "Error de conexión. Por favor, confirme que la aplicación Vite está abierta en el dispositivo",
                 "interfaceNotAvailable": "Connect failed. Please check USB cable is connected. If you connect through Bluetooth, switch off Bluetooth and switch on again",
                 "receiveBlockSuccess": "Successfully received {num} transaction",
                 "introduction": {
@@ -887,18 +887,18 @@
                 "unreceived": "Unreceived",
                 "nextPage": "Next page",
                 "prePage": "Last page",
-                "confirm": "Confirm",
+                "confirm": "Confirmar",
                 "unUsedAccount": "New"
             },
             "confirm": {
-                "tips": "Please confirm the transaction on your Ledger device",
+                "tips": "Por favor, confirma la transacción en tu dispositivo Ledger",
                 "verifyAddress": "Please verify the address on your Ledger device",
                 "alert": "Warning",
-                "alertContent": "Address has been denied on Ledger device. Please double verify if this address matches the address displayed on your Ledger device. If yes, ignore this message and go ahead to confirm the transaction, otherwise DO NOT send asset to the address and quit immediately.",
-                "alertLeftBtn": "I confirm the addresses are matched",
+                "alertContent": "La dirección ha sido denegada en el dispositivo Ledger. Por favor, compruebe si esta dirección coincide con la dirección mostrada en su dispositivo Ledger. Si es así, ignore este mensaje y siga adelante para confirmar la transacción, de lo contrario NO envíe activos a la dirección y cierre inmediatamente.",
+                "alertLeftBtn": "Confirmo que las direcciones coinciden",
                 "alertRightBtn": "Addresses mismatch. Get me out of here!",
-                "userCancel": "Transaction is cancelled on Ledger",
-                "userCancelByWeb": "You cancelled the transaction in Vite wallet. In this case, the transaction will be abandoned and never go through to blockchain even if it is confirmed on your Ledger device."
+                "userCancel": "La transacción ha sido cancelada en el Ledger",
+                "userCancelByWeb": "Has cancelado la transacción desde la billetera Vite. En este caso, la transacción será abandonada y nunca pasará a la blockchain incluso si se confirma en su dispositivo Ledger."
             }
         },
         "invite": {
@@ -1063,7 +1063,7 @@
             "priceNotNull": "Amount cannot be empty",
             "amountNotNull": "Volume cannot be empty",
             "quantityNotNull": "Quantity cannot be empty",
-            "cancelVip": "Cancel",
+            "cancelVip": "Cancelar",
             "openVip": "Become a VIP",
             "dexFee": "Base Transaction Fees: {fee}",
             "operatorFee": "Operator Fees: {fee}",
@@ -1077,8 +1077,8 @@
             "subTitle": "Trade Delegation",
             "successProxy": "Delegation Success",
             "failProxy": "Delegation Failed",
-            "successCancelProxy": "Remove Delegation Success",
-            "failCancelProxy": "Failed to remove delegations",
+            "successCancelProxy": "Delegación removida con éxito",
+            "failCancelProxy": "Falló al remover delegación",
             "info": "What is Trade Delegation?",
             "new": "Initiate Delegation",
             "active": {
@@ -1102,8 +1102,8 @@
                 ]
             },
             "dialog": {
-                "cancel": "Cancel",
-                "cancelAllTips": "Are you sure you'd like to remove all delegations on {trustAddress}?",
+                "cancel": "Cancelar",
+                "cancelAllTips": "¿Estás seguro de que quieres eliminar todas las delegaciones de {trustAddress}?",
                 "rTxtMap": {
                     "new": "Add",
                     "add": "Add",
@@ -1111,9 +1111,9 @@
                     "deleteAll": "Confirm"
                 },
                 "confirm": {
-                    "title": "Confirm Delegations",
-                    "cancel": "Cancel",
-                    "ok": "Confirm"
+                    "title": "Confirmar la delegación",
+                    "cancel": "Cancelar",
+                    "ok": "Confirmar"
                 },
                 "titleMap": {
                     "new": "Initiate Delegation",
@@ -1131,8 +1131,8 @@
             "createKey": "Create API Key",
             "deleteKey": "Delete API",
             "deleteAlert": "The current API will no longer be accessible if confirm to proceed. Existing package will be retained and re-activated upon creation of a new API Key.",
-            "confirmDelete": "Confirm and Delete",
-            "cancel": "Cancel",
+            "confirmDelete": "Confirmar y eliminar",
+            "cancel": "Cancelar",
             "agentAddressStakingAmount": "Delegation Staked Quota",
             "staking": "Stake",
             "package": "Package",
@@ -1199,12 +1199,12 @@
             ]
         },
         "pwdConfirm": {
-            "cancelTxt": "Cancel"
+            "cancelTxt": "Cancelar"
         },
         "table": {
             "heads": [
                 "Token",
-                "Total Balance",
+                "Saldo total",
                 "Exchange Balance",
                 "In Order",
                 "Value"
@@ -1242,12 +1242,12 @@
         "zero": "Hide Low Balances"
     },
     "tradeOpenOrders": {
-        "cancelErr": "You are trying too ofter, please try again later.",
+        "cancelErr": "Estás intentándolo con mucha frecuencia, por favor inténtalo de nuevo más tarde.",
         "confirm": {
             "successToast": "Revoking Order Successful",
             "failToast": "Revoking Order Failed",
-            "submitTxt": "Confirm to revoke",
-            "cancelTxt": "Cancel",
+            "submitTxt": "Confirmar para cancelar",
+            "cancelTxt": "Cancelar",
             "title": "Revoke Order",
             "content": "Are you sure you want to revoke current order?"
         },
@@ -1275,7 +1275,7 @@
                 "Total"
             ],
             "rowMap": {
-                "cancel": "Cancel"
+                "cancel": "Cancelar"
             }
         }
     },
@@ -1293,7 +1293,7 @@
         "status": {
             "1": "Ongoing",
             "2": "Completed",
-            "3": "Cancelled",
+            "3": "Cancelado",
             "4": "Failed"
         },
         "confirmTable": {
@@ -1323,7 +1323,7 @@
                 "statusMap": {
                     "1": "In Order",
                     "2": "Completed",
-                    "3": "Canceled",
+                    "3": "Cancelado",
                     "4": "Failed"
                 },
                 "detail": "Details"
@@ -1353,12 +1353,12 @@
             "mining": "Mining Amount",
             "pledge": "Stake"
         },
-        "txTitle": "Trading as Mining Total Income",
-        "quotaTitle": "Staking as Mining Total Income",
+        "txTitle": "Ingresos totales por trading como minado",
+        "quotaTitle": "Ingresos totales por staking como minado",
         "addHint1": "Single stake should be at least 134 VITE",
-        "addHint2": "VITE staking will be effective immediately after submission. Staking can be canceled after 3 days",
+        "addHint2": "El Stake de VITE será efectivo inmediatamente después del envío. El bloqueo puede ser cancelado después de 3 días",
         "addHint3": "Staked amount will be released after the 7-day waiting period",
-        "withdrawHint1": "You will no longer be able to mine VX after staking is canceled",
+        "withdrawHint1": "Ya no podrás minar VX después de que se cancele el stake",
         "withdrawHint2": "It takes 7 days to return unstaked VITE coins to exchange balance",
         "addTitle": "Stake VITE for Mining",
         "withdrawTitle": "Unstake VITE",
@@ -1380,63 +1380,63 @@
     "tradeVip": {
         "title": "VIP Status",
         "open": "Become a VIP",
-        "cancel": "Cancel {type}",
+        "cancel": "Cancelar {type}",
         "help": {
             "title": "About ViteX VIP"
         },
         "helpConfirm": {
             "t1": "VIP",
-            "txt1": "Stake 10,000 VITE to acquire VIP status and receive 50% off trading fees. Staking can be canceled after 30 days.",
+            "txt1": "Bloquee 10.000 VITE para adquirir el status VIP y recibir un 50% de descuento en las comisiones de trading. El bloqueo puede cancelarse después de 30 días.",
             "t2": "SVIP",
-            "txt2": "Stake 1M VITE to become a SVIP and enjoy 0 base trading fees. Staking can be canceled after 30 days.",
+            "txt2": "Bloquee 1M VITE para tener un status SVIP y disfrutar de 0 comisiones de trading. El bloqueo se puede cancelar después de 30 días.",
             "txt3": "SVIP supports staking for any valid account address. Stake for them to get SVIP status!"
         },
         "vipConfirm": {
-            "cancelVip": "Cancel VIP Status",
+            "cancelVip": "Cancelar status VIP",
             "openVip": "Become a VIP",
             "openStakingAmount": "Staking Amount for Becoming a VIP",
-            "cancelStakingAmount": "Available Stake Balance",
+            "cancelStakingAmount": "Saldo bloqueado disponible",
             "noBalance": "Insufficient Balance",
             "openHint": "You will receive 0.1% trading fee deduction as a VIP. The staking of 10,000 VITE can be withdrawn after 30 days.",
-            "cancelHint": "VIP status will be canceled immediately.",
+            "cancelHint": "El status VIP será cancelado inmediatamente.",
             "openSuccess": "Your VIP status is activated! It will take effect in a few seconds.",
             "openFail": "VIP Registration Failed",
-            "cancelSuccess": "Cancel VIP Successful",
-            "cancelFail": "Cancel Failed",
-            "adviseToCancel": "There will be no base transaction fees with your current status as our SVIP, we therefore recommend you to revoke the staked VITE，which is required for general VIP members.",
+            "cancelSuccess": "Cancelación VIP exitosa",
+            "cancelFail": "Cancelación fallida",
+            "adviseToCancel": "No habrá comisiones de transacción base con su estado actual como SVIP, por lo tanto le recomendamos que retire el VITE bloqueado que es necesario para miembros VIP en general.",
             "address": "Enable VIP Status",
             "addressPlaceholder": "Current address is the default address, address cannot be modified later"
         },
         "svipConfirm": {
             "open": "Upgrade",
-            "cancel": "Cancel",
-            "cancelVip": "Cancel SVIP",
+            "cancel": "Cancelar",
+            "cancelVip": "Cancelar SVIP",
             "openVip": "Become a SVIP",
             "openStakingAmount": "Staking Amount for Becoming a SVIP",
-            "cancelStakingAmount": "Available Stake Balance",
+            "cancelStakingAmount": "Saldo bloqueado disponible",
             "noBalance": "Insufficient Balance",
             "openHint": "You will enjoy 0% base transaction fee when upgrading to SVIP. The stake of 1,000,000 VITE can be withdrawn after 30 days.",
-            "cancelHint": "SVIP privileges will be discontinued once staking is revoked",
+            "cancelHint": "Los privilegios de tener status SVIP se interrumpirán una vez que se cancele el bloqueo",
             "openSuccess": "Applied Successful! SVIP status will come into effect later.",
             "openFail": "Failed to apply SVIP",
-            "cancelSuccess": "Cancel SVIP Successful",
-            "cancelFail": "Cancel Failed",
+            "cancelSuccess": "Cancelación SVIP exitosa",
+            "cancelFail": "Cancelación fallida",
             "address": "Enable SVIP Status",
             "addressPlaceholder": "Address to be Enabled with SVIP Status",
-            "cancelAddress": "SVIP Address"
+            "cancelAddress": "Dirección SVIP"
         },
         "vipListTitle": "VIP Records",
         "openAddress": "Enabled Address",
         "type": "VIP Type"
     },
     "inviteMining": {
-        "title": "Referring as Mining Total Income",
+        "title": "Ingresos totales por referidos como minado",
         "myInviteIncome": "Referral Proceeds",
         "inviteTradeIncome": "Referred Trading Proceeds",
         "inviteOrderIncome": "Referred Market-Making Proceeds"
     },
     "orderMining": {
-        "title": "Market-Making as Mining Total Income",
+        "title": "Ingresos totales por creadores de mercados como minado",
         "tbHead": {
             "date": "Date",
             "ratio": "Ratio",
@@ -1449,12 +1449,12 @@
         "title": "Dividends",
         "poolTitle": "Trading Fee Dividend Pool",
         "listTitle": "My Dividends",
-        "allPrice": "Total Estimated Value",
+        "allPrice": "Valor total estimado",
         "date": "Date",
         "VX": "Stake VX",
         "coin": "Type",
         "amount": "Amount",
-        "price": "Total Estimated Value",
+        "price": "Valor total estimado",
         "hintTitle": "Important Notice",
         "comingHint": "VX mining and dividend functions are coming soon, stay tuned. The system will distribute 1% of BTC, ETH, VITE, USDT of the total pool to all VX users proportional to the amount of VX they hold. The initial dividend pool will start at 0 and will grow according to the amount of fees collected by ViteX. Traders must have a minimum of 10 VX in order to receive dividends from a shared dividend pool comprised of base transaction, listing and referral code generating fees. ",
         "more": "Learn more about VX dividend rules",
@@ -1482,7 +1482,7 @@
             "available": "Exchange Available Balance",
             "amountPlaceholder": "Please input staking amount, minimum 1 VX",
             "notEnough": "Insufficient Exchange Balance",
-            "submit": "Confirm to Stake",
+            "submit": "Confirmar Stake",
             "amountText": "Amount"
         },
         "unlockVXConfirm": {
@@ -1490,7 +1490,7 @@
             "available": "Available Stake Balance",
             "amountPlaceholder": "Please input amount, minimum 1 VX",
             "notEnough": "Insufficient Amount",
-            "submit": "Confirm to Unstake",
+            "submit": "Confirmar Unstake",
             "amountText": "Amount",
             "hint": "It takes about 7 days to unlock."
         },
@@ -1503,14 +1503,14 @@
     "tradeOperator": {
         "title": "Operator",
         "tokenList": "Tokens",
-        "totalIncome": "Total Income",
+        "totalIncome": "Ingresos totales",
         "permission": "Transfer Token's Ownership",
         "txPairManage": "Manage Trading Pairs",
         "noOperator": "You have no tokens or trading pairs yet, wanna become an operator?",
         "learnMore": "Learn More",
         "permissionConfirm": {
             "title": "Transfer Ownership",
-            "submit": "Confirm",
+            "submit": "Confirmar",
             "tokenName": "Token Name",
             "address": "Recipient Address",
             "notice": "NOTICE: When the ownership transferred to someone else, trading pairs that not be opened will belong to the new owner. Trading/suspension trading pairs still belong to you"
@@ -1609,10 +1609,10 @@
         "miningStaking": "Staking",
         "miningInvite": "Referral",
         "miningOrder": "Market-Making",
-        "tradeTotalIncome": "Total Income ({token})",
-        "stakingTotalIncome": "Total Income ({token})",
-        "inviteTotalIncome": "Total Income ({token})",
-        "orderTotalIncome": "Total Income ({token})",
+        "tradeTotalIncome": "Ingresos totales ({token})",
+        "stakingTotalIncome": "Ingresos totales ({token})",
+        "inviteTotalIncome": "Ingresos totales ({token})",
+        "orderTotalIncome": "Ingresos totales ({token})",
         "fee": "Fees",
         "listTitle": "Mining History",
         "viewLink": "Live Mining Dashboard",
