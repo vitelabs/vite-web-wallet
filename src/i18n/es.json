@@ -893,10 +893,10 @@
             "confirm": {
                 "tips": "Por favor, confirma la transacción en tu dispositivo Ledger",
                 "verifyAddress": "Please verify the address on your Ledger device",
-                "alert": "Warning",
+                "alert": "Advertencia",
                 "alertContent": "La dirección ha sido denegada en el dispositivo Ledger. Por favor, compruebe si esta dirección coincide con la dirección mostrada en su dispositivo Ledger. Si es así, ignore este mensaje y siga adelante para confirmar la transacción, de lo contrario NO envíe activos a la dirección y cierre inmediatamente.",
                 "alertLeftBtn": "Confirmo que las direcciones coinciden",
-                "alertRightBtn": "Addresses mismatch. Get me out of here!",
+                "alertRightBtn": "Las direcciones no coinciden. ¡Sal de aquí!",
                 "userCancel": "La transacción ha sido cancelada en el Ledger",
                 "userCancelByWeb": "Has cancelado la transacción desde la billetera Vite. En este caso, la transacción será abandonada y nunca pasará a la blockchain incluso si se confirma en su dispositivo Ledger."
             }
@@ -963,7 +963,7 @@
             "noName": "Anonymous Operator",
             "overview": "Introduction",
             "txPair": "Trading Pairs",
-            "confirmTitle": "Risk Reminder",
+            "confirmTitle": "Recordatorio de riesgo",
             "confirmText": "The current trading pair is {symbol}. Please be careful when trading. Investing in digital assets comes with high risks. Before investing, please have a full understanding of all the risks of investing in digital assets and judge the authenticity, legality and validity of digital assets on your own. Please be prudent of your own investment decisions and undertake responsibility for the loss of your assets.",
             "address": "Operator Address",
             "name": "Operator Name"
@@ -1119,7 +1119,7 @@
                     "new": "Initiate Delegation",
                     "add": "Add Delegations",
                     "delete": "Remove Delegations",
-                    "deleteAll": "Confirm to remove delegations"
+                    "deleteAll": "Confirmar la cancelación de delegación"
                 }
             }
         },
@@ -1159,16 +1159,16 @@
                 "title": "Delegation Quota",
                 "agentAddress": "Delegation Address",
                 "stakingAmount": "Stake Amount",
-                "ok": "Confirm"
+                "ok": "Confirmar"
             },
             "keyConfirm": {
-                "accessKey": "Access Key",
-                "secretKey": "Secret Key",
-                "agentAddress": "Delegation Address",
-                "title": "API Created Successfully",
+                "accessKey": "Clave de acceso",
+                "secretKey": "Clave secreta",
+                "agentAddress": "Dirección de Delegación",
+                "title": "API creada con éxito",
                 "tips": {
-                    "title": "Important Notice",
-                    "0": "To avoid asset loss, Do Not disclose your Access Key and Secret Key.",
+                    "title": "Aviso importante",
+                    "0": "Para evitar la pérdida de activos, no revele a nadie su clave de acceso y clave secreta.",
                     "1": "In cases of lost secret key, Delete the current API and Re-Apply for a new API key."
                 },
                 "warn": "The Secret key is displayed only once and cannot be found back if lost, please keep it properly."
@@ -1364,8 +1364,8 @@
         "withdrawTitle": "Unstake VITE",
         "addPlaceHolder": "Please enter staking amount",
         "withdrawPlaceHolder": "Please input unstaking amount, at least 134 VITE",
-        "addBtn": "Confirm to Stake",
-        "withdrawBtn": "Confirm to Unstake",
+        "addBtn": "Confirmar Stake",
+        "withdrawBtn": "Confirmar Unstake",
         "stakingBalance": "Available Stake Balance",
         "hintTitle": "Important Notice",
         "comingHint": "VX mining function is coming soon, stay tuned. You can get VX in five ways: 1. Trading as Mining, 2. Listing as Mining, 3. Referring as Mining, 4. Staking as Mining, 5. Market-making as Mining. Users who hold VX enjoy payouts from a shared dividend pool.",
@@ -1552,7 +1552,7 @@
         "openFail": "Recovery Failed",
         "changeOwnerSuccess": "Transfer Successful",
         "changeOwnerFaill": "Transfer Failed",
-        "submitChange": "Confirm to transfer",
+        "submitChange": "Confirmar transferencia",
         "changeOwnerHint": "NOTICE: You will not be able to collect or adjust fees after ownership transferred as well as you cannot undo this transfer action",
         "currentMaker": "Maker",
         "confirmFee": "Fee",
