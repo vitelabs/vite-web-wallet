@@ -824,36 +824,36 @@
             "title": "Aviso importante",
             "contentProvider": "Este servicio es proporcionado por {gate}.",
             "contentOther": "Usted acepta y reconoce que Vite Labs no será responsable de las consecuencias negativas causadas por {gate}. La plataforma Vite no participa en la relación que pueda surgir entre {gate} y los usuarios de la plataforma Vite",
-            "contentAgree": "By continuing to use {gate}'s service, you agree and acknowledge {gate}'s",
-            "agreement": "Terms of Services, Trading Conditions and Privacy Policy",
-            "contentUngree": "Please agree to this terms before using {gate}'s service",
-            "hint": "Contact customer service team of {gate} if you encounter any problems during payment process.",
+            "contentAgree": "Al seguir utilizando el servicio de {gate}, aceptas y conoces los",
+            "agreement": "Términos de Servicios, Condiciones de Comercio y Política de Privacidad de {gate}",
+            "contentUngree": "Por favor, acepta estos términos antes de utilizar el servicio de {gate}",
+            "hint": "Póngase en contacto con el equipo de atención al cliente de {gate} si encuentra algún problema durante el proceso de pago.",
             "next": "Confirmar y continuar"
         },
         "vb": {
             "title": "ViteConnect",
-            "closeAlert": "close",
+            "closeAlert": "cerrar",
             "connect": {
-                "tips": "Scan the QR code via Vite Wallet App"
+                "tips": "Escanear el código QR desde la aplicación de billetera Vite"
             },
             "confirm": {
                 "tips": "Por favor, confirme la transacción en la aplicación de su billetera VITE"
             },
             "start": {
-                "scan": "Scan the QR code via Vite Wallet App",
-                "downloadTips": "Don’t have the Vite Wallet App? ",
-                "download": "Download here"
+                "scan": "Escanear el código QR desde la aplicación de billetera Vite",
+                "downloadTips": "¿No tienes la aplicación de billetera Vite? ",
+                "download": "Descargar aquí"
             },
-            "accountName": "ViteConnect Address"
+            "accountName": "Dirección ViteConnect"
         },
         "ledger": {
-            "title": "Ledger Device",
-            "accountName": "Ledger Wallet",
-            "verifyAddress": "Verify address",
+            "title": "Dispositivos Ledger",
+            "accountName": "Billetera Ledger",
+            "verifyAddress": "Verificar dirección",
             "closeAlert": "Cancelar",
             "start": {
-                "title": "Supported Wallets: Ledger Nano S / Ledger Nano X",
-                "connectError": "Connection Issues?",
+                "title": "Billeteras compatibles: Ledger Nano S / Ledger Nano X",
+                "connectError": "¿Problemas de conexión?",
                 "introduction": "App Installation & User Instructions",
                 "introductionUrl": "https://docs.vite.org/go-vite/tutorial/ledger-install.html",
                 "connectErrorUrl": "https://support.ledger.com/hc/en-us/articles/115005165269-Connection-issues-with-Windows-or-Linux"
@@ -1590,31 +1590,31 @@
             "price": "Price",
             "quantity": "Amount"
         },
-        "orderQuantity": "Amount",
-        "orderPrice": "Price",
-        "executedQuantity": "Filled",
-        "avgPrice": "Avg"
+        "orderQuantity": "Cantidad",
+        "orderPrice": "Precio",
+        "executedQuantity": "Completado",
+        "avgPrice": "Promedio"
     },
     "mobileDividend": {
-        "title": "Dividends",
-        "poolTitle": "Dividend Pool ({token})",
-        "myDividendTitle": "Total Estimated Value of Dividends ({token})",
-        "listTitle": "Dividend Details",
-        "lockingTitle": "My Staking",
-        "viewLink": "Unstaking Status"
+        "title": "Dividendos",
+        "poolTitle": "Pool de Dividendos ({token})",
+        "myDividendTitle": "Valor total estimado de Dividendos ({token})",
+        "listTitle": "Detalles de Dividendos",
+        "lockingTitle": "Mis bloqueos",
+        "viewLink": "Estado de desbloqueos"
     },
     "mobileMining": {
-        "title": "Mining",
+        "title": "Minado",
         "miningTrade": "Trading",
         "miningStaking": "Staking",
-        "miningInvite": "Referral",
+        "miningInvite": "Referidos",
         "miningOrder": "Market-Making",
         "tradeTotalIncome": "Ingresos totales ({token})",
         "stakingTotalIncome": "Ingresos totales ({token})",
         "inviteTotalIncome": "Ingresos totales ({token})",
         "orderTotalIncome": "Ingresos totales ({token})",
-        "fee": "Fees",
-        "listTitle": "Mining History",
+        "fee": "Comisiones",
+        "listTitle": "Historial de minería",
         "viewLink": "Live Mining Dashboard",
         "inviteTradeIncome": "Referred Trading Details",
         "inviteOrderIncome": "Referred Market-Making Details",
