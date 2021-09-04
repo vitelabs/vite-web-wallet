@@ -813,17 +813,17 @@
                     "submitText": "Cancelar"
                 }
             },
-            "noSearchData": "No content found, please try another input",
-            "operateBtn": "Vote",
-            "voteErr": "Failed to vote, please try again"
+            "noSearchData": "No se encontró contenido, por favor intente otra entrada",
+            "operateBtn": "Votar",
+            "voteErr": "Error al votar, inténtalo de nuevo"
         }
     },
     "assets": {
-        "title": "Assets",
+        "title": "Activos",
         "notice": {
-            "title": "Important Notice",
-            "contentProvider": "This service is provided by {gate}.",
-            "contentOther": "You agree and acknowledge that Vite Labs would not be responsible for any negative consequences caused by {gate}. Vite platform does not take any part in the relationship that may arise between {gate} and users of Vite platform",
+            "title": "Aviso importante",
+            "contentProvider": "Este servicio es proporcionado por {gate}.",
+            "contentOther": "Usted acepta y reconoce que Vite Labs no será responsable de las consecuencias negativas causadas por {gate}. La plataforma Vite no participa en la relación que pueda surgir entre {gate} y los usuarios de la plataforma Vite",
             "contentAgree": "By continuing to use {gate}'s service, you agree and acknowledge {gate}'s",
             "agreement": "Terms of Services, Trading Conditions and Privacy Policy",
             "contentUngree": "Please agree to this terms before using {gate}'s service",
