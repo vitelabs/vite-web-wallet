@@ -1525,19 +1525,19 @@
         "operate": "Action",
         "stopTrans": "Suspend",
         "resetTrans": "Recover",
-        "changeOwner": "Transfer Ownership",
-        "changeFee": "Adjust Fee Rate",
-        "incomeList": "Income Details",
-        "historyIncome": "Income History",
-        "openTxPair": "Open Trading Pairs",
+        "changeOwner": "Transferir propiedad",
+        "changeFee": "Ajustar rango de comisión",
+        "incomeList": "Detalles de ingresos",
+        "historyIncome": "Historial de Ingresos",
+        "openTxPair": "Abrir par de comercio",
         "statusList": [
-            "Ownership Transferred",
+            "Propiedad transferida",
             "Trading",
-            "Suspension",
-            "Trade Not Open"
+            "Suspensión",
+            "Comercio No Disponible"
         ],
         "openTxPairConfirm": {
-            "title": "Open {symbol} to trade",
+            "title": "Habilitar {symbol} para trade",
             "fee": "Listing Fee",
             "hint": "If you want to add unique operator symbol after opening a trading pair, please contact us at our Telegram group: https://t.me/vite_en",
             "btn": "Submit",
@@ -1616,32 +1616,32 @@
         "fee": "Comisiones",
         "listTitle": "Historial de minería",
         "viewLink": "Dashboard en vivo de minería",
-        "inviteTradeIncome": "Referred Trading Details",
-        "inviteOrderIncome": "Referred Market-Making Details",
-        "myStaking": "My Staking"
+        "inviteTradeIncome": "Detalles trades de referidos",
+        "inviteOrderIncome": "Detalles Market-Making de referidos",
+        "myStaking": "Mis bloqueos"
     },
     "mobileBottomBar": {
-        "center": "Trade",
-        "assets": "Assets",
-        "mining": "Mining",
-        "order": "Order"
+        "center": "Comerciar",
+        "assets": "Activos",
+        "mining": "Minería",
+        "order": "Orden"
     },
     "mobileOrder": {
-        "filterDate": "Date",
-        "filterToken": "Type",
-        "all": "All",
-        "3month": "3 months",
-        "1month": "1 month",
-        "1week": "1 week",
-        "1day": "1 day",
-        "clear": "Clear",
-        "submit": "Search"
+        "filterDate": "Fecha",
+        "filterToken": "Tipo",
+        "all": "Todo",
+        "3month": "3 meses",
+        "1month": "1 mes",
+        "1week": "1 semana",
+        "1day": "1 día",
+        "clear": "Borrar",
+        "submit": "Buscar"
     },
     "desktop": {
-        "unlock": "unlock",
+        "unlock": "desbloquear",
         "unreceivedTx": {
-            "title": "You have received {num} transactions.",
-            "body": "Amount：{amount} {symbol} \nFrom Address: {address}"
+            "title": "Has recibido {num} transacciones.",
+            "body": "Cantidad：{amount} {symbol} \nDesde dirección: {address}"
         }
     }
 }
