@@ -881,8 +881,8 @@
                 }
             },
             "addressSelect": {
-                "index": "Index",
-                "address": "Address",
+                "index": "Índice",
+                "address": "Dirección",
                 "balance": "Balance",
                 "unreceived": "Unreceived",
                 "nextPage": "Next page",
