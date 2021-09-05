@@ -1615,7 +1615,7 @@
         "orderTotalIncome": "Ingresos totales ({token})",
         "fee": "Comisiones",
         "listTitle": "Historial de minería",
-        "viewLink": "Live Mining Dashboard",
+        "viewLink": "Dashboard en vivo de minería",
         "inviteTradeIncome": "Referred Trading Details",
         "inviteOrderIncome": "Referred Market-Making Details",
         "myStaking": "My Staking"
