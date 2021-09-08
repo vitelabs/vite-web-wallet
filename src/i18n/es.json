@@ -854,45 +854,45 @@
             "start": {
                 "title": "Billeteras compatibles: Ledger Nano S / Ledger Nano X",
                 "connectError": "¿Problemas de conexión?",
-                "introduction": "App Installation & User Instructions",
+                "introduction": "Instrucciones de usuario e instalación de app",
                 "introductionUrl": "https://docs.vite.org/go-vite/tutorial/ledger-install.html",
-                "connectErrorUrl": "https://support.ledger.com/hc/en-us/articles/115005165269-Connection-issues-with-Windows-or-Linux"
+                "connectErrorUrl": "https://support.ledger.com/hc/es/articles/115005165269-Connection-issues-with-Windows-or-Linux"
             },
-            "connectWithUSB": "Use USB",
-            "connectWithBlu": "Use Bluetooth",
-            "connectLedger": "Connect to Ledger",
+            "connectWithUSB": "Usar USB",
+            "connectWithBlu": "Usar Bluetooth",
+            "connectLedger": "Conectar al Ledger",
             "connect": {
-                "title": "Address Select",
-                "tips": "Select an address to use:",
-                "selectConnectType": "Choose connection type: (Bluetooth is only supported on Ledger Nano X)",
+                "title": "Selección de dirección",
+                "tips": "Seleccione una dirección a usar:",
+                "selectConnectType": "Elija el tipo de conexión: (Bluetooth sólo es compatible con Ledger Nano X)",
                 "cancelSelect": "Seleccione un dispositivo para conectar",
                 "connectError": "Error de conexión. Por favor, confirme que la aplicación Vite está abierta en el dispositivo",
-                "interfaceNotAvailable": "Connect failed. Please check USB cable is connected. If you connect through Bluetooth, switch off Bluetooth and switch on again",
-                "receiveBlockSuccess": "Successfully received {num} transaction",
+                "interfaceNotAvailable": "Error de conexión. Compruebe que el cable USB está conectado. Si se conecta mediante Bluetooth, apague el Bluetooth y vuelva a encenderlo",
+                "receiveBlockSuccess": "{num} transacción recibida exitosamente",
                 "introduction": {
                     "1": {
-                        "title": "Step 1: ",
-                        "content": "Connect Ledger device and enter PIN code"
+                        "title": "Paso 1: ",
+                        "content": "Conecte el dispositivo Ledger e introduzca el código PIN"
                     },
                     "2": {
-                        "title": "Step 2: ",
-                        "content": "Open Vite app on Ledger"
+                        "title": "Paso 2: ",
+                        "content": "Abrir aplicación Vite en Ledger"
                     }
                 }
             },
             "addressSelect": {
                 "index": "Índice",
                 "address": "Dirección",
-                "balance": "Balance",
-                "unreceived": "Unreceived",
-                "nextPage": "Next page",
-                "prePage": "Last page",
+                "balance": "Saldo",
+                "unreceived": "Sin recibir",
+                "nextPage": "Siguiente página",
+                "prePage": "Última página",
                 "confirm": "Confirmar",
-                "unUsedAccount": "New"
+                "unUsedAccount": "Nuevo"
             },
             "confirm": {
                 "tips": "Por favor, confirma la transacción en tu dispositivo Ledger",
-                "verifyAddress": "Please verify the address on your Ledger device",
+                "verifyAddress": "Por favor verifique la dirección en su dispositivo Ledger",
                 "alert": "Advertencia",
                 "alertContent": "La dirección ha sido denegada en el dispositivo Ledger. Por favor, compruebe si esta dirección coincide con la dirección mostrada en su dispositivo Ledger. Si es así, ignore este mensaje y siga adelante para confirmar la transacción, de lo contrario NO envíe activos a la dirección y cierre inmediatamente.",
                 "alertLeftBtn": "Confirmo que las direcciones coinciden",
@@ -902,8 +902,8 @@
             }
         },
         "invite": {
-            "inviteTitle": "Invite Friends",
-            "receiveInviteTitle": "Use Referral Code",
+            "inviteTitle": "Invitar Amigos",
+            "receiveInviteTitle": "Usar código de referido",
             "myCode": "My Referral Code: ",
             "codeLable": "Referral Code",
             "invited": "You have already accepted an invitation, referral code is: ",
