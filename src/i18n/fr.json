@@ -1,44 +1,44 @@
 {
     "lang": "English",
     "help": "Help",
-    "announcements": "Announcements",
-    "start": "Start",
-    "login": "Log In",
-    "regAcc": "Register",
+    "announcements": "Annonces",
+    "start": "Démarrer",
+    "login": "Se Connecter",
+    "regAcc": "Créer un compte",
     "unlockAcc": "Unlock Current Account",
     "changeAcc": "Switch to Other Account",
-    "existingAcc": "Existing Accounts",
-    "restore": "Import Mnemonic Words",
-    "register": "Sign Up",
-    "createAcc": "Create",
-    "settingAcc": "Setting Account",
-    "resetAcc": "Reset Your Account",
-    "logout": "Logout",
-    "saveLogout": "Logout",
-    "blockHeight": "Snapshot Block Height",
-    "accountName": "Account Name",
+    "existingAcc": "Comptes existants",
+    "restore": "Importer la phrase mnémonique",
+    "register": "S'inscrire",
+    "createAcc": "Créer",
+    "settingAcc": "Paramétrage du compte",
+    "resetAcc": "Remettre à zéro votre compte",
+    "logout": "Déconnexion",
+    "saveLogout": "Déconnexion",
+    "blockHeight": "Hauteur du bloc de sauvegarde",
+    "accountName": "Nom du compte",
     "action": "Action",
-    "stakingAmount": "Staking Amount",
+    "stakingAmount": "Montant Bloqué",
     "submitStaking": "Submit Staking",
     "withdrawHeight": "Expected Snapshot Height",
-    "balance": "Balance",
-    "dexBalance": "ViteX Balance",
-    "addrName": "Address{index}",
+    "balance": "Solde",
+    "dexBalance": "Solde ViteX",
+    "addrName": "Adresse{index}",
     "true": "true",
     "false": "false",
     "guide": {
         "close": "Close",
         "next": "Next",
-        "closeTips": "Skip user guide (Not recommended)",
+        "closeTips": "Passer le guide d'utilisateur (Non recommandé)",
         "trade": [
-            "Manage your assets (both Web Wallet and ViteX exchange) here",
+            "Gérer votre solde (Portefeuille Web et Vitex) ici",
             "Check out Open Orders and Order History, know trading details",
             "Participate in mining, acquire VX and trading fee dividends (Mining Dividends)",
             "Experience more features: Staking for Quota, becoming a SBP (Snapshot Block Producer) runner, Voting for SBPs, ERC20 conversion, Transaction Details, etc."
         ],
         "assets": [
-            "Deposit to Exchange",
-            "Withdraw to Wallet",
+            "Dépôt vers Vitex",
+            "Retrait vers portefeuille",
             "Cross-Chain Receive & Send"
         ]
     },
@@ -47,46 +47,46 @@
             "buy": "Buy Order Completed: {ftoken} / {ttoken}",
             "sell": "Sell Order Completed: {ftoken} / {ttoken}"
         },
-        "failTitle": "Order Failed",
+        "failTitle": "Échec de l'ordre",
         "notice-all": {
-            "buy": "Price: {price} {ttoken} \nAmount: {amount} {ttoken}, was completed. View Order History page for details.",
-            "sell": "Price: {price} {ttoken} \nAmount: {amount} {ttoken}, was completed. View Order History page for details."
+            "buy": "Prix: {price} {ttoken} \nMontant: {amount} {ttoken}, a été complété. Voir l'historique des commandes pour plus de détails.",
+            "sell": "Prix: {price} {ttoken} \nMontant: {amount} {ttoken}, a été complété. Voir l'historique des commandes pour plus de détails."
         },
         "notice-partial": {
-            "buy": "Price: {price} {ttoken} \nAmount: {amount} {ttoken}, is {executedPercent}% completed.",
-            "sell": "Price: {price} {ttoken} \nAmount: {amount} {ttoken}, is {executedPercent}% completed."
+            "buy": "Prix: {price} {ttoken} \nMontant: {amount} {ttoken}, est complété à {executedPercent}%.",
+            "sell": "Prix: {price} {ttoken} \nMontant: {amount} {ttoken}, est complété à {executedPercent}%."
         },
         "error": "Your order {amount} {ftoken} ({ftoken}/{ttoken}) at {time} has failed, for more details, please view in Order History section."
     },
     "pow": {
-        "ing": "Running PoW to acquire quota",
+        "ing": "Exécuter la PoW pour avoir du Quota",
         "no": "You can stake VITE for quota in case you would not like to run PoW",
-        "insuffQuota": "Get Quota",
+        "insuffQuota": "Obtenir du Quota",
         "insuffQuotaMsg": "We notice you have no VITE locked for Quota. Please lock VITE or if you prefer, you can run POW to get Quota.",
         "insuffQuotaMsg2": "VITE Only {powMaxTimes} transactions can be made per day per address without staking VITE. Your address has exhausted all {powMaxTimes} transactions. Please go to the quota page and stake your VITE to perform more transactions.",
-        "getQuota": "Lock VITE",
-        "skip": "Run POW",
-        "cancel": "Cancel"
+        "getQuota": "Verrouiller VITE",
+        "skip": "Exécuter la PoW",
+        "cancel": "Annuler"
     },
-    "addAccount": "Create an Account",
-    "saveQrcode": "Save QR code image",
-    "unlockSuccess": "Unlock Success",
+    "addAccount": "Créer un compte",
+    "saveQrcode": "Sauvegarder le QR code",
+    "unlockSuccess": "Déverrouillage réussi",
     "sendTrans": {
         "send": "Send Transaction",
         "symbol": "Send"
     },
     "compliance": {
         "text": "ViteX does not serve customers in the following countries/regions/territories: Hong Kong, Cuba, Iran, North Korea, Crimea, Sudan, Malaysia, Syria, USA [including all USA territories like Puerto Rico, American Samoa, Guam, Northern Mariana Island, and the US Virgin Islands (St. Croix, St. John and St. Thomas)], Bangladesh, Bolivia, Ecuador, and Kyrgyzstan. For more information, please read our Terms of Service and Privacy Policy",
-        "title": "Important Notice"
+        "title": "Avertissement important"
     },
     "bnbConf": {
-        "title": "Important Notice",
-        "t1": "VITE Binance Listing Coming! Please vote to have VITE listed on Binance.",
+        "title": "Avertissement important",
+        "t1": "VITE chez Binance! Merci de voter pour que VITE figure sur Binance.",
         "t2": "Voting Period: 12:00 pm Dec 12 to 12:00 pm Dec 13 (HKT)",
         "t3": "Voting Method: Holding 50 BNB allows for 1 vote (10 votes max)",
         "t4": "Voting Rewards: All voted users will be rewarded with an airdrop totaling 21,000,000 VITE based on executed votes.",
-        "btn": "Vote Now!!!",
-        "notice": "[Attention]: You must have 50-500 BNBs in your Binance Account starting Dec 5 and last through Dec 13 to Qualify for Voting!"
+        "btn": "Voter maintenant!!!",
+        "notice": "[Attention]: Vous devez avoir 50-500 BNB dans votre compte Binance à partir du 5 Décembre et jusqu'au 13 Décembre pour pouvoir voter !"
     },
     "errCode": {
         "35003": "{name} ID conflict occurs, please re-submit later",
@@ -326,7 +326,7 @@
         "assetSpread": "Portfolio",
         "saveSuccess": "Successfully saved",
         "heads": {
-            "name": "Name",
+            "name": "Nom",
             "balance": "Balance",
             "onroad": "Wallet Unreceived Amount",
             "gate": "Wallet Cross-Chain Gateway",
@@ -342,23 +342,23 @@
             "RECEIVE": "Receive",
             "CHARGE": "Receive",
             "WITHDRAW": "Send",
-            "EXTRANSFER": "Transfer",
-            "EXRECRODS": "History",
-            "RECRODS": "History",
-            "EXCHARGE": "Deposit",
-            "EXWITHDRAW": "Withdraw"
+            "EXTRANSFER": "Transfert",
+            "EXRECRODS": "Historique",
+            "RECRODS": "Historique",
+            "EXCHARGE": "Dépôt",
+            "EXWITHDRAW": "Retrait"
         },
         "transferConfirm": {
-            "from": "From",
-            "to": "To",
+            "from": "De",
+            "to": "À",
             "wallet": "Wallet Account",
             "dex": "Exchange Account",
-            "avaliableAmount": "Balance"
+            "avaliableAmount": "Solde"
         },
         "addToken": {
             "title": "Add Token",
             "placeholder": "Please enter token name or TokenID",
-            "lTxt": "Cancel",
+            "lTxt": "Annuler",
             "rTxt": "Add"
         },
         "type": {
@@ -366,12 +366,12 @@
             "crossGate": "Cross-Chain Coins"
         },
         "assetType": {
-            "TOTAL": "All Assets",
+            "TOTAL": "Tout le solde",
             "EX": "Exchange Assets",
             "WALLET": "Wallet Assets"
         },
         "tokenInfo": {
-            "tabName": "Details",
+            "tabName": "Détails",
             "title": "{tokenSymbol} Information",
             "saveGate": "Save",
             "labels": {
@@ -382,7 +382,7 @@
                 "overview": "Introduction",
                 "type": "Type",
                 "gate": "Cross-Chain Gateway",
-                "website": "Website",
+                "website": "Site Internet",
                 "whitePaper": "White Paper",
                 "explorer": "Explorer",
                 "github": "Github",
@@ -414,14 +414,14 @@
             "nodeDescStr": "This function only works for cross-chain coins, do not use this on built-in tokens. Meanwhile, please be careful about unfamiliar gateway links. By continuing to use our platform, you agree and acknowledge that Vite Labs would not be responsible for the loss of your fund and other negative consequences caused. Fill out the gateway link below if you need to use gateway, the link will come into effect after you hit save."
         },
         "depositRecord": {
-            "tabName": "Receive History",
+            "tabName": "Historique des dépôts",
             "heads": [
                 "Time",
                 "Amount",
                 "Status",
                 "VITE Chain Hash",
                 "{outChain} Chain Hash",
-                "Fees"
+                "Frais"
             ],
             "statusMap": {
                 "OPPOSITE_PROCESSING": "{outChain} awaits to confirm{confirms}",
@@ -436,11 +436,11 @@
             "tabName": "Transfer History",
             "heads": [
                 "Time",
-                "Amount",
+                "Montant ",
                 "Status",
                 "VITE Chain Hash",
                 "{outChain} Chain Hash",
-                "Fees"
+                "Frais"
             ],
             "statusMap": {
                 "TOT_PROCESSING": "VITE Chain Unconfirmed{confirms}",
@@ -480,8 +480,8 @@
                 "balance": "Balance",
                 "address": "Recipient Address",
                 "amount": "Amount",
-                "fee": "Fee",
-                "all": "All"
+                "fee": "Frais",
+                "all": "Tous"
             },
             "labelPlaceholder": "Please input {labelName}",
             "amountPlaceholder": "Please input send amount which should not be less than {min}",
@@ -502,7 +502,7 @@
         "help": {
             "title": "Quick Understanding of Quota"
         },
-        "transfer": "Send Funds",
+        "transfer": "Envoyer des Fonds",
         "getTestToken": "Get Test Tokens",
         "transDetail": "More Transaction Details",
         "address": "My Address",
