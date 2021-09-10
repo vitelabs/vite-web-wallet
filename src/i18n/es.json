@@ -932,7 +932,7 @@
         "title": "Conversión de VITE",
         "help": {
             "title": "Entendimiento rápido de la conversión de VITE",
-            "text": "You can migrate ERC20 tokens into VITE into our TestNet by VITE conversion function. In TestNet, casting your vote for official SBPs to collect rewards, the annualized rate can reach 20%. Your ERC20 VITE tokens will be transferred to Ethereum black hole address: {blackAddr}, you will receive the same amount of VITE at your Vite address when Ethereum black hole address has received the transaction and confirmed. Once you are in the conversion process, confirm that there are enough VITE and ETH (as gas) in your Ethereum address of Vite wallet."
+            "text": "Puedes migrar los tokens VITE ERC20 a VITE Nativo dentro de la TestNet mediante nuestra función de conversión. En la TestNet, puedes emitir el voto por los SBP oficiales para obtener recompensas alcanzó una tasa anual cercana al 20%. Tus tokens ERC20 VITE serán transferidos a la dirección del agujero negro de Ethereum: {blackAddr}, recibirás la misma cantidad de VITE en tu dirección de Vite cuando la transacción haya sido recibida y confirmada por la dirección Ethereum del agujero negro. Una vez que estés en el proceso de conversión, confirme que tenga suficiente VITE y ETH (como gas) en su dirección de Ethereum de la billetera Vite."
         },
         "gas": "Comisión de minería",
         "record": "Historial de conversión",
