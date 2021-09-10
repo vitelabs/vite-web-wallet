@@ -503,7 +503,7 @@
             "title": "Quick Understanding of Quota"
         },
         "transfer": "Envoyer des Fonds",
-        "getTestToken": "Get Test Tokens",
+        "getTestToken": "Obtenir des jetons test",
         "transDetail": "More Transaction Details",
         "address": "My Address",
         "fundFloat": "Unreceived",
@@ -546,8 +546,8 @@
         "getListFail": "You are unable to get token list, try again later",
         "mintageConfirm": {
             "title": "Check your Token Issuance Information",
-            "balance": "Balance",
-            "fee": "Issuance Fee",
+            "balance": "Solde",
+            "fee": "Frais d'émission",
             "btn": "Confirm"
         },
         "reIssuableConfirm": {
@@ -555,7 +555,7 @@
             "text": "Make sure to change {tokenName} to Non-issuable status?"
         },
         "changeOwnerConfirm": {
-            "title": "Transfer Ownership",
+            "title": "Transférer la propriété",
             "address": "Recipient Address"
         },
         "issueConfirm": {
