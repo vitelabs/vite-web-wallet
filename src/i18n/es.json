@@ -964,7 +964,7 @@
             "overview": "Introducción",
             "txPair": "Par de comercio",
             "confirmTitle": "Recordatorio de riesgo",
-            "confirmText": "The current trading pair is {symbol}. Please be careful when trading. Investing in digital assets comes with high risks. Before investing, please have a full understanding of all the risks of investing in digital assets and judge the authenticity, legality and validity of digital assets on your own. Please be prudent of your own investment decisions and undertake responsibility for the loss of your assets.",
+            "confirmText": "El par de comercio actual es {symbol}. Por favor, tenga cuidado al operar. La inversión en activos digitales conlleva altos riesgos. Antes de invertir, por favor comprenda plenamente todos los riesgos de invertir en activos digitales y juzgue la autenticidad, legalidad y validez de los activos digitales por su cuenta. Por favor, sea prudente con sus propias decisiones de inversión y asuma la responsabilidad por la pérdida de sus activos.",
             "address": "Dirección del operador",
             "name": "Nombre de operador"
         },
