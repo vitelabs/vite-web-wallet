@@ -990,34 +990,34 @@
         "quantityTable": "Cant.",
         "amountTable": "Volumen",
         "amount": "Total",
-        "newOrderSuccess": "Order request has sent",
-        "newOrderFail": "Order Failed",
-        "depthView": "Depth",
+        "newOrderSuccess": "Solicitud de orden enviada",
+        "newOrderFail": "Orden fallida",
+        "depthView": "Profundidad",
         "klineView": "TradingView",
         "txPairDetail": {
-            "title": "Trading pair details",
+            "title": "Detalles del par de comercio",
             "24h": "24h",
-            "openPrice": "Open",
-            "quantity": "Market Volume",
-            "amount": "Base volume",
-            "status": "Status",
-            "latest": "Latest",
-            "buy": "Buy price",
-            "sell": "Sell price",
+            "openPrice": "Abrir",
+            "quantity": "Volumen de mercado",
+            "amount": "Volumen base",
+            "status": "Estado",
+            "latest": "Última",
+            "buy": "Precio de Compra",
+            "sell": "Precio de venta",
             "diff": "Spread"
         },
         "buy": {
-            "title": "Buy {token}",
-            "price": "Price({token})",
-            "quantity": "Amount({token})"
+            "title": "Comprar {token}",
+            "price": "Precio({token})",
+            "quantity": "Cantidad({token})"
         },
         "sell": {
-            "title": "Sell {token}",
-            "price": "Price({token})",
-            "quantity": "Amount({token})"
+            "title": "Vender {token}",
+            "price": "Precio({token})",
+            "quantity": "Cantidad({token})"
         },
         "head": {
-            "latestPrice": "Last Price",
+            "latestPrice": "Último precio",
             "updown": "24h Change",
             "highPrice": "24h High",
             "lowPrice": "24h Low",
