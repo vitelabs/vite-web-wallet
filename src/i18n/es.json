@@ -1097,16 +1097,16 @@
             "passive": {
                 "title": "Historial de Delegación Aceptada",
                 "head": [
-                    "Delegation Address",
-                    "Trading Pairs"
+                    "Dirección de Delegación",
+                    "Pares de comercio"
                 ]
             },
             "dialog": {
                 "cancel": "Cancelar",
                 "cancelAllTips": "¿Estás seguro de que quieres eliminar todas las delegaciones de {trustAddress}?",
                 "rTxtMap": {
-                    "new": "Add",
-                    "add": "Add",
+                    "new": "Agregar",
+                    "add": "Agregar",
                     "delete": "Confirmar",
                     "deleteAll": "Confirmar"
                 },
@@ -1116,33 +1116,33 @@
                     "ok": "Confirmar"
                 },
                 "titleMap": {
-                    "new": "Initiate Delegation",
-                    "add": "Add Delegations",
-                    "delete": "Remove Delegations",
+                    "new": "Iniciar una delegación",
+                    "add": "Añadir Delegaciones",
+                    "delete": "Eliminar Delegaciones",
                     "deleteAll": "Confirmar la cancelación de delegación"
                 }
             }
         },
         "openapi": {
             "title": "API",
-            "myKey": "My API Key",
-            "createTime": "Created Time",
-            "permissions": "Applied Trading Pairs",
-            "createKey": "Create API Key",
-            "deleteKey": "Delete API",
-            "deleteAlert": "The current API will no longer be accessible if confirm to proceed. Existing package will be retained and re-activated upon creation of a new API Key.",
+            "myKey": "Mi API KEy",
+            "createTime": "Fecha de creación",
+            "permissions": "Pares de comercio aplicados",
+            "createKey": "Crear API Key",
+            "deleteKey": "Eliminar API",
+            "deleteAlert": "Si confirma continuar, la API actual dejará de ser accesible. El paquete existente se mantendrá y se volverá a activar al crear una nueva API key.",
             "confirmDelete": "Confirmar y eliminar",
             "cancel": "Cancelar",
-            "agentAddressStakingAmount": "Delegation Staked Quota",
-            "staking": "Stake",
-            "package": "Package",
-            "expireTime": "Expiration Date",
-            "callNum": "Triggers/min",
-            "callNumInfo": "{maxCount} transactions/min",
-            "price": "Cost",
-            "priceInfo": "{price} VX/mth",
-            "upgrade": "Upgrade",
-            "balanceAlert": "Cannot create if VITE balance is less than {balanceLimit}.",
+            "agentAddressStakingAmount": "Cuota delegada bloqueada",
+            "staking": "Bloquear",
+            "package": "Paquete",
+            "expireTime": "Fecha de expiración",
+            "callNum": "Activadores/min",
+            "callNumInfo": "{maxCount} transacciones/min",
+            "price": "Coste",
+            "priceInfo": "{price} VX/mes",
+            "upgrade": "Mejorar",
+            "balanceAlert": "No se puede crear si el balance de VITE es inferior a {balanceLimit}.",
             "noSupportForHardware": "Hardware Wallet is not supported at the moment",
             "tips": {
                 "title": "Notice",
