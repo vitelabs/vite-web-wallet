@@ -1028,15 +1028,15 @@
             "website": "Sitio Web Oficial",
             "explorer": "Explorador de bloques",
             "overview": "Descripción",
-            "tokenShow": "Abbr",
+            "tokenShow": "Abrev.",
             "tokenId": "Token ID",
-            "publisher": "Issuer",
+            "publisher": "Emisor",
             "total": "Total",
-            "tokenDigit": "Decimals",
-            "publisherDate": "Issuance Date",
-            "type": "Status",
-            "tokenType0": "Issuance Available",
-            "tokenType1": "Never Issued"
+            "tokenDigit": "Decimales",
+            "publisherDate": "Fecha de emisión",
+            "type": "Estado",
+            "tokenType0": "Emisión disponible",
+            "tokenType1": "Nunca emitido"
         },
         "latestTx": {
             "title": "Last Orders",
