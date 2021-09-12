@@ -1060,42 +1060,42 @@
             "feeRuleWithSVip": "Comisiones del operador * Descuento de Referido. ATENCIÓN: El ajuste y el descuento de las comisiones sólo afectarán a nuevas órdenes, los cargos de las órdenes anteriores siguen siendo las mismas.",
             "text": "Esta página es una página de vista previa de los datos de la transacción. Por favor, inicie sesión para operar.",
             "validAmount": "El volumen debe ser mayor que {amount}{token}",
-            "priceNotNull": "Amount cannot be empty",
-            "amountNotNull": "Volume cannot be empty",
-            "quantityNotNull": "Quantity cannot be empty",
+            "priceNotNull": "La cantidad no puede estar vacía",
+            "amountNotNull": "El volumen no puede estar vacío",
+            "quantityNotNull": "La cantidad no puede estar vacía",
             "cancelVip": "Cancelar",
-            "openVip": "Become a VIP",
-            "dexFee": "Base Transaction Fees: {fee}",
-            "operatorFee": "Operator Fees: {fee}",
-            "vipFee": "VIP Discount: {fee}",
-            "inviteFeeDiscount": "Referral Discount: {fee} off",
-            "svipFee": "SVIP: 0% base transaction fee",
-            "feeRule": "(Base Transaction Fee - VIP discount + Operator Fees) * Referral Discount. ATTENTION: The adjustment and discount of fees will only affect new orders, the former orders' charge remains the same."
+            "openVip": "Hazte VIP",
+            "dexFee": "Comisión base de transacción: {fee}",
+            "operatorFee": "Comisión del operador: {fee}",
+            "vipFee": "Descuento VIP: {fee}",
+            "inviteFeeDiscount": "Descuento por referido: {fee} de descuento",
+            "svipFee": "SVIP: 0% comisión de transacción base",
+            "feeRule": "(Comisión base de transacción - Descuento VIP + Comisiones del operador) * Descuento de Referido. ATENCIÓN: El ajuste y el descuento de las comisiones sólo afectarán a nuevas órdenes, los cargos de las órdenes anteriores siguen siendo las mismas."
         },
         "proxy": {
-            "title": "Trade Delegation",
-            "subTitle": "Trade Delegation",
-            "successProxy": "Delegation Success",
-            "failProxy": "Delegation Failed",
+            "title": "Delegación de trade",
+            "subTitle": "Delegación de trade",
+            "successProxy": "Delegación exitosa",
+            "failProxy": "Delegación fallida",
             "successCancelProxy": "Delegación removida con éxito",
             "failCancelProxy": "Falló al remover delegación",
-            "info": "What is Trade Delegation?",
-            "new": "Initiate Delegation",
+            "info": "¿Qué es la Delegación de trade?",
+            "new": "Iniciar una delegación",
             "active": {
-                "title": "Delegation History",
+                "title": "Historial de Delegación",
                 "head": [
-                    "Delegatee Address",
-                    "Trading Pairs",
-                    "Action"
+                    "Dirección Delegada",
+                    "Pares de comercio",
+                    "Acción"
                 ],
                 "operate": [
-                    "Add Trading Pairs",
-                    "Remove Trading Pairs",
-                    "Remove All Delegations"
+                    "Añadir pares de comercio",
+                    "Remover pares de comercio",
+                    "Remover todas las delegaciones"
                 ]
             },
             "passive": {
-                "title": "Accepted Delegation History",
+                "title": "Historial de Delegación Aceptada",
                 "head": [
                     "Delegation Address",
                     "Trading Pairs"
