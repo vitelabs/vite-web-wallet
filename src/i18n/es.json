@@ -1039,27 +1039,27 @@
             "tokenType1": "Nunca emitido"
         },
         "latestTx": {
-            "title": "Last Orders",
-            "time": "Time"
+            "title": "Últimas órdenes",
+            "time": "Tiempo"
         },
         "depth": {
-            "buy": "Buy",
-            "sell": "Sell",
-            "all": "All",
-            "avgPrice": "Avg.Price:",
+            "buy": "Comprar",
+            "sell": "Vender",
+            "all": "Todo",
+            "avgPrice": "Precio medio:",
             "sum": "Sum {symbol}:"
         },
         "noData": {
-            "favorite": "You have no favorite yet",
-            "search": "No result found"
+            "favorite": "Aún no tienes favoritos",
+            "search": "No hay resultados"
         },
         "limitPrice": {
-            "title": "Limit",
-            "fee": "Fees",
-            "adviseToSVip": "Upgrade to SVIP, enjoy zero base transaction fee",
-            "feeRuleWithSVip": "Operator Fees * Referral Discount. ATTENTION: The adjustment and discount of fees will only affect new orders, the former orders' charge remains the same.",
-            "text": "This page is a preview page of transaction data. Please login to trade.",
-            "validAmount": "Volume must be greater than {amount}{token}",
+            "title": "Límite",
+            "fee": "Comisiones",
+            "adviseToSVip": "Actualizar a SVIP, disfruta tener cero comisión de transacciones",
+            "feeRuleWithSVip": "Comisiones del operador * Descuento de Referido. ATENCIÓN: El ajuste y el descuento de las comisiones sólo afectarán a nuevas órdenes, los cargos de las órdenes anteriores siguen siendo las mismas.",
+            "text": "Esta página es una página de vista previa de los datos de la transacción. Por favor, inicie sesión para operar.",
+            "validAmount": "El volumen debe ser mayor que {amount}{token}",
             "priceNotNull": "Amount cannot be empty",
             "amountNotNull": "Volume cannot be empty",
             "quantityNotNull": "Quantity cannot be empty",
