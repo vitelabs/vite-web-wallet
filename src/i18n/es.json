@@ -1149,16 +1149,16 @@
                 "0": "ViteX está lanzando su API oficial para proporcionar acceso a los mercados y servicios de trading en tiempo real. Siga las instrucciones de abajo para adquirir correctamente una API key privada.",
                 "0-step1": "1. Crear API",
                 "0-step2": "2. Autorizar la delegación de los pares de comercio seleccionados",
-                "0-step3": "3. Stake quota for API delegation address",
-                "0-step4": "View <a href=\"https://vite.wiki/dex/api/dex-apis.html\" target=\"_blank\">API Documentation</a> for further support",
-                "1": "One set of API Key and Secret is allowed for the same address at any given time.",
-                "2": "To avoid asset loss, Do Not disclose your Access Key and Secret",
-                "3": "The API package is set with the free base package at 10 transactions per minute by default, upgrade options available."
+                "0-step3": "3. Obtener cuota para la dirección de la delegación API",
+                "0-step4": "Ver la <a href=\"https://vite.wiki/dex/api/dex-apis.html\" target=\"_blank\">Documentación API</a> para más soporte",
+                "1": "Se permite un conjunto de API Key y Secret para la misma dirección en cualquier momento.",
+                "2": "Para evitar la pérdida de activos, no revele a nadie su clave de acceso y clave secreta",
+                "3": "La utilización mediante API esta establecida con el paquete base gratuito de 10 transacciones por minuto de forma predeterminada, existen opciones de mejora disponibles."
             },
             "stakingForQuota": {
-                "title": "Delegation Quota",
-                "agentAddress": "Delegation Address",
-                "stakingAmount": "Stake Amount",
+                "title": "Cuota de Delegación",
+                "agentAddress": "Dirección de Delegación",
+                "stakingAmount": "Cantidad bloqueada",
                 "ok": "Confirmar"
             },
             "keyConfirm": {
@@ -1185,10 +1185,10 @@
         }
     },
     "tradeAssets": {
-        "title": "Funds",
-        "search": "Please enter token name",
-        "operate": "Action",
-        "all": "All",
+        "title": "Fondos",
+        "search": "Por favor ingrese el nombre del token",
+        "operate": "Acción",
+        "all": "Todo",
         "confirmTable": {
             "title": "Registro detallado",
             "heads": [
@@ -1205,17 +1205,17 @@
             "heads": [
                 "Token",
                 "Saldo total",
-                "Exchange Balance",
-                "In Order",
-                "Value"
+                "Saldo del exchange",
+                "En orden",
+                "Valor"
             ],
             "rowMap": {
-                "recharge": "Deposit to Exchange",
-                "withdraw": "Withdraw to Wallet",
-                "detail": "Details",
+                "recharge": "Depositar al Exchange",
+                "withdraw": "Retirar a billetera",
+                "detail": "Detalles",
                 "sideMap": {
-                    "1": "Deposit",
-                    "2": "Withdraw"
+                    "1": "Depositar",
+                    "2": "Retirar"
                 }
             }
         },
@@ -1226,32 +1226,32 @@
             "lable1": "Balance de Billetera",
             "lable2": "Cantidad del depósito",
             "tips": "Saldo de billetera insuficiente",
-            "placeholder": "Please input deposit amount",
-            "btn": "Deposit"
+            "placeholder": "Por favor ingrese la cantidad a depositar",
+            "btn": "Depositar"
         },
         "confirmwithdraw": {
-            "successToast": "Withdrawal Successful",
-            "failToast": "Withdrawal Failed",
-            "title": "Withdraw to Wallet",
-            "lable1": "Available Balance",
-            "lable2": "Withdrawal Amount",
-            "tips": "Insufficient Wallet Balance",
-            "placeholder": "Please input withdrawal amount",
-            "btn": "Withdraw"
+            "successToast": "Retiro Exitoso",
+            "failToast": "Retiro fallido",
+            "title": "Retirar a billetera",
+            "lable1": "Saldo disponible",
+            "lable2": "Cantidad del retiro",
+            "tips": "Saldo de billetera insuficiente",
+            "placeholder": "Por favor, introduzca la cantidad a retirar",
+            "btn": "Retirar"
         },
-        "zero": "Hide Low Balances"
+        "zero": "Ocultar saldos pequeños"
     },
     "tradeOpenOrders": {
         "cancelErr": "Estás intentándolo con mucha frecuencia, por favor inténtalo de nuevo más tarde.",
         "confirm": {
-            "successToast": "Revoking Order Successful",
-            "failToast": "Revoking Order Failed",
+            "successToast": "Revocando orden con éxito",
+            "failToast": "Falló la revocación de la orden",
             "submitTxt": "Confirmar para cancelar",
             "cancelTxt": "Cancelar",
-            "title": "Revoke Order",
-            "content": "Are you sure you want to revoke current order?"
+            "title": "Revocar orden",
+            "content": "Estás seguro de revocar la orden actual?"
         },
-        "title": "Open Orders",
+        "title": "Órdenes abiertas",
         "hint": {
             "fdate": "Please select start date",
             "tdate": "Please select end date",
