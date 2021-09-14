@@ -1253,25 +1253,25 @@
         },
         "title": "Órdenes abiertas",
         "hint": {
-            "fdate": "Please select start date",
-            "tdate": "Please select end date",
-            "dateErr": "The end date must be later than the start date",
-            "ftoken": "Please select ftoken"
+            "fdate": "Por favor, seleccione fecha de inicio",
+            "tdate": "Por favor, seleccione fecha de fin",
+            "dateErr": "La fecha de fin debe ser posterior a la fecha de inicio",
+            "ftoken": "Por favor seleccione ftoken"
         },
         "side": {
-            "1": "Sell",
-            "0": "Buy"
+            "1": "Vender",
+            "0": "Comprar"
         },
         "table": {
             "heads": [
-                "Date",
-                "Pair",
-                "Side",
-                "Price",
-                "Amount",
-                "Filled",
-                "Filled%",
-                "Average",
+                "Fecha",
+                "Par",
+                "Lado",
+                "Precio",
+                "Cantidad",
+                "Completado",
+                "Completado%",
+                "Promedio",
                 "Total"
             ],
             "rowMap": {
@@ -1280,44 +1280,44 @@
         }
     },
     "tradeOrderHistory": {
-        "title": "Order History",
+        "title": "Historial de órdenes",
         "hint": {
-            "fdate": "Please choose start date",
-            "tdate": "Please choose end date",
-            "dateErr": "End date must be after start date"
+            "fdate": "Por favor, elija fecha de inicio",
+            "tdate": "Por favor, elija fecha de fin",
+            "dateErr": "La fecha de fin debe ser posterior a la fecha de inicio"
         },
         "side": {
-            "1": "Sell",
-            "0": "Buy"
+            "1": "Vender",
+            "0": "Comprar"
         },
         "status": {
-            "1": "Ongoing",
-            "2": "Completed",
+            "1": "En curso",
+            "2": "Completado",
             "3": "Cancelado",
-            "4": "Failed"
+            "4": "Fallído"
         },
         "confirmTable": {
-            "title": "Order Book",
+            "title": "Libro de órdenes",
             "heads": [
-                "Time",
-                "Price",
-                "Amount",
-                "Fees",
+                "Tiempo",
+                "Precio",
+                "Cantidad",
+                "Comisiones",
                 "Total"
             ]
         },
         "table": {
             "heads": [
-                "Date",
-                "Pair",
-                "Side",
-                "Price",
-                "Amount",
-                "Filled",
-                "Average",
-                "Fees",
+                "Fecha",
+                "Par",
+                "Lado",
+                "Precio",
+                "Cantidad",
+                "Completado",
+                "Promedio",
+                "Comisiones",
                 "Total",
-                "Status"
+                "Estado"
             ],
             "rowMap": {
                 "statusMap": {
