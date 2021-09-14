@@ -1366,7 +1366,7 @@
         "withdrawPlaceHolder": "Introduce la cantidad a retirar del stake, al menos 134 VITE",
         "addBtn": "Confirmar Stake",
         "withdrawBtn": "Confirmar Unstake",
-        "stakingBalance": "Saldo disponible stakeado",
+        "stakingBalance": "Saldo disponible en stake",
         "hintTitle": "Aviso importante",
         "comingHint": "La función de minería VX viene pronto, mantente atento. Puedes obtener VX de cinco maneras: 1. Trading como Minería, 2. Listando como Minería, 3. Refiriendo como Minería, 4. Stakeando como Minería, 5. Creando-Mercados como Minería. Los usuarios que poseen VX disfrutan de las ganancias de un fondo de dividendos compartido.",
         "more": "Aprende más sobre las reglas de minería de VX",
@@ -1464,60 +1464,60 @@
         "unlockAmount": "Desbloqueando cantidad",
         "addHint1": "Se debe stakear un mínimo de 10 VX para recibir dividendos",
         "addHint2": "El envío de la solicitud de staking permite empezar a recibir dividendos a partir de la próxima distribución",
-        "addHint3": "Staked amount will be released after the 7-day waiting period",
-        "autoLock": "Automatic Staking",
+        "addHint3": "La cantidad bloqueada se liberará después de esperar un periodo de 7 días",
+        "autoLock": "Staking automático",
         "openAutoLock": {
-            "title": "Enable Automatic Staking",
-            "text": "Mined VX will be automatically staked once enabled"
+            "title": "Habilitar el staking automático",
+            "text": "Una vez habilitado, el VX minado automáticamente será puesto en stake"
         },
         "closeAutoLock": {
-            "title": "Disable Automatic Staking",
-            "text": "Mined VX will not be automatically staked when turned off"
+            "title": "Desactivar el staking automático",
+            "text": "El VX minado no será puesto en stake automáticamente cuando la casilla está desactivada"
         },
         "lock": "Stake",
         "unlock": "Unstake",
-        "lessMin": "Minimum 1 VX",
+        "lessMin": "Mínimo 1 VX",
         "lockVXConfirm": {
             "title": "Stake VX",
-            "available": "Exchange Available Balance",
-            "amountPlaceholder": "Please input staking amount, minimum 1 VX",
-            "notEnough": "Insufficient Exchange Balance",
+            "available": "Saldo disponible en Exchange",
+            "amountPlaceholder": "Ingresa la cantidad a poner en stake, mínimo 1 VX",
+            "notEnough": "Saldo insuficiente en Exchange",
             "submit": "Confirmar Stake",
-            "amountText": "Amount"
+            "amountText": "Cantidad"
         },
         "unlockVXConfirm": {
             "title": "Unstake VX",
-            "available": "Available Stake Balance",
-            "amountPlaceholder": "Please input amount, minimum 1 VX",
-            "notEnough": "Insufficient Amount",
+            "available": "Saldo disponible en stake",
+            "amountPlaceholder": "Por favor ingrese un monto, mínimo 1 VX",
+            "notEnough": "Cantidad insuficiente",
             "submit": "Confirmar Unstake",
-            "amountText": "Amount",
-            "hint": "It takes about 7 days to unlock."
+            "amountText": "Cantidad",
+            "hint": "Tarda unos 7 días en desbloquear."
         },
         "unlockList": {
-            "title": "Retrieving",
-            "amount": "Amount",
-            "time": "Available Date"
+            "title": "Recuperando",
+            "amount": "Cantidad",
+            "time": "Fecha de disponibilidad"
         }
     },
     "tradeOperator": {
-        "title": "Operator",
+        "title": "Operador",
         "tokenList": "Tokens",
         "totalIncome": "Ingresos totales",
-        "permission": "Transfer Token's Ownership",
-        "txPairManage": "Manage Trading Pairs",
-        "noOperator": "You have no tokens or trading pairs yet, wanna become an operator?",
+        "permission": "Transferir propiedad del token",
+        "txPairManage": "Gestionar pares de comercio",
+        "noOperator": "Aún no tienes tokens ni pares de comercio, ¿quieres convertirte en operador?",
         "learnMore": "Aprende más",
         "permissionConfirm": {
             "title": "Transferir propiedad",
             "submit": "Confirmar",
             "tokenName": "Nombre del Token",
             "address": "Dirección del destinatario",
-            "notice": "NOTICE: When the ownership transferred to someone else, trading pairs that not be opened will belong to the new owner. Trading/suspension trading pairs still belong to you"
+            "notice": "NOTA: Cuando la propiedad es transferida a otra persona, los pares de comercio que no estén abiertos pertenecerán al nuevo propietario. Los pares de comercio en estado abierto/suspendidos aún te pertenecen"
         }
     },
     "tradeTxPairManage": {
-        "title": "{tokenSymbol} Trading Pairs Management",
+        "title": "Gestión de pares de comercio de {tokenSymbol}",
         "symbol": "Nombre",
         "income": "Ingresos",
         "fee": "Tasa de comisión",
@@ -1539,19 +1539,19 @@
         "openTxPairConfirm": {
             "title": "Habilitar {symbol} para trade",
             "fee": "Comisión de listado",
-            "hint": "If you want to add unique operator symbol after opening a trading pair, please contact us at our Telegram group: https://t.me/vite_en",
+            "hint": "Si desea añadir un símbolo único del operador después de abrir un par de comercio, póngase en contacto con nosotros mediante nuestro grupo de Telegram: https://t.me/vite_en",
             "btn": "Enviar",
             "reqSuccess": "¡Enviado con éxito! Revísalo en el tablero de mercado más tarde.",
             "reqError": "Falló al listar, inténtelo de nuevo"
         },
         "stopTransHint": "¿Estas seguro de suspender el {symbol}?",
-        "resetTransHint": "Make sure to recover {symbol} ?",
-        "stopSuccess": "Suspension Successful",
-        "stopFail": "Suspension Failed",
-        "openSuccess": "Recovery Successful",
-        "openFail": "Recovery Failed",
-        "changeOwnerSuccess": "Transfer Successful",
-        "changeOwnerFaill": "Transfer Failed",
+        "resetTransHint": "¿Estas seguro de recuperar el {symbol}?",
+        "stopSuccess": "Suspensión exitosa",
+        "stopFail": "Suspensión fallida",
+        "openSuccess": "Recuperación exitosa",
+        "openFail": "Recuperación fallida",
+        "changeOwnerSuccess": "Transferencia exitosa",
+        "changeOwnerFaill": "Transferencia fallida",
         "submitChange": "Confirmar transferencia",
         "changeOwnerHint": "NOTICE: You will not be able to collect or adjust fees after ownership transferred as well as you cannot undo this transfer action",
         "currentMaker": "Maker",
