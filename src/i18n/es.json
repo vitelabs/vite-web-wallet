@@ -1321,54 +1321,54 @@
             ],
             "rowMap": {
                 "statusMap": {
-                    "1": "In Order",
-                    "2": "Completed",
+                    "1": "En orden",
+                    "2": "Completado",
                     "3": "Cancelado",
-                    "4": "Failed"
+                    "4": "Fallído"
                 },
-                "detail": "Details"
+                "detail": "Detalles"
             }
         },
         "filter": {
-            "start": "From",
-            "end": "To",
-            "type": "Type",
-            "side": "Side",
-            "buy": "Buy",
-            "sell": "Sell",
-            "status": "Status",
-            "search": "Search",
-            "reset": "Reset"
+            "start": "Desde",
+            "end": "A",
+            "type": "Tipo",
+            "side": "Lado",
+            "buy": "Comprar",
+            "sell": "Vender",
+            "status": "Estado",
+            "search": "Buscar",
+            "reset": "Reiniciar"
         }
     },
     "tradeMining": {
-        "title": "Mining",
-        "addQuota": "Create a new staking",
-        "add": "Add",
-        "withdraw": "Unstake",
-        "withdrawList": "Withdrawal List",
+        "title": "Minería",
+        "addQuota": "Crear una nuevo bloqueo",
+        "add": "Agregar",
+        "withdraw": "Desbloquear",
+        "withdrawList": "Historial de Retiros",
         "tbHead": {
-            "date": "Date",
-            "fee": "Trading Fees",
-            "mining": "Mining Amount",
+            "date": "Fecha",
+            "fee": "Comisiones de trading",
+            "mining": "Cantidad por minería",
             "pledge": "Stake"
         },
         "txTitle": "Ingresos totales por trading como minado",
         "quotaTitle": "Ingresos totales por staking como minado",
-        "addHint1": "Single stake should be at least 134 VITE",
+        "addHint1": "Cada bloqueo debe ser de al menos 134 VITE",
         "addHint2": "El Stake de VITE será efectivo inmediatamente después del envío. El bloqueo puede ser cancelado después de 3 días",
-        "addHint3": "Staked amount will be released after the 7-day waiting period",
+        "addHint3": "La cantidad bloqueada se liberará después de esperar un periodo de 7 días",
         "withdrawHint1": "Ya no podrás minar VX después de que se cancele el stake",
-        "withdrawHint2": "It takes 7 days to return unstaked VITE coins to exchange balance",
-        "addTitle": "Stake VITE for Mining",
-        "withdrawTitle": "Unstake VITE",
-        "addPlaceHolder": "Please enter staking amount",
-        "withdrawPlaceHolder": "Please input unstaking amount, at least 134 VITE",
+        "withdrawHint2": "Tardarán 7 días en regresar los VITE bloqueados en tu balance del exchange",
+        "addTitle": "Stake VITE para minería",
+        "withdrawTitle": "Retirar VITE del stake",
+        "addPlaceHolder": "Ingrese la cantidad a stakear",
+        "withdrawPlaceHolder": "Introduce la cantidad a retirar del stake, al menos 134 VITE",
         "addBtn": "Confirmar Stake",
         "withdrawBtn": "Confirmar Unstake",
-        "stakingBalance": "Available Stake Balance",
-        "hintTitle": "Important Notice",
-        "comingHint": "VX mining function is coming soon, stay tuned. You can get VX in five ways: 1. Trading as Mining, 2. Listing as Mining, 3. Referring as Mining, 4. Staking as Mining, 5. Market-making as Mining. Users who hold VX enjoy payouts from a shared dividend pool.",
+        "stakingBalance": "Saldo disponible stakeado",
+        "hintTitle": "Aviso importante",
+        "comingHint": "La función de minería VX viene pronto, mantente atento. Puedes obtener VX de cinco maneras: 1. Trading como Minería, 2. Listando como Minería, 3. Refiriendo como Minería, 4. Stakeando como Minería, 5. Creando-Mercados como Minería. Los usuarios que poseen VX disfrutan de las ganancias de un fondo de dividendos compartido.",
         "more": "Learn more about VX mining rules",
         "fee": "Trading Fees",
         "todayTrade": "Mining Details",
@@ -1426,27 +1426,27 @@
             "cancelAddress": "Dirección SVIP"
         },
         "vipListTitle": "VIP Records",
-        "openAddress": "Enabled Address",
-        "type": "VIP Type"
+        "openAddress": "Dirección habilitada",
+        "type": "Tipo VIP"
     },
     "inviteMining": {
         "title": "Ingresos totales por referidos como minado",
-        "myInviteIncome": "Referral Proceeds",
-        "inviteTradeIncome": "Referred Trading Proceeds",
-        "inviteOrderIncome": "Referred Market-Making Proceeds"
+        "myInviteIncome": "Ingresos por referidos",
+        "inviteTradeIncome": "Ingresos por trades de referidos",
+        "inviteOrderIncome": "Ingresos por Market-Making de referidos"
     },
     "orderMining": {
         "title": "Ingresos totales por creadores de mercados como minado",
         "tbHead": {
-            "date": "Date",
+            "date": "Fecha",
             "ratio": "Ratio",
-            "mining": "Amount"
+            "mining": "Cantidad"
         },
-        "market": "{name} Market",
-        "estimate": "{name} Today's Minable Amount"
+        "market": "Mercado de {name}",
+        "estimate": "Cantidad Minable de hoy {name}"
     },
     "tradeDividend": {
-        "title": "Dividends",
+        "title": "Dividendos",
         "poolTitle": "Trading Fee Dividend Pool",
         "listTitle": "My Dividends",
         "allPrice": "Valor total estimado",
@@ -1570,20 +1570,20 @@
     },
     "mobileAssets": {
         "allAssets": "Estimated Assets Value ({token})",
-        "tokenInfoTitle": "Token Details",
-        "transfer": "Transfer",
-        "trade": "Trade",
-        "chooseTxPair": "Choose Trading Pair"
+        "tokenInfoTitle": "Detalles del token",
+        "transfer": "Transferir",
+        "trade": "Comerciar",
+        "chooseTxPair": "Elegir par de comercio"
     },
     "mobileTradeCenter": {
-        "highPrice": "High",
-        "lowPrice": "Low",
-        "quantity": "24H Vol",
-        "buyTitle": "Buy",
-        "sellTitle": "Sell",
-        "price": "Price ({token})",
+        "highPrice": "Máximo",
+        "lowPrice": "Mínimo",
+        "quantity": "Vol. 24h",
+        "buyTitle": "Comprar",
+        "sellTitle": "Vender",
+        "price": "Precio ({token})",
         "buy": {
-            "price": "Price",
+            "price": "Precio",
             "quantity": "Cantidad"
         },
         "sell": {
