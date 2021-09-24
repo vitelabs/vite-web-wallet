@@ -2,7 +2,7 @@ const path = require('path');
 const packJson = require('../package.json');
 
 const goViteServer = { // http-DNS
-    production: '\'wss://node-tokyo.vite.net/ws\'',
+    production: '\'wss://node.vite.net/gvite/ws\'',
     test: '\'wss://node.vite.net/test/gvite/ws\'',
     dev: '\'wss://node.vite.net/test/gvite/ws\''
     // dev: '\'wss://api.vitewallet.com/ws\''
