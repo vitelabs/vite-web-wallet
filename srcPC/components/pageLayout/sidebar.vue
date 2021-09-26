@@ -128,7 +128,7 @@ export default {
     },
     methods: {
         goVX() {
-            openUrl(`https://vitex.net/${ this.$i18n.locale === 'zh' ? 'zh' : '' }`);
+            openUrl('https://vitex.net/');
         },
         _go(name) {
             statistics.event('sidebar', name, this.address || '');

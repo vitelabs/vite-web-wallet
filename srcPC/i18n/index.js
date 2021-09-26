@@ -3,7 +3,6 @@ import VueI18n from 'vue-i18n';
 import localStorage from 'pcUtils/store';
 
 import en from 'i18n/en';
-import zh from 'i18n/zh';
 import id from 'i18n/id';
 import ko from 'i18n/ko';
 import ru from 'i18n/ru';
@@ -29,7 +28,7 @@ const i18nConf = {
     locale,
     fallbackLocale: 'en',
     silentFallbackWarn: true,
-    messages: { en, zh, id_ID: id, ko, ru, vi, tr, fi }
+    messages: { en, id_ID: id, ko, ru, vi, tr, fi }
 };
 
 Vue.use(VueI18n);
@@ -45,7 +44,7 @@ function getDefaultLang() {
         lang = lang.substr(0, 2);
 
         // navigator.languages
-        const languages = [ 'en', 'id', 'ko', 'ru', 'vi', 'zh', 'tr', 'fi' ];
+        const languages = [ 'en', 'id', 'ko', 'ru', 'vi', 'tr', 'fi' ];
         const nameMap = { 'id': 'id_ID' };
         if (languages.indexOf(lang) !== -1) {
             return nameMap[lang] || lang;

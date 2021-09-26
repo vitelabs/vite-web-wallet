@@ -43,7 +43,7 @@ const mutations = {
         localStorage.setItem(LangKey, lang);
         state.lang = lang;
         if (!state.currency) {
-            state.currency = lang === 'zh' ? 'cny' : 'usd';
+            state.currency = 'usd';
         }
     },
     setGate(state, isOpen) {

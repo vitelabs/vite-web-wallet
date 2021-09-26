@@ -21,7 +21,7 @@ export default {
     data() {
         return {
             isShow: false,
-            list: [ 'CNY', 'USD' ]
+            list: ['USD']
         };
     },
     computed: {

@@ -8,7 +8,7 @@ let heightTimer = null;
 
 let currency = env.currency;
 if (!currency && env.lang) {
-    currency = env.lang === 'zh' ? 'cny' : 'usd';
+    currency = 'usd';
 }
 
 const state = {

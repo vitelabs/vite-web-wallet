@@ -122,10 +122,7 @@ export default {
             ]);
         },
         goLink() {
-            if (this.$i18n.locale === 'zh') {
-                openUrl('https://dex.vite.wiki/zh/dex/#%E6%8C%96%E7%9F%BF%E6%96%B9%E6%A1%88v');
-            }
-            openUrl('https://dex.vite.wiki/dex/#vx-mining');
+            openUrl('https://docs.vite.org/go-vite/dex/#mining-details');
         },
         goView() {
             openUrl('https://vitex.net/');

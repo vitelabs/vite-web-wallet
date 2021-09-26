@@ -118,7 +118,7 @@ export default {
     left: 80px;
     width: 1350px;
     height: 65px;
-    background: url('~assets/imgs/assets_guide_zh.svg');
+    background: url('~assets/imgs/assets_guide_en.svg');
     background-size: 100% 100%;
 }
 .en .assets-back {

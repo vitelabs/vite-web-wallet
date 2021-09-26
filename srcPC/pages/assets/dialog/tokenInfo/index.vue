@@ -183,17 +183,11 @@ export default {
             if (!this.gateInfo.overview) {
                 return '';
             }
-            if (this.$i18n.locale === 'zh') {
-                return this.gateInfo.overview.zh || this.gateInfo.overview.en;
-            }
             return this.gateInfo.overview.en;
         },
         gatePolicy() {
             if (!this.gateInfo.policy) {
                 return;
-            }
-            if (this.$i18n.locale === 'zh') {
-                return this.gateInfo.policy.zh || this.gateInfo.policy.en;
             }
             return this.gateInfo.policy.en;
         },
