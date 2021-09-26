@@ -26,9 +26,9 @@ const gatewayInfosServer = { // http-DNS
     dev: '"https://crosschain-test.vite.net"'
 };
 const viteExplorer = { // http-DNS
-    production: '\'https://explorer.vite.net\'',
-    test: '\'http://132.232.134.168:8080\'',
-    dev: '\'http://132.232.134.168:8080\''
+    production: '\'https://viteview.xyz\'',
+    test: '\'https://viteview.xyz\'',
+    dev: '\'https://viteview.xyz\''
 };
 const ethServer = { // http-DNS
     production: '\'https://node.vite.net/eth/v3/caae2231051e46a1941f422df1fbcc94\'',

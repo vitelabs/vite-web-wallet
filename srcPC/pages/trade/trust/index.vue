@@ -106,7 +106,7 @@ export default {
     },
     methods: {
         gotoProxyInfo() {
-            openUrl('https://github.com/vitelabs/vite-wiki/blob/mainnet/docs/zh/dex/api/proxy.md');
+            openUrl('https://docs.vite.org/go-vite/dex/api/proxy.html');
         },
         updateData() {
             return Promise.all([

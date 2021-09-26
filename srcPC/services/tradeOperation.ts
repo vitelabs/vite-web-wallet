@@ -12,7 +12,7 @@ export function bindCode(code: number) {
             function: {
                 name: {
                     base: i18n.t('assets.invite.receiveInviteTitle', 'en'),
-                    zh: i18n.t('assets.invite.receiveInviteTitle', 'zh')
+                    zh: i18n.t('assets.invite.receiveInviteTitle', 'en')
                 }
             },
             inputs: [
