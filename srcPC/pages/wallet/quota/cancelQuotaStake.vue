@@ -78,7 +78,15 @@ export default {
                     beneficiaryAddress: this.activeItem.beneficialAddr,
                     amount: this.activeItem.amount
                 },
-                config: { powLimit: false }
+                config: {
+                    pow: true,
+                    powConfig: {
+                        cancel: () => {
+                            this.handleFinish(false)
+                        }
+                    },
+                    powLimit: false 
+                }
             }).then(() => {
                 this.handleFinish(true);
             }).catch(err => {
@@ -89,7 +97,15 @@ export default {
             sendTx({
                 methodName: 'cancelQuotaStake',
                 data: { id: this.activeItem.rawData.id },
-                config: { powLimit: false }
+                config: {
+                    pow: true,
+                    powConfig: {
+                        cancel: () => {
+                            this.handleFinish(false)
+                        }
+                    },
+                    powLimit: false 
+                }
             }).then(() => {
                 this.handleFinish(true);
             }).catch(err => {
