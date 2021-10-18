@@ -62,7 +62,7 @@ block originContent
 
 <script>
 import { tokenDetail } from 'services/trade';
-import { getExplorerLink } from 'utils/getLink';
+import { getExplorerLink, getTokenLink } from 'utils/getLink';
 import openUrl from 'utils/openUrl';
 import BigNumber from 'utils/bigNumber';
 import defaultTokenIcon from 'assets/imgs/default_token_icon.png';
@@ -115,7 +115,7 @@ export default {
     },
     methods: {
         goToTokenDetail() {
-            const l = `${ getExplorerLink(this.$i18n.locale) }token/${ this.token.tokenId }`;
+            const l = `${ getTokenLink(this.$i18n.locale, this.token.tokenId) }`;
             openUrl(l);
         },
         tabClick(name) {

@@ -55,7 +55,8 @@ export const Server = {
     },
     viteExplorer: { // BOTH
         hostKey: 'EXPLORER',
-        url: process.env.viteExplorer,
+        name: 'viteView',
+        url: process.env['viteView'],
         watchList: []
     }
 };
