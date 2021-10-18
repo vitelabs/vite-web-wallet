@@ -13,7 +13,7 @@
 <script>
 import debounce from 'lodash/debounce';
 import openUrl from 'utils/openUrl';
-import { getExplorerLink } from 'utils/getLink';
+import { getAccountLink } from 'utils/getLink';
 import { gateStorage } from 'pcServices/gate';
 import pageLayout from 'pcComponents/pageLayout/index';
 import accountHead from './head';
@@ -107,7 +107,7 @@ export default {
     },
     methods: {
         goDetail() {
-            openUrl(`${ getExplorerLink(this.$i18n.locale) }account/${ this.account.addr }`);
+            openUrl(`${ getAccountLink(this.$i18n.locale, this.account.addr) }`);
         }
     }
 };

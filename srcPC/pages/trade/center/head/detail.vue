@@ -129,7 +129,7 @@
 
 <script>
 import confirm from 'pcComponents/confirm/confirm.vue';
-import { getExplorerLink } from 'utils/getLink';
+import { getExplorerLink, getTokenLink } from 'utils/getLink';
 import openUrl from 'utils/openUrl';
 import statistics from 'utils/statistics';
 import BigNumber from 'utils/bigNumber';
@@ -197,7 +197,7 @@ export default {
             this.tab = '';
         },
         goToTokenDetail() {
-            const l = `${ getExplorerLink(this.$i18n.locale) }token/${ this.tokenDetail.tokenId }`;
+            const l = `${ getTokenLink(this.$i18n.locale, this.tokenDetail.tokenId) }`;
             this.openUrl(l);
         },
         openUrl(url) {

@@ -25,10 +25,15 @@ const gatewayInfosServer = { // http-DNS
     test: '"https://crosschain-test.vite.net"',
     dev: '"https://crosschain-test.vite.net"'
 };
-const viteExplorer = { // http-DNS
+const viteView = { // http-DNS
     production: '\'https://viteview.xyz\'',
     test: '\'https://viteview.xyz\'',
     dev: '\'https://viteview.xyz\''
+};
+const viteScan = { // http-DNS
+    production: '\'https://vitescan.io\'',
+    test: '\'https://vitescan.io\'',
+    dev: '\'https://vitescan.io\''
 };
 const ethServer = { // http-DNS
     production: '\'https://node.vite.net/eth/v3/caae2231051e46a1941f422df1fbcc94\'',
@@ -85,7 +90,8 @@ module.exports = {
         'process.env.NODE_ENV': `"${ Node_Env }"`,
         'process.env.API': `"${ API }"`,
         'process.env.goViteServer': goViteServer[API],
-        'process.env.viteExplorer': viteExplorer[API],
+        'process.env.viteView': viteView[API],
+        'process.env.viteScan': viteScan[API],
         'process.env.contractAddress': contractAddress[API],
         'process.env.ethServer': ethServer[API],
         'process.env.ethExplorer': ethExplorer[API],

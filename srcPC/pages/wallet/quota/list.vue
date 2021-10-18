@@ -33,7 +33,7 @@ import openUrl from 'utils/openUrl';
 import { timer } from 'utils/asyncFlow';
 import BigNumber from 'utils/bigNumber';
 import statistics from 'utils/statistics';
-import { getExplorerLink } from 'utils/getLink';
+import { getAccountLink } from 'utils/getLink';
 import { execWithValid } from 'pcUtils/execWithValid';
 import cancelQuotaStake from './cancelQuotaStake.vue';
 
@@ -156,7 +156,7 @@ export default {
             return;
         },
         gotoDetail(addr) {
-            openUrl(`${ getExplorerLink(this.$i18n.locale) }account/${ addr }`);
+            openUrl(`${ getAccountLink(this.$i18n.locale, addr) }`);
         },
         showCancel: execWithValid(function (item) {
             this.$refs.cancelQuotaStake.show(item);

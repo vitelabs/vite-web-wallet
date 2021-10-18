@@ -58,7 +58,7 @@ import sendTx from 'pcUtils/sendTx';
 import { execWithValid } from 'pcUtils/execWithValid';
 import openUrl from 'utils/openUrl';
 import statistics from 'utils/statistics';
-import { getExplorerLink } from 'utils/getLink';
+import { getAccountLink, getSBPLink } from 'utils/getLink';
 import { getCurrSBPNodeList, getVoteInfo } from 'services/viteServer';
 
 const Vite_Token_Info = constant.Vite_Token_Info;
@@ -270,10 +270,10 @@ export default {
             }
         },
         goToNodeDetail(nodeName) {
-            return openUrl(`${ getExplorerLink(this.$i18n.locale) }SBPDetail/${ nodeName }`);
+            return openUrl(`${ getSBPLink(this.$i18n.locale, nodeName) }`);
         },
         goToDetail(addr) {
-            return openUrl(`${ getExplorerLink(this.$i18n.locale) }account/${ addr }`);
+            return openUrl(`${ getAccountLink(this.$i18n.locale, addr) }`);
         },
 
         _cancelVote(v) {

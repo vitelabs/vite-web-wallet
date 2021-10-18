@@ -31,7 +31,7 @@
 
 <script>
 import confirm from 'h5Components/confirm/confirm.vue';
-import { getExplorerLink } from 'utils/getLink';
+import { getExplorerLink, getTokenLink } from 'utils/getLink';
 import openUrl from 'utils/openUrl';
 import BigNumber from 'utils/bigNumber';
 import operatorIcon from 'assets/imgs/operator_icon.svg';
@@ -98,7 +98,7 @@ export default {
             this.tab = '';
         },
         goToTokenDetail() {
-            const l = `${ getExplorerLink(this.$i18n.locale) }token/${ this.tokenDetail.tokenId }`;
+            const l = `${ getTokenLink(this.$i18n.locale, this.tokenDetail.tokenId) }`;
             this.openUrl(l);
         },
         openUrl(url) {
