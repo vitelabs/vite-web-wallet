@@ -27,7 +27,7 @@ const gatewayInfosServer = { // http-DNS
 };
 const viteView = { // http-DNS
     production: '\'https://viteview.xyz\'',
-    test: '\'https://viteview.xyz\'',
+    test: '\'https://buidl.viteview.xyz\'',
     dev: '\'https://viteview.xyz\''
 };
 const viteScan = { // http-DNS
