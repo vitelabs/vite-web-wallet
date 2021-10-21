@@ -18,7 +18,7 @@ block content
                         checkbox(@input="onSelect(address, $event)" v-model="address.isChecked")
                     th {{address.index}}
                     th
-                        a(:href="`${ getAccountLink(this.$i18n.locale, address.address) }`" target="_blank") {{address.address | shortAddr}}
+                        a(:href="'https://viteview.xyz/#/account/' + address.address" target="_blank") {{address.address | shortAddr}}
                         span.code_small_btn(v-if="!address.blockCount && address.blockCount !== undefined ") {{ $t('assets.ledger.addressSelect.unUsedAccount') }}
 
                     th {{address.balance | toBasic(18)}}
