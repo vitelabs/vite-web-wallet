@@ -66,7 +66,7 @@ export default {
         },
         dBtnUnuse() {
             return !(
-                this.avaliableExAmount && Number(this.avaliableExAmount) >= 1000
+                this.avaliableExAmount && Number(this.avaliableExAmount) >= 100
             );
         }
     },
