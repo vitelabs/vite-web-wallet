@@ -3,22 +3,18 @@ const packJson = require('../package.json');
 
 const goViteServer = { // http-DNS
     production: '\'wss://node.vite.net/gvite/ws\'',
-    test: '\'wss://node.vite.net/test/gvite/ws\'',
-    dev: '\'wss://node.vite.net/test/gvite/ws\''
-    // dev: '\'wss://api.vitewallet.com/ws\''
-    // dev: '\'ws://148.70.30.139:41423\''
-    // dev: '\'ws://111.231.218.73:41423\''
+    test: '\'wss://buidl.vite.net/gvite/ws\'',
+    dev: '\'wss://buidl.vite.net/gvite/ws\''
 };
 const dexApiServer = { // http-DNS
     production: '"https://vitex.vite.net"',
-    test: '"https://vitex.vite.net"',
-    dev: '"https://vitex.vite.net"'
-    // dev: '"http://192.168.31.213:8080"'
+    test: '"https://buidl.vite.net/vitex"',
+    dev: '"https://buidl.vite.net/vitex"'
 };
 const pushServer = { // http-DNS
     production: '"wss://vitex.vite.net/websocket"',
-    test: '"wss://vitex.vite.net/test/websocket"',
-    dev: '"wss://vitex.vite.net/test/websocket"'
+    test: '"wss://buidl.vite.net/vitex/websocket"',
+    dev: '"wss://buidl.vite.net/vitex/websocket"'
 };
 const gatewayInfosServer = { // http-DNS
     production: '"https://crosschain.vite.net"',
@@ -28,7 +24,7 @@ const gatewayInfosServer = { // http-DNS
 const viteView = { // http-DNS
     production: '\'https://viteview.xyz\'',
     test: '\'https://buidl.viteview.xyz\'',
-    dev: '\'https://viteview.xyz\''
+    dev: '\'https://buidl.viteview.xyz\''
 };
 const viteScan = { // http-DNS
     production: '\'https://vitescan.io\'',
@@ -53,7 +49,6 @@ const conversionGate = { // http-DNS
 const viteConnect = {
     production: '\'wss://biforst.vite.net\'',
     test: '\'wss://biforst.vite.net\'',
-    // test: '\'ws://139.155.7.172:5001\'',
     dev: '\'wss://biforst.vite.net\''
 };
 const apiConfig = {
