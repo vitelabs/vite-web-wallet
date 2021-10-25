@@ -2,7 +2,8 @@ export const sidebarMenuList = {
     assets: 'assets',
     trade: 'tradeCenter',
     wallet: 'walletQuota',
-    setting: 'setting'
+    setting: 'setting',
+    bridge:'crossBridge'
 };
 export const secondMenuList = {
     assets: [ 'viteExplorer', 'viteScanExplorer' ],
