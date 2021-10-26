@@ -1,0 +1,1647 @@
+{
+    "lang": "English",
+    "help": "Centro de ayuda",
+    "announcements": "Anuncios",
+    "start": "Comenzar",
+    "login": "Inicia Sesión",
+    "regAcc": "Registrarse",
+    "unlockAcc": "Desbloquear",
+    "changeAcc": "Cambiar cuenta",
+    "existingAcc": "Cuentas Existentes",
+    "restore": "Importar palabras mnemónicas",
+    "register": "Registrarse",
+    "createAcc": "Crear",
+    "settingAcc": "Configurando cuenta",
+    "resetAcc": "Restablecer tu cuenta",
+    "logout": "Cerrar sesión",
+    "saveLogout": "Cerrar sesión",
+    "blockHeight": "Instantánea de altura de bloque",
+    "accountName": "Nombre de la cuenta",
+    "action": "Acción",
+    "stakingAmount": "Cantidad bloqueada",
+    "submitStaking": "Confirmar bloqueo",
+    "withdrawHeight": "Instantánea de altura esperada",
+    "balance": "Saldo",
+    "dexBalance": "Saldo ViteX",
+    "addrName": "Dirección{index}",
+    "true": "verdadero",
+    "false": "falso",
+    "guide": {
+        "close": "Cerrar",
+        "next": "Siguiente",
+        "closeTips": "Saltar guía de usuario (No recomendado)",
+        "trade": [
+            "Administre sus activos (tanto en billetera Web como en Exchange ViteX) aquí",
+            "Revisa las órdenes abiertas e historial de ordenes, conoce los detalles de comercio",
+            "Participa en la minería, obtén VX como recompensa debida a las comisiones por comerciar (Minado a través del comercio)",
+            "Experiencia y características: bloquear para cuotas, bloquear para convertirse en SBP (Snapshot Block Producer), Votar por un SBPs, conversión a ERC20, Detalles de transacción, etc."
+        ],
+        "assets": [
+            "Depositar al Exchange",
+            "Retirar a billetera",
+            "Depósito y retiros cross-chain"
+        ]
+    },
+    "dealReminder": {
+        "title": {
+            "buy": "Orden de compra completada: {ftoken} / {ttoken}",
+            "sell": "Orden de venta completada: {ftoken} / {ttoken}"
+        },
+        "failTitle": "Orden fallida",
+        "notice-all": {
+            "buy": "Precio: {price} {ttoken} \nMonto: {amount} {ttoken}, se ha completado. Ver el historial de pedidos para más detalles.",
+            "sell": "Precio: {price} {ttoken} \nMonto: {amount} {ttoken}, se ha completado. Ver el historial de pedidos para más detalles."
+        },
+        "notice-partial": {
+            "buy": "Precio: {price} {ttoken} \nMonto: {amount} {ttoken}, {executedPercent}% completado.",
+            "sell": "Precio: {price} {ttoken} \nMonto: {amount} {ttoken}, {executedPercent}% completado."
+        },
+        "error": "Su orden {amount} {ftoken} ({ftoken}/{ttoken}) en {time} ha fallado. Para más detalles, consulte la página Historial de órdenes."
+    },
+    "pow": {
+        "ing": "Ejecutando PoW para adquirir cuota",
+        "no": "Puedes bloquear VITE por cuota en caso de que no quieras ejecutar PoW",
+        "insuffQuota": "Obtener Cuota",
+        "insuffQuotaMsg": "Notamos que no tienes bloqueado VITE para cuota. Por favor bloquee VITE o si lo prefiere, puede ejecutar el PoW para obtener cuota.",
+        "insuffQuotaMsg2": "Solo se pueden realizar {powMaxTimes} transacciones por día y por dirección sin bloquear VITE. Tu dirección ha agotado todas las {powMaxTimes} transacciones disponibles. Por favor, ve a la página de cuotas y deja bloqueado VITE para realizar más transacciones.",
+        "getQuota": "Bloquear VITE",
+        "skip": "Ejecutar el PoW",
+        "cancel": "Cancelar"
+    },
+    "addAccount": "Crear cuenta",
+    "saveQrcode": "Guardar imagen de código QR",
+    "unlockSuccess": "Desbloqueo correcto",
+    "sendTrans": {
+        "send": "Enviar transacción",
+        "symbol": "Enviar"
+    },
+    "compliance": {
+        "text": "ViteX no atiende a clientes en los siguientes países/regiones/territorios: China continental, Hong Kong, Cuba, Irán, Corea del Norte, Crimea, Sudán, Malaysia, Syria, Estados Unidos [incluyendo todos los territorios de Estados Unidos como Puerto Rico, Samoa, Guam, Isla Mariana del Norte y las Islas Virgenes de Estados Unidos (St. Croix, St. John y St. Thomas)], Bangladesh, Bolivia, Ecuador y Kyrgyzstan. Para más información, por favor lea nuestros Términos de Servicio y Política de Privacidad",
+        "title": "Aviso importante"
+    },
+    "bnbConf": {
+        "title": "Aviso importante",
+        "t1": "¡Se viene el listado de VITE en Binance! Por favor, vota para que VITE aparezca en Binance.",
+        "t2": "Periodo de votación: 12:00 pm del 12/Dic al 12:00 pm del 13/Dic (HKT)",
+        "t3": "Método de votación: Tener 50 BNB permite 1 voto (10 votos máximo)",
+        "t4": "Recompensas de votación: Todos los usuarios votantes serán recompensados con un total de 21,000,000 VITE en base a sus votos ejecutados.",
+        "btn": "¡¡¡Vota ahora!!!",
+        "notice": "[Attention]: ¡Debes tener 50-500 BNBs en tu cuenta de Binance desde el 05/Dic y hasta el 13/Dic para calificar para votar!"
+    },
+    "errCode": {
+        "35003": "Ha ocurrido un conflicto de {name} ID, por favor vuelva a enviarlo más tarde",
+        "35004": "Parámetros no válidos",
+        "35005": "Las transacciones han sido enviadas con demasiada frecuencia, por favor inténtalo de nuevo más tarde",
+        "35006": "El método de contrato no existe",
+        "35011": "Red en congestión",
+        "36001": "No puedes hacer transferencias hasta que recibas una transacción primero",
+        "36002": "Falló la verificación del sistema. Inténtalo de nuevo más tarde",
+        "36003": "Falló la verificación del sistema. Inténtalo de nuevo más tarde",
+        "36004": "Falló la verificación del sistema. Inténtalo de nuevo más tarde",
+        "36005": "La instantánea de altura de bloque es ilegal, por favor inténtalo de nuevo más tarde",
+        "37001": "Formato de número de orden incorrecto",
+        "37002": "Tipo de orden incorrecto",
+        "37003": "Formato del precio de orden incorrecto",
+        "37004": "Se produjo un error en el volumen de transacciones de la orden",
+        "37005": "El monto de la orden es demasiado pequeño",
+        "37006": "Mercado de comercio existente",
+        "37007": "Orden en el mercado de comercio inexistente",
+        "37008": "Excepción ocurrida al buscar la información de la orden",
+        "37009": "Orden cancelada, ya no pertenece a la dirección actual",
+        "37010": "El estado de esta orden no puede ser cancelado"
+    },
+    "txType": {
+        "RegisterSBP": "Registro SBP",
+        "RegisterSBP_V1": "Registro SBP",
+        "UpdateSBPBlockProducingAddress": "Actualización de registro",
+        "UpdateSBPBlockProducingAddress_V1": "Actualización de registro",
+        "RevokeSBP": "Cancelar registro",
+        "RevokeSBP_V1": "Cancelar registro",
+        "WithdrawSBPReward": "Reclamar recompensa",
+        "WithdrawSBPReward_V1": "Reclamar recompensa",
+        "VoteForSBP": "Votación",
+        "VoteForSBP_V1": "Votación",
+        "CancelSBPVoting": "Cancelar voto",
+        "CancelSBPVoting_V1": "Cancelar voto",
+        "StakeForQuota": "Obtener Cuota",
+        "StakeForQuota_V1": "Obtener Cuota",
+        "CancelQuotaStake": "Retiro de fondos bloqueados",
+        "CancelQuotaStake_V1": "Retiro de fondos bloqueados",
+        "IssueToken": "Emisión de Token",
+        "IssueToken_V1": "Emisión de Token",
+        "ReIssueToken": "Emisión adicional de token",
+        "ReIssueToken_V1": "Emisión adicional de token",
+        "BurnToken": "Destruir tokens",
+        "BurnToken_V1": "Destruir tokens",
+        "TransferTokenOwnership": "Transferir propiedad",
+        "TransferTokenOwnership_V1": "Transferir propiedad",
+        "DisableReIssue": "Editar tipo de token",
+        "DisableReIssue_V1": "Editar tipo de token",
+        "DexDeposit": "Depósito en ViteX",
+        "DexDeposit_V1": "Depósito en ViteX",
+        "DexWithdraw": "Retiro de ViteX",
+        "DexWithdraw_V1": "Retiro de ViteX",
+        "DexPlaceOrder": "Creando orden en ViteX",
+        "DexPlaceOrder_V1": "Creando orden en ViteX",
+        "DexCancelOrder": "Cancelando orden en ViteX",
+        "DexCancelOrder_V1": "Cancelando orden en ViteX",
+        "DexStakeForSuperVIP": "ViteX SVIP",
+        "DexStakeForSuperVIP_V1": "ViteX SVIP",
+        "DexConfigMarketAgents": "Configurar delegados",
+        "DexConfigMarketAgents_V1": "Configurar delegados",
+        "DexOpenNewMarket": "Listado de tokens de ViteX",
+        "DexOpenNewMarket_V1": "Listado de tokens de ViteX",
+        "DexStakeForVIP": "ViteX VIP",
+        "DexStakeForVIP_V1": "ViteX VIP",
+        "DexStakeForMining": "ViteX Staking",
+        "DexStakeForMining_V1": "ViteX Staking",
+        "CreateContractRequest": "Crear contrato",
+        "TransferRequest": "Transferir",
+        "ReIssueRequest": "Transferir",
+        "Response": "Transferir",
+        "ResponseFail": "Transferir",
+        "RefundByContractRequest": "Transferir",
+        "GenesisResponse": "Génesis",
+        "FullNodeStake": "Bloqueado para Full Nodo",
+        "FullNodeCancelStake": "Retirar bloqueos para Full Nodo",
+        "UpdateSBPRewardWithdrawAddress": "Editar dirección para Retiro de Recompensas de SBP"
+    },
+    "btn": {
+        "cancel": "Cancelar",
+        "login": "Ingresar",
+        "imported": "Importar cuenta",
+        "back": "Atrás",
+        "submit": "Enviar",
+        "next": "Siguiente",
+        "understand": "Entiendo",
+        "edit": "Editar",
+        "reReg": "Re-registrarse",
+        "otherProd": "Usar otros productos de Vite",
+        "known": "Entendido"
+    },
+    "hint": {
+        "noNet": "Red no detectada",
+        "pwErr": "Contraseña incorrecta!",
+        "pwEmpty": "¡La contraseña no puede estar vacía!",
+        "noData": "Sin Datos",
+        "err": "Ups, algo no está bien",
+        "request": "La solicitud {name} ha sido enviada, por favor espere",
+        "copy": "Copiado Exitosamente",
+        "copyShare": "Enlace copiado con éxito!",
+        "addrFormat": "Formato de dirección incorrecto",
+        "amtFormat": "Formato de cantidad incorrecto",
+        "transSucc": "¡Transacción exitosa!",
+        "insufficientBalance": "Saldo insuficiente",
+        "validMaxDigit": "Como máximo {digit} decimales",
+        "nodeErr": "Full Nodo anormal, por favor inténtalo de nuevo más tarde.",
+        "bigger0": "El valor debe ser mayor que 0",
+        "operateSuccess": "Operación exitosa",
+        "operateFail": "Operación Fallida",
+        "unreceived": "Por favor, inicia sesión para recoger fondos no recibidos",
+        "unreceivedNum": "Por favor, inicia sesión para recoger fondos no recibidos, actualmente tienes {number} transacción(es) sin recibir"
+    },
+    "beforeUse": {
+        "title": "Leer antes de usar",
+        "text1": "Por la seguridad de tus fondos, no está permitido la creación de una cuenta en la billetera web. Por favor, descarga la aplicación Vite para crear una cuenta en un dispositivo móvil. La plataforma Vite quiere advertirle que si visita un sitio web de suplantación de identidad o pierde una copia de seguridad, nuestra empresa no podrá recuperar sus fondos.",
+        "text2": "Tenga en cuenta que nuestros sitios web no almacenan sus claves privadas ni palabras de recuperación. Por lo tanto, si decide cambiar de navegador, borrar las cookies locales o cambiar su computadora, deberá restaurar su cuenta a través de palabras de recuperación.",
+        "text3": "Tome las precauciones necesarias para registrar con precisión y almacenar de forma segura sus palabras de recuperación. Incluso el más mínimo error hará que no pueda acceder a su dirección correctamente."
+    },
+    "preview": {
+        "t": "Versión {version}",
+        "txt1": "x.vite.net es una plataforma lanzada por Vite Labs que integra la billetera Vite y el exchange ViteX.",
+        "txt2": "Puede administrar y transferir activos, comerciar, obtener cuotas, registrar SBP y un Full Nodo, votar, generar tokens, solicitar la API de ViteX, permitir la delegación para hacer transacciones, etc.",
+        "txt3": "x.vite.net soporta palabras mnemónicas, Ledger y ViteConnect.",
+        "v": ""
+    },
+    "pwdConfirm": {
+        "conf": "Habilite el modo contraseña-libre para evitar introducir la contraseña durante cada proceso de transacción. ",
+        "title": "Contraseña",
+        "placeholder": "Por favor ingrese la contraseña de la billetera",
+        "unlockAcc": "Por favor desbloquea {name} primero"
+    },
+    "quotaConfirm": {
+        "title": "Cuota insuficiente",
+        "cancelContent": "No puedes {operate} debido por tener cuota insuficiente. Necesitas bloquear VITE por una cuota de {operate}",
+        "goQuota": "Bloquear VITE",
+        "noOperate": "Aún no {operate}"
+    },
+    "mnemonic": {
+        "title": "Mnemónicos",
+        "restore": "Restaurar cuenta mediante frase semilla",
+        "record": "Generar frase semilla",
+        "prompt": "La frase de semilla mnemónica es la única manera de restaurar su billetera. Se le aconseja encarecidamente que escriba la frase en un papel y la mantenga en un lugar seguro donde sólo usted puede acceder.",
+        "placeholder": "Por favor, introduce tu frase semilla",
+        "empty": "La frase de semilla no puede estar vacía",
+        "error": "Frase de semilla incorrecta. Inténtalo de nuevo",
+        "hint": "Ejemplo: manzana plátano durazno mango pera...",
+        "change": "Cambiar a {len} palabras mnemónicas"
+    },
+    "setting": {
+        "title": "Ajustes de la cuenta",
+        "config": "General",
+        "currency": "Divisa predeterminada",
+        "secure": "Seguridad",
+        "gate": "Gateway personalizado",
+        "rpcUrl": "Nodo",
+        "changeRpcUrl": "Cambiar",
+        "changeRpcUrlDialog": {
+            "title": "Cambiar Nodo",
+            "addCustomNode": "Agregar un nodo personalizado",
+            "officialNode": "Nodo Oficial",
+            "addNode": "Agregar Nodo",
+            "customNode": "Nodo personalizado",
+            "deleteCustomNode": "Borrar",
+            "wrongNode": "Por favor, introduzca la URL correcta!",
+            "changeNodeSuccess": "Se ha conectado al nuevo nodo.",
+            "failedConnected": "Error de conexión del nodo",
+            "inputPlaceholder": "Por favor, introduzca la url del nodo con el prefijo wss."
+        },
+        "triggerGate": [
+            "Cerrar",
+            "Apertura"
+        ],
+        "gateHelp": "Puede personalizar la configuración del Gateway al activar esta función. Actualmente esta característica es principalmente para los desarrolladores.",
+        "lang": "Idioma",
+        "block": "Bloque actual",
+        "version": "Versión",
+        "service": "Servicio al cliente",
+        "site": "Sitio web oficial de Vite",
+        "sys": "Portal del sistema",
+        "open": "Vite Github",
+        "addAddr": "Agregar dirección",
+        "addrList": "Gestión de direcciones",
+        "setDefault": "Seleccionar dirección por defecto",
+        "autoLogout": "Tiempo de cierre de sesión automático",
+        "noPass": "Activar el modo contraseña-libre",
+        "explorer": "Explorador de bloques",
+        "netInfo": "Información de Red",
+        "logoutDescribe": "Tu cuenta se cerrará automáticamente cuando salgas de esta página",
+        "timeList": {
+            "5": "5 Minutos",
+            "10": "10 Minutos",
+            "30": "30 Minutos",
+            "60": "1 Hora",
+            "720": "12 Horas"
+        },
+        "theme": "Color del tema",
+        "themeList": [
+            "Claro",
+            "Oscuro"
+        ]
+    },
+    "create": {
+        "input": "Por favor, introduce tu contraseña",
+        "again": "Por favor, confirma tu contraseña",
+        "choose": "Elija una cuenta",
+        "finish": "Hecho",
+        "agreementPre": "He leído y estoy de acuerdo con Vite Wallet y ViteX",
+        "agreement": "Términos de servicios y Política de privacidad",
+        "hint": {
+            "nameInput": "Introduzca el nombre de la cuenta",
+            "nameLong": "El nombre no puede exceder los {long} caracteres",
+            "long": "La contraseña no puede exceder de 32 caracteres",
+            "name": "El nombre de la cuenta sólo admite caracteres del inglés y del chino, dígitos y guión bajo",
+            "consistency": "Introduce la misma contraseña",
+            "pwFormat": "Formato de contraseña incorrecto. La contraseña solo debe contener dígitos, letras y símbolos."
+        }
+    },
+    "startCreate": {
+        "notice": "Para la seguridad de tus fondos, no se puede crear una cuenta nueva desde la versión web. Por favor, descarga la aplicación Vite para crear una cuenta.",
+        "goLogin": "Inicia Sesión",
+        "goDex": "Ir a ViteX"
+    },
+    "keystore": {
+        "title": "Almacén de claves",
+        "dragDrop": {
+            "text": "Arrastrar y colocar archivos aquí",
+            "err1": "¡Archivo ilegal importado!",
+            "err2": "¡Solo se puede importar un archivo!",
+            "guide": "Abrir carpeta para importar",
+            "hint": "El inicio de sesión mediante la importación del archivo de almacén de claves no admite direcciones múltiples, se recomienda utilizar palabras de recuperación mnemotécnicas en situaciones multiplataforma."
+        }
+    },
+    "tokenCard": {
+        "moreRecords": "Ver historial",
+        "others": "Otros",
+        "assetSpread": "Portafolio",
+        "saveSuccess": "Guardado correctamente",
+        "heads": {
+            "name": "Nombre",
+            "balance": "Balance de Billetera",
+            "onroad": "Activos sin recibir",
+            "gate": "Gateway billetera Cross-Chain",
+            "totalExAmount": "Saldo total del Exchange",
+            "availableExAmount": "Saldo disponible en Exchange",
+            "balanceTips": "El envío en-cadena está disponible para los usuarios que desean enviar transacciones desde su billetera Vite a otras direcciones de Vite",
+            "gateTips": "En esta sección de cross-chain, puede asignar otras monedas/tokens a la red Vite. Haga clic en el botón 'Depositar' para depositar los activos en su billetera Vite. Haga clic en el botón 'Retirar' para transferir sus activos a otras plataformas. *El depósito/retiro entre cross-chain puede generar comisiones, también existe un límite de transferencias.",
+            "availableExAmountTips": "Puede transferir sus activos entre su billetera Vite y Exchange ViteX haciendo clic en el botón 'Transferir'. Este proceso no carga ninguna comisión.",
+            "unreceivedTips": "Los fondos sin recibir serán liberados automáticamente después de iniciar sesión"
+        },
+        "actionType": {
+            "SEND": "Enviar en-cadena",
+            "RECEIVE": "Depositar",
+            "CHARGE": "Depositar",
+            "WITHDRAW": "Retirar",
+            "EXTRANSFER": "Transferir",
+            "EXRECRODS": "Historial",
+            "RECRODS": "Historial",
+            "EXCHARGE": "Depositar",
+            "EXWITHDRAW": "Retirar"
+        },
+        "transferConfirm": {
+            "from": "Desde",
+            "to": "A",
+            "wallet": "Billetera",
+            "dex": "Cuenta de Exchange",
+            "avaliableAmount": "Saldo"
+        },
+        "addToken": {
+            "title": "Agregar token",
+            "placeholder": "Por favor ingrese el nombre del token o el TokenID",
+            "lTxt": "Cancelar",
+            "rTxt": "Agregar"
+        },
+        "type": {
+            "native": "Tokens nativos",
+            "crossGate": "Monedas con Cross Chain"
+        },
+        "assetType": {
+            "TOTAL": "Todos los activos",
+            "EX": "Activos en Exchange",
+            "WALLET": "Activos en billetera"
+        },
+        "tokenInfo": {
+            "tabName": "Detalles",
+            "title": "Información de {tokenSymbol}",
+            "saveGate": "Guardar",
+            "labels": {
+                "tokenId": "TokenID",
+                "tokenName": "Nombre",
+                "totalSupply": "Suministro total",
+                "total": "Suministro circulante",
+                "overview": "Introducción",
+                "type": "Tipo",
+                "gate": "Gateway Cross-Chain",
+                "website": "Sitio web",
+                "whitePaper": "White Paper",
+                "explorer": "Explorador",
+                "github": "Github",
+                "media": "Redes Sociales",
+                "crossType": "Cross-Chain",
+                "originType": "Nativo",
+                "viewmore": "Ver más"
+            },
+            "reIssuable": {
+                "true": "Re-emisible",
+                "false": "No es re-emisible"
+            }
+        },
+        "gateInfo": {
+            "clickCustomer": "Enviar una solicitud",
+            "name": "Nombre del Gateway",
+            "customer": "Servicio al cliente",
+            "privacy": "Términos del servicio",
+            "clickPrivacy": "Términos de servicios oficial del {gate} gateway",
+            "gateSetting": "Configuración del Gateway",
+            "tabName": "Detalles del Gateway",
+            "selfdefined": "Gateway personalizado",
+            "officalNet": "Sitio web",
+            "introduction": "Descripción",
+            "token": "Token emitido",
+            "setting": "Interfaz del Gateway",
+            "nodeDesc": "Manual de Usuario",
+            "settingPlaceholder": "Por favor ingrese la dirección URL del gateway",
+            "nodeDescStr": "Esta característica solo funciona para monedas proveniente de cross-chain, no la use en tokens incrustados. Por cierto, tenga cuidado con las conexiones hacia gateways que no conoce. Al continuar utilizando nuestra plataforma, acepta que Vite Labs no será responsable de ninguna pérdida de fondos o cualquier otra consecuencia adversa causada. Si necesita utilizar un gateway, complete el enlace al gateway a continuación, el enlace se activará después de presionar el botón Guardar."
+        },
+        "depositRecord": {
+            "tabName": "Historial recibidos",
+            "heads": [
+                "Tiempo",
+                "Cantidad",
+                "Estado",
+                "{outChain} Hash",
+                "vite Hash",
+                "Comisiones"
+            ],
+            "statusMap": {
+                "OPPOSITE_PROCESSING": "{outChain} espera para confirmar{confirms}",
+                "OPPOSITE_CONFIRMED_FAIL": "{outChain} procesamiento fallido",
+                "OPPOSITE_CONFIRMED": "Recibido en Gateway",
+                "TOT_CONFIRMED": "Completado",
+                "BELOW_MINIMUM": "Instalación fallida",
+                "TOT_PROCESSING": "Esperando confirmación de la cadena VITE"
+            }
+        },
+        "withdrawRecord": {
+            "tabName": "Historial de transferencias",
+            "heads": [
+                "Tiempo",
+                "Cantidad",
+                "Estado",
+                "vite Hash",
+                "{outChain} Hash",
+                "Comisiones"
+            ],
+            "statusMap": {
+                "TOT_PROCESSING": "{confirms} de la cadena VITE sin confirmar",
+                "TOT_CONFIRMED": "VITE confirmado",
+                "TOT_EXCEED_THE_LIMIT": "La cantidad de la transferencia excede el límite",
+                "OPPOSITE_PROCESSING": "{outChain} espera para confirmar",
+                "OPPOSITE_CONFIRMED": "Completado",
+                "WRONG_WITHDRAW_ADDRESS": "La dirección de transferencia es incorrecta"
+            }
+        },
+        "charge": {
+            "title": "Depósito Cross-Chain",
+            "addrErr": "Algo salió mal con el nodo gateway, por favor compruebe su configuración de red",
+            "addressTitle": "Dirección del destinatario",
+            "labelTips": "(Por favor, utilice esta '{labelName}' junto a la dirección de destinatario, de lo contrario puede perder sus activos",
+            "labelCodeTips": "Escanea el código QR desde {labelName}",
+            "codeTips": "Escanea el código QR para depositar. Por favor, envía fondos desde una billetera que soporte {tokenSymbol}",
+            "tips": [
+                "Solo puedes depositar {tokenSymbol} a través de la dirección proporcionada a continuación. No se aceptarán menos de {min} {tokenSymbol}.",
+                "La cuenta se actualizará después de {confirmationCount} confirmaciones de red. Por favor espere.",
+                "Por favor, seleccione la red principal correcta o no podrá recuperar ningún token perdido."
+            ],
+            "selectNetwork": "Seleccionar red"
+        },
+        "viteTips": "El Cross-Chain de VITE sólo es soportado entre: el nuevo contrato ERC20 VITE (Dirección del Contrato: 0xadd5E881984783dD432F80381Fb52F45B53f3e70), BEP20 VITE y VITE nativo.",
+        "withdraw": {
+            "title": "Retiro Cross-Chain",
+            "btn": "Retirar",
+            "balanceErrMap": {
+                "notEnough": "Saldo insuficiente",
+                "overMax": "La cantidad de retiro debe ser menor que {max}",
+                "lessMin": "La cantidad de retiro no de debe ser menor que {min}"
+            },
+            "feeTips": "La comisión de transacción es establecida por el operador gateway",
+            "addressErr": "El formato de dirección es incorrecto",
+            "labels": {
+                "balance": "Saldo",
+                "address": "Dirección del destinatario",
+                "amount": "Cantidad",
+                "fee": "Comisión",
+                "all": "Todo"
+            },
+            "labelPlaceholder": "Por favor ingrese {labelName}",
+            "amountPlaceholder": "Ingrese la cantidad a enviar, que no debe ser inferior a {min}",
+            "addressPlaceholder": "Introduzca la dirección del destinatario {token}",
+            "successTips": "La solicitud de transacción ha sido enviada",
+            "failTips": "Se ha producido un error en el nodo gateway, compruebe la configuración de red"
+        },
+        "nodeErr": "El nodo gateway es inválido, por favor compruebe la configuración del gateway"
+    },
+    "viteExplorer": {
+        "title": "Explorador de Bloques Vite"
+    },
+    "viteScanExplorer": {
+        "title": "ViteScan"
+    },
+    "wallet": {
+        "title": "Gestión de cuotas",
+        "help": {
+            "title": "Comprensión rápida de Cuotas"
+        },
+        "transfer": "Enviar activos",
+        "getTestToken": "Obtener Tokens de Prueba",
+        "transDetail": "Más detalles de la transacción",
+        "address": "Mi Dirección",
+        "fundFloat": "Sin recibir",
+        "pend": "Pendiente",
+        "inAddress": "Dirección del destinatario",
+        "sum": "Cantidad",
+        "remarks": "Nota",
+        "remarksLong": "Quedan {len} bytes",
+        "totalAsset": "Activos Totales",
+        "placeholder": {
+            "amount": "Introduce la cantidad",
+            "remarks": "Porfavor ingresa una nota",
+            "addr": "Por favor ingrese dirección"
+        },
+        "hint": {
+            "token": "Los tokens de prueba VITE han sido enviados a tu cuenta, ¡por favor revisa tu cuenta!",
+            "tErr": "¡Error al obtener tokens de prueba!",
+            "amount": "Cantidad debe ser mayor que 0"
+        },
+        "trans": {
+            "powErr": "Error al ejecutar PoW, inténtelo de nuevo",
+            "powTransErr": "Cuota insuficiente para realizar el PoW, te recomendamos que bloquees VITE para obtener cuota."
+        }
+    },
+    "walletMintage": {
+        "title": "Emisión de Token",
+        "address": "Dirección de emisión",
+        "tokenName": "Nombre del Token",
+        "tokenSymbol": "Símbolo del token",
+        "totalSupply": "Suministro total",
+        "decimals": "Decimales",
+        "isReIssuable": "Re-emisible",
+        "maxSupply": "Suministro máximo",
+        "ownerBurnOnly": "Solo el propietario puede quemar",
+        "isOwnerBurnOnly": "Solo el propietario puede quemar",
+        "mint": "Confirmar",
+        "tokenList": "Token emitido",
+        "submit": "Enviar",
+        "cancel": "Cancelar",
+        "getListFail": "No puedes obtener la lista de tokens, inténtalo de nuevo más tarde",
+        "mintageConfirm": {
+            "title": "Comprueba tu información de emisión del token",
+            "balance": "Saldo",
+            "fee": "Comisión de emisión",
+            "btn": "Confirmar"
+        },
+        "reIssuableConfirm": {
+            "title": "Cambiar a No-emisible",
+            "text": "¿Estás seguro de cambiar el estado de {tokenName} a no emisible?"
+        },
+        "changeOwnerConfirm": {
+            "title": "Transferir propiedad",
+            "address": "Dirección del destinatario"
+        },
+        "issueConfirm": {
+            "title": "Re-emitir",
+            "amount": "Cantidad",
+            "address": "Dirección del beneficiario",
+            "overAmount": "Laos tokens re-emitidos exceden el límite superior"
+        },
+        "hint": {
+            "tokenName": "El nombre del token debe tener 1-40 caracteres, incluyendo mayúsculas y minúsculas, espacios y guión bajo. No se admiten espacios ni números continuos.",
+            "tokenSymbol": "El símbolo del token debe tener 1-10 caracteres, sólo se admiten mayúsculas y números.",
+            "success": "Emisión de token exitosa",
+            "fail": "Emisión de token fallida"
+        },
+        "err": {
+            "tokenNameFormat": "El nombre del token es incorrecto",
+            "tokenNameNull": "El nombre del token es obligatorio",
+            "tokenSymbolFormat": "El símbolo del token es incorrecto",
+            "tokenSymbolNull": "El símbolo del token es obligatorio",
+            "supplyMax": "Cantidad máxima de emisión de token superada",
+            "totalSupplyFormat": "Formato incorrecto del suministro máximo",
+            "totalSupplyNull": "La cantidad total es obligatoria",
+            "maxSupplyNull": "La cantidad máxima es obligatoria",
+            "maxSupplyMin": "Debe ser mayor que el suministro total",
+            "decimalsNull": "Campo decimales es obligatorio",
+            "decimalsFormat": "Formato incorrecto de decimales",
+            "decimalsMax": "Los decimales están fuera de rango",
+            "maxSupplyFormat": "Formato incorrecto del suministro máximo"
+        }
+    },
+    "walletQuota": {
+        "title": "Gestión de cuotas",
+        "help": {
+            "title": "Comprensión rápida de Cuotas"
+        },
+        "myQuota": "Mi cuota",
+        "maxTxNum": "Número máximo de Txs",
+        "beneficialAddr": "Dirección del destinatario de cuota",
+        "fromAddr": "Dirección de Deducción",
+        "time": "Duración del bloqueo",
+        "aboutDays": "Aproximadamente {day} días",
+        "amountPlaceholder": "Ingresa la cantidad a bloquear, mínimo {num} VITE",
+        "limitAmt": "La cantidad a bloquear no puede ser menor que {num}.",
+        "addrPlaceholder": "Introduzca la dirección del destinatario de cuota",
+        "inputWithdrawAmount": "Por favor, introduzca la cantidad a retirar",
+        "pledgeFail": "Falló al enviar",
+        "canclePledgeFail": "Falló",
+        "maturity": "El bloqueo ha expirado!",
+        "minAmt": "El monto del retiro no puede ser inferior a {num} VITE",
+        "gotoStake": "Primero bloquee suficiente VITE",
+        "maxAmt": "La cantidad de retiro debe estar entre [{minAmount}, {maxAmount}]",
+        "cancelLimitAmt": "La cantidad a bloquear no puede ser menor que {num}",
+        "withdrawalStaking": "Retirar token bloqueados",
+        "myAddr": "Yo",
+        "confirm": {
+            "help": {
+                "t1": "¿Qué es la cuota?",
+                "txt1": "En Vite, los usuarios no compran el gas necesario para una transacción pagando una comisión, sino que adquieren el recurso informático a través de un modelo basado en cuotas. La cuota requerida para realizar una transacción = una cuota básica (solicitud) + cuota (por datos de texto adjuntos). La cuota requerida para aceptar una transacción = una cuota básica (respuesta). Este protocolo de configuración de recursos basado en quota, permite a los usuarios obtenerlos de dos maneras: Bloqueando VITE para obtener cuota o ejecutando una prueba de trabajo PoW.",
+                "t2": "¿Qué es el Staking?",
+                "txt2": "En Vite, el usuario puede bloquear VITE para obtener una cierta cantidad de cuotas. El valor mínimo para bloquear es 134 VITE, y no hay límite máximo. Además en Vite también se soporta compartir este beneficio, siendo que una dirección A bloquee una parte VITE y asigne la cuota obtenida a otra dirección B beneficiaría. Cuando los usuarios soliciten un bloqueo, su VITE será enviado a la dirección del contrato inteligente en lugar del otro usuario, y sólo el usuario que solicita el bloqueo tiene acceso a administrar la cantidad a desbloquear.",
+                "t3": "¿Qué es el PoW?",
+                "txt3": "Prueba de Trabajo (PoW, en sus siglas en inglés), es un protocolo para confirmar que has realizado una cierta cantidad de trabajo. Esta medida es una medida económica para disuadir ataques DDoS y otros tipos de abusos de servicios. Requiere que el solicitador realize una cierta cantidad de cómputo tomando cierto tiempo en el servidor. En Vite, los usuarios pueden obtener una cuota gratuita ejecutando este PoW, y pudiendo enviar transacciones sin tomar ninguna acción usando la cuota obtenida."
+            },
+            "cancel": {
+                "describe": "Tu actual cantidad bloqueada es {amount} VITE, por favor confirma el retiro.",
+                "rightBtn": "Listo para empezar",
+                "leftBtn": "Cancelar retiro"
+            },
+            "submit": {
+                "describe": "Asegúrate de bloquear {amount} VITE para obtener cuota, no podrás retirarlo hasta en 3 días después que el bloqueo entre en rigor.",
+                "rightBtn": "Confirmar",
+                "leftBtn": "Cancelar"
+            }
+        },
+        "list": {
+            "title": "Lista de bloqueos",
+            "total": "Bloqueando {amount} VITE en total",
+            "amount": "Cantidad",
+            "withdrawTime": "Fecha de vencimiento prevista",
+            "unexpired": "No se puede retirar el token bloqueado hasta la fecha de vencimiento",
+            "vip": "Esta acción de bloqueo es para convertirse en trader VIP en el exchange ViteX, por favor ve a la página del exchange ViteX para cancelar este status VIP",
+            "mining": "Este bloqueo corresponde a tus staking para minado en ViteX, por favor ve a la página de minería en ViteX para unstake",
+            "other": "Este bloqueo corresponde a tus staking via otras formas y el unstake no está soportado aquí"
+        }
+    },
+    "walletTransList": {
+        "title": "Transacciones",
+        "tType": {
+            "title": "Tipo",
+            "symbol": "Tipo"
+        },
+        "status": {
+            "title": "Estado",
+            "unconfirmed": "Sin confirmar",
+            "confirms": "Confirmando",
+            "confirmed": "Confirmado"
+        },
+        "timestamp": "Timestamp",
+        "tAddress": "Dirección",
+        "sum": "Cantidad"
+    },
+    "walletFullNode": {
+        "title": "Full nodes",
+        "help": {
+            "title": "Acerca de",
+            "t1": "Glosario",
+            "txt1": "[Número de nodos registrados] El número de full nodes registrados con la dirección actual",
+            "txt2": "[Número de nodos activos] El número de full nodes activos registrados con la dirección actual",
+            "txt3": "[Número de nodos de recompensa] Número de nodos siendo recompensados",
+            "t2": "Múltiples full nodes pueden ser registrados con la misma dirección, pero deben ser bloqueados individualmente al menos 10.000 VITE para cada uno; Al calcular la recompensa del nodo activo, si la cantidad en stake/10000 produce un número entero que es mayor o igual al número de nodos activos, todos los nodos activos serán recompensados; Si la cantidad den stake/10000 produce un número entero que es menor que el número de nodos activos, el número de nodos que son recompensados equivale al número entero.",
+            "t3": "El cálculo de las recompensas por votación no depende del número de nodos, sino de la cantidad en stake."
+        },
+        "confirmText": "Confirmación de bloquear {amount} VITE, esto se puede cancelar después de {days} días",
+        "addQuota": {
+            "address": "Dirección de Stake",
+            "stakeDays": "Periodo de bloqueo",
+            "placeholder": "Bloqueo mínimo {min} VITE",
+            "stakingSuspend": "Bloqueo temporalmente suspendido"
+        },
+        "quotaContent": {
+            "onlineReward": "Recompensa del nodo activo",
+            "voteReward": "Recompensa de votación",
+            "yesterday": "ayer",
+            "all": "VITE acumulado: {num}",
+            "nodeInfo": "Información del nodo",
+            "onlineNodes": "Nodos activos",
+            "rewardNodes": "Nodos de recompensa",
+            "stakeAmount": "Nodo staking"
+        }
+    },
+    "walletSBP": {
+        "title": "SBP",
+        "help": {
+            "title": "Acerca del SBP",
+            "text": "SBP (Snapshot Block Producer) es un nodo que tiene derecho a crear bloques, puedes registrarte para convertirte en candidato SBP bloqueando una ciertas cantidad de VITE, cada ronda (cada 75 segundos aproximadamente) se escogerán al azar un total de 25 SBPs, de los cuales 23 nodos serán elegidos entre las posiciones 1-25, y 2 nodos entre las posiciones 26-100 de la lista. El 50% de las recompensas de un SBP se distribuirá en función del número de bloques creados por cada SBP. El otro 50% se distribuirá en función de la cantidad en stake y la cantidad de votos recibidos. Una dirección de registro (dirección que ejecuta el staking) puede registrar múltiples nodos para la creación de bloques (asignándoles nombres a cada nodo), un nombre de nodo no se puede utilizar si el nombre del nodo ya ha sido registrado por una dirección previamente. Un nombre de nodo puede cambiar la dirección de creación de bloques, sin embargo, la dirección de creación de bloques no puede ser reutilizada por otros nombres de nodo."
+        },
+        "register": "Registro SBP",
+        "cancel": "Cancelación de SBP",
+        "cancelBtn": "Cancelar",
+        "rewardBtn": "Reclamar recompensas",
+        "noReward": "Sin recompensa",
+        "rewardConfirm": {
+            "title": "Reclamar recompensas",
+            "describe1": "Las recompensas disponibles a reclamar se actualizan a las 13:00:00 (UTC+8) todos los días, hasta el {time} puedes reclamar",
+            "describe2": "Consultar detalles de recompensas por minado, puedes",
+            "describe3": "haga clic aquí",
+            "describe4": "Las recompensas se enviarán a su dirección Vite después de realizar la solicitud de reclamación, por favor compruébalo en la página principal de tu billetera. Nota: No repita la acción de reclamación.",
+            "leftBtn": "Ahora no",
+            "rightBtn": "Reclamar todo"
+        },
+        "confirm": {
+            "title": "Registro de SBP candidatos",
+            "describe": "Los {amount} VITE de la dirección actual se bloquearán por 90 días cuando el registro sea enviado, el monto será devuelto a la dirección de staking después de ser desbloqueado",
+            "leftBtn": "Aún no se ha registrado",
+            "rightBtn": "Listo para registrarse",
+            "edit": {
+                "title": "Editar información del SBP",
+                "newBlockProducer": "introduce una nueva dirección de creación de bloque",
+                "newRewardAddress": "introduce una nueva dirección de retiro de recompensa",
+                "changeBlockProducer": "Dirección de creación de bloques",
+                "changeRewardAddress": "Dirección de retiro de recompensa",
+                "btn": "Confirmar cambio"
+            }
+        },
+        "section1": {
+            "title": "Formulario de Registro",
+            "nodeName": "Nombre del nodo",
+            "producerAddr": "Dirección de creación de bloques",
+            "rewardWithdrawAddress": "Dirección de retiro de recompensa",
+            "quotaAddr": "Dirección de Stake",
+            "quotaTime": "Periodo de bloqueo",
+            "time": "7776000 instantáneas de bloques (aproximadamente 90 días)",
+            "confirmBtn": "Enviar",
+            "namePlaceholder": "Por favor ingrese el nombre del nodo",
+            "nameHint": "Menor a 40 caracteres, soporta letras en inglés (mayúsculas y minúsculas), números, '_'，'.'",
+            "nameErr": "Este nombre de nodo es ilegal",
+            "nameUsed": "Este nombre ya está en uso",
+            "addrPlaceholder": "Por favor, introduzca la dirección del Nodo generador de instantánea de creación de bloques",
+            "addrHint": "La dirección de creación de bloque debe ser un Full nodo y debe estar en funcionamiento",
+            "addrErr": "Dirección ilegal",
+            "addrUsed": "Esta dirección ha sido ocupada",
+            "registerSuccess": "Solicitud de registro enviada",
+            "registerFail": "Solicitud de registro fallida"
+        },
+        "section2": {
+            "title": "Información de Registro",
+            "update": "Modificar",
+            "updateFail": "Error al enviar la solicitud de modificación",
+            "cancel": "Cancelando",
+            "cancelFail": "Error al enviar la solicitud de cancelación",
+            "expireDate": "Fecha de expiración: {time}",
+            "cancelConfirm": {
+                "title": "Cancelar el registro de SBP",
+                "describe": "La cantidad bloqueada será devuelta a su dirección de stake después de cancelar el registro, usted deberá volver a solicitar un registro para convertirse en un SBP"
+            }
+        }
+    },
+    "walletVote": {
+        "title": "Votación",
+        "help": {
+            "title": "Sobre la votación",
+            "text": "Puedes unirte y votar por cualquier SBP, un total de 25 SBPs (Productor de bloques de instantáneas) serán escogidos por cada ronda de votación, cada 75s. Sus votos equivalen al saldo disponible en la dirección que vota. Su voto se mantiene igual en las siguientes rondas a menos que retire su voto o lo cambie para otro nodo. Serán escogidos aleatoriamente 23 SBP de los 25 mejores candidatos, más 2 SBP de los candidatos entre el puesto 26º y 100º. Siendo elegidos como SBPs 25 nodos en total."
+        },
+        "toReward": "Ver mis recompensas",
+        "voting": "Votación",
+        "search": "Por favor, introduzca el nombre del nodo o la dirección de creación de bloque",
+        "addrNoExistErr": "No puedes votar por ahora ya que tu dirección no tiene ningún registro de transacción previamente",
+        "revokeVoting": "Cancelar voto",
+        "section1": {
+            "title": "Mi voto",
+            "head": [
+                "Nombre",
+                "Estado",
+                "Mi voto",
+                "Estado del voto",
+                "Acción"
+            ],
+            "nodeStatusMap": {
+                "1": "Activo",
+                "2": "Inactivo"
+            },
+            "voteStatusMap": {
+                "voted": "Votación exitosa",
+                "voting": "Votación",
+                "canceling": "Cancelación en proceso",
+                "voteNotWork": "Votación cancelada"
+            },
+            "hoverHelp": "El nodo {nodeName} por el que has votado ha sido revocado, puedes votar de nuevo directamente o cancelar tu voto. Si no lo haces, tu votación original se recuperará después de que el nodo {nodeName} vuela a generar un nuevo registro",
+            "confirm": {
+                "cancelText": "Todavía no",
+                "submitText": "Confirmar"
+            },
+            "revoke": "Cancelando",
+            "operateBtn": "Cancelar",
+            "cancelVoteErr": "Error al cancelar la votación, por favor inténtalo de nuevo"
+        },
+        "section2": {
+            "title": "Candidatos SBP",
+            "head": [
+                "Clasificación",
+                "Nombre del nodo",
+                "Dirección",
+                "Votos",
+                "Acción"
+            ],
+            "confirm": {
+                "normal": {
+                    "content": "Puedes votar por solo un SBP, ¿estás seguro de que quieres votar por {name}?",
+                    "cancelText": "Todavía no",
+                    "submitText": "Listo para votar"
+                },
+                "cover": {
+                    "content": "Ya has votado por {nodeName}, ¿estás seguro de sobrescribir el registro de votación actual?",
+                    "cancelText": "Confirmar",
+                    "submitText": "Cancelar"
+                }
+            },
+            "noSearchData": "No se encontró contenido, por favor intente otra entrada",
+            "operateBtn": "Votar",
+            "voteErr": "Error al votar, inténtalo de nuevo"
+        }
+    },
+    "assets": {
+        "title": "Activos",
+        "notice": {
+            "title": "Aviso importante",
+            "contentProvider": "Este servicio es proporcionado por {gate}.",
+            "contentOther": "Usted acepta y reconoce que Vite Labs no será responsable de las consecuencias negativas causadas por {gate}. La plataforma Vite no participa en la relación que pueda surgir entre {gate} y los usuarios de la plataforma Vite",
+            "contentAgree": "Al seguir utilizando el servicio de {gate}, aceptas y conoces los",
+            "agreement": "Términos de Servicios, Condiciones de Comercio y Política de Privacidad de {gate}",
+            "contentUngree": "Por favor, acepta estos términos antes de utilizar el servicio de {gate}",
+            "hint": "Póngase en contacto con el equipo de atención al cliente de {gate} si encuentra algún problema durante el proceso de pago.",
+            "next": "Confirmar y continuar"
+        },
+        "vb": {
+            "title": "ViteConnect",
+            "closeAlert": "cerrar",
+            "connect": {
+                "tips": "Escanear el código QR desde la aplicación de billetera Vite"
+            },
+            "confirm": {
+                "tips": "Por favor, confirme la transacción en la aplicación de su billetera VITE"
+            },
+            "start": {
+                "scan": "Escanear el código QR desde la aplicación de billetera Vite",
+                "downloadTips": "¿No tienes la aplicación de billetera Vite? ",
+                "download": "Descargar aquí"
+            },
+            "accountName": "Dirección ViteConnect"
+        },
+        "ledger": {
+            "title": "Dispositivos Ledger",
+            "accountName": "Billetera Ledger",
+            "verifyAddress": "Verificar dirección",
+            "closeAlert": "Cancelar",
+            "start": {
+                "title": "Billeteras compatibles: Ledger Nano S / Ledger Nano X",
+                "connectError": "¿Problemas de conexión?",
+                "introduction": "Instrucciones de usuario e instalación de app",
+                "introductionUrl": "https://docs.vite.org/go-vite/tutorial/ledger-install.html",
+                "connectErrorUrl": "https://support.ledger.com/hc/es/articles/115005165269-Connection-issues-with-Windows-or-Linux"
+            },
+            "connectWithUSB": "Usar USB",
+            "connectWithBlu": "Usar Bluetooth",
+            "connectLedger": "Conectar al Ledger",
+            "connect": {
+                "title": "Selección de dirección",
+                "tips": "Seleccione una dirección a usar:",
+                "selectConnectType": "Elija el tipo de conexión: (Bluetooth sólo es compatible con Ledger Nano X)",
+                "cancelSelect": "Seleccione un dispositivo para conectar",
+                "connectError": "Error de conexión. Por favor, confirme que la aplicación Vite está abierta en el dispositivo",
+                "interfaceNotAvailable": "Error de conexión. Compruebe que el cable USB está conectado. Si se conecta mediante Bluetooth, apague el Bluetooth y vuelva a encenderlo",
+                "receiveBlockSuccess": "{num} transacción recibida exitosamente",
+                "introduction": {
+                    "1": {
+                        "title": "Paso 1: ",
+                        "content": "Conecte el dispositivo Ledger e introduzca el código PIN"
+                    },
+                    "2": {
+                        "title": "Paso 2: ",
+                        "content": "Abrir aplicación Vite en Ledger"
+                    }
+                }
+            },
+            "addressSelect": {
+                "index": "Índice",
+                "address": "Dirección",
+                "balance": "Saldo",
+                "unreceived": "Sin recibir",
+                "nextPage": "Siguiente página",
+                "prePage": "Última página",
+                "confirm": "Confirmar",
+                "unUsedAccount": "Nuevo"
+            },
+            "confirm": {
+                "tips": "Por favor, confirma la transacción en tu dispositivo Ledger",
+                "verifyAddress": "Por favor verifique la dirección en su dispositivo Ledger",
+                "alert": "Advertencia",
+                "alertContent": "La dirección ha sido denegada en el dispositivo Ledger. Por favor, compruebe si esta dirección coincide con la dirección mostrada en su dispositivo Ledger. Si es así, ignore este mensaje y siga adelante para confirmar la transacción, de lo contrario NO envíe activos a la dirección y cierre inmediatamente.",
+                "alertLeftBtn": "Confirmo que las direcciones coinciden",
+                "alertRightBtn": "Las direcciones no coinciden. ¡Sal de aquí!",
+                "userCancel": "La transacción ha sido cancelada en el Ledger",
+                "userCancelByWeb": "Has cancelado la transacción desde la billetera Vite. En este caso, la transacción será abandonada y nunca pasará a la blockchain incluso si se confirma en su dispositivo Ledger."
+            }
+        },
+        "invite": {
+            "inviteTitle": "Invitar Amigos",
+            "receiveInviteTitle": "Usar código de referido",
+            "myCode": "Mi código de referido: ",
+            "codeLable": "Código de referido",
+            "invited": "Ya has aceptado una invitación, el código de referido es: ",
+            "genCode": "Crear un código de referido",
+            "cost": "Coste",
+            "formatErr": "Formato de código incorrecto",
+            "noResult": "Vaya... No se han encontrado resultados, por favor inténtalo de nuevo más tarde",
+            "successToast": "Solicitud enviada",
+            "failToast": "Error al enviar la solicitud",
+            "notEnough": "Saldo insuficiente en Exchange",
+            "avaliable": "Saldo",
+            "inviteNum": "Invitado",
+            "inviteBenifit": "Ingresos de minería de referidos",
+            "inviteRule": "Reglas",
+            "ruleItems": [
+                "El pago de <span class='strong'>1,000 VITE</span> para generar un código de invitación serán quemados",
+                "El que refiere recibirá una recompensa del <span class='strong'>5%</span> de todas los trades de los usuarios invitados como ingreso por de minería, y un <span class='strong'>2.5%</span> de todos las creaciones de mercados como ingresos por minería"
+            ],
+            "receiveRuleItems": [
+                "Los usuarios invitados recibirán un <span class='strong'>2,5%</span> extra del trading como recompensas de minería y <span class='strong'>1,25%</span> de la creación de mercado como recompensas de minería",
+                "Disfruta de <span class='strong'>10%</span> de descuento en comisiones de trading con un código de invitación"
+            ]
+        }
+    },
+    "walletConversion": {
+        "title": "Conversión de VITE",
+        "help": {
+            "title": "Entendimiento rápido de la conversión de VITE",
+            "text": "Puedes migrar los tokens VITE ERC20 a VITE Nativo dentro de la TestNet mediante nuestra función de conversión. En la TestNet, puedes emitir el voto por los SBP oficiales para obtener recompensas alcanzó una tasa anual cercana al 20%. Tus tokens ERC20 VITE serán transferidos a la dirección del agujero negro de Ethereum: {blackAddr}, recibirás la misma cantidad de VITE en tu dirección de Vite cuando la transacción haya sido recibida y confirmada por la dirección Ethereum del agujero negro. Una vez que estés en el proceso de conversión, confirme que tenga suficiente VITE y ETH (como gas) en su dirección de Ethereum de la billetera Vite."
+        },
+        "gas": "Comisión de minería",
+        "record": "Historial de conversión",
+        "aboutPrice": "Aprox. {amount} ETH",
+        "note": "Por favor, espere con paciencia después de solicitar la conversión. No podrá recibir el VITE convertido hasta que transacción tenga al menos 30 confirmaciones en la red Ethereum. Los registros de transacciones de Ethereum se pueden ver en la sección Historial de Conversiones.",
+        "exchange": {
+            "vite": "Convertir",
+            "viteAddr": "Dirección de recepción",
+            "viteAmount": "Cantidad a convertir",
+            "btn": "Listo para convertir",
+            "success": "Conversión exitosa. Puede tardar aproximadamente 20 minutos en obtener los VITE en su cuenta después de que la transacción se confirmada en la red Ethereum."
+        }
+    },
+    "tradeCenter": {
+        "title": "Exchange",
+        "marketClosed": "El mercado {symbol} ha sido suspendido",
+        "mergeDepth": "Grupo",
+        "depthStep": "{step} dígitos",
+        "blocking": "Error de congestión de red, por favor inténtelo de nuevo más tarde",
+        "supportMining": "Elegible para trading y creación de mercado como minería",
+        "cmcHelp": "Ver VITE en CoinMarketCap",
+        "supportTradeMining": "Elegible para trading como minería",
+        "supportOrderMining": "Elegible para creación de mercados como minería",
+        "zeroFee": "Cero Comisión",
+        "buyMiningPrice": "Califica para minar cuando el precio de compra es mayor que {price}",
+        "sellMiningPrice": "Califica para minar cuando el precio de venta es menor que {price}",
+        "operator": {
+            "noName": "Operador anónimo",
+            "overview": "Introducción",
+            "txPair": "Par de comercio",
+            "confirmTitle": "Recordatorio de riesgo",
+            "confirmText": "El par de comercio actual es {symbol}. Por favor, tenga cuidado al operar. La inversión en activos digitales conlleva altos riesgos. Antes de invertir, por favor comprenda plenamente todos los riesgos de invertir en activos digitales y juzgue la autenticidad, legalidad y validez de los activos digitales por su cuenta. Por favor, sea prudente con sus propias decisiones de inversión y asuma la responsabilidad por la pérdida de sus activos.",
+            "address": "Dirección del operador",
+            "name": "Nombre de operador"
+        },
+        "operatorTxPair": {
+            "title": "Detalles del par de comercio",
+            "tokenTab": "Detalles del token",
+            "operatorTab": "Detalles del operador"
+        },
+        "depthBuyMiningPrice": "Rango de minería encima de",
+        "depthSellMiningPrice": "Rango de minería debajo de",
+        "inMiningRange": "Rango de minería"
+    },
+    "trade": {
+        "more": "Más",
+        "search": "Buscar",
+        "txPair": "Par",
+        "price": "Precio",
+        "upDown": "Cambiar%",
+        "txNum": "Volumen",
+        "quantityTitle": "Total({quantity})",
+        "priceTitle": "Precio({price})",
+        "amountTitle": "Cantidad({amount})",
+        "quantityTable": "Cant.",
+        "amountTable": "Volumen",
+        "amount": "Total",
+        "newOrderSuccess": "Solicitud de orden enviada",
+        "newOrderFail": "Orden fallida",
+        "depthView": "Profundidad",
+        "klineView": "TradingView",
+        "txPairDetail": {
+            "title": "Detalles del par de comercio",
+            "24h": "24h",
+            "openPrice": "Abrir",
+            "quantity": "Volumen de mercado",
+            "amount": "Volumen base",
+            "status": "Estado",
+            "latest": "Última",
+            "buy": "Precio de Compra",
+            "sell": "Precio de venta",
+            "diff": "Spread"
+        },
+        "buy": {
+            "title": "Comprar {token}",
+            "price": "Precio({token})",
+            "quantity": "Cantidad({token})"
+        },
+        "sell": {
+            "title": "Vender {token}",
+            "price": "Precio({token})",
+            "quantity": "Cantidad({token})"
+        },
+        "head": {
+            "latestPrice": "Último precio",
+            "updown": "Precio en 24h",
+            "highPrice": "Máx. en 24 h",
+            "lowPrice": "Mín. en 24 h",
+            "quantity": "Volumen en 24h",
+            "tokenName": "Token",
+            "originalSymbol": "Símbolo",
+            "gateway": "Gateway",
+            "website": "Sitio Web Oficial",
+            "explorer": "Explorador de bloques",
+            "overview": "Descripción",
+            "tokenShow": "Abrev.",
+            "tokenId": "Token ID",
+            "publisher": "Emisor",
+            "total": "Total",
+            "tokenDigit": "Decimales",
+            "publisherDate": "Fecha de emisión",
+            "type": "Estado",
+            "tokenType0": "Emisión disponible",
+            "tokenType1": "Nunca emitido"
+        },
+        "latestTx": {
+            "title": "Últimas órdenes",
+            "time": "Tiempo"
+        },
+        "depth": {
+            "buy": "Comprar",
+            "sell": "Vender",
+            "all": "Todo",
+            "avgPrice": "Precio medio:",
+            "sum": "Sum {symbol}:"
+        },
+        "noData": {
+            "favorite": "Aún no tienes favoritos",
+            "search": "No hay resultados"
+        },
+        "limitPrice": {
+            "title": "Límite",
+            "fee": "Comisiones",
+            "adviseToSVip": "Actualizar a SVIP, disfruta tener cero comisión de transacciones",
+            "feeRuleWithSVip": "Comisiones del operador * Descuento de Referido. ATENCIÓN: El ajuste y el descuento de las comisiones sólo afectarán a nuevas órdenes, los cargos de las órdenes anteriores siguen siendo las mismas.",
+            "text": "Esta página es una página de vista previa de los datos de la transacción. Por favor, inicie sesión para operar.",
+            "validAmount": "El volumen debe ser mayor que {amount}{token}",
+            "priceNotNull": "La cantidad no puede estar vacía",
+            "amountNotNull": "El volumen no puede estar vacío",
+            "quantityNotNull": "La cantidad no puede estar vacía",
+            "cancelVip": "Cancelar",
+            "openVip": "Hazte VIP",
+            "dexFee": "Comisión base de transacción: {fee}",
+            "operatorFee": "Comisión del operador: {fee}",
+            "vipFee": "Descuento VIP: {fee}",
+            "inviteFeeDiscount": "Descuento por referido: {fee} de descuento",
+            "svipFee": "SVIP: 0% comisión de transacción base",
+            "feeRule": "(Comisión base de transacción - Descuento VIP + Comisiones del operador) * Descuento de Referido. ATENCIÓN: El ajuste y el descuento de las comisiones sólo afectarán a nuevas órdenes, los cargos de las órdenes anteriores siguen siendo las mismas."
+        },
+        "proxy": {
+            "title": "Delegación de trade",
+            "subTitle": "Delegación de trade",
+            "successProxy": "Delegación exitosa",
+            "failProxy": "Delegación fallida",
+            "successCancelProxy": "Delegación removida con éxito",
+            "failCancelProxy": "Falló al remover delegación",
+            "info": "¿Qué es la Delegación de trade?",
+            "new": "Iniciar una delegación",
+            "active": {
+                "title": "Historial de Delegación",
+                "head": [
+                    "Dirección Delegada",
+                    "Pares de comercio",
+                    "Acción"
+                ],
+                "operate": [
+                    "Añadir pares de comercio",
+                    "Remover pares de comercio",
+                    "Remover todas las delegaciones"
+                ]
+            },
+            "passive": {
+                "title": "Historial de Delegación Aceptada",
+                "head": [
+                    "Dirección de Delegación",
+                    "Pares de comercio"
+                ]
+            },
+            "dialog": {
+                "cancel": "Cancelar",
+                "cancelAllTips": "¿Estás seguro de que quieres eliminar todas las delegaciones de {trustAddress}?",
+                "rTxtMap": {
+                    "new": "Agregar",
+                    "add": "Agregar",
+                    "delete": "Confirmar",
+                    "deleteAll": "Confirmar"
+                },
+                "confirm": {
+                    "title": "Confirmar la delegación",
+                    "cancel": "Cancelar",
+                    "ok": "Confirmar"
+                },
+                "titleMap": {
+                    "new": "Iniciar una delegación",
+                    "add": "Añadir Delegaciones",
+                    "delete": "Eliminar Delegaciones",
+                    "deleteAll": "Confirmar la cancelación de delegación"
+                }
+            }
+        },
+        "openapi": {
+            "title": "API",
+            "myKey": "Mi API KEy",
+            "createTime": "Fecha de creación",
+            "permissions": "Pares de comercio aplicados",
+            "createKey": "Crear API Key",
+            "deleteKey": "Eliminar API",
+            "deleteAlert": "Si confirma continuar, la API actual dejará de ser accesible. El paquete existente se mantendrá y se volverá a activar al crear una nueva API key.",
+            "confirmDelete": "Confirmar y eliminar",
+            "cancel": "Cancelar",
+            "agentAddressStakingAmount": "Cuota delegada bloqueada",
+            "staking": "Bloquear",
+            "package": "Paquete",
+            "expireTime": "Fecha de expiración",
+            "callNum": "Activadores/min",
+            "callNumInfo": "{maxCount} transacciones/min",
+            "price": "Coste",
+            "priceInfo": "{price} VX/mes",
+            "upgrade": "Mejorar",
+            "balanceAlert": "No se puede crear si el balance de VITE es inferior a {balanceLimit}.",
+            "noSupportForHardware": "Billetera en Hardware no es compatible en este momento",
+            "tips": {
+                "title": "Aviso",
+                "0": "ViteX está lanzando su API oficial para proporcionar acceso a los mercados y servicios de trading en tiempo real. Siga las instrucciones de abajo para adquirir correctamente una API key privada.",
+                "0-step1": "1. Crear API",
+                "0-step2": "2. Autorizar la delegación de los pares de comercio seleccionados",
+                "0-step3": "3. Obtener cuota para la dirección de la delegación API",
+                "0-step4": "Ver la <a href=\"https://vite.wiki/dex/api/dex-apis.html\" target=\"_blank\">Documentación API</a> para más soporte",
+                "1": "Se permite un conjunto de API Key y Secret para la misma dirección en cualquier momento.",
+                "2": "Para evitar la pérdida de activos, no revele a nadie su clave de acceso y clave secreta",
+                "3": "La utilización mediante API esta establecida con el paquete base gratuito de 10 transacciones por minuto de forma predeterminada, existen opciones de mejora disponibles."
+            },
+            "stakingForQuota": {
+                "title": "Cuota de Delegación",
+                "agentAddress": "Dirección de Delegación",
+                "stakingAmount": "Cantidad bloqueada",
+                "ok": "Confirmar"
+            },
+            "keyConfirm": {
+                "accessKey": "Clave de acceso",
+                "secretKey": "Clave secreta",
+                "agentAddress": "Dirección de Delegación",
+                "title": "API creada con éxito",
+                "tips": {
+                    "title": "Aviso importante",
+                    "0": "Para evitar la pérdida de activos, no revele a nadie su clave de acceso y clave secreta.",
+                    "1": "En caso de pérdida de clave secreta, elimine la API actual y vuelva a solicitar una nueva clave API."
+                },
+                "warn": "La clave secreta se muestra sólo una vez y no se puede encontrar de vuelta si se pierde, por favor manténgala correctamente."
+            },
+            "upgradeConfirm": {
+                "title": "Actualizar paquete",
+                "currentPackage": "Actual",
+                "selectPackage": "Seleccionar nuevo",
+                "selectTime": "Válido por",
+                "month": " Mes",
+                "payAmount": "Total",
+                "balance": "Saldo VX"
+            }
+        }
+    },
+    "tradeAssets": {
+        "title": "Fondos",
+        "search": "Por favor ingrese el nombre del token",
+        "operate": "Acción",
+        "all": "Todo",
+        "confirmTable": {
+            "title": "Registro detallado",
+            "heads": [
+                "Fecha",
+                "Token",
+                "Tipo",
+                "Cantidad"
+            ]
+        },
+        "pwdConfirm": {
+            "cancelTxt": "Cancelar"
+        },
+        "table": {
+            "heads": [
+                "Token",
+                "Saldo total",
+                "Saldo del exchange",
+                "En orden",
+                "Valor"
+            ],
+            "rowMap": {
+                "recharge": "Depositar al Exchange",
+                "withdraw": "Retirar a billetera",
+                "detail": "Detalles",
+                "sideMap": {
+                    "1": "Depositar",
+                    "2": "Retirar"
+                }
+            }
+        },
+        "confirmrecharge": {
+            "successToast": "Depósito satisfactorio",
+            "failToast": "Falló al depositar",
+            "title": "Depositar al Exchange",
+            "lable1": "Balance de Billetera",
+            "lable2": "Cantidad del depósito",
+            "tips": "Saldo de billetera insuficiente",
+            "placeholder": "Por favor ingrese la cantidad a depositar",
+            "btn": "Depositar"
+        },
+        "confirmwithdraw": {
+            "successToast": "Retiro Exitoso",
+            "failToast": "Retiro fallido",
+            "title": "Retirar a billetera",
+            "lable1": "Saldo disponible",
+            "lable2": "Cantidad del retiro",
+            "tips": "Saldo de billetera insuficiente",
+            "placeholder": "Por favor, introduzca la cantidad a retirar",
+            "btn": "Retirar"
+        },
+        "zero": "Ocultar saldos pequeños"
+    },
+    "tradeOpenOrders": {
+        "cancelErr": "Estás intentándolo con mucha frecuencia, por favor inténtalo de nuevo más tarde.",
+        "confirm": {
+            "successToast": "Revocando orden con éxito",
+            "failToast": "Falló la revocación de la orden",
+            "submitTxt": "Confirmar para cancelar",
+            "cancelTxt": "Cancelar",
+            "title": "Revocar orden",
+            "content": "Estás seguro de revocar la orden actual?"
+        },
+        "title": "Órdenes abiertas",
+        "hint": {
+            "fdate": "Por favor, seleccione fecha de inicio",
+            "tdate": "Por favor, seleccione fecha de fin",
+            "dateErr": "La fecha de fin debe ser posterior a la fecha de inicio",
+            "ftoken": "Por favor seleccione ftoken"
+        },
+        "side": {
+            "1": "Vender",
+            "0": "Comprar"
+        },
+        "table": {
+            "heads": [
+                "Fecha",
+                "Par",
+                "Lado",
+                "Precio",
+                "Cantidad",
+                "Completado",
+                "Completado%",
+                "Promedio",
+                "Total"
+            ],
+            "rowMap": {
+                "cancel": "Cancelar"
+            }
+        }
+    },
+    "tradeOrderHistory": {
+        "title": "Historial de órdenes",
+        "hint": {
+            "fdate": "Por favor, elija fecha de inicio",
+            "tdate": "Por favor, elija fecha de fin",
+            "dateErr": "La fecha de fin debe ser posterior a la fecha de inicio"
+        },
+        "side": {
+            "1": "Vender",
+            "0": "Comprar"
+        },
+        "status": {
+            "1": "En curso",
+            "2": "Completado",
+            "3": "Cancelado",
+            "4": "Fallído"
+        },
+        "confirmTable": {
+            "title": "Libro de órdenes",
+            "heads": [
+                "Tiempo",
+                "Precio",
+                "Cantidad",
+                "Comisiones",
+                "Total"
+            ]
+        },
+        "table": {
+            "heads": [
+                "Fecha",
+                "Par",
+                "Lado",
+                "Precio",
+                "Cantidad",
+                "Completado",
+                "Promedio",
+                "Comisiones",
+                "Total",
+                "Estado"
+            ],
+            "rowMap": {
+                "statusMap": {
+                    "1": "En orden",
+                    "2": "Completado",
+                    "3": "Cancelado",
+                    "4": "Fallído"
+                },
+                "detail": "Detalles"
+            }
+        },
+        "filter": {
+            "start": "Desde",
+            "end": "A",
+            "type": "Tipo",
+            "side": "Lado",
+            "buy": "Comprar",
+            "sell": "Vender",
+            "status": "Estado",
+            "search": "Buscar",
+            "reset": "Reiniciar"
+        }
+    },
+    "tradeMining": {
+        "title": "Minería",
+        "addQuota": "Crear una nuevo bloqueo",
+        "add": "Agregar",
+        "withdraw": "Desbloquear",
+        "withdrawList": "Historial de Retiros",
+        "tbHead": {
+            "date": "Fecha",
+            "fee": "Comisiones de trading",
+            "mining": "Cantidad por minería",
+            "pledge": "Stake"
+        },
+        "txTitle": "Ingresos totales por trading como minado",
+        "quotaTitle": "Ingresos totales por staking como minado",
+        "addHint1": "Cada bloqueo debe ser de al menos 134 VITE",
+        "addHint2": "El staking de VITE será efectivo inmediatamente después del envío. El staking puede ser cancelado después de 3 días",
+        "addHint3": "La cantidad bloqueada se liberará después de esperar un periodo de 7 días",
+        "withdrawHint1": "Ya no podrás minar VX después de que se cancele el stake",
+        "withdrawHint2": "Tardarán 7 días en regresar los VITE bloqueados en tu balance del exchange",
+        "addTitle": "Stake VITE para minería",
+        "withdrawTitle": "Retirar VITE del stake",
+        "addPlaceHolder": "Ingrese la cantidad a stakear",
+        "withdrawPlaceHolder": "Introduce la cantidad a retirar del stake, al menos 134 VITE",
+        "addBtn": "Confirmar Stake",
+        "withdrawBtn": "Confirmar Unstake",
+        "stakingBalance": "Saldo disponible en stake",
+        "hintTitle": "Aviso importante",
+        "comingHint": "La función de minería VX viene pronto, mantente atento. Puedes obtener VX de cinco maneras: 1. Trading como Minería, 2. Listando como Minería, 3. Refiriendo como Minería, 4. Stakeando como Minería, 5. Creando-Mercados como Minería. Los usuarios que poseen VX disfrutan de las ganancias de un fondo de dividendos compartido.",
+        "more": "Aprende más sobre las reglas de minería de VX",
+        "fee": "Comisiones de trading",
+        "todayTrade": "Detalles de minería",
+        "dividends": "Volumen de minería esperando 24H",
+        "view": "Dashboard en vivo de minería",
+        "inviteCount": "Referidos",
+        "help": "Las comisiones de trading actuales mostradas en esta página contienen sólo un 0.2% de las comisiones base de las transacciones en ViteX, por favor tenga en cuenta que las comisiones del operador se deberán considerar al calcular el coste de la minería"
+    },
+    "tradeVip": {
+        "title": "Estado VIP",
+        "open": "Hazte VIP",
+        "cancel": "Cancelar {type}",
+        "help": {
+            "title": "Acerca de ViteX VIP"
+        },
+        "helpConfirm": {
+            "t1": "VIP",
+            "txt1": "Bloquee 10.000 VITE para adquirir el status VIP y recibir un 50% de descuento en las comisiones de trading. El bloqueo puede cancelarse después de 30 días.",
+            "t2": "SVIP",
+            "txt2": "Bloquee 1M VITE para tener un status SVIP y disfrutar de 0 comisiones de trading. El bloqueo se puede cancelar después de 30 días.",
+            "txt3": "SVIP, es admitido para cualquier dirección de cuenta válida. ¡Bloquee VITE para ganar el estatus SVIP!"
+        },
+        "vipConfirm": {
+            "cancelVip": "Cancelar status VIP",
+            "openVip": "Hazte VIP",
+            "openStakingAmount": "Bloquear monto para ser VIP",
+            "cancelStakingAmount": "Saldo bloqueado disponible",
+            "noBalance": "Saldo insuficiente",
+            "openHint": "Usted recibirá un descuento del 0,1% en las comisiones de trading al ser VIP. El bloqueo de 10.000 VITE se podrá retirar después de 30 días.",
+            "cancelHint": "El status VIP será cancelado inmediatamente.",
+            "openSuccess": "¡Tu estatus VIP está activado! Tendrá efecto en unos segundos.",
+            "openFail": "Registro VIP fallido",
+            "cancelSuccess": "Cancelación VIP exitosa",
+            "cancelFail": "Cancelación fallida",
+            "adviseToCancel": "No habrá comisiones de transacción base con su estado actual como SVIP, por lo tanto le recomendamos que retire el VITE bloqueado que es necesario para miembros VIP en general.",
+            "address": "Activar estatus VIP",
+            "addressPlaceholder": "La dirección actual es la dirección predeterminada, la dirección no puede ser modificada más tarde"
+        },
+        "svipConfirm": {
+            "open": "Mejorar",
+            "cancel": "Cancelar",
+            "cancelVip": "Cancelar SVIP",
+            "openVip": "Hazte SVIP",
+            "openStakingAmount": "Bloquear monto para ser SVIP",
+            "cancelStakingAmount": "Saldo bloqueado disponible",
+            "noBalance": "Saldo insuficiente",
+            "openHint": "Usted disfrutará de un 0% en comisión base de transacción cuando se actualice a SVIP. Leo bloqueo de 1.000.000 VITE puede ser retirado después de 30 días.",
+            "cancelHint": "Los privilegios de tener status SVIP se interrumpirán una vez que se cancele el bloqueo",
+            "openSuccess": "¡Aplicado con éxito! El estatus de SVIP comenzará a tener efecto más tarde.",
+            "openFail": "No se pudo aplicar SVIP",
+            "cancelSuccess": "Cancelación SVIP exitosa",
+            "cancelFail": "Cancelación fallida",
+            "address": "Activar el estado de SVIP",
+            "addressPlaceholder": "Dirección a activar con el status de SVIP",
+            "cancelAddress": "Dirección SVIP"
+        },
+        "vipListTitle": "Registros VIP",
+        "openAddress": "Dirección habilitada",
+        "type": "Tipo VIP"
+    },
+    "inviteMining": {
+        "title": "Ingresos totales por referidos como minado",
+        "myInviteIncome": "Ingresos por referidos",
+        "inviteTradeIncome": "Ingresos por trades de referidos",
+        "inviteOrderIncome": "Ingresos por Market-Making de referidos"
+    },
+    "orderMining": {
+        "title": "Ingresos totales por creadores de mercados como minado",
+        "tbHead": {
+            "date": "Fecha",
+            "ratio": "Ratio",
+            "mining": "Cantidad"
+        },
+        "market": "Mercado de {name}",
+        "estimate": "Cantidad Minable de hoy {name}"
+    },
+    "tradeDividend": {
+        "title": "Dividendos",
+        "poolTitle": "Pool de dividendos de las comisiones de trading",
+        "listTitle": "Mis Dividendos",
+        "allPrice": "Valor total estimado",
+        "date": "Fecha",
+        "VX": "Stake VX",
+        "coin": "Tipo",
+        "amount": "Cantidad",
+        "price": "Valor total estimado",
+        "hintTitle": "Aviso importante",
+        "comingHint": "Pronto llegarán las funciones de VX como minería y dividendo, manténgase atento. El sistema distribuirá el 1% de BTC, ETH, VITE, USDT del pool total para todos los usuarios de VX, proporcionales a la cantidad de VX que poseen. El pool de dividendos comenzará en 0 y crecerá en función de la cantidad de comisiones cobradas por ViteX. Los traders deben tener un mínimo de 10 VX para recibir dividendos del pool compartido, compuesto por las comisiones base de trading. El listado de tokens y la creación de código de referencia generan comisiones adicionales al pool. ",
+        "more": "Aprende más sobre las reglas de dividendos con VX",
+        "help": "Reglas de recompensa: 1. Se debe bloquear un mínimo de 10 VX para recibir dividendos. 2. El envío de la solicitud de staking permite empezar a recibir dividendos a partir de la próxima distribución. 3. La cantidad stakeada se liberará después del período de espera de 7 días",
+        "lockedAmount": "Cantidad en staking",
+        "lockAmountTips": "Recibir Dividends con 10 VX o más",
+        "unlockAmount": "Desbloqueando cantidad",
+        "addHint1": "Se debe stakear un mínimo de 10 VX para recibir dividendos",
+        "addHint2": "El envío de la solicitud de staking permite empezar a recibir dividendos a partir de la próxima distribución",
+        "addHint3": "La cantidad bloqueada se liberará después de esperar un periodo de 7 días",
+        "autoLock": "Staking automático",
+        "openAutoLock": {
+            "title": "Habilitar el staking automático",
+            "text": "Una vez habilitado, el VX minado automáticamente será puesto en stake"
+        },
+        "closeAutoLock": {
+            "title": "Desactivar el staking automático",
+            "text": "El VX minado no será puesto en stake automáticamente cuando la casilla está desactivada"
+        },
+        "lock": "Stake",
+        "unlock": "Unstake",
+        "lessMin": "Mínimo 1 VX",
+        "lockVXConfirm": {
+            "title": "Stake VX",
+            "available": "Saldo disponible en Exchange",
+            "amountPlaceholder": "Ingresa la cantidad a poner en stake, mínimo 1 VX",
+            "notEnough": "Saldo insuficiente en Exchange",
+            "submit": "Confirmar Stake",
+            "amountText": "Cantidad"
+        },
+        "unlockVXConfirm": {
+            "title": "Unstake VX",
+            "available": "Saldo disponible en stake",
+            "amountPlaceholder": "Por favor ingrese un monto, mínimo 1 VX",
+            "notEnough": "Cantidad insuficiente",
+            "submit": "Confirmar Unstake",
+            "amountText": "Cantidad",
+            "hint": "Tarda unos 7 días en desbloquear."
+        },
+        "unlockList": {
+            "title": "Recuperando",
+            "amount": "Cantidad",
+            "time": "Fecha de disponibilidad"
+        }
+    },
+    "tradeOperator": {
+        "title": "Operador",
+        "tokenList": "Tokens",
+        "totalIncome": "Ingresos totales",
+        "permission": "Transferir propiedad del token",
+        "txPairManage": "Gestionar pares de comercio",
+        "noOperator": "Aún no tienes tokens ni pares de comercio, ¿quieres convertirte en operador?",
+        "learnMore": "Aprende más",
+        "permissionConfirm": {
+            "title": "Transferir propiedad",
+            "submit": "Confirmar",
+            "tokenName": "Nombre del Token",
+            "address": "Dirección del destinatario",
+            "notice": "NOTA: Cuando la propiedad es transferida a otra persona, los pares de comercio que no estén abiertos pertenecerán al nuevo propietario. Los pares de comercio en estado abierto/suspendidos aún te pertenecen"
+        }
+    },
+    "tradeTxPairManage": {
+        "title": "Gestión de pares de comercio de {tokenSymbol}",
+        "symbol": "Nombre",
+        "income": "Ingresos",
+        "fee": "Tasa de comisión",
+        "status": "Estado",
+        "operate": "Acción",
+        "stopTrans": "Suspender",
+        "resetTrans": "Recuperar",
+        "changeOwner": "Transferir propiedad",
+        "changeFee": "Ajustar rango de comisión",
+        "incomeList": "Detalles de ingresos",
+        "historyIncome": "Historial de Ingresos",
+        "openTxPair": "Abrir par de comercio",
+        "statusList": [
+            "Propiedad transferida",
+            "Trading",
+            "Suspensión",
+            "Comercio No Disponible"
+        ],
+        "openTxPairConfirm": {
+            "title": "Habilitar {symbol} para trade",
+            "fee": "Comisión de listado",
+            "hint": "Si desea añadir un símbolo único del operador después de abrir un par de comercio, póngase en contacto con nosotros mediante nuestro grupo de Telegram: https://t.me/vite_en",
+            "btn": "Enviar",
+            "reqSuccess": "¡Enviado con éxito! Revísalo en el tablero de mercado más tarde.",
+            "reqError": "Falló al listar, inténtelo de nuevo"
+        },
+        "stopTransHint": "¿Estas seguro de suspender el {symbol}?",
+        "resetTransHint": "¿Estas seguro de recuperar el {symbol}?",
+        "stopSuccess": "Suspensión exitosa",
+        "stopFail": "Suspensión fallida",
+        "openSuccess": "Recuperación exitosa",
+        "openFail": "Recuperación fallida",
+        "changeOwnerSuccess": "Transferencia exitosa",
+        "changeOwnerFaill": "Transferencia fallida",
+        "submitChange": "Confirmar transferencia",
+        "changeOwnerHint": "NOTA: No estarás habilitado para cobrar ni ajustar las comisiones después de la transferencia de propiedad como también no podrás deshacer esta acción de transferencia",
+        "currentMaker": "Maker",
+        "confirmFee": "Comisión",
+        "currentTaker": "Taker",
+        "txPairName": "Nombre",
+        "changeFeeHint": "Comisión de {symbol} de {fee}",
+        "changeFeeSubmit": "Asegúrese de cambiar {changeFeeHint}",
+        "historyAllIncome": "Ingresos totales",
+        "incomeListHead": {
+            "date": "Fecha",
+            "txNum": "Volumen",
+            "feeRate": "Ratio",
+            "feeIncome": "Ingresos"
+        }
+    },
+    "mobileAssets": {
+        "allAssets": "Valor estimado de activos ({token})",
+        "tokenInfoTitle": "Detalles del token",
+        "transfer": "Transferir",
+        "trade": "Comerciar",
+        "chooseTxPair": "Elegir par de comercio"
+    },
+    "mobileTradeCenter": {
+        "highPrice": "Máximo",
+        "lowPrice": "Mínimo",
+        "quantity": "Vol. 24h",
+        "buyTitle": "Comprar",
+        "sellTitle": "Vender",
+        "price": "Precio ({token})",
+        "buy": {
+            "price": "Precio",
+            "quantity": "Cantidad"
+        },
+        "sell": {
+            "price": "Precio",
+            "quantity": "Cantidad"
+        },
+        "orderQuantity": "Cantidad",
+        "orderPrice": "Precio",
+        "executedQuantity": "Completado",
+        "avgPrice": "Promedio"
+    },
+    "mobileDividend": {
+        "title": "Dividendos",
+        "poolTitle": "Pool de Dividendos ({token})",
+        "myDividendTitle": "Valor total estimado de Dividendos ({token})",
+        "listTitle": "Detalles de Dividendos",
+        "lockingTitle": "Mis bloqueos",
+        "viewLink": "Estado de desbloqueos"
+    },
+    "mobileMining": {
+        "title": "Minado",
+        "miningTrade": "Trading",
+        "miningStaking": "Staking",
+        "miningInvite": "Referidos",
+        "miningOrder": "Market-Making",
+        "tradeTotalIncome": "Ingresos totales ({token})",
+        "stakingTotalIncome": "Ingresos totales ({token})",
+        "inviteTotalIncome": "Ingresos totales ({token})",
+        "orderTotalIncome": "Ingresos totales ({token})",
+        "fee": "Comisiones",
+        "listTitle": "Historial de minería",
+        "viewLink": "Dashboard en vivo de minería",
+        "inviteTradeIncome": "Detalles trades de referidos",
+        "inviteOrderIncome": "Detalles Market-Making de referidos",
+        "myStaking": "Mis bloqueos"
+    },
+    "mobileBottomBar": {
+        "center": "Comerciar",
+        "assets": "Activos",
+        "mining": "Minería",
+        "order": "Orden"
+    },
+    "mobileOrder": {
+        "filterDate": "Fecha",
+        "filterToken": "Tipo",
+        "all": "Todo",
+        "3month": "3 meses",
+        "1month": "1 mes",
+        "1week": "1 semana",
+        "1day": "1 día",
+        "clear": "Borrar",
+        "submit": "Buscar"
+    },
+    "desktop": {
+        "unlock": "desbloquear",
+        "unreceivedTx": {
+            "title": "Has recibido {num} transacciones.",
+            "body": "Cantidad：{amount} {symbol} \nDesde dirección: {address}"
+        }
+    }
+}
