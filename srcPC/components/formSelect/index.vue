@@ -1,8 +1,10 @@
 <template>
-    <vSelect :options="options" >
+    <vSelect :options="options" :value="value" @onChange="onChange">
     <template v-slot:option="option">
-    <span :class="option.icon"></span>
-    {{ option.title }}
+    <div class="select-option">
+    <img :src="option.icon"><img/>
+    <span>{{ option.title }}</span>
+    </div>
   </template>
     </vSelect>
 </template>
@@ -18,3 +20,9 @@ export default {
     components:{vSelect}
 }
 </script>
+
+<style lang="scss" scoped>
+.select-option{
+    display: flex;
+}
+</style>
