@@ -164,7 +164,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "~pcPages/styles/form.scss";
+@import "~pc/styles/form.scss";
 
 .add-quota-wrapper {
     position: relative;

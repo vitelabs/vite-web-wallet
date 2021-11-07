@@ -312,7 +312,7 @@ export default {
 
 <style lang="scss" scoped>
 @import "~assets/scss/vars.scss";
-@import "~pcPages/styles/form.scss";
+@import "~pc/styles/form.scss";
 
 .mintage {
     width: 100%;
