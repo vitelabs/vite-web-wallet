@@ -3,7 +3,13 @@
         <div class="bridge-wrapper">
             <div class="bridge-content">
                 <div class="bri__title">Choose Asset</div>
-
+                <viteSelect
+                    :onSelected="onSelectd"
+                    :options="tokenList"
+                    :searchable="false"
+                    :clearable="false"
+                    :class="'sfd'"
+                ></viteSelect>
                 <div class="bri__network">
                     <div class="bri__network__card">
                         <div class="network__title">
@@ -101,17 +107,33 @@
 <script>
 import pageLayout from 'pcComponents/pageLayout/index';
 import searchTips from 'src/uiKit/searchTips';
+import viteSelect from 'src/uiKit/viteSelect';
+
 import ViteInput from 'components/viteInput.vue';
-import vSelect from 'vue-select';
 import { confirmBriTxDialog } from 'pcComponents/dialog';
 
 import 'vue-select/dist/vue-select.css';
+import { defaultTokenMap } from 'utils/constant';
 
 export default {
-    components: { pageLayout, ViteInput, searchTips, vSelect },
+    components: { pageLayout, ViteInput, searchTips, viteSelect },
+    data() {
+        return {
+            tokenList: Object.values(defaultTokenMap).map(t => {
+                return {
+                    value: t.tokenId,
+                    label: t.tokenSymbol,
+                    icon: t.icon
+                };
+            })
+        };
+    },
     methods: {
         async onNextClick() {
             await confirmBriTxDialog();
+        },
+        onSelected(v) {
+            console.log(99999, v);
         }
     }
 };
@@ -129,6 +151,7 @@ export default {
     display: flex;
     justify-content: center;
     align-items: center;
+    font-size: 14px;
     .bridge-content {
         width: 644px;
         height: 680px;
@@ -139,10 +162,14 @@ export default {
         border-radius: 2px;
         box-shadow: 0px 2px 10px 1px rgba(176, 192, 237, 0.42);
         padding: 40px;
+        .bri__title {
+            margin-bottom: 20px;
+            font-size: 18px;
+        }
         .bri__network {
             display: flex;
             align-items: center;
-            margin-bottom: 34px;
+            margin: 35px 0;
             .bri__trans-icon {
                 width: 64px;
             }
@@ -174,7 +201,13 @@ export default {
         .__row-tips {
             @include bg_color_tips();
             padding: 10px 20px;
-            line-height: 32px;
+            line-height: 24px;
+            > div {
+                &:first-child {
+                    line-height: 32px;
+                }
+            }
+
             .red-dot {
                 border-radius: 100%;
                 height: 6px;
@@ -188,6 +221,7 @@ export default {
             display: flex;
             position: absolute;
             bottom: 50px;
+            font-size: 12px;
             .progress-point {
                 width: 120px;
                 height: 56px;
