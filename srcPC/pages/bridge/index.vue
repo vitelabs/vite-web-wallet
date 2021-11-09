@@ -11,29 +11,19 @@
                     :class="'sfd'"
                 ></viteSelect>
                 <div class="bri__network">
-                    <div class="bri__network__card">
-                        <div class="network__title">
-                            <div class="content">From</div>
-                            <div class="status">Connected</div>
-                        </div>
-                        <div class="network__content">
-                            <div>Network</div>
-                            <div>downArrow</div>
-                        </div>
-                        <div class="network__icon">tokenIcon</div>
+                    <networkCard
+                        :type="'from'"
+                        :status="'connected'"
+                        :network="'VITE'"
+                    />
+                    <div class="bri__trans-icon">
+                        ···<rightDouble style="height:20;width:20" />
                     </div>
-                    <div class="bri__trans-icon">transIcon</div>
-                    <div class="bri__network__card">
-                        <div class="network__title">
-                            <div class="content">From</div>
-                            <div class="status">Connected</div>
-                        </div>
-                        <div class="network__content">
-                            <div>Network</div>
-                            <div>downArrow</div>
-                        </div>
-                        <div class="network__icon">tokenIcon</div>
-                    </div>
+                    <networkCard
+                        :type="'from'"
+                        :status="'connected'"
+                        :network="'ETH'"
+                    />
                 </div>
                 <div>
                     <div class="__row">
@@ -114,9 +104,17 @@ import { confirmBriTxDialog } from 'pcComponents/dialog';
 
 import 'vue-select/dist/vue-select.css';
 import { defaultTokenMap } from 'utils/constant';
-
+import networkCard from './networkCard.vue';
+import rightDouble from 'assets/imgs/rightDouble.svg.vue';
 export default {
-    components: { pageLayout, ViteInput, searchTips, viteSelect },
+    components: {
+        pageLayout,
+        ViteInput,
+        searchTips,
+        viteSelect,
+        networkCard,
+        rightDouble
+    },
     data() {
         return {
             tokenList: Object.values(defaultTokenMap).map(t => {
@@ -153,8 +151,9 @@ export default {
     align-items: center;
     font-size: 14px;
     .bridge-content {
-        width: 644px;
-        height: 680px;
+        width: 630px;
+        height: 665px;
+        box-sizing: border-box;
         position: relative;
         @include bg_color_2();
 
@@ -171,31 +170,12 @@ export default {
             align-items: center;
             margin: 35px 0;
             .bri__trans-icon {
-                width: 64px;
-            }
-            &__card {
+                width: 180px;
+                font-size: 36px;
+                color: #007aff;
                 display: flex;
-                flex-direction: column;
-                width: 244px;
-                height: 136px;
-                @include common_border();
-                border-radius: 2px;
-                padding: 20px 12px;
-                box-sizing: border-box;
-                @include box_shadow();
-                .network__title {
-                    display: flex;
-                    justify-content: space-between;
-                }
-                .network__content {
-                    display: flex;
-                    justify-content: space-between;
-                    margin-top: 20px;
-                }
-                .network__icon {
-                    margin-top: 20px;
-                    height: 35px;
-                }
+                justify-content: center;
+                align-items: center;
             }
         }
         .__row-tips {

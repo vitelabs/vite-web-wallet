@@ -5,22 +5,26 @@
         :clearable="clearable"
         :searchable="false"
         :class="['vite-select', className]"
+        :components="{ OpenIndicator }"
     >
         <template #selected-option="{ icon, label }">
-            <div style="display: flex; align-items: center">
+            <div style="display: flex; align-items: center;">
                 <img v-show="!!icon" :src="icon" style="margin-right:5px" />
                 <span>{{ label }}</span>
             </div>
         </template>
         <template v-slot:option="{ icon, label }">
-            <img v-show="!!icon" :src="icon" />
-            <span>{{ label }}</span>
+            <div style="display: flex; align-items: center;">
+                <img v-show="!!icon" :src="icon" style="margin-right:5px" />
+                <span>{{ label }}</span>
+            </div>
         </template>
     </vSelect>
 </template>
 
 <script>
 import vSelect from 'vue-select';
+import downCircle from 'assets/imgs/downCircle.svg.vue';
 export default {
     props: {
         onSelected: {},
@@ -32,14 +36,17 @@ export default {
         },
         className: { type: String }
     },
-    components: { vSelect },
+    mounted() {
+        console.log(11111, downCircle);
+    },
+    components: { vSelect, downCircle },
     data() {
         return {
             OpenIndicator: {
                 render: createElement =>
-                    createElement('span', {
-                        class: { toggle: true },
-                        domProps: { innerHTML: 'baz' }
+                    createElement(downCircle, {
+                        attrs: {},
+                        class: { 'vite-select-indicator': true }
                     })
             }
         };
@@ -59,6 +66,11 @@ export default {
         align-items: center;
         /deep/.vs__dropdown-toggle {
             width: 100%;
+        }
+        /deep/ .vite-select-indicator {
+            color: $blue-color-1;
+            height: 20px;
+            width: 20px;
         }
     }
 }
