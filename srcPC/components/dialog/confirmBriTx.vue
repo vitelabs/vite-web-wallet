@@ -1,7 +1,7 @@
 <template lang="pug">
 extends /components/dialog/base.pug
 block head
-    .head {{ "ZHEHSI HEADER"}}
+    .bri-trans__head {{ "100.00 VITE"}}
 block content
     div
         .bri-trans
@@ -14,7 +14,7 @@ block content
                 .card__title TO
                 .card__text {{'ETH'}}
                 .card__icon
-        .tab-content
+        .content-container
             .content__item
                 .label sdfsdfa:
                 div.click-able sdf
@@ -52,6 +52,13 @@ export default {
     @include common_border();
     display: flex;
     justify-content: space-between;
+    &__head {
+        @include bg_color_custom(#d4dee7, $black-color-4);
+        display: flex;
+        justify-content: center;
+        font-size: 40px;
+        padding: 30px 0;
+    }
     .br-trans__card {
         display: flex;
         flex-direction: column;
@@ -70,6 +77,18 @@ export default {
         .card__icon {
             margin-top: 20px;
             height: 35px;
+        }
+    }
+    .content-container{
+        .content-item{
+            height:40px;
+            display:flex;
+            align-items:center;
+            .label{
+            @include font_color_2();
+            margin-right:10px;
+            }
+
         }
     }
 }

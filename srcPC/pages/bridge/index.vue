@@ -152,7 +152,7 @@ export default {
     font-size: 14px;
     .bridge-content {
         width: 630px;
-        height: 665px;
+        height: 810px;
         box-sizing: border-box;
         position: relative;
         @include bg_color_2();
@@ -201,7 +201,9 @@ export default {
             display: flex;
             position: absolute;
             bottom: 50px;
+            left: 15px;
             font-size: 12px;
+
             .progress-point {
                 width: 120px;
                 height: 56px;
@@ -211,7 +213,7 @@ export default {
                 justify-content: space-between;
                 align-items: center;
                 &:not(:last-child) {
-                    margin-right: 62px;
+                    margin-right: 45px;
                 }
 
                 .progress-line {
@@ -219,16 +221,16 @@ export default {
                     background-color: rgba($blue-color-1, 0.4);
                     position: absolute;
                     left: 70px;
-                    top: 12px;
-                    width: 162px;
+                    top: 10px;
+                    width: 145px;
                 }
                 .progress-text {
                     white-space: nowrap;
                 }
                 &--pending {
                     .progress-icon {
-                        width: 24px;
-                        height: 24px;
+                        width: 20px;
+                        height: 20px;
                         box-sizing: border-box;
                         border-radius: 100%;
                         border: 6px solid $blue-color-1;
@@ -239,7 +241,6 @@ export default {
                     .progress-icon {
                         width: 20px;
                         height: 20px;
-                        margin-top: 4px;
                         box-sizing: border-box;
                         border-radius: 100%;
                         border: 3px solid rgba($blue-color-1, 0.4);
