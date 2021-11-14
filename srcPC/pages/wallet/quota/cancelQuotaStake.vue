@@ -82,10 +82,10 @@ export default {
                     pow: true,
                     powConfig: {
                         cancel: () => {
-                            this.handleFinish(false)
+                            this.loading = false;
                         }
                     },
-                    powLimit: false 
+                    powLimit: false
                 }
             }).then(() => {
                 this.handleFinish(true);
@@ -101,10 +101,10 @@ export default {
                     pow: true,
                     powConfig: {
                         cancel: () => {
-                            this.handleFinish(false)
+                            this.loading = false;
                         }
                     },
-                    powLimit: false 
+                    powLimit: false
                 }
             }).then(() => {
                 this.handleFinish(true);
