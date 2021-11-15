@@ -3,6 +3,7 @@
         "./src/**/*", "./srcPC/**/*", "./srcH5/**/*", "./typings/*"
     ],
     "compilerOptions": {
+        "resolveJsonModule": true,
         "baseUrl": "./",
         "module": "commonjs",
         "target": "es5",
@@ -49,7 +50,8 @@
             "pcI18n/*": ["./srcPC/i18n/*"],
             "wallet/*": ["./srcPC/wallet/*"],
             "wallet": ["./srcPC/wallet/index"],
-            "typings/*": ["./typings/*"]
+            "typings/*": ["./typings/*"],
+            "src/*": [ "./src/*" ],
         },
         "typeRoots": ["./typings/*", "@types"]
     }

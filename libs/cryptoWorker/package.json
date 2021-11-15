@@ -1,0 +1,32 @@
+{
+    "name": "testwebworker",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "build": "webpack"
+    },
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "@babel/core": "^7.1.6",
+        "@babel/plugin-transform-async-to-generator": "^7.1.0",
+        "@babel/plugin-transform-runtime": "^7.1.0",
+        "@babel/polyfill": "^7.0.0",
+        "@babel/preset-env": "^7.1.6",
+        "@babel/preset-es2015": "^7.0.0-beta.53",
+        "@babel/runtime": "^7.1.5",
+        "babel-eslint": "^10.0.1",
+        "babel-loader": "^8.0.4",
+        "html-webpack-plugin": "^3.2.0",
+        "raw-loader": "^0.5.1",
+        "scryptsy": "^2.0.0",
+        "webpack": "^4.28.2",
+        "webpack-dev-server": "^3.1.9",
+        "worker-loader": "^2.0.0"
+    },
+    "devDependencies": {
+        "webpack-cli": "^3.1.2"
+    }
+}
