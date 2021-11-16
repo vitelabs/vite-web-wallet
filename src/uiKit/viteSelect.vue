@@ -1,11 +1,12 @@
 <template>
     <vSelect
         :options="options"
-        @input="onSelected"
+        @input="onInput"
         :clearable="clearable"
         :searchable="false"
         :class="['vite-select', className]"
         :components="{ OpenIndicator }"
+        :value='value'
     >
         <template #selected-option="{ icon, label }">
             <div style="display: flex; align-items: center;">
@@ -27,7 +28,8 @@ import vSelect from 'vue-select';
 import downCircle from 'assets/imgs/downCircle.svg.vue';
 export default {
     props: {
-        onSelected: {},
+        value:{},
+
         options: {},
         selectable: { type: Boolean, default: false },
         clearable: {
@@ -40,6 +42,11 @@ export default {
         console.log(11111, downCircle);
     },
     components: { vSelect, downCircle },
+methods:{
+            onInput(val){
+                this.$emit('input',val)
+            }
+},
     data() {
         return {
             OpenIndicator: {

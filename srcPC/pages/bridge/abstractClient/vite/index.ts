@@ -18,7 +18,6 @@ const VITE_INFO_PATH_PREFIX = "./.channel_vite/info";
 const ConfirmedThreshold = 1;
 
 export class ChannelVite {
-
   viteProvider: typeof viteClient;
   viteChannelAddress: string;
 
@@ -173,7 +172,15 @@ export class ChannelVite {
     );
     return sendResult;
   }
-
+  async input(address: string, value: string) {
+    const sendResult = await writeContract(
+      this.viteChannelAddress,
+      this.viteChannelAbi,
+      "iutput",
+      [address, value]
+    );
+    return sendResult;
+  }
   async approveOutput(id: string) {
     const sendResult = await writeContract(
       this.viteChannelAddress,
@@ -337,3 +344,5 @@ export async function confirmed(provider: any, hash: string) {
       }
     });
 }
+
+window.vite=ChannelVite;

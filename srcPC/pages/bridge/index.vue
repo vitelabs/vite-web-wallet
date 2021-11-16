@@ -4,7 +4,7 @@
       <div class="bridge-content">
         <div class="bri__title">Choose Asset</div>
         <viteSelect
-          :onSelected="onSelectd"
+          v-model="curToken"
           :options="tokenList"
           :searchable="false"
           :clearable="false"
@@ -14,7 +14,9 @@
           <networkCard
             :type="'from'"
             :status="networkMeta[networkPair.from]['status']"
-            :network="networkPair.from"
+            :value="networkPair.from"
+            :icon="networkMeta[networkPair.from]['logo']"
+            @input="onToggleNet"
           />
           <div class="bri__trans-icon">
             ···<rightDouble style="height:20;width:20" />
@@ -22,7 +24,9 @@
           <networkCard
             :type="'from'"
             :status="networkMeta[networkPair.to]['status']"
-            :network="networkPair.to"
+            :value="networkPair.to"
+            :icon="networkMeta[networkPair.to]['logo']"
+            @input="onToggleNet"
           />
         </div>
         <div v-if="networkMeta['ETH'].status === 'CONNECTED'">
@@ -134,9 +138,13 @@ import { defaultTokenMap } from "utils/constant";
 import networkCard from "./networkCard.vue";
 import rightDouble from "assets/imgs/rightDouble.svg.vue";
 import {ethers,ContractFactory} from "ethers";
+import {ChannelERC20} from "./abstractClient/erc20"
+import { viteClient } from 'services/apiServer';
+import { StatusMap } from 'wallet/webAccount';
+import ViteLogo from 'src/assets/imgs/vite.png';
+import EthLogo from 'src/assets/imgs/ethCircle.png';
 
-window.ContractFactory=ContractFactory;
-let web3=new Web3();
+window.erc20=ChannelERC20;
 const tokens= [
     {
       "token": "VITE",
@@ -155,7 +163,16 @@ const tokens= [
       ]
     }
   ]
+  const netWorkMap={
+    'VITE':{
+      logo:ViteLogo
+    },
+    'ETH':{
+      logo:EthLogo
+    }
+  }
 export default {
+  name:"BRIDGE",
   components: {
     pageLayout,
     ViteInput,
@@ -166,16 +183,16 @@ export default {
   },
   mounted() {
     if (ethereum) {
+              this.networkMeta["ETH"].status = ethereum.isConnected?"CONNECTED":"UNCONNECT";
+
       ethereum.on("connect", (connectInfo) => {
         console.log(9999, "connected");
         this.networkMeta["ETH"].status = "CONNECTED";
       });
       ethereum.on("disconnect", (connectInfo) => {
-        this.networkMeta["ETH"].status = "DISCONNECTED";
+        this.networkMeta["ETH"].status = "UNCONNECT";
         console.log(8888, "disconnected");
       });
-      web3=new Web3(window.ethereum);
-      window.fff=web3;
     } else {
     }
     getTokens().then(t=>(this.tokens=t));
@@ -191,10 +208,12 @@ export default {
       },
       networkMeta: {
         ETH: {
-          status: "UNCONNECTED",
+          status: "UNCONNECT",
+          ...netWorkMap['ETH']
         },
         VITE: {
-          status: "CONNECTED",
+          status: this.$store.state.wallet.currHDAcc.status===StatusMap.LOCK?'UNCONNECT':'CONNECTED',
+           ...netWorkMap['VITE']
         },
       },
       tokenList: Object.values(defaultTokenMap).map((t) => {
@@ -225,11 +244,9 @@ export default {
   watch:{
     'networkPair.from':async function (val){
       const address=await this.requestConnect2MetaMask();
-      const balance=await web3?.getBalance(address?.[0]||'');
     }
   },
   methods: {
-
     async getTokens(){
       return tokens;
     },
@@ -239,8 +256,7 @@ export default {
     async getBalance(){
       const netInfo= this.curTokenInfo.channels[this.networkPair.from];
       if(this.networkPair.from==='ETH'){
-      const accounts= await web3.getAccount();
-      await web3.getBalance(accounts[0]) ;
+
       }
     },
     onToggleNet(){
@@ -251,7 +267,9 @@ export default {
     async requestConnect2MetaMask() {
       ethereum?.request({ method: "eth_requestAccounts" });
     },
-    async autoFillMax() {},
+    async autoFillMax() {
+
+    },
     onSelected(v) {
       console.log(99999, v);
     },
