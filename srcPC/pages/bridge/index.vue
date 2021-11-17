@@ -36,8 +36,12 @@
                 Amount
                 <span class="__row_hint">Balance:122</span>
               </div>
-              <vite-input>
-                <slot name="after" @click="autoFillMax">MAX</slot>
+              <vite-input v-model="amount">
+                <span slot="after" class="__all_wrapper __pointer">
+                  <span class="__all" @click="autoFillMax">{{
+                    $t("tradeAssets.all")
+                  }}</span>
+                </span>
               </vite-input>
             </div>
 
@@ -46,11 +50,7 @@
                 Destination Address
                 <span v-show="amountErr" class="__err">{{ amountErr }}</span>
               </div>
-              <vite-input>
-                <span slot="after" class="__all_wrapper __pointer">
-                  <span class="__all">{{ $t("tradeAssets.all") }}</span>
-                </span>
-              </vite-input>
+              <vite-input v-model="toAddress"> </vite-input>
             </div>
           </div>
           <div class="__row clearfix">
@@ -60,7 +60,11 @@
           </div>
         </div>
         <div v-else class="clearfix">
-          <div class="__form_btn" style="width:100%" @click="requestConnect2MetaMask">
+          <div
+            class="__form_btn"
+            style="width:100%"
+            @click="requestConnect2MetaMask"
+          >
             Connect MetaMask
           </div>
         </div>
@@ -125,7 +129,7 @@
   </page-layout>
 </template>
 
-<script >
+<script>
 import pageLayout from "pcComponents/pageLayout/index.vue";
 import searchTips from "src/uiKit/searchTips.vue";
 import viteSelect from "src/uiKit/viteSelect.vue";
@@ -137,42 +141,45 @@ import "vue-select/dist/vue-select.css";
 import { defaultTokenMap } from "utils/constant";
 import networkCard from "./networkCard.vue";
 import rightDouble from "assets/imgs/rightDouble.svg.vue";
-import {ethers,ContractFactory} from "ethers";
-import {ChannelERC20} from "./abstractClient/erc20"
-import { viteClient } from 'services/apiServer';
-import { StatusMap } from 'wallet/webAccount';
-import ViteLogo from 'src/assets/imgs/vite.png';
-import EthLogo from 'src/assets/imgs/ethCircle.png';
+import { ethers, Contract } from "ethers";
+import { ChannelERC20 } from "./abstractClient/erc20";
+import { viteClient } from "services/apiServer";
+import { StatusMap } from "wallet/webAccount";
+import ViteLogo from "src/assets/imgs/vite.png";
+import EthLogo from "src/assets/imgs/ethCircle.png";
+import _channelAbi from "./abstractClient/erc20/channel.json";
+import _erc20Abi from "./abstractClient/erc20/erc20.json";
+import { ChannelVite } from "./abstractClient/vite";
 
-window.erc20=ChannelERC20;
-const tokens= [
-    {
-      "token": "VITE",
-      "decimals": 6,
-      "channels": [
-        [
-          {
-            "network": "ETH",
-            "contract": "0x0000000000000000"
-          },
-          {
-            "network": "VITE",
-            "contract": "vite_xxxxxxxxxxxxxx"
-          }
-        ]
-      ]
-    }
-  ]
-  const netWorkMap={
-    'VITE':{
-      logo:ViteLogo
-    },
-    'ETH':{
-      logo:EthLogo
-    }
-  }
+let erc20Contract = null;
+const tokens = [
+  {
+    token: "VITE",
+    decimals: 6,
+    channels: [
+      [
+        {
+          network: "ETH",
+          contract: "0x0000000000000000",
+        },
+        {
+          network: "VITE",
+          contract: "vite_xxxxxxxxxxxxxx",
+        },
+      ],
+    ],
+  },
+];
+const netWorkMap = {
+  VITE: {
+    logo: ViteLogo,
+  },
+  ETH: {
+    logo: EthLogo,
+  },
+};
 export default {
-  name:"BRIDGE",
+  name: "BRIDGE",
   components: {
     pageLayout,
     ViteInput,
@@ -183,7 +190,9 @@ export default {
   },
   mounted() {
     if (ethereum) {
-              this.networkMeta["ETH"].status = ethereum.isConnected?"CONNECTED":"UNCONNECT";
+      this.networkMeta["ETH"].status = ethereum.isConnected
+        ? "CONNECTED"
+        : "UNCONNECT";
 
       ethereum.on("connect", (connectInfo) => {
         console.log(9999, "connected");
@@ -195,13 +204,14 @@ export default {
       });
     } else {
     }
-    getTokens().then(t=>(this.tokens=t));
-
+    getTokens().then((t) => (this.tokens = t));
   },
   data() {
     return {
-      tokens:[],
-      curToken:'VITE',
+      toAddress: "",
+      amount: "",
+      tokens: [],
+      curToken: "VITE",
       networkPair: {
         from: "VITE",
         to: "ETH",
@@ -209,11 +219,14 @@ export default {
       networkMeta: {
         ETH: {
           status: "UNCONNECT",
-          ...netWorkMap['ETH']
+          ...netWorkMap["ETH"],
         },
         VITE: {
-          status: this.$store.state.wallet.currHDAcc.status===StatusMap.LOCK?'UNCONNECT':'CONNECTED',
-           ...netWorkMap['VITE']
+          status:
+            this.$store.state.wallet.currHDAcc.status === StatusMap.LOCK
+              ? "UNCONNECT"
+              : "CONNECTED",
+          ...netWorkMap["VITE"],
         },
       },
       tokenList: Object.values(defaultTokenMap).map((t) => {
@@ -227,49 +240,97 @@ export default {
       progressSetp: 1,
     };
   },
-  computed:{
-    curTokenInfo(){
-      return this.tokens.find(t=>t.token===this.curToken)
+  computed: {
+    curTokenInfo() {
+      return this.tokens.find((t) => t.token === this.curToken);
     },
-    allTokenMap(){
+    allTokenMap() {
       return this.$store.getters.allTokenMap;
     },
-    tokenInfo(){
-      this.tokens.map(t=>{
+    tokenInfo() {
+      this.tokens.map((t) => {
         // GET TOKEN
         return t;
-      })
-    }
+      });
+    },
   },
-  watch:{
-    'networkPair.from':async function (val){
-      const address=await this.requestConnect2MetaMask();
-    }
+  watch: {
+    "networkPair.from": async function(val) {
+      const balance = await this.getBalance(val);
+      console.log("net change", "balance", balance);
+    },
+    curToken: async function(val) {
+      const tokenAddress = getChannelInfo()?.tokenAddress;
+      if (!tokenAddress) {
+        erc20Contract = null;
+        return;
+      }
+      erc20Contract = new Contract(
+        tokenAddress,
+        _erc20Abi,
+        new ethers.providers.Web3Provider(window.ethereum)
+      );
+      const balance = await this.getBalance(this.networkPair.from);
+      console.log("token change", "balance", balance);
+    },
   },
   methods: {
-    async getTokens(){
+    async getTokens() {
       return tokens;
     },
     async onNextClick() {
-      await confirmBriTxDialog();
-    },
-    async getBalance(){
-      const netInfo= this.curTokenInfo.channels[this.networkPair.from];
-      if(this.networkPair.from==='ETH'){
+      if (erc20Contract) return;
+      const channelAddress = this.getChannelInfo(this.networkPair.from)
+        ?.tokenAddress;
+      if (channelAddress) {
+        return;
+      }
+      await confirmBriTxDialog({});
 
+      if (this.networkPair.from === "ETH") {
+        await erc20Contract.approve(channelAddress, amount);
+        await new Contract(
+          channelAddress,
+          _channelAbi,
+          new ethers.providers.Web3Provider(window.ethereum)
+        ).input(toAddress, amount);
+      } else if (this.networkPair.from === "VITE") {
+        await execWithValid(
+          new ChannelVite({ address: channelAddress }).input(toAddress, amount)
+        );
       }
     },
-    onToggleNet(){
-     const {from,to}= this.networkPair;
-     this.networkPair.from=to;
-     this.networkPair.to=from;
+    async getAddress(net) {
+      if (net === "VITE") return this.$store.state.currHDAcc?.activeAddr;
+      if (net === "ETH") return window.ethereum?.selectedAddress;
+    },
+    getChannelInfo(net) {
+      return this.curTokenInfo.channels.find(
+        (channel) => channel.network === net
+      );
+    },
+    async getBalance(net) {
+      const address = await this.getAddress(net);
+      const tokenId = getChannelInfo()?.tokenAddress;
+      if (!address || !tokenId) return null;
+
+      if (net === "VITE") {
+        const balance = await viteClient.getBalanceInfo;
+        return balance?.balanceInfoMap?.[tokenId]?.balance;
+      }
+      if (net === "ETH") {
+        return await erc20Contract.balanceOf(address);
+      }
+    },
+    onToggleNet() {
+      const { from, to } = this.networkPair;
+      this.networkPair.from = to;
+      this.networkPair.to = from;
     },
     async requestConnect2MetaMask() {
       ethereum?.request({ method: "eth_requestAccounts" });
     },
-    async autoFillMax() {
-
-    },
+    async autoFillMax() {},
     onSelected(v) {
       console.log(99999, v);
     },

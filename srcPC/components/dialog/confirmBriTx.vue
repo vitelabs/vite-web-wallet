@@ -1,38 +1,46 @@
 <template lang="pug">
 extends /components/dialog/base.pug
 block head
-    .bri-trans__head {{ "100.00 VITE"}}
+    .bri-trans__head {{ amount+" VITE"}}
 block content
     div
         .bri-trans
             .bri-trans__card
                 .card__title from
-                .card__text {{'vite'}}
-                .card__icon
+                .card__text {{networkPair.from.name}}
+                img.card__icon(:src="networkPair.to.icon")
             .bri-trans__icon
             .bri-trans__card
                 .card__title TO
-                .card__text {{'ETH'}}
-                .card__icon
+                .card__text {{networkPair.to.name}}
+                img.card__icon(:src="networkPair.to.icon")
         .content-container
             .content__item
-                .label sdfsdfa:
-                div.click-able sdf
+                .label Assets:
+                div
+                    img.icon(:src="tokenIcon")
+                    .text {{tokenSymbol}}        
             .content__item
-                .label sdfasdf:
-                div.click-able sdfa
-            </template>
+                .label Destination:
+                div {{toAddress}}
+            .content__item
+                .label NetWorkFee:
+                div {{fee}}
+            .content__item
+                .label You Will Receive:
+                div {{estimateAmount}}
+</template>
 <script>
 export default {
+    props:[
+        'networkPair','tokenSymbol','tokenIcon','toAddress','fee','amount','estimateAmount'
+    ],
     data() {
         return { dTitle: 'Confirm', dSTxt: 'Confirm' };
     },
     beforeMount() {},
     computed: {},
     methods: {
-        inspector() {
-            return Promise.resolve();
-        }
     }
 };
 </script>

@@ -26,10 +26,10 @@ export class ChannelERC20 {
   etherChannelAddress: string;
   tokenAddress:string;
   etherChannelAbi: any[];
-  erc20Abi:any[];
+  // erc20Abi:any[];
   etherProvider: ethers.providers.Web3Provider;
   etherChannelContract: ethers.Contract;
-  erc20Contract: ethers.Contract;
+  // erc20Contract: ethers.Contract;
 
 
 
@@ -38,7 +38,7 @@ export class ChannelERC20 {
     tokenAddress:string;
   }) {
     this.etherChannelAbi = _channelAbi;
-    this.erc20Abi=_erc20Abi;
+    // this.erc20Abi=_erc20Abi;
     this.etherChannelAddress = cfg.channelAddress;
     this.tokenAddress = cfg.tokenAddress;
 
@@ -49,22 +49,22 @@ export class ChannelERC20 {
       this.etherProvider
     );
 
-    this.erc20Contract=new ethers.Contract(
-      this.tokenAddress,
-      this.erc20Abi,
-      this.etherProvider
-    );
+    // this.erc20Contract=new ethers.Contract(
+    //   this.tokenAddress,
+    //   this.erc20Abi,
+    //   this.etherProvider
+    // );
 
 
   }
 
-  async approve( amount) {
-    return await this.erc20Contract.approve(this.etherChannelContract.address, amount);
-  }
+  // async approve( amount) {
+  //   return await this.erc20Contract.approve(this.etherChannelContract.address, amount);
+  // }
 
-  async balanceOf(address) {
-    return await this.erc20Contract.balanceOf(address);
-  }
+  // async balanceOf(address) {
+  //   return await this.erc20Contract.balanceOf(address);
+  // }
 
   // getInfo(prefix: string): any {
   //   let json = utils.readJson(this.infoPath + prefix);

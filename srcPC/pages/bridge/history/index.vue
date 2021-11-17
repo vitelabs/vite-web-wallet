@@ -1,11 +1,22 @@
 <template>
-  <wallet-table :headList=""></wallet-table>
+  <wallet-table :headList="headList" :contentList="contentList"></wallet-table>
 </template>
 
 <script>
 import walletTable from "pcComponents/table/index.vue";
+import { getTxs } from "pcServices/conversion";
 export default {
+  props: ["from", "to", "fromAddress", "toAddress", "desc", "tokenSymbol"],
   components: { walletTable },
+  mounted() {
+    const { from, to, fromAddress, toAddress, desc } = this.$props;
+    getTxs({ from, to, fromAddress, toAddress, desc }).then((data) => {
+      (data || []).forEach((item) => {
+        item[this.tokenSymbol] = this.$props.tokenSymbol;
+      });
+      this.contentList = data;
+    });
+  },
   data() {
     return {
       headList: [
@@ -45,6 +56,7 @@ export default {
           class: "keystore-table-item",
         },
       ],
+      contentList: [],
     };
   },
 };

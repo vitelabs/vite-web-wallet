@@ -24,7 +24,7 @@ export class ChannelVite {
   viteChannelAbi: any[];
   viteOffChainCode: any;
 
-  constructor(cfg: any) {
+  constructor(cfg: {address}) {
     this.viteChannelAbi = _viteAbi;
     this.viteOffChainCode = Buffer.from(offChainCode, "hex").toString("base64");
     this.viteProvider = viteClient;
