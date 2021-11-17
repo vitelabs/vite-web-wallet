@@ -177,7 +177,7 @@ export default {
             if (this.multiNetwork && this.multiNetwork.length) {
                 return this.multiNetwork[this.selectedNetwork];
             }
-            return this.token.gateInfo && this.token.gateInfo.mappedToken || {};
+            return this.token.gateInfo.mappedToken || this.token.gateInfo || {};
         },
         gateIntroduction() {
             if (!this.gateInfo.overview) {
