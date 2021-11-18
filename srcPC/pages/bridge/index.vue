@@ -34,7 +34,7 @@
             <div class="__row">
               <div class="__row_t">
                 Amount
-                <span class="__row_hint">Balance:122</span>
+                <span class="__row_hint">Balance:{{ balanceMan }}</span>
               </div>
               <vite-input v-model="amount">
                 <span slot="after" class="__all_wrapper __pointer">
@@ -48,7 +48,7 @@
             <div class="__row">
               <div class="__row_t">
                 Destination Address
-                <span v-show="amountErr" class="__err">{{ amountErr }}</span>
+                <!-- <span v-show="amountErr" class="__err">{{ amountErr }}</span> -->
               </div>
               <vite-input v-model="toAddress"> </vite-input>
             </div>
@@ -150,26 +150,35 @@ import EthLogo from "src/assets/imgs/ethCircle.png";
 import _channelAbi from "./abstractClient/erc20/channel.json";
 import _erc20Abi from "./abstractClient/erc20/erc20.json";
 import { ChannelVite } from "./abstractClient/vite";
+import bnUtils from "src/utils/bigNumber";
+import BigNumber from "bignumber.js";
+import { execWithValid } from "pcUtils/execWithValid";
 
 let erc20Contract = null;
-const tokens = [
-  {
-    token: "VITE",
-    decimals: 6,
-    channels: [
-      [
+const mockTokens = {
+  tokens: [
+    {
+      token: "USDT",
+      channels: [
         {
           network: "ETH",
-          contract: "0x0000000000000000",
+          contract: "0x2fe56db3f21815ab26828debc175ab08d91cf81d",
+          erc20: "0x337610d27c682e347c9cd60bd4b3b107c9d34ddd",
+          decimals: 18,
+          confirmedThreshold: 10,
         },
         {
           network: "VITE",
-          contract: "vite_xxxxxxxxxxxxxx",
+          contract: "vite_75043ce60463a3c14b188a1505fd359acaef278c16dece5a0b",
+          confirmedThreshold: 100,
+          decimals: 18,
+          tokenId: "tti_ece34ebace895e3506a24064",
         },
+        ,
       ],
-    ],
-  },
-];
+    },
+  ],
+};
 const netWorkMap = {
   VITE: {
     logo: ViteLogo,
@@ -204,14 +213,14 @@ export default {
       });
     } else {
     }
-    getTokens().then((t) => (this.tokens = t));
+    this.getTokens().then((t) => (this.tokens = t.tokens));
   },
   data() {
     return {
       toAddress: "",
       amount: "",
       tokens: [],
-      curToken: "VITE",
+      curToken: "",
       networkPair: {
         from: "VITE",
         to: "ETH",
@@ -229,38 +238,59 @@ export default {
           ...netWorkMap["VITE"],
         },
       },
-      tokenList: Object.values(defaultTokenMap).map((t) => {
-        return {
-          value: t.tokenId,
-          label: t.tokenSymbol,
-          icon: t.icon,
-        };
-      }),
+
       amountInput: "",
       progressSetp: 1,
+      balance: new BigNumber(0),
     };
   },
   computed: {
     curTokenInfo() {
-      return this.tokens.find((t) => t.token === this.curToken);
+      return this.tokenInfos.find((t) => t.tokenId === this.curToken?.value);
     },
-    allTokenMap() {
-      return this.$store.getters.allTokenMap;
-    },
-    tokenInfo() {
-      this.tokens.map((t) => {
-        // GET TOKEN
-        return t;
+    tokenInfos() {
+      const tokenMap = this.$store.getters.allTokensMap || {};
+      return (this.tokens || []).map((t) => {
+        const tokenId = t.channels.find((c) => c.network === "VITE")?.tokenId;
+        const token = tokenMap[tokenId];
+        return { ...t, icon: token?.icon, tokenId };
       });
+    },
+    tokenList() {
+      return this.tokenInfos.map((t) => {
+        return {
+          value: t.tokenId,
+          label: t.token,
+          icon: t.icon,
+        };
+      });
+    },
+    balanceMan() {
+      const channel = this.getChannelInfo(this.networkPair.from);
+      if (!channel) return 0;
+      return bnUtils.toBasic(this.balance, channel.decimals);
     },
   },
   watch: {
     "networkPair.from": async function(val) {
-      const balance = await this.getBalance(val);
-      console.log("net change", "balance", balance);
+      this.reGenErc20();
+      this.resetBalance();
     },
     curToken: async function(val) {
-      const tokenAddress = getChannelInfo()?.tokenAddress;
+      this.reGenErc20();
+      this.resetBalance();
+    },
+  },
+  methods: {
+    async resetBalance() {
+      this.balance = new BigNumber(0);
+      const balance = await this.getBalance(this.networkPair.from);
+      console.log("rrrrrfetch", balance);
+      this.balance = balance;
+    },
+    async reGenErc20() {
+      if (this.networkPair.from !== "ETH") return;
+      const tokenAddress = this.getChannelInfo("ETH")?.erc20;
       if (!tokenAddress) {
         erc20Contract = null;
         return;
@@ -273,53 +303,75 @@ export default {
       const balance = await this.getBalance(this.networkPair.from);
       console.log("token change", "balance", balance);
     },
-  },
-  methods: {
     async getTokens() {
-      return tokens;
+      return mockTokens;
+      return fetch(
+        "https://raw.githubusercontent.com/vitelabs/vite-asset-bridge/master/meta.json"
+      ).then((data) => data.json());
     },
     async onNextClick() {
-      if (erc20Contract) return;
-      const channelAddress = this.getChannelInfo(this.networkPair.from)
-        ?.tokenAddress;
-      if (channelAddress) {
+      const curNet = this.networkPair.from;
+      if (!erc20Contract && curNet === "ETH") return;
+      const toAddress = this.toAddress;
+      const curChannel = this.getChannelInfo(curNet);
+      const channelAddress = curChannel?.contract;
+      const decimals = curChannel.decimals;
+      const ammountMin = bnUtils.toMin(this.amount, decimals);
+      if (!channelAddress) {
         return;
       }
-      await confirmBriTxDialog({});
-
-      if (this.networkPair.from === "ETH") {
-        await erc20Contract.approve(channelAddress, amount);
-        await new Contract(
+      // await confirmBriTxDialog({});
+      console.log(333333, channelAddress, toAddress, ammountMin);
+      if (curNet === "ETH") {
+        await erc20Contract.approve(channelAddress, ammountMin);
+        const erc20hChannel= new Contract(
           channelAddress,
           _channelAbi,
           new ethers.providers.Web3Provider(window.ethereum)
-        ).input(toAddress, amount);
-      } else if (this.networkPair.from === "VITE") {
+        );
+        await erc20hChannel.connect((new ethers.providers.Web3Provider(window.ethereum)).getSigner())
+        await erc20hChannel.input(toAddress, ammountMin);
+      } else if (curNet === "VITE") {
         await execWithValid(
-          new ChannelVite({ address: channelAddress }).input(toAddress, amount)
+          new ChannelVite({ address: channelAddress }).input(
+            toAddress,
+            ammountMin
+          )
         );
       }
     },
     async getAddress(net) {
-      if (net === "VITE") return this.$store.state.currHDAcc?.activeAddr;
+      console.log(9999999, this.$store.state.wallet.currHDAcc?.activeAddr);
+      if (net === "VITE") return this.$store.state.wallet.currHDAcc?.activeAddr;
       if (net === "ETH") return window.ethereum?.selectedAddress;
     },
     getChannelInfo(net) {
-      return this.curTokenInfo.channels.find(
+      return this.curTokenInfo?.channels?.find(
         (channel) => channel.network === net
       );
     },
     async getBalance(net) {
       const address = await this.getAddress(net);
-      const tokenId = getChannelInfo()?.tokenAddress;
+      const channel = this.getChannelInfo(this.networkPair.from);
+
+      const tokenId = channel?.erc20 || channel?.tokenId;
+      console.log(22222, address, tokenId);
+
       if (!address || !tokenId) return null;
 
       if (net === "VITE") {
-        const balance = await viteClient.getBalanceInfo;
-        return balance?.balanceInfoMap?.[tokenId]?.balance;
+        const balanceInfo = await viteClient.getBalanceInfo(address);
+        const balance = balanceInfo.balance?.balanceInfoMap?.[tokenId]?.balance
+          ? new BigNumber(
+              balanceInfo.balance?.balanceInfoMap?.[tokenId]?.balance
+            )
+          : new BigNumber(0);
+        return balance;
       }
       if (net === "ETH") {
-        return await erc20Contract.balanceOf(address);
+        const balance = await erc20Contract?.balanceOf(address);
+        const transedBigNumberBalance = new BigNumber(balance?.toString() || 0);
+        return transedBigNumberBalance || new BigNumber(0);
       }
     },
     onToggleNet() {

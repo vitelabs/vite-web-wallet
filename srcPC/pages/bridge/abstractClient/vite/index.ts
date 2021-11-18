@@ -176,7 +176,7 @@ export class ChannelVite {
     const sendResult = await writeContract(
       this.viteChannelAddress,
       this.viteChannelAbi,
-      "iutput",
+      "input",
       [address, value]
     );
     return sendResult;
@@ -290,7 +290,7 @@ async function writeContract(
     throw new Error("method not found: " + methodName);
   }
   const result = await sendTx({
-    methodName,
+    methodName:'callContract',
     data: {
       abi: methodAbi,
       toAddress: to,

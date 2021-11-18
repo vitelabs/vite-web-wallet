@@ -38,9 +38,6 @@ export default {
         },
         className: { type: String }
     },
-    mounted() {
-        console.log(11111, downCircle);
-    },
     components: { vSelect, downCircle },
 methods:{
             onInput(val){
