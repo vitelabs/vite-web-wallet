@@ -919,7 +919,7 @@
             "inviteBenifit": "Referral Mining Income",
             "inviteRule": "Rules",
             "ruleItems": [
-                "The <span class='strong'>1,000 VITE</span> payment to generate an invitation code will be burned",
+                "The <span class='strong'>100 VITE</span> payment to generate an invitation code will be burned",
                 "Referee will be rewarded with <span class='strong'>5%</span> of all invited users' trading as mining proceeds and <span class='strong'>2.5%</span> of all market-making as mining proceeds"
             ],
             "receiveRuleItems": [
