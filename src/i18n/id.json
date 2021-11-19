@@ -919,7 +919,7 @@
             "inviteBenifit": "Penghasilan Penambangan Rujukan",
             "inviteRule": "Aturan",
             "ruleItems": [
-                "Anda dapat menghabiskan <span class = 'strong'> 1000 VITE </span> untuk membuat kode referensi. Dana ini akan dimasukkan ke dalam kumpulan dividen dan didistribusikan kepada pemegang VX",
+                "The <span class='strong'>100 VITE</span> payment to generate an invitation code will be burned",
                 " <span class='strong'>5%</span> biaya perdagangan yang dihasilkan oleh pengguna yang menggunakan kode rujukan akan diperlakukan sebagai biaya perdagangan yang dapat menambang VX."
             ],
             "receiveRuleItems": [
