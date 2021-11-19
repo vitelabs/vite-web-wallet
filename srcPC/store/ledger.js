@@ -2,6 +2,8 @@ import { constant } from '@vite/vitejs';
 import { timer } from 'utils/asyncFlow';
 import { defaultTokenMap, VX_TOKENID } from 'utils/constant';
 import { getTokenInfoById, getSnapshotChainHeight, getTokenInfoList } from 'services/viteServer';
+import { getTokenInfoBatch } from 'services/trade';
+import { gateStorage } from 'pcServices/gate';
 
 const ViteId = constant.Vite_TokenId;
 const MAX_TOKEN_NUM = 300;
@@ -11,7 +13,8 @@ const state = {
     currentHeight: '',
     defaultTokenIds: defaultTokenMap,
     tokenInfoMaps: {},
-    allTokens: []
+    allTokens: [],
+    storageTokens: []
 };
 
 const mutations = {
@@ -35,6 +38,12 @@ const mutations = {
     },
     setAllTokens(state, payload = []) {
         state.allTokens = payload;
+    },
+    setStorageTokens(state, payload = []) {
+        state.storageTokens = payload.map(item => {
+            item.tokenId = item.tokenAddress;
+            return { ...item };
+        });
     }
 };
 
@@ -85,6 +94,13 @@ const actions = {
             dispatch('fetchTokenInfo', tokenId);
         }
     },
+    getTokenInfoInStorage({ commit }) {
+        gateStorage.updateFromStorage();
+        const tokenAddresses = gateStorage.data.map(token => token.tokenId);
+        getTokenInfoBatch({ tokenAddresses }).then(list => {
+            commit('setStorageTokens', list);
+        });
+    },
     fetchTokenInfo({ commit }, tokenId) {
         return apis.fetchTokenInfo(tokenId).then(result => {
             commit('setTokenInfo', { tokenInfo: result, tokenId });
@@ -102,6 +118,9 @@ const getters = {
             map[t.tokenId].icon = map[t.tokenId].icon || idenGateTokenListMap[t.tokenId] && idenGateTokenListMap[t.tokenId].icon;
         });
         return map;
+    },
+    storageTokensMap(state, rootGetters) {
+        return state.storageTokens;
     },
     viteTokenInfo(state) {
         if (!state.tokenInfoMaps[ViteId]) {
