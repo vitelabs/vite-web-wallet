@@ -919,7 +919,7 @@
             "inviteBenifit": "Ingresos de minería de referidos",
             "inviteRule": "Reglas",
             "ruleItems": [
-                "El pago de <span class='strong'>1,000 VITE</span> para generar un código de invitación serán quemados",
+                "The <span class='strong'>100 VITE</span> payment to generate an invitation code will be burned",
                 "El que refiere recibirá una recompensa del <span class='strong'>5%</span> de todas los trades de los usuarios invitados como ingreso por de minería, y un <span class='strong'>2.5%</span> de todos las creaciones de mercados como ingresos por minería"
             ],
             "receiveRuleItems": [
