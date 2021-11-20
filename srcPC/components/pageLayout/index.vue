@@ -49,6 +49,8 @@ export default {
                 list = secondMenuList.trade;
             } else if (this.$route.name.indexOf('assets') === 0) {
                 list = secondMenuList.assets;
+            } else if (this.$route.name.indexOf('bridge') === 0) {
+                list = secondMenuList.bridge;
             }
 
             if (this.$route.name.indexOf('wallet') !== 0) {

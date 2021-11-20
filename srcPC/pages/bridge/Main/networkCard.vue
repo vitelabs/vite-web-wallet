@@ -2,12 +2,18 @@
   <div class="bri__network__card">
     <div class="network__title">
       <div class="content">{{ type }}</div>
-      <div class="status">{{ status }}</div>
+      <div class="status" v-show="status === 'CONNECTED'">
+        <div class="dot"></div>
+        <div>{{ status === "CONNECTED" ? "connected" : null }}</div>
+      </div>
     </div>
     <div class="network__content">
       <vite-select
         @input="oninput"
-        :options="['VITE', 'ETH']"
+        :options="[
+          { value: 'VITE', label: 'VITE Network' },
+          { value: 'ETH', label: 'Ethereum Network' },
+        ]"
         :searchable="false"
         :clearable="false"
         :class="'net-selector'"
@@ -26,8 +32,9 @@ export default {
   components: { downCircle, viteSelect },
   methods: {
     oninput(val) {
-      if (val === this.value) return;
-      this.$emit("input", val);
+      console.log(99999)
+      if (val.value === this.value) return;
+      this.$emit("input", val.value);
     },
   },
 };
@@ -49,6 +56,22 @@ export default {
   .network__title {
     display: flex;
     justify-content: space-between;
+    .content {
+      @include font-family-bold();
+    }
+    .status {
+      color: #6bd100;
+      font-size: 11px;
+      display: flex;
+      align-items: center;
+      .dot {
+        height: 4px;
+        width: 4px;
+        border-radius: 50%;
+        background-color: #6bd100;
+        margin-right: 4px;
+      }
+    }
   }
   .network__content {
     display: flex;
@@ -66,9 +89,13 @@ export default {
     border: none;
     background: none;
     height: 16px;
-    padding:0;
-    *{
-        padding: 0 !important;
+    padding: 0;
+    /deep/ .vs__selected {
+      padding: 0;
+      margin: 0;
+    }
+    /deep/ .vs__search {
+      display: none;
     }
   }
 }
