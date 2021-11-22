@@ -2,14 +2,17 @@
     <div class="page-layout-wrapper" @click="operate">
         <guide></guide>
 
-        <sidebar class="sidebar" :go="go" :menuList="menuList" ></sidebar>
+        <sidebar class="sidebar" :go="go" :menuList="menuList"></sidebar>
 
         <div class="page-content">
             <div class="page-scroll-wrapper">
-                <second-menu v-show="$route.name.indexOf('setting') === -1"
-                             :go="go" class="second-menu"
-                             :tabList="secondMenuList"
-                             :class="{ 'assets': $route.name.indexOf('assets') === 0 }" >
+                <second-menu
+                    v-show="$route.name.indexOf('setting') === -1"
+                    :go="go"
+                    class="second-menu"
+                    :tabList="secondMenuList"
+                    :class="{ assets: $route.name.indexOf('assets') === 0 }"
+                >
                 </second-menu>
                 <div class="page-wrapper">
                     <slot></slot>
@@ -46,6 +49,8 @@ export default {
                 list = secondMenuList.trade;
             } else if (this.$route.name.indexOf('assets') === 0) {
                 list = secondMenuList.assets;
+            } else if (this.$route.name.indexOf('bridge') === 0) {
+                list = secondMenuList.bridge;
             }
 
             if (this.$route.name.indexOf('wallet') !== 0) {
@@ -87,7 +92,7 @@ export default {
             }
 
             const account = this.$store.state.wallet.currHDAcc;
-            if (!account && name !== 'setting') {
+            if (!account && name !== 'setting' && name !== 'bridge') {
                 this.$router.push({ name: 'startLogin' });
                 return;
             }
@@ -130,7 +135,6 @@ export default {
         }
     }
 }
-
 </style>
 
 <style lang="scss" scoped>
@@ -168,7 +172,7 @@ export default {
             width: 100%;
             height: 100%;
             min-width: 1350px;
-            .assets{
+            .assets {
                 padding: 0 10px;
             }
         }
