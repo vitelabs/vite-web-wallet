@@ -96,7 +96,6 @@
         "@fortawesome/free-brands-svg-icons": "^5.14.0",
         "@ledgerhq/hw-transport-web-ble": "^5.11.0",
         "@ledgerhq/hw-transport-webusb": "^5.11.0",
-        "@metamask/providers": "^8.1.1",
         "@vite/bridge": "^1.0.14",
         "@vite/connector": "^0.0.2-0",
         "@vite/ledgerjs-hw-app-vite": "^1.0.0",

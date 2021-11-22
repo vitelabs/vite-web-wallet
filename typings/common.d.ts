@@ -1,13 +1,9 @@
 import Vue from 'vue';
-import {MetaMaskInpageProvider} from '@metamask/providers';
 import {ethers} from 'ethers'
 
 declare type bnStr = string
 declare type tokenId = string
 declare type tokenSymbol = string
-declare  global{
-  var ethereum:MetaMaskInpageProvider& ethers.providers.ExternalProvider;
-}
 declare interface HDAccount {
     id: string;
     lang: string;
