@@ -7,12 +7,12 @@ block content
         .bri-trans
             .bri-trans__card
                 .card__title from
-                .card__text {{networkPair.from.name}}
+                .card__text {{networkPair.from.desc}}
                 img.card__icon(:src="networkPair.from.icon")
             .bri-trans__icon
             .bri-trans__card
                 .card__title TO
-                .card__text {{networkPair.to.name}}
+                .card__text {{networkPair.to.desc}}
                 img.card__icon(:src="networkPair.to.icon")
         .content-container
             .content-item
@@ -25,7 +25,7 @@ block content
                 div {{transInfo.toAddress}}
             .content-item
                 .label NetWorkFee:
-                div {{transInfo.fee}}
+                div {{networkPair.from.fee.fixed}}
             .content-item
                 .label You Will Receive:
                 .accets-container

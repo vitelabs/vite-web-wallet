@@ -2,14 +2,14 @@
 extends /components/dialog/base.pug
 block head
     .bri-trans__head 
-        div Transer USDT form VITE Network to Ethereum Network，Submit a transation to the Vite Network via Vite Wallet\
+        div Transer {{tokenInfo.token}} form {{networkPair.from.desc}} to {{networkPair.to.desc}}，Submit a transation to the {{networkPair.from.desc}} via Vite Wallet
             .assets-container
                 img.icon(:src="tokenInfo.icon")
                 .text
                     .label Amount
                     .content {{`${transInfo.amount}  ${tokenInfo.token}`}}   
 block originContent
-      .content 
+      .custom-content 
         .bri-trans__label  You need to tranfer to the address provoded below：
         .bri-trans__content
             .title Address
@@ -60,6 +60,7 @@ export default {
         display: flex;
         flex-direction: column;
         justify-content: space-between;
+        height: 100%;
         .label {
           @include font_color_2();
           font-size: 12px;
@@ -68,7 +69,7 @@ export default {
     }
   }
 }
-.content {
+.custom-content {
   margin: 20px 30px;
   .bri-trans__label {
     font-size: 12px;

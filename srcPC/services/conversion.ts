@@ -38,8 +38,28 @@ export const getTxs = function(params: {
   fromAddress: string;
   toAddress: string;
   fromHash: string;
+  fromHashConfirmationNums: number;
   toHash: string;
+  toHashConfirmationNums: number;
+  fee: string;
+  time: string;
 }[]> {
+  return Promise.resolve([
+    {
+      id: "",
+      idx: 23,
+      amount: "100",
+      fromAddress: "dsfasdfasdfsa",
+      toAddress: "fasdfas",
+      fromHash: "fasdfasdf",
+      fromHashConfirmationNums: 34,
+      toHash: "fsdfasdfas",
+      toHashConfirmationNums: 34,
+      fee: "23",
+      time: "232332",
+      token: "VITE",
+    },
+  ]);
   return ConversionAPI.request({
     path: "/txs",
     method: "GET",

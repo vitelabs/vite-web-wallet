@@ -6,13 +6,13 @@
 import walletTable from "pcComponents/table/index.vue";
 import { getTxs } from "pcServices/conversion";
 export default {
-  props: ["from", "to", "fromAddress", "toAddress", "desc", "tokenSymbol"],
+  props: ["fromAdr", "to", "fromAddress", "toAddress", "desc", "tokenSymbol"],
   components: { walletTable },
   mounted() {
     const { from, to, fromAddress, toAddress, desc } = this.$props;
     getTxs({ from, to, fromAddress, toAddress, desc }).then((data) => {
       (data || []).forEach((item) => {
-        item[this.tokenSymbol] = this.$props.tokenSymbol;
+        item["status"] = item.toHash ? "success" : "pending";
       });
       this.contentList = data;
     });
@@ -22,7 +22,7 @@ export default {
       headList: [
         {
           text: "Token",
-          cell: "tokenSymbol",
+          cell: "token",
           class: "keystore-table-item",
         },
         {

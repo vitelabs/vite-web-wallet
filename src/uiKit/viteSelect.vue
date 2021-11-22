@@ -8,16 +8,16 @@
     :components="{ OpenIndicator }"
     :value="value"
   >
-    <template #selected-option="{ icon, label }">
+    <template #selected-option="opt">
       <div class="vite-select__selected">
-        <img v-show="!!icon" :src="icon" />
-        <span>{{ label }}</span>
+        <img v-show="!!opt.icon" :src="opt.icon" />
+        <span>{{opt.label }}</span>
       </div>
     </template>
     <template v-slot:option="{ icon, label }">
       <div class="vite-select__option">
         <img v-show="!!icon" :src="icon" />
-        <span>{{ label }}</span>
+        <span>{{ label  }}</span>
       </div>
     </template>
   </vSelect>

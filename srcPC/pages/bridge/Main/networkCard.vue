@@ -10,10 +10,7 @@
     <div class="network__content">
       <vite-select
         @input="oninput"
-        :options="[
-          { value: 'VITE', label: 'VITE Network' },
-          { value: 'ETH', label: 'Ethereum Network' },
-        ]"
+        :options="netList"
         :searchable="false"
         :clearable="false"
         :class="'net-selector'"
@@ -28,7 +25,7 @@ import downCircle from "assets/imgs/downCircle.svg.vue";
 import viteSelect from "src/uiKit/viteSelect.vue";
 
 export default {
-  props: ["type", "status", "value", "icon"],
+  props: ["type", "status", "value", "icon","netList"],
   components: { downCircle, viteSelect },
   methods: {
     oninput(val) {

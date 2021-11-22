@@ -13,20 +13,22 @@
         <networkCard
           :type="'From'"
           :status="richNetworkPair.from['status']"
-          :value="richNetworkPair.from.id"
+          :value="curSelectFromNet"
           :icon="richNetworkPair.from['icon']"
           @input="onToggleNet"
+          :netList="netList"
         />
-        <img class="bri__trans-icon" :src="transIcon" />
+        <img class="bri__trans-icon" :src="transIcon"  @click="onToggleNet" style="cursor:pointer"/>
         <networkCard
           :type="'To'"
           :status="richNetworkPair.to['status']"
-          :value="richNetworkPair.to.id"
+          :value="curSelectToNet"
           :icon="richNetworkPair.to['icon']"
+          :netList="netList"
           @input="onToggleNet"
         />
       </div>
-      <div v-if="networkMeta['ETH'].status === 'CONNECTED'">
+      <div v-if="!requireBSCConnect">
         <div>
           <div class="__row">
             <div class="__row_t">
@@ -67,11 +69,11 @@
           Connect MetaMask <loading :loadingType="'dot'" />
         </div>
       </div>
-      <div class="__row" v-if="networkMeta['ETH'].status === 'CONNECTED'">
+      <div class="__row" v-if="!requireBSCConnect">
         <div class="__row-tips">
           <div><span class="red-dot"></span>Reminder</div>
-          <div>max 111</div>
-          <div>min 2222</div>
+          <div>max {{ richNetworkPair.from.max }}</div>
+          <div>min {{ richNetworkPair.to.min }}</div>
         </div>
       </div>
       <div class="progress-bar">
@@ -147,8 +149,6 @@ import { ethers, Contract } from "ethers";
 import { ChannelERC20 } from "../abstractClient/erc20";
 import { viteClient } from "services/apiServer";
 import { StatusMap } from "wallet/webAccount";
-import ViteLogo from "src/assets/imgs/vite.png";
-import EthLogo from "src/assets/imgs/ethCircle.png";
 import _channelAbi from "../abstractClient/erc20/channel.json";
 import _erc20Abi from "../abstractClient/erc20/erc20.json";
 import { ChannelVite } from "../abstractClient/vite";
@@ -165,36 +165,43 @@ const mockTokens = {
   tokens: [
     {
       token: "USDT",
+      icon: "https://static.vite.net/image-1257137467/logo/usdt-logo.png",
       channels: [
-        {
-          network: "ETH",
-          contract: "0x2fe56db3f21815ab26828debc175ab08d91cf81d",
-          erc20: "0x337610d27c682e347c9cd60bd4b3b107c9d34ddd",
-          decimals: 18,
-          confirmedThreshold: 10,
-        },
-        {
-          network: "VITE",
-          contract: "vite_75043ce60463a3c14b188a1505fd359acaef278c16dece5a0b",
-          confirmedThreshold: 100,
-          decimals: 18,
-          tokenId: "tti_ece34ebace895e3506a24064",
-        },
-        ,
+        [
+          {
+            network: "BSC",
+            desc: "BSC TestNet ",
+            icon: "https://static.vite.net/image-1257137467/logo/bsc-logo.png",
+            contract: "0x2fe56db3f21815ab26828debc175ab08d91cf81d",
+            erc20: "0x337610d27c682e347c9cd60bd4b3b107c9d34ddd",
+            decimals: 18,
+            confirmedThreshold: 10,
+            max: "1",
+            min: "0.01",
+            fee: {
+              fixed: "0",
+            },
+          },
+          {
+            network: "VITE",
+            desc: "Vite TestNet",
+            icon: "https://static.vite.net/image-1257137467/logo/VITE-logo.png",
+            contract: "vite_75043ce60463a3c14b188a1505fd359acaef278c16dece5a0b",
+            tokenId: "tti_ece34ebace895e3506a24064",
+            decimals: 18,
+            confirmedThreshold: 100,
+            max: "1",
+            min: "0.01",
+            fee: {
+              fixed: "0",
+            },
+          },
+        ],
       ],
     },
   ],
 };
-const netWorkMap = {
-  VITE: {
-    icon: ViteLogo,
-    name: "VITE Network",
-  },
-  ETH: {
-    icon: EthLogo,
-    name: "Ethereum Network",
-  },
-};
+
 export default {
   name: "BRIDGE",
   components: {
@@ -208,23 +215,33 @@ export default {
   },
   mounted() {
     if (ethereum) {
-      this.networkMeta["ETH"].status = ethereum.selectedAddress
+      this.networkMeta["BSC"].status = ethereum.selectedAddress
         ? "CONNECTED"
         : "UNCONNECT";
 
       ethereum.on("accountsChanged", (accounts) => {
         console.log(9999, accounts);
-        this.networkMeta["ETH"].status = accounts?.[0]
+        this.networkMeta["BSC"].status = accounts?.[0]
           ? "CONNECTED"
           : "UNCONNECT";
       });
       // ethereum.on("disconnect", (connectInfo) => {
-      //   this.networkMeta["ETH"].status = "UNCONNECT";
+      //   this.networkMeta["BSC"].status = "UNCONNECT";
       //   console.log(8888, "disconnected");
       // });
     } else {
     }
-    this.getTokens().then((t) => (this.tokens = t.tokens));
+    this.getTokens().then((t) => {
+      this.tokens = t.tokens;
+      //TOKEN first \ then net @todo
+      // ct.tokens[0].channels.reduce((pre,cur)=>{
+      //   pre[cur.network]=cur;
+      //   return pre;
+      // },{})
+      t.tokens[0].channels[0].forEach((t) => {
+        this.networkMeta[t.network] = t;
+      });
+    });
   },
   data() {
     return {
@@ -236,19 +253,17 @@ export default {
       curToken: "",
       networkPair: {
         from: "VITE",
-        to: "ETH",
+        to: "BSC",
       },
       networkMeta: {
-        ETH: {
+        BSC: {
           status: "UNCONNECT",
-          ...netWorkMap["ETH"],
         },
         VITE: {
           status:
             this.$store.state.wallet.currHDAcc.status === StatusMap.LOCK
               ? "UNCONNECT"
               : "CONNECTED",
-          ...netWorkMap["VITE"],
         },
       },
 
@@ -258,15 +273,20 @@ export default {
     };
   },
   computed: {
+    requireBSCConnect() {
+      return (
+        this.networkPair.from === "BSC" &&
+        this.networkMeta["BSC"].status !== "CONNECTED"
+      );
+    },
     curTokenInfo() {
       return this.tokenInfos.find((t) => t.tokenId === this.curToken?.value);
     },
     tokenInfos() {
       const tokenMap = this.$store.getters.allTokensMap || {};
       return (this.tokens || []).map((t) => {
-        const tokenId = t.channels.find((c) => c.network === "VITE")?.tokenId;
-        const token = tokenMap[tokenId];
-        return { ...t, icon: token?.icon || getTokenIcon(tokenId), tokenId };
+        const tokenId = t.channels[0].find((c) => c.network === "VITE")?.tokenId;
+        return { ...t, icon: t?.icon || getTokenIcon(tokenId), tokenId };
       });
     },
     tokenList() {
@@ -275,6 +295,25 @@ export default {
           value: t.tokenId,
           label: t.token,
           icon: t.icon,
+        };
+      });
+    },
+    curSelectToNet() {
+      const net =
+        this.netList.find((t) => t.value === this.networkPair.to) || {};
+      net.icon = null;
+      return net;
+    },
+    curSelectFromNet() {
+      const net = this.netList.find((t) => t.value === this.networkPair.from);
+      net.icon = null;
+      return net;
+    },
+    netList() {
+      return Object.values(this.networkMeta || {}).map((t) => {
+        return {
+          value: t.network,
+          label: t.desc,
         };
       });
     },
@@ -290,9 +329,8 @@ export default {
       };
       const fromInfo = this.networkMeta[this.networkPair.from] || {};
       const toInfo = this.networkMeta[this.networkPair.to] || {};
-      richNetworkPair.to.name = this.networkPair.to;
-      richNetworkPair.from = { ...fromInfo, id: this.networkPair.from };
-      richNetworkPair.to = { ...toInfo, id: this.networkPair.to };
+      richNetworkPair.from = { ...fromInfo };
+      richNetworkPair.to = { ...toInfo };
       return richNetworkPair;
     },
   },
@@ -314,8 +352,8 @@ export default {
       this.balance = balance;
     },
     async reGenErc20() {
-      if (this.networkPair.from !== "ETH") return;
-      const tokenAddress = this.getChannelInfo("ETH")?.erc20;
+      if (this.networkPair.from !== "BSC") return;
+      const tokenAddress = this.getChannelInfo("BSC")?.erc20;
       if (!tokenAddress) {
         erc20Contract = null;
         return;
@@ -336,13 +374,25 @@ export default {
     },
     async onNextClick() {
       const curNet = this.networkPair.from;
-      if (!erc20Contract && curNet === "ETH") return;
+      if (!erc20Contract && curNet === "BSC") return;
       const toAddress = this.toAddress;
       const curChannel = this.getChannelInfo(curNet);
       const channelAddress = curChannel?.contract;
       const decimals = curChannel.decimals;
       const ammountMin = bnUtils.toMin(this.amount, decimals);
-      if (!channelAddress || !toAddress || !this.amount) {
+      if (
+        !channelAddress ||
+        !toAddress ||
+        !this.amount ||
+        !this.curTokenInfo.tokenId
+      ) {
+        console.error(
+          `err send `,
+          channelAddress,
+          toAddress,
+          this.amount,
+          this.curTokenInfo.tokenId
+        );
         return;
       }
       const params = {
@@ -359,7 +409,7 @@ export default {
 
       await confirmCrossBridgeDialog(params);
 
-      if (curNet === "ETH") {
+      if (curNet === "BSC") {
         await erc20Contract.approve(channelAddress, ammountMin);
         const erc20hChannel = new Contract(
           channelAddress,
@@ -369,13 +419,14 @@ export default {
         const originAddr = `0x${wallet.getOriginalAddressFromAddress(
           toAddress
         )}`;
+        console.log(999, originAddr, ammountMin);
         await erc20hChannel.input(originAddr, ammountMin);
       } else if (curNet === "VITE") {
         const ss = await execWithValid(() =>
-          new ChannelVite({ address: channelAddress }).input(
-            toAddress,
-            ammountMin
-          )
+          new ChannelVite({
+            address: channelAddress,
+            tokenId: this.curTokenInfo.tokenId,
+          }).input(toAddress, ammountMin)
         )();
       }
       await transConfirmsDialog(params);
@@ -383,10 +434,10 @@ export default {
     async getAddress(net) {
       console.log(9999999, this.$store.state.wallet.currHDAcc?.activeAddr);
       if (net === "VITE") return this.$store.state.wallet.currHDAcc?.activeAddr;
-      if (net === "ETH") return window.ethereum?.selectedAddress;
+      if (net === "BSC") return window.ethereum?.selectedAddress;
     },
     getChannelInfo(net) {
-      return this.curTokenInfo?.channels?.find(
+      return this.curTokenInfo?.channels[0]?.find(
         (channel) => channel.network === net
       );
     },
@@ -408,7 +459,7 @@ export default {
           : new BigNumber(0);
         return balance;
       }
-      if (net === "ETH") {
+      if (net === "BSC") {
         const balance = await erc20Contract?.balanceOf(address);
         const transedBigNumberBalance = new BigNumber(balance?.toString() || 0);
         return transedBigNumberBalance || new BigNumber(0);
@@ -422,7 +473,7 @@ export default {
     async requestConnect2MetaMask() {
       try {
         this.isConnectingMetaMask = true;
-        ethereum?.request({ method: "eth_requestAccounts" });
+        ethereum?.request({ method: "BSC_requestAccounts" });
       } finally {
         this.isConnectingMetaMask = false;
       }

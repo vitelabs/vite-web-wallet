@@ -23,12 +23,14 @@ export class ChannelVite {
 
   viteChannelAbi: any[];
   viteOffChainCode: any;
+  tokenId: string;
 
-  constructor(cfg: {address}) {
+  constructor(cfg: { address; tokenId }) {
     this.viteChannelAbi = _viteAbi;
     this.viteOffChainCode = Buffer.from(offChainCode, "hex").toString("base64");
     this.viteProvider = viteClient;
     this.viteChannelAddress = cfg.address;
+    this.tokenId = cfg.tokenId;
   }
 
   //   getInfo(prefix: string): any {
@@ -163,49 +165,16 @@ export class ChannelVite {
     return id;
   }
 
-  async output(id: string, address: string, value: string) {
-    const sendResult = await writeContract(
-      this.viteChannelAddress,
-      this.viteChannelAbi,
-      "output",
-      [id, address, value]
-    );
-    return sendResult;
-  }
   async input(address: string, value: string) {
     const sendResult = await writeContract(
       this.viteChannelAddress,
       this.viteChannelAbi,
       "input",
-      [address, value]
+      [address, value],
+      this.tokenId,
+      value
     );
     return sendResult;
-  }
-  async approveOutput(id: string) {
-    const sendResult = await writeContract(
-      this.viteChannelAddress,
-      this.viteChannelAbi,
-      "approveOutput",
-      [id]
-    );
-  }
-
-  async approveAndExecOutput(id: string, dest: string, value: string) {
-    const sendResult = await writeContract(
-      this.viteChannelAddress,
-      this.viteChannelAbi,
-      "approveAndExecOutput",
-      [id, dest, value]
-    );
-  }
-
-  async proveInputId(v: number, r: string, s: string, id: string) {
-    const sendResult = await writeContract(
-      this.viteChannelAddress,
-      this.viteChannelAbi,
-      "proveInputId",
-      [v, r, s, id]
-    );
   }
 
   async inputIndex() {
@@ -278,11 +247,10 @@ async function writeContract(
   to: string,
   abi: Array<{ name: string; type: string }>,
   methodName: string,
-  params: any[]
+  params: any[],
+  tokenId: string,
+  amount: string
 ) {
-  const tokenId = constant.Vite_TokenId;
-  const amount = "0";
-
   const methodAbi = abi.find((x) => {
     return x.name === methodName && x.type === "function";
   });
@@ -290,7 +258,7 @@ async function writeContract(
     throw new Error("method not found: " + methodName);
   }
   const result = await sendTx({
-    methodName:'callContract',
+    methodName: "callContract",
     data: {
       abi: methodAbi,
       toAddress: to,
@@ -345,4 +313,4 @@ export async function confirmed(provider: any, hash: string) {
     });
 }
 
-window.vite=ChannelVite;
+window.vite = ChannelVite;
