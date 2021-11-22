@@ -278,6 +278,7 @@ const getters = {
         const balanceInfo = getters.balanceInfo;
         const allToken = rootGetters.allTokensMap;
         const exBalance = rootGetters.exBalanceList;
+        const userStorageToken = rootGetters.storageTokensMap;
 
         // const mapToken2Gate = rootGetters.mapToken2Gate;
         // ------- show user defined gate
@@ -301,7 +302,6 @@ const getters = {
                     decimals = '',
                     owner = '',
                     tokenId = i,
-                    icon = getTokenIcon(i),
                     type = 'THIRD_GATE',
                     gateInfo = {}
                 } = Object.assign({}, token, balanceInfo[i] || {}, allToken[i] || {}, exBalance[i]);
@@ -313,6 +313,13 @@ const getters = {
                 const totalExAssetBtc = rateBtc ? bigNumber.multi(bigNumber.toBasic(totalExAmount || 0, decimals), rateBtc) : 0;
                 const walletAssetBtc = rateBtc ? bigNumber.multi(bigNumber.toBasic(totalAmount || 0, decimals), rateBtc) : 0;
                 const totalAssetBtc = bigNumber.plus(totalExAssetBtc, walletAssetBtc);
+                let icon = getTokenIcon(i);
+                for (const key in userStorageToken) {
+                    if (i === userStorageToken[key].tokenId && userStorageToken[key].icon) {
+                        icon = userStorageToken[key].icon;
+                        break;
+                    }
+                }
                 return {
                     totalExAssetBtc,
                     walletAssetBtc,

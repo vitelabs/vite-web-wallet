@@ -20,6 +20,7 @@ const actions = {
         store.dispatch('updateMarketMap');
         store.dispatch('getMarketsClosed');
         store.dispatch('getDefaultTokenList');
+        store.dispatch('getTokenInfoInStorage');
         store.dispatch('getAllTokens');
         store.dispatch('updateGateInfos');
         store.dispatch('exFetchLimitAmounts');
