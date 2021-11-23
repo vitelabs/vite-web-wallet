@@ -1,6 +1,6 @@
 import { isIOS } from 'utils/platform';
 
-export default function (value) {
+export function execCopy(value) {
     const el = document.createElement('textarea');
     el.style.position = 'absolute';
     el.style.top = '-9999px';
@@ -23,3 +23,4 @@ export default function (value) {
     document.execCommand('copy');
     document.body.removeChild(el);
 }
+export default execCopy;

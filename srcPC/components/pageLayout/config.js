@@ -1,14 +1,26 @@
 export const sidebarMenuList = {
     assets: 'assets',
     trade: 'tradeCenter',
+    bridge: 'bridgeMain',
     wallet: 'walletQuota',
-    bridge:'bridgeMain',
-    setting: 'setting',
-
+    setting: 'setting'
 };
 export const secondMenuList = {
     assets: [ 'viteExplorer', 'viteScanExplorer' ],
-    trade: [ 'tradeCenter', 'tradeOpenOrders', 'tradeOrderHistory', 'tradeMining', 'tradeDividend' ],
-    wallet: [ 'walletQuota', 'walletVote', 'walletFullNode', 'walletSBP', 'walletMintage', 'walletTransList' ],
-    bridge:['bridgeHistory']
+    trade: [
+        'tradeCenter',
+        'tradeOpenOrders',
+        'tradeOrderHistory',
+        'tradeMining',
+        'tradeDividend'
+    ],
+    wallet: [
+        'walletQuota',
+        'walletVote',
+        'walletFullNode',
+        'walletSBP',
+        'walletMintage',
+        'walletTransList'
+    ],
+    bridge: [ 'bridgeMain', 'bridgeHistory' ]
 };

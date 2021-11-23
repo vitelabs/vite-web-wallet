@@ -286,6 +286,9 @@
   "bridgeHistory": {
     "title": "History"
   },
+  "bridgeMain": {
+    "title": "Bridge"
+  },
   "create": {
     "input": "Please enter your password",
     "again": "Please confirm your password",
