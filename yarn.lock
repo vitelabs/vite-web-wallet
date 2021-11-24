@@ -12529,8 +12529,9 @@ terser@^5.3.4:
     source-map "~0.7.2"
     source-map-support "~0.5.20"
 
-"testwebworker@file:./libs/cryptoWorker":
+"testwebworker@git+https://github.com/vitelabs/cryptojsAccelerator.git":
   version "1.0.0"
+  resolved "git+https://github.com/vitelabs/cryptojsAccelerator.git#060975e9a7e42282c42f24ca95d84fd7251d7155"
   dependencies:
     "@babel/core" "^7.1.6"
     "@babel/plugin-transform-async-to-generator" "^7.1.0"

@@ -20,6 +20,7 @@
         "lint:all": "eslint --ext ts,js,vue --fix .",
         "lint": "eslint --ext ts,js,vue --cache --fix .",
         "stylelint": "stylelint **/*.vue --custom-syntax postcss-html --fix",
+        "stylelintScss": "stylelint **/*.scss --custom-syntax postcss-scss --fix",
         "publish:stage": "npm run build:all && wrangler publish --env stage",
         "publish": "npm run build:all && wrangler publish --env production"
     },
@@ -134,7 +135,7 @@
         "qs": "~6.5.2",
         "sass-resources-loader": "^2.0.1",
         "terser-webpack-plugin": "4.2.3",
-        "testwebworker": "file:./libs/cryptoWorker",
+        "testwebworker": "git+https://github.com/vitelabs/cryptojsAccelerator.git",
         "url": "~0.11.0",
         "vue-echarts": "~4.0.1",
         "vue-flatpickr-component": "~8.1.1",

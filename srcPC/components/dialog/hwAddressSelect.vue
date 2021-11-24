@@ -61,7 +61,7 @@ import { viteClient } from 'services/apiServer';
 import { VITE_TOKENID } from 'utils/constant';
 import loading from 'components/loading.vue';
 import Lottie from 'pcComponents/animation/lottie.vue';
-import { getAccountLink } from "utils/getLink";
+import { getAccountLink } from 'utils/getLink';
 
 export default {
     components: { Checkbox, loading, Lottie },
