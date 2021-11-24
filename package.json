@@ -90,6 +90,7 @@
     "dependencies": {
         "@babel/plugin-proposal-class-properties": "~7.5.5",
         "@babel/plugin-proposal-object-rest-spread": "~7.5.5",
+        "@babel/plugin-proposal-optional-chaining": "^7.16.0",
         "@babel/preset-typescript": "~7.3.3",
         "@cloudflare/kv-asset-handler": "^0.1.0",
         "@fortawesome/free-brands-svg-icons": "^5.14.0",
@@ -132,6 +133,7 @@
         "qrcode.es": "~1.0.0",
         "qs": "~6.5.2",
         "sass-resources-loader": "^2.0.1",
+        "terser-webpack-plugin": "4.2.3",
         "testwebworker": "file:./libs/cryptoWorker",
         "url": "~0.11.0",
         "vue-echarts": "~4.0.1",
