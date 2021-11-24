@@ -1,7 +1,7 @@
-import { ethers, Contract, utils } from "ethers";
-import _channelAbi from "./channel.json";
-import _keeperAbi from "./keeper.json";
-import _erc20Abi from "./erc20.json";
+import { ethers, Contract, utils } from 'ethers';
+import _channelAbi from './channel.json';
+import _keeperAbi from './keeper.json';
+import _erc20Abi from './erc20.json';
 interface ConfirmedInfo {
   height: string;
   txIndex: number;
@@ -32,30 +32,25 @@ export class ChannelERC20 {
   // erc20Contract: ethers.Contract;
 
 
-
   constructor(cfg: {
     channelAddress:string;
     tokenAddress:string;
   }) {
-    this.etherChannelAbi = _channelAbi;
-    // this.erc20Abi=_erc20Abi;
-    this.etherChannelAddress = cfg.channelAddress;
-    this.tokenAddress = cfg.tokenAddress;
+      this.etherChannelAbi = _channelAbi;
+      // this.erc20Abi=_erc20Abi;
+      this.etherChannelAddress = cfg.channelAddress;
+      this.tokenAddress = cfg.tokenAddress;
 
-    this.etherProvider = new ethers.providers.Web3Provider(window.ethereum);
-    this.etherChannelContract = new ethers.Contract(
-      this.etherChannelAddress,
-      this.etherChannelAbi,
-      this.etherProvider
-    );
+      this.etherProvider = new ethers.providers.Web3Provider(window.ethereum);
+      this.etherChannelContract = new ethers.Contract(this.etherChannelAddress,
+          this.etherChannelAbi,
+          this.etherProvider);
 
-    // this.erc20Contract=new ethers.Contract(
-    //   this.tokenAddress,
-    //   this.erc20Abi,
-    //   this.etherProvider
-    // );
-
-
+      // this.erc20Contract=new ethers.Contract(
+      //   this.tokenAddress,
+      //   this.erc20Abi,
+      //   this.etherProvider
+      // );
   }
 
   // async approve( amount) {
@@ -80,46 +75,40 @@ export class ChannelERC20 {
   // }
 
   async scanConfirmedInputs(fromHeight: string) {
-    const current = await this.etherProvider.getBlockNumber();
+      const current = await this.etherProvider.getBlockNumber();
 
-    const toHeight = BigInt(current) - ConfirmedThreshold;
+      const toHeight = BigInt(current) - ConfirmedThreshold;
 
-    // if (toHeight <= BigInt(fromHeight)) {
-    //   return [fromHeight, null];
-    // }
+      // if (toHeight <= BigInt(fromHeight)) {
+      //   return [fromHeight, null];
+      // }
 
-    const filterInput = this.etherChannelContract.filters.Input(
-      null,
-      null,
-      null,
-      null
-    );
+      const filterInput = this.etherChannelContract.filters.Input(null,
+          null,
+          null,
+          null);
 
-    const inputs = await this.etherChannelContract.queryFilter(
-      filterInput,
-      +fromHeight,
-      +toHeight.toString()
-    );
+      const inputs = await this.etherChannelContract.queryFilter(filterInput,
+          +fromHeight,
+          +toHeight.toString());
 
-    if (!inputs || inputs.length === 0) {
-      return { toHeight, inputs: [] };
-    }
-    return {
-      toHeight,
-      inputs: inputs.map((input: any) => {
-        return {
-          id: input.args.id,
-          index: input.args.index,
-          height: input.blockNumber,
-          txIndex: input.transactionIndex,
-          logIndex: input.logIndex,
-          event: input.args,
-        };
-      }),
-    };
+      if (!inputs || inputs.length === 0) {
+          return { toHeight, inputs: [] };
+      }
+      return {
+          toHeight,
+          inputs: inputs.map((input: any) => {
+              return {
+                  id: input.args.id,
+                  index: input.args.index,
+                  height: input.blockNumber,
+                  txIndex: input.transactionIndex,
+                  logIndex: input.logIndex,
+                  event: input.args
+              };
+          })
+      };
   }
-
-
 
 
   // async signId(id: string) {
@@ -127,30 +116,30 @@ export class ChannelERC20 {
   //   return signingKey.signDigest(id);
   // }
   async output(id: string, address: string, value: string) {
-    return this.etherChannelContract.output(id, address, value);
+      return this.etherChannelContract.output(id, address, value);
   }
+
   async input(address: string, value: string) {
-    return this.etherChannelContract.output(address, value);
+      return this.etherChannelContract.output(address, value);
   }
+
   async inputIndex() {
-    return this.etherChannelContract.inputIndex();
+      return this.etherChannelContract.inputIndex();
   }
 
   async prevInputId() {
-    return this.etherChannelContract.prevInputId();
+      return this.etherChannelContract.prevInputId();
   }
 
   async outputIndex() {
-    return this.etherChannelContract.outputIndex();
+      return this.etherChannelContract.outputIndex();
   }
 
   async prevOutputId() {
-    return this.etherChannelContract.prevOutputId();
+      return this.etherChannelContract.prevOutputId();
   }
 
   async token() {
-    return this.etherChannelContract.token();
+      return this.etherChannelContract.token();
   }
-
-
 }

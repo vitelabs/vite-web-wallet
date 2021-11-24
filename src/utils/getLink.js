@@ -16,7 +16,7 @@ export function getTxLink(locale, hash) {
     const link = {
         viteView: `${ baseUrl }#/tx/${ hash }`,
         viteScan: `${ baseUrl }tx/${ hash }`
-    }
+    };
     return link[explorer.name];
 }
 
@@ -25,7 +25,7 @@ export function getTokenLink(locale, tokenId) {
     const link = {
         viteView: `${ baseUrl }#/token/${ tokenId }`,
         viteScan: `${ baseUrl }token/${ tokenId }`
-    }
+    };
     return link[explorer.name];
 }
 
@@ -34,7 +34,7 @@ export function getAccountLink(locale, address) {
     const link = {
         viteView: `${ baseUrl }#/account/${ address }`,
         viteScan: `${ baseUrl }address/${ address }`
-    }
+    };
     return link[explorer.name];
 }
 
@@ -43,7 +43,7 @@ export function getSBPLink(locale, name) {
     const link = {
         viteView: `${ baseUrl }#/sbp/${ name }`,
         viteScan: `${ baseUrl }sbp/${ name }`
-    }
+    };
     return link[explorer.name];
 }
 
