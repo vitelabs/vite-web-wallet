@@ -20,6 +20,7 @@
         "lint:all": "eslint --ext ts,js,vue --fix .",
         "lint": "eslint --ext ts,js,vue --cache --fix .",
         "stylelint": "stylelint **/*.vue --custom-syntax postcss-html --fix",
+        "stylelintScss": "stylelint **/*.scss --custom-syntax postcss-scss --fix",
         "publish:stage": "npm run build:all && wrangler publish --env stage",
         "publish": "npm run build:all && wrangler publish --env production"
     },
