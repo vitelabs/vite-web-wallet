@@ -4,6 +4,9 @@ declare type bnStr = string
 declare type tokenId = string
 declare type tokenSymbol = string
 
+declare global{
+   let ethereum:any;
+}
 declare interface HDAccount {
     id: string;
     lang: string;

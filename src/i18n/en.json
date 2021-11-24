@@ -256,10 +256,7 @@
             "failedConnected": "Node connection error",
             "inputPlaceholder": "Please enter the node url prefix with wss."
         },
-        "triggerGate": [
-            "Close",
-            "Open"
-        ],
+        "triggerGate": ["Close", "Open"],
         "gateHelp": "You can customize your gateway configuration when activating this feature. Currently this feature is mainly for developers.",
         "lang": "Language",
         "block": "Current Height",
@@ -284,10 +281,13 @@
             "720": "12 Hours"
         },
         "theme": "Theme color",
-        "themeList": [
-            "Light",
-            "Dark"
-        ]
+        "themeList": ["Light", "Dark"]
+    },
+    "bridgeHistory": {
+        "title": "History"
+    },
+    "bridgeMain": {
+        "title": "Bridge"
     },
     "create": {
         "input": "Please enter your password",
@@ -794,13 +794,7 @@
         },
         "section2": {
             "title": "SBP candidates",
-            "head": [
-                "Rank",
-                "Node Name",
-                "Address",
-                "Votes",
-                "Action"
-            ],
+            "head": ["Rank", "Node Name", "Address", "Votes", "Action"],
             "confirm": {
                 "normal": {
                     "content": "You can vote for only one SBP, are you sure you want to vote for {name}?",
@@ -1083,11 +1077,7 @@
             "new": "Initiate Delegation",
             "active": {
                 "title": "Delegation History",
-                "head": [
-                    "Delegatee Address",
-                    "Trading Pairs",
-                    "Action"
-                ],
+                "head": ["Delegatee Address", "Trading Pairs", "Action"],
                 "operate": [
                     "Add Trading Pairs",
                     "Remove Trading Pairs",
@@ -1096,10 +1086,7 @@
             },
             "passive": {
                 "title": "Accepted Delegation History",
-                "head": [
-                    "Delegation Address",
-                    "Trading Pairs"
-                ]
+                "head": ["Delegation Address", "Trading Pairs"]
             },
             "dialog": {
                 "cancel": "Cancel",
@@ -1191,12 +1178,7 @@
         "all": "All",
         "confirmTable": {
             "title": "Detailed Record",
-            "heads": [
-                "Date",
-                "Token",
-                "Type",
-                "Amount"
-            ]
+            "heads": ["Date", "Token", "Type", "Amount"]
         },
         "pwdConfirm": {
             "cancelTxt": "Cancel"
@@ -1298,13 +1280,7 @@
         },
         "confirmTable": {
             "title": "Order Book",
-            "heads": [
-                "Time",
-                "Price",
-                "Amount",
-                "Fees",
-                "Total"
-            ]
+            "heads": ["Time", "Price", "Amount", "Fees", "Total"]
         },
         "table": {
             "heads": [

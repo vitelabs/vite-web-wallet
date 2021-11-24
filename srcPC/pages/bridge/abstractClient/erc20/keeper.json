@@ -1,0 +1,166 @@
+[
+    {
+        "inputs": [
+            {
+                "internalType": "address[]",
+                "name": "_addrs",
+                "type": "address[]"
+            },
+            {
+                "internalType": "uint8",
+                "name": "_threshold",
+                "type": "uint8"
+            }
+        ],
+        "stateMutability": "nonpayable",
+        "type": "constructor"
+    },
+    {
+        "anonymous": false,
+        "inputs": [
+            {
+                "indexed": false,
+                "internalType": "bytes32",
+                "name": "id",
+                "type": "bytes32"
+            }
+        ],
+        "name": "Approved",
+        "type": "event"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "uint8[]",
+                "name": "sigV",
+                "type": "uint8[]"
+            },
+            {
+                "internalType": "bytes32[]",
+                "name": "sigR",
+                "type": "bytes32[]"
+            },
+            {
+                "internalType": "bytes32[]",
+                "name": "sigS",
+                "type": "bytes32[]"
+            },
+            {
+                "internalType": "bytes32",
+                "name": "id",
+                "type": "bytes32"
+            },
+            {
+                "internalType": "address payable",
+                "name": "dest",
+                "type": "address"
+            },
+            {
+                "internalType": "uint256",
+                "name": "value",
+                "type": "uint256"
+            },
+            {
+                "internalType": "contract IChannel",
+                "name": "channel",
+                "type": "address"
+            }
+        ],
+        "name": "approveAndExecOutput",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "uint8[]",
+                "name": "sigV",
+                "type": "uint8[]"
+            },
+            {
+                "internalType": "bytes32[]",
+                "name": "sigR",
+                "type": "bytes32[]"
+            },
+            {
+                "internalType": "bytes32[]",
+                "name": "sigS",
+                "type": "bytes32[]"
+            },
+            {
+                "internalType": "bytes32",
+                "name": "id",
+                "type": "bytes32"
+            }
+        ],
+        "name": "approveId",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "bytes32",
+                "name": "id",
+                "type": "bytes32"
+            }
+        ],
+        "name": "approved",
+        "outputs": [],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "bytes32",
+                "name": "",
+                "type": "bytes32"
+            }
+        ],
+        "name": "approvedIds",
+        "outputs": [
+            {
+                "internalType": "bool",
+                "name": "",
+                "type": "bool"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "address",
+                "name": "",
+                "type": "address"
+            }
+        ],
+        "name": "keepers",
+        "outputs": [
+            {
+                "internalType": "bool",
+                "name": "",
+                "type": "bool"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "threshold",
+        "outputs": [
+            {
+                "internalType": "uint8",
+                "name": "",
+                "type": "uint8"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    }
+]
