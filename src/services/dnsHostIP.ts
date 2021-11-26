@@ -24,7 +24,7 @@ export const Server = {
         url: 'https://static.vite.net/web-wallet-1257137467',
         watchList: []
     },
-    bridge: {
+    BRIDGE: {
         // PC
         hostKey: 'BRIDGE',
         url: 'https://buidl.vite.net',
