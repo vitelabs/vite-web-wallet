@@ -7,6 +7,11 @@ const langMap = {
     en: 'en'
 };
 
+export const BridgeAPI = new DNSClient({
+    serverKey: 'BRIDGE',
+    baseUrl: '/bridge'
+});
+
 export const ConversionAPI = new DNSClient({
     serverKey: 'conversionGate',
     baseUrl: '/gw'
