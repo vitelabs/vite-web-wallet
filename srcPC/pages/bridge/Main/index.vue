@@ -82,8 +82,8 @@
             <div class="__row" v-if="!requireBSCConnect">
                 <div class="__row-tips">
                     <div><span class="red-dot"></span>Reminder</div>
-                    <div>max {{ richNetworkPair.from.max }}</div>
-                    <div>min {{ richNetworkPair.to.min }}</div>
+                    <div>The maximum amount is {{ richNetworkPair.from.max }} {{curToken.label}}</div>
+                    <div>The minimum amount is {{ richNetworkPair.to.min }} {{curToken.label}}</div>
                 </div>
             </div>
             <div class="progress-bar">
@@ -249,7 +249,9 @@ export default {
             //   return pre;
             // },{})
             t.tokens[0].channels[0].forEach(t => {
-                this.networkMeta[t.network] = t;
+                this.networkMeta[t.network] = Object.assign({},
+                    this.networkMeta[t.network] || {},
+                    t);
             });
         });
     },
@@ -317,7 +319,8 @@ export default {
             return net;
         },
         curSelectFromNet() {
-            const net = this.netList.find(t => t.value === this.networkPair.from);
+            const net
+                = this.netList.find(t => t.value === this.networkPair.from) || {};
             net.icon = null;
             return net;
         },
@@ -509,7 +512,8 @@ export default {
         async requestConnect2MetaMask() {
             try {
                 this.isConnectingMetaMask = true;
-                ethereum?.request({ method: 'eth_requestAccounts' });
+                await ethereum?.request({ method: 'eth_requestAccounts' });
+                this.networkMeta['BSC'].status = 'CONNECTED';
             } finally {
                 this.isConnectingMetaMask = false;
             }
