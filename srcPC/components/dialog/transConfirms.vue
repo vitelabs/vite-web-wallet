@@ -11,16 +11,16 @@ block content
                 img.net-icon(:src='networkPair.from.icon')
                 .confirm-info
                     .trans-info
-                        .amount {{amount+tokenInfo.token}}
-                        .tx-hash {{tx.fromHash?tx.fromHash:'pending'}}
+                        .amount {{transInfo.amount+tokenInfo.token}}
+                        .tx-hash(:class="{pending:!tx.fromHash}") {{tx.fromHash?tx.fromHash:'pending'}}
                     .confirms Confirms({{(tx.confirms||0)+'/'+(tx.totalConfirms||0)}})
             .card
                 img.net-icon(:src='networkPair.to.icon')
                 .confirm-info
                     .trans-info
-                        .amount {{amount+tokenInfo.token}}
-                        .tx-hash {{tx.toHash?tx.toHash:'pending'}}
-                    .confirms To {{tx.toAddress}}
+                        .amount {{transInfo.amount+tokenInfo.token}}
+                        .tx-hash(:class="{pending:!tx.toHash}") {{tx.toHash?tx.toHash:'pending'}}
+                    .confirms.toAddress(@click="addressClick") To {{transInfo.toAddress}}
 </template>
 <script>
 // {
@@ -34,14 +34,45 @@ block content
 // 	toHashConfirmationNums: number
 // }
 import rightCircle from 'assets/imgs/crossBridge/right.png';
+import execCopy from 'utils/copy';
+import { getTx } from 'pcServices/conversion';
+import { timer } from 'utils/asyncFlow';
+
 export default {
     props: [ 'networkPair', 'tokenInfo', 'transInfo' ],
     data() {
-        return { dTitle: 'Confirm', tx: {}, rightCircle, ShowBottom: false };
+        return {
+            dTitle: 'Confirm',
+            tx: {},
+            rightCircle,
+            ShowBottom: false,
+            loopTimer: null
+        };
     },
-    beforeMount() {},
+    mounted() {
+        const { inputId, fromAddress, toAddress } = this.transInfo;
+        console.log('mmmmmm');
+        this.loopTimer = new timer(() => {
+            console.log('loooooop');
+            getTx({
+                from: fromAddress,
+                to: toAddress,
+                id: inputId
+            });
+        });
+        this.loopTimer.start();
+    },
+    beforeDestroy() {
+        console.log('stopppppp[');
+        this.loopTimer?.stop();
+    },
     computed: {},
-    methods: {}
+    methods: {
+        addressClick() {
+            execCopy(this.transInfo.toAddress);
+            this.$toast(this.$t('hint.copy'));
+        }
+    }
 };
 </script>
 
@@ -100,11 +131,23 @@ export default {
                 display: flex;
                 justify-content: space-between;
                 width: 100%;
+                .toAddress {
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    cursor: pointer;
+                    white-space: nowrap;
+                    max-width: 250px;
+                }
                 .trans-info {
                     display: flex;
                     flex-direction: column;
                     .amount {
                         margin-bottom: 8px;
+                    }
+                    .tx-hash {
+                        &.pending {
+                            color: #44d7b6;
+                        }
                     }
                 }
             }

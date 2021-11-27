@@ -22,7 +22,7 @@ block content
                     .text {{tokenInfo.token}}
             .content-item
                 .label Destination:
-                div(@click) {{transInfo.toAddress}}
+                .toAddress(@click="addressClick") {{transInfo.toAddress}}
             .content-item
                 .label NetWorkFee:
                 div {{networkPair.from.fee.fixed}}
@@ -114,6 +114,11 @@ export default {
         height: 40px;
         display: flex;
         align-items: center;
+        .toAddress {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            cursor: pointer;
+        }
         .accets-container {
             display: flex;
             align-items: center;

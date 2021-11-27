@@ -5,4 +5,3 @@ include base.pug
 <script>
 export default {};
 </script>
-

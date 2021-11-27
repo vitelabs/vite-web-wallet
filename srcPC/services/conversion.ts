@@ -26,26 +26,21 @@ export const balance = function ({ address }) {
 };
 
 export const getTxs = function (params: {
-    from: string;
-    to: string;
+    fromAddress: string;
+    fromNet: string;
+}): Promise<{
+    id: string;
+    idx: number;
+    amount: string;
     fromAddress: string;
     toAddress: string;
-    desc: boolean;
-}): Promise<
-    {
-        id: string;
-        idx: number;
-        amount: string;
-        fromAddress: string;
-        toAddress: string;
-        fromHash: string;
-        fromHashConfirmationNums: number;
-        toHash: string;
-        toHashConfirmationNums: number;
-        fee: string;
-        time: string;
-    }[]
-> {
+    fromHash: string;
+    fromHashConfirmationNums: number;
+    toHash: string;
+    toHashConfirmationNums: number;
+    fee: string;
+    time: string;
+}[]> {
     // return Promise.resolve([
     //     {
     //         id: '',

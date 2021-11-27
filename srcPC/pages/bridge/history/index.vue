@@ -1,16 +1,19 @@
 <template>
-    <wallet-table :headList="headList" :contentList="contentList"></wallet-table>
+    <wallet-table
+        :headList="headList"
+        :contentList="contentList"
+    ></wallet-table>
 </template>
 
 <script>
 import walletTable from 'pcComponents/table/index.vue';
 import { getTxs } from 'pcServices/conversion';
 export default {
-    props: [ 'fromAdr', 'to', 'fromAddress', 'toAddress', 'desc', 'tokenSymbol' ],
+    props: [],
     components: { walletTable },
     mounted() {
-        const { from, to, fromAddress, toAddress, desc } = this.$props;
-        getTxs({ from, to, fromAddress, toAddress, desc }).then(data => {
+        const address = this.$store.state.wallet.currHDAcc?.activeAddr;
+        getTxs({ fromAddress: address, fromNet: 'VITE' }).then(data => {
             (data || []).forEach(item => {
                 item['status'] = item.toHash ? 'success' : 'pending';
             });

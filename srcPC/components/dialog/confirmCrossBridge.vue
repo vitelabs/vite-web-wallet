@@ -13,14 +13,16 @@ block originContent
         .bri-trans__label  You need to tranfer to the address provoded below：
         .bri-trans__content
             .title Address
-            .address {{transInfo.toAddress}}
+            .address(@click="addressClick") {{transInfo.toAddress}}
 </template>
 <script>
 import checkbox from 'uiKit/checkbox.vue';
+import execCopy from 'utils/copy';
+
 export default {
     components: { checkbox },
     name: 'ConfirmSubmitTx',
-    props: [ 'networkPair', 'tokenInfo', 'transInfo' ],
+    props: [ 'networkPair', 'tokenInfo', 'transInfo', 'inspector' ],
     data() {
         return {
             dTitle: 'Confirm Submit transation',
@@ -30,7 +32,12 @@ export default {
     },
     beforeMount() {},
     computed: {},
-    methods: {}
+    methods: {
+        addressClick() {
+            execCopy(this.transInfo.toAddress);
+            this.$toast(this.$t('hint.copy'));
+        }
+    }
 };
 </script>
 
@@ -93,6 +100,10 @@ export default {
         @include box_shadow();
         .title {
             @include font-family-bold();
+        }
+        .address {
+            word-break: break-all;
+            cursor: pointer;
         }
     }
 }

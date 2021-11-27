@@ -82,8 +82,14 @@
             <div class="__row" v-if="!requireBSCConnect">
                 <div class="__row-tips">
                     <div><span class="red-dot"></span>Reminder</div>
-                    <div>The maximum amount is {{ richNetworkPair.from.max }} {{curToken.label}}</div>
-                    <div>The minimum amount is {{ richNetworkPair.to.min }} {{curToken.label}}</div>
+                    <div>
+                        The maximum amount is {{ richNetworkPair.from.max }}
+                        {{ curToken.label }}
+                    </div>
+                    <div>
+                        The minimum amount is {{ richNetworkPair.to.min }}
+                        {{ curToken.label }}
+                    </div>
                 </div>
             </div>
             <div class="progress-bar">
@@ -384,6 +390,7 @@ export default {
         },
         async onNextClick() {
             const curNet = this.networkPair.from;
+            const toNet = this.networkPair.to;
             if (!erc20Contract && curNet === 'BSC') return;
             const toAddress = this.toAddress;
             const curChannel = this.getChannelInfo(curNet);
@@ -392,6 +399,7 @@ export default {
             const decimals = curChannel.decimals;
             const ammountMin = bnUtils.toMin(this.amount, decimals);
             let balanceMin = null;
+            const tokenId = this.curTokenInfo.tokenId;
             try {
                 balanceMin = await this.getBalance(curNet);
             } catch (e) {
@@ -425,52 +433,65 @@ export default {
                 this.$toast(amountErrMsg);
                 return;
             }
-            if (curNet === 'BSC') {
+            if (toNet === 'BSC') {
                 if (!ethers.utils.isAddress(toAddress)) {
                     this.$toast('Illegal address');
                     return;
                 }
             }
-            if (curNet === 'VITE') {
+            if (toNet === 'VITE') {
                 if (!wallet.isValidAddress(toAddress)) {
                     this.$toast('Illegal address');
                     return;
                 }
             }
+            const fromAddress = await this.getAddress(curNet);
             const params = {
                 networkPair: this.richNetworkPair,
                 tokenInfo: this.curTokenInfo,
                 transInfo: {
-                    toAddress: toAddress,
+                    fromAddress,
+                    toAddress,
                     fee: 0,
                     amount: this.amount,
                     estimateAmount: this.amount
                 }
             };
+
             await confirmBriTxDialog(params);
-
-            await confirmCrossBridgeDialog(params);
-
-            if (curNet === 'BSC') {
-                await erc20Contract.approve(channelAddress, ammountMin);
-                const erc20hChannel = new Contract(channelAddress,
-                    _channelAbi,
-                    new ethers.providers.Web3Provider(window.ethereum).getSigner());
-                const originAddr = `0x${ wallet.getOriginalAddressFromAddress(toAddress) }`;
-                console.log(999, originAddr, ammountMin);
-                await erc20hChannel.input(originAddr, ammountMin);
-            } else if (curNet === 'VITE') {
-                const ss = await execWithValid(() =>
-                    new ChannelVite({
+            async function sendTx() {
+                let inputId = '';
+                if (curNet === 'BSC') {
+                    await erc20Contract.approve(channelAddress, ammountMin);
+                    const erc20hChannel = new Contract(channelAddress,
+                        _channelAbi,
+                        new ethers.providers.Web3Provider(window.ethereum).getSigner());
+                    const originAddr = `0x${ wallet.getOriginalAddressFromAddress(toAddress) }`;
+                    await erc20hChannel.input(originAddr, ammountMin);
+                    inputId = await erc20hChannel.prevInputId();
+                } else if (curNet === 'VITE') {
+                    const channelClient = new ChannelVite({
                         address: channelAddress,
-                        tokenId: this.curTokenInfo.tokenId
-                    }).input(toAddress, ammountMin))();
+                        tokenId
+                    });
+                    await execWithValid(() =>
+                        channelClient.input(toAddress, ammountMin))();
+                    inputId = await channelClient.prevInputId();
+                }
+                return inputId;
             }
+            const result = await confirmCrossBridgeDialog({
+                ...params,
+                inspector: sendTx
+            });
+
+            const inputId = result?.data?.[0];
+            console.log('tx result-----', result);
+            if (!inputId) return;
+            params.transInfo['inputId'] = inputId;
             await transConfirmsDialog(params);
         },
         async getAddress(net) {
-            console.log(9999999,
-                this.$store.state.wallet.currHDAcc?.activeAddr);
             if (net === 'VITE') return this.$store.state.wallet.currHDAcc?.activeAddr;
             if (net === 'BSC') return window.ethereum?.selectedAddress;
         },
