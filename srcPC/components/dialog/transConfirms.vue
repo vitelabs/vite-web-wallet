@@ -51,9 +51,7 @@ export default {
     },
     mounted() {
         const { inputId, fromAddress, toAddress } = this.transInfo;
-        console.log('mmmmmm');
         this.loopTimer = new timer(() => {
-            console.log('loooooop');
             getTx({
                 from: fromAddress,
                 to: toAddress,
@@ -63,7 +61,6 @@ export default {
         this.loopTimer.start();
     },
     beforeDestroy() {
-        console.log('stopppppp[');
         this.loopTimer?.stop();
     },
     computed: {},

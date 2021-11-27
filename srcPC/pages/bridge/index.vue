@@ -14,17 +14,17 @@ import pageLayout from 'pcComponents/pageLayout/index';
 export default {
     components: { pageLayout },
     mounted() {},
-    computed: { address() {} },
+    computed: {},
     watch: {}
 };
 </script>
 
 <style lang="scss" scoped>
-.trade-container {
+.bridge-container {
     width: 100%;
     height: 100%;
 }
-.trade-wrapper {
+.bridge-wrapper {
     display: flex;
     flex-direction: column;
     height: 100%;

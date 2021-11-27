@@ -236,7 +236,6 @@ export default {
                 : 'UNCONNECT';
 
             ethereum.on('accountsChanged', accounts => {
-                console.log(9999, accounts);
                 this.networkMeta['BSC'].status = accounts?.[0]
                     ? 'CONNECTED'
                     : 'UNCONNECT';
@@ -360,6 +359,10 @@ export default {
             this.reGenErc20();
             this.resetBalance();
         },
+        'richNetworkPair.from.status': async function (val) {
+            this.reGenErc20();
+            this.resetBalance();
+        },
         curToken: async function (val) {
             this.reGenErc20();
             this.resetBalance();
@@ -369,7 +372,6 @@ export default {
         async resetBalance() {
             this.balance = new BigNumber(0);
             const balance = await this.getBalance(this.networkPair.from);
-            console.log('rrrrrfetch', balance);
             this.balance = balance;
         },
         async reGenErc20() {
@@ -383,7 +385,6 @@ export default {
                 _erc20Abi,
                 new ethers.providers.Web3Provider(window.ethereum).getSigner());
             const balance = await this.getBalance(this.networkPair.from);
-            console.log('token change', 'balance', balance);
         },
         async getTokens() {
             return fetch('https://raw.githubusercontent.com/vitelabs/vite-asset-bridge/master/meta.json').then(data => data.json());
@@ -429,7 +430,6 @@ export default {
                 errorMap: errorMap
             })(this.amount);
             if (amountErrMsg) {
-                console.log(amountErrMsg);
                 this.$toast(amountErrMsg);
                 return;
             }
@@ -476,7 +476,7 @@ export default {
                     });
                     await execWithValid(() =>
                         channelClient.input(toAddress, ammountMin))();
-                    inputId = await channelClient.prevInputId();
+                    inputId = (await channelClient.prevInputId())?.[0];
                 }
                 return inputId;
             }
@@ -485,7 +485,7 @@ export default {
                 inspector: sendTx
             });
 
-            const inputId = result?.data?.[0];
+            const inputId = result?.data;
             console.log('tx result-----', result);
             if (!inputId) return;
             params.transInfo['inputId'] = inputId;
@@ -505,7 +505,6 @@ export default {
             const channel = this.getChannelInfo(this.networkPair.from);
 
             const tokenId = channel?.erc20 || channel?.tokenId;
-            console.log(22222, address, tokenId);
 
             if (!address || !tokenId) return null;
 
@@ -542,9 +541,7 @@ export default {
         async autoFillMax() {
             this.amount = this.balanceMan;
         },
-        onSelected(v) {
-            console.log(99999, v);
-        }
+        onSelected(v) {}
     }
 };
 // parent weird animal coil sister damp tunnel cover stick plug ivory luggage
