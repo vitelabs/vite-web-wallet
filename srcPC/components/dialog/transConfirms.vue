@@ -11,16 +11,19 @@ block content
                 img.net-icon(:src='networkPair.from.icon')
                 .confirm-info
                     .trans-info
-                        .amount {{transInfo.amount+tokenInfo.token}}
+                        .amount {{transInfo.amount+' '+tokenInfo.token}}
                         .tx-hash(:class="{pending:!tx.fromHash}") {{tx.fromHash?tx.fromHash:'pending'}}
-                    .confirms Confirms({{(tx.confirms||0)+'/'+(tx.totalConfirms||0)}})
+                    .confirms
+                        .address(@click="addressClick(transInfo.fromAddress)") From {{transInfo.fromAddress}}
+                        .nums ({{(tx.confirms||0)+'/'+(tx.totalConfirms||0)}})
             .card
                 img.net-icon(:src='networkPair.to.icon')
                 .confirm-info
                     .trans-info
-                        .amount {{transInfo.amount+tokenInfo.token}}
+                        .amount {{transInfo.amount+' '+tokenInfo.token}}
                         .tx-hash(:class="{pending:!tx.toHash}") {{tx.toHash?tx.toHash:'pending'}}
-                    .confirms.toAddress(@click="addressClick") To {{transInfo.toAddress}}
+                    .confirms
+                        .address(@click="addressClick(transInfo.toAddress)") To {{transInfo.toAddress}}
 </template>
 <script>
 // {
@@ -65,8 +68,8 @@ export default {
     },
     computed: {},
     methods: {
-        addressClick() {
-            execCopy(this.transInfo.toAddress);
+        addressClick(value) {
+            execCopy(value);
             this.$toast(this.$t('hint.copy'));
         }
     }
@@ -108,7 +111,7 @@ export default {
 
         .card {
             display: flex;
-            padding: 15px;
+            padding: 30px 15px;
             height: 100px;
             width: 408px;
             box-sizing: border-box;
@@ -128,20 +131,39 @@ export default {
                 display: flex;
                 justify-content: space-between;
                 width: 100%;
-                .toAddress {
-                    overflow: hidden;
-                    text-overflow: ellipsis;
-                    cursor: pointer;
-                    white-space: nowrap;
-                    max-width: 250px;
+                font-size: 14px;
+                min-width: 200px;
+                .confirms {
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: space-between;
+                    align-items: flex-end;
+                    flex-shrink: 1;
+                    .address {
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                        cursor: pointer;
+                        white-space: nowrap;
+                        max-width: 210px;
+                    }
                 }
+
                 .trans-info {
                     display: flex;
                     flex-direction: column;
+                    margin-right: 10px;
+                    flex-shrink: 1;
                     .amount {
                         margin-bottom: 8px;
+                        @include font-family-bold();
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                        cursor: pointer;
+                        white-space: nowrap;
+                        max-width: 100px;
                     }
                     .tx-hash {
+                        @include font_color_2();
                         &.pending {
                             color: #44d7b6;
                         }
