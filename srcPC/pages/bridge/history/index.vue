@@ -13,11 +13,16 @@ export default {
     components: { walletTable },
     mounted() {
         const address = this.$store.state.wallet.currHDAcc?.activeAddr;
-        getTxs({ fromAddress: address, fromNet: 'VITE' }).then(data => {
-            (data || []).forEach(item => {
-                item['status'] = item.toHash ? 'success' : 'pending';
-            });
-            this.contentList = data;
+        getTxs({ fromAddress: address, fromNet: 'VITE' }).then(result => {
+            if (result && result.code === 0) {
+                const data = result.data;
+                (data || []).forEach(item => {
+                    item['status'] = item.toHash ? 'success' : 'pending';
+                });
+                this.contentList = data;
+            } else {
+                this.contentList = [];
+            }
         });
     },
     data() {
