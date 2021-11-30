@@ -14,7 +14,6 @@ export default {
     mounted() {
         const address = this.$store.state.wallet.currHDAcc?.activeAddr;
         getTxs({ fromAddress: address, fromNet: 'VITE' }).then(data => {
-            const data = result.data;
             (data || []).forEach(item => {
                 item['status'] = item.toHash ? 'success' : 'pending';
             });
