@@ -22,16 +22,33 @@ import execCopy from 'utils/copy';
 export default {
     components: { checkbox },
     name: 'ConfirmSubmitTx',
-    props: [ 'networkPair', 'tokenInfo', 'transInfo', 'inspector' ],
+    props: [
+        'networkPair',
+        'tokenInfo',
+        'transInfo',
+        'inspector',
+        'checkApprove'
+    ],
     data() {
         return {
             dTitle: 'Confirm Submit transation',
-            dSTxt: 'Submit transation',
-            accepted: false
+            accepted: false,
+            approved: false
         };
     },
-    beforeMount() {},
-    computed: {},
+    async beforeMount() {
+        this.approved = await this.checkApprove();
+    },
+    computed: {
+        dSTxt: function () {
+            return this.approved ? 'Submit transation' : 'Submit approve';
+        }
+    },
+    watch: {
+        btnLoading: async function () {
+            this.approved = await this.checkApprove();
+        }
+    },
     methods: {
         addressClick() {
             execCopy(this.transInfo.toAddress);

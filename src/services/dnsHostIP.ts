@@ -27,7 +27,7 @@ export const Server = {
     BRIDGE: {
         // PC
         hostKey: 'BRIDGE',
-        url: 'https://buidl.vite.net',
+        url: process.env.BRIDGE,
         watchList: []
     },
     ethExplorer: {

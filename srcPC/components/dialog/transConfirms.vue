@@ -12,18 +12,24 @@ block content
                 .confirm-info
                     .trans-info
                         .amount {{transInfo.amount+' '+tokenInfo.token}}
-                        .tx-hash(:class="{pending:!tx.fromHash}") {{tx.fromHash?tx.fromHash:'pending'}}
-                    .confirms
                         .address(@click="addressClick(transInfo.fromAddress)") From {{transInfo.fromAddress}}
-                        .nums ({{(tx.confirms||0)+'/'+(tx.totalConfirms||0)}})
+                    .confirms
+                        .tx-hash(:class="{pending:!tx.fromHash}" @click="tx.fromHash&&addressClick(tx.fromHash)")
+                            |{{tx.fromHash?tx.fromHash:'pending'}}
+                            Loading(loadingType="dot" v-show="!tx.fromHash" :dotSize="1" class="confirm-loading")
+                        .nums ({{(tx.fromHashConfirmationNums||0)+'/'+(networkPair.from.confirmedThreshold||0)}})
             .card
                 img.net-icon(:src='networkPair.to.icon')
                 .confirm-info
                     .trans-info
                         .amount {{transInfo.amount+' '+tokenInfo.token}}
-                        .tx-hash(:class="{pending:!tx.toHash}") {{tx.toHash?tx.toHash:'pending'}}
-                    .confirms
                         .address(@click="addressClick(transInfo.toAddress)") To {{transInfo.toAddress}}
+                    .confirms
+                        .tx-hash(:class="{pending:!tx.toHash}" @click="tx.toHash&&addressClick(tx.toHash)")
+                            | {{tx.toHash?tx.toHash:'pending'}}
+                            Loading(loadingType="dot" v-show="!tx.toHash" :dotSize="1" class="confirm-loading")
+                        .nums ({{(tx.toHashConfirmationNums||0)+'/'+(networkPair.to.confirmedThreshold||0)}})
+
 </template>
 <script>
 // {
@@ -55,10 +61,37 @@ export default {
     mounted() {
         const { inputId, fromAddress, toAddress } = this.transInfo;
         this.loopTimer = new timer(() => {
+            // const data = {
+            //     code: 0,
+            //     data: {
+            //         id:
+            //             '0xdb87d64f7847f146aab26a657c00adcd08a2697b07661065ba5bc7ffe5b17d0e',
+            //         idx: '2',
+            //         amount: '121000000000000000',
+            //         fromAddress: '0xea71ff0553eF77cc3Ca6b5ad82662BCe50E7f068',
+            //         toAddress: '0xb90388add928d41c114b0fb65471c4a6c70595eb00',
+            //         token: 'USDV',
+            //         fromNet: 'BSC',
+            //         fromHash:
+            //             '0x5960e20e1725d8d7cf56032fe854e00cb4d748a842e97f2b3d3b4c4c30714051',
+            //         fromHashConfirmedHeight: 14583821,
+            //         fromHashConfirmationNums: 13797,
+            //         fee: '0',
+            //         time: 1638329455,
+            //         toNet: 'VITE',
+            //         toHash:
+            //             '0x21676d28b8915e8a32cd5ea4367d4d1373901513ba391e80bda03d90f696a78e',
+            //         toHashConfirmedHeight: 3074523,
+            //         toHashConfirmationNums: 39407
+            //     }
+            // };
+            // this.tx = data.data || this.tx;
             getTx({
                 from: fromAddress,
                 to: toAddress,
                 id: inputId
+            }).then(data => {
+                this.tx = data.data || this.tx;
             });
         });
         this.loopTimer.start();
@@ -130,27 +163,14 @@ export default {
             .confirm-info {
                 display: flex;
                 justify-content: space-between;
+                flex-direction: column;
                 width: 100%;
                 font-size: 14px;
                 min-width: 200px;
-                .confirms {
-                    display: flex;
-                    flex-direction: column;
-                    justify-content: space-between;
-                    align-items: flex-end;
-                    flex-shrink: 1;
-                    .address {
-                        overflow: hidden;
-                        text-overflow: ellipsis;
-                        cursor: pointer;
-                        white-space: nowrap;
-                        max-width: 210px;
-                    }
-                }
 
                 .trans-info {
                     display: flex;
-                    flex-direction: column;
+                    justify-content: space-between;
                     margin-right: 10px;
                     flex-shrink: 1;
                     .amount {
@@ -162,10 +182,38 @@ export default {
                         white-space: nowrap;
                         max-width: 100px;
                     }
+                    .address {
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                        cursor: pointer;
+                        white-space: nowrap;
+                        max-width: 210px;
+                    }
+                }
+                .confirms {
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: flex-end;
+                    flex-shrink: 1;
                     .tx-hash {
                         @include font_color_2();
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                        cursor: pointer;
+                        white-space: nowrap;
+                        max-width: 210px;
                         &.pending {
                             color: #44d7b6;
+                            /deep/ .confirm-loading {
+                                margin-left: 5px;
+                                .dot {
+                                    div {
+                                        background: #44d7b6;
+                                        width: 4px;
+                                        height: 4px;
+                                    }
+                                }
+                            }
                         }
                     }
                 }

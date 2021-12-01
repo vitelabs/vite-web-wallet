@@ -188,7 +188,8 @@ const mockTokens = {
                     {
                         network: 'BSC',
                         desc: 'BSC TestNet ',
-                        icon: 'https://static.vite.net/image-1257137467/logo/bsc-logo.png',
+                        icon:
+                            'https://static.vite.net/image-1257137467/logo/bsc-logo.png',
                         contract: '0x2fe56db3f21815ab26828debc175ab08d91cf81d',
                         erc20: '0x337610d27c682e347c9cd60bd4b3b107c9d34ddd',
                         decimals: 18,
@@ -200,7 +201,8 @@ const mockTokens = {
                     {
                         network: 'VITE',
                         desc: 'Vite TestNet',
-                        icon: 'https://static.vite.net/image-1257137467/logo/VITE-logo.png',
+                        icon:
+                            'https://static.vite.net/image-1257137467/logo/VITE-logo.png',
                         contract:
                             'vite_75043ce60463a3c14b188a1505fd359acaef278c16dece5a0b',
                         tokenId: 'tti_ece34ebace895e3506a24064',
@@ -297,7 +299,8 @@ export default {
         tokenInfos() {
             const tokenMap = this.$store.getters.allTokensMap || {};
             return (this.tokens || []).map(t => {
-                const tokenId = t.channels[0].find(c => c.network === 'VITE')?.tokenId;
+                const tokenId = t.channels[0].find(c => c.network === 'VITE')
+                    ?.tokenId;
                 return {
                     ...t,
                     icon: t?.icon || getTokenIcon(tokenId),
@@ -399,7 +402,8 @@ export default {
             let balanceMin = null;
             const tokenId = this.curTokenInfo.tokenId;
             try {
-                balanceMin = await this.getBalance(curNet);
+                const balance = await this.getBalance(curNet);
+                balanceMin = balance?.toString();
             } catch (e) {
                 this.$toast(JSON.stringify(e));
             }
@@ -454,12 +458,25 @@ export default {
                     estimateAmount: this.amount
                 }
             };
-
             await confirmBriTxDialog(params);
+            async function checkApprove() {
+                if (curNet === 'BSC') {
+                    const allowance = await erc20Contract.allowance(fromAddress,
+                        channelAddress);
+                    const approved = bnUtils.compared(allowance.toString(),
+                        ammountMin);
+                    return approved >= 0;
+                }
+                return true;
+            }
             async function sendTx() {
                 let inputId = '';
                 if (curNet === 'BSC') {
-                    await erc20Contract.approve(channelAddress, ammountMin);
+                    const approved = await checkApprove();
+                    if (!approved) {
+                        await erc20Contract.approve(channelAddress, balanceMin);
+                    }
+
                     const erc20hChannel = new Contract(channelAddress,
                         _channelAbi,
                         new ethers.providers.Web3Provider(window.ethereum).getSigner());
@@ -477,9 +494,11 @@ export default {
                 }
                 return inputId;
             }
+
             const result = await confirmCrossBridgeDialog({
                 ...params,
-                inspector: sendTx
+                inspector: sendTx,
+                checkApprove
             });
 
             const inputId = result?.data;
@@ -487,6 +506,7 @@ export default {
             if (!inputId) return;
             params.transInfo['inputId'] = inputId;
             await transConfirmsDialog(params);
+            this.resetBalance();
         },
         async getAddress(net) {
             if (net === 'VITE') return this.$store.state.wallet.currHDAcc?.activeAddr;

@@ -15,6 +15,11 @@ module.exports = {
     devServer: {
         hot: true,
         proxy: {
+            '/bridge': {
+                target: 'https://buidl.vite.net/',
+                changeOrigin: true,
+                secure: false
+            },
             '/gw': {
                 target: 'http://132.232.60.116:8001',
                 changeOrigin: true,
