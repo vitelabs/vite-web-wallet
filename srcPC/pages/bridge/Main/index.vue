@@ -22,7 +22,7 @@
                     class="bri__trans-icon"
                     :src="transIcon"
                     @click="onToggleNet"
-                    style="cursor:pointer"
+                    style="cursor: pointer"
                 />
                 <networkCard
                     :type="'To'"
@@ -63,7 +63,7 @@
                 <div class="__row clearfix">
                     <div
                         class="__form_btn"
-                        style="width:100%"
+                        style="width: 100%"
                         @click="onNextClick"
                     >
                         Next
@@ -73,7 +73,7 @@
             <div v-else class="clearfix">
                 <div
                     class="__form_btn"
-                    style="width:100%"
+                    style="width: 100%"
                     @click="requestConnect2MetaMask"
                 >
                     Connect MetaMask
@@ -188,8 +188,7 @@ const mockTokens = {
                     {
                         network: 'BSC',
                         desc: 'BSC TestNet ',
-                        icon:
-                            'https://static.vite.net/image-1257137467/logo/bsc-logo.png',
+                        icon: 'https://static.vite.net/image-1257137467/logo/bsc-logo.png',
                         contract: '0x2fe56db3f21815ab26828debc175ab08d91cf81d',
                         erc20: '0x337610d27c682e347c9cd60bd4b3b107c9d34ddd',
                         decimals: 18,
@@ -201,8 +200,7 @@ const mockTokens = {
                     {
                         network: 'VITE',
                         desc: 'Vite TestNet',
-                        icon:
-                            'https://static.vite.net/image-1257137467/logo/VITE-logo.png',
+                        icon: 'https://static.vite.net/image-1257137467/logo/VITE-logo.png',
                         contract:
                             'vite_75043ce60463a3c14b188a1505fd359acaef278c16dece5a0b',
                         tokenId: 'tti_ece34ebace895e3506a24064',
@@ -299,8 +297,7 @@ export default {
         tokenInfos() {
             const tokenMap = this.$store.getters.allTokensMap || {};
             return (this.tokens || []).map(t => {
-                const tokenId = t.channels[0].find(c => c.network === 'VITE')
-                    ?.tokenId;
+                const tokenId = t.channels[0].find(c => c.network === 'VITE')?.tokenId;
                 return {
                     ...t,
                     icon: t?.icon || getTokenIcon(tokenId),
@@ -476,7 +473,7 @@ export default {
                     });
                     await execWithValid(() =>
                         channelClient.input(toAddress, ammountMin))();
-                    inputId = (await channelClient.prevInputId())?.[0];
+                    inputId = `0x${ (await channelClient.prevInputId())?.[0] }`;
                 }
                 return inputId;
             }
