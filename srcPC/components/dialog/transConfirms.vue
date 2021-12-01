@@ -91,7 +91,7 @@ export default {
                 to: toAddress,
                 id: inputId
             }).then(data => {
-                this.tx = data.data || this.tx;
+                this.tx = data || this.tx;
             });
         });
         this.loopTimer.start();
