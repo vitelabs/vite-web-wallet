@@ -189,8 +189,7 @@ const mockTokens = {
                     {
                         network: 'BSC',
                         desc: 'BSC TestNet ',
-                        icon:
-                            'https://static.vite.net/image-1257137467/logo/bsc-logo.png',
+                        icon: 'https://static.vite.net/image-1257137467/logo/bsc-logo.png',
                         contract: '0x2fe56db3f21815ab26828debc175ab08d91cf81d',
                         erc20: '0x337610d27c682e347c9cd60bd4b3b107c9d34ddd',
                         decimals: 18,
@@ -202,8 +201,7 @@ const mockTokens = {
                     {
                         network: 'VITE',
                         desc: 'Vite TestNet',
-                        icon:
-                            'https://static.vite.net/image-1257137467/logo/VITE-logo.png',
+                        icon: 'https://static.vite.net/image-1257137467/logo/VITE-logo.png',
                         contract:
                             'vite_75043ce60463a3c14b188a1505fd359acaef278c16dece5a0b',
                         tokenId: 'tti_ece34ebace895e3506a24064',
@@ -300,8 +298,7 @@ export default {
         tokenInfos() {
             const tokenMap = this.$store.getters.allTokensMap || {};
             return (this.tokens || []).map(t => {
-                const tokenId = t.channels[0].find(c => c.network === 'VITE')
-                    ?.tokenId;
+                const tokenId = t.channels[0].find(c => c.network === 'VITE')?.tokenId;
                 return {
                     ...t,
                     icon: t?.icon || getTokenIcon(tokenId),
@@ -482,10 +479,18 @@ export default {
                         _channelAbi,
                         new ethers.providers.Web3Provider(window.ethereum).getSigner());
                     const originAddr = `0x${ wallet.getOriginalAddressFromAddress(toAddress) }`;
-                    await sleep(1000);
+                    const prevId = await erc20hChannel.prevInputId();
                     await erc20hChannel.input(originAddr, ammountMin);
-                    await sleep(5000);
-                    inputId = await erc20hChannel.prevInputId();
+                    while (true) {
+                        await sleep(5000);
+                        const id = await erc20hChannel.prevInputId();
+                        if (id === prevId) {
+                            continue;
+                        } else {
+                            inputId = id;
+                            break;
+                        }
+                    }
                 } else if (curNet === 'VITE') {
                     const channelClient = new ChannelVite({
                         address: channelAddress,
@@ -493,8 +498,17 @@ export default {
                     });
                     await execWithValid(() =>
                         channelClient.input(toAddress, ammountMin))();
-                    await sleep(3000);
-                    inputId = `0x${ (await channelClient.prevInputId())?.[0] }`;
+                    const prevId = `0x${ (await channelClient.prevInputId())?.[0] }`;
+                    while (true) {
+                        await sleep(5000);
+                        const id = `0x${ (await channelClient.prevInputId())?.[0] }`;
+                        if (id === prevId) {
+                            continue;
+                        } else {
+                            inputId = id;
+                            break;
+                        }
+                    }
                 }
                 return inputId;
             }
