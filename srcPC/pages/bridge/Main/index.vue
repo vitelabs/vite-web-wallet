@@ -541,10 +541,12 @@ export default {
 
             const tokenId = channel?.erc20 || channel?.tokenId;
 
+            console.log("address", "tokenId",  address, tokenId, net);
             if (!address || !tokenId) return null;
 
             if (net === 'VITE') {
                 const balanceInfo = await viteClient.getBalanceInfo(address);
+                console.log("balance", address, tokenId, net, balanceInfo);
                 const balance = balanceInfo.balance?.balanceInfoMap?.[tokenId]
                     ?.balance
                     ? new BigNumber(balanceInfo.balance?.balanceInfoMap?.[
