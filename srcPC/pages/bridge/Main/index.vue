@@ -496,9 +496,9 @@ export default {
                         address: channelAddress,
                         tokenId
                     });
+                    const prevId = `0x${ (await channelClient.prevInputId())?.[0] }`;
                     await execWithValid(() =>
                         channelClient.input(toAddress, ammountMin))();
-                    const prevId = `0x${ (await channelClient.prevInputId())?.[0] }`;
                     while (true) {
                         await sleep(5000);
                         const id = `0x${ (await channelClient.prevInputId())?.[0] }`;
