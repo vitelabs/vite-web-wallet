@@ -176,6 +176,7 @@ import { getTokenIcon } from 'utils/tokenParser';
 import transIcon from 'assets/imgs/crossBridge/trans.png';
 import Loading from 'src/components/loading.vue';
 import { verifyAmount } from 'pcUtils/validations';
+import { sleep } from 'utils/asyncFlow';
 
 let erc20Contract = null;
 const mockTokens = {
@@ -481,7 +482,9 @@ export default {
                         _channelAbi,
                         new ethers.providers.Web3Provider(window.ethereum).getSigner());
                     const originAddr = `0x${ wallet.getOriginalAddressFromAddress(toAddress) }`;
+                    await sleep(1000);
                     await erc20hChannel.input(originAddr, ammountMin);
+                    await sleep(5000);
                     inputId = await erc20hChannel.prevInputId();
                 } else if (curNet === 'VITE') {
                     const channelClient = new ChannelVite({
@@ -490,6 +493,7 @@ export default {
                     });
                     await execWithValid(() =>
                         channelClient.input(toAddress, ammountMin))();
+                    await sleep(3000);
                     inputId = `0x${ (await channelClient.prevInputId())?.[0] }`;
                 }
                 return inputId;

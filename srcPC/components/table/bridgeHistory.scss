@@ -1,0 +1,14 @@
+.bridge-history-table {
+  @include rowWith {
+    min-width: 200px;
+    &.bridge-history-item {
+      &--address {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        cursor: pointer;
+        white-space: nowrap;
+        width: 400px;
+      }
+    }
+  }
+}
