@@ -10,7 +10,7 @@ block head
                     .content {{`${transInfo.amount}  ${tokenInfo.token}`}}
 block originContent
       .custom-content
-        .bri-trans__label  You need to tranfer to the address provoded below：
+        .bri-trans__label  Bridge your assets to the following address:
         .bri-trans__content
             .title Address
             .address(@click="addressClick") {{transInfo.toAddress}}
