@@ -18,9 +18,9 @@
     "blockHeight": "Taas ng Block ng Snapshot",
     "accountName": "Pangalan ng account",
     "action": "Kilos",
-    "stakingAmount": "Halaga ng Staking",
-    "submitStaking": "Magsumite ng Staking",
-    "withdrawHeight": "Inaasahang Taas ng Snapshot",
+    "stakingAmount": "Lock Amount",
+    "submitStaking": "Submit To Lock",
+    "withdrawHeight": "Lock Expiration Snapshot Height",
     "balance": "Balanse",
     "dexBalance": "Balanse ng ViteX",
     "addrName": "Address{index}",
@@ -34,7 +34,7 @@
             "Pamahalaan ang iyong mga assets (parehong Web Wallet at ViteX exchange) dito",
             "Suriin ang Mga Open Order at Kasaysayan ng Order, alamin ang mga detalye sa pangangalakal",
             "Sumali sa pagmimina, kumuha ng mga dividend ng VX at trading fee (Mining Dividends)",
-            "Makaranas ng higit pang mga tampok: Staking for Quota, pagiging isang runner ng SBP (Snapshot Block Producer), Pagboto para sa SBPs, conversion ng ERC20, Mga Detalye ng Transaksyon, atbp."
+            "Experience more features: Locking for Quota, becoming a SBP (Snapshot Block Producer) runner, Voting for SBPs, ERC20 conversion, Transaction Details, etc."
         ],
         "assets": [
             "Deposit para sa Palitan",
@@ -60,10 +60,10 @@
     },
     "pow": {
         "ing": "Pagpapatakbo ng PoW upang makakuha ng quota",
-        "no": "Maaari kang mag-stake ng VITE para sa quota kung sakaling hindi mo nais na patakbuhin ang PoW",
+        "no": "You can lock VITE for quota in case you would not like to run PoW",
         "insuffQuota": "Kumuha ng Quota",
         "insuffQuotaMsg": "Napansin naming wala kang VITE na naka-lock para sa Quota. Mangyaring i-lock ang VITE o kung nais mo, maaari kang magpatakbo ng POW upang makakuha ng Quota.",
-        "insuffQuotaMsg2": "VITE Lamang {powMaxTimes} ang mga transaksyon ay maaaring gawin bawat araw bawat address nang hindi tumatakbo ang VITE. Naubos lahat ng iyong address {powMaxTimes} mga transaksyon. Mangyaring pumunta sa pahina ng quota at taya ang iyong VITE upang maisagawa ang higit pang mga transaksyon.",
+        "insuffQuotaMsg2": "VITE Only {powMaxTimes} transactions can be made per day per address without locking VITE. Your address has exhausted all {powMaxTimes} transactions. Please go to the quota page and lock VITE to perform more transactions.",
         "getQuota": "Patakbuhin ang POW",
         "skip": "Patakbuhin ang POW",
         "cancel": "Kanselahin"
@@ -125,8 +125,8 @@
         "CancelSBPVoting_V1": "Bawiin ang Pagboto",
         "StakeForQuota": "Kumuha ng Quota",
         "StakeForQuota_V1": "Kumuha ng Quota",
-        "CancelQuotaStake": "Pagkuha ng Stake",
-        "CancelQuotaStake_V1": "Pagkuha ng Stake",
+        "CancelQuotaStake": "Unlock",
+        "CancelQuotaStake_V1": "Unlock",
         "IssueToken": "Pagbibigay ng Token",
         "IssueToken_V1": "Pagbibigay ng Token",
         "ReIssueToken": "Karagdagang Pagbibigay ng Token",
@@ -221,8 +221,8 @@
     },
     "quotaConfirm": {
         "title": "Hindi sapat ang Quota",
-        "cancelContent": "Hindi ka maaaring {operate} dahil sa hindi sapat na quota ng TPS. Kailangan mong i-stake ang VITE para sa quota na {operate}",
-        "goQuota": "Stake VITE",
+        "cancelContent": "You cannot {operate} due to insufficient TPS quota. You need to lock VITE for quota to {operate}",
+        "goQuota": "Lock VITE",
         "noOperate": "Hindi pa {operate}"
     },
     "mnemonic": {
@@ -525,7 +525,7 @@
         },
         "trans": {
             "powErr": "Nagaganap ang error kapag nagpapatakbo ng PoW, mangyaring subukang muli",
-            "powTransErr": "Hindi sapat ang quota ng PoW, inirerekumenda namin na magtustos ka ng VITE upang makakuha ng quota."
+            "powTransErr": "Insufficient quota by PoW, we'd recommend you lock VITE to obtain enough quota."
         }
     },
     "walletMintage": {
@@ -593,49 +593,49 @@
         },
         "myQuota": "Ang aking Quota",
         "maxTxNum": "Maximum na Bilang ng Txs",
-        "beneficialAddr": "Address ng Tatanggap ng Quota",
+        "beneficialAddr": "Quota Beneficiary",
         "fromAddr": "Address ng Pagbawas",
-        "time": "Tagal ng Staking Freeze",
+        "time": "Lock Period",
         "aboutDays": "Tinatayang {day} araw",
-        "amountPlaceholder": "Mangyaring ipasok ang halaga ng staking, minimum na {num} VITE",
-        "limitAmt": "Ang halaga ng staking ay hindi dapat mas mababa sa {num}.",
-        "addrPlaceholder": "Mangyaring maglagay ng address ng tatanggap ng quota",
+        "amountPlaceholder": "Please enter lock amount, minimum {num} VITE",
+        "limitAmt": "Lock amount should not be less than {num}.",
+        "addrPlaceholder": "Please input quota beneficiary address",
         "inputWithdrawAmount": "Mangyaring i-input ang halagang pag-withdraw",
         "pledgeFail": "Nabigong Isumite",
         "canclePledgeFail": "Nabigo",
-        "maturity": "Nag-expire na ang Staking!",
+        "maturity": "Lock has expired!",
         "minAmt": "Ang halaga ng Withdraw ay hindi maaaring mas mababa sa {num} VITE",
-        "gotoStake": "Mangyaring maglagay muna ng sapat na VITE",
+        "gotoStake": "Please lock enough VITE first",
         "maxAmt": "Ang halaga ng pag-withdraw ay dapat nasa [{minAmount}, {maxAmount}]",
-        "cancelLimitAmt": "Ang halaga ng staking ay hindi maaaring mas mababa sa {num}",
-        "withdrawalStaking": "Mag-withdraw ng Staked Token",
+        "cancelLimitAmt": "Lock amount cannot be less than {num}",
+        "withdrawalStaking": "Unlock Tokens",
         "myAddr": "Ako",
         "confirm": {
             "help": {
                 "t1": "Ano ang Quota?",
-                "txt1": "Sa sistema ng Vite, ang mga gumagamit ay hindi bumibili ng kinakailangang gas para sa isang transaksyon sa pamamagitan ng pagbabayad ng bayad, ngunit kumuha ng mapagkukunan ng computing sa pamamagitan ng isang modelo na batay sa quota. Kinakailangan na quota para sa pagpapadala ng isang transaksyon = ang pangunahing quota (kahilingan) + quota (ang kalakip na data ng teksto), kinakailangang quota upang tanggapin ang isang transaksyon = ang pangunahing quota (tugon). Pinapayagan ng protokol na pagsasaayos ng mapagkukunang batay sa quota ang mga gumagamit na makakuha ng mas mataas na mga quota ng mapagkukunan sa dalawang paraan: Staking VITE upang makakuha ng quota at pagpapatakbo ng PoW.",
-                "t2": "Ano Ang Staking?",
-                "txt2": "Sa sistema ng Vite, maaaring mai-stake ng gumagamit ang VITE upang makakuha ng isang tiyak na halaga ng quota. Ang minimum na halaga para sa staking ay 134 VITE, at walang maximum na limitasyon; samantala, sinusuportahan din ng Vite system na ang A-address ay Stake sa isang bahagi ng VITE at inilalaan ang nakuha na quota sa B address. Kapag nag-apply ang mga gumagamit sa stake, ipapadala ang VITE sa matalinong address ng kontrata sa halip na isa pang gumagamit, at ang gumagamit lamang na nag-apply para sa staking ang may access upang pamahalaan ang halagang naka-stake.",
+                "txt1": "In the Vite system, users do not purchase the gas required for a transaction by paying a fee, but acquire the computing resource through a quota-based model. Required quota for sending a transaction = the basic quota (request) + quota (the attached text data), quota required to accept a transaction = the basic quota (response). This quota-based resource configuration protocol allows users to obtain higher resource quotas in two ways: Locking VITE to obtain quota and running PoW.",
+                "t2": "Locking for quota",
+                "txt2": "In the Vite system, the user can lock VITE to obtain a certain amount of quota. The minimum locking amount is 134 VITE, and there is no maximum; meanwhile, Vite system also supports locking for others. In this case, user A can lock a number of VITE coins and assign another user B as the quota beneficiary. The VITE coins will be sent to the built-in smart contract other than the another user, and only the user who submitted the lock is able to withdraw.",
                 "t3": "Ano ang PoW?",
                 "txt3": "Ang Proof of Work (PoW), ay isang protokol upang kumpirmahing nagawa mo ang isang tiyak na halaga ng trabaho, at isang hakbang din sa ekonomiya upang mapigilan ang mga pag-atake ng DDoS at iba pang pang-aabuso sa serbisyo. Kinakailangan nito ang nagpasimula na magsagawa ng isang tiyak na halaga ng computing, na nangangahulugang maaaring tumagal ng ilang oras para sa computer. Sa sistema ng Vite, ang mga gumagamit ay maaaring makakuha ng isang libreng quota sa pamamagitan ng pagpapatakbo ng PoW, at maaari ring magpadala ng isang transaksyon nang walang anumang anotadong impormasyon sa pamamagitan ng nakuha na quota."
             },
             "cancel": {
-                "describe": "Ang iyong kasalukuyang natipong halaga ay {amount} VITE, mangyaring kumpirmahing mag-withdraw.",
+                "describe": "Your current lock amount is {amount} VITE, please confirm to withdraw.",
                 "rightBtn": "Nakahanda nang umalis",
                 "leftBtn": "Kanselahin ang Pag-withdraw"
             },
             "submit": {
-                "describe": "Siguraduhing magtaya ng {amount} VITE upang makakuha ng quota, hindi ka maaaring mag-withdraw hanggang sa halos 3 araw pagkatapos magkabisa.",
+                "describe": "Make sure to lock {amount} VITE to obtain quota, you cannot withdraw until the lock expires (in about 3 days).",
                 "rightBtn": "Kumpirmahin",
                 "leftBtn": "Kanselahin"
             }
         },
         "list": {
-            "title": "Ang Staking List ko",
-            "total": "Kabuuang {amount} sa Pag-Stake ng VITE",
+            "title": "My Locking List",
+            "total": "Locking {amount} VITE in total",
             "amount": "Halaga",
-            "withdrawTime": "Inaasahang Takdang Petsa",
-            "unexpired": "Pansamantalang hindi maaaring mag-withdrawal ng staked token hanggang sa takdang araw",
+            "withdrawTime": "Lock Expiration Date",
+            "unexpired": "Cannot withdraw until the lock expires",
             "vip": "Ang staking action na ito ay para sa default na pagbubukas ng VIP sa ViteX exchange, mangyaring pumunta sa pahina ng palitan ng ViteX upang kanselahin ang VIP",
             "mining": "Ang staking na ito ay ang iyong staking bilang halaga ng pagmimina sa ViteX, mangyaring pumunta sa pahina ng pagmimina ng ViteX upang mag-unstake",
             "other": "Ang staking na ito ay na-staked sa pamamagitan ng iba pang mga paraan at ang unstake ay hindi suportado dito"
@@ -1133,8 +1133,8 @@
             "deleteAlert": "Ang kasalukuyang API ay hindi na maa-access kung kumpirmahing magpatuloy. Mananatili ang kasalukuyang package at muling mai-aktibo sa paglikha ng isang bagong API Key.",
             "confirmDelete": "Kumpirmahin at Burahin",
             "cancel": "Kanselahin",
-            "agentAddressStakingAmount": "Nagdeposito ng Quota ng Delegasyon",
-            "staking": "Stake",
+            "agentAddressStakingAmount": "Delegation Quota",
+            "staking": "Lock",
             "package": "Package",
             "expireTime": "Petsa na Pagkawalang-bisa",
             "callNum": "Mga Trigger / min",
@@ -1149,7 +1149,7 @@
                 "0": "Ang ViteX ay naglalabas ng opisyal na API upang magbigay ng pag-access sa mga merkado at mga serbisyo sa real-time na pangangalakal. Sundin ang mga tagubilin sa ibaba upang maayos na makakuha ng isang pribadong key ng API.",
                 "0-step1": "1. Lumikha ng API",
                 "0-step2": "2. Pahintulutan ang delegasyon ng mga napiling trading pair",
-                "0-step3": "3. Quota sa Pag-stake para sa address ng delegasyon ng API",
+                "0-step3": "3. Lock for quota for API delegation address",
                 "0-step4": "Tingnan ang <a href=\"https://vite.wiki/dex/api/dex-apis.html\" target=\"_blank\"> Dokumentasyon ng API </a> para sa karagdagang suporta",
                 "1": "Pinapayagan ang isang hanay ng API Key at Lihim para sa parehong address sa anumang naibigay na oras.",
                 "2": "Upang maiwasan ang pagkawala ng assets, Huwag ibunyag ang iyong Access Key at Lihim",
@@ -1158,7 +1158,7 @@
             "stakingForQuota": {
                 "title": "Quota ng Delegasyon",
                 "agentAddress": "Address ng Delegasyon",
-                "stakingAmount": "Halaga ng Stake",
+                "stakingAmount": "Lock Amount",
                 "ok": "Kumpirmahin"
             },
             "keyConfirm": {
