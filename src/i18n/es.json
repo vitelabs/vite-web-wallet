@@ -18,9 +18,9 @@
     "blockHeight": "Instantánea de altura de bloque",
     "accountName": "Nombre de la cuenta",
     "action": "Acción",
-    "stakingAmount": "Cantidad bloqueada",
-    "submitStaking": "Confirmar bloqueo",
-    "withdrawHeight": "Instantánea de altura esperada",
+    "stakingAmount": "Lock Amount",
+    "submitStaking": "Submit To Lock",
+    "withdrawHeight": "Lock Expiration Snapshot Height",
     "balance": "Saldo",
     "dexBalance": "Saldo ViteX",
     "addrName": "Dirección{index}",
@@ -34,7 +34,7 @@
             "Administre sus activos (tanto en billetera Web como en Exchange ViteX) aquí",
             "Revisa las órdenes abiertas e historial de ordenes, conoce los detalles de comercio",
             "Participa en la minería, obtén VX como recompensa debida a las comisiones por comerciar (Minado a través del comercio)",
-            "Experiencia y características: bloquear para cuotas, bloquear para convertirse en SBP (Snapshot Block Producer), Votar por un SBPs, conversión a ERC20, Detalles de transacción, etc."
+            "Experience more features: Locking for Quota, becoming a SBP (Snapshot Block Producer) runner, Voting for SBPs, ERC20 conversion, Transaction Details, etc."
         ],
         "assets": [
             "Depositar al Exchange",
@@ -60,10 +60,10 @@
     },
     "pow": {
         "ing": "Ejecutando PoW para adquirir cuota",
-        "no": "Puedes bloquear VITE por cuota en caso de que no quieras ejecutar PoW",
+        "no": "You can lock VITE for quota in case you would not like to run PoW",
         "insuffQuota": "Obtener Cuota",
         "insuffQuotaMsg": "Notamos que no tienes bloqueado VITE para cuota. Por favor bloquee VITE o si lo prefiere, puede ejecutar el PoW para obtener cuota.",
-        "insuffQuotaMsg2": "Solo se pueden realizar {powMaxTimes} transacciones por día y por dirección sin bloquear VITE. Tu dirección ha agotado todas las {powMaxTimes} transacciones disponibles. Por favor, ve a la página de cuotas y deja bloqueado VITE para realizar más transacciones.",
+        "insuffQuotaMsg2": "VITE Only {powMaxTimes} transactions can be made per day per address without locking VITE. Your address has exhausted all {powMaxTimes} transactions. Please go to the quota page and lock VITE to perform more transactions.",
         "getQuota": "Bloquear VITE",
         "skip": "Ejecutar el PoW",
         "cancel": "Cancelar"
@@ -125,8 +125,8 @@
         "CancelSBPVoting_V1": "Cancelar voto",
         "StakeForQuota": "Obtener Cuota",
         "StakeForQuota_V1": "Obtener Cuota",
-        "CancelQuotaStake": "Retiro de fondos bloqueados",
-        "CancelQuotaStake_V1": "Retiro de fondos bloqueados",
+        "CancelQuotaStake": "Unlock",
+        "CancelQuotaStake_V1": "Unlock",
         "IssueToken": "Emisión de Token",
         "IssueToken_V1": "Emisión de Token",
         "ReIssueToken": "Emisión adicional de token",
@@ -221,8 +221,8 @@
     },
     "quotaConfirm": {
         "title": "Cuota insuficiente",
-        "cancelContent": "No puedes {operate} debido por tener cuota insuficiente. Necesitas bloquear VITE por una cuota de {operate}",
-        "goQuota": "Bloquear VITE",
+        "cancelContent": "You cannot {operate} due to insufficient TPS quota. You need to lock VITE for quota to {operate}",
+        "goQuota": "Lock VITE",
         "noOperate": "Aún no {operate}"
     },
     "mnemonic": {
@@ -525,7 +525,7 @@
         },
         "trans": {
             "powErr": "Error al ejecutar PoW, inténtelo de nuevo",
-            "powTransErr": "Cuota insuficiente para realizar el PoW, te recomendamos que bloquees VITE para obtener cuota."
+            "powTransErr": "Insufficient quota by PoW, we'd recommend you lock VITE to obtain enough quota."
         }
     },
     "walletMintage": {
@@ -593,49 +593,49 @@
         },
         "myQuota": "Mi cuota",
         "maxTxNum": "Número máximo de Txs",
-        "beneficialAddr": "Dirección del destinatario de cuota",
+        "beneficialAddr": "Quota Beneficiary",
         "fromAddr": "Dirección de Deducción",
-        "time": "Duración del bloqueo",
+        "time": "Lock Period",
         "aboutDays": "Aproximadamente {day} días",
-        "amountPlaceholder": "Ingresa la cantidad a bloquear, mínimo {num} VITE",
-        "limitAmt": "La cantidad a bloquear no puede ser menor que {num}.",
-        "addrPlaceholder": "Introduzca la dirección del destinatario de cuota",
+        "amountPlaceholder": "Please enter lock amount, minimum {num} VITE",
+        "limitAmt": "Lock amount should not be less than {num}.",
+        "addrPlaceholder": "Please input quota beneficiary address",
         "inputWithdrawAmount": "Por favor, introduzca la cantidad a retirar",
         "pledgeFail": "Falló al enviar",
         "canclePledgeFail": "Falló",
-        "maturity": "El bloqueo ha expirado!",
+        "maturity": "Lock has expired!",
         "minAmt": "El monto del retiro no puede ser inferior a {num} VITE",
-        "gotoStake": "Primero bloquee suficiente VITE",
+        "gotoStake": "Please lock enough VITE first",
         "maxAmt": "La cantidad de retiro debe estar entre [{minAmount}, {maxAmount}]",
-        "cancelLimitAmt": "La cantidad a bloquear no puede ser menor que {num}",
-        "withdrawalStaking": "Retirar token bloqueados",
+        "cancelLimitAmt": "Lock amount cannot be less than {num}",
+        "withdrawalStaking": "Unlock Tokens",
         "myAddr": "Yo",
         "confirm": {
             "help": {
                 "t1": "¿Qué es la cuota?",
-                "txt1": "En Vite, los usuarios no compran el gas necesario para una transacción pagando una comisión, sino que adquieren el recurso informático a través de un modelo basado en cuotas. La cuota requerida para realizar una transacción = una cuota básica (solicitud) + cuota (por datos de texto adjuntos). La cuota requerida para aceptar una transacción = una cuota básica (respuesta). Este protocolo de configuración de recursos basado en quota, permite a los usuarios obtenerlos de dos maneras: Bloqueando VITE para obtener cuota o ejecutando una prueba de trabajo PoW.",
-                "t2": "¿Qué es el Staking?",
-                "txt2": "En Vite, el usuario puede bloquear VITE para obtener una cierta cantidad de cuotas. El valor mínimo para bloquear es 134 VITE, y no hay límite máximo. Además en Vite también se soporta compartir este beneficio, siendo que una dirección A bloquee una parte VITE y asigne la cuota obtenida a otra dirección B beneficiaría. Cuando los usuarios soliciten un bloqueo, su VITE será enviado a la dirección del contrato inteligente en lugar del otro usuario, y sólo el usuario que solicita el bloqueo tiene acceso a administrar la cantidad a desbloquear.",
+                "txt1": "In the Vite system, users do not purchase the gas required for a transaction by paying a fee, but acquire the computing resource through a quota-based model. Required quota for sending a transaction = the basic quota (request) + quota (the attached text data), quota required to accept a transaction = the basic quota (response). This quota-based resource configuration protocol allows users to obtain higher resource quotas in two ways: Locking VITE to obtain quota and running PoW.",
+                "t2": "Locking for quota",
+                "txt2": "In the Vite system, the user can lock VITE to obtain a certain amount of quota. The minimum locking amount is 134 VITE, and there is no maximum; meanwhile, Vite system also supports locking for others. In this case, user A can lock a number of VITE coins and assign another user B as the quota beneficiary. The VITE coins will be sent to the built-in smart contract other than the another user, and only the user who submitted the lock is able to withdraw.",
                 "t3": "¿Qué es el PoW?",
                 "txt3": "Prueba de Trabajo (PoW, en sus siglas en inglés), es un protocolo para confirmar que has realizado una cierta cantidad de trabajo. Esta medida es una medida económica para disuadir ataques DDoS y otros tipos de abusos de servicios. Requiere que el solicitador realize una cierta cantidad de cómputo tomando cierto tiempo en el servidor. En Vite, los usuarios pueden obtener una cuota gratuita ejecutando este PoW, y pudiendo enviar transacciones sin tomar ninguna acción usando la cuota obtenida."
             },
             "cancel": {
-                "describe": "Tu actual cantidad bloqueada es {amount} VITE, por favor confirma el retiro.",
+                "describe": "Your current lock amount is {amount} VITE, please confirm to withdraw.",
                 "rightBtn": "Listo para empezar",
                 "leftBtn": "Cancelar retiro"
             },
             "submit": {
-                "describe": "Asegúrate de bloquear {amount} VITE para obtener cuota, no podrás retirarlo hasta en 3 días después que el bloqueo entre en rigor.",
+                "describe": "Make sure to lock {amount} VITE to obtain quota, you cannot withdraw until the lock expires (in about 3 days).",
                 "rightBtn": "Confirmar",
                 "leftBtn": "Cancelar"
             }
         },
         "list": {
-            "title": "Lista de bloqueos",
-            "total": "Bloqueando {amount} VITE en total",
+            "title": "My Locking List",
+            "total": "Locking {amount} VITE in total",
             "amount": "Cantidad",
-            "withdrawTime": "Fecha de vencimiento prevista",
-            "unexpired": "No se puede retirar el token bloqueado hasta la fecha de vencimiento",
+            "withdrawTime": "Lock Expiration Date",
+            "unexpired": "Cannot withdraw until the lock expires",
             "vip": "Esta acción de bloqueo es para convertirse en trader VIP en el exchange ViteX, por favor ve a la página del exchange ViteX para cancelar este status VIP",
             "mining": "Este bloqueo corresponde a tus staking para minado en ViteX, por favor ve a la página de minería en ViteX para unstake",
             "other": "Este bloqueo corresponde a tus staking via otras formas y el unstake no está soportado aquí"
@@ -1133,8 +1133,8 @@
             "deleteAlert": "Si confirma continuar, la API actual dejará de ser accesible. El paquete existente se mantendrá y se volverá a activar al crear una nueva API key.",
             "confirmDelete": "Confirmar y eliminar",
             "cancel": "Cancelar",
-            "agentAddressStakingAmount": "Cuota delegada bloqueada",
-            "staking": "Bloquear",
+            "agentAddressStakingAmount": "Delegation Quota",
+            "staking": "Lock",
             "package": "Paquete",
             "expireTime": "Fecha de expiración",
             "callNum": "Activadores/min",
@@ -1149,7 +1149,7 @@
                 "0": "ViteX está lanzando su API oficial para proporcionar acceso a los mercados y servicios de trading en tiempo real. Siga las instrucciones de abajo para adquirir correctamente una API key privada.",
                 "0-step1": "1. Crear API",
                 "0-step2": "2. Autorizar la delegación de los pares de comercio seleccionados",
-                "0-step3": "3. Obtener cuota para la dirección de la delegación API",
+                "0-step3": "3. Lock for quota for API delegation address",
                 "0-step4": "Ver la <a href=\"https://vite.wiki/dex/api/dex-apis.html\" target=\"_blank\">Documentación API</a> para más soporte",
                 "1": "Se permite un conjunto de API Key y Secret para la misma dirección en cualquier momento.",
                 "2": "Para evitar la pérdida de activos, no revele a nadie su clave de acceso y clave secreta",
@@ -1158,7 +1158,7 @@
             "stakingForQuota": {
                 "title": "Cuota de Delegación",
                 "agentAddress": "Dirección de Delegación",
-                "stakingAmount": "Cantidad bloqueada",
+                "stakingAmount": "Lock Amount",
                 "ok": "Confirmar"
             },
             "keyConfirm": {
