@@ -18,9 +18,9 @@
     "blockHeight": "스냅샷 블록 높이",
     "accountName": "계정이름",
     "action": "dddd",
-    "stakingAmount": "스테이킹 수량",
-    "submitStaking": "스테이킹 제출하기",
-    "withdrawHeight": "예상 스냅샷 높이",
+    "stakingAmount": "Lock Amount",
+    "submitStaking": "Submit To Lock",
+    "withdrawHeight": "Lock Expiration Snapshot Height",
     "balance": "보유자산",
     "dexBalance": "ViteX 보유자산",
     "addrName": "주소 {index}",
@@ -34,7 +34,7 @@
             "나의 자산(웹 지갑 및 Vitex 거래소) 을 여기서 관리하세요",
             "주문 및 주문 내역을 확인하고, 거래 세부 정보를 확인하세요",
             "채굴에 참여하고 VX 및 거래 수수료 배당금을 얻으세요 (채굴 배당금)",
-            "더 많은 기능을 체험하세요: 쿼타 스테이킹, SBP(스냅샷 블록 프로듀서, Snapshot Block Producer) 러너 되기, SBP 투표, ERC20 전환, 거래 세부 사항 등"
+            "Experience more features: Locking for Quota, becoming a SBP (Snapshot Block Producer) runner, Voting for SBPs, ERC20 conversion, Transaction Details, etc."
         ],
         "assets": [
             "거래소에 입금하기",
@@ -60,10 +60,10 @@
     },
     "pow": {
         "ing": "PoW를 실행해 쿼타를 얻으세요",
-        "no": "PoW를 실행하지 않는 경우 쿼타에 대해 VITE를 스테이킹 할 수 있습니다.",
+        "no": "You can lock VITE for quota in case you would not like to run PoW",
         "insuffQuota": "쿼타 얻기",
         "insuffQuotaMsg": "락업된 쿼타가 없습니다. VITE를 락업해주세요, 혹은 원하는 경우 POW를 실행하여 쿼타를 얻을 수 있습니다.",
-        "insuffQuotaMsg2": "스테이킹한 VITE가 없으면 주소 당 하루에 {powMaxTimes} 만 거래 할 수 있습니다. 귀하의 주소는 모든 {powMaxTimes} 거래를 소진했습니다. 더 많은 거래를 수행하려면 쿼타 페이지로 이동하여 VITE를 스테이킹 해주세요.",
+        "insuffQuotaMsg2": "VITE Only {powMaxTimes} transactions can be made per day per address without locking VITE. Your address has exhausted all {powMaxTimes} transactions. Please go to the quota page and lock VITE to perform more transactions.",
         "getQuota": "VITE 락업하기",
         "skip": "PoW 운영하기",
         "cancel": "취소"
@@ -125,8 +125,8 @@
         "CancelSBPVoting_V1": "투표 철회",
         "StakeForQuota": "쿼타 가져오기",
         "StakeForQuota_V1": "쿼타 가져오기",
-        "CancelQuotaStake": "스테이킹 출금",
-        "CancelQuotaStake_V1": "스테이킹 출금",
+        "CancelQuotaStake": "Unlock",
+        "CancelQuotaStake_V1": "Unlock",
         "IssueToken": "토큰 발행",
         "IssueToken_V1": "토큰 발행",
         "ReIssueToken": "추가 토큰 발행",
@@ -221,8 +221,8 @@
     },
     "quotaConfirm": {
         "title": "쿼타 부족",
-        "cancelContent": "TPS 쿼타가 부족하여 {operate}을 (를) 수행할 수 없습니다. {operate} 쿼타를 위해 VITE를 스테이킹해야합니다.",
-        "goQuota": "VITE 스테이킹하기",
+        "cancelContent": "You cannot {operate} due to insufficient TPS quota. You need to lock VITE for quota to {operate}",
+        "goQuota": "Lock VITE",
         "noOperate": "아직 {operate}되지 않았습니다"
     },
     "mnemonic": {
@@ -525,7 +525,7 @@
         },
         "trans": {
             "powErr": "PoW 실행 오류가 발생했습니다. 다시 시도하십시오",
-            "powTransErr": "PoW 쿼타가 충분하지 않습니다. VITE를 스테이킹해 쿼타를 얻으세요!"
+            "powTransErr": "Insufficient quota by PoW, we'd recommend you lock VITE to obtain enough quota."
         }
     },
     "walletMintage": {
@@ -593,49 +593,49 @@
         },
         "myQuota": "나의 쿼타",
         "maxTxNum": "최대 Tx 수",
-        "beneficialAddr": "쿼타 입금 주소",
+        "beneficialAddr": "Quota Beneficiary",
         "fromAddr": "공제 주소",
-        "time": "스테이킹 중지 기간",
+        "time": "Lock Period",
         "aboutDays": "약 {day}일",
-        "amountPlaceholder": "Please input staking amount, minimum {num} VITE",
-        "limitAmt": "스테이킹 금액은 {num}보다 작아서는 안됩니다.",
-        "addrPlaceholder": "쿼타 입금 주소를 입력하십시오",
+        "amountPlaceholder": "Please enter lock amount, minimum {num} VITE",
+        "limitAmt": "Lock amount should not be less than {num}.",
+        "addrPlaceholder": "Please input quota beneficiary address",
         "inputWithdrawAmount": "출금 금액을 입력하세요",
         "pledgeFail": "제출에 실패했습니다",
         "canclePledgeFail": "실패했습니다",
-        "maturity": "스테이킹이 만료되었습니다",
+        "maturity": "Lock has expired!",
         "minAmt": "출금 금액은 {num} VITE보다 작을 수 없습니다.",
-        "gotoStake": "충분한 VITE를 먼저 스테이킹하세요",
+        "gotoStake": "Please lock enough VITE first",
         "maxAmt": "출금 금액은 [{minAmount}, {maxAmount}] 범위여만 합니다",
-        "cancelLimitAmt": "스테이킹 금액은 {num}보다 작아서는 안됩니다",
-        "withdrawalStaking": "스테이킹 토큰 출금",
+        "cancelLimitAmt": "Lock amount cannot be less than {num}",
+        "withdrawalStaking": "Unlock Tokens",
         "myAddr": "Current Address",
         "confirm": {
             "help": {
                 "t1": "쿼타란?",
-                "txt1": "Vite 시스템에서 사용자는 수수료를 지불하여 거래에 필요한 가스를 구매하는 대신 할당량 기반 모델을 통해 컴퓨팅 리소스를 얻습니다. 거래를 보내는 데 필요한 쿼타 = 기본 쿼타 (요청) + 쿼타 (첨부된 텍스트 데이터), 거래를 수락하는 데 필요한 쿼타 = 기본 쿼타 (응답). 이 쿼타 기반 리소스 구성 프로토콜을 통해 사용자는 두 가지 방법으로 더 높은 리소스 쿼타를 얻을 수 있습니다. VITE를 스테이킹해 쿼타를 얻고 PoW를 실행합니다.",
-                "t2": "스테이킹이란?",
-                "txt2": "Vite 시스템에서 사용자는 VITE를 스테이킹해 특정 양의 쿼타를 얻을 수 있습니다. 스테이킹의 최솟값은 134 VITE이며 최대 제한은 없습니다. Vite 시스템은 A 주소가 VITE의 일부를 스테이킹하고 획득한 쿼타를 B 주소에 할당하도록 지원합니다. 사용자가 스테이킹에 신청하면 VITE는 다른 사용자 대신 스마트 컨트랙트 주소로 전송되며, 스테이킹을 신청한 사용자만 스테이킹 금액을 관리 할 수 있습니다.",
+                "txt1": "In the Vite system, users do not purchase the gas required for a transaction by paying a fee, but acquire the computing resource through a quota-based model. Required quota for sending a transaction = the basic quota (request) + quota (the attached text data), quota required to accept a transaction = the basic quota (response). This quota-based resource configuration protocol allows users to obtain higher resource quotas in two ways: Locking VITE to obtain quota and running PoW.",
+                "t2": "Locking for quota",
+                "txt2": "In the Vite system, the user can lock VITE to obtain a certain amount of quota. The minimum locking amount is 134 VITE, and there is no maximum; meanwhile, Vite system also supports locking for others. In this case, user A can lock a number of VITE coins and assign another user B as the quota beneficiary. The VITE coins will be sent to the built-in smart contract other than the another user, and only the user who submitted the lock is able to withdraw.",
                 "t3": "PoW란?",
                 "txt3": "작업 증명(PoW)은 일정량의 작업을 수행했음을 확인하는 프로토콜이며 DDoS 공격 및 기타 서비스 남용을 방지하기 위한 경제적인 수단입니다. 초기자가 특정 양의 컴퓨팅을 수행해야 하므로 다소 시간이 걸릴 수 있습니다. Vite 시스템에서 사용자는 PoW를 실행하여 무료 쿼타를 얻을 수 있으며 얻은 쿼타를 통해 주석 정보 없이 트랜잭션을 보낼 수도 있습니다."
             },
             "cancel": {
-                "describe": "사용자의 현재 스테이킹 금액은 {amount} VITE입니다. 출금을 확인해주세요",
+                "describe": "Your current lock amount is {amount} VITE, please confirm to withdraw.",
                 "rightBtn": "시작할 준비가 되셨나요?",
                 "leftBtn": "출금 취소"
             },
             "submit": {
-                "describe": "쿼타를 얻기 위해 {amount} VITE를 스테이킹해야합니다. 스테이킹이 시작된 후 약 3일이 지나야 출금할 수 있습니다",
+                "describe": "Make sure to lock {amount} VITE to obtain quota, you cannot withdraw until the lock expires (in about 3 days).",
                 "rightBtn": "확인",
                 "leftBtn": "취소"
             }
         },
         "list": {
-            "title": "나의 스테이킹 목록",
-            "total": "총 {amount} VITE 스테이킹",
+            "title": "My Locking List",
+            "total": "Locking {amount} VITE in total",
             "amount": "수량",
-            "withdrawTime": "예상 만기일",
-            "unexpired": "만기일까지 스테이킹 토큰을 일시적으로 출금할 수 없습니다.",
+            "withdrawTime": "Lock Expiration Date",
+            "unexpired": "Cannot withdraw until the lock expires",
             "vip": "스테이킹 액션는 기본값으로 ViteX 거래소 VIP를 개통합니다. VIP를 취소하려면 ViteX 거래소로 이동하세요",
             "mining": "This staking is your staking as mining amount on ViteX, please go to ViteX mining page to retrieve",
             "other": "This staking is staked via other ways and it is not supported retrieving here"
@@ -1133,8 +1133,8 @@
             "deleteAlert": "계속 진행하면 현재 API에 더 이상 접근할 수 없습니다. 기존 패키지는 새 API key 생성 시 유지되고 다시 활성화됩니다.",
             "confirmDelete": "확인하고 삭제하기",
             "cancel": "취소",
-            "agentAddressStakingAmount": "위임 스테이킹된 쿼타",
-            "staking": "스테이킹하기",
+            "agentAddressStakingAmount": "Delegation Quota",
+            "staking": "Lock",
             "package": "패키지",
             "expireTime": "만료일",
             "callNum": "트리거/분",
@@ -1149,7 +1149,7 @@
                 "0": "ViteX는 마켓 및 실시간 거래 서비스에 대한 액세스를 제공하기 위해 공식 API를 출시합니다. 아래 지침에 따라 API 개인 키를 올바르게 획득하세요.",
                 "0-step1": "1. API 생성하기",
                 "0-step2": "2. 선택한 거래쌍의 위임 권한 부여하기",
-                "0-step3": "3. API 위임 주소에 대한 쿼타 스테이킹하기",
+                "0-step3": "3. Lock for quota for API delegation address",
                 "0-step4": "보기<a href=\"https://vite.wiki/dex/api/dex-apis.html\" target=\"_blank\">API 문서</a>고객지원을 위해서",
                 "1": "주어진 시간에 동일한 주소에 대해 하나의 API 키 및 시크릿 키가 허용됩니다.",
                 "2": "자산 손실을 방지하기 위해서는 엑세스 키와 시크릿 키를 공개하지 마세요.",
@@ -1158,7 +1158,7 @@
             "stakingForQuota": {
                 "title": "위임 쿼타",
                 "agentAddress": "위임 주소",
-                "stakingAmount": "스테이킹 수량",
+                "stakingAmount": "Lock Amount",
                 "ok": "확인"
             },
             "keyConfirm": {
