@@ -18,9 +18,9 @@
     "blockHeight": "Высота блока снимка",
     "accountName": "Имя аккаунта",
     "action": "Действие",
-    "stakingAmount": "Сумма заморозки",
-    "submitStaking": "Подтвердить заморозку",
-    "withdrawHeight": "Ожидаемая высота снимка",
+    "stakingAmount": "Lock Amount",
+    "submitStaking": "Submit To Lock",
+    "withdrawHeight": "Lock Expiration Snapshot Height",
     "balance": "Баланс",
     "dexBalance": "Баланс ViteX",
     "addrName": "Адрес{index}",
@@ -34,7 +34,7 @@
             "Управляйте вашими активами (как Веб-Кошелека, так и биржи ViteX) здесь",
             "Проверьте открытые заявки и Историю заявок, узнайте детали торговли",
             "Участвуйте в получении наград, получайте VX и дивиденды от торговых комиссий (Награды и дивиденды)",
-            "Попробуйте больше возможностей: сделайте Стейк на Квоту, станьте держателем SBP (Snapshot Block Producer), Голосуйте за SBP, конвертрируйте ERC20, Детали Транзакции и.т.д."
+            "Experience more features: Locking for Quota, becoming a SBP (Snapshot Block Producer) runner, Voting for SBPs, ERC20 conversion, Transaction Details, etc."
         ],
         "assets": [
             "Депозит на Биржу",
@@ -60,10 +60,10 @@
     },
     "pow": {
         "ing": "Запуск PoW для получения квоты",
-        "no": "Вы можете стейкать VITE для квоты, если не хотите запускать PoW",
+        "no": "You can lock VITE for quota in case you would not like to run PoW",
         "insuffQuota": "Получить квоту",
         "insuffQuotaMsg": "Уведомляем, что у вас нет VITE замороженных для получения Квоты. Заблокируйте VITE или, если хотите, можете запустить POW для получения Квоты.",
-        "insuffQuotaMsg2": "Только {powMaxTimes} транзакций могут быть сделаны в день без стейкинга VITE. Ваш адрес исчерпал весь лимит {powMaxTimes} . Пожалуйста, перейдите на страницу квот и заморозьте VITE для совершения дополнительных транзакций.",
+        "insuffQuotaMsg2": "VITE Only {powMaxTimes} transactions can be made per day per address without locking VITE. Your address has exhausted all {powMaxTimes} transactions. Please go to the quota page and lock VITE to perform more transactions.",
         "getQuota": "Заморозить VITE",
         "skip": "Запустить POW",
         "cancel": "Отмена"
@@ -125,8 +125,8 @@
         "CancelSBPVoting_V1": "Отменить Голосование",
         "StakeForQuota": "Получить Квоту",
         "StakeForQuota_V1": "Получить Квоту",
-        "CancelQuotaStake": "Разморозить стейк",
-        "CancelQuotaStake_V1": "Разморозить стейк",
+        "CancelQuotaStake": "Unlock",
+        "CancelQuotaStake_V1": "Unlock",
         "IssueToken": "Выпуск Токена",
         "IssueToken_V1": "Выпуск Токена",
         "ReIssueToken": "Дополнительный Выпуск Токена",
@@ -221,8 +221,8 @@
     },
     "quotaConfirm": {
         "title": "Недостаточно Квоты",
-        "cancelContent": "Вы не можете {operate} из-за недостаточной TPS квоты. Вы должны застейка VITE на квоту, чтобы {operate}",
-        "goQuota": "Стейк VITE",
+        "cancelContent": "You cannot {operate} due to insufficient TPS quota. You need to lock VITE for quota to {operate}",
+        "goQuota": "Lock VITE",
         "noOperate": "Еще {operate} нет"
     },
     "mnemonic": {
@@ -525,7 +525,7 @@
         },
         "trans": {
             "powErr": "Произошла ошибка при запуске PoW, попробуйте еще раз",
-            "powTransErr": "Недостаточно квоты PoW, мы рекомендуем вам застейкать VITE для получения квоты."
+            "powTransErr": "Insufficient quota by PoW, we'd recommend you lock VITE to obtain enough quota."
         }
     },
     "walletMintage": {
@@ -593,49 +593,49 @@
         },
         "myQuota": "Моя Квота",
         "maxTxNum": "Максимальное Количество Транзакций",
-        "beneficialAddr": "Адрес Получателя Квоты",
+        "beneficialAddr": "Quota Beneficiary",
         "fromAddr": "Адрес Вычета",
-        "time": "Продолжительность Замораживания Стейкинга",
+        "time": "Lock Period",
         "aboutDays": "Около {day} дней",
-        "amountPlaceholder": "Пожалуйста, введите сумму стейка, минимум {num} VITE",
-        "limitAmt": "Количество стейка не должно быть меньше {num}.",
-        "addrPlaceholder": "Пожалуйста, введите адрес получателя квоты",
+        "amountPlaceholder": "Please enter lock amount, minimum {num} VITE",
+        "limitAmt": "Lock amount should not be less than {num}.",
+        "addrPlaceholder": "Please input quota beneficiary address",
         "inputWithdrawAmount": "Пожалуйста, введите сумму вывода",
         "pledgeFail": "Не удалось Отправить",
         "canclePledgeFail": "Ошибка",
-        "maturity": "Срок действия стейка истек!",
+        "maturity": "Lock has expired!",
         "minAmt": "Сумма снятия не может быть меньше, чем {num} VITE",
-        "gotoStake": "Пожалуйста, сначала Застейкайте достаточно VITE",
+        "gotoStake": "Please lock enough VITE first",
         "maxAmt": "Сумма снятия должна быть в [{minAmount}, {maxAmount}]",
-        "cancelLimitAmt": "Сумма стейка не может быть меньше {num}",
-        "withdrawalStaking": "Снятие Стейкинга Квоты",
+        "cancelLimitAmt": "Lock amount cannot be less than {num}",
+        "withdrawalStaking": "Unlock Tokens",
         "myAddr": "Current Address",
         "confirm": {
             "help": {
                 "t1": "Что такое Квота?",
-                "txt1": "В системе Vite пользователи не покупают газ, необходимый для транзакции, платя комиссию, а приобретают вычислительный ресурс по модели, основанной на квотах. Требуемая квота для отправки транзакции = базовая квота (запрос) + квота (прикрепленные текстовые данные), квота, необходимая для принятия транзакции = базовая квота (ответ). Этот протокол конфигурации ресурсов на основе квот позволяет пользователям получать более высокие квоты на ресурсы двумя способами: стейкать VITE для получения квоты и запускать PoW.",
-                "t2": "Что такое Стейкинг?",
-                "txt2": "В системе Vite пользователь может застейкать (поставить) VITE, чтобы получить определенную квоту. Минимальное значение для размещения составляет 134 VITE, и нет максимального ограничения; Между тем, система Vite также поддерживает то, что A-адрес стейкает часть VITE и выделяет полученную квоту для B-адреса. Когда пользователи подают заявки на стейк, VITE отправляется на адрес смарт-контракта, а не на другого пользователя, и только пользователь, подающий заявку на стейк, имеет доступ к управлению суммой стейка.",
+                "txt1": "In the Vite system, users do not purchase the gas required for a transaction by paying a fee, but acquire the computing resource through a quota-based model. Required quota for sending a transaction = the basic quota (request) + quota (the attached text data), quota required to accept a transaction = the basic quota (response). This quota-based resource configuration protocol allows users to obtain higher resource quotas in two ways: Locking VITE to obtain quota and running PoW.",
+                "t2": "Locking for quota",
+                "txt2": "In the Vite system, the user can lock VITE to obtain a certain amount of quota. The minimum locking amount is 134 VITE, and there is no maximum; meanwhile, Vite system also supports locking for others. In this case, user A can lock a number of VITE coins and assign another user B as the quota beneficiary. The VITE coins will be sent to the built-in smart contract other than the another user, and only the user who submitted the lock is able to withdraw.",
                 "t3": "Что такое PoW?",
                 "txt3": "Proof of Work (PoW) - это протокол, подтверждающий, что вы выполнили определенный объем работы, а также экономическая мера для предотвращения DDoS-атак и других злоупотреблений услугами. Это требует, чтобы инициатор провел определенное количество вычислений, что означает, что это может занять некоторое время для компьютера. В системе Vite пользователи могут получить бесплатную квоту, запустив PoW, а также могут отправить транзакцию без аннотированной информации через полученную квоту."
             },
             "cancel": {
-                "describe": "Ваша текущая сумма стейка составляет {amount} VITE, подтвердите вывод средств.",
+                "describe": "Your current lock amount is {amount} VITE, please confirm to withdraw.",
                 "rightBtn": "Готовы Начать",
                 "leftBtn": "Отменить Вывод"
             },
             "submit": {
-                "describe": "Удостоверьтесь, что застейка {amount} VITE для получения квоты, вы не сможете снять их ранее, чем примерно через 3 дня после вступления в силу стейка.",
+                "describe": "Make sure to lock {amount} VITE to obtain quota, you cannot withdraw until the lock expires (in about 3 days).",
                 "rightBtn": "Подтвердить",
                 "leftBtn": "Отменить"
             }
         },
         "list": {
-            "title": "Мой Список Стейка",
-            "total": "Всего VITE в стейкинге",
+            "title": "My Locking List",
+            "total": "Locking {amount} VITE in total",
             "amount": "Сумма",
-            "withdrawTime": "Ожидаемый Срок",
-            "unexpired": "Временно не может сделать вывод застейканного токена до истечения срока",
+            "withdrawTime": "Lock Expiration Date",
+            "unexpired": "Cannot withdraw until the lock expires",
             "vip": "Это стейкинг действие для открытия VIP по умолчанию на бирже, перейдите на страницу ViteX, чтобы отменить VIP",
             "mining": "Этот стейкинг является вашим стейком в ​​качестве майнинга на ViteX, перейдите на страницу майнинга ViteX для получения",
             "other": "Этот стейкинг делается другими способами и его получение не поддерживается здесь"
@@ -1133,8 +1133,8 @@
             "deleteAlert": "Текущий API больше не будет доступен. Существующий пакет будет сохранен и вновь активирован при создании нового ключа API.",
             "confirmDelete": "Подтвердить удаление",
             "cancel": "Отменить",
-            "agentAddressStakingAmount": "Делегирование Квоты",
-            "staking": "Заморозка",
+            "agentAddressStakingAmount": "Delegation Quota",
+            "staking": "Lock",
             "package": "Тарифный план",
             "expireTime": "Срок действия",
             "callNum": "Запросов/мин",
@@ -1149,7 +1149,7 @@
                 "0": "ViteX предоставляет официальный API для доступа к рынку и торговым услугам в режиме реального времени. Следуйте инструкциям ниже, чтобы получить приватный ключ API.",
                 "0-step1": "1. Создайте API",
                 "0-step2": "2. Авторизация делегирования выбранных торговых пар",
-                "0-step3": "3. Получение квоты и делегация для работы API",
+                "0-step3": "3. Lock for quota for API delegation address",
                 "0-step4": "Смотрите <a href=\"https://vite.wiki/dex/api/dex-apis.html\" target=\"_blank\">API-документацию</a> для дальнейшей поддержки",
                 "1": "Одновременно только один набор публичного и секретного ключей API разрешён для одного адреса VITE.",
                 "2": "Чтобы избежать потери активов, не раскрывайте ключи API третьим лицам.",
@@ -1158,7 +1158,7 @@
             "stakingForQuota": {
                 "title": "Делегировать квоту",
                 "agentAddress": "Адрес делегации",
-                "stakingAmount": "Сумма заморозки",
+                "stakingAmount": "Lock Amount",
                 "ok": "Подтвердить"
             },
             "keyConfirm": {
