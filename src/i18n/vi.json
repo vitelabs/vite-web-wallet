@@ -18,9 +18,9 @@
     "blockHeight": "Chiều cao Block Snapshot",
     "accountName": "Tên Tài khoản",
     "action": "Hành động",
-    "stakingAmount": "Số lượng Stake",
-    "submitStaking": "Tiến hành Stake",
-    "withdrawHeight": "Chiều cao Snapshot dự kiến",
+    "stakingAmount": "Lock Amount",
+    "submitStaking": "Submit To Lock",
+    "withdrawHeight": "Lock Expiration Snapshot Height",
     "balance": "Số dư",
     "dexBalance": "Số dư ViteX",
     "addrName": "Địa chỉ{index}",
@@ -34,7 +34,7 @@
             "Quản lí tài sản tại đây (ví Web và sàn ViteX)",
             "Kiểm tra Lệnh đang mở, Lịch sử đặt lệnh và Chi tiết giao dịch",
             "Tham gia Khai thác, Nhận cổ tức VX và Cổ tức phí giao dịch (Cổ tức Khai thác)",
-            "Trải nghiệm nhiều tính năng hơn: Stake để nhận Quota, Trở thành SBP (Nhà sản xuất Khối Snapshot), Bỏ phiếu cho SBP, Chuyển đổi ERC20, Chi tiết giao dịch, v. v."
+            "Experience more features: Locking for Quota, becoming a SBP (Snapshot Block Producer) runner, Voting for SBPs, ERC20 conversion, Transaction Details, etc."
         ],
         "assets": [
             "Nạp vào Sàn",
@@ -60,10 +60,10 @@
     },
     "pow": {
         "ing": "Bấm Run PoW để nhận quota",
-        "no": "Bạn có thể stake VITE để nhận quota thay vì bấm run PoW",
+        "no": "You can lock VITE for quota in case you would not like to run PoW",
         "insuffQuota": "Nhận Quota",
         "insuffQuotaMsg": "Chúng tôi nhận thấy bạn không có VITE nào bị khóa cho Quota. Vui lòng stake VITE hoặc nếu muốn, bạn có thể chạy POW để nhận Quota.",
-        "insuffQuotaMsg2": "VITE chỉ có thể thực hiện {powMaxTimes} giao dịch mỗi ngày cho mỗi địa chỉ mà không cần đặt stake VITE. Địa chỉ của bạn đã dùng hết {powMaxTimes} giao dịch. Vui lòng truy cập trang Quota và\b stake VITE của bạn để thực hiện nhiều giao dịch hơn.",
+        "insuffQuotaMsg2": "VITE Only {powMaxTimes} transactions can be made per day per address without locking VITE. Your address has exhausted all {powMaxTimes} transactions. Please go to the quota page and lock VITE to perform more transactions.",
         "getQuota": "Khoá VITE",
         "skip": "Chạy POW",
         "cancel": "Huỷ"
@@ -125,8 +125,8 @@
         "CancelSBPVoting_V1": "Hủy bỏ Bỏ phiếu",
         "StakeForQuota": "Nhận Hạn ngạch",
         "StakeForQuota_V1": "Nhận Quota",
-        "CancelQuotaStake": "Rút token đã stake",
-        "CancelQuotaStake_V1": "Rút token đã stake",
+        "CancelQuotaStake": "Unlock",
+        "CancelQuotaStake_V1": "Unlock",
         "IssueToken": "Phát hành token",
         "IssueToken_V1": "Phát hành token",
         "ReIssueToken": "Phát hành Token bổ sung",
@@ -221,8 +221,8 @@
     },
     "quotaConfirm": {
         "title": "Không đủ Quota",
-        "cancelContent": "Bạn không thể {operate} do không đủ hạn ngạch TPS. Để {operate} bạn cần thế chấp VITE để có hạn ngạch",
-        "goQuota": "Stake VITE",
+        "cancelContent": "You cannot {operate} due to insufficient TPS quota. You need to lock VITE for quota to {operate}",
+        "goQuota": "Lock VITE",
         "noOperate": "Chưa {operate} được"
     },
     "mnemonic": {
@@ -525,7 +525,7 @@
         },
         "trans": {
             "powErr": "Đã có lỗi xảy ra khi run PoW, vui lòng thử lại",
-            "powTransErr": "Không đủ quota từ PoW, chúng tôi khuyên bạn nên stake VITE để nhận quota."
+            "powTransErr": "Insufficient quota by PoW, we'd recommend you lock VITE to obtain enough quota."
         }
     },
     "walletMintage": {
@@ -593,49 +593,49 @@
         },
         "myQuota": "Quota của tôi",
         "maxTxNum": "Số Tx tối đa",
-        "beneficialAddr": "Địa chỉ nhận Quota",
+        "beneficialAddr": "Quota Beneficiary",
         "fromAddr": "Địa chỉ khấu trừ",
-        "time": "Thời gian Đóng băng Stake",
+        "time": "Lock Period",
         "aboutDays": "Dự kiến {day} ngày",
-        "amountPlaceholder": "Vui lòng nhập số lượng stake, ít nhất {num} VITE",
-        "limitAmt": "Số lượng đặt cược không được ít hơn {num}.",
-        "addrPlaceholder": "Vui lòng điền địa chỉ nhận quota",
+        "amountPlaceholder": "Please enter lock amount, minimum {num} VITE",
+        "limitAmt": "Lock amount should not be less than {num}.",
+        "addrPlaceholder": "Please input quota beneficiary address",
         "inputWithdrawAmount": "Vui lòng điền địa chỉ rút",
         "pledgeFail": "Thao tác thất bại",
         "canclePledgeFail": "Thất bại",
-        "maturity": "Đã hết hạn stake!",
+        "maturity": "Lock has expired!",
         "minAmt": "Số tiền rút không thể ít hơn {num} VITE",
-        "gotoStake": "Vui lòng stake đủ VITE",
+        "gotoStake": "Please lock enough VITE first",
         "maxAmt": "Số tiền rút phải trong khoảng [{minAmount}, {maxAmount}]",
-        "cancelLimitAmt": "Số lượng đặt cược không được ít hơn {num}",
-        "withdrawalStaking": "Rút token đã stake",
+        "cancelLimitAmt": "Lock amount cannot be less than {num}",
+        "withdrawalStaking": "Unlock Tokens",
         "myAddr": "Tôi",
         "confirm": {
             "help": {
                 "t1": "Quota là gì?",
-                "txt1": "Trong hệ thống Vite, người dùng không mua gas để trả phí cho giao dịch mà sử dụng tài nguyên tính toán thông qua mô hình hạn ngạch. Hạn ngạch là điều bắt buộc trong gửi giao dịch = hạn ngạch cơ bản (yêu cầu) + hạn ngạch (dữ liệu văn bản đính kèm), hạn ngạch bắt buộc để chấp nhận giao dịch = hạn ngạch cơ bản (phản hồi).\nGiao thức cấu hình tài nguyên dựa trên hạn ngạch này cho phép người dùng có được tài nguyên hạn ngạch cao hơn theo hai cách: Đặt cược VITE để có được hạn ngạch và chạy PoW.",
-                "t2": "Stake là gì?",
-                "txt2": "Trong hệ thống Vite, người dùng có thể thế chấp VITE để có được một lượng hạn ngạch nhất định. Số lượng tối thiểu để thế chấp là 134 VITE và không có giới hạn tối đa; trong khi đó, hệ thống Vite cũng hỗ trợ địa chỉ A thế chấp một phần VITE và phân bổ hạn ngạch cho địa chỉ B. Khi người dùng đăng ký thế chấp, VITE sẽ được gửi đến địa chỉ hợp đồng thông minh của Vite và chỉ người đăng ký thế chấp mới có quyền truy cập để quản lý số tiền đã thế chấp.",
+                "txt1": "In the Vite system, users do not purchase the gas required for a transaction by paying a fee, but acquire the computing resource through a quota-based model. Required quota for sending a transaction = the basic quota (request) + quota (the attached text data), quota required to accept a transaction = the basic quota (response). This quota-based resource configuration protocol allows users to obtain higher resource quotas in two ways: Locking VITE to obtain quota and running PoW.",
+                "t2": "Locking for quota",
+                "txt2": "In the Vite system, the user can lock VITE to obtain a certain amount of quota. The minimum locking amount is 134 VITE, and there is no maximum; meanwhile, Vite system also supports locking for others. In this case, user A can lock a number of VITE coins and assign another user B as the quota beneficiary. The VITE coins will be sent to the built-in smart contract other than the another user, and only the user who submitted the lock is able to withdraw.",
                 "t3": "PoW là gì?",
                 "txt3": "Proof of Work (PoW), là một giao thức để xác nhận rằng bạn đã thực hiện một số lượng công việc nhất định và cũng là một biện pháp kinh tế để ngăn chặn sự tấn công DDoS và lạm dụng dịch vụ khác. Điều này đòi hỏi máy tính phải thực hiện tính toán điện toán nhất định. Trong hệ thống Vite, người dùng có thể nhận được hạn ngạch miễn phí bằng cách bấm run PoW và cũng có thể gửi giao dịch bằng hạn ngạch thu được mà không có bất kỳ thông tin chú thích nào."
             },
             "cancel": {
-                "describe": "Số lượng đã stake của bạn là {amount}, vui lòng xác nhận rút.",
+                "describe": "Your current lock amount is {amount} VITE, please confirm to withdraw.",
                 "rightBtn": "Sẵn sàng",
                 "leftBtn": "Hủy bỏ Rút"
             },
             "submit": {
-                "describe": "Đảm bảo stake {amount} VITE để đạt được quota, bạn chỉ có thể rút sau 3 ngày sau khi hết hạn \bstake.",
+                "describe": "Make sure to lock {amount} VITE to obtain quota, you cannot withdraw until the lock expires (in about 3 days).",
                 "rightBtn": "Xác nhận",
                 "leftBtn": "Hủy"
             }
         },
         "list": {
-            "title": "Stake của tôi",
-            "total": "Đang đặt cược {amount} VITE",
+            "title": "My Locking List",
+            "total": "Locking {amount} VITE in total",
             "amount": "Số lượng",
-            "withdrawTime": "Ngày đáo hạn dự kiến",
-            "unexpired": "Tạm thời chưa thể thực hiện rút token thế chấp cho đến ngày đáo hạn",
+            "withdrawTime": "Lock Expiration Date",
+            "unexpired": "Cannot withdraw until the lock expires",
             "vip": "Hành động đặt cược để mặc định mở VIP trên sàn ViteX, vui lòng truy cập trang sàn giao dịch ViteX để hủy VIP",
             "mining": "Sản phẩm stake này là stake bằng khai thác trên ViteX, vui lòng truy cập trang Khai thác ViteX để huỷ stake",
             "other": "Sản phẩm stake này được stake bằng cách khác và không hỗ trợ huỷ stake tại đây"
@@ -1133,8 +1133,8 @@
             "deleteAlert": "API hiện tại sẽ không thể truy cập được nữa nếu xác nhận để tiếp tục. Gói hiện tại sẽ được giữ lại và kích hoạt lại khi tạo Khóa API mới.",
             "confirmDelete": "Xác nhận và Xoá",
             "cancel": "Hủy",
-            "agentAddressStakingAmount": "Quota được stake Uỷ quyền",
-            "staking": "Stake",
+            "agentAddressStakingAmount": "Delegation Quota",
+            "staking": "Lock",
             "package": "Gói",
             "expireTime": "Ngày hết hạn",
             "callNum": "Kích hoạt/phút",
@@ -1149,7 +1149,7 @@
                 "0": "ViteX đang phát hành API chính thức để cung cấp quyền truy cập vào thị trường và các dịch vụ giao dịch thời gian thực. Thực hiện theo các hướng dẫn bên dưới để có được khóa cá nhân API đúng cách.",
                 "0-step1": "1. Tạo API",
                 "0-step2": "2. Cho phép ủy quyền các cặp giao dịch đã chọn",
-                "0-step3": "3. Stake quota cho địa chỉ ủy quyền API",
+                "0-step3": "3. Lock for quota for API delegation address",
                 "0-step4": "Xem <a href=\"https://vite.wiki/dex/api/dex-apis.html\" target=\"_blank\"> Tại liệu API </a> để được hỗ trợ thêm",
                 "1": "Một bộ API Key và Secret được phép cho cùng một địa chỉ tại bất kỳ thời điểm nào.",
                 "2": "Để tránh mất mát tài sản, Không tiết lộ Khóa truy cập và Khóa bí mật của bạn",
@@ -1158,7 +1158,7 @@
             "stakingForQuota": {
                 "title": "Quota Uỷ quyền",
                 "agentAddress": "Địa chỉ Uỷ quyền",
-                "stakingAmount": "Số lượng Stake",
+                "stakingAmount": "Lock Amount",
                 "ok": "Xác nhận"
             },
             "keyConfirm": {
