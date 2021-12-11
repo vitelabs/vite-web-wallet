@@ -18,9 +18,9 @@
     "blockHeight": "Blok Kayıt Yüksekliği",
     "accountName": "Hesap Adı",
     "action": "Eylem",
-    "stakingAmount": "Stake Miktarı",
-    "submitStaking": "Stake'i Gönder",
-    "withdrawHeight": "Beklenen Kayıt Yüksekliği",
+    "stakingAmount": "Lock Amount",
+    "submitStaking": "Submit To Lock",
+    "withdrawHeight": "Lock Expiration Snapshot Height",
     "balance": "Bakiye",
     "dexBalance": "ViteX Bakiyesi",
     "addrName": "Adres{index}",
@@ -34,7 +34,7 @@
             "Varlıklarınızı (hem Web Cüzdanı hem de ViteX exchange) buradan yönetin",
             "Açık Emirlere ve Emir Geçmişine göz atın, alım satım detaylarını öğrenin",
             "Madenciliğe katılın, VX ve alım satım komisyonundan kar payı elde edin (Madencilik Kar Payı)",
-            "Daha fazla özelliği deneyimleyin: Quota için Stake, SBP (Snapshot Block Producer) koşucusu olma, SBP'ler için Oylama, ERC20 dönüşümü, İşlem Ayrıntıları vb."
+            "Experience more features: Locking for Quota, becoming a SBP (Snapshot Block Producer) runner, Voting for SBPs, ERC20 conversion, Transaction Details, etc."
         ],
         "assets": [
             "Exchange'e Yatırma",
@@ -60,10 +60,10 @@
     },
     "pow": {
         "ing": "Quota elde etmek için PoW'u çalıştırın",
-        "no": "PoW çalıştırmak istememeniz durumunda quota için VITE stake edebilirsiniz",
+        "no": "You can lock VITE for quota in case you would not like to run PoW",
         "insuffQuota": "Quota Al",
         "insuffQuotaMsg": "Quota için kilitli VITE olmadığınızı fark ettik. Lütfen VITE'i kilitleyin veya tercih ederseniz, Quota almak için POW'u çalıştırabilirsiniz.",
-        "insuffQuotaMsg2": "VITE, VITE stake'i olmadan her adres başına günlük yalnızca {powMaxTimes} işlemleri yapılabilir. Adresiniz tüm {powMaxTimes} işlemlerini tüketti. Lütfen quota sayfasına gidin ve daha fazla işlem gerçekleştirmek için VITE'inizi stake edin.",
+        "insuffQuotaMsg2": "VITE Only {powMaxTimes} transactions can be made per day per address without locking VITE. Your address has exhausted all {powMaxTimes} transactions. Please go to the quota page and lock VITE to perform more transactions.",
         "getQuota": "VITE Kilitle",
         "skip": "POW'u çalıştır",
         "cancel": "İptal"
@@ -125,8 +125,8 @@
         "CancelSBPVoting_V1": "Oylamayı İptal Et",
         "StakeForQuota": "Quota Al",
         "StakeForQuota_V1": "Quota Al",
-        "CancelQuotaStake": "Stake Çekimi",
-        "CancelQuotaStake_V1": "Stake Çekimi",
+        "CancelQuotaStake": "Unlock",
+        "CancelQuotaStake_V1": "Unlock",
         "IssueToken": "Token Yayınlama",
         "IssueToken_V1": "Token Yayınlama",
         "ReIssueToken": "İlave Token Yayınlama",
@@ -221,8 +221,8 @@
     },
     "quotaConfirm": {
         "title": "Yetersiz Quota",
-        "cancelContent": "Yetersiz TPS quota nedeniyle {operate} yapamazsınız. {operate} quota için VITE stake etmeniz gerekmektedir",
-        "goQuota": "VITE Stake et",
+        "cancelContent": "You cannot {operate} due to insufficient TPS quota. You need to lock VITE for quota to {operate}",
+        "goQuota": "Lock VITE",
         "noOperate": "Henüz {operate} yapılmadı"
     },
     "mnemonic": {
@@ -525,7 +525,7 @@
         },
         "trans": {
             "powErr": "PoW çalıştırılırken hata oluştu, lütfen tekrar deneyin",
-            "powTransErr": "Yetersiz PoW quotası, quota elde etmek için VITE stake etmenizi tavsiye ederiz."
+            "powTransErr": "Insufficient quota by PoW, we'd recommend you lock VITE to obtain enough quota."
         }
     },
     "walletMintage": {
@@ -593,49 +593,49 @@
         },
         "myQuota": "Quota'larım",
         "maxTxNum": "Maksimum Txs Sayısı",
-        "beneficialAddr": "Quota Alıcı Adresi",
+        "beneficialAddr": "Quota Beneficiary",
         "fromAddr": "Kesinti Adresi",
-        "time": "Stake Dondurma Süresi",
+        "time": "Lock Period",
         "aboutDays": "Yaklaşık {day} gün",
-        "amountPlaceholder": "Lütfen stake miktarını girin, minimum {num} VITE",
-        "limitAmt": "Stake miktarı {num}'den az olmamalıdır.",
-        "addrPlaceholder": "Lütfen quota alıcı adresini girin",
+        "amountPlaceholder": "Please enter lock amount, minimum {num} VITE",
+        "limitAmt": "Lock amount should not be less than {num}.",
+        "addrPlaceholder": "Please input quota beneficiary address",
         "inputWithdrawAmount": "Lütfen çekim miktarını girin",
         "pledgeFail": "Gönderme başarısız",
         "canclePledgeFail": "Başarısız",
-        "maturity": "Stake süresi doldu!",
+        "maturity": "Lock has expired!",
         "minAmt": "Çekim miktarı {num} VITE'den az olmamalıdır",
-        "gotoStake": "Lütfen önce yeterince VITE stake edin",
+        "gotoStake": "Please lock enough VITE first",
         "maxAmt": "Çekme miktarı {minAmount}, {maxAmount} içinde olmalıdır",
-        "cancelLimitAmt": "Stake miktarı {num}'den az olmamalıdır",
-        "withdrawalStaking": "Stake Edilmiş Tokenları Çek",
+        "cancelLimitAmt": "Lock amount cannot be less than {num}",
+        "withdrawalStaking": "Unlock Tokens",
         "myAddr": "Ben",
         "confirm": {
             "help": {
                 "t1": "Quota Nedir?",
-                "txt1": "Vite sisteminde kullanıcılar, bir işlem için gerekli gas'i komisyon ödeyerek satın almazlar, ancak quota tabanlı bir model üzerinden bilgi işlem kaynağına sahip olurlar. Bir işlemi göndermek için gerekli quota = temel quota (talep) + quota (ekli metin verileri), bir işlemi kabul etmek için gereken quota = temel quota (yanıt). Bu quota tabanlı kaynak yapılandırma protokolü, kullanıcıların daha yüksek kaynak quotalarını iki şekilde elde etmelerine olanak tanır: Quota elde etmek için VITE Stake etme ve PoW'u çalıştırma.",
-                "t2": "Stake Nedir?",
-                "txt2": "Vite sisteminde, kullanıcı belirli bir miktarda quota elde etmek için VITE stake edebilir. Stake için minimum değer 134 VITE'dir ve maksimum sınır yoktur; Bu arada, Vite sistemi ayrıca A adresinin VITE'in bir parçası olduğunu destekler ve elde edilen quotayı B adresine tahsis eder. Kullanıcılar stake için başvurduklarında VITE, başka bir kullanıcı yerine akıllı sözleşme adresine gönderilecek ve sadece stake için başvuran kullanıcının stake miktarını yönetme erişimi olacaktır.",
+                "txt1": "In the Vite system, users do not purchase the gas required for a transaction by paying a fee, but acquire the computing resource through a quota-based model. Required quota for sending a transaction = the basic quota (request) + quota (the attached text data), quota required to accept a transaction = the basic quota (response). This quota-based resource configuration protocol allows users to obtain higher resource quotas in two ways: Locking VITE to obtain quota and running PoW.",
+                "t2": "Locking for quota",
+                "txt2": "In the Vite system, the user can lock VITE to obtain a certain amount of quota. The minimum locking amount is 134 VITE, and there is no maximum; meanwhile, Vite system also supports locking for others. In this case, user A can lock a number of VITE coins and assign another user B as the quota beneficiary. The VITE coins will be sent to the built-in smart contract other than the another user, and only the user who submitted the lock is able to withdraw.",
                 "t3": "PoW Nedir?",
                 "txt3": "Proof of Work (PoW), belirli miktarda iş yaptığınızı doğrulayan bir protokoldür ve aynı zamanda DDoS saldırılarını ve diğer hizmet suistimallerini caydırmak için ekonomik bir önlemdir. Başlayanın belirli bir miktarda hesaplama yapmasını gerektirir, bu da bilgisayar için biraz zaman alabileceği anlamına gelir. Vite sisteminde, kullanıcılar PoW çalıştırarak ücretsiz quota elde edebilir ve ayrıca elde edilen quota üzerinden herhangi bir açıklama olmadan işlem gönderebilir."
             },
             "cancel": {
-                "describe": "Mevcut stake miktarınız {amount} VITE, lütfen çekmeyi onaylayın.",
+                "describe": "Your current lock amount is {amount} VITE, please confirm to withdraw.",
                 "rightBtn": "Başlamaya Hazır",
                 "leftBtn": "Çekimi İptal Et"
             },
             "submit": {
-                "describe": "Quota almak için {amount} VITE stake ettiğinizden emin olun, stakelerin yürürlüğe girmesinden yaklaşık 3 gün sonrasına kadar çekim yapamazsınız.",
+                "describe": "Make sure to lock {amount} VITE to obtain quota, you cannot withdraw until the lock expires (in about 3 days).",
                 "rightBtn": "Onayla",
                 "leftBtn": "İptal"
             }
         },
         "list": {
-            "title": "Stake Listem",
-            "total": "Toplamda {amount} VITE Stake ettiniz",
+            "title": "My Locking List",
+            "total": "Locking {amount} VITE in total",
             "amount": "Miktar",
-            "withdrawTime": "Beklenen Bitiş Tarihi",
-            "unexpired": "Stake edilmiş token, bitiş tarihine kadar çekilemez",
+            "withdrawTime": "Lock Expiration Date",
+            "unexpired": "Cannot withdraw until the lock expires",
             "vip": "Bu stake eylemi, ViteX borsasında varsayılan olarak VIP açmak içindir, lütfen VIP'i iptal etmek için ViteX exchange sayfasına gidin",
             "mining": "Bu stake, ViteX'teki madencilik miktarı olarak sizin stake miktarınızdır, lütfen stake iptali için ViteX madencilik sayfasına gidin",
             "other": "Bu stake, başka yollarla stake edilir ve burada stake iptali desteklenmez"
@@ -1133,8 +1133,8 @@
             "deleteAlert": "Devam etmeyi onaylarsanız mevcut API'a artık erişilemez. Mevcut paket korunacak ve yeni bir API Anahtarı oluşturulduktan sonra yeniden etkinleştirilecektir.",
             "confirmDelete": "Onayla ve Sil",
             "cancel": "İptal",
-            "agentAddressStakingAmount": "Delegasyon Stake Quotası",
-            "staking": "Stake Et",
+            "agentAddressStakingAmount": "Delegation Quota",
+            "staking": "Lock",
             "package": "Paket",
             "expireTime": "Bitiş Tarihi",
             "callNum": "Tetikleyici/dk",
@@ -1149,7 +1149,7 @@
                 "0": "ViteX, marketlere ve gerçek zamanlı alım satım hizmetlerine erişim sağlamak için resmi API yayınlıyor. Bir API özel anahtarını doğru şekilde almak için aşağıdaki talimatları izleyin.",
                 "0-step1": "1. API Oluştur",
                 "0-step2": "2. Seçilen alım satım paritelerinin delegasyonuna izin verin",
-                "0-step3": "3. API delegasyon adresi için quota stake edin",
+                "0-step3": "3. Lock for quota for API delegation address",
                 "0-step4": "Daha fazla destek için <a href=\"https://vite.wiki/dex/api/dex-apis.html\" target=\"_blank\">API Belgelerini</a> görüntüleyin",
                 "1": "Herhangi bir zamanda aynı adres için bir API Anahtarı ve Şifresine izin verilir.",
                 "2": "Varlık kaybını önlemek için Erişim Anahtarınızı ve Sırrınızı İfşa Etmeyin",
@@ -1158,7 +1158,7 @@
             "stakingForQuota": {
                 "title": "Delegasyon Quotası",
                 "agentAddress": "Delegasyon Adresi",
-                "stakingAmount": "Stake Miktarı",
+                "stakingAmount": "Lock Amount",
                 "ok": "Onayla"
             },
             "keyConfirm": {
