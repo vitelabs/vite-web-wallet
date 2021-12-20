@@ -682,7 +682,7 @@
             "all": "VITE acumulado: {num}",
             "nodeInfo": "Información del nodo",
             "onlineNodes": "Nodos activos",
-            "rewardNodes": "Nodos de recompensa",
+            "rewardNodes": "Nodos recompensados",
             "stakeAmount": "Nodo staking"
         }
     },
