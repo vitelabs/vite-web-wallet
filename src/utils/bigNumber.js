@@ -53,13 +53,17 @@ export default {
         x = new BigNumber(x);
         y = new BigNumber(y);
         const result = x.minus(y);
-        return type === 'fix' ? result.toFormat(fix) : result.decimalPlaces(fix, 1).toFormat();
+        return type === 'fix'
+            ? result.toFormat(fix)
+            : result.decimalPlaces(fix, 1).toFormat();
     },
     plus(x, y, fix = 8, type = 'fix') {
         x = new BigNumber(x);
         y = new BigNumber(y);
         const result = x.plus(y);
-        return type === 'fix' ? result.toFormat(fix) : result.decimalPlaces(fix, 1).toFormat();
+        return type === 'fix'
+            ? result.toFormat(fix)
+            : result.decimalPlaces(fix, 1).toFormat();
     },
     multi(x, y, fix = 8) {
         x = new BigNumber(x);
@@ -70,11 +74,16 @@ export default {
         num1 = new BigNumber(num1);
         num2 = new BigNumber(num2);
         if (fix === 0) {
-            return num1.dividedBy(num2).integerValue().toString();
+            return num1
+                .dividedBy(num2)
+                .integerValue()
+                .toString();
         }
 
         const result = num1.dividedBy(num2);
-        return type === 'fix' ? result.toFormat(fix) : result.decimalPlaces(fix, 1).toFormat();
+        return type === 'fix'
+            ? result.toFormat(fix)
+            : result.decimalPlaces(fix, 1).toFormat();
     },
     dividedCeil(num1, num2, fix = 0) {
         num1 = new CeilBigNumber(num1);
@@ -83,11 +92,11 @@ export default {
         return result.toFormat(fix);
     },
     /**
-     * 
-     * @param {string} num 
+     *
+     * @param {string} num
      * @param {number} minUnit number
      * @param {number} decimalPlaces number
-     * @returns 
+     * @returns
      */
     toBasic(num, minUnit = 0, decimalPlaces = DP) {
         const min = new BigNumber(10).exponentiatedBy(minUnit);
@@ -97,7 +106,10 @@ export default {
         }
 
         try {
-            return num.dividedBy(min).decimalPlaces(decimalPlaces, 1).toFormat();
+            return num
+                .dividedBy(min)
+                .decimalPlaces(decimalPlaces, 1)
+                .toFormat();
         } catch (err) {
             return '';
         }
