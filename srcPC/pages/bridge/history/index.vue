@@ -10,6 +10,8 @@
 import walletTable from "pcComponents/table/index.vue";
 import { getTxs } from "pcServices/conversion";
 import d from "dayjs";
+import bnUtils from 'utils/bigNumber';
+
 
 export default {
   props: [],
@@ -20,6 +22,7 @@ export default {
       (data || []).forEach((item) => {
         item["status"] = item.toHash ? "success" : "pending";
         item["time"] = d.unix(item["time"]).format("YYYY-MM-DD HH:mm");
+        item["amount"]=bnUtils.toBasic(item.amount,18)
       });
       this.contentList = data;
     });

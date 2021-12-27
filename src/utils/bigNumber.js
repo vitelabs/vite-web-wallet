@@ -82,6 +82,13 @@ export default {
         const result = num1.dividedBy(num2);
         return result.toFormat(fix);
     },
+    /**
+     * 
+     * @param {string} num 
+     * @param {number} minUnit number
+     * @param {number} decimalPlaces number
+     * @returns 
+     */
     toBasic(num, minUnit = 0, decimalPlaces = DP) {
         const min = new BigNumber(10).exponentiatedBy(minUnit);
         num = new BigNumber(num);
