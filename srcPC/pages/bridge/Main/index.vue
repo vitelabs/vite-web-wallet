@@ -1,5 +1,19 @@
 <template>
     <div class="bridge-wrapper">
+        <div class="bridge-notice">
+            <a
+                href="https://medium.com/vitelabs/vitebridge-0-1-testnet-tutorial-1f3382f389f7"
+                target="_blank"
+                rel="noopener noreferrer"
+            >ViteBridge 0.1 Testnet Tutorial</a
+            >
+            <a
+                href="https://medium.com/vitelabs/vitebridge-0-1-bug-bounty-program-109ce87bda2e"
+                target="_blank"
+                rel="noopener noreferrer"
+            >ViteBridge 0.1 Bug Bounty Program</a
+            >
+        </div>
         <div class="bridge-content">
             <div class="bri__title">Choose Asset</div>
             <viteSelect
@@ -39,7 +53,7 @@
                         <div class="__row_t">
                             Amount
                             <span class="__row_hint"
-                            >Balance:{{ balanceMan }}
+                            >Balance: {{ balanceMan }}
                                 {{ curToken.label }}</span
                                 >
                         </div>
@@ -83,11 +97,13 @@
                 <div class="__row-tips">
                     <div><span class="red-dot"></span>Reminder</div>
                     <div>
-                        The maximum amount is {{ richNetworkPair.from.max }}
+                        The maximum bridge amount is
+                        {{ richNetworkPair.from.max }}
                         {{ curToken.label }}
                     </div>
                     <div>
-                        The minimum amount is {{ richNetworkPair.to.min }}
+                        The minimum bridge amount is
+                        {{ richNetworkPair.to.min }}
                         {{ curToken.label }}
                     </div>
                 </div>
@@ -189,7 +205,8 @@ const mockTokens = {
                     {
                         network: 'BSC',
                         desc: 'BSC TestNet ',
-                        icon: 'https://static.vite.net/image-1257137467/logo/bsc-logo.png',
+                        icon:
+                            'https://static.vite.net/image-1257137467/logo/bsc-logo.png',
                         contract: '0x2fe56db3f21815ab26828debc175ab08d91cf81d',
                         erc20: '0x337610d27c682e347c9cd60bd4b3b107c9d34ddd',
                         decimals: 18,
@@ -201,7 +218,8 @@ const mockTokens = {
                     {
                         network: 'VITE',
                         desc: 'Vite TestNet',
-                        icon: 'https://static.vite.net/image-1257137467/logo/VITE-logo.png',
+                        icon:
+                            'https://static.vite.net/image-1257137467/logo/VITE-logo.png',
                         contract:
                             'vite_75043ce60463a3c14b188a1505fd359acaef278c16dece5a0b',
                         tokenId: 'tti_ece34ebace895e3506a24064',
@@ -298,7 +316,8 @@ export default {
         tokenInfos() {
             const tokenMap = this.$store.getters.allTokensMap || {};
             return (this.tokens || []).map(t => {
-                const tokenId = t.channels[0].find(c => c.network === 'VITE')?.tokenId;
+                const tokenId = t.channels[0].find(c => c.network === 'VITE')
+                    ?.tokenId;
                 return {
                     ...t,
                     icon: t?.icon || getTokenIcon(tokenId),
@@ -496,12 +515,16 @@ export default {
                         address: channelAddress,
                         tokenId
                     });
-                    const prevId = `0x${ (await channelClient.prevInputId())?.[0] }`;
+                    const prevId = `0x${
+                        (await channelClient.prevInputId())?.[0]
+                    }`;
                     await execWithValid(() =>
                         channelClient.input(toAddress, ammountMin))();
                     while (true) {
                         await sleep(5000);
-                        const id = `0x${ (await channelClient.prevInputId())?.[0] }`;
+                        const id = `0x${
+                            (await channelClient.prevInputId())?.[0]
+                        }`;
                         if (id === prevId) {
                             continue;
                         } else {
@@ -596,6 +619,18 @@ export default {
     justify-content: center;
     align-items: center;
     font-size: 14px;
+    .bridge-notice {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        height: 60px;
+        position: absolute;
+        top: 100px;
+        left: 50px;
+        > a {
+            color: $blue-color-1;
+        }
+    }
     .bridge-content {
         width: 630px;
         height: 810px;

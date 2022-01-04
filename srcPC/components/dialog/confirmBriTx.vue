@@ -1,42 +1,42 @@
 <template lang="pug">
 extends /components/dialog/base.pug
 block head
-    .bri-trans__head {{ transInfo.amount+" VITE"}}
+  .bri-trans__head {{ transInfo.amount + ' ' + tokenInfo.token }}
 block content
-    div
-        .bri-trans
-            .bri-trans__card
-                .card__title from
-                .card__text {{networkPair.from.desc}}
-                img.card__icon(:src="networkPair.from.icon")
-            .bri-trans__icon
-            .bri-trans__card
-                .card__title TO
-                .card__text {{networkPair.to.desc}}
-                img.card__icon(:src="networkPair.to.icon")
-        .content-container
-            .content-item
-                .label Assets:
-                .accets-container
-                    img.icon(:src="tokenInfo.icon")
-                    .text {{tokenInfo.token}}
-            .content-item
-                .label Destination:
-                .toAddress(@click="addressClick") {{transInfo.toAddress}}
-            .content-item
-                .label NetWorkFee:
-                div {{networkPair.from.fee.fixed}}
-            .content-item
-                .label You Will Receive:
-                .accets-container
-                  img.icon(:src="tokenInfo.icon")
-                  .text {{transInfo.estimateAmount}}
-        .tips The network fees and execution price depend on the market condition, you may get a different rate when the transaction is complete.
-        .term
-          checkbox(class='term-checkbox' v-model='accepted')
-          div
-            | I have read and agree to the
-            span.link Terms of Use
+  div
+    .bri-trans
+      .bri-trans__card
+        .card__title FROM
+        .card__text {{ networkPair.from.desc }}
+        img.card__icon(:src="networkPair.from.icon")
+      .bri-trans__icon
+      .bri-trans__card
+        .card__title TO
+        .card__text {{ networkPair.to.desc }}
+        img.card__icon(:src="networkPair.to.icon")
+    .content-container
+      .content-item
+        .label Assets:
+        .accets-container
+          img.icon(:src="tokenInfo.icon")
+          .text {{ tokenInfo.token }}
+      .content-item
+        .label Destination:
+        .toAddress(@click="addressClick") {{ transInfo.toAddress }}
+      .content-item
+        .label NetWork Fee:
+        div {{ networkPair.from.fee.fixed }}
+      .content-item
+        .label You will receive:
+        .accets-container
+          img.icon(:src="tokenInfo.icon")
+          .text {{ transInfo.estimateAmount }} {{ tokenInfo.token }}
+    .tips The transaction fees are subject to network conditions and may change.
+    .term
+      checkbox.term-checkbox(v-model="accepted")
+      div
+        | I have read and agree to the&nbsp
+        span.link Terms of Use.
 </template>
 <script>
 import checkbox from 'uiKit/checkbox.vue';
@@ -46,10 +46,18 @@ export default {
     name: 'confirmBriTx',
     props: [ 'networkPair', 'tokenInfo', 'transInfo' ],
     data() {
-        return { dTitle: 'Confirm', dSTxt: 'Confirm', accepted: false };
+        return {
+            dTitle: 'Transaction Confirm',
+            dSTxt: 'Confirm',
+            accepted: false
+        };
     },
     beforeMount() {},
-    computed: {},
+    computed: {
+        btnUnuse() {
+            return !this.accepted;
+        }
+    },
     methods: {
         addressClick() {
             execCopy(this.transInfo.toAddress);
@@ -75,6 +83,7 @@ export default {
     display: flex;
     justify-content: space-between;
     &__head {
+        @include common_font_color();
         @include bg_color_custom(#d4dee7, $black-color-4);
         display: flex;
         justify-content: center;

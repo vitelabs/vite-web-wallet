@@ -2,7 +2,7 @@
 extends /components/dialog/base.pug
 block head
     .bri-trans__head
-        div Transer {{tokenInfo.token}} form {{networkPair.from.desc}} to {{networkPair.to.desc}}，Submit a transation to the {{networkPair.from.desc}} via Vite Wallet
+        div You are about to bridge {{tokenInfo.token}} from {{networkPair.from.desc}} to {{networkPair.to.desc}}.
             .assets-container
                 img.icon(:src="tokenInfo.icon")
                 .text
@@ -10,9 +10,9 @@ block head
                     .content {{`${transInfo.amount}  ${tokenInfo.token}`}}
 block originContent
       .custom-content
-        .bri-trans__label  Bridge your assets to the following address:
+        //- .bri-trans__label  Bridge your assets to the following target address:
         .bri-trans__content
-            .title Address
+            .title Target Address
             .address(@click="addressClick") {{transInfo.toAddress}}
 </template>
 <script>
@@ -31,7 +31,7 @@ export default {
     ],
     data() {
         return {
-            dTitle: 'Confirm Submit transation',
+            dTitle: 'Transaction Confirmation',
             accepted: false,
             approved: false
         };
@@ -41,7 +41,7 @@ export default {
     },
     computed: {
         dSTxt: function () {
-            return this.approved ? 'Submit transation' : 'Submit approve';
+            return this.approved ? 'Submit Transaction' : 'Submit approve';
         }
     },
     watch: {
@@ -63,6 +63,7 @@ export default {
 
 .bri-trans {
     &__head {
+        @include common_font_color();
         @include bg_color_custom(#d4dee7, $black-color-4);
         display: flex;
         justify-content: center;
@@ -94,6 +95,7 @@ export default {
     }
 }
 .custom-content {
+    @include common_font_color();
     margin: 20px 30px;
     .bri-trans__label {
         font-size: 12px;

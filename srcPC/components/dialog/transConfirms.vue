@@ -1,35 +1,49 @@
 <template lang="pug">
 extends /components/dialog/base.pug
 block content
-    .col
-        .trans-icon
-          img(:src="rightCircle")
-          .line
-          .circle
-        .row
-            .card
-                img.net-icon(:src='networkPair.from.icon')
-                .confirm-info
-                    .trans-info
-                        .amount {{transInfo.amount+' '+tokenInfo.token}}
-                        .address(@click="addressClick(transInfo.fromAddress)") From {{transInfo.fromAddress}}
-                    .confirms
-                        .tx-hash(:class="{pending:!tx.fromHash}" @click="tx.fromHash&&addressClick(tx.fromHash)")
-                            |{{tx.fromHash?tx.fromHash:'pending'}}
-                            Loading(loadingType="dot" v-show="!tx.fromHash" :dotSize="1" class="confirm-loading")
-                        .nums ({{(tx.fromHashConfirmationNums||0)+'/'+(networkPair.from.confirmedThreshold||0)}})
-            .card
-                img.net-icon(:src='networkPair.to.icon')
-                .confirm-info
-                    .trans-info
-                        .amount {{transInfo.amount+' '+tokenInfo.token}}
-                        .address(@click="addressClick(transInfo.toAddress)") To {{transInfo.toAddress}}
-                    .confirms
-                        .tx-hash(:class="{pending:!tx.toHash}" @click="tx.toHash&&addressClick(tx.toHash)")
-                            | {{tx.toHash?tx.toHash:'pending'}}
-                            Loading(loadingType="dot" v-show="!tx.toHash" :dotSize="1" class="confirm-loading")
-                        .nums ({{(tx.toHashConfirmationNums||0)+'/'+(networkPair.to.confirmedThreshold||0)}})
-
+  .col
+    .trans-icon
+      img(:src="rightCircle")
+      .line
+      .circle(v-if="tx.toHashConfirmationNums")
+      img(:src="rightCircle", v-else)
+    .row
+      .card
+        img.net-icon(:src="networkPair.from.icon")
+        .confirm-info
+          .trans-info
+            .amount {{ transInfo.amount + ' ' + tokenInfo.token }}
+            .address(@click="addressClick(transInfo.fromAddress)") From {{ transInfo.fromAddress }}
+          .confirms
+            .tx-hash(
+              :class="{ pending: !tx.fromHash }",
+              @click="tx.fromHash && addressClick(tx.fromHash)"
+            )
+              | {{ tx.fromHash ? tx.fromHash : 'pending' }}
+              Loading.confirm-loading(
+                loadingType="dot",
+                v-show="!tx.fromHash",
+                :dotSize="1"
+              )
+            .nums ({{ fromConfirmStatus }})
+      .card
+        img.net-icon(:src="networkPair.to.icon")
+        .confirm-info
+          .trans-info
+            .amount {{ transInfo.amount + ' ' + tokenInfo.token }}
+            .address(@click="addressClick(transInfo.toAddress)") To {{ transInfo.toAddress }}
+          .confirms
+            .tx-hash(
+              :class="{ pending: !tx.toHash }",
+              @click="tx.toHash && addressClick(tx.toHash)"
+            )
+              | {{ tx.toHash ? tx.toHash : 'pending' }}
+              Loading.confirm-loading(
+                loadingType="dot",
+                v-show="!tx.toHash",
+                :dotSize="1"
+              )
+            .nums ({{ toConfirmStatus }})
 </template>
 <script>
 // {
@@ -51,7 +65,7 @@ export default {
     props: [ 'networkPair', 'tokenInfo', 'transInfo' ],
     data() {
         return {
-            dTitle: 'Confirm',
+            dTitle: 'Transaction Confirmation Status',
             tx: {},
             rightCircle,
             ShowBottom: false,
@@ -99,7 +113,52 @@ export default {
     beforeDestroy() {
         this.loopTimer?.stop();
     },
-    computed: {},
+    watch: {
+        allConfirmed() {
+            this.$toast('Bridging transaction complete.');
+            this.rClick();
+        }
+    },
+    computed: {
+        allConfirmed() {
+            return (
+                tx.fromHashConfirmationNums
+                && networkPair.from.confirmedThreshold
+                && tx.fromHashConfirmationNums
+                    >= networkPair.from.confirmedThreshold
+                && tx.toHashConfirmationNums
+                && networkPair.to.confirmedThreshold
+                && tx.toHashConfirmationNums >= networkPair.to.confirmedThreshold
+            );
+        },
+        fromConfirmStatus() {
+            if (
+                tx.fromHashConfirmationNums
+                && networkPair.from.confirmedThreshold
+                && tx.fromHashConfirmationNums
+                    >= networkPair.from.confirmedThreshold
+            ) {
+                return 'Confirmed';
+            }
+            return (
+                `${ tx.fromHashConfirmationNums || 0
+                }/${
+                    networkPair.from.confirmedThreshold || 0 }`
+            );
+        },
+        toConfirmStatus() {
+            if (
+                tx.toHashConfirmationNums
+                && networkPair.to.confirmedThreshold
+                && tx.toHashConfirmationNums >= networkPair.to.confirmedThreshold
+            ) return 'Confirmed';
+            return (
+                `${ tx.toHashConfirmationNums || 0
+                }/${
+                    networkPair.to.confirmedThreshold || 0 }`
+            );
+        }
+    },
     methods: {
         addressClick(value) {
             execCopy(value);
