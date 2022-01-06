@@ -24,3 +24,5 @@ export const changeRpcUrlDialog = getDialog(changeRpcUrlComp);
 export const confirmBriTxDialog = getDialog(confirmBriTx);
 export const confirmCrossBridgeDialog = getDialog(confirmCrossBridge);
 export const transConfirmsDialog = getDialog(transConfirms);
+export const powLimitDialog = getDialog(powLimitComp);
+

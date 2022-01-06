@@ -5,7 +5,7 @@ block content
     .trans-icon
       img(:src="rightCircle")
       .line
-      .circle(v-if="tx.toHashConfirmationNums")
+      .circle(v-if="!tx.toHashConfirmationNums")
       img(:src="rightCircle", v-else)
     .row
       .card
@@ -122,40 +122,40 @@ export default {
     computed: {
         allConfirmed() {
             return (
-                tx.fromHashConfirmationNums
-                && networkPair.from.confirmedThreshold
-                && tx.fromHashConfirmationNums
-                    >= networkPair.from.confirmedThreshold
-                && tx.toHashConfirmationNums
-                && networkPair.to.confirmedThreshold
-                && tx.toHashConfirmationNums >= networkPair.to.confirmedThreshold
+                this.tx.fromHashConfirmationNums
+                && this.networkPair.from.confirmedThreshold
+                && this.tx.fromHashConfirmationNums
+                    >= this.networkPair.from.confirmedThreshold
+                && this.tx.toHashConfirmationNums
+                && this.networkPair.to.confirmedThreshold
+                && this.tx.toHashConfirmationNums >= this.networkPair.to.confirmedThreshold
             );
         },
         fromConfirmStatus() {
             if (
-                tx.fromHashConfirmationNums
-                && networkPair.from.confirmedThreshold
-                && tx.fromHashConfirmationNums
-                    >= networkPair.from.confirmedThreshold
+                this.tx.fromHashConfirmationNums
+                && this.networkPair.from.confirmedThreshold
+                && this.tx.fromHashConfirmationNums
+                    >= this.networkPair.from.confirmedThreshold
             ) {
                 return 'Confirmed';
             }
             return (
-                `${ tx.fromHashConfirmationNums || 0
+                `${ this.tx.fromHashConfirmationNums || 0
                 }/${
-                    networkPair.from.confirmedThreshold || 0 }`
+                    this.networkPair.from.confirmedThreshold || 0 }`
             );
         },
         toConfirmStatus() {
             if (
-                tx.toHashConfirmationNums
-                && networkPair.to.confirmedThreshold
-                && tx.toHashConfirmationNums >= networkPair.to.confirmedThreshold
+                this.tx.toHashConfirmationNums
+                && this.networkPair.to.confirmedThreshold
+                && this.tx.toHashConfirmationNums >= this.networkPair.to.confirmedThreshold
             ) return 'Confirmed';
             return (
-                `${ tx.toHashConfirmationNums || 0
+                `${ this.tx.toHashConfirmationNums || 0
                 }/${
-                    networkPair.to.confirmedThreshold || 0 }`
+                    this.networkPair.to.confirmedThreshold || 0 }`
             );
         }
     },

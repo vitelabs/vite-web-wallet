@@ -106,4 +106,4 @@ export function doUntill({
  * 延时
  * @param seconds 毫秒(ms)
  */
-export const sleep = seconds => new (res => setTimeout(() => res(), seconds))();
+export const sleep = seconds => new Promise(res => setTimeout(() => res(), seconds));
