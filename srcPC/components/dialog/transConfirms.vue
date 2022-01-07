@@ -95,11 +95,32 @@ export default {
             //         toNet: 'VITE',
             //         toHash:
             //             '0x21676d28b8915e8a32cd5ea4367d4d1373901513ba391e80bda03d90f696a78e',
-            //         toHashConfirmedHeight: 3074523,
-            //         toHashConfirmationNums: 39407
+            //         toHashConfirmedHeight: 30,
+            //         toHashConfirmationNums: 30
             //     }
             // };
             // this.tx = data.data || this.tx;
+            // this.tx = {
+            //     id:
+            //         '0xdb87d64f7847f146aab26a657c00adcd08a2697b07661065ba5bc7ffe5b17d0e',
+            //     idx: '2',
+            //     amount: '121000000000000000',
+            //     fromAddress: '0xea71ff0553eF77cc3Ca6b5ad82662BCe50E7f068',
+            //     toAddress: '0xb90388add928d41c114b0fb65471c4a6c70595eb00',
+            //     token: 'USDV',
+            //     fromNet: 'BSC',
+            //     fromHash:
+            //         '0x5960e20e1725d8d7cf56032fe854e00cb4d748a842e97f2b3d3b4c4c30714051',
+            //     fromHashConfirmedHeight: 14583821,
+            //     fromHashConfirmationNums: 13797,
+            //     fee: '0',
+            //     time: 1638329455,
+            //     toNet: 'VITE',
+            //     toHash:
+            //         '0x21676d28b8915e8a32cd5ea4367d4d1373901513ba391e80bda03d90f696a78e',
+            //     toHashConfirmedHeight: 2,
+            //     toHashConfirmationNums: 2
+            // };
             getTx({
                 from: fromAddress,
                 to: toAddress,
@@ -114,7 +135,8 @@ export default {
         this.loopTimer?.stop();
     },
     watch: {
-        allConfirmed() {
+        allConfirmed(val) {
+            if (!val) return;
             this.$toast('Bridging transaction complete.');
             this.rClick();
         }
@@ -128,7 +150,8 @@ export default {
                     >= this.networkPair.from.confirmedThreshold
                 && this.tx.toHashConfirmationNums
                 && this.networkPair.to.confirmedThreshold
-                && this.tx.toHashConfirmationNums >= this.networkPair.to.confirmedThreshold
+                && this.tx.toHashConfirmationNums
+                    >= this.networkPair.to.confirmedThreshold
             );
         },
         fromConfirmStatus() {
@@ -140,23 +163,18 @@ export default {
             ) {
                 return 'Confirmed';
             }
-            return (
-                `${ this.tx.fromHashConfirmationNums || 0
-                }/${
-                    this.networkPair.from.confirmedThreshold || 0 }`
-            );
+            return `${ this.tx.fromHashConfirmationNums || 0 }/${ this.networkPair
+                .from.confirmedThreshold || 0 }`;
         },
         toConfirmStatus() {
             if (
                 this.tx.toHashConfirmationNums
                 && this.networkPair.to.confirmedThreshold
-                && this.tx.toHashConfirmationNums >= this.networkPair.to.confirmedThreshold
+                && this.tx.toHashConfirmationNums
+                    >= this.networkPair.to.confirmedThreshold
             ) return 'Confirmed';
-            return (
-                `${ this.tx.toHashConfirmationNums || 0
-                }/${
-                    this.networkPair.to.confirmedThreshold || 0 }`
-            );
+            return `${ this.tx.toHashConfirmationNums || 0 }/${ this.networkPair.to
+                .confirmedThreshold || 0 }`;
         }
     },
     methods: {
