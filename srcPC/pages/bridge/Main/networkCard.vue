@@ -29,7 +29,6 @@ export default {
     components: { downCircle, viteSelect },
     methods: {
         oninput(val) {
-            console.log(99999);
             if (val.value === this.value) return;
             this.$emit('input', val.value);
         }
