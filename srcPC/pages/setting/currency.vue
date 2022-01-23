@@ -16,12 +16,13 @@
 </template>
 
 <script>
+import { symbolList } from 'src/utils/currenySymbol';
 
 export default {
     data() {
         return {
             isShow: false,
-            list: ['USD']
+            list: symbolList
         };
     },
     computed: {

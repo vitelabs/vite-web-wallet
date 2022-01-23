@@ -1,11 +1,19 @@
-import {
-    storage as localStorage,
-    constant
-} from 'pcUtils/store';
+import { storage as localStorage, constant } from 'pcUtils/store';
+import { getSymbol, lowerSymbolList } from 'src/utils/currenySymbol';
+
 import { getApiConfig } from 'services/dnsHostIP';
 import d from 'dayjs';
 
-const { LangKey, GateKey, ThemeKey, autoLogoutKey, currencyKey, CustomNodes, CurrentNode, PowLimit } = constant;
+const {
+    LangKey,
+    GateKey,
+    ThemeKey,
+    autoLogoutKey,
+    currencyKey,
+    CustomNodes,
+    CurrentNode,
+    PowLimit
+} = constant;
 const HideZeroAssets = constant.HideZeroAssets;
 
 const theme = localStorage.getItem(ThemeKey);
@@ -57,7 +65,7 @@ const mutations = {
     },
     setCurrency(state, currency) {
         currency = currency.toLowerCase();
-        if ([ 'cny', 'usd' ].indexOf(currency) === -1) {
+        if (lowerSymbolList.indexOf(currency) === -1) {
             return;
         }
         state.currency = currency;
@@ -110,7 +118,9 @@ const actions = {
     },
     addCustomNode({ commit, state }, newNode) {
         if (!newNode) return;
-        const customNodes = state.customNodes.concat([newNode]).filter(item => item);
+        const customNodes = state.customNodes
+            .concat([newNode])
+            .filter(item => item);
         commit('setCustomNodes', customNodes);
         localStorage.setItem(CustomNodes, customNodes);
     },
@@ -147,11 +157,7 @@ const actions = {
 
 const getters = {
     currencySymbol(state) {
-        const symbolMap = {
-            cny: '¥',
-            usd: '$'
-        };
-        return symbolMap[state.currency];
+        return getSymbol[state.currency];
     },
     allRpcNodes(state) {
         const all = state.officialNodes.concat(state.customNodes);

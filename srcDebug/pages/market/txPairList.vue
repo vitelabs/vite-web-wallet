@@ -1,25 +1,55 @@
 <template>
     <div class="tx-pair-wrapper">
-        <span v-show="symbol && realPrice" class="real-price" :style="`top: ${top}px`">{{ realPrice }}</span>
+        <span
+            v-show="symbol && realPrice"
+            class="real-price"
+            :style="`top: ${top}px`"
+        >{{ realPrice }}</span
+        >
         <div ref="txList" class="tx-list">
-            <div :ref="`txPair${i}`" v-for="(txPair, i) in showList" :key="i"
-                 class="__center-tb-row __pointer"
-                 :class="{'active': txPair && txPair.symbol === activeSymbol}"
-                 @mouseenter="showRealPrice(txPair, i)"
-                 @mouseleave="hideRealPrice(txPair)"
-                 @click="setActiveTxPair(txPair)">
+            <div
+                :ref="`txPair${i}`"
+                v-for="(txPair, i) in showList"
+                :key="i"
+                class="__center-tb-row __pointer"
+                :class="{ active: txPair && txPair.symbol === activeSymbol }"
+                @mouseenter="showRealPrice(txPair, i)"
+                @mouseleave="hideRealPrice(txPair)"
+                @click="setActiveTxPair(txPair)"
+            >
                 <span class="__center-tb-item tx-pair">
-                    <span class="favorite-icon" :class="{'active': !!favoritePairs[txPair.symbol]}"
-                          @click.stop="setFavorite(txPair)"></span>
-                    <span class="describe">{{ getTxPairShowSymbol(txPair) }}</span>
+                    <span
+                        class="favorite-icon"
+                        :class="{ active: !!favoritePairs[txPair.symbol] }"
+                        @click.stop="setFavorite(txPair)"
+                    ></span>
+                    <span class="describe">{{
+                        getTxPairShowSymbol(txPair)
+                    }}</span>
                 </span>
                 <span class="__center-tb-item">
-                    {{ txPair.closePrice ? formatNum(txPair.closePrice, txPair.pricePrecision) : '--' }}
+                    {{
+                        txPair.closePrice
+                            ? formatNum(
+                                txPair.closePrice,
+                                txPair.pricePrecision
+                            )
+                            : '--'
+                    }}
                 </span>
-                <span v-show="showCol === 'updown'" class="__center-tb-item percent" :class="{
-                    'up': +txPair.priceChange > 0,
-                    'down': +txPair.priceChange < 0
-                }">{{ txPair.priceChangePercent ? getPercent(txPair.priceChangePercent) : '0.00%' }}</span>
+                <span
+                    v-show="showCol === 'updown'"
+                    class="__center-tb-item percent"
+                    :class="{
+                        up: +txPair.priceChange > 0,
+                        down: +txPair.priceChange < 0
+                    }"
+                >{{
+                    txPair.priceChangePercent
+                        ? getPercent(txPair.priceChangePercent)
+                        : '0.00%'
+                }}</span
+                >
                 <span v-show="showCol === 'txNum'" class="__center-tb-item">
                     {{ txPair.amount ? formatNum(txPair.amount, 1) : '0.0' }}
                 </span>
@@ -112,7 +142,8 @@ export default {
             return BigNumber.formatNum(num, fix);
         },
         showRealPrice(txPair, i) {
-            const elTop = this.$refs[`txPair${ i }`][0].getBoundingClientRect().top;
+            const elTop = this.$refs[`txPair${ i }`][0].getBoundingClientRect()
+                .top;
             const listTop = this.$refs.txList.getBoundingClientRect().top;
             const height = this.$refs.txList.clientHeight;
             const top = elTop - listTop - 8;
@@ -145,12 +176,14 @@ export default {
                 return txPair.tradeTokenSymbol;
             }
 
-            const _price = BigNumber.multi(txPair.closePrice || 0, rate || 0, 6);
+            const _price = BigNumber.multi(txPair.closePrice || 0,
+                rate || 0,
+                6);
             if (!+_price) {
                 return txPair.tradeTokenSymbol;
             }
 
-            const pre = this.$store.state.env.currency === 'cny' ? '≈¥' : '≈$';
+            const pre = `≈${ this.$store.getters.currencySymbol }`;
             const price = BigNumber.onlyFormat(_price, 2);
 
             return `${ txPair.tradeTokenSymbol }  ${ pre }${ price }`;
@@ -189,15 +222,18 @@ export default {
                 case 'priceDown':
                     return BigNumber.compared(b.closePrice, a.closePrice);
                 case 'upDownUp':
-                    return BigNumber.compared(a.priceChangePercent, b.priceChangePercent);
+                    return BigNumber.compared(a.priceChangePercent,
+                        b.priceChangePercent);
                 case 'upDownDown':
-                    return BigNumber.compared(b.priceChangePercent, a.priceChangePercent);
+                    return BigNumber.compared(b.priceChangePercent,
+                        a.priceChangePercent);
                 case 'txNumUp':
                     return BigNumber.compared(a.amount, b.amount);
                 case 'txNumDown':
                     return BigNumber.compared(b.amount, a.amount);
                 default:
-                    return compareStr(a.tradeTokenSymbol, b.tradeTokenSymbol);
+                    return compareStr(a.tradeTokenSymbol,
+                        b.tradeTokenSymbol);
                 }
             });
         },
@@ -209,7 +245,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "../center.scss";
+@import '../center.scss';
 
 .tx-pair-wrapper {
     position: relative;
@@ -223,19 +259,19 @@ export default {
         right: -10px;
         z-index: 1;
         transform: translateX(100%);
-        background: rgba(215,215,215,1);
-        box-shadow: 0px 5px 20px 0px rgba(0,0,0,0.1);
-        border: 1px solid rgba(212,222,231,1);
+        background: rgba(215, 215, 215, 1);
+        box-shadow: 0px 5px 20px 0px rgba(0, 0, 0, 0.1);
+        border: 1px solid rgba(212, 222, 231, 1);
         font-size: 12px;
         line-height: 18px;
-        color: rgba(94,104,117,1);
+        color: rgba(94, 104, 117, 1);
         font-family: $font-H;
         font-weight: 400;
 
         &::after {
             content: ' ';
             border: 5px solid transparent;
-            border-right: 5px solid rgba(215,215,215,1);
+            border-right: 5px solid rgba(215, 215, 215, 1);
             position: absolute;
             top: 50%;
             left: 0;
@@ -265,5 +301,4 @@ export default {
         background: rgba(75, 116, 255, 0.1);
     }
 }
-
 </style>

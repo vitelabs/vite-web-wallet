@@ -1,36 +1,83 @@
 <template>
     <div class="tx-pair-wrapper">
-        <span v-show="symbol && realPrice" class="real-price" :style="`top: ${top}px`">{{ realPrice }}</span>
+        <span
+            v-show="symbol && realPrice"
+            class="real-price"
+            :style="`top: ${top}px`"
+        >{{ realPrice }}</span
+        >
         <div ref="txList" class="tx-list">
-            <div :ref="`txPair${i}`" v-for="(txPair, i) in showList" :key="i"
-                 class="__center-tb-row __pointer"
-                 :class="{'active': txPair && txPair.symbol === activeSymbol}"
-                 @mouseenter="showRealPrice(txPair, i)"
-                 @mouseleave="hideRealPrice(txPair)"
-                 @click="setActiveTxPair(txPair)">
+            <div
+                :ref="`txPair${i}`"
+                v-for="(txPair, i) in showList"
+                :key="i"
+                class="__center-tb-row __pointer"
+                :class="{ active: txPair && txPair.symbol === activeSymbol }"
+                @mouseenter="showRealPrice(txPair, i)"
+                @mouseleave="hideRealPrice(txPair)"
+                @click="setActiveTxPair(txPair)"
+            >
                 <span class="__center-tb-item tx-pair">
-                    <span class="favorite-icon" :class="{'active': !!favoritePairs[txPair.symbol]}"
-                          @click.stop="setFavorite(txPair)"></span>
+                    <span
+                        class="favorite-icon"
+                        :class="{ active: !!favoritePairs[txPair.symbol] }"
+                        @click.stop="setFavorite(txPair)"
+                    ></span>
                     <span class="describe">
-                        <span class="des-text __ellipsis">{{ getTxPairShowSymbol(txPair) }}</span>
+                        <span class="des-text __ellipsis">{{
+                            getTxPairShowSymbol(txPair)
+                        }}</span>
                         <span class="mining-icon">
-                            <img v-show="isMining(txPair) === 1" src="~assets/imgs/trade_mining.svg"/>
-                            <img v-show="isMining(txPair) === 2" src="~assets/imgs/order_mining.svg"/>
-                            <img v-show="isMining(txPair) === 3" src="~assets/imgs/mining.svg"/>
+                            <img
+                                v-show="isMining(txPair) === 1"
+                                src="~assets/imgs/trade_mining.svg"
+                            />
+                            <img
+                                v-show="isMining(txPair) === 2"
+                                src="~assets/imgs/order_mining.svg"
+                            />
+                            <img
+                                v-show="isMining(txPair) === 3"
+                                src="~assets/imgs/mining.svg"
+                            />
                             {{ miningMultiples(txPair) }}
                         </span>
                     </span>
                 </span>
                 <span class="__center-tb-item">
-                    <img v-show="isZeroFee(txPair)" class="zero-fee-icon" src="~assets/imgs/trade/zero_fee.svg">
-                    {{ txPair.closePrice ? formatNum(txPair.closePrice, txPair.pricePrecision) : '--' }}
+                    <img
+                        v-show="isZeroFee(txPair)"
+                        class="zero-fee-icon"
+                        src="~assets/imgs/trade/zero_fee.svg"
+                    />
+                    {{
+                        txPair.closePrice
+                            ? formatNum(
+                                txPair.closePrice,
+                                txPair.pricePrecision
+                            )
+                            : '--'
+                    }}
                 </span>
-                <span v-show="showCol === 'updown'" class="__center-tb-item percent" :class="{
-                    'up': +txPair.priceChange > 0,
-                    'down': +txPair.priceChange < 0
-                }">{{ txPair.priceChangePercent ? getPercent(txPair.priceChangePercent) : '0.00%' }}</span>
+                <span
+                    v-show="showCol === 'updown'"
+                    class="__center-tb-item percent"
+                    :class="{
+                        up: +txPair.priceChange > 0,
+                        down: +txPair.priceChange < 0
+                    }"
+                >{{
+                    txPair.priceChangePercent
+                        ? getPercent(txPair.priceChangePercent)
+                        : '0.00%'
+                }}</span
+                >
                 <span v-show="showCol === 'txNum'" class="__center-tb-item">
-                    {{ txPair.amount ? formatNum(txPair.amount, transLimit) : '0.0' }}
+                    {{
+                        txPair.amount
+                            ? formatNum(txPair.amount, transLimit)
+                            : '0.0'
+                    }}
                 </span>
             </div>
         </div>
@@ -175,7 +222,8 @@ export default {
             return BigNumber.formatNum(num, fix, fix);
         },
         showRealPrice(txPair, i) {
-            const elTop = this.$refs[`txPair${ i }`][0].getBoundingClientRect().top;
+            const elTop = this.$refs[`txPair${ i }`][0].getBoundingClientRect()
+                .top;
             const listTop = this.$refs.txList.getBoundingClientRect().top;
             const height = this.$refs.txList.clientHeight;
             const top = elTop - listTop - 8;
@@ -208,7 +256,9 @@ export default {
                 return txPair.tradeTokenSymbol;
             }
 
-            const _price = BigNumber.multi(txPair.closePrice || 0, rate || 0, 6);
+            const _price = BigNumber.multi(txPair.closePrice || 0,
+                rate || 0,
+                6);
             if (!+_price) {
                 return txPair.tradeTokenSymbol;
             }
@@ -223,7 +273,7 @@ export default {
                 price = _realPrice2;
             }
 
-            const pre = this.$store.state.env.currency === 'cny' ? '≈¥' : '≈$';
+            const pre = `≈${ this.$store.getters.currencySymbol }`;
             return `${ txPair.tradeTokenSymbol }  ${ pre }${ price }`;
         },
         getRate(tokenId) {
@@ -257,20 +307,25 @@ export default {
                 case 'priceDown':
                     return BigNumber.compared(b.closePrice, a.closePrice);
                 case 'upDownUp':
-                    return BigNumber.compared(a.priceChangePercent, b.priceChangePercent);
+                    return BigNumber.compared(a.priceChangePercent,
+                        b.priceChangePercent);
                 case 'upDownDown':
-                    return BigNumber.compared(b.priceChangePercent, a.priceChangePercent);
+                    return BigNumber.compared(b.priceChangePercent,
+                        a.priceChangePercent);
                 case 'txNumUp':
                     return BigNumber.compared(a.amount, b.amount);
                 case 'txNumDown':
                     return BigNumber.compared(b.amount, a.amount);
                 default:
-                    return compareStr(a.tradeTokenSymbol, b.tradeTokenSymbol);
+                    return compareStr(a.tradeTokenSymbol,
+                        b.tradeTokenSymbol);
                 }
             });
         },
         setActiveTxPair(txPair) {
-            statistics.event(`${ this.$route.name }_trade_pair`, txPair.symbol, this.address || '');
+            statistics.event(`${ this.$route.name }_trade_pair`,
+                txPair.symbol,
+                this.address || '');
             this.$store.dispatch('exFetchActiveTxPair', txPair);
         }
     }
@@ -292,12 +347,12 @@ export default {
         right: -10px;
         z-index: 1;
         transform: translateX(100%);
-        [data-theme="0"] & {
-            color: rgba(94,104,117,1);
-            background: rgba(215,215,215,1);
-            box-shadow: 0px 5px 20px 0px rgba(0,0,0,0.1);
+        [data-theme='0'] & {
+            color: rgba(94, 104, 117, 1);
+            background: rgba(215, 215, 215, 1);
+            box-shadow: 0px 5px 20px 0px rgba(0, 0, 0, 0.1);
         }
-        [data-theme="1"] & {
+        [data-theme='1'] & {
             color: $white-color;
             background: $black-color-1;
         }
@@ -309,10 +364,10 @@ export default {
         &::after {
             content: ' ';
             border: 5px solid transparent;
-            [data-theme="0"] & {
-                border-right: 5px solid rgba(215,215,215,1);
+            [data-theme='0'] & {
+                border-right: 5px solid rgba(215, 215, 215, 1);
             }
-            [data-theme="1"] & {
+            [data-theme='1'] & {
                 border-right: 5px solid $black-color-1;
             }
             position: absolute;
@@ -360,5 +415,4 @@ export default {
         background: rgba(75, 116, 255, 0.1);
     }
 }
-
 </style>
