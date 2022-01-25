@@ -6,6 +6,7 @@
             class="switch-btn"
         >
             <div
+                v-show="!isTestnet"
                 class="btn-item __pointer"
                 :class="{ active: tabName === 'vb' }"
                 @click="toggleTab('vb')"
@@ -15,6 +16,7 @@
                 {{ $t("assets.vb.title") }}
             </div>
             <div
+                v-show="!isTestnet"
                 v-if="!isDesktop"
                 class="btn-item __pointer"
                 :class="{ active: tabName === 'ledger' }"
@@ -223,6 +225,9 @@ export default {
         },
         isDesktop() {
             return window.DESKTOP;
+        },
+        isTestnet() {
+            return process.env.VITE_NET !== 'mainnet';
         }
     },
     methods: {
@@ -254,6 +259,9 @@ export default {
                 DnsHost.onReady(() => {
                     this.initVB();
                 });
+            }
+            if(this.isTestnet){
+                this.toggleTab('resotre');
             }
         },
         initVB() {

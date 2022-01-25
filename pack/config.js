@@ -24,6 +24,7 @@ const BRIDGE = {
     test: '"https://buidl.vite.net"',
     dev: '"/"'
 };
+
 const gatewayInfosServer = {
     // http-DNS
     production: '"https://crosschain.vite.net"',
@@ -32,7 +33,7 @@ const gatewayInfosServer = {
 };
 const viteView = {
     // http-DNS
-    production: '\'https://viteview.xyz\'',
+    production: '\'https://mainnet.viteview.xyz\'',
     test: '\'https://buidl.viteview.xyz\'',
     dev: '\'https://buidl.viteview.xyz\''
 };
@@ -98,6 +99,7 @@ module.exports = {
     envVars: {
         'process.env.version': `"${ packJson.version }"`,
         'process.env.NODE_ENV': `"${ Node_Env }"`,
+        'process.env.VITE_NET': `"${ process.env.VITE_NET || '' }"`,
         'process.env.API': `"${ API }"`,
         'process.env.goViteServer': goViteServer[API],
         'process.env.viteView': viteView[API],
