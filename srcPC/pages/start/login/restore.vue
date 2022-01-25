@@ -11,7 +11,8 @@
 
         <create ref="createDom" :submit="validMnemonic"></create>
 
-        <div class="note">{{ $t('mnemonic.hint') }}</div>
+        <div v-if="!isTestnet" class="note">{{ $t('mnemonic.hint') }}</div>
+        <div v-if="isTestnet" class="note-warning">{{ 'In theory, you could use any existing Vite wallet you already control. But out of caution let’s set up a new wallet for testnet.'  }}</div>
 
         <div class="__btn_list">
             <span class="__btn __btn_border __pointer" @click="leftClick" >{{ $t(leftTxt) }}</span>
@@ -57,6 +58,11 @@ export default {
             errMsg: '',
             isLoading: false
         };
+    },
+    computed: {
+        isTestnet() {
+            return process.env.VITE_NET !== 'mainnet';
+        }
     },
     methods: {
         valid() {
@@ -198,6 +204,19 @@ export default {
 
 .note {
     font-size: 14px;
+    [data-theme="0"] & {
+        color: #fff;
+    }
+    [data-theme="1"] & {
+        color: rgba(255,255,255, 0.8);
+    }
+    text-align: left;
+    line-height: 20px;
+    margin: 30px 0;
+}
+.note-warning {
+    font-size: 14px;
+    font-weight: bold;
     [data-theme="0"] & {
         color: #fff;
     }
