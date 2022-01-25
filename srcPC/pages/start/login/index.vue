@@ -260,6 +260,9 @@ export default {
                     this.initVB();
                 });
             }
+            if(this.isTestnet){
+                this.toggleTab('resotre');
+            }
         },
         initVB() {
             this.vb = initVB();
