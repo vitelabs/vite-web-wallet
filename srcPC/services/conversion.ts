@@ -1,4 +1,4 @@
-import { ConversionAPI } from 'pcServices/apiServer';
+import { ConversionAPI, BridgeAPI } from 'pcServices/apiServer';
 
 export const bind = function ({
     pub_key,
@@ -26,48 +26,43 @@ export const balance = function ({ address }) {
 };
 
 export const getTxs = function (params: {
-    from: string;
-    to: string;
+    fromAddress: string;
+    fromNet: string;
+}): Promise<{
+    id: string;
+    idx: number;
+    amount: string;
     fromAddress: string;
     toAddress: string;
-    desc: boolean;
-}): Promise<
-    {
-        id: string;
-        idx: number;
-        amount: string;
-        fromAddress: string;
-        toAddress: string;
-        fromHash: string;
-        fromHashConfirmationNums: number;
-        toHash: string;
-        toHashConfirmationNums: number;
-        fee: string;
-        time: string;
-    }[]
-> {
-    return Promise.resolve([
-        {
-            id: '',
-            idx: 23,
-            amount: '100',
-            fromAddress: 'dsfasdfasdfsa',
-            toAddress: 'fasdfas',
-            fromHash: 'fasdfasdf',
-            fromHashConfirmationNums: 34,
-            toHash: 'fsdfasdfas',
-            toHashConfirmationNums: 34,
-            fee: '23',
-            time: '232332',
-            token: 'VITE'
-        }
-    ]);
-    // return ConversionAPI.request({
-    //     path: '/txs',
-    //     method: 'GET',
-    //     params: params,
-    //     timeout: 30000
-    // });
+    fromHash: string;
+    fromHashConfirmationNums: number;
+    toHash: string;
+    toHashConfirmationNums: number;
+    fee: string;
+    time: string;
+}[]> {
+    // return Promise.resolve([
+    //     {
+    //         id: '',
+    //         idx: 23,
+    //         amount: '100',
+    //         fromAddress: 'dsfasdfasdfsa',
+    //         toAddress: 'fasdfas',
+    //         fromHash: 'fasdfasdf',
+    //         fromHashConfirmationNums: 34,
+    //         toHash: 'fsdfasdfas',
+    //         toHashConfirmationNums: 34,
+    //         fee: '23',
+    //         time: '232332',
+    //         token: 'VITE'
+    //     }
+    // ]);
+    return BridgeAPI.request({
+        path: '/txs',
+        method: 'GET',
+        params: params,
+        timeout: 30000
+    });
 };
 
 export const getTx = function (params: {
@@ -83,7 +78,7 @@ export const getTx = function (params: {
     fromHash: string;
     toHash: string;
 }> {
-    return ConversionAPI.request({
+    return BridgeAPI.request({
         path: '/tx',
         method: 'GET',
         params: params,

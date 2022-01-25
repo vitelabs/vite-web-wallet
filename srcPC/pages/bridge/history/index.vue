@@ -1,18 +1,27 @@
 <template>
-    <wallet-table :headList="headList" :contentList="contentList"></wallet-table>
+    <wallet-table
+        :headList="headList"
+        :contentList="contentList"
+        class="bridge-history-table"
+    ></wallet-table>
 </template>
 
 <script>
 import walletTable from 'pcComponents/table/index.vue';
 import { getTxs } from 'pcServices/conversion';
+import d from 'dayjs';
+import bnUtils from 'utils/bigNumber';
+
 export default {
-    props: [ 'fromAdr', 'to', 'fromAddress', 'toAddress', 'desc', 'tokenSymbol' ],
+    props: [],
     components: { walletTable },
     mounted() {
-        const { from, to, fromAddress, toAddress, desc } = this.$props;
-        getTxs({ from, to, fromAddress, toAddress, desc }).then(data => {
+        const address = this.$store.state.wallet.currHDAcc?.activeAddr;
+        getTxs({ fromAddress: address, fromNet: 'VITE' }).then(data => {
             (data || []).forEach(item => {
                 item['status'] = item.toHash ? 'success' : 'pending';
+                item['time'] = d.unix(item['time']).format('YYYY-MM-DD HH:mm');
+                item['amount'] = bnUtils.toBasic(item.amount, 18);
             });
             this.contentList = data;
         });
@@ -23,37 +32,37 @@ export default {
                 {
                     text: 'Token',
                     cell: 'token',
-                    class: 'keystore-table-item'
+                    class: 'bridge-history-item--token'
                 },
                 {
                     text: 'Time',
                     cell: 'time',
-                    class: 'keystore-table-item'
+                    class: 'bridge-history-item--time'
                 },
                 {
                     text: 'Amount',
                     cell: 'amount',
-                    class: 'keystore-table-item'
+                    class: 'bridge-history-item--amount'
                 },
                 {
                     text: 'Status',
                     cell: 'status',
-                    class: 'keystore-table-item'
+                    class: 'bridge-history-item--status'
                 },
                 {
                     text: 'From',
                     cell: 'fromAddress',
-                    class: 'keystore-table-item'
+                    class: 'bridge-history-item--address'
                 },
                 {
                     text: 'To',
                     cell: 'toAddress',
-                    class: 'keystore-table-item'
+                    class: 'bridge-history-item--address'
                 },
                 {
                     text: 'Fee',
                     cell: 'fee',
-                    class: 'keystore-table-item'
+                    class: 'bridge-history-item--fee'
                 }
             ],
             contentList: []

@@ -2,7 +2,7 @@
 extends /components/dialog/base.pug
 block head
     .bri-trans__head
-        div Transer {{tokenInfo.token}} form {{networkPair.from.desc}} to {{networkPair.to.desc}}，Submit a transation to the {{networkPair.from.desc}} via Vite Wallet
+        div You are about to bridge {{tokenInfo.token}} from {{networkPair.from.desc}} to {{networkPair.to.desc}}.
             .assets-container
                 img.icon(:src="tokenInfo.icon")
                 .text
@@ -10,27 +10,51 @@ block head
                     .content {{`${transInfo.amount}  ${tokenInfo.token}`}}
 block originContent
       .custom-content
-        .bri-trans__label  You need to tranfer to the address provoded below：
+        //- .bri-trans__label  Bridge your assets to the following target address:
         .bri-trans__content
-            .title Address
-            .address {{transInfo.toAddress}}
+            .title Target Address
+            .address(@click="addressClick") {{transInfo.toAddress}}
 </template>
 <script>
 import checkbox from 'uiKit/checkbox.vue';
+import execCopy from 'utils/copy';
+
 export default {
     components: { checkbox },
     name: 'ConfirmSubmitTx',
-    props: [ 'networkPair', 'tokenInfo', 'transInfo' ],
+    props: [
+        'networkPair',
+        'tokenInfo',
+        'transInfo',
+        'inspector',
+        'checkApprove'
+    ],
     data() {
         return {
-            dTitle: 'Confirm Submit transation',
-            dSTxt: 'Submit transation',
-            accepted: false
+            dTitle: 'Transaction Confirmation',
+            accepted: false,
+            approved: false
         };
     },
-    beforeMount() {},
-    computed: {},
-    methods: {}
+    async beforeMount() {
+        this.approved = await this.checkApprove();
+    },
+    computed: {
+        dSTxt: function () {
+            return this.approved ? 'Submit Transaction' : 'Submit approve';
+        }
+    },
+    watch: {
+        btnLoading: async function () {
+            this.approved = await this.checkApprove();
+        }
+    },
+    methods: {
+        addressClick() {
+            execCopy(this.transInfo.toAddress);
+            this.$toast(this.$t('hint.copy'));
+        }
+    }
 };
 </script>
 
@@ -39,6 +63,7 @@ export default {
 
 .bri-trans {
     &__head {
+        @include common_font_color();
         @include bg_color_custom(#d4dee7, $black-color-4);
         display: flex;
         justify-content: center;
@@ -70,6 +95,7 @@ export default {
     }
 }
 .custom-content {
+    @include common_font_color();
     margin: 20px 30px;
     .bri-trans__label {
         font-size: 12px;
@@ -93,6 +119,10 @@ export default {
         @include box_shadow();
         .title {
             @include font-family-bold();
+        }
+        .address {
+            word-break: break-all;
+            cursor: pointer;
         }
     }
 }

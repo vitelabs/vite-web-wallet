@@ -1,26 +1,49 @@
 <template lang="pug">
 extends /components/dialog/base.pug
 block content
-    .col
-        .trans-icon
-          img(:src="rightCircle")
-          .line
-          .circle
-        .row
-            .card
-                img.net-icon(:src='networkPair.from.icon')
-                .confirm-info
-                    .trans-info
-                        .amount {{amount+tokenInfo.token}}
-                        .tx-hash {{tx.fromHash?tx.fromHash:'pending'}}
-                    .confirms Confirms({{(tx.confirms||0)+'/'+(tx.totalConfirms||0)}})
-            .card
-                img.net-icon(:src='networkPair.to.icon')
-                .confirm-info
-                    .trans-info
-                        .amount {{amount+tokenInfo.token}}
-                        .tx-hash {{tx.toHash?tx.toHash:'pending'}}
-                    .confirms To {{tx.toAddress}}
+  .col
+    .trans-icon
+      img(:src="rightCircle")
+      .line
+      .circle(v-if="!tx.toHashConfirmationNums")
+      img(:src="rightCircle", v-else)
+    .row
+      .card
+        img.net-icon(:src="networkPair.from.icon")
+        .confirm-info
+          .trans-info
+            .amount {{ transInfo.amount + ' ' + tokenInfo.token }}
+            .address(@click="addressClick(transInfo.fromAddress)") From {{ transInfo.fromAddress }}
+          .confirms
+            .tx-hash(
+              :class="{ pending: !tx.fromHash }",
+              @click="tx.fromHash && addressClick(tx.fromHash)"
+            )
+              | {{ tx.fromHash ? tx.fromHash : 'pending' }}
+              Loading.confirm-loading(
+                loadingType="dot",
+                v-show="!tx.fromHash",
+                :dotSize="1"
+              )
+            .nums ({{ fromConfirmStatus }})
+      .card
+        img.net-icon(:src="networkPair.to.icon")
+        .confirm-info
+          .trans-info
+            .amount {{ transInfo.amount + ' ' + tokenInfo.token }}
+            .address(@click="addressClick(transInfo.toAddress)") To {{ transInfo.toAddress }}
+          .confirms
+            .tx-hash(
+              :class="{ pending: !tx.toHash }",
+              @click="tx.toHash && addressClick(tx.toHash)"
+            )
+              | {{ tx.toHash ? tx.toHash : 'pending' }}
+              Loading.confirm-loading(
+                loadingType="dot",
+                v-show="!tx.toHash",
+                :dotSize="1"
+              )
+            .nums ({{ toConfirmStatus }})
 </template>
 <script>
 // {
@@ -34,14 +57,132 @@ block content
 // 	toHashConfirmationNums: number
 // }
 import rightCircle from 'assets/imgs/crossBridge/right.png';
+import execCopy from 'utils/copy';
+import { getTx } from 'pcServices/conversion';
+import { timer } from 'utils/asyncFlow';
+
 export default {
     props: [ 'networkPair', 'tokenInfo', 'transInfo' ],
     data() {
-        return { dTitle: 'Confirm', tx: {}, rightCircle, ShowBottom: false };
+        return {
+            dTitle: 'Transaction Confirmation Status',
+            tx: {},
+            rightCircle,
+            ShowBottom: false,
+            loopTimer: null
+        };
     },
-    beforeMount() {},
-    computed: {},
-    methods: {}
+    mounted() {
+        const { inputId, fromAddress, toAddress } = this.transInfo;
+        this.loopTimer = new timer(() => {
+            // const data = {
+            //     code: 0,
+            //     data: {
+            //         id:
+            //             '0xdb87d64f7847f146aab26a657c00adcd08a2697b07661065ba5bc7ffe5b17d0e',
+            //         idx: '2',
+            //         amount: '121000000000000000',
+            //         fromAddress: '0xea71ff0553eF77cc3Ca6b5ad82662BCe50E7f068',
+            //         toAddress: '0xb90388add928d41c114b0fb65471c4a6c70595eb00',
+            //         token: 'USDV',
+            //         fromNet: 'BSC',
+            //         fromHash:
+            //             '0x5960e20e1725d8d7cf56032fe854e00cb4d748a842e97f2b3d3b4c4c30714051',
+            //         fromHashConfirmedHeight: 14583821,
+            //         fromHashConfirmationNums: 13797,
+            //         fee: '0',
+            //         time: 1638329455,
+            //         toNet: 'VITE',
+            //         toHash:
+            //             '0x21676d28b8915e8a32cd5ea4367d4d1373901513ba391e80bda03d90f696a78e',
+            //         toHashConfirmedHeight: 30,
+            //         toHashConfirmationNums: 30
+            //     }
+            // };
+            // this.tx = data.data || this.tx;
+            // this.tx = {
+            //     id:
+            //         '0xdb87d64f7847f146aab26a657c00adcd08a2697b07661065ba5bc7ffe5b17d0e',
+            //     idx: '2',
+            //     amount: '121000000000000000',
+            //     fromAddress: '0xea71ff0553eF77cc3Ca6b5ad82662BCe50E7f068',
+            //     toAddress: '0xb90388add928d41c114b0fb65471c4a6c70595eb00',
+            //     token: 'USDV',
+            //     fromNet: 'BSC',
+            //     fromHash:
+            //         '0x5960e20e1725d8d7cf56032fe854e00cb4d748a842e97f2b3d3b4c4c30714051',
+            //     fromHashConfirmedHeight: 14583821,
+            //     fromHashConfirmationNums: 13797,
+            //     fee: '0',
+            //     time: 1638329455,
+            //     toNet: 'VITE',
+            //     toHash:
+            //         '0x21676d28b8915e8a32cd5ea4367d4d1373901513ba391e80bda03d90f696a78e',
+            //     toHashConfirmedHeight: 2,
+            //     toHashConfirmationNums: 2
+            // };
+            getTx({
+                from: fromAddress,
+                to: toAddress,
+                id: inputId
+            }).then(data => {
+                this.tx = data || this.tx;
+            });
+        });
+        this.loopTimer.start();
+    },
+    beforeDestroy() {
+        this.loopTimer?.stop();
+    },
+    watch: {
+        allConfirmed(val) {
+            if (!val) return;
+            this.$toast('Bridging transaction complete.');
+            this.rClick();
+        }
+    },
+    computed: {
+        allConfirmed() {
+            return (
+                this.tx.fromHashConfirmationNums
+                && this.networkPair.from.confirmedThreshold
+                && this.tx.fromHashConfirmationNums
+                    >= this.networkPair.from.confirmedThreshold
+                && this.tx.toHashConfirmationNums
+                && this.networkPair.to.confirmedThreshold
+                && this.tx.toHashConfirmationNums
+                    >= this.networkPair.to.confirmedThreshold
+            );
+        },
+        fromConfirmStatus() {
+            if (
+                this.tx.fromHashConfirmationNums
+                && this.networkPair.from.confirmedThreshold
+                && this.tx.fromHashConfirmationNums
+                    >= this.networkPair.from.confirmedThreshold
+            ) {
+                return 'Confirmed';
+            }
+            return `${ this.tx.fromHashConfirmationNums || 0 }/${ this.networkPair
+                .from.confirmedThreshold || 0 }`;
+        },
+        toConfirmStatus() {
+            if (
+                this.tx.toHashConfirmationNums
+                && this.networkPair.to.confirmedThreshold
+                && this.tx.toHashConfirmationNums
+                    >= this.networkPair.to.confirmedThreshold
+            ) return 'Confirmed';
+            return `${ this.tx.toHashConfirmationNums || 0 }/${ this.networkPair.to
+                .confirmedThreshold || 0 }`;
+        }
+    },
+    methods: {
+        addressClick(value) {
+            execCopy(value);
+            this.$toast(this.$t('hint.copy'));
+        }
+    }
 };
 </script>
 
@@ -80,7 +221,7 @@ export default {
 
         .card {
             display: flex;
-            padding: 15px;
+            padding: 30px 15px;
             height: 100px;
             width: 408px;
             box-sizing: border-box;
@@ -99,12 +240,58 @@ export default {
             .confirm-info {
                 display: flex;
                 justify-content: space-between;
+                flex-direction: column;
                 width: 100%;
+                font-size: 14px;
+                min-width: 200px;
+
                 .trans-info {
                     display: flex;
-                    flex-direction: column;
+                    justify-content: space-between;
+                    margin-right: 10px;
+                    flex-shrink: 1;
                     .amount {
                         margin-bottom: 8px;
+                        @include font-family-bold();
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                        cursor: pointer;
+                        white-space: nowrap;
+                        max-width: 100px;
+                    }
+                    .address {
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                        cursor: pointer;
+                        white-space: nowrap;
+                        max-width: 210px;
+                    }
+                }
+                .confirms {
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: flex-end;
+                    flex-shrink: 1;
+                    .tx-hash {
+                        @include font_color_2();
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                        cursor: pointer;
+                        white-space: nowrap;
+                        max-width: 210px;
+                        &.pending {
+                            color: #44d7b6;
+                            /deep/ .confirm-loading {
+                                margin-left: 5px;
+                                .dot {
+                                    div {
+                                        background: #44d7b6;
+                                        width: 4px;
+                                        height: 4px;
+                                    }
+                                }
+                            }
+                        }
                     }
                 }
             }

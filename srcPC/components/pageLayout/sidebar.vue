@@ -20,8 +20,14 @@
                     class="__pointer"
                     @click="_go(name)"
                 >
-                    <div class="icon" :class="{ active: $route.name.indexOf(name) >= 0 }">
-                        <img v-show="$route.name.indexOf(name) < 0" :src="icon[name]" />
+                    <div
+                        class="icon"
+                        :class="{ active: $route.name.indexOf(name) >= 0 }"
+                    >
+                        <img
+                            v-show="$route.name.indexOf(name) < 0"
+                            :src="icon[name]"
+                        />
                         <img
                             v-show="$route.name.indexOf(name) >= 0"
                             :src="icon[`${name}Active`]"
@@ -73,7 +79,7 @@ import trade from 'assets/imgs/trade_default.svg';
 import tradeActive from 'assets/imgs/trade_pressed.svg';
 import defiActive from 'assets/imgs/sidebar_defi_pressed.svg';
 import crossBridge from 'assets/imgs/crossBridge/bridge.png';
-import crossBridgeActive from 'assets/imgs/crossBridge/bridge.png';
+import crossBridgeActive from 'assets/imgs/crossBridge/bridgeActive.png';
 
 import theme1viteLogo from 'assets/theme1_imgs/sidebar_logo.png';
 import theme1wallet from 'assets/theme1_imgs/wallet_default.png';
@@ -183,7 +189,7 @@ export default {
     height: 100%;
     overflow: auto;
     @include bg_color_2();
-    [data-theme="0"] & {
+    [data-theme='0'] & {
         box-shadow: 0 2px 40px 1px rgba(221, 229, 252, 0.5);
     }
 
@@ -236,7 +242,7 @@ export default {
         }
 
         &.active::before {
-            content: "";
+            content: '';
             position: absolute;
             top: 0;
             left: 0;

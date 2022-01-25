@@ -8,6 +8,10 @@ div(:style="s.container")
                 block content
                     div(v-if="Content") {{content}}
         div(:style="s.btnGroup" v-if="ShowBottom")
-            div(:style="[s.btn,BtnUnuse||btnUnuse?s.unUse:undefined]" v-if="!!STxt" @click="rClick") {{STxt}}
+            div(:style="[s.btn,BtnUnuse||btnUnuse?s.unUse:undefined]" v-if="!!STxt" @click="rClick") 
+                span(v-show="!btnLoading") {{STxt}}
+                Loading(loadingType="dot" v-show="btnLoading")
             div(:style="[s.btn,s.lBtn,s.left]" v-if="!STxt"  @click="lClick") {{LTxt}}
-            div(:style="[s.btn,BtnUnuse||btnUnuse?s.unUse:undefined]" v-if="!STxt"  @click="rClick") {{RTxt}}
+            div(:style="[s.btn,BtnUnuse||btnUnuse?s.unUse:undefined]" v-if="!STxt"  @click="rClick") 
+                span(v-show="!btnLoading") {{RTxt}}
+                Loading(loadingType="dot" v-show="btnLoading" )

@@ -1,5 +1,19 @@
 <template>
     <div class="bridge-wrapper">
+        <div class="bridge-notice">
+            <a
+                href="https://medium.com/vitelabs/vitebridge-0-1-testnet-tutorial-1f3382f389f7"
+                target="_blank"
+                rel="noopener noreferrer"
+            >ViteBridge 0.1 Testnet Tutorial</a
+            >
+            <a
+                href="https://medium.com/vitelabs/vitebridge-0-1-bug-bounty-program-109ce87bda2e"
+                target="_blank"
+                rel="noopener noreferrer"
+            >ViteBridge 0.1 Bug Bounty Program</a
+            >
+        </div>
         <div class="bridge-content">
             <div class="bri__title">Choose Asset</div>
             <viteSelect
@@ -22,7 +36,7 @@
                     class="bri__trans-icon"
                     :src="transIcon"
                     @click="onToggleNet"
-                    style="cursor:pointer"
+                    style="cursor: pointer"
                 />
                 <networkCard
                     :type="'To'"
@@ -39,7 +53,7 @@
                         <div class="__row_t">
                             Amount
                             <span class="__row_hint"
-                            >Balance:{{ balanceMan }}
+                            >Balance: {{ balanceMan }}
                                 {{ curToken.label }}</span
                                 >
                         </div>
@@ -63,7 +77,7 @@
                 <div class="__row clearfix">
                     <div
                         class="__form_btn"
-                        style="width:100%"
+                        style="width: 100%"
                         @click="onNextClick"
                     >
                         Next
@@ -73,7 +87,7 @@
             <div v-else class="clearfix">
                 <div
                     class="__form_btn"
-                    style="width:100%"
+                    style="width: 100%"
                     @click="requestConnect2MetaMask"
                 >
                     Connect MetaMask
@@ -82,8 +96,16 @@
             <div class="__row" v-if="!requireBSCConnect">
                 <div class="__row-tips">
                     <div><span class="red-dot"></span>Reminder</div>
-                    <div>max {{ richNetworkPair.from.max }}</div>
-                    <div>min {{ richNetworkPair.to.min }}</div>
+                    <div>
+                        The maximum bridge amount is
+                        {{ richNetworkPair.from.max }}
+                        {{ curToken.label }}
+                    </div>
+                    <div>
+                        The minimum bridge amount is
+                        {{ richNetworkPair.to.min }}
+                        {{ curToken.label }}
+                    </div>
                 </div>
             </div>
             <div class="progress-bar">
@@ -170,6 +192,7 @@ import { getTokenIcon } from 'utils/tokenParser';
 import transIcon from 'assets/imgs/crossBridge/trans.png';
 import Loading from 'src/components/loading.vue';
 import { verifyAmount } from 'pcUtils/validations';
+import { sleep } from 'utils/asyncFlow';
 
 let erc20Contract = null;
 const mockTokens = {
@@ -230,7 +253,6 @@ export default {
                 : 'UNCONNECT';
 
             ethereum.on('accountsChanged', accounts => {
-                console.log(9999, accounts);
                 this.networkMeta['BSC'].status = accounts?.[0]
                     ? 'CONNECTED'
                     : 'UNCONNECT';
@@ -249,7 +271,9 @@ export default {
             //   return pre;
             // },{})
             t.tokens[0].channels[0].forEach(t => {
-                this.networkMeta[t.network] = t;
+                this.networkMeta[t.network] = Object.assign({},
+                    this.networkMeta[t.network] || {},
+                    t);
             });
         });
     },
@@ -317,7 +341,8 @@ export default {
             return net;
         },
         curSelectFromNet() {
-            const net = this.netList.find(t => t.value === this.networkPair.from);
+            const net
+                = this.netList.find(t => t.value === this.networkPair.from) || {};
             net.icon = null;
             return net;
         },
@@ -351,6 +376,10 @@ export default {
             this.reGenErc20();
             this.resetBalance();
         },
+        'richNetworkPair.from.status': async function (val) {
+            this.reGenErc20();
+            this.resetBalance();
+        },
         curToken: async function (val) {
             this.reGenErc20();
             this.resetBalance();
@@ -360,7 +389,6 @@ export default {
         async resetBalance() {
             this.balance = new BigNumber(0);
             const balance = await this.getBalance(this.networkPair.from);
-            console.log('rrrrrfetch', balance);
             this.balance = balance;
         },
         async reGenErc20() {
@@ -374,13 +402,13 @@ export default {
                 _erc20Abi,
                 new ethers.providers.Web3Provider(window.ethereum).getSigner());
             const balance = await this.getBalance(this.networkPair.from);
-            console.log('token change', 'balance', balance);
         },
         async getTokens() {
             return fetch('https://raw.githubusercontent.com/vitelabs/vite-asset-bridge/master/meta.json').then(data => data.json());
         },
         async onNextClick() {
             const curNet = this.networkPair.from;
+            const toNet = this.networkPair.to;
             if (!erc20Contract && curNet === 'BSC') return;
             const toAddress = this.toAddress;
             const curChannel = this.getChannelInfo(curNet);
@@ -389,8 +417,10 @@ export default {
             const decimals = curChannel.decimals;
             const ammountMin = bnUtils.toMin(this.amount, decimals);
             let balanceMin = null;
+            const tokenId = this.curTokenInfo.tokenId;
             try {
-                balanceMin = await this.getBalance(curNet);
+                const balance = await this.getBalance(curNet);
+                balanceMin = balance?.toString();
             } catch (e) {
                 this.$toast(JSON.stringify(e));
             }
@@ -418,56 +448,108 @@ export default {
                 errorMap: errorMap
             })(this.amount);
             if (amountErrMsg) {
-                console.log(amountErrMsg);
                 this.$toast(amountErrMsg);
                 return;
             }
-            if (curNet === 'BSC') {
+            if (toNet === 'BSC') {
                 if (!ethers.utils.isAddress(toAddress)) {
                     this.$toast('Illegal address');
                     return;
                 }
             }
-            if (curNet === 'VITE') {
+            if (toNet === 'VITE') {
                 if (!wallet.isValidAddress(toAddress)) {
                     this.$toast('Illegal address');
                     return;
                 }
             }
+            const fromAddress = await this.getAddress(curNet);
             const params = {
                 networkPair: this.richNetworkPair,
                 tokenInfo: this.curTokenInfo,
                 transInfo: {
-                    toAddress: toAddress,
+                    fromAddress,
+                    toAddress,
                     fee: 0,
                     amount: this.amount,
                     estimateAmount: this.amount
                 }
             };
             await confirmBriTxDialog(params);
-
-            await confirmCrossBridgeDialog(params);
-
-            if (curNet === 'BSC') {
-                await erc20Contract.approve(channelAddress, ammountMin);
-                const erc20hChannel = new Contract(channelAddress,
-                    _channelAbi,
-                    new ethers.providers.Web3Provider(window.ethereum).getSigner());
-                const originAddr = `0x${ wallet.getOriginalAddressFromAddress(toAddress) }`;
-                console.log(999, originAddr, ammountMin);
-                await erc20hChannel.input(originAddr, ammountMin);
-            } else if (curNet === 'VITE') {
-                const ss = await execWithValid(() =>
-                    new ChannelVite({
-                        address: channelAddress,
-                        tokenId: this.curTokenInfo.tokenId
-                    }).input(toAddress, ammountMin))();
+            async function checkApprove() {
+                if (curNet === 'BSC') {
+                    const allowance = await erc20Contract.allowance(fromAddress,
+                        channelAddress);
+                    const approved = bnUtils.compared(allowance.toString(),
+                        ammountMin);
+                    return approved >= 0;
+                }
+                return true;
             }
+            async function sendTx() {
+                let inputId = '';
+                if (curNet === 'BSC') {
+                    const approved = await checkApprove();
+                    if (!approved) {
+                        await erc20Contract.approve(channelAddress, balanceMin);
+                    }
+
+                    const erc20hChannel = new Contract(channelAddress,
+                        _channelAbi,
+                        new ethers.providers.Web3Provider(window.ethereum).getSigner());
+                    const originAddr = `0x${ wallet.getOriginalAddressFromAddress(toAddress) }`;
+                    const prevId = await erc20hChannel.prevInputId();
+                    await erc20hChannel.input(originAddr, ammountMin);
+                    while (true) {
+                        await sleep(5000);
+                        const id = await erc20hChannel.prevInputId();
+                        if (id === prevId) {
+                            continue;
+                        } else {
+                            inputId = id;
+                            break;
+                        }
+                    }
+                } else if (curNet === 'VITE') {
+                    const channelClient = new ChannelVite({
+                        address: channelAddress,
+                        tokenId
+                    });
+                    const prevId = `0x${
+                        (await channelClient.prevInputId())?.[0]
+                    }`;
+                    await execWithValid(() =>
+                        channelClient.input(toAddress, ammountMin))();
+                    while (true) {
+                        await sleep(5000);
+                        const id = `0x${
+                            (await channelClient.prevInputId())?.[0]
+                        }`;
+                        if (id === prevId) {
+                            continue;
+                        } else {
+                            inputId = id;
+                            break;
+                        }
+                    }
+                }
+                return inputId;
+            }
+
+            const result = await confirmCrossBridgeDialog({
+                ...params,
+                inspector: sendTx,
+                checkApprove
+            });
+
+            const inputId = result?.data;
+            console.log('tx result-----', result);
+            if (!inputId) return;
+            params.transInfo['inputId'] = inputId;
             await transConfirmsDialog(params);
+            this.resetBalance();
         },
         async getAddress(net) {
-            console.log(9999999,
-                this.$store.state.wallet.currHDAcc?.activeAddr);
             if (net === 'VITE') return this.$store.state.wallet.currHDAcc?.activeAddr;
             if (net === 'BSC') return window.ethereum?.selectedAddress;
         },
@@ -481,12 +563,12 @@ export default {
             const channel = this.getChannelInfo(this.networkPair.from);
 
             const tokenId = channel?.erc20 || channel?.tokenId;
-            console.log(22222, address, tokenId);
 
             if (!address || !tokenId) return null;
 
             if (net === 'VITE') {
                 const balanceInfo = await viteClient.getBalanceInfo(address);
+
                 const balance = balanceInfo.balance?.balanceInfoMap?.[tokenId]
                     ?.balance
                     ? new BigNumber(balanceInfo.balance?.balanceInfoMap?.[
@@ -509,7 +591,8 @@ export default {
         async requestConnect2MetaMask() {
             try {
                 this.isConnectingMetaMask = true;
-                ethereum?.request({ method: 'eth_requestAccounts' });
+                await ethereum?.request({ method: 'eth_requestAccounts' });
+                this.networkMeta['BSC'].status = 'CONNECTED';
             } finally {
                 this.isConnectingMetaMask = false;
             }
@@ -517,9 +600,7 @@ export default {
         async autoFillMax() {
             this.amount = this.balanceMan;
         },
-        onSelected(v) {
-            console.log(99999, v);
-        }
+        onSelected(v) {}
     }
 };
 // parent weird animal coil sister damp tunnel cover stick plug ivory luggage
@@ -538,6 +619,18 @@ export default {
     justify-content: center;
     align-items: center;
     font-size: 14px;
+    .bridge-notice {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        height: 60px;
+        position: absolute;
+        top: 100px;
+        left: 50px;
+        > a {
+            color: $blue-color-1;
+        }
+    }
     .bridge-content {
         width: 630px;
         height: 810px;

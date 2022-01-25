@@ -20,7 +20,7 @@ router.beforeEach((to, from, next) => {
     // Windows APP
     if (!to.name && to.path) {
         const arr = to.path.split('/');
-        router.replace({ name: arr[ arr.length - 1 ] || 'tradeCenter' });
+        router.replace({ name: arr[arr.length - 1] || 'tradeCenter' });
         return;
     }
 
@@ -43,31 +43,53 @@ router.beforeEach((to, from, next) => {
         router.replace({ name: 'notFound' });
         return;
     }
-
+    console.log(9999, to.name);
     const currHDAcc = getCurrHDAcc();
-
+    if (
+        !currHDAcc
+        && to.name
+        && [ 'bridgeMain', 'bridgeHistory' ].indexOf(to.name) !== -1
+    ) {
+        router.replace({ name: 'startLogin' });
+        return;
+    }
     // Init
     if (!from.name) {
         // Don't have currHDAcc and want to go start*** or trade***
-        if (!currHDAcc && to.name && [ 'startLogin', 'tradeCenter', 'crossBridge' ].indexOf(to.name) === -1) {
+        if (
+            !currHDAcc
+            && to.name
+            && [ 'startLogin', 'tradeCenter' ].indexOf(to.name) === -1
+        ) {
             router.replace({ name: 'startLogin' });
             return;
         }
     }
 
     // If want to go tradeTxPairManage, but not from tradeOperator or don't have from, use tradeOperator instead it.
-    if ((!from.name || from.name !== 'tradeOperator') && to.name === 'tradeTxPairManage') {
+    if (
+        (!from.name || from.name !== 'tradeOperator')
+        && to.name === 'tradeTxPairManage'
+    ) {
         router.replace({ name: 'tradeOperator' });
         return;
     }
 
     // If want to go startLogin, and from isn't start***, record from.
-    if (to.name && to.name === 'startLogin' && from.name && from.name.indexOf('start') === -1) {
+    if (
+        to.name
+        && to.name === 'startLogin'
+        && from.name
+        && from.name.indexOf('start') === -1
+    ) {
         store.commit('setLastPage', from.name);
     }
 
     // If must login, but not login, to startLogin.
-    if (loginRoutes.indexOf(to.name) >= 0 && currHDAcc.status === StatusMap.LOCK) {
+    if (
+        loginRoutes.indexOf(to.name) >= 0
+        && currHDAcc.status === StatusMap.LOCK
+    ) {
         router.replace({ name: 'startLogin' });
         return;
     }
