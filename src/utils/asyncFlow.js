@@ -27,16 +27,22 @@ export class timer {
                 const triggered = this.loopFunc();
 
                 // Normal function
-                if (!triggered || !(triggered instanceof Promise) || !triggered.then) {
+                if (
+                    !triggered
+                    || !(triggered instanceof Promise)
+                    || !triggered.then
+                ) {
                     return _task();
                 }
 
                 // Promise
-                triggered.then(() => {
-                    _task();
-                }).catch(() => {
-                    _task();
-                });
+                triggered
+                    .then(() => {
+                        _task();
+                    })
+                    .catch(() => {
+                        _task();
+                    });
             }, this.interval);
         };
 
@@ -59,7 +65,8 @@ export function doUntill({
     interval = 3000,
     times = 100,
     timeout = 5 * 60 * 1000
-}, ...args) {
+},
+...args) {
     const that = this;
     const timesControl = times > 0;
     const timeoutControl = timeout > 0;
@@ -70,17 +77,23 @@ export function doUntill({
 
         const tryAndTry = function () {
             t += 1;
-            createPromise.call(that, ...args).then(result => {
-                if (test({ resolve: result, times: t })) {
-                    return res(result);
-                }
-            }).catch(e => {
-                if (test({ reject: e, times: t })) {
-                    return rej(e);
-                }
-            })
+            createPromise
+                .call(that, ...args)
+                .then(result => {
+                    if (test({ resolve: result, times: t })) {
+                        return res(result);
+                    }
+                })
+                .catch(e => {
+                    if (test({ reject: e, times: t })) {
+                        return rej(e);
+                    }
+                })
                 .finally(() => {
-                    if (timeoutControl && (Date.now() - initTime) >= timeout || timesControl && t >= times) {
+                    if (
+                        (timeoutControl && Date.now() - initTime >= timeout)
+                        || (timesControl && t >= times)
+                    ) {
                         return;
                     }
                     setTimeout(tryAndTry, interval);
@@ -89,3 +102,8 @@ export function doUntill({
         tryAndTry();
     });
 }
+/**
+ * 延时
+ * @param seconds 毫秒(ms)
+ */
+export const sleep = seconds => new Promise(res => setTimeout(() => res(), seconds));

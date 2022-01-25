@@ -6,54 +6,70 @@ export const Server = {
     isReady: false,
     onReady: [],
 
-    crosschainGate: { // PC
+    crosschainGate: {
+        // PC
         hostKey: 'CROSSCHAIN',
         url: process.env.gatewayInfosServer,
         watchList: []
     },
-    conversionGate: { // PC
+    conversionGate: {
+        // PC
         hostKey: 'GATEWAY',
         url: process.env.conversionGate,
         watchList: []
     },
-    h5Config: { // PC
+    h5Config: {
+        // PC
         hostKey: 'WEBCONFIG',
         url: 'https://static.vite.net/web-wallet-1257137467',
         watchList: []
     },
-    ethExplorer: { // PC
+    BRIDGE: {
+        // PC
+        hostKey: 'BRIDGE',
+        url: process.env.BRIDGE,
+        watchList: []
+    },
+    ethExplorer: {
+        // PC
         hostKey: 'ETH_EXPLORER',
         url: process.env.ethExplorer,
         watchList: []
     },
-    ethServer: { // PC
+    ethServer: {
+        // PC
         hostKey: 'ETH_NODE',
         url: process.env.ethServer,
         watchList: []
     },
 
-    viteConnect: { // PC
+    viteConnect: {
+        // PC
         hostKey: 'VITE_CONNECT',
         url: process.env.viteConnect,
         watchList: []
     },
-    dexPush: { // BOTH
+    dexPush: {
+        // BOTH
         hostKey: 'DEXPUSHSERVER',
         url: process.env.pushServer,
         watchList: []
     },
-    gViteAPI: { // BOTH
+    gViteAPI: {
+        // BOTH
         hostKey: 'WALLETWSAPI',
         url: window.VITE_NODE_API || process.env.goViteServer,
         watchList: []
     },
 
-    dexAPI: { // BOTH
+    dexAPI: {
+        // BOTH
         hostKey: 'VITEX',
         url: process.env.dexApiServer,
         watchList: []
     },
-    viteExplorer: { // BOTH
+    viteExplorer: {
+        // BOTH
         hostKey: 'EXPLORER',
         name: 'viteView',
         url: process.env['viteView'],
@@ -84,7 +100,6 @@ export function getApiConfig() {
         });
 }
 
-
 export class DNSClient extends Client {
     constructor({
         serverKey,
@@ -92,10 +107,10 @@ export class DNSClient extends Client {
         headersBase = {},
         baseUrl = ''
     }: {
-        serverKey: string,
-        afterResponse?: Function,
-        headersBase?: Object,
-        baseUrl?: string
+        serverKey: string;
+        afterResponse?: Function;
+        headersBase?: Object;
+        baseUrl?: string;
     }) {
         if (!Server[serverKey]) {
             throw 'No Server Key or no callback';
@@ -131,7 +146,6 @@ export function onReady(cb: Function) {
     const list: Array<Function> = Server.onReady;
     list.push(cb);
 }
-
 
 callReady();
 

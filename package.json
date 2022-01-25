@@ -22,6 +22,7 @@
         "lint:all": "eslint --ext ts,js,vue --fix .",
         "lint": "eslint --ext ts,js,vue --cache --fix .",
         "stylelint": "stylelint **/*.vue --custom-syntax postcss-html --fix",
+        "stylelintScss": "stylelint **/*.scss --custom-syntax postcss-scss --fix",
         "publish:stage": "npm run build:all && wrangler publish --env stage",
         "publish": "npm run build:all && wrangler publish --env production"
     },
@@ -92,6 +93,7 @@
     "dependencies": {
         "@babel/plugin-proposal-class-properties": "~7.5.5",
         "@babel/plugin-proposal-object-rest-spread": "~7.5.5",
+        "@babel/plugin-proposal-optional-chaining": "^7.16.0",
         "@babel/preset-typescript": "~7.3.3",
         "@cloudflare/kv-asset-handler": "^0.1.0",
         "@fortawesome/free-brands-svg-icons": "^5.14.0",
@@ -116,6 +118,7 @@
         "es6-promise": "~4.2.5",
         "ethereumjs-tx": "~1.3.7",
         "ethereumjs-wallet": "~0.6.2",
+        "ethers": "^5.5.1",
         "eventemitter3": "^4.0.0",
         "identicon.js": "~2.3.3",
         "jsonrpc-lite": "~2.0.2",
@@ -133,12 +136,17 @@
         "qrcode.es": "~1.0.0",
         "qs": "~6.5.2",
         "sass-resources-loader": "^2.0.1",
+        "terser-webpack-plugin": "4.2.3",
         "testwebworker": "git+https://github.com/vitelabs/cryptojsAccelerator.git",
         "url": "~0.11.0",
         "vue-echarts": "~4.0.1",
         "vue-flatpickr-component": "~8.1.1",
-        "vue-select": "^3.10.7",
+        "vue-select": "^3.16.0",
         "vuex": "~3.0.1",
         "web3": "1.0.0-beta.33"
+    },
+    "volta": {
+        "node": "10.24.1",
+        "yarn": "1.22.17"
     }
 }

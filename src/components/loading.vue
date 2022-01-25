@@ -1,6 +1,8 @@
 <template>
     <div class="loading-wrapper">
-        <div v-if="loadingType === 'ring'" class="loading-ring"> <div></div> </div>
+        <div v-if="loadingType === 'ring'" class="loading-ring">
+            <div></div>
+        </div>
         <div v-if="loadingType === 'dot'" class="dot">
             <div class="bounce1"></div>
             <div class="bounce2"></div>

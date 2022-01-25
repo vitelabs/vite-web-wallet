@@ -318,8 +318,7 @@ export default {
 <style lang="scss" scoped>
 @import "~pcAssets/scss/common.scss";
 @import "~assets/scss/vars.scss";
-@import "../../wallet/form.scss";
-
+@import "~pc/styles/form.scss";
 @include secondTitle();
 @include tradeBtn();
 

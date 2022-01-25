@@ -2,11 +2,12 @@ import Vue from 'vue';
 import closeIcon from 'assets/imgs/confirm_close.svg';
 import store from 'pcStore';
 import i18n from 'pcI18n';
+import Loading from 'components/loading';
 
 const STATUS = {
-    'CLOSE': 'CLOSE',
-    'CANCEL': 'CANCEL',
-    'CONFIRMED': 'CONFIRMED'
+    CLOSE: 'CLOSE',
+    CANCEL: 'CANCEL',
+    CONFIRMED: 'CONFIRMED'
 };
 const widthMap = {
     narrow: '380px',
@@ -21,6 +22,7 @@ const getValue = function (key, defaultValue) {
 };
 
 const mixin = {
+    components: { Loading },
     i18n,
     props: {
         width: {}, // wide narrow normal
@@ -35,7 +37,8 @@ const mixin = {
         promise: {
             type: Object,
             default: () => null
-        }
+        },
+        btnLoading: false
     },
     computed: {
         Width() {
@@ -72,7 +75,7 @@ const mixin = {
             const theme = this[`theme${ this.$store.state.env.theme || 0 }`];
             const baseTheme = {
                 container: {
-                    'background': this.ShowMask ? 'rgba(0, 0, 0, 0.4)' : '--',
+                    background: this.ShowMask ? 'rgba(0, 0, 0, 0.4)' : '--',
                     position: 'fixed',
                     top: 0,
                     bottom: 0,
@@ -96,7 +99,7 @@ const mixin = {
                     'font-size': '14px',
                     height: '50px',
                     'line-height': '50px',
-                    'padding': '0 30px',
+                    padding: '0 30px',
                     'font-family': 'PingFangSC-Semibold, arial, sans-serif',
                     color: '#ffffff',
                     ...theme.title
@@ -131,7 +134,7 @@ const mixin = {
                     padding: '0 30px',
                     display: 'flex',
                     'min-height': '40px',
-                    'height': '40px',
+                    height: '40px',
                     'box-sizing': 'border-box',
                     'justify-content': 'space-between',
                     'margin-bottom': '30px',
@@ -139,7 +142,7 @@ const mixin = {
                 },
                 lBtn: {
                     'margin-right': '20px',
-                    'background': 'transparent'
+                    background: 'transparent'
                 },
                 btn: {
                     cursor: 'pointer',
@@ -147,7 +150,7 @@ const mixin = {
                     'white-space': 'nowrap',
                     color: '#ffffff',
                     background: '#007AFF',
-                    'display': 'flex',
+                    display: 'flex',
                     'align-items': 'center',
                     'justify-content': 'center'
                 },
@@ -198,13 +201,19 @@ const mixin = {
         rClick() {
             if (this.BtnUnuse) return;
             if (this.inspector) {
-                this.inspector().then(data => {
-                    this.promise.resolve({
-                        status: STATUS.CONFIRMED,
-                        data
+                if (this.btnLoading) return;
+                this.btnLoading = true;
+                this.inspector()
+                    .then(data => {
+                        this.promise.resolve({
+                            status: STATUS.CONFIRMED,
+                            data
+                        });
+                        this.__close();
+                    })
+                    .finally(() => {
+                        this.btnLoading = false;
                     });
-                    this.__close();
-                });
             } else {
                 this.promise.resolve({
                     status: STATUS.CONFIRMED,

@@ -19,6 +19,12 @@ const pushServer = {
     test: '"wss://buidl.vite.net/vitex/websocket"',
     dev: '"wss://buidl.vite.net/vitex/websocket"'
 };
+const BRIDGE = {
+    production: '"https://buidl.vite.net"',
+    test: '"https://buidl.vite.net"',
+    dev: '"/"'
+};
+
 const gatewayInfosServer = {
     // http-DNS
     production: '"https://crosschain.vite.net"',
@@ -109,6 +115,7 @@ module.exports = {
         'process.env.apiConfig': apiConfig[API],
         'process.env.rewardApiServer': rewardApiServer[API],
         'process.env.desktopWalletVersion': `"${ process.env
-            .DESKTOP_WALLET_VERSION || '' }"`
+            .DESKTOP_WALLET_VERSION || '' }"`,
+        'process.env.BRIDGE': BRIDGE[API]
     }
 };

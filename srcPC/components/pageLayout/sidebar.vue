@@ -1,31 +1,62 @@
 <template>
     <div class="sidebar-wrapper">
         <div class="content">
-            <div @mouseenter="overLogo" @mouseleave="leaveLogo" class="logo __pointer">
+            <div
+                @mouseenter="overLogo"
+                @mouseleave="leaveLogo"
+                class="logo __pointer"
+            >
                 <img @click="goVX" :src="viteLogo" />
-                <test-notice class="notice" :class="{'hide': !isShowNotice}"></test-notice>
+                <test-notice
+                    class="notice"
+                    :class="{ hide: !isShowNotice }"
+                ></test-notice>
             </div>
 
             <div class="_top">
-                <div v-for="(name, index) in menuTops" :key="index"
-                     class="__pointer"
-                     @click="_go(name)">
-                    <div class="icon" :class="{ 'active': $route.name.indexOf(name) >= 0 }">
-                        <img v-show="$route.name.indexOf(name) < 0" :src="icon[name]" />
-                        <img v-show="$route.name.indexOf(name) >= 0" :src="icon[`${name}Active`]"  />
+                <div
+                    v-for="(name, index) in menuTops"
+                    :key="index"
+                    class="__pointer"
+                    @click="_go(name)"
+                >
+                    <div
+                        class="icon"
+                        :class="{ active: $route.name.indexOf(name) >= 0 }"
+                    >
+                        <img
+                            v-show="$route.name.indexOf(name) < 0"
+                            :src="icon[name]"
+                        />
+                        <img
+                            v-show="$route.name.indexOf(name) >= 0"
+                            :src="icon[`${name}Active`]"
+                        />
                     </div>
                 </div>
             </div>
 
             <div class="_bottom">
-                <div v-for="(name, index) in menuBottoms" :key="index"
-                     class="icon __pointer" :class="{ 'active': $route.name === name }"
-                     @click="_go(name)">
-                    <img class="default" v-show="$route.name !== name" :src="icon[name]" />
-                    <img class="active" v-show="$route.name === name" :src="icon[`${name}Active`]"  />
+                <div
+                    v-for="(name, index) in menuBottoms"
+                    :key="index"
+                    class="icon __pointer"
+                    :class="{ active: $route.name === name }"
+                    @click="_go(name)"
+                >
+                    <img
+                        class="default"
+                        v-show="$route.name !== name"
+                        :src="icon[name]"
+                    />
+                    <img
+                        class="active"
+                        v-show="$route.name === name"
+                        :src="icon[`${name}Active`]"
+                    />
                 </div>
                 <div class="icon __pointer" @click="changeTheme" key="theme">
-                    <font-awesome-icon :icon="themeIcon" class="theme-icon"/>
+                    <font-awesome-icon :icon="themeIcon" class="theme-icon" />
                 </div>
             </div>
         </div>
@@ -47,6 +78,8 @@ import settingActive from 'assets/imgs/settings_pressed.svg';
 import trade from 'assets/imgs/trade_default.svg';
 import tradeActive from 'assets/imgs/trade_pressed.svg';
 import defiActive from 'assets/imgs/sidebar_defi_pressed.svg';
+import crossBridge from 'assets/imgs/crossBridge/bridge.png';
+import crossBridgeActive from 'assets/imgs/crossBridge/bridgeActive.png';
 
 import theme1viteLogo from 'assets/theme1_imgs/sidebar_logo.png';
 import theme1wallet from 'assets/theme1_imgs/wallet_default.png';
@@ -96,7 +129,9 @@ export default {
                     settingActive,
                     index: theme1trade,
                     indexActive: tradeActive,
-                    defiActive
+                    defiActive,
+                    bridge: crossBridge,
+                    bridgeActive: crossBridgeActive
                 };
             }
             return {
@@ -110,7 +145,9 @@ export default {
                 settingActive,
                 index: trade,
                 indexActive: tradeActive,
-                defiActive
+                defiActive,
+                bridge: crossBridge,
+                bridgeActive: crossBridgeActive
             };
         },
         settingIndex() {
@@ -152,8 +189,8 @@ export default {
     height: 100%;
     overflow: auto;
     @include bg_color_2();
-    [data-theme="0"] & {
-        box-shadow: 0 2px 40px 1px rgba(221, 229, 252, 0.5);;
+    [data-theme='0'] & {
+        box-shadow: 0 2px 40px 1px rgba(221, 229, 252, 0.5);
     }
 
     .content {
@@ -213,7 +250,14 @@ export default {
             right: 4px;
             display: inline-block;
             width: 4px;
-            background-image: linear-gradient(-90deg, #1b3bd8 100%, #176ce0 100%, #0b92e7 100%, #0bb6eb 100%, #00e0f2 100%);
+            background-image: linear-gradient(
+                -90deg,
+                #1b3bd8 100%,
+                #176ce0 100%,
+                #0b92e7 100%,
+                #0bb6eb 100%,
+                #00e0f2 100%
+            );
         }
     }
 

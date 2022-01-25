@@ -7,6 +7,28 @@ const langMap = {
     en: 'en'
 };
 
+export const BridgeAPI = new DNSClient({
+    serverKey: 'BRIDGE',
+    baseUrl: '/bridge',
+    afterResponse: xhr => {
+        try {
+            const { code, msg, data, error, subCode } = JSON.parse(xhr.responseText);
+
+            if (code !== 0) {
+                return Promise.reject({
+                    code,
+                    subCode,
+                    message: msg || error
+                });
+            }
+
+            return Promise.resolve(data || null);
+        } catch (e) {
+            return Promise.reject(xhr.responseText);
+        }
+    }
+});
+
 export const ConversionAPI = new DNSClient({
     serverKey: 'conversionGate',
     baseUrl: '/gw'

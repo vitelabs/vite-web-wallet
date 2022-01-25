@@ -8,6 +8,10 @@ import inviteComp from './invite.vue';
 import receiveInviteComp from './receiveInvite.vue';
 import changeRpcUrlComp from './changeRpcUrl.vue';
 import powLimitComp from './powLimit.vue';
+import confirmBriTx from './confirmBriTx.vue';
+import confirmCrossBridge from './confirmCrossBridge.vue';
+import transConfirms from './transConfirms.vue';
+
 
 export const inviteDialog = getDialog(inviteComp);
 export const receiveInviteDialog = getDialog(receiveInviteComp);
@@ -17,4 +21,8 @@ export const vbConnectDialog = getDialog(vbConnectComp);
 export const hwAddressSelectDialog = getDialog(hwAddressSelectComp, { width: 'wide' });
 export const hwVerifyAddressDialog = getDialog(hwVerifyAddressComp);
 export const changeRpcUrlDialog = getDialog(changeRpcUrlComp);
+export const confirmBriTxDialog = getDialog(confirmBriTx);
+export const confirmCrossBridgeDialog = getDialog(confirmCrossBridge);
+export const transConfirmsDialog = getDialog(transConfirms);
 export const powLimitDialog = getDialog(powLimitComp);
+
