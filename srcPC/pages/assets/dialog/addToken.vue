@@ -6,7 +6,7 @@ block content
             span.search-icon
             input(v-model="userInput" class="search-input" :placeholder="$t('tokenCard.addToken.placeholder')")
         .search-tips
-            .search-tips__item(v-for="token in searchRes" :class="{active:selectedTokenIds.indexOf(token.tokenId)>=0}" @click="toggleToken(token.tokenId,index)")
+            .search-tips__item(v-for="(token,index) in searchRes" :class="{active:selectedTokenIds.indexOf(token.tokenId)>=0}" @click="toggleToken(token.tokenId,index)")
                 input(type="checkbox" name="addTokenSelected" v-model="selectedTokenIds" :value="token.tokenId" )
                 img(:src="token.icon")
                 .info
@@ -35,7 +35,7 @@ export default {
     },
     methods: {
         toggleToken(tokenId, index) {
-            const isActive = this.selectedTokenIds.indexOf(tokenId);
+            const isActive = this.selectedTokenIds.indexOf(tokenId)>=0;
             if (isActive) {
                 this.selectedTokenIds = this.selectedTokenIds.filter(id => id !== tokenId);
             } else {

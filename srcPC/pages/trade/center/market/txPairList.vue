@@ -1,84 +1,121 @@
 <template>
     <div class="tx-pair-wrapper">
-        <span
+        <!-- <span
             v-show="symbol && realPrice"
             class="real-price"
             :style="`top: ${top}px`"
         >{{ realPrice }}</span
-        >
+        > -->
         <div ref="txList" class="tx-list">
-            <div
-                :ref="`txPair${i}`"
-                v-for="(txPair, i) in showList"
-                :key="i"
-                class="__center-tb-row __pointer"
-                :class="{ active: txPair && txPair.symbol === activeSymbol }"
-                @mouseenter="showRealPrice(txPair, i)"
-                @mouseleave="hideRealPrice(txPair)"
-                @click="setActiveTxPair(txPair)"
-            >
-                <span class="__center-tb-item tx-pair">
-                    <span
-                        class="favorite-icon"
-                        :class="{ active: !!favoritePairs[txPair.symbol] }"
-                        @click.stop="setFavorite(txPair)"
-                    ></span>
-                    <span class="describe">
-                        <span class="des-text __ellipsis">{{
-                            getTxPairShowSymbol(txPair)
-                        }}</span>
-                        <span class="mining-icon">
-                            <img
-                                v-show="isMining(txPair) === 1"
-                                src="~assets/imgs/trade_mining.svg"
-                            />
-                            <img
-                                v-show="isMining(txPair) === 2"
-                                src="~assets/imgs/order_mining.svg"
-                            />
-                            <img
-                                v-show="isMining(txPair) === 3"
-                                src="~assets/imgs/mining.svg"
-                            />
-                            {{ miningMultiples(txPair) }}
+            <div :ref="`txPair${i}`" v-for="(txPair, i) in showList" :key="i">
+                <a-tooltip placement="right">
+                    <template slot="title">
+                        <div style="margin-bottom:8px">{{ realPrice }}</div>
+                        <div>
+                            <div>{{ getTxPairShowSymbol(txPair) }} Mining</div>
+                            <div
+                                v-show="
+                                    !isTradeMining(txPair) &&
+                                        !isOrderMining(txPair)
+                                "
+                            >
+                                None
+                            </div>
+                            <div v-show="isTradeMining(txPair)">
+                                MM as Mining
+                            </div>
+                            <div v-show="isOrderMining(txPair)">
+                                Trading as Mining
+                            </div>
+                        </div>
+                    </template>
+                    <div
+                        style="width:100%"
+                        class="__center-tb-row __pointer"
+                        :class="{
+                            active: txPair && txPair.symbol === activeSymbol
+                        }"
+                        @mouseenter="showRealPrice(txPair, i)"
+                        @mouseleave="hideRealPrice(txPair)"
+                        @click="setActiveTxPair(txPair)"
+                    >
+                        <span class="__center-tb-item tx-pair">
+                            <span
+                                class="favorite-icon"
+                                :class="{
+                                    active: !!favoritePairs[txPair.symbol]
+                                }"
+                                @click.stop="setFavorite(txPair)"
+                            ></span>
+                            <span class="describe">
+                                <span class="des-text __ellipsis">{{
+                                    getTxPairShowSymbol(txPair)
+                                }}</span>
+                                <!-- <img :src="operatorIcon" alt="" srcset="">    -->
+                                <!-- todo,anomous operator -->
+                                <font-awesome-icon
+                                    class="operator-icon"
+                                    style="color:#007aff"
+                                    icon="user-ninja"
+                                    v-show="!txPair.operatorName"
+                                />
+                                <div class="mining-icon">
+                                    <img
+                                        v-show="isMining(txPair) === 1"
+                                        src="~assets/imgs/trade_mining.svg"
+                                    />
+                                    <img
+                                        v-show="isMining(txPair) === 2"
+                                        src="~assets/imgs/order_mining.svg"
+                                    />
+                                    <img
+                                        v-show="isMining(txPair) === 3"
+                                        src="~assets/imgs/mining.svg"
+                                    />
+                                    {{ miningMultiples(txPair) }}
+                                </div>
+                            </span>
                         </span>
-                    </span>
-                </span>
-                <span class="__center-tb-item">
-                    <img
-                        v-show="isZeroFee(txPair)"
-                        class="zero-fee-icon"
-                        src="~assets/imgs/trade/zero_fee.svg"
-                    />
-                    {{
-                        txPair.closePrice
-                            ? formatNum(
-                                txPair.closePrice,
-                                txPair.pricePrecision
-                            )
-                            : '--'
-                    }}
-                </span>
-                <span
-                    v-show="showCol === 'updown'"
-                    class="__center-tb-item percent"
-                    :class="{
-                        up: +txPair.priceChange > 0,
-                        down: +txPair.priceChange < 0
-                    }"
-                >{{
-                    txPair.priceChangePercent
-                        ? getPercent(txPair.priceChangePercent)
-                        : '0.00%'
-                }}</span
-                >
-                <span v-show="showCol === 'txNum'" class="__center-tb-item">
-                    {{
-                        txPair.amount
-                            ? formatNum(txPair.amount, transLimit)
-                            : '0.0'
-                    }}
-                </span>
+                        <span class="__center-tb-item">
+                            <img
+                                v-show="isZeroFee(txPair)"
+                                class="zero-fee-icon"
+                                src="~assets/imgs/trade/zero_fee.svg"
+                            />
+                            {{
+                                txPair.closePrice
+                                    ? formatNum(
+                                        txPair.closePrice,
+                                        txPair.pricePrecision
+                                    )
+                                    : '--'
+                            }}
+                        </span>
+                        <span
+                            v-show="showCol === 'updown'"
+                            class="__center-tb-item percent"
+                            :class="{
+                                up: +txPair.priceChange > 0,
+                                down: +txPair.priceChange < 0
+                            }"
+                        >{{
+                            txPair.priceChangePercent
+                                ? getPercent(txPair.priceChangePercent)
+                                : '0.00%'
+                        }}</span
+                        >
+                        <span
+                            v-show="showCol === 'txNum'"
+                            class="__center-tb-item"
+                        >
+                            {{
+                                txPair.amount
+                                    ? formatNum(txPair.amount, transLimit)
+                                    : '0.0'
+                            }}
+                        </span>
+                    </div>
+                </a-tooltip>
             </div>
         </div>
     </div>
@@ -87,6 +124,7 @@
 <script>
 import BigNumber from 'utils/bigNumber';
 import statistics from 'utils/statistics';
+import operatorIcon from 'assets/imgs/operator.png';
 
 export default {
     props: {
@@ -121,7 +159,8 @@ export default {
         return {
             symbol: null,
             realPrice: '',
-            top: 0
+            top: 0,
+            operatorIcon
         };
     },
     computed: {
@@ -393,11 +432,17 @@ export default {
         display: flex;
         width: 80px;
         box-sizing: border-box;
+        align-items: center;
         .des-text {
             flex: 1;
         }
+        .operator-icon{
+            margin-right: 3px;
+        }
         .mining-icon {
             color: $blue-color-1;
+            display: flex;
+            align-items: center;
         }
         img {
             width: 12px;

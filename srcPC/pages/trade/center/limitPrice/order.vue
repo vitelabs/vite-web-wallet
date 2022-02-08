@@ -3,6 +3,12 @@
         <div class="order-title">
             {{ $t(`trade.${orderType}.title`, { token: ftokenShow }) }}
             <div class="wallet">
+                <font-awesome-icon
+                    style="cursor:pointer;"
+                    icon="arrow-right-arrow-left"
+                    @click="handleTransfer"
+                />
+                <font-awesome-icon icon="wallet" />
                 {{ balance || '0' }}
                 <span class="ex-order-token">
                     {{ orderType === 'buy' ? ttokenShow : ftokenShow }}
@@ -151,6 +157,10 @@
                 <span @click="login">{{ $t('register') }}</span>
             </span>
         </div>
+        <exTransfer
+            ref="exTransfer"
+            :tokenInfo="curTransferTokenInfo"
+        ></exTransfer>
     </div>
 </template>
 
@@ -165,9 +175,11 @@ import BigNumber from 'utils/bigNumber';
 import { isNumber, verifyAmount } from 'pcUtils/validations';
 import { execWithValid } from 'pcUtils/execWithValid';
 import statistics from 'utils/statistics';
+import exTransfer from 'pcPages/assets/dialog/exTransfer.vue';
+import { getTokenIcon } from 'utils/tokenParser';
 
 export default {
-    components: { viteInput, slider },
+    components: { viteInput, slider, exTransfer },
     props: {
         orderType: {
             type: String,
@@ -189,7 +201,9 @@ export default {
             oldPrice: '',
             oldAmount: '',
             oldQuantity: '',
-            focusInput: ''
+            focusInput: '',
+            // current transfer
+            curTransferTokenInfo: null
         };
     },
     watch: {
@@ -361,6 +375,9 @@ export default {
                 3,
                 'nofix');
         },
+        tokenInfoMap() {
+            return this.$store.getters.allTokenWithExAssets;
+        },
         rawBalance() {
             if (!this.activeTxPair) {
                 return null;
@@ -423,6 +440,12 @@ export default {
         activeTx() {
             return this.$store.state.exchangeActiveTx.activeTx;
         },
+        // token that taken attention
+        attentionToken() {
+            return this.orderType === 'buy'
+                ? this.ttokenDetail
+                : this.ftokenDetail;
+        },
         ttokenDigit() {
             // console.log(`tttokenDigit: ${this.$store.getters.quoteTokenDecimalsLimit}`);
             return this.$store.getters.quoteTokenDecimalsLimit;
@@ -445,6 +468,25 @@ export default {
         }
     },
     methods: {
+        handleTransfer: execWithValid(function () {
+            const {
+                tokenId,
+                symbol: tokenSymbol,
+                urlIcon: icon,
+                tokenDecimals: decimals
+            } = this.attentionToken || {};
+
+            const baseTokenInfo = { tokenId, tokenSymbol, icon, decimals };
+            baseTokenInfo.icon = icon || getTokenIcon(tokenId);
+            if (!tokenId) {
+                console.error(`could not find target token ${ tokenId }`);
+                return;
+            }
+            const curTransferTokenInfo = this.tokenInfoMap[tokenId] || {};
+            this.curTransferTokenInfo = Object.assign(baseTokenInfo,
+                curTransferTokenInfo);
+            this.$refs.exTransfer.show();
+        }),
         unlock() {
             statistics.event(this.$route.name,
                 'limitPrice-unlockAccount',
@@ -864,17 +906,9 @@ $font-black: rgba(36, 39, 43, 0.8);
             font-family: $font-H;
             display: block;
             float: right;
-            &::before {
-                content: '';
-                display: inline-block;
-                width: 16px;
-                height: 16px;
-                margin-bottom: -4px;
-                @include background_common_img_suffix(
-                    'ex-wallet-icon',
-                    'svg',
-                    'png'
-                );
+            :not(:last-child){
+                margin-right: 3px;
+                @include second_title_font_color();
             }
         }
     }

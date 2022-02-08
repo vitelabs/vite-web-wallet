@@ -8,7 +8,7 @@ const {
     LangKey,
     GateKey,
     ThemeKey,
-    autoLogoutKey,
+    AutoLogoutKey,
     currencyKey,
     CustomNodes,
     CurrentNode,
@@ -27,7 +27,7 @@ const state = {
     clientStatus: -1,
     lang: '',
     currency: localStorage.getItem(currencyKey) || '',
-    autoLogoutTime: localStorage.getItem(autoLogoutKey) || 5,
+    autoLogoutTime: localStorage.getItem(AutoLogoutKey) || 5,
     gate: +localStorage.getItem(GateKey) || 0,
     theme: theme === null ? 1 : +theme,
     lastPage: '',
@@ -72,7 +72,7 @@ const mutations = {
         localStorage.setItem(currencyKey, currency);
     },
     setAutoLogoutTime(state, time) {
-        localStorage.setItem(autoLogoutKey, time);
+        localStorage.setItem(AutoLogoutKey, time);
         state.autoLogoutTime = time;
     },
     setLastPage(state, lastPage) {
