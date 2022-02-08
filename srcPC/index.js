@@ -22,14 +22,40 @@ import { resaveAccList, resaveLastAcc } from 'pcUtils/store/resave';
 
 // Add fortawesome
 import { library } from '@fortawesome/fontawesome-svg-core';
-import { faExclamationCircle, faInfoCircle, faLightbulb, faMoon } from '@fortawesome/free-solid-svg-icons';
-import { faWindows, faApple, faAppStoreIos, faGooglePlay } from '@fortawesome/free-brands-svg-icons';
+import {
+    faExclamationCircle,
+    faInfoCircle,
+    faLightbulb,
+    faMoon,
+    faArrowRightArrowLeft,
+    faWallet,
+    faUserNinja
+} from '@fortawesome/free-solid-svg-icons';
+import {
+    faWindows,
+    faApple,
+    faAppStoreIos,
+    faGooglePlay
+} from '@fortawesome/free-brands-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 
 // Some init code for desktop app
 import * as desktop from './utils/desktop';
+import Tooltip from 'ant-design-vue/lib/tooltip';
 
-library.add(faExclamationCircle, faInfoCircle, faLightbulb, faMoon, faWindows, faApple, faAppStoreIos, faGooglePlay);
+import 'ant-design-vue/lib/tooltip/style'; // 或者 ant-design-vue/lib/button/style/css 加载 css 文件
+
+library.add(faExclamationCircle,
+    faInfoCircle,
+    faLightbulb,
+    faMoon,
+    faWindows,
+    faApple,
+    faAppStoreIos,
+    faGooglePlay,
+    faArrowRightArrowLeft,
+    faWallet,
+    faUserNinja);
 Vue.component('font-awesome-icon', FontAwesomeIcon);
 
 resaveAccList();
@@ -40,13 +66,20 @@ Vue.use(plugin);
 // V-click-outside
 Vue.use(directives);
 
+// -----reg antv component
+Vue.use(Tooltip);
+
+// ----
+
 // For desktop only
 if (window.DESKTOP) {
     desktop.init();
-    window.addEventListener('contextmenu', e => {
-        e.preventDefault();
-        window.desktopUtils.popupMenu();
-    }, false);
+    window.addEventListener('contextmenu',
+        e => {
+            e.preventDefault();
+            window.desktopUtils.popupMenu();
+        },
+        false);
 }
 
 Vue.config.devtools = process.env.NODE_ENV !== 'production';

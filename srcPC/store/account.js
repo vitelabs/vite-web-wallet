@@ -3,7 +3,12 @@ import bigNumber from 'utils/bigNumber';
 import { timer } from 'utils/asyncFlow';
 import { defaultTokenMap } from 'utils/constant';
 import { getTokenIcon } from 'utils/tokenParser';
-import { getAccountBalance, subUnreceivedTx, unsubUnreceivedTx, getAccountBlockByHash } from 'services/viteServer';
+import {
+    getAccountBalance,
+    subUnreceivedTx,
+    unsubUnreceivedTx,
+    getAccountBlockByHash
+} from 'services/viteServer';
 import { gateStorage } from 'pcServices/gate';
 import { notice } from 'utils/noticeUtils';
 import i18n from 'pcI18n';
@@ -27,20 +32,25 @@ const mutations = {
             return;
         }
 
-        state.accountBlockCount = payload.balance ? payload.balance.blockCount || 0 : 0;
+        state.accountBlockCount = payload.balance
+            ? payload.balance.blockCount || 0
+            : 0;
         state.balance = payload.balance || {};
-        state.balance.balanceInfos = state.balance && state.balance.balanceInfoMap
-            ? state.balance.balanceInfoMap
-            : {};
+        state.balance.balanceInfos
+            = state.balance && state.balance.balanceInfoMap
+                ? state.balance.balanceInfoMap
+                : {};
 
         state.onroad = payload.unreceived || {};
-        state.onroad.balanceInfos = state.onroad && state.onroad.balanceInfoMap
-            ? state.onroad.balanceInfoMap
-            : {};
+        state.onroad.balanceInfos
+            = state.onroad && state.onroad.balanceInfoMap
+                ? state.onroad.balanceInfoMap
+                : {};
 
         // Desktop wallt only
         if (window.ipcRenderer) {
-            window.ipcRenderer.send('balanceInfo', JSON.stringify(getters.balanceInfo(state)));
+            window.ipcRenderer.send('balanceInfo',
+                JSON.stringify(getters.balanceInfo(state)));
         }
     },
     commitClearBalance(state) {
@@ -49,11 +59,7 @@ const mutations = {
     }
 };
 const actions = {
-    startLoopBalance({
-        commit,
-        dispatch,
-        rootState
-    }) {
+    startLoopBalance({ commit, dispatch, rootState }) {
         dispatch('stopLoopBalance');
         balanceInfoInst = new timer(() => {
             const activeAcc = rootState.wallet.activeAcc;
@@ -78,30 +84,33 @@ const actions = {
         if (unreceivedTxEvent) {
             dispatch('unsubUnreceivedTx');
         }
-        subUnreceivedTx(activeAcc.address).then(event => {
-            event.on(data => {
-                if (!Array.isArray(data)) return;
-                const title = i18n.t('desktop.unreceivedTx.title', { num: data.length });
-                if (data.length > 1) {
-                    return notice(title);
-                } else if (data.length === 1) {
-                    getAccountBlockByHash(data[0].hash).then(data => {
-                        const body = i18n.t('desktop.unreceivedTx.body', {
-                            symbol: data.tokenInfo.tokenSymbol,
-                            address: data.fromAddress,
-                            amount: bigNumber.toBasic(data.amount, data.tokenInfo.decimals)
+        subUnreceivedTx(activeAcc.address)
+            .then(event => {
+                event.on(data => {
+                    if (!Array.isArray(data)) return;
+                    const title = i18n.t('desktop.unreceivedTx.title', { num: data.length });
+                    if (data.length > 1) {
+                        return notice(title);
+                    } else if (data.length === 1) {
+                        getAccountBlockByHash(data[0].hash).then(data => {
+                            const body = i18n.t('desktop.unreceivedTx.body', {
+                                symbol: data.tokenInfo.tokenSymbol,
+                                address: data.fromAddress,
+                                amount: bigNumber.toBasic(data.amount,
+                                    data.tokenInfo.decimals)
+                            });
+                            notice(title, {
+                                body,
+                                requireInteraction: false
+                            });
                         });
-                        notice(title, {
-                            body,
-                            requireInteraction: false
-                        });
-                    });
-                }
+                    }
+                });
+                unreceivedTxEvent = event;
+            })
+            .catch(err => {
+                console.error(err);
             });
-            unreceivedTxEvent = event;
-        }).catch(err => {
-            console.error(err);
-        });
     },
     unsubUnreceivedTx() {
         unsubUnreceivedTx(unreceivedTxEvent);
@@ -135,10 +144,13 @@ const getters = {
             const balance = bigNumber.toBasic(item.balance, decimals);
 
             balanceInfo[tokenId] = balanceInfo[tokenId] || {};
-            balanceInfo[tokenId].tokenId = balanceInfo[tokenId].tokenId || tokenInfo.tokenId;
+            balanceInfo[tokenId].tokenId
+                = balanceInfo[tokenId].tokenId || tokenInfo.tokenId;
             balanceInfo[tokenId].fundFloat = balance;
-            balanceInfo[tokenId].decimals = balanceInfo[tokenId].decimals || tokenInfo.decimals;
-            balanceInfo[tokenId].tokenSymbol = balanceInfo[tokenId].tokenSymbol || tokenInfo.tokenSymbol;
+            balanceInfo[tokenId].decimals
+                = balanceInfo[tokenId].decimals || tokenInfo.decimals;
+            balanceInfo[tokenId].tokenSymbol
+                = balanceInfo[tokenId].tokenSymbol || tokenInfo.tokenSymbol;
             balanceInfo[tokenId].onroadNum = item.transactionCount;
         }
         return balanceInfo;
@@ -171,16 +183,39 @@ const getters = {
             } = Object.assign({},
                 defaultTokenMap[i],
                 balanceInfo[i] || {},
-                allToken[i] || {}, { gateInfo: mapToken2Gate[i] && mapToken2Gate[i].gateInfo || { url: null } },
+                allToken[i] || {},
+                {
+                    gateInfo: (mapToken2Gate[i]
+                        && mapToken2Gate[i].gateInfo) || { url: null }
+                },
                 exBalance[i]);
-            const rate = rootState.exchangeRate.rateMap[i] && rootState.exchangeRate.rateMap[i][`${ rootState.env.currency }Rate`];
-            const totalExAsset = rate ? bigNumber.multi(bigNumber.toBasic(totalExAmount || 0, decimals), rate) : 0;
-            const walletAsset = rate ? bigNumber.multi(bigNumber.toBasic(totalAmount || 0, decimals), rate) : 0;
+            const rate
+                = rootState.exchangeRate.rateMap[i]
+                && rootState.exchangeRate.rateMap[i][
+                    `${ rootState.env.currency }Rate`
+                ];
+            const totalExAsset = rate
+                ? bigNumber.multi(bigNumber.toBasic(totalExAmount || 0, decimals),
+                    rate)
+                : 0;
+            const walletAsset = rate
+                ? bigNumber.multi(bigNumber.toBasic(totalAmount || 0, decimals),
+                    rate)
+                : 0;
             const totalAsset = bigNumber.plus(totalExAsset, walletAsset);
-            const rateBtc = rootState.exchangeRate.rateMap[i] && rootState.exchangeRate.rateMap[i]['btcRate'];
-            const totalExAssetBtc = rateBtc ? bigNumber.multi(bigNumber.toBasic(totalExAmount || 0, decimals), rateBtc) : 0;
-            const walletAssetBtc = rateBtc ? bigNumber.multi(bigNumber.toBasic(totalAmount || 0, decimals), rateBtc) : 0;
-            const totalAssetBtc = bigNumber.plus(totalExAssetBtc, walletAssetBtc);
+            const rateBtc
+                = rootState.exchangeRate.rateMap[i]
+                && rootState.exchangeRate.rateMap[i]['btcRate'];
+            const totalExAssetBtc = rateBtc
+                ? bigNumber.multi(bigNumber.toBasic(totalExAmount || 0, decimals),
+                    rateBtc)
+                : 0;
+            const walletAssetBtc = rateBtc
+                ? bigNumber.multi(bigNumber.toBasic(totalAmount || 0, decimals),
+                    rateBtc)
+                : 0;
+            const totalAssetBtc = bigNumber.plus(totalExAssetBtc,
+                walletAssetBtc);
             return {
                 totalExAssetBtc,
                 walletAssetBtc,
@@ -210,7 +245,8 @@ const getters = {
         // force vite first
         const viteId = constant.Vite_TokenId;
         return list
-            .splice(list.findIndex(v => v.tokenId === viteId), 1)
+            .splice(list.findIndex(v => v.tokenId === viteId),
+                1)
             .concat(list);
     },
     officalGateTokenList(state, getters, rootState, rootGetters) {
@@ -219,60 +255,89 @@ const getters = {
         const mapToken2Gate = rootGetters.mapToken2Gate;
         const exBalance = rootGetters.exBalanceList;
 
-        return Object.keys(mapToken2Gate).map(i => {
-            const {
-                index,
-                availableExAmount = '',
-                totalExAmount = '',
-                onroadNum = '',
-                tokenName = '',
-                totalAmount = '',
-                totalSupply = '',
-                isReIssuable = '',
-                tokenSymbol,
-                balance = '',
-                fundFloat = '',
-                decimals = '',
-                owner = '',
-                tokenId = i,
-                icon = getTokenIcon(i),
-                type = 'OFFICAL_GATE',
-                gateInfo = {}
-            } = Object.assign({}, balanceInfo[i] || {}, allToken[i] || {}, { gateInfo: mapToken2Gate[i].gateInfo }, exBalance[i]);
-            const rate = rootState.exchangeRate.rateMap[i] && rootState.exchangeRate.rateMap[i][`${ rootState.env.currency }Rate`];
-            const totalExAsset = rate ? bigNumber.multi(bigNumber.toBasic(totalExAmount || 0, decimals), rate) : 0;
-            const walletAsset = rate ? bigNumber.multi(bigNumber.toBasic(totalAmount || 0, decimals), rate) : 0;
-            const totalAsset = bigNumber.plus(totalExAsset, walletAsset);
-            const rateBtc = rootState.exchangeRate.rateMap[i] && rootState.exchangeRate.rateMap[i]['btcRate'];
-            const totalExAssetBtc = rateBtc ? ((tokenSymbol === 'BTC') ? bigNumber.toBasic(totalExAmount || 0, decimals) : bigNumber.multi(bigNumber.toBasic(totalExAmount || 0, decimals), rateBtc)) : 0;
-            const walletAssetBtc = rateBtc ? ((tokenSymbol === 'BTC') ? bigNumber.toBasic(totalAmount || 0, decimals) : bigNumber.multi(bigNumber.toBasic(totalAmount || 0, decimals), rateBtc)) : 0;
-            const totalAssetBtc = bigNumber.plus(totalExAssetBtc, walletAssetBtc);
-            return {
-                totalExAssetBtc,
-                walletAssetBtc,
-                totalAssetBtc,
-                index,
-                totalAsset,
-                totalExAsset,
-                walletAsset,
-                availableExAmount,
-                totalExAmount,
-                onroadNum,
-                tokenName,
-                totalAmount,
-                totalSupply,
-                isReIssuable,
-                tokenSymbol,
-                balance,
-                fundFloat,
-                decimals,
-                owner,
-                tokenId,
-                icon,
-                type: (tokenSymbol === 'VCP' && !index) ? 'NATIVE' : type,
-                gateInfo
-            };
-        }).filter(item => !defaultTokenMap[item.tokenId]);
+        return Object.keys(mapToken2Gate)
+            .map(i => {
+                const {
+                    index,
+                    availableExAmount = '',
+                    totalExAmount = '',
+                    onroadNum = '',
+                    tokenName = '',
+                    totalAmount = '',
+                    totalSupply = '',
+                    isReIssuable = '',
+                    tokenSymbol,
+                    balance = '',
+                    fundFloat = '',
+                    decimals = '',
+                    owner = '',
+                    tokenId = i,
+                    icon = getTokenIcon(i),
+                    type = 'OFFICAL_GATE',
+                    gateInfo = {}
+                } = Object.assign({},
+                    balanceInfo[i] || {},
+                    allToken[i] || {},
+                    { gateInfo: mapToken2Gate[i].gateInfo },
+                    exBalance[i]);
+                const rate
+                    = rootState.exchangeRate.rateMap[i]
+                    && rootState.exchangeRate.rateMap[i][
+                        `${ rootState.env.currency }Rate`
+                    ];
+                const totalExAsset = rate
+                    ? bigNumber.multi(bigNumber.toBasic(totalExAmount || 0, decimals),
+                        rate)
+                    : 0;
+                const walletAsset = rate
+                    ? bigNumber.multi(bigNumber.toBasic(totalAmount || 0, decimals),
+                        rate)
+                    : 0;
+                const totalAsset = bigNumber.plus(totalExAsset, walletAsset);
+                const rateBtc
+                    = rootState.exchangeRate.rateMap[i]
+                    && rootState.exchangeRate.rateMap[i]['btcRate'];
+                const totalExAssetBtc = rateBtc
+                    ? tokenSymbol === 'BTC'
+                        ? bigNumber.toBasic(totalExAmount || 0, decimals)
+                        : bigNumber.multi(bigNumber.toBasic(totalExAmount || 0, decimals),
+                            rateBtc)
+                    : 0;
+                const walletAssetBtc = rateBtc
+                    ? tokenSymbol === 'BTC'
+                        ? bigNumber.toBasic(totalAmount || 0, decimals)
+                        : bigNumber.multi(bigNumber.toBasic(totalAmount || 0, decimals),
+                            rateBtc)
+                    : 0;
+                const totalAssetBtc = bigNumber.plus(totalExAssetBtc,
+                    walletAssetBtc);
+                return {
+                    totalExAssetBtc,
+                    walletAssetBtc,
+                    totalAssetBtc,
+                    index,
+                    totalAsset,
+                    totalExAsset,
+                    walletAsset,
+                    availableExAmount,
+                    totalExAmount,
+                    onroadNum,
+                    tokenName,
+                    totalAmount,
+                    totalSupply,
+                    isReIssuable,
+                    tokenSymbol,
+                    balance,
+                    fundFloat,
+                    decimals,
+                    owner,
+                    tokenId,
+                    icon,
+                    type: tokenSymbol === 'VCP' && !index ? 'NATIVE' : type,
+                    gateInfo
+                };
+            })
+            .filter(item => !defaultTokenMap[item.tokenId]);
     },
     userStorageTokenList(state, getters, rootState, rootGetters) {
         const balanceInfo = getters.balanceInfo;
@@ -304,18 +369,44 @@ const getters = {
                     tokenId = i,
                     type = 'THIRD_GATE',
                     gateInfo = {}
-                } = Object.assign({}, token, balanceInfo[i] || {}, allToken[i] || {}, exBalance[i]);
-                const rate = rootState.exchangeRate.rateMap[i] && rootState.exchangeRate.rateMap[i][`${ rootState.env.currency }Rate`];
-                const totalExAsset = rate ? bigNumber.multi(bigNumber.toBasic(totalExAmount || 0, decimals), rate) : 0;
-                const walletAsset = rate ? bigNumber.multi(bigNumber.toBasic(totalAmount || 0, decimals), rate) : 0;
+                } = Object.assign({},
+                    token,
+                    balanceInfo[i] || {},
+                    allToken[i] || {},
+                    exBalance[i]);
+                const rate
+                    = rootState.exchangeRate.rateMap[i]
+                    && rootState.exchangeRate.rateMap[i][
+                        `${ rootState.env.currency }Rate`
+                    ];
+                const totalExAsset = rate
+                    ? bigNumber.multi(bigNumber.toBasic(totalExAmount || 0, decimals),
+                        rate)
+                    : 0;
+                const walletAsset = rate
+                    ? bigNumber.multi(bigNumber.toBasic(totalAmount || 0, decimals),
+                        rate)
+                    : 0;
                 const totalAsset = bigNumber.plus(totalExAsset, walletAsset);
-                const rateBtc = rootState.exchangeRate.rateMap[i] && rootState.exchangeRate.rateMap[i]['btcRate'];
-                const totalExAssetBtc = rateBtc ? bigNumber.multi(bigNumber.toBasic(totalExAmount || 0, decimals), rateBtc) : 0;
-                const walletAssetBtc = rateBtc ? bigNumber.multi(bigNumber.toBasic(totalAmount || 0, decimals), rateBtc) : 0;
-                const totalAssetBtc = bigNumber.plus(totalExAssetBtc, walletAssetBtc);
+                const rateBtc
+                    = rootState.exchangeRate.rateMap[i]
+                    && rootState.exchangeRate.rateMap[i]['btcRate'];
+                const totalExAssetBtc = rateBtc
+                    ? bigNumber.multi(bigNumber.toBasic(totalExAmount || 0, decimals),
+                        rateBtc)
+                    : 0;
+                const walletAssetBtc = rateBtc
+                    ? bigNumber.multi(bigNumber.toBasic(totalAmount || 0, decimals),
+                        rateBtc)
+                    : 0;
+                const totalAssetBtc = bigNumber.plus(totalExAssetBtc,
+                    walletAssetBtc);
                 let icon = getTokenIcon(i);
                 for (const key in userStorageToken) {
-                    if (i === userStorageToken[key].tokenId && userStorageToken[key].icon) {
+                    if (
+                        i === userStorageToken[key].tokenId
+                        && userStorageToken[key].icon
+                    ) {
                         icon = userStorageToken[key].icon;
                         break;
                     }
@@ -342,7 +433,7 @@ const getters = {
                     owner,
                     tokenId,
                     icon,
-                    type: (tokenSymbol === 'VCP' && !index) ? 'NATIVE' : type,
+                    type: tokenSymbol === 'VCP' && !index ? 'NATIVE' : type,
                     gateInfo
                 };
             })
@@ -364,9 +455,15 @@ const getters = {
         ].map(t => t.tokenId);
         return Object.keys(allToken)
             .filter(i => {
-                const walletAmount = getters.balanceInfo[i] ? getters.balanceInfo[i].totalAmount : 0;
+                const walletAmount = getters.balanceInfo[i]
+                    ? getters.balanceInfo[i].totalAmount
+                    : 0;
                 const exAmount = exBalance[i] ? exBalance[i].totalExAmount : 0;
-                return (!bigNumber.isEqual(walletAmount, 0) || !bigNumber.isEqual(exAmount, 0)) && contains.indexOf(i) === -1;
+                return (
+                    (!bigNumber.isEqual(walletAmount, 0)
+                        || !bigNumber.isEqual(exAmount, 0))
+                    && contains.indexOf(i) === -1
+                );
             })
             .map(i => {
                 const {
@@ -388,14 +485,33 @@ const getters = {
                     type = 'THIRD_GATE',
                     gateInfo = {}
                 } = Object.assign({}, balanceInfo[i] || {}, allToken[i] || {}, { gateInfo: { url: mapToken2Gate[i] && mapToken2Gate[i].url } });
-                const rate = rootState.exchangeRate.rateMap[i] && rootState.exchangeRate.rateMap[i][`${ rootState.env.currency }Rate`];
-                const totalExAsset = rate ? bigNumber.multi(bigNumber.toBasic(totalExAmount || 0, decimals), rate) : 0;
-                const walletAsset = rate ? bigNumber.multi(bigNumber.toBasic(totalAmount || 0, decimals), rate) : 0;
+                const rate
+                    = rootState.exchangeRate.rateMap[i]
+                    && rootState.exchangeRate.rateMap[i][
+                        `${ rootState.env.currency }Rate`
+                    ];
+                const totalExAsset = rate
+                    ? bigNumber.multi(bigNumber.toBasic(totalExAmount || 0, decimals),
+                        rate)
+                    : 0;
+                const walletAsset = rate
+                    ? bigNumber.multi(bigNumber.toBasic(totalAmount || 0, decimals),
+                        rate)
+                    : 0;
                 const totalAsset = bigNumber.plus(totalExAsset, walletAsset);
-                const rateBtc = rootState.exchangeRate.rateMap[i] && rootState.exchangeRate.rateMap[i]['btcRate'];
-                const totalExAssetBtc = rateBtc ? bigNumber.multi(bigNumber.toBasic(totalExAmount || 0, decimals), rateBtc) : 0;
-                const walletAssetBtc = rateBtc ? bigNumber.multi(bigNumber.toBasic(totalAmount || 0, decimals), rateBtc) : 0;
-                const totalAssetBtc = bigNumber.plus(totalExAssetBtc, walletAssetBtc);
+                const rateBtc
+                    = rootState.exchangeRate.rateMap[i]
+                    && rootState.exchangeRate.rateMap[i]['btcRate'];
+                const totalExAssetBtc = rateBtc
+                    ? bigNumber.multi(bigNumber.toBasic(totalExAmount || 0, decimals),
+                        rateBtc)
+                    : 0;
+                const walletAssetBtc = rateBtc
+                    ? bigNumber.multi(bigNumber.toBasic(totalAmount || 0, decimals),
+                        rateBtc)
+                    : 0;
+                const totalAssetBtc = bigNumber.plus(totalExAssetBtc,
+                    walletAssetBtc);
                 return {
                     totalExAssetBtc,
                     walletAssetBtc,
@@ -418,10 +534,25 @@ const getters = {
                     owner,
                     tokenId,
                     icon,
-                    type: (tokenSymbol === 'VCP' && !index) ? 'NATIVE' : type,
+                    type: tokenSymbol === 'VCP' && !index ? 'NATIVE' : type,
                     gateInfo
                 };
             });
+    },
+    allTokenWithExAssets(state, getters, rootState, rootGetters) {
+        return [
+            ...getters.defaultTokenList,
+            ...getters.userStorageTokenList,
+            ...getters.otherWhithBalance,
+            ...getters.officalGateTokenList
+        ]
+            .filter(t => t.tokenName)
+            .reduce((pre, cur) => {
+                return {
+                    ...pre,
+                    [cur.tokenId]: cur
+                };
+            }, {});
     }
 };
 

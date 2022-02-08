@@ -80,57 +80,75 @@ const getters = {
         }
         return balanceInfo;
     },
+    // allBalanceInfoMap(state, getters, rootState, rootGetters) {
+    //     return getters.allBalanceInfo.reduce((pre, cur) => {
+    //         return {
+    //             ...pre,
+    //             [cur.tokenId]: cur
+    //         };
+    //     },
+    //     {});
+    // },
     allBalanceInfo(state, getters, rootState, rootGetters) {
         const balanceInfo = getters.balanceInfo || {};
         const exBalance = rootGetters.exBalanceList || {};
-        const allToken = Object.assign({}, defaultTokenMap, exBalance, balanceInfo);
+        const allToken = Object.assign({},
+            defaultTokenMap,
+            exBalance,
+            balanceInfo);
 
-        return Object.keys(allToken)
-            .map(i => {
-                const {
-                    availableExAmount = '',
-                    totalExAmount = '',
-                    tokenName = '',
-                    totalAmount = '',
-                    totalSupply = '',
-                    isReIssuable = '',
-                    tokenSymbol,
-                    balance = '',
-                    decimals = '',
-                    owner = '',
-                    tokenId = i,
-                    icon = getTokenIcon(i)
-                } = Object.assign({}, balanceInfo[i] || {}, exBalance[i] || {}, rootState.env.tokenMap[i] || {});
+        return Object.keys(allToken).map(i => {
+            const {
+                availableExAmount = '',
+                totalExAmount = '',
+                tokenName = '',
+                totalAmount = '',
+                totalSupply = '',
+                isReIssuable = '',
+                tokenSymbol,
+                balance = '',
+                decimals = '',
+                owner = '',
+                tokenId = i,
+                icon = getTokenIcon(i)
+            } = Object.assign({},
+                balanceInfo[i] || {},
+                exBalance[i] || {},
+                rootState.env.tokenMap[i] || {});
 
-                const currencyRate = rootGetters.currencyRateList[i] || 0;
-                const totalExAsset = bigNumber.multi(bigNumber.toBasic(totalExAmount || 0, decimals), currencyRate);
-                const walletAsset = bigNumber.multi(bigNumber.toBasic(totalAmount || 0, decimals), currencyRate);
+            const currencyRate = rootGetters.currencyRateList[i] || 0;
+            const totalExAsset = bigNumber.multi(bigNumber.toBasic(totalExAmount || 0, decimals),
+                currencyRate);
+            const walletAsset = bigNumber.multi(bigNumber.toBasic(totalAmount || 0, decimals),
+                currencyRate);
 
-                const btcRate = rootGetters.btcRateList[i] || 0;
-                const totalExAssetBtc = bigNumber.multi(bigNumber.toBasic(totalExAmount || 0, decimals), btcRate);
-                const walletAssetBtc = bigNumber.multi(bigNumber.toBasic(totalAmount || 0, decimals), btcRate);
+            const btcRate = rootGetters.btcRateList[i] || 0;
+            const totalExAssetBtc = bigNumber.multi(bigNumber.toBasic(totalExAmount || 0, decimals),
+                btcRate);
+            const walletAssetBtc = bigNumber.multi(bigNumber.toBasic(totalAmount || 0, decimals),
+                btcRate);
 
-                return {
-                    totalExAssetBtc,
-                    walletAssetBtc,
-                    walletAsset,
-                    totalExAmount,
-                    availableExAmount,
-                    totalExAsset,
-                    tokenName,
-                    totalAmount,
-                    totalSupply,
-                    isReIssuable,
-                    tokenSymbol,
-                    balance,
-                    decimals,
-                    owner,
-                    tokenId,
-                    icon,
-                    totalAsset: bigNumber.plus(totalExAsset, walletAsset),
-                    totalAssetBtc: bigNumber.plus(totalExAssetBtc, walletAssetBtc)
-                };
-            });
+            return {
+                totalExAssetBtc,
+                walletAssetBtc,
+                walletAsset,
+                totalExAmount,
+                availableExAmount,
+                totalExAsset,
+                tokenName,
+                totalAmount,
+                totalSupply,
+                isReIssuable,
+                tokenSymbol,
+                balance,
+                decimals,
+                owner,
+                tokenId,
+                icon,
+                totalAsset: bigNumber.plus(totalExAsset, walletAsset),
+                totalAssetBtc: bigNumber.plus(totalExAssetBtc, walletAssetBtc)
+            };
+        });
     }
 };
 
