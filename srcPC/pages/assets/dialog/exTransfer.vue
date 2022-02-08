@@ -49,6 +49,14 @@ export default {
     components: { confirm, viteInput },
     props: {
         tokenInfo: {
+            /**
+             * icon
+             * tokenId
+             * totalAmount
+             * availableExAmount
+             * decimals
+             * tokenSymbol
+             */
             type: Object,
             default: () => {
                 return {};

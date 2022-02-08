@@ -43,7 +43,6 @@ router.beforeEach((to, from, next) => {
         router.replace({ name: 'notFound' });
         return;
     }
-    console.log(9999, to.name);
     const currHDAcc = getCurrHDAcc();
     if (
         !currHDAcc
