@@ -9,7 +9,7 @@ export const symbolMap = {
     gbp: '£',
     inr: '₹'
 };
-export const lowerSymbolList = Object.keys(symbolMap);
+export const lowerSymbolList = Object.keys(symbolMap).sort();
 export const symbolList = lowerSymbolList.map(v => v.toUpperCase());
 export const getSymbol = Object.keys(symbolMap).reduce((pre, cur) => {
     return {
