@@ -41,9 +41,7 @@ import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 
 // Some init code for desktop app
 import * as desktop from './utils/desktop';
-import Tooltip from 'ant-design-vue/lib/tooltip';
 
-import 'ant-design-vue/lib/tooltip/style'; // 或者 ant-design-vue/lib/button/style/css 加载 css 文件
 
 library.add(faExclamationCircle,
     faInfoCircle,
@@ -65,9 +63,6 @@ resaveLastAcc();
 Vue.use(plugin);
 // V-click-outside
 Vue.use(directives);
-
-// -----reg antv component
-Vue.use(Tooltip);
 
 // ----
 

@@ -7,6 +7,7 @@
                     style="cursor:pointer;"
                     icon="arrow-right-arrow-left"
                     @click="handleTransfer"
+                    class="assets-ex-transfer-icon"
                 />
                 <font-awesome-icon icon="wallet" />
                 {{ balance || '0' }}
@@ -906,9 +907,12 @@ $font-black: rgba(36, 39, 43, 0.8);
             font-family: $font-H;
             display: block;
             float: right;
-            :not(:last-child){
-                margin-right: 3px;
+            :not(:last-child) {
+                margin-right: 5px;
                 @include second_title_font_color();
+            }
+            .assets-ex-transfer-icon {
+                margin-right: 10px;
             }
         }
     }
