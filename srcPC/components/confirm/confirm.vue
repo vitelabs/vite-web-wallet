@@ -8,7 +8,7 @@
 
             <div class="content-wrapper" >
                 <img v-if="type === 'generalTips'" class="general-tips-icon" src="~assets/imgs/general-tips.svg"/>
-                <div v-if="content">{{ content }}</div>
+                <div v-if="content" style="white-space: pre-line;">{{ content }}</div>
                 <slot></slot>
             </div>
 

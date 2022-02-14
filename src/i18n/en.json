@@ -958,8 +958,8 @@
             "noName": "Anonymous Operator",
             "overview": "Introduction",
             "txPair": "Trading Pairs",
-            "confirmTitle": "Unverified Operator",
-            "confirmText": "Note that the selected trading pair {symbol} is being managed by an unverified operator.\nTrade at your own risk.",
+            "confirmTitle": "Unknown Operator",
+            "confirmText": "Note that the selected trading pair {symbol} is being managed by an Unknown operator.\nTrade at your own risk.",
             "address": "Operator Address",
             "name": "Operator Name"
         },

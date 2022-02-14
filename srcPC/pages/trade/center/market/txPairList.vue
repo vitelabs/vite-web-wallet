@@ -7,37 +7,69 @@
         >{{ realPrice }}</span
         > -->
         <div ref="txList" class="tx-list">
-            <div :ref="`txPair${i}`" v-for="(txPair, i) in showList" :key="i">
-                <a-tooltip placement="right">
-                    <template slot="title">
-                        <div style="margin-bottom:8px">{{ realPrice }}</div>
+            <div
+                :ref="`txPair${i}`"
+                :id="`txPair${i}`"
+                v-for="(txPair, i) in showList"
+                :key="i"
+            >
+                <Popper
+                    trigger="hover"
+                    :options="{
+                        placement: 'right',
+                        modifiers: { offset: { offset: '0,20px' } }
+                    }"
+                    :boundaries-selector="'body'"
+                    :visible-arrow="true"
+                >
+                    <div class="txPair-tips">
+                        <div class="txPair-tips__price">{{ realPrice }}</div>
+                        <div class="txPair-tips__divider"></div>
                         <div>
-                            <div>{{ getTxPairShowSymbol(txPair) }} Mining</div>
+                            <div
+                                v-show="!txPair.operatorName"
+                                class="txPair-tips__operator--unverified"
+                            >
+                                Unknown Operator
+                            </div>
+                            <div class="txPair-tips__mineTitle">
+                                {{ getTxPairShowSymbol(txPair) }} Mining
+                            </div>
                             <div
                                 v-show="
                                     !isTradeMining(txPair) &&
                                         !isOrderMining(txPair)
                                 "
+                                class="txPair-tips__mineItem"
                             >
                                 None
                             </div>
-                            <div v-show="isTradeMining(txPair)">
+                            <div
+                                v-show="isTradeMining(txPair)"
+                                class="txPair-tips__mineItem"
+                            >
                                 MM as Mining
                             </div>
-                            <div v-show="isOrderMining(txPair)">
+                            <div
+                                v-show="isOrderMining(txPair)"
+                                class="txPair-tips__mineItem"
+                            >
                                 Trading as Mining
                             </div>
                         </div>
-                    </template>
+                    </div>
                     <div
                         style="width:100%"
                         class="__center-tb-row __pointer"
                         :class="{
-                            active: txPair && txPair.symbol === activeSymbol
+                            active: txPair && txPair.symbol === activeSymbol,
+                            'unknown-operator':!txPair.operatorName
+
                         }"
                         @mouseenter="showRealPrice(txPair, i)"
                         @mouseleave="hideRealPrice(txPair)"
                         @click="setActiveTxPair(txPair)"
+                        slot="reference"
                     >
                         <span class="__center-tb-item tx-pair">
                             <span
@@ -55,8 +87,7 @@
                                 <!-- todo,anomous operator -->
                                 <font-awesome-icon
                                     class="operator-icon"
-                                    style="color:#007aff"
-                                    icon="user-ninja"
+                                    icon="circle-exclamation"
                                     v-show="!txPair.operatorName"
                                 />
                                 <div class="mining-icon">
@@ -115,7 +146,7 @@
                             }}
                         </span>
                     </div>
-                </a-tooltip>
+                </Popper>
             </div>
         </div>
     </div>
@@ -125,8 +156,10 @@
 import BigNumber from 'utils/bigNumber';
 import statistics from 'utils/statistics';
 import operatorIcon from 'assets/imgs/operator.png';
+import Popper from 'vue-popperjs';
 
 export default {
+    components: { Popper },
     props: {
         favoritePairs: {
             type: Object,
@@ -436,8 +469,11 @@ export default {
         .des-text {
             flex: 1;
         }
-        .operator-icon{
+        .operator-icon {
             margin-right: 3px;
+            color: #ffc6c6;
+            background-color: red;
+            border-radius: 50%;
         }
         .mining-icon {
             color: $blue-color-1;
@@ -456,8 +492,57 @@ export default {
         position: absolute;
         left: 0;
     }
+    &.unknown-operator{
+        color:#a4acb8;
+
+    }
     &.active {
         background: rgba(75, 116, 255, 0.1);
+    }
+}
+.txPair-tips {
+    background-color: #d7d7d7;
+    padding: 8px 12px;
+    position: relative;
+    font-size: 12px;
+    color: #1d2024;
+    &__price {
+    }
+    &__divider {
+        border-top: 2px dashed #007aff;
+        margin: 9px 0px;
+        width: 100%;
+    }
+    &__operator--unverified {
+        color: red;
+        margin-bottom: 6px;
+    }
+    &__mineTitle {
+        margin-bottom: 6px;
+    }
+    &__mineItem {
+        color: #5e6875;
+    }
+    &::before {
+        content: '';
+        border-right: 10px solid #d7d7d7;
+        border-top: 10px solid transparent;
+        border-bottom: 10px solid transparent;
+        position: absolute;
+        top: 50%;
+        left: -10px;
+        transform: translateY(-50%);
+
+        //           content: '';
+        //   position: absolute;
+        //   left: 0;
+        //   top: 50%;
+        //   display: block;
+        //   border-right: 5px solid red;
+        //   border-bottom: 5px solid red;
+        //   width: 25px;
+        //   height: 25px;
+        //   transform: translate(-50%, -50%) rotate(-45deg);
     }
 }
 </style>
