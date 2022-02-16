@@ -63,8 +63,7 @@
                         class="__center-tb-row __pointer"
                         :class="{
                             active: txPair && txPair.symbol === activeSymbol,
-                            'unknown-operator':!txPair.operatorName
-
+                            'unknown-operator': !txPair.operatorName
                         }"
                         @mouseenter="showRealPrice(txPair, i)"
                         @mouseleave="hideRealPrice(txPair)"
@@ -492,9 +491,8 @@ export default {
         position: absolute;
         left: 0;
     }
-    &.unknown-operator{
-        color:#a4acb8;
-
+    &.unknown-operator {
+        color: #a4acb8;
     }
     &.active {
         background: rgba(75, 116, 255, 0.1);
@@ -507,14 +505,15 @@ export default {
     font-size: 12px;
     color: #1d2024;
     &__price {
+        font-weight: 600;
     }
     &__divider {
-        border-top: 2px dashed #007aff;
+        border-top: 1px dashed #007aff;
         margin: 9px 0px;
         width: 100%;
     }
     &__operator--unverified {
-        color: red;
+        color: #e02020;
         margin-bottom: 6px;
     }
     &__mineTitle {
