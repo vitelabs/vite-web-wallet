@@ -123,7 +123,7 @@ export default {
         },
         getPrice(dividendStat) {
             const coin = this.$store.state.env.currency;
-            const pre = coin === 'cny' ? '¥' : '$';
+            const pre = this.$store.getters.currencySymbol;
             const income = this.getPriceNum(dividendStat, coin);
             return `${ pre }${ bigNumber.formatNum(income, 2) }`;
         },

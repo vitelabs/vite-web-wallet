@@ -153,8 +153,8 @@
 }
 
 @mixin font_color_2() {
-    [data-theme="0"] & {
-        color: #5e6875; // color: rgba(94,104,117,1);
+    [data-theme='0'] & {
+        color: #5e6875; // color: rgba(94,104,117,0.58);
     }
     [data-theme="1"] & {
         color: $gray-color-2;
