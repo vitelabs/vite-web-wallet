@@ -76,7 +76,10 @@
         "symbol": "Enviar"
     },
     "compliance": {
-        "text": "ViteX no atiende a clientes en los siguientes países/regiones/territorios: China continental, Hong Kong, Cuba, Irán, Corea del Norte, Crimea, Sudán, Malaysia, Syria, Estados Unidos [incluyendo todos los territorios de Estados Unidos como Puerto Rico, Samoa, Guam, Isla Mariana del Norte y las Islas Virgenes de Estados Unidos (St. Croix, St. John y St. Thomas)], Bangladesh, Bolivia, Ecuador y Kyrgyzstan. Para más información, por favor lea nuestros Términos de Servicio y Política de Privacidad",
+        "text": "By accessing ViteX, you agree to our",
+        "textTermsLink": "Terms of Service",
+        "textAnd": " and ",
+        "textPrivacyLink": "Privacy Policy",
         "title": "Aviso importante"
     },
     "bnbConf": {
@@ -963,8 +966,8 @@
             "noName": "Operador anónimo",
             "overview": "Introducción",
             "txPair": "Par de comercio",
-            "confirmTitle": "Recordatorio de riesgo",
-            "confirmText": "El par de comercio actual es {symbol}. Por favor, tenga cuidado al operar. La inversión en activos digitales conlleva altos riesgos. Antes de invertir, por favor comprenda plenamente todos los riesgos de invertir en activos digitales y juzgue la autenticidad, legalidad y validez de los activos digitales por su cuenta. Por favor, sea prudente con sus propias decisiones de inversión y asuma la responsabilidad por la pérdida de sus activos.",
+            "confirmTitle": "Unknown Operator",
+            "confirmText": "Note that the selected trading pair {symbol} is being managed by an Unknown operator.\nTrade at your own risk.",
             "address": "Dirección del operador",
             "name": "Nombre de operador"
         },
@@ -1641,7 +1644,7 @@
         "unlock": "desbloquear",
         "unreceivedTx": {
             "title": "Has recibido {num} transacciones.",
-            "body": "Cantidad：{amount} {symbol} \nDesde dirección: {address}"
+            "body": "Amount: {amount} {symbol} \nFrom Address: {address}"
         }
     }
 }
