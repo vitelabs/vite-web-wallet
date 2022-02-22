@@ -76,7 +76,10 @@
         "symbol": "전송"
     },
     "compliance": {
-        "text": "ViteX는 홍콩, 쿠바, 이란, 북한, 크리미아, 수단, 말레이시아, 시리아, 미국[(푸에르토 리코, 아메리칸 사모아, 괌, 북 마리아나 섬과 같은 모든 미국 영토 포함, 미국령 버진 아일랜드 (세인트 크로이, 세인트 존 및 세인트 토마스)], 방글라데시, 볼리비아, 에콰도르 및 키르기스스탄에있는 고객에게 서비스를 제공하지 않습니다. 자세한 내용은 서비스 약관 및 개인 정보 보호 정책을 참조하십시오",
+        "text": "By accessing ViteX, you agree to our",
+        "textTermsLink": "Terms of Service",
+        "textAnd": " and ",
+        "textPrivacyLink": "Privacy Policy",
         "title": "중요 공지"
     },
     "bnbConf": {
@@ -963,8 +966,8 @@
             "noName": "익명 오퍼레이터",
             "overview": "소개",
             "txPair": "트레이딩 페어",
-            "confirmTitle": "리스크 알림",
-            "confirmText": "현재 트레이딩 페어는 {symbol}입니다. 거래시 주의하시기 바랍니다. 디지털 자산 투자에는 높은 위험이 따릅니다. 투자하기 전에 발생하는 모든 위험을 완전히 이해하고 디지털 자산의 진위, 합법성 및 유효성을 스스로 판단하십시오. 자신의 투자 결정에 신중을 기하고 자산 손실에 대한 책임을 져야합니다.",
+            "confirmTitle": "Unknown Operator",
+            "confirmText": "Note that the selected trading pair {symbol} is being managed by an Unknown operator.\nTrade at your own risk.",
             "address": "오퍼레이터 주소",
             "name": "오퍼레이터 이름"
         },
@@ -1641,7 +1644,7 @@
         "unlock": "잠금 해제하기",
         "unreceivedTx": {
             "title": "{num} 거래를 수신 받았습니다.",
-            "body": "수량：{amount} {symbol} \n다음 주소로 부터: {address}"
+            "body": "Amount: {amount} {symbol} \nFrom Address: {address}"
         }
     }
 }
