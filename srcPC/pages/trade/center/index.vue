@@ -23,8 +23,12 @@
         >
             <div>
                 <span>{{ $t('compliance.text') }}</span>
-                <a href="https://x.vite.net/privacy.html" target="__blank">{{
-                    $t('compliance.textLink')
+                <a href="https://test.vite.org/terms.html" target="__blank">{{
+                    $t('compliance.textTermsLink')
+                }}</a>
+                {{ $t('compliance.testAnd') }}
+                <a href="https://test.vite.org/privacy.html" target="__blank">{{
+                    $t('compliance.textPrivacyLink')
                 }}</a>
             </div>
         </confirm>

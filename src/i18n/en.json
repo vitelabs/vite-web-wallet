@@ -77,7 +77,9 @@
     },
     "compliance": {
         "text": "By accessing ViteX, you agree to our",
-        "textLink":"Terms of Service and Privacy Policy.",
+        "textTermsLink":"Terms of Service",
+        "textAnd": " and ",
+        "textPrivacyLink":"Privacy Policy",
         "title": "Important Notice"
     },
     "bnbConf": {
@@ -1642,7 +1644,7 @@
         "unlock": "unlock",
         "unreceivedTx": {
             "title": "You have received {num} transactions.",
-            "body": "Amount：{amount} {symbol} \nFrom Address: {address}"
+            "body": "Amount: {amount} {symbol} \nFrom Address: {address}"
         }
     }
 }
