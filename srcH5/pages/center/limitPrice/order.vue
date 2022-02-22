@@ -211,7 +211,7 @@ export default {
                 return '';
             }
 
-            const pre = this.$store.state.env.currency === 'cny' ? '≈ ¥' : '≈ $';
+            const pre = `≈${ this.$store.getters.currencySymbol }`;
 
             if (!this.activeTxPair) {
                 return `${ pre }0`;

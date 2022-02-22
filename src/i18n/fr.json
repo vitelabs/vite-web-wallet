@@ -76,7 +76,8 @@
         "symbol": "Send"
     },
     "compliance": {
-        "text": "ViteX does not serve customers in the following countries/regions/territories: Hong Kong, Cuba, Iran, North Korea, Crimea, Sudan, Malaysia, Syria, USA [including all USA territories like Puerto Rico, American Samoa, Guam, Northern Mariana Island, and the US Virgin Islands (St. Croix, St. John and St. Thomas)], Bangladesh, Bolivia, Ecuador, and Kyrgyzstan. For more information, please read our Terms of Service and Privacy Policy",
+        "text": "By accessing ViteX, you agree to our",
+        "textLink":"Terms of Service and Privacy Policy.",
         "title": "Important Notice"
     },
     "bnbConf": {
@@ -963,8 +964,8 @@
             "noName": "Anonymous Operator",
             "overview": "Introduction",
             "txPair": "Trading Pairs",
-            "confirmTitle": "Risk Reminder",
-            "confirmText": "The current trading pair is {symbol}. Please be careful when trading. Investing in digital assets comes with high risks. Before investing, please have a full understanding of all the risks of investing in digital assets and judge the authenticity, legality and validity of digital assets on your own. Please be prudent of your own investment decisions and undertake responsibility for the loss of your assets.",
+            "confirmTitle": "Unknown Operator",
+            "confirmText": "Note that the selected trading pair {symbol} is being managed by an Unknown operator.\nTrade at your own risk.",
             "address": "Operator Address",
             "name": "Operator Name"
         },

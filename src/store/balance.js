@@ -7,6 +7,22 @@ const loopTime = 2 * 1000;
 let balanceTimer = null;
 let address = null;
 
+
+// tti_5649544520544f4b454e6e40: {,…}
+// available: "12000000000000000000"
+// locked: "0"
+// tokenInfo: {tokenName: "Vite Token", tokenSymbol: "VITE", totalSupply: "1000000000000000000000000000",…}
+// decimals: 18
+// index: 0
+// isOwnerBurnOnly: false
+// isReIssuable: true
+// maxSupply: "100000000000000000000000000000"
+// owner: "vite_962eab5a19e51fe36506308f6fcf337876139bd5fee3048c46"
+// ownerBurnOnly: false
+// tokenId: "tti_5649544520544f4b454e6e40"
+// tokenName: "Vite Token"
+// tokenSymbol: "VITE"
+// totalSupply: "1000000000000000000000000000"}
 const state = { balanceList: {} };
 
 const mutations = {
