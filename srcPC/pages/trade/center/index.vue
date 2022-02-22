@@ -26,7 +26,7 @@
                 <a href="https://test.vite.org/terms.html" target="__blank">{{
                     $t('compliance.textTermsLink')
                 }}</a>
-                {{ $t('compliance.testAnd') }}
+                {{ $t('compliance.textAnd') }}
                 <a href="https://test.vite.org/privacy.html" target="__blank">{{
                     $t('compliance.textPrivacyLink')
                 }}</a>
