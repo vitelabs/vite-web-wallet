@@ -76,7 +76,10 @@
         "symbol": "Ipadala"
     },
     "compliance": {
-        "text": "Hindi naglilingkod ang ViteX sa mga customer sa mga sumusunod na bansa / rehiyon / teritoryo: Mainland China, Hong Kong, Cuba, Iran, North Korea, Crimea, Sudan, Malaysia, Syria, USA [kasama ang lahat ng mga teritoryo ng USA tulad ng Puerto Rico, American Samoa, Guam, Ang Hilagang Pulo ng Mariana, at ang US Virgin Islands (St. Croix, St. John at St. Thomas)], Bangladesh, Bolivia, Ecuador, at Kyrgyzstan. Para sa karagdagang impormasyon, mangyaring basahin ang aming Mga Tuntunin ng Serbisyo at Patakaran sa Privacy",
+        "text": "By accessing ViteX, you agree to our",
+        "textTermsLink": "Terms of Service",
+        "textAnd": " and ",
+        "textPrivacyLink": "Privacy Policy",
         "title": "Mahalagang Paunawa"
     },
     "bnbConf": {
@@ -963,8 +966,8 @@
             "noName": "Anonymous na Operator",
             "overview": "Panimula",
             "txPair": "Mga Trading Pair",
-            "confirmTitle": "Paalala sa Panganib",
-            "confirmText": "Ang kasalukuyang trading ay {symbol}. Mangyaring maging maingat kapag nag-trading. Ang pamumuhunan sa mga digital na assets ay may mataas na peligro. Bago mamuhunan, mangyaring magkaroon ng buong pag-unawa sa lahat ng mga panganib ng pamumuhunan sa mga digital na assets at hatulan ang pagiging tunay, legalidad at bisa ng mga digital na assets sa iyong sarili. Mangyaring maging maingat sa iyong sariling mga desisyon sa pamumuhunan at isagawa ang responsibilidad para sa pagkawala ng iyong mga assets.",
+            "confirmTitle": "Unknown Operator",
+            "confirmText": "Note that the selected trading pair {symbol} is being managed by an Unknown operator.\nTrade at your own risk.",
             "address": "Address ng Operator",
             "name": "Pangalan ng Operator"
         },
@@ -1641,7 +1644,7 @@
         "unlock": "i-unlock",
         "unreceivedTx": {
             "title": "Nakatanggap ka ng mga transaksyon sa {num}.",
-            "body": "Halaga ：{amount} {symbol} \nMula sa Address: {address}"
+            "body": "Amount: {amount} {symbol} \nFrom Address: {address}"
         }
     }
 }
