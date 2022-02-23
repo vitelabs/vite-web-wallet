@@ -963,11 +963,11 @@
         "buyMiningPrice": "Đủ điều kiện khai thác khi giá mua lớn hơn {price}",
         "sellMiningPrice": "Đủ điều kiện khai thác khi giá bán nhỏ hơn {price}",
         "operator": {
-            "noName": "Nhà vận hành Ẩn danh",
+            "noName": "Unknown Operator",
             "overview": "Giới thiệu",
             "txPair": "Cặp Giao dịch",
             "confirmTitle": "Unknown Operator",
-            "confirmText": "Note that the selected trading pair {symbol} is being managed by an Unknown operator.\nTrade at your own risk.",
+            "confirmText": "Note that the selected trading pair {symbol} is being managed by an Unknown Operator.\nTrade at your own risk.",
             "address": "Địa chỉ Nhà vận hành",
             "name": "Tên Nhà vận hành"
         },
