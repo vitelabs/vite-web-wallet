@@ -963,11 +963,11 @@
         "buyMiningPrice": "Kwalipikado para sa pagmimina kapag ang presyo ng pagbili ay mas malaki kaysa sa {price}",
         "sellMiningPrice": "Kwalipikado para sa pagmimina kapag ang presyo ng pagbebenta ay mas mababa sa {price}",
         "operator": {
-            "noName": "Anonymous na Operator",
+            "noName": "Unknown Operator",
             "overview": "Panimula",
             "txPair": "Mga Trading Pair",
             "confirmTitle": "Unknown Operator",
-            "confirmText": "Note that the selected trading pair {symbol} is being managed by an Unknown operator.\nTrade at your own risk.",
+            "confirmText": "Note that the selected trading pair {symbol} is being managed by an Unknown Operator.\nTrade at your own risk.",
             "address": "Address ng Operator",
             "name": "Pangalan ng Operator"
         },
