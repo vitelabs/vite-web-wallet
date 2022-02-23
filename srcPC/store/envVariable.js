@@ -1,11 +1,19 @@
-import {
-    storage as localStorage,
-    constant
-} from 'pcUtils/store';
+import { storage as localStorage, constant } from 'pcUtils/store';
+import { getSymbol, lowerSymbolList } from 'src/utils/currenySymbol';
+
 import { getApiConfig } from 'services/dnsHostIP';
 import d from 'dayjs';
 
-const { LangKey, GateKey, ThemeKey, autoLogoutKey, currencyKey, CustomNodes, CurrentNode, PowLimit } = constant;
+const {
+    LangKey,
+    GateKey,
+    ThemeKey,
+    AutoLogoutKey,
+    currencyKey,
+    CustomNodes,
+    CurrentNode,
+    PowLimit
+} = constant;
 const HideZeroAssets = constant.HideZeroAssets;
 
 const theme = localStorage.getItem(ThemeKey);
@@ -19,7 +27,7 @@ const state = {
     clientStatus: -1,
     lang: '',
     currency: localStorage.getItem(currencyKey) || '',
-    autoLogoutTime: localStorage.getItem(autoLogoutKey) || 5,
+    autoLogoutTime: localStorage.getItem(AutoLogoutKey) || 5,
     gate: +localStorage.getItem(GateKey) || 0,
     theme: theme === null ? 1 : +theme,
     lastPage: '',
@@ -57,14 +65,14 @@ const mutations = {
     },
     setCurrency(state, currency) {
         currency = currency.toLowerCase();
-        if ([ 'cny', 'usd' ].indexOf(currency) === -1) {
+        if (lowerSymbolList.indexOf(currency) === -1) {
             return;
         }
         state.currency = currency;
         localStorage.setItem(currencyKey, currency);
     },
     setAutoLogoutTime(state, time) {
-        localStorage.setItem(autoLogoutKey, time);
+        localStorage.setItem(AutoLogoutKey, time);
         state.autoLogoutTime = time;
     },
     setLastPage(state, lastPage) {
@@ -110,7 +118,9 @@ const actions = {
     },
     addCustomNode({ commit, state }, newNode) {
         if (!newNode) return;
-        const customNodes = state.customNodes.concat([newNode]).filter(item => item);
+        const customNodes = state.customNodes
+            .concat([newNode])
+            .filter(item => item);
         commit('setCustomNodes', customNodes);
         localStorage.setItem(CustomNodes, customNodes);
     },
@@ -147,11 +157,7 @@ const actions = {
 
 const getters = {
     currencySymbol(state) {
-        const symbolMap = {
-            cny: '¥',
-            usd: '$'
-        };
-        return symbolMap[state.currency];
+        return getSymbol[state.currency];
     },
     allRpcNodes(state) {
         const all = state.officialNodes.concat(state.customNodes);
