@@ -963,11 +963,11 @@
         "buyMiningPrice": "가격이 {price} 이상일 때, 채굴이 가능합니다.",
         "sellMiningPrice": "가격이 {price} 이하일 때, 채굴이 가능합니다.",
         "operator": {
-            "noName": "익명 오퍼레이터",
+            "noName": "Unknown Operator",
             "overview": "소개",
             "txPair": "트레이딩 페어",
             "confirmTitle": "Unknown Operator",
-            "confirmText": "Note that the selected trading pair {symbol} is being managed by an Unknown operator.\nTrade at your own risk.",
+            "confirmText": "Note that the selected trading pair {symbol} is being managed by an Unknown Operator.\nTrade at your own risk.",
             "address": "오퍼레이터 주소",
             "name": "오퍼레이터 이름"
         },
