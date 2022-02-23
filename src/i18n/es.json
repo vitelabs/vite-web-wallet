@@ -963,11 +963,11 @@
         "buyMiningPrice": "Califica para minar cuando el precio de compra es mayor que {price}",
         "sellMiningPrice": "Califica para minar cuando el precio de venta es menor que {price}",
         "operator": {
-            "noName": "Operador anónimo",
+            "noName": "Unknown Operator",
             "overview": "Introducción",
             "txPair": "Par de comercio",
             "confirmTitle": "Unknown Operator",
-            "confirmText": "Note that the selected trading pair {symbol} is being managed by an Unknown operator.\nTrade at your own risk.",
+            "confirmText": "Note that the selected trading pair {symbol} is being managed by an Unknown Operator.\nTrade at your own risk.",
             "address": "Dirección del operador",
             "name": "Nombre de operador"
         },
