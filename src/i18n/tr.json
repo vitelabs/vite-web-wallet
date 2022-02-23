@@ -963,11 +963,11 @@
         "buyMiningPrice": "Alış fiyatı {price} 'dan yüksek olduğunda madencilik için uygundur",
         "sellMiningPrice": "Satış fiyatı {price} altında olduğunda madencilik için uygundur",
         "operator": {
-            "noName": "Anonim Operatör",
+            "noName": "Unknown Operator",
             "overview": "Giriş",
             "txPair": "Alım Satım Paritesi",
             "confirmTitle": "Unknown Operator",
-            "confirmText": "Note that the selected trading pair {symbol} is being managed by an Unknown operator.\nTrade at your own risk.",
+            "confirmText": "Note that the selected trading pair {symbol} is being managed by an Unknown Operator.\nTrade at your own risk.",
             "address": "Operatör Adresi",
             "name": "Operatör Adı"
         },
