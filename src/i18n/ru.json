@@ -963,11 +963,11 @@
         "buyMiningPrice": "Цена, выше чем {price}, доступна для наград за торговлю.",
         "sellMiningPrice": "Цена, ниже чем {price}, доступна для наград за торговлю.",
         "operator": {
-            "noName": "Анонимный оператор",
+            "noName": "Unknown Operator",
             "overview": "Описание",
             "txPair": "Торговые Пары",
             "confirmTitle": "Unknown Operator",
-            "confirmText": "Note that the selected trading pair {symbol} is being managed by an Unknown operator.\nTrade at your own risk.",
+            "confirmText": "Note that the selected trading pair {symbol} is being managed by an Unknown Operator.\nTrade at your own risk.",
             "address": "Адрес оператора",
             "name": "Имя оператора"
         },
