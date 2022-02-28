@@ -1082,7 +1082,7 @@
             "failProxy": "Delegation Failed",
             "successCancelProxy": "Remove Delegation Success",
             "failCancelProxy": "Failed to remove delegations",
-            "info": "About Delegation?",
+            "info": "About Delegation",
             "new": "Initiate Delegation",
             "active": {
                 "title": "Delegation History",
