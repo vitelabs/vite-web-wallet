@@ -1082,7 +1082,7 @@
             "failProxy": "Delegación fallida",
             "successCancelProxy": "Delegación removida con éxito",
             "failCancelProxy": "Falló al remover delegación",
-            "info": "¿Qué es la Delegación de trade?",
+            "info": "About Delegation",
             "new": "Iniciar una delegación",
             "active": {
                 "title": "Historial de Delegación",
