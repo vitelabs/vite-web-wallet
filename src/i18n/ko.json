@@ -1082,7 +1082,7 @@
             "failProxy": "위임 실패",
             "successCancelProxy": "위임 성공 제거하기",
             "failCancelProxy": "위임 제거에 실패했습니다.",
-            "info": "거래 위임이란?",
+            "info": "About Delegation",
             "new": "위임 시작하기",
             "active": {
                 "title": "위임 내역",
