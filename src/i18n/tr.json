@@ -1082,7 +1082,7 @@
             "failProxy": "Delegasyon Başarısız",
             "successCancelProxy": "Delegasyonu Kaldırma Başarılı",
             "failCancelProxy": "Delegasyonlar kaldırılamadı",
-            "info": "Alım Satım Delegasyonu Nedir?",
+            "info": "About Delegation",
             "new": "Delegasyonu Başlat",
             "active": {
                 "title": "Delegasyon Geçmişi",
