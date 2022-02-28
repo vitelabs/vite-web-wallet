@@ -1082,7 +1082,7 @@
             "failProxy": "委托失败",
             "successCancelProxy": "撤销委托成功",
             "failCancelProxy": "撤销委托失败",
-            "info": "了解委托",
+            "info": "About Delegation",
             "new": "新建委托",
             "active": {
                 "title": "委托记录",
