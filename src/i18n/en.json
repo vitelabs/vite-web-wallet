@@ -77,9 +77,9 @@
     },
     "compliance": {
         "text": "By accessing ViteX, you agree to our",
-        "textTermsLink": "Terms of Service",
+        "textTermsLink":"Terms of Service",
         "textAnd": " and ",
-        "textPrivacyLink": "Privacy Policy",
+        "textPrivacyLink":"Privacy Policy",
         "title": "Important Notice"
     },
     "bnbConf": {
