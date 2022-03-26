@@ -1516,7 +1516,7 @@
             "submit": "確認",
             "tokenName": "トークン名",
             "address": "受取アドレス",
-            "notice": "注意：所有権が他の誰かに譲渡された場合、開かれていない取引ペアは新しい所有者に属します。 トレーディング/サスペンション取引ペアはまだあなたのものです"
+            "notice": "Note: After transferring the token ownership, you will no longer be able to open new trading pairs for this token. Any rights to old trading pairs you opened still belong to you."
         }
     },
     "tradeTxPairManage": {
