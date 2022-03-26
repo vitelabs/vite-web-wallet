@@ -1516,7 +1516,7 @@
             "submit": "Confirmar",
             "tokenName": "Nombre del Token",
             "address": "Dirección del destinatario",
-            "notice": "NOTA: Cuando la propiedad es transferida a otra persona, los pares de comercio que no estén abiertos pertenecerán al nuevo propietario. Los pares de comercio en estado abierto/suspendidos aún te pertenecen"
+            "notice": "Note: After transferring the token ownership, you will no longer be able to open new trading pairs for this token. Any rights to old trading pairs you opened still belong to you."
         }
     },
     "tradeTxPairManage": {
