@@ -142,6 +142,7 @@ export default {
                         this.labelName = res.labelName;
                         this.labelValue = res.label;
                         this.confirmationCount = res.confirmationCount;
+                        this.noticeMsg = res.noticeMsg;
 
                         // Custom for vite new erc20 tips
                         if (this.token.tokenSymbol === 'VITE') {
