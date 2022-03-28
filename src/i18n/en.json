@@ -1516,7 +1516,7 @@
             "submit": "Confirm",
             "tokenName": "Token Name",
             "address": "Recipient Address",
-            "notice": "NOTICE: When the ownership transferred to someone else, trading pairs that not be opened will belong to the new owner. Trading/suspension trading pairs still belong to you"
+            "notice": "Note: After transferring the token ownership, you will no longer be able to open new trading pairs for this token. Any rights to old trading pairs you opened still belong to you."
         }
     },
     "tradeTxPairManage": {
