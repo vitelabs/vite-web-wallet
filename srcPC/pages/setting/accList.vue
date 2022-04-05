@@ -4,35 +4,67 @@
         <div class="acc-list __pointer">
             <div ref="listWrapper" class="list-wrapper">
                 <div ref="list">
-                    <div class="acc-item"
-                         v-for="(addrObj, index) in addrList" :key="index"
-                         @click="setDefault(addrObj.addr, index)" >
-                        <span class="select" :class="{
-                            'active': defaultAddr === addrObj.address
-                        }"></span>
+                    <div
+                        class="acc-item"
+                        v-for="(addrObj, index) in addrList"
+                        :key="index"
+                        @click="setDefault(addrObj.addr, index)"
+                    >
+                        <span
+                            class="select"
+                            :class="{
+                                active: defaultAddr === addrObj.address
+                            }"
+                        ></span>
                         <div class="describe __ellipsis">
                             <div v-show="showNameInput !== index" class="bold">
-                                {{ addrObj.name || `${$t('addrName', { index:index + 1 })}`  }}
+                                {{
+                                    addrObj.name ||
+                                        `${$t('addrName', {
+                                            index: index + 1
+                                        })}`
+                                }}
                             </div>
                             <form class="name-input" autocomplete="off">
-                                <input ref="nameInput" type="text" autocomplete="off"
-                                       v-show="showNameInput === index"
-                                       v-model="editName"
-                                       :placeholder="index"
-                                       @blur="rename(addrObj.address, index)"/>
+                                <input
+                                    ref="nameInput"
+                                    type="text"
+                                    autocomplete="off"
+                                    v-show="showNameInput === index"
+                                    v-model="editName"
+                                    :placeholder="index"
+                                    @blur="rename(addrObj.address, index)"
+                                />
                             </form>
                             <div class="__ellipsis">{{ addrObj.address }}</div>
                         </div>
-                        <img @click.stop="startRename(addrObj.address, index)" class="icon __pointer" :class="{
-                            'not-allowed': !isLogin&&currHDAcc.isSeparateKey
-                        }" src="~assets/imgs/edit_default.svg"/>
-                        <img @click.stop="copy(addrObj.address)" class="icon __pointer" src="~assets/imgs/copy_default.svg"/>
+                        <img
+                            @click.stop="startRename(addrObj.address, index)"
+                            class="icon __pointer"
+                            :class="{
+                                'not-allowed':
+                                    !isLogin && currHDAcc.isSeparateKey
+                            }"
+                            src="~assets/imgs/edit_default.svg"
+                        />
+                        <img
+                            @click.stop="copy(addrObj.address)"
+                            class="icon __pointer"
+                            src="~assets/imgs/copy_default.svg"
+                        />
                     </div>
                 </div>
             </div>
 
-            <div v-show="isLogin && addrList.length < 10&&!currHDAcc.isSeparateKey" class="add" @click="addAddr">
-                <span class="acc-add"></span><span class="describe bold">{{ $t('setting.addAddr') }}</span>
+            <div
+                v-show="
+                    isLogin && addrList.length < 10 && !currHDAcc.isSeparateKey
+                "
+                class="add"
+                @click="addAddr"
+            >
+                <span class="acc-add"></span
+                ><span class="describe bold">{{ $t('setting.addAddr') }}</span>
             </div>
         </div>
     </div>
@@ -62,6 +94,9 @@ export default {
         },
         currHDAcc() {
             return this.$store.state.wallet.currHDAcc;
+        },
+        autoReceive() {
+            return this.$store.state.env.autoReceive;
         }
     },
     watch: {
@@ -93,7 +128,11 @@ export default {
             if (!this.isLogin) {
                 return;
             }
-            this.$store.commit('switchActiveAcc', { address, index });
+            this.$store.commit('switchActiveAcc', {
+                address,
+                index,
+                autoReceive: this.autoReceive
+            });
         },
 
         startRename(addr, index) {
@@ -150,12 +189,12 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "~assets/scss/vars.scss";
-@import "./setting.scss";
+@import '~assets/scss/vars.scss';
+@import './setting.scss';
 
 .acc-list {
     @include bg_color_1();
-    [data-theme="0"] & {
+    [data-theme='0'] & {
         border: 1px solid #d4dee7;
     }
     border-radius: 2px;

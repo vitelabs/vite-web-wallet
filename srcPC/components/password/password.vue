@@ -1,13 +1,29 @@
 <template>
-    <confirm class="small" :title="pwdTitle"
-             :content="content" :showMask="showMask" :isLoading="isLoading"
-             :leftBtnTxt="cancelTxt || $t('btn.cancel')" :rightBtnTxt="submitTxt || $t('btn.submit')"
-             :leftBtnClick="exchange ? _submit : _cancle"  :rightBtnClick="exchange ? _cancle : _submit">
+    <confirm
+        class="small"
+        :title="pwdTitle"
+        :content="content"
+        :showMask="showMask"
+        :isLoading="isLoading"
+        :leftBtnTxt="cancelTxt || $t('btn.cancel')"
+        :rightBtnTxt="submitTxt || $t('btn.submit')"
+        :leftBtnClick="exchange ? _submit : _cancle"
+        :rightBtnClick="exchange ? _cancle : _submit"
+    >
         <slot></slot>
 
-        <span v-show="isShowPWD" :class="{ 'distance': !!content }" class="unlock-user"></span>
+        <span
+            v-show="isShowPWD"
+            :class="{ distance: !!content }"
+            class="unlock-user"
+        ></span>
         <form autocomplete="off" v-show="isShowPWD" class="__input __input_row">
-            <input ref="passInput" v-model="password" :placeholder="$t('pwdConfirm.placeholder')" type="password"/>
+            <input
+                ref="passInput"
+                v-model="password"
+                :placeholder="$t('pwdConfirm.placeholder')"
+                type="password"
+            />
         </form>
 
         <hold-pwd-view v-show="isShowPWD && isShowHold"></hold-pwd-view>
@@ -76,7 +92,8 @@ export default {
 
         this.isHoldPWD = !!accInfo[constant.HoldPwdKey];
         this.isShowHold = showHoldNum < 3 && !this.isHoldPWD;
-        this.currHDAcc.saveOnAcc(constant.ShowHoldPWDNumKey, this.isShowHold ? showHoldNum + 1 : 4);
+        this.currHDAcc.saveOnAcc(constant.ShowHoldPWDNumKey,
+            this.isShowHold ? showHoldNum + 1 : 4);
     },
     destroyed() {
         this.$onKeyDown(13, lastE);
@@ -103,6 +120,9 @@ export default {
         },
         isLogin() {
             return this.$store.state.wallet.status === StatusMap.UNLOCK;
+        },
+        autoReceive() {
+            return this.$store.state.env.autoReceive;
         }
     },
     methods: {
@@ -151,31 +171,37 @@ export default {
             };
 
             if (this.isLogin) {
-                this.currHDAcc.verify(password).then(() => {
-                    deal(true);
-                }).catch(() => {
-                    deal(false);
-                });
+                this.currHDAcc
+                    .verify(password)
+                    .then(() => {
+                        deal(true);
+                    })
+                    .catch(() => {
+                        deal(false);
+                    });
                 return;
             }
 
             this.isLoading = true;
-            this.$store.dispatch('login', password).then(() => {
-                this.isLoading = false;
-                if (!this.password) {
-                    return;
-                }
-                this.currHDAcc.activate();
-                deal(true);
-            }).catch(err => {
-                console.warn(err);
-                this.isLoading = false;
-                if (!this.password) {
-                    return;
-                }
-                console.warn(err);
-                deal(false);
-            });
+            this.$store
+                .dispatch('login', password)
+                .then(() => {
+                    this.isLoading = false;
+                    if (!this.password) {
+                        return;
+                    }
+                    this.currHDAcc.activate(this.autoReceive);
+                    deal(true);
+                })
+                .catch(err => {
+                    console.warn(err);
+                    this.isLoading = false;
+                    if (!this.password) {
+                        return;
+                    }
+                    console.warn(err);
+                    deal(false);
+                });
         }
     }
 };
@@ -187,10 +213,10 @@ export default {
 input {
     width: 100%;
     @include bg_color_1();
-    [data-theme="0"] & {
-        color: rgba(94,104,117,0.3);
+    [data-theme='0'] & {
+        color: rgba(94, 104, 117, 0.3);
     }
-    [data-theme="1"] & {
+    [data-theme='1'] & {
         color: $gray-color-2;
     }
 }

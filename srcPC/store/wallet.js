@@ -36,16 +36,20 @@ const mutations = {
         state.currHDAcc.rename(name);
         state.name = state.currHDAcc.name;
     },
-    switchActiveAcc(state, { address, index }) {
+    switchActiveAcc(state, { address, index, autoReceive }) {
         if (!state.currHDAcc) {
             return;
         }
 
-        state.currHDAcc.switchActiveAcc(index, address);
+        state.currHDAcc.switchActiveAcc(index, address, autoReceive);
         state.activeAcc = getActiveAcc();
     },
     logout(state) {
-        if (!state.currHDAcc || !state.currHDAcc.status || state.currHDAcc.status === StatusMap.LOCK) {
+        if (
+            !state.currHDAcc
+            || !state.currHDAcc.status
+            || state.currHDAcc.status === StatusMap.LOCK
+        ) {
             return;
         }
 
@@ -55,18 +59,26 @@ const mutations = {
         state.addrList = state.currHDAcc ? state.currHDAcc.addrList || [] : [];
     },
     currHDAccAddAddr(state) {
-        if (!state.currHDAcc || !state.currHDAcc.status || state.currHDAcc.status === StatusMap.LOCK) {
+        if (
+            !state.currHDAcc
+            || !state.currHDAcc.status
+            || state.currHDAcc.status === StatusMap.LOCK
+        ) {
             return;
         }
         state.currHDAcc.addAddr();
-        state.addrList = state.currHDAcc ? [].concat(state.currHDAcc.addrList || []) : [];
+        state.addrList = state.currHDAcc
+            ? [].concat(state.currHDAcc.addrList || [])
+            : [];
     },
     changeAddrName(state, { address, index, name }) {
         if (!state.currHDAcc) {
             return;
         }
         state.currHDAcc.changeAddrName(name, index, address);
-        state.addrList = state.currHDAcc ? [].concat(state.currHDAcc.addrList || []) : [];
+        state.addrList = state.currHDAcc
+            ? [].concat(state.currHDAcc.addrList || [])
+            : [];
     }
 };
 

@@ -18,7 +18,10 @@ export const ShowHoldPWDNumKey = 'showHoldPWDNum';
 export const HideZeroAssets = 'hideZeroAssets';
 export const CustomNodes = 'customNodes';
 export const CurrentNode = 'currentNode';
+export const CustomPowUrls = 'CustomPowUrls';
+export const CurrentPowUrl = 'CurrentPowUrl';
 export const PowLimit = 'powLimit';
+export const AutoReceiveKey='AutoReceiveKey'
 
 
 export const SettingKeys = [ FirstKey, LangKey, AutoLogoutKey, CurrencyKey, HoldPwdKey, ShowHoldPWDNumKey, GateKey, ThemeKey ];
