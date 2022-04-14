@@ -1,9 +1,13 @@
 <template>
-    <div id="vite-wallet-app" class="app-wrapper" :class="{
-        'dex': $route.name.indexOf('trade') !== -1,
-        'wallet': $route.name.indexOf('trade') === -1
-    }">
-        <router-view/>
+    <div
+        id="vite-wallet-app"
+        class="app-wrapper"
+        :class="{
+            dex: $route.name.indexOf('trade') !== -1,
+            wallet: $route.name.indexOf('trade') === -1
+        }"
+    >
+        <router-view />
         <notice-list></notice-list>
     </div>
 </template>
@@ -22,6 +26,8 @@ export default {
     beforeMount() {
         this.$store.commit('setLang', this.$i18n.locale);
         this.$store.dispatch('getApiConfig');
+        this.$store.dispatch('startLoopQuota');
+
         this.$store.dispatch('startLoopBalance');
         this.$store.dispatch('subUnreceivedTx');
         this.$store.dispatch('startLoopExchangeBalance');
@@ -29,7 +35,8 @@ export default {
         this._initVC();
         try {
             if (Number(this.$route.query['ldfjacia']) > 0) {
-                emptySpace.setItem(inviteCodeKey, this.$route.query['ldfjacia']);
+                emptySpace.setItem(inviteCodeKey,
+                    this.$route.query['ldfjacia']);
             }
         } catch (err) {
             console.warn(err);
@@ -51,6 +58,9 @@ export default {
         },
         activeAcc() {
             return this.$store.state.wallet.activeAcc;
+        },
+        maxQuota() {
+            return this.$store.state.pledge.maxQuota;
         }
     },
     methods: {
@@ -66,7 +76,11 @@ export default {
             const { isBifrost, address } = this.activeAcc || {};
             if (!isBifrost || !address) return;
             const session = getValidSession();
-            if (session && Array.isArray(session.accounts) && session.accounts.indexOf(address) > -1) {
+            if (
+                session
+                && Array.isArray(session.accounts)
+                && session.accounts.indexOf(address) > -1
+            ) {
                 initVB({ lastAccount: address });
             }
         },
@@ -81,8 +95,32 @@ export default {
         }
     },
     watch: {
+        maxQuota: function (val, preVal) {
+            if (
+                !this.$store.state.pledge.maxQuotaLoading
+                && !!val !== !!preVal
+            ) {
+                const acc = this.$store.state.wallet.currHDAcc;
+                const hasPledge = !!val;
+                if (acc) {
+                    hasPledge
+                        ? acc.receiveTask.start({
+                            checkTime: 1000,
+                            transactionNumber: 5,
+                            gapTime: 1000
+                        })
+                        : acc.receiveTask.start({
+                            checkTime: 5000,
+                            transactionNumber: 5,
+                            gapTime: 5000
+                        });
+                }
+                // do sth
+            }
+        },
         currHDAcc: function () {
             this.$store.dispatch('startLoopBalance');
+            this.$store.dispatch('startLoopQuota');
             this.$store.dispatch('subUnreceivedTx');
             this.$store.dispatch('startLoopExchangeBalance');
             this.$store.dispatch('getInvitedCode');
@@ -100,7 +138,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "~assets/scss/vars.scss";
+@import '~assets/scss/vars.scss';
 
 .app-wrapper {
     position: absolute;

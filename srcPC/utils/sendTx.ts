@@ -104,7 +104,6 @@ async function webSendTx({ methodName, params, config, privateKey }) {
     await accountBlock.autoSetPreviousAccountBlock();
 
     const difficulty = await accountBlock.getDifficulty();
-    console.log(difficulty);
 
     if (!difficulty) {
         return accountBlock.sign().send();
@@ -320,7 +319,6 @@ async function runPow(difficulty, accountBlock) {
     const getNonceHashBuffer = Buffer.from(accountBlock.originalAddress + accountBlock.previousHash,
         'hex');
     const getNonceHash = utils.blake2bHex(getNonceHashBuffer, null, 32);
-    console.log(1111, getNonceHash);
     const nonce = await powProvider.request('util_getPoWNonce',
         difficulty,
         getNonceHash);
