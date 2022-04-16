@@ -243,6 +243,8 @@
         "title": "Account Settings",
         "config": "General",
         "currency": "Default Currency",
+        "powUrl":"pow",
+        "changePowUrl":"Change Pow",
         "secure": "Security",
         "gate": "Custom Gateway",
         "rpcUrl": "Node",

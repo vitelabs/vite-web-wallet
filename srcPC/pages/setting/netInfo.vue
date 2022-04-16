@@ -3,9 +3,7 @@
         <div class="row">
             <span class="title">{{ $t('setting.rpcUrl') }}</span>
             <code v-html="env.currentNode"></code>
-            <span class="small-btn" @click="openNodeChangeDialog">{{
-                $t('setting.changeRpcUrl')
-            }}</span>
+            <span class="small-btn" @click="openNodeChangeDialog">{{$t('setting.changeRpcUrl')}}</span>
             <span class="auto-receive-switch">
                 <span>Auto-Receive</span>
                 <a-switch
@@ -19,7 +17,7 @@
             <span class="title">{{ $t('setting.powUrl') }}</span>
             <code v-html="env.currentPowUrl"></code>
             <span class="small-btn" @click="openPowUrlChangeDialog">{{
-                $t('setting.changePorUrl')
+                $t('setting.changePowUrl')
             }}</span>
         </div>
         <div class="row">

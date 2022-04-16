@@ -96,20 +96,17 @@ export default {
     },
     watch: {
         maxQuota: function (val, preVal) {
-            if (
-                !this.$store.state.pledge.maxQuotaLoading
-                && !!val !== !!preVal
-            ) {
+            if (!this.$store.state.pledge.maxQuotaLoading) {
                 const acc = this.$store.state.wallet.currHDAcc;
-                const hasPledge = !!val;
+                const hasPledge = val !== '0' && !!val;
                 if (acc) {
                     hasPledge
-                        ? acc.receiveTask.start({
+                        ? acc.receiveTask?.start({
                             checkTime: 1000,
                             transactionNumber: 5,
                             gapTime: 1000
                         })
-                        : acc.receiveTask.start({
+                        : acc.receiveTask?.start({
                             checkTime: 5000,
                             transactionNumber: 5,
                             gapTime: 5000
