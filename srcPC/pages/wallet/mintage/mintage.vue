@@ -46,7 +46,7 @@
                 <vite-input v-model="totalSupply"></vite-input>
             </div>
 
-            <div class="row">
+            <!-- <div class="row">
                 <div class="__form_input_title">{{ $t('walletMintage.isReIssuable') }}</div>
                 <bool-radio v-model="isReIssuable"></bool-radio>
             </div>
@@ -63,7 +63,7 @@
                     <div class="__form_input_title">{{ $t('walletMintage.isOwnerBurnOnly') }}</div>
                     <bool-radio v-model="ownerBurnOnly"></bool-radio>
                 </div>
-            </div>
+            </div> -->
 
             <div v-show="canMintage" class="__form_btn __pointer" @click="toMintage">{{ $t('walletMintage.mint') }}</div>
             <div v-show="!canMintage" class="__form_btn __pointer unuse">{{ $t('walletMintage.mint') }}</div>
