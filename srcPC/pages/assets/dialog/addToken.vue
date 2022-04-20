@@ -6,7 +6,7 @@ block content
             span.search-icon
             input(v-model="userInput" class="search-input" :placeholder="$t('tokenCard.addToken.placeholder')")
         .search-tips
-            .search-tips__item(v-for="token in searchRes" :class="{active:selectedTokenIds.indexOf(token.tokenId)>=0}")
+            .search-tips__item(v-for="(token,index) in searchRes" :class="{active:selectedTokenIds.indexOf(token.tokenId)>=0}" @click="toggleToken(token.tokenId,index)")
                 input(type="checkbox" name="addTokenSelected" v-model="selectedTokenIds" :value="token.tokenId" )
                 img(:src="token.icon")
                 .info
@@ -34,6 +34,14 @@ export default {
         };
     },
     methods: {
+        toggleToken(tokenId, index) {
+            const isActive = this.selectedTokenIds.indexOf(tokenId)>=0;
+            if (isActive) {
+                this.selectedTokenIds = this.selectedTokenIds.filter(id => id !== tokenId);
+            } else {
+                this.selectedTokenIds.push(tokenId);
+            }
+        },
         inspector: throttle(function () {
             statistics.event('assets', 'addToken-add', this.activeAddr || '');
 
@@ -51,11 +59,23 @@ export default {
             if (this.userInput === '') {
                 return [];
             }
-            const shownTokens = [ ...this.$store.getters.defaultTokenList, ...this.$store.getters.officalGateTokenList, ...this.$store.getters.userStorageTokenList ];
-            const shownTokenIds = shownTokens.map(t => t.tokenId).concat(this.$store.getters.otherWhithBalance);
+            const shownTokens = [
+                ...this.$store.getters.defaultTokenList,
+                ...this.$store.getters.officalGateTokenList,
+                ...this.$store.getters.userStorageTokenList
+            ];
+            const shownTokenIds = shownTokens
+                .map(t => t.tokenId)
+                .concat(this.$store.getters.otherWhithBalance);
             const allTokens = this.$store.state.ledger.allTokens;
             const reg = new RegExp(this.userInput.trim(), 'i');
-            return allTokens.filter(t => shownTokenIds.indexOf(t.tokenId) === -1 && t.tokenName).filter(t => t.tokenName.match(reg) || t.tokenSymbol.match(reg) || t.tokenId === this.userInput.trim()).slice(0, MAX_RES_NUMS);
+            return allTokens
+                .filter(t => shownTokenIds.indexOf(t.tokenId) === -1 && t.tokenName)
+                .filter(t =>
+                    t.tokenName.match(reg)
+                        || t.tokenSymbol.match(reg)
+                        || t.tokenId === this.userInput.trim())
+                .slice(0, MAX_RES_NUMS);
         },
         BtnUnuse() {
             return this.selectedTokenIds.length === 0;
@@ -68,15 +88,15 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "~assets/scss/vars.scss";
+@import '~assets/scss/vars.scss';
 
 .content-wrapper {
     min-height: 120px;
 }
 
-.search-container{
+.search-container {
     position: relative;
-    .search-input{
+    .search-input {
         box-sizing: border-box;
         width: 100%;
         height: 45px;
@@ -87,7 +107,7 @@ export default {
         @include common_border();
         @include font_color_1();
     }
-    .search-icon{
+    .search-icon {
         width: 18px;
         height: 18px;
         position: absolute;
@@ -98,20 +118,21 @@ export default {
     }
 }
 
-.search-tips{
+.search-tips {
     flex: 1;
     height: 260px;
     overflow-y: scroll;
     border-radius: 0px 0px 2px 2px;
     @include common_border();
     border-top: none;
-    &__item{
+    &__item {
         display: flex;
         height: 52px;
         padding: 7px 15px;
         align-items: center;
         cursor: pointer;
-        &.active, &:hover{
+        &.active,
+        &:hover {
             @include hover_color();
         }
         input {
@@ -127,16 +148,16 @@ export default {
             display: flex;
             flex-direction: column;
             font-size: 12px;
-            .title{
+            .title {
                 display: flex;
-                .name{
+                .name {
                     @include font-family-bold();
                     @include common_font_color();
                     font-size: 14px;
                     line-height: 18px;
                 }
                 .tag {
-                    background: rgba(0,122,255,0.06);
+                    background: rgba(0, 122, 255, 0.06);
                     border-radius: 2px;
                     height: 18px;
                     color: $blue-color-1;
@@ -151,4 +172,3 @@ export default {
     }
 }
 </style>
-

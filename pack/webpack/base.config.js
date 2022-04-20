@@ -57,12 +57,24 @@ module.exports = {
                     // this applies to <template lang="pug"> in Vue components
                     {
                         resourceQuery: /^\?vue/,
-                        use: [{ loader: 'pug-plain-loader', options: { basedir: srcPath } }]
+                        use: [
+                            {
+                                loader: 'pug-plain-loader',
+                                options: { basedir: srcPath }
+                            }
+                        ]
                     },
                     // this applies to pug imports inside JavaScript
-                    { use: [ 'raw-loader', { loader: 'pug-plain-loader', options: { basedir: srcPath } } ] }
+                    {
+                        use: [
+                            'raw-loader',
+                            {
+                                loader: 'pug-plain-loader',
+                                options: { basedir: srcPath }
+                            }
+                        ]
+                    }
                 ]
-
             },
             {
                 test: /\.vue$/,
@@ -89,7 +101,8 @@ module.exports = {
                     loader: 'babel-loader',
                     options: { presets: ['@babel/preset-env'] }
                 }
-            }, {
+            },
+            {
                 test: /(\.scss$|\.css$|\.sass$)/,
                 use: [
                     { loader: 'style-loader' },
@@ -114,19 +127,35 @@ module.exports = {
                         options: {
                             resources: [
                                 path.resolve(srcPath, './assets/scss/var.scss'),
-                                path.resolve(srcPath, './assets/scss/mixins.scss'),
-                                path.resolve(srcPath, './assets/scss/theme.scss')
+                                path.resolve(srcPath,
+                                    './assets/scss/mixins.scss'),
+                                path.resolve(srcPath,
+                                    './assets/scss/theme.scss')
                             ]
                         }
                     }
                 ]
-            }, {
+            },
+            {
+                test: /\.less$/i,
+                loader: [
+                    // compiles Less to CSS
+                    'style-loader',
+                    'css-loader',
+                    {
+                        loader: 'less-loader',
+                        options: { lessOptions: { javascriptEnabled: true } }
+                    }
+                ]
+            },
+            {
                 test: /(\.ttf$|\.ttc$|\.otf$)/,
                 use: {
                     loader: 'url-loader',
                     options: { limit: 10000 }
                 }
-            } ]
+            }
+        ]
     },
     resolve: {
         alias: {
@@ -153,11 +182,11 @@ module.exports = {
         proxy: {
             '/trade': {
                 target: 'http://localhost:8081',
-                pathRewrite: { '^/trade\w*': '' }
+                pathRewrite: { '^/tradew*': '' }
             },
             '/mobiledex': {
                 target: 'http://localhost:8081/mobileDex.html',
-                pathRewrite: { '^/mobiledex\w*': '' }
+                pathRewrite: { '^/mobiledexw*': '' }
             }
         }
     }

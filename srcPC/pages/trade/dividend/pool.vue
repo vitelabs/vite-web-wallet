@@ -10,19 +10,48 @@
         </div>
 
         <template v-for="tokenType in typeList">
-            <div class="pool item" v-if="tokenType.name !== 'VITE'" :key="tokenType.name">
+            <div
+                class="pool item"
+                v-if="tokenType.name !== 'VITE'"
+                :key="tokenType.name"
+            >
                 <img class="icon" :src="tokenType.icon" />
-                <div class="token-wrapper __pointer" v-click-outside="hideTokenList" @click.stop="showTokenList(tokenType)">
+                <div
+                    class="token-wrapper __pointer"
+                    v-click-outside="hideTokenList"
+                    @click.stop="showTokenList(tokenType)"
+                >
                     <div>{{ tokenType.name }}</div>
                     <div class="bold">
-                        {{ pool[tokenType.name] ? formatNum(pool[tokenType.name].amount, tokenType.name) : '--' }}
+                        {{
+                            pool[tokenType.name]
+                                ? formatNum(
+                                    pool[tokenType.name].amount,
+                                    tokenType.name
+                                )
+                                : '--'
+                        }}
                         <span class="down-icon"></span>
                     </div>
 
-                    <div class="item-content" v-if="pool[tokenType.name] && isShowTokenList === tokenType.name">
-                        <div class="row" v-for="(token, i) in pool[tokenType.name].tokens" :key="i">
-                            <span class="light">{{ getSymbol(token.tokenInfo)  }}:</span>
-                            <span class="amount">{{ formatNum(token.amount, tokenType.name) }}</span>
+                    <div
+                        class="item-content"
+                        v-if="
+                            pool[tokenType.name] &&
+                                isShowTokenList === tokenType.name
+                        "
+                    >
+                        <div
+                            class="row"
+                            v-for="(token, i) in pool[tokenType.name].tokens"
+                            :key="i"
+                        >
+                            <span class="light"
+                            >{{ getSymbol(token.tokenInfo) }}:</span
+                            >
+                            <span class="amount">{{
+                                formatNum(token.amount, tokenType.name)
+                            }}</span>
                         </div>
                     </div>
                 </div>
@@ -53,7 +82,7 @@ export default {
         },
         allPrice() {
             const coin = this.$store.state.env.currency;
-            const pre = coin === 'cny' ? '¥' : '$';
+            const pre = this.$store.getters.currencySymbol;
 
             let allPrice = this.getPrice(this.rawData, coin);
             if (+allPrice < 0) {
@@ -114,42 +143,47 @@ export default {
             return getTokenSymbolString(tokenInfo.tokenSymbol, tokenInfo.index);
         },
         fetchPool() {
-            getCurrDividendPools().then(data => {
-                this.rawData = data;
-                if (!data) {
+            getCurrDividendPools()
+                .then(data => {
+                    this.rawData = data;
+                    if (!data) {
+                        this.pool = {};
+                        return;
+                    }
+
                     this.pool = {};
-                    return;
-                }
+                    const tokenIds = [];
+                    const tokenList = [ 'VITE', 'ETH', 'BTC', 'USDT' ];
 
-                this.pool = {};
-                const tokenIds = [];
-                const tokenList = [ 'VITE', 'ETH', 'BTC', 'USDT' ];
+                    for (const tokenId in data) {
+                        const token = data[tokenId];
+                        const tokenTypeName
+                            = tokenList[token.quoteTokenType - 1];
 
-                for (const tokenId in data) {
-                    const token = data[tokenId];
-                    const tokenTypeName = tokenList[token.quoteTokenType - 1];
+                        this.pool[tokenTypeName] = this.pool[tokenTypeName] || {
+                            amount: '0',
+                            decimals: 8,
+                            tokens: []
+                        };
 
-                    this.pool[tokenTypeName] = this.pool[tokenTypeName] || {
-                        amount: '0',
-                        decimals: 8,
-                        tokens: []
-                    };
+                        const allAmount = this.pool[tokenTypeName].amount;
 
-                    const allAmount = this.pool[tokenTypeName].amount;
+                        token.tokenType = tokenTypeName;
+                        token.amount = bigNumber.toBasic(token.amount,
+                            token.tokenInfo.decimals);
 
-                    token.tokenType = tokenTypeName;
-                    token.amount = bigNumber.toBasic(token.amount, token.tokenInfo.decimals);
+                        this.pool[tokenTypeName].tokens.push(token);
+                        this.pool[tokenTypeName].amount = bigNumber.plus(token.amount,
+                            allAmount);
 
-                    this.pool[tokenTypeName].tokens.push(token);
-                    this.pool[tokenTypeName].amount = bigNumber.plus(token.amount, allAmount);
+                        tokenIds.push(token.tokenInfo.tokenId);
+                    }
 
-                    tokenIds.push(token.tokenInfo.tokenId);
-                }
-
-                this.$store.dispatch('addRateTokens', tokenIds);
-            }).catch(err => {
-                console.warn(err);
-            });
+                    this.$store.dispatch('addRateTokens', tokenIds);
+                })
+                .catch(err => {
+                    console.warn(err);
+                });
         },
         formatNum(amount, tokenSymbol) {
             const map = {
@@ -165,14 +199,14 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "~assets/scss/vars.scss";
-@import "../components/stakingDetail.scss";
+@import '~assets/scss/vars.scss';
+@import '../components/stakingDetail.scss';
 
 @mixin font_color_price() {
-    [data-theme="0"] & {
-        color: rgba(94,104,117,0.58);
+    [data-theme='0'] & {
+        color: rgba(94, 104, 117, 0.58);
     }
-    [data-theme="1"] & {
+    [data-theme='1'] & {
         color: $gray-color-2;
     }
 }

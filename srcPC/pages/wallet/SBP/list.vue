@@ -29,18 +29,18 @@
             cell: 'operate'
         }]" :contentList="list">
             <template #name="{ data }">
-                <a :href="`https://vitescan.io/address/${data.stakeAddress}`" target="_blank">{{ data.name }}</a>
+                <a :href="getAccountUrl(data.stakeAddress)" target="_blank">{{ data.name }}</a>
             </template>
 
             <template #blockProducingAddress="{ data }">
-                <a :href="`https://vitescan.io/address/${data.blockProducingAddress}`" target="_blank">
+                <a :href="getAccountUrl(data.blockProducingAddress)" target="_blank">
                     {{data.blockProducingAddress | shortAddr}}
                 </a>
                 <span v-if="data.blockProducingAddress === address" class="beneficial-img"></span>
             </template>
 
             <template #rewardWithdrawAddress="{ data }">
-                <a :href="`https://vitescan.io/address/${data.rewardWithdrawAddress}`" target="_blank">
+                <a :href="getAccountUrl(data.rewardWithdrawAddress)" target="_blank">
                     {{data.rewardWithdrawAddress | shortAddr}}
                 </a>
                 <span v-if="data.rewardWithdrawAddress === address" class="beneficial-img"></span>
@@ -100,7 +100,7 @@
 <script>
 import { constant as viteConstant } from '@vite/vitejs';
 import date from 'utils/date.js';
-import { getExplorerLink } from 'utils/getLink';
+import { getAccountLink, getSBPLink } from 'utils/getLink';
 import BigNumber from 'utils/bigNumber';
 import sendTx from 'pcUtils/sendTx';
 import { constant } from 'pcUtils/store';
@@ -217,7 +217,10 @@ export default {
             return date(time, 'zh');
         },
         getUrl(name) {
-            return `${ getExplorerLink(this.$i18n.locale) }SBPDetail/${ name }`;
+            return `${ getSBPLink(this.$i18n.locale, name) }`;
+        },
+        getAccountUrl(address) {
+            return `${ getAccountLink(this.$i18n.locale, address) }`;
         },
 
         sendRegisterTx(item) {

@@ -920,7 +920,7 @@
             "inviteBenifit": "Thu nhập Khai thác giới thiệu",
             "inviteRule": "Quy tắc",
             "ruleItems": [
-                "Bạn có thể chi <span class='strong'> 1000 VITE </span> để tạo mã giới thiệu. Số VITE đó sẽ được đưa vào nhóm cổ tức và phân phối cho chủ sở hữu VX",
+                "Bạn có thể chi <span class='strong'> 100 VITE </span> để tạo mã giới thiệu. Số VITE đó sẽ được đưa vào nhóm cổ tức và phân phối cho chủ sở hữu VX",
                 "Người mời sẽ nhận được <span class='strong'> 5% </span> từ phí giao dịch khai thác người được mời và <span class='strong'> 2,5% </span> từ phí khai thác tạo thanh khoản của người được mời"
             ],
             "receiveRuleItems": [

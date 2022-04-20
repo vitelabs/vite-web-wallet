@@ -18,7 +18,7 @@ block content
                         checkbox(@input="onSelect(address, $event)" v-model="address.isChecked")
                     th {{address.index}}
                     th
-                        a(:href="'https://vitescan.io/address/' + address.address" target="_blank") {{address.address | shortAddr}}
+                        a(:href="getUrl(address.address)" target="_blank") {{address.address | shortAddr}}
                         span.code_small_btn(v-if="!address.blockCount && address.blockCount !== undefined ") {{ $t('assets.ledger.addressSelect.unUsedAccount') }}
 
                     th {{address.balance | toBasic(18)}}
@@ -61,6 +61,7 @@ import { viteClient } from 'services/apiServer';
 import { VITE_TOKENID } from 'utils/constant';
 import loading from 'components/loading.vue';
 import Lottie from 'pcComponents/animation/lottie.vue';
+import { getAccountLink } from "utils/getLink";
 
 export default {
     components: { Checkbox, loading, Lottie },
@@ -126,6 +127,9 @@ export default {
                 }
             }
         },
+        getUrl(address) {
+            return `${ getAccountLink(this.$i18n.locale, address) }`;
+        },
         onSelect(address, isChecked) {
             this.selected = address;
             this.addressList = this.addressList.map(item => {
@@ -151,7 +155,7 @@ export default {
                 .then(() => this.getAddressList())
                 .then(() => {
                     this.isConnected = true;
-                    console.log('Ledger conneected !!!!!!!!!!!!!!!!');
+                    console.log('Ledger connected !!!!!!!!!!!!!!!!');
                 })
                 .catch(err => {
                     console.log(err);

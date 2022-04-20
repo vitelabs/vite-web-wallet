@@ -99,7 +99,7 @@ block originContent
 import { tokenDetail } from 'services/trade';
 import { gateStorage, getChargeAddr } from 'pcServices/gate';
 import { getTokenIcon } from 'utils/tokenParser';
-import { getExplorerLink } from 'utils/getLink';
+import { getExplorerLink, getTokenLink } from 'utils/getLink';
 import openUrl from 'utils/openUrl';
 import BigNumber from 'utils/bigNumber';
 import Tb from './tb';
@@ -177,7 +177,7 @@ export default {
             if (this.multiNetwork && this.multiNetwork.length) {
                 return this.multiNetwork[this.selectedNetwork];
             }
-            return this.token.gateInfo && this.token.gateInfo.mappedToken || {};
+            return this.token.gateInfo.mappedToken || this.token.gateInfo || {};
         },
         gateIntroduction() {
             if (!this.gateInfo.overview) {
@@ -223,7 +223,7 @@ export default {
     },
     methods: {
         goToTokenDetail() {
-            const l = `${ getExplorerLink(this.$i18n.locale) }token/${ this.token.tokenId }`;
+            const l = `${ getTokenLink(this.$i18n.locale, this.token.tokenId) }`;
             openUrl(l);
         },
         isEmail(url) {

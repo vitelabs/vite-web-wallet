@@ -43,7 +43,7 @@ export function genCode() {
         },
         vbExtends: {
             type: 'dexNewInviter',
-            cost: '1000 VITE'
+            cost: '100 VITE'
         },
         methodName: 'dexCreateNewInviter'
     });

@@ -25,7 +25,7 @@
 </template>
 
 <script>
-import { getExplorerLink } from 'utils/getLink';
+import { getAccountLink } from 'utils/getLink';
 import unlock from './unlock';
 import importKeystore from './import';
 import sendTx from './sendTx';
@@ -48,7 +48,7 @@ export default {
     },
     methods: {
         goNet() {
-            openUrl(`${ getExplorerLink(this.$i18n.locale) }account/${ this.address }`);
+            openUrl(`${ getAccountLink(this.$i18n.locale, this.address) }`);
         },
         getKeystore(obj) {
             this.address = obj.addr;

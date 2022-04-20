@@ -18,9 +18,9 @@
     "blockHeight": "Snapshot Block Height",
     "accountName": "Account Name",
     "action": "Action",
-    "stakingAmount": "Staking Amount",
-    "submitStaking": "Submit Staking",
-    "withdrawHeight": "Expected Snapshot Height",
+    "stakingAmount": "Lock Amount",
+    "submitStaking": "Submit To Lock",
+    "withdrawHeight": "Lock Expiration Snapshot Height",
     "balance": "Balance",
     "dexBalance": "ViteX Balance",
     "addrName": "Address{index}",
@@ -34,7 +34,7 @@
             "Manage your assets (both Web Wallet and ViteX exchange) here",
             "Check out Open Orders and Order History, know trading details",
             "Participate in mining, acquire VX and trading fee dividends (Mining Dividends)",
-            "Experience more features: Staking for Quota, becoming a SBP (Snapshot Block Producer) runner, Voting for SBPs, ERC20 conversion, Transaction Details, etc."
+            "Experience more features: Locking for Quota, becoming a SBP (Snapshot Block Producer) runner, Voting for SBPs, ERC20 conversion, Transaction Details, etc."
         ],
         "assets": [
             "Deposit to Exchange",
@@ -60,10 +60,10 @@
     },
     "pow": {
         "ing": "Running PoW to acquire quota",
-        "no": "You can stake VITE for quota in case you would not like to run PoW",
+        "no": "You can lock VITE for quota in case you would not like to run PoW",
         "insuffQuota": "Get Quota",
         "insuffQuotaMsg": "We notice you have no VITE locked for Quota. Please lock VITE or if you prefer, you can run POW to get Quota.",
-        "insuffQuotaMsg2": "VITE Only {powMaxTimes} transactions can be made per day per address without staking VITE. Your address has exhausted all {powMaxTimes} transactions. Please go to the quota page and stake your VITE to perform more transactions.",
+        "insuffQuotaMsg2": "VITE Only {powMaxTimes} transactions can be made per day per address without locking VITE. Your address has exhausted all {powMaxTimes} transactions. Please go to the quota page and lock VITE to perform more transactions.",
         "getQuota": "Lock VITE",
         "skip": "Run POW",
         "cancel": "Cancel"
@@ -76,7 +76,10 @@
         "symbol": "Send"
     },
     "compliance": {
-        "text": "ViteX does not serve customers in the following countries/regions/territories: Mainland China, Hong Kong, Cuba, Iran, North Korea, Crimea, Sudan, Malaysia, Syria, USA [including all USA territories like Puerto Rico, American Samoa, Guam, Northern Mariana Island, and the US Virgin Islands (St. Croix, St. John and St. Thomas)], Bangladesh, Bolivia, Ecuador, and Kyrgyzstan. For more information, please read our Terms of Service and Privacy Policy",
+        "text": "By accessing ViteX, you agree to our",
+        "textTermsLink":"Terms of Service",
+        "textAnd": " and ",
+        "textPrivacyLink":"Privacy Policy",
         "title": "Important Notice"
     },
     "bnbConf": {
@@ -125,8 +128,8 @@
         "CancelSBPVoting_V1": "Revoke Voting",
         "StakeForQuota": "Get Quota",
         "StakeForQuota_V1": "Get Quota",
-        "CancelQuotaStake": "Withdrawal of Stake",
-        "CancelQuotaStake_V1": "Withdrawal of Stake",
+        "CancelQuotaStake": "Unlock",
+        "CancelQuotaStake_V1": "Unlock",
         "IssueToken": "Token Issuance",
         "IssueToken_V1": "Token Issuance",
         "ReIssueToken": "Additional Token Issuance",
@@ -222,8 +225,8 @@
     },
     "quotaConfirm": {
         "title": "Insufficient Quota",
-        "cancelContent": "You cannot {operate} due to insufficient TPS quota. You need to stake VITE for quota to {operate}",
-        "goQuota": "Stake VITE",
+        "cancelContent": "You cannot {operate} due to insufficient TPS quota. You need to lock VITE for quota to {operate}",
+        "goQuota": "Lock VITE",
         "noOperate": "Not {operate} yet"
     },
     "mnemonic": {
@@ -526,7 +529,7 @@
         },
         "trans": {
             "powErr": "Error occurs when running PoW, please try again",
-            "powTransErr": "Insufficient quota of PoW, we'd recommend that you stake VITE to obtain quota."
+            "powTransErr": "Insufficient quota by PoW, we'd recommend you lock VITE to obtain enough quota."
         }
     },
     "walletMintage": {
@@ -594,49 +597,49 @@
         },
         "myQuota": "My Quota",
         "maxTxNum": "Maximum Number of Txs",
-        "beneficialAddr": "Quota Recipient Address",
+        "beneficialAddr": "Quota Beneficiary",
         "fromAddr": "Deduction Address",
-        "time": "Staking Freeze Duration",
+        "time": "Lock Period",
         "aboutDays": "Approx {day} days",
-        "amountPlaceholder": "Please enter staking amount, minimum {num} VITE",
-        "limitAmt": "Staking amount should not be less than {num}.",
-        "addrPlaceholder": "Please input quota recipient address",
+        "amountPlaceholder": "Please enter lock amount, minimum {num} VITE",
+        "limitAmt": "Lock amount should not be less than {num}.",
+        "addrPlaceholder": "Please input quota beneficiary address",
         "inputWithdrawAmount": "Please input withdraw amount",
         "pledgeFail": "Failed to Submit",
         "canclePledgeFail": "Failed",
-        "maturity": "Staking has expired!",
+        "maturity": "Lock has expired!",
         "minAmt": "Withdraw amount cannot be less than {num} VITE",
-        "gotoStake": "Please Staking enough VITE first",
+        "gotoStake": "Please lock enough VITE first",
         "maxAmt": "Withdraw amount should be in [{minAmount}, {maxAmount}]",
-        "cancelLimitAmt": "Staking amount cannot be less than {num}",
-        "withdrawalStaking": "Withdraw Staked Token",
+        "cancelLimitAmt": "Lock amount cannot be less than {num}",
+        "withdrawalStaking": "Unlock Tokens",
         "myAddr": "Me",
         "confirm": {
             "help": {
                 "t1": "What is Quota?",
-                "txt1": "In the Vite system, users do not purchase the gas required for a transaction by paying a fee, but acquire the computing resource through a quota-based model. Required quota for sending a transaction = the basic quota (request) + quota (the attached text data), quota required to accept a transaction = the basic quota (response). This quota-based resource configuration protocol allows users to obtain higher resource quotas in two ways: Staking VITE to obtain quota and running PoW.",
-                "t2": "What is Staking?",
-                "txt2": "In the Vite system, the user can stake VITE to obtain a certain amount of quota. The minimum value for staking is 134 VITE, and there is no maximum limit; meanwhile, Vite system also supports that the A-address stakes a part of the VITE and allocates the obtained quota to the B address. When users apply to stake, VITE will be sent to the smart contract address instead of another user, and only the user who applies for staking has access to manage the staking amount.",
+                "txt1": "In the Vite system, users do not purchase the gas required for a transaction by paying a fee, but acquire the computing resource through a quota-based model. Required quota for sending a transaction = the basic quota (request) + quota (the attached text data), quota required to accept a transaction = the basic quota (response). This quota-based resource configuration protocol allows users to obtain higher resource quotas in two ways: Locking VITE to obtain quota and running PoW.",
+                "t2": "Locking for quota",
+                "txt2": "In the Vite system, the user can lock VITE to obtain a certain amount of quota. The minimum locking amount is 134 VITE, and there is no maximum; meanwhile, Vite system also supports locking for others. In this case, user A can lock a number of VITE coins and assign another user B as the quota beneficiary. The VITE coins will be sent to the built-in smart contract other than the another user, and only the user who submitted the lock is able to withdraw.",
                 "t3": "What is PoW?",
                 "txt3": "Proof of Work (PoW), is a protocol to confirm that you have done a certain amount of work, and is also an economic measure to deter DDoS attacks and other service abuse. It requires the initiator to conduct a certain amount of computing, which means that it may take some time for the computer. In the Vite system, users can obtain a free quota by running the PoW, and also can send a transaction without any annotated information through obtained quota."
             },
             "cancel": {
-                "describe": "Your current staked amount is {amount} VITE, please confirm to withdraw.",
+                "describe": "Your current lock amount is {amount} VITE, please confirm to withdraw.",
                 "rightBtn": "Ready to Go",
                 "leftBtn": "Cancel Withdraw"
             },
             "submit": {
-                "describe": "Make sure to stake {amount} VITE to obtain quota, you cannot withdraw until about 3 days after staking comes into effect.",
+                "describe": "Make sure to lock {amount} VITE to obtain quota, you cannot withdraw until the lock expires (in about 3 days).",
                 "rightBtn": "Confirm",
                 "leftBtn": "Cancel"
             }
         },
         "list": {
-            "title": "My Staking List",
-            "total": "Staking {amount} VITE in total",
+            "title": "My Locking List",
+            "total": "Locking {amount} VITE in total",
             "amount": "Amount",
-            "withdrawTime": "Expected Due Date",
-            "unexpired": "Temporarily cannot make withdrawal of staked token until due date",
+            "withdrawTime": "Lock Expiration Date",
+            "unexpired": "Cannot withdraw until the lock expires",
             "vip": "This staking action is for default opening VIP on ViteX exchange, please go to ViteX exchange page to cancel VIP",
             "mining": "This staking is your staking as mining amount on ViteX, please go to ViteX mining page to unstake",
             "other": "This staking is staked via other ways and unstake is not supported here"
@@ -920,7 +923,7 @@
             "inviteBenifit": "Referral Mining Income",
             "inviteRule": "Rules",
             "ruleItems": [
-                "The <span class='strong'>1,000 VITE</span> payment to generate an invitation code will be burned",
+                "The <span class='strong'>100 VITE</span> payment to generate an invitation code will be burned",
                 "Referee will be rewarded with <span class='strong'>5%</span> of all invited users' trading as mining proceeds and <span class='strong'>2.5%</span> of all market-making as mining proceeds"
             ],
             "receiveRuleItems": [
@@ -961,11 +964,11 @@
         "buyMiningPrice": "Qualifies for mining when buy price is greater than {price}",
         "sellMiningPrice": "Qualifies for mining when sell price is less than {price}",
         "operator": {
-            "noName": "Anonymous Operator",
+            "noName": "Unknown Operator",
             "overview": "Introduction",
             "txPair": "Trading Pairs",
-            "confirmTitle": "Risk Reminder",
-            "confirmText": "The current trading pair is {symbol}. Please be careful when trading. Investing in digital assets comes with high risks. Before investing, please have a full understanding of all the risks of investing in digital assets and judge the authenticity, legality and validity of digital assets on your own. Please be prudent of your own investment decisions and undertake responsibility for the loss of your assets.",
+            "confirmTitle": "Unknown Operator",
+            "confirmText": "Note that the selected trading pair {symbol} is being managed by an Unknown Operator.\nTrade at your own risk.",
             "address": "Operator Address",
             "name": "Operator Name"
         },
@@ -1080,7 +1083,7 @@
             "failProxy": "Delegation Failed",
             "successCancelProxy": "Remove Delegation Success",
             "failCancelProxy": "Failed to remove delegations",
-            "info": "What is Trade Delegation?",
+            "info": "About Delegation",
             "new": "Initiate Delegation",
             "active": {
                 "title": "Delegation History",
@@ -1134,8 +1137,8 @@
             "deleteAlert": "The current API will no longer be accessible if confirm to proceed. Existing package will be retained and re-activated upon creation of a new API Key.",
             "confirmDelete": "Confirm and Delete",
             "cancel": "Cancel",
-            "agentAddressStakingAmount": "Delegation Staked Quota",
-            "staking": "Stake",
+            "agentAddressStakingAmount": "Delegation Quota",
+            "staking": "Lock",
             "package": "Package",
             "expireTime": "Expiration Date",
             "callNum": "Triggers/min",
@@ -1150,7 +1153,7 @@
                 "0": "ViteX is releasing official API to provide access to markets and real-time trading services. Follow the instructions below to properly acquire an API private key.",
                 "0-step1": "1. Create API",
                 "0-step2": "2. Authorize delegation of selected trading pairs",
-                "0-step3": "3. Stake quota for API delegation address",
+                "0-step3": "3. Lock for quota for API delegation address",
                 "0-step4": "View <a href=\"https://vite.wiki/dex/api/dex-apis.html\" target=\"_blank\">API Documentation</a> for further support",
                 "1": "One set of API Key and Secret is allowed for the same address at any given time.",
                 "2": "To avoid asset loss, Do Not disclose your Access Key and Secret",
@@ -1159,7 +1162,7 @@
             "stakingForQuota": {
                 "title": "Delegation Quota",
                 "agentAddress": "Delegation Address",
-                "stakingAmount": "Stake Amount",
+                "stakingAmount": "Lock Amount",
                 "ok": "Confirm"
             },
             "keyConfirm": {
@@ -1514,7 +1517,7 @@
             "submit": "Confirm",
             "tokenName": "Token Name",
             "address": "Recipient Address",
-            "notice": "NOTICE: When the ownership transferred to someone else, trading pairs that not be opened will belong to the new owner. Trading/suspension trading pairs still belong to you"
+            "notice": "Note: After transferring the token ownership, you will no longer be able to open new trading pairs for this token. Any rights to old trading pairs you opened still belong to you."
         }
     },
     "tradeTxPairManage": {
@@ -1642,7 +1645,7 @@
         "unlock": "unlock",
         "unreceivedTx": {
             "title": "You have received {num} transactions.",
-            "body": "Amount：{amount} {symbol} \nFrom Address: {address}"
+            "body": "Amount: {amount} {symbol} \nFrom Address: {address}"
         }
     }
 }

@@ -920,7 +920,7 @@
             "inviteBenifit": "Referans Madencilik Geliri",
             "inviteRule": "Kurallar",
             "ruleItems": [
-                "Bir davetiye kodu oluşturmak için <span class='strong'>1.000 VITE</span> ödemesi yakılacak",
+                "Bir davetiye kodu oluşturmak için <span class='strong'>100 VITE</span> ödemesi yakılacak",
                 "Referans eden kullanıcı, davet ettiği tüm kullanıcıların madencilik için alım satım işlemlerinden <span class='strong'>%5</span> ve tüm madencilik için market yapıcılık işlemlerinden <span class='strong'>%2,5</span> ödül kazanır"
             ],
             "receiveRuleItems": [

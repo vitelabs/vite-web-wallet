@@ -920,7 +920,7 @@
             "inviteBenifit": "リファラルマイニング収入",
             "inviteRule": "ルール",
             "ruleItems": [
-                "あなたは<span class = 'strong'> 1000 VITE </ span>を使って紹介コードを作成できます。このファンドは配当プールに入れられ、VX保有者に分配されます",
+                "あなたは<span class = 'strong'> 100 VITE </ span>を使って紹介コードを作成できます。このファンドは配当プールに入れられ、VX保有者に分配されます",
                 "紹介コードを使用するユーザーによって生成された取引手数料の<span class = 'strong'> 5％</ span>は、VXをマイニングできる取引手数料として扱われます。"
             ],
             "receiveRuleItems": [
