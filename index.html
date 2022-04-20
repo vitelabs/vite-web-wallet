@@ -12,7 +12,8 @@
         <link rel="shortcut icon" type="image/x-icon" href="favicon.ico"/>
         <link rel="apple-touch-startup-image" href="logo.png">
         <title><%= htmlWebpackPlugin.options.title %></title>
-
+        <!-- google recaptcha -->
+        <script src="https://www.google.com/recaptcha/enterprise.js?render=<%= htmlWebpackPlugin.options.recaptchaToken %>"></script>
         <!-- Global site tag (gtag.js) - Google Analytics -->
         <script async src="https://www.googletagmanager.com/gtag/js?id=UA-132666177-1"></script>
         <script>

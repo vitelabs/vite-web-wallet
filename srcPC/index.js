@@ -38,10 +38,12 @@ import {
     faGooglePlay
 } from '@fortawesome/free-brands-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
+import Switch from 'ant-design-vue/lib/switch';
+import 'ant-design-vue/lib/switch/style'; // 或者 ant-design-vue/lib/button/style/css 加载 css 文件
 
 // Some init code for desktop app
 import * as desktop from './utils/desktop';
-
+Vue.use(Switch);
 
 library.add(faExclamationCircle,
     faInfoCircle,

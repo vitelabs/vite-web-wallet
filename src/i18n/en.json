@@ -18,7 +18,7 @@
     "blockHeight": "Snapshot Block Height",
     "accountName": "Account Name",
     "action": "Action",
-    "stakingAmount": "Lock Amount",
+    "stakingAmount": "Locked Amount",
     "submitStaking": "Submit To Lock",
     "withdrawHeight": "Lock Expiration Snapshot Height",
     "balance": "Balance",
@@ -62,10 +62,10 @@
         "ing": "Running PoW to acquire quota",
         "no": "You can lock VITE for quota in case you would not like to run PoW",
         "insuffQuota": "Get Quota",
-        "insuffQuotaMsg": "We notice you have no VITE locked for Quota. Please lock VITE or if you prefer, you can run POW to get Quota.",
-        "insuffQuotaMsg2": "VITE Only {powMaxTimes} transactions can be made per day per address without locking VITE. Your address has exhausted all {powMaxTimes} transactions. Please go to the quota page and lock VITE to perform more transactions.",
+        "insuffQuotaMsg": "We notice you have no vite locked for Quota. Please lock VITE or you could get quota for free this time. You have ${powTimesLeft} free chances left today.",
+        "insuffQuotaMsg2": "We notice you have no vite locked for Quota. You have used up your free quota for today. Please lock VITE. ",
         "getQuota": "Lock VITE",
-        "skip": "Run POW",
+        "skip": "Get one free",
         "cancel": "Cancel"
     },
     "addAccount": "Create an Account",
@@ -243,6 +243,8 @@
         "title": "Account Settings",
         "config": "General",
         "currency": "Default Currency",
+        "powUrl":"pow",
+        "changePowUrl":"Change Pow",
         "secure": "Security",
         "gate": "Custom Gateway",
         "rpcUrl": "Node",
@@ -503,7 +505,7 @@
     "wallet": {
         "title": "Quota Management",
         "help": {
-            "title": "Quick Understanding of Quota"
+            "title": "What is Quota?"
         },
         "transfer": "Send Funds",
         "getTestToken": "Get Test Tokens",
@@ -592,7 +594,7 @@
     "walletQuota": {
         "title": "Quota Management",
         "help": {
-            "title": "Quick Understanding of Quota"
+            "title": "What is Quota?"
         },
         "myQuota": "My Quota",
         "maxTxNum": "Maximum Number of Txs",
@@ -606,12 +608,12 @@
         "inputWithdrawAmount": "Please input withdraw amount",
         "pledgeFail": "Failed to Submit",
         "canclePledgeFail": "Failed",
-        "maturity": "Lock has expired!",
+        "maturity": "Locking has expired!",
         "minAmt": "Withdraw amount cannot be less than {num} VITE",
         "gotoStake": "Please lock enough VITE first",
         "maxAmt": "Withdraw amount should be in [{minAmount}, {maxAmount}]",
         "cancelLimitAmt": "Lock amount cannot be less than {num}",
-        "withdrawalStaking": "Unlock Tokens",
+        "withdrawalStaking": "Withdraw Locked Token",
         "myAddr": "Me",
         "confirm": {
             "help": {
@@ -623,7 +625,7 @@
                 "txt3": "Proof of Work (PoW), is a protocol to confirm that you have done a certain amount of work, and is also an economic measure to deter DDoS attacks and other service abuse. It requires the initiator to conduct a certain amount of computing, which means that it may take some time for the computer. In the Vite system, users can obtain a free quota by running the PoW, and also can send a transaction without any annotated information through obtained quota."
             },
             "cancel": {
-                "describe": "Your current lock amount is {amount} VITE, please confirm to withdraw.",
+                "describe": "Your current locked amount is {amount} VITE, please confirm to withdraw.",
                 "rightBtn": "Ready to Go",
                 "leftBtn": "Cancel Withdraw"
             },
@@ -634,7 +636,7 @@
             }
         },
         "list": {
-            "title": "My Locking List",
+            "title": "Locking Record",
             "total": "Locking {amount} VITE in total",
             "amount": "Amount",
             "withdrawTime": "Lock Expiration Date",

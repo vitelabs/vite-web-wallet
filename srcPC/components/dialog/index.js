@@ -7,6 +7,7 @@ import getDialog from './utils.js';
 import inviteComp from './invite.vue';
 import receiveInviteComp from './receiveInvite.vue';
 import changeRpcUrlComp from './changeRpcUrl.vue';
+import changePowUrlComp from './changePowUrl.vue';
 import powLimitComp from './powLimit.vue';
 
 export const inviteDialog = getDialog(inviteComp);
@@ -17,4 +18,5 @@ export const vbConnectDialog = getDialog(vbConnectComp);
 export const hwAddressSelectDialog = getDialog(hwAddressSelectComp, { width: 'wide' });
 export const hwVerifyAddressDialog = getDialog(hwVerifyAddressComp);
 export const changeRpcUrlDialog = getDialog(changeRpcUrlComp);
+export const changePowUrlDialog = getDialog(changePowUrlComp);
 export const powLimitDialog = getDialog(powLimitComp);
