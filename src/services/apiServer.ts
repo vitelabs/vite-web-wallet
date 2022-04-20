@@ -67,6 +67,7 @@ export const setProvider = url => new Promise((resolve, reject) => {
 
 const FullNodeContractAddressOld = 'vite_b3b6335ef23ef3826cff125b81efd158dac3c2209748e0601a';
 const FullNodeContractAddress = 'vite_8cf2663cc949442db2d3f78f372621733292d1fb0b846f1651';
+const ViteNSContractAddress = 'vite_1077691249858a325a4387fa77a203e494d08167fa6234bc01';
 
 export const customContracts = {
     FullNodeStake: {
@@ -76,6 +77,10 @@ export const customContracts = {
     FullNodeCancelStake: {
         contractAddress: FullNodeContractAddressOld,
         abi: { 'inputs': [{ 'name': 'id', 'type': 'bytes32' }], 'name': 'cancelStake', 'payable': false, 'type': 'function' }
+    },
+    ViteNS: {
+        contractAddress: ViteNSContractAddress,
+        abi: { "constant": true, "inputs": [{ "name": "_vnsAddress", "type": "string" }], "name": "resolveAddress", "outputs": [{ "name":"", "type":"address" }], "payable": false, "stateMutability": "view", "type": "offchain" }
     }
 };
 viteClient.addTransactionType(customContracts);

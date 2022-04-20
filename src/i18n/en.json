@@ -191,6 +191,7 @@
         "addrFormat": "Incorrect address format",
         "amtFormat": "Incorrect amount format",
         "transSucc": "Transaction successful!",
+        "transNameErr": "Name doesn't exists!",
         "insufficientBalance": "Insufficient balance",
         "validMaxDigit": "At most {digit} decimals",
         "nodeErr": "The full node is abnormal, please try again later.",

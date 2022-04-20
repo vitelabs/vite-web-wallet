@@ -66,6 +66,7 @@
 <script>
 import Vue from 'vue';
 import { utils, wallet, accountBlock as accountBlockUtils } from '@vite/vitejs';
+import { resolveViteNSName } from 'services/viteServer';
 
 import { initPwd } from 'pcComponents/password/index.js';
 import confirm from 'pcComponents/confirm/confirm.vue';
@@ -153,6 +154,10 @@ export default {
         validAddr() {
             this.isValidAddress
                 = this.inAddress && wallet.isValidAddress(this.inAddress);
+
+            if (!this.isValidAddress) {
+                this.isValidAddress = this.inAddress.endsWith('.vite') && this.inAddress.replace('.vite', '').length > 0
+            }
         },
 
         testAmount() {
@@ -196,7 +201,7 @@ export default {
             !isHold && (this.isShowTrans = false);
         },
 
-        transfer: execWithValid(function () {
+        transfer: execWithValid(async function () {
             if (!this.netStatus) {
                 this.$toast(this.$t('hint.noNet'));
                 return;
@@ -230,6 +235,15 @@ export default {
 
                 this.$toast(msg, err);
             };
+
+            if (this.inAddress.endsWith('.vite')) {
+                const addressEncoded = await resolveViteNSName(this.inAddress.replace('.vite', ''));
+                this.inAddress = abi.decodeParameters("address", Buffer.from(addressEncoded, 'base64').toString('hex'))
+
+                if (this.inAddress === "vite_0000000000000000000000000000000000000000a4f3a0cb58") {
+                    return this.$toast(this.$t('hint.transNameErr'));
+                }
+            }
 
             sendTx({
                 methodName: 'send',

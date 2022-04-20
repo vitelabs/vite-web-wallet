@@ -191,6 +191,7 @@
         "addrFormat": "Maling format ng address",
         "amtFormat": "Maling format ng halaga",
         "transSucc": "Matagumpay ang transaksyon!",
+        "transNameErr": "Ang pangalan ay hindi umiiral!",
         "insufficientBalance": "Hindi sapat na balanse",
         "validMaxDigit": "Hindi hihigit sa {digit} mga decimal",
         "nodeErr": "Abnormal ang buong node, mangyaring subukang muli sa ibang pagkakataon.",

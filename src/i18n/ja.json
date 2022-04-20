@@ -191,6 +191,7 @@
         "addrFormat": "アドレス形式が間違っています",
         "amtFormat": "数値形式が間違っています",
         "transSucc": "トランザクション成功",
+        "transNameErr": "名前が存在しません",
         "insufficientBalance": "残高不足",
         "validMaxDigit": "最大{digit}小数値です",
         "nodeErr": "フルノードが異常です。再度お試しください。",
