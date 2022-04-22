@@ -1745,10 +1745,10 @@
   resolved "https://registry.yarnpkg.com/@vite/vitejs-ws/-/vitejs-ws-2.3.12.tgz#ab5e1c00f94542a79800b70589dbbb675ce5648b"
   integrity sha512-K5w6SP6L4quNXrOJw30wxrQkREHtP2/Q/3r6kGjrro8yb1HgxJD9jbNL373h/AAXTqI75QUEPUygyRa1KOMknQ==
 
-"@vite/vitejs@2.3.19-alpha.1":
-  version "2.3.19-alpha.1"
-  resolved "https://registry.npmmirror.com/@vite/vitejs/-/vitejs-2.3.19-alpha.1.tgz#48d5dccdb719bbd0be02ead47685d98042e3ecd3"
-  integrity sha512-tKluoHbZSnMTCIYdl6SjIWBx0qSJYYlZvh/U+e7IOQEoZiZy2gnaQi3UvxvxIOdZAVvtP3iEWTGaPTbmqcZeKQ==
+"@vite/vitejs@2.3.19-alpha.2":
+  version "2.3.19-alpha.2"
+  resolved "https://registry.npmmirror.com/@vite/vitejs/-/vitejs-2.3.19-alpha.2.tgz#1f6446a4279d9cecbbf3a92bf3121f686c54653f"
+  integrity sha512-VC73axWdA8K727OmysxwBmuHwUmCdRnFAqskSBf1kzFXnN2QdbK4Zb/X1sj0kbbpPLJQNBHkUvyo833U86svDQ==
   dependencies:
     "@sisi/ed25519-blake2b-hd-key" "^1.0.2"
     "@sisi/tweetnacl-blake2b" "^1.0.0"
@@ -12977,9 +12977,9 @@ websocket@^1.0.34:
     utf-8-validate "^5.0.2"
     yaeti "^0.0.6"
 
-"websocket@git+https://github.com/frozeman/WebSocket-Node.git#browserifyCompatible":
+"websocket@https://github.com/frozeman/WebSocket-Node.git#browserifyCompatible":
   version "1.0.26"
-  resolved "git+https://github.com/frozeman/WebSocket-Node.git#6c72925e3f8aaaea8dc8450f97627e85263999f2"
+  resolved "https://github.com/frozeman/WebSocket-Node.git#6c72925e3f8aaaea8dc8450f97627e85263999f2"
   dependencies:
     debug "^2.2.0"
     nan "^2.3.3"
