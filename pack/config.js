@@ -77,7 +77,11 @@ const contractAddress = {
     test: '\'0x54b716345c14ba851f1b51dcc1491abee6ba8f44\'',
     dev: '\'0x54b716345c14ba851f1b51dcc1491abee6ba8f44\''
 };
-
+const recaptchaToken = {
+    production: '6LdziZ0fAAAAADBzBnGli4Akjok0CoSJ388bRWtw',
+    test: '6LdziZ0fAAAAADBzBnGli4Akjok0CoSJ388bRWtw',
+    dev: '6LdziZ0fAAAAADBzBnGli4Akjok0CoSJ388bRWtw'
+};
 const Node_Env = process.env.NODE_ENV;
 let API = process.env.API;
 
@@ -90,7 +94,9 @@ module.exports = {
     staticPath: path.join(__dirname, '../dist'),
     mobileStaticPath: path.join(__dirname, '../distH5'),
     appStaticPath: path.join(__dirname, '../distAPP'),
+    recaptchaToken,
     envVars: {
+        'process.env.recaptchaToken': `"${ recaptchaToken[Node_Env] }"`,
         'process.env.version': `"${ packJson.version }"`,
         'process.env.NODE_ENV': `"${ Node_Env }"`,
         'process.env.VITE_NET': `"${ process.env.VITE_NET || '' }"`,

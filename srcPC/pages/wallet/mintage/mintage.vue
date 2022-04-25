@@ -1,39 +1,48 @@
 <template>
     <div class="mintage __form_border">
         <div class="item">
-            <div class="__form_input_title">{{ $t('walletMintage.address') }}</div>
+            <div class="__form_input_title">
+                {{ $t('walletMintage.address') }}
+            </div>
             <div class="__form_input unuse">{{ activeAddr }}</div>
 
             <div class="row">
-                <span class="__form_tips" :class="{'active': tipsType === 'tokenName'}">
-                    {{  tipsType === 'tokenName' ? $t('walletMintage.hint.tokenName') : '' }}
+                <span
+                    class="__form_tips"
+                    :class="{ active: tipsType === 'tokenName' }"
+                >
+                    {{
+                        tipsType === 'tokenName'
+                            ? $t('walletMintage.hint.tokenName')
+                            : ''
+                    }}
                 </span>
                 <div class="__form_input_title">
                     {{ $t('walletMintage.tokenName') }}
-                    <span v-show="tokenNameErr" class="err">{{ tokenNameErr }}</span>
+                    <span v-show="tokenNameErr" class="err">{{
+                        tokenNameErr
+                    }}</span>
                 </div>
-                <vite-input v-model="tokenName" :valid="isTokenName"
-                            @blur="hideTips" @focus="showTips('tokenName')"></vite-input>
-            </div>
-
-            <div class="row">
-                <span class="__form_tips" :class="{'active': tipsType === 'tokenSymbol'}">
-                    {{  tipsType === 'tokenSymbol' ? $t('walletMintage.hint.tokenSymbol') : '' }}
-                </span>
-                <div class="__form_input_title">
-                    {{ $t('walletMintage.tokenSymbol') }}
-                    <span v-show="tokenSymbolErr" class="err">{{ tokenSymbolErr }}</span>
-                </div>
-                <vite-input v-model="tokenSymbol" :valid="isTokenSymbol"
-                            @blur="hideTips" @focus="showTips('tokenSymbol')"></vite-input>
+                <vite-input
+                    v-model="tokenName"
+                    :valid="isTokenName"
+                    @blur="hideTips"
+                    @focus="showTips('tokenName')"
+                ></vite-input>
             </div>
 
             <div class="row">
                 <div class="__form_input_title">
                     {{ $t('walletMintage.decimals') }}
-                    <span v-show="decimalsErr" class="err">{{ decimalsErr }}</span>
+                    <span v-show="decimalsErr" class="err">{{
+                        decimalsErr
+                    }}</span>
                 </div>
-                <vite-input v-model="decimals" @blur="hideTips" @focus="showTips('decimals')"></vite-input>
+                <vite-input
+                    v-model="decimals"
+                    @blur="hideTips"
+                    @focus="showTips('decimals')"
+                ></vite-input>
             </div>
         </div>
 
@@ -41,11 +50,36 @@
             <div class="row">
                 <div class="__form_input_title">
                     {{ $t('walletMintage.totalSupply') }}
-                    <span v-show="totalSupplyErr" class="err">{{ totalSupplyErr }}</span>
+                    <span v-show="totalSupplyErr" class="err">{{
+                        totalSupplyErr
+                    }}</span>
                 </div>
                 <vite-input v-model="totalSupply"></vite-input>
             </div>
-
+            <div class="row">
+                <span
+                    class="__form_tips"
+                    :class="{ active: tipsType === 'tokenSymbol' }"
+                >
+                    {{
+                        tipsType === 'tokenSymbol'
+                            ? $t('walletMintage.hint.tokenSymbol')
+                            : ''
+                    }}
+                </span>
+                <div class="__form_input_title">
+                    {{ $t('walletMintage.tokenSymbol') }}
+                    <span v-show="tokenSymbolErr" class="err">{{
+                        tokenSymbolErr
+                    }}</span>
+                </div>
+                <vite-input
+                    v-model="tokenSymbol"
+                    :valid="isTokenSymbol"
+                    @blur="hideTips"
+                    @focus="showTips('tokenSymbol')"
+                ></vite-input>
+            </div>
             <!-- <div class="row">
                 <div class="__form_input_title">{{ $t('walletMintage.isReIssuable') }}</div>
                 <bool-radio v-model="isReIssuable"></bool-radio>
@@ -65,12 +99,24 @@
                 </div>
             </div> -->
 
-            <div v-show="canMintage" class="__form_btn __pointer" @click="toMintage">{{ $t('walletMintage.mint') }}</div>
-            <div v-show="!canMintage" class="__form_btn __pointer unuse">{{ $t('walletMintage.mint') }}</div>
+            <div
+                v-show="canMintage"
+                class="__form_btn __pointer"
+                @click="toMintage"
+            >
+                {{ $t('walletMintage.mint') }}
+            </div>
+            <div v-show="!canMintage" class="__form_btn __pointer unuse">
+                {{ $t('walletMintage.mint') }}
+            </div>
         </div>
 
-        <mintage-confirm v-if="tokenInfo" :tokenInfo="tokenInfo"
-                         :close="closeConfirm" :clear="clearAll"></mintage-confirm>
+        <mintage-confirm
+            v-if="tokenInfo"
+            :tokenInfo="tokenInfo"
+            :close="closeConfirm"
+            :clear="clearAll"
+        ></mintage-confirm>
     </div>
 </template>
 
@@ -114,7 +160,14 @@ export default {
         },
         canMintage() {
             // Required
-            if (!(this.decimals !== '' && this.totalSupply && this.tokenName && this.tokenSymbol)) {
+            if (
+                !(
+                    this.decimals !== ''
+                    && this.totalSupply
+                    && this.tokenName
+                    && this.tokenSymbol
+                )
+            ) {
                 return false;
             }
 
@@ -123,7 +176,13 @@ export default {
                 return false;
             }
 
-            return !this.tokenNameErr && !this.tokenSymbolErr && !this.totalSupplyErr && !this.decimalsErr && !this.maxSupplyErr;
+            return (
+                !this.tokenNameErr
+                && !this.tokenSymbolErr
+                && !this.totalSupplyErr
+                && !this.decimalsErr
+                && !this.maxSupplyErr
+            );
         }
     },
     watch: {
@@ -160,7 +219,10 @@ export default {
                 return false;
             }
 
-            if (!/^[a-zA-Z_]+(\s{1}[a-zA-Z_]+)*$/g.test(tokenName) || tokenName.length > Len) {
+            if (
+                !/^[a-zA-Z_]+(\s{1}[a-zA-Z_]+)*$/g.test(tokenName)
+                || tokenName.length > Len
+            ) {
                 this.tokenNameErr = this.$t('walletMintage.err.tokenNameFormat');
                 return false;
             }
@@ -243,8 +305,11 @@ export default {
                 return false;
             }
 
-            if ((this.totalSupply === '' || this.totalSupplyErr)
-                || (this.decimals === '' || this.decimalsErr)) {
+            if (
+                this.totalSupply === ''
+                || this.totalSupplyErr
+                || this.decimals === '' || this.decimalsErr
+            ) {
                 this.maxSupplyErr = '';
                 return false;
             }
@@ -311,8 +376,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "~assets/scss/vars.scss";
-@import "../form.scss";
+@import '~assets/scss/vars.scss';
+@import '../form.scss';
 
 .mintage {
     width: 100%;
