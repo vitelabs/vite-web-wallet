@@ -6,7 +6,7 @@ block content
             input(type="radio" v-model="selectedNode" :value="node" :id="`radio_changeRpcUrl_${index}`" @change="onChangeNode")
             label(:for="`radio_changeRpcUrl_${index}`")
                 span(class="__sm_btn") {{ $t('setting.changeRpcUrlDialog.customNode')}}
-                code.__pointer {{node}}
+                div.node-text.__pointer {{node}}
                 span(class="__sm_btn ping-tag") {{nodeStatusMap[node] ? `${nodeStatusMap[node].ping} ms` : 'Ping...' }}
             span(class="__sm_btn delete-node-btn"  @click="deleteNode(node)") {{$t('setting.changeRpcUrlDialog.deleteCustomNode')}}
         div.__row
@@ -33,7 +33,6 @@ export default {
     beforeMount() {
         this.dTitle = this.$t('setting.changeRpcUrlDialog.title');
         this.checkNodeStatus();
-        window.fff=this;
     },
     computed: { ...mapState(['env']) },
     methods: {
@@ -132,10 +131,13 @@ export default {
     input {
         line-height: 18px;
     }
-    code {
+    .node-text {
         margin-left: 15px;
+        max-width: 200px;
+        text-overflow: ellipsis;
     }
     label {
+        display: flex;
         margin-left: 15px;
     }
 }

@@ -62,7 +62,7 @@
         "ing": "Running PoW to acquire quota",
         "no": "You can lock VITE for quota in case you would not like to run PoW",
         "insuffQuota": "Get Quota",
-        "insuffQuotaMsg": "We notice you have no vite locked for Quota. Please lock VITE or you could get quota for free this time. You have ${powTimesLeft} free chances left today.",
+        "insuffQuotaMsg": "We notice you have no vite locked for Quota. Please lock VITE or you could get quota for free this time. You have {powTimesLeft} free chances left today.",
         "insuffQuotaMsg2": "We notice you have no vite locked for Quota. You have used up your free quota for today. Please lock VITE. ",
         "getQuota": "Lock VITE",
         "skip": "Get one free",
