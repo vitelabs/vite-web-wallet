@@ -29,7 +29,7 @@ export default {
             this.isShowHelp = false;
         },
         showHelp() {
-            this.isShowHelp = true;
+            // this.isShowHelp = true;
         }
     }
 };

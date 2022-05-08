@@ -119,7 +119,8 @@ async function webSendTx({ methodName, params, config, privateKey }) {
 
     if (config.powLimit) {
         try {
-            const powLimitRes = await powLimitDialog();
+            const p = powLimitDialog();
+            const powLimitRes = await p;
             if (powLimitRes.data === 'getQuota') {
                 return Promise.reject();
             }

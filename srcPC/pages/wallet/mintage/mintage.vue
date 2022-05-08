@@ -387,7 +387,7 @@ export default {
         display: inline-block;
         box-sizing: border-box;
         width: 50%;
-        min-height: 330px;
+        min-height: 260px;
         padding: 6px 25px 20px 30px;
         &.right {
             float: right;
@@ -410,9 +410,7 @@ export default {
     margin-top: 14px;
 }
 .__form_btn {
-    position: absolute;
-    bottom: 20px;
-    right: 25px;
-    left: 30px;
+    width:100%;
+    margin-top: 40px;
 }
 </style>

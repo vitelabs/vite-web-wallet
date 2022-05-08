@@ -22,7 +22,7 @@ export default {
         dLTxt() {
             return this.powTimesLeft > 0
                 ? this.$t('pow.skip')
-                : this.$t('pow.cancel');
+                : this.$t('pow.buyVite');
         },
         dRTxt() {
             return this.$t('pow.getQuota');
@@ -42,6 +42,7 @@ export default {
             if (this.powTimesLeft > 0) {
                 execWithRecaptcha(this.startPow.bind(this));
             } else {
+                window.open('https://x.vite.net/trade?symbol=VITE_USDT-000')
                 this.promise.reject({ status: 'CLOSE' });
             }
             this.__close();
