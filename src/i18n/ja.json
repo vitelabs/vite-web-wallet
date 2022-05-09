@@ -59,13 +59,14 @@
         "error": "あなたの{time}の注文{amount} {token}（{token} / {token})は取引に失敗しました。詳細は注文履歴をご覧ください。"
     },
     "pow": {
-        "ing": "PoWを実行してクォータを取得",
-        "no": "クオータ取得のためにPoWを実行したくない場合は、VITEをステークすることができます",
+        "ing": "Running PoW to acquire quota",
+        "no": "You can lock VITE for quota in case you would not like to run PoW",
         "insuffQuota": "Get Quota",
-        "insuffQuotaMsg": "We notice you have no VITE locked for Quota. Please lock VITE or if you prefer, you can run POW to get Quota.",
-        "insuffQuotaMsg2": "VITE Only {powMaxTimes} transactions can be made per day per address without staking VITE. Your address has exhausted all {powMaxTimes} transactions. Please go to the quota page and stake your VITE to perform more transactions.",
+        "insuffQuotaMsg": "We noticed that you have donʼt have any VITE locked for Quota. You can get free Quota for {powTimesLeft} more times today or lock VITE now. ",
+        "insuffQuotaMsg2": "You have used up all your free Quota for today. Please lock VITE. ",
         "getQuota": "Lock VITE",
-        "skip": "Run POW",
+        "skip": "Free Quota",
+        "buyVite":"Buy Vite",
         "cancel": "Cancel"
     },
     "addAccount": "アカウントの作成",

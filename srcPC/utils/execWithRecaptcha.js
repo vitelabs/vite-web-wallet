@@ -1,8 +1,13 @@
 export function execWithRecaptcha(fn, ...args) {
-    const ele = document.getElementById('g-recaptcha-1');
-    ele.classList.add('show');
+    const ele = document.createElement('div');
+    ele.classList.add('g-recaptcha', 'g-recaptcha-custom-style');
+    document.body.append(ele);
     const reset = () => {
-        ele.classList.remove('show');
+        try {
+            document.body.removeChild(ele);
+        } catch (e) {
+            console.log(e);
+        }
         grecaptcha.reset(id);
     };
 
