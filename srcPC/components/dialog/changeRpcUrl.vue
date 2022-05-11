@@ -92,10 +92,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "~assets/scss/vars.scss";
-@import "pcAssets/scss/common.scss";
-@import "pcComponents/confirm/confirmRow.scss";
-
+@import '~assets/scss/vars.scss';
+@import 'pcAssets/scss/common.scss';
+@import 'pcComponents/confirm/confirmRow.scss';
 
 .head {
     box-sizing: border-box;
@@ -120,7 +119,8 @@ export default {
     @include small_btn();
 }
 
-.delete-node-btn, .ping-tag{
+.delete-node-btn,
+.ping-tag {
     margin-left: 15px;
 }
 
@@ -145,12 +145,13 @@ export default {
     }
     .node-text {
         margin-left: 15px;
-        max-width: 150px;
+        max-width: 200px;
         text-overflow: ellipsis;
+        overflow: hidden;
     }
     label {
+        display: flex;
         margin-left: 15px;
     }
 }
 </style>
-

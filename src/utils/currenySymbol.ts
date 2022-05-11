@@ -7,7 +7,8 @@ export const symbolMap = {
     vnd: '₫',
     eur: '€',
     gbp: '£',
-    inr: '₹'
+    inr: '₹',
+    uah: '₴'
 };
 export const lowerSymbolList = Object.keys(symbolMap).sort();
 export const symbolList = lowerSymbolList.map(v => v.toUpperCase());

@@ -27,7 +27,7 @@ customPowUrls = Array.isArray(customPowUrls) ? customPowUrls : [];
 const currentPowUrl = localStorage.getItem(CurrentPowUrl) || '';
 const defaultNode = process.env.goViteServer;
 const defaultPowLimit = localStorage.getItem(PowLimit) || {};
-const defaultPowMaxTimes = process.env.NODE_ENV === 'production' ? 100 : 5;
+const defaultPowMaxTimes = process.env.NODE_ENV === 'production' ? 5 : 5;
 const autoReceive = localStorage.getItem(AutoReceiveKey) !== false;
 const state = {
     clientStatus: -1,

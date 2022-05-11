@@ -43,6 +43,30 @@
                     @blur="hideTips"
                     @focus="showTips('decimals')"
                 ></vite-input>
+                <div class="row">
+                    <span
+                        class="__form_tips"
+                        :class="{ active: tipsType === 'tokenSymbol' }"
+                    >
+                        {{
+                            tipsType === 'tokenSymbol'
+                                ? $t('walletMintage.hint.tokenSymbol')
+                                : ''
+                        }}
+                    </span>
+                    <div class="__form_input_title">
+                        {{ $t('walletMintage.tokenSymbol') }}
+                        <span v-show="tokenSymbolErr" class="err">{{
+                            tokenSymbolErr
+                        }}</span>
+                    </div>
+                    <vite-input
+                        v-model="tokenSymbol"
+                        :valid="isTokenSymbol"
+                        @blur="hideTips"
+                        @focus="showTips('tokenSymbol')"
+                    ></vite-input>
+                </div>
             </div>
         </div>
 
@@ -56,48 +80,25 @@
                 </div>
                 <vite-input v-model="totalSupply"></vite-input>
             </div>
+
             <div class="row">
-                <span
-                    class="__form_tips"
-                    :class="{ active: tipsType === 'tokenSymbol' }"
-                >
-                    {{
-                        tipsType === 'tokenSymbol'
-                            ? $t('walletMintage.hint.tokenSymbol')
-                            : ''
-                    }}
-                </span>
                 <div class="__form_input_title">
-                    {{ $t('walletMintage.tokenSymbol') }}
-                    <span v-show="tokenSymbolErr" class="err">{{
-                        tokenSymbolErr
-                    }}</span>
+                    {{ $t('walletMintage.isReIssuable') }}
                 </div>
-                <vite-input
-                    v-model="tokenSymbol"
-                    :valid="isTokenSymbol"
-                    @blur="hideTips"
-                    @focus="showTips('tokenSymbol')"
-                ></vite-input>
-            </div>
-            <!-- <div class="row">
-                <div class="__form_input_title">{{ $t('walletMintage.isReIssuable') }}</div>
                 <bool-radio v-model="isReIssuable"></bool-radio>
             </div>
 
-            <div class="row" v-show="isReIssuable">
+            <div class="row" :style="{opacity:isReIssuable?1:0,'pointer-events':isReIssuable?undefined:'none'}">
                 <div class="half">
                     <div class="__form_input_title">
                         {{ $t('walletMintage.maxSupply') }}
-                        <span v-show="maxSupplyErr" class="err">{{ maxSupplyErr }}</span>
+                        <span v-show="maxSupplyErr" class="err">{{
+                            maxSupplyErr
+                        }}</span>
                     </div>
                     <vite-input v-model="maxSupply"></vite-input>
                 </div>
-                <div class="half">
-                    <div class="__form_input_title">{{ $t('walletMintage.isOwnerBurnOnly') }}</div>
-                    <bool-radio v-model="ownerBurnOnly"></bool-radio>
-                </div>
-            </div> -->
+            </div>
 
             <div
                 v-show="canMintage"
@@ -308,7 +309,8 @@ export default {
             if (
                 this.totalSupply === ''
                 || this.totalSupplyErr
-                || this.decimals === '' || this.decimalsErr
+                || this.decimals === ''
+                || this.decimalsErr
             ) {
                 this.maxSupplyErr = '';
                 return false;
@@ -398,7 +400,7 @@ export default {
             .half {
                 width: 45%;
                 display: inline-block;
-                &:last-child {
+                &:not(:first-child) {
                     margin-left: 28px;
                 }
             }
@@ -410,7 +412,7 @@ export default {
     margin-top: 14px;
 }
 .__form_btn {
-    width:100%;
+    width: 100%;
     margin-top: 40px;
 }
 </style>
