@@ -88,7 +88,13 @@
                 <bool-radio v-model="isReIssuable"></bool-radio>
             </div>
 
-            <div class="row" :style="{opacity:isReIssuable?1:0,'pointer-events':isReIssuable?undefined:'none'}">
+            <div
+                class="row"
+                :style="{
+                    opacity: isReIssuable ? 1 : 0,
+                    'pointer-events': isReIssuable ? undefined : 'none'
+                }"
+            >
                 <div class="half">
                     <div class="__form_input_title">
                         {{ $t('walletMintage.maxSupply') }}
@@ -367,7 +373,8 @@ export default {
                 decimals: this.decimals,
                 isReIssuable: this.isReIssuable,
                 maxSupply: this.maxSupply,
-                ownerBurnOnly: this.ownerBurnOnly
+                // ownerBurnOnly: this.ownerBurnOnly
+                ownerBurnOnly: false
             };
         }),
         closeConfirm() {
