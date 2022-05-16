@@ -18,7 +18,7 @@
     "blockHeight": "Blok Kayıt Yüksekliği",
     "accountName": "Hesap Adı",
     "action": "Eylem",
-    "stakingAmount": "Lock Amount",
+    "stakingAmount": "Locked Amount",
     "submitStaking": "Submit To Lock",
     "withdrawHeight": "Lock Expiration Snapshot Height",
     "balance": "Bakiye",
@@ -62,10 +62,11 @@
         "ing": "Quota elde etmek için PoW'u çalıştırın",
         "no": "You can lock VITE for quota in case you would not like to run PoW",
         "insuffQuota": "Quota Al",
-        "insuffQuotaMsg": "Quota için kilitli VITE olmadığınızı fark ettik. Lütfen VITE'i kilitleyin veya tercih ederseniz, Quota almak için POW'u çalıştırabilirsiniz.",
-        "insuffQuotaMsg2": "VITE Only {powMaxTimes} transactions can be made per day per address without locking VITE. Your address has exhausted all {powMaxTimes} transactions. Please go to the quota page and lock VITE to perform more transactions.",
+        "insuffQuotaMsg": "We noticed that you have donʼt have any VITE locked for Quota. You can get free Quota for {powTimesLeft} more times today or lock VITE now. ",
+        "insuffQuotaMsg2": "You have used up all your free Quota for today. Please lock VITE. ",
         "getQuota": "VITE Kilitle",
-        "skip": "POW'u çalıştır",
+        "skip": "Free Quota",
+        "buyVite": "Buy Vite",
         "cancel": "İptal"
     },
     "addAccount": "Bir Hesap Oluştur",
@@ -243,6 +244,8 @@
         "title": "Hesap Ayarları",
         "config": "Genel",
         "currency": "Varsayılan Para Birimi",
+        "powUrl": "PoW",
+        "changePowUrl": "Change PoW",
         "secure": "Güvenlik",
         "gate": "Özel Ağ Geçidi",
         "rpcUrl": "Düğüm",
@@ -332,11 +335,11 @@
             "name": "Ad",
             "balance": "Cüzdan Bakiyesi",
             "onroad": "Alınmamış Cüzdan Varlıkları",
-            "gate": "Cüzdan Cross-Chain Ağ Geçidi",
+            "gate": "Cross-Chain Gateway",
             "totalExAmount": "Toplam Exchange Bakiyesi",
             "availableExAmount": "Kullanılabilir Exchange Bakiyesi",
             "balanceTips": "On-chain gönderimini, Vite cüzdanınızdan diğer Vite adreslerine işlem göndermek isteyen kullanıcılar kullanılabilir",
-            "gateTips": "Bu cross-chain bölümünde, diğer koinleri/tokenları Vite ağına eşleyebilirsiniz. Varlıkları Vite Cüzdanınıza yatırmak için 'Yatır' düğmesine tıklayın. Varlıklarınızı diğer platformlara transfer etmek için 'Çek' düğmesine tıklayın. * Cross-chain yatırma/çekme işlemi komisyona neden olabilir, ayrıca transfer limiti de bulunmaktadır.",
+            "gateTips": "跨链资产服务由网关提供，出现充值&提现相关问 题，请联系负责该资产的网关.",
             "availableExAmountTips": "Varlıklarınızı 'Transfer' butonuna tıklayarak Vite Wallet ile ViteX Exchange arasında transfer edebilirsiniz. Bu işlemler sırasında işlem komisyonu alınmaz.",
             "unreceivedTips": "Alınmamış varlıklar, oturum açtıktan sonra otomatik olarak alınacaktır"
         },
@@ -503,7 +506,7 @@
     "wallet": {
         "title": "Quota Yönetimi",
         "help": {
-            "title": "Quotayı Hızlı Anlama"
+            "title": "What is Quota?"
         },
         "transfer": "Varlıkları Gönder",
         "getTestToken": "Test Tokenlarını Al",
@@ -592,7 +595,7 @@
     "walletQuota": {
         "title": "Quota Yönetimi",
         "help": {
-            "title": "Quotayı Hızlı Anlama"
+            "title": "What is Quota?"
         },
         "myQuota": "Quota'larım",
         "maxTxNum": "Maksimum Txs Sayısı",
@@ -606,12 +609,12 @@
         "inputWithdrawAmount": "Lütfen çekim miktarını girin",
         "pledgeFail": "Gönderme başarısız",
         "canclePledgeFail": "Başarısız",
-        "maturity": "Lock has expired!",
+        "maturity": "Locking has expired!",
         "minAmt": "Çekim miktarı {num} VITE'den az olmamalıdır",
         "gotoStake": "Please lock enough VITE first",
         "maxAmt": "Çekme miktarı {minAmount}, {maxAmount} içinde olmalıdır",
         "cancelLimitAmt": "Lock amount cannot be less than {num}",
-        "withdrawalStaking": "Unlock Tokens",
+        "withdrawalStaking": "Withdraw Locked Token",
         "myAddr": "Ben",
         "confirm": {
             "help": {
@@ -623,7 +626,7 @@
                 "txt3": "Proof of Work (PoW), belirli miktarda iş yaptığınızı doğrulayan bir protokoldür ve aynı zamanda DDoS saldırılarını ve diğer hizmet suistimallerini caydırmak için ekonomik bir önlemdir. Başlayanın belirli bir miktarda hesaplama yapmasını gerektirir, bu da bilgisayar için biraz zaman alabileceği anlamına gelir. Vite sisteminde, kullanıcılar PoW çalıştırarak ücretsiz quota elde edebilir ve ayrıca elde edilen quota üzerinden herhangi bir açıklama olmadan işlem gönderebilir."
             },
             "cancel": {
-                "describe": "Your current lock amount is {amount} VITE, please confirm to withdraw.",
+                "describe": "Your current locked amount is {amount} VITE, please confirm to withdraw.",
                 "rightBtn": "Başlamaya Hazır",
                 "leftBtn": "Çekimi İptal Et"
             },
@@ -634,7 +637,7 @@
             }
         },
         "list": {
-            "title": "My Locking List",
+            "title": "Locking Record",
             "total": "Locking {amount} VITE in total",
             "amount": "Miktar",
             "withdrawTime": "Lock Expiration Date",
