@@ -18,7 +18,7 @@
     "blockHeight": "Chiều cao Block Snapshot",
     "accountName": "Tên Tài khoản",
     "action": "Hành động",
-    "stakingAmount": "Lock Amount",
+    "stakingAmount": "Locked Amount",
     "submitStaking": "Submit To Lock",
     "withdrawHeight": "Lock Expiration Snapshot Height",
     "balance": "Số dư",
@@ -62,10 +62,11 @@
         "ing": "Bấm Run PoW để nhận quota",
         "no": "You can lock VITE for quota in case you would not like to run PoW",
         "insuffQuota": "Nhận Quota",
-        "insuffQuotaMsg": "Chúng tôi nhận thấy bạn không có VITE nào bị khóa cho Quota. Vui lòng stake VITE hoặc nếu muốn, bạn có thể chạy POW để nhận Quota.",
-        "insuffQuotaMsg2": "VITE Only {powMaxTimes} transactions can be made per day per address without locking VITE. Your address has exhausted all {powMaxTimes} transactions. Please go to the quota page and lock VITE to perform more transactions.",
+        "insuffQuotaMsg": "We noticed that you have donʼt have any VITE locked for Quota. You can get free Quota for {powTimesLeft} more times today or lock VITE now. ",
+        "insuffQuotaMsg2": "You have used up all your free Quota for today. Please lock VITE. ",
         "getQuota": "Khoá VITE",
-        "skip": "Chạy POW",
+        "skip": "Free Quota",
+        "buyVite": "Buy Vite",
         "cancel": "Huỷ"
     },
     "addAccount": "Tạo Tài khoản",
@@ -243,6 +244,8 @@
         "title": "Thiết lập tài khoản",
         "config": "Tổng quan",
         "currency": "Tiền tệ mặc định",
+        "powUrl": "PoW",
+        "changePowUrl": "Change PoW",
         "secure": "Bảo mật",
         "gate": "Gateway Tuỳ chỉnh",
         "rpcUrl": "Node",
@@ -332,11 +335,11 @@
             "name": "Tên",
             "balance": "Số dư Ví",
             "onroad": "Số lượng chưa nhận",
-            "gate": "Cổng ví Chuỗi chéo",
+            "gate": "Cross-Chain Gateway",
             "totalExAmount": "Số dư Sàn",
             "availableExAmount": "Số dư khả dụng Sàn",
             "balanceTips": "Gửi on-chain khả dụng cho những người dùng muốn gửi giao dịch từ ví Vite của bạn đến các địa chỉ Vite khác",
-            "gateTips": "Trong phần \bcross-chain này, bạn có thể đổi coin/token khác vào mạng Vite. Nhấp vào nút 'Gửi tiền' để gửi tài sản vào Ví Vite của bạn. Nhấp vào nút 'Rút tiền' để chuyển tài sản của bạn sang các nền tảng khác. *Quá trình rút/nạp cross-chain có thể mất phí, và có giới hạn khi chuyển tiền.",
+            "gateTips": "跨链资产服务由网关提供，出现充值&提现相关问 题，请联系负责该资产的网关.",
             "availableExAmountTips": "Bạn có thể chuyển tài sản của mình giữa Vite Wallet và ViteX Exchange bằng cách nhấp vào nút 'Chuyển'. Thao tác này không phát sinh phí.",
             "unreceivedTips": "Các khoản chưa nhận sẽ được tự động nhận sau khi đăng nhập"
         },
@@ -503,7 +506,7 @@
     "wallet": {
         "title": "Quản lý \bQuota",
         "help": {
-            "title": "Tìm hiểu về Quota"
+            "title": "What is Quota?"
         },
         "transfer": "Gửi Tài sản",
         "getTestToken": "Nhận Test Token",
@@ -592,7 +595,7 @@
     "walletQuota": {
         "title": "Quản lý Quota",
         "help": {
-            "title": "Tìm hiểu về Quota"
+            "title": "What is Quota?"
         },
         "myQuota": "Quota của tôi",
         "maxTxNum": "Số Tx tối đa",
@@ -606,12 +609,12 @@
         "inputWithdrawAmount": "Vui lòng điền địa chỉ rút",
         "pledgeFail": "Thao tác thất bại",
         "canclePledgeFail": "Thất bại",
-        "maturity": "Lock has expired!",
+        "maturity": "Locking has expired!",
         "minAmt": "Số tiền rút không thể ít hơn {num} VITE",
         "gotoStake": "Please lock enough VITE first",
         "maxAmt": "Số tiền rút phải trong khoảng [{minAmount}, {maxAmount}]",
         "cancelLimitAmt": "Lock amount cannot be less than {num}",
-        "withdrawalStaking": "Unlock Tokens",
+        "withdrawalStaking": "Withdraw Locked Token",
         "myAddr": "Tôi",
         "confirm": {
             "help": {
@@ -623,7 +626,7 @@
                 "txt3": "Proof of Work (PoW), là một giao thức để xác nhận rằng bạn đã thực hiện một số lượng công việc nhất định và cũng là một biện pháp kinh tế để ngăn chặn sự tấn công DDoS và lạm dụng dịch vụ khác. Điều này đòi hỏi máy tính phải thực hiện tính toán điện toán nhất định. Trong hệ thống Vite, người dùng có thể nhận được hạn ngạch miễn phí bằng cách bấm run PoW và cũng có thể gửi giao dịch bằng hạn ngạch thu được mà không có bất kỳ thông tin chú thích nào."
             },
             "cancel": {
-                "describe": "Your current lock amount is {amount} VITE, please confirm to withdraw.",
+                "describe": "Your current locked amount is {amount} VITE, please confirm to withdraw.",
                 "rightBtn": "Sẵn sàng",
                 "leftBtn": "Hủy bỏ Rút"
             },
@@ -634,7 +637,7 @@
             }
         },
         "list": {
-            "title": "My Locking List",
+            "title": "Locking Record",
             "total": "Locking {amount} VITE in total",
             "amount": "Số lượng",
             "withdrawTime": "Lock Expiration Date",
