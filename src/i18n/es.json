@@ -18,7 +18,7 @@
     "blockHeight": "Instantánea de altura de bloque",
     "accountName": "Nombre de la cuenta",
     "action": "Acción",
-    "stakingAmount": "Cantidad bloqueada",
+    "stakingAmount": "Locked Amount",
     "submitStaking": "Confirmar bloqueo",
     "withdrawHeight": "Altura de bloque para expiración de bloqueo ",
     "balance": "Saldo",
@@ -62,10 +62,11 @@
         "ing": "Ejecutando PoW para adquirir cuota",
         "no": "Puedes bloquear VITE para obtener la cuota en caso de que no quieras ejecutar el PoW",
         "insuffQuota": "Obtener Cuota",
-        "insuffQuotaMsg": "Notamos que no tienes bloqueado VITE para cuota. Por favor bloquee VITE o si lo prefiere, puede ejecutar el PoW para obtener cuota.",
-        "insuffQuotaMsg2": "Solo se pueden realizar {powMaxTimes} transacciones por día y por dirección sin haber bloqueado VITE. Tu dirección ya ha agotado todas las {powMaxTimes} transacciones. Ve a la página de cuotas y bloquea tu VITE para realizar más transacciones.",
+        "insuffQuotaMsg": "We noticed that you have donʼt have any VITE locked for Quota. You can get free Quota for {powTimesLeft} more times today or lock VITE now. ",
+        "insuffQuotaMsg2": "You have used up all your free Quota for today. Please lock VITE. ",
         "getQuota": "Bloquear VITE",
-        "skip": "Ejecutar el PoW",
+        "skip": "Free Quota",
+        "buyVite": "Buy Vite",
         "cancel": "Cancelar"
     },
     "addAccount": "Crear cuenta",
@@ -243,6 +244,8 @@
         "title": "Ajustes de la cuenta",
         "config": "General",
         "currency": "Divisa predeterminada",
+        "powUrl": "PoW",
+        "changePowUrl": "Change PoW",
         "secure": "Seguridad",
         "gate": "Gateway personalizado",
         "rpcUrl": "Nodo",
@@ -332,11 +335,11 @@
             "name": "Nombre",
             "balance": "Balance de Billetera",
             "onroad": "Activos sin recibir",
-            "gate": "Gateway billetera Cross-Chain",
+            "gate": "Cross-Chain Gateway",
             "totalExAmount": "Saldo total del Exchange",
             "availableExAmount": "Saldo disponible en Exchange",
             "balanceTips": "El envío en-cadena está disponible para los usuarios que desean enviar transacciones desde su billetera Vite a otras direcciones de Vite",
-            "gateTips": "En esta sección de cross-chain, puede asignar otras monedas/tokens a la red Vite. Haga clic en el botón 'Depositar' para depositar los activos en su billetera Vite. Haga clic en el botón 'Retirar' para transferir sus activos a otras plataformas. *El depósito/retiro entre cross-chain puede generar comisiones, también existe un límite de transferencias.",
+            "gateTips": "跨链资产服务由网关提供，出现充值&提现相关问 题，请联系负责该资产的网关.",
             "availableExAmountTips": "Puede transferir sus activos entre su billetera Vite y Exchange ViteX haciendo clic en el botón 'Transferir'. Este proceso no carga ninguna comisión.",
             "unreceivedTips": "Los fondos sin recibir serán liberados automáticamente después de iniciar sesión"
         },
@@ -503,7 +506,7 @@
     "wallet": {
         "title": "Gestión de cuotas",
         "help": {
-            "title": "Comprensión rápida de Cuotas"
+            "title": "What is Quota?"
         },
         "transfer": "Enviar activos",
         "getTestToken": "Obtener Tokens de Prueba",
@@ -592,7 +595,7 @@
     "walletQuota": {
         "title": "Gestión de cuotas",
         "help": {
-            "title": "Comprensión rápida de Cuotas"
+            "title": "What is Quota?"
         },
         "myQuota": "Mi cuota",
         "maxTxNum": "Número máximo de Txs",
@@ -606,12 +609,12 @@
         "inputWithdrawAmount": "Por favor, introduzca la cantidad a retirar",
         "pledgeFail": "Falló al enviar",
         "canclePledgeFail": "Falló",
-        "maturity": "El bloqueo ha expirado!",
+        "maturity": "Locking has expired!",
         "minAmt": "El monto del retiro no puede ser inferior a {num} VITE",
         "gotoStake": "Primero bloquee suficiente VITE",
         "maxAmt": "La cantidad de retiro debe estar entre [{minAmount}, {maxAmount}]",
         "cancelLimitAmt": "La cantidad a bloquear no puede ser menor que {num}",
-        "withdrawalStaking": "Desbloquear tokens",
+        "withdrawalStaking": "Withdraw Locked Token",
         "myAddr": "Yo",
         "confirm": {
             "help": {
@@ -623,7 +626,7 @@
                 "txt3": "Prueba de Trabajo (PoW, en sus siglas en inglés), es un protocolo para confirmar que has realizado una cierta cantidad de trabajo. Esta medida es una medida económica para disuadir ataques DDoS y otros tipos de abusos de servicios. Requiere que el solicitador realize una cierta cantidad de cómputo tomando cierto tiempo en el servidor. En Vite, los usuarios pueden obtener una cuota gratuita ejecutando este PoW, y pudiendo enviar transacciones sin tomar ninguna acción usando la cuota obtenida."
             },
             "cancel": {
-                "describe": "Tu actual cantidad bloqueada es {amount} VITE, por favor confirma para retirarla.",
+                "describe": "Your current locked amount is {amount} VITE, please confirm to withdraw.",
                 "rightBtn": "Listo para empezar",
                 "leftBtn": "Cancelar retiro"
             },
@@ -634,7 +637,7 @@
             }
         },
         "list": {
-            "title": "Mi lista de bloqueos",
+            "title": "Locking Record",
             "total": "Bloqueando {amount} VITE en total",
             "amount": "Cantidad",
             "withdrawTime": "Fecha de expiración de bloqueo",
