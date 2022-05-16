@@ -18,7 +18,7 @@
     "blockHeight": "Taas ng Block ng Snapshot",
     "accountName": "Pangalan ng account",
     "action": "Kilos",
-    "stakingAmount": "Lock Amount",
+    "stakingAmount": "Locked Amount",
     "submitStaking": "Submit To Lock",
     "withdrawHeight": "Lock Expiration Snapshot Height",
     "balance": "Balanse",
@@ -62,10 +62,11 @@
         "ing": "Pagpapatakbo ng PoW upang makakuha ng quota",
         "no": "You can lock VITE for quota in case you would not like to run PoW",
         "insuffQuota": "Kumuha ng Quota",
-        "insuffQuotaMsg": "Napansin naming wala kang VITE na naka-lock para sa Quota. Mangyaring i-lock ang VITE o kung nais mo, maaari kang magpatakbo ng POW upang makakuha ng Quota.",
-        "insuffQuotaMsg2": "VITE Only {powMaxTimes} transactions can be made per day per address without locking VITE. Your address has exhausted all {powMaxTimes} transactions. Please go to the quota page and lock VITE to perform more transactions.",
+        "insuffQuotaMsg": "We noticed that you have donʼt have any VITE locked for Quota. You can get free Quota for {powTimesLeft} more times today or lock VITE now. ",
+        "insuffQuotaMsg2": "You have used up all your free Quota for today. Please lock VITE. ",
         "getQuota": "Patakbuhin ang POW",
-        "skip": "Patakbuhin ang POW",
+        "skip": "Free Quota",
+        "buyVite": "Buy Vite",
         "cancel": "Kanselahin"
     },
     "addAccount": "Gumawa ng Account",
@@ -243,6 +244,8 @@
         "title": "Mga Setting ng Account",
         "config": "Pangkalahatan",
         "currency": "Ang Default na Currency",
+        "powUrl": "PoW",
+        "changePowUrl": "Change PoW",
         "secure": "Seguridad",
         "gate": "Pasadyang Gateway",
         "rpcUrl": "Node",
@@ -332,11 +335,11 @@
             "name": "Pangalan",
             "balance": "Balanse sa Wallet",
             "onroad": "Mga Pondo na Hindi Natanggap",
-            "gate": "Wallet Cross-Chain Gateway",
+            "gate": "Cross-Chain Gateway",
             "totalExAmount": "Kabuuang Balanse ng Palitan",
             "availableExAmount": "Magagamit na Balanse sa Palitan",
             "balanceTips": "Magagamit ang on-chain na pagpapadala para sa mga gumagamit na nais magpadala ng mga transaksyon mula sa iyong Vite wallet sa iba pang mga Vite address",
-            "gateTips": "Sa seksyong cross-chain na ito, maaari kang mag-mapa ng iba pang mga barya / token sa Vite network. I-click ang pindutang 'Deposit' upang magdeposito ng mga assets sa iyong Vite Wallet. I-click ang pindutan na 'Bawiin' upang ilipat ang iyong mga assets sa iba pang mga platform. * Ang proseso ng deposito ng cross-chain / withdrawal ay maaaring maging sanhi ng bayarin, mayroon din itong limitasyon sa paglipat.",
+            "gateTips": "跨链资产服务由网关提供，出现充值&提现相关问 题，请联系负责该资产的网关.",
             "availableExAmountTips": "Maaari mong ilipat ang iyong mga assets sa pagitan ng Vite Wallet at ViteX Exchange sa pamamagitan ng pag-click sa pindutang 'Transfer'. Walang ng mga bayarin sa transaksyon sa mga proseso na ito.",
             "unreceivedTips": "Ang mga hindi natanggap na pondo ay awtomatikong matatanggap pagkatapos ng pag-sign in"
         },
@@ -503,7 +506,7 @@
     "wallet": {
         "title": "Pamamahala sa Quota",
         "help": {
-            "title": "Mabilis na Pag-unawa sa Quota"
+            "title": "What is Quota?"
         },
         "transfer": "Magpadala ng mga pondo",
         "getTestToken": "Kumuha ng Mga Token para I-test",
@@ -592,7 +595,7 @@
     "walletQuota": {
         "title": "Pamamahala sa Quota",
         "help": {
-            "title": "Mabilis na Pag-unawa sa Quota"
+            "title": "What is Quota?"
         },
         "myQuota": "Ang aking Quota",
         "maxTxNum": "Maximum na Bilang ng Txs",
@@ -606,12 +609,12 @@
         "inputWithdrawAmount": "Mangyaring i-input ang halagang pag-withdraw",
         "pledgeFail": "Nabigong Isumite",
         "canclePledgeFail": "Nabigo",
-        "maturity": "Lock has expired!",
+        "maturity": "Locking has expired!",
         "minAmt": "Ang halaga ng Withdraw ay hindi maaaring mas mababa sa {num} VITE",
         "gotoStake": "Please lock enough VITE first",
         "maxAmt": "Ang halaga ng pag-withdraw ay dapat nasa [{minAmount}, {maxAmount}]",
         "cancelLimitAmt": "Lock amount cannot be less than {num}",
-        "withdrawalStaking": "Unlock Tokens",
+        "withdrawalStaking": "Withdraw Locked Token",
         "myAddr": "Ako",
         "confirm": {
             "help": {
@@ -623,7 +626,7 @@
                 "txt3": "Ang Proof of Work (PoW), ay isang protokol upang kumpirmahing nagawa mo ang isang tiyak na halaga ng trabaho, at isang hakbang din sa ekonomiya upang mapigilan ang mga pag-atake ng DDoS at iba pang pang-aabuso sa serbisyo. Kinakailangan nito ang nagpasimula na magsagawa ng isang tiyak na halaga ng computing, na nangangahulugang maaaring tumagal ng ilang oras para sa computer. Sa sistema ng Vite, ang mga gumagamit ay maaaring makakuha ng isang libreng quota sa pamamagitan ng pagpapatakbo ng PoW, at maaari ring magpadala ng isang transaksyon nang walang anumang anotadong impormasyon sa pamamagitan ng nakuha na quota."
             },
             "cancel": {
-                "describe": "Your current lock amount is {amount} VITE, please confirm to withdraw.",
+                "describe": "Your current locked amount is {amount} VITE, please confirm to withdraw.",
                 "rightBtn": "Nakahanda nang umalis",
                 "leftBtn": "Kanselahin ang Pag-withdraw"
             },
@@ -634,7 +637,7 @@
             }
         },
         "list": {
-            "title": "My Locking List",
+            "title": "Locking Record",
             "total": "Locking {amount} VITE in total",
             "amount": "Halaga",
             "withdrawTime": "Lock Expiration Date",
