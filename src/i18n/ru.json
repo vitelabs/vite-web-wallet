@@ -18,7 +18,7 @@
     "blockHeight": "Высота блока снимка",
     "accountName": "Имя аккаунта",
     "action": "Действие",
-    "stakingAmount": "Lock Amount",
+    "stakingAmount": "Locked Amount",
     "submitStaking": "Submit To Lock",
     "withdrawHeight": "Lock Expiration Snapshot Height",
     "balance": "Баланс",
@@ -62,10 +62,11 @@
         "ing": "Запуск PoW для получения квоты",
         "no": "You can lock VITE for quota in case you would not like to run PoW",
         "insuffQuota": "Получить квоту",
-        "insuffQuotaMsg": "Уведомляем, что у вас нет VITE замороженных для получения Квоты. Заблокируйте VITE или, если хотите, можете запустить POW для получения Квоты.",
-        "insuffQuotaMsg2": "VITE Only {powMaxTimes} transactions can be made per day per address without locking VITE. Your address has exhausted all {powMaxTimes} transactions. Please go to the quota page and lock VITE to perform more transactions.",
+        "insuffQuotaMsg": "We noticed that you have donʼt have any VITE locked for Quota. You can get free Quota for {powTimesLeft} more times today or lock VITE now. ",
+        "insuffQuotaMsg2": "You have used up all your free Quota for today. Please lock VITE. ",
         "getQuota": "Заморозить VITE",
-        "skip": "Запустить POW",
+        "skip": "Free Quota",
+        "buyVite": "Buy Vite",
         "cancel": "Отмена"
     },
     "addAccount": "Создать Аккаунт",
@@ -243,6 +244,8 @@
         "title": "Настройки Аккаунта",
         "config": "Общие",
         "currency": "Валюта По Умолчанию",
+        "powUrl": "PoW",
+        "changePowUrl": "Change PoW",
         "secure": "Безопасность",
         "gate": "Настроить Шлюз",
         "rpcUrl": "Адрес узла",
@@ -332,11 +335,11 @@
             "name": "Название",
             "balance": "Баланс",
             "onroad": "Неполученная Сумма Кошелька",
-            "gate": "Кросс-чейн Шлюз Кошелька",
+            "gate": "Cross-Chain Gateway",
             "totalExAmount": "Общий Баланс на Бирже",
             "availableExAmount": "Доступный Баланс на Бирже",
             "balanceTips": "You can transfer your assets to other addresses via clicking 'Send' button",
-            "gateTips": "In this cross-chain section, you can map other tokens into Vite network. Click 'Receive' button to deposit assets to your Vite Wallet. Click 'Send' button to transfer your assets to other platforms. * Cross-chain receive/send process may charge fees, it also has its transfer limitation.",
+            "gateTips": "跨链资产服务由网关提供，出现充值&提现相关问 题，请联系负责该资产的网关.",
             "availableExAmountTips": "You can transfer your assets from Vite Wallet to ViteX Exchange via clicking 'Deposit' button. Click 'Withdraw' button to transfer assets from ViteX Exchange to Vite Wallet. No transaction fees caused during these processes.",
             "unreceivedTips": "Неполученные средства будут получены автоматически после входа в систему"
         },
@@ -503,7 +506,7 @@
     "wallet": {
         "title": "Управление Квотой",
         "help": {
-            "title": "Быстрое Понимание Квоты"
+            "title": "What is Quota?"
         },
         "transfer": "Отправить средства",
         "getTestToken": "Получить Тестовые Токены",
@@ -592,7 +595,7 @@
     "walletQuota": {
         "title": "Управление Квотой",
         "help": {
-            "title": "Быстрое Понимание Квоты"
+            "title": "What is Quota?"
         },
         "myQuota": "Моя Квота",
         "maxTxNum": "Максимальное Количество Транзакций",
@@ -606,12 +609,12 @@
         "inputWithdrawAmount": "Пожалуйста, введите сумму вывода",
         "pledgeFail": "Не удалось Отправить",
         "canclePledgeFail": "Ошибка",
-        "maturity": "Lock has expired!",
+        "maturity": "Locking has expired!",
         "minAmt": "Сумма снятия не может быть меньше, чем {num} VITE",
         "gotoStake": "Please lock enough VITE first",
         "maxAmt": "Сумма снятия должна быть в [{minAmount}, {maxAmount}]",
         "cancelLimitAmt": "Lock amount cannot be less than {num}",
-        "withdrawalStaking": "Unlock Tokens",
+        "withdrawalStaking": "Withdraw Locked Token",
         "myAddr": "Current Address",
         "confirm": {
             "help": {
@@ -623,7 +626,7 @@
                 "txt3": "Proof of Work (PoW) - это протокол, подтверждающий, что вы выполнили определенный объем работы, а также экономическая мера для предотвращения DDoS-атак и других злоупотреблений услугами. Это требует, чтобы инициатор провел определенное количество вычислений, что означает, что это может занять некоторое время для компьютера. В системе Vite пользователи могут получить бесплатную квоту, запустив PoW, а также могут отправить транзакцию без аннотированной информации через полученную квоту."
             },
             "cancel": {
-                "describe": "Your current lock amount is {amount} VITE, please confirm to withdraw.",
+                "describe": "Your current locked amount is {amount} VITE, please confirm to withdraw.",
                 "rightBtn": "Готовы Начать",
                 "leftBtn": "Отменить Вывод"
             },
@@ -634,7 +637,7 @@
             }
         },
         "list": {
-            "title": "My Locking List",
+            "title": "Locking Record",
             "total": "Locking {amount} VITE in total",
             "amount": "Сумма",
             "withdrawTime": "Lock Expiration Date",
