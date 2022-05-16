@@ -18,7 +18,7 @@
     "blockHeight": "스냅샷 블록 높이",
     "accountName": "계정이름",
     "action": "dddd",
-    "stakingAmount": "Lock Amount",
+    "stakingAmount": "Locked Amount",
     "submitStaking": "Submit To Lock",
     "withdrawHeight": "Lock Expiration Snapshot Height",
     "balance": "보유자산",
@@ -62,10 +62,11 @@
         "ing": "PoW를 실행해 쿼타를 얻으세요",
         "no": "You can lock VITE for quota in case you would not like to run PoW",
         "insuffQuota": "쿼타 얻기",
-        "insuffQuotaMsg": "락업된 쿼타가 없습니다. VITE를 락업해주세요, 혹은 원하는 경우 POW를 실행하여 쿼타를 얻을 수 있습니다.",
-        "insuffQuotaMsg2": "VITE Only {powMaxTimes} transactions can be made per day per address without locking VITE. Your address has exhausted all {powMaxTimes} transactions. Please go to the quota page and lock VITE to perform more transactions.",
+        "insuffQuotaMsg": "We noticed that you have donʼt have any VITE locked for Quota. You can get free Quota for {powTimesLeft} more times today or lock VITE now. ",
+        "insuffQuotaMsg2": "You have used up all your free Quota for today. Please lock VITE. ",
         "getQuota": "VITE 락업하기",
-        "skip": "PoW 운영하기",
+        "skip": "Free Quota",
+        "buyVite": "Buy Vite",
         "cancel": "취소"
     },
     "addAccount": "계정 생성하기",
@@ -243,6 +244,8 @@
         "title": "계정 설정",
         "config": "일반",
         "currency": "기본 통화",
+        "powUrl": "PoW",
+        "changePowUrl": "Change PoW",
         "secure": "보안",
         "gate": "게이트웨이 사용자 설정",
         "rpcUrl": "노드",
@@ -332,11 +335,11 @@
             "name": "토큰명",
             "balance": "보유자산",
             "onroad": "지갑 수령 예정 금액",
-            "gate": "지갑 크로스체인 게이트웨이",
+            "gate": "Cross-Chain Gateway",
             "totalExAmount": "거래소 총 보유자산",
             "availableExAmount": "거래소 거래 가능 자산",
             "balanceTips": "You can transfer your assets to other addresses via clicking 'Send' button",
-            "gateTips": "In this cross-chain section, you can map other tokens into Vite network. Click 'Receive' button to deposit assets to your Vite Wallet. Click 'Send' button to transfer your assets to other platforms. * Cross-chain receive/send process may charge fees, it also has its transfer limitation.",
+            "gateTips": "跨链资产服务由网关提供，出现充值&提现相关问 题，请联系负责该资产的网关.",
             "availableExAmountTips": "You can transfer your assets from Vite Wallet to ViteX Exchange via clicking 'Deposit' button. Click 'Withdraw' button to transfer assets from ViteX Exchange to Vite Wallet. No transaction fees caused during these processes.",
             "unreceivedTips": "미수신된 자금은 로그인 후 자동으로 지급됩니다."
         },
@@ -503,7 +506,7 @@
     "wallet": {
         "title": "쿼타 관리",
         "help": {
-            "title": "쿼타에 대해 빠르게 이해하기"
+            "title": "What is Quota?"
         },
         "transfer": "자금 보내기",
         "getTestToken": "테스트 토큰 가져오기",
@@ -592,7 +595,7 @@
     "walletQuota": {
         "title": "쿼타 관리",
         "help": {
-            "title": "쿼타에 대해 빠르게 이해하기"
+            "title": "What is Quota?"
         },
         "myQuota": "나의 쿼타",
         "maxTxNum": "최대 Tx 수",
@@ -606,12 +609,12 @@
         "inputWithdrawAmount": "출금 금액을 입력하세요",
         "pledgeFail": "제출에 실패했습니다",
         "canclePledgeFail": "실패했습니다",
-        "maturity": "Lock has expired!",
+        "maturity": "Locking has expired!",
         "minAmt": "출금 금액은 {num} VITE보다 작을 수 없습니다.",
         "gotoStake": "Please lock enough VITE first",
         "maxAmt": "출금 금액은 [{minAmount}, {maxAmount}] 범위여만 합니다",
         "cancelLimitAmt": "Lock amount cannot be less than {num}",
-        "withdrawalStaking": "Unlock Tokens",
+        "withdrawalStaking": "Withdraw Locked Token",
         "myAddr": "Current Address",
         "confirm": {
             "help": {
@@ -623,7 +626,7 @@
                 "txt3": "작업 증명(PoW)은 일정량의 작업을 수행했음을 확인하는 프로토콜이며 DDoS 공격 및 기타 서비스 남용을 방지하기 위한 경제적인 수단입니다. 초기자가 특정 양의 컴퓨팅을 수행해야 하므로 다소 시간이 걸릴 수 있습니다. Vite 시스템에서 사용자는 PoW를 실행하여 무료 쿼타를 얻을 수 있으며 얻은 쿼타를 통해 주석 정보 없이 트랜잭션을 보낼 수도 있습니다."
             },
             "cancel": {
-                "describe": "Your current lock amount is {amount} VITE, please confirm to withdraw.",
+                "describe": "Your current locked amount is {amount} VITE, please confirm to withdraw.",
                 "rightBtn": "시작할 준비가 되셨나요?",
                 "leftBtn": "출금 취소"
             },
@@ -634,7 +637,7 @@
             }
         },
         "list": {
-            "title": "My Locking List",
+            "title": "Locking Record",
             "total": "Locking {amount} VITE in total",
             "amount": "수량",
             "withdrawTime": "Lock Expiration Date",
