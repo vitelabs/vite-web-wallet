@@ -18,7 +18,7 @@
     "blockHeight": "Snapshot Block Height",
     "accountName": "Nama Akun",
     "action": "Beraksi",
-    "stakingAmount": "Lock Amount",
+    "stakingAmount": "Locked Amount",
     "submitStaking": "Submit To Lock",
     "withdrawHeight": "Lock Expiration Snapshot Height",
     "balance": "Saldo",
@@ -62,10 +62,11 @@
         "ing": "Menjalankan PoW untuk mendapatkan kuota",
         "no": "You can lock VITE for quota in case you would not like to run PoW",
         "insuffQuota": "Get Quota",
-        "insuffQuotaMsg": "We notice you have no VITE locked for Quota. Please lock VITE or if you prefer, you can run POW to get Quota.",
-        "insuffQuotaMsg2": "VITE Only {powMaxTimes} transactions can be made per day per address without locking VITE. Your address has exhausted all {powMaxTimes} transactions. Please go to the quota page and lock VITE to perform more transactions.",
+        "insuffQuotaMsg": "We noticed that you have donʼt have any VITE locked for Quota. You can get free Quota for {powTimesLeft} more times today or lock VITE now. ",
+        "insuffQuotaMsg2": "You have used up all your free Quota for today. Please lock VITE. ",
         "getQuota": "Lock VITE",
-        "skip": "Run POW",
+        "skip": "Free Quota",
+        "buyVite": "Buy Vite",
         "cancel": "Cancel"
     },
     "addAccount": "Membuat Akun",
@@ -243,6 +244,8 @@
         "title": "Pengaturan akun",
         "config": "Umum",
         "currency": "Mata Uang Default",
+        "powUrl": "PoW",
+        "changePowUrl": "Change PoW",
         "secure": "Keamanan",
         "gate": "Custom Gateway",
         "rpcUrl": "Node",
@@ -332,11 +335,11 @@
             "name": "Nama",
             "balance": "Saldo Dompet",
             "onroad": "Jumlah Dompet yang Tidak Dapat Diterima",
-            "gate": "Gateway Lintas Rantai Dompet",
+            "gate": "Cross-Chain Gateway",
             "totalExAmount": "Total Saldo Pertukaran",
             "availableExAmount": "Saldo Tersedia Pertukaran",
             "balanceTips": "You can transfer your assets to other addresses via clicking 'Send' button",
-            "gateTips": "In this cross-chain section, you can map other tokens into Vite network. Click 'Receive' button to deposit assets to your Vite Wallet. Click 'Send' button to transfer your assets to other platforms. * Cross-chain receive/send process may charge fees, it also has its transfer limitation.",
+            "gateTips": "跨链资产服务由网关提供，出现充值&提现相关问 题，请联系负责该资产的网关.",
             "availableExAmountTips": "You can transfer your assets from Vite Wallet to ViteX Exchange via clicking 'Deposit' button. Click 'Withdraw' button to transfer assets from ViteX Exchange to Vite Wallet. No transaction fees caused during these processes.",
             "unreceivedTips": "Unreceived funds will be received automatically after signing in"
         },
@@ -503,7 +506,7 @@
     "wallet": {
         "title": "Manajemen Kuota",
         "help": {
-            "title": "Pemahaman Cepat tentang Kuota"
+            "title": "What is Quota?"
         },
         "transfer": "Send Funds",
         "getTestToken": "Dapatkan Token Uji",
@@ -592,7 +595,7 @@
     "walletQuota": {
         "title": "Manajemen Kuota",
         "help": {
-            "title": "Pemahaman Cepat tentang Kuota"
+            "title": "What is Quota?"
         },
         "myQuota": "Kuota saya",
         "maxTxNum": "Jumlah Maksimum dari Txs",
@@ -606,12 +609,12 @@
         "inputWithdrawAmount": "Silakan masukkan jumlah penarikan",
         "pledgeFail": "Gagal Kirim",
         "canclePledgeFail": "Gagal",
-        "maturity": "Lock has expired!",
+        "maturity": "Locking has expired!",
         "minAmt": "Jumlah penarikan tidak boleh kurang dari {num} VITE",
         "gotoStake": "Please lock enough VITE first",
         "maxAmt": "Jumlah penarikan harus dalam [{minAmount}, {maxAmount}]",
         "cancelLimitAmt": "Lock amount cannot be less than {num}",
-        "withdrawalStaking": "Unlock Tokens",
+        "withdrawalStaking": "Withdraw Locked Token",
         "myAddr": "Saya",
         "confirm": {
             "help": {
@@ -623,7 +626,7 @@
                 "txt3": "Proof of Work (PoW), adalah protokol untuk mengkonfirmasi bahwa Anda telah melakukan sejumlah pekerjaan, dan juga merupakan langkah ekonomi untuk mencegah serangan DDoS dan penyalahgunaan layanan lainnya. Ini memerlukan inisiator untuk melakukan sejumlah komputasi, yang berarti bahwa mungkin perlu waktu untuk komputer. Dalam sistem Vite, pengguna dapat memperoleh kuota gratis dengan menjalankan PoW, dan juga dapat mengirim transaksi tanpa informasi beranotasi melalui kuota yang diperoleh."
             },
             "cancel": {
-                "describe": "Your current lock amount is {amount} VITE, please confirm to withdraw.",
+                "describe": "Your current locked amount is {amount} VITE, please confirm to withdraw.",
                 "rightBtn": "Siap untuk berangkat",
                 "leftBtn": "Batalkan Penarikan"
             },
@@ -634,7 +637,7 @@
             }
         },
         "list": {
-            "title": "My Locking List",
+            "title": "Locking Record",
             "total": "Locking {amount} VITE in total",
             "amount": "Jumlah",
             "withdrawTime": "Lock Expiration Date",
