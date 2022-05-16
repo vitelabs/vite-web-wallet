@@ -18,7 +18,7 @@
     "blockHeight": "スナップショットブロック値",
     "accountName": "アカウント名",
     "action": "アクション",
-    "stakingAmount": "Lock Amount",
+    "stakingAmount": "Locked Amount",
     "submitStaking": "Submit To Lock",
     "withdrawHeight": "Lock Expiration Snapshot Height",
     "balance": "残高",
@@ -62,10 +62,11 @@
         "ing": "PoWを実行してクォータを取得",
         "no": "You can lock VITE for quota in case you would not like to run PoW",
         "insuffQuota": "Get Quota",
-        "insuffQuotaMsg": "We notice you have no VITE locked for Quota. Please lock VITE or if you prefer, you can run POW to get Quota.",
-        "insuffQuotaMsg2": "VITE Only {powMaxTimes} transactions can be made per day per address without locking VITE. Your address has exhausted all {powMaxTimes} transactions. Please go to the quota page and lock VITE to perform more transactions.",
+        "insuffQuotaMsg": "We noticed that you have donʼt have any VITE locked for Quota. You can get free Quota for {powTimesLeft} more times today or lock VITE now. ",
+        "insuffQuotaMsg2": "You have used up all your free Quota for today. Please lock VITE. ",
         "getQuota": "Lock VITE",
-        "skip": "Run POW",
+        "skip": "Free Quota",
+        "buyVite": "Buy Vite",
         "cancel": "Cancel"
     },
     "addAccount": "アカウントの作成",
@@ -243,6 +244,8 @@
         "title": "アカウント設定",
         "config": "基本設定",
         "currency": "デフォルト通貨",
+        "powUrl": "PoW",
+        "changePowUrl": "Change PoW",
         "secure": "セキュリティ",
         "gate": "Custom Gateway",
         "rpcUrl": "Node",
@@ -332,11 +335,11 @@
             "name": "名前",
             "balance": "残高",
             "onroad": "ウォレット未受取額",
-            "gate": "ウォレット クロスチェ－ンゲートウェイ",
+            "gate": "Cross-Chain Gateway",
             "totalExAmount": "取引所合計残高",
             "availableExAmount": "取引可能残高",
             "balanceTips": "You can transfer your assets to other addresses via clicking 'Send' button",
-            "gateTips": "In this cross-chain section, you can map other tokens into Vite network. Click 'Receive' button to deposit assets to your Vite Wallet. Click 'Send' button to transfer your assets to other platforms. * Cross-chain receive/send process may charge fees, it also has its transfer limitation.",
+            "gateTips": "跨链资产服务由网关提供，出现充值&提现相关问 题，请联系负责该资产的网关.",
             "availableExAmountTips": "You can transfer your assets from Vite Wallet to ViteX Exchange via clicking 'Deposit' button. Click 'Withdraw' button to transfer assets from ViteX Exchange to Vite Wallet. No transaction fees caused during these processes.",
             "unreceivedTips": "Unreceived funds will be received automatically after signing in"
         },
@@ -503,7 +506,7 @@
     "wallet": {
         "title": "クオータ管理",
         "help": {
-            "title": "クォータの簡易解説"
+            "title": "What is Quota?"
         },
         "transfer": "Send Funds",
         "getTestToken": "テストトークンの取得",
@@ -592,7 +595,7 @@
     "walletQuota": {
         "title": "クオータ管理",
         "help": {
-            "title": "クォータの簡易解説"
+            "title": "What is Quota?"
         },
         "myQuota": "所有クオータ",
         "maxTxNum": "Txsの最大値",
@@ -606,12 +609,12 @@
         "inputWithdrawAmount": "引き出し量を入力してください",
         "pledgeFail": "送信できませんでした",
         "canclePledgeFail": "失敗",
-        "maturity": "Lock has expired!",
+        "maturity": "Locking has expired!",
         "minAmt": "引き出し金額は{num} VITEより小さくすることはできません",
         "gotoStake": "Please lock enough VITE first",
         "maxAmt": "引き出し金額は[{minAmount}、{maxAmount}]である必要があります",
         "cancelLimitAmt": "Lock amount cannot be less than {num}",
-        "withdrawalStaking": "Unlock Tokens",
+        "withdrawalStaking": "Withdraw Locked Token",
         "myAddr": "Current Address",
         "confirm": {
             "help": {
@@ -623,7 +626,7 @@
                 "txt3": "Proof of Work（PoW）は、一定量の作業の実行を証明するためのプロトコルであり、DDoS攻撃やその他のサービスの悪用を阻止する手段でもあります。 プロセスとして、一定量のコンピューティングの実行が必要となります。つまり、計算に要する時間としてある程度の時間がかかる場合があります。 Viteシステムでは、ユーザーはPoWを実行することで無料の割り当てを取得できます。また、取得した割り当てを通じてトランザクションを送信することもできます。"
             },
             "cancel": {
-                "describe": "Your current lock amount is {amount} VITE, please confirm to withdraw.",
+                "describe": "Your current locked amount is {amount} VITE, please confirm to withdraw.",
                 "rightBtn": "準備はいいですか？",
                 "leftBtn": "引き出しのキャンセル"
             },
@@ -634,7 +637,7 @@
             }
         },
         "list": {
-            "title": "My Locking List",
+            "title": "Locking Record",
             "total": "Locking {amount} VITE in total",
             "amount": "量",
             "withdrawTime": "Lock Expiration Date",
