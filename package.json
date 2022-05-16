@@ -11,11 +11,9 @@
         "build": "npm run clean && NODE_ENV=production VITE_NET=mainnet isPC=true webpack && NODE_ENV=production VITE_NET=mainnet node ./pack/afterPack.js",
         "build:H5": "npm run clean:H5 && NODE_ENV=production VITE_NET=mainnet isH5=true webpack && NODE_ENV=production VITE_NET=mainnet isH5=true node ./pack/afterPack.js",
         "build:all": "npm run build && npm run build:H5 && mv distH5/ dist/mobiledex",
-
         "testBuild": "npm run clean && NODE_ENV=production VITE_NET=buidl isPC=true webpack && NODE_ENV=production node ./pack/afterPack.js",
         "testBuild:H5": "npm run clean:H5 && NODE_ENV=production VITE_NET=buidl isH5=true webpack && NODE_ENV=production isH5=true node ./pack/afterPack.js",
         "testBuild:all": "npm run testBuild && npm run testBuild:H5 && mv distH5/ dist/mobiledex",
-
         "dev": "NODE_ENV=dev webpack-dev-server",
         "dev:prod": "API=production npm run dev",
         "analyzer": "NODE_ENV=production analyzer=true isPC=true webpack-dev-server",
@@ -100,7 +98,7 @@
         "@vite/bridge": "^1.0.14",
         "@vite/connector": "^0.0.2-0",
         "@vite/ledgerjs-hw-app-vite": "^1.0.0",
-        "@vite/vitejs": "^2.3.12",
+        "@vite/vitejs": "2.3.19-alpha.2",
         "@vite/vitejs-ws": "^2.3.12",
         "ant-design-vue": "^1.7.8",
         "babel-plugin-syntax-dynamic-import": "~6.18.0",
@@ -143,5 +141,9 @@
         "vue-select": "^3.16.0",
         "vuex": "~3.0.1",
         "web3": "1.0.0-beta.33"
+    },
+    "volta": {
+        "node": "10.24.1",
+        "yarn": "1.22.17"
     }
 }

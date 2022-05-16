@@ -12,17 +12,23 @@ const {
     currencyKey,
     CustomNodes,
     CurrentNode,
-    PowLimit
+    PowLimit,
+    CurrentPowUrl,
+    CustomPowUrls,
+    AutoReceiveKey
 } = constant;
 const HideZeroAssets = constant.HideZeroAssets;
 
 const theme = localStorage.getItem(ThemeKey);
 let customNodes = localStorage.getItem(CustomNodes);
 customNodes = Array.isArray(customNodes) ? customNodes : [];
+let customPowUrls = localStorage.getItem(CustomPowUrls);
+customPowUrls = Array.isArray(customPowUrls) ? customPowUrls : [];
+const currentPowUrl = localStorage.getItem(CurrentPowUrl) || '';
 const defaultNode = process.env.goViteServer;
 const defaultPowLimit = localStorage.getItem(PowLimit) || {};
-const defaultPowMaxTimes = process.env.NODE_ENV === 'production' ? 100 : 5;
-
+const defaultPowMaxTimes = process.env.NODE_ENV === 'production' ? 20 : 5;
+const autoReceive = localStorage.getItem(AutoReceiveKey) !== false;
 const state = {
     clientStatus: -1,
     lang: '',
@@ -34,10 +40,13 @@ const state = {
     isShowCompliance: false,
     hideZeroAssets: +localStorage.getItem(HideZeroAssets) || 0,
     customNodes,
+    currentPowUrl,
+    customPowUrls,
     officialNodes: [],
     currentNode: '',
     powMaxTimes: defaultPowMaxTimes,
-    powLimit: defaultPowLimit
+    powLimit: defaultPowLimit,
+    autoReceive
 };
 
 const mutations = {
@@ -95,13 +104,34 @@ const mutations = {
     setCurrentNode(state, node) {
         state.currentNode = node;
     },
+    setCustomPowUrls(state, nodes) {
+        state.customPowUrls = nodes;
+    },
+    setCurrentPowUrl(state, url) {
+        state.currentPowUrl = url;
+    },
     setPowLimit(state, powLimit) {
         localStorage.setItem(PowLimit, powLimit);
         state.powLimit = powLimit;
+    },
+    setAutoReceive(state, payload) {
+        localStorage.setItem(AutoReceiveKey, payload);
+        state.autoReceive = payload;
     }
 };
 
 const actions = {
+    changeAutoReceive({ commit, rootState }, isAutoRecive) {
+        commit('setAutoReceive', isAutoRecive);
+        const currHDAcc = rootState.wallet.currHDAcc;
+        if (currHDAcc) {
+            if (isAutoRecive) {
+                currHDAcc.startAutoReceive();
+            } else {
+                currHDAcc.stopAutoReceive();
+            }
+        }
+    },
     onNetStatus({ commit }) {
         window.addEventListener('online', () => {
             commit('setClientNetStatus', navigator.onLine);
@@ -132,6 +162,27 @@ const actions = {
     changeNode({ commit }, node) {
         localStorage.setItem(CurrentNode, node);
         commit('setCurrentNode', node);
+    },
+    addCustomPowUrl({ commit, state }, url) {
+        if (!url) return;
+        const customPowUrls = state.customPowUrls
+            .concat([url])
+            .filter(item => item);
+        commit('setCustomPowUrls', customPowUrls);
+        localStorage.setItem(CustomPowUrls, customPowUrls);
+    },
+    deleteCustomPowUrl({ commit, state }, url) {
+        const customPowUrls = state.customPowUrls.filter(item => item !== url);
+        if (url === state.currentPowUrl) {
+            commit('setCurrentPowUrl', '');
+            localStorage.setItem(CurrentPowUrl, '');
+        }
+        commit('setCustomPowUrls', customPowUrls);
+        localStorage.setItem(CustomPowUrls, customPowUrls);
+    },
+    changePowUrl({ commit }, url) {
+        localStorage.setItem(CurrentPowUrl, url);
+        commit('setCurrentPowUrl', url);
     },
     updatePowLimit({ commit, state }, { address, time = 1 }) {
         const { powLimit } = state;

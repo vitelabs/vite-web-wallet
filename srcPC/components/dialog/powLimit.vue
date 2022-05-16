@@ -1,13 +1,13 @@
 <template lang="pug">
 extends /components/dialog/base.pug
 block content
-    div {{ this.powTimesLeft > 0 ? $t('pow.insuffQuotaMsg') : $t('pow.insuffQuotaMsg2', {powMaxTimes: env.powMaxTimes})}}
+    div {{ this.powTimesLeft > 0 ? $t('pow.insuffQuotaMsg',{powTimesLeft:this.powTimesLeft}) : $t('pow.insuffQuotaMsg2')}}
 </template>
 
 <script>
 import { mapGetters, mapState } from 'vuex';
 import router from 'pcRouter/index.js';
-
+import { execWithRecaptcha } from 'pcUtils/execWithRecaptcha';
 
 export default {
     computed: {
@@ -20,7 +20,9 @@ export default {
             return this.$t('pow.insuffQuota');
         },
         dLTxt() {
-            return this.powTimesLeft > 0 ? this.$t('pow.skip') : this.$t('pow.cancel');
+            return this.powTimesLeft > 0
+                ? this.$t('pow.skip')
+                : this.$t('pow.buyVite');
         },
         dRTxt() {
             return this.$t('pow.getQuota');
@@ -32,11 +34,15 @@ export default {
             this.__close();
             router.push({ name: 'walletQuota' });
         },
+        startPow() {
+            this.promise.resolve({ status: 'CONFIRMED', data: 'skip' });
+            this.$store.dispatch('updatePowLimit', { address: this.address });
+        },
         lClick() {
             if (this.powTimesLeft > 0) {
-                this.promise.resolve({ status: 'CONFIRMED', data: 'skip' });
-                this.$store.dispatch('updatePowLimit', { address: this.address });
+                execWithRecaptcha(this.startPow.bind(this));
             } else {
+                window.open('https://x.vite.net/trade?symbol=VITE_USDT-000')
                 this.promise.reject({ status: 'CLOSE' });
             }
             this.__close();
@@ -46,7 +52,5 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "~assets/scss/vars.scss";
-
+@import '~assets/scss/vars.scss';
 </style>
-

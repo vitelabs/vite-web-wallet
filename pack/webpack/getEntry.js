@@ -14,6 +14,7 @@ module.exports = function (entryFile) {
             title: entryFile[entryName].title,
             favicon: entryFile[entryName].favicon,
             template: entryFile[entryName].template,
+            recaptchaToken: entryFile[entryName].recaptchaToken,
             filename: `${ entryName }.html`,
             hash: true,
             chunks: [ entryName, 'vendors', 'default' ],

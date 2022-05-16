@@ -1,10 +1,8 @@
 <template>
     <div class="login-wrapper">
-        <div class="__title">{{ $t("login") }}</div>
+        <div class="__title">{{ $t('login') }}</div>
 
-        <div
-            class="switch-btn"
-        >
+        <div class="switch-btn">
             <div
                 v-show="!isTestnet"
                 class="btn-item __pointer"
@@ -13,7 +11,7 @@
                 :key="'tb'"
             >
                 <div class="star"></div>
-                {{ $t("assets.vb.title") }}
+                {{ $t('assets.vb.title') }}
             </div>
             <div
                 v-show="!isTestnet"
@@ -24,7 +22,7 @@
                 :key="'ledger'"
             >
                 <div class="star"></div>
-                {{ $t("assets.ledger.title") }}
+                {{ $t('assets.ledger.title') }}
             </div>
             <div
                 v-show="isHaveList"
@@ -33,7 +31,7 @@
                 @click="toggleTab('existingAcc')"
                 :key="'existingAcc'"
             >
-                {{ $t("existingAcc") }}
+                {{ $t('existingAcc') }}
             </div>
             <div
                 class="btn-item __pointer"
@@ -41,14 +39,14 @@
                 @click="toggleTab('resotre')"
                 :key="'resotre'"
             >
-                {{ $t("restore") }}
+                {{ $t('restore') }}
             </div>
         </div>
         <div class="tab-content">
             <div class="vb" v-if="tabName === 'vb'">
                 <div class="code_container">
                     <div class="code_tips">
-                        {{ $t("assets.vb.start.scan") }}
+                        {{ $t('assets.vb.start.scan') }}
                     </div>
                     <qrcode
                         :options="qrcodeOpt"
@@ -56,60 +54,90 @@
                         class="vb_qrcode"
                     ></qrcode>
                     <div class="code_tips">
-                        {{ $t("assets.vb.start.downloadTips")
+                        {{ $t('assets.vb.start.downloadTips')
                         }}<span class="action_get_app" @click="getWallet"
-                        >{{ $t("assets.vb.start.download") }}&rarr;</span
+                        >{{ $t('assets.vb.start.download') }}&rarr;</span
                         >
                     </div>
                 </div>
                 <div class="__btn __btn_all_in __pointer" @click="createAcc">
-                    {{ $t("addAccount") }}
+                    {{ $t('addAccount') }}
                 </div>
             </div>
             <!-- Ledger wallet login panel -->
             <div class="ledger" v-if="tabName === 'ledger'">
                 <div class="code_container">
                     <div class="code_tips">
-                        {{ $t("assets.ledger.start.title") }}
+                        {{ $t('assets.ledger.start.title') }}
                     </div>
                     <div class="img_wrapper">
-                        <img src="~assets/imgs/ledger_logo.svg" alt="">
+                        <img src="~assets/imgs/ledger_logo.svg" alt="" />
                     </div>
                     <div class="code_tips_introduction">
-                        <a :href="$t('assets.ledger.start.introductionUrl')" target="_blank">{{ $t("assets.ledger.start.introduction") }}</a>
-                        <a :href="$t('assets.ledger.start.connectErrorUrl')" target="_blank">{{ $t("assets.ledger.start.connectError") }}</a>
+                        <a
+                            :href="$t('assets.ledger.start.introductionUrl')"
+                            target="_blank"
+                        >{{ $t('assets.ledger.start.introduction') }}</a
+                        >
+                        <a
+                            :href="$t('assets.ledger.start.connectErrorUrl')"
+                            target="_blank"
+                        >{{ $t('assets.ledger.start.connectError') }}</a
+                        >
                     </div>
                 </div>
-                <div class="__btn __btn_all_in __pointer" @click="connectLedger()">
-                    {{ $t("assets.ledger.connectLedger") }}
+                <div
+                    class="__btn __btn_all_in __pointer"
+                    @click="connectLedger()"
+                >
+                    {{ $t('assets.ledger.connectLedger') }}
                 </div>
             </div>
             <div v-if="tabName === 'existingAcc'" class="existing-acc">
-                <div class="bottom __btn __pointer" v-click-outside.includeChildrens="hideAccountList">
+                <div
+                    class="bottom __btn __pointer"
+                    v-click-outside.includeChildrens="hideAccountList"
+                >
                     <div @click="toggleAccountList">
-                        <div v-show="currAcc && !currAcc.activeAddr && !currAcc.isSeparateKey" class="__btn __btn_input">
+                        <div
+                            v-show="
+                                currAcc &&
+                                    !currAcc.activeAddr &&
+                                    !currAcc.isSeparateKey
+                            "
+                            class="__btn __btn_input"
+                        >
                             <div class="name __ellipsis">
                                 {{ currAcc.name }}
                             </div>
                         </div>
 
-                        <account-item class="no-border"
-                                      v-show="currAcc && currAcc.activeAddr"
-                                      :account="currAcc"></account-item>
+                        <account-item
+                            class="no-border"
+                            v-show="currAcc && currAcc.activeAddr"
+                            :account="currAcc"
+                        ></account-item>
 
-                        <span :class="{
-                            slide: true,
-                            down: !isShowAccountList,
-                            up: isShowAccountList
-                        }" ></span>
+                        <span
+                            :class="{
+                                slide: true,
+                                down: !isShowAccountList,
+                                up: isShowAccountList
+                            }"
+                        ></span>
                     </div>
 
-                    <account-list ref="accList" v-show="isShowAccountList"
-                                  :clickAccount="chooseAccount"></account-list>
+                    <account-list
+                        ref="accList"
+                        v-show="isShowAccountList"
+                        :clickAccount="chooseAccount"
+                    ></account-list>
                 </div>
 
-                <div class="bottom __btn __btn_input"
-                     :class="{ active: !!password || inputItem === 'pass' }">
+                <div
+                    class="bottom __btn __btn_input"
+                    :class="{ active: !!password || inputItem === 'pass' }"
+                >
                     <input
                         ref="passInput"
                         autofocus
@@ -126,14 +154,14 @@
                         class="__btn __btn_border __pointer"
                         @click="createAcc"
                     >
-                        {{ $t("addAccount") }}
+                        {{ $t('addAccount') }}
                     </span>
                     <div class="__btn __btn_all_in __pointer" @click="login">
                         <span v-show="!isLoading">
                             {{
                                 isShowExisting
-                                    ? $t("btn.login")
-                                    : $t("create.finish")
+                                    ? $t('btn.login')
+                                    : $t('create.finish')
                             }}
                         </span>
                         <loading v-show="isLoading" loadingType="dot"></loading>
@@ -160,7 +188,6 @@ import { getAppLink } from 'utils/getLink';
 import openUrl from 'utils/openUrl';
 import { getList, deleteOldAcc } from 'wallet';
 import * as DnsHost from 'services/dnsHostIP';
-
 
 import accountItem from './accountItem.vue';
 import restore from './restore.vue';
@@ -228,6 +255,9 @@ export default {
         },
         isTestnet() {
             return process.env.VITE_NET !== 'mainnet';
+        },
+        autoReceive() {
+            return this.$store.state.env.autoReceive;
         }
     },
     methods: {
@@ -260,7 +290,7 @@ export default {
                     this.initVB();
                 });
             }
-            if(this.isTestnet){
+            if (this.isTestnet) {
                 this.toggleTab('resotre');
             }
         },
@@ -390,8 +420,9 @@ export default {
                         deleteOldAcc(this.currAcc);
                     }
 
-                    this.currHDAcc.activate();
-                    const name = this.$store.state.env.lastPage || 'tradeCenter';
+                    this.currHDAcc.activate(this.autoReceive);
+                    const name
+                        = this.$store.state.env.lastPage || 'tradeCenter';
                     this.$router.push({ name });
                 })
                 .catch(err => {
@@ -406,7 +437,8 @@ export default {
         connectLedger() {
             hwAddressSelectDialog({ width: 'wide' }).then(({ status }) => {
                 if (status === 'CONFIRMED') {
-                    const name = this.$store.state.env.lastPage || 'tradeCenter';
+                    const name
+                        = this.$store.state.env.lastPage || 'tradeCenter';
                     this.$router.push({ name });
                 }
             });
@@ -416,7 +448,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "../start.scss";
+@import '../start.scss';
 
 .no-border {
     border: none;
@@ -427,10 +459,10 @@ export default {
     flex-direction: column;
     align-items: center;
     .__title {
-        [data-theme="0"] & {
+        [data-theme='0'] & {
             color: #fff;
         }
-        [data-theme="1"] & {
+        [data-theme='1'] & {
             color: #fff;
         }
     }
@@ -457,12 +489,12 @@ export default {
         margin-top: -6px;
 
         &.down {
-            background: url("~assets/imgs/down_icon.svg");
+            background: url('~assets/imgs/down_icon.svg');
             background-size: 16px 16px;
         }
 
         &.up {
-            background: url("~assets/imgs/up_icon.svg");
+            background: url('~assets/imgs/up_icon.svg');
             background-size: 16px 16px;
         }
     }
@@ -504,10 +536,10 @@ export default {
                 border-radius: 16px;
                 padding: 6px 12px;
                 box-shadow: 0 0 4px 0 rgba(0, 105, 219, 1);
-                &:first-child{
+                &:first-child {
                     margin-left: 0;
                 }
-                &:last-child{
+                &:last-child {
                     margin-right: 0;
                 }
             }
@@ -584,4 +616,3 @@ export default {
     }
 }
 </style>
-

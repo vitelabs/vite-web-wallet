@@ -1,10 +1,22 @@
 import viteCrypto from 'testwebworker';
-import { keystore, wallet, accountBlock as accountBlockUtils } from '@vite/vitejs';
+import {
+    keystore,
+    wallet,
+    accountBlock as accountBlockUtils
+} from '@vite/vitejs';
 
 import statistics from 'utils/statistics';
 import { viteClient } from 'services/apiServer';
 
-import { getAddr, addHdAccount, setAcc, getAcc, setAccInfo, setAddr, setLastAcc } from './store';
+import {
+    getAddr,
+    addHdAccount,
+    setAcc,
+    getAcc,
+    setAccInfo,
+    setAddr,
+    setLastAcc
+} from './store';
 
 const Default_Lang = 'english';
 const Max_Addr_Num = 10;
@@ -39,13 +51,13 @@ export class WebAccount {
         activeAddr,
         activeIdx
     }: {
-        id: string,
-        lang: string,
-        keystore,
-        name?: string,
-        addrNum?: number,
-        activeAddr: string,
-        activeIdx: number
+        id: string;
+        lang: string;
+        keystore;
+        name?: string;
+        addrNum?: number;
+        activeAddr: string;
+        activeIdx: number;
     }) {
         this.status = StatusMap.LOCK;
 
@@ -59,7 +71,8 @@ export class WebAccount {
 
         // Set Addr Num
         addrNum = addrNum || 1;
-        this.addrNum = this.activeIdx + 1 > addrNum ? this.activeIdx + 1 : addrNum;
+        this.addrNum
+            = this.activeIdx + 1 > addrNum ? this.activeIdx + 1 : addrNum;
 
         // Set Addr List
         this.setAddrList();
@@ -113,10 +126,15 @@ export class WebAccount {
 
     async unlock(pass) {
         const before = new Date().getTime();
-        const entropy: any = await keystore.decrypt(JSON.stringify(this.keystore), pass, viteCrypto);
+        const entropy: any = await keystore.decrypt(JSON.stringify(this.keystore),
+            pass,
+            viteCrypto);
         const after = new Date().getTime();
 
-        statistics.event('mnemonic-decrypt', this.keystore.version, 'time', after - before);
+        statistics.event('mnemonic-decrypt',
+            this.keystore.version,
+            'time',
+            after - before);
 
         // Set Base Info
         this.status = StatusMap.UNLOCK;
@@ -150,7 +168,7 @@ export class WebAccount {
         this.setAddrList();
     }
 
-    activate() {
+    activate(withAutoRecevie = true) {
         if (this.status === StatusMap.LOCK || !this.activeAccount) {
             return;
         }
@@ -160,7 +178,7 @@ export class WebAccount {
             privateKey: this.activeAccount.privateKey,
             provider: viteClient
         });
-        this.receiveTask.start();
+        withAutoRecevie && this.receiveTask.start();
         return;
     }
 
@@ -209,14 +227,22 @@ export class WebAccount {
         setAddr(addrObj.address, addrObj);
     }
 
-    switchActiveAcc(index, address) {
+    switchActiveAcc(index, address, withAutoRecevie = true) {
         if (this.status === StatusMap.LOCK) {
             return;
         }
         this.freeze();
         this.setActiveAcc(index, address);
         this.saveAcc();
-        this.activate();
+        this.activate(withAutoRecevie);
+    }
+
+    stopAutoReceive() {
+        this.receiveTask && this.receiveTask.stop();
+    }
+
+    startAutoReceive() {
+        this.receiveTask && this.receiveTask.start();
     }
 
     setActiveAcc(index?, address?) {
@@ -246,8 +272,12 @@ export class WebAccount {
         this.activeIdx = addrObj.idx;
         const privateKey = addrObj.privateKey;
 
-        if (this.activeAccount && this.activeAccount.address === this.activeAddr) {
-            !this.activeAccount.privateKey && (this.activeAccount.privateKey = privateKey);
+        if (
+            this.activeAccount
+            && this.activeAccount.address === this.activeAddr
+        ) {
+            !this.activeAccount.privateKey
+                && (this.activeAccount.privateKey = privateKey);
             return;
         }
 

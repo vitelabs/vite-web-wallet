@@ -1,13 +1,16 @@
 const path = require('path');
 const getEntry = require('./getEntry');
-const { srcPath } = require('../config');
+const { srcPath ,recaptchaToken} = require('../config');
 
 const PC_SRC_PATH = path.join(srcPath, '../srcPC');
-
+// -------- recaptchaToken
+const token = recaptchaToken[process.env.NODE_ENV];
+// ------
 const { entry, htmlWebpackPlugins } = getEntry({
     index: {
         path: path.join(PC_SRC_PATH, '/index.js'),
         title: 'ViteX, Exchange By the Community, For the Community',
+        recaptchaToken: token,
         favicon: path.join(srcPath, 'assets/imgs/logo.png'),
         template: path.join(srcPath, '../index.html')
     }
@@ -31,4 +34,3 @@ module.exports = {
         }
     }
 };
-

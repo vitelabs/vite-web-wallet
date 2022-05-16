@@ -30,10 +30,6 @@
             cell: 'showMaxSupply'
         },{
             class: '__ellipsis',
-            text: $t('walletMintage.isOwnerBurnOnly'),
-            cell: 'ownerBurnOnly'
-        },{
-            class: '__ellipsis',
             text: $t('tradeAssets.operate'),
             cell: 'operate'
         }]" :contentList="showTokenList">

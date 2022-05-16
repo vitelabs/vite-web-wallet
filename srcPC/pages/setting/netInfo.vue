@@ -3,32 +3,59 @@
         <div class="row">
             <span class="title">{{ $t('setting.rpcUrl') }}</span>
             <code v-html="env.currentNode"></code>
-            <span class="small-btn" @click="openNodeChangeDialog">{{ $t('setting.changeRpcUrl') }}</span>
+            <span class="small-btn" @click="openNodeChangeDialog">{{$t('setting.changeRpcUrl')}}</span>
+            <span class="auto-receive-switch">
+                <span>Auto-Receive</span>
+                <a-switch
+                    :size="'small'"
+                    :checked="env.autoReceive"
+                    @change="onChangeAutoReceive"
+                ></a-switch>
+            </span>
         </div>
-
         <div class="row">
-            <span class="title">{{ $t('setting.block') }}</span>{{ height || '----' }}
+            <span class="title">{{ $t('setting.powUrl') }}</span>
+            <code v-html="env.currentPowUrl"></code>
+            <span class="small-btn" @click="openPowUrlChangeDialog">{{
+                $t('setting.changePowUrl')
+            }}</span>
         </div>
         <div class="row">
-            <span class="title">{{ $t('setting.version') }}</span>{{ version }}
+            <span class="title">{{ $t('setting.block') }}</span
+            >{{ height || '----' }}
         </div>
         <div class="row">
-            <span class="a-link __pointer" @click="go('https://vitex.zendesk.com/')">
-                <span class="title">{{ $t('setting.service') }}</span><span class="link">https://vitex.zendesk.com/</span>
+            <span class="title">{{ $t('setting.version') }}</span
+            >{{ version }}
+        </div>
+        <div class="row">
+            <span
+                class="a-link __pointer"
+                @click="go('https://vitex.zendesk.com/')"
+            >
+                <span class="title">{{ $t('setting.service') }}</span
+                ><span class="link">https://vitex.zendesk.com/</span>
             </span>
             <span class="a-link __pointer" @click="go('https://vite.org/')">
-                <span class="title">{{ $t('setting.site') }}</span><span class="link">vite.org</span>
+                <span class="title">{{ $t('setting.site') }}</span
+                ><span class="link">vite.org</span>
             </span>
             <span class="a-link __pointer" @click="goNet">
-                <span class="title">{{ $t('setting.explorer') }}</span><span class="link">{{ netService }}</span>
+                <span class="title">{{ $t('setting.explorer') }}</span
+                ><span class="link">{{ netService }}</span>
             </span>
         </div>
         <div class="row">
-            <span class="a-link __pointer"  @click="go('https://vite.net/')">
-                <span class="title">{{ $t('setting.sys') }}</span><span class="link">vite.net</span>
+            <span class="a-link __pointer" @click="go('https://vite.net/')">
+                <span class="title">{{ $t('setting.sys') }}</span
+                ><span class="link">vite.net</span>
             </span>
-            <span class="a-link __pointer"  @click="go('https://github.com/vitelabs')">
-                <span class="title">{{ $t('setting.open') }}</span><span class="link">https://github.com/vitelabs</span>
+            <span
+                class="a-link __pointer"
+                @click="go('https://github.com/vitelabs')"
+            >
+                <span class="title">{{ $t('setting.open') }}</span
+                ><span class="link">https://github.com/vitelabs</span>
             </span>
         </div>
     </div>
@@ -39,7 +66,7 @@ import { mapState } from 'vuex';
 import openUrl from 'utils/openUrl';
 import { getExplorerLink } from 'utils/getLink';
 import { getProvider } from 'services/apiServer';
-import { changeRpcUrlDialog } from 'pcComponents/dialog';
+import { changeRpcUrlDialog, changePowUrlDialog } from 'pcComponents/dialog';
 
 export default {
     mounted() {
@@ -67,6 +94,9 @@ export default {
         }
     },
     methods: {
+        onChangeAutoReceive(value) {
+            this.$store.dispatch('changeAutoReceive', value);
+        },
         goNet() {
             this.go(this.netService);
         },
@@ -78,13 +108,16 @@ export default {
         },
         openNodeChangeDialog() {
             changeRpcUrlDialog();
+        },
+        openPowUrlChangeDialog() {
+            changePowUrlDialog();
         }
     }
 };
 </script>
 
 <style lang="scss" scoped>
-@import "./setting.scss";
+@import './setting.scss';
 
 .small-btn {
     @include small-btn();
@@ -96,6 +129,21 @@ export default {
     letter-spacing: 0.35px;
     font-size: 14px;
     @include font_color_to_white(#5e6875);
+    .auto-receive-switch {
+        display: inline-block;
+        margin-left: 10px;
+        > span:first-child {
+            display: inline-block;
+            margin-right: 5px;
+        }
+        .ant-switch {
+            background-color: #545f75;
+            &.ant-switch-checked {
+            background-color: #007aff;
+        }
+        }
+
+    }
     .a-link {
         @include setting_common_color();
         margin-left: 20px;
