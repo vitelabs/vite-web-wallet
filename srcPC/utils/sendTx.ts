@@ -1,4 +1,8 @@
-import { utils, accountBlock as accountBlockUtils } from '@vite/vitejs';
+import {
+    utils,
+    accountBlock as accountBlockUtils,
+    ViteAPI
+} from '@vite/vitejs';
 import { getActiveAcc, getCurrHDAcc } from 'wallet';
 import { powProcess } from 'pcComponents/pow/index';
 import { quotaConfirm } from 'pcComponents/quota/index';
@@ -7,7 +11,12 @@ import { execWithValid } from 'pcUtils/execWithValid';
 import { getVbInstance } from 'wallet/vb';
 import { getLedgerInstance } from 'wallet/ledgerHW';
 import { viteClient } from 'services/apiServer';
+import envStore from 'pcStore/envVariable';
+import provider from '@vite/vitejs-ws';
+
 import i18n from 'pcI18n';
+const providerTimeout = 60000;
+const providerOptions = { retryTimes: -1, retryInterval: 5000 };
 
 const { createAccountBlock } = accountBlockUtils;
 const { isObject } = utils;
@@ -35,7 +44,6 @@ const sendTx = execWithValid(function ({
 }) {
     const activeAccount = getActiveAcc();
 
-
     if (activeAccount.isBifrost) {
         return vbSendTx({
             abi,
@@ -61,16 +69,18 @@ const sendTx = execWithValid(function ({
     }
 
     if (window.touchID && window.touchID.isEnableTouchID()) {
-        return window.touchID.promptTouchID(i18n.t('desktop.unlock'))
-            .then(() => webSendTx({
-                methodName,
-                params: {
-                    ...data,
-                    address: activeAccount.address
-                },
-                config: formatConfig(config),
-                privateKey: activeAccount.privateKey
-            }))
+        return window.touchID
+            .promptTouchID(i18n.t('desktop.unlock'))
+            .then(() =>
+                webSendTx({
+                    methodName,
+                    params: {
+                        ...data,
+                        address: activeAccount.address
+                    },
+                    config: formatConfig(config),
+                    privateKey: activeAccount.privateKey
+                }))
             .catch(err => {
                 throw err;
             });
@@ -87,13 +97,13 @@ const sendTx = execWithValid(function ({
     });
 });
 
-
 async function webSendTx({ methodName, params, config, privateKey }) {
-    const accountBlock = createAccountBlock(methodName, params).setProvider(viteClient).setPrivateKey(privateKey);
+    const accountBlock = createAccountBlock(methodName, params)
+        .setProvider(viteClient)
+        .setPrivateKey(privateKey);
     await accountBlock.autoSetPreviousAccountBlock();
 
     const difficulty = await accountBlock.getDifficulty();
-    console.log(difficulty);
 
     if (!difficulty) {
         return accountBlock.sign().send();
@@ -109,7 +119,8 @@ async function webSendTx({ methodName, params, config, privateKey }) {
 
     if (config.powLimit) {
         try {
-            const powLimitRes = await powLimitDialog();
+            const p = powLimitDialog();
+            const powLimitRes = await p;
             if (powLimitRes.data === 'getQuota') {
                 return Promise.reject();
             }
@@ -121,10 +132,9 @@ async function webSendTx({ methodName, params, config, privateKey }) {
         }
     }
 
-
     const powInstance = powProcess({ ...config.powConfig });
     try {
-        await accountBlock.PoW(difficulty);
+        await runPow(difficulty, accountBlock);
         await powInstance.stopCount();
         return accountBlock.sign().send();
     } catch (err) {
@@ -149,19 +159,23 @@ function vbSendTx({ methodName, params, vbExtends, abi, description }) {
             rej({ code: '11021' });
         });
 
-        const accountBlock = createAccountBlock(methodName, params).accountBlock;
+        const accountBlock = createAccountBlock(methodName, params)
+            .accountBlock;
 
         const vb = getVbInstance();
-        return vb.sendVbTx({
-            block: accountBlock,
-            extend: vbExtends,
-            abi,
-            description
-        }).then(data => {
-            res(data);
-        }).catch(err => {
-            rej(err);
-        })
+        return vb
+            .sendVbTx({
+                block: accountBlock,
+                extend: vbExtends,
+                abi,
+                description
+            })
+            .then(data => {
+                res(data);
+            })
+            .catch(err => {
+                rej(err);
+            })
             .finally(() => {
                 compInstance && compInstance.close();
             });
@@ -179,7 +193,6 @@ async function hwSendTx({ methodName, params, config }) {
     const { publicKey, activeIdx } = getCurrHDAcc();
     accountBlock.setPublicKey(publicKey);
 
-
     if (!difficulty) {
         return signHwTx(activeIdx, accountBlock);
     }
@@ -195,7 +208,7 @@ async function hwSendTx({ methodName, params, config }) {
     const powInstance = powProcess({ ...config.powConfig });
 
     try {
-        await accountBlock.PoW(difficulty);
+        await runPow(difficulty, accountBlock);
         await powInstance.stopCount();
     } catch (err) {
         console.error('pow err', err);
@@ -210,7 +223,6 @@ async function hwSendTx({ methodName, params, config }) {
     return signHwTx(activeIdx, accountBlock);
 }
 
-
 function signHwTx(activeIdx, accountBlock) {
     return new Promise((resolve, reject) => {
         const confirmPromise: any = vbConfirmDialog();
@@ -223,10 +235,12 @@ function signHwTx(activeIdx, accountBlock) {
             getLedgerInstance().handleError({ name: 'CancelByWeb' });
             reject({ code: '11021' });
         });
-        getLedgerInstance().signHwTx(activeIdx, accountBlock).catch(err => {
-            !isRejected && getLedgerInstance().handleError(err);
-            throw err;
-        })
+        getLedgerInstance()
+            .signHwTx(activeIdx, accountBlock)
+            .catch(err => {
+                !isRejected && getLedgerInstance().handleError(err);
+                throw err;
+            })
             .finally(() => {
                 compInstance && compInstance.close();
             })
@@ -250,7 +264,10 @@ function formatConfig(config) {
     const powConfig = config.powConfig
         ? config.powConfig
         : defaultConfig.powConfig;
-    const powLimit = typeof config.powLimit === 'boolean' ? config.powLimit : defaultConfig.powLimit;
+    const powLimit
+        = typeof config.powLimit === 'boolean'
+            ? config.powLimit
+            : defaultConfig.powLimit;
 
     if (!isObject(powConfig)) {
         throw new Error('[Error] utils/sendTx: config.powConfig should be an Object.');
@@ -263,8 +280,8 @@ function formatConfig(config) {
     if (
         !(
             powConfig.hasOwnProperty('isShowCancel')
-      && typeof powConfig.isShowCancel !== 'undefined'
-      && powConfig.isShowCancel !== null
+            && typeof powConfig.isShowCancel !== 'undefined'
+            && powConfig.isShowCancel !== null
         )
     ) {
         powConfig.isShowCancel = true;
@@ -274,7 +291,9 @@ function formatConfig(config) {
         return { pow, powConfig, confirmConfig: null, powLimit };
     }
 
-    const confirmConfig = config.confirm ? config.confirm : defaultConfig.confirm;
+    const confirmConfig = config.confirm
+        ? config.confirm
+        : defaultConfig.confirm;
     if (!isObject(confirmConfig)) {
         throw new Error('[Error] utils/sendTx: config.confirm should be an object.');
     }
@@ -285,6 +304,30 @@ function formatConfig(config) {
 
     return { pow, powConfig, confirmConfig, powLimit };
 }
-
-
+const createViteApiFactory = url =>
+    new Promise((resolve, reject) => {
+        const WS_RPC = new provider(url, providerTimeout, providerOptions);
+        const viteClient = new ViteAPI(WS_RPC, () => {
+            console.log(`pow Connect to ${ url }`);
+            resolve(viteClient);
+        });
+    });
+async function runPow(difficulty, accountBlock) {
+    const customPowUrl = envStore.state.currentPowUrl;
+    const powProvider = customPowUrl
+        ? await createViteApiFactory(customPowUrl)
+        : accountBlock.provider;
+    const getNonceHashBuffer = Buffer.from(accountBlock.originalAddress + accountBlock.previousHash,
+        'hex');
+    const getNonceHash = utils.blake2bHex(getNonceHashBuffer, null, 32);
+    const nonce = await powProvider.request('util_getPoWNonce',
+        difficulty,
+        getNonceHash);
+    accountBlock.difficulty = difficulty;
+    accountBlock.nonce = nonce;
+    if (customPowUrl) {
+        powProvider._provider && powProvider._provider.disconnect();
+    }
+    return accountBlock;
+}
 export default sendTx;

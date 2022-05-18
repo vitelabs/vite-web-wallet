@@ -1,39 +1,72 @@
 <template>
     <div class="mintage __form_border">
         <div class="item">
-            <div class="__form_input_title">{{ $t('walletMintage.address') }}</div>
+            <div class="__form_input_title">
+                {{ $t('walletMintage.address') }}
+            </div>
             <div class="__form_input unuse">{{ activeAddr }}</div>
 
             <div class="row">
-                <span class="__form_tips" :class="{'active': tipsType === 'tokenName'}">
-                    {{  tipsType === 'tokenName' ? $t('walletMintage.hint.tokenName') : '' }}
+                <span
+                    class="__form_tips"
+                    :class="{ active: tipsType === 'tokenName' }"
+                >
+                    {{
+                        tipsType === 'tokenName'
+                            ? $t('walletMintage.hint.tokenName')
+                            : ''
+                    }}
                 </span>
                 <div class="__form_input_title">
                     {{ $t('walletMintage.tokenName') }}
-                    <span v-show="tokenNameErr" class="err">{{ tokenNameErr }}</span>
+                    <span v-show="tokenNameErr" class="err">{{
+                        tokenNameErr
+                    }}</span>
                 </div>
-                <vite-input v-model="tokenName" :valid="isTokenName"
-                            @blur="hideTips" @focus="showTips('tokenName')"></vite-input>
-            </div>
-
-            <div class="row">
-                <span class="__form_tips" :class="{'active': tipsType === 'tokenSymbol'}">
-                    {{  tipsType === 'tokenSymbol' ? $t('walletMintage.hint.tokenSymbol') : '' }}
-                </span>
-                <div class="__form_input_title">
-                    {{ $t('walletMintage.tokenSymbol') }}
-                    <span v-show="tokenSymbolErr" class="err">{{ tokenSymbolErr }}</span>
-                </div>
-                <vite-input v-model="tokenSymbol" :valid="isTokenSymbol"
-                            @blur="hideTips" @focus="showTips('tokenSymbol')"></vite-input>
+                <vite-input
+                    v-model="tokenName"
+                    :valid="isTokenName"
+                    @blur="hideTips"
+                    @focus="showTips('tokenName')"
+                ></vite-input>
             </div>
 
             <div class="row">
                 <div class="__form_input_title">
                     {{ $t('walletMintage.decimals') }}
-                    <span v-show="decimalsErr" class="err">{{ decimalsErr }}</span>
+                    <span v-show="decimalsErr" class="err">{{
+                        decimalsErr
+                    }}</span>
                 </div>
-                <vite-input v-model="decimals" @blur="hideTips" @focus="showTips('decimals')"></vite-input>
+                <vite-input
+                    v-model="decimals"
+                    @blur="hideTips"
+                    @focus="showTips('decimals')"
+                ></vite-input>
+                <div class="row">
+                    <span
+                        class="__form_tips"
+                        :class="{ active: tipsType === 'tokenSymbol' }"
+                    >
+                        {{
+                            tipsType === 'tokenSymbol'
+                                ? $t('walletMintage.hint.tokenSymbol')
+                                : ''
+                        }}
+                    </span>
+                    <div class="__form_input_title">
+                        {{ $t('walletMintage.tokenSymbol') }}
+                        <span v-show="tokenSymbolErr" class="err">{{
+                            tokenSymbolErr
+                        }}</span>
+                    </div>
+                    <vite-input
+                        v-model="tokenSymbol"
+                        :valid="isTokenSymbol"
+                        @blur="hideTips"
+                        @focus="showTips('tokenSymbol')"
+                    ></vite-input>
+                </div>
             </div>
         </div>
 
@@ -41,36 +74,56 @@
             <div class="row">
                 <div class="__form_input_title">
                     {{ $t('walletMintage.totalSupply') }}
-                    <span v-show="totalSupplyErr" class="err">{{ totalSupplyErr }}</span>
+                    <span v-show="totalSupplyErr" class="err">{{
+                        totalSupplyErr
+                    }}</span>
                 </div>
                 <vite-input v-model="totalSupply"></vite-input>
             </div>
 
             <div class="row">
-                <div class="__form_input_title">{{ $t('walletMintage.isReIssuable') }}</div>
+                <div class="__form_input_title">
+                    {{ $t('walletMintage.isReIssuable') }}
+                </div>
                 <bool-radio v-model="isReIssuable"></bool-radio>
             </div>
 
-            <div class="row" v-show="isReIssuable">
+            <div
+                class="row"
+                :style="{
+                    opacity: isReIssuable ? 1 : 0,
+                    'pointer-events': isReIssuable ? undefined : 'none'
+                }"
+            >
                 <div class="half">
                     <div class="__form_input_title">
                         {{ $t('walletMintage.maxSupply') }}
-                        <span v-show="maxSupplyErr" class="err">{{ maxSupplyErr }}</span>
+                        <span v-show="maxSupplyErr" class="err">{{
+                            maxSupplyErr
+                        }}</span>
                     </div>
                     <vite-input v-model="maxSupply"></vite-input>
                 </div>
-                <div class="half">
-                    <div class="__form_input_title">{{ $t('walletMintage.isOwnerBurnOnly') }}</div>
-                    <bool-radio v-model="ownerBurnOnly"></bool-radio>
-                </div>
             </div>
 
-            <div v-show="canMintage" class="__form_btn __pointer" @click="toMintage">{{ $t('walletMintage.mint') }}</div>
-            <div v-show="!canMintage" class="__form_btn __pointer unuse">{{ $t('walletMintage.mint') }}</div>
+            <div
+                v-show="canMintage"
+                class="__form_btn __pointer"
+                @click="toMintage"
+            >
+                {{ $t('walletMintage.mint') }}
+            </div>
+            <div v-show="!canMintage" class="__form_btn __pointer unuse">
+                {{ $t('walletMintage.mint') }}
+            </div>
         </div>
 
-        <mintage-confirm v-if="tokenInfo" :tokenInfo="tokenInfo"
-                         :close="closeConfirm" :clear="clearAll"></mintage-confirm>
+        <mintage-confirm
+            v-if="tokenInfo"
+            :tokenInfo="tokenInfo"
+            :close="closeConfirm"
+            :clear="clearAll"
+        ></mintage-confirm>
     </div>
 </template>
 
@@ -114,7 +167,14 @@ export default {
         },
         canMintage() {
             // Required
-            if (!(this.decimals !== '' && this.totalSupply && this.tokenName && this.tokenSymbol)) {
+            if (
+                !(
+                    this.decimals !== ''
+                    && this.totalSupply
+                    && this.tokenName
+                    && this.tokenSymbol
+                )
+            ) {
                 return false;
             }
 
@@ -123,7 +183,13 @@ export default {
                 return false;
             }
 
-            return !this.tokenNameErr && !this.tokenSymbolErr && !this.totalSupplyErr && !this.decimalsErr && !this.maxSupplyErr;
+            return (
+                !this.tokenNameErr
+                && !this.tokenSymbolErr
+                && !this.totalSupplyErr
+                && !this.decimalsErr
+                && !this.maxSupplyErr
+            );
         }
     },
     watch: {
@@ -160,7 +226,10 @@ export default {
                 return false;
             }
 
-            if (!/^[a-zA-Z_]+(\s{1}[a-zA-Z_]+)*$/g.test(tokenName) || tokenName.length > Len) {
+            if (
+                !/^[a-zA-Z_]+(\s{1}[a-zA-Z_]+)*$/g.test(tokenName)
+                || tokenName.length > Len
+            ) {
                 this.tokenNameErr = this.$t('walletMintage.err.tokenNameFormat');
                 return false;
             }
@@ -243,8 +312,12 @@ export default {
                 return false;
             }
 
-            if ((this.totalSupply === '' || this.totalSupplyErr)
-                || (this.decimals === '' || this.decimalsErr)) {
+            if (
+                this.totalSupply === ''
+                || this.totalSupplyErr
+                || this.decimals === ''
+                || this.decimalsErr
+            ) {
                 this.maxSupplyErr = '';
                 return false;
             }
@@ -300,7 +373,8 @@ export default {
                 decimals: this.decimals,
                 isReIssuable: this.isReIssuable,
                 maxSupply: this.maxSupply,
-                ownerBurnOnly: this.ownerBurnOnly
+                // ownerBurnOnly: this.ownerBurnOnly
+                ownerBurnOnly: false
             };
         }),
         closeConfirm() {
@@ -311,8 +385,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "~assets/scss/vars.scss";
-@import "../form.scss";
+@import '~assets/scss/vars.scss';
+@import '../form.scss';
 
 .mintage {
     width: 100%;
@@ -322,7 +396,7 @@ export default {
         display: inline-block;
         box-sizing: border-box;
         width: 50%;
-        min-height: 330px;
+        min-height: 260px;
         padding: 6px 25px 20px 30px;
         &.right {
             float: right;
@@ -333,7 +407,7 @@ export default {
             .half {
                 width: 45%;
                 display: inline-block;
-                &:last-child {
+                &:not(:first-child) {
                     margin-left: 28px;
                 }
             }
@@ -345,9 +419,7 @@ export default {
     margin-top: 14px;
 }
 .__form_btn {
-    position: absolute;
-    bottom: 20px;
-    right: 25px;
-    left: 30px;
+    width: 100%;
+    margin-top: 40px;
 }
 </style>

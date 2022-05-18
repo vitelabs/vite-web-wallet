@@ -1,16 +1,29 @@
 <template>
     <div>
         <sec-title :showHelp="showHelp"></sec-title>
-        <confirm  class="small" v-show="isShowHelp" :showMask="true" :singleBtn="true"
-                  :title="$t('walletQuota.help.title')" :closeIcon="true"
-                  :close="close" :leftBtnTxt="$t('btn.understand')"
-                  :leftBtnClick="close">
+        <confirm
+            class="small"
+            v-show="isShowHelp"
+            :showMask="true"
+            :singleBtn="true"
+            :title="$t('walletQuota.help.title')"
+            :closeIcon="true"
+            :close="close"
+            :leftBtnTxt="$t('btn.understand')"
+            :leftBtnClick="close"
+        >
             <div class="help-t">{{ $t('walletQuota.confirm.help.t1') }}</div>
-            <div class="help-txt">{{ $t('walletQuota.confirm.help.txt1') }}</div>
+            <div class="help-txt">
+                {{ $t('walletQuota.confirm.help.txt1') }}
+            </div>
             <div class="help-t">{{ $t('walletQuota.confirm.help.t2') }}</div>
-            <div class="help-txt">{{ $t('walletQuota.confirm.help.txt2') }}</div>
+            <div class="help-txt">
+                {{ $t('walletQuota.confirm.help.txt2') }}
+            </div>
             <div class="help-t">{{ $t('walletQuota.confirm.help.t3') }}</div>
-            <div class="help-txt">{{ $t('walletQuota.confirm.help.txt3') }}</div>
+            <div class="help-txt">
+                {{ $t('walletQuota.confirm.help.txt3') }}
+            </div>
         </confirm>
     </div>
 </template>
@@ -29,14 +42,17 @@ export default {
             this.isShowHelp = false;
         },
         showHelp() {
+            // open dialog
             this.isShowHelp = true;
+            // open quota page here @TODO url
+            // window.open(url);
         }
     }
 };
 </script>
 
 <style lang="scss" scoped>
-@import "~assets/scss/vars.scss";
+@import '~assets/scss/vars.scss';
 
 .help-t {
     @include font-family-normal();

@@ -2,13 +2,13 @@
 extends /components/dialog/base.pug
 block content
     div
-        div(v-for="(node, index) in allRpcNodes" :key="node" class="__radio_item")
-            input(type="radio" v-model="selectedNode" :value="node" :id="`radio_changeRpcUrl_${index}`" @change="onChangeNode" :disabled="!nodeStatusMap[node]")
+        div(v-for="(node, index) in env.customPowUrls" :key="node" class="__radio_item")
+            input(type="radio" v-model="selectedNode" :value="node" :id="`radio_changeRpcUrl_${index}`" @change="onChangeNode")
             label(:for="`radio_changeRpcUrl_${index}`")
-                span(class="__sm_btn") {{ isOfficial(node) ? $t('setting.changeRpcUrlDialog.officialNode') : $t('setting.changeRpcUrlDialog.customNode')}}
+                span(class="__sm_btn") {{ $t('setting.changeRpcUrlDialog.customNode')}}
                 div.node-text.__pointer {{node}}
                 span(class="__sm_btn ping-tag") {{nodeStatusMap[node] ? `${nodeStatusMap[node].ping} ms` : 'Ping...' }}
-            span(class="__sm_btn delete-node-btn" v-if="!isOfficial(node)" @click="deleteNode(node)") {{$t('setting.changeRpcUrlDialog.deleteCustomNode')}}
+            span(class="__sm_btn delete-node-btn"  @click="deleteNode(node)") {{$t('setting.changeRpcUrlDialog.deleteCustomNode')}}
         div.__row
             .__row_t {{$t('setting.changeRpcUrlDialog.addCustomNode')}}
             input.__input_row(type="text" v-model="newNode" :placeholder="$t('setting.changeRpcUrlDialog.inputPlaceholder')")
@@ -16,15 +16,16 @@ block content
 </template>
 
 <script>
-import { mapGetters, mapState } from 'vuex';
-import { getProvider, setProvider } from 'services/apiServer';
-import { checkApi } from 'pcUtils/nodeApi';
+import { mapState } from 'vuex';
+const checkApi = () => {
+    return Promise.resolve({ ping: 300, blockHeight: -1 }) ;
+};
 
 export default {
     data() {
         return {
             dShowClose: true,
-            selectedNode: getProvider().path || process.env.goViteServer,
+            selectedNode: this.$store.state.env.currentPowUrl,
             newNode: '',
             nodeStatusMap: {}
         };
@@ -33,58 +34,45 @@ export default {
         this.dTitle = this.$t('setting.changeRpcUrlDialog.title');
         this.checkNodeStatus();
     },
-    computed: {
-        ...mapState(['env']),
-        ...mapGetters(['allRpcNodes'])
-    },
-    watch: {
-        allRpcNodes() {
-            this.checkNodeStatus();
-        }
-    },
+    computed: { ...mapState(['env']) },
     methods: {
         inspector() {
             return Promise.resolve();
         },
         addNode() {
+            
             if (!this.validateNode(this.newNode)) {
                 this.$toast(this.$t('setting.changeRpcUrlDialog.wrongNode'));
                 return;
             }
-            this.$store.dispatch('addCustomNode', this.newNode);
+            this.$store.dispatch('addCustomPowUrl', this.newNode);
             this.newNode = '';
         },
         validateNode(url) {
             const re = /^(?:ws(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$/;
             return re.test(url);
         },
-        isOfficial(node) {
-            return this.env.officialNodes.indexOf(node) > -1;
-        },
         deleteNode(node) {
-            this.$store.dispatch('deleteCustomNode', node);
-            this.selectedNode = this.allRpcNodes[0];
+            this.$store.dispatch('deleteCustomPowUrl', node);
+            this.selectedNode = this.env.customPowUrls[0];
         },
         onChangeNode() {
-            const currentNode = getProvider().path;
+            const currentNode = this.env.currentPowUrl;
             if (currentNode === this.selectedNode) return;
-            setProvider(this.selectedNode).then(() => {
-                this.$toast(this.$t('setting.changeRpcUrlDialog.changeNodeSuccess'));
-                this.$store.dispatch('changeNode', this.selectedNode);
-            }).catch(err => {
-                this.$toast(this.$t('setting.changeRpcUrlDialog.failedConnected'));
-            });
+            this.$store.dispatch('changePowUrl', this.selectedNode);
+            this.checkNodeStatus();
         },
         checkNodeStatus() {
-            this.allRpcNodes.forEach(node => {
-                checkApi(node).then(data => {
-                    this.nodeStatusMap = {
-                        ...this.nodeStatusMap,
-                        [node]: data
-                    };
-                })
-                    .catch(err => {
-                    });
+            console.log(1111,this.nodeStatusMap)
+            this.env.customPowUrls.forEach(node => {
+                checkApi(node)
+                    .then(data => {
+                        this.nodeStatusMap = {
+                            ...this.nodeStatusMap,
+                            [node]: data
+                        };
+                    })
+                    .catch(err => {});
             });
         }
     }
@@ -147,7 +135,6 @@ export default {
         margin-left: 15px;
         max-width: 200px;
         text-overflow: ellipsis;
-        overflow: hidden;
     }
     label {
         display: flex;
