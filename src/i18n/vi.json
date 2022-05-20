@@ -339,7 +339,7 @@
             "totalExAmount": "Số dư Sàn",
             "availableExAmount": "Số dư khả dụng Sàn",
             "balanceTips": "Gửi on-chain khả dụng cho những người dùng muốn gửi giao dịch từ ví Vite của bạn đến các địa chỉ Vite khác",
-            "gateTips": "跨链资产服务由网关提供，出现充值&提现相关问 题，请联系负责该资产的网关.",
+            "gateTips": "The cross-chain service is provided by the gateway, if there are problems related to deposit & withdrawal, please contact its gateway.",
             "availableExAmountTips": "Bạn có thể chuyển tài sản của mình giữa Vite Wallet và ViteX Exchange bằng cách nhấp vào nút 'Chuyển'. Thao tác này không phát sinh phí.",
             "unreceivedTips": "Các khoản chưa nhận sẽ được tự động nhận sau khi đăng nhập"
         },
