@@ -9,13 +9,14 @@
                 >
                     {{ $t('trade.limitPrice.title') }}
                 </div>
-                <div
+                <!-- hide market price -->
+                <!-- <div
                     class="tab-item"
                     :class="{ active: priceType === 'market' }"
                     @click="togglePriceType('market')"
                 >
                     Market Price
-                </div>
+                </div> -->
             </div>
 
             <div class="right-tab">
@@ -173,19 +174,20 @@ export default {
     font-size: 14px;
     @include font-family-normal();
     font-weight: 400;
-    &__center-title{
+    .__center-title {
         display: flex;
         justify-content: space-between;
+        align-items: center;
         padding-bottom: 0;
         padding-bottom: 0;
     }
-    .left-tab{
+    .left-tab {
         display: flex;
-        .tab-item{
+        .tab-item {
             cursor: pointer;
-            padding:6px;
-            &.active{
-                background-color:#fff;
+            padding: 6px;
+            &.active {
+                background-color: #fff;
             }
         }
     }
