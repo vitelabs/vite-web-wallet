@@ -17,27 +17,31 @@ $font-H: DINPro, arial, sans-serif;
     font-weight: 600;
 }
 
-$black-color-1: #0F162D;
-$black-color-2: #151C32;
-$black-color-3: #01081F;
-$black-color-4: #1E2745;
+$black-color-1: #0f162d;
+$black-color-2: #151c32;
+$black-color-3: #01081f;
+$black-color-4: #1e2745;
 $black-color-5: #1d2024;
 
 $white-color: #fff;
 
-$blue-color-1: #007AFF;
-$blue-color-2: #4B74FF;
-$blue-color-3: rgba(38,142,255,1);
+$blue-color-1: #007aff;
+$blue-color-2: #4b74ff;
+$blue-color-3: rgba(38, 142, 255, 1);
 
-$red-color: #E5494D;
+$red-color: #e5494d;
 $red-color-1: #ff2929;
 
-$green-color: #00D764;
+$green-color: #00d764;
 
 $gray-color-1: #bdc1d1;
-$gray-color-2: #545F75;
-$gray-color-3: #73767A;
-$gray-color-4: rgba(94,104,117,1);
+$gray-color-2: #545f75;
+$gray-color-3: #73767a;
+$gray-color-4: rgba(94, 104, 117, 1);
 
 $hover-color-1: rgba(75, 116, 255, 0.1);
 $hover-color-2: $black-color-4;
+:root{
+    --vs-font-size: 0.14rem;
+
+}
