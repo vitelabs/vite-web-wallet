@@ -339,7 +339,7 @@
             "totalExAmount": "Saldo total del Exchange",
             "availableExAmount": "Saldo disponible en Exchange",
             "balanceTips": "El envío en-cadena está disponible para los usuarios que desean enviar transacciones desde su billetera Vite a otras direcciones de Vite",
-            "gateTips": "跨链资产服务由网关提供，出现充值&提现相关问 题，请联系负责该资产的网关.",
+            "gateTips": "The cross-chain service is provided by the gateway, if there are problems related to deposit & withdrawal, please contact its gateway.",
             "availableExAmountTips": "Puede transferir sus activos entre su billetera Vite y Exchange ViteX haciendo clic en el botón 'Transferir'. Este proceso no carga ninguna comisión.",
             "unreceivedTips": "Los fondos sin recibir serán liberados automáticamente después de iniciar sesión"
         },
