@@ -339,7 +339,7 @@
             "totalExAmount": "取引所合計残高",
             "availableExAmount": "取引可能残高",
             "balanceTips": "You can transfer your assets to other addresses via clicking 'Send' button",
-            "gateTips": "跨链资产服务由网关提供，出现充值&提现相关问 题，请联系负责该资产的网关.",
+            "gateTips": "The cross-chain service is provided by the gateway, if there are problems related to deposit & withdrawal, please contact its gateway.",
             "availableExAmountTips": "You can transfer your assets from Vite Wallet to ViteX Exchange via clicking 'Deposit' button. Click 'Withdraw' button to transfer assets from ViteX Exchange to Vite Wallet. No transaction fees caused during these processes.",
             "unreceivedTips": "Unreceived funds will be received automatically after signing in"
         },
