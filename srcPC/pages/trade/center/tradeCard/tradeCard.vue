@@ -9,13 +9,14 @@
                 >
                     {{ $t('trade.limitPrice.title') }}
                 </div>
-                <div
+                <!-- hide market price -->
+                <!-- <div
                     class="tab-item"
                     :class="{ active: priceType === 'market' }"
                     @click="togglePriceType('market')"
                 >
                     Market Price
-                </div>
+                </div> -->
             </div>
 
             <div class="right-tab">
