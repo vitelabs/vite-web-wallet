@@ -339,7 +339,7 @@
             "totalExAmount": "Kabuuang Balanse ng Palitan",
             "availableExAmount": "Magagamit na Balanse sa Palitan",
             "balanceTips": "Magagamit ang on-chain na pagpapadala para sa mga gumagamit na nais magpadala ng mga transaksyon mula sa iyong Vite wallet sa iba pang mga Vite address",
-            "gateTips": "跨链资产服务由网关提供，出现充值&提现相关问 题，请联系负责该资产的网关.",
+            "gateTips": "The cross-chain service is provided by the gateway, if there are problems related to deposit & withdrawal, please contact its gateway.",
             "availableExAmountTips": "Maaari mong ilipat ang iyong mga assets sa pagitan ng Vite Wallet at ViteX Exchange sa pamamagitan ng pag-click sa pindutang 'Transfer'. Walang ng mga bayarin sa transaksyon sa mga proseso na ito.",
             "unreceivedTips": "Ang mga hindi natanggap na pondo ay awtomatikong matatanggap pagkatapos ng pag-sign in"
         },
