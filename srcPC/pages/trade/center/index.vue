@@ -6,7 +6,7 @@
             <market slot="lb1"></market>
             <center-view slot="lb2"></center-view>
             <latest-tx slot="lb3"></latest-tx>
-            <TradeCard slot="lb4"></TradeCard>
+            <limit-price slot="lb4"></limit-price>
         </layout>
 
         <order-tab class="order-tab"></order-tab>
@@ -41,7 +41,7 @@ import layout from './layout';
 import depth from './depth/depth.vue';
 import market from './market/market.vue';
 import latestTx from './latestTx';
-import TradeCard from './tradeCard/tradeCard.vue';
+import limitPrice from './limitPrice/limitPrice.vue';
 import centerHead from './head/head.vue';
 import centerView from './view/view.vue';
 import orderTab from './orderTab';
@@ -52,7 +52,7 @@ export default {
         depth,
         market,
         latestTx,
-        TradeCard,
+        limitPrice,
         centerHead,
         centerView,
         orderTab,
