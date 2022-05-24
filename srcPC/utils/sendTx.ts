@@ -116,8 +116,10 @@ async function webSendTx({ methodName, params, config, privateKey }) {
             message: 'Don\'t need pow, already show confirm.'
         };
     }
-
-    if (config.powLimit) {
+    const customPowUrl = envStore.state.currentPowUrl;
+    const isOfficalPowUrl
+        = !customPowUrl || !!customPowUrl.match(/node\.vite\.net/);
+    if (config.powLimit && isOfficalPowUrl) {
         try {
             const p = powLimitDialog();
             const powLimitRes = await p;
