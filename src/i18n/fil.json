@@ -62,7 +62,7 @@
         "ing": "Pagpapatakbo ng PoW upang makakuha ng quota",
         "no": "You can lock VITE for quota in case you would not like to run PoW",
         "insuffQuota": "Kumuha ng Quota",
-        "insuffQuotaMsg": "We noticed that you have donʼt have any VITE locked for Quota. You can get free Quota for {powTimesLeft} more times today or lock VITE now. ",
+        "insuffQuotaMsg": "We noticed that you donʼt have any VITE locked for Quota. You can get free Quota for {powTimesLeft} more times today or lock VITE now. ",
         "insuffQuotaMsg2": "You have used up all your free Quota for today. Please lock VITE. ",
         "getQuota": "Patakbuhin ang POW",
         "skip": "Free Quota",
