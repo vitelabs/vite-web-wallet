@@ -40,7 +40,8 @@ export default {
         },
         lClick() {
             if (this.powTimesLeft > 0) {
-                execWithRecaptcha(this.startPow.bind(this));
+                this.startPow();
+                // execWithRecaptcha(this.startPow.bind(this));
             } else {
                 window.open('https://x.vite.net/trade?symbol=VITE_USDT-000')
                 this.promise.reject({ status: 'CLOSE' });
