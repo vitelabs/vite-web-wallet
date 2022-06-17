@@ -833,6 +833,8 @@ $font-black: rgba(36, 39, 43, 0.8);
         box-sizing: border-box;
         flex: 1;
         @include common_border();
+        @include bg_color_1();
+        @include default_font_color();
         &--forbidden {
             background: #f3f6f9;
             border: 1px solid #d4dee7;
