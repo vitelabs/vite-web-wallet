@@ -8,6 +8,8 @@
         <span class="vip-operate drop_menu __pointer" @click="goTradeVip">
             {{ isVip && isSVip ? $t('tradeVip.title') : $t('tradeVip.open') }}
         </span>
+        <span :style="{'padding-left':'2px','padding-right':'6px'}">|</span>
+
     </div>
 </template>
 
