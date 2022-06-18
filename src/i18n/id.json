@@ -64,6 +64,7 @@
         "insuffQuota": "Get Quota",
         "insuffQuotaMsg": "We notice you have no VITE locked for Quota. Please lock VITE or if you prefer, you can run POW to get Quota.",
         "insuffQuotaMsg2": "You have used up all your free Quota for today. Please lock VITE.",
+        "getQuota": "Lock VITE",
         "skip": "Run POW",
         "cancel": "Cancel"
     },
