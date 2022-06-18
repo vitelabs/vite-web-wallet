@@ -63,8 +63,7 @@
         "no": "Anda dapat menjalankan stake VITE untuk kuota jika Anda tidak ingin menjalankan PoW",
         "insuffQuota": "Get Quota",
         "insuffQuotaMsg": "We notice you have no VITE locked for Quota. Please lock VITE or if you prefer, you can run POW to get Quota.",
-        "insuffQuotaMsg2": "VITE Only {powMaxTimes} transactions can be made per day per address without staking VITE. Your address has exhausted all {powMaxTimes} transactions. Please go to the quota page and stake your VITE to perform more transactions.",
-        "getQuota": "Lock VITE",
+        "insuffQuotaMsg2": "You have used up all your free Quota for today. Please lock VITE.",
         "skip": "Run POW",
         "cancel": "Cancel"
     },
