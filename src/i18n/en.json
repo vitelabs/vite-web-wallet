@@ -62,11 +62,11 @@
         "ing": "Running PoW to acquire quota",
         "no": "You can lock VITE for quota in case you would not like to run PoW",
         "insuffQuota": "Get Quota",
-        "insuffQuotaMsg": "We noticed that you donʼt have any VITE locked for Quota. You can get free Quota for {powTimesLeft} more times today or lock VITE now. ",
-        "insuffQuotaMsg2": "You have used up all your free Quota for today. Please lock VITE. ",
+        "insuffQuotaMsg": "We noticed that you donʼt have any VITE locked for Quota. You can get free Quota for {powTimesLeft} more times today or lock VITE now.",
+        "insuffQuotaMsg2": "You have used up all your free Quota for today. Please lock VITE.",
         "getQuota": "Lock VITE",
         "skip": "Free Quota",
-        "buyVite":"Buy Vite",
+        "buyVite": "Buy Vite",
         "cancel": "Cancel"
     },
     "addAccount": "Create an Account",
@@ -78,9 +78,9 @@
     },
     "compliance": {
         "text": "By accessing ViteX, you agree to our",
-        "textTermsLink":"Terms of Service",
+        "textTermsLink": "Terms of Service",
         "textAnd": " and ",
-        "textPrivacyLink":"Privacy Policy",
+        "textPrivacyLink": "Privacy Policy",
         "title": "Important Notice"
     },
     "bnbConf": {
@@ -244,8 +244,8 @@
         "title": "Account Settings",
         "config": "General",
         "currency": "Default Currency",
-        "powUrl":"PoW",
-        "changePowUrl":"Change PoW",
+        "powUrl": "PoW",
+        "changePowUrl": "Change PoW",
         "secure": "Security",
         "gate": "Custom Gateway",
         "rpcUrl": "Node",
