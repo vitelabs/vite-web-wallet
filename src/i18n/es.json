@@ -62,11 +62,11 @@
         "ing": "Ejecutando PoW para adquirir cuota",
         "no": "Puedes bloquear VITE para obtener la cuota en caso de que no quieras ejecutar el PoW",
         "insuffQuota": "Obtener Cuota",
-        "insuffQuotaMsg": "We noticed that you donʼt have any VITE locked for Quota. You can get free Quota for {powTimesLeft} more times today or lock VITE now.",
-        "insuffQuotaMsg2": "You have used up all your free Quota for today. Please lock VITE.",
+        "insuffQuotaMsg": "Hemos notado que no tienes VITE bloqueado para Cuota. Puedes obtener cuota gratis {powTimesLeft} veces más hoy o puedes bloquear VITE ahora.",
+        "insuffQuotaMsg2": "Has usado toda tu cuota gratis para hoy. Por favor bloquea VITE.",
         "getQuota": "Bloquear VITE",
-        "skip": "Free Quota",
-        "buyVite": "Buy Vite",
+        "skip": "Cuota Gratis",
+        "buyVite": "Comprar Vite",
         "cancel": "Cancelar"
     },
     "addAccount": "Crear cuenta",
@@ -102,7 +102,7 @@
         "36002": "Falló la verificación del sistema. Inténtalo de nuevo más tarde",
         "36003": "Falló la verificación del sistema. Inténtalo de nuevo más tarde",
         "36004": "Falló la verificación del sistema. Inténtalo de nuevo más tarde",
-        "36005": "La instantánea de altura de bloque es ilegal, por favor inténtalo de nuevo más tarde",
+        "36005": "La altura de bloque de la instantánea es ilegal, por favor inténtalo de nuevo más tarde",
         "37001": "Formato de número de orden incorrecto",
         "37002": "Tipo de orden incorrecto",
         "37003": "Formato del precio de orden incorrecto",
@@ -245,7 +245,7 @@
         "config": "General",
         "currency": "Divisa predeterminada",
         "powUrl": "PoW",
-        "changePowUrl": "Change PoW",
+        "changePowUrl": "Cambiar PoW",
         "secure": "Seguridad",
         "gate": "Gateway personalizado",
         "rpcUrl": "Nodo",
@@ -335,11 +335,11 @@
             "name": "Nombre",
             "balance": "Balance de Billetera",
             "onroad": "Activos sin recibir",
-            "gate": "Cross-Chain Gateway",
+            "gate": "Gateway Cross-Chain",
             "totalExAmount": "Saldo total del Exchange",
             "availableExAmount": "Saldo disponible en Exchange",
             "balanceTips": "El envío en-cadena está disponible para los usuarios que desean enviar transacciones desde su billetera Vite a otras direcciones de Vite",
-            "gateTips": "The cross-chain service is provided by the gateway, if there are problems related to deposit & withdrawal, please contact its gateway.",
+            "gateTips": "El servicio de cross-chain es proporcionado por el gateway, si existen problemas relacionados con depósitos y/o retiros, póngase en contacto con su gateway.",
             "availableExAmountTips": "Puede transferir sus activos entre su billetera Vite y Exchange ViteX haciendo clic en el botón 'Transferir'. Este proceso no carga ninguna comisión.",
             "unreceivedTips": "Los fondos sin recibir serán liberados automáticamente después de iniciar sesión"
         },
@@ -506,7 +506,7 @@
     "wallet": {
         "title": "Gestión de cuotas",
         "help": {
-            "title": "What is Quota?"
+            "title": "¿Qué es la Cuota?"
         },
         "transfer": "Enviar activos",
         "getTestToken": "Obtener Tokens de Prueba",
@@ -595,7 +595,7 @@
     "walletQuota": {
         "title": "Gestión de cuotas",
         "help": {
-            "title": "What is Quota?"
+            "title": "¿Qué es la Cuota?"
         },
         "myQuota": "Mi cuota",
         "maxTxNum": "Número máximo de Txs",
@@ -609,12 +609,12 @@
         "inputWithdrawAmount": "Por favor, introduzca la cantidad a retirar",
         "pledgeFail": "Falló al enviar",
         "canclePledgeFail": "Falló",
-        "maturity": "Locking has expired!",
+        "maturity": "¡El bloqueo ha expirado!",
         "minAmt": "El monto del retiro no puede ser inferior a {num} VITE",
         "gotoStake": "Primero bloquee suficiente VITE",
         "maxAmt": "La cantidad de retiro debe estar entre [{minAmount}, {maxAmount}]",
         "cancelLimitAmt": "La cantidad a bloquear no puede ser menor que {num}",
-        "withdrawalStaking": "Withdraw Locked Token",
+        "withdrawalStaking": "Retirar Token Bloqueado",
         "myAddr": "Yo",
         "confirm": {
             "help": {
@@ -626,7 +626,7 @@
                 "txt3": "Prueba de Trabajo (PoW, en sus siglas en inglés), es un protocolo para confirmar que has realizado una cierta cantidad de trabajo. Esta medida es una medida económica para disuadir ataques DDoS y otros tipos de abusos de servicios. Requiere que el solicitador realize una cierta cantidad de cómputo tomando cierto tiempo en el servidor. En Vite, los usuarios pueden obtener una cuota gratuita ejecutando este PoW, y pudiendo enviar transacciones sin tomar ninguna acción usando la cuota obtenida."
             },
             "cancel": {
-                "describe": "Your current locked amount is {amount} VITE, please confirm to withdraw.",
+                "describe": "Tu cantidad bloqueada actual es {amount} VITE, por favor confirma para retirarla.",
                 "rightBtn": "Listo para empezar",
                 "leftBtn": "Cancelar retiro"
             },
@@ -637,7 +637,7 @@
             }
         },
         "list": {
-            "title": "Locking Record",
+            "title": "Registros de bloqueos",
             "total": "Bloqueando {amount} VITE en total",
             "amount": "Cantidad",
             "withdrawTime": "Fecha de expiración de bloqueo",
@@ -1085,7 +1085,7 @@
             "failProxy": "Delegación fallida",
             "successCancelProxy": "Delegación removida con éxito",
             "failCancelProxy": "Falló al remover delegación",
-            "info": "About Delegation",
+            "info": "Sobre Delegación",
             "new": "Iniciar una delegación",
             "active": {
                 "title": "Historial de Delegación",
@@ -1519,7 +1519,7 @@
             "submit": "Confirmar",
             "tokenName": "Nombre del Token",
             "address": "Dirección del destinatario",
-            "notice": "Note: After transferring the token ownership, you will no longer be able to open new trading pairs for this token. Any rights to old trading pairs you opened still belong to you."
+            "notice": "Advertencia: Después de transferir la propiedad del token, ya no podrá abrir nuevos pares de trading para este token. Cualquier derecho a los antiguos pares de trading que hayas abierto todavía te pertenece."
         }
     },
     "tradeTxPairManage": {
