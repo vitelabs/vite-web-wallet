@@ -18,7 +18,7 @@
     "blockHeight": "Instantánea de altura de bloque",
     "accountName": "Nombre de la cuenta",
     "action": "Acción",
-    "stakingAmount": "Locked Amount",
+    "stakingAmount": "Cantidad bloqueada",
     "submitStaking": "Confirmar bloqueo",
     "withdrawHeight": "Altura de bloque para expiración de bloqueo ",
     "balance": "Saldo",
