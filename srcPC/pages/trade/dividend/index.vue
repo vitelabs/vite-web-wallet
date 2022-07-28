@@ -347,7 +347,7 @@ export default {
                 });
         },
         goLink() {
-            openUrl('https://docs.vite.org/go-vite/dex/#vx-holder-dividends');
+            openUrl('https://docs.vite.org/vite-docs/dex/#vx-holder-dividends');
         }
     }
 };
