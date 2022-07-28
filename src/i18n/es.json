@@ -600,7 +600,7 @@
         "myQuota": "Mi cuota",
         "maxTxNum": "Número máximo de Txs",
         "beneficialAddr": "Beneficiario de la cuota",
-        "fromAddr": "Dirección de Deducción",
+        "fromAddr": "Source Address",
         "time": "Periodo de bloqueo",
         "aboutDays": "Aproximadamente {day} días",
         "amountPlaceholder": "Ingresa la cantidad a bloquear, mínimo {num} VITE",
@@ -861,7 +861,7 @@
                 "title": "Billeteras compatibles: Ledger Nano S / Ledger Nano X",
                 "connectError": "¿Problemas de conexión?",
                 "introduction": "Instrucciones de usuario e instalación de app",
-                "introductionUrl": "https://docs.vite.org/go-vite/tutorial/ledger-install.html",
+                "introductionUrl": "https://docs.vite.org/vite-docs/tutorial/ledger-install.html",
                 "connectErrorUrl": "https://support.ledger.com/hc/es/articles/115005165269-Connection-issues-with-Windows-or-Linux"
             },
             "connectWithUSB": "Usar USB",
