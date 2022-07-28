@@ -106,7 +106,7 @@ export default {
     },
     methods: {
         gotoProxyInfo() {
-            openUrl('https://docs.vite.org/go-vite/dex/api/rest-api.html#private-api-authorization');
+            openUrl('https://docs.vite.org/vite-docs/dex/api/rest-api.html#private-api-authorization');
         },
         updateData() {
             return Promise.all([
