@@ -122,7 +122,7 @@ export default {
             ]);
         },
         goLink() {
-            openUrl('https://docs.vite.org/go-vite/dex/#mining-details');
+            openUrl('https://docs.vite.org/vite-docs/dex/#mining-details');
         },
         goView() {
             openUrl('https://vitex.net/');
