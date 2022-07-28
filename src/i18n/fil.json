@@ -855,7 +855,7 @@
                 "title": "Mga suportadong Wallet: Ledger Nano S / Ledger Nano X",
                 "connectError": "Mga Isyu sa Koneksyon?",
                 "introduction": "Pag-install ng App at Mga Tagubilin sa Gumagamit",
-                "introductionUrl": "https://docs.vite.org/go-vite/tutorial/ledger-install.html",
+                "introductionUrl": "https://docs.vite.org/vite-docs/tutorial/ledger-install.html",
                 "connectErrorUrl": "https://support.ledger.com/hc/en-us/articles/115005165269-Connection-issues-with-Windows-or-Linux"
             },
             "connectWithUSB": "Gumamit ng USB",
