@@ -600,7 +600,7 @@
         "myQuota": "Quota của tôi",
         "maxTxNum": "Số Tx tối đa",
         "beneficialAddr": "Quota Beneficiary",
-        "fromAddr": "Địa chỉ khấu trừ",
+        "fromAddr": "Source Address",
         "time": "Lock Period",
         "aboutDays": "Dự kiến {day} ngày",
         "amountPlaceholder": "Please enter lock amount, minimum {num} VITE",
@@ -861,7 +861,7 @@
                 "title": "Ví được hỗ trợ: Ledger Nano S / Ledger Nano X",
                 "connectError": "Lỗi kết nối?",
                 "introduction": "Hướng dẫn Sử dụng & Cài đặt Ứng dụng",
-                "introductionUrl": "https://docs.vite.org/go-vite/tutorial/ledger-install.html",
+                "introductionUrl": "https://docs.vite.org/vite-docs/tutorial/ledger-install.html",
                 "connectErrorUrl": "https://support.ledger.com/hc/en-us/articles/115005165269-Connection-issues-with-Windows-or-Linux"
             },
             "connectWithUSB": "Sử dụng USB",
