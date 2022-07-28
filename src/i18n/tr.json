@@ -855,7 +855,7 @@
                 "title": "Desteklenen Cüzdanlar: Ledger Nano S / Ledger Nano X",
                 "connectError": "Bağlantı Sorunları?",
                 "introduction": "Uygulama Kurulumu ve Kullanıcı Talimatları",
-                "introductionUrl": "https://docs.vite.org/go-vite/tutorial/ledger-install.html",
+                "introductionUrl": "https://docs.vite.org/vite-docs/tutorial/ledger-install.html",
                 "connectErrorUrl": "https://support.ledger.com/hc/en-us/articles/115005165269-Connection-issues-with-Windows-or-Linux"
             },
             "connectWithUSB": "USB kullan",
