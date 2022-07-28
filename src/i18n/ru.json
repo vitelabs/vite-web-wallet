@@ -600,7 +600,7 @@
         "myQuota": "Моя Квота",
         "maxTxNum": "Максимальное Количество Транзакций",
         "beneficialAddr": "Quota Beneficiary",
-        "fromAddr": "Адрес Вычета",
+        "fromAddr": "Source Address",
         "time": "Lock Period",
         "aboutDays": "Около {day} дней",
         "amountPlaceholder": "Please enter lock amount, minimum {num} VITE",
@@ -861,7 +861,7 @@
                 "title": "Поддерживаемые кошельки: Ledger Nano S / Ledger Nano X",
                 "connectError": "Проблемы с подключением?",
                 "introduction": "Инструкции по установке и использованию приложения",
-                "introductionUrl": "https://docs.vite.org/go-vite/tutorial/ledger-install.html",
+                "introductionUrl": "https://docs.vite.org/vite-docs/tutorial/ledger-install.html",
                 "connectErrorUrl": "https://support.ledger.com/hc/ru/articles/115005165269-Connection-issues-with-Windows-or-Linux"
             },
             "connectWithUSB": "Использовать USB",
