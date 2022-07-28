@@ -855,7 +855,7 @@
                 "title": "지원되는 지갑: Ledger Nano S / Ledger Nano X",
                 "connectError": "연결 오류?",
                 "introduction": "어플 설치 & 사용 설명서",
-                "introductionUrl": "https://docs.vite.org/go-vite/tutorial/ledger-install.html",
+                "introductionUrl": "https://docs.vite.org/vite-docs/tutorial/ledger-install.html",
                 "connectErrorUrl": "https://support.ledger.com/hc/en-us/articles/115005165269-Connection-issues-with-Windows-or-Linux"
             },
             "connectWithUSB": "USB 사용하기",
