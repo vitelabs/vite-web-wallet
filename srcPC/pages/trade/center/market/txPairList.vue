@@ -48,13 +48,13 @@
                                 v-show="isTradeMining(txPair)"
                                 class="txPair-tips__mineItem"
                             >
-                                MM as Mining
+                                Trading as Mining
                             </div>
                             <div
                                 v-show="isOrderMining(txPair)"
                                 class="txPair-tips__mineItem"
                             >
-                                Trading as Mining
+                                MM as Mining
                             </div>
                         </div>
                     </div>
