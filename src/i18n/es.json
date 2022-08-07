@@ -1464,7 +1464,7 @@
         "hintTitle": "Aviso importante",
         "comingHint": "Pronto llegarán las funciones de VX como minería y dividendo, manténgase atento. El sistema distribuirá el 1% de BTC, ETH, VITE, USDT del pool total para todos los usuarios de VX, proporcionales a la cantidad de VX que poseen. El pool de dividendos comenzará en 0 y crecerá en función de la cantidad de comisiones cobradas por ViteX. Los traders deben tener un mínimo de 10 VX para recibir dividendos del pool compartido, compuesto por las comisiones base de trading. El listado de tokens y la creación de código de referencia generan comisiones adicionales al pool. ",
         "more": "Aprende más sobre las reglas de dividendos con VX",
-        "help": "Reglas de recompensa: 1. Se debe bloquear un mínimo de 10 VX para recibir dividendos. 2. El envío de la solicitud de staking permite empezar a recibir dividendos a partir de la próxima distribución. 3. La cantidad stakeada se liberará después del período de espera de 7 días",
+        "help": "Reglas de recompensa: 1. Se debe bloquear un mínimo de 10 VX para recibir dividendos. 2. El envío de la solicitud de staking permite empezar a recibir dividendos a partir de la próxima distribución. 3. La cantidad en staking se liberará después del período de espera de 7 días",
         "lockedAmount": "Cantidad en staking",
         "lockAmountTips": "Recibir Dividends con 10 VX o más",
         "unlockAmount": "Desbloqueando cantidad",
