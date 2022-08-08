@@ -600,7 +600,7 @@
         "myQuota": "Mi cuota",
         "maxTxNum": "Número máximo de Txs",
         "beneficialAddr": "Beneficiario de la cuota",
-        "fromAddr": "Source Address",
+        "fromAddr": "Dirección de origen",
         "time": "Periodo de bloqueo",
         "aboutDays": "Aproximadamente {day} días",
         "amountPlaceholder": "Ingresa la cantidad a bloquear, mínimo {num} VITE",
