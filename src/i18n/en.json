@@ -33,7 +33,7 @@
         "trade": [
             "Manage your assets (both Web Wallet and ViteX exchange) here",
             "Check out Open Orders and Order History, know trading details",
-            "Participate in mining, acquire VX and trading fee dividends (Mining Dividends)",
+            "Participate in mining, acquire VX and trading fee rewards (Mining Rewards)",
             "Experience more features: Locking for Quota, becoming a SBP (Snapshot Block Producer) runner, Voting for SBPs, ERC20 conversion, Transaction Details, etc."
         ],
         "assets": [
@@ -922,7 +922,7 @@
             "notEnough": "Insufficient exchange balance",
             "avaliable": "Balance",
             "inviteNum": "Invited",
-            "inviteBenifit": "Referral Mining Income",
+            "inviteBenifit": "Referral Mining Rewards",
             "inviteRule": "Rules",
             "ruleItems": [
                 "The <span class='strong'>100 VITE</span> payment to generate an invitation code will be burned",
@@ -1359,8 +1359,8 @@
             "mining": "Mining Amount",
             "pledge": "Stake"
         },
-        "txTitle": "Trading as Mining Total Income",
-        "quotaTitle": "Staking as Mining Total Income",
+        "txTitle": "Trading as Mining Total Rewards",
+        "quotaTitle": "Staking as Mining Total Rewards",
         "addHint1": "Single stake should be at least 134 VITE",
         "addHint2": "VITE staking will be effective immediately after submission. Staking can be canceled after 3 days",
         "addHint3": "Staked amount will be released after the 7-day waiting period",
@@ -1436,13 +1436,13 @@
         "type": "VIP Type"
     },
     "inviteMining": {
-        "title": "Referring as Mining Total Income",
+        "title": "Referring as Mining Total Rewards",
         "myInviteIncome": "Referral Proceeds",
         "inviteTradeIncome": "Referred Trading Proceeds",
         "inviteOrderIncome": "Referred Market-Making Proceeds"
     },
     "orderMining": {
-        "title": "Market-Making as Mining Total Income",
+        "title": "Market-Making as Mining Total Rewards",
         "tbHead": {
             "date": "Date",
             "ratio": "Ratio",
@@ -1452,9 +1452,9 @@
         "estimate": "{name} Today's Minable Amount"
     },
     "tradeDividend": {
-        "title": "Dividends",
+        "title": "Rewards",
         "poolTitle": "Trading Fee Dividend Pool",
-        "listTitle": "My Dividends",
+        "listTitle": "My Rewards",
         "allPrice": "Total Estimated Value",
         "date": "Date",
         "VX": "Stake VX",
@@ -1462,14 +1462,14 @@
         "amount": "Amount",
         "price": "Total Estimated Value",
         "hintTitle": "Important Notice",
-        "comingHint": "VX mining and dividend functions are coming soon, stay tuned. The system will distribute 1% of BTC, ETH, VITE, USDT of the total pool to all VX users proportional to the amount of VX they hold. The initial dividend pool will start at 0 and will grow according to the amount of fees collected by ViteX. Traders must have a minimum of 10 VX in order to receive dividends from a shared dividend pool comprised of base transaction, listing and referral code generating fees. ",
+        "comingHint": "VX mining and dividend functions are coming soon, stay tuned. The system will distribute 1% of BTC, ETH, VITE, USDT of the total pool to all VX users proportional to the amount of VX they hold. The initial dividend pool will start at 0 and will grow according to the amount of fees collected by ViteX. Traders must have a minimum of 10 VX in order to receive rewards from a shared dividend pool comprised of base transaction, listing and referral code generating fees. ",
         "more": "Learn more about VX dividend rules",
-        "help": "Reward Rules: 1. A minimum of 10 VX must be staked to receive dividends. 2. Submission of staking request allows for dividends starting the nearest distribution. 3. Staked amount will be released after the 7-day waiting period",
+        "help": "Reward Rules: 1. A minimum of 10 VX must be staked to receive rewards. 2. Submission of staking request allows for rewards starting the nearest distribution. 3. Staked amount will be released after the 7-day waiting period",
         "lockedAmount": "Staking Amount",
-        "lockAmountTips": "Receive Dividends on 10 VX or Above",
+        "lockAmountTips": "Receive Rewards on 10 VX or Above",
         "unlockAmount": "Unlocking Amount",
-        "addHint1": "A minimum of 10 VX must be staked to receive dividends",
-        "addHint2": "Submission of staking request allows for dividends starting the nearest distribution",
+        "addHint1": "A minimum of 10 VX must be staked to receive rewards",
+        "addHint2": "Submission of staking request allows for rewards starting the nearest distribution",
         "addHint3": "Staked amount will be released after the 7-day waiting period",
         "autoLock": "Automatic Staking",
         "openAutoLock": {
@@ -1509,7 +1509,7 @@
     "tradeOperator": {
         "title": "Operator",
         "tokenList": "Tokens",
-        "totalIncome": "Total Income",
+        "totalIncome": "Total Rewards",
         "permission": "Transfer Token's Ownership",
         "txPairManage": "Manage Trading Pairs",
         "noOperator": "You have no tokens or trading pairs yet, wanna become an operator?",
@@ -1525,7 +1525,7 @@
     "tradeTxPairManage": {
         "title": "{tokenSymbol} Trading Pairs Management",
         "symbol": "Name",
-        "income": "Income",
+        "income": "Rewards",
         "fee": "Fee Rate",
         "status": "Status",
         "operate": "Action",
@@ -1533,8 +1533,8 @@
         "resetTrans": "Recover",
         "changeOwner": "Transfer Ownership",
         "changeFee": "Adjust Fee Rate",
-        "incomeList": "Income Details",
-        "historyIncome": "Income History",
+        "incomeList": "Rewards Details",
+        "historyIncome": "Rewards History",
         "openTxPair": "Open Trading Pairs",
         "statusList": [
             "Ownership Transferred",
@@ -1566,12 +1566,12 @@
         "txPairName": "Name",
         "changeFeeHint": "{symbol}'s fee into {fee}",
         "changeFeeSubmit": "Make sure to change {changeFeeHint}",
-        "historyAllIncome": "Total Income",
+        "historyAllIncome": "Total Rewards",
         "incomeListHead": {
             "date": "Date",
             "txNum": "Volume",
             "feeRate": "Rate",
-            "feeIncome": "Income"
+            "feeIncome": "Rewards"
         }
     },
     "mobileAssets": {
@@ -1602,9 +1602,9 @@
         "avgPrice": "Avg"
     },
     "mobileDividend": {
-        "title": "Dividends",
+        "title": "Rewards",
         "poolTitle": "Dividend Pool ({token})",
-        "myDividendTitle": "Total Estimated Value of Dividends ({token})",
+        "myDividendTitle": "Total Estimated Value of Rewards ({token})",
         "listTitle": "Dividend Details",
         "lockingTitle": "My Staking",
         "viewLink": "Unstaking Status"
@@ -1615,10 +1615,10 @@
         "miningStaking": "Staking",
         "miningInvite": "Referral",
         "miningOrder": "Market-Making",
-        "tradeTotalIncome": "Total Income ({token})",
-        "stakingTotalIncome": "Total Income ({token})",
-        "inviteTotalIncome": "Total Income ({token})",
-        "orderTotalIncome": "Total Income ({token})",
+        "tradeTotalIncome": "Total Rewards ({token})",
+        "stakingTotalIncome": "Total Rewards ({token})",
+        "inviteTotalIncome": "Total Rewards ({token})",
+        "orderTotalIncome": "Total Rewards ({token})",
         "fee": "Fees",
         "listTitle": "Mining History",
         "viewLink": "Live Mining Dashboard",
