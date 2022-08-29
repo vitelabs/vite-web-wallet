@@ -33,7 +33,7 @@
         "trade": [
             "Управляйте вашими активами (как Веб-Кошелека, так и биржи ViteX) здесь",
             "Проверьте открытые заявки и Историю заявок, узнайте детали торговли",
-            "Участвуйте в получении наград, получайте VX и дивиденды от торговых комиссий (Награды и дивиденды)",
+            "Participate in mining, acquire VX and trading fee rewards (Mining Rewards)",
             "Experience more features: Locking for Quota, becoming a SBP (Snapshot Block Producer) runner, Voting for SBPs, ERC20 conversion, Transaction Details, etc."
         ],
         "assets": [
@@ -922,7 +922,7 @@
             "notEnough": "Недостаточный биржевой баланс",
             "avaliable": "Баланс",
             "inviteNum": "Поиглашенные",
-            "inviteBenifit": "Привлечение как Майнинг Доход",
+            "inviteBenifit": "Referral Mining Rewards",
             "inviteRule": "Правила",
             "ruleItems": [
                 "The <span class='strong'>100 VITE</span> payment to generate an invitation code will be burned",
@@ -1359,8 +1359,8 @@
             "mining": "Сумма Майнинга",
             "pledge": "Сумма Стейкинга"
         },
-        "txTitle": "Торговля как Майнинг Общий Доход",
-        "quotaTitle": "Стейкинг как Майнинг Общий Доход",
+        "txTitle": "Trading as Mining Total Rewards",
+        "quotaTitle": "Staking as Mining Total Rewards",
         "addHint1": " Стейк должен быть не менее 134 VITE",
         "addHint2": "Заморозка VITE будет действовать сразу. Разморозка будет доступна через 3 дня.",
         "addHint3": "Размещённая сумма будет доступна к разморозке после 7-дневного периода ожидания",
@@ -1436,13 +1436,13 @@
         "type": "VIP тип"
     },
     "inviteMining": {
-        "title": "邀请挖矿总收益",
+        "title": "Referring as Mining Total Rewards",
         "myInviteIncome": "Награда за приглашенных",
         "inviteTradeIncome": "Награды за торговлю приглашенных",
         "inviteOrderIncome": "Награды за маркет-мейкинг приглашенных"
     },
     "orderMining": {
-        "title": "挂单挖矿总收益",
+        "title": "Market-Making as Mining Total Rewards",
         "tbHead": {
             "date": "日前",
             "ratio": "占比",
@@ -1452,9 +1452,9 @@
         "estimate": "{name} Сумма добытого сегодня "
     },
     "tradeDividend": {
-        "title": "Дивиденды",
+        "title": "Rewards",
         "poolTitle": "Пул Дивидендов Комиссии за Торговлю",
-        "listTitle": "Мои Дивиденды",
+        "listTitle": "My Rewards",
         "allPrice": "Общая Оценочная Стоимость",
         "date": "Дата",
         "VX": "Хранение VX",
@@ -1462,14 +1462,14 @@
         "amount": "Сумма",
         "price": "Общая Оценочная Стоимость",
         "hintTitle": "Важное Замечание",
-        "comingHint": "Функции майнинга и дивидендов VX скоро появятся, следите за обновлениями. Система будет распределять 1% BTC, ETH, VITE, USDT от общего пула всем пользователям VX пропорционально количеству VX, которое они имеют. Начальный дивидендный пул начнется с 0 и будет расти в зависимости от суммы сборов, взимаемых ViteX. Трейдеры должны иметь как минимум 10 VX, чтобы получать дивиденды из пула дивидендов, состоящего из базовой транзакции, листинга и комиссионных за генерацию реферального кода. ",
+        "comingHint": "VX mining and dividend functions are coming soon, stay tuned. The system will distribute 1% of BTC, ETH, VITE, USDT of the total pool to all VX users proportional to the amount of VX they hold. The initial dividend pool will start at 0 and will grow according to the amount of fees collected by ViteX. Traders must have a minimum of 10 VX in order to receive rewards from a shared dividend pool comprised of base transaction, listing and referral code generating fees. ",
         "more": "Узнайте больше о правилах дивидендов VX",
-        "help": "Правила: 1. Для получения дивидендов нужно заморозить не менее 10 VX. 2. Первые дивиденды вы получите в ближайшее распределение после заморозки. 3. Разморозка длится семь (7) дней.",
+        "help": "Reward Rules: 1. A minimum of 10 VX must be staked to receive rewards. 2. Submission of staking request allows for rewards starting the nearest distribution. 3. Staked amount will be released after the 7-day waiting period",
         "lockedAmount": "Сумма Стейкинга",
-        "lockAmountTips": "Получение дивидендов от 10 VX (минимум)  или больше",
+        "lockAmountTips": "Receive Rewards on 10 VX or Above",
         "unlockAmount": "Сумма разморозки",
-        "addHint1": "Для получения дивидендов необходимо заморозить минимум 10 VX",
-        "addHint2": "Заморозка позволит получить дивиденды в ближайшее распределение",
+        "addHint1": "A minimum of 10 VX must be staked to receive rewards",
+        "addHint2": "Submission of staking request allows for rewards starting the nearest distribution",
         "addHint3": "Разморозка средств длится семь (7) дней",
         "autoLock": "Автоматическая заморозка",
         "openAutoLock": {
@@ -1509,7 +1509,7 @@
     "tradeOperator": {
         "title": "Оператор",
         "tokenList": "Токены",
-        "totalIncome": "Общий Доход",
+        "totalIncome": "Total Rewards",
         "permission": "Передача Права Собственности Токеном",
         "txPairManage": "Управление Торговыми Парами",
         "noOperator": "У вас еще нет токенов или торговых пар, хотите стать оператором?",
@@ -1525,7 +1525,7 @@
     "tradeTxPairManage": {
         "title": "Управление торговыми парами {tokenSymbol}",
         "symbol": "Имя",
-        "income": "Доход",
+        "income": "Rewards",
         "fee": "Ставка Комиссии",
         "status": "Статус",
         "operate": "Действие",
@@ -1533,8 +1533,8 @@
         "resetTrans": "Восстановить",
         "changeOwner": "Передать Права Собственности",
         "changeFee": "Регулировать Ставку Комиссии",
-        "incomeList": "Детали Дохода",
-        "historyIncome": "История Доходов",
+        "incomeList": "Rewards Details",
+        "historyIncome": "Rewards History",
         "openTxPair": "Открытые Торговые Пары",
         "statusList": [
             "Собственность Передана",
@@ -1566,12 +1566,12 @@
         "txPairName": "Имя",
         "changeFeeHint": "Комиссия {symbol} на {fee}",
         "changeFeeSubmit": "Убедитесь в изменении {changeFeeHint}",
-        "historyAllIncome": "Общий Доход",
+        "historyAllIncome": "Total Rewards",
         "incomeListHead": {
             "date": "Дата",
             "txNum": "Объём",
             "feeRate": "Курс",
-            "feeIncome": "Доход"
+            "feeIncome": "Rewards"
         }
     },
     "mobileAssets": {
@@ -1602,9 +1602,9 @@
         "avgPrice": "Сред."
     },
     "mobileDividend": {
-        "title": "Дивиденды",
+        "title": "Rewards",
         "poolTitle": "Пул дивидендов ({token})",
-        "myDividendTitle": "Сумма полученных дивидендов ({token})",
+        "myDividendTitle": "Total Estimated Value of Rewards ({token})",
         "listTitle": "Детализация дивидендов",
         "lockingTitle": "Заморожено",
         "viewLink": "Статус разморозки"
@@ -1615,10 +1615,10 @@
         "miningStaking": "Заморозка",
         "miningInvite": "Приглашенные",
         "miningOrder": "Маркет-мейкинг",
-        "tradeTotalIncome": "Общий доход ({token})",
-        "stakingTotalIncome": "Общий доход ({token})",
-        "inviteTotalIncome": "Общий доход ({token})",
-        "orderTotalIncome": "Общий доход ({token})",
+        "tradeTotalIncome": "Total Rewards ({token})",
+        "stakingTotalIncome": "Total Rewards ({token})",
+        "inviteTotalIncome": "Total Rewards ({token})",
+        "orderTotalIncome": "Total Rewards ({token})",
         "fee": "Комиссия",
         "listTitle": "История наград",
         "viewLink": "Посмотреть в реальном времени",
