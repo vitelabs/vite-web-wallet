@@ -33,7 +33,7 @@
         "trade": [
             "Kelola aset Anda (baik Web Wallet dan pertukaran ViteX) di sini",
             "Lihat Pesanan Terbuka dan Riwayat Pesanan, ketahui detail perdagangan",
-            "Berpartisipasi dalam penambangan, memperoleh dividen VX dan biaya perdagangan (Dividen Tambang)",
+            "Participate in mining, acquire VX and trading fee rewards (Mining Rewards)",
             "Experience more features: Locking for Quota, becoming a SBP (Snapshot Block Producer) runner, Voting for SBPs, ERC20 conversion, Transaction Details, etc."
         ],
         "assets": [
@@ -922,7 +922,7 @@
             "notEnough": "Saldo pertukaran tidak mencukupi",
             "avaliable": "Saldo",
             "inviteNum": "Diundang",
-            "inviteBenifit": "Penghasilan Penambangan Rujukan",
+            "inviteBenifit": "Referral Mining Rewards",
             "inviteRule": "Aturan",
             "ruleItems": [
                 "The <span class='strong'>100 VITE</span> payment to generate an invitation code will be burned",
@@ -1359,8 +1359,8 @@
             "mining": "Jumlah Penambangan",
             "pledge": "Jumlah Staking"
         },
-        "txTitle": "Perdagangan sebagai Total Pendapatan Penambangan",
-        "quotaTitle": "Staking sebagai Pendapatan Total Penambangan",
+        "txTitle": "Trading as Mining Total Rewards",
+        "quotaTitle": "Staking as Mining Total Rewards",
         "addHint1": "Single stake should be at least 134 VITE",
         "addHint2": "VITE staking will be effective immediately after submission. Staking can be canceled after 3 days",
         "addHint3": "Staked amount will be released after the 7-day waiting period",
@@ -1436,13 +1436,13 @@
         "type": "VIP Type"
     },
     "inviteMining": {
-        "title": "Mengacu pada Total Pendapatan Penambangan",
+        "title": "Referring as Mining Total Rewards",
         "myInviteIncome": "Referral Proceeds",
         "inviteTradeIncome": "Referred Trading Proceeds",
         "inviteOrderIncome": "Referred Market-Making Proceeds"
     },
     "orderMining": {
-        "title": "挂单挖矿总收益",
+        "title": "Market-Making as Mining Total Rewards",
         "tbHead": {
             "date": "Tanggal",
             "ratio": "占比",
@@ -1452,9 +1452,9 @@
         "estimate": "{name} Today's Minable Amount"
     },
     "tradeDividend": {
-        "title": "Dividen",
+        "title": "Rewards",
         "poolTitle": "Kelompok Dividen Biaya Perdagangan",
-        "listTitle": "Dividen Saya",
+        "listTitle": "My Rewards",
         "allPrice": "Total Nilai Taksiran",
         "date": "Tanggal",
         "VX": "Holding VX",
@@ -1462,14 +1462,14 @@
         "amount": "Jumlah",
         "price": "Total Nilai Taksiran",
         "hintTitle": "Pemberitahuan Penting",
-        "comingHint": "Fungsi penambangan dan dividen VX akan segera hadir, tunggu saja. Sistem akan mendistribusikan 1% dari BTC, ETH, VITE, USDT dari total kumpulan ke semua pengguna VX sebanding dengan jumlah VX yang mereka pegang. Kumpulan dividen awal akan mulai dari 0 dan akan tumbuh sesuai dengan jumlah biaya yang dikumpulkan oleh ViteX. Trader harus memiliki minimal 10 VX untuk dapat menerima dividen dari kumpulan dividen bersama yang terdiri dari transaksi dasar, daftar, dan biaya pembuatan kode rujukan. ",
+        "comingHint": "VX mining and dividend functions are coming soon, stay tuned. The system will distribute 1% of BTC, ETH, VITE, USDT of the total pool to all VX users proportional to the amount of VX they hold. The initial dividend pool will start at 0 and will grow according to the amount of fees collected by ViteX. Traders must have a minimum of 10 VX in order to receive rewards from a shared dividend pool comprised of base transaction, listing and referral code generating fees. ",
         "more": "Pelajari lebih lanjut tentang aturan dividen VX",
-        "help": "Reward Rules: 1. A minimum of 10 VX must be staked to receive dividends. 2. Submission of staking request allows for dividends starting the nearest distribution. 3. Staked amount will be released after the 7-day waiting period",
+        "help": "Reward Rules: 1. A minimum of 10 VX must be staked to receive rewards. 2. Submission of staking request allows for rewards starting the nearest distribution. 3. Staked amount will be released after the 7-day waiting period",
         "lockedAmount": "Jumlah Stake",
-        "lockAmountTips": "Receive Dividends on 10 VX or Above",
+        "lockAmountTips": "Receive Rewards on 10 VX or Above",
         "unlockAmount": "Unlocking Amount",
-        "addHint1": "A minimum of 10 VX must be staked to receive dividends",
-        "addHint2": "Submission of staking request allows for dividends starting the nearest distribution",
+        "addHint1": "A minimum of 10 VX must be staked to receive rewards",
+        "addHint2": "Submission of staking request allows for rewards starting the nearest distribution",
         "addHint3": "Staked amount will be released after the 7-day waiting period",
         "autoLock": "Automatic Staking",
         "openAutoLock": {
@@ -1509,7 +1509,7 @@
     "tradeOperator": {
         "title": "Operator",
         "tokenList": "Token",
-        "totalIncome": "Jumlah pemasukan",
+        "totalIncome": "Total Rewards",
         "permission": "Transfer Kepemilikan Token",
         "txPairManage": "Kelola Pasangan Perdagangan",
         "noOperator": "Anda belum memiliki token atau pasangan perdagangan, ingin menjadi operator?",
@@ -1525,7 +1525,7 @@
     "tradeTxPairManage": {
         "title": "{tokenSymbol} Manajemen Pasangan Trading",
         "symbol": "Nama",
-        "income": "Pendapatan",
+        "income": "Rewards",
         "fee": "Tarif Biaya",
         "status": "Status",
         "operate": "Tindakan",
@@ -1533,8 +1533,8 @@
         "resetTrans": "Memulihkan",
         "changeOwner": "Transfer Kepemilikan",
         "changeFee": "Sesuaikan Tingkat Biaya",
-        "incomeList": "Rincian Penghasilan",
-        "historyIncome": "Sejarah Penghasilan",
+        "incomeList": "Rewards Details",
+        "historyIncome": "Rewards History",
         "openTxPair": "Buka Pasangan Perdagangan",
         "statusList": [
             "Kepemilikan Ditransfer",
@@ -1566,12 +1566,12 @@
         "txPairName": "Nama",
         "changeFeeHint": "{symbol} biaya menjadi {fee}",
         "changeFeeSubmit": "Pastikan untuk mengubah {changeFeeHint}",
-        "historyAllIncome": "Jumlah pemasukan",
+        "historyAllIncome": "Total Rewards",
         "incomeListHead": {
             "date": "Tanggal",
             "txNum": "Volume",
             "feeRate": "Nilai",
-            "feeIncome": "Pendapatan"
+            "feeIncome": "Rewards"
         }
     },
     "mobileAssets": {
@@ -1602,9 +1602,9 @@
         "avgPrice": "Avg"
     },
     "mobileDividend": {
-        "title": "Dividen",
+        "title": "Rewards",
         "poolTitle": "Dividend Pool ({token})",
-        "myDividendTitle": "Total Estimated Value of Dividends ({token})",
+        "myDividendTitle": "Total Estimated Value of Rewards ({token})",
         "listTitle": "Dividend Details",
         "lockingTitle": "My Staking",
         "viewLink": "Unstaking Status"
@@ -1615,10 +1615,10 @@
         "miningStaking": "Staking",
         "miningInvite": "Referral",
         "miningOrder": "Market-Making",
-        "tradeTotalIncome": "Total Income ({token})",
-        "stakingTotalIncome": "Total Income ({token})",
-        "inviteTotalIncome": "Total Income ({token})",
-        "orderTotalIncome": "Total Income ({token})",
+        "tradeTotalIncome": "Total Rewards ({token})",
+        "stakingTotalIncome": "Total Rewards ({token})",
+        "inviteTotalIncome": "Total Rewards ({token})",
+        "orderTotalIncome": "Total Rewards ({token})",
         "fee": "Biaya",
         "listTitle": "Mining History",
         "viewLink": "Live Mining Dashboard",
