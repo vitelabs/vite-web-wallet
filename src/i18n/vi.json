@@ -33,7 +33,7 @@
         "trade": [
             "Quản lí tài sản tại đây (ví Web và sàn ViteX)",
             "Kiểm tra Lệnh đang mở, Lịch sử đặt lệnh và Chi tiết giao dịch",
-            "Tham gia Khai thác, Nhận cổ tức VX và Cổ tức phí giao dịch (Cổ tức Khai thác)",
+            "Participate in mining, acquire VX and trading fee rewards (Mining Rewards)",
             "Experience more features: Locking for Quota, becoming a SBP (Snapshot Block Producer) runner, Voting for SBPs, ERC20 conversion, Transaction Details, etc."
         ],
         "assets": [
@@ -922,7 +922,7 @@
             "notEnough": "Số dư sàn không đủ",
             "avaliable": "Số dư",
             "inviteNum": "Đã mời",
-            "inviteBenifit": "Thu nhập Khai thác giới thiệu",
+            "inviteBenifit": "Referral Mining Rewards",
             "inviteRule": "Quy tắc",
             "ruleItems": [
                 "The <span class='strong'>100 VITE</span> payment to generate an invitation code will be burned",
@@ -1359,8 +1359,8 @@
             "mining": "Số lượng Khai thác",
             "pledge": "Stake"
         },
-        "txTitle": "Tổng Khai thác bằng Giao dịch",
-        "quotaTitle": "Tổng Khai thác bằng Stake",
+        "txTitle": "Trading as Mining Total Rewards",
+        "quotaTitle": "Staking as Mining Total Rewards",
         "addHint1": "Tối thiếu 134 VITE mỗi một stake",
         "addHint2": "Stake VITE sẽ có hiệu lực ngay sau khi ghi nhận. Stake có thể hủy sau 3 ngày",
         "addHint3": "Số token stake sẽ không được mở khoá sau thời gian chờ đợi 7 ngày",
@@ -1436,13 +1436,13 @@
         "type": "Loại VIP"
     },
     "inviteMining": {
-        "title": "Tổng Khai thác bằng Giới thiệu",
+        "title": "Referring as Mining Total Rewards",
         "myInviteIncome": "Hoa hồng từ Giới thiệu",
         "inviteTradeIncome": "Hoa hồng từ Ref Giao dịch",
         "inviteOrderIncome": "Hoa hồng từ Ref Tạo thanh khoản"
     },
     "orderMining": {
-        "title": "Tổng Khai thác từ Tạo thanh khoản",
+        "title": "Market-Making as Mining Total Rewards",
         "tbHead": {
             "date": "Ngày",
             "ratio": "Tỷ lệ",
@@ -1452,9 +1452,9 @@
         "estimate": "{name} Tổng khai thác hôm nay"
     },
     "tradeDividend": {
-        "title": "Cổ tức",
+        "title": "Rewards",
         "poolTitle": "Tổng Cổ tức Phí giao dịch",
-        "listTitle": "Cổ tức của tôi",
+        "listTitle": "My Rewards",
         "allPrice": "Tổng Giá trị ước tính",
         "date": "Ngày",
         "VX": "Stake VX",
@@ -1462,14 +1462,14 @@
         "amount": "Số lượng",
         "price": "Tổng Giá trị ước tính",
         "hintTitle": "Thông báo Quan trọng",
-        "comingHint": "Chức năng khai thác và cổ tức VX sẽ sớm ra mắt, hãy cùng chờ đón! Hệ thống sẽ phân phối 1% BTC, ETH, VITE, USDT của tổng số vốn chung cho tất cả người dùng VX, tỷ lệ thuận với lượng VX họ nắm giữ. Nhóm cổ tức ban đầu sẽ bắt đầu từ 0 và sẽ tăng theo mức phí mà ViteX thu được. Trader phải có tối thiểu 10 VX để nhận cổ tức từ nhóm vốn chung cổ tức bao gồm phí giao dịch cơ sở, phí niêm yết và phí tạo mã giới thiệu. ",
+        "comingHint": "VX mining and dividend functions are coming soon, stay tuned. The system will distribute 1% of BTC, ETH, VITE, USDT of the total pool to all VX users proportional to the amount of VX they hold. The initial dividend pool will start at 0 and will grow according to the amount of fees collected by ViteX. Traders must have a minimum of 10 VX in order to receive rewards from a shared dividend pool comprised of base transaction, listing and referral code generating fees. ",
         "more": "Tìm hiểu về Quy tắc cổ tức VX",
-        "help": "Quy tắc Phần thưởng: 1. Phải stake tối thiểu 10 VX để nhận dividend. 2. Việc gửi yêu cầu stake cho phép nhận dividend bắt đầu từ đợt phân phối gần nhất. 3. Số token đã stake sẽ chỉ được mở khoá sau thời gian chờ 7 ngày unstake",
+        "help": "Reward Rules: 1. A minimum of 10 VX must be staked to receive rewards. 2. Submission of staking request allows for rewards starting the nearest distribution. 3. Staked amount will be released after the 7-day waiting period",
         "lockedAmount": "Số lượng Stake",
-        "lockAmountTips": "Nhận Dividend từ 10 VX hoặc nhiều hơn",
+        "lockAmountTips": "Receive Rewards on 10 VX or Above",
         "unlockAmount": "Mở khóa",
-        "addHint1": "Phải stake tối thiểu 10 VX để nhận dividend",
-        "addHint2": "Việc gửi yêu cầu stake cho phép nhận\b dividend bắt đầu từ đợt phân phối gần nhất",
+        "addHint1": "A minimum of 10 VX must be staked to receive rewards",
+        "addHint2": "Submission of staking request allows for rewards starting the nearest distribution",
         "addHint3": "Số token stake sẽ không được mở khoá sau thời gian chờ đợi 7 ngày",
         "autoLock": "Stake Tự động",
         "openAutoLock": {
@@ -1509,7 +1509,7 @@
     "tradeOperator": {
         "title": "Nhà vận hành",
         "tokenList": "Token",
-        "totalIncome": "Tổng thu nhập",
+        "totalIncome": "Total Rewards",
         "permission": "Chuyển quyền sở hữu Token",
         "txPairManage": "Quản lý Cặp giao dịch",
         "noOperator": "Bạn chưa có token hoặc cặp giao dịch nào, bạn có muốn trở thành Nhà vậy hành?",
@@ -1525,7 +1525,7 @@
     "tradeTxPairManage": {
         "title": "Quản lý cặp giao dịch {tokenSymbol}",
         "symbol": "Tên",
-        "income": "Thu nhập",
+        "income": "Rewards",
         "fee": "Tỷ lệ Phí",
         "status": "Trạng thái",
         "operate": "Thực thi",
@@ -1533,8 +1533,8 @@
         "resetTrans": "Khôi phục",
         "changeOwner": "Chuyển quyền Sở hữu",
         "changeFee": "Điều chỉnh Tỷ lệ Phí",
-        "incomeList": "Chi tiết Thu nhập",
-        "historyIncome": "Lịch sử Thu nhập",
+        "incomeList": "Rewards Details",
+        "historyIncome": "Rewards History",
         "openTxPair": "Mở Cặp Giao dịch",
         "statusList": [
             "Chuyển nhượng Quyền sở hữu",
@@ -1566,12 +1566,12 @@
         "txPairName": "Tên",
         "changeFeeHint": "Phí của {symbol} trong {fee}",
         "changeFeeSubmit": "Chắc chắn thay đổi {changeFeeHint}",
-        "historyAllIncome": "Tổng thu nhập",
+        "historyAllIncome": "Total Rewards",
         "incomeListHead": {
             "date": "Ngày",
             "txNum": "Khối lượng",
             "feeRate": "Tỷ giá",
-            "feeIncome": "Thu nhập"
+            "feeIncome": "Rewards"
         }
     },
     "mobileAssets": {
@@ -1602,9 +1602,9 @@
         "avgPrice": "Avg"
     },
     "mobileDividend": {
-        "title": "Cổ tức",
+        "title": "Rewards",
         "poolTitle": "Tổng Dividend ({token})",
-        "myDividendTitle": "Tổng Giá trị Dividend Ước tính ({token})",
+        "myDividendTitle": "Total Estimated Value of Rewards ({token})",
         "listTitle": "Chi tiết Dividend",
         "lockingTitle": "Stake của tôi",
         "viewLink": "Lịch sử Huỷ stake"
@@ -1615,10 +1615,10 @@
         "miningStaking": "Stake",
         "miningInvite": "Giới thiệu",
         "miningOrder": "Tạo thanh khoản",
-        "tradeTotalIncome": "Tổng thu nhập ({token})",
-        "stakingTotalIncome": "Tổng thu nhập ({token})",
-        "inviteTotalIncome": "Tổng thu nhập ({token})",
-        "orderTotalIncome": "Tổng thu nhập ({token})",
+        "tradeTotalIncome": "Total Rewards ({token})",
+        "stakingTotalIncome": "Total Rewards ({token})",
+        "inviteTotalIncome": "Total Rewards ({token})",
+        "orderTotalIncome": "Total Rewards ({token})",
         "fee": "Phí",
         "listTitle": "Lịch sử Khai thác",
         "viewLink": "Trang tổng quan Khai thác",
