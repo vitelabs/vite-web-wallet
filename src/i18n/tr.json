@@ -33,7 +33,7 @@
         "trade": [
             "Varlıklarınızı (hem Web Cüzdanı hem de ViteX exchange) buradan yönetin",
             "Açık Emirlere ve Emir Geçmişine göz atın, alım satım detaylarını öğrenin",
-            "Madenciliğe katılın, VX ve alım satım komisyonundan kar payı elde edin (Madencilik Kar Payı)",
+            "Participate in mining, acquire VX and trading fee rewards (Mining Rewards)",
             "Experience more features: Locking for Quota, becoming a SBP (Snapshot Block Producer) runner, Voting for SBPs, ERC20 conversion, Transaction Details, etc."
         ],
         "assets": [
@@ -922,7 +922,7 @@
             "notEnough": "Yetersiz exchange bakiyesi",
             "avaliable": "Bakiye",
             "inviteNum": "Davet Edildi",
-            "inviteBenifit": "Referans Madencilik Geliri",
+            "inviteBenifit": "Referral Mining Rewards",
             "inviteRule": "Kurallar",
             "ruleItems": [
                 "The <span class='strong'>100 VITE</span> payment to generate an invitation code will be burned",
@@ -1359,8 +1359,8 @@
             "mining": "Madencilik Miktarı",
             "pledge": "Stake"
         },
-        "txTitle": "Madencilik için Toplam Alım Satım Geliri",
-        "quotaTitle": "Madencilik için Toplam Stake Geliri",
+        "txTitle": "Trading as Mining Total Rewards",
+        "quotaTitle": "Staking as Mining Total Rewards",
         "addHint1": "Tek stake miktarı en az 134 VITE olmalıdır",
         "addHint2": "VITE stake'i, gönderildikten hemen sonra geçerli olacaktır. Stake 3 gün sonra iptal edilebilir",
         "addHint3": "Stake edilmiş miktar 7 günlük bekleme süresinden sonra serbest bırakılacaktır",
@@ -1436,13 +1436,13 @@
         "type": "VIP Türü"
     },
     "inviteMining": {
-        "title": "Referans için Toplam Alım Satım Geliri",
+        "title": "Referring as Mining Total Rewards",
         "myInviteIncome": "Referans Geliri",
         "inviteTradeIncome": "Referans Alım Satım Gelirleri",
         "inviteOrderIncome": "Referans Edilen Market Yapıcılık Gelirleri"
     },
     "orderMining": {
-        "title": "Madencilik için Toplam Market Yapıcılık Geliri",
+        "title": "Market-Making as Mining Total Rewards",
         "tbHead": {
             "date": "Tarih",
             "ratio": "Oran",
@@ -1452,9 +1452,9 @@
         "estimate": "{name} Bugünlük Kazılabilecek Miktar"
     },
     "tradeDividend": {
-        "title": "Kar payı",
+        "title": "Rewards",
         "poolTitle": "Alım Satım Komisyonu Kar Payı Havuzu",
-        "listTitle": "Kar Paylarım",
+        "listTitle": "My Rewards",
         "allPrice": "Toplam Tahmini Değer",
         "date": "Tarih",
         "VX": "VX Stake et",
@@ -1462,14 +1462,14 @@
         "amount": "Miktar",
         "price": "Toplam Tahmini Değer",
         "hintTitle": "Önemli Uyarı",
-        "comingHint": "VX madenciliği ve kar payı fonksiyonları yakında geliyor, bizi izlemeye devam edin. Sistem, sahip oldukları VX miktarıyla orantılı olarak tüm VX kullanıcılarına toplam havuzun BTC, ETH, VITE, USDT'nin %1'ini dağıtacaktır. İlk kar payı havuzu 0'dan başlayacak ve ViteX tarafından toplanan komisyon miktarına göre büyüyecektir. Alım satım yapan kullanıcıların; temel işlem, listeleme ve referans kodu oluşturma komisyonlarından oluşan ortak havuzdan kar payı alabilmeleri için en az 10 VX'e sahip olması gerekir. ",
+        "comingHint": "VX mining and dividend functions are coming soon, stay tuned. The system will distribute 1% of BTC, ETH, VITE, USDT of the total pool to all VX users proportional to the amount of VX they hold. The initial dividend pool will start at 0 and will grow according to the amount of fees collected by ViteX. Traders must have a minimum of 10 VX in order to receive rewards from a shared dividend pool comprised of base transaction, listing and referral code generating fees. ",
         "more": "VX kar payı kuralları hakkında daha fazla bilgi edinin",
-        "help": "Ödül Kuralları: 1. Kar payı alabilmek için en az 10 VX stake edilmelidir. 2. Stake talebinin sunulması, kar payının en yakın zamanda dağıtıma başlamasına izin verir. 3. Stake miktarı, 7 günlük bekleme süresinden sonra serbest bırakılacaktır",
+        "help": "Reward Rules: 1. A minimum of 10 VX must be staked to receive rewards. 2. Submission of staking request allows for rewards starting the nearest distribution. 3. Staked amount will be released after the 7-day waiting period",
         "lockedAmount": "Stake Miktarı",
-        "lockAmountTips": "10 VX veya Üzeri Kar Payı Alın",
+        "lockAmountTips": "Receive Rewards on 10 VX or Above",
         "unlockAmount": "Kilidi Açılan Miktar",
-        "addHint1": "Kar payı alabilmek için minimum 10 VX stake edilmelidir",
-        "addHint2": "Stake başvuru talebi, en yakın dağıtımdan itibaren kar payı almanıza olanak sağlar",
+        "addHint1": "A minimum of 10 VX must be staked to receive rewards",
+        "addHint2": "Submission of staking request allows for rewards starting the nearest distribution",
         "addHint3": "Stake edilmiş miktar 7 günlük bekleme süresinden sonra serbest bırakılacaktır",
         "autoLock": "Otomatik Stake Et",
         "openAutoLock": {
@@ -1509,7 +1509,7 @@
     "tradeOperator": {
         "title": "Operatör",
         "tokenList": "Tokenler",
-        "totalIncome": "Toplam Gelir",
+        "totalIncome": "Total Rewards",
         "permission": "Token Sahipliğini Devret",
         "txPairManage": "Alım Satım Paritelerini Yönet",
         "noOperator": "Henüz tokenınız veya alım satım pariteniz bulunmamaktadır, operatör olmak ister misiniz?",
@@ -1525,7 +1525,7 @@
     "tradeTxPairManage": {
         "title": "{tokenSymbol} Alım Satım Pariteleri Yönetimi",
         "symbol": "Ad",
-        "income": "Gelir",
+        "income": "Rewards",
         "fee": "Komisyon Oranı",
         "status": "Durum",
         "operate": "Eylem",
@@ -1533,8 +1533,8 @@
         "resetTrans": "Kurtar",
         "changeOwner": "Sahipliği Devret",
         "changeFee": "Düzenlenmiş Komisyon Oranı",
-        "incomeList": "Gelir Ayrıntıları",
-        "historyIncome": "Gelir Geçmişi",
+        "incomeList": "Rewards Details",
+        "historyIncome": "Rewards History",
         "openTxPair": "Alım Satım Paritelerini Aç",
         "statusList": [
             "Sahiplik Devredildi",
@@ -1566,12 +1566,12 @@
         "txPairName": "Ad",
         "changeFeeHint": "{symbol}'den {fee}'e komisyonu",
         "changeFeeSubmit": "{changeFeeHint} değiştirdiğinizden emin olun",
-        "historyAllIncome": "Toplam Gelir",
+        "historyAllIncome": "Total Rewards",
         "incomeListHead": {
             "date": "Tarih",
             "txNum": "Hacim",
             "feeRate": "Oran",
-            "feeIncome": "Gelir"
+            "feeIncome": "Rewards"
         }
     },
     "mobileAssets": {
@@ -1602,9 +1602,9 @@
         "avgPrice": "Ort"
     },
     "mobileDividend": {
-        "title": "Kar payı",
+        "title": "Rewards",
         "poolTitle": "Kar Payı Havuzu ({token})",
-        "myDividendTitle": "Kar Paylarının Toplam Tahmini Değeri ({token})",
+        "myDividendTitle": "Total Estimated Value of Rewards ({token})",
         "listTitle": "Kar Payı Ayrıntıları",
         "lockingTitle": "Stakelerim",
         "viewLink": "Stake İptal Durumu"
@@ -1615,10 +1615,10 @@
         "miningStaking": "Alım Satım",
         "miningInvite": "Referans",
         "miningOrder": "Market Yapıcı",
-        "tradeTotalIncome": "Toplam Gelir ({token})",
-        "stakingTotalIncome": "Toplam Gelir ({token})",
-        "inviteTotalIncome": "Toplam Gelir ({token})",
-        "orderTotalIncome": "Toplam Gelir ({token})",
+        "tradeTotalIncome": "Total Rewards ({token})",
+        "stakingTotalIncome": "Total Rewards ({token})",
+        "inviteTotalIncome": "Total Rewards ({token})",
+        "orderTotalIncome": "Total Rewards ({token})",
         "fee": "Komisyonlar",
         "listTitle": "Madencilik Geçmişi",
         "viewLink": "Anlık Madencilik Paneli",
