@@ -33,7 +33,7 @@
         "trade": [
             "資産管理はこちら（Web WalletとViteX）",
             "未処理注文と注文履歴の確認し、取引の詳細を知る",
-            "マイニングへの参加、VXの取得、取引手数料の配当（マイニング配当）",
+            "Participate in mining, acquire VX and trading fee rewards (Mining Rewards)",
             "Experience more features: Locking for Quota, becoming a SBP (Snapshot Block Producer) runner, Voting for SBPs, ERC20 conversion, Transaction Details, etc."
         ],
         "assets": [
@@ -922,7 +922,7 @@
             "notEnough": "取引所残高が不足しています",
             "avaliable": "残高",
             "inviteNum": "招待",
-            "inviteBenifit": "リファラルマイニング収入",
+            "inviteBenifit": "Referral Mining Rewards",
             "inviteRule": "ルール",
             "ruleItems": [
                 "The <span class='strong'>100 VITE</span> payment to generate an invitation code will be burned",
@@ -1359,8 +1359,8 @@
             "mining": "マイニング量",
             "pledge": "ステーキング量"
         },
-        "txTitle": "トレードマイニング総収入",
-        "quotaTitle": "ステーキングマイニング総収入",
+        "txTitle": "Trading as Mining Total Rewards",
+        "quotaTitle": "Staking as Mining Total Rewards",
         "addHint1": "Single stake should be at least 134 VITE",
         "addHint2": "VITE staking will be effective immediately after submission. Staking can be canceled after 3 days",
         "addHint3": "Staked amount will be released after the 7-day waiting period",
@@ -1436,13 +1436,13 @@
         "type": "VIP Type"
     },
     "inviteMining": {
-        "title": "邀请挖矿总收益",
+        "title": "Referring as Mining Total Rewards",
         "myInviteIncome": "Referral Proceeds",
         "inviteTradeIncome": "Referred Trading Proceeds",
         "inviteOrderIncome": "Referred Market-Making Proceeds"
     },
     "orderMining": {
-        "title": "挂单挖矿总收益",
+        "title": "Market-Making as Mining Total Rewards",
         "tbHead": {
             "date": "日前",
             "ratio": "占比",
@@ -1452,9 +1452,9 @@
         "estimate": "{name} Today's Minable Amount"
     },
     "tradeDividend": {
-        "title": "配当金",
+        "title": "Rewards",
         "poolTitle": "取引手数料配当プール",
-        "listTitle": "配当",
+        "listTitle": "My Rewards",
         "allPrice": "合計推定値",
         "date": "日付",
         "VX": "保有VX",
@@ -1462,14 +1462,14 @@
         "amount": "量",
         "price": "合計推定値",
         "hintTitle": "重要なお知らせ",
-        "comingHint": "VXマイニングおよび配当詳細は近日公開予定です。ご期待ください。 システムは、保有するVXの量に比例して、BTC、ETH、VITE、USDTの合計プールの1％をすべてのVXユーザーに配布します。 最初の配当プールは0から始まり、ViteX徴収手数料量に応じて増加します。 トレーダーは、トレード、リスティング、リファラルコード、マーケットメイキングによりVXを獲得できますが、共有配当プールから配当を受け取るためには最低10 VXが必要です。",
+        "comingHint": "VX mining and dividend functions are coming soon, stay tuned. The system will distribute 1% of BTC, ETH, VITE, USDT of the total pool to all VX users proportional to the amount of VX they hold. The initial dividend pool will start at 0 and will grow according to the amount of fees collected by ViteX. Traders must have a minimum of 10 VX in order to receive rewards from a shared dividend pool comprised of base transaction, listing and referral code generating fees. ",
         "more": "VX配当ルールの詳細",
-        "help": "Reward Rules: 1. A minimum of 10 VX must be staked to receive dividends. 2. Submission of staking request allows for dividends starting the nearest distribution. 3. Staked amount will be released after the 7-day waiting period",
+        "help": "Reward Rules: 1. A minimum of 10 VX must be staked to receive rewards. 2. Submission of staking request allows for rewards starting the nearest distribution. 3. Staked amount will be released after the 7-day waiting period",
         "lockedAmount": "ステーキング量",
-        "lockAmountTips": "Receive Dividends on 10 VX or Above",
+        "lockAmountTips": "Receive Rewards on 10 VX or Above",
         "unlockAmount": "Unlocking Amount",
-        "addHint1": "A minimum of 10 VX must be staked to receive dividends",
-        "addHint2": "Submission of staking request allows for dividends starting the nearest distribution",
+        "addHint1": "A minimum of 10 VX must be staked to receive rewards",
+        "addHint2": "Submission of staking request allows for rewards starting the nearest distribution",
         "addHint3": "Staked amount will be released after the 7-day waiting period",
         "autoLock": "Automatic Staking",
         "openAutoLock": {
@@ -1509,7 +1509,7 @@
     "tradeOperator": {
         "title": "オペレーター",
         "tokenList": "トークン",
-        "totalIncome": "総所得",
+        "totalIncome": "Total Rewards",
         "permission": "所有権の譲渡",
         "txPairManage": "取引ペア管理",
         "noOperator": "あなたはトークンや取引ペアをs女優していませんが、オペレーターになりたいですか？",
@@ -1525,7 +1525,7 @@
     "tradeTxPairManage": {
         "title": "{tokenSymbol} 取引ペア管理",
         "symbol": "名前",
-        "income": "収入",
+        "income": "Rewards",
         "fee": "手数料価格",
         "status": "ステータス",
         "operate": "アクション",
@@ -1533,8 +1533,8 @@
         "resetTrans": "復元する",
         "changeOwner": "オーナー移転",
         "changeFee": "手数料率の調整",
-        "incomeList": "収入詳細",
-        "historyIncome": "収入履歴",
+        "incomeList": "Rewards Details",
+        "historyIncome": "Rewards History",
         "openTxPair": "オープン取引ペア",
         "statusList": [
             "所有権の移転",
@@ -1566,12 +1566,12 @@
         "txPairName": "名前",
         "changeFeeHint": "{symbol}の手数料{fee}",
         "changeFeeSubmit": "{changeFeeHint}を変更してください",
-        "historyAllIncome": "総所得",
+        "historyAllIncome": "Total Rewards",
         "incomeListHead": {
             "date": "日付",
             "txNum": "ボリューム",
             "feeRate": "レート",
-            "feeIncome": "収入"
+            "feeIncome": "Rewards"
         }
     },
     "mobileAssets": {
@@ -1602,9 +1602,9 @@
         "avgPrice": "Avg"
     },
     "mobileDividend": {
-        "title": "配当金",
+        "title": "Rewards",
         "poolTitle": "Dividend Pool ({token})",
-        "myDividendTitle": "Total Estimated Value of Dividends ({token})",
+        "myDividendTitle": "Total Estimated Value of Rewards ({token})",
         "listTitle": "Dividend Details",
         "lockingTitle": "My Staking",
         "viewLink": "Unstaking Status"
@@ -1615,10 +1615,10 @@
         "miningStaking": "Staking",
         "miningInvite": "Referral",
         "miningOrder": "Market-Making",
-        "tradeTotalIncome": "Total Income ({token})",
-        "stakingTotalIncome": "Total Income ({token})",
-        "inviteTotalIncome": "Total Income ({token})",
-        "orderTotalIncome": "Total Income ({token})",
+        "tradeTotalIncome": "Total Rewards ({token})",
+        "stakingTotalIncome": "Total Rewards ({token})",
+        "inviteTotalIncome": "Total Rewards ({token})",
+        "orderTotalIncome": "Total Rewards ({token})",
         "fee": "手数料",
         "listTitle": "Mining History",
         "viewLink": "Live Mining Dashboard",
