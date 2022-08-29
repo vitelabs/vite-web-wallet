@@ -922,7 +922,7 @@
             "notEnough": "Insufficient exchange balance",
             "avaliable": "Balance",
             "inviteNum": "Invited",
-            "inviteBenifit": "Referral Mining Income",
+            "inviteBenifit": "Referral Mining Rewards",
             "inviteRule": "Rules",
             "ruleItems": [
                 "The <span class='strong'>100 VITE</span> payment to generate an invitation code will be burned",
@@ -1359,8 +1359,8 @@
             "mining": "Mining Amount",
             "pledge": "Stake"
         },
-        "txTitle": "Trading as Mining Total Income",
-        "quotaTitle": "Staking as Mining Total Income",
+        "txTitle": "Trading as Mining Total Rewards",
+        "quotaTitle": "Staking as Mining Total Rewards",
         "addHint1": "Single stake should be at least 134 VITE",
         "addHint2": "VITE staking will be effective immediately after submission. Staking can be canceled after 3 days",
         "addHint3": "Staked amount will be released after the 7-day waiting period",
@@ -1436,13 +1436,13 @@
         "type": "VIP Type"
     },
     "inviteMining": {
-        "title": "Referring as Mining Total Income",
+        "title": "Referring as Mining Total Rewards",
         "myInviteIncome": "Referral Proceeds",
         "inviteTradeIncome": "Referred Trading Proceeds",
         "inviteOrderIncome": "Referred Market-Making Proceeds"
     },
     "orderMining": {
-        "title": "Market-Making as Mining Total Income",
+        "title": "Market-Making as Mining Total Rewards",
         "tbHead": {
             "date": "Date",
             "ratio": "Ratio",
@@ -1509,7 +1509,7 @@
     "tradeOperator": {
         "title": "Operator",
         "tokenList": "Tokens",
-        "totalIncome": "Total Income",
+        "totalIncome": "Total Rewards",
         "permission": "Transfer Token's Ownership",
         "txPairManage": "Manage Trading Pairs",
         "noOperator": "You have no tokens or trading pairs yet, wanna become an operator?",
@@ -1525,7 +1525,7 @@
     "tradeTxPairManage": {
         "title": "{tokenSymbol} Trading Pairs Management",
         "symbol": "Name",
-        "income": "Income",
+        "income": "Rewards",
         "fee": "Fee Rate",
         "status": "Status",
         "operate": "Action",
@@ -1533,8 +1533,8 @@
         "resetTrans": "Recover",
         "changeOwner": "Transfer Ownership",
         "changeFee": "Adjust Fee Rate",
-        "incomeList": "Income Details",
-        "historyIncome": "Income History",
+        "incomeList": "Rewards Details",
+        "historyIncome": "Rewards History",
         "openTxPair": "Open Trading Pairs",
         "statusList": [
             "Ownership Transferred",
@@ -1566,12 +1566,12 @@
         "txPairName": "Name",
         "changeFeeHint": "{symbol}'s fee into {fee}",
         "changeFeeSubmit": "Make sure to change {changeFeeHint}",
-        "historyAllIncome": "Total Income",
+        "historyAllIncome": "Total Rewards",
         "incomeListHead": {
             "date": "Date",
             "txNum": "Volume",
             "feeRate": "Rate",
-            "feeIncome": "Income"
+            "feeIncome": "Rewards"
         }
     },
     "mobileAssets": {
@@ -1615,10 +1615,10 @@
         "miningStaking": "Staking",
         "miningInvite": "Referral",
         "miningOrder": "Market-Making",
-        "tradeTotalIncome": "Total Income ({token})",
-        "stakingTotalIncome": "Total Income ({token})",
-        "inviteTotalIncome": "Total Income ({token})",
-        "orderTotalIncome": "Total Income ({token})",
+        "tradeTotalIncome": "Total Rewards ({token})",
+        "stakingTotalIncome": "Total Rewards ({token})",
+        "inviteTotalIncome": "Total Rewards ({token})",
+        "orderTotalIncome": "Total Rewards ({token})",
         "fee": "Fees",
         "listTitle": "Mining History",
         "viewLink": "Live Mining Dashboard",
