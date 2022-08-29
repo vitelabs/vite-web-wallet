@@ -33,7 +33,7 @@
         "trade": [
             "Administre sus activos (tanto en billetera Web como en Exchange ViteX) aquí",
             "Revisa las órdenes abiertas e historial de ordenes, conoce los detalles de comercio",
-            "Participa en la minería, obtén VX como recompensa debida a las comisiones por comerciar (Minado a través del comercio)",
+            "Participate in mining, acquire VX and trading fee rewards (Mining Rewards)",
             "Prueba más características: bloqueo de cuota, convertirte en un SBP (Productor de Instantáneas de Bloques), vota por algún SBPs, convierte a ERC20, detalles de transacciones, etc."
         ],
         "assets": [
@@ -922,7 +922,7 @@
             "notEnough": "Saldo insuficiente en Exchange",
             "avaliable": "Saldo",
             "inviteNum": "Invitado",
-            "inviteBenifit": "Ingresos de minería de referidos",
+            "inviteBenifit": "Referral Mining Rewards",
             "inviteRule": "Reglas",
             "ruleItems": [
                 "El pago de <span class='strong'>100 VITE</span> para generar un código de invitación serán quemados",
@@ -1359,8 +1359,8 @@
             "mining": "Cantidad por minería",
             "pledge": "Stake"
         },
-        "txTitle": "Ingresos totales por trading como minado",
-        "quotaTitle": "Ingresos totales por staking como minado",
+        "txTitle": "Trading as Mining Total Rewards",
+        "quotaTitle": "Staking as Mining Total Rewards",
         "addHint1": "Cada bloqueo debe ser de al menos 134 VITE",
         "addHint2": "El staking de VITE será efectivo inmediatamente después del envío. El staking puede ser cancelado después de 3 días",
         "addHint3": "La cantidad bloqueada se liberará después de esperar un periodo de 7 días",
@@ -1436,13 +1436,13 @@
         "type": "Tipo VIP"
     },
     "inviteMining": {
-        "title": "Ingresos totales por referidos como minado",
+        "title": "Referring as Mining Total Rewards",
         "myInviteIncome": "Ingresos por referidos",
         "inviteTradeIncome": "Ingresos por trades de referidos",
         "inviteOrderIncome": "Ingresos por Market-Making de referidos"
     },
     "orderMining": {
-        "title": "Ingresos totales por creadores de mercados como minado",
+        "title": "Market-Making as Mining Total Rewards",
         "tbHead": {
             "date": "Fecha",
             "ratio": "Ratio",
@@ -1452,9 +1452,9 @@
         "estimate": "Cantidad Minable de hoy {name}"
     },
     "tradeDividend": {
-        "title": "Dividendos",
+        "title": "Rewards",
         "poolTitle": "Pool de dividendos de las comisiones de trading",
-        "listTitle": "Mis Dividendos",
+        "listTitle": "My Rewards",
         "allPrice": "Valor total estimado",
         "date": "Fecha",
         "VX": "Stake VX",
@@ -1462,14 +1462,14 @@
         "amount": "Cantidad",
         "price": "Valor total estimado",
         "hintTitle": "Aviso importante",
-        "comingHint": "Pronto llegarán las funciones de VX como minería y dividendo, manténgase atento. El sistema distribuirá el 1% de BTC, ETH, VITE, USDT del pool total para todos los usuarios de VX, proporcionales a la cantidad de VX que poseen. El pool de dividendos comenzará en 0 y crecerá en función de la cantidad de comisiones cobradas por ViteX. Los traders deben tener un mínimo de 10 VX para recibir dividendos del pool compartido, compuesto por las comisiones base de trading. El listado de tokens y la creación de código de referencia generan comisiones adicionales al pool. ",
+        "comingHint": "VX mining and dividend functions are coming soon, stay tuned. The system will distribute 1% of BTC, ETH, VITE, USDT of the total pool to all VX users proportional to the amount of VX they hold. The initial dividend pool will start at 0 and will grow according to the amount of fees collected by ViteX. Traders must have a minimum of 10 VX in order to receive rewards from a shared dividend pool comprised of base transaction, listing and referral code generating fees. ",
         "more": "Aprende más sobre las reglas de dividendos con VX",
-        "help": "Reglas de recompensa: 1. Se debe bloquear un mínimo de 10 VX para recibir dividendos. 2. El envío de la solicitud de staking permite empezar a recibir dividendos a partir de la próxima distribución. 3. La cantidad en staking se liberará después del período de espera de 7 días",
+        "help": "Reward Rules: 1. A minimum of 10 VX must be staked to receive rewards. 2. Submission of staking request allows for rewards starting the nearest distribution. 3. Staked amount will be released after the 7-day waiting period",
         "lockedAmount": "Cantidad en staking",
-        "lockAmountTips": "Recibir Dividends con 10 VX o más",
+        "lockAmountTips": "Receive Rewards on 10 VX or Above",
         "unlockAmount": "Desbloqueando cantidad",
-        "addHint1": "Se debe stakear un mínimo de 10 VX para recibir dividendos",
-        "addHint2": "El envío de la solicitud de staking permite empezar a recibir dividendos a partir de la próxima distribución",
+        "addHint1": "A minimum of 10 VX must be staked to receive rewards",
+        "addHint2": "Submission of staking request allows for rewards starting the nearest distribution",
         "addHint3": "La cantidad bloqueada se liberará después de esperar un periodo de 7 días",
         "autoLock": "Staking automático",
         "openAutoLock": {
@@ -1509,7 +1509,7 @@
     "tradeOperator": {
         "title": "Operador",
         "tokenList": "Tokens",
-        "totalIncome": "Ingresos totales",
+        "totalIncome": "Total Rewards",
         "permission": "Transferir propiedad del token",
         "txPairManage": "Gestionar pares de comercio",
         "noOperator": "Aún no tienes tokens ni pares de comercio, ¿quieres convertirte en operador?",
@@ -1525,7 +1525,7 @@
     "tradeTxPairManage": {
         "title": "Gestión de pares de comercio de {tokenSymbol}",
         "symbol": "Nombre",
-        "income": "Ingresos",
+        "income": "Rewards",
         "fee": "Tasa de comisión",
         "status": "Estado",
         "operate": "Acción",
@@ -1533,8 +1533,8 @@
         "resetTrans": "Recuperar",
         "changeOwner": "Transferir propiedad",
         "changeFee": "Ajustar rango de comisión",
-        "incomeList": "Detalles de ingresos",
-        "historyIncome": "Historial de Ingresos",
+        "incomeList": "Rewards Details",
+        "historyIncome": "Rewards History",
         "openTxPair": "Abrir par de comercio",
         "statusList": [
             "Propiedad transferida",
@@ -1566,12 +1566,12 @@
         "txPairName": "Nombre",
         "changeFeeHint": "Comisión de {symbol} de {fee}",
         "changeFeeSubmit": "Asegúrese de cambiar {changeFeeHint}",
-        "historyAllIncome": "Ingresos totales",
+        "historyAllIncome": "Total Rewards",
         "incomeListHead": {
             "date": "Fecha",
             "txNum": "Volumen",
             "feeRate": "Ratio",
-            "feeIncome": "Ingresos"
+            "feeIncome": "Rewards"
         }
     },
     "mobileAssets": {
@@ -1602,9 +1602,9 @@
         "avgPrice": "Promedio"
     },
     "mobileDividend": {
-        "title": "Dividendos",
+        "title": "Rewards",
         "poolTitle": "Pool de Dividendos ({token})",
-        "myDividendTitle": "Valor total estimado de Dividendos ({token})",
+        "myDividendTitle": "Total Estimated Value of Rewards ({token})",
         "listTitle": "Detalles de Dividendos",
         "lockingTitle": "Mis bloqueos",
         "viewLink": "Estado de desbloqueos"
@@ -1615,10 +1615,10 @@
         "miningStaking": "Staking",
         "miningInvite": "Referidos",
         "miningOrder": "Market-Making",
-        "tradeTotalIncome": "Ingresos totales ({token})",
-        "stakingTotalIncome": "Ingresos totales ({token})",
-        "inviteTotalIncome": "Ingresos totales ({token})",
-        "orderTotalIncome": "Ingresos totales ({token})",
+        "tradeTotalIncome": "Total Rewards ({token})",
+        "stakingTotalIncome": "Total Rewards ({token})",
+        "inviteTotalIncome": "Total Rewards ({token})",
+        "orderTotalIncome": "Total Rewards ({token})",
         "fee": "Comisiones",
         "listTitle": "Historial de minería",
         "viewLink": "Dashboard en vivo de minería",
