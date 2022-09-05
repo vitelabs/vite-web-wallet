@@ -48,7 +48,7 @@
 
         </div>
         <div class="col">
-            {{ `${exBanlance || 0} ${token.tokenSymbol}` }}
+            {{ `${exBalance || 0} ${token.tokenSymbol}` }}
         </div>
         <div class="col">
             <div>
@@ -146,7 +146,7 @@ export default {
             if (this.token.gateInfo.url) return this.$t('tokenCard.gateInfo.selfdefined');
             return this.canEditGateURL ? this.$t('tokenCard.gateInfo.gateSetting') : '--';
         },
-        exBanlance() {
+        exBalance() {
             return (
                 this.token.totalExAmount
                 && bigNumber.toBasic(this.token.totalExAmount, this.token.decimals)
