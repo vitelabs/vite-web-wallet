@@ -34,10 +34,6 @@
             >
                 {{ gateName }}
             </div>
-
-        </div>
-        <div class="col">
-            {{ `${exBanlance || 0} ${token.tokenSymbol}` }}
             <div class="op_group" v-if="token.gateInfo.url">
                 <div class="op" @click="deposit">
                     {{ $t("tokenCard.actionType.CHARGE") }}
@@ -49,6 +45,10 @@
                     {{ $t("tokenCard.actionType.RECRODS") }}
                 </div>
             </div>
+
+        </div>
+        <div class="col">
+            {{ `${exBalance || 0} ${token.tokenSymbol}` }}
         </div>
         <div class="col">
             <div>
@@ -146,7 +146,7 @@ export default {
             if (this.token.gateInfo.url) return this.$t('tokenCard.gateInfo.selfdefined');
             return this.canEditGateURL ? this.$t('tokenCard.gateInfo.gateSetting') : '--';
         },
-        exBanlance() {
+        exBalance() {
             return (
                 this.token.totalExAmount
                 && bigNumber.toBasic(this.token.totalExAmount, this.token.decimals)
