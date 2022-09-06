@@ -763,8 +763,15 @@ export default {
 
             sendTx({
                 methodName: 'dexPlaceOrder',
-                // orderType:"1" market 
-                data: { tradeToken, quoteToken, side, price, quantity,orderType:"1" },
+                // orderType:"1" market
+                data: {
+                    tradeToken,
+                    quoteToken,
+                    side,
+                    price,
+                    quantity,
+                    orderType: '1'
+                },
                 config: {
                     pow: true,
                     powConfig: {
@@ -832,13 +839,19 @@ $font-black: rgba(36, 39, 43, 0.8);
         border-radius: 2px;
         box-sizing: border-box;
         flex: 1;
+        font-size: 12px;
         @include common_border();
+        // @include bg_color_1();
+        // @include bg_color_2();
+        @include font_color_to_white(rgba(94, 104, 117, 0.7));
         &--forbidden {
             background: #f3f6f9;
             border: 1px solid #d4dee7;
             border-radius: 2px;
-            padding-left: 16px;
-            color: rgba(94, 104, 117, 0.7);
+            padding-left: 6px;
+            [data-theme='1'] & {
+                background-color: $black-color-2;
+            }
         }
         &.err {
             border: 1px solid $red;
@@ -907,7 +920,6 @@ $font-black: rgba(36, 39, 43, 0.8);
         height: 30px;
         display: flex;
         align-items: center;
-     
     }
     .order-btn {
         height: 30px;

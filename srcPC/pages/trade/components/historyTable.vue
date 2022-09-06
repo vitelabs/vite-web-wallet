@@ -60,7 +60,7 @@ export default {
                 list.push({
                     createTime: this.filterDate(v.createTime),
                     symbol: `${ v.tradeTokenSymbol }/${ v.quoteTokenSymbol }`,
-                    price: `${ v.price } ${ this.getOriginSymbol(v.quoteTokenSymbol) }`,
+                    price: String(v.type) === '1' ? 'Market Price' : `${ v.price } ${ this.getOriginSymbol(v.quoteTokenSymbol) }`,
                     quantity: `${ v.quantity } ${ this.getOriginSymbol(v.tradeTokenSymbol) }`,
                     executedQuantity: `${ v.executedQuantity } ${ this.getOriginSymbol(v.tradeTokenSymbol) }`,
                     // executedPercent: `${ (v.executedPercent * 100).toFixed(2) }%`,
