@@ -1436,13 +1436,13 @@
         "type": "Tipo VIP"
     },
     "inviteMining": {
-        "title": "Referring as Mining Total Rewards",
+        "title": "Ingresos totales por referidos como minería",
         "myInviteIncome": "Ingresos por referidos",
         "inviteTradeIncome": "Ingresos por trades de referidos",
         "inviteOrderIncome": "Ingresos por Market-Making de referidos"
     },
     "orderMining": {
-        "title": "Market-Making as Mining Total Rewards",
+        "title": "Ingresos totales por crear mercados como minería",
         "tbHead": {
             "date": "Fecha",
             "ratio": "Ratio",
@@ -1452,9 +1452,9 @@
         "estimate": "Cantidad Minable de hoy {name}"
     },
     "tradeDividend": {
-        "title": "Rewards",
+        "title": "Recompensas",
         "poolTitle": "Pool de dividendos de las comisiones de trading",
-        "listTitle": "My Rewards",
+        "listTitle": "Mis recompensas",
         "allPrice": "Valor total estimado",
         "date": "Fecha",
         "VX": "Stake VX",
