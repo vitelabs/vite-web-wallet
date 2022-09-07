@@ -1462,7 +1462,7 @@
         "amount": "Cantidad",
         "price": "Valor total estimado",
         "hintTitle": "Aviso importante",
-        "comingHint": "Pronto llegarán las funciones de VX como minería y dividendos, manténgase atento. El sistema distribuirá el 1% de BTC, ETH, VITE, USDT del pool total para todos los usuarios de VX, proporcionales a la cantidad de VX que poseen. El pool de dividendos comenzará en 0 y crecerá en función de la cantidad de comisiones cobradas por ViteX. Los traders deben tener un mínimo de 10 VX para recibir dividendos del pool compartido, que está compuesto por las comisiones bases cobradas al hacer trading. El listado de tokens y la creación del código de referidos generan comisiones adicionales al pool. ",
+        "comingHint": "Pronto llegarán las funciones de VX como minería y dividendos, manténgase atento. El sistema distribuirá el 1% de BTC, ETH, VITE, USDT del pool total para todos los usuarios de VX, proporcionales a la cantidad de VX que poseen. El pool de dividendos comenzará en 0 y crecerá en función de la cantidad de comisiones cobradas por ViteX. Los traders deben tener un mínimo de 10 VX para recibir recompensaa del pool compartido, que está compuesto por las comisiones bases cobradas al hacer trading. El listado de tokens y la creación del código de referidos generan comisiones adicionales al pool. ",
         "more": "Aprende más sobre las reglas de dividendos con VX",
         "help": "Reglas de recompensa: 1. Se debe bloquear un mínimo de 10 VX para recibir recompensas. 2. El envío de la solicitud de staking permite empezar a recibir recompensas a partir de la próxima distribución. 3. La cantidad en staking se liberará después de un período de espera de 7 días",
         "lockedAmount": "Cantidad en staking",
@@ -1566,12 +1566,12 @@
         "txPairName": "Nombre",
         "changeFeeHint": "Comisión de {symbol} de {fee}",
         "changeFeeSubmit": "Asegúrese de cambiar {changeFeeHint}",
-        "historyAllIncome": "Total Rewards",
+        "historyAllIncome": "Recompensas totales",
         "incomeListHead": {
             "date": "Fecha",
             "txNum": "Volumen",
             "feeRate": "Ratio",
-            "feeIncome": "Rewards"
+            "feeIncome": "Recompensas"
         }
     },
     "mobileAssets": {
@@ -1602,9 +1602,9 @@
         "avgPrice": "Promedio"
     },
     "mobileDividend": {
-        "title": "Rewards",
+        "title": "Recompensas",
         "poolTitle": "Pool de Dividendos ({token})",
-        "myDividendTitle": "Total Estimated Value of Rewards ({token})",
+        "myDividendTitle": "Valor estimado total de las recompensas ({token})",
         "listTitle": "Detalles de Dividendos",
         "lockingTitle": "Mis bloqueos",
         "viewLink": "Estado de desbloqueos"
@@ -1615,10 +1615,10 @@
         "miningStaking": "Staking",
         "miningInvite": "Referidos",
         "miningOrder": "Market-Making",
-        "tradeTotalIncome": "Total Rewards ({token})",
-        "stakingTotalIncome": "Total Rewards ({token})",
-        "inviteTotalIncome": "Total Rewards ({token})",
-        "orderTotalIncome": "Total Rewards ({token})",
+        "tradeTotalIncome": "Recompensas totales ({token})",
+        "stakingTotalIncome": "Recompensas totales ({token})",
+        "inviteTotalIncome": "Recompensas totales ({token})",
+        "orderTotalIncome": "Recompensas totales ({token})",
         "fee": "Comisiones",
         "listTitle": "Historial de minería",
         "viewLink": "Dashboard en vivo de minería",
