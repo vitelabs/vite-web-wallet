@@ -6,7 +6,7 @@ import { getTokenInfoBatch } from 'services/trade';
 import { gateStorage } from 'pcServices/gate';
 
 const ViteId = constant.Vite_TokenId;
-const MAX_TOKEN_NUM = 300;
+const MAX_TOKEN_NUM = 500;
 
 let heightTimer = null;
 const state = {
