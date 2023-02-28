@@ -128,7 +128,7 @@
         "postcss-pxtorem": "^4.0.1",
         "postcss-scss": "^2.0.0",
         "postcss-strip-inline-comments": "^0.1.5",
-        "protobufjs": "~6.8.8",
+        "protobufjs": "~6.11.3",
         "px2rem-loader": "^0.1.9",
         "qrcode.es": "~1.0.0",
         "qs": "~6.5.2",
