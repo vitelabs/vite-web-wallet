@@ -12,9 +12,9 @@
                 <span @click="_showDetail('token')" class="ttoken">
                     /{{ ttokenDetail ? ttokenDetail.symbol : '' }}
                 </span>
-                <img v-show="isMining === 1" class="mining" src="~assets/imgs/trade_mining.svg"/>
-                <img v-show="isMining === 2" class="mining" src="~assets/imgs/order_mining.svg"/>
-                <img v-show="isMining === 3" class="mining" src="~assets/imgs/mining.svg"/>
+                <img v-show="isMining === 1" class="mining" :src="tradeMiningIcon"/>
+                <img v-show="isMining === 2" class="mining" :src="orderMiningIcon"/>
+                <img v-show="isMining === 3" class="mining" :src="miningIcon"/>
                 <span class="mining-mul">{{ orderMiningMultiples }}</span>
                 <img v-if="isSupportSwitch" @click="switchTxPair" class="mining" src="~h5Assets/imgs/down.svg"/>
             </div>
@@ -33,6 +33,13 @@ import operatorIcon from 'h5Assets/imgs/operator_default.svg';
 import { bridge } from 'h5Utils/bridge';
 import { getTokenIcon } from 'utils/tokenParser';
 import openUrl from 'utils/openUrl';
+
+import tradeMiningSvg from 'assets/imgs/trade_mining.svg';
+import orderMiningSvg from 'assets/imgs/order_mining.svg';
+import miningSvg from 'assets/imgs/mining.svg';
+import theme1TradeMiningSvg from 'assets/theme1_imgs/trade_mining.svg';
+import theme1OrderMiningSvg from 'assets/theme1_imgs/order_mining.svg';
+import theme1MiningSvg from 'assets/theme1_imgs/mining.svg';
 
 export default {
     props: {
@@ -96,6 +103,24 @@ export default {
         isSupportSwitch() {
             const bridgeUnsupportList = this.$store.getters.bridgeUnsupportList;
             return bridgeUnsupportList.indexOf('pri.switchPair') === -1;
+        },
+        tradeMiningIcon() {
+            if (+this.theme === 0) {
+                return tradeMiningSvg;
+            }
+            return theme1TradeMiningSvg;
+        },
+        orderMiningIcon() {
+            if (+this.theme === 0) {
+                return orderMiningSvg;
+            }
+            return theme1OrderMiningSvg;
+        },
+        miningIcon() {
+            if (+this.theme === 0) {
+                return miningSvg;
+            }
+            return theme1MiningSvg;
         }
     },
     methods: {
@@ -200,7 +225,8 @@ export default {
             margin-bottom: 4px;
         }
         .mining-mul {
-            color: $blue-color-1;
+            // color: $blue-color-1;
+            @include primary_color();
             margin-left: 2px;
             @include font-normal();
             font-size: 11px;

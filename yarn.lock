@@ -1740,15 +1740,15 @@
     bip32-path "^0.4.2"
     blakejs "^1.1.0"
 
-"@vite/vitejs-ws@^2.3.12":
-  version "2.3.12"
-  resolved "https://registry.yarnpkg.com/@vite/vitejs-ws/-/vitejs-ws-2.3.12.tgz#ab5e1c00f94542a79800b70589dbbb675ce5648b"
-  integrity sha512-K5w6SP6L4quNXrOJw30wxrQkREHtP2/Q/3r6kGjrro8yb1HgxJD9jbNL373h/AAXTqI75QUEPUygyRa1KOMknQ==
+"@vite/vitejs-ws@^2.3.19":
+  version "2.3.19"
+  resolved "https://registry.yarnpkg.com/@vite/vitejs-ws/-/vitejs-ws-2.3.19.tgz#4f428162bd7ff593bcc7b6ce0d91c24397c4ba36"
+  integrity sha512-o5oQviQutbvK9VXnY/en7nRyNybhWkvsADy88xHFC7KwoFFvzSKYkwkjjIwaHrndJpo9v7CptuNUJi7wEHJ/NA==
 
-"@vite/vitejs@2.3.19-alpha.2":
-  version "2.3.19-alpha.2"
-  resolved "https://registry.npmmirror.com/@vite/vitejs/-/vitejs-2.3.19-alpha.2.tgz#1f6446a4279d9cecbbf3a92bf3121f686c54653f"
-  integrity sha512-VC73axWdA8K727OmysxwBmuHwUmCdRnFAqskSBf1kzFXnN2QdbK4Zb/X1sj0kbbpPLJQNBHkUvyo833U86svDQ==
+"@vite/vitejs@^2.3.19":
+  version "2.3.19"
+  resolved "https://registry.yarnpkg.com/@vite/vitejs/-/vitejs-2.3.19.tgz#1c59e40a4bd1d4c39cb921e2cbf7d08365e87ef2"
+  integrity sha512-wwRnEyVIm5ZjYpv2wt408WdsnNnQcc4tu4uk+TtOunbFsYGvCMaVqHZrQ+Qg6Vl/LF62nOUJphOZtwHYG9CZfA==
   dependencies:
     "@sisi/ed25519-blake2b-hd-key" "^1.0.2"
     "@sisi/tweetnacl-blake2b" "^1.0.0"
@@ -1763,7 +1763,6 @@
     jsonrpc-lite "^2.2.0"
     net "^1.0.2"
     pure-uuid "^1.6.2"
-    qs "^6.10.3"
     scryptsy "^2.1.0"
     websocket "^1.0.34"
     xhr2 "^0.2.1"
@@ -10039,13 +10038,6 @@ qs@6.7.0:
   resolved "https://registry.yarnpkg.com/qs/-/qs-6.7.0.tgz#41dc1a015e3d581f1621776be31afb2876a9b1bc"
   integrity sha512-VCdBRNFTX1fyE7Nb6FYoURo/SPe62QCaAyzJvUjwRaIsc+NePBEniHlvxFmmX56+HZphIGtV0XeCirBtpDrTyQ==
 
-qs@^6.10.3:
-  version "6.10.3"
-  resolved "https://registry.npmmirror.com/qs/-/qs-6.10.3.tgz#d6cde1b2ffca87b5aa57889816c5f81535e22e8e"
-  integrity sha512-wr7M2E0OFRfIfJZjKGieI8lBKb7fRCH4Fv5KNPEs7gJ8jadvotdsS08PzOKR7opXhZ/Xkjtt3WF9g38drmyRqQ==
-  dependencies:
-    side-channel "^1.0.4"
-
 qs@~6.5.2:
   version "6.5.2"
   resolved "https://registry.yarnpkg.com/qs/-/qs-6.5.2.tgz#cb3ae806e8740444584ef154ce8ee98d403f3e36"
@@ -10973,15 +10965,6 @@ shebang-regex@^1.0.0:
   resolved "https://registry.yarnpkg.com/shebang-regex/-/shebang-regex-1.0.0.tgz#da42f49740c0b42db2ca9728571cb190c98efea3"
   integrity sha1-2kL0l0DAtC2yypcoVxyxkMmO/qM=
 
-side-channel@^1.0.4:
-  version "1.0.4"
-  resolved "https://registry.yarnpkg.com/side-channel/-/side-channel-1.0.4.tgz#efce5c8fdc104ee751b25c58d4290011fa5ea2cf"
-  integrity sha512-q5XPytqFEIKHkGdiMIrY10mvLRvnQh42/+GoBlFW3b2LXLE2xxJpZFdm94we0BaoV3RwJyGqg5wS7epxTv0Zvw==
-  dependencies:
-    call-bind "^1.0.0"
-    get-intrinsic "^1.0.2"
-    object-inspect "^1.9.0"
-
 signal-exit@^3.0.0, signal-exit@^3.0.2:
   version "3.0.3"
   resolved "https://registry.yarnpkg.com/signal-exit/-/signal-exit-3.0.3.tgz#a1410c2edd8f077b08b4e253c8eacfcaf057461c"
@@ -11730,9 +11713,9 @@ terser@^4.1.2:
     source-map "~0.6.1"
     source-map-support "~0.5.12"
 
-"testwebworker@git+https://github.com/vitelabs/cryptojsAccelerator.git":
+"testwebworker@https://github.com/vitelabs/cryptojsAccelerator.git":
   version "1.0.0"
-  resolved "git+https://github.com/vitelabs/cryptojsAccelerator.git#060975e9a7e42282c42f24ca95d84fd7251d7155"
+  resolved "https://github.com/vitelabs/cryptojsAccelerator.git#060975e9a7e42282c42f24ca95d84fd7251d7155"
   dependencies:
     "@babel/core" "^7.1.6"
     "@babel/plugin-transform-async-to-generator" "^7.1.0"

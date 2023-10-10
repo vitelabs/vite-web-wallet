@@ -4,7 +4,7 @@
             <span class="title">{{ $t('setting.rpcUrl') }}</span>
             <code v-html="env.currentNode"></code>
             <span class="small-btn" @click="openNodeChangeDialog">{{$t('setting.changeRpcUrl')}}</span>
-            <span class="auto-receive-switch">
+            <span class="auto-receive-switch" v-if="!!isLogin&&!currHDAcc.isSeparateKey">
                 <span>Auto-Receive</span>
                 <a-switch
                     :size="'small'"
@@ -67,6 +67,7 @@ import openUrl from 'utils/openUrl';
 import { getExplorerLink } from 'utils/getLink';
 import { getProvider } from 'services/apiServer';
 import { changeRpcUrlDialog, changePowUrlDialog } from 'pcComponents/dialog';
+import { StatusMap } from 'wallet';
 
 export default {
     mounted() {
@@ -91,6 +92,12 @@ export default {
         ...mapState(['env']),
         height() {
             return this.$store.state.ledger.currentHeight;
+        },
+        isLogin() {
+            return this.$store.state.wallet.status === StatusMap.UNLOCK;
+        },
+        currHDAcc() {
+            return this.$store.state.wallet.currHDAcc;
         }
     },
     methods: {
@@ -139,7 +146,8 @@ export default {
         .ant-switch {
             background-color: #545f75;
             &.ant-switch-checked {
-            background-color: #007aff;
+                // background-color: #00BEFF;
+                @include primary_bg_color();
         }
         }
 
@@ -160,7 +168,8 @@ export default {
         @include setting_common_color();
     }
     .link {
-        color: $blue-color-1;
+        // color: $blue-color-1;
+        @include primary_color();
     }
 }
 </style>

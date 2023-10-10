@@ -34,8 +34,8 @@ export default {
         };
     },
     methods: {
-        toggleToken(tokenId, index) {
-            const isActive = this.selectedTokenIds.indexOf(tokenId)>=0;
+        toggleToken(tokenId) {
+            const isActive = this.selectedTokenIds.indexOf(tokenId) >= 0;
             if (isActive) {
                 this.selectedTokenIds = this.selectedTokenIds.filter(id => id !== tokenId);
             } else {
@@ -160,7 +160,8 @@ export default {
                     background: rgba(0, 122, 255, 0.06);
                     border-radius: 2px;
                     height: 18px;
-                    color: $blue-color-1;
+                    // color: $blue-color-1;
+                    @include primary_color();
                     line-height: 18px;
                     padding: 0 4px;
                 }

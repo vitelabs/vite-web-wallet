@@ -95,7 +95,8 @@ export default {
     .help {
         align-items: center;
         font-size: 12px;
-        color: $blue-color-1;
+        // color: $blue-color-1;
+        @include primary_color();
         text-align: right;
         line-height: 16px;
         margin-left: 12px;
@@ -103,7 +104,8 @@ export default {
         white-space: nowrap;
 
         .icon {
-            background: url(~assets/imgs/detail.svg);
+            // background: url(~assets/imgs/detail.svg);
+            @include background_common_img('detail.svg');
             width: 16px;
             height: 16px;
             background-size: 100% 100%;

@@ -42,7 +42,7 @@ export const theme0Config = {
         'bollinger bands.median.color': '#33FF88',
         'bollinger bands.upper.linewidth': 7
     },
-    loading_screen: { foregroundColor: '#007AFF' },
+    loading_screen: { foregroundColor: '#00BEFF' },
     toolbar_bg: '#f4f7f9'
 };
 
@@ -69,7 +69,7 @@ export const theme1Config = {
     },
     loading_screen: {
         backgroundColor: '#151C32',
-        foregroundColor: '#007AFF'
+        foregroundColor: '#00BEFF'
     },
     toolbar_bg: '#151C32'
 };

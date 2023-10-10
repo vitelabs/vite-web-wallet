@@ -216,7 +216,8 @@ export default {
 }
 
 .beneficial-addr {
-    color: #007aff;
+    // color: #00BEFF;
+    @include primary_color();
 }
 
 .beneficial-img {

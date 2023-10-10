@@ -70,7 +70,8 @@ export default {
     @include font_color_2();
     .first, .last {
         font-size: 20px;
-        color: $blue-color-1;
+        // color: $blue-color-1;
+        @include primary_color();
     }
 }
 </style>

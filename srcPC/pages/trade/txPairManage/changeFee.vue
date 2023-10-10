@@ -178,7 +178,7 @@ export default {
     padding-top: 20px;
 }
 .__blue {
-    color: #007AFF;
+    color: #00BEFF;
 }
 .__left {
     float: left;

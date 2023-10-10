@@ -45,7 +45,8 @@ export default {
             margin-left: 10px;
         }
         &.active {
-            color: $blue-color-1;
+            // color: $blue-color-1;
+            @include primary-color();
         }
     }
     .vip {

@@ -70,7 +70,8 @@ export default {
         display: inline-block;
         width: 196px;
         height: 44px;
-        background: $blue-color-1;
+        // background: $blue-color-1;
+        @include primary_bg_color();
         border-radius: 2px;
         text-align: center;
         line-height: 44px;

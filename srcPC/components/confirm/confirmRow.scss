@@ -95,7 +95,8 @@
 }
 
 .__all_wrapper {
-    color: $blue-color-1;
+    // color: $blue-color-1;
+    @include primary_color();
     font-size: 12px;
     margin: 0 15px;
     .__all {

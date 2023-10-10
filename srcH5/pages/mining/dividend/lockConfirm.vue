@@ -155,11 +155,11 @@ export default {
     margin-top: 6px;
 }
 .all-wrapper {
-    color: #007AFF;
+    color: #00BEFF;
     font-size: 12px;
     margin: 0 15px;
     .all {
-        border-bottom: 1px dashed #007AFF;
+        border-bottom: 1px dashed #00BEFF;
     }
 }
 </style>

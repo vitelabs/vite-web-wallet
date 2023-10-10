@@ -19,7 +19,8 @@
 }
 
 .__btn_all_in {
-    background: #007AFF;
+    // background: #00BEFF;
+    @include primary_bg_color();
     color: #FFFFFF;
     border-radius: 3px;
     @include font-family-bold();

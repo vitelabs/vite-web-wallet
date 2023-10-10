@@ -410,7 +410,8 @@ export default {
                         display: inline-block;
                         width: 4px;
                         height: 4px;
-                        background: #007aff;
+                        // background: #00BEFF;
+                        @include primary_bg_color();
                         border-radius: 5px;
                     }
                 }

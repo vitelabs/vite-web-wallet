@@ -382,7 +382,8 @@ export default {
 }
 
 .link {
-    color: $blue-color-1;
+    //color: $blue-color-1;
+    @include primary_color();
     text-decoration: underline;
 }
 </style>

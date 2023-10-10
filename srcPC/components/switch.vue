@@ -30,7 +30,7 @@ export default {
 
 <style lang="scss" scoped>
 $switch-button-height: 18px;
-$switch-button-color: #007aff;
+$switch-button-color: #00BEFF;
 $switch-transition: all 0.3s ease-in-out;
 $switch-is-rounded: true;
 $switch-background-height: 6px;

@@ -20,9 +20,9 @@
                 <tooltips class="tips" :content="$t('tradeCenter.zeroFee')"></tooltips>
             </span>
             <span class="mining" v-show="+isMining">
-                <img v-show="isMining === 1" src="~assets/imgs/trade_mining.svg"/>
-                <img v-show="isMining === 2" src="~assets/imgs/order_mining.svg"/>
-                <img v-show="isMining === 3" src="~assets/imgs/mining.svg"/>
+                <img v-show="isMining === 1" :src="tradeMiningIcon"/>
+                <img v-show="isMining === 2" :src="orderMiningIcon"/>
+                <img v-show="isMining === 3" :src="miningIcon"/>
                 {{ orderMiningMultiples }}
                 <tooltips class="tips" :content="supportMining"></tooltips>
             </span>
@@ -36,8 +36,16 @@
 
 <script>
 import tooltips from 'components/tooltips';
-import operatorIcon from 'assets/imgs/operator.png';
+import operatorIcon from 'assets/imgs/operator_icon.svg';
+import theme1OperatorIcon from 'assets/theme1_imgs/operator_icon.svg';
 import openUrl from 'utils/openUrl';
+
+import tradeMiningSvg from 'assets/imgs/trade_mining.svg';
+import orderMiningSvg from 'assets/imgs/order_mining.svg';
+import miningSvg from 'assets/imgs/mining.svg';
+import theme1TradeMiningSvg from 'assets/theme1_imgs/trade_mining.svg';
+import theme1OrderMiningSvg from 'assets/theme1_imgs/order_mining.svg';
+import theme1MiningSvg from 'assets/theme1_imgs/mining.svg';
 
 export default {
     components: { tooltips },
@@ -121,7 +129,28 @@ export default {
             if (this.operatorInfo) {
                 return this.operatorInfo.icon || '';
             }
-            return operatorIcon;
+            if (+this.theme === 0) {
+                return operatorIcon;
+            }
+            return theme1OperatorIcon;
+        },
+        tradeMiningIcon() {
+            if (+this.theme === 0) {
+                return tradeMiningSvg;
+            }
+            return theme1TradeMiningSvg;
+        },
+        orderMiningIcon() {
+            if (+this.theme === 0) {
+                return orderMiningSvg;
+            }
+            return theme1OrderMiningSvg;
+        },
+        miningIcon() {
+            if (+this.theme === 0) {
+                return miningSvg;
+            }
+            return theme1MiningSvg;
         }
     },
     methods: {
@@ -222,7 +251,8 @@ export default {
     }
     .mining {
         position: relative;
-        color: $blue-color-1;
+        // color: $blue-color-1;
+        @include primary_color();
         .tips {
             display: none;
             @include font-family-normal();
@@ -237,7 +267,6 @@ export default {
             margin-bottom: -2px;
             width: 14px;
             height: 14px;
-
         }
     }
     .zero-fee-icon {
@@ -259,7 +288,8 @@ export default {
     }
     .gate {
         @include font-family-normal();
-        color: $blue-color-1;
+        // color: $blue-color-1;
+        @include primary_color();
         display: flex;
         margin-top: 2px;
         .gate-img {

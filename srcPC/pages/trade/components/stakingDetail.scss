@@ -62,12 +62,14 @@
         line-height: 16px;
         &.add {
             color: #fff;
-            background: $blue-color-1;
+            // background: $blue-color-1;
+            @include primary_bg_color();
             margin-right: 13px;
             margin-bottom: -1px;
         }
         &.cancel {
-            color: $blue-color-1;
+            // color: $blue-color-1;
+            @include primary_color();
             border: 1px solid $blue-color-1;
             margin-right: 30px;
         }

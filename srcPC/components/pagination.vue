@@ -116,11 +116,13 @@ export default {
     }
 
     &.active {
+        @include primary_bg_color();
         [data-theme="0"] & {
-            background: $blue-color-1;
+            // background: $blue-color-1;
             border: none;
         }
-        color: $white-color;
+        // color: $white-color;
+        @include primary_font_color();
         top: -1px;
         position: relative;
     }

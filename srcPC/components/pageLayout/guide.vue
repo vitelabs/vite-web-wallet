@@ -176,9 +176,11 @@ export default {
         width: 70px;
         height: 30px;
         line-height: 30px;
-        background: rgba(0,122,255,1);
+        // background: rgba(0,122,255,1);
+        @include primary_bg_color();
+        @include primary_font_color();
         border-radius: 2px;
-        color: rgba(255,255,255,1);
+        // color: rgba(255,255,255,1);
         text-align: center;
     }
     &:after {
@@ -264,7 +266,7 @@ export default {
         word-break: keep-all;
         white-space: nowrap;
         line-height: 16px;
-        color: #007aff;
+        color: #00BEFF;
         bottom: -20px;
         transform: translateY(100%);
     }

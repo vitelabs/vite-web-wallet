@@ -88,7 +88,7 @@ export default {
     margin-top: 16px;
 }
 .link {
-    color: #007aff;
+    color: #00BEFF;
     text-decoration: underline;
 }
 .notice-content {

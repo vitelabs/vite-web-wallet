@@ -20,8 +20,10 @@
 
 .__form_btn {
     border-radius: 2px;
-    background: $blue-color-1;
-    color: #fff;
+    // background: $blue-color-1;
+    @include primary_bg_color();
+    // color: #fff;
+    @include primary_font_color();
     height: 34px;
     line-height: 34px;
     text-align: center;

@@ -52,8 +52,8 @@ export default {
         background: $black-color-4;
     }
     &.__selected {
-        border: 1px solid #007aff;
-        color: #007aff;
+        border: 1px solid #00BEFF;
+        color: #00BEFF;
         background: rgba(0,122,255,0.05);
     }
 }

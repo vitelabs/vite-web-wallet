@@ -11,8 +11,7 @@
                      class="__pointer"
                      @click="_go(name)">
                     <div class="icon" :class="{ 'active': $route.name.indexOf(name) >= 0 }">
-                        <img v-show="$route.name.indexOf(name) < 0" :src="icon[name]" />
-                        <img v-show="$route.name.indexOf(name) >= 0" :src="icon[`${name}Active`]"  />
+                        <img :src="icon[name]" />
                     </div>
                 </div>
             </div>
@@ -21,8 +20,7 @@
                 <div v-for="(name, index) in menuBottoms" :key="index"
                      class="icon __pointer" :class="{ 'active': $route.name === name }"
                      @click="_go(name)">
-                    <img class="default" v-show="$route.name !== name" :src="icon[name]" />
-                    <img class="active" v-show="$route.name === name" :src="icon[`${name}Active`]"  />
+                    <img class="default" :src="icon[name]" />
                 </div>
                 <div class="icon __pointer" @click="changeTheme" key="theme">
                     <font-awesome-icon :icon="themeIcon" class="theme-icon"/>
@@ -37,7 +35,7 @@ import testNotice from 'pcComponents/testNotice';
 import statistics from 'utils/statistics';
 import openUrl from 'utils/openUrl';
 
-import viteLogo from 'assets/imgs/sidebar_logo.svg';
+// import viteLogo from 'assets/imgs/sidebar_logo.svg';
 import assets from 'assets/imgs/assets_default.svg';
 import assetsActive from 'assets/imgs/assets_pressed.svg';
 import wallet from 'assets/imgs/wallet_default.svg';
@@ -49,11 +47,11 @@ import tradeActive from 'assets/imgs/trade_pressed.svg';
 import defiActive from 'assets/imgs/sidebar_defi_pressed.svg';
 
 import theme1viteLogo from 'assets/theme1_imgs/sidebar_logo.png';
-import theme1wallet from 'assets/theme1_imgs/wallet_default.png';
-import theme1walletActive from 'assets/theme1_imgs/wallet_pressed.png';
-import theme1trade from 'assets/theme1_imgs/trade_default.png';
-import theme1assets from 'assets/theme1_imgs/assets_default.png';
-import theme1setting from 'assets/theme1_imgs/settings_default.png';
+// import theme1wallet from 'assets/theme1_imgs/wallet_default.png';
+// import theme1walletActive from 'assets/theme1_imgs/wallet_pressed.png';
+// import theme1trade from 'assets/theme1_imgs/trade_default.png';
+// import theme1assets from 'assets/theme1_imgs/assets_default.png';
+// import theme1setting from 'assets/theme1_imgs/settings_default.png';
 
 export default {
     components: { testNotice },
@@ -78,27 +76,27 @@ export default {
             return this.theme ? 'lightbulb' : 'moon';
         },
         viteLogo() {
-            if (+this.theme === 0) {
-                return viteLogo;
-            }
+            // if (+this.theme === 0) {
+            //     return viteLogo;
+            // }
             return theme1viteLogo;
         },
         icon() {
-            if (+this.theme) {
-                return {
-                    assets: theme1assets,
-                    assetsActive,
-                    wallet: theme1wallet,
-                    walletActive: theme1walletActive,
-                    trade: theme1trade,
-                    tradeActive,
-                    setting: theme1setting,
-                    settingActive,
-                    index: theme1trade,
-                    indexActive: tradeActive,
-                    defiActive
-                };
-            }
+            // if (+this.theme) {
+            //     return {
+            //         assets: theme1assets,
+            //         assetsActive,
+            //         wallet: theme1wallet,
+            //         walletActive: theme1walletActive,
+            //         trade: theme1trade,
+            //         tradeActive,
+            //         setting: theme1setting,
+            //         settingActive,
+            //         index: theme1trade,
+            //         indexActive: tradeActive,
+            //         defiActive
+            //     };
+            // }
             return {
                 assets,
                 assetsActive,
@@ -151,10 +149,11 @@ export default {
 .sidebar-wrapper {
     height: 100%;
     overflow: auto;
-    @include bg_color_2();
-    [data-theme="0"] & {
-        box-shadow: 0 2px 40px 1px rgba(221, 229, 252, 0.5);;
-    }
+    // @include bg_color_2();
+    background: linear-gradient(180deg, #00BEFF 0%, #00FF95 100%);
+    // [data-theme="0"] & {
+    //     box-shadow: 0 2px 40px 1px rgba(221, 229, 252, 0.5);;
+    // }
 
     .content {
         display: flex;
@@ -201,7 +200,8 @@ export default {
             height: 20px;
         }
         .theme-icon {
-            @include second_title_font_color();
+            // @include second_title_font_color();
+            color: #fff;
         }
 
         &.active::before {
@@ -213,7 +213,8 @@ export default {
             right: 4px;
             display: inline-block;
             width: 4px;
-            background-image: linear-gradient(-90deg, #1b3bd8 100%, #176ce0 100%, #0b92e7 100%, #0bb6eb 100%, #00e0f2 100%);
+            // background-image: linear-gradient(-90deg, #1b3bd8 100%, #176ce0 100%, #0b92e7 100%, #0bb6eb 100%, #00e0f2 100%);
+            background-color: #fff;
         }
     }
 

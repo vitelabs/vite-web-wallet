@@ -141,7 +141,7 @@ const mixin = {
                     'flex-grow': 1,
                     'white-space': 'nowrap',
                     color: '#ffffff',
-                    background: '#007AFF',
+                    background: '#00BEFF',
                     'display': 'flex',
                     'align-items': 'center',
                     'justify-content': 'center'
@@ -149,7 +149,7 @@ const mixin = {
                 left: {
                     border: '1px solid rgba(0,122,255,1)',
                     'border-radius': '2px',
-                    color: '#007aff',
+                    color: '#00BEFF',
                     'margin-right': '20px'
                 },
                 unUse: {

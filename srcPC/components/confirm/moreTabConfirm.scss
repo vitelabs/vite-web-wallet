@@ -34,7 +34,8 @@
     }
     .gate_info {
         font-size: 12px;
-        color: $blue-color-1;
+        // color: $blue-color-1;
+        @include primary_color();
         @include self_bg_color_2();
         padding: 0 4px;
         align-self: flex-start;
@@ -54,7 +55,8 @@
         font-size: 14px;
         line-height: 18px;
         &__gate {
-            color: $blue-color-1;
+            // color: $blue-color-1;
+            @include primary_color();
             @include self_bg_color_2();
             @include font-family-normal();
             font-size: 12px;
@@ -149,7 +151,8 @@
             white-space: nowrap;
         }
         .click-able {
-            color: $blue-color-1;
+            // color: $blue-color-1;
+            @include primary_color();
             cursor: pointer;
         }
         .btn {
@@ -163,7 +166,8 @@
             padding: 0 20px;
             white-space: nowrap;
             margin-left: 23px;
-            background: $blue-color-1;
+            // background: $blue-color-1;
+            @include primary_bg_color();
             color: $white-color;
             &.unuse {
                 @include gray_btn_color();

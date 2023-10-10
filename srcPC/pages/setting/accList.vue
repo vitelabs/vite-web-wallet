@@ -236,7 +236,8 @@ export default {
         height: 36px;
         line-height: 36px;
         font-size: 12px;
-        color: $blue-color-1;
+        // color: $blue-color-1;
+        @include primary_color();
         @include common_border_one(top);
 
         .acc-add {
@@ -252,7 +253,8 @@ export default {
             display: inline;
             position: relative;
             bottom: 3px;
-            color: $blue-color-1;
+            // color: $blue-color-1;
+            @include primary_color();
         }
     }
 
