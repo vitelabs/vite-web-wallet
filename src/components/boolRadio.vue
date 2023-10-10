@@ -73,7 +73,8 @@ export default {
             display: inline-block;
             width: 8px;
             height: 8px;
-            background: $blue-color-1;
+            // background: $blue-color-1;
+            @include primary_bg_color();
             border-radius: 5px;
         }
     }

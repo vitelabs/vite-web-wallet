@@ -14,7 +14,7 @@
                         <mask id="mask-2" fill="white">
                             <use xlink:href="#path-1"></use>
                         </mask>
-                        <use id="Combined-Shape" fill-opacity="0.7" fill="#007AFF" fill-rule="nonzero" transform="translate(6.000000, 6.000000) rotate(-45.000000) translate(-6.000000, -6.000000) " xlink:href="#path-1"></use>
+                        <use id="Combined-Shape" fill-opacity="0.7" fill="#00BEFF" fill-rule="nonzero" transform="translate(6.000000, 6.000000) rotate(-45.000000) translate(-6.000000, -6.000000) " xlink:href="#path-1"></use>
                     </g>
                 </g>
             </g>

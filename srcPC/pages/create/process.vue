@@ -59,7 +59,8 @@ export default {
     }
 
     .active {
-        background: #007aff;
+        // background: #00BEFF;
+        @include primary_bg_color();
         border: 8px solid #fff;
         box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.16);
     }
@@ -73,7 +74,8 @@ export default {
         background: #68d2ff;
 
         &.finish {
-            background: #007aff;
+            // background: #00BEFF;
+            @include primary_bg_color();
         }
     }
 }

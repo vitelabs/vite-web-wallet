@@ -242,7 +242,7 @@ export default {
 
     .blue {
         @include font-family-bold();
-        color: #007aff;
+        color: #00BEFF;
     }
 
     .green {

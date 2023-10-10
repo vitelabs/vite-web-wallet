@@ -12,7 +12,7 @@
                             y2="100%"
                         >
                             <stop offset="0%" stop-color="#19B4FD" />
-                            <stop offset="100%" stop-color="#007AFF" />
+                            <stop offset="100%" stop-color="#00BEFF" />
                         </linearGradient>
                         <linearGradient
                             id="pie_linear1"

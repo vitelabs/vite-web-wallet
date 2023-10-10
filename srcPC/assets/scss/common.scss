@@ -21,12 +21,14 @@
         padding: 0 5px;
         margin-right: 11px;
         color: #fff;
-        background-color: $blue-color-1;
+        // background-color: $blue-color-1;
+        @include primary_bg_color();
         border-radius: 2px;
         font-size: 12px;
         &__cancel {
             @include bg_color_4();
-            color: $blue-color-1;
+            // color: $blue-color-1;
+            @include primary_color();
         }
     }
 }

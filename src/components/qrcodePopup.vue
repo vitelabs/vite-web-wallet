@@ -77,7 +77,8 @@ export default {
         transform: translateX(20px);
         z-index: 1;
         .btn {
-            background: $blue-color-1;
+            // background: $blue-color-1;
+            @include primary_bg_color();
             border-radius: 2px;
             color: #fff;
             margin: 10px 8px;

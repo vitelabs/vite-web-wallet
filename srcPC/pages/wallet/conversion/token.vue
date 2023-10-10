@@ -107,7 +107,8 @@ export default {
             .num {
                 float: right;
                 font-size: 20px;
-                color: $blue-color-1;
+                // color: $blue-color-1;
+                @include primary_color();
                 margin-left: 10px;
             }
         }
@@ -125,7 +126,8 @@ export default {
                 text-align: center;
                 margin-left: 10px;
                 white-space: nowrap;
-                background: $blue-color-1;
+                // background: $blue-color-1;
+                @include primary_bg_color();
                 color: $white-color;
                 &.only {
                     min-width: 100%;

@@ -263,9 +263,11 @@ export default {
     .search {
         width: 60px;
         height: 28px;
-        color: #007aff;
+        // color: #00BEFF;
+        @include primary_color();
         border-radius: 2px;
-        border: 1px solid #007aff;
+        border: 1px solid #00BEFF;
+        @include primary_border_color();
         font-family: $font-normal-b;
         font-weight: normal;
         text-align: center;

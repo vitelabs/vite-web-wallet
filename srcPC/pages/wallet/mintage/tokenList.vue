@@ -311,7 +311,7 @@ export default {
 }
 .btn {
     margin-right: 8px;
-    color: #007AFF;
+    color: #00BEFF;
     &.unuse {
         color: #ced1d5;
     }

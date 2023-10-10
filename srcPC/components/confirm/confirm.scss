@@ -2,7 +2,7 @@
 
 @mixin title_bg_color() {
     [data-theme="0"] & {
-        background-color: $blue-color-3;
+        background-color: $blue-color-1;
     }
     [data-theme="1"] & {
         background-color: $black-color-1;
@@ -114,6 +114,11 @@
         line-height: 22px;
         overflow: auto;
         flex: 1;
+            
+        .link {
+            // color: $blue-color-1;
+            @include primary_color();
+        }
     }
 
     .bottom {
@@ -132,7 +137,8 @@
             height: 40px;
             line-height: 40px;
             font-size: 14px;
-            color: $blue-color-1;
+            // color: $blue-color-1;
+            @include primary_color();
             box-sizing: border-box;
             text-align: center;
 
@@ -145,12 +151,16 @@
             &.btn-border {
                 border-radius: 2px;
                 border: 1px solid $blue-color-1;
-                color: $blue-color-1;
+                // color: $blue-color-1;
+                @include primary_color();
+                @include primary_border_color();
             }
 
             &.btn-blue {
-                background: $blue-color-1;
-                color: $white-color;
+                // background: $blue-color-1;
+                // color: $white-color;
+                @include primary_bg_color();
+                @include primary_font_color();
             }
 
             &.btn-gray {

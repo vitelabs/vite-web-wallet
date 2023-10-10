@@ -92,15 +92,15 @@
                                 <div class="mining-icon">
                                     <img
                                         v-show="isMining(txPair) === 1"
-                                        src="~assets/imgs/trade_mining.svg"
+                                        :src="tradeMiningIcon"
                                     />
                                     <img
                                         v-show="isMining(txPair) === 2"
-                                        src="~assets/imgs/order_mining.svg"
+                                        :src="orderMiningIcon"
                                     />
                                     <img
                                         v-show="isMining(txPair) === 3"
-                                        src="~assets/imgs/mining.svg"
+                                        :src="miningIcon"
                                     />
                                     {{ miningMultiples(txPair) }}
                                 </div>
@@ -156,6 +156,13 @@ import BigNumber from 'utils/bigNumber';
 import statistics from 'utils/statistics';
 import operatorIcon from 'assets/imgs/operator.png';
 import Popper from 'vue-popperjs';
+
+import tradeMiningSvg from 'assets/imgs/trade_mining.svg';
+import orderMiningSvg from 'assets/imgs/order_mining.svg';
+import miningSvg from 'assets/imgs/mining.svg';
+import theme1TradeMiningSvg from 'assets/theme1_imgs/trade_mining.svg';
+import theme1OrderMiningSvg from 'assets/theme1_imgs/order_mining.svg';
+import theme1MiningSvg from 'assets/theme1_imgs/mining.svg';
 
 export default {
     components: { Popper },
@@ -260,6 +267,24 @@ export default {
         },
         hiddenSymbols() {
             return this.$store.state.uiConfig.hiddenSymbols;
+        },
+        tradeMiningIcon() {
+            if (+this.theme === 0) {
+                return tradeMiningSvg;
+            }
+            return theme1TradeMiningSvg;
+        },
+        orderMiningIcon() {
+            if (+this.theme === 0) {
+                return orderMiningSvg;
+            }
+            return theme1OrderMiningSvg;
+        },
+        miningIcon() {
+            if (+this.theme === 0) {
+                return miningSvg;
+            }
+            return theme1MiningSvg;
         }
     },
     methods: {
@@ -475,7 +500,8 @@ export default {
             border-radius: 50%;
         }
         .mining-icon {
-            color: $blue-color-1;
+            // color: $blue-color-1;
+            @include primary_color();
             display: flex;
             align-items: center;
         }
@@ -508,7 +534,8 @@ export default {
         font-weight: 600;
     }
     &__divider {
-        border-top: 1px dashed #007aff;
+        border-top: 1px dashed #00BEFF;
+        @include primary_border_color();
         margin: 9px 0px;
         width: 100%;
     }

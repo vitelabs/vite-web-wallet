@@ -243,7 +243,7 @@ export default {
             margin-top: 7px;
             width: 18px;
             height: 18px;
-            @include background_common_img_suffix('add-quota-icon', 'svg', 'png');
+            @include background_common_img('add-quota-icon.svg');
         }
 
         .list {

@@ -337,7 +337,8 @@ export default {
                 border: 1px solid rgba(0, 122, 255, 0.3);
                 line-height: 16px;
                 cursor: pointer;
-                color: $blue-color-1;
+                // color: $blue-color-1;
+                @include primary_color();
                 margin-right: 6px;
                 padding: 0 2px;
                 &.readonly {

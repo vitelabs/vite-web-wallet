@@ -406,7 +406,8 @@ export default {
     margin-right: 12px;
 }
 .clickable {
-    color: #007aff;
+    // color: #00BEFF;
+    @include primary_color();
     cursor: pointer;
 }
 

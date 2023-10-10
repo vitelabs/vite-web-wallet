@@ -55,7 +55,8 @@ export default {
     word-wrap: break-word;
     &.normal {
         &::before {
-            background-image: linear-gradient(138deg, #052ef5 0%, #094bf3 31%, #0d6df0 49%, #0b92e7 71%, #0ba8e9 100%);
+            // background-image: linear-gradient(138deg, #052ef5 0%, #094bf3 31%, #0d6df0 49%, #0b92e7 71%, #0ba8e9 100%);
+            background: linear-gradient(180deg, #00BEFF 0%, #00FF95 100%);
         }
     }
     &.notice {

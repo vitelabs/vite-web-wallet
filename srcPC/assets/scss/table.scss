@@ -104,6 +104,7 @@
     }
     .click-able {
         cursor: pointer;
-        color: $blue-color-1;
+        // color: $blue-color-1;
+        @include primary_color();
     }
 }

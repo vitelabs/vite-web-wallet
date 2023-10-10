@@ -173,7 +173,8 @@ export default {
 @import "pcComponents/confirm/confirmRow.scss";
 
 .strong{
-    color: $blue-color-1;
+    // color: $blue-color-1;
+    @include primary_color();
     @include font-family-bold();
 }
 .no_top {

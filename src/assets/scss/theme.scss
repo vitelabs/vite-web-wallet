@@ -45,6 +45,42 @@
     }
 }
 
+@mixin primary_color {
+    [data-theme="0"] & {
+        color: $blue-color-1;
+    }
+    [data-theme="1"] & {
+        color: $green-color;
+    }
+}
+
+@mixin primary_font_color {
+    [data-theme="0"] & {
+        color: $white-color;
+    }
+    [data-theme="1"] & {
+        color: $black-color-1;
+    }
+}
+
+@mixin primary_bg_color {
+    [data-theme="0"] & {
+        background-color: $blue-color-1;
+    }
+    [data-theme="1"] & {
+        background-color: $green-color;
+    }
+}
+
+@mixin primary_border_color {
+    [data-theme="0"] & {
+        border-color: $blue-color-1;
+    }
+    [data-theme="1"] & {
+        border-color: $green-color;
+    }
+}
+
 @mixin hover_color() {
     [data-theme="0"] & {
         background-color: $hover-color-1;
@@ -212,7 +248,8 @@
     background: rgba(0,122,255,0.05);
     border-radius: 2px;
     line-height: 15px;
-    color: #007AFF;
+    // color: #00BEFF;
+    @include primary_color();
     padding: 0 3px;
     cursor: pointer;
 }

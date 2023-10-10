@@ -732,7 +732,7 @@ $font-black: rgba(36, 39, 43, 0.8);
         height: 50px;
         line-height: 50px;
         text-align: center;
-        border-radius: 2px;
+        border-radius: 12px;
         font-size: 16px;
         @include font-bold();
         color: #fff;
@@ -740,7 +740,7 @@ $font-black: rgba(36, 39, 43, 0.8);
             background: $red;
         }
         &.green {
-            background: $green;
+            background: linear-gradient(82deg, #00BEFF 0%, #00FF95 100%);
         }
         &.gray {
             color: rgba(29, 32, 36, 0.6);

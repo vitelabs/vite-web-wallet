@@ -504,7 +504,8 @@ export default {
         align-items: center;
         margin-bottom: 20px;
         border-radius: 16px;
-        background: #007aff;
+        // background: #00BEFF;
+        @include primary_color();
         box-shadow: 0 0 4px 0 rgba(0, 105, 219, 1);
         &.no-padding-left {
             padding-left: 0;
@@ -565,7 +566,8 @@ export default {
                 color: #333333;
                 line-height: 18px;
                 .action_get_app {
-                    color: #007aff;
+                    // color: #00BEFF;
+                    @include primary_color();
                     font-size: 14px;
                     font-family: $font-bold;
                     cursor: pointer;
@@ -597,12 +599,14 @@ export default {
                 line-height: 18px;
             }
             .code_tips_introduction {
-                color: $blue-color-1;
+                // color: $blue-color-1;
+                @include primary_color();
                 font-size: 14px;
                 display: flex;
                 flex-direction: row;
                 a {
-                    color: $blue-color-1;
+                    // color: $blue-color-1;
+                    @include primary_color();
                     flex: 1;
                     &:first-child {
                         text-align: left;

@@ -251,9 +251,11 @@ export default {
         border-radius: 2px;
         padding: 0 12px;
         font-size: 14px;
-        color: #007aff;
+        // color: #00BEFF;
+        @include primary_color();
         &:active {
-            background: $blue-color-1;
+            // background: $blue-color-1;
+            @include primary_bg_color();
             color: #edf1ff;
         }
     }
