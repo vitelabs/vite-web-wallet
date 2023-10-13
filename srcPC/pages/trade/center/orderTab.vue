@@ -80,4 +80,14 @@ export default {
         overflow: hidden;
     }
 }
+.order-tab {
+    .ex-tab-list {
+    [data-theme="0"] & {
+        background: linear-gradient(90deg, rgba(243, 245, 249, 1) 0%, rgba(0, 190, 255, .5) 25%, rgba(0, 255, 149, .5) 75%, rgba(243, 245, 249, 1) 100%);
+    }
+    [data-theme="1"] & {
+        background: linear-gradient(90deg, rgba(15, 22, 45, 1) 0%, rgba(15, 22, 45, .8) 15%, rgba(0, 255, 149, .7) 45%, rgba(0, 190, 255, .7) 55%, rgba(15, 22, 45, .8) 85%, rgba(15, 22, 45, 1) 100%);
+    }
+    }
+}
 </style>

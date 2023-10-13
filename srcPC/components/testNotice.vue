@@ -45,7 +45,8 @@ export default {
         text-align: left;
         font-size: 16px;
         line-height: 16px;
-        color: #195add;
+        // color: #195add;
+        @include primary_color();
         margin-bottom: 16px;
         word-break: break-all;
     }
