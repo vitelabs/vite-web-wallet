@@ -277,8 +277,10 @@ export default {
 
         &:active,
         &.active {
-            background: rgba(0, 122, 255, 1);
-            color: #fff;
+            // background: rgba(0, 122, 255, 1);
+            // color: #fff;
+            @include primary_bg_color();
+            @include primary_font_color();
         }
     }
 }

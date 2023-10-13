@@ -53,12 +53,12 @@ $up-font-color: $green;
     width: 100%;
     padding: 4px 0 0px 0;
     [data-theme="0"] & {
-        // background: rgba(243,245,249,1);
-        background: linear-gradient(90deg, rgba(243, 245, 249, 1) 0%, rgba(0, 190, 255, .5) 25%, rgba(0, 255, 149, .5) 75%, rgba(243, 245, 249, 1) 100%);
+        background: rgba(243,245,249,1);
+        // background: linear-gradient(90deg, rgba(243, 245, 249, 1) 0%, rgba(0, 190, 255, .5) 25%, rgba(0, 255, 149, .5) 75%, rgba(243, 245, 249, 1) 100%);
     }
     [data-theme="1"] & {
-        // background-color: $black-color-1;
-        background: linear-gradient(90deg, rgba(15, 22, 45, 1) 0%, rgba(15, 22, 45, .8) 15%, rgba(0, 255, 149, .7) 45%, rgba(0, 190, 255, .7) 55%, rgba(15, 22, 45, .8) 85%, rgba(15, 22, 45, 1) 100%);
+        background-color: $black-color-1;
+        // background: linear-gradient(90deg, rgba(15, 22, 45, 1) 0%, rgba(15, 22, 45, .8) 15%, rgba(0, 255, 149, .7) 45%, rgba(0, 190, 255, .7) 55%, rgba(15, 22, 45, .8) 85%, rgba(15, 22, 45, 1) 100%);
     }
     .ex-tab {
         display: inline-block;
