@@ -387,7 +387,8 @@ export default {
 
 .__hint {
     .link {
-        color: #007AFF;
+        // color: #00BEFF;
+        @include primary_color();
     }
 }
 .beneficial-img {
@@ -414,7 +415,8 @@ export default {
 }
 
 .btn {
-    color: #007aff;
+    // color: #00BEFF;
+    @include primary_color();
     margin-right: 15px;
     &.unuse {
         color: #ced1d5;

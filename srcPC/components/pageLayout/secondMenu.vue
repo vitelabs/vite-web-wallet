@@ -240,14 +240,19 @@ export default {
         user-select: none;
         &.active {
             position: relative;
-            color: $blue-color-1;
+            // color: $blue-color-1;
+            @include primary_color();
             border-bottom: 2px solid $blue-color-1;
+            @include primary_border_color();
 
             &::after {
                 content: "";
                 display: inline-block;
                 border: 6px solid transparent;
                 border-bottom: 6px solid $blue-color-1;
+                [data-theme="1"] & {
+                    border-bottom: 6px solid $green-color;
+                }
                 position: absolute;
                 bottom: 0;
                 left: 50%;

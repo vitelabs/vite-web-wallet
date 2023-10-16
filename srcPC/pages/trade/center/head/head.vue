@@ -187,7 +187,12 @@ export default {
         display: inline-block;
         height: 24px;
         padding: 2px 10px;
-        background: url('~assets/imgs/more-tx-detail.svg') right bottom no-repeat;
+        [data-theme="0"] & {
+            background: url('~assets/imgs/more-tx-detail.svg') right bottom no-repeat;
+        }
+        [data-theme="1"] & {
+            background: url('~assets/theme1_imgs/more-tx-detail.svg') right bottom no-repeat;
+        }
         background-size: 4px 24px;
     }
 }

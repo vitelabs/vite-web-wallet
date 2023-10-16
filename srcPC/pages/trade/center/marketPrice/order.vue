@@ -926,7 +926,7 @@ $font-black: rgba(36, 39, 43, 0.8);
         line-height: 30px;
         text-align: center;
         margin-top: 12px;
-        border-radius: 2px;
+        border-radius: 12px;
         font-size: 14px;
         @include font-family-bold();
         font-weight: 600;
@@ -939,16 +939,7 @@ $font-black: rgba(36, 39, 43, 0.8);
             );
         }
         &.green {
-            [data-theme='0'] & {
-                background: linear-gradient(
-                    270deg,
-                    rgba(0, 212, 208, 1) 0%,
-                    rgba(0, 215, 100, 1) 100%
-                );
-            }
-            [data-theme='1'] & {
-                background: $green-color;
-            }
+            background: linear-gradient(82deg, #00BEFF 0%, #00FF95 100%);
         }
         &.gray {
             @include gray_btn_color();

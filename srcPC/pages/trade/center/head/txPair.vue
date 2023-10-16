@@ -129,7 +129,8 @@ export default {
                 content: ' ';
                 width: 5px;
                 height: 5px;
-                background: $blue-color-1;
+                // background: $blue-color-1;
+                @include primary_bg_color();
                 margin-right: 6px;
                 margin-bottom: 2px;
                 border-radius: 5px;

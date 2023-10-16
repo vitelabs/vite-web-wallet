@@ -343,7 +343,8 @@ $green: linear-gradient(270deg, rgba(0,212,208,1) 0%, rgba(0,215,100,1) 100%);
         position: absolute;
         top: 0;
         left: 0;
-        background: #007aff;
+        // background: #00BEFF;
+        @include primary_bg_color();
         height: 100%;
         border-radius: 4px;
         &.smooth {

@@ -12,17 +12,17 @@
     <rect width="1350" height="60" fill="#FFF"/>
     <polygon fill="#D3DFEF" fill-opacity=".7" points="148.25 10 148.75 10 148.75 50 148.25 50" transform="matrix(-1 0 0 1 297 0)"/>
     <polygon fill="#D3DFEF" fill-opacity=".69" points="1174.25 10 1174.75 10 1174.75 50 1174.25 50"/>
-    <rect width="46.5" height="15.5" x="155.25" y="34.25" fill="#007AFF" fill-opacity=".05" stroke="#007AFF" stroke-opacity=".299" stroke-width=".5" rx="2"/>
-    <rect width="45.5" height="15.5" x="208.25" y="34.25" fill="#007AFF" fill-opacity=".05" stroke="#007AFF" stroke-opacity=".299" stroke-width=".5" rx="2"/>
-    <rect width="55.5" height="15.5" x="876.25" y="34.25" fill="#007AFF" fill-opacity=".05" stroke="#007AFF" stroke-opacity=".299" stroke-width=".5" rx="2"/>
+    <rect width="46.5" height="15.5" x="155.25" y="34.25" fill="#00BEFF" fill-opacity=".05" stroke="#00BEFF" stroke-opacity=".299" stroke-width=".5" rx="2"/>
+    <rect width="45.5" height="15.5" x="208.25" y="34.25" fill="#00BEFF" fill-opacity=".05" stroke="#00BEFF" stroke-opacity=".299" stroke-width=".5" rx="2"/>
+    <rect width="55.5" height="15.5" x="876.25" y="34.25" fill="#00BEFF" fill-opacity=".05" stroke="#00BEFF" stroke-opacity=".299" stroke-width=".5" rx="2"/>
     <rect width="42.5" height="15.5" x="938.25" y="34.25" fill="#5E6875" fill-opacity=".05" stroke="#5E6875" stroke-opacity=".297" stroke-width=".5" rx="2"/>
-    <text fill="#007AFF" font-family="PingFang-SC-Regular, PingFang SC" font-size="12">
+    <text fill="#00BEFF" font-family="PingFang-SC-Regular, PingFang SC" font-size="12">
       <tspan x="157" y="47">transfer</tspan>
     </text>
-    <text fill="#007AFF" font-family="PingFang-SC-Regular, PingFang SC" font-size="12">
+    <text fill="#00BEFF" font-family="PingFang-SC-Regular, PingFang SC" font-size="12">
       <tspan x="210" y="47">Deposit</tspan>
     </text>
-    <text fill="#007AFF" font-family="PingFang-SC-Regular, PingFang SC" font-size="12">
+    <text fill="#00BEFF" font-family="PingFang-SC-Regular, PingFang SC" font-size="12">
       <tspan x="878" y="47">Withdraw</tspan>
     </text>
     <text fill="#5E6875" font-family="PingFang-SC-Regular, PingFang SC" font-size="12">
@@ -43,7 +43,7 @@
       </g>
     </g>
     <g transform="translate(30 8)">
-      <path fill="#F2F8FF" stroke="#007AFF" stroke-opacity=".67" stroke-width=".5" d="M8,0.25 C3.71979319,0.25 0.25,3.71979319 0.25,8 C0.25,12.2802068 3.71979319,15.75 8,15.75 C12.2802068,15.75 15.75,12.2802068 15.75,8 C15.75,3.71979319 12.2802068,0.25 8,0.25 Z"/>
+      <path fill="#F2F8FF" stroke="#00BEFF" stroke-opacity=".67" stroke-width=".5" d="M8,0.25 C3.71979319,0.25 0.25,3.71979319 0.25,8 C0.25,12.2802068 3.71979319,15.75 8,15.75 C12.2802068,15.75 15.75,12.2802068 15.75,8 C15.75,3.71979319 12.2802068,0.25 8,0.25 Z"/>
       <path fill="url(#资产英文-a)" d="M3.75,5.95778598 L6.37727272,5.36259615 L6.11544098,12.04 L3.75,5.95778598 Z M7.00003595,5.20820673 L12.25,3.965 L6.22272727,11.9623558 L7.00003595,5.20820673 Z"/>
     </g>
     <text fill="#5E6875" font-family="PingFangSC-Regular, PingFang SC" font-size="12">

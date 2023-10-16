@@ -94,7 +94,8 @@ export default {
 .cancel {
     color: #ced1d5;
     &.active {
-        color: #007aff;
+        // color: #00BEFF;
+        @include primary_color();
     }
 }
 </style>

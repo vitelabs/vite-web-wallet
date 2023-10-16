@@ -213,7 +213,8 @@ export default {
     .btn-list {
         font-size: 12px;
         @include font-family-bold();
-        color: $blue-color-1;
+        // color: $blue-color-1;
+        @include primary_color();
         span {
             display: inline-block;
             box-sizing: border-box;

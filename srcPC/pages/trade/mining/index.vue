@@ -152,7 +152,8 @@ export default {
     display: inline-block;
     align-items: center;
     font-size: 12px;
-    color: $blue-color-1;
+    // color: $blue-color-1;
+    @include primary_color();
     margin-left: 10px;
     &::before {
         display: inline-block;

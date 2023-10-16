@@ -52,16 +52,16 @@ block content
 <script>
 import Vue from 'vue';
 
-import { initVB } from 'wallet/vb';
+// import { initVB } from 'wallet/vb';
 import { getLedgerInstance, initLedger } from 'wallet/ledgerHW';
-import { getCurrHDAcc } from 'wallet';
-import icon from 'assets/imgs/start_qrcode_icon.svg';
+// import { getCurrHDAcc } from 'wallet';
+// import icon from 'assets/imgs/start_qrcode_icon.svg';
 import Checkbox from 'uiKit/checkbox';
 import { viteClient } from 'services/apiServer';
 import { VITE_TOKENID } from 'utils/constant';
 import loading from 'components/loading.vue';
 import Lottie from 'pcComponents/animation/lottie.vue';
-import { getAccountLink } from "utils/getLink";
+import { getAccountLink } from 'utils/getLink';
 
 export default {
     components: { Checkbox, loading, Lottie },
@@ -243,7 +243,8 @@ export default {
                 border-radius: 2px;
                 border: 1px solid rgba(0,122,255,0.3);
                 line-height: 15px;
-                color: #007AFF;
+                // color: #00BEFF;
+                @include primary_color();
                 padding: 0 3px;
                 margin-left: 5px;
             }
@@ -271,7 +272,8 @@ export default {
         border: 1px solid rgba(0,122,255,0.3);
         line-height: 15px;
         cursor: pointer;
-        color: #007AFF;
+        // color: #00BEFF;
+        @include primary_color();
         padding: 0 7px;
         &:last-child {
             margin-left: 10px;
@@ -291,7 +293,8 @@ export default {
         line-height: 40px;
         font-size: 14px;
         color: white;
-        background: $blue-color-1;
+        // background: $blue-color-1;
+        @include primary_bg_color();
         box-sizing: border-box;
         text-align: center;
         &.btn-gray {
@@ -311,7 +314,8 @@ export default {
         line-height: 40px;
         font-size: 14px;
         color: white;
-        background: $blue-color-1;
+        // background: $blue-color-1;
+        @include primary_bg_color();
         box-sizing: border-box;
         text-align: center;
     }

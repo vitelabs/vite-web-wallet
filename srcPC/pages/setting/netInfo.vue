@@ -146,7 +146,8 @@ export default {
         .ant-switch {
             background-color: #545f75;
             &.ant-switch-checked {
-            background-color: #007aff;
+                // background-color: #00BEFF;
+                @include primary_bg_color();
         }
         }
 
@@ -167,7 +168,8 @@ export default {
         @include setting_common_color();
     }
     .link {
-        color: $blue-color-1;
+        // color: $blue-color-1;
+        @include primary_color();
     }
 }
 </style>

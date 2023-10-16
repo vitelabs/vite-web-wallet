@@ -191,7 +191,7 @@ export default {
 
 .click-able {
     cursor: pointer;
-    color: #007aff;
+    color: #00BEFF;
 }
 
 .__tb {

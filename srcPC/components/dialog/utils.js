@@ -146,7 +146,7 @@ const mixin = {
                     'flex-grow': 1,
                     'white-space': 'nowrap',
                     color: '#ffffff',
-                    background: '#007AFF',
+                    background: '#00BEFF',
                     'display': 'flex',
                     'align-items': 'center',
                     'justify-content': 'center'
@@ -154,7 +154,7 @@ const mixin = {
                 left: {
                     border: '1px solid rgba(0,122,255,1)',
                     'border-radius': '2px',
-                    color: '#007aff',
+                    color: '#00BEFF',
                     'margin-right': '20px'
                 },
                 unUse: {
@@ -170,7 +170,7 @@ const mixin = {
                     background: '#ffffff',
                     'box-shadow': '0 2px 48px 1px rgba(176, 192, 237, 0.42)'
                 },
-                title: { background: '#007AFF' },
+                title: { background: '#00BEFF' },
                 body: { color: 'rgba(29,32,36,1)' },
                 unUse: { background: 'rgba(191,191,191,1)' }
             };

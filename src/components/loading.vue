@@ -113,7 +113,8 @@ export default {
     }
 
     .dot > div {
-        background-color: #007aff;
+        // background-color: #00BEFF;
+        @include primary_bg_color();
     }
 }
 </style>

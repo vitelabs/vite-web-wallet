@@ -143,12 +143,14 @@ export default {
     margin-top: 6px;
 }
 .all-wrapper {
-    color: #007AFF;
+    // color: #00BEFF;
+    @include primary_color();
     font-size: 12px;
     margin: 0 15px;
     cursor: pointer;
     .all {
-        border-bottom: 1px dashed #007AFF;
+        border-bottom: 1px dashed #00BEFF;
+        @include primary_border_color();
     }
 }
 </style>

@@ -1,6 +1,6 @@
 const path = require('path');
 const getEntry = require('./getEntry');
-const { srcPath ,recaptchaToken} = require('../config');
+const { srcPath, recaptchaToken } = require('../config');
 
 const PC_SRC_PATH = path.join(srcPath, '../srcPC');
 // -------- recaptchaToken

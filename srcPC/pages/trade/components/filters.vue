@@ -263,9 +263,11 @@ export default {
     .search {
         width: 60px;
         height: 28px;
-        color: #007aff;
+        // color: #00BEFF;
+        @include primary_color();
         border-radius: 2px;
-        border: 1px solid #007aff;
+        border: 1px solid #00BEFF;
+        @include primary_border_color();
         font-family: $font-normal-b;
         font-weight: normal;
         text-align: center;
@@ -275,8 +277,10 @@ export default {
 
         &:active,
         &.active {
-            background: rgba(0, 122, 255, 1);
-            color: #fff;
+            // background: rgba(0, 122, 255, 1);
+            // color: #fff;
+            @include primary_bg_color();
+            @include primary_font_color();
         }
     }
 }
