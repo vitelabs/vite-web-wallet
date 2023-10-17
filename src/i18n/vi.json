@@ -191,6 +191,7 @@
         "addrFormat": "Sai định dạng địa chỉ",
         "amtFormat": "Sai định dạng số lượng",
         "transSucc": "Giao dịch thành công!",
+        "transNameErr": "Tên không tồn tại!",
         "insufficientBalance": "Không đủ số dư",
         "validMaxDigit": "Tối đa {digit} decimal",
         "nodeErr": "Xảy ra lỗi fullnode, vui lòng thử lại sau.",

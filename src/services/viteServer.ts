@@ -1,5 +1,5 @@
-import { constant } from '@vite/vitejs';
-import { viteClient } from './apiServer';
+import { abi, constant } from '@vite/vitejs';
+import { viteClient, customContracts } from './apiServer';
 
 export function getCode(address: string) {
     // get my code
@@ -141,4 +141,11 @@ export function unsubUnreceivedTx(event) {
 
 export function getAccountBlockByHash(hash) {
     return viteClient.request('ledger_getAccountBlockByHash', hash);
+}
+
+export function resolveViteNSName(name) {
+    return viteClient.request("contract_query", {
+        address: customContracts['ViteNS'].contractAddress,
+        data: Buffer.from(abi.encodeFunctionCall(customContracts['ViteNS'].abi, [ name ]), "hex").toString("base64")
+    })
 }
