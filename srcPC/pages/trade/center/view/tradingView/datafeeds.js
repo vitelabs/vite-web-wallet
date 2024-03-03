@@ -1,5 +1,5 @@
-import { klineHistory } from 'services/trade';
-import { subTask } from 'utils/proto/subTask';
+import { klineHistory } from '@services/trade';
+import { subTask } from '@utils/proto/subTask';
 
 const timers = {};
 const maxReqBarNum = 1500;

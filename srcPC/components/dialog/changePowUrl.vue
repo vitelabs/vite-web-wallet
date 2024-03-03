@@ -1,5 +1,5 @@
 <template lang="pug">
-extends /components/dialog/base.pug
+extends ../../../src/components/dialog/base.pug
 block content
     div
         div(v-for="(node, index) in env.customPowUrls" :key="node" class="__radio_item")
@@ -80,9 +80,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '~assets/scss/vars.scss';
-@import 'pcAssets/scss/common.scss';
-@import 'pcComponents/confirm/confirmRow.scss';
+@use "@assets/scss/theme.scss" as *;
+@use '../../assets/scss/common.scss' as *;
+@use '../confirm/confirmRow.scss' as *;
 
 .head {
     box-sizing: border-box;

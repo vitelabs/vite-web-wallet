@@ -1,5 +1,5 @@
-import bigNumber from 'utils/bigNumber';
-import { subTask } from 'utils/proto/subTask';
+import bigNumber from '@utils/bigNumber';
+import { subTask } from '@utils/proto/subTask';
 
 const time = 2000;
 let depthTask = null;

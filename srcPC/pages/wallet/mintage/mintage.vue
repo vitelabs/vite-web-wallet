@@ -129,12 +129,12 @@
 
 <script>
 import { utils } from '@vite/vitejs';
-import viteInput from 'components/viteInput';
-import boolRadio from 'components/boolRadio';
-import BigNumber from 'utils/bigNumber';
-import mintageConfirm from './confirm';
-import { execWithValid } from 'pcUtils/execWithValid';
-import { checkAmountFormat } from 'pcUtils/validations';
+import viteInput from '@components/viteInput.vue';
+import boolRadio from '@components/boolRadio.vue';
+import BigNumber from '@utils/bigNumber';
+import mintageConfirm from './confirm.vue';
+import { execWithValid } from '@pc/utils/execWithValid';
+import { checkAmountFormat } from '@pc/utils/validations';
 
 const maxNum = BigNumber.exponentiated(2, 256, '-1');
 
@@ -385,8 +385,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '~assets/scss/vars.scss';
-@import '../form.scss';
+@use "@assets/scss/theme.scss" as *;
+@use '../form.scss' as *;
 
 .mintage {
     width: 100%;

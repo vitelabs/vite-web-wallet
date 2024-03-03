@@ -11,11 +11,11 @@
 </template>
 
 <script>
-import fullNodetitle from './title';
-import addQuota from './addQuotaForNode';
-import list from './list';
-import quotaContent from './quotaContent';
-import cancelStake from './cancelStake';
+import fullNodetitle from './title.vue';
+import addQuota from './addQuotaForNode.vue';
+import list from './list.vue';
+import quotaContent from './quotaContent.vue';
+import cancelStake from './cancelStake.vue';
 
 export default {
     components: { fullNodetitle, addQuota, list, quotaContent, cancelStake },

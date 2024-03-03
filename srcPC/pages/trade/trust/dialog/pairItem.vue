@@ -23,6 +23,8 @@ export default {
 </script>
 
 <style lang="scss">
+@use "@assets/scss/theme.scss" as *;
+
 .pair-item {
     padding: 4px 6px;
     border-radius: 2px;
@@ -42,7 +44,7 @@ export default {
         width: 12px;
         height: 12px;
         margin-left: 8px;
-        background: url(~assets/imgs/cancel_item.png);
+        background: url("@assets/imgs/cancel_item.png");
         background-size: cover;
         background-repeat: no-repeat;
     }

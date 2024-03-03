@@ -4,7 +4,7 @@
 
 <script>
 import { qrcode, modes, ecLevel } from 'qrcode.es';
-import logo from 'assets/imgs/qrcode_addr.png';
+import logo from '@assets/imgs/qrcode_addr.png';
 
 const defaultOpt = {
     size: 300,

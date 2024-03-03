@@ -1,7 +1,7 @@
-import viteCrypto from 'testwebworker';
+import scrypt from 'scryptsy';
 import { keystore, utils } from '@vite/vitejs';
 
-import { getOldAccList, setOldAccList } from 'pcUtils/store';
+import { getOldAccList, setOldAccList } from '../utils/store';
 
 import { WebAccount as HDAccount, StatusMap as _StatusMap } from './webAccount';
 import { VBAccount } from './vbAccount';
@@ -101,7 +101,7 @@ export function saveHDAccount({
         throw err;
     }
 
-    return keystore.encrypt(entropy, pass, null, viteCrypto).then(keystoreStr => {
+    return keystore.encrypt(entropy, pass, null, scrypt).then(keystoreStr => {
         const keystoreObj = JSON.parse(keystoreStr);
 
         addHdAccount({

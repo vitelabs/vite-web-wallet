@@ -32,9 +32,9 @@
 </template>
 
 <script>
-import bigNumber from 'utils/bigNumber';
+import bigNumber from '@utils/bigNumber';
 import { constant } from '@vite/vitejs';
-import stakingList from './stakingList';
+import stakingList from './stakingList.vue';
 import cancelStakeForMining from './cancelStakeForMining.vue';
 import cancellingDetails from './cancellingDetails.vue';
 
@@ -90,11 +90,11 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "../../components/stakingDetail.scss";
+@use "../../components/stakingDetail.scss";
 
 .down-icon {
     display: inline-block;
-    background: url('~assets/imgs/moreRecords.svg');
+    background: url("@assets/imgs/moreRecords.svg");
     background-size: 100% 100%;
     width: 16px;
     height: 16px;

@@ -71,7 +71,7 @@
                         {{ $t('assets.ledger.start.title') }}
                     </div>
                     <div class="img_wrapper">
-                        <img src="~assets/imgs/ledger_logo.svg" alt="" />
+                        <img src="@assets/imgs/ledger_logo.svg" alt="" />
                     </div>
                     <div class="code_tips_introduction">
                         <a
@@ -181,22 +181,21 @@
 </template>
 
 <script>
-import Vue from 'vue';
-import loading from 'components/loading.vue';
-import ellipsisAddr from 'utils/ellipsisAddr.js';
-import { getAppLink } from 'utils/getLink';
-import openUrl from 'utils/openUrl';
-import { getList, deleteOldAcc } from 'wallet';
-import * as DnsHost from 'services/dnsHostIP';
+import loading from '@components/loading.vue';
+import ellipsisAddr from '@utils/ellipsisAddr.js';
+import { getAppLink } from '@utils/getLink';
+import openUrl from '@utils/openUrl';
+import { getList, deleteOldAcc } from '@pc/wallet';
+import * as DnsHost from '@services/dnsHostIP';
 
 import accountItem from './accountItem.vue';
 import restore from './restore.vue';
 import accountList from './accountList.vue';
-import { hwAddressSelectDialog } from 'pcComponents/dialog';
+import { hwAddressSelectDialog } from '@pc/components/dialog';
 
-import qrcode from 'components/qrcode';
-import { initVB } from 'wallet/vb';
-import icon from 'assets/imgs/start_qrcode_icon.svg';
+import qrcode from '@components/qrcode.vue';
+import { initVB } from '@pc/wallet/vb';
+import icon from '@assets/imgs/start_qrcode_icon.svg';
 
 const TABNAME = {
     vb: 'vb',
@@ -254,7 +253,7 @@ export default {
             return window.DESKTOP;
         },
         isTestnet() {
-            return process.env.VITE_NET !== 'mainnet';
+            return import.meta.env.VITE_NETWORK == 'testnet';
         },
         autoReceive() {
             return this.$store.state.env.autoReceive;
@@ -448,7 +447,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '../start.scss';
+@use "@assets/scss/theme.scss" as *;
+@use '../start.scss';
 
 .no-border {
     border: none;
@@ -489,12 +489,12 @@ export default {
         margin-top: -6px;
 
         &.down {
-            background: url('~assets/imgs/down_icon.svg');
+            background: url("@assets/imgs/down_icon.svg");
             background-size: 16px 16px;
         }
 
         &.up {
-            background: url('~assets/imgs/up_icon.svg');
+            background: url("@assets/imgs/up_icon.svg");
             background-size: 16px 16px;
         }
     }
@@ -528,7 +528,7 @@ export default {
                 height: 10px;
                 width: 10px;
                 margin-right: 4px;
-                background-image: url(~assets/imgs/star.png);
+                background-image: url(@assets/imgs/star.png);
                 background-size: contain;
                 background-repeat: no-repeat;
             }

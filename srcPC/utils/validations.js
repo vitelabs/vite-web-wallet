@@ -1,5 +1,5 @@
-import numChecker from 'utils/numChecker';
-import i18n from 'pcI18n';
+import numChecker from '@utils/numChecker';
+import i18n from '@pc/i18n';
 
 const numCheckerInstance = new numChecker(i18n);
 

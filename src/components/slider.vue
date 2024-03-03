@@ -168,7 +168,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "~assets/scss/vars.scss";
+@use "@assets/scss/theme.scss" as *;
 
 $red: linear-gradient(270deg, rgba(226,43,116,1) 0%, rgba(237,81,88,1) 100%);
 $green: linear-gradient(270deg, rgba(0,212,208,1) 0%, rgba(0,215,100,1) 100%);

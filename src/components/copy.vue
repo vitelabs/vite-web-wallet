@@ -3,8 +3,8 @@
 </template>
 
 <script>
-import tips from 'uiKit/tips';
-import copy from 'utils/copy';
+import tips from '@uiKit/tips.vue';
+import copy from '@utils/copy';
 
 export default {
     components: { tips },

@@ -51,19 +51,19 @@
 </template>
 
 <script>
-import { operatorMarkets } from 'services/trade';
-import pagination from 'pcComponents/pagination.vue';
-import walletTable from 'pcComponents/table/index.vue';
-import secTitle from 'pcComponents/secTitle.vue';
-import confirm from 'pcComponents/confirm/index.js';
-import { initPwd } from 'pcComponents/password/index.js';
+import { operatorMarkets } from '@services/trade';
+import pagination from '@pc/components/pagination.vue';
+import walletTable from '@pc/components/table/index.vue';
+import secTitle from '@pc/components/secTitle.vue';
+import confirm from '@pc/components/confirm/index.js';
+import { initPwd } from '@pc/components/password/index.js';
 import openTxPair from './openTxPair.vue';
 import incomeList from './incomeList.vue';
 import changeFee from './changeFee.vue';
 import changeOwner from './changeOwner.vue';
-import { execWithValid } from 'pcUtils/execWithValid';
-import sendTx from 'pcUtils/sendTx';
-import BigNumber from 'utils/bigNumber';
+import { execWithValid } from '@pc/utils/execWithValid';
+import sendTx from '@pc/utils/sendTx';
+import BigNumber from '@utils/bigNumber';
 
 export default {
     components: { pagination, walletTable, secTitle, incomeList, openTxPair, changeOwner, changeFee },
@@ -283,19 +283,19 @@ export default {
             margin-right: 2px;
             margin-bottom: -3px;
             &.status_0 {
-                background: url('~assets/imgs/trans-change-owner.svg');
+                background: url("@assets/imgs/trans-change-owner.svg");
                 background-size: 100% 100%;
             }
             &.status_1 {
-                background: url('~assets/imgs/transfer.svg');
+                background: url("@assets/imgs/transfer.svg");
                 background-size: 100% 100%;
             }
             &.status_2 {
-                background: url('~assets/imgs/stop-trans.svg');
+                background: url("@assets/imgs/stop-trans.svg");
                 background-size: 100% 100%;
             }
             &.status_3 {
-                background: url('~assets/imgs/trans-closed.svg');
+                background: url("@assets/imgs/trans-closed.svg");
                 background-size: 100% 100%;
             }
         }

@@ -45,12 +45,12 @@
                                 'not-allowed':
                                     !isLogin && currHDAcc.isSeparateKey
                             }"
-                            src="~assets/imgs/edit_default.svg"
+                            src="@assets/imgs/edit_default.svg"
                         />
                         <img
                             @click.stop="copy(addrObj.address)"
                             class="icon __pointer"
-                            src="~assets/imgs/copy_default.svg"
+                            src="@assets/imgs/copy_default.svg"
                         />
                     </div>
                 </div>
@@ -72,8 +72,8 @@
 
 <script>
 import Vue from 'vue';
-import copy from 'utils/copy';
-import { StatusMap } from 'wallet';
+import copy from '@utils/copy';
+import { StatusMap } from '@pc/wallet';
 
 export default {
     data() {
@@ -189,8 +189,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '~assets/scss/vars.scss';
-@import './setting.scss';
+@use "@assets/scss/theme.scss" as *;
+@use './setting.scss';
 
 .acc-list {
     @include bg_color_1();
@@ -245,7 +245,7 @@ export default {
             margin: 10px 10px 0 0;
             width: 16px;
             height: 16px;
-            background: url('~assets/imgs/add_icon.svg') no-repeat center;
+            background: url("@assets/imgs/add_icon.svg") no-repeat center;
             background-size: 16px 16px;
         }
 

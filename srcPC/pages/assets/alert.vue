@@ -27,8 +27,8 @@
 
 <script>
 // [TODO] Need pcComponents/confirm and pcComponents/table
-import { chargeDetail } from 'services/trade';
-import date from 'utils/date';
+import { chargeDetail } from '@services/trade';
+import date from '@utils/date';
 
 export default {
     props: {
@@ -85,8 +85,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "~pcComponents/confirm/confirm.scss";
-@import "~pcAssets/scss/table.scss";
+@use "../../components/confirm/confirm.scss" as *;
+@use "@pc/assets/scss/table.scss" as *;
 
 .__tb {
     min-width: 0px;

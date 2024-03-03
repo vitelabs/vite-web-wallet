@@ -13,14 +13,14 @@
 </template>
 
 <script>
-import BigNumber from 'utils/bigNumber';
+import BigNumber from '@utils/bigNumber';
 
 const Default_Title = 'Vite Wallet';
 
 export default {
     mounted() {
         document.title = this.documentTitle;
-    },
+     },
     destroyed() {
         document.title = Default_Title;
     },
@@ -54,7 +54,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '../center.scss';
+@use "@assets/scss/theme.scss" as *;
+@use '../center.scss' as *;
 
 .price-wrapper {
     display: flex;
@@ -80,11 +81,11 @@ export default {
         height: 12px;
         margin-top: 9px;
         &.up-icon {
-            background: url('~assets/imgs/ex-up-arrow.png');
+            background: url("@assets/imgs/ex-up-arrow.png");
             background-size: 100% 100%;
         }
         &.down-icon {
-            background: url('~assets/imgs/ex-down-arrow.png');
+            background: url("@assets/imgs/ex-down-arrow.png");
             background-size: 100% 100%;
         }
     }

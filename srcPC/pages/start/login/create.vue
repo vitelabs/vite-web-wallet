@@ -136,7 +136,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "../start.scss";
+@use "../start.scss";
 
 .__btn {
     margin-top: 20px;

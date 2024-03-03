@@ -13,11 +13,11 @@
 </template>
 
 <script>
-import noticeList from 'pcComponents/noticeList.vue';
-import { receiveInviteDialog } from 'pcComponents/dialog';
-import { emptySpace } from 'pcUtils/storageSpace';
-import { getValidSession, initVB } from 'wallet/vb';
-import * as DnsHost from 'services/dnsHostIP';
+import noticeList from '@pc/components/noticeList.vue';
+import { receiveInviteDialog } from '@pc/components/dialog';
+import { emptySpace } from '@pc/utils/storageSpace';
+import { getValidSession, initVB } from '@pc/wallet/vb';
+import * as DnsHost from '@services/dnsHostIP';
 
 const inviteCodeKey = 'INVITE_CODE';
 
@@ -135,7 +135,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '~assets/scss/vars.scss';
+@use "@assets/scss/theme.scss" as *;
 
 .app-wrapper {
     position: absolute;

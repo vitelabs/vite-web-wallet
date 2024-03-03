@@ -6,8 +6,8 @@
 </template>
 
 <script>
-import update from 'pcComponents/update.vue';
-import orderNoticeList from 'components/orderNoticeList.vue';
+import update from '@pc/components/update.vue';
+import orderNoticeList from '@components/orderNoticeList.vue';
 
 export default { components: { update, orderNoticeList } };
 </script>

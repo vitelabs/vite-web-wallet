@@ -1,5 +1,5 @@
 <template lang="pug">
-extends /components/dialog/base.pug
+extends ../../../../../src/components/dialog/base.pug
 block content
     .__row
         .__row_t {{ $t('trade.openapi.upgradeConfirm.currentPackage') }}
@@ -33,15 +33,15 @@ block content
 <script>
 import { constant } from '@vite/vitejs';
 
-import { execWithValid } from 'pcUtils/execWithValid';
-import sendTx from 'pcUtils/sendTx';
-import { upgradePackage } from 'pcServices/tradeOperation';
-import { doUntill } from 'utils/asyncFlow';
-import bigNumber from 'utils/bigNumber';
-import { verifyAmount } from 'pcUtils/validations';
+import { execWithValid } from '@pc/utils/execWithValid';
+import sendTx from '@pc/utils/sendTx';
+import { upgradePackage } from '@pc/services/tradeOperation';
+import { doUntill } from '@utils/asyncFlow';
+import bigNumber from '@utils/bigNumber';
+import { verifyAmount } from '@pc/utils/validations';
 
-import tips from 'pcComponents/tips.vue';
-import packageInfo from '../packageInfo';
+import tips from '@pc/components/tips.vue';
+import packageInfo from '../packageInfo.vue';
 
 
 const VX_Token_Info = constant.VX_Token_Info;
@@ -173,8 +173,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "pcComponents/confirm/confirmRow.scss";
-@import "../../trust/dialog/confirm.scss";
+@use "@assets/scss/theme.scss" as *;
+@use "../../../../components/confirm/confirmRow.scss" as *;
+@use "../../trust/dialog/confirm.scss" as *;
 
 .__row {
     .__input_row {

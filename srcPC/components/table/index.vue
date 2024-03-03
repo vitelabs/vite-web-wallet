@@ -112,19 +112,19 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '~pcAssets/scss/table.scss';
-@import './walletSBP.scss';
-@import './walletQuota.scss';
-@import './walletTransList.scss';
-@import './walletVote.scss';
-@import './mintage.scss';
-@import './tradeOrderHistory.scss';
-@import "./mintTrade.scss";
-@import "./dividend.scss";
-@import "./txPairManage.scss";
-@import "./tradeList.scss";
-@import "./incomeList.scss";
-@import "./vipList.scss";
-@import "./smallStakingList.scss";
-@import "./proxyTb.scss";
+@use '../..//assets/scss/table.scss';
+@use './walletSBP.scss';
+@use './walletQuota.scss';
+@use './walletTransList.scss';
+@use './walletVote.scss';
+@use './mintage.scss';
+@use './tradeOrderHistory.scss';
+@use "./mintTrade.scss";
+@use "./dividend.scss";
+@use "./txPairManage.scss";
+@use "./tradeList.scss";
+@use "./incomeList.scss";
+@use "./vipList.scss";
+@use "./smallStakingList.scss";
+@use "./proxyTb.scss";
 </style>

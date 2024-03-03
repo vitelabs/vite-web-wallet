@@ -1,4 +1,3 @@
-import { widget } from 'charting/charting_library.min';
 import { commonConfig, theme0Config, theme1Config } from './config.ts';
 import datafeedClass from './datafeeds.js';
 
@@ -37,17 +36,19 @@ class kline {
         this.isLoading = true;
 
         this.remove();
+
         const historySymbol = this.symbolName;
         const themeConfig = +this.theme === 0 ? theme0Config : theme1Config;
         const theme = +this.theme === 0 ? 'Light' : 'Dark';
 
-        this.tvWidget = new widget({
+        this.tvWidget = new TradingView.widget({
             datafeed: this.datafeed,
             locale: this.locale,
             theme,
             ...commonConfig,
             ...themeConfig
         });
+
         this.tvWidget.onChartReady(() => {
             this.isLoading = false;
 

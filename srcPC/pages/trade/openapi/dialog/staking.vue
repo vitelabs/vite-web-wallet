@@ -1,5 +1,5 @@
 <template lang="pug">
-extends /components/dialog/base.pug
+extends ../../../../../src/components/dialog/base.pug
 block content
     .__row
         .__row_t {{ $t('trade.openapi.stakingForQuota.agentAddress') }}
@@ -14,13 +14,13 @@ block content
 <script>
 import { constant } from '@vite/vitejs';
 
-import viteInput from 'components/viteInput';
-import { execWithValid } from 'pcUtils/execWithValid';
-import { initPwd } from 'pcComponents/password/index.js';
-import BigNumber from 'utils/bigNumber';
-import sendTx from 'pcUtils/sendTx';
+import viteInput from '@components/viteInput.vue';
+import { execWithValid } from '@pc/utils/execWithValid';
+import { initPwd } from '@pc/components/password/index.js';
+import BigNumber from '@utils/bigNumber';
+import sendTx from '@pc/utils/sendTx';
 
-import { verifyAmount } from 'pcUtils/validations';
+import { verifyAmount } from '@pc/utils/validations';
 
 const Vite_Token_Info = constant.Vite_Token_Info;
 const minNum = 134;
@@ -123,8 +123,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "pcComponents/confirm/confirmRow.scss";
-@import "../../trust/dialog/confirm.scss";
+@use "@assets/scss/theme.scss" as *;
+@use "../../../../components/confirm/confirmRow.scss" as *;
+@use "../../trust/dialog/confirm.scss" as *;
 
 .__row {
     .__input_row {

@@ -63,11 +63,11 @@
 
 <script>
 import { mapState } from 'vuex';
-import openUrl from 'utils/openUrl';
-import { getExplorerLink } from 'utils/getLink';
-import { getProvider } from 'services/apiServer';
-import { changeRpcUrlDialog, changePowUrlDialog } from 'pcComponents/dialog';
-import { StatusMap } from 'wallet';
+import openUrl from '@utils/openUrl';
+import { getExplorerLink } from '@utils/getLink';
+import { getProvider } from '@services/apiServer';
+import { changeRpcUrlDialog, changePowUrlDialog } from '@pc/components/dialog';
+import { StatusMap } from '@pc/wallet';
 
 export default {
     mounted() {
@@ -84,7 +84,7 @@ export default {
     },
     data() {
         return {
-            version: process.env.version,
+            version: import.meta.env.VITE_WEB_WALLET_VERSION,
             netService: getExplorerLink(this.$i18n.locale)
         };
     },
@@ -124,7 +124,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import './setting.scss';
+@use "@assets/scss/theme.scss" as *;
+@use './setting.scss' as *;
 
 .small-btn {
     @include small-btn();

@@ -7,7 +7,7 @@
             </div>
 
             <div class="content-wrapper" >
-                <img v-if="type === 'generalTips'" class="general-tips-icon" src="~assets/imgs/general-tips.svg"/>
+                <img v-if="type === 'generalTips'" class="general-tips-icon" src="@assets/imgs/general-tips.svg"/>
                 <div v-if="content" style="white-space: pre-line;">{{ content }}</div>
                 <slot></slot>
             </div>
@@ -34,7 +34,7 @@
 </template>
 
 <script>
-import loading from 'components/loading.vue';
+import loading from '@components/loading.vue';
 
 export default {
     components: { loading },
@@ -120,7 +120,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "~assets/scss/vars.scss";
-@import "./confirm.scss";
-@import "./confirmRow.scss";
+@use "@assets/scss/theme.scss";
+@use "./confirm.scss";
+@use "./confirmRow.scss";
 </style>

@@ -30,14 +30,14 @@
 </template>
 
 <script>
-import { StatusMap } from 'wallet';
-import switchAddr from 'pcComponents/switchAddress';
+import { StatusMap } from '@pc/wallet';
+import switchAddr from '@pc/components/switchAddress.vue';
 
-import statistics from 'utils/statistics';
-import SwitchComp from 'uiKit/switch.vue';
-import { inviteDialog, receiveInviteDialog, hwAddressSelectDialog } from 'pcComponents/dialog';
-import { execWithValid } from 'pcUtils/execWithValid';
-import openUrl from 'utils/openUrl';
+import statistics from '@utils/statistics';
+import SwitchComp from '@uiKit/switch.vue';
+import { inviteDialog, receiveInviteDialog, hwAddressSelectDialog } from '@pc/components/dialog';
+import { execWithValid } from '@pc/utils/execWithValid';
+import openUrl from '@utils/openUrl';
 
 export default {
     components: { switchAddr, SwitchComp },
@@ -177,6 +177,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@use "@assets/scss/theme.scss" as *;
+
 .head {
     box-sizing: border-box;
     line-height: 43px;
@@ -209,12 +211,12 @@ export default {
             position: relative;
             margin-left: 28px;
             &.invite-switch{
-                /deep/ .list-title{
+                .list-title{
                     padding: 0!important;
                 }
             }
             &.more-switch{
-                /deep/ .list-title{
+                .list-title{
                     padding: 0!important;
                 }
             }

@@ -30,17 +30,17 @@
 </template>
 
 <script>
-import pageLayout from 'pcComponents/pageLayout/index';
-import secTitle from 'pcComponents/secTitle';
-import holdPwd from 'pcComponents/password/holdPwd.vue';
-import netInfo from './netInfo';
+import pageLayout from '@pc/components/pageLayout/index.vue';
+import secTitle from '@pc/components/secTitle.vue';
+import holdPwd from '@pc/components/password/holdPwd.vue';
+import netInfo from './netInfo.vue';
 import lang from './lang.vue';
 import gate from './gate.vue';
 import autoLogout from './autoLogout.vue';
 import accList from './accList.vue';
 import mnemonic from './mnemonic.vue';
 import currency from './currency.vue';
-import { StatusMap } from 'wallet';
+import { StatusMap } from '@pc/wallet';
 
 export default {
     components: {
@@ -56,7 +56,7 @@ export default {
         gate
     },
     data() {
-        return { isTestEnv: process.env.NODE_ENV === 'dev' || process.env.NODE_ENV === 'test' };
+        return { isTestEnv: import.meta.env.DEV };
     },
     computed: {
         isLogin() {
@@ -70,8 +70,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "~assets/scss/vars.scss";
-@import "./setting.scss";
+@use "@assets/scss/theme.scss" as *;
+@use "./setting.scss";
 
 .setting-wrapper {
     position: relative;

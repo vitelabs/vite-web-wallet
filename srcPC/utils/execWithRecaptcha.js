@@ -12,7 +12,7 @@ export function execWithRecaptcha(fn, ...args) {
     };
 
     const id = grecaptcha.render(ele, {
-        sitekey: process.env.recaptchaToken,
+        sitekey: import.meta.env.VITE_RECAPTCHA_TOKEN,
         callback: () => {
             reset();
             fn(...args);

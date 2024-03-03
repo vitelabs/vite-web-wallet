@@ -26,9 +26,9 @@
 
 <script>
 import { wallet } from '@vite/vitejs';
-import { getAccountBalance } from 'services/viteServer';
-import loading from 'components/loading.vue';
-import { saveHDAccount } from 'wallet';
+import { getAccountBalance } from '@services/viteServer';
+import loading from '@components/loading.vue';
+import { saveHDAccount } from '@pc/wallet';
 import create from './create.vue';
 
 export default {
@@ -61,7 +61,7 @@ export default {
     },
     computed: {
         isTestnet() {
-            return process.env.VITE_NET !== 'mainnet';
+            return import.meta.env.VITE_NETWORK == 'testnet';
         }
     },
     methods: {
@@ -164,7 +164,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "../start.scss";
+@use "../start.scss";
 
 .wrapper {
     box-sizing: border-box;

@@ -33,14 +33,14 @@
 </template>
 
 <script>
-import { getProxyRelation, getProxyGrantor } from 'pcServices/tradeOperation';
+import { getProxyRelation, getProxyGrantor } from '@pc/services/tradeOperation';
 import { addDialog } from './dialog';
-import PairItem from './dialog/pairItem';
-import { doUntill } from 'utils/asyncFlow';
-import { execWithValid } from 'pcUtils/execWithValid';
-import openUrl from 'utils/openUrl';
-import secTitle from 'pcComponents/secTitle';
-import walletTable from 'pcComponents/table/index.vue';
+import PairItem from './dialog/pairItem.vue';
+import { doUntill } from '@utils/asyncFlow';
+import { execWithValid } from '@pc/utils/execWithValid';
+import openUrl from '@utils/openUrl';
+import secTitle from '@pc/components/secTitle.vue';
+import walletTable from '@pc/components/table/index.vue';
 
 export default {
     components: { PairItem, secTitle, walletTable },
@@ -157,7 +157,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "~pcAssets/scss/common.scss";
+@use "@pc/assets/scss/common.scss" as *;
 
 @include secondTitle();
 @include tradeBtn();

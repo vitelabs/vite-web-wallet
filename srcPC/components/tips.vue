@@ -28,6 +28,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@use "@assets/scss/theme.scss" as *;
+
 $warnColor: #E6A23C;
 
 .__tips_wrapper {

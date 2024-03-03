@@ -1,5 +1,5 @@
 <template lang="pug">
-extends /components/dialog/base.pug
+extends ../../../../src/components/dialog/base.pug
 block content
     .content-wrapper
         .search-container
@@ -17,9 +17,9 @@ block content
 </template>
 
 <script>
-import { gateStorage } from 'pcServices/gate';
+import { gateStorage } from '@pc/services/gate';
 import throttle from 'lodash/throttle';
-import statistics from 'utils/statistics';
+import statistics from '@utils/statistics';
 
 const MAX_RES_NUMS = 10;
 
@@ -88,7 +88,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '~assets/scss/vars.scss';
+@use "@assets/scss/theme.scss" as *;
 
 .content-wrapper {
     min-height: 120px;

@@ -3,7 +3,7 @@
 </template>
 
 <script>
-import { order } from 'services/trade';
+import { order } from '@services/trade';
 import historyTable from './historyTable.vue';
 
 const pageSize = 30;

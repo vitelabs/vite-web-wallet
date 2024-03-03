@@ -1,4 +1,4 @@
-import { limit } from 'services/trade';
+import { limit } from '@services/trade';
 
 const state = {
     minAmount: {},

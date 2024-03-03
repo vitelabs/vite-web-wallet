@@ -1,4 +1,4 @@
-@import "~assets/scss/vars.scss";
+@use "@assets/scss/theme.scss" as *;
 
 @mixin title_bg_color() {
     [data-theme="0"] & {
@@ -100,7 +100,7 @@
             float: right;
             width: 20px;
             height: 20px;
-            background: url('~assets/imgs/confirm_close.svg') no-repeat center;
+            background: url("@assets/imgs/confirm_close.svg") no-repeat center;
             background-size: 20px 20px;
         }
     }

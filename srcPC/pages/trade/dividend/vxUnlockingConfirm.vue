@@ -10,12 +10,12 @@
 </template>
 
 <script>
-import pagination from 'pcComponents/pagination';
-import walletTable from 'pcComponents/table/index.vue';
-import confirm from 'pcComponents/confirm/confirm.vue';
-import date from 'utils/date';
-import bigNumber from 'utils/bigNumber';
-import { getVxUnlockList } from 'services/viteServer';
+import pagination from '@pc/components/pagination.vue';
+import walletTable from '@pc/components/table/index.vue';
+import confirm from '@pc/components/confirm/confirm.vue';
+import date from '@utils/date';
+import bigNumber from '@utils/bigNumber';
+import { getVxUnlockList } from '@services/viteServer';
 
 export default {
     components: { walletTable, confirm, pagination },

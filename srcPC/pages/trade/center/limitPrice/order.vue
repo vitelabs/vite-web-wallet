@@ -166,18 +166,18 @@
 </template>
 
 <script>
-import { StatusMap } from 'wallet';
-import slider from 'components/slider';
-import viteInput from 'components/viteInput';
-import viteConfirm from 'pcComponents/confirm/index.js';
-import { initPwd } from 'pcComponents/password/index.js';
-import sendTx from 'pcUtils/sendTx';
-import BigNumber from 'utils/bigNumber';
-import { isNumber, verifyAmount } from 'pcUtils/validations';
-import { execWithValid } from 'pcUtils/execWithValid';
-import statistics from 'utils/statistics';
-import exTransfer from 'pcPages/assets/dialog/exTransfer.vue';
-import { getTokenIcon } from 'utils/tokenParser';
+import { StatusMap } from '@pc/wallet';
+import slider from '@components/slider.vue';
+import viteInput from '@components/viteInput.vue';
+import viteConfirm from '@pc/components/confirm/index.js';
+import { initPwd } from '@pc/components/password/index.js';
+import sendTx from '@pc/utils/sendTx';
+import BigNumber from '@utils/bigNumber';
+import { isNumber, verifyAmount } from '@pc/utils/validations';
+import { execWithValid } from '@pc/utils/execWithValid';
+import statistics from '@utils/statistics';
+import exTransfer from '@pc/pages/assets/dialog/exTransfer.vue';
+import { getTokenIcon } from '@utils/tokenParser';
 
 export default {
     components: { viteInput, slider, exTransfer },
@@ -817,7 +817,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '../center.scss';
+@use "@assets/scss/theme.scss" as *;
+@use '../center.scss' as *;
 
 $font-black: rgba(36, 39, 43, 0.8);
 
@@ -949,7 +950,7 @@ $font-black: rgba(36, 39, 43, 0.8);
 </style>
 
 <style lang="scss">
-@import '~assets/scss/vars.scss';
+@use "@assets/scss/theme.scss" as *;
 
 .dex-input-wrapper .input-wrapper {
     height: 100%;

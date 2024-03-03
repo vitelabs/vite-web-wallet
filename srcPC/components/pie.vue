@@ -151,6 +151,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@use "@assets/scss/theme.scss" as *;
 .pie {
     display: flex;
     align-items: center;

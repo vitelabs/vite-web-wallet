@@ -1,5 +1,5 @@
 <template lang="pug">
-extends /components/dialog/base.pug
+extends ../../../../src/components/dialog/base.pug
 block content
     .__row
         .__row_t {{ $t('tokenCard.heads.availableExAmount') }}
@@ -23,10 +23,10 @@ block content
 
 <script>
 import { constant, wallet } from '@vite/vitejs';
-import BigNumber from 'utils/bigNumber';
-import { stakeForSuperVIP, stakeForPrincipalSVIP } from 'pcServices/tradeOperation';
-import viteInput from 'components/viteInput';
-import { initPwd } from 'pcComponents/password/index.js';
+import BigNumber from '@utils/bigNumber';
+import { stakeForSuperVIP, stakeForPrincipalSVIP } from '@pc/services/tradeOperation';
+import viteInput from '@components/viteInput.vue';
+import { initPwd } from '@pc/components/password/index.js';
 
 const Vite_Token_Info = constant.Vite_Token_Info;
 const vipStakingAmount = 1000000;
@@ -120,5 +120,5 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "pcComponents/confirm/confirmRow.scss";
+@use "@pc/components/confirm/confirmRow.scss";
 </style>

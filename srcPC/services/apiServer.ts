@@ -1,5 +1,5 @@
-import { DNSClient } from 'services/dnsHostIP';
-import i18n from 'pcI18n';
+import { DNSClient } from '@services/dnsHostIP';
+import i18n from '@pc/i18n';
 
 const langMap = {
     zh: 'zh-cn',
@@ -22,7 +22,7 @@ export const ConfigClient = new DNSClient({
             return Promise.reject(xhr.responseText);
         }
     },
-    baseUrl: process.env.API === 'production' ? '' : '/test'
+    baseUrl: import.meta.env.VITE_NETWORK === 'mainnet' ? '' : '/test'
 });
 
 export const CrosschainGate = new DNSClient({

@@ -21,6 +21,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@use '../assets/scss/theme.scss' as *;
 .loading-wrapper {
     display: inline-block;
 }

@@ -1,5 +1,5 @@
 <template lang="pug">
-extends /components/dialog/base.pug
+extends ../../../../../src/components/dialog/base.pug
 block content
     .__row
         tips(type="warn") {{ $t('trade.openapi.keyConfirm.warn') }}
@@ -20,7 +20,7 @@ block content
 </template>
 
 <script>
-import tips from 'pcComponents/tips.vue';
+import tips from '@pc/components/tips.vue';
 
 export default {
     components: { tips },
@@ -49,8 +49,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "pcComponents/confirm/confirmRow.scss";
-@import "../../trust/dialog/confirm.scss";
+@use "@assets/scss/theme.scss" as *;
 
 .__row {
     .__input_row {

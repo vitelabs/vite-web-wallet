@@ -23,8 +23,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "~assets/scss/vars.scss";
-@import "../start.scss";
+@use "@assets/scss/theme.scss" as *;
+@use "../start.scss";
 
 .__btn_input_active {
     border: 1px solid #d4dee7;

@@ -1,5 +1,5 @@
-import { baseToken, marketsClosed } from 'services/trade';
-import getQuery from 'utils/query';
+import { baseToken, marketsClosed } from '@services/trade';
+import getQuery from '@utils/query';
 
 const quoteTokenCategory = [ 'BTC', 'ETH', 'VITE', 'USDT' ];
 const categoryTransLimit = { 'BTC': 3, 'ETH': 2, 'VITE': 1, 'USDT': 1 };

@@ -31,27 +31,27 @@
 </template>
 
 <script>
-import testNotice from 'pcComponents/testNotice';
-import statistics from 'utils/statistics';
-import openUrl from 'utils/openUrl';
+import testNotice from '@pc/components/testNotice.vue';
+import statistics from '@utils/statistics';
+import openUrl from '@utils/openUrl';
 
-// import viteLogo from 'assets/imgs/sidebar_logo.svg';
-import assets from 'assets/imgs/assets_default.svg';
-import assetsActive from 'assets/imgs/assets_pressed.svg';
-import wallet from 'assets/imgs/wallet_default.svg';
-import walletActive from 'assets/imgs/wallet_pressed.svg';
-import setting from 'assets/imgs/settings_default.svg';
-import settingActive from 'assets/imgs/settings_pressed.svg';
-import trade from 'assets/imgs/trade_default.svg';
-import tradeActive from 'assets/imgs/trade_pressed.svg';
-import defiActive from 'assets/imgs/sidebar_defi_pressed.svg';
+// import viteLogo from '@assets/imgs/sidebar_logo.svg';
+import assets from '@assets/imgs/assets_default.svg';
+import assetsActive from '@assets/imgs/assets_pressed.svg';
+import wallet from '@assets/imgs/wallet_default.svg';
+import walletActive from '@assets/imgs/wallet_pressed.svg';
+import setting from '@assets/imgs/settings_default.svg';
+import settingActive from '@assets/imgs/settings_pressed.svg';
+import trade from '@assets/imgs/trade_default.svg';
+import tradeActive from '@assets/imgs/trade_pressed.svg';
+import defiActive from '@assets/imgs/sidebar_defi_pressed.svg';
 
-import theme1viteLogo from 'assets/theme1_imgs/sidebar_logo.png';
-// import theme1wallet from 'assets/theme1_imgs/wallet_default.png';
-// import theme1walletActive from 'assets/theme1_imgs/wallet_pressed.png';
-// import theme1trade from 'assets/theme1_imgs/trade_default.png';
-// import theme1assets from 'assets/theme1_imgs/assets_default.png';
-// import theme1setting from 'assets/theme1_imgs/settings_default.png';
+import theme1viteLogo from '@assets/theme1_imgs/sidebar_logo.png';
+// import theme1wallet from '@assets/theme1_imgs/wallet_default.png';
+// import theme1walletActive from '@assets/theme1_imgs/wallet_pressed.png';
+// import theme1trade from '@assets/theme1_imgs/trade_default.png';
+// import theme1assets from '@assets/theme1_imgs/assets_default.png';
+// import theme1setting from '@assets/theme1_imgs/settings_default.png';
 
 export default {
     components: { testNotice },
@@ -146,6 +146,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@use "@assets/scss/theme.scss" as *;
 .sidebar-wrapper {
     height: 100%;
     overflow: auto;

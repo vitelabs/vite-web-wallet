@@ -20,7 +20,11 @@ export function getAccountBalance(address: string) {
 }
 
 export function getDexFundAddrOnroadInfo() {
-    return viteClient.request('ledger_getUnreceivedTransactionSummaryByAddress', constant.DexFund_ContractAddress);
+    try {
+        return viteClient.request('ledger_getUnreceivedTransactionSummaryByAddress', constant.DexFund_ContractAddress);
+    } catch (error) {
+        console.log('something went wrong', error);
+    }
 }
 
 export function isPledgeVip(address: string) {

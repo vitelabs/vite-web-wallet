@@ -1,3 +1,5 @@
+@use "@pc/assets/scss/table.scss" as *;
+
 .order-tab .trade-history-table {
     @include rowWith {
         &:first-child {

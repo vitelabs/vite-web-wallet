@@ -1,20 +1,20 @@
 <template lang="pug">
-extends /components/dialog/base.pug
+extends ../../../src/components/dialog/base.pug
 block content
     span.bg-img
     div(v-if="inviteCode")
         .invite-code {{$t('assets.invite.myCode')}}{{this.inviteCode}}
-            img.copy-share.__pointer(src="~assets/imgs/share.svg" @click="copyShare()")
-            img.copy.__pointer(src="~assets/imgs/copy_default.svg" @click="copy")
+            img.copy-share.__pointer(src="@assets/imgs/share.svg" @click="copyShare()")
+            img.copy.__pointer(src="@assets/imgs/copy_default.svg" @click="copy")
         .invite-info
             .item
-                img.left(src="~assets/imgs/invite_num.png")
+                img.left(src="@assets/imgs/invite_num.png")
                 .right
                     .label {{ $t('assets.invite.inviteNum') }}
                     .content {{inviteInfo&&inviteInfo.inviteCount||0}}
 
             .item
-                img.left(src="~assets/imgs/invite_benifit.png")
+                img.left(src="@assets/imgs/invite_benifit.png")
                 .right
                     .label {{ $t('assets.invite.inviteBenifit') }}
                     .content {{(inviteInfo&&inviteInfo.miningTotal)?formatNum(inviteInfo.miningTotal):0}}
@@ -29,13 +29,13 @@ block content
 </template>
 
 <script>
-import { getInviteInfo } from 'services/trade';
-import { getCode } from 'services/viteServer';
-import { genCode } from 'pcServices/tradeOperation';
-import copy from 'utils/copy';
-import { doUntill } from 'utils/asyncFlow';
-import { VITE_TOKENID } from 'utils/constant';
-import bn from 'utils/bigNumber';
+import { getInviteInfo } from '@services/trade';
+import { getCode } from '@services/viteServer';
+import { genCode } from '@pc/services/tradeOperation';
+import copy from '@utils/copy';
+import { doUntill } from '@utils/asyncFlow';
+import { VITE_TOKENID } from '@utils/constant';
+import bn from '@utils/bigNumber';
 
 export default {
     async beforeMount() {
@@ -99,7 +99,7 @@ export default {
         },
         copyShare() {
             copy(`https://growth.vite.net${
-                process.env.NODE_ENV === 'production' ? '' : '/test'
+                import.meta.env.VITE_NETWORK == 'mainnet' ? '' : '/test'
             }/vitex-board?ldfjacia=${ this.inviteCode }`);
             this.$toast(this.$t('hint.copyShare'));
         },
@@ -112,8 +112,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "~assets/scss/vars.scss";
-@import './invite.scss';
+@use "@assets/scss/theme.scss" as *;
+@use './invite.scss';
 
 .__row_hint {
     top: 0;

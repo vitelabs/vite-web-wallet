@@ -1,5 +1,5 @@
 import { constant } from '@vite/vitejs';
-import BigNumber from 'utils/bigNumber';
+import BigNumber from '@utils/bigNumber';
 
 const Vite_Token_Info = constant.Vite_Token_Info;
 const MaxDecimals = 20;

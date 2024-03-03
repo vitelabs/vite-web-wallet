@@ -1,4 +1,4 @@
-import getDialog from 'pcComponents/dialog/utils';
+import getDialog from '@pc/components/dialog/utils';
 import addComp from './add.vue';
 import confirmComp from './confirm.vue';
 

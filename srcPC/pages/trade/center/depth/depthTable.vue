@@ -33,10 +33,10 @@
 </template>
 
 <script>
-import BigNumber from 'utils/bigNumber';
-import loading from 'components/loading';
-import tooltips from 'components/tooltips';
-import price from './price';
+import BigNumber from '@utils/bigNumber';
+import loading from '@components/loading.vue';
+import tooltips from '@components/tooltips.vue';
+import price from './price.vue';
 
 export default {
     components: { loading, price, tooltips },
@@ -195,7 +195,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '../center.scss';
+@use "@assets/scss/theme.scss" as *;
+@use '../center.scss' as *;
 
 .depth-table {
     position: relative;
@@ -268,7 +269,7 @@ export default {
     display: inline-block;
     width: 8px;
     height: 8px;
-    background: url('~assets/imgs/owner.png');
+    background: url("@assets/imgs/owner.png");
     background-size: 100% 100%;
 }
 

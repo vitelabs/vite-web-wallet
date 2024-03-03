@@ -23,11 +23,11 @@
 
 <script>
 import d from 'dayjs';
-import statistics from 'utils/statistics';
-import { orderDetail } from 'services/trade';
-import pagination from 'pcComponents/pagination';
-import walletTable from 'pcComponents/table/index';
-import confirm from './tradeList';
+import statistics from '@utils/statistics';
+import { orderDetail } from '@services/trade';
+import pagination from '@pc/components/pagination.vue';
+import walletTable from '@pc/components/table/index.vue';
+import confirm from './tradeList.vue';
 
 export default {
     components: { confirm, walletTable, pagination },

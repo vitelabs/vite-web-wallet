@@ -39,7 +39,7 @@
 </template>
 
 <script>
-import { getRewardPledgeFullStat } from 'pcServices/reward';
+import { getRewardPledgeFullStat } from '@pc/services/reward';
 
 export default {
     created() {
@@ -71,6 +71,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@use "@assets/scss/theme.scss" as *;
 .flex-wrapper {
     display: flex;
     flex-direction: row;

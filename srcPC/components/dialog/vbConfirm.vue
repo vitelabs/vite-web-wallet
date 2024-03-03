@@ -1,5 +1,5 @@
 <template lang="pug">
-extends /components/dialog/base.pug
+extends ../../../src/components/dialog/base.pug
 block head
     .head {{ isHardware ? $t('assets.ledger.confirm.tips') : $t('assets.vb.confirm.tips')}}
 block content
@@ -8,7 +8,7 @@ block content
 </template>
 
 <script>
-import Lottie from 'pcComponents/animation/lottie.vue';
+import Lottie from '@pc/components/animation/lottie.vue';
 
 export default {
     components: { Lottie },
@@ -34,7 +34,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "~assets/scss/vars.scss";
+@use "@assets/scss/theme.scss" as *;
 .head {
     box-sizing: border-box;
     padding: 23px;

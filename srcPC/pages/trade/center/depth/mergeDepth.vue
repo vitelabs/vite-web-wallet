@@ -67,6 +67,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@use "@assets/scss/theme.scss" as *;
 .merge-depth-wrapper {
     position: relative;
     float: right;
@@ -103,7 +104,7 @@ export default {
             width: 16px;
             height: 16px;
             margin-bottom: -3px;
-            background: url('~assets/imgs/uiKit/select/down.svg');
+            background: url("@assets/imgs/uiKit/select/down.svg");
             background-size: 16px 16px;
             margin-top: -2px;
         }

@@ -54,10 +54,10 @@
 <script>
 import FlatPickr from 'vue-flatpickr-component';
 import vSelect from 'vue-select';
-import { tokenMap } from 'services/trade';
+import { tokenMap } from '@services/trade';
 import 'flatpickr/dist/flatpickr.css';
-import statistics from 'utils/statistics';
-import { VITE_TOKENID } from 'utils/constant';
+import statistics from '@utils/statistics';
+import { VITE_TOKENID } from '@utils/constant';
 import 'vue-select/dist/vue-select.css';
 
 export default {
@@ -196,6 +196,8 @@ export default {
 </script>
 
 <style lang="scss">
+@use "@assets/scss/theme.scss" as *;
+
 .vs__dropdown-menu {
     border: none;
     @include default_font_color();
@@ -214,6 +216,7 @@ export default {
 </style>
 
 <style lang="scss" scoped>
+@use "@assets/scss/theme.scss" as *;
 .filter-root {
     display: flex;
     align-items: flex-end;

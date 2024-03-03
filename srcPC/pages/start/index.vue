@@ -14,8 +14,8 @@
 </template>
 
 <script>
-import openUrl from 'utils/openUrl';
-import changeLang from 'pcComponents/changeLang';
+import openUrl from '@utils/openUrl';
+import changeLang from '@pc/components/changeLang.vue';
 import firstNotice from './firstNotice.vue';
 
 export default {
@@ -29,7 +29,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "./start.scss";
+@use "./start.scss";
 
 .index-layout-wrapper {
     position: relative;
@@ -38,7 +38,7 @@ export default {
     overflow: auto;
     [data-theme="0"] & {
         animation: key-opacity 0.3s ease-in-out;
-        background: url(~assets/imgs/bg.svg) rgba(255, 255, 255, 0.1) no-repeat;
+        background: url(@assets/imgs/bg.svg) rgba(255, 255, 255, 0.1) no-repeat;
         background-size: cover;
         @keyframes key-opacity {
             0% {
@@ -74,13 +74,13 @@ export default {
             [data-theme="0"] & {
                 height: 50px;
                 width: 152px;
-                background: url("~assets/imgs/ViteLogo1.svg");
+                background: url("@assets/imgs/ViteLogo1.svg");
                 background-size: 100% 100%;
             }
             [data-theme="1"] & {
                 height: 50px;
                 width: 152px;
-                background: url("~assets/imgs/ViteLogo1.svg");
+                background: url("@assets/imgs/ViteLogo1.svg");
                 background-size: 100% 100%;
             }
         }

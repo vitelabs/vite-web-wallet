@@ -8,7 +8,7 @@
 </template>
 
 <script>
-import { timer } from 'utils/asyncFlow';
+import { timer } from '@utils/asyncFlow';
 
 let quotaInst;
 
@@ -47,6 +47,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@use "@assets/scss/theme.scss" as *;
 .my-quota-wrapper {
     padding: 35px 24px;
 }

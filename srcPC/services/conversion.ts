@@ -1,4 +1,4 @@
-import { ConversionAPI } from 'pcServices/apiServer';
+import { ConversionAPI } from '@pc/services/apiServer';
 
 export const bind = function ({ pub_key, eth_tx_hash, eth_addr, vite_addr, value, signature }) {
     return ConversionAPI.request({

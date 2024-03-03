@@ -46,13 +46,13 @@
 
 <script>
 import { wallet, constant } from '@vite/vitejs';
-import viteInput from 'components/viteInput';
-import { initPwd } from 'pcComponents/password/index.js';
-import BigNumber from 'utils/bigNumber';
-import statistics from 'utils/statistics';
-import sendTx from 'pcUtils/sendTx';
-import { verifyAmount } from 'pcUtils/validations';
-import { execWithValid } from 'pcUtils/execWithValid';
+import viteInput from '@components/viteInput.vue';
+import { initPwd } from '@pc/components/password/index.js';
+import BigNumber from '@utils/bigNumber';
+import statistics from '@utils/statistics';
+import sendTx from '@pc/utils/sendTx';
+import { verifyAmount } from '@pc/utils/validations';
+import { execWithValid } from '@pc/utils/execWithValid';
 
 const Vite_Token_Info = constant.Vite_Token_Info;
 const amountTimeout = null;
@@ -205,8 +205,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "~assets/scss/vars.scss";
-@import "../form.scss";
+@use "@assets/scss/theme.scss" as *;
+@use "../form.scss" as *;
 
 .pledge-tx-wrapper {
     position: relative;

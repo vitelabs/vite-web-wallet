@@ -1,7 +1,7 @@
 import Vue from 'vue';
-import i18n from 'pcI18n';
-import store from 'pcStore';
-import { constant } from 'pcUtils/store';
+import i18n from '@pc/i18n';
+import store from '@pc/store';
+import { constant } from '@pc/utils/store';
 import pwdComponent from './password.vue';
 
 const PwdComponent = Vue.extend(pwdComponent);

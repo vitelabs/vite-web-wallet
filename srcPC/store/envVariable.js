@@ -1,7 +1,7 @@
-import { storage as localStorage, constant } from 'pcUtils/store';
-import { getSymbol, lowerSymbolList } from 'src/utils/currenySymbol';
+import { storage as localStorage, constant } from '@pc/utils/store';
+import { getSymbol, lowerSymbolList } from '@utils/currenySymbol';
 
-import { getApiConfig } from 'services/dnsHostIP';
+import { getApiConfig } from '@services/dnsHostIP';
 import d from 'dayjs';
 
 const {
@@ -25,9 +25,9 @@ customNodes = Array.isArray(customNodes) ? customNodes : [];
 let customPowUrls = localStorage.getItem(CustomPowUrls);
 customPowUrls = Array.isArray(customPowUrls) ? customPowUrls : [];
 const currentPowUrl = localStorage.getItem(CurrentPowUrl) || '';
-const defaultNode = process.env.goViteServer;
+const defaultNode = import.meta.env.VITE_SERVER;
 const defaultPowLimit = localStorage.getItem(PowLimit) || {};
-const defaultPowMaxTimes = process.env.NODE_ENV === 'production' ? 20 : 5;
+const defaultPowMaxTimes = import.meta.env.VITE_NETWORK === 'mainnet' ? 20 : 5;
 const autoReceive = localStorage.getItem(AutoReceiveKey) !== false;
 const state = {
     clientStatus: -1,

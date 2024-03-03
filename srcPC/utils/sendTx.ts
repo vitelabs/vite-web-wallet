@@ -3,18 +3,20 @@ import {
     accountBlock as accountBlockUtils,
     ViteAPI
 } from '@vite/vitejs';
-import { getActiveAcc, getCurrHDAcc } from 'wallet';
-import { powProcess } from 'pcComponents/pow/index';
-import { quotaConfirm } from 'pcComponents/quota/index';
-import { vbConfirmDialog, powLimitDialog } from 'pcComponents/dialog';
-import { execWithValid } from 'pcUtils/execWithValid';
-import { getVbInstance } from 'wallet/vb';
-import { getLedgerInstance } from 'wallet/ledgerHW';
-import { viteClient } from 'services/apiServer';
-import envStore from 'pcStore/envVariable';
+import { getActiveAcc, getCurrHDAcc } from '@pc/wallet';
+import { powProcess } from '@pc/components/pow/index';
+import { quotaConfirm } from '@pc/components/quota/index';
+import { vbConfirmDialog, powLimitDialog } from '@pc/components/dialog';
+import { execWithValid } from '@pc/utils/execWithValid';
+import { getVbInstance } from '@pc/wallet/vb';
+import { getLedgerInstance } from '@pc/wallet/ledgerHW';
+import { viteClient } from '@services/apiServer';
+import envStore from '@pc/store/envVariable';
 import provider from '@vite/vitejs-ws';
+import { Buffer } from 'buffer';
 
-import i18n from 'pcI18n';
+
+import i18n from '@pc/i18n';
 const providerTimeout = 60000;
 const providerOptions = { retryTimes: -1, retryInterval: 5000 };
 

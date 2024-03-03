@@ -20,13 +20,13 @@
 
 <script>
 import { constant } from '@vite/vitejs';
-import pagination from 'pcComponents/pagination';
-import walletTable from 'pcComponents/table/index.vue';
-import confirm from 'pcComponents/confirm/confirm.vue';
-import date from 'utils/date';
-import bigNumber from 'utils/bigNumber';
-import { getAgentMiningPledgeInfo } from 'services/viteServer';
-import { timer } from 'utils/asyncFlow';
+import pagination from '@pc/components/pagination.vue';
+import walletTable from '@pc/components/table/index.vue';
+import confirm from '@pc/components/confirm/confirm.vue';
+import date from '@utils/date';
+import bigNumber from '@utils/bigNumber';
+import { getAgentMiningPledgeInfo } from '@services/viteServer';
+import { timer } from '@utils/asyncFlow';
 
 const Vite_Token_Info = constant.Vite_Token_Info;
 let stakingListInst = null;
@@ -145,6 +145,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@use "@assets/scss/theme.scss" as *;
 .cancel {
     color: #ced1d5;
     &.active {

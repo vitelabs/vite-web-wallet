@@ -13,7 +13,7 @@
 </template>
 
 <script>
-import loading from 'components/loading';
+import loading from '@components/loading.vue';
 
 let processTimeout;
 let limitTimeout;
@@ -111,7 +111,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "~assets/scss/vars.scss";
+@use "@assets/scss/vars.scss" as *;
 
 .gray-wrapper {
     position: fixed;

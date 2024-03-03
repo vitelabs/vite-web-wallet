@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import helpTips from 'pcComponents/helpTips';
+import helpTips from '@pc/components/helpTips.vue';
 
 export default {
     components: { helpTips },
@@ -24,7 +24,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "~assets/scss/vars.scss";
+@use "@assets/scss/theme.scss" as *;
 
 .title {
     padding: 14px 0;

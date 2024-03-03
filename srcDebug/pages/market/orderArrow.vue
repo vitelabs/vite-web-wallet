@@ -37,11 +37,11 @@ export default {
         height: 50%;
 
         &:first-child {
-            background: url("~assets/imgs/ascend.svg") bottom no-repeat;
+            background: url("@assets/imgs/ascend.svg") bottom no-repeat;
         }
 
         &:last-child {
-            background: url("~assets/imgs/decend.svg") top no-repeat;
+            background: url("@assets/imgs/decend.svg") top no-repeat;
         }
     }
 }

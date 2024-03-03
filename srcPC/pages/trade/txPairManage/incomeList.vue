@@ -16,12 +16,12 @@
 </template>
 
 <script>
-import confirm from 'pcComponents/confirm/confirm.vue';
-import walletTable from 'pcComponents/table/index.vue';
-import pagination from 'pcComponents/pagination.vue';
-import { operatorIncome } from 'services/trade';
-import date from 'utils/date';
-import BigNumber from 'utils/bigNumber';
+import confirm from '@pc/components/confirm/confirm.vue';
+import walletTable from '@pc/components/table/index.vue';
+import pagination from '@pc/components/pagination.vue';
+import { operatorIncome } from '@services/trade';
+import date from '@utils/date';
+import BigNumber from '@utils/bigNumber';
 
 export default {
     components: { confirm, walletTable, pagination },
@@ -113,7 +113,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "~assets/scss/vars.scss";
+@use "@assets/scss/theme.scss" as *;
 
 .total-income {
     padding: 14px 30px;

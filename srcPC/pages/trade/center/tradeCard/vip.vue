@@ -32,6 +32,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@use "@assets/scss/theme.scss" as *;
 .vip-container {
     display: flex;
     .vip-operate {
@@ -56,13 +57,13 @@ export default {
         color: $white-color;
         width: 36px;
         height: 16px;
-        background-image: url("~assets/imgs/not_vip.svg");
+        background-image: url("@assets/imgs/not_vip.svg");
         background-size: 100% 100%;
         &.svip {
-            background-image: url("~assets/imgs/svip.png");
+            background-image: url("@assets/imgs/svip.png");
         }
         &.active {
-            background: url("~assets/imgs/vip.svg");
+            background: url("@assets/imgs/vip.svg");
             background-size: 100% 100%;
         }
     }

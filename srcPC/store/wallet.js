@@ -1,4 +1,4 @@
-import { getCurrHDAcc, setCurrHDAcc, getActiveAcc, StatusMap } from 'wallet';
+import { getCurrHDAcc, setCurrHDAcc, getActiveAcc, StatusMap } from '@pc/wallet';
 
 const state = {
     currHDAcc: getCurrHDAcc(),

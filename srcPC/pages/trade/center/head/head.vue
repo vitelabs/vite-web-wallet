@@ -52,9 +52,9 @@
 </template>
 
 <script>
-import BigNumber from 'utils/bigNumber';
-import token from './token';
-import txPair from './txPair';
+import BigNumber from '@utils/bigNumber';
+import token from './token.vue';
+import txPair from './txPair.vue';
 
 export default {
     components: { token, txPair },
@@ -119,7 +119,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '../center.scss';
+@use "@assets/scss/theme.scss" as *;
+@use '../center.scss' as *;
 
 .txpair-head-wrapper {
     width: 100%;
@@ -188,10 +189,10 @@ export default {
         height: 24px;
         padding: 2px 10px;
         [data-theme="0"] & {
-            background: url('~assets/imgs/more-tx-detail.svg') right bottom no-repeat;
+            background: url("@assets/imgs/more-tx-detail.svg") right bottom no-repeat;
         }
         [data-theme="1"] & {
-            background: url('~assets/theme1_imgs/more-tx-detail.svg') right bottom no-repeat;
+            background: url("@assets/theme1_imgs/more-tx-detail.svg") right bottom no-repeat;
         }
         background-size: 4px 24px;
     }

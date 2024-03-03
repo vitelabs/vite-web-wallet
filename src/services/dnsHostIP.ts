@@ -1,6 +1,6 @@
-import { Client } from 'utils/request';
+import { Client } from '@utils/request';
 
-const apiConfigUrl = process.env.apiConfig;
+const apiConfigUrl = import.meta.env.VITE_API_CONFIG;
 
 export const Server = {
     isReady: false,
@@ -8,12 +8,12 @@ export const Server = {
 
     crosschainGate: { // PC
         hostKey: 'CROSSCHAIN',
-        url: process.env.gatewayInfosServer,
+        url: import.meta.env.VITE_CROSSCHAIN_SERVER,
         watchList: []
     },
     conversionGate: { // PC
         hostKey: 'GATEWAY',
-        url: process.env.conversionGate,
+        url: import.meta.env.VITE_GATEWAY,
         watchList: []
     },
     h5Config: { // PC
@@ -23,40 +23,40 @@ export const Server = {
     },
     ethExplorer: { // PC
         hostKey: 'ETH_EXPLORER',
-        url: process.env.ethExplorer,
+        url: import.meta.env.VITE_ETH_EXPLORER,
         watchList: []
     },
     ethServer: { // PC
         hostKey: 'ETH_NODE',
-        url: process.env.ethServer,
+        url: import.meta.env.VITE_ETH_SERVER,
         watchList: []
     },
 
     viteConnect: { // PC
         hostKey: 'VITE_CONNECT',
-        url: process.env.viteConnect,
+        url: import.meta.env.VITE_CONNECT,
         watchList: []
     },
     dexPush: { // BOTH
         hostKey: 'DEXPUSHSERVER',
-        url: process.env.pushServer,
+        url: import.meta.env.VITE_PUSH_SERVER,
         watchList: []
     },
     gViteAPI: { // BOTH
         hostKey: 'WALLETWSAPI',
-        url: window.VITE_NODE_API || process.env.goViteServer,
+        url: window.VITE_NODE_API || import.meta.env.VITE_SERVER,
         watchList: []
     },
 
     dexAPI: { // BOTH
         hostKey: 'VITEX',
-        url: process.env.dexApiServer,
+        url: import.meta.env.VITE_DEX_SERVER,
         watchList: []
     },
     viteExplorer: { // BOTH
         hostKey: 'EXPLORER',
         name: 'viteView',
-        url: process.env['viteView'],
+        url: import.meta.env.VITE_VIEW,
         watchList: []
     }
 };

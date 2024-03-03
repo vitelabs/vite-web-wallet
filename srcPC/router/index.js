@@ -1,19 +1,19 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
+import routes from './routes';
 
-import i18n from 'pcI18n';
-import store from 'pcStore';
-import openUrl from 'utils/openUrl';
-import statistics from 'utils/statistics';
-import { getExplorerLink } from 'utils/getLink';
-import { getCurrHDAcc, StatusMap } from 'wallet';
-import routeConfig from './routes';
+import i18n from '@pc/i18n';
+import store from '@pc/store';
+import openUrl from '@utils/openUrl';
+import statistics from '@utils/statistics';
+import { getExplorerLink } from '@utils/getLink';
+import { getCurrHDAcc, StatusMap } from '@pc/wallet';
 
-const loginRoutes = ['walletConversion'];
+const loginRoutes = [];
 
 const router = new VueRouter({
-    mode: process.env.NODE_ENV === 'dev' ? 'hash' : 'history',
-    routes: routeConfig.routes
+    mode: 'history',
+    routes,
 });
 
 router.beforeEach((to, from, next) => {
@@ -36,7 +36,7 @@ router.beforeEach((to, from, next) => {
 
     // CreateAccount only use in development.
     if (to.name === 'create') {
-        if (process.env.NODE_ENV === 'test' || process.env.NODE_ENV === 'dev') {
+        if (import.meta.env.DEV) {
             next();
             return;
         }

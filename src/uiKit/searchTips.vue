@@ -1,7 +1,7 @@
 <template>
     <div class="v-search-tips" v-click-outside.includeChildrens="closeTips">
         <div class="search-input-container">
-            <img src="~assets/imgs/search_gray.png" class="search-icon" />
+            <img src="@assets/imgs/search_gray.png" class="search-icon" />
             <input type="text" class="search-input" v-model="userInput" @blur="search(userInput)" />
         </div>
         <div class="tips-list" v-show="isShowTips">
@@ -55,6 +55,8 @@ export default {
 </script>
 
 <style lang="scss">
+@use "@assets/scss/theme.scss" as *;
+
 .v-search-tips {
     font-size: 12px;
     max-height: 203px;

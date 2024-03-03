@@ -89,7 +89,7 @@
 import LimitPriceOrder from '../limitPrice/order.vue';
 import MarketPriceOrder from '../marketPrice/order.vue';
 
-import BigNumber from 'utils/bigNumber';
+import BigNumber from '@utils/bigNumber';
 import Vip from './vip.vue';
 
 export default {
@@ -165,7 +165,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '../center.scss';
+@use "@assets/scss/theme.scss" as *;
+@use '../center.scss' as *;
 
 .limit-price-wrapper {
     display: flex;

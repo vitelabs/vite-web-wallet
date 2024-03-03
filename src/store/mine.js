@@ -1,22 +1,22 @@
 import { constant } from '@vite/vitejs';
-import bigNumber from 'utils/bigNumber';
-import { getCurrentFeesForMine, getAllFeesOfAddress, getMinThresholdForTradeAndMining, getCurrentVxMineInfo, getCurrentPledgeForVxSum, getAgentMiningPledgeInfo } from 'services/viteServer';
-import { getMiningSetting } from 'services/trade';
+import bigNumber from '@utils/bigNumber';
+import { getCurrentFeesForMine, getAllFeesOfAddress, getMinThresholdForTradeAndMining, getCurrentVxMineInfo, getCurrentPledgeForVxSum, getAgentMiningPledgeInfo } from '@services/viteServer';
+import { getMiningSetting } from '@services/trade';
 
-import viteIcon from 'assets/imgs/vite-dividend.svg';
-import ethIcon from 'assets/imgs/eth.svg';
-import usdIcon from 'assets/imgs/usd.svg';
-import btcIcon from 'assets/imgs/BTC.svg';
+import viteIcon from '@assets/imgs/vite-dividend.svg';
+import ethIcon from '@assets/imgs/eth.svg';
+import usdIcon from '@assets/imgs/usd.svg';
+import btcIcon from '@assets/imgs/BTC.svg';
 
-import theme1viteIcon from 'assets/theme1_imgs/vite-dividend.svg';
-import theme1ethIcon from 'assets/theme1_imgs/eth.svg';
-import theme1usdIcon from 'assets/theme1_imgs/usd.svg';
-import theme1btcIcon from 'assets/theme1_imgs/BTC.svg';
+import theme1viteIcon from '@assets/theme1_imgs/vite-dividend.svg';
+import theme1ethIcon from '@assets/theme1_imgs/eth.svg';
+import theme1usdIcon from '@assets/theme1_imgs/usd.svg';
+import theme1btcIcon from '@assets/theme1_imgs/BTC.svg';
 
-import h5ViteIcon from 'assets/imgs/trade/vite.png';
-import h5EthIcon from 'assets/imgs/trade/eth.png';
-import h5UsdIcon from 'assets/imgs/trade/usd.png';
-import h5BtcIcon from 'assets/imgs/trade/btc.png';
+import h5ViteIcon from '@assets/imgs/trade/vite.png';
+import h5EthIcon from '@assets/imgs/trade/eth.png';
+import h5UsdIcon from '@assets/imgs/trade/usd.png';
+import h5BtcIcon from '@assets/imgs/trade/btc.png';
 
 const Vite_Token_Info = constant.Vite_Token_Info;
 const VX_Decimals = 18;

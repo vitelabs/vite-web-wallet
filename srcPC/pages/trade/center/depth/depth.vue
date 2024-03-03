@@ -65,10 +65,10 @@
 </template>
 
 <script>
-import depthTable from './depthTable';
-import mergeDepth from './mergeDepth';
-import price from './price';
-import BigNumber from 'utils/bigNumber';
+import depthTable from './depthTable.vue';
+import mergeDepth from './mergeDepth.vue';
+import price from './price.vue';
+import BigNumber from '@utils/bigNumber';
 
 export default {
     components: { depthTable, price, mergeDepth },
@@ -148,7 +148,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '../center.scss';
+@use "@assets/scss/theme.scss" as *;
+@use '../center.scss' as *;
 
 .depth-wrapper {
     position: relative;

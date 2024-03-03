@@ -4,7 +4,7 @@ export const commonConfig = {
     interval: '360',
     allow_symbol_change: true,
     container_id: 'tv_chart_container',
-    library_path: '/charting_library/',
+    library_path: '/assets/charting_library/',
     drawings_access: {
         type: 'black',
         tools: [{ name: 'Trend Line' }]
@@ -23,7 +23,7 @@ export const commonConfig = {
 };
 
 export const theme0Config = {
-    custom_css_url: '/charting_library/charting_custom.css',
+    custom_css_url: '/assets/charting_library/charting_custom.css',
     overrides: {
         'mainSeriesProperties.style': 0,
         'symbolWatermarkProperties.color': '#944',
@@ -47,7 +47,7 @@ export const theme0Config = {
 };
 
 export const theme1Config = {
-    custom_css_url: '/charting_library/charting_custom_theme1.css',
+    custom_css_url: '/assets/charting_library/charting_custom_theme1.css',
     overrides: {
         'mainSeriesProperties.style': 0,
         'symbolWatermarkProperties.color': '#E5494D',

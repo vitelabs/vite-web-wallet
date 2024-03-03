@@ -7,8 +7,8 @@
 </template>
 
 <script>
-import { StatusMap } from 'wallet';
-import tooltips from 'components/tooltips';
+import { StatusMap } from '@pc/wallet';
+import tooltips from '@components/tooltips.vue';
 
 export default {
     components: { tooltips },
@@ -50,7 +50,7 @@ export default {
 </script>
 
 <style lang="scss" rel="stylesheet/scss" scoped>
-@import "assets/scss/vars.scss";
+@use "@assets/scss/theme.scss" as *;
 
 .unreceive-bubble {
     position: relative;
@@ -80,7 +80,7 @@ export default {
         }
         word-break: break-word;
         @include font-family-normal();
-        /deep/.trigle {
+        .trigle {
             border: 7px solid transparent;
             [data-theme="0"] & {
                 border-bottom: 7px solid $white-color;

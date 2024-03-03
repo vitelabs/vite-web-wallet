@@ -8,9 +8,9 @@
 </template>
 
 <script>
-import notice from 'components/notice';
-import date from 'utils/date';
-import * as noticeUtils from 'utils/noticeUtils';
+import notice from '@components/notice.vue';
+import date from '@utils/date';
+import * as noticeUtils from '@utils/noticeUtils';
 
 const orderStatusMap = {
     1: 'notice-partial',

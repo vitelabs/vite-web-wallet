@@ -27,12 +27,12 @@
 
 <script>
 import { constant } from '@vite/vitejs';
-import loading from 'components/loading';
-import confirm from 'pcComponents/confirm/confirm.vue';
-import viteInput from 'components/viteInput';
-import BigNumber from 'utils/bigNumber';
-import sendTx from 'pcUtils/sendTx';
-import { initPwd } from 'pcComponents/password/index.js';
+import loading from '@components/loading.vue';
+import confirm from '@pc/components/confirm/confirm.vue';
+import viteInput from '@components/viteInput.vue';
+import BigNumber from '@utils/bigNumber';
+import sendTx from '@pc/utils/sendTx';
+import { initPwd } from '@pc/components/password/index.js';
 
 const spend = 10000;
 const Vite_Token_Info = constant.Vite_Token_Info;

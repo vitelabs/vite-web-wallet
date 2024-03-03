@@ -6,8 +6,8 @@
 </template>
 
 <script>
-import confirm from 'pcComponents/confirm/confirm.vue';
-import walletTable from 'pcComponents/table/index.vue';
+import confirm from '@pc/components/confirm/confirm.vue';
+import walletTable from '@pc/components/table/index.vue';
 
 export default {
     components: { confirm, walletTable },

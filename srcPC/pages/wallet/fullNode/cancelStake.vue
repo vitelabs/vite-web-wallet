@@ -14,11 +14,11 @@
 </template>
 
 <script>
-import sendTx from 'pcUtils/sendTx';
-import confirm from 'pcComponents/confirm/confirm.vue';
-import { initPwd } from 'pcComponents/password/index.js';
-import { customContracts } from 'services/apiServer';
-import { getAccountBlockByHash } from 'services/viteServer';
+import sendTx from '@pc/utils/sendTx';
+import confirm from '@pc/components/confirm/confirm.vue';
+import { initPwd } from '@pc/components/password/index.js';
+import { customContracts } from '@services/apiServer';
+import { getAccountBlockByHash } from '@services/viteServer';
 
 export default {
     components: { confirm },

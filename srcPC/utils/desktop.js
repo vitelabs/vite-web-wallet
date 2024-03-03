@@ -1,5 +1,5 @@
-import { getProvider } from 'services/apiServer';
-import store from 'pcStore';
+import { getProvider } from '@services/apiServer';
+import store from '@pc/store';
 
 const actionQueue = [];
 

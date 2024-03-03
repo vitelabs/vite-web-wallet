@@ -3,7 +3,7 @@
         <div v-for="(item, i) in pledgeList" :key="i"
              :slot="`${i}addrBefore`">
             <span class="beneficial-addr">{{ item.showAddr }}</span>
-            <img v-if="item.beneficialAddr === address" class="beneficial-img" src='~assets/imgs/mine.svg'/>
+            <img v-if="item.beneficialAddr === address" class="beneficial-img" src="@assets/imgs/mine.svg"/>
         </div>
 
         <span v-for="(item, i) in pledgeList" :key="i"
@@ -21,16 +21,16 @@
 <script>
 import { constant } from '@vite/vitejs';
 
-import pagination from 'pcComponents/pagination.vue';
-import walletTable from 'pcComponents/table/index.vue';
-import date from 'utils/date.js';
-import openUrl from 'utils/openUrl';
-import { timer } from 'utils/asyncFlow';
-import BigNumber from 'utils/bigNumber';
-import statistics from 'utils/statistics';
-import { getAccountLink } from 'utils/getLink';
-import { execWithValid } from 'pcUtils/execWithValid';
-import { getRewardPledgeFullList } from 'pcServices/reward';
+import pagination from '@pc/components/pagination.vue';
+import walletTable from '@pc/components/table/index.vue';
+import date from '@utils/date.js';
+import openUrl from '@utils/openUrl';
+import { timer } from '@utils/asyncFlow';
+import BigNumber from '@utils/bigNumber';
+import statistics from '@utils/statistics';
+import { getAccountLink } from '@utils/getLink';
+import { execWithValid } from '@pc/utils/execWithValid';
+import { getRewardPledgeFullList } from '@pc/services/reward';
 
 let pledgeListInst;
 const limit = 30;
@@ -167,7 +167,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "~assets/scss/vars.scss";
+@use "@assets/scss/theme.scss" as *;
 
 .list-wrapper {
     flex: 1;

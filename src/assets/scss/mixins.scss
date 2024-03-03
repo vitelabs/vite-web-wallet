@@ -1,4 +1,4 @@
-@import "~assets/scss/vars.scss";
+@use "./theme.scss" as *;
 
 @mixin placeholder_color() {
     [data-theme="0"] & {
@@ -85,7 +85,7 @@ textarea {
 
 @font-face {
     font-family: "DINPro";
-    src: url("~assets/font/DINPro.otf");
+    src: url("@assets/font/DINPro.otf");
     font-weight: normal;
     font-style: normal;
 }

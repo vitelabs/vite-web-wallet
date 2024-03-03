@@ -38,12 +38,12 @@
 
 <script>
 import { wallet } from '@vite/vitejs';
-import sendTx from 'pcUtils/sendTx';
-import BigNumber from 'utils/bigNumber';
-import { initPwd } from 'pcComponents/password/index.js';
-import confirm from 'pcComponents/confirm/confirm.vue';
-import viteInput from 'components/viteInput';
-import { execWithValid } from 'pcUtils/execWithValid';
+import sendTx from '@pc/utils/sendTx';
+import BigNumber from '@utils/bigNumber';
+import { initPwd } from '@pc/components/password/index.js';
+import confirm from '@pc/components/confirm/confirm.vue';
+import viteInput from '@components/viteInput.vue';
+import { execWithValid } from '@pc/utils/execWithValid';
 
 export default {
     components: { confirm, viteInput },
@@ -169,7 +169,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "~assets/scss/vars.scss";
+@use "@assets/scss/theme.scss" as *;
 
 .token-card-wrapper {
     @include bg_color_2();

@@ -6,11 +6,11 @@
 </template>
 
 <script>
-import changeLang from 'pcComponents/changeLang';
+import changeLang from '@pc/components/changeLang.vue';
 
 export default { components: { changeLang } };
 </script>
 
 <style lang="scss" scoped>
-@import "./setting.scss";
+@use "./setting.scss";
 </style>
