@@ -852,7 +852,7 @@
             "verifyAddress": "주소 검증하기",
             "closeAlert": "취소",
             "start": {
-                "title": "지원되는 지갑: Ledger Nano S / Ledger Nano X",
+                "title": "지원되는 지갑: Ledger Nano S\nLedger Nano X",
                 "connectError": "연결 오류?",
                 "introduction": "어플 설치 & 사용 설명서",
                 "introductionUrl": "https://docs.vite.org/vite-docs/tutorial/ledger-install.html",

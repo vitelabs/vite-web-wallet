@@ -2,7 +2,7 @@
 
 @mixin placeholder_color() {
     [data-theme="0"] & {
-        color: rgba(94,104,117,0.3);
+        color: rgba(94,104,117,0.7);
     }
     [data-theme="1"] & {
         color: #545F75;

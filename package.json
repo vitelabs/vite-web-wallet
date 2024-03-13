@@ -6,7 +6,7 @@
     "scripts": {
         "dev": "vite",
         "build": "vite build",
-        "preview": "vite preview"
+        "staging": "vite build --mode staging"
     },
     "license": "ISC",
     "peerDependencies": {
@@ -51,7 +51,6 @@
         "protobufjs": "~6.8.8",
         "qrcode.es": "~1.0.0",
         "qs": "~6.5.2",
-        "scryptsy": "^2.1.0",
         "url": "~0.11.0",
         "vue": "^2.7.16",
         "vue-echarts": "^6.6.9",

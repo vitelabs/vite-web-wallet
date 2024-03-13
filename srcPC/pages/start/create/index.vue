@@ -67,6 +67,7 @@ export default {
 
 .create-account-wrapper{
     max-width: 360px;
+    margin: 0 auto;
     .notice {
         box-sizing: border-box;
         padding: 20px;

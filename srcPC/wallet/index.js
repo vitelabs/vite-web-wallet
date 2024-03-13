@@ -1,4 +1,3 @@
-import scrypt from 'scryptsy';
 import { keystore, utils } from '@vite/vitejs';
 
 import { getOldAccList, setOldAccList } from '../utils/store';
@@ -101,7 +100,7 @@ export function saveHDAccount({
         throw err;
     }
 
-    return keystore.encrypt(entropy, pass, null, scrypt).then(keystoreStr => {
+    return keystore.encrypt(entropy, pass, null).then(keystoreStr => {
         const keystoreObj = JSON.parse(keystoreStr);
 
         addHdAccount({

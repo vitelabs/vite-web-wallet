@@ -1,4 +1,3 @@
-import scrypt from 'scryptsy';
 import {
     keystore,
     wallet,
@@ -126,9 +125,7 @@ export class WebAccount {
 
     async unlock(pass) {
         const before = new Date().getTime();
-        const entropy: any = await keystore.decrypt(JSON.stringify(this.keystore),
-            pass,
-            scrypt);
+        const entropy: any = await keystore.decrypt(JSON.stringify(this.keystore), pass, null);
         const after = new Date().getTime();
 
         statistics.event('mnemonic-decrypt',

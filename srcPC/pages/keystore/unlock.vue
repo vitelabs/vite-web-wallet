@@ -13,7 +13,6 @@
 </template>
 
 <script>
-import scrypt from 'scryptsy';
 import { keystore } from '@vite/vitejs';
 import loading from '@components/loading.vue';
 
@@ -34,7 +33,7 @@ export default {
     methods: {
         unlock() {
             this.isLoading = true;
-            keystore.decrypt(JSON.stringify(this.keystore), this.password, scrypt).then(privateKey => {
+            keystore.decrypt(JSON.stringify(this.keystore), this.password, null).then(privateKey => {
                 this.isLoading = false;
                 this.$emit('unlockSuccess', privateKey);
             }).catch(err => {

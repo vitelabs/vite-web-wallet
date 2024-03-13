@@ -852,7 +852,7 @@
             "verifyAddress": "Xác thực địa chỉ",
             "closeAlert": "Hủy",
             "start": {
-                "title": "Ví được hỗ trợ: Ledger Nano S / Ledger Nano X",
+                "title": "Ví được hỗ trợ: Ledger Nano S\nLedger Nano X",
                 "connectError": "Lỗi kết nối?",
                 "introduction": "Hướng dẫn Sử dụng & Cài đặt Ứng dụng",
                 "introductionUrl": "https://docs.vite.org/vite-docs/tutorial/ledger-install.html",

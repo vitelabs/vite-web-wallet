@@ -852,7 +852,7 @@
             "verifyAddress": "Patunayan ang address",
             "closeAlert": "Kanselahin",
             "start": {
-                "title": "Mga suportadong Wallet: Ledger Nano S / Ledger Nano X",
+                "title": "Mga suportadong Wallet: Ledger Nano S\nLedger Nano X",
                 "connectError": "Mga Isyu sa Koneksyon?",
                 "introduction": "Pag-install ng App at Mga Tagubilin sa Gumagamit",
                 "introductionUrl": "https://docs.vite.org/vite-docs/tutorial/ledger-install.html",

@@ -852,7 +852,7 @@
             "verifyAddress": "Adres Doğrula",
             "closeAlert": "İptal",
             "start": {
-                "title": "Desteklenen Cüzdanlar: Ledger Nano S / Ledger Nano X",
+                "title": "Desteklenen Cüzdanlar: Ledger Nano S\nLedger Nano X",
                 "connectError": "Bağlantı Sorunları?",
                 "introduction": "Uygulama Kurulumu ve Kullanıcı Talimatları",
                 "introductionUrl": "https://docs.vite.org/vite-docs/tutorial/ledger-install.html",

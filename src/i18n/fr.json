@@ -853,7 +853,7 @@
             "verifyAddress": "Verify address",
             "closeAlert": "Cancel",
             "start": {
-                "title": "Supported Wallets: Ledger Nano S / Ledger Nano X",
+                "title": "Supported Wallets: Ledger Nano S\nLedger Nano X",
                 "connectError": "Connection Issues?",
                 "introduction": "App Installation & User Instructions",
                 "introductionUrl": "https://docs.vite.org/vite-docs/tutorial/ledger-install.html",

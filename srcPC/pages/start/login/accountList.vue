@@ -49,8 +49,7 @@ export default {
     background: #fff;
 
     .list-wrapper {
-        border-top: 1px solid #d4dee7;
-        border-bottom: 1px solid #d4dee7;
+        border-bottom: 1px solid #ccc;
         max-height: 180px;
         overflow: auto;
     }
