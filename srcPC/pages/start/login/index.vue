@@ -43,7 +43,7 @@
                 @click="toggleTab('vitePassport')"
                 :key="'vitePassport'"
             >
-                {{ $t('vitePassport') }}
+                {{ $t('assets.vitePassport.title') }}
             </div>
         </div>
 
@@ -182,9 +182,20 @@
                     :finishCb="showExisting"
                 ></restore>
                 
-                <div class="vitePassport" v-if="tabName === 'vitePassport'">
-                    <div class="code_container">
-                    vitePassport
+                <div class="vitePassport box" v-if="tabName === 'vitePassport'">
+                    <div class="box-content">
+                        <div class="box-title">{{ $t('assets.vitePassport.subtitle') }}</div>
+                    </div>
+                    <div class="box-footer">
+                        <div class="tips">
+                            <a :href="$t('assets.vitePassport.helpLink')" target="_blank">{{  $t('assets.vitePassport.help') }}</a>
+                        </div>
+                        <div class="actions">
+                            <button class="btn active __pointer" @click="connectVitePassport">
+                                <span v-show="!isLoading">{{ $t('assets.vitePassport.connect') }}</span>
+                                <loading v-show="isLoading" loadingType="dot"></loading>
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -213,7 +224,8 @@ const TABNAME = {
     vb: 'vb',
     existingAcc: 'existingAcc',
     restore: 'restore',
-    ledger: 'ledger'
+    ledger: 'ledger',
+    vitePassport: 'vitePassport'
 };
 
 export default {
@@ -454,6 +466,27 @@ export default {
                     this.$router.push({ name });
                 }
             });
+        },
+        async connectVitePassport() {
+            if (window?.vitePassport) {
+                this.isLoading = true;
+                try {
+                    let address = await window.vitePassport.getConnectedAddress();
+                    if (address) {
+                        await window.vitePassport.disconnectWallet();
+                    }
+                    await window.vitePassport.connectWallet();
+
+                    this.isLoading = false;
+                    const name = this.$store.state.env.lastPage || 'tradeCenter';
+                    this.$router.push({ name });
+                } catch (error) {
+                    this.isLoading = false;
+                    this.$toast(error.message);
+                }
+            } else {
+                this.$toast(this.$t('assets.vitePassport.notDetected'));
+            }
         }
     }
 };

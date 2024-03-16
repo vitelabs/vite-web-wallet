@@ -19,8 +19,9 @@ const signText = execWithValid(function ({ text }) {
         return vcSign({ text });
     }
 
-    // 暂时不支持硬件钱包
-    if (activeAccount.isHardware) {
+    // 暂时不支持硬件钱包 
+    // TODO: vitePossport hasn't provided an api of signText
+    if (activeAccount.isHardware || activeAccount.isVitePassport) {
         return Promise.reject({ code: '11021' });
     }
 

@@ -53,3 +53,32 @@ declare module '*.vue' {
 
 declare module '*.png'
 declare module '*.svg'
+
+type Network = {
+	name: string;
+	rpcUrl: string;
+	explorerUrl?: string;
+};
+
+type injectedScriptEvents = 'accountChange' | 'networkChange';
+type VitePassport = {
+	// These methods are relayed from contentScript.ts => injectedScript.ts
+	getConnectedAddress: () => Promise<undefined | string>;
+	disconnectWallet: () => Promise<undefined>;
+	getNetwork: () => Promise<Network>;
+
+	// These methods are relayed from contentScript.ts => background.ts => popup => contentScript.ts => injectedScript.ts
+	connectWallet: () => Promise<{ domain: string }>;
+	writeAccountBlock: (type: string, params: object) => Promise<{ block: AccountBlockBlock }>;
+
+	// `on` subscribes to `event` and returns an unsubscribe function
+	on: (
+		event: injectedScriptEvents,
+		callback: (payload: { activeAddress?: string; activeNetwork: Network }) => void
+	) => () => void;
+};
+declare global {
+	interface Window {
+		vitePassport?: VitePassport;
+	}
+}

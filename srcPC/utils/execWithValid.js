@@ -18,6 +18,10 @@ export function execWithValid(funcName, noActive) {
             hwAddressSelectDialog();
             return Promise.reject({ error: { code: 12001 } });
         }
+        if (currHDACC && currHDACC.isVitePassport) {
+            window?.vitePassport.connectWallet();
+            return;
+        }
         if (activeAccount) {
             pwdConfirm({ type: 'unlockAccount' });
             return Promise.reject({ error: { code: 12001 } });

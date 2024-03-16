@@ -901,6 +901,14 @@
                 "userCancelByWeb": "Kinansela mo ang transaksyon sa Vite wallet. Sa kasong ito, ang transaksyon ay naiwan at hindi dumaan sa blockchain kahit na nakumpirma ito sa iyong Ledger device."
             }
         },
+        "vitePassport": {
+            "title": "VitePassport",
+            "subtitle": "Ang VitePassport ay ang MetaMask ng VITE chain",
+            "help": "Mga Isyu sa Koneksyon",
+            "helpLink": "https://t.me/vite_ph",
+            "connect": "Kumonekta",
+            "notDetected": "Hindi ma-detect ang VitePassport. Mangyaring suriin kung naka-install at na-enable ito."
+        },
         "invite": {
             "inviteTitle": "Mag-imbita ng mga kaibigan",
             "receiveInviteTitle": "Gumamit ng Referral Code",

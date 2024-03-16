@@ -9,7 +9,6 @@
     "changeAcc": "Switch Account",
     "existingAcc": "Existing Accounts",
     "restore": "Import Mnemonic Words",
-    "vitePassport": "VitePassport",
     "register": "Sign Up",
     "createAcc": "Create",
     "settingAcc": "Setting Account",
@@ -907,6 +906,14 @@
                 "userCancel": "Transaction is cancelled on Ledger",
                 "userCancelByWeb": "You cancelled the transaction in Vite wallet. In this case, the transaction will be abandoned and never go through to blockchain even if it is confirmed on your Ledger device."
             }
+        },
+        "vitePassport": {
+            "title": "VitePassport",
+            "subtitle": "VitePassport is the MetaMask of the VITE chain",
+            "help": "Connection Issues",
+            "helpLink": "https://t.me/vite_en",
+            "connect": "Connect",
+            "notDetected": "Unable to detect VitePassport. Please check if it's installed and enabled."
         },
         "invite": {
             "inviteTitle": "Invite Friends",

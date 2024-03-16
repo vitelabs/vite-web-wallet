@@ -1,12 +1,15 @@
 {
     "name": "vite-wallet",
-    "version": "4.0.0",
+    "version": "4.1.0",
     "description": "vite web wallet",
     "type": "module",
     "scripts": {
         "dev": "vite",
         "build": "vite build",
-        "staging": "vite build --mode staging"
+        "staging": "vite build --mode staging",
+        "build:production": "vite build",
+        "build:test": "vite build --mode staging",
+        "build:stag": "vite build --mode staging",
     },
     "license": "ISC",
     "peerDependencies": {

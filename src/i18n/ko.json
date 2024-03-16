@@ -901,6 +901,14 @@
                 "userCancelByWeb": "Vite 지갑에서 거래를 취소했습니다. 거래는 취소되며 렛저 장치에서 확인된 경우에도 블록체인을 거치지 않습니다."
             }
         },
+        "vitePassport": {
+            "title": "VitePassport",
+            "subtitle": "VitePassport는 VITE 체인의 MetaMask입니다",
+            "help": "연결 문제",
+            "helpLink": "https://t.me/vite_kr",
+            "connect": "연결",
+            "notDetected": "VitePassport를 감지할 수 없습니다. 설치 및 활성화 여부를 확인하십시오."
+        },
         "invite": {
             "inviteTitle": "친구 초대하기",
             "receiveInviteTitle": "추천코드 사용하기",

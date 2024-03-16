@@ -3,7 +3,7 @@
         <div class="container">
             <div class="header">
                 <span @click="goVX" class="header-logo __pointer"></span>
-                <change-lang class="start change-lang __pointer"></change-lang>
+                <change-lang class="start change-lang __pointer" is-large></change-lang>
             </div>
             <router-view></router-view>
             <first-notice v-if="$route.name === 'start'"></first-notice>

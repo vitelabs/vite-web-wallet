@@ -70,6 +70,16 @@ const sendTx = execWithValid(function ({
         });
     }
 
+    if (activeAccount.isVitePassport) {
+        return vitePassportSendTx({
+            methodName,
+            params: {
+                ...data,
+                address: activeAccount.address
+            }
+        });
+    }
+
     if (window.touchID && window.touchID.isEnableTouchID()) {
         return window.touchID
             .promptTouchID(i18n.t('desktop.unlock'))
@@ -184,6 +194,10 @@ function vbSendTx({ methodName, params, vbExtends, abi, description }) {
                 compInstance && compInstance.close();
             });
     });
+}
+
+function vitePassportSendTx({ methodName, params}) {
+    return window.vitePassport.writeAccountBlock(methodName, params);
 }
 
 // 硬件钱包发送交易

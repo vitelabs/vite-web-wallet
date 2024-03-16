@@ -1,6 +1,8 @@
 <template>
     <div class="common-list-wrapper  __pointer">
-        <span class="lang-title" :class="{
+        <span :class="{
+            'list-title': !isLarge,
+            'lang-title': isLarge,
             'down': !showLang,
             'up': showLang
         }" @click="toggleLangList">{{ $t('lang') }}</span>
@@ -13,6 +15,9 @@
 
 <script>
 export default {
+    props: {
+        isLarge: Boolean,
+    },
     data() {
         return {
             showLang: false,

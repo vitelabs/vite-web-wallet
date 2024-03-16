@@ -901,6 +901,14 @@
                 "userCancelByWeb": "Вы отменили транзакцию в VITE кошельке. В этом случае транзакция не будет проходить в блокчейн, даже если она подтверждена на вашем устройстве Ledger."
             }
         },
+        "vitePassport": {
+            "title": "VitePassport",
+            "subtitle": "VitePassport — это MetaMask сети VITE",
+            "help": "Проблемы с подключением",
+            "helpLink": "https://t.me/vite_ru",
+            "connect": "Подключить",
+            "notDetected": "Не удалось обнаружить VitePassport. Убедитесь, что он установлен и включен."
+        },
         "invite": {
             "inviteTitle": "Пригласить Друзей",
             "receiveInviteTitle": "Используйте Реферальный Код",

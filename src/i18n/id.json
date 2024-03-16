@@ -901,6 +901,14 @@
                 "userCancelByWeb": "You cancelled the transaction in Vite wallet. In this case, the transaction will be abandoned and never go through to blockchain even if it is confirmed on your Ledger device."
             }
         },
+        "vitePassport": {
+            "title": "VitePassport",
+            "subtitle": "VitePassport adalah MetaMask dari rantai VITE",
+            "help": "Masalah Koneksi",
+            "helpLink": "https://t.me/vite_id",
+            "connect": "Hubungkan",
+            "notDetected": "VitePassport tidak dapat dideteksi. Harap periksa apakah sudah diinstal dan diaktifkan."
+        },
         "invite": {
             "inviteTitle": "Mengundang teman-teman",
             "receiveInviteTitle": "Gunakan Kode Rujukan",

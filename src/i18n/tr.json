@@ -901,6 +901,14 @@
                 "userCancelByWeb": "Vite cüzdanındaki işlemi iptal ettiniz. Bu durumda, işlem iptal edilecek ve Ledger cihazınızda onaylansa bile asla blok zincirine geçmeyecektir."
             }
         },
+        "vitePassport": {
+            "title": "VitePassport",
+            "subtitle": "VitePassport, VITE zincirinin MetaMask'ı",
+            "help": "Bağlantı Sorunları",
+            "helpLink": "https://t.me/vite_tr",
+            "connect": "Bağlan",
+            "notDetected": "VitePassport algılanamadı. Kurulu ve etkin olup olmadığını kontrol edin."
+        },
         "invite": {
             "inviteTitle": "Arkadaşlarını Davet Et",
             "receiveInviteTitle": "Referans Kodu Kullan",

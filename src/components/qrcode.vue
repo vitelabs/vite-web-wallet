@@ -9,7 +9,7 @@ import logo from '@assets/imgs/qrcode_addr.png';
 const defaultOpt = {
     size: 300,
     ecLevel: ecLevel.HIGH,
-    minVersion: 4,
+    minVersion: 12,
     background: '#fff',
     mode: modes.DRAW_WITH_IMAGE_BOX,
     radius: 0,

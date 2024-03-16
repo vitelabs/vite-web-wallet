@@ -5,6 +5,7 @@ import { getOldAccList, setOldAccList } from '../utils/store';
 import { WebAccount as HDAccount, StatusMap as _StatusMap } from './webAccount';
 import { VBAccount } from './vbAccount';
 import { HWAccount } from './hwAccount';
+import { VPAccount } from './vpAccount';
 
 import { getLastAcc, addHdAccount, setAcc, getAccList } from './store';
 
@@ -26,19 +27,7 @@ export function setCurrHDAcc(acc) {
         return;
     }
 
-    if (acc.isBifrost || acc.isHardware) {
-        acc.isSeparateKey = true;
-    }
-
-    if (acc.isBifrost
-        && currentHDAccount
-        && currentHDAccount.isBifrost
-        && currentHDAccount.activeAddr === acc.activeAddr
-        || acc.isHardware
-        && currentHDAccount
-        && currentHDAccount.isHardware
-        && currentHDAccount.activeAddr === acc.activeAddr
-    ) {
+    if (currentHDAccount && currentHDAccount.activeAddr === acc.activeAddr) {
         if (acc.isHardware) {
             currentHDAccount.publicKey = acc.publicKey;
         }
@@ -60,7 +49,7 @@ export function getList() {
     const oldAccList = getOldAccList() || [];
     return accList
         .concat(oldAccList)
-        .filter(acc => acc.id && (!acc.id.startsWith('VITEBIFROST_') && !acc.id.startsWith('VITEHARDWARE_'))); // filter vb and hardware accounts
+        .filter(acc => acc.id && (!acc.id.startsWith('VITEBIFROST_') && !acc.id.startsWith('VITEHARDWARE_') && !acc.id.startsWith('VITEPASSPORT_'))); // filter vb and hardware accounts
 }
 
 export function deleteOldAcc(acc) {
@@ -121,10 +110,9 @@ export function saveHDAccount({
 
 function initCurrHDAccount() {
     const lastAcc = getLastAcc();
-    if (!lastAcc) {
-        return;
+    if (lastAcc) {
+        constructAccount(lastAcc);
     }
-    return constructAccount(lastAcc);
 }
 
 function constructAccount(acc) {
@@ -132,6 +120,8 @@ function constructAccount(acc) {
         currentHDAccount = new VBAccount(acc);
     } else if (acc.isHardware || acc.id && acc.id.startsWith('VITEHARDWARE_')) {
         currentHDAccount = new HWAccount(acc);
+    } else if (acc.isVitePassport || acc.id && acc.id.startsWith('VITEPASSPORT_')) {
+        currentHDAccount = new VPAccount(acc);
     } else {
         currentHDAccount = new HDAccount(acc);
     }
