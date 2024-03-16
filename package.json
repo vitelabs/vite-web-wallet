@@ -9,7 +9,7 @@
         "staging": "vite build --mode staging",
         "build:production": "vite build",
         "build:test": "vite build --mode staging",
-        "build:stag": "vite build --mode staging",
+        "build:stag": "vite build --mode staging"
     },
     "license": "ISC",
     "peerDependencies": {
