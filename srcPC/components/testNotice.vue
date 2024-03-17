@@ -13,13 +13,13 @@
 <script>
 export default {
     data() {
-        return { version: process.env.version };
+        return { version: import.meta.env.VITE_WEB_WALLET_VERSION };
     }
 };
 </script>
 
 <style lang="scss" scoped>
-@import "~assets/scss/vars.scss";
+@use "@assets/scss/theme.scss" as *;
 
 .hover-wrapper {
     position: absolute;

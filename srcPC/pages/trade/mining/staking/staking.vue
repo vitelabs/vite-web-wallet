@@ -21,15 +21,15 @@
 </template>
 
 <script>
-import statistics from 'utils/statistics';
-import { execWithValid } from 'pcUtils/execWithValid';
+import statistics from '@utils/statistics';
+import { execWithValid } from '@pc/utils/execWithValid';
 import stakingDetail from './stakingDetail.vue';
-import { timer } from 'utils/asyncFlow';
-import walletTable from 'pcComponents/table/index.vue';
-import pagination from 'pcComponents/pagination';
-import { miningPledge } from 'services/trade';
-import bigNumber from 'utils/bigNumber';
-import date from 'utils/date';
+import { timer } from '@utils/asyncFlow';
+import walletTable from '@pc/components/table/index.vue';
+import pagination from '@pc/components/pagination.vue';
+import { miningPledge } from '@services/trade';
+import bigNumber from '@utils/bigNumber';
+import date from '@utils/date';
 import stakeForMining from './stakeForMining.vue';
 
 let stakingInfoTimer = null;
@@ -141,7 +141,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "../../components/stakingDetail.scss";
+@use "@assets/scss/theme.scss" as *;
+@use "../../components/stakingDetail.scss";
 
 .quota-detail {
     box-sizing: border-box;
@@ -160,7 +161,7 @@ export default {
             display: inline-block;
             width: 13px;
             height: 13px;
-            background: url('~assets/imgs/addStaking.svg');
+            background: url("@assets/imgs/addStaking.svg");
             background-size: 100% 100%;
             margin-right: 6px;
             margin-bottom: -1px;

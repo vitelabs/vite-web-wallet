@@ -1,5 +1,5 @@
-import { getGateInfos } from 'pcServices/gate';
-import { getTokenInfoBatch } from 'services/trade';
+import { getGateInfos } from '@pc/services/gate';
+import { getTokenInfoBatch } from '@services/trade';
 
 
 const state = {

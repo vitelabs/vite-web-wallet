@@ -35,10 +35,10 @@
 </template>
 
 <script>
-import tokenCard from '../tokenCard';
-import AssetSwitch from '../assetSwitch';
-import tips from './tips';
-import unreceiveTips from './unreceiveTips';
+import tokenCard from '../tokenCard/index.vue';
+import AssetSwitch from '../assetSwitch.vue';
+import tips from './tips.vue';
+import unreceiveTips from './unreceiveTips.vue';
 
 export default {
     components: { AssetSwitch, tokenCard, tips, unreceiveTips },
@@ -71,8 +71,8 @@ export default {
 </script>
 
 <style lang="scss" rel="stylesheet/scss" scoped>
-@import "assets/scss/vars.scss";
-@import "../tokenCard/colWidth.scss";
+@use "@assets/scss/theme.scss" as *;
+@use "../tokenCard/colWidth.scss" as *;
 
 .token-list {
     position: relative;
@@ -99,7 +99,7 @@ export default {
             content: ' ';
             width: 60px;
             height: 60px;
-            background: url('~assets/imgs/dexEmpty.svg') 100% 100%;
+            background: url("@assets/imgs/dexEmpty.svg") 100% 100%;
         }
     }
     .token__head {
@@ -119,10 +119,10 @@ export default {
                 font-size: 12px;
                 border: none;
                 margin-left: -10px;
-                /deep/.list-title {
+                .list-title {
                     padding: 0 10px;
                 }
-                /deep/.list {
+                .list {
                     overflow: visible;
                     border-radius: 2px;
                     margin-top: 8px;

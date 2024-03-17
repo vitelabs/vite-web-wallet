@@ -34,17 +34,17 @@
 </template>
 
 <script>
-import statistics from 'utils/statistics';
-import { execWithValid } from 'pcUtils/execWithValid';
-import component2function from 'pcComponents/dialog/utils';
-import { doUntill } from 'utils/asyncFlow';
-import secTitle from 'pcComponents/secTitle';
-import confirm from 'pcComponents/confirm/confirm.vue';
-import svipComp from './svipConfirm';
+import statistics from '@utils/statistics';
+import { execWithValid } from '@pc/utils/execWithValid';
+import component2function from '@pc/components/dialog/utils';
+import { doUntill } from '@utils/asyncFlow';
+import secTitle from '@pc/components/secTitle.vue';
+import confirm from '@pc/components/confirm/confirm.vue';
+import svipComp from './svipConfirm.vue';
 import vipConfirm from './vipConfirm.vue';
 import vipList from './vipList.vue';
-import cancelSVIPConfirm from './cancelSVIPConfirm';
-import cancelVIPConfirm from './cancelVIPConfirm';
+import cancelSVIPConfirm from './cancelSVIPConfirm.vue';
+import cancelVIPConfirm from './cancelVIPConfirm.vue';
 
 export default {
     components: { secTitle, confirm, vipList, vipConfirm, cancelVIPConfirm, cancelSVIPConfirm },
@@ -104,7 +104,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "~pcAssets/scss/common.scss";
+@use "@assets/scss/theme.scss" as *;
+@use "@pc/assets/scss/common.scss" as *;
 
 @include secondTitle();
 @include tradeBtn();

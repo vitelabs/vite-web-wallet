@@ -4,8 +4,8 @@ require('es6-promise').polyfill();
 import 'assets/scss/mixins.scss';
 
 import Vue from 'vue';
-import i18n from 'pcI18n';
-import store from 'pcStore';
+import i18n from '@pc/i18n';
+import store from '@pc/store';
 
 import App from './pages/index.vue';
 

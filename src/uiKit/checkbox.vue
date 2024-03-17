@@ -3,10 +3,10 @@
 </template>
 
 <script>
-import SelectedIcon from 'assets/imgs/uiKit/checkbox/selected.svg';
-import UnselectIcon from 'assets/imgs/uiKit/checkbox/unselect.svg';
-import theme1SelectedIcon from 'assets/theme1_imgs/selected.png';
-import theme1UnselectIcon from 'assets/theme1_imgs/unselect.png';
+import SelectedIcon from '@assets/imgs/uiKit/checkbox/selected.svg';
+import UnselectIcon from '@assets/imgs/uiKit/checkbox/unselect.svg';
+import theme1SelectedIcon from '@assets/theme1_imgs/selected.png';
+import theme1UnselectIcon from '@assets/theme1_imgs/unselect.png';
 
 export default {
     props: {

@@ -1,6 +1,6 @@
 import Vue from 'vue';
-import i18n from 'pcI18n';
-import router from 'pcRouter/index.js';
+import i18n from '@pc/i18n';
+import router from '@pc/router/index.js';
 import quotaCancelComponent from './cancel.vue';
 
 const QuotaCancelComponent = Vue.extend(quotaCancelComponent);

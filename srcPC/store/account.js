@@ -1,17 +1,17 @@
 import { constant } from '@vite/vitejs';
-import bigNumber from 'utils/bigNumber';
-import { timer } from 'utils/asyncFlow';
-import { defaultTokenMap } from 'utils/constant';
-import { getTokenIcon } from 'utils/tokenParser';
+import bigNumber from '@utils/bigNumber';
+import { timer } from '@utils/asyncFlow';
+import { defaultTokenMap } from '@utils/constant';
+import { getTokenIcon } from '@utils/tokenParser';
 import {
     getAccountBalance,
     subUnreceivedTx,
     unsubUnreceivedTx,
     getAccountBlockByHash
-} from 'services/viteServer';
-import { gateStorage } from 'pcServices/gate';
-import { notice } from 'utils/noticeUtils';
-import i18n from 'pcI18n';
+} from '@services/viteServer';
+import { gateStorage } from '@pc/services/gate';
+import { notice } from '@utils/noticeUtils';
+import i18n from '@pc/i18n';
 
 let balanceInfoInst = null;
 let unreceivedTxEvent = null;

@@ -31,9 +31,9 @@
 </template>
 
 <script>
-import { StatusMap } from 'wallet';
-import { constant } from 'pcUtils/store';
-import confirm from 'pcComponents/confirm/confirm.vue';
+import { StatusMap } from '@pc/wallet';
+import { constant } from '@pc/utils/store';
+import confirm from '@pc/components/confirm/confirm.vue';
 import holdPwdView from './holdPwd.vue';
 
 let lastE = null;
@@ -208,7 +208,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '~assets/scss/vars.scss';
+@use "@assets/scss/theme.scss" as *;
 
 input {
     width: 100%;

@@ -1,4 +1,4 @@
-import { constant } from 'pcUtils/store';
+import { constant } from '@pc/utils/store';
 
 import { addHdAccount, setAcc, getAcc, setAccInfo, setLastAcc } from './store';
 

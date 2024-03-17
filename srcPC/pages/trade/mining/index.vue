@@ -60,10 +60,10 @@
 </template>
 
 <script>
-import openUrl from 'utils/openUrl';
-import secTitle from 'pcComponents/secTitle';
-import helpTips from 'pcComponents/helpTips';
-import { miningTrade, miningPledge, getInviteMiningDetail, getOrderMining } from 'services/trade';
+import openUrl from '@utils/openUrl';
+import secTitle from '@pc/components/secTitle.vue';
+import helpTips from '@pc/components/helpTips.vue';
+import { miningTrade, miningPledge, getInviteMiningDetail, getOrderMining } from '@services/trade';
 import inviteMinComp from './invite/invite.vue';
 import orderMinComp from './order.vue';
 import tradeMinComp from './trade.vue';
@@ -132,7 +132,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "~assets/scss/vars.scss";
+@use "@assets/scss/theme.scss" as *;
 
 .help {
     width: 16px;
@@ -160,7 +160,7 @@ export default {
         content: ' ';
         width: 16px;
         height: 16px;
-        background: url('~assets/imgs/info_link.svg');
+        background: url("@assets/imgs/info_link.svg");
         background-size: 100% 100%;
         margin-right: 5px;
         margin-bottom: -3px;

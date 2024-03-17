@@ -15,9 +15,9 @@
 </template>
 
 <script>
-import confirm from 'pcComponents/confirm/confirm.vue';
-import { initPwd } from 'pcComponents/password/index.js';
-import { stakeForVIP, cancelStakeById } from 'pcServices/tradeOperation';
+import confirm from '@pc/components/confirm/confirm.vue';
+import { initPwd } from '@pc/components/password/index.js';
+import { stakeForVIP, cancelStakeById } from '@pc/services/tradeOperation';
 
 export default {
     components: { confirm },

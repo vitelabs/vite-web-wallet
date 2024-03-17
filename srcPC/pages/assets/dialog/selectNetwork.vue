@@ -30,8 +30,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "~assets/scss/vars.scss";
-
+@use "@assets/scss/theme.scss" as *;
 
 .strong {
     @include common_font_color();

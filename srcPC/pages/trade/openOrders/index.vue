@@ -11,10 +11,10 @@
 </template>
 
 <script>
-import { order } from 'services/trade';
-import pagination from 'pcComponents/pagination';
-import openTable from '../components/openTable';
-import Filters from '../components/filters';
+import { order } from '@services/trade';
+import pagination from '@pc/components/pagination.vue';
+import openTable from '../components/openTable.vue';
+import Filters from '../components/filters.vue';
 
 const Page_Size = 50;
 
@@ -70,6 +70,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@use "@assets/scss/theme.scss" as *;
 .open-order-ct {
     display: flex;
     flex-direction: column;

@@ -16,8 +16,8 @@
 </template>
 
 <script>
-import secTitle from 'pcComponents/secTitle';
-import confirm from 'pcComponents/confirm/confirm.vue';
+import secTitle from '@pc/components/secTitle.vue';
+import confirm from '@pc/components/confirm/confirm.vue';
 
 export default {
     components: { secTitle, confirm },
@@ -36,7 +36,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "~assets/scss/vars.scss";
+@use "@assets/scss/theme.scss" as *;
 
 .help-t {
     @include font-family-normal();

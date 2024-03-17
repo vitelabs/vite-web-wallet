@@ -8,7 +8,7 @@
 </template>
 
 <script>
-import { getInviteInfo } from 'services/trade';
+import { getInviteInfo } from '@services/trade';
 
 export default {
     beforeMount() {
@@ -41,8 +41,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "~assets/scss/vars.scss";
-@import "~pcAssets/scss/common.scss";
+@use "@assets/scss/theme.scss" as *;
+@use "@pc/assets/scss/common.scss" as *;
 
 @include secondTitle();
 .__second-title {

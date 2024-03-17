@@ -21,7 +21,7 @@
         <create-page v-else></create-page>
         <div class="go-list clearfix">
             <span class="__pointer" @click="go('startLogin')">
-                <img class="back" src="~assets/imgs/arrow-back.svg"/>{{ $t('startCreate.goLogin') }}
+                <img class="back" src="@assets/imgs/arrow-back.svg"/>{{ $t('startCreate.goLogin') }}
             </span>
             <span class="__pointer" @click="go('tradeCenter')">{{ $t('startCreate.goDex') }}</span>
         </div>
@@ -29,12 +29,12 @@
 </template>
 
 <script>
-import createPage from '../../create/index';
+import createPage from '../../create/index.vue';
 
 export default {
     components: { createPage },
     data() {
-        return { desktopVersion: process.env.desktopWalletVersion };
+        return { desktopVersion: import.meta.env.VITE_WEB_WALLET_VERSION };
     },
     computed: {
         isDesktop() {
@@ -62,11 +62,12 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "~assets/scss/vars.scss";
-@import "../start.scss";
+@use "@assets/scss/theme.scss" as *;
+@use "../start.scss";
 
 .create-account-wrapper{
     max-width: 360px;
+    margin: 0 auto;
     .notice {
         box-sizing: border-box;
         padding: 20px;
@@ -139,7 +140,7 @@ export default {
             background: rgba(255,255,255,1);
             box-shadow: 0px 5px 10px 0px rgba(0,145,216,0.6);
             content: ' ';
-            background: url('~assets/imgs/download.png') center no-repeat #fff;
+            background: url("@assets/imgs/download.png") center no-repeat #fff;
             background-size: 100px 100px;
             padding: 6px;
             width: 100px;

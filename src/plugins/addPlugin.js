@@ -1,7 +1,7 @@
-import toast from 'components/toast/index.js';
-import bigNumber from 'utils/bigNumber';
-import date from 'utils/date';
-import ellipsisAddr from 'utils/ellipsisAddr.js';
+import toast from '@components/toast/index.js';
+import bigNumber from '@utils/bigNumber';
+import date from '@utils/date';
+import ellipsisAddr from '@utils/ellipsisAddr.js';
 
 document.addEventListener('drop', e => {
     e.preventDefault();

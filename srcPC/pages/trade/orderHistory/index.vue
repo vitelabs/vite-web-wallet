@@ -8,9 +8,9 @@
 </template>
 
 <script>
-import { order } from 'services/trade';
+import { order } from '@services/trade';
 import historyTable from '../components/historyTable.vue';
-import Filters from '../components/filters';
+import Filters from '../components/filters.vue';
 
 const pageSize = 35;
 
@@ -64,6 +64,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@use "@assets/scss/theme.scss" as *;
 .order-history-ct {
     height: 100%;
     padding-top: 10px;

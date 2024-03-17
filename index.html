@@ -18,9 +18,10 @@
             name="keywords"
             content="vite, vitex, crypto,dag,bitcoin,vitecoin,contract platform, vitex exchange"
         />
-        <link rel="shortcut icon" type="image/x-icon" href="favicon.ico" />
+        <link rel="shortcut icon" type="image/x-icon" href="favicon.png" />
         <link rel="apple-touch-startup-image" href="logo.png" />
-        <title><%= htmlWebpackPlugin.options.title %></title>
+        <title>ViteX, Exchange By the Community, For the Community</title>
+        <script async src="/assets/charting_library/charting_library.min.js"></script>
         <!-- google recaptcha -->
         <script src="https://www.google.com/recaptcha/api.js"></script>
         <!-- Global site tag (gtag.js) - Google Analytics -->
@@ -60,7 +61,6 @@
         <div id="app">
             <div class="app-loading-wrapper">
                 <div id="loading" class="spinner spinner-animate">
-                    <?xml version="1.0" encoding="UTF-8"?>
                     <svg
                         viewBox="0 0 52 53"
                         version="1.1"
@@ -496,5 +496,6 @@
             } catch (err) {}
             document.documentElement.setAttribute('data-theme', theme);
         </script>
+        <script type="module" src="/srcPC/index.js"></script>
     </body>
 </html>

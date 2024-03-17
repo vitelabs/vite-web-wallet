@@ -30,10 +30,10 @@
 
 <script>
 import { constant } from '@vite/vitejs';
-import confirm from 'pcComponents/confirm/confirm.vue';
-import BigNumber from 'utils/bigNumber';
-import { initPwd } from 'pcComponents/password/index.js';
-import { stakeForVIP } from 'pcServices/tradeOperation';
+import confirm from '@pc/components/confirm/confirm.vue';
+import BigNumber from '@utils/bigNumber';
+import { initPwd } from '@pc/components/password/index.js';
+import { stakeForVIP } from '@pc/services/tradeOperation';
 
 const Vite_Token_Info = constant.Vite_Token_Info;
 const vipStakingAmount = 10000;

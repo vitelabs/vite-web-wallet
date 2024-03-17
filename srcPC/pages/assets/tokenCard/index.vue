@@ -91,14 +91,14 @@ import {
     withdrawDialog,
     tokenInfoDialog
 } from '../dialog';
-import exTransfer from '../dialog/exTransfer';
-import importantHint from '../dialog/importantHint';
-import statistics from 'utils/statistics';
-import bigNumber from 'utils/bigNumber';
-import { execWithValid } from 'pcUtils/execWithValid';
-import { getTokenSymbolString } from 'utils/tokenParser';
-import { gateStorage } from 'pcServices/gate';
-import transaction from '../transaction';
+import exTransfer from '../dialog/exTransfer.vue';
+import importantHint from '../dialog/importantHint.vue';
+import statistics from '@utils/statistics';
+import bigNumber from '@utils/bigNumber';
+import { execWithValid } from '@pc/utils/execWithValid';
+import { getTokenSymbolString } from '@utils/tokenParser';
+import { gateStorage } from '@pc/services/gate';
+import transaction from '../transaction.vue';
 import Alert from '../alert.vue';
 
 export default {
@@ -246,8 +246,8 @@ export default {
 </script>
 
 <style lang='scss' scoped>
-@import "~assets/scss/vars.scss";
-@import "./colWidth.scss";
+@use "@assets/scss/theme.scss" as *;
+@use "./colWidth.scss" as *;
 
 @mixin border_one($b) {
     @if $b == bottom {
@@ -315,7 +315,7 @@ export default {
             position: absolute;
             bottom: 6px;
             right: 6px;
-            background-image: url(~assets/imgs/bind.png);
+            background-image: url(@assets/imgs/bind.png);
             background-size: cover;
         }
         .underline {

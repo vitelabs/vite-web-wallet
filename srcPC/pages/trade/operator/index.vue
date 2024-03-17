@@ -13,9 +13,9 @@
 
 <script>
 import income from './income.vue';
-import tokenList from './tokenList';
-import secTitle from 'pcComponents/secTitle';
-import openUrl from 'utils/openUrl';
+import tokenList from './tokenList.vue';
+import secTitle from '@pc/components/secTitle.vue';
+import openUrl from '@utils/openUrl';
 
 export default {
     components: { income, secTitle, tokenList },
@@ -39,7 +39,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "~assets/scss/vars.scss";
+@use "@assets/scss/theme.scss" as *;
 
 .operator-wrapper {
     width: 100%;

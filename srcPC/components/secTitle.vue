@@ -11,8 +11,9 @@
 </template>
 
 <script>
-import { blackHole } from 'pcUtils/ethWallet/viteContract';
-import confirm from 'pcComponents/confirm/index.js';
+import confirm from '@pc/components/confirm/index.js';
+
+const blackHole = '0x1111111111111111111111111111111111111111';
 
 export default {
     props: {
@@ -70,7 +71,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "~assets/scss/vars.scss";
+@use "@assets/scss/theme.scss" as *;
 
 .sec-title-container {
     @include font-family-bold();
@@ -84,7 +85,7 @@ export default {
         display: inline-block;
         width: 16px;
         height: 16px;
-        background: url('~assets/imgs/back.svg') center no-repeat;
+        background: url("@assets/imgs/back.svg") center no-repeat;
         background-size: 16px 16px;
         margin-bottom: -3px;
         margin-right: 6px;
@@ -104,7 +105,7 @@ export default {
         white-space: nowrap;
 
         .icon {
-            // background: url(~assets/imgs/detail.svg);
+            // background: url(@assets/imgs/detail.svg);
             @include background_common_img('detail.svg');
             width: 16px;
             height: 16px;

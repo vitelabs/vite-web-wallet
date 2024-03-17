@@ -36,18 +36,18 @@ export default {
         height: 50%;
         [data-theme="0"] & {
             &:first-child {
-                background: url("~assets/imgs/ascend.svg") bottom no-repeat;
+                background: url("@assets/imgs/ascend.svg") bottom no-repeat;
             }
             &:last-child {
-                background: url("~assets/imgs/decend.svg") top no-repeat;
+                background: url("@assets/imgs/decend.svg") top no-repeat;
             }
         }
         [data-theme="1"] & {
             &:first-child {
-                background: url("~assets/theme1_imgs/ascend.svg") bottom no-repeat;
+                background: url("@assets/theme1_imgs/ascend.svg") bottom no-repeat;
             }
             &:last-child {
-                background: url("~assets/theme1_imgs/decend.svg") top no-repeat;
+                background: url("@assets/theme1_imgs/decend.svg") top no-repeat;
             }
         }
     }

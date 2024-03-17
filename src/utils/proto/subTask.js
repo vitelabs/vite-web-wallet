@@ -1,6 +1,6 @@
 import { WsProtoClient } from './index';
-import { timer } from 'utils/asyncFlow';
-import { onReady, Server } from 'services/dnsHostIP';
+import { timer } from '@utils/asyncFlow';
+import { onReady, Server } from '@services/dnsHostIP';
 import { httpServicesMap, wsServicesMap } from './subService';
 
 // Http + ws 订阅任务；

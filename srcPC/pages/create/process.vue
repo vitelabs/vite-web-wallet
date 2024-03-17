@@ -30,7 +30,7 @@ export default {
 
 
 <style lang="scss" scoped>
-@import "~assets/scss/vars.scss";
+@use "@assets/scss/theme.scss" as *;
 
 .process-wrapper {
     position: relative;
@@ -55,7 +55,7 @@ export default {
     }
 
     .finish {
-        background: url('~assets/imgs/complete.svg');
+        background: url("@assets/imgs/complete.svg");
     }
 
     .active {

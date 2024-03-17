@@ -19,7 +19,7 @@
 </template>
 
 <script>
-import helpTips from 'pcComponents/helpTips';
+import helpTips from '@pc/components/helpTips.vue';
 
 export default {
     components: { helpTips },
@@ -47,6 +47,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "~pcAssets/scss/list/setting.scss";
-@import "./setting.scss";
+@use "@pc/assets/scss/list/setting.scss" as *;
+@use "./setting.scss" as *;
 </style>

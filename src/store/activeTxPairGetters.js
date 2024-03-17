@@ -1,4 +1,4 @@
-import BigNumber from 'utils/bigNumber';
+import BigNumber from '@utils/bigNumber';
 
 const maxDigit = 8;
 

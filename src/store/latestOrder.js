@@ -1,4 +1,4 @@
-import { subTask } from 'utils/proto/subTask';
+import { subTask } from '@utils/proto/subTask';
 
 let latestOrderTask = null;
 

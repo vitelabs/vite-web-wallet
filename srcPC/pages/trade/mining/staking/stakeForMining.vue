@@ -31,13 +31,13 @@
 </template>
 
 <script>
-import confirm from 'pcComponents/confirm/confirm.vue';
-import viteInput from 'components/viteInput';
-import sendTx from 'pcUtils/sendTx';
-import bigNumber from 'utils/bigNumber';
-import statistics from 'utils/statistics';
-import { verifyAmount } from 'pcUtils/validations';
-import router from 'pcRouter';
+import confirm from '@pc/components/confirm/confirm.vue';
+import viteInput from '@components/viteInput.vue';
+import sendTx from '@pc/utils/sendTx';
+import bigNumber from '@utils/bigNumber';
+import statistics from '@utils/statistics';
+import { verifyAmount } from '@pc/utils/validations';
+import router from '@pc/router';
 
 const minLimit = 134;
 
@@ -133,6 +133,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@use "@assets/scss/theme.scss" as *;
 .__hint {
     &.distance {
         margin-top: 20px;

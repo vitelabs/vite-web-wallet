@@ -1,6 +1,6 @@
-import { StatusMap, getCurrHDAcc, getActiveAcc } from 'wallet';
-import { pwdConfirm } from 'pcComponents/password/index.js';
-import { vbConnectDialog, hwAddressSelectDialog } from 'pcComponents/dialog';
+import { StatusMap, getCurrHDAcc, getActiveAcc } from '@pc/wallet';
+import { pwdConfirm } from '@pc/components/password/index.js';
+import { vbConnectDialog, hwAddressSelectDialog } from '@pc/components/dialog';
 
 export function execWithValid(funcName, noActive) {
     return function (...args) {
@@ -17,6 +17,10 @@ export function execWithValid(funcName, noActive) {
         if (currHDACC && currHDACC.isHardware) {
             hwAddressSelectDialog();
             return Promise.reject({ error: { code: 12001 } });
+        }
+        if (currHDACC && currHDACC.isVitePassport) {
+            window?.vitePassport.connectWallet();
+            return;
         }
         if (activeAccount) {
             pwdConfirm({ type: 'unlockAccount' });

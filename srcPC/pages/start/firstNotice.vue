@@ -13,7 +13,7 @@
 </template>
 
 <script>
-import { constant, storage } from 'pcUtils/store';
+import { constant, storage } from '@pc/utils/store';
 
 export default {
     mounted() {
@@ -32,8 +32,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "~assets/scss/vars.scss";
-@import "./start.scss";
+@use "@assets/scss/theme.scss" as *;
+@use "./start.scss";
 
 .first-notice-wrapper {
     position: fixed;

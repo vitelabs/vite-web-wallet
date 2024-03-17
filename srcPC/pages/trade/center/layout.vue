@@ -16,6 +16,7 @@
 </template>
 
 <style lang="scss" scoped>
+@use "@assets/scss/theme.scss" as *;
 .__flex_row {
     display: flex;
     flex-direction: row;

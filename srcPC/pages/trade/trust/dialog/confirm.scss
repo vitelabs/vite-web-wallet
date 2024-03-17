@@ -1,3 +1,5 @@
+@use "@assets/scss/theme.scss" as *;
+
 .strong {
     @include font_color_1();
     font-size: 14px;

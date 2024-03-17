@@ -1,9 +1,9 @@
 const statisticsNull = {
     pageView(...args) {
-        process.env.NODE_ENV === 'dev' && console.log('[statistics pageView]', JSON.stringify(args));
+        import.meta.env.DEV && console.log('[statistics pageView]', JSON.stringify(args));
     },
     event(...args) {
-        process.env.NODE_ENV === 'dev' && console.log('[statistics event]', JSON.stringify(args));
+        import.meta.env.DEV && console.log('[statistics event]', JSON.stringify(args));
     }
 };
 
@@ -19,4 +19,4 @@ const statistics = {
     }
 };
 
-export default process.env.NODE_ENV === 'production' ? statistics : statisticsNull;
+export default import.meta.env.PROD ? statistics : statisticsNull;

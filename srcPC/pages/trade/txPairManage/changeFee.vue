@@ -56,9 +56,9 @@
 </template>
 
 <script>
-import confirm from 'pcComponents/confirm/confirm.vue';
-import alertConfirm from 'pcComponents/confirm/index.js';
-import slider from 'components/slider';
+import confirm from '@pc/components/confirm/confirm.vue';
+import alertConfirm from '@pc/components/confirm/index.js';
+import slider from '@components/slider.vue';
 
 const minFee = 0;
 const maxFee = 0.2;
@@ -162,7 +162,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "~assets/scss/vars.scss";
+@use "@assets/scss/theme.scss" as *;
 
 .change-fee-slider {
     margin-bottom: 46px;

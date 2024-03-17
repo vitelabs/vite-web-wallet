@@ -1,4 +1,4 @@
-import getDialog from 'pcComponents/dialog/utils';
+import getDialog from '@pc/components/dialog/utils';
 import keyConfirmComp from './keyConfirm.vue';
 import stakingComp from './staking.vue';
 import upgradeComp from './upgrade.vue';

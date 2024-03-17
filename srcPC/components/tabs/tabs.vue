@@ -32,5 +32,5 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "./sbp.scss";
+@use "./sbp.scss";
 </style>

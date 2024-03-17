@@ -1,24 +1,21 @@
-import '@babel/polyfill';
-require('es6-promise').polyfill();
-
-import 'assets/scss/mixins.scss';
-import 'utils/performance';
-import 'pcUtils/nodeApi';
-import 'services/dnsHostIP';
-import 'services/apiServer';
+import '@assets/scss/mixins.scss';
+import '@utils/performance';
+import '@pc/utils/nodeApi';
+import '@services/dnsHostIP';
+import '@services/apiServer';
 import './wallet';
 
 import Vue from 'vue';
 
-import App from 'pcPages/index.vue';
-import router from 'pcRouter/index.js';
+import App from '@pc/pages/index.vue';
+import router from '@pc/router/index.js';
 
-import i18n from 'pcI18n';
-import store from 'pcStore';
+import i18n from '@pc/i18n';
+import store from '@pc/store';
 
-import plugin from 'plugins/addPlugin';
-import directives from 'plugins/directives';
-import { resaveAccList, resaveLastAcc } from 'pcUtils/store/resave';
+import plugin from '@plugins/addPlugin';
+import directives from '@plugins/directives';
+import { resaveAccList, resaveLastAcc } from '@pc/utils/store/resave';
 
 // Add fortawesome
 import { library } from '@fortawesome/fontawesome-svg-core';
@@ -79,7 +76,8 @@ if (window.DESKTOP) {
         false);
 }
 
-Vue.config.devtools = process.env.NODE_ENV !== 'production';
+Vue.config.devtools = import.meta.env.DEV;
+
 new Vue({
     el: '#app',
     components: { App },

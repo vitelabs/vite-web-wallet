@@ -64,16 +64,16 @@
 </template>
 
 <script>
-import viteInput from 'components/viteInput';
-import loading from 'components/loading';
-import localStorage from 'pcUtils/store';
-import { subTask } from 'utils/proto/subTask';
-import statistics from 'utils/statistics';
-import { assignPair } from 'services/trade';
+import viteInput from '@components/viteInput.vue';
+import loading from '@components/loading.vue';
+import localStorage from '@pc/utils/store';
+import { subTask } from '@utils/proto/subTask';
+import statistics from '@utils/statistics';
+import { assignPair } from '@services/trade';
 
-import orderArrow from './orderArrow';
-import tabList from './tabList';
-import txPairList from './txPairList';
+import orderArrow from './orderArrow.vue';
+import tabList from './tabList.vue';
+import txPairList from './txPairList.vue';
 
 const FavoriteKey = 'favoriteTickers';
 let defaultPairTimer = null;
@@ -340,7 +340,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "../center.scss";
+@use "@assets/scss/theme.scss" as *;
+@use "../center.scss" as *;
 
 .__center-tb-item.percent {
     overflow: visible;
@@ -420,6 +421,7 @@ export default {
 </style>
 
 <style lang="scss">
+@use "@assets/scss/theme.scss" as t;
 .market-search-input.input-wrapper {
     box-sizing: border-box;
     height: 20px;
@@ -431,7 +433,7 @@ export default {
         width: 12px;
         height: 12px;
         margin: 4px 6px 4px 6px;
-        @include background_common_img_suffix('search', 'svg', 'png');
+        @include t.background_common_img_suffix('search', 'svg', 'png');
     }
     input {
         text-indent: 0;

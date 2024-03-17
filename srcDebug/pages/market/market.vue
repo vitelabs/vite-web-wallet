@@ -5,7 +5,7 @@
         <div class="search-wrapper">
             <vite-input class="market-search-input" v-model="searchText"
                         :placeholder="$t('trade.search')">
-                <img slot="before" class="icon" src="~assets/imgs/search.svg"/>
+                <img slot="before" class="icon" src="@assets/imgs/search.svg"/>
             </vite-input>
 
             <div class="select-icon-wrapper __pointer" @click="toogleShowCol('updown')">
@@ -65,15 +65,15 @@
 </template>
 
 <script>
-import viteInput from 'components/viteInput';
-import loading from 'components/loading';
-import localStorage from 'pcUtils/store';
-import { subTask } from 'utils/proto/subTask';
-import { assignPair } from 'services/trade';
+import viteInput from '@components/viteInput.vue';
+import loading from '@components/loading.vue';
+import localStorage from '@pc/utils/store';
+import { subTask } from '@utils/proto/subTask';
+import { assignPair } from '@services/trade';
 
-import orderArrow from './orderArrow';
-import tabList from './tabList';
-import txPairList from './txPairList';
+import orderArrow from './orderArrow.vue';
+import tabList from './tabList.vue';
+import txPairList from './txPairList.vue';
 
 const FavoriteKey = 'favoriteTickers';
 let defaultPairTimer = null;

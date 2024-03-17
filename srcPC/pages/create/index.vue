@@ -9,7 +9,7 @@
 <script>
 import create from './create.vue';
 import record from './record.vue';
-import process from './process';
+import process from './process.vue';
 
 export default {
     components: { create, process, record },
@@ -36,7 +36,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "./create.scss";
+@use "./create.scss";
 
 .create-pc-account-wrapper {
     width: 360px;

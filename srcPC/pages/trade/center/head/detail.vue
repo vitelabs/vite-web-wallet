@@ -82,19 +82,19 @@
             </div>
             <div class="content__item">
                 <div class="label">{{$t("tokenCard.tokenInfo.labels.media")}}:</div>
-                <img src="~assets/imgs/facebook.svg" class="media-icon"
+                <img src="@assets/imgs/facebook.svg" class="media-icon"
                      v-show="tokenDetail.facebookLink"  @click="openUrl(tokenDetail.facebookLink[0])"/>
-                <img src="~assets/imgs/twitter.svg" class="media-icon"
+                <img src="@assets/imgs/twitter.svg" class="media-icon"
                      v-show="tokenDetail.twitterLink"  @click="openUrl(tokenDetail.twitterLink[0])"/>
-                <img src="~assets/imgs/telegram.svg" class="media-icon"
+                <img src="@assets/imgs/telegram.svg" class="media-icon"
                      v-show="tokenDetail.telegramLink"  @click="openUrl(tokenDetail.telegramLink[0])"/>
-                <img src="~assets/imgs/medium.svg" class="media-icon"
+                <img src="@assets/imgs/medium.svg" class="media-icon"
                      v-show="tokenDetail.mediumLink"  @click="openUrl(tokenDetail.mediumLink[0])"/>
-                <img src="~assets/imgs/discord.svg" class="media-icon"
+                <img src="@assets/imgs/discord.svg" class="media-icon"
                      v-show="tokenDetail.discordLink"  @click="openUrl(tokenDetail.discordLink[0])"/>
-                <img src="~assets/imgs/reddit.svg" class="media-icon"
+                <img src="@assets/imgs/reddit.svg" class="media-icon"
                      v-show="tokenDetail.redditLink"  @click="openUrl(tokenDetail.redditLink[0])"/>
-                <img src="~assets/imgs/youtube.svg" class="media-icon"
+                <img src="@assets/imgs/youtube.svg" class="media-icon"
                      v-show="tokenDetail.youtubeLink"  @click="openUrl(tokenDetail.youtubeLink[0])"/>
             </div>
         </div>
@@ -128,13 +128,13 @@
 </template>
 
 <script>
-import confirm from 'pcComponents/confirm/confirm.vue';
-import { getExplorerLink, getTokenLink } from 'utils/getLink';
-import openUrl from 'utils/openUrl';
-import statistics from 'utils/statistics';
-import BigNumber from 'utils/bigNumber';
+import confirm from '@pc/components/confirm/confirm.vue';
+import { getExplorerLink, getTokenLink } from '@utils/getLink';
+import openUrl from '@utils/openUrl';
+import statistics from '@utils/statistics';
+import BigNumber from '@utils/bigNumber';
 import txPairInfo from './txPairInfo.vue';
-import operatorIcon from 'assets/imgs/operator.png';
+import operatorIcon from '@assets/imgs/operator.png';
 
 export default {
     components: { confirm, txPairInfo },
@@ -226,7 +226,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "~pcComponents/confirm/moreTabConfirm.scss";
+@use "@pc/components/confirm/moreTabConfirm.scss";
 
 .click-able {
     margin-right: 10px;

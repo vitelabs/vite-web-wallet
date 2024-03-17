@@ -852,7 +852,7 @@
             "verifyAddress": "Xác thực địa chỉ",
             "closeAlert": "Hủy",
             "start": {
-                "title": "Ví được hỗ trợ: Ledger Nano S / Ledger Nano X",
+                "title": "Ví được hỗ trợ: Ledger Nano S\nLedger Nano X",
                 "connectError": "Lỗi kết nối?",
                 "introduction": "Hướng dẫn Sử dụng & Cài đặt Ứng dụng",
                 "introductionUrl": "https://docs.vite.org/vite-docs/tutorial/ledger-install.html",
@@ -900,6 +900,14 @@
                 "userCancel": "Giao dịch đã bị hủy trên Ledger",
                 "userCancelByWeb": "Bạn đã hủy giao dịch trong ví Vite. Trong trường hợp này, giao dịch sẽ bị hủy bỏ và không bao giờ được chuyển sang blockchain ngay cả khi nó được xác nhận trên thiết bị Ledger của bạn."
             }
+        },
+        "vitePassport": {
+            "title": "VitePassport",
+            "subtitle": "VitePassport là MetaMask của chuỗi VITE",
+            "help": "Vấn đề kết nối",
+            "helpLink": "https://t.me/vite_vn",
+            "connect": "Kết nối",
+            "notDetected": "Không thể phát hiện VitePassport. Vui lòng kiểm tra xem nó đã được cài đặt và kích hoạt hay chưa."
         },
         "invite": {
             "inviteTitle": "Mời bạn bè",

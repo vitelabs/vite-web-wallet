@@ -26,8 +26,8 @@
 </template>
 
 <script>
-import { operator } from 'services/trade';
-import BigNumber from 'utils/bigNumber';
+import { operator } from '@services/trade';
+import BigNumber from '@utils/bigNumber';
 
 export default {
     created() {
@@ -118,7 +118,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '~assets/scss/vars.scss';
+@use "@assets/scss/theme.scss" as *;
 
 .income-wrapper {
     border-radius: 2px;

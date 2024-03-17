@@ -3,8 +3,8 @@
 </template>
 
 <script>
-import statistics from 'utils/statistics';
-import Vswitch from 'uiKit/switch';
+import statistics from '@utils/statistics';
+import Vswitch from '@uiKit/switch.vue';
 
 export default {
     components: { Vswitch },

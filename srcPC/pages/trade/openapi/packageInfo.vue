@@ -32,6 +32,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@use "@assets/scss/theme.scss" as *;
 .package-info {
     @include common_border();
     max-width: 180px;

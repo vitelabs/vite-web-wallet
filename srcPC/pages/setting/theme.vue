@@ -43,6 +43,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "~pcAssets/scss/list/setting.scss";
-@import "./setting.scss";
+@use "@pc/assets/scss/list/setting.scss";
+@use "./setting.scss" as *;
 </style>

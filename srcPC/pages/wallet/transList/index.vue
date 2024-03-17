@@ -56,23 +56,23 @@
 </template>
 
 <script>
-import txQuotaImg from 'assets/imgs/txQuota.svg';
-import txRegImg from 'assets/imgs/txReg.svg';
-import txRewardImg from 'assets/imgs/txReward.svg';
-import txTokenImg from 'assets/imgs/txToken.svg';
-import txTransImg from 'assets/imgs/txTrans.svg';
-import txVoteImg from 'assets/imgs/txVote.svg';
-import txDexImg from 'assets/imgs/txDex.svg';
+import txQuotaImg from '@assets/imgs/txQuota.svg';
+import txRegImg from '@assets/imgs/txReg.svg';
+import txRewardImg from '@assets/imgs/txReward.svg';
+import txTokenImg from '@assets/imgs/txToken.svg';
+import txTransImg from '@assets/imgs/txTrans.svg';
+import txVoteImg from '@assets/imgs/txVote.svg';
+import txDexImg from '@assets/imgs/txDex.svg';
 
-import pagination from 'pcComponents/pagination.vue';
-import walletTable from 'pcComponents/table/index.vue';
-import secTitle from 'pcComponents/secTitle';
-import date from 'utils/date.js';
-import { timer } from 'utils/asyncFlow';
-import BigNumber from 'utils/bigNumber';
-import { getTxLink } from 'utils/getLink';
-import ellipsisAddr from 'utils/ellipsisAddr.js';
-import openUrl from 'utils/openUrl.js';
+import pagination from '@pc/components/pagination.vue';
+import walletTable from '@pc/components/table/index.vue';
+import secTitle from '@pc/components/secTitle.vue';
+import date from '@utils/date.js';
+import { timer } from '@utils/asyncFlow';
+import BigNumber from '@utils/bigNumber';
+import { getTxLink } from '@utils/getLink';
+import ellipsisAddr from '@utils/ellipsisAddr.js';
+import openUrl from '@utils/openUrl.js';
 
 const txImgs = {
     SBPreg: txRegImg,
@@ -224,7 +224,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "~assets/scss/vars.scss";
+@use "@assets/scss/theme.scss" as *;
 
 .wallet-trans-list-table {
     flex: 1;

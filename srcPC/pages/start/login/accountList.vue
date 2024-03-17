@@ -9,8 +9,8 @@
 </template>
 
 <script>
-import ellipsisAddr from 'utils/ellipsisAddr.js';
-import { getList } from 'wallet';
+import ellipsisAddr from '@utils/ellipsisAddr.js';
+import { getList } from '@pc/wallet';
 import accountItem from './accountItem.vue';
 
 export default {
@@ -40,7 +40,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "../start.scss";
+@use "../start.scss";
 
 .account-list-wrapper {
     position: absolute;
@@ -49,8 +49,7 @@ export default {
     background: #fff;
 
     .list-wrapper {
-        border-top: 1px solid #d4dee7;
-        border-bottom: 1px solid #d4dee7;
+        border-bottom: 1px solid #ccc;
         max-height: 180px;
         overflow: auto;
     }

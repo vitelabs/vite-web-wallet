@@ -1,7 +1,8 @@
+import { Buffer } from 'buffer';
 import { utils } from '@vite/vitejs';
-import { CrosschainGate } from 'pcServices/apiServer';
-import sendTx from 'pcUtils/sendTx';
-import { addrSpace } from 'pcUtils/storageSpace';
+import { CrosschainGate } from '@pc/services/apiServer';
+import sendTx from '@pc/utils/sendTx';
+import { addrSpace } from '@pc/utils/storageSpace';
 
 const STORAGEKEY = 'INDEX_COLLECT_TOKEN';
 

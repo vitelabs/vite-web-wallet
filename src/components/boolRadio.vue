@@ -39,6 +39,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@use "@assets/scss/theme.scss" as *;
 .radio-wrapper {
     line-height: 32px;
 }

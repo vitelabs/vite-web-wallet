@@ -2,28 +2,37 @@
     <div class="depth-wrapper">
         <div class="bar">
             <div class="btn active __pointer">{{ $t('trade.depthView') }}</div>
-            <div @click="toogleDepth" class="btn __pointer">{{ $t('trade.klineView') }}</div>
+            <div @click="toggleDepth" class="btn __pointer">{{ $t('trade.klineView') }}</div>
         </div>
-        <e-charts class="e-charts-wrapper" auto-resize :options="deptChartOption"></e-charts>
+        <v-chart class="e-charts-wrapper" auto-resize :option="deptChartOption"></v-chart>
     </div>
 </template>
 
 <script>
-import ECharts from 'vue-echarts';
-import BigNumber from 'utils/bigNumber.js';
+import BigNumber from '@utils/bigNumber.js';
+import { use as echartsUse } from 'echarts/core';
+import { CanvasRenderer } from 'echarts/renderers';
+import { LineChart } from 'echarts/charts';
+import {
+    TooltipComponent,
+    GridComponent,
+} from 'echarts/components';
+import VChart from "vue-echarts";
 
-require('echarts/lib/chart/line');
-require('echarts/lib/component/tooltip');
-require('echarts/lib/component/legendScroll');
+echartsUse(
+    [TooltipComponent, GridComponent, LineChart, CanvasRenderer]
+);
 
 export default {
-    components: { ECharts },
+    components: {
+        VChart
+    },
     props: {
         showView: {
             type: String,
             default: 'kline'
         },
-        toogleDepth: {
+        toggleDepth: {
             type: Function,
             default: () => {}
         }
@@ -166,15 +175,15 @@ export default {
                     name: this.$t('trade.quantityTable'),
                     type: 'line',
                     data: this.buyQuantityList,
-                    itemStyle: { normal: { color: '#4cc453' } },
-                    lineStyle: { normal: { color: '#00D764' } },
+                    itemStyle: { color: '#4cc453' },
+                    lineStyle: { color: '#00D764' },
                     areaStyle: { color: '#00D764' }
                 }, {
                     name: this.$t('trade.quantityTable'),
                     type: 'line',
                     data: this.sellQuantityList,
-                    itemStyle: { normal: { color: '#e94c4c' } },
-                    lineStyle: { normal: { color: '#ED5158' } },
+                    itemStyle: { color: '#e94c4c' },
+                    lineStyle: { color: '#ED5158' },
                     areaStyle: { color: '#ED5158' }
                 } ]
             };
@@ -199,6 +208,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@use "@assets/scss/theme.scss" as *;
 .depth-wrapper {
     display: flex;
     flex-direction: column;

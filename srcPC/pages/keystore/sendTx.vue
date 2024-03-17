@@ -11,7 +11,7 @@
 
 <script>
 import { wallet, accountBlock as accountBlockUtils } from '@vite/vitejs';
-import { viteClient } from 'services/apiServer';
+import { viteClient } from '@services/apiServer';
 
 export default {
     props: {
@@ -90,7 +90,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "./common.scss";
+@use "./common.scss";
 .__btn_input {
     margin-top: 20px;
 }

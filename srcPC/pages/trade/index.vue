@@ -9,7 +9,7 @@
 </template>
 
 <script>
-import pageLayout from 'pcComponents/pageLayout/index';
+import pageLayout from '@pc/components/pageLayout/index.vue';
 
 export default {
     components: { pageLayout },

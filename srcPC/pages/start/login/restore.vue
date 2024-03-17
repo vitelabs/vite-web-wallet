@@ -1,24 +1,30 @@
 <template>
-    <div>
-        <div class="wrapper">
-            <textarea class="" v-model="mnemonic" :class="{
-                'center': !mnemonic
-            }" :placeholder="$t('mnemonic.placeholder')"></textarea>
-            <span v-show="errMsg" class="msg __err_msg" >
-                {{ errMsg === 'mnemonic.empty' || errMsg === 'mnemonic.error' || errMsg === 'hint.nodeErr' ? $t(errMsg) : errMsg }}
-            </span>
+    <div class="box">
+        <div class="box-content">
+            <div class="wrapper">
+                <textarea rows="3" v-model="mnemonic" :class="{
+                    'center': !mnemonic
+                }" :placeholder="$t('mnemonic.placeholder')"></textarea>
+                <span v-show="errMsg" class="msg __err_msg" >
+                    {{ errMsg === 'mnemonic.empty' || errMsg === 'mnemonic.error' || errMsg === 'hint.nodeErr' ? $t(errMsg) : errMsg }}
+                </span>
+            </div>
+
+            <create ref="createDom" :submit="validMnemonic"></create>
+
         </div>
-
-        <create ref="createDom" :submit="validMnemonic"></create>
-
-        <div v-if="!isTestnet" class="note">{{ $t('mnemonic.hint') }}</div>
-        <div v-if="isTestnet" class="note-warning">{{ 'In theory, you could use any existing Vite wallet you already control. But out of caution let’s set up a new wallet for testnet.'  }}</div>
-
-        <div class="__btn_list">
-            <span class="__btn __btn_border __pointer" @click="leftClick" >{{ $t(leftTxt) }}</span>
-            <div class="__btn __btn_all_in __pointer" @click="valid">
-                <span v-show="!isLoading">{{ $t('create.finish') }}</span>
-                <loading v-show="isLoading" loadingType="dot"></loading>
+        
+        <div class="box-footer">
+            <div class="tips">
+                <div v-if="!isTestnet" class="note">{{ $t('mnemonic.hint') }}</div>
+                <div v-if="isTestnet" class="note-warning">{{ 'In theory, you could use any existing Vite wallet you already control. But out of caution let’s set up a new wallet for testnet.'  }}</div>
+            </div>
+            <div class="actions">
+                <span class="btn active __pointer" @click="leftClick" >{{ $t(leftTxt) }}</span>
+                <div class="btn active __pointer" @click="valid">
+                    <span v-show="!isLoading">{{ $t('create.finish') }}</span>
+                    <loading v-show="isLoading" loadingType="dot"></loading>
+                </div>
             </div>
         </div>
     </div>
@@ -26,9 +32,9 @@
 
 <script>
 import { wallet } from '@vite/vitejs';
-import { getAccountBalance } from 'services/viteServer';
-import loading from 'components/loading.vue';
-import { saveHDAccount } from 'wallet';
+import { getAccountBalance } from '@services/viteServer';
+import loading from '@components/loading.vue';
+import { saveHDAccount } from '@pc/wallet';
 import create from './create.vue';
 
 export default {
@@ -61,7 +67,7 @@ export default {
     },
     computed: {
         isTestnet() {
-            return process.env.VITE_NET !== 'mainnet';
+            return import.meta.env.VITE_NETWORK == 'testnet';
         }
     },
     methods: {
@@ -116,10 +122,10 @@ export default {
 
                 this.isLoading = false;
                 this.finishCb && this.finishCb(id);
-                this.$router.push({
-                    name: 'startLogin',
-                    params: { id }
-                });
+                // this.$router.push({
+                //     name: 'startLogin',
+                //     params: { id }
+                // });
             }).catch(err => {
                 console.warn(err);
                 this.isLoading = false;
@@ -131,7 +137,6 @@ export default {
             let addrs;
             try {
                 const myWallet = wallet.getWallet(mnemonic);
-                console.log(myWallet);
                 addrs = myWallet.deriveAddressList(0, num - 1);
             } catch (err) {
                 console.warn(err);
@@ -164,67 +169,31 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "../start.scss";
+@use "@assets/scss/theme.scss" as *;
+@use "../start.scss";
 
 .wrapper {
     box-sizing: border-box;
-    position: relative;
-    background: #fff;
-    border-radius: 3px;
-    text-align: center;
+    border: 1px solid #ccc;
+    border-radius: 5px;
     font-size: 14px;
-    color: #1d2024;
-    box-sizing: border-box;
-    position: relative;
-    padding: 20px;
-    height: 100px;
-    color: rgba(94, 104, 117, 0.3);
-    margin-bottom: 20px;
-
+    padding: 16px;
     textarea {
         width: 100%;
         height: 100%;
         resize: none;
-        text-align: left;
-        word-wrap: break-word;
-        font-size: 14px;
-
-        &.center {
-            text-align: center;
-            line-height: 60px;
-        }
-    }
-
-    .msg {
-        position: absolute;
-        left: 0;
-        bottom: 0;
     }
 }
 
 .note {
     font-size: 14px;
-    [data-theme="0"] & {
-        color: #fff;
-    }
-    [data-theme="1"] & {
-        color: rgba(255,255,255, 0.8);
-    }
-    text-align: left;
     line-height: 20px;
-    margin: 30px 0;
+    color: #00BEFF;
 }
 .note-warning {
     font-size: 14px;
     font-weight: bold;
-    [data-theme="0"] & {
-        color: #fff;
-    }
-    [data-theme="1"] & {
-        color: rgba(255,255,255, 0.8);
-    }
-    text-align: left;
     line-height: 20px;
-    margin: 30px 0;
+    color: #00BEFF;
 }
 </style>

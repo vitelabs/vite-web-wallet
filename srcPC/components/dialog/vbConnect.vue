@@ -1,5 +1,5 @@
 <template lang="pug">
-extends /components/dialog/base.pug
+extends ../../../src/components/dialog/base.pug
 block head
     .head {{$t('assets.vb.connect.tips')}}
 block content
@@ -7,10 +7,10 @@ block content
 </template>
 
 <script>
-import { initVB } from 'wallet/vb';
-import { getCurrHDAcc } from 'wallet';
-import qrcode from 'components/qrcode';
-import icon from 'assets/imgs/start_qrcode_icon.svg';
+import { initVB } from '@pc/wallet/vb';
+import { getCurrHDAcc } from '@pc/wallet';
+import qrcode from '@components/qrcode.vue';
+import icon from '@assets/imgs/start_qrcode_icon.svg';
 
 export default {
     components: { qrcode },
@@ -48,7 +48,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "~assets/scss/vars.scss";
+@use "@assets/scss/theme.scss" as *;
 .head {
     box-sizing: border-box;
     padding: 20px;

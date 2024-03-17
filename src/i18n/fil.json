@@ -852,7 +852,7 @@
             "verifyAddress": "Patunayan ang address",
             "closeAlert": "Kanselahin",
             "start": {
-                "title": "Mga suportadong Wallet: Ledger Nano S / Ledger Nano X",
+                "title": "Mga suportadong Wallet: Ledger Nano S\nLedger Nano X",
                 "connectError": "Mga Isyu sa Koneksyon?",
                 "introduction": "Pag-install ng App at Mga Tagubilin sa Gumagamit",
                 "introductionUrl": "https://docs.vite.org/vite-docs/tutorial/ledger-install.html",
@@ -900,6 +900,14 @@
                 "userCancel": "Nakansela ang transaksyon sa Ledger",
                 "userCancelByWeb": "Kinansela mo ang transaksyon sa Vite wallet. Sa kasong ito, ang transaksyon ay naiwan at hindi dumaan sa blockchain kahit na nakumpirma ito sa iyong Ledger device."
             }
+        },
+        "vitePassport": {
+            "title": "VitePassport",
+            "subtitle": "Ang VitePassport ay ang MetaMask ng VITE chain",
+            "help": "Mga Isyu sa Koneksyon",
+            "helpLink": "https://t.me/vite_ph",
+            "connect": "Kumonekta",
+            "notDetected": "Hindi ma-detect ang VitePassport. Mangyaring suriin kung naka-install at na-enable ito."
         },
         "invite": {
             "inviteTitle": "Mag-imbita ng mga kaibigan",

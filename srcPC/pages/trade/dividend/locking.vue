@@ -39,16 +39,16 @@
 </template>
 
 <script>
-import { doUntill } from 'utils/asyncFlow';
-import bigNumber from 'utils/bigNumber';
-import Checkbox from 'uiKit/checkbox';
-import tooltips from 'components/tooltips';
-import { getIsAutoLockMinedVx } from 'services/viteServer';
-import { execWithValid } from 'pcUtils/execWithValid';
-import sendTx from 'pcUtils/sendTx';
-import { initPwd } from 'pcComponents/password/index.js';
-import vxConfirm from './vxConfirm';
-import vxUnlockingConfirm from './vxUnlockingConfirm';
+import { doUntill } from '@utils/asyncFlow';
+import bigNumber from '@utils/bigNumber';
+import Checkbox from '@uiKit/checkbox.vue';
+import tooltips from '@components/tooltips.vue';
+import { getIsAutoLockMinedVx } from '@services/viteServer';
+import { execWithValid } from '@pc/utils/execWithValid';
+import sendTx from '@pc/utils/sendTx';
+import { initPwd } from '@pc/components/password/index.js';
+import vxConfirm from './vxConfirm.vue';
+import vxUnlockingConfirm from './vxUnlockingConfirm.vue';
 
 export default {
     components: { Checkbox, tooltips, vxConfirm, vxUnlockingConfirm },
@@ -149,7 +149,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "../components/stakingDetail.scss";
+@use "@assets/scss/theme.scss" as *;
+@use "../components/stakingDetail.scss" as *;
 
 .staking-detail.locking {
     [data-theme="0"] & {

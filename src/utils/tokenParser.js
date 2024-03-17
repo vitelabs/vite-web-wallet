@@ -1,5 +1,5 @@
-import { defaultTokenMap } from 'utils/constant';
-import defaultTokenIcon from 'assets/imgs/default_token_icon.png';
+import { defaultTokenMap } from '@utils/constant';
+import defaultTokenIcon from '@assets/imgs/default_token_icon.png';
 
 const No_Index_Token = [ 'VITE', 'VCP', 'VX' ];
 

@@ -48,7 +48,7 @@
 </template>
 
 <script>
-import storage from 'pcUtils/store';
+import storage from '@pc/utils/store';
 
 const GuideKey = 'beginnerGuide';
 
@@ -99,7 +99,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "~assets/scss/vars.scss";
+@use "@assets/scss/theme.scss" as *;
 
 .beginner-guide {
     position: absolute;
@@ -118,11 +118,11 @@ export default {
     left: 80px;
     width: 1350px;
     height: 65px;
-    background: url('~assets/imgs/assets_guide_en.svg');
+    background: url("@assets/imgs/assets_guide_en.svg");
     background-size: 100% 100%;
 }
 .en .assets-back {
-    background: url('~assets/imgs/assets_guide_en.svg');
+    background: url("@assets/imgs/assets_guide_en.svg");
 }
 
 .item {
@@ -149,7 +149,7 @@ export default {
         float: right;
         width: 28px;
         height: 28px;
-        background: url('~assets/imgs/close.svg') no-repeat top right;
+        background: url("@assets/imgs/close.svg") no-repeat top right;
         background-size: 16px 16px;
         .tips {
             position: absolute;
@@ -214,7 +214,7 @@ export default {
             transform: translateX(-100%);
             width: 30px;
             height: 30px;
-            background: url('~assets/imgs/assets_gray.svg') center;
+            background: url("@assets/imgs/assets_gray.svg") center;
             background-size: 100% 100%;
         }
     }
@@ -253,7 +253,7 @@ export default {
     &:nth-child(4) {
         top: 250px;
         .icon {
-            background: url('~assets/imgs/wallet_default.svg') center;
+            background: url("@assets/imgs/wallet_default.svg") center;
         }
     }
 }

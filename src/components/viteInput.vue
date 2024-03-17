@@ -84,6 +84,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@use "@assets/scss/theme.scss" as *;
+
 .input-wrapper {
     display: flex;
     width: 100%;

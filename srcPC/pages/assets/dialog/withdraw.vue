@@ -1,5 +1,5 @@
 <template lang="pug">
-extends /components/dialog/base.pug
+extends ../../../../src/components/dialog/base.pug
 block head
     .head(v-if="multiNetwork && multiNetwork.length")
         div
@@ -39,17 +39,17 @@ block content
 </template>
 
 <script>
-import { verifyAddr, getWithdrawInfo, getWithdrawFee, withdraw, getMetaInfo } from 'pcServices/gate';
-import tips from 'pcComponents/tips';
+import { verifyAddr, getWithdrawInfo, getWithdrawFee, withdraw, getMetaInfo } from '@pc/services/gate';
+import tips from '@pc/components/tips.vue';
 import debounce from 'lodash/debounce';
-import { getValidBalance } from 'pcUtils/validations';
-import bigNumber from 'utils/bigNumber';
-import tooltips from 'components/tooltips';
-import { getTokenIcon } from 'utils/tokenParser';
-import { execWithValid } from 'pcUtils/execWithValid';
-import viteInput from 'components/viteInput';
-import selectNetwork from './selectNetwork';
-import loading from 'components/loading';
+import { getValidBalance } from '@pc/utils/validations';
+import bigNumber from '@utils/bigNumber';
+import tooltips from '@components/tooltips.vue';
+import { getTokenIcon } from '@utils/tokenParser';
+import { execWithValid } from '@pc/utils/execWithValid';
+import viteInput from '@components/viteInput.vue';
+import selectNetwork from './selectNetwork.vue';
+import loading from '@components/loading.vue';
 
 export default {
     components: { tooltips, viteInput, selectNetwork, loading, tips },
@@ -273,8 +273,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "~assets/scss/vars.scss";
-@import "pcComponents/confirm/confirmRow.scss";
+@use "@assets/scss/theme.scss" as *;
+@use "../../../components/confirm/confirmRow.scss";
 
 .__row {
     overflow: visible;
@@ -289,7 +289,7 @@ export default {
         background-repeat: no-repeat;
         position: relative;
         display: inline-block;
-        background: url(~assets/imgs/hover_help.svg);
+        background: url("@assets/imgs/hover_help.svg");
         overflow: visible;
         width: 16px;
         height: 16px;

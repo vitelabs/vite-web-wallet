@@ -7,7 +7,7 @@ import kline from './tradingView/kline';
 
 export default {
     props: {
-        toogleDepth: {
+        toggleDepth: {
             type: Function,
             default: () => {}
         }
@@ -81,7 +81,7 @@ export default {
             button.textContent = this.$t('trade.depthView');
             button.setAttribute('style', 'cursor: pointer;');
             button.addEventListener('click', () => {
-                this.toogleDepth();
+                this.toggleDepth();
             });
 
             const klineButton = this.tvKline.tvWidget.createButton({ align: 'right' })[0];

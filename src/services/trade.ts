@@ -1,4 +1,4 @@
-import { ViteXAPI, ViteXAPIV2 } from 'services/apiServer';
+import { ViteXAPI, ViteXAPIV2 } from '@services/apiServer';
 
 export const limit = function () {
     return ViteXAPI.request({

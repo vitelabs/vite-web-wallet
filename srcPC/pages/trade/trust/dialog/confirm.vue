@@ -1,5 +1,5 @@
 <template lang="pug">
-extends /components/dialog/base.pug
+extends ../../../../../src/components/dialog/base.pug
 block content
     div(v-if="isDeleteAll")
         i18n.strong(path='trade.proxy.dialog.cancelAllTips' tag="span")
@@ -54,8 +54,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "pcComponents/confirm/confirmRow.scss";
-@import "./confirm.scss";
+@use "@pc/components/confirm/confirmRow.scss";
+@use "./confirm.scss";
 
 .block__content {
     position: relative;

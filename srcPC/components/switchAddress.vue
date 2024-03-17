@@ -35,10 +35,10 @@
 </template>
 
 <script>
-import statistics from 'utils/statistics';
-import ellipsisAddr from 'utils/ellipsisAddr.js';
-import { StatusMap, getCurrHDAcc } from 'wallet';
-import { hwAddressSelectDialog } from 'pcComponents/dialog';
+import statistics from '@utils/statistics';
+import ellipsisAddr from '@utils/ellipsisAddr.js';
+import { StatusMap, getCurrHDAcc } from '@pc/wallet';
+import { hwAddressSelectDialog } from '@pc/components/dialog';
 
 export default {
     props: {
@@ -133,6 +133,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@use "@assets/scss/theme.scss" as *;
 .menu.switch-address-wrapper {
     .list-title {
         [data-theme='0'] & {

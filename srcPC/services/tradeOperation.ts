@@ -1,8 +1,8 @@
-import sendTx from 'pcUtils/sendTx';
-import signText from 'pcUtils/signText';
+import sendTx from '@pc/utils/sendTx';
+import signText from '@pc/utils/signText';
 import { constant } from '@vite/vitejs';
-import i18n from 'pcI18n';
-import { ViteXAPI, viteClient } from 'services/apiServer';
+import i18n from '@pc/i18n';
+import { ViteXAPI, viteClient } from '@services/apiServer';
 
 
 export function bindCode(code: number) {

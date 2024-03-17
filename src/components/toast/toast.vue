@@ -46,6 +46,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@use "@assets/scss/theme.scss" as *;
+
 .mint-toast {
     box-sizing: border-box;
     position: fixed;

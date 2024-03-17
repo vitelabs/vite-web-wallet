@@ -16,13 +16,13 @@
 import { constant } from '@vite/vitejs';
 const { Vite_TokenId } = constant;
 
-import quotaHead from './quotaHead';
-import myQuota from './myQuota';
-import pledgeTx from './pledgeTx';
-import list from './list';
-import viteInput from 'components/viteInput';
-import sendTx from 'pcUtils/sendTx';
-import { execWithValid } from 'pcUtils/execWithValid';
+import quotaHead from './quotaHead.vue';
+import myQuota from './myQuota.vue';
+import pledgeTx from './pledgeTx.vue';
+import list from './list.vue';
+import viteInput from '@components/viteInput.vue';
+import sendTx from '@pc/utils/sendTx';
+import { execWithValid } from '@pc/utils/execWithValid';
 
 
 export default {
@@ -57,7 +57,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "../form.scss";
+@use "../form.scss";
 
 .quota-wrapper {
     position: relative;

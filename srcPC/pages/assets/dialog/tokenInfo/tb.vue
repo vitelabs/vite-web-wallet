@@ -67,11 +67,11 @@
 <script>
 // [TODO] Need pcComponents/table
 
-import Pagination from 'pcComponents/pagination.vue';
-import { getDepositRecords, getWithdrawRecords } from 'pcServices/gate';
-import shortify from 'utils/ellipsisAddr';
-import b from 'utils/bigNumber';
-import openUrl from 'utils/openUrl';
+import Pagination from '@pc/components/pagination.vue';
+import { getDepositRecords, getWithdrawRecords } from '@pc/services/gate';
+import shortify from '@utils/ellipsisAddr';
+import b from '@utils/bigNumber';
+import openUrl from '@utils/openUrl';
 import d from 'dayjs';
 const pageSize = 10;
 
@@ -186,8 +186,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "~pcAssets/scss/table.scss";
-@import "~assets/scss/vars.scss";
+@use "@assets/scss/theme.scss" as *;
+@use "@pc/assets/scss/table.scss" as *;
 
 .click-able {
     cursor: pointer;

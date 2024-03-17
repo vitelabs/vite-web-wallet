@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import tooltips from 'components/tooltips';
+import tooltips from '@components/tooltips.vue';
 
 export default {
     components: { tooltips },
@@ -19,18 +19,18 @@ export default {
 </script>
 
 <style lang="scss" rel="stylesheet/scss" scoped>
-@import "assets/scss/vars.scss";
+@use "@assets/scss/theme.scss" as *;
 
 .tipsicon {
     margin-left: 3px;
     position: relative;
     display: inline-block;
     [data-theme="0"] & {
-        background: url(~assets/imgs/gray_hover_help.svg) center no-repeat;
+        background: url(@assets/imgs/gray_hover_help.svg) center no-repeat;
         background-size: 100% 100%;
     }
     [data-theme="1"] & {
-        background: url(~assets/theme1_imgs/gray_hover_help.png) center no-repeat;
+        background: url(@assets/theme1_imgs/gray_hover_help.png) center no-repeat;
         background-size: 100% 100%;
     }
     overflow: visible;
@@ -52,7 +52,7 @@ export default {
         [data-theme="0"] & {
             box-shadow: 0px 5px 20px 0px rgba(176,192,237,0.4);
         }
-        /deep/.trigle {
+        .trigle {
             [data-theme="0"] & {
                 border-bottom: 7px solid $white-color;
             }

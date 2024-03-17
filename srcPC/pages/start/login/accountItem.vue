@@ -23,12 +23,12 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "~assets/scss/vars.scss";
-@import "../start.scss";
+@use "@assets/scss/theme.scss" as *;
+@use "../start.scss";
 
 .__btn_input_active {
-    border: 1px solid #d4dee7;
-    border-top: none;
+    border: 1px solid #ccc;
+    border-radius: 5px;
     padding: 10px 40px 8px 20px;
     text-align: left;
     background: #fff;
@@ -45,7 +45,7 @@ export default {
 
     .address {
         font-family: $font-normal-b;
-        font-size: 12px;
+        font-size: 14px;
         line-height: 20px;
         color: #333;
     }

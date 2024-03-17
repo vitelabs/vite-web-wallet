@@ -1,56 +1,55 @@
 {
-    "include": [
-        "./src/**/*", "./srcPC/**/*", "./srcH5/**/*", "./typings/*"
-    ],
-    "compilerOptions": {
-        "baseUrl": "./",
-        "module": "commonjs",
-        "target": "es5",
-        "lib": ["es2017", "dom"],
-        "strict": false,
-        "allowJs": true,
-        // "checkJs": true,
-        // "composite": true,
-        // "declaration": true,
-        // "declarationMap": true,
-        "sourceMap": true,
-        "moduleResolution": "node",
-        "allowSyntheticDefaultImports": true,
-        "esModuleInterop": true,
-        "forceConsistentCasingInFileNames": true,
-        "downlevelIteration": true,
-        "noImplicitReturns": true,
-        "noImplicitThis": true,
-        "noImplicitAny": false,
-        "preserveSymlinks": true,
-        "importHelpers": true,
-        "strictNullChecks": true,
-        "suppressImplicitAnyIndexErrors": true,
-        "noUnusedLocals": true,
-        "paths": {
-            "*": [ "./src/*" ],
-            "h5Pages/*": ["./srcH5/pages/*"],
-            "h5Router/*": ["./srcH5/pagrouteres/*"],
-            "h5Components/*": ["./srcH5/components/*"],
-            "h5Assets/*": ["./srcH5/assets/*"],
-            "h5Store": ["./srcH5/store/index"],
-            "h5Store/*": ["./srcH5/store/*"],
-            "h5Services/*": ["./srcH5/services/*"],
-            "h5Utils/*": ["./srcH5/utils/*"],
-            "h5I18n/*": ["./srcH5/i18n/*"],
-            "pcPages/*": ["./srcPC/pages/*"],
-            "pcRouter/*": ["./srcPC/pagrouteres/*"],
-            "pcComponents/*": ["./srcPC/components/*"],
-            "pcAssets/*": ["./srcPC/assets/*"],
-            "pcStore/*": ["./srcPC/store/*"],
-            "pcServices/*": ["./srcPC/services/*"],
-            "pcUtils/*": ["./srcPC/utils/*"],
-            "pcI18n": ["./srcPC/i18n/index"],
-            "pcI18n/*": ["./srcPC/i18n/*"],
-            "wallet/*": ["./srcPC/wallet/*"],
-            "wallet": ["./srcPC/wallet/index"],
-            "typings/*": ["./typings/*"]
-        },
-        "typeRoots": ["./typings/*", "@types"]
+  "compilerOptions": {
+    "target": "ES2020",
+    "useDefineForClassFields": true,
+    "module": "ESNext",
+    "lib": ["ES2020", "DOM", "DOM.Iterable", "WebWorker"],
+    "skipLibCheck": true,
+
+    /* Bundler mode */
+    "moduleResolution": "bundler",
+    "allowImportingTsExtensions": true,
+    "allowJs": true,
+    "checkJs": false,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true,
+    "jsx": "preserve",
+
+    /* Linting */
+    "strict": false,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noFallthroughCasesInSwitch": true,
+    "types": ["node", "vite/client", "./global.d.ts"],
+
+    /* Aliases */
+    "baseUrl": "./",
+    "paths": {
+      "@/*": ["src/*"],
+      "@assets/*": ["src/assets/*"],
+      "@components/*": ["src/components/*"],
+      "@i18n/*": ["src/i18n/*"],
+      "@mixins/*": ["src/mixins/*"],
+      "@plugins/*": ["src/plugins/*"],
+      "@services/*": ["src/services/*"],
+      "@store/*": ["src/store/*"],
+      "@uiKit/*": ["src/uiKit/*"],
+      "@utils/*": ["src/utils/*"],
+      "@h5/*": ["srcH5/*"],
+      "@pc/*": ["srcPC/*"]
     }
+  },
+
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.tsx",
+    "src/**/*.vue",
+    "srcPC/**/*.ts",
+    "srcPC/**/*.vue",
+    "srcH5/**/*.ts",
+    "srcH5/**/*.vue"
+  ],
+
+  "references": [{ "path": "./tsconfig.node.json" }]
 }

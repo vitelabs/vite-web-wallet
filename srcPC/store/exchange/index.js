@@ -1,4 +1,4 @@
-import commonStore from 'store/index';
+import commonStore from '@store/index';
 
 import market from './market';
 import latestTx from './latestTx';

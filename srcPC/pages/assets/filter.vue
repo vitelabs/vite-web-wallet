@@ -23,10 +23,10 @@
 
 <script>
 import debounce from 'lodash/debounce';
-import Search from 'components/search';
+import Search from '@components/search.vue';
 import { addTokenDialog } from './dialog';
-import Checkbox from 'uiKit/checkbox';
-import statistics from 'utils/statistics';
+import Checkbox from '@uiKit/checkbox.vue';
+import statistics from '@utils/statistics';
 
 export default {
     data() {
@@ -83,6 +83,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@use "@assets/scss/theme.scss" as *;
 .filter-root {
     display: flex;
     align-items: flex-end;

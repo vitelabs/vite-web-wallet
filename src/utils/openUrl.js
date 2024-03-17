@@ -1,4 +1,5 @@
-const urlLibs = require('url');
+// const urlLibs = require('url');
+import * as urlLibs from "url";
 
 const protocols = [ 'http:', 'https:' ];
 // const middlePage = 'https://middlejump.netlify.com/';

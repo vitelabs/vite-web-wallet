@@ -99,17 +99,17 @@
 
 <script>
 import { constant as viteConstant } from '@vite/vitejs';
-import date from 'utils/date.js';
-import { getAccountLink, getSBPLink } from 'utils/getLink';
-import BigNumber from 'utils/bigNumber';
-import sendTx from 'pcUtils/sendTx';
-import { constant } from 'pcUtils/store';
-import tooltips from 'components/tooltips';
-import walletTable from 'pcComponents/table/index.vue';
-import { initPwd } from 'pcComponents/password/index.js';
-import password from 'pcComponents/password/password.vue';
-import { execWithValid } from 'pcUtils/execWithValid';
-import { getSBPAvailableReward } from 'services/viteServer';
+import date from '@utils/date.js';
+import { getAccountLink, getSBPLink } from '@utils/getLink';
+import BigNumber from '@utils/bigNumber';
+import sendTx from '@pc/utils/sendTx';
+import { constant } from '@pc/utils/store';
+import tooltips from '@components/tooltips.vue';
+import walletTable from '@pc/components/table/index.vue';
+import { initPwd } from '@pc/components/password/index.js';
+import password from '@pc/components/password/password.vue';
+import { execWithValid } from '@pc/utils/execWithValid';
+import { getSBPAvailableReward } from '@services/viteServer';
 
 const Vite_Token_Info = viteConstant.Vite_Token_Info;
 const amount = 1000000;
@@ -372,7 +372,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "~assets/scss/vars.scss";
+@use "@assets/scss/theme.scss" as *;
 
 .tb-list {
     flex: 1;
@@ -397,14 +397,14 @@ export default {
     margin-bottom: -2px;
     width: 12px;
     height: 12px;
-    background: url('~assets/imgs/owner.png');
+    background: url("@assets/imgs/owner.png");
     background-size: 100% 100%;
 }
 
 .tipsicon {
     position: relative;
     display: inline-block;
-    background: url(~assets/imgs/hover_help.svg);
+    background: url("@assets/imgs/hover_help.svg");
     overflow: visible;
     width: 16px;
     height: 16px;

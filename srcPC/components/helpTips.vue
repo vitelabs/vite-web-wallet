@@ -28,6 +28,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@use "@assets/scss/theme.scss" as *;
 .help {
     position: relative;
     @include background_common_img("info.svg");

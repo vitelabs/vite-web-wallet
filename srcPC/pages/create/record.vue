@@ -5,7 +5,7 @@
 
         <div class="row">
             <span @click="change" class="change __pointer">{{ $t('mnemonic.change', { len }) }}</span>
-            <img @click="copy" class="copy __pointer" src="~assets/imgs/copy_white.svg"/>
+            <img @click="copy" class="copy __pointer" src="@assets/imgs/copy_white.svg"/>
         </div>
 
         <div class="wrapper">
@@ -29,10 +29,10 @@
 
 <script>
 import { wallet } from '@vite/vitejs';
-import { saveHDAccount } from 'wallet';
-import copy from 'components/copy';
-import loading from 'components/loading.vue';
-import process from './process';
+import { saveHDAccount } from '@pc/wallet';
+import copy from '@components/copy.vue';
+import loading from '@components/loading.vue';
+import process from './process.vue';
 
 export default {
     components: { process, copy, loading },
@@ -113,8 +113,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "~assets/scss/vars.scss";
-@import "./create.scss";
+@use "@assets/scss/theme.scss" as *;
+@use "./create.scss";
 
 .__btn.__btn_all_in.unuse {
     background: rgba(191,191,191,1);

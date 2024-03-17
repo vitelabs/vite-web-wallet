@@ -1,5 +1,5 @@
-import { timer } from 'utils/asyncFlow';
-import { rateToken } from 'services/trade';
+import { timer } from '@utils/asyncFlow';
+import { rateToken } from '@services/trade';
 
 const loopTime = 60 * 1000;
 let rateTimer = null;
