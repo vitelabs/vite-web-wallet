@@ -8,6 +8,7 @@ static
 .eslintcache
 .idea
 .vscode
+.wrangler
 viteJS
 .netlify
 .yarnrc
