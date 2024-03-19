@@ -40,7 +40,7 @@ const straightforwardPaths = [
 function mapRequestToAsset(request) {
   const url = new URL(request.url);
   for (let i = 0, len = straightforwardPaths.length; i < len; i++) {
-    if (url.pathname.startsWith(excludePaths[i])) {
+    if (url.pathname.startsWith(straightforwardPaths[i])) {
       return request;
     }
   }
