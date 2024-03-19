@@ -23,7 +23,8 @@
         "sass": "^1.71.1",
         "typescript": "^5.2.2",
         "vite": "^5.1.0",
-        "vite-plugin-node-polyfills": "^0.21.0"
+        "vite-plugin-node-polyfills": "^0.21.0",
+        "wrangler": "^3.34.2"
     },
     "dependencies": {
         "@cloudflare/kv-asset-handler": "^0.1.0",

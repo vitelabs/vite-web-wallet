@@ -41,7 +41,7 @@ class kline {
         const themeConfig = +this.theme === 0 ? theme0Config : theme1Config;
         const theme = +this.theme === 0 ? 'Light' : 'Dark';
 
-        this.tvWidget = new TradingView.widget({
+        this.tvWidget = new window.TradingView.widget({
             datafeed: this.datafeed,
             locale: this.locale,
             theme,

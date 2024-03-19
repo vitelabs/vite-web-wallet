@@ -2,7 +2,6 @@
     <div class="login-wrapper">
         <div class="switch-btn">
             <div
-                v-show="!isTestnet"
                 class="btn"
                 :class="{ active: tabName === 'vb' }"
                 @click="toggleTab('vb')"
@@ -11,7 +10,6 @@
                 {{ $t('assets.vb.title') }}
             </div>
             <div
-                v-show="!isTestnet"
                 v-if="!isDesktop"
                 class="btn __pointer"
                 :class="{ active: tabName === 'ledger' }"

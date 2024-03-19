@@ -3,6 +3,9 @@
         v-click-outside="hideList"
         @click="toggleList"
         class="switch-address-wrapper __pointer"
+        :class="{
+            'hide': address.length == 0,
+        }"
     >
         <span
             class="list-title"
@@ -135,6 +138,10 @@ export default {
 <style lang="scss" scoped>
 @use "@assets/scss/theme.scss" as *;
 .menu.switch-address-wrapper {
+    &.hide {
+        display: none;
+    }
+
     .list-title {
         [data-theme='0'] & {
             border: none;

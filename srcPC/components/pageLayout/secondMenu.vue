@@ -204,12 +204,9 @@ export default {
     .right-lab-list {
         display: flex;
         flex-wrap: nowrap;
+        column-gap: 20px;
         .tab {
-            &:last-child {
-                margin-left: 18px;
-            }
             position: relative;
-            margin-left: 28px;
             &.invite-switch{
                 .list-title{
                     padding: 0!important;
@@ -226,7 +223,6 @@ export default {
     .switch-tab {
         display: inline-block;
         width: auto;
-        margin-left: 20px;
     }
 
     .tab {

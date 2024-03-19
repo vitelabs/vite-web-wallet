@@ -18,9 +18,6 @@ export default {
         toggleDepth() {
             this.showView = this.showView === 'depth' ? 'kline' : 'depth';
         }
-    },
-    mounted() {
-        console.log('trade view init')
     }
 };
 </script>
