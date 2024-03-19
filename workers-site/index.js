@@ -34,17 +34,18 @@ function mapRequestCacheControl(request) {
 }
 
 const straightforwardPaths = [
-  '/charting_library/static/'
+    '/charting_library/static/'
 ]
 
 function mapRequestToAsset(request) {
-  const url = new URL(request.url);
-  for (let i = 0, len = straightforwardPaths.length; i < len; i++) {
-    if (url.pathname.startsWith(straightforwardPaths[i])) {
-      return request;
+    const url = new URL(request.url);
+
+    for (let i = 0, len = straightforwardPaths.length; i < len; i++) {
+        if (url.pathname.startsWith(straightforwardPaths[i])) {
+            return request;
+        }
     }
-  }
-  return serveSinglePageApp(request);
+    return serveSinglePageApp(request);
 }
 
 async function handleEvent(event) {

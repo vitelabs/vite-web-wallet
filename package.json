@@ -27,7 +27,7 @@
         "wrangler": "^3.34.2"
     },
     "dependencies": {
-        "@cloudflare/kv-asset-handler": "^0.1.0",
+        "@cloudflare/kv-asset-handler": "^0.3.1",
         "@fortawesome/fontawesome-svg-core": "^1.3.0",
         "@fortawesome/free-brands-svg-icons": "^5.14.0",
         "@fortawesome/free-solid-svg-icons": "^6.0.0",
