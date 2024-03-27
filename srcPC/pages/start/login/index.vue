@@ -1,6 +1,17 @@
 <template>
     <div class="login-wrapper">
-        <div class="switch-btn">
+        <div class="switch-btn"
+        :class="{
+            'has-five': isHaveList,
+        }">
+            <div
+                class="btn __pointer"
+                :class="{ active: tabName === 'vitePassport' }"
+                @click="toggleTab('vitePassport')"
+                :key="'vitePassport'"
+            >
+                {{ $t('assets.vitePassport.title') }}
+            </div>
             <div
                 class="btn"
                 :class="{ active: tabName === 'vb' }"
@@ -34,14 +45,6 @@
                 :key="'resotre'"
             >
                 {{ $t('restore') }}
-            </div>
-            <div
-                class="btn __pointer"
-                :class="{ active: tabName === 'vitePassport' }"
-                @click="toggleTab('vitePassport')"
-                :key="'vitePassport'"
-            >
-                {{ $t('assets.vitePassport.title') }}
             </div>
         </div>
 
@@ -152,12 +155,6 @@
                     <div class="box-footer">
                         <div class="tips"></div>
                         <div class="actions">
-                            <span
-                                class="btn active __pointer"
-                                @click="createAcc"
-                            >
-                                {{ $t('addAccount') }}
-                            </span>
                             <div class="btn active __pointer" @click="login">
                                 <span v-show="!isLoading">
                                     {{
@@ -168,6 +165,12 @@
                                 </span>
                                 <loading v-show="isLoading" loadingType="dot"></loading>
                             </div>
+                            <span
+                                class="btn active __pointer"
+                                @click="createAcc"
+                            >
+                                {{ $t('addAccount') }}
+                            </span>
                         </div>
                     </div>
                 </div>
@@ -240,7 +243,7 @@ export default {
             inputItem: '',
             isLoading: false,
             isShowAccountList: false,
-            tabName: TABNAME.vb,
+            tabName: TABNAME.vitePassport,
             qrcodeOpt: {
                 size: 240,
                 image: icon,
@@ -528,9 +531,14 @@ export default {
 
     .switch-btn {
         display: flex;
-        flex-flow: wrap;
-        row-gap: 20px;
+        flex-wrap: nowrap;
         justify-content: space-between;
+        &.has-five {
+            .btn {
+                padding-left: 20px;
+                padding-right: 20px;
+            }
+        }
     }
 
     .tab-content {

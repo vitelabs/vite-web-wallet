@@ -20,11 +20,11 @@
                 <div v-if="isTestnet" class="note-warning">{{ 'In theory, you could use any existing Vite wallet you already control. But out of caution let’s set up a new wallet for testnet.'  }}</div>
             </div>
             <div class="actions">
-                <span class="btn active __pointer" @click="leftClick" >{{ $t(leftTxt) }}</span>
                 <div class="btn active __pointer" @click="valid">
                     <span v-show="!isLoading">{{ $t('create.finish') }}</span>
                     <loading v-show="isLoading" loadingType="dot"></loading>
                 </div>
+                <span class="btn active __pointer" @click="leftClick" >{{ $t(leftTxt) }}</span>
             </div>
         </div>
     </div>
