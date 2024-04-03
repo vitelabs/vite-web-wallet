@@ -43,8 +43,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "~pcAssets/scss/list/setting.scss";
-@import "./setting.scss";
+@use "@pc/assets/scss/list/setting.scss" as *;
+@use "./setting.scss" as *;
 
 .describe {
     line-height: 16px;

@@ -1,10 +1,10 @@
-import { constant } from 'pcUtils/store';
+import { constant } from '@pc/utils/store';
 import { accountBlock as accountBlockUtils, accountBlock } from '@vite/vitejs';
-import { viteClient } from 'services/apiServer';
+import { viteClient } from '@services/apiServer';
 
 import { addHdAccount, setAcc, getAcc, setAccInfo, setLastAcc } from './store';
-import toast from 'components/toast/index.js';
-import i18n from 'pcI18n';
+import toast from '@components/toast/index.js';
+import i18n from '@pc/i18n';
 
 const Default_Lang = 'english';
 enum StatusMap {

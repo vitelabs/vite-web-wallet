@@ -4,12 +4,12 @@
 
 <script>
 import { qrcode, modes, ecLevel } from 'qrcode.es';
-import logo from 'assets/imgs/qrcode_addr.png';
+import logo from '@assets/imgs/qrcode_addr.png';
 
 const defaultOpt = {
     size: 300,
     ecLevel: ecLevel.HIGH,
-    minVersion: 4,
+    minVersion: 12,
     background: '#fff',
     mode: modes.DRAW_WITH_IMAGE_BOX,
     radius: 0,
@@ -55,10 +55,3 @@ export default {
     }
 };
 </script>
-
-<style lang="scss" scoped>
-.qrcode {
-    background: #fff;
-    padding: 10px;
-}
-</style>

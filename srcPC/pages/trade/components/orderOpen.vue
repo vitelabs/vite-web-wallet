@@ -3,7 +3,7 @@
 </template>
 
 <script>
-import { order } from 'services/trade';
+import { order } from '@services/trade';
 import openTable from './openTable.vue';
 
 const pageSize = 30;

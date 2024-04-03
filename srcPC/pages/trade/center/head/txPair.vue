@@ -48,8 +48,8 @@
 </template>
 
 <script>
-import confirm from 'pcComponents/confirm/confirm.vue';
-import BigNumber from 'utils/bigNumber';
+import confirm from '@pc/components/confirm/confirm.vue';
+import BigNumber from '@utils/bigNumber';
 
 export default {
     components: { confirm },
@@ -112,7 +112,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '../center.scss';
+@use "@assets/scss/theme.scss" as *;
+@use '../center.scss' as *;
 
 .tx-pair-wrapper {
     display: flex;

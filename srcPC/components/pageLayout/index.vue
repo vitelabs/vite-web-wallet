@@ -20,11 +20,11 @@
 </template>
 
 <script>
-import { StatusMap, getCurrHDAcc } from 'wallet';
-import sidebar from './sidebar';
-import secondMenu from './secondMenu';
+import { StatusMap, getCurrHDAcc } from '@pc/wallet';
+import sidebar from './sidebar.vue';
+import secondMenu from './secondMenu.vue';
 import { sidebarMenuList, secondMenuList } from './config';
-import guide from './guide';
+import guide from './guide.vue';
 
 let autoLogout = null;
 
@@ -134,6 +134,7 @@ export default {
 </style>
 
 <style lang="scss" scoped>
+@use "@assets/scss/theme.scss" as *;
 .dex .page-layout-wrapper .page-content {
     .page-scroll-wrapper .page-wrapper {
         height: calc(100% - 60px);

@@ -1,5 +1,5 @@
-import { timer } from 'utils/asyncFlow';
-import { getDexFundAddrOnroadInfo } from 'services/viteServer';
+import { timer } from '@utils/asyncFlow';
+import { getDexFundAddrOnroadInfo } from '@services/viteServer';
 
 const loopTime = 5 * 1000;
 let unreceivedTimer = null;

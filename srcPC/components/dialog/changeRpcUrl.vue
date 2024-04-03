@@ -1,5 +1,5 @@
 <template lang="pug">
-extends /components/dialog/base.pug
+extends ../../../src/components/dialog/base.pug
 block content
     div
         div(v-for="(node, index) in allRpcNodes" :key="node" class="__radio_item")
@@ -17,14 +17,14 @@ block content
 
 <script>
 import { mapGetters, mapState } from 'vuex';
-import { getProvider, setProvider } from 'services/apiServer';
-import { checkApi } from 'pcUtils/nodeApi';
+import { getProvider, setProvider } from '@services/apiServer';
+import { checkApi } from '@pc/utils/nodeApi';
 
 export default {
     data() {
         return {
             dShowClose: true,
-            selectedNode: getProvider().path || process.env.goViteServer,
+            selectedNode: getProvider().path || import.meta.env.VITE_SERVER,
             newNode: '',
             nodeStatusMap: {}
         };
@@ -92,9 +92,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '~assets/scss/vars.scss';
-@import 'pcAssets/scss/common.scss';
-@import 'pcComponents/confirm/confirmRow.scss';
+@use "@assets/scss/theme.scss" as *;
+@use '../../assets/scss/common.scss' as *;
+@use '../../components/confirm/confirmRow.scss' as *;
 
 .head {
     box-sizing: border-box;

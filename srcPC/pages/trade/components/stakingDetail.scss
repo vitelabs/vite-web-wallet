@@ -1,4 +1,4 @@
-@import "~assets/scss/vars.scss";
+@use "@assets/scss/theme.scss" as *;
 
 .staking-detail {
     @include background_common_img("mint_pledge_bg.png");
@@ -122,17 +122,17 @@
     height: 16px;
     margin-bottom: -4px;
     [data-theme="0"] & {
-        background: url("~assets/imgs/decend.svg") center no-repeat;
+        background: url("@assets/imgs/decend.svg") center no-repeat;
     }
     [data-theme="1"] & {
-        background: url("~assets/theme1_imgs/decend.svg") center no-repeat;
+        background: url("@assets/theme1_imgs/decend.svg") center no-repeat;
     }
     &.active {
         [data-theme="0"] & {
-            background: url("~assets/imgs/ascend.svg") center no-repeat;
+            background: url("@assets/imgs/ascend.svg") center no-repeat;
         }
         [data-theme="1"] & {
-            background: url("~assets/theme1_imgs/ascend.svg") center no-repeat;
+            background: url("@assets/theme1_imgs/ascend.svg") center no-repeat;
         }
     }
 }

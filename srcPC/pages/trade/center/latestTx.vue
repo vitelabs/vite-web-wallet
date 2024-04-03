@@ -31,9 +31,9 @@
 </template>
 
 <script>
-import date from 'utils/date';
-import BigNumber from 'utils/bigNumber';
-import loading from 'components/loading';
+import date from '@utils/date';
+import BigNumber from '@utils/bigNumber';
+import loading from '@components/loading.vue';
 
 export default {
     components: { loading },
@@ -79,7 +79,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import './center.scss';
+@use './center.scss';
 
 .ex-latest-tx-wrapper {
     position: relative;

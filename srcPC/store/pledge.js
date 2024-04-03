@@ -1,6 +1,6 @@
-import { getAccountQuota, getAccountPledgeList } from 'services/viteServer';
-import bigNumber from 'utils/bigNumber';
-import { timer } from 'utils/asyncFlow';
+import { getAccountQuota, getAccountPledgeList } from '@services/viteServer';
+import bigNumber from '@utils/bigNumber';
+import { timer } from '@utils/asyncFlow';
 
 const pageCount = 50;
 const quotaPerUT = 21000;
@@ -77,6 +77,7 @@ const actions = {
         lastFetchQuotaTime = fetchTime;
         lastAddress = address;
 
+        if (address.length === 0) return;
         return getAccountQuota(address).then(result => {
             if (
                 fetchTime !== lastFetchQuotaTime

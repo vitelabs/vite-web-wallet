@@ -18,7 +18,7 @@
 </template>
 
 <script>
-import statistics from 'utils/statistics';
+import statistics from '@utils/statistics';
 import openOrder from '../components/orderOpen.vue';
 import historyOrder from '../components/orderHistory.vue';
 
@@ -42,7 +42,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "./center.scss";
+@use "@assets/scss/theme.scss" as *;
+@use "./center.scss";
 
 .order {
     display: flex;

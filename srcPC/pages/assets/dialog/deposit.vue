@@ -1,5 +1,5 @@
 <template lang="pug">
-extends /components/dialog/base.pug
+extends ../../../../src/components/dialog/base.pug
 block head
     .head
         .__hint.no_top
@@ -19,7 +19,7 @@ block head
 block content
     .__row
         span.__row_t {{$t('tokenCard.charge.addressTitle')}}
-        img.copy.__pointer(v-show="!isLoading" src="~assets/imgs/copy_default.svg" @click="copy")
+        img.copy.__pointer(v-show="!isLoading" src="@assets/imgs/copy_default.svg" @click="copy")
     div.ex-center-loading(v-show="isLoading")
         loading(loadingType="dot")
     div(v-if="!isLoading" :key="selectedNetwork")
@@ -29,21 +29,21 @@ block content
         .__row(v-if="showLabel")
             span.__row_t {{labelName}}
                 span.red {{ $t('tokenCard.charge.labelTips',{labelName}) }}
-            img.copy.__pointer(src="~assets/imgs/copy_default.svg" @click="copyLabel")
+            img.copy.__pointer(src="@assets/imgs/copy_default.svg" @click="copyLabel")
         .__input_row.__unuse_input.top(v-if="showLabel") {{ labelValue }}
         .qrcode-container(v-if="showLabel") {{ $t('tokenCard.charge.labelCodeTips',{labelName}) }}
             qrcode(:text="labelValue" :options="qrOptions" class="qrcode-container__content")
 </template>
 
 <script>
-import loading from 'components/loading';
-import qrcode from 'components/qrcode';
-import tips from 'pcComponents/tips';
-import copy from 'utils/copy';
-import selectNetwork from './selectNetwork';
+import loading from '@components/loading.vue';
+import qrcode from '@components/qrcode.vue';
+import tips from '@pc/components/tips.vue';
+import copy from '@utils/copy';
+import selectNetwork from './selectNetwork.vue';
 import { modes } from 'qrcode.es';
-import { getDepositInfo, getMetaInfo } from 'pcServices/gate';
-import bigNumber from 'utils/bigNumber';
+import { getDepositInfo, getMetaInfo } from '@pc/services/gate';
+import bigNumber from '@utils/bigNumber';
 
 export default {
     components: { qrcode, loading, selectNetwork, tips },
@@ -169,8 +169,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "~assets/scss/vars.scss";
-@import "pcComponents/confirm/confirmRow.scss";
+@use "@assets/scss/theme.scss" as *;
+@use "../../../components/confirm/confirmRow.scss" as *;
 
 .strong{
     // color: $blue-color-1;

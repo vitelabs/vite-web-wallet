@@ -46,20 +46,20 @@
 
 <script>
 import { constant } from '@vite/vitejs';
-import tooltips from 'components/tooltips';
-import search from 'components/search';
-import secTitle from 'pcComponents/secTitle';
-import loading from 'components/loading';
-import walletTable from 'pcComponents/table/index.vue';
-import { initPwd } from 'pcComponents/password/index.js';
-import { timer } from 'utils/asyncFlow';
-import BigNumber from 'utils/bigNumber';
-import sendTx from 'pcUtils/sendTx';
-import { execWithValid } from 'pcUtils/execWithValid';
-import openUrl from 'utils/openUrl';
-import statistics from 'utils/statistics';
-import { getAccountLink, getSBPLink } from 'utils/getLink';
-import { getCurrSBPNodeList, getVoteInfo } from 'services/viteServer';
+import tooltips from '@components/tooltips.vue';
+import search from '@components/search.vue';
+import secTitle from '@pc/components/secTitle.vue';
+import loading from '@components/loading.vue';
+import walletTable from '@pc/components/table/index.vue';
+import { initPwd } from '@pc/components/password/index.js';
+import { timer } from '@utils/asyncFlow';
+import BigNumber from '@utils/bigNumber';
+import sendTx from '@pc/utils/sendTx';
+import { execWithValid } from '@pc/utils/execWithValid';
+import openUrl from '@utils/openUrl';
+import statistics from '@utils/statistics';
+import { getAccountLink, getSBPLink } from '@utils/getLink';
+import { getCurrSBPNodeList, getVoteInfo } from '@services/viteServer';
 
 const Vite_Token_Info = constant.Vite_Token_Info;
 
@@ -364,7 +364,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "~pcAssets/scss/common.scss";
+@use "@assets/scss/theme.scss" as *;
+@use "@pc/assets/scss/common.scss" as *;
 
 @include secondTitle();
 

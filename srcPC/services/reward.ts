@@ -1,4 +1,4 @@
-import { RewardAPI } from 'services/apiServer';
+import { RewardAPI } from '@services/apiServer';
 
 export function getRewardPledgeFullStat({ address }) {
     return RewardAPI.request({

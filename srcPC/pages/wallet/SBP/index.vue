@@ -40,17 +40,17 @@
 
 <script>
 import { wallet } from '@vite/vitejs';
-import secTitle from 'pcComponents/secTitle';
-import loading from 'components/loading';
-import confirm from 'pcComponents/confirm/confirm.vue';
-import viteInput from 'components/viteInput';
-import { initPwd } from 'pcComponents/password/index.js';
-import { execWithValid } from 'pcUtils/execWithValid';
-import sendTx from 'pcUtils/sendTx';
-import register from './register';
-import list from './list';
-import tabs from 'pcComponents/tabs/tabs';
-import tab from 'pcComponents/tabs/tab';
+import secTitle from '@pc/components/secTitle.vue';
+import loading from '@components/loading.vue';
+import confirm from '@pc/components/confirm/confirm.vue';
+import viteInput from '@components/viteInput.vue';
+import { initPwd } from '@pc/components/password/index.js';
+import { execWithValid } from '@pc/utils/execWithValid';
+import sendTx from '@pc/utils/sendTx';
+import register from './register.vue';
+import list from './list.vue';
+import tabs from '@pc/components/tabs/tabs.vue';
+import tab from '@pc/components/tabs/tab.vue';
 
 export default {
     components: { secTitle, register, list, loading, confirm, viteInput, tabs, tab },
@@ -241,7 +241,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "~pcAssets/scss/common.scss";
+@use "@assets/scss/theme.scss" as *;
+@use "@pc/assets/scss/common.scss" as *;
 
 @include secondTitle();
 

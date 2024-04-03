@@ -37,10 +37,10 @@
 
 <script>
 import d from 'dayjs';
-import sendTx from 'pcUtils/sendTx';
-import statistics from 'utils/statistics';
-import { execWithValid } from 'pcUtils/execWithValid';
-import { initPwd } from 'pcComponents/password/index.js';
+import sendTx from '@pc/utils/sendTx';
+import statistics from '@utils/statistics';
+import { execWithValid } from '@pc/utils/execWithValid';
+import { initPwd } from '@pc/components/password/index.js';
 
 export default {
     props: {
@@ -120,7 +120,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '~pcAssets/scss/table.scss';
+@use '../../../assets/scss/table.scss' as *;
 
 .__tb {
     flex: 1;

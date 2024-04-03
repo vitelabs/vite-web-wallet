@@ -1,5 +1,5 @@
-import BigNumber from 'utils/bigNumber';
-import { getAccountTxList } from 'services/viteServer';
+import BigNumber from '@utils/bigNumber';
+import { getAccountTxList } from '@services/viteServer';
 
 const pageCount = 50;
 let lastFetchTime = null;

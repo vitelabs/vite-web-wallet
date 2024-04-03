@@ -37,12 +37,12 @@
 </template>
 
 <script>
-import { getOrderMining, getOrderMiningDetails, getOrderMiningEstimate } from 'services/trade';
-import walletTable from 'pcComponents/table/index.vue';
-import pagination from 'pcComponents/pagination.vue';
-import loading from 'components/loading';
-import bigNumber from 'utils/bigNumber';
-import date from 'utils/date';
+import { getOrderMining, getOrderMiningDetails, getOrderMiningEstimate } from '@services/trade';
+import walletTable from '@pc/components/table/index.vue';
+import pagination from '@pc/components/pagination.vue';
+import loading from '@components/loading.vue';
+import bigNumber from '@utils/bigNumber';
+import date from '@utils/date';
 
 export default {
     components: { walletTable, pagination, loading },
@@ -190,8 +190,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "~assets/scss/vars.scss";
-@import "../components/stakingDetail.scss";
+@use "@assets/scss/theme.scss" as *;
+@use "../components/stakingDetail.scss";
 
 .detail-wrapper {
     position: relative;
@@ -202,7 +202,7 @@ export default {
     [data-theme="1"] & {
         background: rgba(1,8,31,0.25);
     }
-    /deep/ .ex-center-loading .dot {
+    .ex-center-loading .dot {
         position: absolute;
     }
     .err-msg {

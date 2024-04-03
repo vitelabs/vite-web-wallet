@@ -1,7 +1,7 @@
-import { timer } from 'utils/asyncFlow';
-import BigNumber from 'utils/bigNumber';
-import { getAccountDexBalance } from 'services/viteServer';
-import { VX_TOKENID, VITE_TOKENID } from 'utils/constant';
+import { timer } from '@utils/asyncFlow';
+import BigNumber from '@utils/bigNumber';
+import { getAccountDexBalance } from '@services/viteServer';
+import { VX_TOKENID, VITE_TOKENID } from '@utils/constant';
 
 const loopTime = 2 * 1000;
 let balanceTimer = null;

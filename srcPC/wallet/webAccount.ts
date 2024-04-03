@@ -1,12 +1,11 @@
-import viteCrypto from 'testwebworker';
 import {
     keystore,
     wallet,
     accountBlock as accountBlockUtils
 } from '@vite/vitejs';
 
-import statistics from 'utils/statistics';
-import { viteClient } from 'services/apiServer';
+import statistics from '@utils/statistics';
+import { viteClient } from '@services/apiServer';
 
 import {
     getAddr,
@@ -126,9 +125,7 @@ export class WebAccount {
 
     async unlock(pass) {
         const before = new Date().getTime();
-        const entropy: any = await keystore.decrypt(JSON.stringify(this.keystore),
-            pass,
-            viteCrypto);
+        const entropy: any = await keystore.decrypt(JSON.stringify(this.keystore), pass, null);
         const after = new Date().getTime();
 
         statistics.event('mnemonic-decrypt',

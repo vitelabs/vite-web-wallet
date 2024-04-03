@@ -1,4 +1,4 @@
-import statistics from 'utils/statistics';
+import statistics from '@utils/statistics';
 
 function recordPerformance() {
     try {

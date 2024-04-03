@@ -39,11 +39,11 @@
 </template>
 
 <script>
-import confirm from 'pcComponents/confirm/confirm.vue';
-import viteInput from 'components/viteInput';
-import bigNumber from 'utils/bigNumber';
-import { verifyAmount } from 'pcUtils/validations';
-import sendTx from 'pcUtils/sendTx';
+import confirm from '@pc/components/confirm/confirm.vue';
+import viteInput from '@components/viteInput.vue';
+import bigNumber from '@utils/bigNumber';
+import { verifyAmount } from '@pc/utils/validations';
+import sendTx from '@pc/utils/sendTx';
 
 export default {
     components: { confirm, viteInput },
@@ -198,8 +198,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "~assets/scss/vars.scss";
-@import "pcComponents/confirm/confirmRow.scss";
+@use "@assets/scss/theme.scss" as *;
+@use "../../../components/confirm/confirmRow.scss" as *;
 
 .transfer-head {
     display: flex;
@@ -216,7 +216,7 @@ export default {
             width: 4px;
             height: 40px;
             margin: 5px 1px;
-            background: url('~assets/imgs/transfer-points.svg');
+            background: url("@assets/imgs/transfer-points.svg");
             background-size: 4px 40px;
         }
         &::before, &::after {
@@ -257,7 +257,7 @@ export default {
     .switch {
         width: 40px;
         height: 40px;
-        background: url('~assets/imgs/switch.svg');
+        background: url("@assets/imgs/switch.svg");
         background-size: 40px 40px;
         margin-left: 72px;
     }

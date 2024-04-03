@@ -1,4 +1,4 @@
-import { storage, constant } from 'pcUtils/store';
+import { storage, constant } from '@pc/utils/store';
 
 const { getItem, setItem } = storage;
 const {

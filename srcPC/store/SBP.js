@@ -1,6 +1,6 @@
-import { timer } from 'utils/asyncFlow';
-import BigNumber from 'utils/bigNumber';
-import { getAccountSBPList } from 'services/viteServer';
+import { timer } from '@utils/asyncFlow';
+import BigNumber from '@utils/bigNumber';
+import { getAccountSBPList } from '@services/viteServer';
 
 const loopTime = 5000;
 let regListInst = null;

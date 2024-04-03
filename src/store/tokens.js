@@ -1,4 +1,4 @@
-import { operatorTradepair } from 'services/trade';
+import { operatorTradepair } from '@services/trade';
 
 const state = {
     ttoken: null,

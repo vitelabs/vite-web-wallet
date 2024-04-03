@@ -67,15 +67,15 @@
 import Vue from 'vue';
 import { utils, wallet, accountBlock as accountBlockUtils } from '@vite/vitejs';
 
-import { initPwd } from 'pcComponents/password/index.js';
-import confirm from 'pcComponents/confirm/confirm.vue';
-import viteInput from 'components/viteInput';
-import sendTx from 'pcUtils/sendTx';
-import bigNumber from 'utils/bigNumber';
-import statistics from 'utils/statistics';
-import { getTokenIcon } from 'utils/tokenParser';
-import { verifyAmount } from 'pcUtils/validations';
-import { execWithValid } from 'pcUtils/execWithValid';
+import { initPwd } from '@pc/components/password/index.js';
+import confirm from '@pc/components/confirm/confirm.vue';
+import viteInput from '@components/viteInput.vue';
+import sendTx from '@pc/utils/sendTx';
+import bigNumber from '@utils/bigNumber';
+import statistics from '@utils/statistics';
+import { getTokenIcon } from '@utils/tokenParser';
+import { verifyAmount } from '@pc/utils/validations';
+import { execWithValid } from '@pc/utils/execWithValid';
 
 const { getBytesSize } = utils;
 

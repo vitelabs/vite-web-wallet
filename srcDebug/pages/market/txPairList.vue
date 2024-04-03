@@ -59,7 +59,7 @@
 </template>
 
 <script>
-import BigNumber from 'utils/bigNumber';
+import BigNumber from '@utils/bigNumber';
 
 export default {
     props: {
@@ -245,7 +245,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '../center.scss';
+@use "../../../src/assets/scss/theme.scss" as *;
+@use '../center.scss' as *;
 
 .tx-pair-wrapper {
     position: relative;

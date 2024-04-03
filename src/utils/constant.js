@@ -1,6 +1,6 @@
 import { constant } from '@vite/vitejs';
-import viteIcon from 'assets/imgs/vite.png';
-import vxIcon from 'assets/imgs/vx.png';
+import viteIcon from '@assets/imgs/vite.png';
+import vxIcon from '@assets/imgs/vx.png';
 
 
 export const defaultTokenMap = {

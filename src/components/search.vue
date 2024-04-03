@@ -38,6 +38,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@use "@assets/scss/theme.scss" as *;
 .search {
     cursor: pointer;
     width: 397px;

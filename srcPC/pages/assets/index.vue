@@ -12,13 +12,13 @@
 
 <script>
 import debounce from 'lodash/debounce';
-import openUrl from 'utils/openUrl';
-import { getAccountLink } from 'utils/getLink';
-import { gateStorage } from 'pcServices/gate';
-import pageLayout from 'pcComponents/pageLayout/index';
-import accountHead from './head';
-import TokenFilter from './filter';
-import tokenListView from './tokenList/list';
+import openUrl from '@utils/openUrl';
+import { getAccountLink } from '@utils/getLink';
+import { gateStorage } from '@pc/services/gate';
+import pageLayout from '@pc/components/pageLayout/index.vue';
+import accountHead from './head.vue';
+import TokenFilter from './filter.vue';
+import tokenListView from './tokenList/list.vue';
 
 const filterFunc = (filterObj, currency) => {
     const ob = {};
@@ -114,7 +114,7 @@ export default {
 </script>
 
 <style lang="scss" rel="stylesheet/scss" scoped>
-@import "assets/scss/vars.scss";
+@use "@assets/scss/theme.scss" as *;
 
 .assets-container {
     position: absolute;

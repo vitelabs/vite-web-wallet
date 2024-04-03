@@ -1,4 +1,4 @@
-@import "~assets/scss/vars.scss";
+@use "../assets/scss/vars.scss" as *;
 
 $blue: #00BEFF;
 $red: #E5494D;
@@ -60,9 +60,9 @@ $up-font-color: $green;
             display: inline-block;
             width: 10px;
             height: 10px;
-            background: url('~assets/imgs/trade/favorite-tab.svg') no-repeat center;
+            background: url("@assets/imgs/trade/favorite-tab.svg") no-repeat center;
             &.active {
-                background: url('~assets/imgs/trade/favorite-active.svg') no-repeat center;
+                background: url("@assets/imgs/trade/favorite-active.svg") no-repeat center;
             }
         }
     }
@@ -142,9 +142,9 @@ $up-font-color: $green;
         display: inline-block;
         width: 10px;
         height: 100%;
-        background: url('~assets/imgs/trade/favorite.svg') no-repeat center left;
+        background: url("@assets/imgs/trade/favorite.svg") no-repeat center left;
         &.active {
-            background: url('~assets/imgs/trade/favorite-active.svg') no-repeat center left;
+            background: url("@assets/imgs/trade/favorite-active.svg") no-repeat center left;
         }
     }
     .describe {

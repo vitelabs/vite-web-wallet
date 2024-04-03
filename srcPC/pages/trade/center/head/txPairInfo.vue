@@ -16,7 +16,7 @@
                 {{ ttokenDetail ? ttokenDetail.symbol : '' }}
             </span>
             <span class="zero-fee-icon">
-                <img v-show="isZeroFee" src="~assets/imgs/trade/zero_fee.svg">
+                <img v-show="isZeroFee" src="@assets/imgs/trade/zero_fee.svg">
                 <tooltips class="tips" :content="$t('tradeCenter.zeroFee')"></tooltips>
             </span>
             <span class="mining" v-show="+isMining">
@@ -35,17 +35,17 @@
 </template>
 
 <script>
-import tooltips from 'components/tooltips';
-import operatorIcon from 'assets/imgs/operator_icon.svg';
-import theme1OperatorIcon from 'assets/theme1_imgs/operator_icon.svg';
-import openUrl from 'utils/openUrl';
+import tooltips from '@components/tooltips.vue';
+import operatorIcon from '@assets/imgs/operator_icon.svg';
+import theme1OperatorIcon from '@assets/theme1_imgs/operator_icon.svg';
+import openUrl from '@utils/openUrl';
 
-import tradeMiningSvg from 'assets/imgs/trade_mining.svg';
-import orderMiningSvg from 'assets/imgs/order_mining.svg';
-import miningSvg from 'assets/imgs/mining.svg';
-import theme1TradeMiningSvg from 'assets/theme1_imgs/trade_mining.svg';
-import theme1OrderMiningSvg from 'assets/theme1_imgs/order_mining.svg';
-import theme1MiningSvg from 'assets/theme1_imgs/mining.svg';
+import tradeMiningSvg from '@assets/imgs/trade_mining.svg';
+import orderMiningSvg from '@assets/imgs/order_mining.svg';
+import miningSvg from '@assets/imgs/mining.svg';
+import theme1TradeMiningSvg from '@assets/theme1_imgs/trade_mining.svg';
+import theme1OrderMiningSvg from '@assets/theme1_imgs/order_mining.svg';
+import theme1MiningSvg from '@assets/theme1_imgs/mining.svg';
 
 export default {
     components: { tooltips },
@@ -165,7 +165,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '../center.scss';
+@use "@assets/scss/theme.scss" as *;
+@use '../center.scss' as *;
 
 .tx-pair-info {
     position: relative;
@@ -201,7 +202,7 @@ export default {
             width: 14px;
             height: 14px;
             border-radius: 12px;
-            background: url('~assets/imgs/tx-pair-close.svg');
+            background: url("@assets/imgs/tx-pair-close.svg");
             background-size: 100% 100%;
         }
     }

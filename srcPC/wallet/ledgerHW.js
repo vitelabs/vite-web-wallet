@@ -7,10 +7,10 @@ import { accountBlock } from '@vite/vitejs';
 const { utils } = accountBlock;
 
 import { setCurrHDAcc, getCurrHDAcc } from './index';
-import store from 'pcStore';
-import { Server } from 'services/dnsHostIP';
-import i18n from 'pcI18n';
-import toast from 'components/toast/index.js';
+import store from '@pc/store';
+import { Server } from '@services/dnsHostIP';
+import i18n from '@pc/i18n';
+import toast from '@components/toast/index.js';
 
 export class Ledger extends Eventemitter {
     constructor({ connectType = 'usb' }) {

@@ -1,7 +1,7 @@
 <template>
     <div class="ex-view-container">
-        <kline :toogleDepth="toogleDepth" v-show="showView === 'kline'"></kline>
-        <depth :toogleDepth="toogleDepth" v-if="showView === 'depth'"></depth>
+        <kline :toggleDepth="toggleDepth" v-show="showView === 'kline'"></kline>
+        <depth :toggleDepth="toggleDepth" v-if="showView === 'depth'"></depth>
     </div>
 </template>
 
@@ -15,7 +15,7 @@ export default {
         return { showView: 'kline' };
     },
     methods: {
-        toogleDepth() {
+        toggleDepth() {
             this.showView = this.showView === 'depth' ? 'kline' : 'depth';
         }
     }

@@ -14,10 +14,10 @@ import { ViteAPI } from '@vite/vitejs';
 import {
     storage as localStorage,
     constant
-} from 'pcUtils/store';
+} from '@pc/utils/store';
 
 const { CurrentNode } = constant;
-const defaultNode = process.env.goViteServer;
+const defaultNode = import.meta.env.VITE_SERVER;
 window.VITE_NODE_API = localStorage.getItem(CurrentNode) || defaultNode;
 /*  end   */
 

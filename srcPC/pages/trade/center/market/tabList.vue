@@ -14,7 +14,7 @@
 </template>
 
 <script>
-import statistics from 'utils/statistics';
+import statistics from '@utils/statistics';
 
 export default {
     computed: {
@@ -47,5 +47,5 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "../center.scss";
+@use "../center.scss";
 </style>

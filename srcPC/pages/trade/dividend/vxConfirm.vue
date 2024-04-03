@@ -38,12 +38,12 @@
 </template>
 
 <script>
-import bigNumber from 'utils/bigNumber';
-import viteInput from 'components/viteInput';
-import confirm from 'pcComponents/confirm/confirm.vue';
-import { verifyAmount } from 'pcUtils/validations';
-import { initPwd } from 'pcComponents/password/index.js';
-import { lockVxForDividend } from 'pcServices/tradeOperation';
+import bigNumber from '@utils/bigNumber';
+import viteInput from '@components/viteInput.vue';
+import confirm from '@pc/components/confirm/confirm.vue';
+import { verifyAmount } from '@pc/utils/validations';
+import { initPwd } from '@pc/components/password/index.js';
+import { lockVxForDividend } from '@pc/services/tradeOperation';
 
 export default {
     components: { confirm, viteInput },
@@ -151,6 +151,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@use "@assets/scss/theme.scss" as *;
 .__hint {
     &.distance {
         margin-top: 20px;

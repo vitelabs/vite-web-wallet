@@ -1,9 +1,9 @@
 import { constant } from '@vite/vitejs';
-import { timer } from 'utils/asyncFlow';
-import { defaultTokenMap, VX_TOKENID } from 'utils/constant';
-import { getTokenInfoById, getSnapshotChainHeight, getTokenInfoList } from 'services/viteServer';
-import { getTokenInfoBatch } from 'services/trade';
-import { gateStorage } from 'pcServices/gate';
+import { timer } from '@utils/asyncFlow';
+import { defaultTokenMap, VX_TOKENID } from '@utils/constant';
+import { getTokenInfoById, getSnapshotChainHeight, getTokenInfoList } from '@services/viteServer';
+import { getTokenInfoBatch } from '@services/trade';
+import { gateStorage } from '@pc/services/gate';
 
 const ViteId = constant.Vite_TokenId;
 const MAX_TOKEN_NUM = 500;

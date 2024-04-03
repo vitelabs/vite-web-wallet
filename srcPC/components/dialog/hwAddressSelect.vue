@@ -1,5 +1,5 @@
 <template lang="pug">
-extends /components/dialog/base.pug
+extends ../../../src/components/dialog/base.pug
 block head
     .head {{ !(isConnected) ? $t('assets.ledger.connect.selectConnectType') : $t('assets.ledger.connect.tips')}}
 block content
@@ -52,16 +52,16 @@ block content
 <script>
 import Vue from 'vue';
 
-// import { initVB } from 'wallet/vb';
-import { getLedgerInstance, initLedger } from 'wallet/ledgerHW';
-// import { getCurrHDAcc } from 'wallet';
-// import icon from 'assets/imgs/start_qrcode_icon.svg';
-import Checkbox from 'uiKit/checkbox';
-import { viteClient } from 'services/apiServer';
-import { VITE_TOKENID } from 'utils/constant';
-import loading from 'components/loading.vue';
-import Lottie from 'pcComponents/animation/lottie.vue';
-import { getAccountLink } from 'utils/getLink';
+// import { initVB } from '@pc/wallet/vb';
+import { getLedgerInstance, initLedger } from '@pc/wallet/ledgerHW';
+// import { getCurrHDAcc } from '@pc/wallet';
+// import icon from '@assets/imgs/start_qrcode_icon.svg';
+import Checkbox from '@uiKit/checkbox.vue';
+import { viteClient } from '@services/apiServer';
+import { VITE_TOKENID } from '@utils/constant';
+import loading from '@components/loading.vue';
+import Lottie from '@pc/components/animation/lottie.vue';
+import { getAccountLink } from '@utils/getLink';
 
 export default {
     components: { Checkbox, loading, Lottie },
@@ -174,9 +174,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "~assets/scss/vars.scss";
-@import "pcPages/start/start.scss";
-@import "pcAssets/scss/table.scss";
+@use "@assets/scss/theme.scss" as *;
+@use "../../pages/start/start.scss" as *;
+@use "@pc/assets/scss/table.scss" as *;
 
 .head {
     box-sizing: border-box;

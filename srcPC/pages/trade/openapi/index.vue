@@ -76,19 +76,19 @@
 </template>
 
 <script>
-import { deleteKey, getProxyGrantor, getAgentAddress, createOpenApiKey, getPackageList } from 'pcServices/tradeOperation';
-import { doUntill } from 'utils/asyncFlow';
-import { execWithValid } from 'pcUtils/execWithValid';
-import openUrl from 'utils/openUrl';
-import secTitle from 'pcComponents/secTitle';
-import walletTable from 'pcComponents/table/index.vue';
-import tips from 'pcComponents/tips.vue';
+import { deleteKey, getProxyGrantor, getAgentAddress, createOpenApiKey, getPackageList } from '@pc/services/tradeOperation';
+import { doUntill } from '@utils/asyncFlow';
+import { execWithValid } from '@pc/utils/execWithValid';
+import openUrl from '@utils/openUrl';
+import secTitle from '@pc/components/secTitle.vue';
+import walletTable from '@pc/components/table/index.vue';
+import tips from '@pc/components/tips.vue';
 
 import { keyConfirmDialog, stakingDialog, upgradeDialog } from './dialog';
-import { baseDialog } from 'pcComponents/dialog';
-import PackageInfo from './packageInfo';
+import { baseDialog } from '@pc/components/dialog';
+import PackageInfo from './packageInfo.vue';
 import { addDialog } from '../trust/dialog';
-import PairItem from '../trust/dialog/pairItem';
+import PairItem from '../trust/dialog/pairItem.vue';
 
 
 export default {
@@ -316,9 +316,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "~pcAssets/scss/common.scss";
-@import "~assets/scss/vars.scss";
-@import "../../wallet/form.scss";
+@use "@assets/scss/theme.scss" as *;
+@use "@pc/assets/scss/common.scss" as *;
+@use "../../wallet/form.scss" as *;
 
 @include secondTitle();
 @include tradeBtn();

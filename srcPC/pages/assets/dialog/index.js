@@ -1,7 +1,7 @@
-import getDialog from 'pcComponents/dialog/utils.js';
+import getDialog from '@pc/components/dialog/utils.js';
 import depositComp from './deposit.vue';
 import addTokenComp from './addToken.vue';
-import tokenInfoComp from './tokenInfo';
+import tokenInfoComp from './tokenInfo/index.vue';
 import withdrawComp from './withdraw.vue';
 
 export const depositDialog = getDialog(depositComp);

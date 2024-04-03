@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import { constant } from 'pcUtils/store';
+import { constant } from '@pc/utils/store';
 
 const HoldPwdKey = constant.HoldPwdKey;
 
@@ -33,6 +33,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@use "@assets/scss/theme.scss" as *;
 .hold-pwd {
     line-height: 16px;
     margin-top: 12px;

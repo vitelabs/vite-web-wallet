@@ -1,7 +1,7 @@
 import { utils } from '@vite/vitejs';
 import { root } from './protoClass';
-import { random } from 'utils/random';
-import { timer } from 'utils/asyncFlow';
+import { random } from '@utils/random';
+import { timer } from '@utils/asyncFlow';
 
 const { _Buffer } = utils;
 const DexProto = root.lookupType('vite.DexProto');

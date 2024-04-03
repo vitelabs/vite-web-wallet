@@ -27,8 +27,8 @@
 </template>
 
 <script>
-import confirm from 'pcComponents/confirm/confirm.vue';
-import openUrl from 'utils/openUrl';
+import confirm from '@pc/components/confirm/confirm.vue';
+import openUrl from '@utils/openUrl';
 
 export default {
     components: { confirm },
@@ -82,7 +82,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "~assets/scss/vars.scss";
+@use "@assets/scss/theme.scss" as *;
 
 .__hint {
     margin-top: 16px;
@@ -102,7 +102,7 @@ export default {
     color: rgba(29,32,36,1);
     &.active {
         &::before {
-            background: url('~assets/imgs/agree.svg');
+            background: url("@assets/imgs/agree.svg");
             background-size: 100% 100%;
         }
     }
@@ -113,7 +113,7 @@ export default {
         height: 14px;
         margin-bottom: -3px;
         margin-right: 6px;
-        background: url('~assets/imgs/unagree.svg');
+        background: url("@assets/imgs/unagree.svg");
         background-size: 100% 100%;
     }
 }

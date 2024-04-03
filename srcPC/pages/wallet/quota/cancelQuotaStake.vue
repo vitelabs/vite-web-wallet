@@ -15,10 +15,10 @@
 
 <script>
 import { constant } from '@vite/vitejs';
-import { initPwd } from 'pcComponents/password/index.js';
-import sendTx from 'pcUtils/sendTx';
-import BigNumber from 'utils/bigNumber';
-import confirm from 'pcComponents/confirm/confirm.vue';
+import { initPwd } from '@pc/components/password/index.js';
+import sendTx from '@pc/utils/sendTx';
+import BigNumber from '@utils/bigNumber';
+import confirm from '@pc/components/confirm/confirm.vue';
 
 const Vite_Token_Info = constant.Vite_Token_Info;
 

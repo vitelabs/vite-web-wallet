@@ -84,6 +84,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@use "@assets/scss/theme.scss" as *;
 .pagination-wrapper {
     display: inline-block;
     align-items: center;
@@ -140,12 +141,12 @@ export default {
 }
 
 .prev {
-    background: url('~assets/imgs/left.svg');
+    background: url("@assets/imgs/left.svg");
     background-size: 100% 100%;
 }
 
 .next {
-    background: url('~assets/imgs/right.svg');
+    background: url("@assets/imgs/right.svg");
     background-size: 100% 100%;
 }
 </style>

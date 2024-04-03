@@ -852,7 +852,7 @@
             "verifyAddress": "Подтвердить адрес",
             "closeAlert": "Отменить",
             "start": {
-                "title": "Поддерживаемые кошельки: Ledger Nano S / Ledger Nano X",
+                "title": "Поддерживаемые кошельки: Ledger Nano S\nLedger Nano X",
                 "connectError": "Проблемы с подключением?",
                 "introduction": "Инструкции по установке и использованию приложения",
                 "introductionUrl": "https://docs.vite.org/vite-docs/tutorial/ledger-install.html",
@@ -900,6 +900,14 @@
                 "userCancel": "Транзакция отменена на Ledger",
                 "userCancelByWeb": "Вы отменили транзакцию в VITE кошельке. В этом случае транзакция не будет проходить в блокчейн, даже если она подтверждена на вашем устройстве Ledger."
             }
+        },
+        "vitePassport": {
+            "title": "VitePassport",
+            "subtitle": "VitePassport — это MetaMask сети VITE",
+            "help": "Проблемы с подключением",
+            "helpLink": "https://t.me/vite_ru",
+            "connect": "Подключить",
+            "notDetected": "Не удалось обнаружить VitePassport. Убедитесь, что он установлен и включен."
         },
         "invite": {
             "inviteTitle": "Пригласить Друзей",

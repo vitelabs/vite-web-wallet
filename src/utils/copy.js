@@ -1,4 +1,4 @@
-import { isIOS } from 'utils/platform';
+import { isIOS } from '@utils/platform';
 
 export default function (value) {
     const el = document.createElement('textarea');

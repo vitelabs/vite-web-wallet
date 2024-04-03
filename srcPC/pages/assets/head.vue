@@ -61,26 +61,26 @@
 <script>
 import Vue from 'vue';
 import { utils } from '@vite/vitejs';
-import { getCurrHDAcc, StatusMap } from 'wallet';
-import { getLedgerInstance } from 'wallet/ledgerHW';
-import copy from 'components/copy';
-import QrcodePopup from 'components/qrcodePopup';
-import Pie from 'pcComponents/pie';
-import SwitchAddr from 'pcComponents/switchAddress';
-import bigNumber from 'utils/bigNumber';
-import statistics from 'utils/statistics';
-import { getTokenSymbolString } from 'utils/tokenParser';
-import AssetSwitch from './assetSwitch';
-import { hwVerifyAddressDialog, baseDialog } from 'pcComponents/dialog';
+import { getCurrHDAcc, StatusMap } from '@pc/wallet';
+import { getLedgerInstance } from '@pc/wallet/ledgerHW';
+import copy from '@components/copy.vue';
+import QrcodePopup from '@components/qrcodePopup.vue';
+import Pie from '@pc/components/pie.vue';
+import SwitchAddr from '@pc/components/switchAddress.vue';
+import bigNumber from '@utils/bigNumber';
+import statistics from '@utils/statistics';
+import { getTokenSymbolString } from '@utils/tokenParser';
+import AssetSwitch from './assetSwitch.vue';
+import { hwVerifyAddressDialog, baseDialog } from '@pc/components/dialog';
 
 
-import headAcc from 'assets/imgs/head_acc.png';
-import headAddr from 'assets/imgs/head_addr.svg';
-import headAsset from 'assets/imgs/head_asset.png';
+import headAcc from '@assets/imgs/head_acc.png';
+import headAddr from '@assets/imgs/head_addr.svg';
+import headAsset from '@assets/imgs/head_asset.png';
 
-import theme1headAcc from 'assets/theme1_imgs/head_acc.png';
-import theme1headAddr from 'assets/theme1_imgs/head_addr.png';
-import theme1headAsset from 'assets/theme1_imgs/head_asset.png';
+import theme1headAcc from '@assets/theme1_imgs/head_acc.png';
+import theme1headAddr from '@assets/theme1_imgs/head_addr.png';
+import theme1headAsset from '@assets/theme1_imgs/head_asset.png';
 
 const assetsType = {
     TOTAL: 'TOTAL',
@@ -301,7 +301,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "~assets/scss/vars.scss";
+@use "@assets/scss/theme.scss" as *;
 
 .click-able {
     cursor: pointer;
@@ -313,7 +313,7 @@ export default {
         background: #fff;
     }
     [data-theme="1"] & {
-        background: url("~assets/theme1_imgs/mint_pledge_bg.png");
+        background: url("@assets/theme1_imgs/mint_pledge_bg.png");
         background-size: 100% 100%;
     }
     border-radius: 2px;
@@ -479,7 +479,7 @@ export default {
                     height: 24px;
                     line-height: 24px;
                     margin-bottom: 10px;
-                    /deep/.list-title {
+                    .list-title {
                         [data-theme="1"] & {
                             color: $white-color;
                         }

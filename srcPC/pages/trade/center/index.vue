@@ -16,7 +16,6 @@
             :type="'generalTips'"
             :showMask="true"
             :title="$t('compliance.title')"
-            :close="closeTrans"
             :singleBtn="true"
             :leftBtnTxt="$t('btn.understand')"
             :leftBtnClick="setComplianceShowed"
@@ -36,15 +35,15 @@
 </template>
 
 <script>
-import confirm from 'pcComponents/confirm/confirm.vue';
-import layout from './layout';
+import confirm from '@pc/components/confirm/confirm.vue';
+import layout from './layout.vue';
 import depth from './depth/depth.vue';
 import market from './market/market.vue';
-import latestTx from './latestTx';
+import latestTx from './latestTx.vue';
 import TradeCard from './tradeCard/tradeCard.vue';
 import centerHead from './head/head.vue';
 import centerView from './view/view.vue';
-import orderTab from './orderTab';
+import orderTab from './orderTab.vue';
 
 export default {
     components: {

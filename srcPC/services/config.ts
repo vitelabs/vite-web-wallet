@@ -1,4 +1,4 @@
-import { ConfigClient } from 'pcServices/apiServer';
+import { ConfigClient } from '@pc/services/apiServer';
 
 interface IUiController {
   inviteAddrList: string[];

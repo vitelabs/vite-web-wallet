@@ -1,5 +1,5 @@
 <template lang="pug">
-extends /components/dialog/base.pug
+extends ../../../../../src/components/dialog/base.pug
 block content
     div(v-if="actionType==='deleteAll'")
         i18n.strong(path='trade.proxy.dialog.cancelAllTips' tag="span")
@@ -22,10 +22,10 @@ block content
 <script>
 import throttle from 'lodash/throttle';
 import { wallet } from '@vite/vitejs';
-import PairItem from './pairItem';
-import SearchTips from 'uiKit/searchTips';
-import viteInput from 'components/viteInput';
-import { getProxyAblePairs, configMarketsAgent } from 'pcServices/tradeOperation';
+import PairItem from './pairItem.vue';
+import SearchTips from '@uiKit/searchTips.vue';
+import viteInput from '@components/viteInput.vue';
+import { getProxyAblePairs, configMarketsAgent } from '@pc/services/tradeOperation';
 import { confirmDialog } from './index';
 
 export default {
@@ -146,8 +146,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "pcComponents/confirm/confirmRow.scss";
-@import "./confirm.scss";
+@use "@pc/components/confirm/confirmRow.scss";
+@use "./confirm.scss";
 
 .pair_section {
     display: flex;

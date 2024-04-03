@@ -7,9 +7,9 @@
 </template>
 
 <script>
-import tokenList from './tokenList';
-import mintage from './mintage';
-import secTitle from 'pcComponents/secTitle';
+import tokenList from './tokenList.vue';
+import mintage from './mintage.vue';
+import secTitle from '@pc/components/secTitle.vue';
 
 export default {
     components: { tokenList, secTitle, mintage },

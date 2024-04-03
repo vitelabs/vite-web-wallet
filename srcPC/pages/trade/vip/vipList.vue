@@ -3,7 +3,7 @@
         <div v-for="(item, i) in contentList" :key="i"
              :slot="`${i}addrBefore`">
             <span class="beneficial-addr">{{ item.address }}</span>
-            <img v-if="item.address === address" class="beneficial-img" src='~assets/imgs/mine.svg'/>
+            <img v-if="item.address === address" class="beneficial-img" src="@assets/imgs/mine.svg"/>
         </div>
 
         <span v-for="(item, i) in contentList" :key="i"
@@ -23,12 +23,12 @@
 
 <script>
 import { constant } from '@vite/vitejs';
-import { getVIPStakeInfoList } from 'services/viteServer';
-import pagination from 'pcComponents/pagination';
-import walletTable from 'pcComponents/table/index.vue';
-import date from 'utils/date';
-import bigNumber from 'utils/bigNumber';
-import { timer } from 'utils/asyncFlow';
+import { getVIPStakeInfoList } from '@services/viteServer';
+import pagination from '@pc/components/pagination.vue';
+import walletTable from '@pc/components/table/index.vue';
+import date from '@utils/date';
+import bigNumber from '@utils/bigNumber';
+import { timer } from '@utils/asyncFlow';
 
 const Vite_Token_Info = constant.Vite_Token_Info;
 let vipListInst = null;
@@ -157,6 +157,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@use "@assets/scss/theme.scss" as *;
 .beneficial-img {
     margin-left: 8px;
     margin-bottom: -2px;
@@ -170,11 +171,11 @@ export default {
     height: 16px;
     margin-bottom: -4px;
     &.VIP {
-        background: url("~assets/imgs/vip.svg");
+        background: url("@assets/imgs/vip.svg");
         background-size: 100% 100%;
     }
     &.SVIP {
-        background: url("~assets/imgs/svip.png");
+        background: url("@assets/imgs/svip.png");
         background-size: 100% 100%;
     }
 }

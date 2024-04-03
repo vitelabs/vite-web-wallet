@@ -1,6 +1,6 @@
 import Vue from 'vue';
-import store from 'pcStore';
-import i18n from 'pcI18n';
+import store from '@pc/store';
+import i18n from '@pc/i18n';
 
 export function insertTo(component, propsDefault = {}, ele) {
     const vueComp = Vue.extend(component);

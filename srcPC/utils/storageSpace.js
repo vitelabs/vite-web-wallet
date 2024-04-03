@@ -1,5 +1,5 @@
-import { getActiveAcc } from 'wallet';
-import storage from 'pcUtils/store';
+import { getActiveAcc } from '@pc/wallet';
+import storage from '@pc/utils/store';
 
 export const addrSpace = {
     get key() {

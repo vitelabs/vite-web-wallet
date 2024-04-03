@@ -1,5 +1,5 @@
 <template lang="pug">
-extends /components/dialog/base.pug
+extends ../../../../../src/components/dialog/base.pug
 block head
     .head
         img.icon(:src="tokenDetail.urlIcon || token.icon || getIcon(token.tokenId)")
@@ -58,9 +58,9 @@ block originContent
         .content__item
             .label {{$t("tokenCard.tokenInfo.labels.media")}}:
             div
-                img.media-icon(src="~assets/imgs/facebook.svg" v-show="tokenDetail.facebookLink" @click="openUrl(tokenDetail.facebookLink)")
-                img.media-icon(src="~assets/imgs/twitter.svg" v-show="tokenDetail.twitterLink" @click="openUrl(tokenDetail.twitterLink)")
-                img.media-icon(src="~assets/imgs/telegram.svg" v-show="tokenDetail.telegramLink" @click="openUrl(tokenDetail.telegramLink)")
+                img.media-icon(src="@assets/imgs/facebook.svg" v-show="tokenDetail.facebookLink" @click="openUrl(tokenDetail.facebookLink)")
+                img.media-icon(src="@assets/imgs/twitter.svg" v-show="tokenDetail.twitterLink" @click="openUrl(tokenDetail.twitterLink)")
+                img.media-icon(src="@assets/imgs/telegram.svg" v-show="tokenDetail.telegramLink" @click="openUrl(tokenDetail.telegramLink)")
     .tab-content(v-if="tabName==='gate'")
         .content__item(v-if="token.gateInfo.url")
             .label {{$t("tokenCard.gateInfo.name")}}:
@@ -71,13 +71,13 @@ block originContent
         .content__item(v-if="token.gateInfo.url")
             .label {{$t("tokenCard.gateInfo.introduction")}}:
             div {{ gateIntroduction }}
-        .content__item(v-if="token.gateInfo.url")
-            .label {{$t("tokenCard.gateInfo.customer")}}:
-            div.click-able(v-if="gateInfo.serviceSupport")(@click="openUrl(gateInfo.serviceSupport)") {{ gateSupport }}
-        .content__item(v-if="token.gateInfo.url")
-            .label {{$t("tokenCard.gateInfo.privacy")}}:
-            div.click-able(v-if="gatePolicy")(@click="openUrl(gatePolicy)") {{$t("tokenCard.gateInfo.clickPrivacy", {gate: gateInfo.name})}}
-        .content__item(v-if="!token.gateInfo.url")
+        <!-- .content__item(v-if="token.gateInfo.url") -->
+        <!--     .label {{$t("tokenCard.gateInfo.customer")}}: -->
+        <!--     div.click-able(v-if="gateInfo.serviceSupport")(@click="openUrl(gateInfo.serviceSupport)") {{ gateSupport }} -->
+        <!-- .content__item(v-if="token.gateInfo.url") -->
+        <!--     .label {{$t("tokenCard.gateInfo.privacy")}}: -->
+        <!--     div.click-able(v-if="gatePolicy")(@click="openUrl(gatePolicy)") {{$t("tokenCard.gateInfo.clickPrivacy", {gate: gateInfo.name})}} -->
+        <!-- .content__item(v-if="!token.gateInfo.url") -->
             .label {{$t("tokenCard.gateInfo.nodeDesc")}}:
             div {{ $t("tokenCard.gateInfo.nodeDescStr") }}
         .content__item.center(v-if="token.type==='OFFICAL_GATE'")
@@ -96,16 +96,16 @@ block originContent
 </template>
 
 <script>
-import { tokenDetail } from 'services/trade';
-import { gateStorage, getChargeAddr } from 'pcServices/gate';
-import { getTokenIcon } from 'utils/tokenParser';
-import { getExplorerLink, getTokenLink } from 'utils/getLink';
-import openUrl from 'utils/openUrl';
-import BigNumber from 'utils/bigNumber';
-import Tb from './tb';
-import viteInput from 'components/viteInput';
+import { tokenDetail } from '@services/trade';
+import { gateStorage, getChargeAddr } from '@pc/services/gate';
+import { getTokenIcon } from '@utils/tokenParser';
+import { getExplorerLink, getTokenLink } from '@utils/getLink';
+import openUrl from '@utils/openUrl';
+import BigNumber from '@utils/bigNumber';
+import Tb from './tb.vue';
+import viteInput from '@components/viteInput.vue';
 import throttle from 'lodash/throttle';
-import selectNetwork from '../selectNetwork';
+import selectNetwork from '../selectNetwork.vue';
 
 
 export default {
@@ -297,7 +297,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "~pcComponents/confirm/moreTabConfirm.scss";
+@use "@pc/components/confirm/moreTabConfirm.scss";
 
 .click-able {
     margin-right: 10px;

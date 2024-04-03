@@ -61,9 +61,9 @@
 </template>
 
 <script>
-import { getTokenSymbolString } from 'utils/tokenParser';
-import bigNumber from 'utils/bigNumber';
-import { getCurrDividendPools } from 'services/viteServer';
+import { getTokenSymbolString } from '@utils/tokenParser';
+import bigNumber from '@utils/bigNumber';
+import { getCurrDividendPools } from '@services/viteServer';
 
 export default {
     beforeMount() {
@@ -199,8 +199,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '~assets/scss/vars.scss';
-@import '../components/stakingDetail.scss';
+@use "@assets/scss/theme.scss" as *;
+@use '../components/stakingDetail.scss';
 
 @mixin font_color_price() {
     [data-theme='0'] & {

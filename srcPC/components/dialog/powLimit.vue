@@ -1,13 +1,13 @@
 <template lang="pug">
-extends /components/dialog/base.pug
+extends ../../../src/components/dialog/base.pug
 block content
     div {{ this.powTimesLeft > 0 ? $t('pow.insuffQuotaMsg',{powTimesLeft:this.powTimesLeft}) : $t('pow.insuffQuotaMsg2')}}
 </template>
 
 <script>
 import { mapGetters, mapState } from 'vuex';
-import router from 'pcRouter/index.js';
-import { execWithRecaptcha } from 'pcUtils/execWithRecaptcha';
+import router from '@pc/router/index.js';
+import { execWithRecaptcha } from '@pc/utils/execWithRecaptcha';
 
 export default {
     computed: {
@@ -53,5 +53,5 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '~assets/scss/vars.scss';
+@use "@assets/scss/theme.scss" as *;
 </style>

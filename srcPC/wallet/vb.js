@@ -1,8 +1,8 @@
 import Connector from '@vite/connector';
 import { setCurrHDAcc, getCurrHDAcc } from './index';
-import store from 'pcStore';
-import { Server } from 'services/dnsHostIP';
-import { constant } from 'pcUtils/store';
+import store from '@pc/store';
+import { Server } from '@services/dnsHostIP';
+import { constant } from '@pc/utils/store';
 
 const { VCSessionKey } = constant;
 

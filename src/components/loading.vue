@@ -21,6 +21,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@use '../assets/scss/theme.scss' as *;
 .loading-wrapper {
     display: inline-block;
 }
@@ -69,7 +70,7 @@ export default {
 .dot > div {
     width: 8px;
     height: 8px;
-    background-color: #fff;
+    background-color: #000;
     border-radius: 100%;
     display: inline-block;
     animation: sk-bouncedelay 1.4s infinite ease-in-out both;

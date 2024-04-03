@@ -8,8 +8,8 @@
 </template>
 
 <script>
-import notice from 'components/notice';
-import { getVersion, setVersion } from 'pcUtils/store';
+import notice from '@components/notice.vue';
+import { getVersion, setVersion } from '@pc/utils/store';
 
 const showNum = 1;
 

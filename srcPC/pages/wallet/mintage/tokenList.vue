@@ -123,16 +123,16 @@
 
 <script>
 import { wallet } from '@vite/vitejs';
-import showConfirm from 'pcComponents/confirm/confirm.vue';
-import walletTable from 'pcComponents/table/index.vue';
-import { initPwd } from 'pcComponents/password/index.js';
-import viteInput from 'components/viteInput';
-import tooltips from 'components/tooltips';
-import BigNumber from 'utils/bigNumber';
-import { getTokenListByOwner } from 'services/viteServer';
-import sendTx from 'pcUtils/sendTx';
-import { verifyAmount } from 'pcUtils/validations';
-import { execWithValid } from 'pcUtils/execWithValid';
+import showConfirm from '@pc/components/confirm/confirm.vue';
+import walletTable from '@pc/components/table/index.vue';
+import { initPwd } from '@pc/components/password/index.js';
+import viteInput from '@components/viteInput.vue';
+import tooltips from '@components/tooltips.vue';
+import BigNumber from '@utils/bigNumber';
+import { getTokenListByOwner } from '@services/viteServer';
+import sendTx from '@pc/utils/sendTx';
+import { verifyAmount } from '@pc/utils/validations';
+import { execWithValid } from '@pc/utils/execWithValid';
 
 export default {
     components: { walletTable, showConfirm, viteInput, tooltips },
@@ -294,7 +294,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "~pcAssets/scss/common.scss";
+@use "../../..//assets/scss/common.scss" as *;
 
 @include secondTitle();
 
@@ -320,7 +320,7 @@ export default {
 .tipsicon {
     position: relative;
     display: inline-block;
-    background: url(~assets/imgs/hover_help.svg);
+    background: url(@assets/imgs/hover_help.svg);
     overflow: visible;
     width: 16px;
     height: 16px;

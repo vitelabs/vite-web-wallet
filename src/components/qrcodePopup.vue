@@ -19,8 +19,8 @@
 </template>
 
 <script>
-import qrcode from 'components/qrcode';
-import { fromBase64 } from 'utils/downloadImg';
+import qrcode from '@components/qrcode.vue';
+import { fromBase64 } from '@utils/downloadImg';
 
 export default {
     components: { qrcode },
@@ -58,7 +58,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "~assets/scss/vars.scss";
+@use "@assets/scss/theme.scss" as *;
 .qrcode-popup {
     display: flex;
     position: relative;

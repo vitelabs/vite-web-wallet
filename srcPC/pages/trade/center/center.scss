@@ -1,4 +1,4 @@
-@import "~assets/scss/vars.scss";
+@use "@assets/scss/theme.scss" as *;
 
 @mixin center_color {
     [data-theme="0"] & {
@@ -102,7 +102,7 @@ $up-font-color: $green;
             padding: 0;
             @include background_common_img_suffix('favorite-tab', 'svg', 'png');
             &.active {
-                background: url('~assets/imgs/trade/favorite-active.svg') no-repeat center;
+                background: url("@assets/imgs/trade/favorite-active.svg") no-repeat center;
             }
         }
     }
@@ -200,7 +200,7 @@ $up-font-color: $green;
         margin: 4px 0;
         @include background_common_img_suffix('favorite', 'svg', 'png');
         &.active {
-            background: url('~assets/imgs/trade/favorite-active.svg') no-repeat center left;
+            background: url("@assets/imgs/trade/favorite-active.svg") no-repeat center left;
         }
     }
     .describe {

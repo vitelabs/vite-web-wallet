@@ -25,13 +25,13 @@
 </template>
 
 <script>
-import { getAccountLink } from 'utils/getLink';
-import unlock from './unlock';
-import importKeystore from './import';
-import sendTx from './sendTx';
-import balance from './balance';
-import receiveTx from './receiveTx';
-import openUrl from 'utils/openUrl';
+import { getAccountLink } from '@utils/getLink';
+import unlock from './unlock.vue';
+import importKeystore from './import.vue';
+import sendTx from './sendTx.vue';
+import balance from './balance.vue';
+import receiveTx from './receiveTx.vue';
+import openUrl from '@utils/openUrl';
 
 export default {
     components: { importKeystore, unlock, balance, sendTx, receiveTx },
@@ -66,7 +66,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "./common.scss";
+@use "./common.scss";
 .keystore-wrapper {
     width: 100%;
     height: 100%;

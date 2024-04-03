@@ -13,8 +13,8 @@
 </template>
 
 <script>
-import copy from 'components/copy';
-import { pwdConfirm } from 'pcComponents/password';
+import copy from '@components/copy.vue';
+import { pwdConfirm } from '@pc/components/password';
 
 export default {
     components: { copy },
@@ -66,8 +66,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "~assets/scss/vars.scss";
-@import "./setting.scss";
+@use "@assets/scss/theme.scss" as *;
+@use "./setting.scss" as *;
 
 .mnemonic {
     width: 100%;
@@ -91,17 +91,17 @@ export default {
     .lock-icon {
         margin-right: 16px;
         background-size: 20px 20px;
-        background: url('~assets/imgs/unlock.svg') center no-repeat;
+        background: url("@assets/imgs/unlock.svg") center no-repeat;
         &.lock {
-            background: url('~assets/imgs/lock.svg') center no-repeat;
+            background: url("@assets/imgs/lock.svg") center no-repeat;
         }
     }
 
     .copy {
         background-size: 20px 20px;
-        background: url('~assets/imgs/copy_default.svg');
+        background: url("@assets/imgs/copy_default.svg");
         &.lock {
-            background: url('~assets/imgs/copy_disabled.svg');
+            background: url("@assets/imgs/copy_disabled.svg");
             cursor: not-allowed;
         }
     }

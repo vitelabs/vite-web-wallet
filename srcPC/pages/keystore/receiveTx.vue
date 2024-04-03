@@ -6,7 +6,7 @@
 
 <script>
 import { accountBlock as accountBlockUtils } from '@vite/vitejs';
-import { viteClient } from 'services/apiServer';
+import { viteClient } from '@services/apiServer';
 
 let autoReceiveTimer = null;
 

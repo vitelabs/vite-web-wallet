@@ -27,11 +27,11 @@
 </template>
 
 <script>
-import walletTable from 'pcComponents/table/index.vue';
-import pagination from 'pcComponents/pagination';
-import { miningTrade } from 'services/trade';
-import bigNumber from 'utils/bigNumber';
-import date from 'utils/date';
+import walletTable from '@pc/components/table/index.vue';
+import pagination from '@pc/components/pagination.vue';
+import { miningTrade } from '@services/trade';
+import bigNumber from '@utils/bigNumber';
+import date from '@utils/date';
 
 export default {
     components: { walletTable, pagination },
@@ -133,6 +133,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "~assets/scss/vars.scss";
-@import "../components/stakingDetail.scss";
+@use "@assets/scss/theme.scss" as *;
+@use "../components/stakingDetail.scss";
 </style>

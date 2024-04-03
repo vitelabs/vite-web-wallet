@@ -1,32 +1,37 @@
 <template>
     <div class="login-wrapper">
-        <div class="__title">{{ $t('login') }}</div>
-
-        <div class="switch-btn">
+        <div class="switch-btn"
+        :class="{
+            'has-five': isHaveList,
+        }">
             <div
-                v-show="!isTestnet"
-                class="btn-item __pointer"
+                class="btn __pointer"
+                :class="{ active: tabName === 'vitePassport' }"
+                @click="toggleTab('vitePassport')"
+                :key="'vitePassport'"
+            >
+                {{ $t('assets.vitePassport.title') }}
+            </div>
+            <div
+                class="btn"
                 :class="{ active: tabName === 'vb' }"
                 @click="toggleTab('vb')"
                 :key="'tb'"
             >
-                <div class="star"></div>
                 {{ $t('assets.vb.title') }}
             </div>
             <div
-                v-show="!isTestnet"
                 v-if="!isDesktop"
-                class="btn-item __pointer"
+                class="btn __pointer"
                 :class="{ active: tabName === 'ledger' }"
                 @click="toggleTab('ledger')"
                 :key="'ledger'"
             >
-                <div class="star"></div>
                 {{ $t('assets.ledger.title') }}
             </div>
             <div
                 v-show="isHaveList"
-                class="btn-item __pointer"
+                class="btn __pointer"
                 :class="{ active: tabName === 'existingAcc' }"
                 @click="toggleTab('existingAcc')"
                 :key="'existingAcc'"
@@ -34,7 +39,7 @@
                 {{ $t('existingAcc') }}
             </div>
             <div
-                class="btn-item __pointer"
+                class="btn __pointer"
                 :class="{ active: tabName === 'resotre' }"
                 @click="toggleTab('resotre')"
                 :key="'resotre'"
@@ -42,167 +47,186 @@
                 {{ $t('restore') }}
             </div>
         </div>
+
         <div class="tab-content">
-            <div class="vb" v-if="tabName === 'vb'">
-                <div class="code_container">
-                    <div class="code_tips">
-                        {{ $t('assets.vb.start.scan') }}
+            <figure class="image">
+                <img srcset="@pc/assets/login-bg@2x.png 2x,
+                    @pc/assets/login-bg.png 1x"
+                    src="@pc/assets/login-bg.png" alt="login background image">
+            </figure>
+            <div class="container">
+                <h3 class="title">{{ $t('login') }}</h3>
+                <div class="vb box" v-if="tabName === 'vb'">
+                    <div class="box-content">
+                        <div class="box-title">{{ $t('assets.vb.start.scan') }}</div>
+                        <qrcode
+                            :options="qrcodeOpt"
+                            :text="vb && vb.uri"
+                            class="vb_qrcode"
+                        ></qrcode>
                     </div>
-                    <qrcode
-                        :options="qrcodeOpt"
-                        :text="vb && vb.uri"
-                        class="vb_qrcode"
-                    ></qrcode>
-                    <div class="code_tips">
-                        {{ $t('assets.vb.start.downloadTips')
-                        }}<span class="action_get_app" @click="getWallet"
-                        >{{ $t('assets.vb.start.download') }}&rarr;</span
-                        >
-                    </div>
-                </div>
-                <div class="__btn __btn_all_in __pointer" @click="createAcc">
-                    {{ $t('addAccount') }}
-                </div>
-            </div>
-            <!-- Ledger wallet login panel -->
-            <div class="ledger" v-if="tabName === 'ledger'">
-                <div class="code_container">
-                    <div class="code_tips">
-                        {{ $t('assets.ledger.start.title') }}
-                    </div>
-                    <div class="img_wrapper">
-                        <img src="~assets/imgs/ledger_logo.svg" alt="" />
-                    </div>
-                    <div class="code_tips_introduction">
-                        <a
-                            :href="$t('assets.ledger.start.introductionUrl')"
-                            target="_blank"
-                        >{{ $t('assets.ledger.start.introduction') }}</a
-                        >
-                        <a
-                            :href="$t('assets.ledger.start.connectErrorUrl')"
-                            target="_blank"
-                        >{{ $t('assets.ledger.start.connectError') }}</a
-                        >
+                    <div class="box-footer">
+                        <div class="code_tips">
+                            <p>{{ $t('assets.vb.start.downloadTips') }}</p>
+                            <a href="https://app.vite.net/" target="_blank">{{ $t('assets.vb.start.download') }}</a>
+                        </div>
+                        <div class="actions">
+                            <button class="btn active __pointer" @click="createAcc">
+                                {{ $t('addAccount') }}
+                            </button>
+                        </div>
                     </div>
                 </div>
-                <div
-                    class="__btn __btn_all_in __pointer"
-                    @click="connectLedger()"
-                >
-                    {{ $t('assets.ledger.connectLedger') }}
+                <!-- Ledger wallet login panel -->
+                <div class="ledger box" v-if="tabName === 'ledger'">
+                    <div class="box-content">
+                        <div class="box-title">{{ $t('assets.ledger.start.title') }}</div>
+                        <div class="img_wrapper">
+                            <img src="@assets/imgs/ledger_logo.svg" alt="" />
+                        </div>
+                    </div>
+                    <div class="box-footer">
+                        <div class="code_tips_introduction">
+                            <a :href="$t('assets.ledger.start.introductionUrl')" target="_blank">{{ $t('assets.ledger.start.introduction') }}</a>
+                            <br />
+                            <a :href="$t('assets.ledger.start.connectErrorUrl')" target="_blank">{{ $t('assets.ledger.start.connectError') }}</a>
+                        </div>
+                        <div class="actions">
+                            <button class="btn active __pointer" @click="connectLedger()">{{ $t('assets.ledger.connectLedger') }}</button>
+                        </div>
+                    </div>
                 </div>
-            </div>
-            <div v-if="tabName === 'existingAcc'" class="existing-acc">
-                <div
-                    class="bottom __btn __pointer"
-                    v-click-outside.includeChildrens="hideAccountList"
-                >
-                    <div @click="toggleAccountList">
+                <div v-if="tabName === 'existingAcc'" class="existing-acc box">
+                    <div class="box-content">
                         <div
-                            v-show="
-                                currAcc &&
-                                    !currAcc.activeAddr &&
-                                    !currAcc.isSeparateKey
-                            "
-                            class="__btn __btn_input"
+                            class="bottom __btn __pointer"
+                            v-click-outside.includeChildrens="hideAccountList"
                         >
-                            <div class="name __ellipsis">
-                                {{ currAcc.name }}
+                            <div @click="toggleAccountList">
+                                <div
+                                    v-show="
+                                        currAcc &&
+                                            !currAcc.activeAddr &&
+                                            !currAcc.isSeparateKey
+                                    "
+                                    class="__btn __btn_input"
+                                >
+                                    <div class="name __ellipsis">
+                                        {{ currAcc.name }}
+                                    </div>
+                                </div>
+
+                                <account-item
+                                    v-show="currAcc && currAcc.activeAddr"
+                                    :account="currAcc"
+                                ></account-item>
+
+                                <span
+                                    :class="{
+                                        slide: true,
+                                        down: !isShowAccountList,
+                                        up: isShowAccountList
+                                    }"
+                                ></span>
                             </div>
+                            <account-list
+                                ref="accList"
+                                v-show="isShowAccountList"
+                                :clickAccount="chooseAccount"
+                            ></account-list>
                         </div>
 
-                        <account-item
-                            class="no-border"
-                            v-show="currAcc && currAcc.activeAddr"
-                            :account="currAcc"
-                        ></account-item>
-
-                        <span
-                            :class="{
-                                slide: true,
-                                down: !isShowAccountList,
-                                up: isShowAccountList
-                            }"
-                        ></span>
+                        <div
+                            class="bottom __btn __btn_input"
+                            :class="{ active: !!password || inputItem === 'pass' }"
+                        >
+                            <input
+                                ref="passInput"
+                                autofocus
+                                :placeholder="$t('create.input')"
+                                v-model="password"
+                                :type="'password'"
+                                @focus="inputFocus('pass')"
+                                @blur="inputBlur('pass')"
+                            />
+                        </div>
                     </div>
-
-                    <account-list
-                        ref="accList"
-                        v-show="isShowAccountList"
-                        :clickAccount="chooseAccount"
-                    ></account-list>
+                    
+                    <div class="box-footer">
+                        <div class="tips"></div>
+                        <div class="actions">
+                            <div class="btn active __pointer" @click="login">
+                                <span v-show="!isLoading">
+                                    {{
+                                        isShowExisting
+                                            ? $t('btn.login')
+                                            : $t('create.finish')
+                                    }}
+                                </span>
+                                <loading v-show="isLoading" loadingType="dot"></loading>
+                            </div>
+                            <span
+                                class="btn active __pointer"
+                                @click="createAcc"
+                            >
+                                {{ $t('addAccount') }}
+                            </span>
+                        </div>
+                    </div>
                 </div>
 
-                <div
-                    class="bottom __btn __btn_input"
-                    :class="{ active: !!password || inputItem === 'pass' }"
-                >
-                    <input
-                        ref="passInput"
-                        autofocus
-                        :placeholder="$t('create.input')"
-                        v-model="password"
-                        :type="'password'"
-                        @focus="inputFocus('pass')"
-                        @blur="inputBlur('pass')"
-                    />
-                </div>
-
-                <div class="__btn_list">
-                    <span
-                        class="__btn __btn_border __pointer"
-                        @click="createAcc"
-                    >
-                        {{ $t('addAccount') }}
-                    </span>
-                    <div class="__btn __btn_all_in __pointer" @click="login">
-                        <span v-show="!isLoading">
-                            {{
-                                isShowExisting
-                                    ? $t('btn.login')
-                                    : $t('create.finish')
-                            }}
-                        </span>
-                        <loading v-show="isLoading" loadingType="dot"></loading>
+                <restore
+                    ref="restoreDom"
+                    v-if="tabName === 'resotre'"
+                    :leftClick="createAcc"
+                    leftTxt="createAcc"
+                    :finishCb="showExisting"
+                ></restore>
+                
+                <div class="vitePassport box" v-if="tabName === 'vitePassport'">
+                    <div class="box-content">
+                        <div class="box-title">{{ $t('assets.vitePassport.subtitle') }}</div>
+                    </div>
+                    <div class="box-footer">
+                        <div class="tips">
+                            <a :href="$t('assets.vitePassport.helpLink')" target="_blank">{{  $t('assets.vitePassport.help') }}</a>
+                        </div>
+                        <div class="actions">
+                            <button class="btn active __pointer" @click="connectVitePassport">
+                                <span v-show="!isLoading">{{ $t('assets.vitePassport.connect') }}</span>
+                                <loading v-show="isLoading" loadingType="dot"></loading>
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
-
-            <restore
-                ref="restoreDom"
-                v-if="tabName === 'resotre'"
-                :leftClick="createAcc"
-                leftTxt="createAcc"
-                :finishCb="showExisting"
-            ></restore>
         </div>
     </div>
 </template>
 
 <script>
-import Vue from 'vue';
-import loading from 'components/loading.vue';
-import ellipsisAddr from 'utils/ellipsisAddr.js';
-import { getAppLink } from 'utils/getLink';
-import openUrl from 'utils/openUrl';
-import { getList, deleteOldAcc } from 'wallet';
-import * as DnsHost from 'services/dnsHostIP';
+import loading from '@components/loading.vue';
+import ellipsisAddr from '@utils/ellipsisAddr.js';
+import { getAppLink } from '@utils/getLink';
+import openUrl from '@utils/openUrl';
+import { getList, deleteOldAcc } from '@pc/wallet';
+import * as DnsHost from '@services/dnsHostIP';
 
 import accountItem from './accountItem.vue';
 import restore from './restore.vue';
 import accountList from './accountList.vue';
-import { hwAddressSelectDialog } from 'pcComponents/dialog';
+import { hwAddressSelectDialog } from '@pc/components/dialog';
 
-import qrcode from 'components/qrcode';
-import { initVB } from 'wallet/vb';
-import icon from 'assets/imgs/start_qrcode_icon.svg';
+import qrcode from '@components/qrcode.vue';
+import { initVB } from '@pc/wallet/vb';
+import icon from '@assets/imgs/start_qrcode_icon.svg';
 
 const TABNAME = {
     vb: 'vb',
     existingAcc: 'existingAcc',
     restore: 'restore',
-    ledger: 'ledger'
+    ledger: 'ledger',
+    vitePassport: 'vitePassport'
 };
 
 export default {
@@ -219,7 +243,7 @@ export default {
             inputItem: '',
             isLoading: false,
             isShowAccountList: false,
-            tabName: TABNAME.vb,
+            tabName: TABNAME.vitePassport,
             qrcodeOpt: {
                 size: 240,
                 image: icon,
@@ -254,7 +278,7 @@ export default {
             return window.DESKTOP;
         },
         isTestnet() {
-            return process.env.VITE_NET !== 'mainnet';
+            return import.meta.env.VITE_NETWORK == 'testnet';
         },
         autoReceive() {
             return this.$store.state.env.autoReceive;
@@ -280,6 +304,7 @@ export default {
         },
         showExisting(id) {
             this.id = id;
+            this.isHaveList = true;
             this.toggleTab('existingAcc');
         },
         _initVB() {
@@ -442,38 +467,43 @@ export default {
                     this.$router.push({ name });
                 }
             });
+        },
+        async connectVitePassport() {
+            if (window?.vitePassport) {
+                this.isLoading = true;
+                try {
+                    let address = await window.vitePassport.getConnectedAddress();
+                    if (address) {
+                        await window.vitePassport.disconnectWallet();
+                    }
+                    await window.vitePassport.connectWallet();
+
+                    this.isLoading = false;
+                    const name = this.$store.state.env.lastPage || 'tradeCenter';
+                    this.$router.push({ name });
+                } catch (error) {
+                    this.isLoading = false;
+                    this.$toast(error.message);
+                }
+            } else {
+                this.$toast(this.$t('assets.vitePassport.notDetected'));
+            }
         }
     }
 };
 </script>
 
 <style lang="scss" scoped>
-@import '../start.scss';
+@use "@assets/scss/theme.scss" as *;
+@use '../start.scss';
 
 .no-border {
     border: none;
 }
 
 .login-wrapper {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    .__title {
-        [data-theme='0'] & {
-            color: #fff;
-        }
-        [data-theme='1'] & {
-            color: #fff;
-        }
-    }
-    .__btn {
-        position: relative;
-        &.__btn_input {
-            .name {
-                width: 89%;
-            }
-        }
-    }
+    margin-top: 60px;
+    padding-bottom: 80px;
 
     .bottom {
         margin-bottom: 20px;
@@ -482,91 +512,80 @@ export default {
     .slide {
         display: inline-block;
         position: absolute;
-        top: 50%;
+        top: 20%;
         right: 20px;
         width: 16px;
         height: 16px;
         margin-top: -6px;
 
         &.down {
-            background: url('~assets/imgs/down_icon.svg');
+            background: url("@assets/imgs/down_icon.svg");
             background-size: 16px 16px;
         }
 
         &.up {
-            background: url('~assets/imgs/up_icon.svg');
+            background: url("@assets/imgs/up_icon.svg");
             background-size: 16px 16px;
         }
     }
 
     .switch-btn {
         display: flex;
-        align-items: center;
-        margin-bottom: 20px;
-        border-radius: 16px;
-        // background: #00BEFF;
-        @include primary_color();
-        box-shadow: 0 0 4px 0 rgba(0, 105, 219, 1);
-        &.no-padding-left {
-            padding-left: 0;
-        }
-        &.no-padding-right {
-            padding-right: 0;
-        }
-
-        .btn-item {
-            align-items: center;
-            margin: 0 12px;
-            display: flex;
-            color: #fff;
-            font-size: 14px;
-            @include font-family-bold();
-            font-weight: 600;
-            color: rgba(255, 255, 255, 1);
-            line-height: 18px;
-            .star {
-                height: 10px;
-                width: 10px;
-                margin-right: 4px;
-                background-image: url(~assets/imgs/star.png);
-                background-size: contain;
-                background-repeat: no-repeat;
-            }
-            &.active {
-                background: rgba(51, 187, 255, 1);
-                border-radius: 16px;
-                padding: 6px 12px;
-                box-shadow: 0 0 4px 0 rgba(0, 105, 219, 1);
-                &:first-child {
-                    margin-left: 0;
-                }
-                &:last-child {
-                    margin-right: 0;
-                }
+        flex-wrap: nowrap;
+        justify-content: space-between;
+        &.has-five {
+            .btn {
+                padding-left: 20px;
+                padding-right: 20px;
             }
         }
     }
+
     .tab-content {
-        width: 360px;
-    }
-    .vb {
-        width: 100%;
-
-        .code_container {
-            width: 100%;
-            padding: 20px;
+        margin-top: 30px;
+        position: relative;
+        border-radius: 12px;
+        box-shadow: 4px 4px 6px 0px rgba(0, 0, 0, 0.5);
+        min-height: 623px;
+        background: #fff;
+        .image {
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            margin: 0;
+            border-top-right-radius: 12px;
+            border-bottom-right-radius: 12px;
+            background: linear-gradient(180deg,#00beff 32.8%,#00ff95 94.95%);
+            img {
+                display: block;
+            }
+        }
+        .container {
             box-sizing: border-box;
-            background: #fff;
+            position: absolute;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            padding: 30px 40px;
+            h3.title {
+                font-size: 64px;
+                line-height: 1.3;
+                margin: 0 0 20px;
+            }
+        }
+    }
+
+    .vb {
+        .code_container {
+            box-sizing: border-box;
             margin-bottom: 20px;
             font-size: 14px;
-            border-radius: 2px;
             .code_tips {
                 word-break: break-all;
-                text-align: left;
                 color: #333333;
                 line-height: 18px;
                 .action_get_app {
-                    // color: #00BEFF;
                     @include primary_color();
                     font-size: 14px;
                     font-family: $font-bold;
@@ -575,47 +594,16 @@ export default {
                     word-break: keep-all;
                 }
             }
-            .vb_qrcode {
-                margin: 30px auto;
-            }
         }
     }
+
     .ledger {
-        width: 100%;
-        .code_container {
-            width: 100%;
-            padding: 20px;
-            box-sizing: border-box;
-            background: #fff;
-            margin-bottom: 20px;
-            font-size: 14px;
-            .img_wrapper {
-                margin: 30px 0;
-            }
-            .code_tips {
-                text-align: left;
-                word-break: break-all;
-                color: #333333;
-                line-height: 18px;
-            }
-            .code_tips_introduction {
-                // color: $blue-color-1;
-                @include primary_color();
-                font-size: 14px;
-                display: flex;
-                flex-direction: row;
-                a {
-                    // color: $blue-color-1;
-                    @include primary_color();
-                    flex: 1;
-                    &:first-child {
-                        text-align: left;
-                    }
-                    &:last-child {
-                        text-align: right;
-                    }
-                }
-            }
+        .box-title {
+            width: 300px;
+        }
+        .img_wrapper {
+            width: 326px;
+            margin-top: 60px;
         }
     }
 }

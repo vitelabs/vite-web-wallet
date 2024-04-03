@@ -8,8 +8,8 @@
 </template>
 
 <script>
-import { operatorTokens } from 'services/trade';
-import tokenCard from './tokenCard';
+import { operatorTokens } from '@services/trade';
+import tokenCard from './tokenCard.vue';
 
 export default {
     components: { tokenCard },
@@ -45,7 +45,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "~pcAssets/scss/common.scss";
+@use "@pc/assets/scss/common.scss" as *;
 
 @include secondTitle();
 .__second-title {

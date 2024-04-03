@@ -26,15 +26,15 @@
 
 <script>
 import { constant } from '@vite/vitejs';
-import pagination from 'pcComponents/pagination.vue';
-import walletTable from 'pcComponents/table/index.vue';
-import date from 'utils/date.js';
-import openUrl from 'utils/openUrl';
-import { timer } from 'utils/asyncFlow';
-import BigNumber from 'utils/bigNumber';
-import statistics from 'utils/statistics';
-import { getAccountLink } from 'utils/getLink';
-import { execWithValid } from 'pcUtils/execWithValid';
+import pagination from '@pc/components/pagination.vue';
+import walletTable from '@pc/components/table/index.vue';
+import date from '@utils/date.js';
+import openUrl from '@utils/openUrl';
+import { timer } from '@utils/asyncFlow';
+import BigNumber from '@utils/bigNumber';
+import statistics from '@utils/statistics';
+import { getAccountLink } from '@utils/getLink';
+import { execWithValid } from '@pc/utils/execWithValid';
 import cancelQuotaStake from './cancelQuotaStake.vue';
 
 const Vite_Token_Info = constant.Vite_Token_Info;
@@ -199,7 +199,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "~pcAssets/scss/common.scss";
+@use "@assets/scss/theme.scss" as *;
+@use "@pc/assets/scss/common.scss" as *;
 
 @include secondTitle();
 
@@ -226,7 +227,7 @@ export default {
     margin-bottom: -2px;
     width: 12px;
     height: 12px;
-    background: url('~assets/imgs/owner.png');
+    background: url("@assets/imgs/owner.png");
     background-size: 100% 100%;
 }
 

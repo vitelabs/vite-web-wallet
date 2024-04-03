@@ -1,5 +1,5 @@
 <template lang="pug">
-extends /components/dialog/base.pug
+extends ../../../src/components/dialog/base.pug
 block content
     span.bg-img
     div(v-if="inviteeCode && +inviteeCode!==0")
@@ -14,11 +14,11 @@ block content
 </template>
 
 <script>
-import viteInput from 'components/viteInput';
-import { bindCode } from 'pcServices/tradeOperation';
-import { doUntill } from 'utils/asyncFlow';
-import { emptySpace } from 'pcUtils/storageSpace';
-import router from 'pcRouter';
+import viteInput from '@components/viteInput.vue';
+import { bindCode } from '@pc/services/tradeOperation';
+import { doUntill } from '@utils/asyncFlow';
+import { emptySpace } from '@pc/utils/storageSpace';
+import router from '@pc/router';
 
 export default {
     components: { viteInput },
@@ -93,7 +93,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "~assets/scss/vars.scss";
-@import './invite.scss';
+@use "@assets/scss/theme.scss" as *;
+@use './invite.scss';
 </style>
 

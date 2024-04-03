@@ -1,4 +1,52 @@
 /* theme: 0-white, 1-black **/
+$font-bold: PingFangSC-Semibold, arial, sans-serif;
+$font-normal: PingFangSC-Regular, arial, sans-serif;
+$font-normal-b: Avenir-Book, arial, sans-serif;
+$font-H: DINPro, arial, sans-serif;
+
+@mixin font-family($font) {
+    font-family: $font, arial, sans-serif;
+}
+
+@mixin font-family-normal() {
+    font-family: $font-normal;
+    font-weight: 400;
+}
+
+@mixin font-family-bold() {
+    font-family: $font-bold;
+    font-weight: 600;
+}
+
+$black-color-1: #0f162d;
+$black-color-2: #151c32;
+$black-color-3: #01081f;
+$black-color-4: #1e2745;
+$black-color-5: #1d2024;
+
+$white-color: #fff;
+
+$blue-color-1: #00beff;
+$blue-color-2: #4b74ff;
+$blue-color-3: rgba(38, 142, 255, 1);
+
+$red-color: #e5494d;
+$red-color-1: #ff2929;
+    
+
+$green-color: #00ff95;
+
+$gray-color-1: #bdc1d1;
+$gray-color-2: #545f75;
+$gray-color-3: #73767a;
+$gray-color-4: rgba(94, 104, 117, 1);
+
+$hover-color-1: rgba(75, 116, 255, 0.1);
+$hover-color-2: $black-color-4;
+:root{
+    --vs-font-size: 0.14rem;
+}
+
 
 @mixin bg_color_1() {
     [data-theme="0"] & {
@@ -215,22 +263,22 @@
 
 @mixin background_common_img($img_name) {
     [data-theme="0"] & {
-        background: url("~assets/imgs/" + $img_name);
+        background: url("@assets/imgs/" + $img_name);
         background-size: 100% 100%;
     }
     [data-theme="1"] & {
-        background: url("~assets/theme1_imgs/" + $img_name);
+        background: url("@assets/theme1_imgs/" + $img_name);
         background-size: 100% 100%;
     }
 }
 
 @mixin background_common_img_suffix($img_name, $theme0, $theme1) {
     [data-theme="0"] & {
-        background: url("~assets/imgs/" + $img_name + '.' + $theme0);
+        background: url("@assets/imgs/" + $img_name + '.' + $theme0);
         background-size: 100% 100%;
     }
     [data-theme="1"] & {
-        background: url("~assets/theme1_imgs/" + $img_name + '.' + $theme1);
+        background: url("@assets/theme1_imgs/" + $img_name + '.' + $theme1);
         background-size: 100% 100%;
     }
 }

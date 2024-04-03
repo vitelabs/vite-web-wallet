@@ -16,7 +16,7 @@
 </template>
 
 <script>
-import { symbolList } from 'src/utils/currenySymbol';
+import { symbolList } from '@utils/currenySymbol';
 
 export default {
     data() {
@@ -43,6 +43,5 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "~pcAssets/scss/list/setting.scss";
-@import "./setting.scss";
+@use "./setting.scss";
 </style>

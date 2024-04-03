@@ -13,9 +13,8 @@
 </template>
 
 <script>
-import viteCrypto from 'testwebworker';
 import { keystore } from '@vite/vitejs';
-import loading from 'components/loading.vue';
+import loading from '@components/loading.vue';
 
 export default {
     components: { loading },
@@ -34,7 +33,7 @@ export default {
     methods: {
         unlock() {
             this.isLoading = true;
-            keystore.decrypt(JSON.stringify(this.keystore), this.password, viteCrypto).then(privateKey => {
+            keystore.decrypt(JSON.stringify(this.keystore), this.password, null).then(privateKey => {
                 this.isLoading = false;
                 this.$emit('unlockSuccess', privateKey);
             }).catch(err => {
@@ -48,7 +47,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "./common.scss";
+@use "./common.scss";
 .__btn_input {
     margin-top: 20px;
 }

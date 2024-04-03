@@ -54,8 +54,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "~assets/scss/vars.scss";
-@import "./create.scss";
+@use "@assets/scss/theme.scss" as *;
+@use "./create.scss";
 
 .__btn.__btn_all_in.unuse {
     background: rgba(191,191,191,1);

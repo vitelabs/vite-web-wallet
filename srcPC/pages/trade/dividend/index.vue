@@ -136,14 +136,14 @@
 
 <script>
 import pool from './pool.vue';
-import walletTable from 'pcComponents/table/index.vue';
-import pagination from 'pcComponents/pagination.vue';
-import { dividend } from 'services/trade';
-import date from 'utils/date';
-import bigNumber from 'utils/bigNumber';
-import openUrl from 'utils/openUrl';
-import sectionTitle from './sectionTitle';
-import locking from './locking';
+import walletTable from '@pc/components/table/index.vue';
+import pagination from '@pc/components/pagination.vue';
+import { dividend } from '@services/trade';
+import date from '@utils/date';
+import bigNumber from '@utils/bigNumber';
+import openUrl from '@utils/openUrl';
+import sectionTitle from './sectionTitle.vue';
+import locking from './locking.vue';
 
 export default {
     components: { sectionTitle, walletTable, pagination, pool, locking },
@@ -354,9 +354,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '~assets/scss/vars.scss';
-@import '~pcAssets/scss/table.scss';
-@import '../components/stakingDetail.scss';
+@use "@assets/scss/theme.scss" as *;
+@use '../../../assets/scss/table.scss';
+@use '../components/stakingDetail.scss';
 
 .trade-dividend-wrapper {
     width: 100%;

@@ -1,4 +1,4 @@
-import { Server } from 'services/dnsHostIP';
+import { Server } from '@services/dnsHostIP';
 
 const explorer = Server.viteExplorer;
 

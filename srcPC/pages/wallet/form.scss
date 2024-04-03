@@ -1,3 +1,5 @@
+@use "@assets/scss/theme.scss" as *;
+
 .__form_border {
     border-radius: 2px;
     @include bg_color_2();

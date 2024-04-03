@@ -1,3 +1,5 @@
+@use "@pc/assets/scss/table.scss" as *;
+
 .tx-pair-manage-table {
     @include rowWith {
         width: 15%;

@@ -28,7 +28,7 @@
 
 <script>
 import { keystore } from '@vite/vitejs';
-import { getKeystoreAccList } from 'pcUtils/store';
+import { getKeystoreAccList } from '@pc/utils/store';
 
 export default {
     data() {
@@ -91,7 +91,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "./common.scss";
+@use "@assets/scss/theme.scss" as *;
+@use "./common.scss";
 
 .hint {
     font-size: 14px;

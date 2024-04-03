@@ -1,6 +1,6 @@
 import provider from '@vite/vitejs-ws';
 import { ViteAPI } from '@vite/vitejs';
-import { Client } from 'utils/request';
+import { Client } from '../utils/request';
 import { DNSClient, setWatch } from './dnsHostIP';
 
 let currentViteApiUrl = null;
@@ -25,16 +25,16 @@ function viteXAPIAfterRes(xhr) {
 export const ViteXAPI = new DNSClient({
     serverKey: 'dexAPI',
     afterResponse: viteXAPIAfterRes,
-    baseUrl: `${ process.env.API === 'production' ? '' : '' }/api/v1`
+    baseUrl: `/api/v1`
 });
 
 export const ViteXAPIV2 = new DNSClient({
     serverKey: 'dexAPI',
     afterResponse: viteXAPIAfterRes,
-    baseUrl: `${ process.env.API === 'production' ? '' : '' }/api/v2`
+    baseUrl: `/api/v2`
 });
 
-export const RewardAPI = new Client(`${ process.env.rewardApiServer }/`, viteXAPIAfterRes);
+export const RewardAPI = new Client(`${ import.meta.env.VITE_REWARD_SERVER }/`, viteXAPIAfterRes);
 
 currentViteApiUrl = setWatch('gViteAPI', url => {
     setProvider(url);

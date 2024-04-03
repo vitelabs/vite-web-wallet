@@ -110,7 +110,7 @@
                             <img
                                 v-show="isZeroFee(txPair)"
                                 class="zero-fee-icon"
-                                src="~assets/imgs/trade/zero_fee.svg"
+                                src="@assets/imgs/trade/zero_fee.svg"
                             />
                             {{
                                 txPair.closePrice
@@ -152,17 +152,17 @@
 </template>
 
 <script>
-import BigNumber from 'utils/bigNumber';
-import statistics from 'utils/statistics';
-import operatorIcon from 'assets/imgs/operator.png';
+import BigNumber from '@utils/bigNumber';
+import statistics from '@utils/statistics';
+import operatorIcon from '@assets/imgs/operator.png';
 import Popper from 'vue-popperjs';
 
-import tradeMiningSvg from 'assets/imgs/trade_mining.svg';
-import orderMiningSvg from 'assets/imgs/order_mining.svg';
-import miningSvg from 'assets/imgs/mining.svg';
-import theme1TradeMiningSvg from 'assets/theme1_imgs/trade_mining.svg';
-import theme1OrderMiningSvg from 'assets/theme1_imgs/order_mining.svg';
-import theme1MiningSvg from 'assets/theme1_imgs/mining.svg';
+import tradeMiningSvg from '@assets/imgs/trade_mining.svg';
+import orderMiningSvg from '@assets/imgs/order_mining.svg';
+import miningSvg from '@assets/imgs/mining.svg';
+import theme1TradeMiningSvg from '@assets/theme1_imgs/trade_mining.svg';
+import theme1OrderMiningSvg from '@assets/theme1_imgs/order_mining.svg';
+import theme1MiningSvg from '@assets/theme1_imgs/mining.svg';
 
 export default {
     components: { Popper },
@@ -429,7 +429,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '../center.scss';
+@use "@assets/scss/theme.scss" as *;
+@use '../center.scss';
 
 .tx-pair-wrapper {
     position: relative;

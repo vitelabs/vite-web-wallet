@@ -8,7 +8,7 @@
 </template>
 
 <script>
-import confirm from 'pcComponents/confirm/confirm.vue';
+import confirm from '@pc/components/confirm/confirm.vue';
 
 export default {
     props: {

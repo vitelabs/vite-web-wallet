@@ -1,11 +1,11 @@
 import { utils } from '@vite/vitejs';
 
-import { getActiveAcc } from 'wallet';
-import { getVbInstance } from 'wallet/vb';
+import { getActiveAcc } from '@pc/wallet';
+import { getVbInstance } from '@pc/wallet/vb';
 
 
-import { execWithValid } from 'pcUtils/execWithValid';
-import { vbConfirmDialog } from 'pcComponents/dialog';
+import { execWithValid } from '@pc/utils/execWithValid';
+import { vbConfirmDialog } from '@pc/components/dialog';
 
 const { ed25519, _Buffer, blake2bHex } = utils;
 
@@ -19,8 +19,9 @@ const signText = execWithValid(function ({ text }) {
         return vcSign({ text });
     }
 
-    // 暂时不支持硬件钱包
-    if (activeAccount.isHardware) {
+    // 暂时不支持硬件钱包 
+    // TODO: vitePossport hasn't provided an api of signText
+    if (activeAccount.isHardware || activeAccount.isVitePassport) {
         return Promise.reject({ code: '11021' });
     }
 
