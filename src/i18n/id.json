@@ -191,6 +191,7 @@
         "addrFormat": "Format alamat salah",
         "amtFormat": "Format jumlah yang salah",
         "transSucc": "Transaksi berhasil!",
+        "transNameErr": "Nama tidak ada!",
         "insufficientBalance": "Saldo tidak mencukupi",
         "validMaxDigit": "Paling banyak {digit} desimal",
         "nodeErr": "Fullnode tidak normal, silakan coba lagi nanti.",

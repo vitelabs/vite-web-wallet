@@ -191,6 +191,7 @@
         "addrFormat": "Hatalı adres formatı",
         "amtFormat": "Hatalı miktar formatı",
         "transSucc": "İşlem başarılı!",
+        "transNameErr": "İsim bulunamadı!",
         "insufficientBalance": "Yetersiz bakiye",
         "validMaxDigit": "En çok {digit} ondalık sayı",
         "nodeErr": "Tam düğüm anormal, lütfen daha sonra tekrar deneyin.",

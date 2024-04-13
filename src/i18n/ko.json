@@ -191,6 +191,7 @@
         "addrFormat": "잘못된 주소 형식",
         "amtFormat": "잘못된 금액 형식",
         "transSucc": "트랜잭션 성공!",
+        "transNameErr": "이름이 존재하지 않습니다!",
         "insufficientBalance": "잔액이 부족합니다",
         "validMaxDigit": "최대 {digit} 소수",
         "nodeErr": "전체 노드의 상태가 좋지 않습니다. 나중에 다시 시도하세요",
