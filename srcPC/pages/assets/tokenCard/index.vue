@@ -27,7 +27,7 @@
             <div class="separate"></div>
 
         </div>
-        <div class="col">
+        <!-- <div class="col">
             <div
                 :class="{underline:gateName!=='--','click-able':gateName!=='--'}"
                 @click="() => gateName !== '--' &&  showDetail('gate')"
@@ -46,7 +46,7 @@
                 </div>
             </div>
 
-        </div>
+        </div> -->
         <div class="col">
             {{ `${exBalance || 0} ${token.tokenSymbol}` }}
         </div>

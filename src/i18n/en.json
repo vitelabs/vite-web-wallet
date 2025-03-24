@@ -244,14 +244,14 @@
         "title": "Account Settings",
         "config": "General",
         "currency": "Default Currency",
-        "powUrl":"PoW",
-        "changePowUrl":"Change PoW",
+        "powUrl":"PoW Endpoint:",
+        "changePowUrl":"Change",
         "secure": "Security",
         "gate": "Custom Gateway",
-        "rpcUrl": "Node",
+        "rpcUrl": "RPC Endpoint:",
         "changeRpcUrl": "Change",
         "changeRpcUrlDialog": {
-            "title": "Change Node",
+            "title": "Change",
             "addCustomNode": "Add Custom Node",
             "officialNode": "Official Node",
             "addNode": "Add Node",
@@ -275,8 +275,8 @@
         "sys": "System Portal",
         "open": "Vite Github",
         "addAddr": "Add Address",
-        "addrList": "Address Management",
-        "setDefault": "Select Default Address",
+        "addrList": "Wallet Management",
+        "setDefault": "Select Address",
         "autoLogout": "Auto Logout Time",
         "noPass": "Turn on password-free mode",
         "explorer": "Block Explorer",
@@ -344,7 +344,7 @@
             "unreceivedTips": "Unreceived funds will be received automatically after signing in"
         },
         "actionType": {
-            "SEND": "On-Chain Send",
+            "SEND": "Send",
             "RECEIVE": "Deposit",
             "CHARGE": "Deposit",
             "WITHDRAW": "Withdraw",
@@ -498,7 +498,7 @@
         "nodeErr": "Gateway node is invalid, please check the gateway settings"
     },
     "viteExplorer": {
-        "title": "Vite Block Explorer"
+        "title": "Block Explorer"
     },
     "viteScanExplorer": {
         "title": "ViteScan"

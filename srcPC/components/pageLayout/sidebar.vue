@@ -1,10 +1,10 @@
 <template>
     <div class="sidebar-wrapper">
         <div class="content">
-            <div @mouseenter="overLogo" @mouseleave="leaveLogo" class="logo __pointer">
+            <!-- <div @mouseenter="overLogo" @mouseleave="leaveLogo" class="logo __pointer">
                 <img @click="goVX" :src="viteLogo" />
                 <test-notice class="notice" :class="{'hide': !isShowNotice}"></test-notice>
-            </div>
+            </div> -->
 
             <div class="_top">
                 <div v-for="(name, index) in menuTops" :key="index"
@@ -150,11 +150,16 @@ export default {
 .sidebar-wrapper {
     height: 100%;
     overflow: auto;
-    // @include bg_color_2();
-    background: linear-gradient(180deg, #00BEFF 0%, #00FF95 100%);
-    // [data-theme="0"] & {
-    //     box-shadow: 0 2px 40px 1px rgba(221, 229, 252, 0.5);;
-    // }
+    
+    // background: linear-gradient(180deg, #00BEFF 0%, #00FF95 100%);
+    [data-theme="0"] & {
+        background: rgba(88, 151, 251, 1);
+        box-shadow: 0 2px 80px 1px rgba(88, 151, 251, 0.7);;
+    }
+
+    [data-theme="1"] & {
+        box-shadow: 0 2px 80px 1px rgba(221, 229, 252, 0.7);;
+    }
 
     .content {
         display: flex;
@@ -201,7 +206,7 @@ export default {
             height: 20px;
         }
         .theme-icon {
-            // @include second_title_font_color();
+            @include second_title_font_color();
             color: #fff;
         }
 

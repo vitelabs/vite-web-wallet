@@ -8,6 +8,7 @@
 
 module.exports = {
     startLogin: { alias: '/start' },
-    tradeCenter: { alias: [ '/index', '/trade' ] },
-    walletQuota: { alias: '/wallet' }
+    tradeCenter: { alias: '/trade' },
+    walletQuota: { alias: '/wallet' },
+    assets: { alias: ['/index', 'assets'] }
 };

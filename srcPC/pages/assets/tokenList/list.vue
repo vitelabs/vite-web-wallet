@@ -11,10 +11,10 @@
                 <unreceive-tips :unreceivedNum="unreceivedNum"></unreceive-tips>
                 <tips v-show="unreceivedNum === 0" :content="$t('tokenCard.heads.unreceivedTips')"></tips>
             </div>
-            <div class="col">
+            <!-- <div class="col">
                 {{$t('tokenCard.heads.gate')}}
                 <tips :content="$t('tokenCard.heads.gateTips')"></tips>
-            </div>
+            </div> -->
             <div class="col">{{$t('tokenCard.heads.totalExAmount')}}</div>
             <div class="col">
                 {{$t('tokenCard.heads.availableExAmount')}}
