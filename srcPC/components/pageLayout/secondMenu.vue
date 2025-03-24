@@ -13,9 +13,9 @@
         </ul>
 
         <ul class="right-lab-list">
-            <SwitchComp class="tab __pointer invite-switch" :optList="inviteOptLit" :value="selectInvite" @input="inviteDialog" v-show="$route.name.indexOf('trade') !== -1"/>
-            <div v-show="$route.name.indexOf('trade') === -1" class="tab __pointer" @click="goAnnouncements">{{ $t("announcements") }}</div>
-            <div v-show="$route.name.indexOf('trade') === -1" class="tab __pointer" @click="goHelp">{{ $t("help") }}</div>
+            <!-- <SwitchComp class="tab __pointer invite-switch" :optList="inviteOptLit" :value="selectInvite" @input="inviteDialog" v-show="$route.name.indexOf('trade') !== -1"/> -->
+            <!-- <div v-show="$route.name.indexOf('trade') === -1" class="tab __pointer" @click="goAnnouncements">{{ $t("announcements") }}</div> -->
+            <!-- <div v-show="$route.name.indexOf('trade') === -1" class="tab __pointer" @click="goHelp">{{ $t("help") }}</div> -->
             <div v-show="!isHaveUsers" @click="login"
                  class="tab __pointer"> {{ $t("login") }}</div>
             <div v-show="!isLogin && isHaveUsers" @click="_unlock" class="tab __pointer">{{ $t("unlockAcc") }}</div>

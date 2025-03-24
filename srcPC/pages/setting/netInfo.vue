@@ -15,6 +15,7 @@
         </div>
         <div class="row">
             <span class="title">{{ $t('setting.powUrl') }}</span>
+            
             <code v-html="env.currentPowUrl"></code>
             <span class="small-btn" @click="openPowUrlChangeDialog">{{
                 $t('setting.changePowUrl')
@@ -28,7 +29,7 @@
             <span class="title">{{ $t('setting.version') }}</span
             >{{ version }}
         </div>
-        <div class="row">
+        <!-- <div class="row">
             <span
                 class="a-link __pointer"
                 @click="go('https://vitex.zendesk.com/')"
@@ -57,7 +58,7 @@
                 <span class="title">{{ $t('setting.open') }}</span
                 ><span class="link">https://github.com/vitelabs</span>
             </span>
-        </div>
+        </div> -->
     </div>
 </template>
 

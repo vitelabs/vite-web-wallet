@@ -28,7 +28,7 @@ import walletVote from '@pc/pages/wallet/vote/index.vue';
 
 export default [
   {
-    name: 'assets', path: '/assets', component: assets,
+    name: 'assets', path: '/assets', component: assets, alias: "/index",
     children: [{ name: 'assetsTokenCard', path: '/assetsTokenCard', component: assetsTokenCard },
     ]
   },
@@ -44,7 +44,7 @@ export default [
   },
   {
     name: 'trade', path: '/trade', component: trade,
-    children: [{ name: 'tradeCenter', path: '/tradeCenter', component: tradeCenter, alias: ["/index", "/trade"] },
+    children: [{ name: 'tradeCenter', path: '/tradeCenter', component: tradeCenter, alias: ["/trade"] },
     { name: 'tradeDividend', path: '/tradeDividend', component: tradeDividend },
     { name: 'tradeMining', path: '/tradeMining', component: tradeMining },
     { name: 'tradeOpenOrders', path: '/tradeOpenOrders', component: tradeOpenOrders },
