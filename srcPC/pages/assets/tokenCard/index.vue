@@ -64,7 +64,7 @@
             </div>
             <div class="separate"></div>
         </div>
-        <div class="col">
+        <!-- <div class="col">
             <div class="assets">
                 <div class="est_btc">{{ assetView.btc }} BTC</div>
                 <div class="est_cash">
@@ -76,7 +76,7 @@
                 @click="unbind"
                 v-if="showUnbind"
             ></div>
-        </div>
+        </div> -->
         <Alert ref="alert" :token="token" />
 
         <transaction :closeTrans="closeTrans" :token="token" v-if="isShowTrans"/>

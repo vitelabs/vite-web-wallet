@@ -58,12 +58,13 @@ export default [
   },
   {
     name: 'wallet', path: '/wallet', component: wallet,
-    children: [{ name: 'walletSBP', path: '/walletSBP', component: walletSBP },
-    { name: 'walletFullNode', path: '/walletFullNode', component: walletFullNode },
-    { name: 'walletMintage', path: '/walletMintage', component: walletMintage },
-    { name: 'walletQuota', path: '/walletQuota', component: walletQuota, alias: "/wallet" },
-    { name: 'walletTransList', path: '/walletTransList', component: walletTransList },
-    { name: 'walletVote', path: '/walletVote', component: walletVote },
+    children: [
+      { name: 'walletSBP', path: '/walletSBP', component: walletSBP },
+      { name: 'walletFullNode', path: '/walletFullNode', component: walletFullNode },
+      { name: 'walletMintage', path: '/walletMintage', component: walletMintage },
+      { name: 'walletQuota', path: '/walletQuota', component: walletQuota, alias: "/wallet" },
+      { name: 'walletTransList', path: '/walletTransList', component: walletTransList },
+      { name: 'walletVote', path: '/walletVote', component: walletVote },
     ]
   },
   { path: '/', redirect: '/index' },

@@ -177,6 +177,7 @@ export default {
         padding: 0 8px;
         white-space: nowrap;
         @include hover_color();
+        font-size: 12px;
 
         &:after {
             content: '';

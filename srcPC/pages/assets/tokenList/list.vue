@@ -20,9 +20,9 @@
                 {{$t('tokenCard.heads.availableExAmount')}}
                 <tips :content="$t('tokenCard.heads.availableExAmountTips')"></tips>
             </div>
-            <div class="col">
+            <!-- <div class="col">
                 <AssetSwitch v-model="assetType" class="asset-switch" />
-            </div>
+            </div> -->
         </div>
         <div v-show="!tokenList || !tokenList.length" class="no-data"><div>{{ $t('hint.noData') }}</div></div>
         <tokenCard v-show="tokenList && tokenList.length"

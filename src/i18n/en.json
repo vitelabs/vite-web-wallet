@@ -23,7 +23,7 @@
     "withdrawHeight": "Lock Expiration Snapshot Height",
     "balance": "Balance",
     "dexBalance": "ViteX Balance",
-    "addrName": "Address{index}",
+    "addrName": "address #{index}",
     "true": "true",
     "false": "false",
     "guide": {
@@ -504,7 +504,7 @@
         "title": "ViteScan"
     },
     "wallet": {
-        "title": "Quota Management",
+        "title": "Quota",
         "help": {
             "title": "What is Quota?"
         },
@@ -593,7 +593,7 @@
         }
     },
     "walletQuota": {
-        "title": "Quota Management",
+        "title": "Quota",
         "help": {
             "title": "What is Quota?"
         },
@@ -648,7 +648,7 @@
         }
     },
     "walletTransList": {
-        "title": "Transactions",
+        "title": "History",
         "tType": {
             "title": "Type",
             "symbol": "Type"

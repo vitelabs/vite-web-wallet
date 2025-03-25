@@ -23,7 +23,7 @@
                  @click="changeAcc">{{ $t('changeAcc') }}</div>
 
             <SwitchComp @input="operateAction" v-show="$route.name.indexOf('trade') !== -1" class="more-switch tab __pointer" :title="$t('trade.more')" :optList="moreOptList" />
-            <switch-addr class="switch-tab menu" v-show="$route.name !== 'assets'" ></switch-addr>
+            <switch-addr class="switch-tab menu"></switch-addr>
             <div class="tab __pointer" v-show="isLogin" @click="logout">{{ $t('saveLogout') }}</div>
         </ul>
     </div>

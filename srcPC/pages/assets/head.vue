@@ -39,7 +39,7 @@
                 </span>
             </div>
         </div>
-        <div class="worth head__item">
+        <!-- <div class="worth head__item">
             <img class="icon" :src="iconList.headAsset" />
             <div class="assets">
                 <AssetSwitch v-model="assetsType" class="asset-switch" />
@@ -54,7 +54,7 @@
                 :labelGen="labelGen"
                 :title="$t('tokenCard.assetSpread')"
             ></Pie>
-        </div>
+        </div> -->
     </div>
 </template>
 
@@ -365,15 +365,14 @@ export default {
             margin-right: 20px;
         }
         .address-content {
-            max-width: 300px;
-            font-size: 14px;
+            max-width: 500px;
+            font-size: 13px;
             word-break: break-word;
             box-sizing: border-box;
-            padding: 5px 9px;
+            padding: 20px 10px 20px 20px;
             display: flex;
             align-items: center;
             margin: 10px 0 5px;
-            display: flex;
             position: relative;
             font-family: $font-normal;
             [data-theme="0"] & {
@@ -388,7 +387,7 @@ export default {
                 top: -50%;
             }
             .addr_item{
-                max-width: 220px;
+                max-width: 420px;
             }
             &__operate {
                 width: 16px;
