@@ -12,7 +12,7 @@ import { getCurrHDAcc, StatusMap } from '@pc/wallet';
 const loginRoutes = [];
 
 const router = new VueRouter({
-    mode: 'history',
+    mode: 'hash',
     routes,
 });
 
