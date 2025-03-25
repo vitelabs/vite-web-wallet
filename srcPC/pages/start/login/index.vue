@@ -322,7 +322,7 @@ export default {
         initVB() {
             this.vb = initVB();
             this.vb.on('connect', () => {
-                const name = this.$store.state.env.lastPage || 'tradeCenter';
+                const name = this.$store.state.env.lastPage || 'assets';
                 this.$router.push({ name });
             });
             this.vb.on('disconnect', () => {
@@ -447,7 +447,7 @@ export default {
 
                     this.currHDAcc.activate(this.autoReceive);
                     const name
-                        = this.$store.state.env.lastPage || 'tradeCenter';
+                        = this.$store.state.env.lastPage || 'assets';
                     this.$router.push({ name });
                 })
                 .catch(err => {
@@ -463,7 +463,7 @@ export default {
             hwAddressSelectDialog({ width: 'wide' }).then(({ status }) => {
                 if (status === 'CONFIRMED') {
                     const name
-                        = this.$store.state.env.lastPage || 'tradeCenter';
+                        = this.$store.state.env.lastPage || 'assets';
                     this.$router.push({ name });
                 }
             });
@@ -479,7 +479,7 @@ export default {
                     await window.vitePassport.connectWallet();
 
                     this.isLoading = false;
-                    const name = this.$store.state.env.lastPage || 'tradeCenter';
+                    const name = this.$store.state.env.lastPage || 'assets';
                     this.$router.push({ name });
                 } catch (error) {
                     this.isLoading = false;
