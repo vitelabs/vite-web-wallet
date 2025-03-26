@@ -908,8 +908,8 @@
             }
         },
         "vitePassport": {
-            "title": "VitePassport",
-            "subtitle": "VitePassport is the MetaMask of the VITE chain",
+            "title": "Vite Passport",
+            "subtitle": "Vite Passport is a Vite Wallet Chrome Browser Extension, it's the MetaMask of the Vite.",
             "help": "Connection Issues",
             "helpLink": "https://t.me/vite_en",
             "connect": "Connect",

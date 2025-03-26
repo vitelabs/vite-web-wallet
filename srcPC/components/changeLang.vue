@@ -46,7 +46,7 @@ export default {
 .lang-title {
     @include font-family-normal();
     color: #fff;
-    font-size: 20px;
+    font-size: 14px;
     display: inline-block;
     min-width: 50px;
     text-align: right;

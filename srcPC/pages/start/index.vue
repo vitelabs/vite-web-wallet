@@ -2,7 +2,7 @@
     <div class="index-layout-wrapper">
         <div class="container">
             <div class="header">
-                <span @click="goVX" class="header-logo __pointer"></span>
+                <span class="header-logo __pointer"></span>
                 <change-lang class="start change-lang __pointer" is-large></change-lang>
             </div>
             <router-view></router-view>
@@ -31,7 +31,7 @@ export default {
 
 .index-layout-wrapper {
     min-height: 100%;
-    background: linear-gradient(63deg,#00beff 32.8%,#00ff95 94.95%);
+    background: linear-gradient(63deg,#5897fb 32.8%,#000 94.95%);
     
     .container {
         margin: 0 auto;
@@ -39,14 +39,14 @@ export default {
     }
 
     .header {
-        padding-top: 80px;
+        padding-top: 10px;
         display: grid;
         grid-template-columns: 1fr auto;
         .header-logo {
             display: block;
             height: 50px;
             width: 152px;
-            background: url("@assets/imgs/ViteLogo1.svg");
+            background: url("@assets/imgs/ViteLogo.svg");
             background-size: 100% 100%;
         }
         .change-lang {

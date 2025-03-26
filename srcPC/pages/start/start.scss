@@ -91,11 +91,12 @@
     box-sizing: border-box;
     border: 1px solid #fff;
     border-radius: 12px;
-    height: 75px;
+    height: 40px;
     padding: 22px 40px;
+    margin: 0px 10px 0px 0px;
     @include font-family-normal();
     color: #fff;
-    font-size: 24px;
+    font-size: 16px;
     line-height: 1.5;
     white-space: nowrap;
     text-align: center;
@@ -109,14 +110,14 @@
 .box {
     display: grid;
     align-content: space-between;
-    height: 450px;
+    height: 350px;
 }
 
 .box-content {
     position: relative;
     width: 400px;
     .box-title {
-        font-size: 32px;
+        font-size: 16px;
         font-weight: 300;
         line-height: 1.5;
         width: 420px;
@@ -131,12 +132,12 @@
     column-gap: 40px;
     p {
         margin: 0;
-        font-size: 20px;
+        font-size: 16px;
     }
 
     a {
         color: #00BEFF;
-        font-size: 20px;
+        font-size: 16px;
     }
     
     .btn {

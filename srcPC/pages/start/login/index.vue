@@ -13,7 +13,7 @@
                 {{ $t('assets.vitePassport.title') }}
             </div>
             <div
-                class="btn"
+                class="btn __pointer"
                 :class="{ active: tabName === 'vb' }"
                 @click="toggleTab('vb')"
                 :key="'tb'"
@@ -189,7 +189,16 @@
                     </div>
                     <div class="box-footer">
                         <div class="tips">
-                            <a :href="$t('assets.vitePassport.helpLink')" target="_blank">{{  $t('assets.vitePassport.help') }}</a>
+                            <!-- <a :href="$t('assets.vitePassport.helpLink')" target="_blank">{{  $t('assets.vitePassport.help') }}</a> -->
+                            <p>
+                            Available on 
+                            <a href="https://chrome.google.com/webstore/detail/vite-passport/eckbjklobbepbbcklkjjgkkkpdakglmf" target="_blank">
+                                Chrome Web Store
+                            </a>
+                            </p>
+                            <p>
+                                Visit <a href="https://github.com/vitelabs/vite-passport" target="_blank">Github</a> for source code of Vite Passport.
+                            </p>
                         </div>
                         <div class="actions">
                             <button class="btn active __pointer" @click="connectVitePassport">
@@ -502,7 +511,7 @@ export default {
 }
 
 .login-wrapper {
-    margin-top: 60px;
+    margin-top: 40px;
     padding-bottom: 80px;
 
     .bottom {
@@ -532,7 +541,7 @@ export default {
     .switch-btn {
         display: flex;
         flex-wrap: nowrap;
-        justify-content: space-between;
+        justify-content: start;
         &.has-five {
             .btn {
                 padding-left: 20px;
@@ -542,11 +551,11 @@ export default {
     }
 
     .tab-content {
-        margin-top: 30px;
+        margin-top: 15px;
         position: relative;
         border-radius: 12px;
         box-shadow: 4px 4px 6px 0px rgba(0, 0, 0, 0.5);
-        min-height: 623px;
+        min-height: 523px;
         background: #fff;
         .image {
             position: absolute;
@@ -569,7 +578,7 @@ export default {
             height: 100%;
             padding: 30px 40px;
             h3.title {
-                font-size: 64px;
+                font-size: 24px;
                 line-height: 1.3;
                 margin: 0 0 20px;
             }
